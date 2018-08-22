@@ -62,7 +62,7 @@
                                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
                                 </div>
                                 <div class="row m-login__form-sub">
-                                    <div class="col m--align-left m-login__form-left">
+                                    <div class="col m--align-left m-login__form-left invisible">
                                         <label class="m-checkbox  m-checkbox--light">
                                             <input type="checkbox" name="remember"> Remember me
                                             <span></span>
