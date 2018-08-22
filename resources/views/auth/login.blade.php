@@ -35,9 +35,9 @@
         <!-- begin:: Page -->
         <div class="m-grid m-grid--hor m-grid--root m-page">
             <div id="m_login"
-                    class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-1"
-                    style="background-image: url(../../../assets/metronic/app/media/img//bg/bg-1.jpg);">
-                <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
+                 style="background-image: url(../../../assets/metronic/app/media/img//bg/bg-1.jpg);"
+                 class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-1">
+                 <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
                     <div class="m-login__container">
                         <div class="m-login__logo">
                             <a href="#">
@@ -54,12 +54,12 @@
                                 @csrf
 
                                 <div class="form-group m-form__group">
-                                    <input type="email" id="email" name="email" placeholder="Email"
-                                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" autofocus>
+                                    <input type="email" id="email" name="email" placeholder="Email" autofocus
+                                           class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}">
                                 </div>
                                 <div class="form-group m-form__group">
                                     <input type="password" id="password" name="password" placeholder="Password"
-                                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
+                                           class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
                                 </div>
                                 <div class="row m-login__form-sub">
                                     <div class="col m--align-left m-login__form-left">
@@ -84,22 +84,21 @@
                         </div>
                         <div class="m-login__forget-password">
                             <div class="m-login__head">
-                                <h3 class="m-login__title">
-                                    Forgotten Password ?
-                                </h3>
-                                <div class="m-login__desc">
-                                    Enter your email to reset your password:
-                                </div>
+                                <h3 class="m-login__title">Forgotten Password ?</h3>
+                                <div class="m-login__desc">Enter your email to reset your password:</div>
                             </div>
                             <form class="m-login__form m-form" action="">
                                 <div class="form-group m-form__group">
-                                    <input type="text" id="m_email" name="email" class="form-control m-input" placeholder="Email" autocomplete="off">
+                                    <input type="text" id="m_email" name="email" placeholder="Email" autocomplete="off"
+                                           class="form-control m-input">
                                 </div>
                                 <div class="m-login__form-action">
-                                    <button id="m_login_forget_password_submit" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                                    <button id="m_login_forget_password_submit"
+                                            class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
                                         Request
                                     </button>
-                                    <button id="m_login_forget_password_cancel" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">
+                                    <button id="m_login_forget_password_cancel"
+                                            class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">
                                         Cancel
                                     </button>
                                 </div>
