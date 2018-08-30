@@ -31,11 +31,11 @@
                                         </label>
                                         <br>
                                         <select class="form-control m-select2" id="m_select2_1" name="country">
-                                            <option value="AK">
-                                                Alaska
+                                            <option value="idn">
+                                                Indonesia
                                             </option>
-                                            <option value="HI">
-                                                Hawaii
+                                            <option value="..">
+                                                ...
                                             </option>
                                         </select>
                                         <div class="form-control-feedback text-danger" id="country-error"></div>
@@ -51,13 +51,13 @@
                                         </label>
                                         <br>
                                         <select class="form-control m-select2" id="m_select2_2" name="city">
-                                            <option value="AK">
-                                                Alaska
+                                            <option value="Sby">
+                                                Surabaya
                                             </option>
-                                            <option value="HI">
-                                                Hawaii
+                                            <option value="..">
+                                                ...
                                             </option>
-                                        </select>                                        <!-- <input type="text" class="form-control form-control-danger m-input" name="city" id="city" placeholder="city"> -->
+                                        </select>                                        
                                         <div class="form-control-feedback text-danger" id="city-error"></div>
                                         <span class="m-form__help">
                                             City
