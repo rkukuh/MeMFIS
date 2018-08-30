@@ -2,11 +2,11 @@
 <html lang="en" >
     <!-- begin::Head -->
     <head>
-        @include('layouts.include._header')
+        @include('frontend.include._header')
 
 
     </head>
-    <!-- end::Head -->
+    <!-- end::Head -->  
 
     
     <!-- begin::Body -->
@@ -19,13 +19,13 @@
     
 	
 <!-- BEGIN: Header -->
-@include('layouts.include._navbar')
+@include('frontend.include._navbar')
 <!-- END: Header -->		
 		<!-- begin::Body -->
 				<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
 			
 <!-- BEGIN: Left Aside -->
-@include('layouts.include._sidebar')
+@include('frontend.include._sidebar')
 <!-- END: Left Aside -->							
 		   	<div class="m-grid__item m-grid__item--fluid m-wrapper">
             @if (session('pesan_sukses'))
@@ -43,7 +43,7 @@
 
 				
 <!-- begin::Footer -->
-@include('layouts.include._footer')
+@include('frontend.include._footer')
 <!-- end::Footer -->		
 		
 
@@ -51,7 +51,7 @@
 <!-- end:: Page -->
 
 <!-- begin::Quick Sidebar -->
-@include('layouts.include._control-sidebar')
+@include('frontend.include._control-sidebar')
 <!-- end::Quick Sidebar -->		    
 	    <!-- begin::Scroll Top -->
 <div id="m_scroll_top" class="m-scroll-top">
@@ -59,16 +59,16 @@
 </div>
 <!-- end::Scroll Top -->		    
 <!-- begin::Quick Nav -->
-@include('layouts.include._nav-sticky')
+@include('frontend.include._nav-sticky')
 <!-- end::Quick Nav -->	
     	<!--begin::Base Scripts -->        
-    	    	<script src="assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-		    	<script src="assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+    	    	<script src="assets/metronic/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+		    	<script src="assets/metronic/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
 				<!--end::Base Scripts -->   
 
          
         <!--begin::Page Vendors Scripts -->
-                <script src="assets/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
+                <script src="assets/metronic/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
                 <!--end::Page Vendors Scripts -->
           
 
@@ -76,7 +76,7 @@
         
                     
         <!--begin::Page Snippets --> 
-                <script src="assets/app/js/dashboard.js" type="text/javascript"></script>
+                <script src="assets/metronic/app/js/dashboard.js" type="text/javascript"></script>
                 <!--end::Page Snippets -->   
                 @stack('footer-scripts')
             </body>
