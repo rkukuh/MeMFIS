@@ -30,7 +30,7 @@
                                         Country *
                                         </label>
                                         <br>
-                                        <select class="form-control m-select2" id="m_select2_1" name="country">
+                                        <select class="form-control m-select2" id="m_select2_1" name="country" style="width:100%">
                                             <option value="idn">
                                                 Indonesia
                                             </option>
@@ -50,7 +50,7 @@
                                         City *
                                         </label>
                                         <br>
-                                        <select class="form-control m-select2" id="m_select2_2" name="city">
+                                        <select class="form-control m-select2" id="m_select2_2" name="city" style="width:100%">
                                             <option value="Sby">
                                                 Surabaya
                                             </option>
