@@ -108,7 +108,6 @@
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}" type="text/javascript"></script>
 
 <script src="{{ asset('js/customer.js')}}"></script>
-<!-- <script src="{{ asset('js/country.js')}}"></script>
-<script src="{{ asset('js/city.js')}}"></script> -->
+<script src="{{ asset('js/addres.js')}}"></script>
 
 @endpush  

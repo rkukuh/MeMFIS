@@ -31,11 +31,8 @@
                                         </label>
                                         <br>
                                         <select class="form-control m-select2" id="m_select2_1" name="country" style="width:100%">
-                                            <option value="idn">
-                                                Indonesia
-                                            </option>
-                                            <option value="..">
-                                                ...
+                                            <option value="">
+                                            --- Country ---
                                             </option>
                                         </select>
                                         <div class="form-control-feedback text-danger" id="country-error"></div>
@@ -51,11 +48,8 @@
                                         </label>
                                         <br>
                                         <select class="form-control m-select2" id="m_select2_2" name="city" style="width:100%">
-                                            <option value="Sby">
-                                                Surabaya
-                                            </option>
-                                            <option value="..">
-                                                ...
+                                            <option value="">
+                                            --- City ---
                                             </option>
                                         </select>                                        
                                         <div class="form-control-feedback text-danger" id="city-error"></div>
