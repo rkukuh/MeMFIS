@@ -11,6 +11,7 @@
         "laravel/framework": "5.6.*",
         "laravel/scout": "^5.0",
         "laravel/tinker": "^1.0",
+        "spatie/laravel-activitylog": "^2.8",
         "spatie/laravel-backup": "^5.10",
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-permission": "^2.17"
