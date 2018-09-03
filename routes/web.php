@@ -15,3 +15,14 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('frontend.home');
 });
+
+Route::get('/quation', function () {
+    $pdf = \PDF::loadView('frontend/form/quation');
+    return $pdf->stream();
+});
+
+Route::get('/preliminary', function () {
+    $pdf = \PDF::loadView('frontend/form/preliminary');
+    return $pdf->stream();
+});
+
