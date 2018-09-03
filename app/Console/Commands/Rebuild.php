@@ -54,7 +54,7 @@ class Rebuild extends Command
      */
     protected function commandOperations()
     {
-        $this->call('madewow:fresh');
+        $this->call('memfis:fresh');
 
         /**
          * Reset cached roles and permissions
