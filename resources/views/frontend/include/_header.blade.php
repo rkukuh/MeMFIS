@@ -18,18 +18,18 @@
     <!--end::Web font -->
 
     <!--begin::Page Vendors Styles -->
-        <link href="{{asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" /><!--RTL version:<link href="assets/vendors/custom/fullcalendar/fullcalendar.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+        <link href="{{asset('assets/metronic/vendors/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" /><!--RTL version:<link href="assets/metronic/vendors/custom/fullcalendar/fullcalendar.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
 
     <!--end::Page Vendors Styles -->
         
     <!--begin::Base Styles -->
-		<link href="{{asset('assets/vendors/base/vendors.bundle.css')}}" rel="stylesheet" type="text/css" /><!--RTL version:<link href="assets/vendors/base/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+		<link href="{{asset('assets/metronic/vendors/base/vendors.bundle.css')}}" rel="stylesheet" type="text/css" /><!--RTL version:<link href="assets/metronic/vendors/base/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
 
-		<link href="{{asset('assets/demo/default/base/style.bundle.css')}}" rel="stylesheet" type="text/css" /><!--RTL version:<link href="assets/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+		<link href="{{asset('assets/metronic/demo/default/base/style.bundle.css')}}" rel="stylesheet" type="text/css" /><!--RTL version:<link href="assets/metronic/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
 
     <!--end::Base Styles -->
 
-<link rel="shortcut icon" href="{{asset('assets/demo/default/media/img/logo/favicon.ico')}}" /> 
+<link rel="shortcut icon" href="{{asset('assets/metronic/demo/default/media/img/logo/favicon.ico')}}" /> 
