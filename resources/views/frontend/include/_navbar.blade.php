@@ -6,7 +6,7 @@
 	<div class="m-stack m-stack--ver m-stack--general">
 		<div class="m-stack__item m-stack__item--middle m-brand__logo">
 			<a href="index.html" class="m-brand__logo-wrapper">
-			<img alt="" src="assets/demo/default/media/img/logo/logo_default_dark.png"/>
+			<img alt="" src="{{asset('assets/metronic/demo/default/media/img/logo/logo_default_dark.png')}}"/>
 			</a>  
 		</div>
 		<div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -93,7 +93,7 @@
 	<div class="m-dropdown__wrapper">
 		<span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
 		<div class="m-dropdown__inner">
-			<div class="m-dropdown__header m--align-center" style="background: url(assets/app/media/img/misc/notification_bg.jpg); background-size: cover;">
+			<div class="m-dropdown__header m--align-center" style="background: url(assets/metronic/app/media/img/misc/notification_bg.jpg); background-size: cover;">
 				<span class="m-dropdown__header-title">9 New</span>
 				<span class="m-dropdown__header-subtitle">User Notifications</span>
 			</div>
@@ -220,7 +220,7 @@
 	<div class="m-dropdown__wrapper">
 		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
 		<div class="m-dropdown__inner">
-			<div class="m-dropdown__header m--align-center" style="background: url(assets/app/media/img/misc/quick_actions_bg.jpg); background-size: cover;">
+			<div class="m-dropdown__header m--align-center" style="background: url('assets/metronic/app/media/img/misc/quick_actions_bg.jpg); background-size: cover;">
 				<span class="m-dropdown__header-title">Quick Actions</span>
 				<span class="m-dropdown__header-subtitle">Shortcuts</span>
 			</div>
@@ -258,13 +258,13 @@
 			<li class="m-nav__item m-topbar__languages m-dropdown m-dropdown--small m-dropdown--arrow m-dropdown--align-right m-dropdown--mobile-full-width"  m-dropdown-toggle="click">
 	<a href="#" class="m-nav__link m-dropdown__toggle">
 		<span class="m-nav__link-text">
-			<img class="m-topbar__language-selected-img" src="assets/app/media/img/flags/020-flag.svg">	
+			<img class="m-topbar__language-selected-img" src="{{asset('assets/metronic/app/media/img/flags/020-flag.svg')}}">	
 		</span>
 	</a>
 	<div class="m-dropdown__wrapper">
 		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
 		<div class="m-dropdown__inner">
-			<div class="m-dropdown__header m--align-center" style="background: url(assets/app/media/img/misc/flagsquick_actions_bg.jpg); background-size: cover;">
+			<div class="m-dropdown__header m--align-center" style="background: url(assets/metronic/app/media/img/misc/flagsquick_actions_bg.jpg); background-size: cover;">
 				<span class="m-dropdown__header-subtitle">Select your language</span>
 			</div>
 			<div class="m-dropdown__body">
@@ -272,31 +272,31 @@
 					<ul class="m-nav m-nav--skin-light">
 						<li class="m-nav__item m-nav__item--active">
 							<a href="#" class="m-nav__link m-nav__link--active">
-								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="assets/app/media/img/flags/020-flag.svg"></span>
+								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="{{asset('assets/metronic/app/media/img/flags/020-flag.svg')}}"></span>
 								<span class="m-nav__link-title m-topbar__language-text m-nav__link-text">USA</span>
 							</a>
 						</li>
 						<li class="m-nav__item">
 							<a href="#" class="m-nav__link">
-								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="assets/app/media/img/flags/015-china.svg"></span>
+								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="{{asset('assets/metronic/app/media/img/flags/015-china.svg')}}"></span>
 								<span class="m-nav__link-title m-topbar__language-text m-nav__link-text">China</span>
 							</a>
 						</li>
 						<li class="m-nav__item">
 							<a href="#" class="m-nav__link">
-								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="assets/app/media/img/flags/016-spain.svg"></span>
+								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="{{asset('assets/metronic/app/media/img/flags/016-spain.svg')}}"></span>
 								<span class="m-nav__link-title m-topbar__language-text m-nav__link-text">Spain</span>
 							</a>
 						</li>
 						<li class="m-nav__item">
 							<a href="#" class="m-nav__link">
-								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="assets/app/media/img/flags/014-japan.svg"></span>
+								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="{{asset('assets/metronic/app/media/img/flags/014-japan.svg')}}"></span>
 								<span class="m-nav__link-title m-topbar__language-text m-nav__link-text">Japan</span>
 							</a>
 						</li>
 						<li class="m-nav__item">
 							<a href="#" class="m-nav__link">
-								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="assets/app/media/img/flags/017-germany.svg"></span>
+								<span class="m-nav__link-icon"><img class="m-topbar__language-img" src="{{asset('assets/metronic/app/media/img/flags/017-germany.svg')}}"></span>
 								<span class="m-nav__link-title m-topbar__language-text m-nav__link-text">Germany</span>
 							</a>
 						</li>
@@ -309,17 +309,17 @@
 			<li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
 	<a href="#" class="m-nav__link m-dropdown__toggle">
 	<span class="m-topbar__userpic">	
-		<img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt=""/>
+		<img src="{{asset('assets/metronic/app/media/img/users/user4.jpg')}}" class="m--img-rounded m--marginless" alt=""/>
 	</span>
 	<span class="m-topbar__username m--hide">Nick</span>
 	</a>
 	<div class="m-dropdown__wrapper">
 		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
 		<div class="m-dropdown__inner">
-			<div class="m-dropdown__header m--align-center" style="background: url(assets/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
+			<div class="m-dropdown__header m--align-center" style="background: url(assets/metronic/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
 				<div class="m-card-user m-card-user--skin-dark">
 					<div class="m-card-user__pic">
-						<img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt=""/>
+						<img src="{{asset('assets/metronic/app/media/img/users/user4.jpg')}}" class="m--img-rounded m--marginless" alt=""/>
 						<!--
 						<span class="m-type m-type--lg m--bg-danger"><span class="m--font-light">S<span><span>
 						-->
