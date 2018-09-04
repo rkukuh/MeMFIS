@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         /** USER and ACL/RBAC */
 
         $this->call(RolesTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
     }
 }
