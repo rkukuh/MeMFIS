@@ -2,28 +2,97 @@
 
 namespace App;
 
+/** Traits **/
+use App\Traits\UuidKey;
+use App\Traits\Timestampable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+
+/** Relationship **/
+use Modules\Blog\Entities\Post;
+use Spatie\MediaLibrary\Models\Media;
+
+/** Scopes, Interfaces, Facades, Helpers  **/
+use App\Scopes\OrderByColumn;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements Auditable, HasMedia
 {
+    use UuidKey;
+    use HasRoles;
     use Notifiable;
+    use SoftDeletes;
+    use Timestampable;
+    use HasMediaTrait;
+    use \OwenIt\Auditing\Auditable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
-        'password', 'remember_token',
+        'id',
+        'password',
+        'remember_token',
     ];
+
+    protected $dates = ['deleted_at'];
+
+    /***************************************** OVERRIDE *******************************************/
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('avatar')
+             ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+             ->width(25)
+             ->height(25);
+    }
+
+    /******************************************* BOOT ********************************************/
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OrderByColumn('name'));
+    }
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    // ...
+
+    /**************************************** ACCESSOR *******************************************/
+
+    /**
+     * Get first role of this user
+     *
+     * @return void
+     */
+    public function getRoleAttribute()
+    {
+        if ($this->hasRole('admin'))
+            return 'Admin';
+    }
 }
