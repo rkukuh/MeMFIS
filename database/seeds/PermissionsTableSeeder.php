@@ -14,9 +14,9 @@ class PermissionsTableSeeder extends Seeder
     {
         // USER entity permissions:
 
-        Permission::create(['name' => 'create-user']);
-        Permission::create(['name' => 'edit-user']);
-        Permission::create(['name' => 'remove-user']);
-        Permission::create(['name' => 'delete-user']);
+        Permission::create(['name' => 'user-create']);
+        Permission::create(['name' => 'user-edit']);
+        Permission::create(['name' => 'user-remove']);
+        Permission::create(['name' => 'user-delete']);
     }
 }
