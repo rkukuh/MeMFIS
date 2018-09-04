@@ -19,26 +19,27 @@
                                         <label class="form-control-label">
                                         Name *
                                         </label>
-                                        <input type="text" class="form-control form-control-danger m-input" name="name" id="name" placeholder="name">
-                                        <div class="form-control-feedback text-danger" id="name-error"></div>
-                                        <span class="m-form__help">
-                                            Name
-                                        </span>
+
+                                    @component('frontend.common.input.input')
+                                        @slot('text', 'Name')
+                                        @slot('name', 'name')
+                                        @slot('type', 'text')
+                                    @endcomponent
+
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                         Country *
                                         </label>
                                         <br>
-                                        <select class="form-control m-select2" id="m_select2_1" name="country" style="width:100%">
-                                            <option value="">
-                                            --- Country ---
-                                            </option>
-                                        </select>
-                                        <div class="form-control-feedback text-danger" id="country-error"></div>
-                                        <span class="m-form__help">
-                                            Country
-                                        </span>
+                                        @component('frontend.common.input.select')
+                                            @slot('text', 'Country')
+                                            @slot('name', 'country')
+                                            @slot('id', 'm_select2_1')
+                                            @slot('style', 'width:100%')
+
+                                        @endcomponent
+
                                     </div>
                                     </div>
                                     <div class="form-group m-form__group row ">
@@ -47,25 +48,25 @@
                                         City *
                                         </label>
                                         <br>
-                                        <select class="form-control m-select2" id="m_select2_2" name="city" style="width:100%">
-                                            <option value="">
-                                            --- City ---
-                                            </option>
-                                        </select>                                        
-                                        <div class="form-control-feedback text-danger" id="city-error"></div>
-                                        <span class="m-form__help">
-                                            City
-                                        </span>
+                                        @component('frontend.common.input.select')
+                                            @slot('text', 'City')
+                                            @slot('name', 'city')
+                                            @slot('id', 'm_select2_2')
+                                            @slot('style', 'width:100%')
+
+                                        @endcomponent
+
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                         Address *
                                         </label>
-                                        <textarea class="form-control m-input m-input--air"  name="address" id="address" rows="3"  placeholder="Address"></textarea>
-                                        <div class="form-control-feedback text-danger" id="address-error"></div>
-                                        <span class="m-form__help">
-                                            Address
-                                        </span>
+                                        @component('frontend.common.input.textarea')
+                                            @slot('text', 'Address')
+                                            @slot('name', 'address')
+                                            @slot('rows', '3')
+
+                                        @endcomponent
                                     </div>
                                     </div>
                                     <div class="form-group m-form__group row ">
@@ -79,8 +80,12 @@
                                                 <div data-repeater-item class="row">     
                                                         <div class="m-form__group row">
                                                         <div class="col-md-0">
+                                                        @component('frontend.common.input.input')
+                                                            @slot('text', 'Phone')
+                                                            @slot('name', 'phone')
+                                                            @slot('type', 'number')
+                                                        @endcomponent
 
-                                                        <input type="text" class="form-control form-control-danger m-input" name="phone" id="phone" placeholder="phone">
                                                         </div>
                                                         <div class="col-md-1">
                                                             <div data-repeater-delete="" class="btn-sm btn btn-danger">
@@ -119,8 +124,12 @@
                                                 <div data-repeater-item class="row">     
                                                         <div class="m-form__group row">
                                                         <div class="col-md-0">
+                                                        @component('frontend.common.input.input')
+                                                            @slot('text', 'Email')
+                                                            @slot('name', 'email')
+                                                            @slot('type', 'email')
+                                                        @endcomponent
 
-                                                        <input type="text" class="form-control form-control-danger m-input" name="email" id="email" placeholder="email">
                                                         </div>
                                                         <div class="col-md-1">
                                                             <div data-repeater-delete="" class="btn-sm btn btn-danger">
@@ -162,8 +171,11 @@
                                                 <div data-repeater-item class="row">     
                                                         <div class="m-form__group row">
                                                         <div class="col-md-0">
-
-                                                        <input type="text" class="form-control form-control-danger m-input" name="fax" id="fax" placeholder="fax">
+                                                        @component('frontend.common.input.input')
+                                                            @slot('text', 'Fax')
+                                                            @slot('name', 'fax')
+                                                            @slot('type', 'number')
+                                                        @endcomponent
                                                         </div>
                                                         <div class="col-md-1">
                                                             <div data-repeater-delete="" class="btn-sm btn btn-danger">
@@ -192,7 +204,33 @@
                                             Fax
                                         </span>
                                     </div>
+                                    
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    @component('frontend.common.input.radio')
+                                                            @slot('name', 'tes')
+                                                            @slot('Text', 'Tes')
+                                                            @slot('value', 'Tes2')
+                                                        @endcomponent
+
+                                    <!-- ini -->
+                                    <!-- <div class="m-checkbox-list"> -->
+											<!-- <label class="m-checkbox m-checkbox--success">
+											<input type="checkbox" > Success state
+											<span></span>
+											</label>
+											<label class="m-checkbox m-checkbox--brand">
+											<input type="checkbox" > Brand state
+											<span></span>
+											</label>
+											<label class="m-checkbox m-checkbox--primary">
+											<input type="checkbox" > Primary state
+											<span></span>
+											</label> -->
+										<!-- </div> -->
                                     </div>
+
+                                    </div>
+
 
                                 </div>
 
