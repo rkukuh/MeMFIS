@@ -4,8 +4,8 @@ use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Hash;
 
-$factory->define(User::class, function (Faker $faker) {
-
+$factory->define(User::class, function (Faker $faker)
+{
     $first_name = $faker->firstName;
     $last_name  = $faker->lastName;
 
@@ -15,5 +15,4 @@ $factory->define(User::class, function (Faker $faker) {
         'password'        => Hash::make('rahasia'),
         'remember_token'  => str_random(10),
     ];
-
 });
