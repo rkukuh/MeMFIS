@@ -7,13 +7,16 @@ Route::resource('/customer', 'frontend\CustomerController');
 Route::get('getcustomer','frontend\CustomerController@getcustomer')->name('getcustomer');
 Route::get('addres/country','frontend\AddresController@country')->name('country');
 Route::get('addres/city/{id}','frontend\AddresController@city')->name('city');
-// Route::get('/kecamatan/ajax/{id}',array('as'=>'myform.ajax','uses'=>'KecamatanController@myformAjax'));
+Route::get('getaudit','frontend\AuditController@getaudit')->name('getaudit');
 
 Route::get('/', function () {
     return view('auth.login');
 });
 Route::get('/home', function () {
     return view('frontend.home');
+});
+Route::get('/audit', function () {
+    return view('frontend.audit');
 });
 
 Route::get('/quation', function () {
