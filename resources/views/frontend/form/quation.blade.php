@@ -310,10 +310,69 @@
 
 
   </table>
-  <table width="100%">
+  <table >
   <tr>
+  <td colspan="2"><b><u>Term and Condition</u></b></td>
+  </tr>
+  <tr>
+  <td>- Quotation should be approved
+  </td>
+  </tr>
+  <tr>
+  <td>- Currency 1 USD = IDR 14.478 (per. 24-31 Juli 2018)
+  </td>
+  </tr>
+  <tr>
+  <td>- Exclude tax 10%
+  </td>
+  </tr>
+  <tr>
+  <td>- T.A.T : 3 Work days
+  </td>
+  </tr>
+  <tr>
+  <td>- <b> Payment methode :</b>
+  </td>
+  </tr>
+  <tr>
+  <td>- <b><i>"Cah after received"</i></b>
+  </td>
+  </tr>
+  <tr>
+  <td>- Account Rupiah No : 888.000.868.8 Bank BNI 46 Cab. Sidoarjo
+  </td>
+  </tr>
+  </table>
+<br>
+  <table >
+  
+  <tr>
+  <td colspan="3">
+  <center>
+  <b>
+  If a dispute arises in the implementation of this Quotation, it will be resolved by deleberation but if both
+  parties may not reach the deliberations within 30 calendar days, either party is entitied to submit a settlement
+  through the indonesian National Arbitration Board (BANI) upon proceeding. both parties agree tu use English language
+  and ear the cost together with equal composition.
+  The BANI award will be declared as final and binding on both parties " 
+  </b>
+  </center>
+  </td>
+  </tr>
+  <tr>
+  <td><center>Acknowledged by,<br><br><br><br><b><u>EDDY SIREGAR</u></b><br>Marketing Manager</center>
+  
+  </td>
   <td></td>
-  <td></td></tr>
+  <td><center>Approved by,,<br><br><br><br><b><u>R O M D A N I</u></b><br>Direlek Nam Air</center></td>
+  </tr>
+  <tr>
+  <td colspan="3">
+  <center><i>
+  Trusted Reliable Partner MRO
+  </i>
+  </center>
+  </td></tr>
   </table>
    
   </body>
