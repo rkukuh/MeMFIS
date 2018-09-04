@@ -197,13 +197,19 @@
                                 </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="reset" class="btn btn-success add" id="button">
-    						<i class="fa flaticon-file"></i>
-								<span id="simpan">
-	    							Simpan
-								</span>
-                          </button>
+                          @component('frontend.common.buttons.close')
+                            @slot('color', 'secondary')
+                            @slot('size', 'md')
+                            @slot('data_dismiss', 'modal')
+                          @endcomponent
+
+                          @component('frontend.common.buttons.submit')
+                            @slot('color', 'success')
+                            @slot('size', 'md')
+                            @slot('class', 'add')
+                        
+                          @endcomponent
+
                     </div>
                     </div>
                             </form>
