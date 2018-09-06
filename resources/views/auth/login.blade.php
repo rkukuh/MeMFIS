@@ -41,7 +41,8 @@
                     <div class="m-login__container">
                         <div class="m-login__logo">
                             <a href="#">
-                                <img src="img/LogoMemfisSpinner.png" alt="logo" height="200px" >
+                                <img src="img/LogoMemfisSpinner.png" alt="logo" height="100px" >
+
                             </a>
                         </div>
                         <div class="m-login__signin">
