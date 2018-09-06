@@ -41,7 +41,8 @@
                     <div class="m-login__container">
                         <div class="m-login__logo">
                             <a href="#">
-                                <img src="{{ asset('assets/metronic/app/media/img/logos/logo-1.png')}}">
+                                <img src="img/LogoMemfisSpinner.png" alt="logo" height="100px" >
+
                             </a>
                         </div>
                         <div class="m-login__signin">

@@ -206,12 +206,6 @@
                                     </div>
                                     
                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                    @component('frontend.common.input.radio')
-                                                            @slot('name', 'tes')
-                                                            @slot('Text', 'Tes')
-                                                            @slot('value', 'Tes2')
-                                                        @endcomponent
-
                                     <!-- ini -->
                                     <!-- <div class="m-checkbox-list"> -->
 											<!-- <label class="m-checkbox m-checkbox--success">
