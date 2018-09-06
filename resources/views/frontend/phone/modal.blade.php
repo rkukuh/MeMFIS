@@ -23,8 +23,45 @@
                                       <div id="m_repeater_1a">                    
                                         <div class="" id="m_repeater_1a">
                                             <div data-repeater-list="" >
-                                                <div data-repeater-item class="row">     
-                                                        <div class="form-group m-form__group row align-items-center">
+                                                <div data-repeater-item class="row">
+                                                        <table >
+                                                            <tr>
+                                                            <td width="30%" >
+                                                            @component('frontend.common.input.input')
+                                                            @slot('text', 'Phone')
+                                                            @slot('name', 'name')
+                                                            @slot('placeholder', 'phone')
+                                                        @endcomponent
+                                                        </td>
+                                                        <td width="5%"></td>
+                                                            <td width="15%">
+                                                            @component('frontend.common.input.radio')
+                                                            @slot('text', 'Work')
+                                                            @slot('name', 'type')
+                                                            @slot('value', 'work')
+                                                        @endcomponent
+
+                                                            </td>
+                                                            <td width="15%">
+                                                            @component('frontend.common.input.radio')
+                                                            @slot('text', 'Personal')
+                                                            @slot('name', 'type')
+                                                            @slot('value', 'personal')
+                                                        @endcomponent
+
+                                                            </td>
+                                                            <td width="35%">
+                                                            <div data-repeater-delete="" class="btn-sm btn btn-danger">
+                                                            <span>
+                                                                <i class="la la-trash-o"></i>
+                                                                <span>Delete</span>
+                                                            </span>
+                                                            </div>
+
+                                                            </td>
+                                                            </tr>
+                                                        </table>     
+                                                        <!-- <div class="form-group m-form__group row align-items-center">
                                                         <div class="col-md-6">
                                                         @component('frontend.common.input.input')
                                                             @slot('text', 'Phone')
@@ -39,7 +76,6 @@
                                                             @slot('name', 'type')
                                                             @slot('value', 'work')
                                                         @endcomponent
-                                                        <!-- <br> -->
                                                         @component('frontend.common.input.radio')
                                                             @slot('text', 'Personal')
                                                             @slot('name', 'type')
@@ -56,7 +92,7 @@
                                                             </div>
 
                                                         </div>
-                                                        </div>
+                                                        </div> -->
                                                 </div>                            
                                             </div>                 
                                         </div>
