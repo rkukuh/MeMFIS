@@ -49,6 +49,7 @@
                                     @component('frontend.common.input.textarea')
                                         @slot('name', 'description')
                                         @slot('rows', '3')
+                                        @slot('text', 'Description')
                                     @endcomponent
 
                                     </div>
