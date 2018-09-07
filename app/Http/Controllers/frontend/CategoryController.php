@@ -4,8 +4,8 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Category\Category;
-use App\Category\ListUtil;
+use App\Models\Category;
+use App\Models\ListUtil;
 use App\Http\Requests\fronted\CategryRequest;
 
 
@@ -19,7 +19,7 @@ class CategoryController extends Controller
 
     public function getcategory()
     {
-        $Categories = Customer::All();
+        $Categories = Category::All();
 
         $data = $alldata = json_decode($Categories);
 
@@ -150,7 +150,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $Categories = Categori::find($id);
-        return response()->json($Cuategorie);
+        return response()->json($Categories);
     }
 
     /**
