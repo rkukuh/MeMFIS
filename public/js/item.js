@@ -1,4 +1,4 @@
-var Category = {
+var Item = {
     init: function() {
         $(".m_datatable").mDatatable({
             data: {
@@ -143,7 +143,7 @@ var Category = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "post",
-                url: "/category",
+                url: "/item",
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -180,7 +180,7 @@ var Category = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/category/" + triggerid + "/edit",
+                url: "/item/" + triggerid + "/edit",
                 success: function(data) {
                     document.getElementById("name").value = data.name;
                     document.getElementById("id").value = data.id;
@@ -209,7 +209,7 @@ var Category = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "put",
-                url: "/category/" + triggerid,
+                url: "/item/" + triggerid,
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -246,7 +246,7 @@ var Category = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/category/" + triggerid,
+                url: "/item/" + triggerid,
                 success: function(data) {
                     document.getElementById("TitleModalCustomer").innerHTML =
                         "Detail Customer #ID-" + triggerid;
@@ -287,7 +287,7 @@ var Category = {
                             )
                         },
                         type: "DELETE",
-                        url: "/category/" + triggerid + "",
+                        url: "/item/" + triggerid + "",
                         success: function(data) {
                             toastr.success(
                                 "Data Berhasil Dihapus.",
@@ -333,5 +333,5 @@ var Category = {
 
 
 jQuery(document).ready(function() {
-    Category.init();
+    Item.init();
 });
