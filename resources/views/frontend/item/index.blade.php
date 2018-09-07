@@ -42,7 +42,7 @@
                 <i class="la la-gear"></i>
               </span>
               <h3 class="m-portlet__head-text">
-                Form Category
+                Form Item
               </h3>
             </div>
           </div>
@@ -70,10 +70,10 @@
                         </div>
                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                         @component('frontend.common.buttons.create-new')
-                            @slot('text', 'Add Customer')
+                            @slot('text', 'Add Item')
                             @slot('color', 'primary')
                             @slot('size', 'md')
-                            @slot('data_target', '#modal_customer')
+                            @slot('data_target', '#modal_item')
                         @endcomponent
 
                             <div class="m-separator m-separator--dashed d-xl-none"></div>					
