@@ -108,7 +108,7 @@
 <!-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}" type="text/javascript"></script> -->
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}" type="text/javascript"></script>
 
-<script src="{{ asset('js/customer.js')}}"></script>
+<script src="{{ asset('js/category.js')}}"></script>
 <script src="{{ asset('js/addres.js')}}"></script>
 <script src="{{ asset('js/select.js')}}"></script>
 
