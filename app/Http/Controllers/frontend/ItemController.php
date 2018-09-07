@@ -18,7 +18,7 @@ class ItemController extends Controller
      */
     public function getitem()
     {
-        $Items = Customer::All();
+        $Items = Item::All();
 
         $data = $alldata = json_decode($Items);
 
