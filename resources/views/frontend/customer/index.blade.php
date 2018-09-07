@@ -19,7 +19,7 @@
           -
         </li>
         <li class="m-nav__item">
-          <a href="/Customer" class="m-nav__link">
+          <a href="/customer" class="m-nav__link">
             <span class="m-nav__link-text">
               Customer
             </span>
@@ -110,5 +110,6 @@
 
 <script src="{{ asset('js/customer.js')}}"></script>
 <script src="{{ asset('js/addres.js')}}"></script>
+<script src="{{ asset('js/select.js')}}"></script>
 
 @endpush  

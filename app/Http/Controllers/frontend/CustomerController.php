@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 // use Illuminate\Support\Facades\Input;
 // use Validator;
 // use Response;
-use App\model\Customer;
-use App\model\ListUtil;
-use App\Http\Requests\CustomerRequest;
+use App\Models\Customer;
+use App\Models\ListUtil;
+use App\Http\Requests\fronted\CustomerRequest;
 
 class CustomerController extends Controller
 {
