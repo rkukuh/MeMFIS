@@ -113,7 +113,6 @@ class ItemController extends Controller
     public function index()
     {
         return view('frontend.item.index');
-
     }
 
     /**
@@ -163,7 +162,7 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        $Items =Itemr::find($id);
+        $Items =Item::find($id);
         return response()->json($Items);
 
     }
