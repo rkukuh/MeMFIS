@@ -9,8 +9,8 @@ use App\Http\Controllers\Controller;
 // use Response;
 use App\Models\Customer;
 use App\Models\ListUtil;
-use App\Http\Requests\Fronted\CustomerStore;
-use App\Http\Requests\Fronted\CustomerUpdate;
+use App\Http\Requests\Frontend\CustomerStore;
+use App\Http\Requests\Frontend\CustomerUpdate;
 
 class CustomerController extends Controller
 {

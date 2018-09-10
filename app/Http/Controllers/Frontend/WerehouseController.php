@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Werehouse;
 use App\Models\ListUtil;
-use App\Http\Requests\Fronted\WerehouseStore;
-use App\Http\Requests\Fronted\WerehouseUpdate;
+use App\Http\Requests\Frontend\WerehouseStore;
+use App\Http\Requests\Frontend\WerehouseUpdate;
 
 class WerehouseController extends Controller
 {
