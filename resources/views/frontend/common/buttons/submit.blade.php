@@ -1,4 +1,4 @@
-<button type="submit" 
+<button type="reset" 
         name="{{ $name or 'submit' }}" 
         value="{{ $value or '' }}" 
         target="{{ $target or '' }}" 
