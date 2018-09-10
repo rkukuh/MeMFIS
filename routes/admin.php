@@ -10,7 +10,7 @@ Route::name('admin.')->group(function () {
 
     ], function () {
 
-        //
+        Route::resource('bank', 'BankController');
 
     });
 
