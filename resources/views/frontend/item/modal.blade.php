@@ -92,10 +92,9 @@
                                         Active *
                                         </label>
                                         <br>
-                                        @component('frontend.common.input.input')
+                                        @component('frontend.common.input.checkbox')
                                         @slot('text', 'Active')
                                         @slot('name', 'active')
-                                        @slot('type', 'text')
                                     @endcomponent
 
                                     </div>

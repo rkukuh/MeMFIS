@@ -72,6 +72,19 @@
                                     <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
+                                        ZipCode *
+                                        </label>
+
+                                    @component('frontend.common.input.input')
+                                        @slot('text', 'ZipCode')
+                                        @slot('name', 'zipcpde')
+                                        @slot('type', 'text')
+                                    @endcomponent
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
                                         Phone
                                         </label>
                                         <div id="m_repeater_1">                    
@@ -114,6 +127,10 @@
                                             Phone
                                         </span>
                                     </div>
+                                    
+                                    </div>
+                                    
+                                    <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                         Email
@@ -158,9 +175,6 @@
                                             Email
                                         </span>
                                     </div>
-                                    </div>
-                                    
-                                    <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
                                         Fax
@@ -205,7 +219,7 @@
                                         </span>
                                     </div>
                                     
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <!-- <div class="col-sm-6 col-md-6 col-lg-6"> -->
                                     <!-- ini -->
                                     <!-- <div class="m-checkbox-list"> -->
 											<!-- <label class="m-checkbox m-checkbox--success">
@@ -221,7 +235,7 @@
 											<span></span>
 											</label> -->
 										<!-- </div> -->
-                                    </div>
+                                    <!-- </div> -->
 
                                     </div>
 
@@ -239,10 +253,6 @@
 
 
 
-                                        <div class="form-control-feedback text-danger" id="fax-error"></div>
-                                        <span class="m-form__help">
-                                            NPWP
-                                        </span>
                                     </div>
                                     
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -258,15 +268,23 @@
 
 
 
-                                        <div class="form-control-feedback text-danger" id="fax-error"></div>
-                                        <span class="m-form__help">
-                                            NPPKP
-                                        </span>
                                     </div>
 
                                     </div>
 
                                      <div class="form-group m-form__group row ">
+                                     <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                        ToP
+                                        </label>
+                                        <br>
+                                        @component('frontend.common.input.input')
+                                            @slot('text', 'ToP')
+                                            @slot('name', 'top')
+                                            @slot('type', 'text')
+                                        @endcomponent
+                                        <!-- <br> -->
+                                    </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
                                         Barcode
@@ -280,32 +298,70 @@
 
 
 
-                                        <div class="form-control-feedback text-danger" id="fax-error"></div>
-                                        <span class="m-form__help">
-                                            NPWP
-                                        </span>
                                     </div>
                                     
+       
+
+                                    </div>
+
+                                    <div class="form-group m-form__group row ">
+                                     <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                        Contact Person
+                                        </label>
+                                        <br>
+                                        @component('frontend.common.input.input')
+                                            @slot('text', 'Contact Person')
+                                            @slot('name', 'contactperson')
+                                            @slot('type', 'text')
+                                        @endcomponent
+                                        <!-- <br> -->
+                                    </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <!-- <label class="form-control-label">
-                                        NPPKP
+                                    <label class="form-control-label">
+                                     Contact Person Job Position
+n
                                         </label>
                                         
                                         @component('frontend.common.input.input')
-                                        @slot('text', 'NPPKP')
-                                        @slot('name', 'nppkp')
+                                        @slot('text', 'Contact Person Job Position')
+                                        @slot('name', 'contactpersonjobposition')
                                         @slot('type', 'text')
                                     @endcomponent
 
 
 
-                                        <div class="form-control-feedback text-danger" id="fax-error"></div>
-                                        <span class="m-form__help">
-                                            NPPKP
-                                        </span> -->
                                     </div>
+                                    
+       
 
                                     </div>
+                                <div class="form-group m-form__group row ">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                        Active *
+                                        </label>
+                                        <br>
+                                        @component('frontend.common.input.checkbox')
+                                        @slot('text', 'Active')
+                                        @slot('name', 'active')
+                                    @endcomponent
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                        AccountCode *
+                                        </label>
+                                        <br>
+                                        @component('frontend.common.input.input')
+                                        @slot('text', 'AccountCode')
+                                        @slot('name', 'accountcode')
+                                        @slot('type', 'text')
+                                    @endcomponent
+
+                                    </div>
+
+                                </div>
 
 
 
