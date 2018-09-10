@@ -2,16 +2,9 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
+Route::view('/', 'auth.login');
+Route::view('/home', 'frontend.home');
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/home', function () {
-    return view('frontend.home');
-});
-
 
 Route::resource('/customer', 'frontend\CustomerController');
 Route::get('getcustomer','frontend\CustomerController@getcustomer')->name('getcustomer');
@@ -39,9 +32,7 @@ Route::get('addres/city/{id}','frontend\AddresController@city')->name('city');
 
 Route::get('getaudit','frontend\AuditController@getaudit')->name('getaudit');
 
-Route::get('/audit', function () {
-    return view('frontend.audit');
-});
+Route::view('/audit', 'frontend.audit');
 
 Route::get('/quotation', function () {
     $pdf = \PDF::loadView('frontend/form/quotation');
