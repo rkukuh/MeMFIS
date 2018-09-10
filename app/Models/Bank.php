@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class Bank extends Model
+class Bank extends MemfisModel
 {
-    //
+    protected $fillable = [
+        'abbr',
+        'name',
+    ];
 }
