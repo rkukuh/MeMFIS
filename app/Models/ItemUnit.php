@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class ItemUnit extends Model
+class ItemUnit extends MemfisModel
 {
     //
 }
