@@ -1,4 +1,4 @@
-var Customer = {
+var Itemstock = {
     init: function() {
         $(".m_datatable").mDatatable({
             data: {
@@ -7,7 +7,7 @@ var Customer = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getcustomer",
+                        url: "/getitemstock",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -39,12 +39,12 @@ var Customer = {
                 }
             },
             columns: [
-                {
-                    field: "id",
-                    title: "#",
-                    sortable: !1,
-                    width: 40
-                },
+                // {
+                //     field: "id",
+                //     title: "#",
+                //     sortable: !1,
+                //     width: 40
+                // },
                 {
                     field: "code",
                     title: "Code",
@@ -53,54 +53,25 @@ var Customer = {
                     width: 60
                 },
                 {
-                    field: "name",
-                    title: "Name",
+                    field: "id_warehouse",
+                    title: "Warehouse",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "address",
-                    title: "Address",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 150,
-                    template: "{{address}}, {{city}}"
-                },
-                {
-                    field: "email",
-                    title: "Email",
+                    field: "max",
+                    title: "Max",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "phone",
-                    title: "Phone",
+                    field: "min",
+                    title: "Min",
                     sortable: "asc",
                     filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: "fax",
-                    title: "Fax",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: "npwp",
-                    title: "NPWP",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: "npwpa_ddress",
-                    title: "NPWP Address",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 150,
+                    width: 150
                 },
                 {
                     field: "Actions",
@@ -137,7 +108,7 @@ var Customer = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "post",
-                url: "/customer",
+                url: "/itemstock",
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -174,7 +145,7 @@ var Customer = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/customer/" + triggerid + "/edit",
+                url: "/itemstock/" + triggerid + "/edit",
                 success: function(data) {
                     document.getElementById("name").value = data.name;
                     document.getElementById("id").value = data.id;
@@ -203,7 +174,7 @@ var Customer = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "put",
-                url: "/customer/" + triggerid,
+                url: "/itemstock/" + triggerid,
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -240,7 +211,7 @@ var Customer = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/customer/" + triggerid,
+                url: "/itemstock/" + triggerid,
                 success: function(data) {
                     document.getElementById("TitleModalCustomer").innerHTML =
                         "Detail Customer #ID-" + triggerid;
@@ -281,7 +252,7 @@ var Customer = {
                             )
                         },
                         type: "DELETE",
-                        url: "/customer/" + triggerid + "",
+                        url: "/itemstock/" + triggerid + "",
                         success: function(data) {
                             toastr.success(
                                 "Data Berhasil Dihapus.",
@@ -327,5 +298,5 @@ var Customer = {
 
 
 jQuery(document).ready(function() {
-    Customer.init();
+    Itemstock.init();
 });

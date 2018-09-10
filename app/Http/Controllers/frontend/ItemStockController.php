@@ -1,28 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Input;
-// use Validator;
-// use Response;
-use App\Models\Customer;
+use App\Models\ItemStock;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\CustomerRequest;
+use App\Http\Requests\fronted\ItemStockRequest;
 
-class CustomerController extends Controller
+class ItemStockController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getcustomer()
+    public function getitemstock()
     {
-        $Customers = Customer::All();
+        $Itemstock = ItemStock::All();
 
-        $data = $alldata = json_decode($Customers);
+        $data = $alldata = json_decode($Itemstock);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -114,7 +111,7 @@ class CustomerController extends Controller
     }
     public function index()
     {
-        return view('frontend.customer.index');
+        return view('frontend.itemstock.index');
     }
 
     /**
@@ -133,13 +130,14 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerRequest $request)
+    public function store(Request $request)
     {
-        $Customer = Customer::create([
-            'name' => $request->name,
+        $ItemStock = ItemStock::create([
+            // 'name' => $request->name,
         ]);
 
-        return response()->json($Customer);
+        return response()->json($ItemStock);
+
     }
 
     /**
@@ -150,8 +148,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $ItemStocks = ItemStock::find($id);
+        return response()->json($ItemStocks);
+
     }
 
     /**
@@ -162,8 +161,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $ItemStock =ItemStock::find($id);
+        return response()->json($ItemStock);
+
     }
 
     /**
@@ -173,12 +173,13 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $Customer = Customer::find($id);
-        $Customer->name = $request->name;
-        $Customer->save();
-        return response()->json($Customer);
+        $ItemStock = ItemStock::find($id);
+        // $Item->name = $request->name;
+        $ItemStock->save();
+        return response()->json($ItemStock);
+
     }
 
     /**
@@ -189,9 +190,10 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $Customer = Customer::find($id)->delete();
-        return response()->json($Customer);
+        $ItemStock = ItemStock::find($id)->delete();
+        return response()->json($ItemStock);
     }
+
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {
       if ( ! is_array( $list ) ) {
@@ -202,4 +204,5 @@ class CustomerController extends Controller
 
       return $util->filter( $args, $operator );
     }
+
 }

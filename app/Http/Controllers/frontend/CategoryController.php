@@ -1,28 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Input;
-// use Validator;
-// use Response;
-use App\Models\Customer;
+use App\Models\Category;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\CustomerRequest;
+use App\Http\Requests\fronted\CategryRequest;
 
-class CustomerController extends Controller
+
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getcustomer()
-    {
-        $Customers = Customer::All();
 
-        $data = $alldata = json_decode($Customers);
+    public function getcategory()
+    {
+        $Categories = Category::All();
+
+        $data = $alldata = json_decode($Categories);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -114,7 +113,7 @@ class CustomerController extends Controller
     }
     public function index()
     {
-        return view('frontend.customer.index');
+        return view('frontend.category.index');
     }
 
     /**
@@ -133,13 +132,13 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerRequest $request)
+    public function store(CategoryRequest $request)
     {
-        $Customer = Customer::create([
-            'name' => $request->name,
+        $Category = Category::create([
+            // 'name' => $request->name,
         ]);
 
-        return response()->json($Customer);
+        return response()->json($Category);
     }
 
     /**
@@ -150,8 +149,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $Categories = Categori::find($id);
+        return response()->json($Categories);
     }
 
     /**
@@ -162,8 +161,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $Categories = Categori::find($id);
+        return response()->json($Categories);
     }
 
     /**
@@ -173,12 +172,12 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $Customer = Customer::find($id);
-        $Customer->name = $request->name;
-        $Customer->save();
-        return response()->json($Customer);
+        $Category = Category::find($id);
+        // $Category->name = $request->name;
+        // $Category->save();
+        return response()->json($Category);
     }
 
     /**
@@ -189,8 +188,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $Customer = Customer::find($id)->delete();
-        return response()->json($Customer);
+        $Category = Category::find($id)->delete();
+        return response()->json($Category);
     }
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {

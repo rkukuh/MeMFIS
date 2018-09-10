@@ -1,28 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Input;
-// use Validator;
-// use Response;
-use App\Models\Customer;
+use App\Models\Item;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\CustomerRequest;
+use App\Http\Requests\fronted\ItemRequest;
 
-class CustomerController extends Controller
+
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getcustomer()
+    public function getitem()
     {
-        $Customers = Customer::All();
+        $Items = Item::All();
 
-        $data = $alldata = json_decode($Customers);
+        $data = $alldata = json_decode($Items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -114,7 +112,7 @@ class CustomerController extends Controller
     }
     public function index()
     {
-        return view('frontend.customer.index');
+        return view('frontend.item.index');
     }
 
     /**
@@ -133,13 +131,14 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerRequest $request)
+    public function store(ItemRequest $request)
     {
-        $Customer = Customer::create([
-            'name' => $request->name,
+        $Item = Item::create([
+            // 'name' => $request->name,
         ]);
 
-        return response()->json($Customer);
+        return response()->json($Item);
+
     }
 
     /**
@@ -150,8 +149,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $Items = Item::find($id);
+        return response()->json($Items);
+
     }
 
     /**
@@ -162,8 +162,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $Items =Item::find($id);
+        return response()->json($Items);
+
     }
 
     /**
@@ -173,12 +174,13 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(ItemRequest $request, $id)
     {
-        $Customer = Customer::find($id);
-        $Customer->name = $request->name;
-        $Customer->save();
-        return response()->json($Customer);
+        $Item = Item::find($id);
+        // $Item->name = $request->name;
+        $Item->save();
+        return response()->json($Item);
+
     }
 
     /**
@@ -189,8 +191,9 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $Customer = Customer::find($id)->delete();
-        return response()->json($Customer);
+        $Item = Item::find($id)->delete();
+        return response()->json($Item);
+
     }
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {
@@ -202,4 +205,5 @@ class CustomerController extends Controller
 
       return $util->filter( $args, $operator );
     }
+
 }
