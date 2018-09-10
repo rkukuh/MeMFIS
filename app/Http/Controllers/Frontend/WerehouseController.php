@@ -1,27 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Werehouse;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\CategryRequest;
+use App\Http\Requests\Fronted\WerehouseStore;
+use App\Http\Requests\Fronted\WerehouseUpdate;
 
-
-class CategoryController extends Controller
+class WerehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function getcategory()
+    public function getwerehouse()
     {
-        $Categories = Category::All();
+        $Werehouse = Werehouse::All();
 
-        $data = $alldata = json_decode($Categories);
+        $data = $alldata = json_decode($Werehouse);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -113,7 +112,7 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        return view('frontend.category.index');
+        return view('frontend.werehouse.index');
     }
 
     /**
@@ -132,13 +131,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(WerehouseStore $request)
     {
-        $Category = Category::create([
+        $Werehouse = Werehouse::create([
             // 'name' => $request->name,
         ]);
 
-        return response()->json($Category);
+        return response()->json($Werehouse);
     }
 
     /**
@@ -149,8 +148,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $Categories = Categori::find($id);
-        return response()->json($Categories);
+        $Werehouse = Werehouse::find($id);
+        return response()->json($Werehouse);
     }
 
     /**
@@ -161,8 +160,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $Categories = Categori::find($id);
-        return response()->json($Categories);
+        $Werehouse = Werehouse::find($id);
+        return response()->json($Werehouse);
     }
 
     /**
@@ -172,12 +171,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(WerehouseUpdate $request, $id)
     {
-        $Category = Category::find($id);
+        $Werehouse = Werehouse::find($id);
         // $Category->name = $request->name;
         // $Category->save();
-        return response()->json($Category);
+        return response()->json($Werehouse);
     }
 
     /**
@@ -188,8 +187,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $Category = Category::find($id)->delete();
-        return response()->json($Category);
+        $Werehouse = Werehouse::find($id)->delete();
+        return response()->json($Werehouse);
     }
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {

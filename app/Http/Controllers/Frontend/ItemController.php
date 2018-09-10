@@ -1,29 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
-use App\model\ListUtil;
+use App\Models\Item;
+use App\Models\ListUtil;
+use App\Http\Requests\Fronted\ItemStore;
+use App\Http\Requests\Fronted\ItemUpdate;
 
 
-class AuditController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function getaudit()
+    public function getitem()
     {
-        $Audits = DB::table("audits")->get();
-        
-        $data = $alldata = json_decode($Audits);
-  
+        $Items = Item::All();
+
+        $data = $alldata = json_decode($Items);
+
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
-  
+
         // search filter by keywords
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
             ? $datatable['query']['generalSearch'] : '';
@@ -33,7 +34,7 @@ class AuditController extends Controller
             });
             unset($datatable['query']['generalSearch']);
         }
-  
+
         // filter by field query
         $query = isset($datatable['query']) && is_array($datatable['query']) ? $datatable['query'] : null;
         if (is_array($query)) {
@@ -42,30 +43,30 @@ class AuditController extends Controller
                 $data = $this->list_filter($data, [$key => $val]);
             }
         }
-  
+
         $sort  = ! empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
         $field = ! empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'RecordID';
-  
+
         $meta    = [];
         $page    = ! empty($datatable['pagination']['page']) ? (int)$datatable['pagination']['page'] : 1;
         $perpage = ! empty($datatable['pagination']['perpage']) ? (int)$datatable['pagination']['perpage'] : -1;
-  
+
         $pages = 1;
         $total = count($data); // total items in array
-  
+
         // sort
         usort($data, function ($a, $b) use ($sort, $field) {
             if ( ! isset($a->$field) || ! isset($b->$field)) {
                 return false;
             }
-  
+
             if ($sort === 'asc') {
                 return $a->$field > $b->$field ? true : false;
             }
-  
+
             return $a->$field < $b->$field ? true : false;
         });
-  
+
         // $perpage 0; get all data
         if ($perpage > 0) {
             $pages  = ceil($total / $perpage); // calculate total pages
@@ -75,31 +76,31 @@ class AuditController extends Controller
             if ($offset < 0) {
                 $offset = 0;
             }
-  
+
             $data = array_slice($data, $offset, $perpage, true);
         }
-  
+
         $meta = [
             'page'    => $page,
             'pages'   => $pages,
             'perpage' => $perpage,
             'total'   => $total,
         ];
-  
-  
+
+
         // if selected all records enabled, provide all the ids
         if (isset($datatable['requestIds']) && filter_var($datatable['requestIds'], FILTER_VALIDATE_BOOLEAN)) {
             $meta['rowIds'] = array_map(function ($row) {
                 return $row->RecordID;
             }, $alldata);
         }
-  
-  
+
+
         header('Content-Type: application/json');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
-  
+
         $result = [
             'meta' => $meta + [
                     'sort'  => $sort,
@@ -107,13 +108,12 @@ class AuditController extends Controller
                 ],
             'data' => $data,
         ];
-  
+
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
-
     public function index()
     {
-        //
+        return view('frontend.item.index');
     }
 
     /**
@@ -132,9 +132,14 @@ class AuditController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemStore $request)
     {
-        //
+        $Item = Item::create([
+            // 'name' => $request->name,
+        ]);
+
+        return response()->json($Item);
+
     }
 
     /**
@@ -145,7 +150,9 @@ class AuditController extends Controller
      */
     public function show($id)
     {
-        //
+        $Items = Item::find($id);
+        return response()->json($Items);
+
     }
 
     /**
@@ -156,7 +163,9 @@ class AuditController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Items =Item::find($id);
+        return response()->json($Items);
+
     }
 
     /**
@@ -166,9 +175,13 @@ class AuditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ItemUpdate $request, $id)
     {
-        //
+        $Item = Item::find($id);
+        // $Item->name = $request->name;
+        $Item->save();
+        return response()->json($Item);
+
     }
 
     /**
@@ -179,17 +192,19 @@ class AuditController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $Item = Item::find($id)->delete();
+        return response()->json($Item);
 
+    }
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {
       if ( ! is_array( $list ) ) {
         return array();
       }
- 
+
       $util = new ListUtil( $list );
- 
+
       return $util->filter( $args, $operator );
     }
+
 }

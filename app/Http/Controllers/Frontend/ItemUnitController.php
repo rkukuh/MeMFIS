@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ItemUnit;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\ItemStockUnit;
+use App\Http\Requests\Fronted\ItemUnitStore;
+use App\Http\Requests\Fronted\ItemUnitUpdate;
 
 class ItemUnitController extends Controller
 {
@@ -130,7 +131,7 @@ class ItemUnitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemUnitStore $request)
     {
         $ItemUnit = ItemUnit::create([
             // 'name' => $request->name,
@@ -172,7 +173,7 @@ class ItemUnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ItemUnitUpdate $request, $id)
     {
         $ItemUnit = ItemUnit::find($id);
         // $Item->name = $request->name;

@@ -69,6 +69,55 @@
         </a>
         </li>      
         <li class="m-menu__item" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+        <a  href="/supplier" class="m-menu__link m-menu__toggle">
+            <i class="m-menu__link-icon flaticon-list-3"></i>
+            <span class="m-menu__link-text">
+            Supplier
+            </span>
+        </a>
+        </li>      
+        <li class="m-menu__item" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+        <a  href="/category" class="m-menu__link m-menu__toggle">
+            <i class="m-menu__link-icon flaticon-list-3"></i>
+            <span class="m-menu__link-text">
+            Category
+            </span>
+        </a>
+        </li>      
+        <li class="m-menu__item" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+        <a  href="/item" class="m-menu__link m-menu__toggle">
+            <i class="m-menu__link-icon flaticon-list-3"></i>
+            <span class="m-menu__link-text">
+            Item
+            </span>
+        </a>
+        </li>      
+        <li class="m-menu__item" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+        <a  href="/itemstock" class="m-menu__link m-menu__toggle">
+            <i class="m-menu__link-icon flaticon-list-3"></i>
+            <span class="m-menu__link-text">
+            Itemstock
+            </span>
+        </a>
+        </li>      
+        <li class="m-menu__item" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+        <a  href="/itemunit" class="m-menu__link m-menu__toggle">
+            <i class="m-menu__link-icon flaticon-list-3"></i>
+            <span class="m-menu__link-text">
+            Itemunit
+            </span>
+        </a>
+        </li>      
+        <li class="m-menu__item" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+        <a  href="/werehouse" class="m-menu__link m-menu__toggle">
+            <i class="m-menu__link-icon flaticon-list-3"></i>
+            <span class="m-menu__link-text">
+            Werehouse
+            </span>
+        </a>
+        </li>      
+
+        <li class="m-menu__item" aria-haspopup="true"  data-menu-submenu-toggle="hover">
         <a  href="/audit" class="m-menu__link m-menu__toggle">
             <i class="m-menu__link-icon flaticon-list-3"></i>
             <span class="m-menu__link-text">

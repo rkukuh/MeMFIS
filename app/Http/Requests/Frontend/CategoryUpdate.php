@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\frontend;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ItemRequest extends FormRequest
+
+class CategoryUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,15 +34,15 @@ class ItemRequest extends FormRequest
     protected function failedValidation(Validator $validator) { 
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()])); 
     }
-
-    // public function messages()
-    // {
-    //     return [
-    //         'name.required' => 'Harus diisi',
-    //         'name.min' => 'minimal 3 karakter',
-    //         'name.max' => 'maximal 50 karakter',
-    //         'name.regex' => 'Berisi Huruf dan Spasi',
-    //         // 'body.required'  => 'A message is required',
-    //     ];
-    // }
+    
+        // public function messages()
+        // {
+        //     return [
+        //         'name.required' => 'Harus diisi',
+        //         'name.min' => 'minimal 3 karakter',
+        //         'name.max' => 'maximal 50 karakter',
+        //         'name.regex' => 'Berisi Huruf dan Spasi',
+        //         // 'body.required'  => 'A message is required',
+        //     ];
+        // }
 }

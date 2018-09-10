@@ -1,26 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Item;
+use App\Models\Category;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\ItemRequest;
+use App\Http\Requests\Fronted\CategoryStore;
+use App\Http\Requests\Fronted\CategoryUpdate;
 
 
-class ItemController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getitem()
-    {
-        $Items = Item::All();
 
-        $data = $alldata = json_decode($Items);
+    public function getcategory()
+    {
+        $Categories = Category::All();
+
+        $data = $alldata = json_decode($Categories);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -112,7 +114,7 @@ class ItemController extends Controller
     }
     public function index()
     {
-        return view('frontend.item.index');
+        return view('frontend.category.index');
     }
 
     /**
@@ -131,14 +133,13 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemRequest $request)
+    public function store(CategoryStore $request)
     {
-        $Item = Item::create([
+        $Category = Category::create([
             // 'name' => $request->name,
         ]);
 
-        return response()->json($Item);
-
+        return response()->json($Category);
     }
 
     /**
@@ -149,9 +150,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $Items = Item::find($id);
-        return response()->json($Items);
-
+        $Categories = Categori::find($id);
+        return response()->json($Categories);
     }
 
     /**
@@ -162,9 +162,8 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        $Items =Item::find($id);
-        return response()->json($Items);
-
+        $Categories = Categori::find($id);
+        return response()->json($Categories);
     }
 
     /**
@@ -174,13 +173,12 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemRequest $request, $id)
+    public function update(CategoryUpdate $request, $id)
     {
-        $Item = Item::find($id);
-        // $Item->name = $request->name;
-        $Item->save();
-        return response()->json($Item);
-
+        $Category = Category::find($id);
+        // $Category->name = $request->name;
+        // $Category->save();
+        return response()->json($Category);
     }
 
     /**
@@ -191,9 +189,8 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        $Item = Item::find($id)->delete();
-        return response()->json($Item);
-
+        $Category = Category::find($id)->delete();
+        return response()->json($Category);
     }
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {
@@ -205,5 +202,4 @@ class ItemController extends Controller
 
       return $util->filter( $args, $operator );
     }
-
 }

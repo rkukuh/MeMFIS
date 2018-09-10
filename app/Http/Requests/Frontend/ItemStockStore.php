@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\frontend;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class WerehouseRequest extends FormRequest
+class ItemStockStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -45,4 +45,3 @@ class WerehouseRequest extends FormRequest
     //     ];
     // }
 }
-

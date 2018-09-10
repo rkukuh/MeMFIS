@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Werehouse;
+use App\Models\Supplier;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\WerehouseRequest;
+use App\Http\Requests\Fronted\SupplierStore;
+use App\Http\Requests\Fronted\SupplierUpdate;
 
-class WerehouseController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getwerehouse()
+    public function getsupplier()
     {
-        $Werehouse = Werehouse::All();
+        $supplier = Supplier::All();
 
-        $data = $alldata = json_decode($Werehouse);
+        $data = $alldata = json_decode($supplier);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -111,7 +112,7 @@ class WerehouseController extends Controller
     }
     public function index()
     {
-        return view('frontend.werehouse.index');
+        return view('frontend.supplier.index');
     }
 
     /**
@@ -130,13 +131,14 @@ class WerehouseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SupplierStore $request)
     {
-        $Werehouse = Werehouse::create([
+        $Supplier = Supplier::create([
             // 'name' => $request->name,
         ]);
 
-        return response()->json($Werehouse);
+        return response()->json($Supplier);
+
     }
 
     /**
@@ -147,8 +149,8 @@ class WerehouseController extends Controller
      */
     public function show($id)
     {
-        $Werehouse = Werehouse::find($id);
-        return response()->json($Werehouse);
+        $Supplier = Supplier::find($id);
+        return response()->json($Supplier);
     }
 
     /**
@@ -159,8 +161,9 @@ class WerehouseController extends Controller
      */
     public function edit($id)
     {
-        $Werehouse = Werehouse::find($id);
-        return response()->json($Werehouse);
+        $Supplier = Supplier::find($id);
+        return response()->json($Supplier);
+
     }
 
     /**
@@ -170,12 +173,13 @@ class WerehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SupplierUpdate $request, $id)
     {
-        $Werehouse = Werehouse::find($id);
+        $Supplier = Supplier::find($id);
         // $Category->name = $request->name;
         // $Category->save();
-        return response()->json($Werehouse);
+        return response()->json($Supplier);
+
     }
 
     /**
@@ -186,8 +190,8 @@ class WerehouseController extends Controller
      */
     public function destroy($id)
     {
-        $Werehouse = Werehouse::find($id)->delete();
-        return response()->json($Werehouse);
+        $Supplier = Supplier::find($id)->delete();
+        return response()->json($Supplier);
     }
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {
