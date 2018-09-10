@@ -2,6 +2,8 @@
 
 Auth::routes();
 
+require_once('admin.php');
+
 Route::view('/', 'auth.login');
 Route::view('/home', 'frontend.home');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -43,4 +45,3 @@ Route::get('/preliminary', function () {
     $pdf = \PDF::loadView('frontend/form/preliminary');
     return $pdf->stream();
 });
-
