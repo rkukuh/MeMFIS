@@ -11,6 +11,8 @@ class ExampleDataSeeder extends Seeder
      */
     public function run()
     {
-        //
+        /** MASTER */
+
+        $this->call(Banks::class);
     }
 }
