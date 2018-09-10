@@ -1,4 +1,4 @@
-var Customer = {
+var Item = {
     init: function() {
         $(".m_datatable").mDatatable({
             data: {
@@ -7,7 +7,7 @@ var Customer = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getcustomer",
+                        url: "/getitem",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -39,12 +39,12 @@ var Customer = {
                 }
             },
             columns: [
-                {
-                    field: "id",
-                    title: "#",
-                    sortable: !1,
-                    width: 40
-                },
+                // {
+                //     field: "id",
+                //     title: "#",
+                //     sortable: !1,
+                //     width: 40
+                // },
                 {
                     field: "code",
                     title: "Code",
@@ -54,53 +54,59 @@ var Customer = {
                 },
                 {
                     field: "name",
-                    title: "Name",
+                    title: "Category",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "address",
-                    title: "Address",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 150,
-                    template: "{{address}}, {{city}}"
-                },
-                {
-                    field: "email",
-                    title: "Email",
+                    field: "barcode",
+                    title: "Barcode",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "phone",
-                    title: "Phone",
+                    field: "id_category",
+                    title: "Category",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: "description",
+                    title: "Description",
                     sortable: "asc",
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: "fax",
-                    title: "Fax",
+                    field: "active",
+                    title: "Active",
                     sortable: "asc",
                     filterable: !1,
-                    width: 150,
+                    width: 150
                 },
                 {
-                    field: "npwp",
-                    title: "NPWP",
+                    field: "isppn",
+                    title: "IsPPn",
                     sortable: "asc",
                     filterable: !1,
-                    width: 150,
+                    width: 150
                 },
                 {
-                    field: "npwpa_ddress",
-                    title: "NPWP Address",
+                    field: "isstock",
+                    title: "IsStock",
                     sortable: "asc",
                     filterable: !1,
-                    width: 150,
+                    width: 150
+                },
+                {
+                    field: "accountcode",
+                    title: "AccountCode",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 150
                 },
                 {
                     field: "Actions",
@@ -137,7 +143,7 @@ var Customer = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "post",
-                url: "/customer",
+                url: "/item",
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -174,7 +180,7 @@ var Customer = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/customer/" + triggerid + "/edit",
+                url: "/item/" + triggerid + "/edit",
                 success: function(data) {
                     document.getElementById("name").value = data.name;
                     document.getElementById("id").value = data.id;
@@ -203,7 +209,7 @@ var Customer = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "put",
-                url: "/customer/" + triggerid,
+                url: "/item/" + triggerid,
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -240,7 +246,7 @@ var Customer = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/customer/" + triggerid,
+                url: "/item/" + triggerid,
                 success: function(data) {
                     document.getElementById("TitleModalCustomer").innerHTML =
                         "Detail Customer #ID-" + triggerid;
@@ -281,7 +287,7 @@ var Customer = {
                             )
                         },
                         type: "DELETE",
-                        url: "/customer/" + triggerid + "",
+                        url: "/item/" + triggerid + "",
                         success: function(data) {
                             toastr.success(
                                 "Data Berhasil Dihapus.",
@@ -327,5 +333,5 @@ var Customer = {
 
 
 jQuery(document).ready(function() {
-    Customer.init();
+    Item.init();
 });

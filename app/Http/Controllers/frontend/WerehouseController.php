@@ -1,28 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Input;
-// use Validator;
-// use Response;
-use App\Models\Customer;
+use App\Models\Werehouse;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\CustomerRequest;
+use App\Http\Requests\fronted\WerehouseRequest;
 
-class CustomerController extends Controller
+class WerehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getcustomer()
+    public function getwerehouse()
     {
-        $Customers = Customer::All();
+        $Werehouse = Werehouse::All();
 
-        $data = $alldata = json_decode($Customers);
+        $data = $alldata = json_decode($Werehouse);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -114,7 +111,7 @@ class CustomerController extends Controller
     }
     public function index()
     {
-        return view('frontend.customer.index');
+        return view('frontend.werehouse.index');
     }
 
     /**
@@ -133,13 +130,13 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerRequest $request)
+    public function store(Request $request)
     {
-        $Customer = Customer::create([
-            'name' => $request->name,
+        $Werehouse = Werehouse::create([
+            // 'name' => $request->name,
         ]);
 
-        return response()->json($Customer);
+        return response()->json($Werehouse);
     }
 
     /**
@@ -150,8 +147,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $Werehouse = Werehouse::find($id);
+        return response()->json($Werehouse);
     }
 
     /**
@@ -162,8 +159,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $Werehouse = Werehouse::find($id);
+        return response()->json($Werehouse);
     }
 
     /**
@@ -173,12 +170,12 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $Customer = Customer::find($id);
-        $Customer->name = $request->name;
-        $Customer->save();
-        return response()->json($Customer);
+        $Werehouse = Werehouse::find($id);
+        // $Category->name = $request->name;
+        // $Category->save();
+        return response()->json($Werehouse);
     }
 
     /**
@@ -189,8 +186,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $Customer = Customer::find($id)->delete();
-        return response()->json($Customer);
+        $Werehouse = Werehouse::find($id)->delete();
+        return response()->json($Werehouse);
     }
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {

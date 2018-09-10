@@ -1,28 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Input;
-// use Validator;
-// use Response;
-use App\Models\Customer;
+use App\Models\ItemUnit;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\CustomerRequest;
+use App\Http\Requests\fronted\ItemStockUnit;
 
-class CustomerController extends Controller
+class ItemUnitController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getcustomer()
+    public function getitemunit()
     {
-        $Customers = Customer::All();
+        $Itemunit = ItemUnit::All();
 
-        $data = $alldata = json_decode($Customers);
+        $data = $alldata = json_decode($Itemunit);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -114,7 +111,7 @@ class CustomerController extends Controller
     }
     public function index()
     {
-        return view('frontend.customer.index');
+        return view('frontend.itemunit.index');
     }
 
     /**
@@ -133,13 +130,13 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerRequest $request)
+    public function store(Request $request)
     {
-        $Customer = Customer::create([
-            'name' => $request->name,
+        $ItemUnit = ItemUnit::create([
+            // 'name' => $request->name,
         ]);
 
-        return response()->json($Customer);
+        return response()->json($ItemUnit);
     }
 
     /**
@@ -150,8 +147,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $ItemUnits = ItemUnit::find($id);
+        return response()->json($ItemUnits);
+
     }
 
     /**
@@ -162,8 +160,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $Customers = Customer::find($id);
-        return response()->json($Customers);
+        $ItemUnit =ItemUnit::find($id);
+        return response()->json($ItemUnit);
+
     }
 
     /**
@@ -173,12 +172,13 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $Customer = Customer::find($id);
-        $Customer->name = $request->name;
-        $Customer->save();
-        return response()->json($Customer);
+        $ItemUnit = ItemUnit::find($id);
+        // $Item->name = $request->name;
+        $ItemUnit->save();
+        return response()->json($ItemUnit);
+
     }
 
     /**
@@ -189,8 +189,9 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $Customer = Customer::find($id)->delete();
-        return response()->json($Customer);
+        $ItemUnit = ItemUnit::find($id)->delete();
+        return response()->json($ItemUnit);
+
     }
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {
