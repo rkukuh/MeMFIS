@@ -38,6 +38,12 @@
                                             @slot('id', 'm_select2_1')
                                             @slot('style', 'width:100%')
                                         @endcomponent
+                                        @component('frontend.common.buttons.create-new')
+                                        @slot('text', 'add warehouse')
+                                        @slot('size', 'sm')
+                                        @slot('data_target', '#modal_werehouse')            
+                                        @endcomponent
+
                                     </div>
                                     </div>
                                     <div class="form-group m-form__group row ">

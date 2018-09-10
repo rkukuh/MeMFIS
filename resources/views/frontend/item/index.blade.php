@@ -82,6 +82,7 @@
                 </div>
                 <!--end: Search Form -->
                 @include('frontend.item.modal')
+                @include('frontend.category.modal')
                 
 
                 <!--begin: Datatable -->

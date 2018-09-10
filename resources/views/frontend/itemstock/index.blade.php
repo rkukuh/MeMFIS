@@ -82,6 +82,8 @@
                 </div>
                 <!--end: Search Form -->
                 @include('frontend.itemstock.modal')
+                @include('frontend.werehouse.modal')
+
                 
 
                 <!--begin: Datatable -->

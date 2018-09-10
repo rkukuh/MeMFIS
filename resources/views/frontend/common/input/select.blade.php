@@ -7,5 +7,5 @@
 </select>
 <div class="form-control-feedback text-danger" id="{{ $name or '' }}-error"></div>
 <span class="m-form__help">
-    {{ $text or '' }}
+    {{ $label or '' }}
 </span>

@@ -64,6 +64,13 @@
                                             @slot('id', 'm_select2_1')
                                             @slot('style', 'width:100%')
                                         @endcomponent
+                                        <!-- <br> -->
+                                        @component('frontend.common.buttons.create-new')
+                                        @slot('text', 'add category')
+                                        @slot('size', 'sm')
+                                        @slot('data_target', '#modal_category')            
+                                        @endcomponent
+
 
                                     </div>
                                     </div>
