@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Supplier;
+use App\Models\ItemStock;
 use App\Models\ListUtil;
-use App\Http\Requests\fronted\SupplierRequest;
+use App\Http\Requests\Fronted\ItemStockStore;
+use App\Http\Requests\Fronted\ItemStockUpdate;
 
-class SupplierController extends Controller
+class ItemStockController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getsupplier()
+    public function getitemstock()
     {
-        $supplier = Supplier::All();
+        $Itemstock = ItemStock::All();
 
-        $data = $alldata = json_decode($supplier);
+        $data = $alldata = json_decode($Itemstock);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -111,7 +112,7 @@ class SupplierController extends Controller
     }
     public function index()
     {
-        return view('frontend.supplier.index');
+        return view('frontend.itemstock.index');
     }
 
     /**
@@ -130,13 +131,13 @@ class SupplierController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemStockStore $request)
     {
-        $Supplier = Supplier::create([
+        $ItemStock = ItemStock::create([
             // 'name' => $request->name,
         ]);
 
-        return response()->json($Supplier);
+        return response()->json($ItemStock);
 
     }
 
@@ -148,8 +149,9 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        $Supplier = Supplier::find($id);
-        return response()->json($Supplier);
+        $ItemStocks = ItemStock::find($id);
+        return response()->json($ItemStocks);
+
     }
 
     /**
@@ -160,8 +162,8 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        $Supplier = Supplier::find($id);
-        return response()->json($Supplier);
+        $ItemStock =ItemStock::find($id);
+        return response()->json($ItemStock);
 
     }
 
@@ -172,12 +174,12 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ItemStockUpdate $request, $id)
     {
-        $Supplier = Supplier::find($id);
-        // $Category->name = $request->name;
-        // $Category->save();
-        return response()->json($Supplier);
+        $ItemStock = ItemStock::find($id);
+        // $Item->name = $request->name;
+        $ItemStock->save();
+        return response()->json($ItemStock);
 
     }
 
@@ -189,9 +191,10 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        $Supplier = Supplier::find($id)->delete();
-        return response()->json($Supplier);
+        $ItemStock = ItemStock::find($id)->delete();
+        return response()->json($ItemStock);
     }
+
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {
       if ( ! is_array( $list ) ) {
@@ -202,4 +205,5 @@ class SupplierController extends Controller
 
       return $util->filter( $args, $operator );
     }
+
 }
