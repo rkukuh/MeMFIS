@@ -10,7 +10,7 @@
         <td  width="30%" >
           <center>
             <!-- <img src="img/LogoMMF.png" alt="logo" height="100%" style="margin-bottom:-20px"> -->
-            <h2>QUOTATITON</h2>
+            <h2>QUOTATION</h2>
           </center>
         </td>
         <td  width="30%" >
