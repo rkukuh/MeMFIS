@@ -2,9 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
+use App\Scopes\OrderByColumn;
 
-class Bank extends Model
+class Bank extends MemfisModel
 {
-    //
+    protected $fillable = [
+        'abbr',
+        'name',
+    ];
+
+    /******************************************* BOOT ********************************************/
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OrderByColumn('name'));
+    }
 }
