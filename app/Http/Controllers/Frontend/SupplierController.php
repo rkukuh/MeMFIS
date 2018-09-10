@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Supplier;
 use App\Models\ListUtil;
-use App\Http\Requests\Fronted\SupplierStore;
-use App\Http\Requests\Fronted\SupplierUpdate;
+use App\Http\Requests\Frontend\SupplierStore;
+use App\Http\Requests\Frontend\SupplierUpdate;
 
 class SupplierController extends Controller
 {

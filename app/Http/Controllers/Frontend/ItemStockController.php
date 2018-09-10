@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ItemStock;
 use App\Models\ListUtil;
-use App\Http\Requests\Fronted\ItemStockStore;
-use App\Http\Requests\Fronted\ItemStockUpdate;
+use App\Http\Requests\Frontend\ItemStockStore;
+use App\Http\Requests\Frontend\ItemStockUpdate;
 
 class ItemStockController extends Controller
 {
