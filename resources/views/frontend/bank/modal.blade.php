@@ -1,5 +1,5 @@
 <!--begin::Modal-->
-<div class="modal fade" id="modal_customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_bank" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -11,7 +11,7 @@
                     <div class="modal-body">
 
                         <!--begin::Form-->
-                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
+                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="BankForm">
                             <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row ">
@@ -34,7 +34,7 @@
                                         <br>
                                         @component('frontend.common.input.input')
                                         @slot('text', 'Name')
-                                        @slot('name', 'name')
+                                        @slot('name', 'bank_name')
                                         @slot('type', 'text')
                                     @endcomponent
 
@@ -54,7 +54,7 @@
                           @component('frontend.common.buttons.submit')
                             @slot('color', 'success')
                             @slot('size', 'md')
-                            @slot('class', 'add')
+                            @slot('class', 'add2')
                         
                           @endcomponent
 
