@@ -19,6 +19,7 @@ class CreateBanksTable extends Migration
             $table->string('abbr');
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
