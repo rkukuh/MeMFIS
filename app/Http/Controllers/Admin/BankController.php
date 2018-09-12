@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Bank;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BankStore;
+use App\Http\Requests\Admin\BankUpdate;
 
 class BankController extends Controller
 {
@@ -31,10 +32,10 @@ class BankController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\BankStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BankStore $request)
     {
         //
     }
@@ -64,11 +65,11 @@ class BankController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\BankUpdate  $request
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bank $bank)
+    public function update(BankUpdate $request, Bank $bank)
     {
         //
     }
