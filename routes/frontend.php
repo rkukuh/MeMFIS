@@ -1,43 +1,53 @@
 <?php
 
-Route::view('/', 'auth.login');
+Route::name('frontend.')->group(function () {
 
-Route::view('/home', 'frontend.home');
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::group([
 
-Route::resource('/customer', 'Frontend\CustomerController');
-Route::get('getcustomer','Frontend\CustomerController@getcustomer')->name('getcustomer');
+        // 'middleware'    => 'auth',
+        'namespace'     => 'Frontend'
 
-Route::resource('/category', 'Frontend\CategoryController');
-Route::get('getcategory','Frontend\CategoryController@getcategory')->name('getcategory');
+    ], function () {
 
-Route::resource('/item', 'Frontend\ItemController');
-Route::get('getitem','Frontend\ItemController@getitem')->name('getitem');
+        Route::view('/', 'auth.login');
 
-Route::resource('/itemstock', 'Frontend\ItemStockController');
-Route::get('getitemstock','Frontend\ItemStockController@getitemstock')->name('getitemstock');
+        Route::resource('/customer', 'CustomerController');
+        Route::get('getcustomer','CustomerController@getcustomer')->name('getcustomer');
 
-Route::resource('/itemunit', 'Frontend\ItemUnitController');
-Route::get('getitemunit','Frontend\ItemUnitController@getitemunit')->name('getitemunit');
+        Route::resource('/category', 'CategoryController');
+        Route::get('getcategory','CategoryController@getcategory')->name('getcategory');
 
-Route::resource('/werehouse', 'Frontend\WerehouseController');
-Route::get('getwerehouse','Frontend\WerehouseController@getwerehouse')->name('getwerehouse');
+        Route::resource('/item', 'ItemController');
+        Route::get('getitem','ItemController@getitem')->name('getitem');
 
-Route::resource('/supplier', 'Frontend\SupplierController');
-Route::get('getsupplier','Frontend\SupplierController@getwerehouse')->name('getsupplier');
+        Route::resource('/itemstock', 'ItemStockController');
+        Route::get('getitemstock','ItemStockController@getitemstock')->name('getitemstock');
 
-Route::get('addres/country','Frontend\AddresController@country')->name('country');
-Route::get('addres/city/{id}','Frontend\AddresController@city')->name('city');
+        Route::resource('/itemunit', 'ItemUnitController');
+        Route::get('getitemunit','ItemUnitController@getitemunit')->name('getitemunit');
 
-Route::view('/audit', 'frontend.audit');
-Route::get('getaudit','Frontend\AuditController@getaudit')->name('getaudit');
+        Route::resource('/werehouse', 'WerehouseController');
+        Route::get('getwerehouse','WerehouseController@getwerehouse')->name('getwerehouse');
 
-Route::get('/quotation', function () {
-    $pdf = \PDF::loadView('frontend/form/quotation');
-    return $pdf->stream();
-});
+        Route::resource('/supplier', 'SupplierController');
+        Route::get('getsupplier','SupplierController@getwerehouse')->name('getsupplier');
 
-Route::get('/preliminary', function () {
-    $pdf = \PDF::loadView('frontend/form/preliminary');
-    return $pdf->stream();
+        Route::get('addres/country','AddresController@country')->name('country');
+        Route::get('addres/city/{id}','AddresController@city')->name('city');
+
+        Route::view('/audit', 'frontend.audit');
+        Route::get('getaudit','AuditController@getaudit')->name('getaudit');
+
+        Route::get('/quotation', function () {
+            $pdf = \PDF::loadView('frontend/form/quotation');
+            return $pdf->stream();
+        });
+
+        Route::get('/preliminary', function () {
+            $pdf = \PDF::loadView('frontend/form/preliminary');
+            return $pdf->stream();
+        });
+
+    });
+
 });
