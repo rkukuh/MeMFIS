@@ -9,41 +9,33 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
-
-
-
-
                         <!--begin::Form-->
                         <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
                             <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                                 <div class="m-portlet__body">
+                                    <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#general" role="tab"><i class="la la-cloud-upload"></i> General</a>
+                                        </li>
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#address" role="tab"><i class="la la-cloud-upload"></i> Address</a>
+                                        </li>
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#contact" role="tab"><i class="la la-cloud-upload"></i> Contact</a>
+                                        </li>
 
-
-
-                        <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
-                            <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#general" role="tab"><i class="la la-cloud-upload"></i> General</a>
-                            </li>
-                            <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#address" role="tab"><i class="la la-cloud-upload"></i> Address</a>
-                            </li>
-                            <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#contact" role="tab"><i class="la la-cloud-upload"></i> Contact</a>
-                            </li>
-
-                        </ul>                        
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="general" role="tabpanel">
-                               @include('frontend.supplier.tabs.general')
-                            </div>
-                            <div class="tab-pane" id="address" role="tabpanel">
-                               @include('frontend.supplier.tabs.address')                            
-                            </div>
-                            <div class="tab-pane" id="contact" role="tabpanel">
-                                @include('frontend.supplier.tabs.contact')                            
-                            </div>
-                        </div>  
+                                    </ul>                        
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="general" role="tabpanel">
+                                        @include('frontend.supplier.tabs.general')
+                                        </div>
+                                        <div class="tab-pane" id="address" role="tabpanel">
+                                        @include('frontend.supplier.tabs.address')                            
+                                        </div>
+                                        <div class="tab-pane" id="contact" role="tabpanel">
+                                            @include('frontend.supplier.tabs.contact')                            
+                                        </div>
+                                    </div>  
                     </div>
 
                     <div class="modal-footer">
@@ -62,7 +54,7 @@
 
                     </div>
                     </div>
-                            </form>
+                        </form>
                 </div>
                 </div>
                 </div>
