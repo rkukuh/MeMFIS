@@ -13,6 +13,7 @@ class ExampleDataSeeder extends Seeder
     {
         /** INDEPENDENT / POLYMORPH */
 
+        $this->call(Faxes::class);
         $this->call(Types::class);
         $this->call(Phones::class);
 
