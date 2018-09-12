@@ -8,6 +8,8 @@ use App\Models\Bank;
 use App\Policies\BankPolicy;
 use App\Models\Type;
 use App\Policies\TypePolicy;
+use App\Models\Email;
+use App\Policies\EmailPolicy;
 use App\Models\Phone;
 use App\Policies\PhonePolicy;
 use App\Models\BankAccount;
@@ -27,6 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         Fax::class => FaxPolicy::class,
         Bank::class => BankPolicy::class,
         Type::class => TypePolicy::class,
+        Email::class => EmailPolicy::class,
         Phone::class => PhonePolicy::class,
         BankAccount::class => BankAccountPolicy::class,
     ];

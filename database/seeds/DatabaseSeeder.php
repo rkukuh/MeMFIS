@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(FaxesTableSeeder::class);
         $this->call(TypesTableSeeder::class);
+        $this->call(EmailsTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
 
         /** FINANCE */
