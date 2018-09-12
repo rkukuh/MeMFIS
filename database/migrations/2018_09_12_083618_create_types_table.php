@@ -20,6 +20,9 @@ class CreateTypesTable extends Migration
             $table->string('of');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('name');
+            $table->index('of');
         });
     }
 

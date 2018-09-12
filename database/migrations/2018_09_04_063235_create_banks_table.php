@@ -20,6 +20,9 @@ class CreateBanksTable extends Migration
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('code');
+            $table->index('name');
         });
     }
 

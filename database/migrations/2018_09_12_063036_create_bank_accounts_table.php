@@ -28,6 +28,9 @@ class CreateBankAccountsTable extends Migration
                   ->references('id')->on('banks')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
+
+            $table->index('holder_name');
+            $table->index('account_number');
         });
     }
 
