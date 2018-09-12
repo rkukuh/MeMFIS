@@ -13,47 +13,47 @@ class BanksTableSeeder extends Seeder
     public function run()
     {
         Bank::create([
-            'abbr' => 'SINARMAS',
+            'code' => 'SINARMAS',
             'name' => 'Bank Sinarmas'
         ]);
 
         Bank::create([
-            'abbr' => 'BCA',
+            'code' => 'BCA',
             'name' => 'Bank Central Asia (BCA)'
         ]);
 
         Bank::create([
-            'abbr' => 'MANDIRI',
+            'code' => 'MANDIRI',
             'name' => 'Bank Mandiri'
         ]);
 
         Bank::create([
-            'abbr' => 'BNI',
+            'code' => 'BNI',
             'name' => 'Bank Negara Indonesia (BNI)'
         ]);
 
         Bank::create([
-            'abbr' => 'BRI',
+            'code' => 'BRI',
             'name' => 'Bank Rakyat Indonesia (BRI)'
         ]);
 
         Bank::create([
-            'abbr' => 'CIMB',
+            'code' => 'CIMB',
             'name' => 'Bank CIMB Niaga'
         ]);
 
         Bank::create([
-            'abbr' => 'OCBC',
+            'code' => 'OCBC',
             'name' => 'Bank OCBC NISP'
         ]);
 
         Bank::create([
-            'abbr' => 'DANAMON',
+            'code' => 'DANAMON',
             'name' => 'Bank Danamon'
         ]);
 
         Bank::create([
-            'abbr' => 'MAYBANK',
+            'code' => 'MAYBANK',
             'name' => 'Bank Maybank'
         ]);
     }

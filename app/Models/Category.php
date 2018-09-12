@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class Cateogry extends MemfisModel
+class Category extends MemfisModel
 {
     //
 }

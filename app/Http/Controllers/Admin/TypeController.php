@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Bank;
+use App\Models\Type;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\BankStore;
-use App\Http\Requests\Admin\BankUpdate;
+use App\Http\Requests\Admin\TypeStore;
+use App\Http\Requests\Admin\TypeUpdate;
 
-class BankController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class BankController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\BankStore  $request
+     * @param  \App\Http\Requests\Admin\TypeStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BankStore $request)
+    public function store(TypeStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class BankController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function show(Bank $bank)
+    public function show(Type $type)
     {
         //
     }
@@ -54,10 +54,10 @@ class BankController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bank $bank)
+    public function edit(Type $type)
     {
         //
     }
@@ -65,11 +65,11 @@ class BankController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\BankUpdate  $request
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Http\Requests\Admin\TypeUpdate  $request
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(BankUpdate $request, Bank $bank)
+    public function update(TypeUpdate $request, Type $type)
     {
         //
     }
@@ -77,10 +77,10 @@ class BankController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bank $bank)
+    public function destroy(Type $type)
     {
         //
     }
