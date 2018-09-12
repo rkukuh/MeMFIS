@@ -18,11 +18,16 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleHasPermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
 
-        /** INDEPENDENT / POLYMORPH */
+        /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);
         $this->call(TypesTableSeeder::class);
+        $this->call(EmailsTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
+
+        /** MASTER */
+
+        $this->call(DepartmentsTableSeeder::class);
 
         /** FINANCE */
 

@@ -10,11 +10,16 @@ Route::name('admin.')->group(function () {
 
     ], function () {
 
-        /** INDEPENDENT / POLYMORPH */
+        /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
         Route::resource('type', 'TypeController');
+        Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+
+        /** MASTER */
+
+        Route::resource('department', 'DepartmentController');
 
         /** FINANCE */
 

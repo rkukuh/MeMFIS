@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('name');
+            $table->index('email');
         });
     }
 

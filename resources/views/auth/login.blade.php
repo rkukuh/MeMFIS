@@ -47,7 +47,7 @@
                         </div>
                         <div class="m-login__signin">
                             <div class="m-login__head">
-                                <h3 class="m-login__title">Login Form</h3>
+                                <h3 class="m-login__title">Welcome to MeMFIS</h3>
                             </div>
 
                             <form method="POST" action="{{ route('login') }}" class="m-login__form m-form">

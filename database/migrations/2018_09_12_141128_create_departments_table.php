@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBankAccountsTable extends Migration
+class CreateDepartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,22 @@ class CreateBankAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_accounts', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('bank_id');
-            $table->string('holder_name');
-            $table->string('account_number');
-            $table->integer('bank_accountable_id');
-            $table->string('bank_accountable_type');
+            $table->string('code');
+            $table->string('name');
+            $table->unsignedInteger('parent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('bank_id')
-                  ->references('id')->on('banks')
+            $table->foreign('parent_id')
+                  ->references('id')->on('departments')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
 
-            $table->index('holder_name');
-            $table->index('account_number');
+            $table->index('code');
+            $table->index('name');
         });
     }
 
@@ -41,6 +39,6 @@ class CreateBankAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_accounts');
+        Schema::dropIfExists('departments');
     }
 }

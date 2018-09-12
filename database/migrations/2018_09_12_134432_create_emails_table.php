@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBankAccountsTable extends Migration
+class CreateEmailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,23 @@ class CreateBankAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_accounts', function (Blueprint $table) {
+        Schema::create('emails', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('bank_id');
-            $table->string('holder_name');
-            $table->string('account_number');
-            $table->integer('bank_accountable_id');
-            $table->string('bank_accountable_type');
+            $table->string('address');
+            $table->unsignedInteger('type_id');
+            $table->boolean('is_primary');
+            $table->integer('emailable_id');
+            $table->string('emailable_type');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('bank_id')
-                  ->references('id')->on('banks')
+            $table->foreign('type_id')
+                  ->references('id')->on('types')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
 
-            $table->index('holder_name');
-            $table->index('account_number');
+            $table->index('address');
         });
     }
 
@@ -41,6 +40,6 @@ class CreateBankAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_accounts');
+        Schema::dropIfExists('emails');
     }
 }
