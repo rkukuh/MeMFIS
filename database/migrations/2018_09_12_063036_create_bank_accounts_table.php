@@ -15,7 +15,19 @@ class CreateBankAccountsTable extends Migration
     {
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->unsignedInteger('bank_id');
+            $table->string('holder_name');
+            $table->string('account_number');
+            $table->integer('bank_accountable_id');
+            $table->string('bank_accountable_type');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('bank_id')
+                  ->references('id')->on('banks')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
         });
     }
 
