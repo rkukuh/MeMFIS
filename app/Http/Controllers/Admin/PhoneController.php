@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Phone;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PhoneStore;
+use App\Http\Requests\Admin\PhoneUpdate;
 
 class PhoneController extends Controller
 {
@@ -31,10 +32,10 @@ class PhoneController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\PhoneStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhoneStore $request)
     {
         //
     }
@@ -64,11 +65,11 @@ class PhoneController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\PhoneUpdate  $request
      * @param  \App\Models\Phone  $phone
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phone $phone)
+    public function update(PhoneUpdate $request, Phone $phone)
     {
         //
     }
