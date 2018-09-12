@@ -15,4 +15,5 @@ $factory->define(User::class, function (Faker $faker)
         'password'        => Hash::make('rahasia'),
         'remember_token'  => str_random(10),
     ];
+
 });

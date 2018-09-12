@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Bank;
 use Illuminate\Database\Seeder;
 
-class ExampleDataSeeder extends Seeder
+class Banks extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +12,6 @@ class ExampleDataSeeder extends Seeder
      */
     public function run()
     {
-        /** MASTER */
-
-        $this->call(Banks::class);
+        factory(Bank::class, 10)->create();
     }
 }

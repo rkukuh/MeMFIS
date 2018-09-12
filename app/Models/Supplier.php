@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class Supplier extends Model
+class Supplier extends MemfisModel
 {
     //
 }

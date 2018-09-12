@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ItemUnit;
 use App\Models\ListUtil;
-use App\Http\Requests\Fronted\ItemUnitStore;
-use App\Http\Requests\Fronted\ItemUnitUpdate;
+use App\Http\Requests\Frontend\ItemUnitStore;
+use App\Http\Requests\Frontend\ItemUnitUpdate;
 
 class ItemUnitController extends Controller
 {

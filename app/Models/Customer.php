@@ -2,16 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\MemfisModel;
 
-class Customer extends Model
+class Customer extends MemfisModel
 {
-    use SoftDeletes;
-
-     protected $dates = ['deleted_at'];
-
-     protected $fillable = [
+    protected $fillable = [
         'branch_id',
         'code',
         'name',
@@ -35,5 +30,4 @@ class Customer extends Model
         'ToP',
         'AccountCode',
     ];
-
 }
