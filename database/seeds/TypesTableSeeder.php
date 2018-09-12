@@ -1,6 +1,6 @@
 <?php
 
-use PharIo\Manifest\Type;
+use App\Models\Type;
 use Illuminate\Database\Seeder;
 
 class TypesTableSeeder extends Seeder
