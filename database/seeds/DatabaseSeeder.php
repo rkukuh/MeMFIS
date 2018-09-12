@@ -21,5 +21,9 @@ class DatabaseSeeder extends Seeder
         /** MASTER */
 
         $this->call(BanksTableSeeder::class);
+
+        /** FINANCE */
+
+        $this->call(BankAccountsTableSeeder::class);
     }
 }

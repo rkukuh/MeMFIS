@@ -14,5 +14,9 @@ class ExampleDataSeeder extends Seeder
         /** MASTER */
 
         $this->call(Banks::class);
+
+        /** FINANCE */
+
+        $this->call(BankAccounts::class);
     }
 }
