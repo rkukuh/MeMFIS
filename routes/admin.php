@@ -10,12 +10,13 @@ Route::name('admin.')->group(function () {
 
     ], function () {
 
-        /** MASTER */
+        /** INDEPENDENT / POLYMORPH */
 
-        Route::resource('bank', 'BankController');
+        Route::resource('phone', 'PhoneController');
 
         /** FINANCE */
 
+        Route::resource('bank', 'BankController');
         Route::resource('bank-account', 'BankAccountController');
 
     });

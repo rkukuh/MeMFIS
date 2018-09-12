@@ -11,12 +11,14 @@ class ExampleDataSeeder extends Seeder
      */
     public function run()
     {
-        /** MASTER */
+        /** INDEPENDENT / POLYMORPH */
 
-        $this->call(Banks::class);
+        $this->call(Phones::class);
+
 
         /** FINANCE */
 
+        $this->call(Banks::class);
         $this->call(BankAccounts::class);
     }
 }
