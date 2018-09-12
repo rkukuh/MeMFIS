@@ -15,7 +15,19 @@ class CreateFaxesTable extends Migration
     {
         Schema::create('faxes', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('number');
+            $table->unsignedInteger('type_id');
+            $table->boolean('is_primary');
+            $table->integer('faxable_id');
+            $table->string('faxable_type');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('type_id')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
         });
     }
 
