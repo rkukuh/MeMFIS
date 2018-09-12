@@ -2442,16 +2442,16 @@
         },
         {
             "name": "spatie/image-optimizer",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/image-optimizer.git",
-                "reference": "1530d6cf72070068eecab150ffb73466c3806bdd"
+                "reference": "0cc312a83186afc586df0cb034c4303c3d7cf629"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/1530d6cf72070068eecab150ffb73466c3806bdd",
-                "reference": "1530d6cf72070068eecab150ffb73466c3806bdd",
+                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/0cc312a83186afc586df0cb034c4303c3d7cf629",
+                "reference": "0cc312a83186afc586df0cb034c4303c3d7cf629",
                 "shasum": ""
             },
             "require": {
@@ -2487,7 +2487,7 @@
                 "image-optimizer",
                 "spatie"
             ],
-            "time": "2018-06-05T07:36:17+00:00"
+            "time": "2018-09-10T10:21:45+00:00"
         },
         {
             "name": "spatie/laravel-activitylog",
@@ -2697,16 +2697,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "7.4.2",
+            "version": "7.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "3babc8069e37df1a5a94bc2d096ef8f9da7deb49"
+                "reference": "5f980f3c2287fe9bd387ac46401972e0bc730bc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/3babc8069e37df1a5a94bc2d096ef8f9da7deb49",
-                "reference": "3babc8069e37df1a5a94bc2d096ef8f9da7deb49",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/5f980f3c2287fe9bd387ac46401972e0bc730bc6",
+                "reference": "5f980f3c2287fe9bd387ac46401972e0bc730bc6",
                 "shasum": ""
             },
             "require": {
@@ -2772,20 +2772,20 @@
                 "media",
                 "spatie"
             ],
-            "time": "2018-09-05T09:31:23+00:00"
+            "time": "2018-09-10T11:01:52+00:00"
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "2.18.0",
+            "version": "2.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "0319fefd54319e7a1155ded3c9a754ef3f7f58d8"
+                "reference": "cf4f3afb093a524bbdfb32f02a644a37694ff4c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/0319fefd54319e7a1155ded3c9a754ef3f7f58d8",
-                "reference": "0319fefd54319e7a1155ded3c9a754ef3f7f58d8",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/cf4f3afb093a524bbdfb32f02a644a37694ff4c6",
+                "reference": "cf4f3afb093a524bbdfb32f02a644a37694ff4c6",
                 "shasum": ""
             },
             "require": {
@@ -2833,7 +2833,7 @@
                 "security",
                 "spatie"
             ],
-            "time": "2018-09-06T14:30:14+00:00"
+            "time": "2018-09-10T19:52:52+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
@@ -2891,16 +2891,16 @@
         },
         {
             "name": "spatie/laravel-schemaless-attributes",
-            "version": "1.1.3",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-schemaless-attributes.git",
-                "reference": "e853155e58eac905939f523542b5bf3472abe7a6"
+                "reference": "07fb75b36a5075a5bc15ba2ec5e5b8355feb22e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-schemaless-attributes/zipball/e853155e58eac905939f523542b5bf3472abe7a6",
-                "reference": "e853155e58eac905939f523542b5bf3472abe7a6",
+                "url": "https://api.github.com/repos/spatie/laravel-schemaless-attributes/zipball/07fb75b36a5075a5bc15ba2ec5e5b8355feb22e8",
+                "reference": "07fb75b36a5075a5bc15ba2ec5e5b8355feb22e8",
                 "shasum": ""
             },
             "require": {
@@ -2944,7 +2944,7 @@
                 "laravel-schemaless-attributes",
                 "spatie"
             ],
-            "time": "2018-07-11T13:45:44+00:00"
+            "time": "2018-09-11T07:01:44+00:00"
         },
         {
             "name": "spatie/laravel-sluggable",
@@ -3146,16 +3146,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.1.2",
+            "version": "v6.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "7d760881d266d63c5e7a1155cbcf2ac656a31ca8"
+                "reference": "8ddcb66ac10c392d3beb54829eef8ac1438595f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/7d760881d266d63c5e7a1155cbcf2ac656a31ca8",
-                "reference": "7d760881d266d63c5e7a1155cbcf2ac656a31ca8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/8ddcb66ac10c392d3beb54829eef8ac1438595f4",
+                "reference": "8ddcb66ac10c392d3beb54829eef8ac1438595f4",
                 "shasum": ""
             },
             "require": {
@@ -3201,7 +3201,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2018-07-13T07:04:35+00:00"
+            "time": "2018-09-11T07:12:52+00:00"
         },
         {
             "name": "symfony/console",
