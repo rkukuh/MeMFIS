@@ -2,9 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class Fax extends Model
+class Fax extends MemfisModel
 {
-    //
+    protected $fillable = [
+        'number',
+        'type_id',
+        'is_primary',
+        'faxable_id',
+        'faxable_type',
+    ];
 }
