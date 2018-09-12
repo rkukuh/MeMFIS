@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Type;
 
 class Types extends Seeder
 {
@@ -11,6 +12,6 @@ class Types extends Seeder
      */
     public function run()
     {
-        //
+        factory(Type::class, 10)->create();
     }
 }
