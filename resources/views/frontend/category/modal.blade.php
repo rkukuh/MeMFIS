@@ -3,7 +3,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="TitleModalCustomer">Category</h5>
+                        <h5 class="modal-title" id="TitleModalCategory">Category</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -11,7 +11,7 @@
                     <div class="modal-body">
 
                         <!--begin::Form -->
-                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
+                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CategoryForm">
                             <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row ">

@@ -8,7 +8,7 @@ use App\Scopes\OrderByColumn;
 class Bank extends MemfisModel
 {
     protected $fillable = [
-        'abbr',
+        'code',
         'name',
     ];
 

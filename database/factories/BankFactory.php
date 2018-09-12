@@ -10,7 +10,7 @@ $factory->define(Bank::class, function (Faker $faker) {
     $bank_name = $faker->company;
 
     return [
-        'abbr' => strtoupper(substr($bank_name, 0, 4)),
+        'code' => strtoupper(substr($bank_name, 0, 4)),
         'name' => 'Bank ' . $bank_name,
     ];
 
