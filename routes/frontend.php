@@ -38,6 +38,14 @@ Route::name('frontend.')->group(function () {
         Route::view('/audit', 'frontend.audit');
         Route::get('getaudit','AuditController@getaudit')->name('getaudit');
 
+        Route::resource('/bank', 'Frontend\BankController');
+        Route::resource('/bankaccount', 'Frontend\BankAccountController');
+        Route::resource('/phone', 'Frontend\PhoneController');
+        Route::resource('/fax', 'Frontend\FaxController');
+        Route::resource('/email', 'Frontend\EmailController');
+        Route::resource('/department', 'Frontend\DepartmentController');
+
+
         Route::get('/quotation', function () {
             $pdf = \PDF::loadView('frontend/form/quotation');
             return $pdf->stream();
