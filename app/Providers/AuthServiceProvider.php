@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Bank;
 use App\Policies\BankPolicy;
+use App\Models\Type;
+use App\Policies\TypePolicy;
 use App\Models\Phone;
 use App\Policies\PhonePolicy;
 use App\Models\BankAccount;
@@ -21,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Bank::class => BankPolicy::class,
+        Type::class => TypePolicy::class,
         Phone::class => PhonePolicy::class,
         BankAccount::class => BankAccountPolicy::class,
     ];

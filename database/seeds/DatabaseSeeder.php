@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         /** INDEPENDENT / POLYMORPH */
 
+        $this->call(TypesTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
 
         /** FINANCE */
