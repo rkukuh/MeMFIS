@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Fax;
+use App\Policies\FaxPolicy;
 use App\Models\Bank;
 use App\Policies\BankPolicy;
 use App\Models\Type;
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        Fax::class => FaxPolicy::class,
         Bank::class => BankPolicy::class,
         Type::class => TypePolicy::class,
         Phone::class => PhonePolicy::class,

@@ -12,6 +12,7 @@ Route::name('admin.')->group(function () {
 
         /** INDEPENDENT / POLYMORPH */
 
+        Route::resource('fax', 'FaxController');
         Route::resource('type', 'TypeController');
         Route::resource('phone', 'PhoneController');
 
