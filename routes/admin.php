@@ -10,7 +10,13 @@ Route::name('admin.')->group(function () {
 
     ], function () {
 
+        /** MASTER */
+
         Route::resource('bank', 'BankController');
+
+        /** FINANCE */
+
+        Route::resource('bank-account', 'BankAccountController');
 
     });
 
