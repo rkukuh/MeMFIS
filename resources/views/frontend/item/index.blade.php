@@ -83,6 +83,7 @@
                 <!--end: Search Form -->
                 @include('frontend.item.modal')
                 @include('frontend.category.modal')
+                @include('frontend.bank.modal')
                 
 
                 <!--begin: Datatable -->
@@ -110,5 +111,6 @@
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}" type="text/javascript"></script>
 
 <script src="{{ asset('js/item.js')}}"></script>
+<script src="{{ asset('js/bank.js')}}"></script>
 
 @endpush  

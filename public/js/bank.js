@@ -57,23 +57,24 @@ var simpan = $(".modal-footer").on("click", ".add2", function() {
             abbr: abbr
         },
         success: function(data) {
-            alert('sukses')
+            // alert('sukses')
             console.log(data);
             if (data.errors) {
-                if (data.errors.name) {
-                    $("#name-error").html(data.errors.name[0]);
-                    document.getElementById("name").value = name;
-                }
-                if(data.errors.abbr){
-                    $( '#abbr-error' ).html( data.errors.abbr[0] );
-                    document.getElementById("abbr").value = abbr;
-                }
+
+                // if (data.errors.name) {
+                //     $("#name-error").html(data.errors.name[0]);
+                //     document.getElementById("name").value = name;
+                // }
+                // if(data.errors.abbr){
+                //     $( '#abbr-error' ).html( data.errors.abbr[0] );
+                //     document.getElementById("abbr").value = abbr;
+                // }
             } else {
                 $("#modal_bank").modal("hide");
                 toastr.success("Berhasil Disimpan.", "Sukses!!", {
                     timeOut: 5000
                 });
-                var table = $(".m_datatable").mDatatable();
+                // var table = $(".m_datatable").mDatatable();
                 // table.originalDataSet = [];
                 // table.reload();
             }
