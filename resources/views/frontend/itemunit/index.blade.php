@@ -7,7 +7,7 @@
   <div class="d-flex align-items-center">
     <div class="mr-auto">
       <h3 class="m-subheader__title m-subheader__title--separator">
-        ItemUnit
+        Item Unit
       </h3>
       <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
         <li class="m-nav__item m-nav__item--home">
@@ -21,7 +21,7 @@
         <li class="m-nav__item">
           <a href="/itemunit" class="m-nav__link">
             <span class="m-nav__link-text">
-             ItemUnit
+             Item Unit
             </span>
           </a>
         </li>
@@ -42,7 +42,7 @@
                 <i class="la la-gear"></i>
               </span>
               <h3 class="m-portlet__head-text">
-                Form ItemUnit
+                Form Item Unit
               </h3>
             </div>
           </div>

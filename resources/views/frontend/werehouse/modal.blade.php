@@ -66,14 +66,13 @@
                                     </div>
                                     <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
+                                    <label class="form-control-label">
                                         Active *
                                         </label>
-
-                                    @component('frontend.common.input.input')
+                                        <br>
+                                        @component('frontend.common.input.checkbox')
                                         @slot('text', 'Active')
                                         @slot('name', 'active')
-                                        @slot('type', 'text')
                                     @endcomponent
 
                                     </div>

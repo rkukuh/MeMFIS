@@ -29,6 +29,8 @@ Route::get('getsupplier','Frontend\SupplierController@getwerehouse')->name('gets
 Route::get('addres/country','Frontend\AddresController@country')->name('country');
 Route::get('addres/city/{id}','Frontend\AddresController@city')->name('city');
 
+Route::resource('/bank', 'Frontend\BankController');
+
 Route::view('/audit', 'frontend.audit');
 Route::get('getaudit','Frontend\AuditController@getaudit')->name('getaudit');
 

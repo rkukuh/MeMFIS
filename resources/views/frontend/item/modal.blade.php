@@ -55,6 +55,26 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
+                                        Bank *
+                                        </label>
+                                        <br>
+                                        @component('frontend.common.input.select')
+                                            @slot('text', 'Bank')
+                                            @slot('name', 'bank')
+                                            @slot('id', 'm_select2_1')
+                                            @slot('style', 'width:100%')
+                                        @endcomponent
+                                        <!-- <br> -->
+                                        @component('frontend.common.buttons.create-new')
+                                        @slot('text', 'add bank')
+                                        @slot('size', 'sm')
+                                        @slot('data_target', '#modal_bank')            
+                                        @endcomponent
+
+
+                                    </div>
+                                    <!-- <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
                                         Category *
                                         </label>
                                         <br>
@@ -64,7 +84,6 @@
                                             @slot('id', 'm_select2_1')
                                             @slot('style', 'width:100%')
                                         @endcomponent
-                                        <!-- <br> -->
                                         @component('frontend.common.buttons.create-new')
                                         @slot('text', 'add category')
                                         @slot('size', 'sm')
@@ -72,7 +91,7 @@
                                         @endcomponent
 
 
-                                    </div>
+                                    </div> -->
                                     </div>
                                     <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -92,10 +111,9 @@
                                         Active *
                                         </label>
                                         <br>
-                                        @component('frontend.common.input.input')
+                                        @component('frontend.common.input.checkbox')
                                         @slot('text', 'Active')
                                         @slot('name', 'active')
-                                        @slot('type', 'text')
                                     @endcomponent
 
                                     </div>

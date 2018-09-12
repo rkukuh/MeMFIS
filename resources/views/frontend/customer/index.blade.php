@@ -110,6 +110,7 @@
 
 <script src="{{ asset('js/customer.js')}}"></script>
 <script src="{{ asset('js/addres.js')}}"></script>
-<script src="{{ asset('js/select.js')}}"></script>
+
+<!-- <script src="{{ asset('js/select.js')}}"></script> -->
 
 @endpush  

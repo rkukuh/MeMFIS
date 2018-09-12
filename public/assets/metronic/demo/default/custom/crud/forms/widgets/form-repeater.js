@@ -30,7 +30,16 @@ var FormRepeater = {
                 $(this).slideUp(e);
             }
         }),
-            $("#m_repeater_2").repeater({
+        $("#m_repeater_1c").repeater({
+            initEmpty: !1,
+            defaultValues: { "text-input": "foo" },
+            show: function() {
+                $(this).slideDown();
+            },
+            hide: function(e) {
+                $(this).slideUp(e);
+            }
+        }),            $("#m_repeater_2").repeater({
                 initEmpty: !1,
                 defaultValues: { "text-input": "foo" },
                 show: function() {
