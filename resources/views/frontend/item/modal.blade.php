@@ -53,7 +53,7 @@
                                     @endcomponent
 
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <!-- <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                         Bank *
                                         </label>
@@ -64,7 +64,6 @@
                                             @slot('id', 'm_select2_1')
                                             @slot('style', 'width:100%')
                                         @endcomponent
-                                        <!-- <br> -->
                                         @component('frontend.common.buttons.create-new')
                                         @slot('text', 'add bank')
                                         @slot('size', 'sm')
@@ -72,8 +71,8 @@
                                         @endcomponent
 
 
-                                    </div>
-                                    <!-- <div class="col-sm-6 col-md-6 col-lg-6">
+                                    </div> -->
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                         Category *
                                         </label>
@@ -91,7 +90,7 @@
                                         @endcomponent
 
 
-                                    </div> -->
+                                    </div>
                                     </div>
                                     <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
