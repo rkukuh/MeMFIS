@@ -35,7 +35,7 @@ Route::name('frontend.')->group(function () {
         Route::get('addres/country','AddresController@country')->name('country');
         Route::get('addres/city/{id}','AddresController@city')->name('city');
 
-        Route::view('/audit', 'frontend.audit');
+        Route::resource('/audit', 'AuditController');
         Route::get('getaudit','AuditController@getaudit')->name('getaudit');
 
         Route::resource('/bank', 'BankController');
