@@ -114,29 +114,28 @@ var Customer = {
                     sortable: "asc",
                     filterable: !1,
                     width: 150,
-                }
-                // },
+                },
 
-                // {
-                //     field: "Actions",
-                //     width: 110,
-                //     title: "Actions",
-                //     sortable: !1,
-                //     overflow: "visible",
-                //     template: function(t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                //             '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
-                //             t.id +
-                //             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
-                //         );
-                //     }
-                // }
+                {
+                    field: "Actions",
+                    width: 110,
+                    title: "Actions",
+                    sortable: !1,
+                    overflow: "visible",
+                    template: function(t, e, i) {
+                        return (
+                            '<a href="/audit/1" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t' 
+                            // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            // t.id +
+                            // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            // '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
+                            // t.id +
+                            // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
+                        );
+                    }
+                }
             ]
         });
 
