@@ -19,7 +19,7 @@
           -
         </li>
         <li class="m-nav__item">
-          <a href="/Customer" class="m-nav__link">
+          <a href="/audit" class="m-nav__link">
             <span class="m-nav__link-text">
               Audit
             </span>
