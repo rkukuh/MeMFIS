@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style>
+td {
+    font-size:12px;
+    /* text-align:center; */
+
+}
+</style>
   </head>
   <body>
   <table width="100%" style="margin: 0px;">

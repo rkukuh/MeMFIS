@@ -1,6 +1,13 @@
 <!-- inputan dari task card -->
 <html>
     <head>
+    <style>
+td {
+    font-size:12px;
+    /* text-align:center; */
+
+}
+</style>
     </head>
     <body>
         <table  width="100%" style="margin: 0px;">
@@ -212,5 +219,112 @@
             </tr>
 
         </table>       
+        <br>
+        <table  width="100%" >
+            <tr>
+                <td colspan="2" colspan="52%">Total MHRS Package (without "Performance Factor" & "Allowance") </td>
+                <td width="12%">1854.58</td>
+                <td width="12%"></td>
+                <td width="12%"></td>
+                <td width="12%"></td>
+            </tr>
+            <tr>
+                <td colspan="2" colspan="52%">Prod. Planner recommendation with Performance Factor = 1.33& Allowance =1.20 </td>
+                <td width="12%">2,967.32</td>
+                <td width="12%"></td>
+                <td width="12%"></td>
+                <td width="12%"></td>
+            </tr>
+            <tr>
+                <td width="12%"> </td>
+                <td width="40%">Turn Around Time (T.A.T) >>>>>> </td>
+                <td width="12%">23.55 Work days</td>
+                <td width="12%"></td>
+                <td width="12%"></td>
+                <td width="12%"></td>
+            </tr>
+
+        </table>
+        <table  width="100%" >   
+        <tr>
+                <td width="20%"><u>NOTE :</u> </td>
+                <td width="7%"> </td>
+                <td width="20%"></td>
+                <td width="12%"></td>
+                <td width="7%"></td>
+                <td width="34%"></td>
+        </tr>
+        <tr>
+                <td width="20%">workhour scheduled (hr) </td>
+                <td width="7%"> 8</td>
+                <td width="20%">Total Manpower</td>
+                <td width="12%"></td>
+                <td width="7%">27</td>
+                <td width="34%"></td>
+        </tr>
+        <tr>
+                <td width="20%">lost time (hr) </td>
+                <td width="7%"> 2</td>
+                <td width="20%"></td>
+                <td width="12%">A/P Pers.</td>
+                <td width="7%">1</td>
+                <td width="34%"></td>
+        </tr>
+        <tr>
+                <td width="20%">allowance</td>
+                <td width="7%">20% </td>
+                <td width="20%"></td>
+                <td width="12%">ERI Pers.</td>
+                <td width="7%">5</td>
+                <td width="34%"></td>
+        </tr>
+        <tr>
+                <td width="20%"> </td>
+                <td width="7%"> </td>
+                <td width="20%"></td>
+                <td width="12%">REP Pers.</td>
+                <td width="7%">5</td>
+                <td width="34%"></td>
+        </tr>
+
+        <tr>
+                <td width="20%"> </td>
+                <td width="7%"> </td>
+                <td width="20%"></td>
+                <td width="12%">CAB Pers.</td>
+                <td width="7%">1</td>
+                <td width="34%"></td>
+        </tr>
+        <tr>
+                <td width="20%"></td>
+                <td width="7%"> </td>
+                <td width="20%"></td>
+                <td width="12%">Shop Pers.</td>
+                <td width="7%">5</td>
+                <td width="34%"></td>
+        </tr>    
+        <tr>
+                <td width="27%" colspan="2">Date Compiled : March 9, 2018</td>
+                <td width="20%"></td>
+                <td width="12%"></td>
+                <td width="7%"></td>
+                <td width="34%"></td>
+        </tr>    
+        <tr>
+                <td width="27%" colspan="2">Compiled By Ali Sadikin</td>
+                <td width="20%"></td>
+                <td width="12%"></td>
+                <td width="7%"></td>
+                <td width="34%"></td>
+        </tr>    
+        <tr>
+                <td width="27%" colspan="2">Approved By L Thatut CR</td>
+                <td width="20%"></td>
+                <td width="12%"></td>
+                <td width="7%"></td>
+                <td width="34%"></td>
+        </tr>    
+        </table>
+
     </body>
 </html>
