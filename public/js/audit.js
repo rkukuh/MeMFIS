@@ -1,5 +1,16 @@
 var Customer = {
     init: function() {
+        // var tes =(<?php echo $message; ?>);
+        // var tes ='<?php echo $abc?>';
+        // <?php
+        // header("Content-type: application/javascript");
+        // ?>
+        // var jsvar='something';
+        // var othervar='<?php echo $phpVar; ?>';
+        //<?php //some php ;?>
+        // alert(tes);
+
+
         $(".m_datatable").mDatatable({
             data: {
                 type: "remote",
@@ -123,17 +134,38 @@ var Customer = {
                     sortable: !1,
                     overflow: "visible",
                     template: function(t, e, i) {
+                        if(tes == 2) {
                         return (
                             '<a href="/audit/1" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t' 
-                            // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            // t.id +
-                            // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            // '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
-                            // t.id +
-                            // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
-                        );
+                            );
+
+                    }
+                          else {
+                            return (
+                                '<button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                                t.id +
+                                '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'+
+                                '<a href="audit/'+t.id+'" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="audit" data-id=' +
+                                t.id +
+                                '>\t\t\t\t\t\t\t<i class="la la-info-circle"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t' 
+                                );
+                              }
+                        // alert(tes); 
+                        // "<?php echo $message; ?>"
+                        // return (
+                        //     '<a href="/audit/1" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                        //     t.id +
+                        //     '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t'+ 
+                        //     // '"<?php echo $message; ?>"'
+                        //     // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                        //     // t.id +
+                        //     // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                        //     // '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
+                        //     // t.id +
+                        //     // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
+                        // );
                     }
                 }
             ]

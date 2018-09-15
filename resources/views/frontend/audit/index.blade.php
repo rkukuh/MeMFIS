@@ -88,13 +88,14 @@
     </div>
   </div>
 </div>
-
 @endsection
 
 <!-- @section('script')
 <script src="{{ asset('js/ajax.js')}}"></script>
 @endsection -->
 @push('footer-scripts')
+<script> 
+  var tes = "<?php echo Auth::user()->id ?>";
+</script> 
 <script src="{{ asset('js/audit.js')}}"></script>
-
 @endpush  
