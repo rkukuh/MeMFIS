@@ -61,10 +61,18 @@ Route::name('frontend.')->group(function () {
         });
 
         Route::get('/summaryworkpackage', function () {
-            $pdf = \PDF::loadView('frontend/form/preworkpackage');
+            $pdf = \PDF::loadView('frontend/form/summary_wp');
             $pdf->setPaper('A4', 'landscape');
             return $pdf->stream();
         });
+
+        Route::get('/workpackage', function () {
+            $pdf = \PDF::loadView('frontend/form/workpackage');
+            $pdf->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        });
+
+        
 
         Route::get('/wp-summart-doc', function () {
             $pdf = \PDF::loadView('frontend/form/wp');
