@@ -2,7 +2,7 @@
 
 Auth::routes();
 
-Route::view('/home', 'frontend.home');
+Route::view('/', 'auth.login');
 Route::get('/home', 'HomeController@index')->name('home');
 
 require_once('admin.php');

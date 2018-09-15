@@ -9,8 +9,6 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
-        Route::view('/', 'auth.login');
-
         Route::resource('/customer', 'CustomerController');
         Route::get('getcustomer','CustomerController@getcustomer')->name('getcustomer');
 
