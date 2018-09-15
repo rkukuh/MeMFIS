@@ -44,9 +44,13 @@ Route::name('frontend.')->group(function () {
         Route::resource('/fax', 'FaxController');
         Route::resource('/email', 'EmailController');
         Route::resource('/department', 'DepartmentController');
+        Route::resource('/taskcard', 'TaskCardController');
+        Route::resource('/tp', 'TPController');
+        Route::resource('/wp', 'WorkPackageController');
+        Route::resource('/quotation', 'QuotationController');
 
 
-        Route::get('/quotation', function () {
+        Route::get('/quotation-doc', function () {
             $pdf = \PDF::loadView('frontend/form/quotation');
             return $pdf->stream();
         });
@@ -55,6 +59,18 @@ Route::name('frontend.')->group(function () {
             $pdf = \PDF::loadView('frontend/form/preliminary');
             return $pdf->stream();
         });
+
+        Route::get('/summaryworkpackage', function () {
+            $pdf = \PDF::loadView('frontend/form/preworkpackage');
+            $pdf->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        });
+
+        Route::get('/wp-summart-doc', function () {
+            $pdf = \PDF::loadView('frontend/form/wp');
+            return $pdf->stream();
+        });
+
 
     });
 
