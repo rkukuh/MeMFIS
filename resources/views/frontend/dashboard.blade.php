@@ -91,7 +91,7 @@
                             </div>
                             <div class="m-widget4__item">
                                 <div class="m-widget4__img m-widget4__img--logo">
-                                    <img src="assets/metronic/app/media/img/client-logos/logo3.png" alt="">
+                                    <img src="{{ asset('assets/metronic/app/media/img/client-logos/logo3.png') }}" alt="">
                                 </div>
                                 <div class="m-widget4__info">
                                     <span class="m-widget4__title">
@@ -107,7 +107,7 @@
                             </div>
                             <div class="m-widget4__item">
                                 <div class="m-widget4__img m-widget4__img--logo">
-                                    <img src="assets/metronic/app/media/img/client-logos/logo1.png" alt="">
+                                    <img src="{{ asset('assets/metronic/app/media/img/client-logos/logo1.png') }}" alt="">
                                 </div>
                                 <div class="m-widget4__info">
                                     <span class="m-widget4__title">
@@ -123,7 +123,7 @@
                             </div>
                             <div class="m-widget4__item">
                                 <div class="m-widget4__img m-widget4__img--logo">
-                                    <img src="assets/metronic/app/media/img/client-logos/logo2.png" alt="">
+                                    <img src="{{ asset('assets/metronic/app/media/img/client-logos/logo2.png') }}" alt="">
                                 </div>
                                 <div class="m-widget4__info">
                                     <span class="m-widget4__title">
@@ -283,7 +283,7 @@
                     <div class="m-portlet__body">
                         <div class="m-widget19">
                             <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height-: 286px">
-                                <img src="assets/metronic/app/media/img//blog/blog1.jpg" alt="">
+                                <img src="{{ asset('assets/metronic/app/media/img/blog/blog1.jpg') }}" alt="">
                                 <h3 class="m-widget19__title m--font-light">
                                     Introducing New Feature
                                 </h3>
@@ -292,7 +292,7 @@
                             <div class="m-widget19__content">
                                 <div class="m-widget19__header">
                                     <div class="m-widget19__user-img">
-                                        <img class="m-widget19__img" src="assets/metronic/app/media/img//users/user1.jpg"
+                                        <img class="m-widget19__img" src="{{ asset('assets/metronic/app/media/img/users/user1.jpg') }}"
                                             alt="">
                                     </div>
                                     <div class="m-widget19__info">
@@ -498,7 +498,7 @@
                     <div class="m-portlet__body">
                         <div class="m-widget27 m-portlet-fit--sides">
                             <div class="m-widget27__pic">
-                                <img src="assets/metronic/app/media/img//bg/bg-4.jpg" alt="">
+                                <img src="{{ asset('assets/metronic/app/media/img/bg/bg-4.jpg') }}" alt="">
                                 <h3 class="m-widget27__title m--font-light">
                                     <span><span>$</span>256,100</span>
                                 </h3>
@@ -1423,7 +1423,7 @@
                             <div class="m-widget3__item">
                                 <div class="m-widget3__header">
                                     <div class="m-widget3__user-img">
-                                        <img class="m-widget3__img" src="assets/metronic/app/media/img/users/user1.jpg" alt="">
+                                        <img class="m-widget3__img" src="{{ asset('assets/metronic/app/media/imgusers/user1.jpg') }}" alt="">
                                     </div>
                                     <div class="m-widget3__info">
                                         <span class="m-widget3__username">
@@ -1447,7 +1447,7 @@
                             <div class="m-widget3__item">
                                 <div class="m-widget3__header">
                                     <div class="m-widget3__user-img">
-                                        <img class="m-widget3__img" src="assets/metronic/app/media/img/users/user4.jpg" alt="">
+                                        <img class="m-widget3__img" src="{{ asset('assets/metronic/app/media/imgusers/user4.jpg') }}" alt="">
                                     </div>
                                     <div class="m-widget3__info">
                                         <span class="m-widget3__username">
@@ -1472,7 +1472,7 @@
                             <div class="m-widget3__item">
                                 <div class="m-widget3__header">
                                     <div class="m-widget3__user-img">
-                                        <img class="m-widget3__img" src="assets/metronic/app/media/img/users/user5.jpg" alt="">
+                                        <img class="m-widget3__img" src="{{ asset('assets/metronic/app/media/imgusers/user5.jpg') }}" alt="">
                                     </div>
                                     <div class="m-widget3__info">
                                         <span class="m-widget3__username">
@@ -1592,10 +1592,10 @@
                                             AEOL Meeting With
                                         </div>
                                         <div class="m-list-pics m-list-pics--sm m--padding-left-20">
-                                            <a href="#"><img src="assets/metronic/app/media/img/users/100_4.jpg" title=""></a>
-                                            <a href="#"><img src="assets/metronic/app/media/img/users/100_13.jpg" title=""></a>
-                                            <a href="#"><img src="assets/metronic/app/media/img/users/100_11.jpg" title=""></a>
-                                            <a href="#"><img src="assets/metronic/app/media/img/users/100_14.jpg" title=""></a>
+                                            <a href="#"><img src="{{ asset('assets/metronic/app/media/img/users/100_4.jpg') }}" alt=""></a>
+                                            <a href="#"><img src="{{ asset('assets/metronic/app/media/img/users/100_13.jpg') }}" alt=""></a>
+                                            <a href="#"><img src="{{ asset('assets/metronic/app/media/img/users/100_11.jpg') }}" alt=""></a>
+                                            <a href="#"><img src="{{ asset('assets/metronic/app/media/img/users/100_14.jpg') }}" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="m-timeline-2__item m--margin-top-30">
@@ -2167,7 +2167,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product6.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t6.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2211,7 +2211,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product10.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t10.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2251,7 +2251,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product11.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t11.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2297,7 +2297,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product11.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t11.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2337,7 +2337,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product6.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t6.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2377,7 +2377,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product10.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t10.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2423,7 +2423,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product10.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t10.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2463,7 +2463,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product11.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t11.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2503,7 +2503,7 @@
                                     <div class="m-widget5__item">
                                         <div class="m-widget5__content">
                                             <div class="m-widget5__pic">
-                                                <img class="m-widget7__img" src="assets/metronic/app/media/img//products/product6.jpg"
+                                                <img class="m-widget7__img" src="{{ asset('assets/metronic/app/media/img/products/produc') }}t6.jpg"
                                                     alt="">
                                             </div>
                                             <div class="m-widget5__section">
@@ -2618,7 +2618,7 @@
                         <div class="m-widget4">
                             <div class="m-widget4__item">
                                 <div class="m-widget4__img m-widget4__img--logo">
-                                    <img src="assets/metronic/app/media/img/client-logos/logo5.png" alt="">
+                                    <img src="{{ asset('assets/metronic/app/media/img/client-logos/logo5.png') }}" alt="">
                                 </div>
                                 <div class="m-widget4__info">
                                     <span class="m-widget4__title">
@@ -2634,7 +2634,7 @@
                             </div>
                             <div class="m-widget4__item">
                                 <div class="m-widget4__img m-widget4__img--logo">
-                                    <img src="assets/metronic/app/media/img/client-logos/logo4.png" alt="">
+                                    <img src="{{ asset('assets/metronic/app/media/img/client-logos/logo4.png') }}" alt="">
                                 </div>
                                 <div class="m-widget4__info">
                                     <span class="m-widget4__title">
@@ -2650,7 +2650,7 @@
                             </div>
                             <div class="m-widget4__item">
                                 <div class="m-widget4__img m-widget4__img--logo">
-                                    <img src="assets/metronic/app/media/img/client-logos/logo3.png" alt="">
+                                    <img src="{{ asset('assets/metronic/app/media/img/client-logos/logo3.png') }}" alt="">
                                 </div>
                                 <div class="m-widget4__info">
                                     <span class="m-widget4__title">
@@ -2666,7 +2666,7 @@
                             </div>
                             <div class="m-widget4__item">
                                 <div class="m-widget4__img m-widget4__img--logo">
-                                    <img src="assets/metronic/app/media/img/client-logos/logo2.png" alt="">
+                                    <img src="{{ asset('assets/metronic/app/media/img/client-logos/logo2.png') }}" alt="">
                                 </div>
                                 <div class="m-widget4__info">
                                     <span class="m-widget4__title">
@@ -2682,7 +2682,7 @@
                             </div>
                             <div class="m-widget4__item">
                                 <div class="m-widget4__img m-widget4__img--logo">
-                                    <img src="assets/metronic/app/media/img/client-logos/logo1.png" alt="">
+                                    <img src="{{ asset('assets/metronic/app/media/img/client-logos/logo1.png') }}" alt="">
                                 </div>
                                 <div class="m-widget4__info">
                                     <span class="m-widget4__title">
