@@ -29,6 +29,7 @@
         </div>
     </div>
     <!-- END: Subheader -->
+
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -77,6 +78,7 @@
                                 </div>
                             </div>
                             <!--end: Search Form -->
+
                             @include('frontend.item-unit.modal')
 
                             <!--begin: Datatable -->

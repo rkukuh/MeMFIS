@@ -77,6 +77,7 @@
                                 </div>
                             </div>
                             <!--end: Search Form -->
+
                             @include('frontend.item.modal')
                             @include('frontend.bank.modal')
                             @include('frontend.category.modal')
