@@ -5,8 +5,8 @@
     class="form-control m-input
            {{ $class or '' }}"
     style="{{$style or ''}}"
-    placeholder="{{ $placeholder or '' }}"
     value="{{$value or ''}}"
+    placeholder="{{ $placeholder or '' }}"
     {{$editable or ''}}>
 
 <div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>
