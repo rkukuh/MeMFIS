@@ -113,7 +113,7 @@ class ItemUnitController extends Controller
      */
     public function index()
     {
-        return view('frontend.itemunit.index');
+        return view('frontend.item-unit.index');
     }
 
     /**
