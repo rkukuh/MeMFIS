@@ -62,15 +62,15 @@
                     </div>
                     <div class="modal-footer">
                         @component('frontend.common.buttons.close')
-                            @slot('color', 'secondary')
                             @slot('size', 'md')
+                            @slot('color', 'secondary')
                             @slot('data_dismiss', 'modal')
                         @endcomponent
 
                         @component('frontend.common.buttons.submit')
-                            @slot('color', 'success')
                             @slot('size', 'md')
                             @slot('class', 'add')
+                            @slot('color', 'success')
                         @endcomponent
                     </div>
                 </div>

@@ -45,8 +45,8 @@
 
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
-                            @slot('color', 'success')
                             @slot('class', 'add2')
+                            @slot('color', 'success')
                         @endcomponent
                     </div>
                 </form>

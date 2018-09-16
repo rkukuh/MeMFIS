@@ -68,6 +68,7 @@
                                 </div>
                             </div>
                             <!--end: Search Form -->
+
                             @include('frontend.customer.modal')
 
                             <!--begin: Datatable -->
