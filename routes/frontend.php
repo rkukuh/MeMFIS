@@ -10,31 +10,31 @@ Route::name('frontend.')->group(function () {
     ], function () {
 
         Route::resource('/customer', 'CustomerController');
-        Route::get('/getcustomer','CustomerController@getcustomer')->name('getcustomer');
+        Route::get('/getcustomer','CustomerController@getCustomers')->name('getcustomers');
 
         Route::resource('/category', 'CategoryController');
-        Route::get('/getcategory','CategoryController@getcategory')->name('getcategory');
+        Route::get('/getcategories','CategoryController@getCategories')->name('getcategories');
 
         Route::resource('/item', 'ItemController');
-        Route::get('/getitem','ItemController@getitem')->name('getitem');
+        Route::get('/getitems','ItemController@getItems')->name('getitems');
 
         Route::resource('/itemstock', 'ItemStockController');
-        Route::get('/getitemstock','ItemStockController@getitemstock')->name('getitemstock');
+        Route::get('/getitemstocks','ItemStockController@getItemStocks')->name('getitemstocks');
 
         Route::resource('/itemunit', 'ItemUnitController');
-        Route::get('/getitemunit','ItemUnitController@getitemunit')->name('getitemunit');
+        Route::get('/getItemunits','ItemUnitController@getItemUnits')->name('getitemunits');
 
         Route::resource('/warehouse', 'WarehouseController');
-        Route::get('/getwarehouse','WarehouseController@getWarehouse')->name('getwarehouse');
+        Route::get('/getwarehouses','WarehouseController@getWarehouses')->name('getwarehouses');
 
         Route::resource('/supplier', 'SupplierController');
-        Route::get('/getsupplier','SupplierController@getwerehouse')->name('getsupplier');
+        Route::get('/getsuppliers','SupplierController@getSuppliers')->name('getsuppliers');
 
-        Route::get('addres/country','AddresController@country')->name('country');
-        Route::get('addres/city/{id}','AddresController@city')->name('city');
+        Route::get('/addres/country','AddresController@Country')->name('country');
+        Route::get('/addres/city/{id}','AddresController@City')->name('city');
 
         Route::resource('/audit', 'AuditController');
-        Route::get('/getaudit','AuditController@getaudit')->name('getaudit');
+        Route::get('/getaudit','AuditController@getAudits')->name('getaudits');
 
         Route::resource('/bank', 'BankController');
         Route::resource('/bankaccount', 'BankAccountController');
@@ -43,9 +43,13 @@ Route::name('frontend.')->group(function () {
         Route::resource('/email', 'EmailController');
         Route::resource('/department', 'DepartmentController');
         Route::resource('/taskcard', 'TaskCardController');
-        Route::resource('/tp', 'TPController');
+        Route::get('/taskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
+        Route::resource('/tp', 'TaskCardPackageController');
+        Route::get('/tp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
         Route::resource('/wp', 'WorkPackageController');
+        Route::get('/wp', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
         Route::resource('/quotation', 'QuotationController');
+        Route::get('/quotation', 'QuotationController@getQuotations')->name('getquotations');
 
 
         Route::get('/quotation-doc', function () {
