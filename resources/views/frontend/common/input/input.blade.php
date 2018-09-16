@@ -1,14 +1,15 @@
-<input type="{{ $type or 'text' }}"
-       class="form-control
-              m-input {{ $class or '' }}"
-        id="{{ $id_input or '' }}"
-        name="{{ $name or '' }}"
-        placeholder="{{ $placeholder or '' }}"
-        style="{{$style or ''}}"
-        {{$editable or ''}}
-        value="{{$value or ''}}">
+<input
+    type="{{ $type or 'text' }}"
+    id="{{ $id or '' }}"
+    name="{{ $name or '' }}"
+    class="form-control m-input
+           {{ $class or '' }}"
+    style="{{$style or ''}}"
+    placeholder="{{ $placeholder or '' }}"
+    value="{{$value or ''}}"
+    {{$editable or ''}}>
 
-<div class="form-control-feedback text-danger" id="{{ $id_div or '' }}-error"></div>
+<div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>
 
 <span class="m-form__help">
     {{ $text or '' }}

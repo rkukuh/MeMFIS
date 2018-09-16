@@ -1,12 +1,16 @@
-<label class="m-checkbox
-              m-checkbox--{{ $color or 'primary' }}
-              {{ $class or '' }}">
+<label
+    class="m-checkbox
+           m-checkbox--{{ $color or 'primary' }}
+           {{ $class or '' }}">
 
-    <input type="checkbox"
-           name="{{ $name or '' }}"
-           style="{{$style or ''}}"
-           {{$editable or ''}}
-           {{$value or ''}}>
+    <input
+        type="checkbox"
+        id="{{ $id or ''}}"
+        name="{{ $name or '' }}"
+        class="{{ $class or ''}}"
+        style="{{$style or ''}}"
+        value="{{$value or ''}}"
+        {{$editable or ''}}>
 
     {{$text or '' }}
 
@@ -16,5 +20,5 @@
 <br>
 
 <span class="m-form__help">
-    {{ $text or '' }}
+    {{ $help_text or '' }}
 </span>

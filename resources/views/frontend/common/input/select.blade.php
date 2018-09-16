@@ -1,11 +1,17 @@
+<select
+    id="{{ $id or '' }}"
+    name="{{ $name or '' }}"
+    class="form-control m-select2
+           {{ $class or '' }}"
+    style="{{ $style or '' }}">
 
-
-<select class="form-control m-select2 {{ $class or '' }}" id="{{ $id or '' }}" name="{{ $name or '' }}" style="{{ $style or '' }}">
     <option value="">
-        --- Select{{ $text or '' }}---
+        --- Select {{ $entity or '' }} ---
     </option>
 </select>
-<div class="form-control-feedback text-danger" id="{{ $name or '' }}-error"></div>
+
+<div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>
+
 <span class="m-form__help">
-    {{ $label or '' }}
+    {{ $help_text or '' }}
 </span>
