@@ -1,9 +1,12 @@
-<a  href="{{ $href or '' }}"
-    style="{{ $style or '' }}"
+<a
+    href="{{ $href or '' }}"
+    id={{ $id or '' }}
+    name={{ $name or '' }}
     class="btn
-          btn-{{ $color or 'default' }}
-          btn-{{ $size or 'md' }}
-          {{ $class or '' }}">
+           btn-{{ $color or 'default' }}
+           btn-{{ $size or 'md' }}
+           {{ $class or '' }}"
+    style="{{ $style or '' }}">
 
     <span>
         <i class="la la-{{ $icon or 'undo' }}"></i>
