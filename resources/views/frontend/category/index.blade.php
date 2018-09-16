@@ -29,7 +29,6 @@
         </div>
     </div>
     <!-- END: Subheader -->
-
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -97,9 +96,9 @@
 @endsection
 
 @push('footer-scripts')
-    <script type="text/javascript" src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    {{-- <script type="text/javascript" src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
-    <script type="text/javascript" src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
+    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
+    {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
+    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
     <script src="{{ asset('js/category.js')}}"></script>
 @endpush
