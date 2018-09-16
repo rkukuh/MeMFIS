@@ -33,18 +33,22 @@ Route::name('frontend.')->group(function () {
         Route::get('addres/country','AddresController@country')->name('country');
         Route::get('addres/city/{id}','AddresController@city')->name('city');
 
-        Route::view('/audit', 'frontend.audit');
+        Route::resource('/audit', 'AuditController');
         Route::get('getaudit','AuditController@getaudit')->name('getaudit');
 
-        Route::resource('/bank', 'Frontend\BankController');
-        Route::resource('/bankaccount', 'Frontend\BankAccountController');
-        Route::resource('/phone', 'Frontend\PhoneController');
-        Route::resource('/fax', 'Frontend\FaxController');
-        Route::resource('/email', 'Frontend\EmailController');
-        Route::resource('/department', 'Frontend\DepartmentController');
+        Route::resource('/bank', 'BankController');
+        Route::resource('/bankaccount', 'BankAccountController');
+        Route::resource('/phone', 'PhoneController');
+        Route::resource('/fax', 'FaxController');
+        Route::resource('/email', 'EmailController');
+        Route::resource('/department', 'DepartmentController');
+        Route::resource('/taskcard', 'TaskCardController');
+        Route::resource('/tp', 'TPController');
+        Route::resource('/wp', 'WorkPackageController');
+        Route::resource('/quotation', 'QuotationController');
 
 
-        Route::get('/quotation', function () {
+        Route::get('/quotation-doc', function () {
             $pdf = \PDF::loadView('frontend/form/quotation');
             return $pdf->stream();
         });
@@ -53,6 +57,26 @@ Route::name('frontend.')->group(function () {
             $pdf = \PDF::loadView('frontend/form/preliminary');
             return $pdf->stream();
         });
+
+        Route::get('/summaryworkpackage', function () {
+            $pdf = \PDF::loadView('frontend/form/summary_wp');
+            $pdf->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        });
+
+        Route::get('/workpackage', function () {
+            $pdf = \PDF::loadView('frontend/form/workpackage');
+            $pdf->setPaper('A4', 'landscape');
+            return $pdf->stream();
+        });
+
+        
+
+        Route::get('/wp-summart-doc', function () {
+            $pdf = \PDF::loadView('frontend/form/wp');
+            return $pdf->stream();
+        });
+
 
     });
 

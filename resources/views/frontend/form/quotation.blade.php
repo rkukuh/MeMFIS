@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style>
+td {
+    font-size:12px;
+    /* text-align:center; */
+
+}
+</style>
   </head>
   <body>
   <table width="100%" style="margin: 0px;">
@@ -13,13 +20,13 @@
             <h2>QUOTATION</h2>
           </center>
         </td>
-        <td  width="30%" >
+        <td  width="40%" >
           <center>
             <!-- <img src="img/LogoMMF.png" alt="logo" height="100%" style="margin-bottom:-20px"> -->
             <!-- <h3>PRELIMINARY INSPECTION</h3> -->
           </center>
         </td>
-        <td  width="40%" >
+        <td  width="30%" >
           <center>
             <img src="img/LogoMMF.png" alt="logo" height="80px" >
             <!-- <h3>PRELIMINARY INSPECTION</h3> -->

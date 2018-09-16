@@ -7,7 +7,7 @@
   <div class="d-flex align-items-center">
     <div class="mr-auto">
       <h3 class="m-subheader__title m-subheader__title--separator">
-        Customer
+        Supplier
       </h3>
       <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
         <li class="m-nav__item m-nav__item--home">
@@ -19,9 +19,9 @@
           -
         </li>
         <li class="m-nav__item">
-          <a href="/customer" class="m-nav__link">
+          <a href="/supplier" class="m-nav__link">
             <span class="m-nav__link-text">
-              Customer
+              Supplier
             </span>
           </a>
         </li>
@@ -42,7 +42,7 @@
         		<div class="m-portlet__head-caption">
         			<div class="m-portlet__head-title">
         				<h3 class="m-portlet__head-text">
-        					Customer Detail
+        					Suplier Detail
         				</h3>
         			</div>
         		</div>
@@ -64,13 +64,13 @@
                 </ul>                        
                 <div class="tab-content">
                 <div class="tab-pane active" id="general" role="tabpanel">
-                                        @include('frontend.customer.tabs-show.general')
+                                        @include('frontend.supplier.tabs-show.general')
                                         </div>
                                         <div class="tab-pane" id="address" role="tabpanel">
-                                        @include('frontend.customer.tabs-show.address')                            
+                                        @include('frontend.supplier.tabs-show.address')                            
                                         </div>
                                         <div class="tab-pane" id="contact" role="tabpanel">
-                                            @include('frontend.customer.tabs-show.contact')                            
+                                            @include('frontend.supplier.tabs-show.contact')                            
                                         </div>
                 </div>      
         	</div>

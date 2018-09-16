@@ -15,12 +15,19 @@ class AuditController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function query()
+    {
+        $Audits = DB::table("audits")->get();
+
+        return $Audits;
+
+    }
 
     public function getaudit()
     {
         $Audits = DB::table("audits")->get();
         
-        $data = $alldata = json_decode($Audits);
+        $data = $alldata = json_decode($this->query());
   
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
   
@@ -113,7 +120,8 @@ class AuditController extends Controller
 
     public function index()
     {
-        //
+        return view('frontend.audit.index');
+
     }
 
     /**
@@ -145,7 +153,7 @@ class AuditController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('frontend.audit.show');
     }
 
     /**
