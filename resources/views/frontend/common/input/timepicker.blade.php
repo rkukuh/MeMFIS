@@ -1,1 +1,8 @@
-<input class="form-control {{$class or ''}}" id="m_timepicker_1" readonly placeholder="{{ $name or 'Select time'}}" type="text" style="{{$style or ''}}"/>
+<input
+    type="text"
+    id="{{ $id or 'm_timepicker_1' }}"
+    name="{{ $name or '' }}"
+    class="form-control {{$class or ''}}"
+    style="{{$style or ''}}"
+    placeholder="{{ $placeholder or 'Select time'}}"
+    readonly>

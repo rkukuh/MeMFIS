@@ -34,31 +34,46 @@
   <div class="row">
     <div class="col-lg-12">
       <!--begin::Portlet-->
-      <div class="m-portlet">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <span class="m-portlet__head-icon m--hide">
-                <i class="la la-gear"></i>
-              </span>
-              <h3 class="m-portlet__head-text">
-                Detail Customer
-              </h3>
-            </div>
-          </div>
-        </div>
+
         <!--begin::Form-->
         <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="myForm">                
-          <div class="m-portlet__body">
-            <div class="form-group m-form__group row">
-              <div class="col-sm-6 col-md-6 col-lg-6">
-                <label class="form-control-label">
-                  Name :
-                </label>
-                <p>tes</p>
-              </div>
-            </div>
-          </div>
+        <div class="m-portlet">
+        	<div class="m-portlet__head">
+        		<div class="m-portlet__head-caption">
+        			<div class="m-portlet__head-title">
+        				<h3 class="m-portlet__head-text">
+        					Customer Detail
+        				</h3>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="m-portlet__body">
+        		<ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
+            <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#general" role="tab"><i class="la la-book"></i> General</a>
+                                        </li>
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#address" role="tab"><i class="la la-map"></i> Address</a>
+                                        </li>
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#contact" role="tab"><i class="la la-phone"></i> Contact</a>
+                                        </li>
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" href="/audit" ><i class="la la-info-circle"></i> Auditable</a>
+                                        </li>
+                </ul>                        
+                <div class="tab-content">
+                <div class="tab-pane active" id="general" role="tabpanel">
+                                        @include('frontend.customer.tabs-show.general')
+                                        </div>
+                                        <div class="tab-pane" id="address" role="tabpanel">
+                                        @include('frontend.customer.tabs-show.address')                            
+                                        </div>
+                                        <div class="tab-pane" id="contact" role="tabpanel">
+                                            @include('frontend.customer.tabs-show.contact')                            
+                                        </div>
+                </div>      
+        	</div>
           <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
             <div class="m-form__actions m-form__actions--solid">
               <div class="row">
@@ -66,7 +81,7 @@
                 @component('frontend.common.buttons.back')
                             @slot('color', 'primary')
                             @slot('size', 'md')
-                            @slot('href', '')
+                            @slot('href', '/customer')
                 @endcomponent
 
                 <!-- <a class="btn btn-success" href="">
@@ -88,9 +103,6 @@
 
 @endsection
 
-<!-- @section('script')
-<script src="{{ asset('js/ajax.js')}}"></script>
-@endsection -->
 @push('footer-scripts')
 
 @endpush  

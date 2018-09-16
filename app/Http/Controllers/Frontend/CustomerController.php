@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 // use Validator;
 // use Response;
 use App\Models\Customer;
+use App\Models\Bank;
 use App\Models\ListUtil;
 use App\Http\Requests\Frontend\CustomerStore;
 use App\Http\Requests\Frontend\CustomerUpdate;
@@ -151,6 +152,16 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
+        // $Customers = Customer::All();
+
+        // Get first available Article
+        // $thinker = Bank::find(2);
+        // $name = $thinker->name;
+        // dd($name);
+        // Get latest Audit
+        // $audit = $article->audits()->latest()->first();
+        // dd($thinker->audits->first()->getModified());
+        // var_dump($name->audit$s);
         return view('frontend.customer.show');
 
         // $Customers = Customer::find($id);

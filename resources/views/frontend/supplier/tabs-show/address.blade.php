@@ -4,23 +4,27 @@
                                             Country *
                                             </label>
                                             <br>
-                                            @component('frontend.common.input.select')
-                                                @slot('text', 'Country')
+                                            @component('frontend.common.input.input')
+                                            @slot('text', 'Country')
                                                 @slot('name', 'country')
-                                                @slot('id', 'm_select2_1')
-                                                @slot('style', 'width:100%')
+                                                @slot('type', 'text')
+                                                @slot('value', 'text')
+                                                @slot('editable', 'readonly')
                                             @endcomponent
+
+                                            
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                             City *
                                             </label>
                                             <br>
-                                            @component('frontend.common.input.select')
+                                            @component('frontend.common.input.input')
                                                 @slot('text', 'City')
                                                 @slot('name', 'city')
-                                                @slot('id', 'm_select2_2')
-                                                @slot('style', 'width:100%')
+                                                @slot('type', 'text')
+                                                @slot('value', 'text')
+                                                @slot('editable', 'readonly')
                                             @endcomponent
                                         </div>
                                 </div>
@@ -33,6 +37,8 @@
                                             @slot('text', 'Address')
                                             @slot('name', 'address')
                                             @slot('rows', '3')
+                                            @slot('value', 'text')
+                                            @slot('editable', 'readonly')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -43,6 +49,8 @@
                                             @slot('text', 'ZipCode')
                                             @slot('name', 'zipcpde')
                                             @slot('type', 'text')
+                                            @slot('value', 'text')
+                                            @slot('editable', 'readonly')
                                         @endcomponent
                                     </div>
                                 </div>

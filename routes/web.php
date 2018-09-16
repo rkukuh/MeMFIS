@@ -2,7 +2,7 @@
 
 Auth::routes();
 
-Route::view('/home', 'frontend.home');
+Route::redirect('/', '/customer', 301);
 Route::get('/home', 'HomeController@index')->name('home');
 
 require_once('admin.php');

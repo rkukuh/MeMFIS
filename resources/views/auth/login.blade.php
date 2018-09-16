@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <!-- begin::Head -->
     <head>
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
         <meta charset="utf-8">
-
-        <title>MeMFIS</title>
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="description" content="Latest updates and statistic charts">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
@@ -41,8 +41,7 @@
                     <div class="m-login__container">
                         <div class="m-login__logo">
                             <a href="#">
-                                <img src="img/LogoMemfisSpinner.png" alt="logo" height="100px" >
-
+                                <img src="img/LogoMemfisSpinner.png" alt="logo" height="100px">
                             </a>
                         </div>
                         <div class="m-login__signin">
@@ -50,22 +49,28 @@
                                 <h3 class="m-login__title">Welcome to MeMFIS</h3>
                             </div>
 
-                            <form method="POST" action="{{ route('login') }}" class="m-login__form m-form">
+                            <form action="{{ route('login') }}" method="POST" class="m-login__form m-form">
 
                                 @csrf
 
                                 <div class="form-group m-form__group">
+                                    <strong>{{ $errors->first('email') }}</strong>
+
                                     <input type="email" id="email" name="email" placeholder="Email" autofocus
                                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}">
                                 </div>
                                 <div class="form-group m-form__group">
+                                    <strong>{{ $errors->first('password') }}</strong>
+
                                     <input type="password" id="password" name="password" placeholder="Password"
                                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
                                 </div>
                                 <div class="row m-login__form-sub">
-                                    <div class="col m--align-left m-login__form-left invisible">
+                                    <div class="col m--align-left m-login__form-left">
                                         <label class="m-checkbox  m-checkbox--light">
-                                            <input type="checkbox" name="remember"> Remember me
+                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                            {{ __('Remember Me') }}
+
                                             <span></span>
                                         </label>
                                     </div>
@@ -77,7 +82,8 @@
                                 </div>
                                 <div class="m-login__form-action">
                                     <button type="submit"
-                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air
+                                                   m-login__btn m-login__btn--primary">
                                             {{ __('Login') }}
                                     </button>
                                 </div>
@@ -88,18 +94,23 @@
                                 <h3 class="m-login__title">Forgotten Password ?</h3>
                                 <div class="m-login__desc">Enter your email to reset your password:</div>
                             </div>
-                            <form class="m-login__form m-form" action="">
+                            <form action="" method="POST" class="m-login__form m-form">
+
+                                @csrf
+
                                 <div class="form-group m-form__group">
                                     <input type="text" id="m_email" name="email" placeholder="Email" autocomplete="off"
                                            class="form-control m-input">
                                 </div>
                                 <div class="m-login__form-action">
                                     <button id="m_login_forget_password_submit"
-                                            class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                                            class="btn m-btn m-btn--pill m-btn--custom m-btn--air
+                                                   m-login__btn m-login__btn--primary">
                                         Request
                                     </button>
                                     <button id="m_login_forget_password_cancel"
-                                            class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">
+                                            class="btn m-btn m-btn--pill m-btn--custom m-btn--air
+                                                   m-login__btn">
                                         Cancel
                                     </button>
                                 </div>
