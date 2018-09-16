@@ -14,7 +14,7 @@ class AuditController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getAudit()
+    public function getAudits()
     {
         $Audits = Audits::All();
 

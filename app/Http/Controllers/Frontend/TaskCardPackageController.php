@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\TaskCard;
+use App\Models\TaskCardPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\TaskCardStore;
-use App\Http\Requests\Frontend\TaskCardUpdate;
+use App\Http\Requests\Frontend\TaskCardPackageStore;
+use App\Http\Requests\Frontend\TaskCardPackageUpdate;
 use App\model\ListUtil;
 
-class TaskCardController extends Controller
+class TaskCardPackageController extends Controller
 {
     /**
      * Show data from model for DataTable.
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getTaskCards()
+    public function getTaskCardPackage()
     {
-        $TaskCard = TaskCard::All();
+        $TaskCardPackagw = TaskCardPackagw::All();
 
-        $data = $alldata = json_decode($TaskCard);
+        $data = $alldata = json_decode($TaskCardPackagw);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
   
@@ -113,7 +113,7 @@ class TaskCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.taskcard.index');
+        return view('frontend.taskcardpackage.index');
     }
 
     /**
@@ -132,64 +132,65 @@ class TaskCardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskCardStore $request)
+    public function store(TaskCardPackageStore $request)
     {
-        $TaskCard = TaskCard::create([
+        $TaskCardPackage = TaskCardPackage::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
-        return response()->json($TaskCard);
+        return response()->json($TaskCardPackage);
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Models\TaskCardPackage  $taskCardPackage
      * @return \Illuminate\Http\Response
      */
-    public function show(TaskCard $taskCard)
+    public function show(TaskCardPackage $taskCardPackage)
     {
-        $TaskCards = TaskCard::find($taskCard);
-        return response()->json($TaskCards);
+        $TaskCardPackages = TaskCardPackage::find($taskCardPackage);
+        return response()->json($TaskCardPackages);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Models\TaskCardPackage  $taskCardPackage
      * @return \Illuminate\Http\Response
      */
-    public function edit(TaskCard $taskCard)
+    public function edit(TaskCardPackage $taskCardPackage)
     {
-        $TaskCards = TaskCard::find($taskCard);
-        return response()->json($TaskCards);
+        $TaskCardPackages = TaskCardPackage::find($taskCardPackage);
+        return response()->json($TaskCardPackages);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Models\TaskCardPackage  $taskCardPackage
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardUpdate $request, TaskCard $taskCard)
+    public function update(TaskCardPackageUpdate $request, TaskCardPackage $taskCardPackage)
     {
-        $TaskCard = TaskCard::find($taskCard);
-        // $TaskCard->name = $request->name;
-        // $TaskCard->save();
-        return response()->json($TaskCard);
+        $TaskCardPackage = TaskCardPackage::find($taskCardPackage);
+        // $TaskCardPackage->name = $request->name;
+        // $TaskCardPackage->save();
+        return response()->json($TaskCardPackage);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Models\TaskCardPackage  $taskCardPackage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaskCard $taskCard)
+    public function destroy(TaskCardPackage $taskCardPackage)
     {
-        $taskcard = TaskCard::find($taskCard)->delete();
-        return response()->json($taskcard);
+        $TaskCardPackage = TaskCardPackage::find($taskCardPackage)->delete();
+        return response()->json($TaskCardPackage);
     }
 
     /**

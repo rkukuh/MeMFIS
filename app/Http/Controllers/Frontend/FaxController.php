@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Fax;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\FaxStore;
 
 class FaxController extends Controller
 {
@@ -14,7 +16,8 @@ class FaxController extends Controller
      */
     public function index()
     {
-        //
+        $Faxs = Fax::pluck('name', 'id');
+        return json_encode($Faxs);
     }
 
     /**
@@ -33,18 +36,22 @@ class FaxController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FaxStore $request)
     {
-        //
+        $Fax = Fax::create([
+            // 'abbr' => $request->abbr,
+            // 'name' => $request->name,
+        ]);
+        return response()->json($Fax);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Fax  $fax
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Fax $fax)
     {
         //
     }
@@ -52,10 +59,10 @@ class FaxController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Fax  $fax
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Fax $fax)
     {
         //
     }
@@ -64,10 +71,10 @@ class FaxController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Fax  $fax
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Fax $fax)
     {
         //
     }
@@ -75,10 +82,10 @@ class FaxController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Fax  $fax
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Fax $fax)
     {
         //
     }

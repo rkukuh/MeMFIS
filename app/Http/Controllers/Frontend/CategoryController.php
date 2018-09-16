@@ -12,11 +12,11 @@ use App\model\ListUtil;
 class CategoryController extends Controller
 {
     /**
-     * Show data from model.
+     * Show data from model for DataTable.
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getCategory()
+    public function getCategories()
     {
         $Categories = Category::All();
 
@@ -203,9 +203,7 @@ class CategoryController extends Controller
       if ( ! is_array( $list ) ) {
         return array();
       }
-
       $util = new ListUtil( $list );
-
       return $util->filter( $args, $operator );
     }
 }

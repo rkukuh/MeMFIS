@@ -18,7 +18,8 @@ class BankAccountController extends Controller
      */
     public function index()
     {
-        //
+        $BankAccounts = Audits::pluck('name', 'id');
+        return json_encode($BankAccounts);
     }
 
     /**
@@ -37,9 +38,13 @@ class BankAccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BankAccountStore $request)
     {
-        //
+        $BankAccount = BankAccount::create([
+            // 'abbr' => $request->abbr,
+            // 'name' => $request->name,
+        ]);
+        return response()->json($BankAccount);
     }
 
     /**
@@ -87,14 +92,4 @@ class BankAccountController extends Controller
         //
     }
 
-    public function list_filter( $list, $args = array(), $operator = 'AND' )
-    {
-      if ( ! is_array( $list ) ) {
-        return array();
-      }
-
-      $util = new ListUtil( $list );
-
-      return $util->filter( $args, $operator );
-    }
 }

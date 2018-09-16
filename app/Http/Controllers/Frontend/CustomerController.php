@@ -12,11 +12,11 @@ use App\model\ListUtil;
 class CustomerController extends Controller
 {
     /**
-     * Show data from model.
+     * Show data from model for DataTable.
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getCustomer()
+    public function getCustomers()
     {
         $Customers = Customer::All();
 
@@ -203,9 +203,7 @@ class CustomerController extends Controller
       if ( ! is_array( $list ) ) {
         return array();
       }
-
       $util = new ListUtil( $list );
-
       return $util->filter( $args, $operator );
     }
 }
