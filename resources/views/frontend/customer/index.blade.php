@@ -46,11 +46,7 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     <div class="m-portlet m-portlet--mobile">
-
                         <div class="m-portlet__body">
                             <!--begin: Search Form -->
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
@@ -70,10 +66,10 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                        @slot('text', 'Add Customer')
-                                        @slot('color', 'primary')
-                                        @slot('size', 'md')
-                                        @slot('data_target', '#modal_customer')
+                                            @slot('text', 'Add Customer')
+                                            @slot('color', 'primary')
+                                            @slot('size', 'md')
+                                            @slot('data_target', '#modal_customer')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
