@@ -77,6 +77,7 @@
                                 </div>
                             </div>
                             <!--end: Search Form -->
+
                             @include('frontend.category.modal')
 
                             <!--begin: Datatable -->

@@ -19,9 +19,9 @@
                                     Holder Name *
                                 </label>
                                 @component('frontend.common.input.input')
+                                    @slot('type', 'text')
                                     @slot('text', 'Holder Name')
                                     @slot('name', 'holder_name')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -30,24 +30,24 @@
                                 </label>
                                 <br>
                                 @component('frontend.common.input.input')
+                                    @slot('type', 'text')
                                     @slot('text', 'Account No')
                                     @slot('name', 'account_no')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         @component('frontend.common.buttons.close')
-                            @slot('color', 'secondary')
                             @slot('size', 'md')
+                            @slot('color', 'secondary')
                             @slot('data_dismiss', 'modal')
                         @endcomponent
 
                         @component('frontend.common.buttons.submit')
-                            @slot('color', 'success')
                             @slot('size', 'md')
                             @slot('class', 'add')
+                            @slot('color', 'success')
                         @endcomponent
                     </div>
                 </div>
