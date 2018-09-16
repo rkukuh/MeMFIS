@@ -85,7 +85,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/ajax.js')}}"></script>
+    {{-- <script src="{{ asset('js/ajax.js')}}"></script> --}}
 @endsection
 
 @push('footer-scripts')
