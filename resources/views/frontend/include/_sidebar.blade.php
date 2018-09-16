@@ -95,7 +95,7 @@
                 <a href="/itemstock" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Itemstock
+                        Item Stock
                     </span>
                 </a>
             </li>
@@ -103,7 +103,7 @@
                 <a href="/itemunit" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Itemunit
+                        Item Unit
                     </span>
                 </a>
             </li>

@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <!--end: Search Form -->
-                @include('frontend.itemstock.modal')
+                @include('frontend.item-stock.modal')
                 @include('frontend.warehouse.modal')
 
 
