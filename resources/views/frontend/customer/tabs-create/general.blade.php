@@ -68,8 +68,8 @@
             @slot('style', 'width:100%')
         @endcomponent
         @component('frontend.common.buttons.create-new')
-            @slot('text', 'add Type')
             @slot('size', 'sm')
+            @slot('text', 'add Type')
             @slot('data_target', '#modal_')
         @endcomponent
     </div>
@@ -87,8 +87,8 @@
             @slot('style', 'width:100%')
         @endcomponent
         @component('frontend.common.buttons.create-new')
-            @slot('text', 'add Number')
             @slot('size', 'sm')
+            @slot('text', 'add Number')
             @slot('data_target', '#modal_')
         @endcomponent
     </div>
@@ -110,9 +110,9 @@
         </label>
         <br>
         @component('frontend.common.input.input')
+            @slot('type', 'text')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
-            @slot('type', 'text')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -121,9 +121,9 @@
         </label>
         <br>
         @component('frontend.common.input.input')
+            @slot('type', 'text')
             @slot('text', 'Leveling')
             @slot('name', 'leveling')
-            @slot('type', 'text')
         @endcomponent
     </div>
 </div>
@@ -139,9 +139,9 @@
                         <div class="m-form__group row">
                             <div class="col-md-0">
                                 @component('frontend.common.input.input')
+                                    @slot('type', 'text')
                                     @slot('text', 'xType')
                                     @slot('name', 'xtype')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                             <div class="col-md-1">
