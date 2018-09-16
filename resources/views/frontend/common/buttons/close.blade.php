@@ -1,4 +1,4 @@
-<button type="button"
+<button type="{{ $type or 'button' }}"
         name="{{ $name or 'create' }}"
         value="{{ $value or '' }}"
         class="btn
