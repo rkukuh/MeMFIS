@@ -7,7 +7,7 @@
   <div class="d-flex align-items-center">
     <div class="mr-auto">
       <h3 class="m-subheader__title m-subheader__title--separator">
-        ItemStock
+        Item Unit
       </h3>
       <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
         <li class="m-nav__item m-nav__item--home">
@@ -19,9 +19,9 @@
           -
         </li>
         <li class="m-nav__item">
-          <a href="/itemstock" class="m-nav__link">
+          <a href="/itemunit" class="m-nav__link">
             <span class="m-nav__link-text">
-             ItemStock
+             Item Unit
             </span>
           </a>
         </li>
@@ -42,7 +42,7 @@
                 <i class="la la-gear"></i>
               </span>
               <h3 class="m-portlet__head-text">
-                Form ItemStock
+                Form Item Unit
               </h3>
             </div>
           </div>
@@ -70,10 +70,10 @@
                         </div>
                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                         @component('frontend.common.buttons.create-new')
-                            @slot('text', 'Add Item Stock')
+                            @slot('text', 'Add Item Unit')
                             @slot('color', 'primary')
                             @slot('size', 'md')
-                            @slot('data_target', '#modal_itemstock')
+                            @slot('data_target', '#modal_itemsunit')
                         @endcomponent
 
                             <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -81,9 +81,7 @@
                     </div>
                 </div>
                 <!--end: Search Form -->
-                @include('frontend.itemstock.modal')
-                @include('frontend.warehouse.modal')
-
+                @include('frontend.item-unit.modal')
 
 
                 <!--begin: Datatable -->
@@ -110,6 +108,6 @@
 <!-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}" type="text/javascript"></script> -->
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}" type="text/javascript"></script>
 
-<script src="{{ asset('js/itemstock.js')}}"></script>
+<script src="{{ asset('js/itemunit.js')}}"></script>
 
 @endpush

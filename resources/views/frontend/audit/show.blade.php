@@ -29,7 +29,6 @@
         </div>
     </div>
     <!-- END: Subheader -->
-
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -84,7 +83,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/ajax.js')}}"></script>
+    {{-- <script src="{{ asset('js/ajax.js')}}"></script> --}}
 @endsection
 
 @push('footer-scripts')

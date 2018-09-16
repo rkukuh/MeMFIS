@@ -30,9 +30,9 @@
             Address *
         </label>
         @component('frontend.common.input.textarea')
+            @slot('rows', '3')
             @slot('text', 'Address')
             @slot('name', 'address')
-            @slot('rows', '3')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -40,9 +40,9 @@
             ZipCode *
         </label>
         @component('frontend.common.input.input')
+            @slot('type', 'text')
             @slot('text', 'ZipCode')
             @slot('name', 'zipcpde')
-            @slot('type', 'text')
         @endcomponent
     </div>
 </div>
