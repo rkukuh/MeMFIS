@@ -179,6 +179,4 @@
             </li> --}}
         </ul>
     </div>
-
-    <!-- END: Aside Menu -->
 </div>
