@@ -29,6 +29,7 @@
         </div>
     </div>
     <!-- END: Subheader -->
+
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -81,8 +82,8 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         @component('frontend.common.buttons.back')
-                                            @slot('color', 'primary')
                                             @slot('size', 'md')
+                                            @slot('color', 'primary')
                                             @slot('href', '/customer')
                                         @endcomponent
                                     </div>
