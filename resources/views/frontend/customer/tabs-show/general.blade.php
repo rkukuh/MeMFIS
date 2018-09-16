@@ -43,12 +43,12 @@
         </label>
         <br>
         @component('frontend.common.input.textarea')
-            @slot('text', 'NPWP Address')
-            @slot('name', 'npwpaddress')
-            @slot('placeholder', 'NPWP Address')
             @slot('rows', '3')
             @slot('value', 'text')
+            @slot('name', 'npwpaddress')
+            @slot('text', 'NPWP Address')
             @slot('editable', 'readonly')
+            @slot('placeholder', 'NPWP Address')
         @endcomponent
     </div>
 </div>
@@ -86,9 +86,9 @@
         </label>
         <br>
         @component('frontend.common.input.input')
+            @slot('value', 'text')
             @slot('text', 'Number')
             @slot('name', 'id_number')
-            @slot('value', 'text')
             @slot('editable', 'readonly')
         @endcomponent
     </div>
@@ -100,9 +100,9 @@
         @component('frontend.common.input.checkbox')
             @slot('text', 'Active')
             @slot('name', 'active')
+            @slot('value', 'checked')
             @slot('color', 'disabled')
             @slot('editable', 'disabled')
-            @slot('value', 'checked')
         @endcomponent
     </div>
 
@@ -114,10 +114,10 @@
         </label>
         <br>
         @component('frontend.common.input.input')
-            @slot('text', 'AccountCode')
-            @slot('name', 'accountcode')
             @slot('type', 'text')
             @slot('value', 'text')
+            @slot('text', 'AccountCode')
+            @slot('name', 'accountcode')
             @slot('editable', 'readonly')
         @endcomponent
     </div>

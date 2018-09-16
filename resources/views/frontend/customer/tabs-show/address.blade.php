@@ -5,10 +5,10 @@
         </label>
         <br>
         @component('frontend.common.input.input')
-            @slot('text', 'Country')
-            @slot('name', 'country')
             @slot('type', 'text')
             @slot('value', 'text')
+            @slot('text', 'Country')
+            @slot('name', 'country')
             @slot('editable', 'readonly')
         @endcomponent
     </div>
@@ -32,10 +32,10 @@
             Address *
         </label>
         @component('frontend.common.input.textarea')
-            @slot('text', 'Address')
-            @slot('name', 'address')
             @slot('rows', '3')
             @slot('value', 'text')
+            @slot('text', 'Address')
+            @slot('name', 'address')
             @slot('editable', 'readonly')
         @endcomponent
     </div>
@@ -44,10 +44,10 @@
             ZipCode *
         </label>
         @component('frontend.common.input.input')
-            @slot('text', 'ZipCode')
-            @slot('name', 'zipcpde')
             @slot('type', 'text')
             @slot('value', 'text')
+            @slot('text', 'ZipCode')
+            @slot('name', 'zipcpde')
             @slot('editable', 'readonly')
         @endcomponent
     </div>
