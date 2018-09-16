@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Werehouse;
 use App\Models\ListUtil;
-use App\Http\Requests\Frontend\WerehouseStore;
-use App\Http\Requests\Frontend\WerehouseUpdate;
+use App\Models\Warehouse;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\WarehouseStore;
+use App\Http\Requests\Frontend\WarehouseUpdate;
 
-class WerehouseController extends Controller
+class WarehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getwerehouse()
+    public function getWarehouse()
     {
-        $Werehouse = Werehouse::All();
+        $warehouses = Warehouse::All();
 
-        $data = $alldata = json_decode($Werehouse);
+        $data = $alldata = json_decode($warehouses);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -110,9 +109,10 @@ class WerehouseController extends Controller
 
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
+
     public function index()
     {
-        return view('frontend.werehouse.index');
+        return view('frontend.warehouse.index');
     }
 
     /**
@@ -128,16 +128,16 @@ class WerehouseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\WarehouseStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WerehouseStore $request)
+    public function store(WarehouseStore $request)
     {
-        $Werehouse = Werehouse::create([
+        $warehouses = Warehouse::create([
             // 'name' => $request->name,
         ]);
 
-        return response()->json($Werehouse);
+        return response()->json($warehouses);
     }
 
     /**
@@ -148,8 +148,8 @@ class WerehouseController extends Controller
      */
     public function show($id)
     {
-        $Werehouse = Werehouse::find($id);
-        return response()->json($Werehouse);
+        $warehouses = Warehouse::find($id);
+        return response()->json($warehouses);
     }
 
     /**
@@ -160,23 +160,24 @@ class WerehouseController extends Controller
      */
     public function edit($id)
     {
-        $Werehouse = Werehouse::find($id);
-        return response()->json($Werehouse);
+        $warehouses = Warehouse::find($id);
+        return response()->json($warehouses);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\WarehouseUpdate  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(WerehouseUpdate $request, $id)
+    public function update(WarehouseUpdate $request, $id)
     {
-        $Werehouse = Werehouse::find($id);
+        $warehouses = Warehouse::find($id);
         // $Category->name = $request->name;
         // $Category->save();
-        return response()->json($Werehouse);
+
+        return response()->json($warehouses);
     }
 
     /**
@@ -187,17 +188,18 @@ class WerehouseController extends Controller
      */
     public function destroy($id)
     {
-        $Werehouse = Werehouse::find($id)->delete();
-        return response()->json($Werehouse);
+        $warehouses = Warehouse::find($id)->delete();
+        return response()->json($warehouses);
     }
-    public function list_filter( $list, $args = array(), $operator = 'AND' )
+
+    public function list_filter($list, $args = array(), $operator = 'AND')
     {
-      if ( ! is_array( $list ) ) {
-        return array();
-      }
+        if ( ! is_array( $list ) ) {
+            return array();
+        }
 
-      $util = new ListUtil( $list );
+        $util = new ListUtil( $list );
 
-      return $util->filter( $args, $operator );
+        return $util->filter( $args, $operator );
     }
 }

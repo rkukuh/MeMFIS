@@ -49,7 +49,7 @@
         </div>
 
 
-     
+
             <div class="m-portlet m-portlet--mobile">
 
             <div class="m-portlet__body">
@@ -76,13 +76,13 @@
                             @slot('data_target', '#modal_werehouse')
                         @endcomponent
 
-                            <div class="m-separator m-separator--dashed d-xl-none"></div>					
+                            <div class="m-separator m-separator--dashed d-xl-none"></div>
                         </div>
                     </div>
                 </div>
                 <!--end: Search Form -->
-                @include('frontend.werehouse.modal')
-                
+                @include('frontend.warehouse.modal')
+
 
                 <!--begin: Datatable -->
                 <div class="m_datatable" id="scrolling_both"></div>
@@ -110,4 +110,4 @@
 
 <script src="{{ asset('js/werehouse.js')}}"></script>
 
-@endpush  
+@endpush

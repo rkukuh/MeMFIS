@@ -24,8 +24,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('/itemunit', 'ItemUnitController');
         Route::get('getitemunit','ItemUnitController@getitemunit')->name('getitemunit');
 
-        Route::resource('/werehouse', 'WerehouseController');
-        Route::get('getwerehouse','WerehouseController@getwerehouse')->name('getwerehouse');
+        Route::resource('/warehouse', 'WarehouseController');
+        Route::get('getwarehouse','WarehouseController@getWarehouse')->name('getwarehouse');
 
         Route::resource('/supplier', 'SupplierController');
         Route::get('getsupplier','SupplierController@getwerehouse')->name('getsupplier');
@@ -70,13 +70,10 @@ Route::name('frontend.')->group(function () {
             return $pdf->stream();
         });
 
-        
-
         Route::get('/wp-summart-doc', function () {
             $pdf = \PDF::loadView('frontend/form/wp');
             return $pdf->stream();
         });
-
 
     });
 

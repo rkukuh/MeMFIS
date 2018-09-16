@@ -108,10 +108,10 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/werehouse" class="m-menu__link m-menu__toggle">
+                <a href="/warehouse" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Werehouse
+                        Warehouse
                     </span>
                 </a>
             </li>
@@ -119,7 +119,7 @@
                 <a href="/taskcard" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        TaskCard
+                        Task Card
                     </span>
                 </a>
             </li>
@@ -127,7 +127,7 @@
                 <a href="/tp" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        TaskCard Package
+                        Task Card Package
                     </span>
                 </a>
             </li>
