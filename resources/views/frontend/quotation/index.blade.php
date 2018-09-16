@@ -7,7 +7,7 @@
   <div class="d-flex align-items-center">
     <div class="mr-auto">
       <h3 class="m-subheader__title m-subheader__title--separator">
-        Qoutation
+        Quotation
       </h3>
       <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
         <li class="m-nav__item m-nav__item--home">
@@ -21,7 +21,7 @@
         <li class="m-nav__item">
           <a href="/qoutation" class="m-nav__link">
             <span class="m-nav__link-text">
-                Qoutation
+                Quotation
             </span>
           </a>
         </li>
@@ -49,7 +49,7 @@
         </div>
 
 
-     
+
             <div class="m-portlet m-portlet--mobile">
 
             <div class="m-portlet__body">
@@ -76,7 +76,7 @@
                             @slot('data_target', '#modal_quotation')
                         @endcomponent
 
-                            <div class="m-separator m-separator--dashed d-xl-none"></div>					
+                            <div class="m-separator m-separator--dashed d-xl-none"></div>
                         </div>
                     </div>
                 </div>
@@ -114,4 +114,4 @@
 
 <script src="{{ asset('js/quotation.js')}}"></script>
 
-@endpush  
+@endpush
