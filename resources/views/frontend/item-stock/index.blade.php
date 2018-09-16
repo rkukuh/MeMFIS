@@ -77,6 +77,7 @@
                                 </div>
                             </div>
                             <!--end: Search Form -->
+
                             @include('frontend.warehouse.modal')
                             @include('frontend.item-stock.modal')
 

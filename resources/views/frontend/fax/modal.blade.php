@@ -71,8 +71,8 @@
                                 </label>
                                     <br>
                                 @component('frontend.common.input.radio')
-                                    @slot('value', 'work')
                                     @slot('text', 'Work')
+                                    @slot('value', 'work')
                                     @slot('name', 'account_no')
                                 @endcomponent
                                 <br>
