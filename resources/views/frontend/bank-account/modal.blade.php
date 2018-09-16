@@ -10,7 +10,6 @@
             </div>
             <div class="modal-body">
 
-                <!--begin::Form-->
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
