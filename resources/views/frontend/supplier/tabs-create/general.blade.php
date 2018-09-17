@@ -6,8 +6,8 @@
         @endcomponent
         </label>
         @component('frontend.common.input.input')
-            @slot('text', 'Name')
-            @slot('name', 'name')
+            @slot('text', 'Code')
+            @slot('name', 'code')
             @slot('type', 'text')
         @endcomponent
     </div>
