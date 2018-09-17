@@ -149,7 +149,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        $Customers = Customer::find($customer);
+        // $Customers = Customer::find($customer);
         return view('frontend.customer.show');
     }
 
@@ -161,7 +161,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $Customers = Customer::find($customer);
+        // $Customers = Customer::find($customer);
         return response()->json($Customers);
     }
 

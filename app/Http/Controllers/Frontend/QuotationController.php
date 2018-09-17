@@ -19,9 +19,9 @@ class QuotationController extends Controller
      */
     public function getQuotations()
     {
-        $Items = Item::All();
+        $Quotations =Quotation::All();
 
-        $data = $alldata = json_decode($Items);
+        $data = $alldata = json_decode($Quotation);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
   
