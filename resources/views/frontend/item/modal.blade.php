@@ -28,7 +28,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Name
-                                @component('frontend.common.label.required')
+                                @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
                                 <br>
@@ -43,7 +43,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Barcode
-                                @component('frontend.common.label.required')
+                                @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
                                 @component('frontend.common.input.input')
@@ -55,7 +55,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Bank
-                                @component('frontend.common.label.required')
+                                @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
                                 <br>
@@ -97,7 +97,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Description
-                                @component('frontend.common.label.required')
+                                @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
                                 @component('frontend.common.input.textarea')
@@ -109,7 +109,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Active
-                                @component('frontend.common.label.required')
+                                @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
                                 <br>
@@ -148,7 +148,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     xPicture
-                                @component('frontend.common.label.required')
+                                @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
                                 @component('frontend.common.input.upload')
@@ -159,7 +159,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     AccountCode
-                                @component('frontend.common.label.required')
+                                @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
                                 <br>
