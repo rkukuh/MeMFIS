@@ -44,8 +44,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('/department', 'DepartmentController');
         Route::resource('/taskcard', 'TaskCardController');
         Route::get('/taskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
-        Route::resource('/tp', 'TaskCardPackageController');
-        Route::get('/tp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
+        Route::resource('/tcp', 'TaskCardPackageController');
+        Route::get('/tcp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
         Route::resource('/wp', 'WorkPackageController');
         Route::get('/wp', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
         Route::resource('/quotation', 'QuotationController');

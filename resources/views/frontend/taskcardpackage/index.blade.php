@@ -103,5 +103,5 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/TP.js')}}"></script>
+    <script src="{{ asset('js/TCP.js')}}"></script>
 @endpush

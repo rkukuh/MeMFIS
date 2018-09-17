@@ -102,5 +102,5 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/TPmodal.js')}}"></script>
+    <script src="{{ asset('js/TCPmodal.js')}}"></script>
 @endpush
