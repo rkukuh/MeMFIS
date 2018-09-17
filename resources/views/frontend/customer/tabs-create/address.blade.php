@@ -1,7 +1,9 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Country *
+            Country
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.select')
@@ -13,7 +15,9 @@
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            City *
+            City
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.select')
@@ -27,17 +31,22 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Address *
+            Address
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         @component('frontend.common.input.textarea')
             @slot('rows', '3')
             @slot('text', 'Address')
             @slot('name', 'address')
+            @slot('placeholder', 'Address')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            ZipCode *
+            ZipCode
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         @component('frontend.common.input.input')
             @slot('type', 'text')
