@@ -84,7 +84,7 @@
                                         @component('frontend.common.buttons.back')
                                         @slot('size', 'md')
                                         @slot('color', 'primary')
-                                        @slot('href', '/customer')
+                                        @slot('href', route('frontend.supplier.index'))
                                         @endcomponent
                                     </div>
                                 </div>
