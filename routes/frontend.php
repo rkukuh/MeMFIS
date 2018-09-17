@@ -9,6 +9,8 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
+        Route::view('/dashboard', 'frontend.dashboard');
+
         Route::resource('/customer', 'CustomerController');
         Route::get('/getcustomer','CustomerController@getCustomers')->name('getcustomers');
 
