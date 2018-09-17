@@ -9,7 +9,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="QuotationForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
@@ -27,7 +26,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Currency *
+                                    Currency
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.select')
@@ -41,7 +42,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Valid Until *
+                                    Valid Until
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.datepicker')
                                     @slot('rows', '3')
@@ -51,7 +54,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Subject *
+                                    Subject
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.textarea')
@@ -64,7 +69,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Workpackage *
+                                    Workpackage
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.select')
                                     @slot('id', 'm_select2_3')
@@ -81,7 +88,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Additonal *
+                                    Additonal
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.select')
@@ -95,7 +104,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Term and Condition *
+                                    Term and Condition
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
 
                                 <div class="summernote" id="m_summernote_1"></div>
@@ -117,9 +128,8 @@
                             @slot('data_dismiss', 'modal')
                         @endcomponent
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
 </div>
