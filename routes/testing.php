@@ -8,8 +8,6 @@ Route::name('testing.')->group(function () {
             return "Hello $name !";
         });
 
-        Route::view('/dashboard', 'frontend.dashboard');
-
     });
 
 });
