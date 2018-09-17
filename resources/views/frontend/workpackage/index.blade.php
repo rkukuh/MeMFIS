@@ -42,7 +42,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Form Workpackage
+                                    Workpackage Datalist
                                 </h3>
                             </div>
                         </div>
@@ -79,8 +79,8 @@
                             </div>
                             <!--end: Search Form -->
 
-                            @include('frontend.tp.modal')
                             @include('frontend.workpackage.modal')
+                            @include('frontend.taskcardpackage.modal')
 
                             <!--begin: Datatable -->
                             <div class="m_datatable" id="scrolling_both"></div>
