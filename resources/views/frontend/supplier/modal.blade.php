@@ -54,8 +54,8 @@
                             @slot('data_dismiss', 'modal')
                         @endcomponent
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
 
         </div>
     </div>
