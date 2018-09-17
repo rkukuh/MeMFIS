@@ -3,7 +3,7 @@
     id="{{ $id or '' }}"
     name="{{ $name or 'submit' }}"
     class="btn
-           btn-{{ $color or 'default' }}
+           btn-{{ $color or 'success' }}
            btn-{{ $size or 'md' }}
                {{ $class or '' }}"
     style="{{ $style or '' }}"

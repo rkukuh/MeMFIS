@@ -82,16 +82,18 @@
                     <!--end: Datatable -->
                     <br>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('color', 'secondary')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
-
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
                             @slot('class', 'add')
-                            @slot('color', 'success')
+                        @endcomponent
+
+                        @component('frontend.common.buttons.reset')
+                            @slot('size', 'md')
+                        @endcomponent
+
+                        @component('frontend.common.buttons.close')
+                            @slot('size', 'md')
+                            @slot('data_dismiss', 'modal')
                         @endcomponent
                     </div>
                 </div>
@@ -102,5 +104,5 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/TCPmodal.js')}}"></script>
+    <script src="{{ asset('js/taskcardpackagemodal.js')}}"></script>
 @endpush
