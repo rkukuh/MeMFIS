@@ -16,7 +16,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code *
+                                    Code
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.input')
                                     @slot('text', 'Code')
@@ -26,7 +28,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name *
+                                    Name
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.input')
                                     @slot('text', 'Name')
@@ -38,7 +42,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Description *
+                                    Description
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
@@ -48,7 +54,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Account Code *
+                                    Account Code
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.input')
@@ -61,7 +69,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Active *
+                                    Active
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.checkbox')
@@ -88,9 +98,8 @@
                             @slot('data_dismiss', 'modal')
                         @endcomponent
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
 </div>
