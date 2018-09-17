@@ -15,7 +15,7 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Email
-                                @component('frontend.common.label.optional')
+                                @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
                                 <div id="m_repeater_1a">
