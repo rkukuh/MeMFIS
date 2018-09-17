@@ -689,9 +689,21 @@
                                                     </li>
                                                     <li class="m-nav__separator m-nav__separator--fit">
                                                     </li>
-                                                    <li class="m-nav__item">
+                                                    {{-- <li class="m-nav__item">
                                                         <a href="snippets/pages/user/login-1.html" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
-                                                    </li>
+                                                    </li> --}}
+                                                    <li class="m-nav__item">
+                                                        <a href="{{ route('logout') }}"
+                                                            onclick="event.preventDefault();
+                                                                     document.getElementById('logout-form').submit();"
+                                                            class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                                                            Logout
+                                                        </a>
+                            
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            {{ csrf_field() }}
+                                                        </form>
+                                                    </li>                           
                                                 </ul>
                                             </div>
                                         </div>
