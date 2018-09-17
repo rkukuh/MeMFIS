@@ -7,7 +7,7 @@ var Itemstock = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getitemstock",
+                        url: "/getitem-stock",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
