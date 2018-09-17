@@ -5,7 +5,7 @@
             <div class="m-stack__item m-brand  m-brand--skin-dark ">
                 <div class="m-stack m-stack--ver m-stack--general">
                     <div class="m-stack__item m-stack__item--middle m-brand__logo">
-                        <a href="index.html" class="m-brand__logo-wrapper">
+                        <a href="/" class="m-brand__logo-wrapper">
                             <img src="{{asset('img/LogoMMF.png')}}" alt="logo" height="50px">
                             <!-- <img alt="" src="{{asset('assets/metronic/demo/default/media/img/logo/logo_default_dark.png')}}"/> -->
                         </a>

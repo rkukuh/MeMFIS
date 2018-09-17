@@ -16,6 +16,8 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Fax
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <div id="m_repeater_1a">
                                     <div class="" id="m_repeater_1a">
@@ -57,7 +59,9 @@
                                     </div>
                                 </div>
                                 <label class="form-control-label">
-                                    Name *
+                                    Name
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.input')
                                     @slot('text', 'Name')
@@ -67,7 +71,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    type *
+                                    type
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                     <br>
                                 @component('frontend.common.input.radio')
@@ -85,21 +91,22 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('color', 'secondary')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
-
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
                             @slot('class', 'add')
-                            @slot('color', 'success')
                         @endcomponent
-                    </div>
-                </div>
-            </form>
 
+                        @component('frontend.common.buttons.reset')
+                            @slot('size', 'md')
+                        @endcomponent
+
+                        @component('frontend.common.buttons.close')
+                            @slot('size', 'md')
+                            @slot('data_dismiss', 'modal')
+                        @endcomponent
+                    </div>                
+                </form>
+            </div>
         </div>
     </div>
 </div>

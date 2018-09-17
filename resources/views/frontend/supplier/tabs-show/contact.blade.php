@@ -2,6 +2,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Phone
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <div id="m_repeater_1">
             <div class="" id="m_repeater_1">
@@ -44,6 +46,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Email
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <div id="m_repeater_1a">
             <div class="" id="m_repeater_1a">
@@ -88,6 +92,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Fax
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <div id="m_repeater_1b">
             <div class="" id="m_repeater_1b">

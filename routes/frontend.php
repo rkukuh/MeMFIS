@@ -20,11 +20,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('/item', 'ItemController');
         Route::get('/getitems','ItemController@getItems')->name('getitems');
 
-        Route::resource('/itemstock', 'ItemStockController');
-        Route::get('/getitemstocks','ItemStockController@getItemStocks')->name('getitemstocks');
+        Route::resource('/item-stock', 'ItemStockController');
+        Route::get('/getitem-stocks','ItemStockController@getItemStocks')->name('getitemstocks');
 
-        Route::resource('/itemunit', 'ItemUnitController');
-        Route::get('/getItemunits','ItemUnitController@getItemUnits')->name('getitemunits');
+        Route::resource('/item-unit', 'ItemUnitController');
+        Route::get('/getItem-units','ItemUnitController@getItemUnits')->name('getitemunits');
 
         Route::resource('/warehouse', 'WarehouseController');
         Route::get('/getwarehouses','WarehouseController@getWarehouses')->name('getwarehouses');
@@ -46,10 +46,10 @@ Route::name('frontend.')->group(function () {
         Route::resource('/department', 'DepartmentController');
         Route::resource('/taskcard', 'TaskCardController');
         Route::get('/taskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
-        Route::resource('/tp', 'TaskCardPackageController');
-        Route::get('/tp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
+        Route::resource('/tcp', 'TaskCardPackageController');
+        Route::get('/tcp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
         Route::resource('/wp', 'WorkPackageController');
-        Route::get('/wp', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
+        Route::get('/workpakages', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
         Route::resource('/quotation', 'QuotationController');
         Route::get('/quotation', 'QuotationController@getQuotations')->name('getquotations');
 

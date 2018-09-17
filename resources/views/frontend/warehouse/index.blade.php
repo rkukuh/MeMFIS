@@ -6,7 +6,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    ItemUnit
+                    Warehouse
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -20,7 +20,7 @@
                     <li class="m-nav__item">
                         <a href="/werehouse" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                ItemUnit
+                                Warehouse
                             </span>
                         </a>
                     </li>
@@ -42,7 +42,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Form ItemUnit
+                                    Warehouse Datalist
                                 </h3>
                             </div>
                         </div>
@@ -92,10 +92,6 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script src="{{ asset('js/ajax.js')}}"></script>
 @endsection
 
 @push('footer-scripts')

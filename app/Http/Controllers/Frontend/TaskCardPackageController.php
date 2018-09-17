@@ -18,7 +18,7 @@ class TaskCardPackageController extends Controller
      */
     public function getTaskCardPackage()
     {
-        $TaskCardPackagw = TaskCardPackagw::All();
+        $TaskCardPackagw = TaskCardPackage::All();
 
         $data = $alldata = json_decode($TaskCardPackagw);
 

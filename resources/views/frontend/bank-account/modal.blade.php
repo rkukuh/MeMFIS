@@ -16,7 +16,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Holder Name *
+                                    Holder Name
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.input')
                                     @slot('type', 'text')
@@ -26,7 +28,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Account No *
+                                    Account No
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.input')
@@ -50,9 +54,8 @@
                             @slot('color', 'success')
                         @endcomponent
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
 </div>

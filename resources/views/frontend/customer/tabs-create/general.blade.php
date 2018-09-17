@@ -1,7 +1,9 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Name *
+            Name 
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         @component('frontend.common.input.input')
             @slot('text', 'Name')
@@ -12,6 +14,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Code
+        @component('frontend.common.label.required')
+        @endcomponent
         </label>
         @component('frontend.common.input.input')
             @slot('text', 'Code')
@@ -24,6 +28,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             NPWP
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         @component('frontend.common.input.input')
             @slot('text', 'NPWP')
@@ -34,6 +40,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             NPWP Address
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.textarea')
@@ -48,6 +56,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             ToP
+        @component('frontend.common.label.required')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.input')
@@ -59,6 +69,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Type
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.select')
@@ -78,6 +90,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Number
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.select')
@@ -95,6 +109,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Active *
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.checkbox')
@@ -106,7 +122,9 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            AccountCode *
+            AccountCode
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.input')
@@ -118,6 +136,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Leveling
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.input')
@@ -131,6 +151,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             xType
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <div id="m_repeater_1c">
             <div class="" id="m_repeater_1c">

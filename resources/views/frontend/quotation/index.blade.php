@@ -42,7 +42,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Form Qoutation
+                                    Qoutation Datalist
                                 </h3>
                             </div>
                         </div>
@@ -94,10 +94,6 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script src="{{ asset('js/ajax.js')}}"></script>
 @endsection
 
 @push('footer-scripts')
