@@ -8,14 +8,15 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="TaskCardPackageForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code *
+                                    Code
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.input')
                                     @slot('text', 'Code')
@@ -25,7 +26,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name *
+                                    Name
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.input')
@@ -38,7 +41,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Description *
+                                    Description
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
 
                                 @component('frontend.common.input.textarea')
@@ -49,7 +54,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Upload TaskCard *
+                                    Upload TaskCard
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.upload')
@@ -73,13 +80,10 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <!--begin: Datatable -->
                     <div class="m_datatable2" id="second"></div>
-                    {{-- <div class="m_datatable" id="second"></div> --}}
-                    <!--end: Datatable -->
                     <br>
                     <div class="modal-footer">
                         @component('frontend.common.buttons.submit')
@@ -96,9 +100,8 @@
                             @slot('data_dismiss', 'modal')
                         @endcomponent
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
 </div>
