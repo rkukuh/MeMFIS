@@ -22,7 +22,6 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
-                                    @slot('id', 'code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -35,7 +34,6 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'bank_name')
-                                    @slot('id', 'bank_name')
                                 @endcomponent
                             </div>
                         </div>
