@@ -94,9 +94,6 @@
     </div>
 @endsection
 
-@section('script')
-    {{-- <script src="{{ asset('js/ajax.js')}}"></script> --}}
-@endsection
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
