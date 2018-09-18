@@ -18,11 +18,16 @@ class CreateJournalsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name')->nullable();
-            $table->integer('type')->nullable();
+            $table->unsignedInteger('type_id')->nullable();
             $table->integer('level')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('type_id')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
         });
     }
 
