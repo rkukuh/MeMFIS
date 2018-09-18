@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class JournalStore extends FormRequest
 {
@@ -24,6 +26,7 @@ class JournalStore extends FormRequest
     public function rules()
     {
         return [
+            'code' => 'required|numeric',
             // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
     }
