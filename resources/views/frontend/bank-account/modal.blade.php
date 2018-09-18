@@ -20,10 +20,10 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'text')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Holder Name')
                                     @slot('name', 'holder_name')
+                                    @slot('id', 'holder_name')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -33,10 +33,10 @@
                                 @endcomponent
                                 </label>
                                 <br>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'text')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Account No')
                                     @slot('name', 'account_no')
+                                    @slot('id', 'account_no')
                                 @endcomponent
                             </div>
                         </div>
