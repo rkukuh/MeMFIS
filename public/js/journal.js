@@ -92,10 +92,10 @@ var Category = {
                     overflow: "visible",
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            // t.id +
+                            // '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '<button data-toggle="modal" data-target="#modal_journal" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
@@ -163,11 +163,6 @@ var Category = {
             var type = $("#m_select2_1").val();
             var level = $("#m_select2_2").val();
             var description = $("#description").val();
-            // alert(code);
-            // alert(name);
-            // alert(type);
-            // alert(level);
-            // alert(description);
             $("#simpan").text("Simpan");
             var registerForm = $("#CustomerForm");
             var formData = registerForm.serialize();
@@ -255,9 +250,39 @@ var Category = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/category/" + triggerid + "/edit",
+                url: "/journal/" + triggerid + "/edit",
                 success: function (data) {
+                    // $.ajax({
+                    //     headers: {
+                    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    //     },
+                    //     type: "get",
+                    //     url: "/type/" + data.type + "/edit",
+                    //     success: function (data2) {
+                    //         alert(data2.name);
+                    //     },
+                    // });
+                    var select = document.getElementById("m_select2_1");
+                    $('select[name="type"]').append(
+                        "<option value='0' selected>Edit Type</option>"
+                    );
+                    // $.ajax({
+                    //     headers: {
+                    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    //     },
+                    //     type: "get",
+                    //     url: "/level/" + data.type + "/edit",
+                    //     success: function (data) {
+                    //         alert(data.name);
+                    //     },
+                    // });
+                    var select = document.getElementById("m_select2_2");
+                    $('select[name="level"]').append(
+                        "<option value='0' selected> Edit Level</option>"
+                    );
+                    document.getElementById("code").value = data.code;
                     document.getElementById("name").value = data.name;
+                    document.getElementById("description").value = data.description;
                     document.getElementById("id").value = data.id;
                     $(".btn-success").addClass("update");
                     $(".btn-success").removeClass("add");
@@ -267,14 +292,18 @@ var Category = {
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function (index, value) {
-                        $("#kategori-error").html(value);
+                        $("#journal-error").html(value);
                     });
                 }
             });
         });
 
         var update = $(".modal-footer").on("click", ".update", function () {
+            var code = $("input[name=code]").val();
             var name = $("input[name=name]").val();
+            var type = $("#m_select2_1").val();
+            var level = $("#m_select2_2").val();
+            var description = $("#description").val();
             $("#name-error").html("");
             $("#button").show();
             var triggerid = $("input[name=id]").val();
@@ -284,29 +313,72 @@ var Category = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "put",
-                url: "/category/" + triggerid,
+                url: "/journal/" + triggerid,
                 data: {
                     _token: $("input[name=_token]").val(),
-                    name: name
+                    code: code,
+                    name: name,
+                    type: type,
+                    level: level,
+                    description: description
                 },
                 success: function (data) {
                     console.log(data);
                     if (data.errors) {
+                        if (data.errors.code) {
+                            $("#code-error").html(data.errors.code[0]);
+                            document.getElementById("code").value = code;
+                            document.getElementById("name").value = name;
+                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("description").value = description;
+                        }
                         if (data.errors.name) {
                             $("#name-error").html(data.errors.name[0]);
+                            document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
+                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("description").value = description;
                         }
-                        // if(data.errors.email){
-                        //     $( '#email-error' ).html( data.errors.email[0] );
-                        // }
+                        if (data.errors.type) {
+                            $("#type-error").html(data.errors.type[0]);
+                            document.getElementById("code").value = code;
+                            document.getElementById("name").value = name;
+                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("description").value = description;
+                        }
+                        if (data.errors.level) {
+                            $("#level-error").html(data.errors.level[0]);
+                            document.getElementById("code").value = code;
+                            document.getElementById("name").value = name;
+                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("description").value = description;
+                        }
+                        if (data.errors.description) {
+                            $("#description-error").html(data.errors.description[0]);
+                            document.getElementById("code").value = code;
+                            document.getElementById("name").value = name;
+                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("description").value = description;
+                        }
                     } else {
-                        $("#modal_customer").modal("hide");
+                        $("#modal_journal").modal("hide");
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
                             timeOut: 5000
                         });
                         var table = $(".m_datatable").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
+                        $("#code-error").html("");
+                        $("#name-error").html("");
+                        $("#type-error").html("");
+                        $("#level-error").html("");
+                        $("#description-error").html("");
+
                     }
                 }
             });

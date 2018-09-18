@@ -152,7 +152,6 @@ class JournalController extends Controller
      */
     public function show(Journal $journal)
     {
-        $journal = Journal::find($journal);
         return response()->json($journal);
     }
 
@@ -164,7 +163,6 @@ class JournalController extends Controller
      */
     public function edit(Journal $journal)
     {
-        $journal = Journal::find($journal);
         return response()->json($journal);
     }
 
@@ -177,7 +175,7 @@ class JournalController extends Controller
      */
     public function update(JournalUpdate $request, Journal $journal)
     {
-        $journal = Journal::find($journal);
+        // $journal = Journal::find($journal);
         $journal->code = $request->code;
         $journal->name = $request->name;
         $journal->type = $request->type;
@@ -195,9 +193,7 @@ class JournalController extends Controller
      */
     public function destroy(Journal $journal)
     {
-        $journal = Journal::find($journal)->delete();
-        // dd($journal);        
-        
+        $journal->delete();
         return response()->json($journal);
     }
 
