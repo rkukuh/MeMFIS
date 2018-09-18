@@ -79,12 +79,12 @@
                         </div>
                         <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
                             <div class="m-form__actions m-form__actions--solid">
-                                <div class="row">
+                                <div class="row"> 
                                     <div class="col-lg-6">
                                         @component('frontend.common.buttons.back')
                                             @slot('size', 'md')
                                             @slot('color', 'primary')
-                                            @slot('href', '/customer')
+                                            @slot('href', route('frontend.customer.index') )
                                         @endcomponent
                                     </div>
                                 </div>
@@ -96,5 +96,4 @@
                 <!--end::Portlet-->
             </div>
         </div>
-    </div>
 @endsection

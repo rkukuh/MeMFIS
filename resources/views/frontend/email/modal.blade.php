@@ -8,7 +8,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="EmailForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
@@ -16,6 +15,8 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Email
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <div id="m_repeater_1a">
                                     <div class="" id="m_repeater_1a">
@@ -60,21 +61,22 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('color', 'secondary')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
-
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
                             @slot('class', 'add')
-                            @slot('color', 'success')
+                        @endcomponent
+
+                        @component('frontend.common.buttons.reset')
+                            @slot('size', 'md')
+                        @endcomponent
+
+                        @component('frontend.common.buttons.close')
+                            @slot('size', 'md')
+                            @slot('data_dismiss', 'modal')
                         @endcomponent
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -15,22 +15,24 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Abbr *
+                                    Code
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
-                                    @slot('text', 'Abbr')
-                                    @slot('name', 'abbr')
-                                    @slot('type', 'text')
+                                @component('frontend.common.input.text')
+                                    @slot('text', 'Code')
+                                    @slot('name', 'code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name *
+                                    Name
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Name')
-                                    @slot('type', 'text')
                                     @slot('name', 'bank_name')
                                 @endcomponent
                             </div>

@@ -42,7 +42,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Form TaskCard Package
+                                    TaskCard Package Datalist
                                 </h3>
                             </div>
                         </div>
@@ -94,14 +94,10 @@
     </div>
 @endsection
 
-@section('script')
-    {{-- <script src="{{ asset('js/ajax.js')}}"></script> --}}
-@endsection
-
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/TP.js')}}"></script>
+    <script src="{{ asset('js/taskcardpackage.js')}}"></script>
 @endpush

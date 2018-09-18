@@ -1,22 +1,24 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Name *
+            Name 
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'Name')
             @slot('name', 'name')
-            @slot('type', 'text')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Code
+        @component('frontend.common.label.required')
+        @endcomponent
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'Code')
             @slot('name', 'code')
-            @slot('type', 'text')
         @endcomponent
     </div>
 </div>
@@ -24,16 +26,19 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             NPWP
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'NPWP')
             @slot('name', 'npwp')
-            @slot('type', 'text')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             NPWP Address
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.textarea')
@@ -48,17 +53,20 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             ToP
+        @component('frontend.common.label.required')
+        @endcomponent
         </label>
         <br>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'ToP')
             @slot('name', 'top')
-            @slot('type', 'text')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Type
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.select')
@@ -78,6 +86,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Number
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.select')
@@ -95,6 +105,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Active *
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
         @component('frontend.common.input.checkbox')
@@ -106,11 +118,12 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            AccountCode *
+            AccountCode
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
         @endcomponent
@@ -118,10 +131,11 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Leveling
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <br>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('text', 'Leveling')
             @slot('name', 'leveling')
         @endcomponent
@@ -131,6 +145,8 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             xType
+        @component('frontend.common.label.optional')
+        @endcomponent
         </label>
         <div id="m_repeater_1c">
             <div class="" id="m_repeater_1c">
@@ -138,10 +154,10 @@
                     <div data-repeater-item class="row">
                         <div class="m-form__group row">
                             <div class="col-md-0">
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'text')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'xType')
                                     @slot('name', 'xtype')
+                                    @slot('id', 'xtype')
                                 @endcomponent
                             </div>
                             <div class="col-md-1">

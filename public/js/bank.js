@@ -27,15 +27,11 @@ $(document).ready(function() {
 });
 
 var simpan = $(".modal-footer").on("click", ".add2", function() {
-    var abbr = $("input[name=abbr]").val();
+    var code = $("input[name=code]").val();
     var name = $("input[name=bank_name]").val();
-    // alert(abbr);
-    // alert(name);
     $("#simpan").text("Simpan");
-    // var registerForm = $("#CustomerForm");
-    // var formData = registerForm.serialize();
     $("#name-error").html("");
-    $("#abbr-error").html("");
+    $("#code-error").html("");
     $.ajax({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -45,7 +41,7 @@ var simpan = $(".modal-footer").on("click", ".add2", function() {
         data: {
             _token: $("input[name=_token]").val(),
             name: name,
-            abbr: abbr
+            code: code
         },
         success: function(data) {
             // alert('sukses')
@@ -55,9 +51,9 @@ var simpan = $(".modal-footer").on("click", ".add2", function() {
                     $("#name-error").html(data.errors.name[0]);
                     document.getElementById("name").value = name;
                 }
-                if (data.errors.abbr) {
-                    $("#abbr-error").html(data.errors.abbr[0]);
-                    document.getElementById("abbr").value = abbr;
+                if (data.errors.code) {
+                    $("#code-error").html(data.errors.code[0]);
+                    document.getElementById("code").value = code;
                 }
             } else {
                 bank();

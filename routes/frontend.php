@@ -9,32 +9,34 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
+        Route::view('/dashboard', 'frontend.dashboard');
+
         Route::resource('/customer', 'CustomerController');
-        Route::get('/getcustomer','CustomerController@getcustomer')->name('getcustomer');
+        Route::get('/getcustomer','CustomerController@getCustomers')->name('getcustomers');
 
         Route::resource('/category', 'CategoryController');
-        Route::get('/getcategory','CategoryController@getcategory')->name('getcategory');
+        Route::get('/getcategories','CategoryController@getCategories')->name('getcategories');
 
         Route::resource('/item', 'ItemController');
-        Route::get('/getitem','ItemController@getitem')->name('getitem');
+        Route::get('/getitems','ItemController@getItems')->name('getitems');
 
-        Route::resource('/itemstock', 'ItemStockController');
-        Route::get('/getitemstock','ItemStockController@getitemstock')->name('getitemstock');
+        Route::resource('/item-stock', 'ItemStockController');
+        Route::get('/getitem-stocks','ItemStockController@getItemStocks')->name('getitemstocks');
 
-        Route::resource('/itemunit', 'ItemUnitController');
-        Route::get('/getitemunit','ItemUnitController@getitemunit')->name('getitemunit');
+        Route::resource('/item-unit', 'ItemUnitController');
+        Route::get('/getItem-units','ItemUnitController@getItemUnits')->name('getitemunits');
 
         Route::resource('/warehouse', 'WarehouseController');
-        Route::get('/getwarehouse','WarehouseController@getWarehouse')->name('getwarehouse');
+        Route::get('/getwarehouses','WarehouseController@getWarehouses')->name('getwarehouses');
 
         Route::resource('/supplier', 'SupplierController');
-        Route::get('/getsupplier','SupplierController@getwerehouse')->name('getsupplier');
+        Route::get('/getsuppliers','SupplierController@getSuppliers')->name('getsuppliers');
 
-        Route::get('addres/country','AddresController@country')->name('country');
-        Route::get('addres/city/{id}','AddresController@city')->name('city');
+        Route::get('/addres/country','AddresController@Country')->name('country');
+        Route::get('/addres/city/{id}','AddresController@City')->name('city');
 
         Route::resource('/audit', 'AuditController');
-        Route::get('/getaudit','AuditController@getaudit')->name('getaudit');
+        Route::get('/getaudit','AuditController@getAudits')->name('getaudits');
 
         Route::resource('/bank', 'BankController');
         Route::resource('/bankaccount', 'BankAccountController');
@@ -43,9 +45,17 @@ Route::name('frontend.')->group(function () {
         Route::resource('/email', 'EmailController');
         Route::resource('/department', 'DepartmentController');
         Route::resource('/taskcard', 'TaskCardController');
-        Route::resource('/tp', 'TPController');
+        Route::get('/gettaskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
+        Route::resource('/tcp', 'TaskCardPackageController');
+        Route::get('/gettcp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
         Route::resource('/wp', 'WorkPackageController');
+        Route::get('/getworkpakages', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
         Route::resource('/quotation', 'QuotationController');
+        Route::get('/getquotation', 'QuotationController@getQuotations')->name('getquotation');
+        Route::resource('/journal', 'JournalController');
+        Route::get('/getjournal', 'JournalController@getJournals')->name('getjournal');
+
+        Route::resource('/type', 'TypeController');
 
 
         Route::get('/quotation-doc', function () {
@@ -60,7 +70,7 @@ Route::name('frontend.')->group(function () {
 
         Route::get('/summaryworkpackage', function () {
             $pdf = \PDF::loadView('frontend/form/summary_wp');
-            $pdf->setPaper('A4', 'landscape');
+            // $pdf->setPaper('A4', 'landscape');
             return $pdf->stream();
         });
 

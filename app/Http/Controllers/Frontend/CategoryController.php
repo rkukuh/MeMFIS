@@ -2,31 +2,28 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\ListUtil;
 use App\Http\Requests\Fronted\CategoryStore;
 use App\Http\Requests\Fronted\CategoryUpdate;
-
+use App\model\ListUtil;
 
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * Show data from model for DataTable.
+     * 
      * @return \Illuminate\Http\Response
      */
-
-    public function getcategory()
+    public function getCategories()
     {
         $Categories = Category::All();
 
         $data = $alldata = json_decode($Categories);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
-
-        // search filter by keywords
+  
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
             ? $datatable['query']['generalSearch'] : '';
         if ( ! empty($filter)) {
@@ -35,8 +32,7 @@ class CategoryController extends Controller
             });
             unset($datatable['query']['generalSearch']);
         }
-
-        // filter by field query
+  
         $query = isset($datatable['query']) && is_array($datatable['query']) ? $datatable['query'] : null;
         if (is_array($query)) {
             $query = array_filter($query);
@@ -44,64 +40,61 @@ class CategoryController extends Controller
                 $data = $this->list_filter($data, [$key => $val]);
             }
         }
-
+  
         $sort  = ! empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
         $field = ! empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'RecordID';
-
+  
         $meta    = [];
         $page    = ! empty($datatable['pagination']['page']) ? (int)$datatable['pagination']['page'] : 1;
         $perpage = ! empty($datatable['pagination']['perpage']) ? (int)$datatable['pagination']['perpage'] : -1;
-
+  
         $pages = 1;
-        $total = count($data); // total items in array
-
-        // sort
+        $total = count($data);
+  
         usort($data, function ($a, $b) use ($sort, $field) {
             if ( ! isset($a->$field) || ! isset($b->$field)) {
                 return false;
             }
-
+  
             if ($sort === 'asc') {
                 return $a->$field > $b->$field ? true : false;
             }
-
+  
             return $a->$field < $b->$field ? true : false;
         });
-
-        // $perpage 0; get all data
+  
         if ($perpage > 0) {
-            $pages  = ceil($total / $perpage); // calculate total pages
-            $page   = max($page, 1); // get 1 page when $_REQUEST['page'] <= 0
-            $page   = min($page, $pages); // get last page when $_REQUEST['page'] > $totalPages
+            $pages  = ceil($total / $perpage); 
+            $page   = max($page, 1); 
+            $page   = min($page, $pages); 
             $offset = ($page - 1) * $perpage;
             if ($offset < 0) {
                 $offset = 0;
             }
-
+  
             $data = array_slice($data, $offset, $perpage, true);
         }
-
+  
         $meta = [
             'page'    => $page,
             'pages'   => $pages,
             'perpage' => $perpage,
             'total'   => $total,
         ];
-
-
-        // if selected all records enabled, provide all the ids
+  
+  
         if (isset($datatable['requestIds']) && filter_var($datatable['requestIds'], FILTER_VALIDATE_BOOLEAN)) {
             $meta['rowIds'] = array_map(function ($row) {
                 return $row->RecordID;
             }, $alldata);
         }
-
-
+  
+  
         header('Content-Type: application/json');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
-
+  
         $result = [
             'meta' => $meta + [
                     'sort'  => $sort,
@@ -109,9 +102,15 @@ class CategoryController extends Controller
                 ],
             'data' => $data,
         ];
-
+  
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('frontend.category.index');
@@ -136,7 +135,7 @@ class CategoryController extends Controller
     public function store(CategoryStore $request)
     {
         $Category = Category::create([
-            // 'name' => $request->name,
+            //
         ]);
 
         return response()->json($Category);
@@ -145,24 +144,24 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        $Categories = Categori::find($id);
+        $Categories = Categori::find($category);
         return response()->json($Categories);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $Categories = Categori::find($id);
+        $Categories = Categori::find($category);
         return response()->json($Categories);
     }
 
@@ -170,12 +169,12 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryUpdate $request, $id)
+    public function update(CategoryUpdate $request, Category $category)
     {
-        $Category = Category::find($id);
+        $Category = Category::find($category);
         // $Category->name = $request->name;
         // $Category->save();
         return response()->json($Category);
@@ -184,22 +183,27 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $Category = Category::find($id)->delete();
+        $Category = Category::find($category)->delete();
         return response()->json($Category);
     }
+
+    /**
+     * Show data from model with flter on datatable.
+     * 
+     * @param $list, $args, $operator
+     * @return \Illuminate\Http\Response
+     */
     public function list_filter( $list, $args = array(), $operator = 'AND' )
     {
       if ( ! is_array( $list ) ) {
         return array();
       }
-
       $util = new ListUtil( $list );
-
       return $util->filter( $args, $operator );
     }
 }

@@ -9,14 +9,15 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code *
+                                    Code
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.input')
                                 @slot('text', 'Code')
@@ -26,7 +27,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Unit *
+                                    Unit
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.select')
@@ -40,7 +43,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Qty *
+                                    Qty
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.input')
                                 @slot('text', 'Qty')
@@ -50,7 +55,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Purchasing Price *
+                                    Purchasing Price
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <br>
                                 @component('frontend.common.input.input')
@@ -64,6 +71,8 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     SellingPrice
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
                                 <div id="m_repeater_1a">
                                     <div class="" id="m_repeater_1a">
@@ -98,73 +107,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-control-feedback text-danger" id="email-error"></div>
-                                <span class="m-form__help">
-                                    SellingPrice
-                                </span>
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    SellingPrice *
-                                </label>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'number')
-                                    @slot('name', 'sellingprice')
-                                    @slot('text', 'Selling Price')
-                                @endcomponent
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    SellingPrice2 *
-                                </label>
-                                <br>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'number')
-                                    @slot('name', 'sellingprice2')
-                                    @slot('text', 'Selling Price 2')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    SellingPrice3 *
-                                </label>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'number')
-                                    @slot('name', 'sellingprice3')
-                                    @slot('text', 'Selling Price 3')
-                                @endcomponent
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    SellingPrice4 *
-                                </label>
-                                <br>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'number')
-                                    @slot('name', 'sellingprice4')
-                                    @slot('text', 'Selling Price 4')
-                                @endcomponent
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('color', 'secondary')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
-
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
                             @slot('class', 'add')
-                            @slot('color', 'success')
+                        @endcomponent
+
+                        @component('frontend.common.buttons.reset')
+                            @slot('size', 'md')
+                        @endcomponent
+
+                        @component('frontend.common.buttons.close')
+                            @slot('size', 'md')
+                            @slot('data_dismiss', 'modal')
                         @endcomponent
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -8,7 +8,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <!--begin::Form -->
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CategoryForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
@@ -16,30 +15,34 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code *
+                                    Code
+                                @component('frontend.common.label.required')
+                                @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name *
+                                    Name
+                                @component('frontend.common.label.optional')
+                                @endcomponent
                                 </label>
                                 <br>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Description *
+                                    Description
+                                @component('frontend.common.label.optional')
+                                @endcomponent
                                 </label>
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
@@ -49,11 +52,12 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    AccountCode *
+                                    AccountCode
+                                @component('frontend.common.label.optional')
+                                @endcomponent
                                 </label>
                                 <br>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'text')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'AccountCode')
                                     @slot('name', 'accountcode')
                                 @endcomponent
@@ -73,9 +77,8 @@
                             @slot('color', 'success')
                         @endcomponent
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
 </div>

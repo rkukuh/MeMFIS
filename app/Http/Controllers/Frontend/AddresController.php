@@ -8,13 +8,25 @@ use DB;
 
 class AddresController extends Controller
 {
-    public function country()
+    /**
+     * Show data Country.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function Country()
     {
         $country = DB::table("countries")
                     ->pluck("country_name","country_id")->all();
         return json_encode($country);
     }
-    public function city($id)
+
+    /**
+     * Show data City.
+     * 
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function City($id)
     {
         $city = DB::table("cities")
                     ->where("country_id",$id)
