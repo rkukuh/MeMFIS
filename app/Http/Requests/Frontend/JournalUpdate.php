@@ -26,6 +26,7 @@ class JournalUpdate extends FormRequest
     public function rules()
     {
         return [
+            'code' => 'required|numeric',
             // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
     }

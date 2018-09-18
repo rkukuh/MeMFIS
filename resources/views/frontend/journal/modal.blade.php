@@ -19,11 +19,10 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
                                     @slot('id', 'code')
-                                    @slot('type', 'text')
                                     @slot('id_error', 'code')
                                 @endcomponent
                             </div>
@@ -34,11 +33,10 @@
                                 @endcomponent
                                 </label>
                                 <br>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
                                     @slot('id', 'name')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                         </div>
@@ -65,14 +63,14 @@
                                         @endcomponent
                                         </label>
                                         <br>
-                                    @component('frontend.common.input.select')
+                                    @component('frontend.common.input.text')
                                         @slot('text', 'Level')
                                         @slot('name', 'level')
-                                        @slot('id', 'm_select2_2')
-                                        @slot('style', 'width:100%')
-                                        @slot('level', 'text')
+                                        @slot('value', '1')
+                                        @slot('editable', 'readonly')
+                                        @slot('id_error', 'code')
                                     @endcomponent
-                                </div>
+                                    </div>
                         </div>
                         <div class="form-group m-form__group row ">
 
@@ -91,20 +89,6 @@
                                 @endcomponent
                             </div>
                         </div>
-
-                            {{-- <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    AccountCode
-                                @component('frontend.common.label.optional')
-                                @endcomponent
-                                </label>
-                                <br>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'text')
-                                    @slot('text', 'AccountCode')
-                                    @slot('name', 'accountcode')
-                                @endcomponent
-                            </div> --}}
                         </div>
                     <div class="modal-footer">
                         @component('frontend.common.buttons.close')

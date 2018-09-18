@@ -47,5 +47,33 @@ class TypesTableSeeder extends Seeder
             'name' => 'Personal',
             'of'  => 'fax',
         ]);
+
+        /** JOURNAL */
+
+        Type::create([
+            'name' => 'Aktiva',
+            'of'  => 'journal',
+        ]);
+
+        Type::create([
+            'name' => 'Pasiva',
+            'of'  => 'journal',
+        ]);
+
+        Type::create([
+            'name' => 'Ekuitas',
+            'of'  => 'journal',
+        ]);
+
+        Type::create([
+            'name' => 'Pendapatan',
+            'of'  => 'journal',
+        ]);
+
+        Type::create([
+            'name' => 'Biaya',
+            'of'  => 'journal',
+        ]);
+
     }
 }

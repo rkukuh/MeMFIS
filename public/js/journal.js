@@ -133,7 +133,7 @@ var Category = {
         });
 
         $(document).ready(function () {
-            var select = document.getElementById("m_select2_2");
+            var select = document.getElementById("level");
 
             $.ajax({
                 url: "/type",
@@ -161,7 +161,7 @@ var Category = {
             var code = $("input[name=code]").val();
             var name = $("input[name=name]").val();
             var type = $("#m_select2_1").val();
-            var level = $("#m_select2_2").val();
+            var level = $("#level").val();
             var description = $("#description").val();
             $("#simpan").text("Simpan");
             var registerForm = $("#CustomerForm");
@@ -188,7 +188,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                         if (data.errors.name) {
@@ -196,7 +196,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                         if (data.errors.type) {
@@ -204,7 +204,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                         if (data.errors.level) {
@@ -212,7 +212,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                         if (data.errors.description) {
@@ -220,7 +220,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                     } else {
@@ -276,7 +276,7 @@ var Category = {
                     //         alert(data.name);
                     //     },
                     // });
-                    var select = document.getElementById("m_select2_2");
+                    var select = document.getElementById("level");
                     $('select[name="level"]').append(
                         "<option value='0' selected> Edit Level</option>"
                     );
@@ -302,7 +302,7 @@ var Category = {
             var code = $("input[name=code]").val();
             var name = $("input[name=name]").val();
             var type = $("#m_select2_1").val();
-            var level = $("#m_select2_2").val();
+            var level = $("#level").val();
             var description = $("#description").val();
             $("#name-error").html("");
             $("#button").show();
@@ -330,7 +330,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                         if (data.errors.name) {
@@ -338,7 +338,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                         if (data.errors.type) {
@@ -346,7 +346,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                         if (data.errors.level) {
@@ -354,7 +354,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                         if (data.errors.description) {
@@ -362,7 +362,7 @@ var Category = {
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
                             document.getElementById("m_select2_1").value = type;
-                            document.getElementById("m_select2_2").value = level;
+                            document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
                     } else {
