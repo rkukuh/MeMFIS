@@ -70,7 +70,7 @@ Route::name('frontend.')->group(function () {
 
         Route::get('/summaryworkpackage', function () {
             $pdf = \PDF::loadView('frontend/form/summary_wp');
-            $pdf->setPaper('A4', 'landscape');
+            // $pdf->setPaper('A4', 'landscape');
             return $pdf->stream();
         });
 
