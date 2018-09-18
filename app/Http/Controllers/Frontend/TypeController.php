@@ -59,7 +59,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return response()->json($type);
     }
 
     /**
