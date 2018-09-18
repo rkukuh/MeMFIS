@@ -1,5 +1,5 @@
 <input
-    type="text"
+    type="email"
     id="{{ $id or $name }}"
     name="{{ $name or '' }}"
     class="form-control m-input

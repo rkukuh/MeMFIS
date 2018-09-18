@@ -1,6 +1,6 @@
 <input
     type="number"
-    id="{{ $id or '' }}"
+    id="{{ $id or $name }}"
     name="{{ $name or '' }}"
     class="form-control m-input
            {{ $class or '' }}"
