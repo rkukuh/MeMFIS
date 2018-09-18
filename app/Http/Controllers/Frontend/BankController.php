@@ -17,7 +17,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        $Banks = Audits::selectRaw('id, CONCAT(abbr," - ",name) as full_name')
+        $Banks = Audits::selectRaw('id, CONCAT(code," - ",name) as full_name')
                 ->pluck('full_name', 'id');
         return json_encode($Banks);
     }
@@ -41,7 +41,7 @@ class BankController extends Controller
     public function store(Request $request)
     {
         $Bank = Bank::create([
-            'abbr' => $request->abbr,
+            'code' => $request->code,
             'name' => $request->name,
         ]);
 
