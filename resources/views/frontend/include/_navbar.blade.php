@@ -48,7 +48,7 @@
                     <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
                         <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click"
                             m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle"
-                               title="Non functional dummy link""><i class=" m-menu__link-icon flaticon-add"></i><span
+                               title="Non functional dummy link"><i class=" m-menu__link-icon flaticon-add"></i><span
                                       class="m-menu__link-text">Actions</span><i class="m-menu__hor-arrow la la-angle-down"></i><i
                                    class="m-menu__ver-arrow la la-angle-right"></i></a>
                             <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
@@ -699,11 +699,11 @@
                                                             class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
                                                             Logout
                                                         </a>
-                            
+
                                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                             {{ csrf_field() }}
                                                         </form>
-                                                    </li>                           
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
