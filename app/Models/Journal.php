@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\MemfisModel;
 
-class Journal extends Model
+class Journal extends MemfisModel
 {
-    use SoftDeletes;
     protected $fillable = [
         'code',
         'name',
-        'type',
+        'type_id',
         'level',
         'description',
     ];
