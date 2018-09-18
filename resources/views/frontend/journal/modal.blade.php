@@ -63,11 +63,10 @@
                                         @endcomponent
                                         </label>
                                         <br>
-                                    @component('frontend.common.input.text')
+                                    @component('frontend.common.input.number')
                                         @slot('text', 'Level')
                                         @slot('name', 'level')
                                         @slot('value', '1')
-                                        @slot('editable', 'readonly')
                                         @slot('id_error', 'code')
                                     @endcomponent
                                     </div>
