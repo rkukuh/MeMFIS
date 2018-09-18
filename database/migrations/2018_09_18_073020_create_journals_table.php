@@ -20,7 +20,7 @@ class CreateJournalsTable extends Migration
             $table->string('name')->nullable();
             $table->integer('type')->nullable();
             $table->integer('level')->nullable();
-            $table->string('deccription')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
