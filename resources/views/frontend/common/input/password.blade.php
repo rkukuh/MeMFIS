@@ -1,5 +1,5 @@
 <input
-    type="{{ $type or 'text' }}"
+    type="password"
     id="{{ $id or '' }}"
     name="{{ $name or '' }}"
     class="form-control m-input
