@@ -5,10 +5,9 @@
         @component('frontend.common.label.optional')
         @endcomponent    
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'Name')
             @slot('name', 'name')
-            @slot('type', 'text')
             @slot('value', 'text')
             @slot('editable', 'readonly')
         @endcomponent
@@ -19,10 +18,9 @@
         @component('frontend.common.label.required')
         @endcomponent    
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'Code')
             @slot('name', 'code')
-            @slot('type', 'text')
             @slot('value', 'text')
             @slot('editable', 'readonly')
         @endcomponent
@@ -35,10 +33,9 @@
         @component('frontend.common.label.optional')
         @endcomponent    
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'NPWP')
             @slot('name', 'npwp')
-            @slot('type', 'text')
             @slot('value', 'text')
             @slot('editable', 'readonly')
         @endcomponent
@@ -68,10 +65,9 @@
         @endcomponent        
         </label>
         <br>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'ToP')
             @slot('name', 'top')
-            @slot('type', 'text')
             @slot('value', 'text')
             @slot('editable', 'readonly')
         @endcomponent
@@ -83,7 +79,7 @@
         @endcomponent        
         </label>
         <br>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'Type')
             @slot('name', 'id_type')
             @slot('value', 'text')
@@ -99,7 +95,7 @@
         @endcomponent        
         </label>
         <br>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('value', 'text')
             @slot('text', 'Number')
             @slot('name', 'id_number')
@@ -131,8 +127,7 @@
         @endcomponent
         </label>
         <br>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('value', 'text')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
@@ -146,10 +141,9 @@
         @endcomponent    
         </label>
         <br>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'Leveling')
             @slot('name', 'leveling')
-            @slot('type', 'text')
             @slot('value', 'text')
             @slot('editable', 'readonly')
         @endcomponent
@@ -168,10 +162,9 @@
                     <div data-repeater-item class="row">
                         <div class="m-form__group row">
                             <div class="col-md-0">
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'xType')
                                     @slot('name', 'xtype')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                             <div class="col-md-1">

@@ -6,8 +6,7 @@
         @endcomponent
         </label>
         <br>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('value', 'text')
             @slot('text', 'Country')
             @slot('name', 'country')
@@ -21,11 +20,10 @@
         @endcomponent
         </label>
         <br>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
+            @slot('value', 'text')
             @slot('text', 'City')
             @slot('name', 'city')
-            @slot('type', 'text')
-            @slot('value', 'text')
             @slot('editable', 'readonly')
         @endcomponent
     </div>
@@ -51,8 +49,7 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('value', 'text')
             @slot('text', 'ZipCode')
             @slot('name', 'zipcpde')
