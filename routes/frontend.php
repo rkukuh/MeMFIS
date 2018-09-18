@@ -45,13 +45,15 @@ Route::name('frontend.')->group(function () {
         Route::resource('/email', 'EmailController');
         Route::resource('/department', 'DepartmentController');
         Route::resource('/taskcard', 'TaskCardController');
-        Route::get('/taskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
+        Route::get('/gettaskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
         Route::resource('/tcp', 'TaskCardPackageController');
-        Route::get('/tcp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
+        Route::get('/gettcp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
         Route::resource('/wp', 'WorkPackageController');
-        Route::get('/workpakages', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
+        Route::get('/getworkpakages', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
         Route::resource('/quotation', 'QuotationController');
-        Route::get('/quotation', 'QuotationController@getQuotations')->name('getquotations');
+        Route::get('/getquotation', 'QuotationController@getQuotations')->name('getquotation');
+        Route::resource('/journal', 'JournalController');
+        Route::get('/getjournal', 'JournalController@getJournals')->name('getjournal');
 
 
         Route::get('/quotation-doc', function () {
