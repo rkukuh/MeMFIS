@@ -16,7 +16,7 @@ class CreateJournalsTable extends Migration
         Schema::create('journals', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->string('name')->nullable();
             $table->integer('type')->nullable();
             $table->integer('level')->nullable();
