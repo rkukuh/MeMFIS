@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Journal;
+use App\Models\ListUtil;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JournalStore;
 use App\Http\Requests\Frontend\JournalUpdate;
-use App\model\ListUtil;
 
 class JournalController extends Controller
 {
@@ -208,9 +208,9 @@ class JournalController extends Controller
      * @param $list, $args, $operator
      * @return \Illuminate\Http\Response
      */
-    public function list_filter( $list, $args = array(), $operator = 'AND' )
+    public function list_filter($list, $args = array(), $operator = 'AND')
     {
-        if ( ! is_array($list) ) {
+        if ( ! is_array($list)) {
             return array();
         }
 
