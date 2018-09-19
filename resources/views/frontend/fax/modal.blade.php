@@ -25,7 +25,7 @@
                                             <div data-repeater-item class="row">
                                                 <div class="form-group m-form__group row align-items-center">
                                                     <div class="col-md-6">
-                                                        @component('frontend.common.input.input')
+                                                        @component('frontend.common.input.text')
                                                             @slot('text', 'fax')
                                                             @slot('name', 'name')
                                                             @slot('placeholder', 'fax')
@@ -63,10 +63,9 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
