@@ -11,7 +11,7 @@
     target="{{ $target or '' }}">
 
     <span>
-        <i class="lfa {{ $icon or 'flaticon-file' }}"></i>
+        <i class="fa {{ $icon or 'fa-save' }}"></i>
         <span>{{ $text or 'Submit' }}</span>
     </span>
 </button>

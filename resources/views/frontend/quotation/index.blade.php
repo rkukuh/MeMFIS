@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/qoutation" class="m-nav__link">
+                        <a href="{{route('frontend.quotation.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Quotation
                             </span>
@@ -79,7 +79,7 @@
                             </div>
                             <!--end: Search Form -->
 
-                            @include('frontend.tp.modal')
+                            @include('frontend.taskcardpackage.modal')
                             @include('frontend.quotation.modal')
                             @include('frontend.workpackage.modal')
 
@@ -103,5 +103,5 @@
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/bootstrap-datepicker.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/summernote.js')}}"></script>
 
-    <script src="{{ asset('js/quotation.js')}}"></script>
+    <script src="{{ asset('js/frontend/quotation.js')}}"></script>
 @endpush

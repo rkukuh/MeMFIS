@@ -19,9 +19,8 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('name', 'name')
-                                    @slot('type', 'text')
                                     @slot('text', 'Department Name')
                                 @endcomponent
                             </div>

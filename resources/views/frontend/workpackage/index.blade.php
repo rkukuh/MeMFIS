@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/workpackage" class="m-nav__link">
+                        <a href="{{route('frontend.workpackage.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Workpackage
                             </span>
@@ -100,5 +100,5 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/workpackage.js')}}"></script>
+    <script src="{{ asset('js/frontend/workpackage.js')}}"></script>
 @endpush

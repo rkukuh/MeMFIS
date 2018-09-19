@@ -14,11 +14,6 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label class="form-control-label">
-                                    Phone
-                                @component('frontend.common.label.required')
-                                @endcomponent
-                                </label>
                                 <div id="m_repeater_1a">
                                     <div class="" id="m_repeater_1a">
                                         <div data-repeater-list="">
@@ -26,10 +21,27 @@
                                                 <table>
                                                     <tr>
                                                         <td width="30%">
-                                                            @component('frontend.common.input.input')
+                                                                <label class="form-control-label">
+                                                                        Phone
+                                                                    @component('frontend.common.label.required')
+                                                                    @endcomponent
+                                                                    </label>
+                                    
+                                                            @component('frontend.common.input.text')
                                                                 @slot('name', 'name')
                                                                 @slot('text', 'Phone')
-                                                                @slot('placeholder', 'phone')
+                                                            @endcomponent
+                                                        </td>
+                                                        <td width="20%">
+                                                                <label class="form-control-label">
+                                                                        ext
+                                                                    @component('frontend.common.label.optional')
+                                                                    @endcomponent
+                                                                    </label>
+                                    
+                                                            @component('frontend.common.input.text')
+                                                                @slot('name', 'ext')
+                                                                @slot('text', 'Ext')
                                                             @endcomponent
                                                         </td>
                                                         <td width="5%"></td>
@@ -47,7 +59,7 @@
                                                                 @slot('value', 'personal')
                                                             @endcomponent
                                                         </td>
-                                                        <td width="35%">
+                                                        <td width="15%">
                                                             <div data-repeater-delete="" class="btn-sm btn btn-danger">
                                                                 <span>
                                                                     <i class="la la-trash-o"></i>
@@ -57,36 +69,6 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <div class="form-group m-form__group row align-items-center">
-                                                    <div class="col-md-6">
-                                                        @component('frontend.common.input.input')
-                                                            @slot('name', 'name')
-                                                            @slot('text', 'Phone')
-                                                            @slot('placeholder', 'phone')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-md-0">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
-                                                            @slot('name', 'type')
-                                                            @slot('value', 'work')
-                                                        @endcomponent
-
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'type')
-                                                            @slot('text', 'Personal')
-                                                            @slot('value', 'personal')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div data-repeater-delete="" class="btn-sm btn btn-danger">
-                                                            <span>
-                                                                <i class="la la-trash-o"></i>
-                                                                <span>Delete</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -99,35 +81,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label class="form-control-label">
-                                    Name
-                                @component('frontend.common.label.required')
-                                @endcomponent
-                                </label>
-                                @component('frontend.common.input.input')
-                                    @slot('text', 'Name')
-                                    @slot('name', 'name')
-                                    @slot('type', 'text')
-                                @endcomponent
+                                
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    type
-                                @component('frontend.common.label.required')
-                                @endcomponent
-                                </label>
-                                @component('frontend.common.input.radio')
-                                    @slot('text', 'Work')
-                                    @slot('value', 'work')
-                                    @slot('name', 'account_no')
-                                @endcomponent
-
-                                @component('frontend.common.input.radio')
-                                    @slot('text', 'Personal')
-                                    @slot('value', 'personal')
-                                    @slot('name', 'account_no')
-                                @endcomponent
-                            </div>
+                           
                         </div>
                     </div>
                     <div class="modal-footer">

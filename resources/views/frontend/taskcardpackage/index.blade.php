@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/tp" class="m-nav__link">
+                        <a href="{{route('frontend.taskcardpackage.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 TaskCard Package
                             </span>
@@ -79,7 +79,7 @@
                             </div>
                             <!--end: Search Form -->
 
-                            @include('frontend.tp.modal')
+                            @include('frontend.taskcardpackage.modal')
 
                             <!--begin: Datatable -->
                             <div class="m_datatable" id="first"></div>
@@ -99,5 +99,5 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/taskcardpackage.js')}}"></script>
+    <script src="{{ asset('js/frontend/taskcard-package.js')}}"></script>
 @endpush

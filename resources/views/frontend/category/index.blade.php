@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/category" class="m-nav__link">
+                        <a href="{{route('frontend.category.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Category
                             </span>
@@ -98,5 +98,5 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     {{-- <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script> --}}
 
-    <script src="{{ asset('js/category.js')}}"></script>
+    <script src="{{ asset('js/frontend/category.js')}}"></script>
 @endpush

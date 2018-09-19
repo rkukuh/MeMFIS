@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/customer" class="m-nav__link">
+                        <a href="{{route('frontend.customer.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Customer
                             </span>
@@ -100,8 +100,8 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/customer.js')}}"></script>
-    <script src="{{ asset('js/addres.js')}}"></script>
+    <script src="{{ asset('js/frontend/customer.js')}}"></script>
+    <script src="{{ asset('js/frontend/address.js')}}"></script>
 
     {{-- <script src="{{ asset('js/select.js')}}"></script> --}}
 @endpush

@@ -1,13 +1,13 @@
-var Itemstock = {
+var TaskcardPackageModal = {
     init: function() {
-        $(".m_datatable").mDatatable({
+        $(".m_datatable2").mDatatable({
             data: {
                 type: "remote",
                 source: {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getitem-stock",
+                        url: "/getaudit",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -23,12 +23,7 @@ var Itemstock = {
                 serverFiltering: !0,
                 serverSorting: !0
             },
-            layout: {
-                theme: "default",
-                class: "",
-                scroll: false,
-                footer: !1
-            },
+            layout: { theme: "default", class: "", scroll: !1, footer: !1 },
             sortable: !0,
             filterable: !1,
             pagination: !0,
@@ -39,60 +34,77 @@ var Itemstock = {
                 }
             },
             columns: [
+                {
+                    field: "id",
+                    title: "#",
+                    width: 50,
+                    sortable: !1,
+                    textAlign: "center",
+                    name:"sas",
+                    selector: { class: "m-checkbox--solid m-checkbox--brand"}
+                  },
                 // {
                 //     field: "id",
                 //     title: "#",
                 //     sortable: !1,
                 //     width: 40
                 // },
+                // {
+                //     field: "code",
+                //     title: "Code",
+                //     sortable: "asc",
+                //     filterable: !1,
+                //     width: 60
+                // },
                 {
-                    field: "code",
-                    title: "Code",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 60
-                },
-                {
-                    field: "id_warehouse",
-                    title: "Warehouse",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: "max",
-                    title: "Max",
+                    field: "event",
+                    title: "Name",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
-                },
-                {
-                    field: "min",
-                    title: "Min",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: "Actions",
-                    width: 110,
-                    title: "Actions",
-                    sortable: !1,
-                    overflow: "visible",
-                    template: function(t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
-                            t.id +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
-                        );
-                    }
                 }
+                // {
+                //     field: "description",
+                //     title: "Description",
+                //     sortable: "asc",
+                //     filterable: !1,
+                //     width: 150,
+                // },
+                // {
+                //     field: "taskcard",
+                //     title: "TaskCard",
+                //     sortable: "asc",
+                //     filterable: !1,
+                //     width: 150,
+                // },
+                // {
+                //     field: "accountcode",
+                //     title: "Accountcode",
+                //     sortable: "asc",
+                //     filterable: !1,
+                //     width: 150
+                // },
+               
+                // {
+                //     field: "Actions",
+                //     width: 110,
+                //     title: "Actions",
+                //     sortable: !1,
+                //     overflow: "visible",
+                //     template: function(t, e, i) {
+                //         return (
+                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                //             t.id +
+                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' 
+                //             // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                //             // t.id +
+                //             // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                //             // '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
+                //             // t.id +
+                //             // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
+                //         );
+                //     }
+                // }
             ]
         });
 
@@ -108,7 +120,7 @@ var Itemstock = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "post",
-                url: "/itemstock",
+                url: "/category",
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -128,7 +140,7 @@ var Itemstock = {
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
                             timeOut: 5000
                         });
-                        var table = $(".m_datatable").mDatatable();
+                        var table = $(".m_datatable2").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -136,7 +148,7 @@ var Itemstock = {
             });
         });
 
-        var edit = $(".m_datatable").on("click", ".edit", function() {
+        var edit = $(".m_datatable2").on("click", ".edit", function() {
             $("#button").show();
             var triggerid = $(this).data("id");
             $("#simpan").text("Perbarui");
@@ -145,7 +157,7 @@ var Itemstock = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/itemstock/" + triggerid + "/edit",
+                url: "/category/" + triggerid + "/edit",
                 success: function(data) {
                     document.getElementById("name").value = data.name;
                     document.getElementById("id").value = data.id;
@@ -174,7 +186,7 @@ var Itemstock = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "put",
-                url: "/itemstock/" + triggerid,
+                url: "/category/" + triggerid,
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -194,7 +206,7 @@ var Itemstock = {
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
                             timeOut: 5000
                         });
-                        var table = $(".m_datatable").mDatatable();
+                        var table = $(".m_datatable2").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -202,7 +214,7 @@ var Itemstock = {
             });
         });
 
-        var show = $(".m_datatable").on("click", ".show", function() {
+        var show = $(".m_datatable2").on("click", ".show", function() {
             $("#button").hide();
             var triggerid = $(this).data("id");
             $("#simpan").text("Perbarui");
@@ -211,7 +223,7 @@ var Itemstock = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/itemstock/" + triggerid,
+                url: "/category/" + triggerid,
                 success: function(data) {
                     document.getElementById("TitleModalCustomer").innerHTML =
                         "Detail Customer #ID-" + triggerid;
@@ -234,7 +246,7 @@ var Itemstock = {
         });
 
 
-        var remove = $(".m_datatable").on("click", ".delete", function() {
+        var remove = $(".m_datatable2").on("click", ".delete", function() {
             var triggerid = $(this).data("id");
             swal({
                 title: "Are you sure?",
@@ -252,14 +264,14 @@ var Itemstock = {
                             )
                         },
                         type: "DELETE",
-                        url: "/itemstock/" + triggerid + "",
+                        url: "/category/" + triggerid + "",
                         success: function(data) {
                             toastr.success(
                                 "Data Berhasil Dihapus.",
                                 "Sukses!!!",
                                 { timeOut: 5000 }
                             );
-                            var table = $(".m_datatable").mDatatable();
+                            var table = $(".m_datatable2").mDatatable();
                             table.originalDataSet = [];
                             table.reload();
                         },
@@ -298,5 +310,5 @@ var Itemstock = {
 
 
 jQuery(document).ready(function() {
-    Itemstock.init();
+    TaskcardPackageModal.init();
 });

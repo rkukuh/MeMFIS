@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/journal" class="m-nav__link">
+                        <a href="{{route('frontend.journal.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Journal
                             </span>
@@ -99,5 +99,5 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/journal.js')}}"></script>
+    <script src="{{ asset('js/frontend/journal.js')}}"></script>
 @endpush

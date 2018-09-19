@@ -1,4 +1,4 @@
-var TP = {
+var ItemStock = {
     init: function() {
         $(".m_datatable").mDatatable({
             data: {
@@ -7,7 +7,7 @@ var TP = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/gettaskcard",
+                        url: "/getitem-stock",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -39,48 +39,40 @@ var TP = {
                 }
             },
             columns: [
-                {
-                    field: "id",
-                    title: "#",
-                    sortable: !1,
-                    width: 40
-                },
                 // {
-                //     field: "code",
-                //     title: "Code",
-                //     sortable: "asc",
-                //     filterable: !1,
-                //     width: 60
+                //     field: "id",
+                //     title: "#",
+                //     sortable: !1,
+                //     width: 40
                 // },
                 {
-                    field: "name",
-                    title: "Name",
+                    field: "code",
+                    title: "Code",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 60
+                },
+                {
+                    field: "id_warehouse",
+                    title: "Warehouse",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "description",
-                    title: "Description",
+                    field: "max",
+                    title: "Max",
                     sortable: "asc",
                     filterable: !1,
-                    width: 150,
+                    width: 150
                 },
                 {
-                    field: "taskcard",
-                    title: "TaskCard",
+                    field: "min",
+                    title: "Min",
                     sortable: "asc",
                     filterable: !1,
-                    width: 150,
+                    width: 150
                 },
-                // {
-                //     field: "accountcode",
-                //     title: "Accountcode",
-                //     sortable: "asc",
-                //     filterable: !1,
-                //     width: 150
-                // },
-               
                 {
                     field: "Actions",
                     width: 110,
@@ -91,13 +83,13 @@ var TP = {
                         return (
                             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
                             t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' 
-                            // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            // t.id +
-                            // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            // '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
-                            // t.id +
-                            // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
+                            t.id +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
                         );
                     }
                 }
@@ -116,7 +108,7 @@ var TP = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "post",
-                url: "/category",
+                url: "/itemstock",
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -153,7 +145,7 @@ var TP = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/category/" + triggerid + "/edit",
+                url: "/itemstock/" + triggerid + "/edit",
                 success: function(data) {
                     document.getElementById("name").value = data.name;
                     document.getElementById("id").value = data.id;
@@ -182,7 +174,7 @@ var TP = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "put",
-                url: "/category/" + triggerid,
+                url: "/itemstock/" + triggerid,
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -219,7 +211,7 @@ var TP = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/category/" + triggerid,
+                url: "/itemstock/" + triggerid,
                 success: function(data) {
                     document.getElementById("TitleModalCustomer").innerHTML =
                         "Detail Customer #ID-" + triggerid;
@@ -260,7 +252,7 @@ var TP = {
                             )
                         },
                         type: "DELETE",
-                        url: "/category/" + triggerid + "",
+                        url: "/itemstock/" + triggerid + "",
                         success: function(data) {
                             toastr.success(
                                 "Data Berhasil Dihapus.",
@@ -306,5 +298,5 @@ var TP = {
 
 
 jQuery(document).ready(function() {
-    TP.init();
+    ItemStock.init();
 });

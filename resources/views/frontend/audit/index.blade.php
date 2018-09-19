@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/audit" class="m-nav__link">
+                        <a href="{{route('frontend.audit.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Auditable
                             </span>
@@ -89,5 +89,5 @@
         var tes = "<?php echo Auth::user()->id; ?>";
     </script>
 
-    <script src="{{ asset('js/audit.js')}}"></script>
+    <script src="{{ asset('js/frontend/audit.js')}}"></script>
 @endpush
