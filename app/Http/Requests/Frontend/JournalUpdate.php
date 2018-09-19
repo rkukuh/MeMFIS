@@ -27,22 +27,10 @@ class JournalUpdate extends FormRequest
     {
         return [
             'code' => 'required',
-            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
     }
 
     protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
-
-        // public function messages()
-        // {
-        //     return [
-        //         'name.required' => 'Harus diisi',
-        //         'name.min' => 'minimal 3 karakter',
-        //         'name.max' => 'maximal 50 karakter',
-        //         'name.regex' => 'Berisi Huruf dan Spasi',
-        //         // 'body.required'  => 'A message is required',
-        //     ];
-        // }
 }
