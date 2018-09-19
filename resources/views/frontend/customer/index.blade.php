@@ -101,7 +101,7 @@
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
     <script src="{{ asset('js/frontend/customer.js')}}"></script>
-    <script src="{{ asset('js/frontend/addres.js')}}"></script>
+    <script src="{{ asset('js/frontend/address.js')}}"></script>
 
     {{-- <script src="{{ asset('js/select.js')}}"></script> --}}
 @endpush
