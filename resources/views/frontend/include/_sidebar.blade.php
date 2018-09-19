@@ -13,7 +13,7 @@
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/dashboard" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.dashboard')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-line-graph"></i>
                     <span class="m-menu__link-text">Dashboard</span>
                 </a>
@@ -60,7 +60,7 @@
                 </div>
             </li> --}}
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/customer" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.customer.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Customer
@@ -68,7 +68,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/supplier" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.supplier.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Supplier
@@ -76,7 +76,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/category" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.category.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Category
@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/item" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.item.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Item
@@ -92,7 +92,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/item-stock" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.item-stock.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Item Stock
@@ -100,7 +100,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/item-unit" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.item-unit.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Item Unit
@@ -108,7 +108,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/warehouse" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.warehouse.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Warehouse
@@ -116,7 +116,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/taskcard" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.taskcard.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Task Card
@@ -124,7 +124,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/tcp" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.taskcardpackage.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Task Card Package
@@ -132,7 +132,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/wp" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.workpackage.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Work Package
@@ -140,7 +140,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/quotation" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.quotation.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Quotation
@@ -148,7 +148,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="/journal" class="m-menu__link m-menu__toggle">
+                <a href="{{route('frontend.journal.index')}}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Journal
