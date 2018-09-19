@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Journal;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JournalStore;
 use App\Http\Requests\Frontend\JournalUpdate;
@@ -132,7 +131,7 @@ class JournalController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\JournalStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(JournalStore $request)
@@ -173,7 +172,7 @@ class JournalController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\JournalUpdate  $request
      * @param  \App\Models\Journal  $journal
      * @return \Illuminate\Http\Response
      */
