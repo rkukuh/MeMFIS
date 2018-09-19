@@ -47,6 +47,17 @@ class Type extends MemfisModel
         return $query->where('of', 'fax');
     }
 
+    /**
+     * Scope a query to only include category of journal.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfJournal(Builder $query)
+    {
+        return $query->where('of', 'journal');
+    }
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
