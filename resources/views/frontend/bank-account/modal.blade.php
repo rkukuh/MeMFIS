@@ -31,7 +31,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Account No')
                                     @slot('name', 'account_no')

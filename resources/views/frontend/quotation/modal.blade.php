@@ -30,7 +30,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Currency')
                                     @slot('name', 'currency')
@@ -58,7 +57,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
                                     @slot('name', 'subject')
@@ -92,7 +90,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.select')
                                     @slot('id', 'm_select2_4')
                                     @slot('text', 'Additional')

@@ -55,7 +55,6 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.text')
                                     @slot('name', 'accountcode')
                                     @slot('text', 'Account Code')
@@ -69,7 +68,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.checkbox')
                                     @slot('text', 'Active')
                                     @slot('name', 'active')

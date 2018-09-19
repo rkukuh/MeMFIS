@@ -30,7 +30,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
@@ -47,7 +46,7 @@
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Tp')
                                     @slot('name', 'tp')
-                                    @slot('id', 'm_select2_1')
+                                    @slot('id', 'm_select2_3a')
                                     @slot('style', 'width:100%')
                                 @endcomponent
 
@@ -63,7 +62,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.upload')
                                     @slot('text', 'file')
                                     @slot('name', 'file')

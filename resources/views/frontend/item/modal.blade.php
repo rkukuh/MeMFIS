@@ -30,7 +30,6 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
@@ -55,7 +54,6 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Bank')
                                     @slot('name', 'bank')
@@ -75,11 +73,10 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Category')
                                     @slot('name', 'category')
-                                    @slot('id', 'm_select2_1')
+                                    @slot('id', 'm_select2_2')
                                     @slot('style', 'width:100%')
                                 @endcomponent
 
@@ -109,7 +106,6 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.checkbox')
                                     @slot('text', 'Active')
                                     @slot('name', 'active')
@@ -132,7 +128,6 @@
                                 <label class="form-control-label">
                                     IsStock
                                 </label>
-                                <br>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'IsStock')
                                     @slot('name', 'isstock')
@@ -157,7 +152,6 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'AccountCode')
                                     @slot('name', 'accountcode')

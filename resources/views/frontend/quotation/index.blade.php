@@ -78,10 +78,9 @@
                                 </div>
                             </div>
                             <!--end: Search Form -->
-
-                            @include('frontend.taskcardpackage.modal')
                             @include('frontend.quotation.modal')
                             @include('frontend.workpackage.modal')
+                            @include('frontend.taskcardpackage.modal')
 
                             <!--begin: Datatable -->
                             <div class="m_datatable" id="scrolling_both"></div>
