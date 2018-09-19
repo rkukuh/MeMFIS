@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/werehouse" class="m-nav__link">
+                        <a href="{{route('frontend.warehouse.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Warehouse
                             </span>
@@ -99,5 +99,5 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/werehouse.js')}}"></script>
+    <script src="{{ asset('js/warehouse.js')}}"></script>
 @endpush

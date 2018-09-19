@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/tp" class="m-nav__link">
+                        <a href="{{route('frontend.taskcardpackage.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 TaskCard Package
                             </span>

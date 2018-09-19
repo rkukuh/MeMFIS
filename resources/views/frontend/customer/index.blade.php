@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/customer" class="m-nav__link">
+                        <a href="{{route('frontend.customer.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Customer
                             </span>
