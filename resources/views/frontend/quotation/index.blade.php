@@ -79,7 +79,7 @@
                             </div>
                             <!--end: Search Form -->
 
-                            @include('frontend.tp.modal')
+                            @include('frontend.taskcardpackage.modal')
                             @include('frontend.quotation.modal')
                             @include('frontend.workpackage.modal')
 

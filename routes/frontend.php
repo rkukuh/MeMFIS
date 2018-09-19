@@ -9,7 +9,7 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
-        Route::view('/dashboard', 'frontend.dashboard');
+        Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
 
         Route::resource('/customer', 'CustomerController');
         Route::get('/getcustomer','CustomerController@getCustomers')->name('getcustomers');
@@ -46,9 +46,9 @@ Route::name('frontend.')->group(function () {
         Route::resource('/department', 'DepartmentController');
         Route::resource('/taskcard', 'TaskCardController');
         Route::get('/gettaskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
-        Route::resource('/tcp', 'TaskCardPackageController');
+        Route::resource('/taskcardpackage', 'TaskCardPackageController');
         Route::get('/gettcp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
-        Route::resource('/wp', 'WorkPackageController');
+        Route::resource('/workpackage', 'WorkPackageController');
         Route::get('/getworkpakages', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
         Route::resource('/quotation', 'QuotationController');
         Route::get('/getquotation', 'QuotationController@getQuotations')->name('getquotation');
@@ -74,7 +74,7 @@ Route::name('frontend.')->group(function () {
             return $pdf->stream();
         });
 
-        Route::get('/workpackage', function () {
+        Route::get('/workpackage-doc', function () {
             $pdf = \PDF::loadView('frontend/form/workpackage');
             $pdf->setPaper('A4', 'landscape');
             return $pdf->stream();

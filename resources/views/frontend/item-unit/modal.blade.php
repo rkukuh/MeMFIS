@@ -58,7 +58,7 @@
                                 @endcomponent
                                 </label>
                                 <br>
-                                @component('frontend.common.input.type')
+                                @component('frontend.common.input.number')
                                 @slot('name', 'purchasingprice')
                                 @slot('text', 'Purchasing Price')
                                 @endcomponent

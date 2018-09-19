@@ -79,7 +79,7 @@
                             </div>
                             <!--end: Search Form -->
 
-                            @include('frontend.tp.modal')
+                            @include('frontend.taskcardpackage.modal')
 
                             <!--begin: Datatable -->
                             <div class="m_datatable" id="first"></div>
