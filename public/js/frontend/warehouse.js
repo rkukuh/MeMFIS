@@ -1,4 +1,4 @@
-var Werehouse = {
+var Warehouse = {
     init: function() {
         $(".m_datatable").mDatatable({
             data: {
@@ -7,7 +7,7 @@ var Werehouse = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getwerehouse",
+                        url: "/getwarehouse",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -305,5 +305,5 @@ var Werehouse = {
 
 
 jQuery(document).ready(function() {
-    Werehouse.init();
+    Warehouse.init();
 });
