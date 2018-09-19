@@ -8,6 +8,8 @@ var Select2 = {
             placeholder: "Select a state"
         }), $("#m_select2_3a, #m_select2_3a_validate").select2({
             placeholder: "Select a state"
+        }), $("#accountcode, #accountcode_validate").select2({
+            placeholder: "Select a Accountcode"
         }), $("#m_select2_4").select2({
             placeholder: "Select a state",
             allowClear: !0
