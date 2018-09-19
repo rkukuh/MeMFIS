@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/qoutation" class="m-nav__link">
+                        <a href="{{route('frontend.quotation.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Quotation
                             </span>
@@ -78,10 +78,9 @@
                                 </div>
                             </div>
                             <!--end: Search Form -->
-
-                            @include('frontend.tp.modal')
                             @include('frontend.quotation.modal')
                             @include('frontend.workpackage.modal')
+                            @include('frontend.taskcardpackage.modal')
 
                             <!--begin: Datatable -->
                             <div class="m_datatable" id="scrolling_both"></div>
@@ -99,9 +98,9 @@
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/bootstrap-datepicker.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/summernote.js')}}"></script>
 
-    <script src="{{ asset('js/quotation.js')}}"></script>
+    <script src="{{ asset('js/frontend/quotation.js')}}"></script>
 @endpush

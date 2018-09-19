@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/audit" class="m-nav__link">
+                        <a href="{{route('frontend.audit.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Audit
                             </span>
@@ -93,5 +93,5 @@
         Auth::user() - > role " ?>";
     </script>
 
-    <script src="{{ asset('js/audit.js')}}"></script>
+    <script src="{{ asset('js/frontend/audit.js')}}"></script>
 @endpush

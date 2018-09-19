@@ -19,10 +19,9 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -31,10 +30,9 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                         </div>
@@ -57,9 +55,7 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                <br>
-                                @component('frontend.common.input.input')
-                                    @slot('type', 'text')
+                                @component('frontend.common.input.text')
                                     @slot('name', 'accountcode')
                                     @slot('text', 'Account Code')
                                 @endcomponent
@@ -72,7 +68,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.checkbox')
                                     @slot('text', 'Active')
                                     @slot('name', 'active')

@@ -5,10 +5,9 @@
                 @component('frontend.common.label.required')
                 @endcomponent
                 </label>
-                @component('frontend.common.input.input')
+                @component('frontend.common.input.text')
                     @slot('text', 'Code')
                     @slot('name', 'code')
-                    @slot('type', 'text')
                     @slot('value', 'text')
                     @slot('editable', 'readonly')
                 @endcomponent
@@ -19,10 +18,9 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'Name')
             @slot('name', 'name')
-            @slot('type', 'text')
             @slot('value', 'text')
             @slot('editable', 'readonly')
         @endcomponent
@@ -35,10 +33,9 @@
                 @component('frontend.common.label.optional')
                 @endcomponent
                 </label>
-                @component('frontend.common.input.input')
+                @component('frontend.common.input.text')
                     @slot('text', 'NPWP')
                     @slot('name', 'npwp')
-                    @slot('type', 'text')
                     @slot('value', 'text')
                     @slot('editable', 'readonly')
                 @endcomponent
@@ -49,10 +46,9 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'NPPKP')
             @slot('name', 'nppkp')
-            @slot('type', 'text')
             @slot('value', 'text')
         @slot('editable', 'readonly')
         @endcomponent
@@ -65,11 +61,9 @@
                 @component('frontend.common.label.required')
                 @endcomponent
                 </label>
-                <br>
-                @component('frontend.common.input.input')
+                @component('frontend.common.input.text')
                     @slot('text', 'ToP')
                     @slot('name', 'top')
-                    @slot('type', 'text')
                     @slot('value', 'text')
                     @slot('editable', 'readonly')
                 @endcomponent
@@ -80,8 +74,7 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('value', 'text')
             @slot('text', 'Barcode')
             @slot('name', 'barcode')
@@ -96,9 +89,7 @@
                 @component('frontend.common.label.optional')
                 @endcomponent
                 </label>
-                <br>
-                @component('frontend.common.input.input')
-                    @slot('type', 'text')
+                @component('frontend.common.input.text')
                     @slot('value', 'text')
                     @slot('text', 'Contact Person')
                     @slot('name', 'contactperson')
@@ -111,8 +102,7 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('value', 'text')
             @slot('editable', 'readonly')
             @slot('text', 'Contact Person Job Position')
@@ -127,7 +117,6 @@
                 @component('frontend.common.label.optional')
                 @endcomponent
                 </label>
-                <br>
                 @component('frontend.common.input.checkbox')
                     @slot('text', 'Active')
                     @slot('name', 'active')
@@ -142,9 +131,7 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('value', 'text')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')

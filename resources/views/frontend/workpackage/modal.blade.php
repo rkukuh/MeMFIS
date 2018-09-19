@@ -19,10 +19,9 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -31,11 +30,9 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                         </div>
@@ -49,7 +46,7 @@
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Tp')
                                     @slot('name', 'tp')
-                                    @slot('id', 'm_select2_1')
+                                    @slot('id', 'm_select2_3a')
                                     @slot('style', 'width:100%')
                                 @endcomponent
 
@@ -65,7 +62,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.upload')
                                     @slot('text', 'file')
                                     @slot('name', 'file')

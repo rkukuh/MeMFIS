@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/itemunit" class="m-nav__link">
+                        <a href="{{route('frontend.item-unit.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Item Unit
                             </span>
@@ -97,7 +97,7 @@
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
 
-    <script src="{{ asset('js/itemunit.js')}}"></script>
+    <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
 @endpush

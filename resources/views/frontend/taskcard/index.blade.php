@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/taskcard" class="m-nav__link">
+                        <a href="{{route('frontend.taskcard.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 TaskCard
                             </span>
@@ -97,7 +97,6 @@
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/taskcard.js')}}"></script>
+    <script src="{{ asset('js/frontend/taskcard.js')}}"></script>
 @endpush

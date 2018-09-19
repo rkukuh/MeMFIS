@@ -1,13 +1,13 @@
-var TPM = {
+var ItemUnit = {
     init: function() {
-        $(".m_datatable2").mDatatable({
+        $(".m_datatable").mDatatable({
             data: {
                 type: "remote",
                 source: {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getaudit",
+                        url: "/getitem-unit",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -23,7 +23,12 @@ var TPM = {
                 serverFiltering: !0,
                 serverSorting: !0
             },
-            layout: { theme: "default", class: "", scroll: !1, footer: !1 },
+            layout: {
+                theme: "default",
+                class: "",
+                scroll: false,
+                footer: !1
+            },
             sortable: !0,
             filterable: !1,
             pagination: !0,
@@ -34,77 +39,81 @@ var TPM = {
                 }
             },
             columns: [
-                {
-                    field: "id",
-                    title: "#",
-                    width: 50,
-                    sortable: !1,
-                    textAlign: "center",
-                    name:"sas",
-                    selector: { class: "m-checkbox--solid m-checkbox--brand"}
-                  },
                 // {
                 //     field: "id",
                 //     title: "#",
                 //     sortable: !1,
                 //     width: 40
                 // },
-                // {
-                //     field: "code",
-                //     title: "Code",
-                //     sortable: "asc",
-                //     filterable: !1,
-                //     width: 60
-                // },
                 {
-                    field: "event",
-                    title: "Name",
+                    field: "code",
+                    title: "Code",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 60
+                },
+                {
+                    field: "id_unit",
+                    title: "Unit",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
+                },
+                {
+                    field: "qty",
+                    title: "Qty",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: "purchasingprice",
+                    title: "PurchasingPrice",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: "sellingprice2",
+                    title: "SellingPrice2",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: "sellingprice3",
+                    title: "SellingPrice3",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: "sellingprice4",
+                    title: "SellingPrice4",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: "Actions",
+                    width: 110,
+                    title: "Actions",
+                    sortable: !1,
+                    overflow: "visible",
+                    template: function(t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
+                            t.id +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
+                        );
+                    }
                 }
-                // {
-                //     field: "description",
-                //     title: "Description",
-                //     sortable: "asc",
-                //     filterable: !1,
-                //     width: 150,
-                // },
-                // {
-                //     field: "taskcard",
-                //     title: "TaskCard",
-                //     sortable: "asc",
-                //     filterable: !1,
-                //     width: 150,
-                // },
-                // {
-                //     field: "accountcode",
-                //     title: "Accountcode",
-                //     sortable: "asc",
-                //     filterable: !1,
-                //     width: 150
-                // },
-               
-                // {
-                //     field: "Actions",
-                //     width: 110,
-                //     title: "Actions",
-                //     sortable: !1,
-                //     overflow: "visible",
-                //     template: function(t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' 
-                //             // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                //             // t.id +
-                //             // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                //             // '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
-                //             // t.id +
-                //             // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
-                //         );
-                //     }
-                // }
             ]
         });
 
@@ -120,7 +129,7 @@ var TPM = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "post",
-                url: "/category",
+                url: "/itemunit",
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -140,7 +149,7 @@ var TPM = {
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
                             timeOut: 5000
                         });
-                        var table = $(".m_datatable2").mDatatable();
+                        var table = $(".m_datatable").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -148,7 +157,7 @@ var TPM = {
             });
         });
 
-        var edit = $(".m_datatable2").on("click", ".edit", function() {
+        var edit = $(".m_datatable").on("click", ".edit", function() {
             $("#button").show();
             var triggerid = $(this).data("id");
             $("#simpan").text("Perbarui");
@@ -157,7 +166,7 @@ var TPM = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/category/" + triggerid + "/edit",
+                url: "/itemunit/" + triggerid + "/edit",
                 success: function(data) {
                     document.getElementById("name").value = data.name;
                     document.getElementById("id").value = data.id;
@@ -186,7 +195,7 @@ var TPM = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "put",
-                url: "/category/" + triggerid,
+                url: "/itemunit/" + triggerid,
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -206,7 +215,7 @@ var TPM = {
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
                             timeOut: 5000
                         });
-                        var table = $(".m_datatable2").mDatatable();
+                        var table = $(".m_datatable").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -214,7 +223,7 @@ var TPM = {
             });
         });
 
-        var show = $(".m_datatable2").on("click", ".show", function() {
+        var show = $(".m_datatable").on("click", ".show", function() {
             $("#button").hide();
             var triggerid = $(this).data("id");
             $("#simpan").text("Perbarui");
@@ -223,7 +232,7 @@ var TPM = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/category/" + triggerid,
+                url: "/itemunit/" + triggerid,
                 success: function(data) {
                     document.getElementById("TitleModalCustomer").innerHTML =
                         "Detail Customer #ID-" + triggerid;
@@ -246,7 +255,7 @@ var TPM = {
         });
 
 
-        var remove = $(".m_datatable2").on("click", ".delete", function() {
+        var remove = $(".m_datatable").on("click", ".delete", function() {
             var triggerid = $(this).data("id");
             swal({
                 title: "Are you sure?",
@@ -264,14 +273,14 @@ var TPM = {
                             )
                         },
                         type: "DELETE",
-                        url: "/category/" + triggerid + "",
+                        url: "/itemunit/" + triggerid + "",
                         success: function(data) {
                             toastr.success(
                                 "Data Berhasil Dihapus.",
                                 "Sukses!!!",
                                 { timeOut: 5000 }
                             );
-                            var table = $(".m_datatable2").mDatatable();
+                            var table = $(".m_datatable").mDatatable();
                             table.originalDataSet = [];
                             table.reload();
                         },
@@ -310,5 +319,5 @@ var TPM = {
 
 
 jQuery(document).ready(function() {
-    TPM.init();
+    ItemUnit.init();
 });

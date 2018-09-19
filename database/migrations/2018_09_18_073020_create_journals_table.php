@@ -16,13 +16,18 @@ class CreateJournalsTable extends Migration
         Schema::create('journals', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->string('name')->nullable();
-            $table->integer('type')->nullable();
+            $table->unsignedInteger('type_id')->nullable();
             $table->integer('level')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('type_id')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
         });
     }
 

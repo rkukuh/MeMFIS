@@ -32,7 +32,6 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
@@ -47,7 +46,6 @@
                                         @component('frontend.common.label.optional')
                                         @endcomponent
                                         </label>
-                                        <br>
                                     @component('frontend.common.input.select')
                                         @slot('text', 'Type')
                                         @slot('name', 'type')
@@ -62,7 +60,6 @@
                                         @component('frontend.common.label.optional')
                                         @endcomponent
                                         </label>
-                                        <br>
                                     @component('frontend.common.input.number')
                                         @slot('text', 'Level')
                                         @slot('name', 'level')

@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="/journal" class="m-nav__link">
+                        <a href="{{route('frontend.journal.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Journal
                             </span>
@@ -67,11 +67,12 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Add Journal')
-                                            @slot('color', 'primary')
                                             @slot('size', 'md')
+                                            @slot('color', 'primary')
+                                            @slot('text', 'Add Journal')
                                             @slot('data_target', '#modal_journal')
                                         @endcomponent
+
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
@@ -96,7 +97,7 @@
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
 
-    <script src="{{ asset('js/journal.js')}}"></script>
+    <script src="{{ asset('js/frontend/journal.js')}}"></script>
 @endpush

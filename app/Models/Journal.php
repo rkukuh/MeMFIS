@@ -2,18 +2,31 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\MemfisModel;
 
-class Journal extends Model
+class Journal extends MemfisModel
 {
-    use SoftDeletes;
     protected $fillable = [
         'code',
         'name',
-        'type',
+        'type_id',
         'level',
         'description',
     ];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A journal may have zero or many type.
+     *
+     * This function will retrieve the type of a journal.
+     * See: Type's journals() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 
 }

@@ -5,7 +5,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.select')
             @slot('text', 'Country')
             @slot('name', 'country')
@@ -19,7 +18,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.select')
             @slot('text', 'City')
             @slot('name', 'city')

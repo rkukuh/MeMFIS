@@ -24,8 +24,7 @@
                                             <div data-repeater-item class="row">
                                                 <div class="form-group m-form__group row align-items-center">
                                                     <div class="col-md-6">
-                                                        @component('frontend.common.input.input')
-                                                            @slot('text', 'Email')
+                                                        @component('frontend.common.input.email')
                                                             @slot('name', 'name')
                                                             @slot('placeholder', 'Email')
                                                         @endcomponent
