@@ -56,7 +56,9 @@ Route::name('frontend.')->group(function () {
         Route::get('/getjournal', 'JournalController@getJournals')->name('getjournal');
 
         Route::resource('/type', 'TypeController');
+        Route::resource('/accountcode', 'AccountCodeController');
 
+        
 
         Route::get('/quotation-doc', function () {
             $pdf = \PDF::loadView('frontend/form/quotation');
