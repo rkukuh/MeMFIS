@@ -40,7 +40,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.textarea')
             @slot('text', 'NPWP Address')
             @slot('name', 'npwpaddress')
@@ -56,7 +55,6 @@
         @component('frontend.common.label.required')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.text')
             @slot('text', 'ToP')
             @slot('name', 'top')
@@ -68,7 +66,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.select')
             @slot('text', 'Type')
             @slot('name', 'id_type')
@@ -89,7 +86,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.select')
             @slot('text', 'Number')
             @slot('name', 'id_number')
@@ -108,7 +104,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.checkbox')
             @slot('text', 'Active')
             @slot('name', 'active')
@@ -122,7 +117,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.text')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
@@ -134,7 +128,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.text')
             @slot('text', 'Leveling')
             @slot('name', 'leveling')

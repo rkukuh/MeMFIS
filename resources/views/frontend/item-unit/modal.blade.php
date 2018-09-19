@@ -30,7 +30,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.select')
                                 @slot('text', 'Unit')
                                 @slot('name', 'id_unit')
@@ -57,7 +56,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.number')
                                 @slot('name', 'purchasingprice')
                                 @slot('text', 'Purchasing Price')

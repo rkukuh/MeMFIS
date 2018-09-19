@@ -53,7 +53,6 @@
                 @component('frontend.common.label.required')
                 @endcomponent
                 </label>
-                <br>
                 @component('frontend.common.input.text')
                     @slot('text', 'ToP')
                     @slot('name', 'top')
@@ -78,7 +77,6 @@
                 @component('frontend.common.label.optional')
                 @endcomponent
                 </label>
-                <br>
                 @component('frontend.common.input.text')
                     @slot('text', 'Contact Person')
                     @slot('name', 'contactperson')
@@ -103,7 +101,6 @@
                 @component('frontend.common.label.optional')
                 @endcomponent
                 </label>
-                <br>
                 @component('frontend.common.input.checkbox')
                     @slot('text', 'Active')
                     @slot('name', 'active')
@@ -115,7 +112,6 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        <br>
         @component('frontend.common.input.text')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')

@@ -30,7 +30,6 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                <br>
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Parent')
                                     @slot('parent_id', 'name')
