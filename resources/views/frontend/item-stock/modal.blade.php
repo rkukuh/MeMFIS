@@ -19,10 +19,9 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
-                                    @slot('type', 'text')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -53,10 +52,9 @@
                                 @component('frontend.common.label.required')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.number')
                                     @slot('text', 'Max')
                                     @slot('name', 'max')
-                                    @slot('type', 'number')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,10 +64,9 @@
                                 @endcomponent
                                 </label>
                                 <br>
-                                @component('frontend.common.input.input')
+                                @component('frontend.common.input.number')
                                     @slot('text', 'Min')
                                     @slot('name', 'min')
-                                    @slot('type', 'number')
                                 @endcomponent
                             </div>
                         </div>
