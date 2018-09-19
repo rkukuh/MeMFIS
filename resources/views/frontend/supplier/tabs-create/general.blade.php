@@ -5,10 +5,9 @@
         @component('frontend.common.label.required')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
+        @component('frontend.common.input.text')
             @slot('text', 'Code')
             @slot('name', 'code')
-            @slot('type', 'text')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -17,10 +16,9 @@
             @component('frontend.common.label.optional')
             @endcomponent
             </label>
-            @component('frontend.common.input.input')
+            @component('frontend.common.input.text')
                 @slot('text', 'Name')
                 @slot('name', 'name')
-                @slot('type', 'text')
             @endcomponent
         </div>
     </div>
@@ -31,10 +29,9 @@
                 @component('frontend.common.label.optional')
                 @endcomponent
                 </label>
-                @component('frontend.common.input.input')
+                @component('frontend.common.input.text')
                     @slot('text', 'NPWP')
                     @slot('name', 'npwp')
-                    @slot('type', 'text')
                 @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -43,8 +40,7 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('text', 'NPPKP')
             @slot('name', 'nppkp')
         @endcomponent
@@ -58,10 +54,9 @@
                 @endcomponent
                 </label>
                 <br>
-                @component('frontend.common.input.input')
+                @component('frontend.common.input.text')
                     @slot('text', 'ToP')
                     @slot('name', 'top')
-                    @slot('type', 'text')
                 @endcomponent
     </div>        
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -70,8 +65,7 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('text', 'Barcode')
             @slot('name', 'barcode')
         @endcomponent
@@ -85,8 +79,7 @@
                 @endcomponent
                 </label>
                 <br>
-                @component('frontend.common.input.input')
-                    @slot('type', 'text')
+                @component('frontend.common.input.text')
                     @slot('text', 'Contact Person')
                     @slot('name', 'contactperson')
                 @endcomponent
@@ -97,8 +90,7 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('name', 'contactpersonjobposition')
             @slot('text', 'Contact Person Job Position')
         @endcomponent
@@ -124,8 +116,7 @@
         @endcomponent
         </label>
         <br>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
         @endcomponent

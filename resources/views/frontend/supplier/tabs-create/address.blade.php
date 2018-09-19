@@ -47,8 +47,7 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.input')
-            @slot('type', 'text')
+        @component('frontend.common.input.text')
             @slot('text', 'ZipCode')
             @slot('name', 'zipcpde')
         @endcomponent
