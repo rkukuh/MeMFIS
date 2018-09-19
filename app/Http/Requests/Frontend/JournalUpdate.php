@@ -26,15 +26,15 @@ class JournalUpdate extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|numeric',
+            'code' => 'required',
             // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
     }
 
-    protected function failedValidation(Validator $validator) { 
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()])); 
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
-    
+
         // public function messages()
         // {
         //     return [
