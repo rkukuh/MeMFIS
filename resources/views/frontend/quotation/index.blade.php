@@ -103,5 +103,5 @@
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/bootstrap-datepicker.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/summernote.js')}}"></script>
 
-    <script src="{{ asset('js/quotation.js')}}"></script>
+    <script src="{{ asset('js/frontend/quotation.js')}}"></script>
 @endpush

@@ -100,6 +100,6 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/item.js')}}"></script>
-    <script src="{{ asset('js/bank.js')}}"></script>
+    <script src="{{ asset('js/frontend/item.js')}}"></script>
+    <script src="{{ asset('js/frontend/bank.js')}}"></script>
 @endpush

@@ -89,5 +89,5 @@
         var tes = "<?php echo Auth::user()->id; ?>";
     </script>
 
-    <script src="{{ asset('js/audit.js')}}"></script>
+    <script src="{{ asset('js/frontend/audit.js')}}"></script>
 @endpush

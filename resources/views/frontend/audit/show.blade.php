@@ -93,5 +93,5 @@
         Auth::user() - > role " ?>";
     </script>
 
-    <script src="{{ asset('js/audit.js')}}"></script>
+    <script src="{{ asset('js/frontend/audit.js')}}"></script>
 @endpush

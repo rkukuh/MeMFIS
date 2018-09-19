@@ -105,5 +105,5 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/taskcardpackagemodal.js')}}"></script>
+    <script src="{{ asset('js/frontend/taskcard-package-modal.js')}}"></script>
 @endpush

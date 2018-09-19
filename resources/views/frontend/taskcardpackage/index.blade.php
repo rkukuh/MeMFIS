@@ -99,5 +99,5 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script>
 
-    <script src="{{ asset('js/taskcardpackage.js')}}"></script>
+    <script src="{{ asset('js/frontend/taskcard-package.js')}}"></script>
 @endpush
