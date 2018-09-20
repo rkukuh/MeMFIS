@@ -69,7 +69,7 @@
         @component('frontend.common.input.select')
             @slot('text', 'Type')
             @slot('name', 'id_type')
-            @slot('id', 'm_select2_3')
+            @slot('id', 'type')
             @slot('style', 'width:100%')
         @endcomponent
         @component('frontend.common.buttons.create-new')
@@ -89,7 +89,7 @@
         @component('frontend.common.input.select')
             @slot('text', 'Number')
             @slot('name', 'id_number')
-            @slot('id', 'm_select2_4')
+            @slot('id', 'number')
             @slot('style', 'width:100%')
         @endcomponent
         @component('frontend.common.buttons.create-new')
