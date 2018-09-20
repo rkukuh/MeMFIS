@@ -8,7 +8,7 @@
         @component('frontend.common.input.select')
             @slot('text', 'Country')
             @slot('name', 'country')
-            @slot('id', 'm_select2_1')
+            @slot('id', 'country')
             @slot('style', 'width:100%')
         @endcomponent
     </div>
@@ -21,7 +21,7 @@
         @component('frontend.common.input.select')
             @slot('text', 'City')
             @slot('name', 'city')
-            @slot('id', 'm_select2_2')
+            @slot('id', 'city')
             @slot('style', 'width:100%')
         @endcomponent
     </div>
