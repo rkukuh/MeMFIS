@@ -12,6 +12,10 @@ var Select2 = {
             placeholder: "Select a Accountcode"
         }), $("#type, #type_validate").select2({
             placeholder: "Select a Type"
+        }), $("#currency, #currency_validate").select2({
+            placeholder: "Select a Currency"
+        }), $("#customer, #customer_validate").select2({
+            placeholder: "Select a Customer"
         }), $("#number, #number_validate").select2({
             placeholder: "Select a Number"
         }), $("#country, #country_validate").select2({
