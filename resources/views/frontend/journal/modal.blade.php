@@ -49,7 +49,7 @@
                                     @component('frontend.common.input.select')
                                         @slot('text', 'Type')
                                         @slot('name', 'type')
-                                        @slot('id', 'm_select2_1')
+                                        @slot('id', 'type')
                                         @slot('style', 'width:100%')
                                         @slot('type', 'text')
                                     @endcomponent
