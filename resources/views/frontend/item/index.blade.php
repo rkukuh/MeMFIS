@@ -67,9 +67,15 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('size', 'md')
-                                            @slot('text', 'Add Item')
+                                            @slot('text', 'Add Item Modal')
                                             @slot('color', 'primary')
                                             @slot('data_target', '#modal_item')
+                                        @endcomponent
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'Add Item New Page')
+                                            @slot('size', 'md')
+                                            @slot('color', 'primary')
+                                            @slot('href', route('frontend.item.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -79,7 +85,7 @@
                             <!--end: Search Form -->
 
                             @include('frontend.item.modal')
-                            @include('frontend.bank.modal')
+                            {{-- @include('frontend.bank.modal') --}}
                             @include('frontend.category.modal')
 
                             <!--begin: Datatable -->
