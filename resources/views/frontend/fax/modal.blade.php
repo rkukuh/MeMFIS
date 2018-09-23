@@ -15,9 +15,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Fax
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Fax @include('frontend.common.label.required')
                                 </label>
                                 <div id="m_repeater_1a">
                                     <div class="" id="m_repeater_1a">
@@ -59,9 +57,7 @@
                                     </div>
                                 </div>
                                 <label class="form-control-label">
-                                    Name
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Name @include('frontend.common.label.required')
                                 </label>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
@@ -70,9 +66,7 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    type
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    type @include('frontend.common.label.required')
                                 </label>
                                     <br>
                                 @component('frontend.common.input.radio')
@@ -103,7 +97,7 @@
                             @slot('size', 'md')
                             @slot('data_dismiss', 'modal')
                         @endcomponent
-                    </div>                
+                    </div>
                 </form>
             </div>
         </div>
