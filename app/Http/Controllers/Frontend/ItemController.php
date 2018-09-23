@@ -26,7 +26,7 @@ class ItemController extends Controller
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
                     ? $datatable['query']['generalSearch'] : '';
 
-        if ( ! empty($filter)) {
+        if (! empty($filter)) {
             $data = array_filter($data, function ($a) use ($filter) {
                 return (boolean)preg_grep("/$filter/i", (array)$a);
             });
@@ -55,7 +55,7 @@ class ItemController extends Controller
         $total = count($data);
 
         usort($data, function ($a, $b) use ($sort, $field) {
-            if ( ! isset($a->$field) || ! isset($b->$field)) {
+            if (! isset($a->$field) || ! isset($b->$field)) {
                 return false;
             }
 
@@ -151,9 +151,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        $items = Item::find($item);
-
-        return response()->json($items);
+        return response()->json($item);
     }
 
     /**
@@ -164,9 +162,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        $items = Item::find($item);
-
-        return response()->json($items);
+        return response()->json($item);
     }
 
     /**
@@ -193,7 +189,7 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        $item = Item::find($item)->delete();
+        $item->delete();
 
         return response()->json($item);
     }
@@ -206,7 +202,7 @@ class ItemController extends Controller
      */
     public function list_filter($list, $args = array(), $operator = 'AND')
     {
-        if ( ! is_array($list)) {
+        if (! is_array($list)) {
             return array();
         }
 
