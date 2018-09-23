@@ -9,16 +9,16 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Code @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
@@ -26,10 +26,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name
-                                @component('frontend.common.label.optional')
-                                @endcomponent
+                                    Name @include('frontend.common.label.optional')
                                 </label>
+
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
@@ -39,10 +38,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Description
-                                @component('frontend.common.label.optional')
-                                @endcomponent
+                                    Description @include('frontend.common.label.optional')
                                 </label>
+
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
                                     @slot('text', 'Description')
@@ -51,10 +49,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Account Code
-                                @component('frontend.common.label.optional')
-                                @endcomponent
+                                    Account Code @include('frontend.common.label.optional')
                                 </label>
+
                                 @component('frontend.common.input.select')
                                     @slot('text', 'AccountCode')
                                     @slot('name', 'accountcode')
@@ -66,10 +63,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Active
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Active @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.checkbox')
                                     @slot('text', 'Active')
                                     @slot('name', 'active')
@@ -78,7 +74,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
@@ -95,6 +90,7 @@
                         @endcomponent
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
