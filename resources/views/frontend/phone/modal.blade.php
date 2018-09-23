@@ -21,24 +21,20 @@
                                                 <table>
                                                     <tr>
                                                         <td width="30%">
-                                                                <label class="form-control-label">
-                                                                        Phone
-                                                                    @component('frontend.common.label.required')
-                                                                    @endcomponent
-                                                                    </label>
-                                    
+                                                            <label class="form-control-label">
+                                                                Phone @include('frontend.common.label.required')
+                                                            </label>
+
                                                             @component('frontend.common.input.text')
                                                                 @slot('name', 'name')
                                                                 @slot('text', 'Phone')
                                                             @endcomponent
                                                         </td>
                                                         <td width="20%">
-                                                                <label class="form-control-label">
-                                                                        ext
-                                                                    @component('frontend.common.label.optional')
-                                                                    @endcomponent
-                                                                    </label>
-                                    
+                                                            <label class="form-control-label">
+                                                                Ext. @include('frontend.common.label.optional')
+                                                            </label>
+
                                                             @component('frontend.common.input.text')
                                                                 @slot('name', 'ext')
                                                                 @slot('text', 'Ext')
@@ -81,9 +77,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
-                           
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -102,6 +96,7 @@
                         @endcomponent
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
