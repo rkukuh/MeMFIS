@@ -20,7 +20,7 @@
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Customer')
                                     @slot('name', 'customer')
-                                    @slot('id', 'm_select2_1')
+                                    @slot('id', 'customer')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -33,7 +33,7 @@
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Currency')
                                     @slot('name', 'currency')
-                                    @slot('id', 'm_select2_2')
+                                    @slot('id', 'currency')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>

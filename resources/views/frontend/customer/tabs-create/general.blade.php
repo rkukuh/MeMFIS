@@ -69,7 +69,7 @@
         @component('frontend.common.input.select')
             @slot('text', 'Type')
             @slot('name', 'id_type')
-            @slot('id', 'm_select2_3')
+            @slot('id', 'type')
             @slot('style', 'width:100%')
         @endcomponent
         @component('frontend.common.buttons.create-new')
@@ -89,7 +89,7 @@
         @component('frontend.common.input.select')
             @slot('text', 'Number')
             @slot('name', 'id_number')
-            @slot('id', 'm_select2_4')
+            @slot('id', 'number')
             @slot('style', 'width:100%')
         @endcomponent
         @component('frontend.common.buttons.create-new')
@@ -117,10 +117,16 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.text')
+        @component('frontend.common.input.select')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
+            @slot('id', 'accountcode')
+            @slot('style', 'width:100%')
         @endcomponent
+        {{-- @component('frontend.common.input.text')
+            @slot('text', 'AccountCode')
+            @slot('name', 'accountcode')
+        @endcomponent --}}
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">

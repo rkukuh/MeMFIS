@@ -55,11 +55,13 @@
                                 @component('frontend.common.label.optional')
                                 @endcomponent
                                 </label>
-                                @component('frontend.common.input.text')
+                                @component('frontend.common.input.select')
+                                    @slot('text', 'AccountCode')
                                     @slot('name', 'accountcode')
-                                    @slot('text', 'Account Code')
+                                    @slot('id', 'accountcode')
+                                    @slot('style', 'width:100%')
                                 @endcomponent
-                            </div>
+                                                </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">

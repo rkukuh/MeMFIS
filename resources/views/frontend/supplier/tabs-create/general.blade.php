@@ -112,9 +112,12 @@
         @component('frontend.common.label.optional')
         @endcomponent
         </label>
-        @component('frontend.common.input.text')
+        <br>
+        @component('frontend.common.input.select')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
+            @slot('id', 'accountcode')
+            @slot('style', 'width:100%')
         @endcomponent
     </div>
 </div>
