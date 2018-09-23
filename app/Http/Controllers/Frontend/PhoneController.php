@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Phone;
-use Illuminate\Http\Request;
+use App\model\ListUtil;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\PhoneStore;
-use App\model\ListUtil;
+use App\Http\Requests\Frontend\PhoneUpdate;
 
 class PhoneController extends Controller
 {
@@ -33,16 +33,17 @@ class PhoneController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\PhoneStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(PhoneStore $request)
     {
-        $Phone = Phone::create([
+        $phone = Phone::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
-        return response()->json($Phone);
+
+        return response()->json($phone);
     }
 
     /**
@@ -70,11 +71,11 @@ class PhoneController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\PhoneUpdate  $request
      * @param  \App\Models\Phone  $phone
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phone $phone)
+    public function update(PhoneUpdate $request, Phone $phone)
     {
         //
     }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Fax;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\FaxStore;
+use App\Http\Requests\Frontend\FaxUpdate;
 
 class FaxController extends Controller
 {
@@ -16,8 +16,9 @@ class FaxController extends Controller
      */
     public function index()
     {
-        $Faxs = Fax::pluck('name', 'id');
-        return json_encode($Faxs);
+        $faxes = Fax::pluck('name', 'id');
+
+        return json_encode($faxes);
     }
 
     /**
@@ -33,16 +34,17 @@ class FaxController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\FaxStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(FaxStore $request)
     {
-        $Fax = Fax::create([
+        $fax = Fax::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
-        return response()->json($Fax);
+
+        return response()->json($fax);
     }
 
     /**
@@ -70,11 +72,11 @@ class FaxController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\FaxUpdate  $request
      * @param  \App\Models\Fax  $fax
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fax $fax)
+    public function update(FaxUpdate $request, Fax $fax)
     {
         //
     }

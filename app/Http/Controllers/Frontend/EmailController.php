@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Email;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\EmailStore;
+use App\Http\Requests\Frontend\EmailUpdate;
 
 class EmailController extends Controller
 {
@@ -16,8 +16,9 @@ class EmailController extends Controller
      */
     public function index()
     {
-        $Emails = Email::pluck('name', 'id');
-        return json_encode($Emails);
+        $emails = Email::pluck('name', 'id');
+
+        return json_encode($emails);
     }
 
     /**
@@ -33,16 +34,17 @@ class EmailController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\EmailStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(EmailStore $request)
     {
-        $Email = Email::create([
+        $email = Email::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
-        return response()->json($Email);
+
+        return response()->json($email);
     }
 
     /**
@@ -70,11 +72,11 @@ class EmailController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\EmailUpdate  $request
      * @param  \App\Models\Email  $email
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Email $email)
+    public function update(EmailUpdate $request, Email $email)
     {
         //
     }

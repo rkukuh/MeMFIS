@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\model\ListUtil;
 use App\Models\BankAccount;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\BankAccountStore;
-use App\model\ListUtil;
+use App\Http\Requests\Frontend\BankAccountUpdate;
 
 class BankAccountController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +17,9 @@ class BankAccountController extends Controller
      */
     public function index()
     {
-        $BankAccounts = Audits::pluck('name', 'id');
-        return json_encode($BankAccounts);
+        $bankAccounts = BankAccount::pluck('name', 'id');
+
+        return json_encode($bankAccounts);
     }
 
     /**
@@ -35,16 +35,17 @@ class BankAccountController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\BankAccountStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(BankAccountStore $request)
     {
-        $BankAccount = BankAccount::create([
+        $bankAccount = BankAccount::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
-        return response()->json($BankAccount);
+
+        return response()->json($bankAccount);
     }
 
     /**
@@ -72,11 +73,11 @@ class BankAccountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\BankAccountUpdate  $request
      * @param  \App\Models\BankAccount  $bankAccount
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BankAccount $bankAccount)
+    public function update(BankAccountUpdate $request, BankAccount $bankAccount)
     {
         //
     }
@@ -91,5 +92,4 @@ class BankAccountController extends Controller
     {
         //
     }
-
 }

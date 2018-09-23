@@ -2,35 +2,39 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
 
 class AddresController extends Controller
 {
     /**
      * Show data Country.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function Country()
+    public function country()
     {
         $country = DB::table("countries")
-                    ->pluck("country_name","country_id")->all();
+                     ->pluck("country_name", "country_id")
+                     ->all();
+
         return json_encode($country);
     }
 
     /**
      * Show data City.
-     * 
+     *
      * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function City($id)
+    public function city($id)
     {
         $city = DB::table("cities")
-                    ->where("country_id",$id)
-                    ->pluck("city_name","city_id")->all();
+                  ->where("country_id", $id)
+                  ->pluck("city_name", "city_id")
+                  ->all();
+
         return json_encode($city);
     }
 }
