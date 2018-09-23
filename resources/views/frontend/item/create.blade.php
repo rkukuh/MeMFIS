@@ -305,6 +305,7 @@
                                                             @component('frontend.common.buttons.create-new')
                                                                 @slot('size', 'md')
                                                                 @slot('color', 'primary')
+                                                                @slot('attribute', 'disabled')
                                                                 @slot('text', 'Add Item Unit')
                                                                 @slot('data_target', '#modal_itemsunit')
                                                             @endcomponent
@@ -318,7 +319,7 @@
                                                 @include('frontend.item-unit.modal')
                     
                                                 <!--begin: Datatable -->
-                                                <div class="m_datatable" id="scrolling_both"></div>
+                                                <div class="m_datatable1" id="fisrt"></div>
                                                 <!--end: Datatable -->
                                             </div>
                                         </div>
@@ -343,51 +344,33 @@
                                                 <div class="m-portlet__body">
                                                     
                                                         <div class="m-portlet__body">
-                                                                {{-- <div class="form-group m-form__group row ">
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            Warehouse
-                                                                        @component('frontend.common.label.required')
-                                                                        @endcomponent
-                                                                        </label>
-                                                                        @component('frontend.common.input.select')
-                                                                            @slot('text', 'Warehouse')
-                                                                            @slot('name', 'warehouse')
-                                                                            @slot('id', 'm_select2_1')
-                                                                            @slot('style', 'width:100%')
-                                                                        @endcomponent
-                                        
-                                                                        @component('frontend.common.buttons.create-new')
-                                                                            @slot('size', 'sm')
-                                                                            @slot('text', 'add warehouse')
-                                                                            @slot('data_target', '#modal_werehouse')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group m-form__group row ">
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            Max
-                                                                        @component('frontend.common.label.required')
-                                                                        @endcomponent
-                                                                        </label>
-                                                                        @component('frontend.common.input.number')
-                                                                            @slot('text', 'Max')
-                                                                            @slot('name', 'max')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            Min
-                                                                        @component('frontend.common.label.required')
-                                                                        @endcomponent
-                                                                        </label>
-                                                                        @component('frontend.common.input.number')
-                                                                            @slot('text', 'Min')
-                                                                            @slot('name', 'min')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div> --}}
+                                                                                           <!--begin: Search Form -->
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                    <div class="row align-items-center">
+                                       
+                                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('size', 'md')
+                                                @slot('color', 'primary')
+                                                @slot('attribute', 'disabled')
+                                                @slot('text', 'Add Item Stock')
+                                                @slot('data_target', '#modal_itemstock')
+                                            @endcomponent
+    
+                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end: Search Form -->
+    
+                                @include('frontend.warehouse.modal')
+                                @include('frontend.item-stock.modal')
+    
+                                <!--begin: Datatable -->
+                                <div class="m_datatable2" id="second"></div>
+                                <!--end: Datatable -->
+
+
                                                             </div>
                     
                                                    
@@ -409,5 +392,7 @@
     <script src="{{ asset('js/frontend/accountcode.js')}}"></script>
 
     <script src="{{ asset('js/frontend/item.js')}}"></script>
+    <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
+    <script src="{{ asset('js/frontend/item-stock.js')}}"></script>
     <script src="{{ asset('js/frontend/bank.js')}}"></script>
 @endpush
