@@ -1,6 +1,6 @@
 var ItemStock = {
     init: function() {
-        $(".m_datatable").mDatatable({
+        $(".m_datatable2").mDatatable({
             data: {
                 type: "remote",
                 source: {

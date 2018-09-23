@@ -1,6 +1,6 @@
 var ItemUnit = {
     init: function() {
-        $(".m_datatable").mDatatable({
+        $(".m_datatable1").mDatatable({
             data: {
                 type: "remote",
                 source: {

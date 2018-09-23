@@ -89,6 +89,7 @@
                             @include('frontend.item.modal')
                             {{-- @include('frontend.bank.modal') --}}
                             @include('frontend.category.modal')
+                            @include('frontend.item-unit.modal')
 
                             <!--begin: Datatable -->
                             <div class="m_datatable" id="scrolling_both"></div>

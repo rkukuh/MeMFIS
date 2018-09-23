@@ -10,7 +10,9 @@
     style="{{ $style or '' }}"
     target="{{ $target or '' }}"
     data-toggle="{{ $data_toggle or 'modal' }}"
-    data-target="{{ $data_target or '#' }}">
+    data-target="{{ $data_target or '#' }}"
+    {{ $attribute or '' }}
+>
 
     <span>
         <i class="la la-{{ $icon or 'plus'}}"></i>
