@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{route('frontend.taskcardpackage.index')}}" class="m-nav__link">
+                        <a href="{{ route('frontend.taskcard-package.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 TaskCard Package
                             </span>
@@ -79,7 +79,7 @@
                             </div>
                             <!--end: Search Form -->
 
-                            @include('frontend.taskcardpackage.modal')
+                            @include('frontend.taskcard-package.modal')
 
                             <!--begin: Datatable -->
                             <div class="m_datatable" id="first"></div>

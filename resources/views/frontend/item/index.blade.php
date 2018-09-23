@@ -29,6 +29,7 @@
         </div>
     </div>
     <!-- END: Subheader -->
+
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -67,9 +68,16 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('size', 'md')
-                                            @slot('text', 'Add Item')
                                             @slot('color', 'primary')
+                                            @slot('text', 'Add Item Modal')
                                             @slot('data_target', '#modal_item')
+                                        @endcomponent
+
+                                        @component('frontend.common.buttons.create')
+                                            @slot('size', 'md')
+                                            @slot('color', 'primary')
+                                            @slot('text', 'Add Item New Page')
+                                            @slot('href', route('frontend.item.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -79,7 +87,7 @@
                             <!--end: Search Form -->
 
                             @include('frontend.item.modal')
-                            @include('frontend.bank.modal')
+                            {{-- @include('frontend.bank.modal') --}}
                             @include('frontend.category.modal')
 
                             <!--begin: Datatable -->

@@ -1,10 +1,9 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Name 
-        @component('frontend.common.label.optional')
-        @endcomponent
+            Name  @include('frontend.common.label.optional')
         </label>
+
         @component('frontend.common.input.text')
             @slot('text', 'Name')
             @slot('name', 'name')
@@ -12,10 +11,9 @@
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Code
-        @component('frontend.common.label.required')
-        @endcomponent
+            Code @include('frontend.common.label.required')
         </label>
+
         @component('frontend.common.input.text')
             @slot('text', 'Code')
             @slot('name', 'code')
@@ -25,10 +23,9 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            NPWP
-        @component('frontend.common.label.optional')
-        @endcomponent
+            NPWP @include('frontend.common.label.optional')
         </label>
+
         @component('frontend.common.input.text')
             @slot('text', 'NPWP')
             @slot('name', 'npwp')
@@ -36,10 +33,9 @@
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            NPWP Address
-        @component('frontend.common.label.optional')
-        @endcomponent
+            NPWP Address @include('frontend.common.label.optional')
         </label>
+
         @component('frontend.common.input.textarea')
             @slot('text', 'NPWP Address')
             @slot('name', 'npwpaddress')
@@ -51,10 +47,9 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            ToP
-        @component('frontend.common.label.required')
-        @endcomponent
+            ToP @include('frontend.common.label.required')
         </label>
+
         @component('frontend.common.input.text')
             @slot('text', 'ToP')
             @slot('name', 'top')
@@ -62,16 +57,16 @@
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Type
-        @component('frontend.common.label.optional')
-        @endcomponent
+            Type @include('frontend.common.label.optional')
         </label>
+
         @component('frontend.common.input.select')
+            @slot('id', 'type')
             @slot('text', 'Type')
             @slot('name', 'id_type')
-            @slot('id', 'm_select2_3')
             @slot('style', 'width:100%')
         @endcomponent
+
         @component('frontend.common.buttons.create-new')
             @slot('size', 'sm')
             @slot('text', 'add Type')
@@ -82,16 +77,16 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Number
-        @component('frontend.common.label.optional')
-        @endcomponent
+            Number @include('frontend.common.label.optional')
         </label>
+
         @component('frontend.common.input.select')
+            @slot('id', 'number')
             @slot('text', 'Number')
             @slot('name', 'id_number')
-            @slot('id', 'm_select2_4')
             @slot('style', 'width:100%')
         @endcomponent
+
         @component('frontend.common.buttons.create-new')
             @slot('size', 'sm')
             @slot('text', 'add Number')
@@ -100,10 +95,9 @@
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Active *
-        @component('frontend.common.label.optional')
-        @endcomponent
+            Active * @include('frontend.common.label.optional')
         </label>
+
         @component('frontend.common.input.checkbox')
             @slot('text', 'Active')
             @slot('name', 'active')
@@ -113,21 +107,26 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            AccountCode
-        @component('frontend.common.label.optional')
-        @endcomponent
+            AccountCode @include('frontend.common.label.optional')
         </label>
-        @component('frontend.common.input.text')
+
+        @component('frontend.common.input.select')
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
+            @slot('id', 'accountcode')
+            @slot('style', 'width:100%')
         @endcomponent
+
+        {{-- @component('frontend.common.input.text')
+            @slot('text', 'AccountCode')
+            @slot('name', 'accountcode')
+        @endcomponent --}}
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            Leveling
-        @component('frontend.common.label.optional')
-        @endcomponent
+            Leveling @include('frontend.common.label.optional')
         </label>
+
         @component('frontend.common.input.text')
             @slot('text', 'Leveling')
             @slot('name', 'leveling')
@@ -137,10 +136,9 @@
 <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
-            xType
-        @component('frontend.common.label.optional')
-        @endcomponent
+            xType @include('frontend.common.label.optional')
         </label>
+
         <div id="m_repeater_1c">
             <div class="" id="m_repeater_1c">
                 <div data-repeater-list="">
@@ -148,9 +146,9 @@
                         <div class="m-form__group row">
                             <div class="col-md-0">
                                 @component('frontend.common.input.text')
+                                    @slot('id', 'xtype')
                                     @slot('text', 'xType')
                                     @slot('name', 'xtype')
-                                    @slot('id', 'xtype')
                                 @endcomponent
                             </div>
                             <div class="col-md-1">

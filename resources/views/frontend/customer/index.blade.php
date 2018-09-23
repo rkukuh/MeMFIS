@@ -67,9 +67,9 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Add Customer')
-                                            @slot('color', 'primary')
                                             @slot('size', 'md')
+                                            @slot('color', 'primary')
+                                            @slot('text', 'Add Customer')
                                             @slot('data_target', '#modal_customer')
                                         @endcomponent
 
@@ -94,11 +94,11 @@
     </div>
 @endsection
 
-
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
+    <script src="{{ asset('js/frontend/accountcode.js')}}"></script>
 
     <script src="{{ asset('js/frontend/customer.js')}}"></script>
     <script src="{{ asset('js/frontend/address.js')}}"></script>

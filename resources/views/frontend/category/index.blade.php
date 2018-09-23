@@ -72,6 +72,7 @@
                                             @slot('size', 'md')
                                             @slot('data_target', '#modal_category')
                                         @endcomponent
+
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
@@ -97,6 +98,8 @@
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     {{-- <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/select2.js')}}"></script> --}}
+    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
+    <script src="{{ asset('js/frontend/accountcode.js')}}"></script>
 
     <script src="{{ asset('js/frontend/category.js')}}"></script>
 @endpush

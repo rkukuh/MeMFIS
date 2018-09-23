@@ -94,11 +94,11 @@
     </div>
 @endsection
 
-
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
+    <script src="{{ asset('js/frontend/accountcode.js')}}"></script>
 
     <script src="{{ asset('js/frontend/supplier.js')}}"></script>
 @endpush

@@ -14,16 +14,22 @@
                     <div class="m-portlet__body">
                         <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
                             <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#general" role="tab"><i
-                                       class="la la-book"></i> General</a>
+                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#general" role="tab">
+                                    <i class="la la-book"></i>
+                                    General
+                                </a>
                             </li>
                             <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#address" role="tab"><i class="la la-map"></i>
-                                    Address</a>
+                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#address" role="tab">
+                                    <i class="la la-map"></i>
+                                    Address
+                                </a>
                             </li>
                             <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#contact" role="tab"><i class="la la-phone"></i>
-                                    Contact</a>
+                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#contact" role="tab">
+                                    <i class="la la-phone"></i>
+                                    Contact
+                                </a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -38,7 +44,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
@@ -55,8 +60,8 @@
                         @endcomponent
                     </div>
                 </form>
-            </div>
 
+            </div>
         </div>
     </div>
 </div>

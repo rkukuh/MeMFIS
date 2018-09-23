@@ -78,6 +78,7 @@
                                 </div>
                             </div>
                             <!--end: Search Form -->
+
                             @include('frontend.quotation.modal')
                             @include('frontend.workpackage.modal')
                             @include('frontend.taskcardpackage.modal')

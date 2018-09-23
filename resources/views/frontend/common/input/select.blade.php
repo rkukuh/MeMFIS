@@ -6,7 +6,7 @@
     style="{{ $style or '' }}">
 
     <option value="">
-        --- Select {{ $entity or '' }} ---
+        &mdash; Select {{ $entity or '' }} &mdash;
     </option>
 </select>
 

@@ -9,16 +9,16 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Code @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
@@ -26,10 +26,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Warehouse
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Warehouse @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Warehouse')
                                     @slot('name', 'warehouse')
@@ -47,10 +46,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Max
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Max @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.number')
                                     @slot('text', 'Max')
                                     @slot('name', 'max')
@@ -58,10 +56,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Min
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Min @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.number')
                                     @slot('text', 'Min')
                                     @slot('name', 'min')
@@ -85,6 +82,7 @@
                         @endcomponent
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
