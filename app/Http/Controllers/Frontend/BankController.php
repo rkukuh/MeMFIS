@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Bank;
-use Illuminate\Http\Request;
+use App\model\ListUtil;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\BankStore;
-use App\model\ListUtil;
+use App\Http\Requests\Frontend\BankUpdate;
 
 class BankController extends Controller
 {
@@ -17,9 +17,10 @@ class BankController extends Controller
      */
     public function index()
     {
-        $Banks = Audits::selectRaw('id, CONCAT(code," - ",name) as full_name')
-                ->pluck('full_name', 'id');
-        return json_encode($Banks);
+        $banks = Bank::selectRaw('id, CONCAT(code, " - ", name) as full_name')
+                     ->pluck('full_name', 'id');
+
+        return json_encode($banks);
     }
 
     /**
@@ -73,11 +74,11 @@ class BankController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\BankUpdate  $request
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bank $bank)
+    public function update(BankUpdate $request, Bank $bank)
     {
         //
     }
