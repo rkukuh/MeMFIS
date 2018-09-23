@@ -1,10 +1,9 @@
 <div class="form-group m-form__group row ">
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Code
-            @component('frontend.common.label.required')
-            @endcomponent
+                Code @include('frontend.common.label.required')
             </label>
+
             @component('frontend.common.input.text')
                 @slot('text', 'Code')
                 @slot('name', 'code')
@@ -12,10 +11,9 @@
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Name
-            @component('frontend.common.label.optional')
-            @endcomponent
+                Name @include('frontend.common.label.optional')
             </label>
+
             @component('frontend.common.input.text')
                 @slot('text', 'Name')
                 @slot('name', 'name')
@@ -25,10 +23,9 @@
     <div class="form-group m-form__group row ">
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Barcode
-            @component('frontend.common.label.optional')
-            @endcomponent
+                Barcode @include('frontend.common.label.optional')
             </label>
+
             @component('frontend.common.input.text')
                 @slot('text', 'Barcode')
                 @slot('name', 'barcode')
@@ -36,10 +33,9 @@
         </div>
         {{-- <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Bank
-            @component('frontend.common.label.optional')
-            @endcomponent
+                Bank @include('frontend.common.label.optional')
             </label>
+
             @component('frontend.common.input.select')
                 @slot('text', 'Bank')
                 @slot('name', 'bank')
@@ -55,10 +51,9 @@
         </div> --}}
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Category
-            @component('frontend.common.label.required')
-            @endcomponent
+                Category @include('frontend.common.label.required')
             </label>
+
             @component('frontend.common.input.select')
                 @slot('text', 'Category')
                 @slot('name', 'category')
@@ -76,10 +71,9 @@
     <div class="form-group m-form__group row ">
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Description
-            @component('frontend.common.label.optional')
-            @endcomponent
+                Description @include('frontend.common.label.optional')
             </label>
+
             @component('frontend.common.input.textarea')
                 @slot('rows', '3')
                 @slot('name', 'description')
@@ -88,10 +82,9 @@
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Active
-            @component('frontend.common.label.optional')
-            @endcomponent
+                Active @include('frontend.common.label.optional')
             </label>
+
             @component('frontend.common.input.checkbox')
                 @slot('text', 'Active')
                 @slot('name', 'active')
@@ -101,10 +94,9 @@
     <div class="form-group m-form__group row ">
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                IsPPn
-            @component('frontend.common.label.required')
-            @endcomponent
+                IsPPn @include('frontend.common.label.required')
             </label>
+
             @component('frontend.common.input.checkbox')
                 @slot('text', 'IsPPn')
                 @slot('name', 'isppn')
@@ -133,10 +125,9 @@
     <div class="form-group m-form__group row ">
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                xPicture
-            @component('frontend.common.label.optional')
-            @endcomponent
+                xPicture @include('frontend.common.label.optional')
             </label>
+
             @component('frontend.common.input.upload')
                 @slot('text', 'xPicture')
                 @slot('name', 'xpicture')
@@ -144,10 +135,9 @@
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                AccountCode
-            @component('frontend.common.label.optional')
-            @endcomponent
+                AccountCode @include('frontend.common.label.optional')
             </label>
+
             @component('frontend.common.input.text')
                 @slot('text', 'AccountCode')
                 @slot('name', 'accountcode')
