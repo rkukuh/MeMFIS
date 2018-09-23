@@ -16,9 +16,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Holder Name
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Holder Name @include('frontend.common.label.required')
                                 </label>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Holder Name')
@@ -27,9 +25,7 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Account No
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Account Number @include('frontend.common.label.required')
                                 </label>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Account No')
