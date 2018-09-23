@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Department;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\DepartmentStore;
+use App\Http\Requests\Frontend\DepartmentUpdate;
 
 class DepartmentController extends Controller
 {
@@ -16,8 +16,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $Departments = Department::pluck('name', 'id');
-        return json_encode($Departments);
+        $departments = Department::pluck('name', 'id');
+
+        return json_encode($departments);
     }
 
     /**
@@ -33,16 +34,17 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\DepartmentStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(DepartmentStore $request)
     {
-        $Department = Department::create([
+        $department = Department::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
-        return response()->json($Department);
+
+        return response()->json($department);
     }
 
     /**
@@ -70,11 +72,11 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\DepartmentUpdate  $request
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(DepartmentUpdate $request, Department $department)
     {
         //
     }
