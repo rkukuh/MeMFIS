@@ -268,6 +268,24 @@
                                                             </div>
         
                                                     </div>
+                                                    <div class="form-group m-form__group row ">
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('size', 'md')
+                                                        @slot('class', 'add22')
+                                                    @endcomponent
+
+                                                    @component('frontend.common.buttons.reset')
+                                                        @slot('size', 'md')
+                                                    @endcomponent
+
+                                                    @component('frontend.common.buttons.close')
+                                                        @slot('size', 'md')
+                                                        @slot('data_dismiss', 'modal')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
         
                                     <!--begin: Datatable -->
@@ -303,6 +321,7 @@
                                                         
                                                         <div class="col-xl-5 order-1 order-xl-2 m--align-right">
                                                             @component('frontend.common.buttons.create-new')
+                                                                @slot('id', 'item-unit')
                                                                 @slot('size', 'md')
                                                                 @slot('color', 'primary')
                                                                 @slot('attribute', 'disabled')
@@ -350,6 +369,7 @@
                                        
                                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                             @component('frontend.common.buttons.create-new')
+                                                @slot('id', 'item-stock')
                                                 @slot('size', 'md')
                                                 @slot('color', 'primary')
                                                 @slot('attribute', 'disabled')
@@ -390,9 +410,9 @@
     {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/accountcode.js')}}"></script>
+    <script src="{{ asset('js/frontend/bank.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/item.js')}}"></script>
+    <script src="{{ asset('js/frontend/item.js') }}"></script>
     <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
     <script src="{{ asset('js/frontend/item-stock.js')}}"></script>
-    <script src="{{ asset('js/frontend/bank.js')}}"></script>
 @endpush
