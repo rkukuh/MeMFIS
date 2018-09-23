@@ -1,90 +1,32 @@
-<div class="form-group m-form__group row ">
-        {{-- <div class="col-sm-6 col-md-6 col-lg-6">
-            <label class="form-control-label">
-                Code
-            @component('frontend.common.label.required')
-            @endcomponent
-            </label>
-            @component('frontend.common.input.text')
-            @slot('text', 'Code')
-            @slot('name', 'code')
-            @endcomponent
-        </div> --}}
-        <div class="col-sm-6 col-md-6 col-lg-6">
-            <label class="form-control-label">
-                Unit
-            @component('frontend.common.label.required')
-            @endcomponent
-            </label>
-            @component('frontend.common.input.select')
-            @slot('text', 'Unit')
-            @slot('name', 'id_unit')
-            @slot('id', 'unit')
-            @slot('style', 'width:100%')
-            @endcomponent
-        </div>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-                <label class="form-control-label">
-                    Qty
-                @component('frontend.common.label.required')
-                @endcomponent
-                </label>
-                @component('frontend.common.input.number')
-                @slot('text', 'Qty')
-                @slot('name', 'qty')
-                @endcomponent
-            </div>
-    </div>
-    <div class="form-group m-form__group row ">
-       
-        <div class="col-sm-6 col-md-6 col-lg-6">
-            <label class="form-control-label">
-                Purchasing Price
-            @component('frontend.common.label.required')
-            @endcomponent
-            </label>
-            @component('frontend.common.input.number')
-            @slot('name', 'purchasingprice')
-            @slot('text', 'Purchasing Price')
-            @endcomponent
-        </div>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-                <label class="form-control-label">
-                    SellingPrice
-                @component('frontend.common.label.required')
-                @endcomponent
-                </label>
-                <div id="m_repeater_1a">
-                    <div class="" id="m_repeater_1a">
-                        <div data-repeater-list="">
-                            <div data-repeater-item class="row">
-                                <div class="m-form__group row">
-                                    <div class="col-md-0">
-                                        @component('frontend.common.input.text')
-                                        @slot('name', 'sellingprice')
-                                        @slot('text', 'Selling Price')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-md-1">
-                                        <div data-repeater-delete="" class="btn-sm btn btn-danger">
-                                            <span>
-                                                <i class="la la-trash-o"></i>
-                                                <span>Delete</span>
-                                            </span>
-                                        </div>
-                                    </div>
+<div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+        <div class="row align-items-center">
+                <div class="col-xl-8 order-2 order-xl-1">
+                        <div class="form-group m-form__group row align-items-center">
+                            <div class="col-md-4">
+                                <div class="m-input-icon m-input-icon--left">
+                                    <input type="text" class="form-control m-input" placeholder="Search..."
+                                        id="generalSearch">
+                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span><i class="la la-search"></i></span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="m-form__group form-group row">
-                        <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
-                            <span>
-                                <i class="la la-plus"></i>
-                                <span>Add</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                @component('frontend.common.buttons.create-new')
+                    @slot('size', 'md')
+                    @slot('color', 'primary')
+                    @slot('text', 'Add Item Unit')
+                    @slot('data_target', '#modal_itemsunit')
+                @endcomponent
+
+                <div class="m-separator m-separator--dashed d-xl-none"></div>
             </div>
+        </div>
     </div>
+    <!--end: Search Form -->
+
+
+    <!--begin: Datatable -->
+    {{-- <div class="m_datatable" id="scrolling_both"></div> --}}
