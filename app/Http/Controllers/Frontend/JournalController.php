@@ -17,14 +17,14 @@ class JournalController extends Controller
      */
     public function getJournals()
     {
-        $Journal = Journal::All();
+        $journals = Journal::All();
 
-        $data = $alldata = json_decode($Journal);
+        $data = $alldata = json_decode($journals);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
-            ? $datatable['query']['generalSearch'] : '';
+                    ? $datatable['query']['generalSearch'] : '';
 
         if ( ! empty($filter)) {
             $data = array_filter($data, function ($a) use ($filter) {
@@ -136,7 +136,7 @@ class JournalController extends Controller
      */
     public function store(JournalStore $request)
     {
-        $Journal = Journal::create([
+        $journal = Journal::create([
             'code' => $request->code,
             'name' => $request->name,
             'type' => $request->type,
@@ -144,7 +144,7 @@ class JournalController extends Controller
             'description' => $request->description,
         ]);
 
-        return response()->json($Journal);
+        return response()->json($journal);
     }
 
     /**
