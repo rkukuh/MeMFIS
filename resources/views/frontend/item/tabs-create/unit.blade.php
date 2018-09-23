@@ -1,10 +1,9 @@
 <div class="form-group m-form__group row ">
         {{-- <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Code
-            @component('frontend.common.label.required')
-            @endcomponent
+                Code @include('frontend.common.label.required')
             </label>
+
             @component('frontend.common.input.text')
             @slot('text', 'Code')
             @slot('name', 'code')
@@ -12,48 +11,44 @@
         </div> --}}
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Unit
-            @component('frontend.common.label.required')
-            @endcomponent
+                Unit @include('frontend.common.label.required')
             </label>
+
             @component('frontend.common.input.select')
-            @slot('text', 'Unit')
-            @slot('name', 'id_unit')
-            @slot('id', 'unit')
-            @slot('style', 'width:100%')
+                @slot('id', 'unit')
+                @slot('text', 'Unit')
+                @slot('name', 'id_unit')
+                @slot('style', 'width:100%')
             @endcomponent
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
                 <label class="form-control-label">
-                    Qty
-                @component('frontend.common.label.required')
-                @endcomponent
+                    Qty @include('frontend.common.label.required')
                 </label>
+
                 @component('frontend.common.input.number')
-                @slot('text', 'Qty')
-                @slot('name', 'qty')
+                    @slot('text', 'Qty')
+                    @slot('name', 'qty')
                 @endcomponent
             </div>
     </div>
     <div class="form-group m-form__group row ">
-       
+
         <div class="col-sm-6 col-md-6 col-lg-6">
             <label class="form-control-label">
-                Purchasing Price
-            @component('frontend.common.label.required')
-            @endcomponent
+                Purchasing Price @include('frontend.common.label.required')
             </label>
+
             @component('frontend.common.input.number')
-            @slot('name', 'purchasingprice')
-            @slot('text', 'Purchasing Price')
+                @slot('name', 'purchasingprice')
+                @slot('text', 'Purchasing Price')
             @endcomponent
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
                 <label class="form-control-label">
-                    SellingPrice
-                @component('frontend.common.label.required')
-                @endcomponent
+                    SellingPrice @include('frontend.common.label.required')
                 </label>
+
                 <div id="m_repeater_1a">
                     <div class="" id="m_repeater_1a">
                         <div data-repeater-list="">
@@ -61,8 +56,8 @@
                                 <div class="m-form__group row">
                                     <div class="col-md-0">
                                         @component('frontend.common.input.text')
-                                        @slot('name', 'sellingprice')
-                                        @slot('text', 'Selling Price')
+                                            @slot('name', 'sellingprice')
+                                            @slot('text', 'Selling Price')
                                         @endcomponent
                                     </div>
                                     <div class="col-md-1">
