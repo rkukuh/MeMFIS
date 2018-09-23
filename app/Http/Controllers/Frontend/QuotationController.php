@@ -152,9 +152,7 @@ class QuotationController extends Controller
      */
     public function show(Quotation $quotation)
     {
-        $quotations = Quotation::find($quotation);
-
-        return response()->json($quotations);
+        return response()->json($quotation);
     }
 
     /**
@@ -165,9 +163,7 @@ class QuotationController extends Controller
      */
     public function edit(Quotation $quotation)
     {
-        $quotations = Quotation::find($quotation);
-
-        return response()->json($quotations);
+        return response()->json($quotation);
     }
 
     /**
@@ -194,7 +190,7 @@ class QuotationController extends Controller
      */
     public function destroy(Quotation $quotation)
     {
-        $quotation = Quotation::find($quotation)->delete();
+        $quotation->delete();
 
         return response()->json($quotation);
     }

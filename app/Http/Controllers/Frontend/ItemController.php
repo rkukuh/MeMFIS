@@ -151,9 +151,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        $items = Item::find($item);
-
-        return response()->json($items);
+        return response()->json($item);
     }
 
     /**
@@ -164,9 +162,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        $items = Item::find($item);
-
-        return response()->json($items);
+        return response()->json($item);
     }
 
     /**
@@ -193,7 +189,7 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        $item = Item::find($item)->delete();
+        $item->delete();
 
         return response()->json($item);
     }

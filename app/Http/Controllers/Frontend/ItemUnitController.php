@@ -152,9 +152,7 @@ class ItemUnitController extends Controller
      */
     public function show(ItemUnit $itemUnit)
     {
-        $itemUnits = ItemUnit::find($itemUnit);
-
-        return response()->json($itemUnits);
+        return response()->json($itemUnit);
     }
 
     /**
@@ -165,9 +163,7 @@ class ItemUnitController extends Controller
      */
     public function edit(ItemUnit $itemUnit)
     {
-        $itemUnits = ItemUnit::find($itemUnit);
-
-        return response()->json($itemUnits);
+        return response()->json($itemUnit);
     }
 
     /**
@@ -194,7 +190,7 @@ class ItemUnitController extends Controller
      */
     public function destroy(ItemUnit $itemUnit)
     {
-        $itemUnit = ItemUnit::find($itemUnit)->delete();
+        $itemUnit->delete();
 
         return response()->json($itemUnit);
     }

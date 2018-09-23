@@ -151,9 +151,7 @@ class ItemStockController extends Controller
      */
     public function show(ItemStock $itemStock)
     {
-        $itemStocks = ItemStock::find($itemStock);
-
-        return response()->json($itemStocks);
+        return response()->json($itemStock);
     }
 
     /**
@@ -164,9 +162,7 @@ class ItemStockController extends Controller
      */
     public function edit(ItemStock $itemStock)
     {
-        $itemStocks = ItemStock::find($itemStock);
-
-        return response()->json($itemStocks);
+        return response()->json($itemStock);
     }
 
     /**
@@ -193,7 +189,7 @@ class ItemStockController extends Controller
      */
     public function destroy(ItemStock $itemStock)
     {
-        $itemStock = ItemStock::find($itemStock)->delete();
+        $itemStock->delete();
 
         return response()->json($itemStock);
     }

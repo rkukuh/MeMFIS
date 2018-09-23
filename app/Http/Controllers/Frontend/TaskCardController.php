@@ -152,8 +152,6 @@ class TaskCardController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        $taskCard = TaskCard::find($taskCard);
-
         return response()->json($taskCard);
     }
 
@@ -165,8 +163,6 @@ class TaskCardController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
-        $taskCard = TaskCard::find($taskCard);
-
         return response()->json($taskCard);
     }
 
@@ -194,7 +190,7 @@ class TaskCardController extends Controller
      */
     public function destroy(TaskCard $taskCard)
     {
-        $taskcard = TaskCard::find($taskCard)->delete();
+        $taskCard->delete();
 
         return response()->json($taskcard);
     }

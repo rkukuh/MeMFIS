@@ -152,10 +152,7 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        $supplier = Supplier::find($supplier);
-
-        // return response()->json($supplier);
-        return view('frontend.supplier.show');
+        return view('frontend.supplier.show', $supplier);
     }
 
     /**
@@ -166,8 +163,6 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        $supplier = Supplier::find($supplier);
-
         return response()->json($supplier);
     }
 
@@ -195,7 +190,7 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        $supplier = Supplier::find($supplier)->delete();
+        $supplier->delete();
 
         return response()->json($supplier);
     }

@@ -152,9 +152,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        // $customers = Customer::find($customer);
-
-        return view('frontend.customer.show');
+        return view('frontend.customer.show', $customer);
     }
 
     /**
@@ -165,9 +163,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        // $customers = Customer::find($customer);
-
-        return response()->json($customers);
+        return response()->json($customer);
     }
 
     /**
@@ -194,7 +190,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer = Customer::find($customer)->delete();
+        $customer->delete();
 
         return response()->json($customer);
     }

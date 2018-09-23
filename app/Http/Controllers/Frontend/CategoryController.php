@@ -151,9 +151,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $categories = Categori::find($category);
-
-        return response()->json($categories);
+        return response()->json($category);
     }
 
     /**
@@ -164,9 +162,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Categori::find($category);
-
-        return response()->json($categories);
+        return response()->json($category);
     }
 
     /**
@@ -193,7 +189,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category = Category::find($category)->delete();
+        $category->delete();
 
         return response()->json($category);
     }
