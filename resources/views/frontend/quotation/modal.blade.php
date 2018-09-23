@@ -9,31 +9,32 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="QuotationForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Customer *
+                                    Customer @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.select')
+                                    @slot('id', 'customer')
                                     @slot('text', 'Customer')
                                     @slot('name', 'customer')
-                                    @slot('id', 'customer')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Currency
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Currency @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.select')
+                                    @slot('id', 'currency')
                                     @slot('text', 'Currency')
                                     @slot('name', 'currency')
-                                    @slot('id', 'currency')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -41,10 +42,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Valid Until
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Valid Until @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.datepicker')
                                     @slot('rows', '3')
                                     @slot('name', 'description')
@@ -53,10 +53,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Subject
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Subject @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
                                     @slot('name', 'subject')
@@ -67,10 +66,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Workpackage
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Workpackage @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.select')
                                     @slot('id', 'm_select2_3')
                                     @slot('text', 'Workpackage')
@@ -86,10 +84,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Additonal
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Additonal @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.select')
                                     @slot('id', 'm_select2_4')
                                     @slot('text', 'Additional')
@@ -101,10 +98,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Term and Condition
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Term and Condition @include('frontend.common.label.required')
                                 </label>
+
 
                                 <div class="summernote" id="m_summernote_1"></div>
                             </div>
@@ -126,6 +122,7 @@
                         @endcomponent
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
