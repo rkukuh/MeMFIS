@@ -18,7 +18,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{route('frontend.supplier.index')}}" class="m-nav__link">
+                        <a href="{{ route('frontend.supplier.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Supplier
                             </span>
@@ -65,7 +65,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item m-tabs__item">
-                                    <a class="nav-link m-tabs__link" href="{{route('frontend.audit.index')}}"><i class="la la-info-circle"></i>
+                                    <a class="nav-link m-tabs__link" href="{{ route('frontend.audit.index') }}"><i class="la la-info-circle"></i>
                                         Auditable
                                     </a>
                                 </li>
