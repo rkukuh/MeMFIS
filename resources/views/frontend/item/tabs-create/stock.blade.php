@@ -1,12 +1,11 @@
 <div class="m-portlet__body">
         <div class="form-group m-form__group row ">
-            
+
             <div class="col-sm-6 col-md-6 col-lg-6">
                 <label class="form-control-label">
-                    Warehouse
-                @component('frontend.common.label.required')
-                @endcomponent
+                    Warehouse @include('frontend.common.label.required')
                 </label>
+
                 @component('frontend.common.input.select')
                     @slot('text', 'Warehouse')
                     @slot('name', 'warehouse')
@@ -22,10 +21,9 @@
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Max
-                    @component('frontend.common.label.required')
-                    @endcomponent
+                        Max @include('frontend.common.label.required')
                     </label>
+
                     @component('frontend.common.input.number')
                         @slot('text', 'Max')
                         @slot('name', 'max')
@@ -33,13 +31,12 @@
                 </div>
         </div>
         <div class="form-group m-form__group row ">
-            
+
             <div class="col-sm-6 col-md-6 col-lg-6">
                 <label class="form-control-label">
-                    Min
-                @component('frontend.common.label.required')
-                @endcomponent
+                    Min @include('frontend.common.label.required')
                 </label>
+
                 @component('frontend.common.input.number')
                     @slot('text', 'Min')
                     @slot('name', 'min')
