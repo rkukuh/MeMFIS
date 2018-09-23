@@ -18,6 +18,7 @@
                                 <label class="form-control-label">
                                     Holder Name @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Holder Name')
                                     @slot('name', 'holder_name')
@@ -27,6 +28,7 @@
                                 <label class="form-control-label">
                                     Account Number @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Account No')
                                     @slot('name', 'account_no')

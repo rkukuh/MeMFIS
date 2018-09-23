@@ -72,6 +72,7 @@
                                             @slot('size', 'md')
                                             @slot('data_target', '#modal_category')
                                         @endcomponent
+
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
