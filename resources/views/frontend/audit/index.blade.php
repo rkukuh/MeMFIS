@@ -86,8 +86,8 @@
 
 @push('footer-scripts')
     <script>
-        var tes = "<?php echo Auth::user()->id; ?>";
+        var tes = @php echo Auth::user()->id; @endphp;
     </script>
 
-    <script src="{{ asset('js/frontend/audit.js')}}"></script>
+    <script src="{{ asset('js/frontend/audit.js') }}"></script>
 @endpush
