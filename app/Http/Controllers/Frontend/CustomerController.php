@@ -136,11 +136,11 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
-        $Customer = Customer::create([
+        $customer = Customer::create([
             'name' => $request->name,
         ]);
 
-        return response()->json($Customer);
+        return response()->json($customer);
 
     }
 
@@ -207,7 +207,7 @@ class CustomerController extends Controller
      */
     public function list_filter($list, $args = array(), $operator = 'AND')
     {
-        if ( ! is_array($list) ) {
+        if ( ! is_array($list)) {
             return array();
         }
 
