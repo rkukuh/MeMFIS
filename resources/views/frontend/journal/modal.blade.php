@@ -8,84 +8,78 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!--begin::Form -->
+
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="JournalForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Code @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.text')
+                                    @slot('id', 'code')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
-                                    @slot('id', 'code')
                                     @slot('id_error', 'code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name
-                                @component('frontend.common.label.optional')
-                                @endcomponent
+                                    Name @include('frontend.common.label.optional')
                                 </label>
+
                                 @component('frontend.common.input.text')
+                                    @slot('id', 'name')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
-                                    @slot('id', 'name')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Type
-                                        @component('frontend.common.label.optional')
-                                        @endcomponent
-                                        </label>
-                                    @component('frontend.common.input.select')
-                                        @slot('text', 'Type')
-                                        @slot('name', 'type')
-                                        @slot('id', 'type')
-                                        @slot('style', 'width:100%')
-                                        @slot('type', 'text')
-                                    @endcomponent
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Level
-                                        @component('frontend.common.label.optional')
-                                        @endcomponent
-                                        </label>
-                                    @component('frontend.common.input.number')
-                                        @slot('text', 'Level')
-                                        @slot('name', 'level')
-                                        @slot('value', '1')
-                                        @slot('id_error', 'code')
-                                    @endcomponent
-                                    </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Description
-                                @component('frontend.common.label.optional')
-                                @endcomponent
+                                    Type @include('frontend.common.label.optional')
                                 </label>
+
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'type')
+                                    @slot('text', 'Type')
+                                    @slot('name', 'type')
+                                    @slot('type', 'text')
+                                    @slot('style', 'width:100%')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Level @include('frontend.common.label.optional')
+                                </label>
+
+                                @component('frontend.common.input.number')
+                                    @slot('value', '1')
+                                    @slot('text', 'Level')
+                                    @slot('name', 'level')
+                                    @slot('id_error', 'code')
+                                @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Description @include('frontend.common.label.optional')
+                                </label>
+
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
-                                    @slot('name', 'description')
                                     @slot('id', 'description')
+                                    @slot('name', 'description')
                                     @slot('text', 'Description')
                                     @slot('description', 'text')
                                 @endcomponent
                             </div>
                         </div>
-                        </div>
+                    </div>
                     <div class="modal-footer">
                         @component('frontend.common.buttons.close')
                             @slot('size', 'md')
@@ -100,6 +94,7 @@
                         @endcomponent
                     </div>
                 </form>
+
                </div>
             </div>
         </div>
