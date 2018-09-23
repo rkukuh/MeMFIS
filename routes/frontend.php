@@ -12,31 +12,31 @@ Route::name('frontend.')->group(function () {
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
 
         Route::resource('customer', 'CustomerController');
-        Route::get('/getcustomer','CustomerController@getCustomers')->name('getcustomers');
+        Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 
         Route::resource('category', 'CategoryController');
-        Route::get('/getcategories','CategoryController@getCategories')->name('getcategories');
+        Route::get('/get-categories','CategoryController@getCategories')->name('get-categories');
 
         Route::resource('item', 'ItemController');
-        Route::get('/getitems','ItemController@getItems')->name('getitems');
+        Route::get('/get-items','ItemController@getItems')->name('get-items');
 
         Route::resource('item-stock', 'ItemStockController');
-        Route::get('/getitem-stocks','ItemStockController@getItemStocks')->name('getitemstocks');
+        Route::get('/get-item-stocks','ItemStockController@getItemStocks')->name('get-itemstocks');
 
         Route::resource('item-unit', 'ItemUnitController');
-        Route::get('/getItem-units','ItemUnitController@getItemUnits')->name('getitemunits');
+        Route::get('/get-item-units','ItemUnitController@getItemUnits')->name('get-itemunits');
 
         Route::resource('warehouse', 'WarehouseController');
-        Route::get('/getwarehouses','WarehouseController@getWarehouses')->name('getwarehouses');
+        Route::get('/get-warehouses','WarehouseController@getWarehouses')->name('get-warehouses');
 
         Route::resource('supplier', 'SupplierController');
-        Route::get('/getsuppliers','SupplierController@getSuppliers')->name('getsuppliers');
+        Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');
 
         Route::get('/addres/country','AddresController@Country')->name('country');
         Route::get('/addres/city/{id}','AddresController@City')->name('city');
 
         Route::resource('audit', 'AuditController');
-        Route::get('/getaudit','AuditController@getAudits')->name('getaudits');
+        Route::get('/get-audits','AuditController@getAudits')->name('get-audits');
 
         Route::resource('bank', 'BankController');
         Route::resource('bankaccount', 'BankAccountController');
@@ -45,15 +45,15 @@ Route::name('frontend.')->group(function () {
         Route::resource('email', 'EmailController');
         Route::resource('department', 'DepartmentController');
         Route::resource('taskcard', 'TaskCardController');
-        Route::get('/gettaskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
+        Route::get('/get-taskcards', 'TaskCardController@getTaskCards')->name('get-taskcards');
         Route::resource('taskcard-package', 'TaskCardPackageController');
-        Route::get('/gettaskcardpackage', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
+        Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
         Route::resource('workpackage', 'WorkPackageController');
-        Route::get('/getworkpakages', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
+        Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
         Route::resource('quotation', 'QuotationController');
-        Route::get('/getquotation', 'QuotationController@getQuotations')->name('getquotation');
+        Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
         Route::resource('journal', 'JournalController');
-        Route::get('/getjournal', 'JournalController@getJournals')->name('getjournal');
+        Route::get('/get-journals', 'JournalController@getJournals')->name('get-journals');
 
         Route::resource('type', 'TypeController');
         Route::resource('accountcode', 'AccountCodeController');
