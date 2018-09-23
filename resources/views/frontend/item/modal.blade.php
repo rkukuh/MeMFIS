@@ -38,7 +38,7 @@
                                         @include('frontend.item.tabs-create.stock')
                                     </div>
                                     <div class="tab-pane" id="item-unit" role="tabpanel">
-                                            @include('frontend.item.tabs-create.unit')
+                                        @include('frontend.item.tabs-create.unit')
                                     </div>
                                 </div>
                     </div>
