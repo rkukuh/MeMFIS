@@ -46,8 +46,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('/department', 'DepartmentController');
         Route::resource('/taskcard', 'TaskCardController');
         Route::get('/gettaskcard', 'TaskCardController@getTaskCards')->name('gettaskcards');
-        Route::resource('/taskcardpackage', 'TaskCardPackageController');
-        Route::get('/gettcp', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
+        Route::resource('/taskcard-package', 'TaskCardPackageController');
+        Route::get('/gettaskcardpackage', 'TaskCardPackageController@getTaskCardPackage')->name('gettaskcardpackage');
         Route::resource('/workpackage', 'WorkPackageController');
         Route::get('/getworkpakages', 'WorkPackageController@getWorkPackage')->name('getworkpackage');
         Route::resource('/quotation', 'QuotationController');
@@ -58,7 +58,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('/type', 'TypeController');
         Route::resource('/accountcode', 'AccountCodeController');
 
-        
 
         Route::get('/quotation-doc', function () {
             $pdf = \PDF::loadView('frontend/form/quotation');
