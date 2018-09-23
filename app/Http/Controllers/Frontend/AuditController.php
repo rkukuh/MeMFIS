@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Audit;
+use App\model\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\model\ListUtil;
 
 class AuditController extends Controller
 {
