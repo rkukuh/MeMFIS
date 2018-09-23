@@ -15,8 +15,8 @@ class AccountCodeController extends Controller
      */
     public function index()
     {
-        $accountcode = Journal::
-        pluck('code', 'id');
+        $accountcode = Journal::pluck('code', 'id');
+
         return json_encode($accountcode);
 
     }
