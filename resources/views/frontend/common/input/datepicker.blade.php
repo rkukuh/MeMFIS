@@ -6,4 +6,5 @@
            {{$class or ''}}"
     style="{{$style or ''}}"
     placeholder="{{ $placeholder or '' }}"
-    readonly>
+    readonly
+>

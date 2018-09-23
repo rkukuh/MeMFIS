@@ -12,5 +12,4 @@
         <i class="la la-{{ $icon or 'plus'}}"></i>
         {{ $text or 'Add' }}
     </span>
-
 </a>
