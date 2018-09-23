@@ -142,7 +142,6 @@
         </tr>
     </table>
     <table width="100%">
-
         <tr>
             <td width="10%">
                 Subject
@@ -152,14 +151,11 @@
                     for Aircraft ATR72-600/PK-NYW Nam Air</b>
             </td>
         </tr>
-
     </table>
     <table width="100%">
-
         <tr>
             <td colspan="5" height="10"></td>
         </tr>
-
         <tr>
             <td width="10%">
             </td>
@@ -280,16 +276,13 @@
         </tr>
         <tr>
             <td width="10%" colspan="4">
-
             </td>
-
             <td width="20%">
                 ________________
             </td>
         </tr>
         <tr>
             <td width="10%">
-
             </td>
             <td width="5%" colspan="2">
             </td>
@@ -302,7 +295,6 @@
         </tr>
         <tr>
             <td width="10%">
-
             </td>
             <td width="5%" colspan="2">
             </td>
@@ -313,8 +305,6 @@
                 57.796.176
             </td>
         </tr>
-
-
     </table>
     <table>
         <tr>
