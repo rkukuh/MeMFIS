@@ -86,7 +86,6 @@ class CategoryController extends Controller
             'total'   => $total,
         ];
 
-
         if (isset($datatable['requestIds']) && filter_var($datatable['requestIds'], FILTER_VALIDATE_BOOLEAN)) {
             $meta['rowIds'] = array_map(function ($row) {
                 return $row->RecordID;
@@ -137,11 +136,11 @@ class CategoryController extends Controller
      */
     public function store(CategoryStore $request)
     {
-        $Category = Category::create([
+        $category = Category::create([
             //
         ]);
 
-        return response()->json($Category);
+        return response()->json($category);
     }
 
     /**
@@ -179,11 +178,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdate $request, Category $category)
     {
-        $Category = Category::find($category);
-        // $Category->name = $request->name;
-        // $Category->save();
+        $category = Category::find($category);
+        // $category->name = $request->name;
+        // $category->save();
 
-        return response()->json($Category);
+        return response()->json($category);
     }
 
     /**
@@ -194,9 +193,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $Category = Category::find($category)->delete();
+        $category = Category::find($category)->delete();
 
-        return response()->json($Category);
+        return response()->json($category);
     }
 
     /**
@@ -207,12 +206,12 @@ class CategoryController extends Controller
      */
     public function list_filter($list, $args = array(), $operator = 'AND')
     {
-      if ( ! is_array( $list )) {
-        return array();
-      }
+        if ( ! is_array($list)) {
+            return array();
+        }
 
-      $util = new ListUtil( $list );
+        $util = new ListUtil($list);
 
-      return $util->filter( $args, $operator );
+        return $util->filter($args, $operator);
     }
 }
