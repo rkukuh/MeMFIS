@@ -15,10 +15,9 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Code @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
@@ -26,10 +25,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name
-                                @component('frontend.common.label.required')
-                                @endcomponent
+                                    Name @include('frontend.common.label.required')
                                 </label>
+
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'bank_name')

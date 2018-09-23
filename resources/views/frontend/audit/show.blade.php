@@ -89,8 +89,7 @@
 
 @push('footer-scripts')
     <script>
-        var tes = "<?php echo "
-        Auth::user() - > role " ?>";
+        var tes = "<?php echo " Auth::user()-> role " ?>";
     </script>
 
     <script src="{{ asset('js/frontend/audit.js')}}"></script>
