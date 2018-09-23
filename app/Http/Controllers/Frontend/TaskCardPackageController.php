@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\model\ListUtil;
 use App\Models\TaskCardPackage;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardPackageStore;
 use App\Http\Requests\Frontend\TaskCardPackageUpdate;
-use App\model\ListUtil;
 
 class TaskCardPackageController extends Controller
 {
@@ -18,24 +17,28 @@ class TaskCardPackageController extends Controller
      */
     public function getTaskCardPackage()
     {
-        $TaskCardPackagw = TaskCardPackage::All();
+        $taskCardPackages = TaskCardPackage::All();
 
-        $data = $alldata = json_decode($TaskCardPackagw);
+        $data = $alldata = json_decode($taskCardPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
-            ? $datatable['query']['generalSearch'] : '';
-        if ( ! empty($filter)) {
+                    ? $datatable['query']['generalSearch'] : '';
+
+        if (! empty($filter)) {
             $data = array_filter($data, function ($a) use ($filter) {
                 return (boolean)preg_grep("/$filter/i", (array)$a);
             });
+
             unset($datatable['query']['generalSearch']);
         }
 
         $query = isset($datatable['query']) && is_array($datatable['query']) ? $datatable['query'] : null;
+
         if (is_array($query)) {
             $query = array_filter($query);
+
             foreach ($query as $key => $val) {
                 $data = $this->list_filter($data, [$key => $val]);
             }
@@ -52,7 +55,7 @@ class TaskCardPackageController extends Controller
         $total = count($data);
 
         usort($data, function ($a, $b) use ($sort, $field) {
-            if ( ! isset($a->$field) || ! isset($b->$field)) {
+            if (! isset($a->$field) || ! isset($b->$field)) {
                 return false;
             }
 
@@ -68,6 +71,7 @@ class TaskCardPackageController extends Controller
             $page   = max($page, 1);
             $page   = min($page, $pages);
             $offset = ($page - 1) * $perpage;
+
             if ($offset < 0) {
                 $offset = 0;
             }
@@ -81,7 +85,6 @@ class TaskCardPackageController extends Controller
             'perpage' => $perpage,
             'total'   => $total,
         ];
-
 
         if (isset($datatable['requestIds']) && filter_var($datatable['requestIds'], FILTER_VALIDATE_BOOLEAN)) {
             $meta['rowIds'] = array_map(function ($row) {
@@ -128,16 +131,17 @@ class TaskCardPackageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\TaskCardPackageStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(TaskCardPackageStore $request)
     {
-        $TaskCardPackage = TaskCardPackage::create([
+        $taskCardPackage = TaskCardPackage::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
-        return response()->json($TaskCardPackage);
+
+        return response()->json($taskCardPackage);
 
     }
 
@@ -149,8 +153,7 @@ class TaskCardPackageController extends Controller
      */
     public function show(TaskCardPackage $taskCardPackage)
     {
-        $TaskCardPackages = TaskCardPackage::find($taskCardPackage);
-        return response()->json($TaskCardPackages);
+        return response()->json($taskCardPackage);
     }
 
     /**
@@ -161,23 +164,23 @@ class TaskCardPackageController extends Controller
      */
     public function edit(TaskCardPackage $taskCardPackage)
     {
-        $TaskCardPackages = TaskCardPackage::find($taskCardPackage);
-        return response()->json($TaskCardPackages);
+        return response()->json($taskCardPackage);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\TaskCardPackageUpdate  $request
      * @param  \App\Models\TaskCardPackage  $taskCardPackage
      * @return \Illuminate\Http\Response
      */
     public function update(TaskCardPackageUpdate $request, TaskCardPackage $taskCardPackage)
     {
-        $TaskCardPackage = TaskCardPackage::find($taskCardPackage);
-        // $TaskCardPackage->name = $request->name;
-        // $TaskCardPackage->save();
-        return response()->json($TaskCardPackage);
+        $taskCardPackage = TaskCardPackage::find($taskCardPackage);
+        // $taskCardPackage->name = $request->name;
+        // $taskCardPackage->save();
+
+        return response()->json($taskCardPackage);
     }
 
     /**
@@ -188,8 +191,9 @@ class TaskCardPackageController extends Controller
      */
     public function destroy(TaskCardPackage $taskCardPackage)
     {
-        $TaskCardPackage = TaskCardPackage::find($taskCardPackage)->delete();
-        return response()->json($TaskCardPackage);
+        $taskCardPackage->delete();
+
+        return response()->json($taskCardPackage);
     }
 
     /**
@@ -198,12 +202,14 @@ class TaskCardPackageController extends Controller
      * @param $list, $args, $operator
      * @return \Illuminate\Http\Response
      */
-    public function list_filter( $list, $args = array(), $operator = 'AND' )
+    public function list_filter($list, $args = array(), $operator = 'AND')
     {
-      if ( ! is_array( $list ) ) {
-        return array();
-      }
-      $util = new ListUtil( $list );
-      return $util->filter( $args, $operator );
+        if (! is_array($list)) {
+            return array();
+        }
+
+        $util = new ListUtil($list);
+
+        return $util->filter($args, $operator);
     }
 }

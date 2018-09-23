@@ -26,7 +26,7 @@ class SupplierController extends Controller
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
                     ? $datatable['query']['generalSearch'] : '';
 
-        if ( ! empty($filter)) {
+        if (! empty($filter)) {
             $data = array_filter($data, function ($a) use ($filter) {
                 return (boolean)preg_grep("/$filter/i", (array)$a);
             });
@@ -55,7 +55,7 @@ class SupplierController extends Controller
         $total = count($data);
 
         usort($data, function ($a, $b) use ($sort, $field) {
-            if ( ! isset($a->$field) || ! isset($b->$field)) {
+            if (! isset($a->$field) || ! isset($b->$field)) {
                 return false;
             }
 
@@ -152,10 +152,7 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        $supplier = Supplier::find($supplier);
-
-        // return response()->json($supplier);
-        return view('frontend.supplier.show');
+        return view('frontend.supplier.show', $supplier);
     }
 
     /**
@@ -166,8 +163,6 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        $supplier = Supplier::find($supplier);
-
         return response()->json($supplier);
     }
 
@@ -195,7 +190,7 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        $supplier = Supplier::find($supplier)->delete();
+        $supplier->delete();
 
         return response()->json($supplier);
     }
@@ -208,7 +203,7 @@ class SupplierController extends Controller
      */
     public function list_filter($list, $args = array(), $operator = 'AND')
     {
-        if ( ! is_array($list)) {
+        if (! is_array($list)) {
             return array();
         }
 
