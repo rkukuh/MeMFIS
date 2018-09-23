@@ -179,11 +179,11 @@ class CustomerController extends Controller
      */
     public function update(CustomerUpdate $request, Customer $customer)
     {
-        $Customer = Customer::find($customer);
-        $Customer->name = $request->name;
-        $Customer->save();
+        $customer = Customer::find($customer);
+        $customer->name = $request->name;
+        $customer->save();
 
-        return response()->json($Customer);
+        return response()->json($customer);
     }
 
     /**
@@ -194,9 +194,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $Customer = Customer::find($customer)->delete();
+        $customer = Customer::find($customer)->delete();
 
-        return response()->json($Customer);
+        return response()->json($customer);
     }
 
     /**

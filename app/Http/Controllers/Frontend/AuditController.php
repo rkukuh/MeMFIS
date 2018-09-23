@@ -196,8 +196,8 @@ class AuditController extends Controller
             return array();
         }
 
-        $util = new ListUtil( $list );
+        $util = new ListUtil($list);
 
-        return $util->filter( $args, $operator );
+        return $util->filter($args, $operator);
     }
 }

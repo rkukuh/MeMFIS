@@ -41,12 +41,12 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        $Bank = Bank::create([
+        $bank = Bank::create([
             'code' => $request->code,
             'name' => $request->name,
         ]);
 
-        return response()->json($Bank);
+        return response()->json($bank);
     }
 
     /**

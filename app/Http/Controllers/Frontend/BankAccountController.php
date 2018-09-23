@@ -40,12 +40,12 @@ class BankAccountController extends Controller
      */
     public function store(BankAccountStore $request)
     {
-        $BankAccount = BankAccount::create([
+        $bankAccount = BankAccount::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
 
-        return response()->json($BankAccount);
+        return response()->json($bankAccount);
     }
 
     /**
