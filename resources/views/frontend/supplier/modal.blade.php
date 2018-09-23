@@ -44,7 +44,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
@@ -61,8 +60,8 @@
                         @endcomponent
                     </div>
                 </form>
-            </div>
 
+            </div>
         </div>
     </div>
 </div>
