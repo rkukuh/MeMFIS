@@ -7,7 +7,7 @@ var TaskcardPackageModal = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getaudit",
+                        url: "/get-audit",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;

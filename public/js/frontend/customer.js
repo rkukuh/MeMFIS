@@ -7,7 +7,7 @@ var Customer = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getcustomer",
+                        url: "/get-customer",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;

@@ -7,7 +7,7 @@ var Item = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getitem",
+                        url: "/get-item",
                         map: function (raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -142,8 +142,39 @@ var Item = {
             var formData = registerForm.serialize();
             // var tes = $("input[name=name]").val();
             $("#name-error").html("");
-            document.getElementById("item-unit").removeAttribute('disabled')
-            document.getElementById("item-stock").removeAttribute('disabled')
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "get",
+                url: "/test",
+                success: function (data) {
+                                        $("#my-content-div").html(data);
+
+                    // document.getElementById("name").value = data.name;
+                    // document.getElementById("id").value = data.id;
+                    // $(".btn-success").addClass("update");
+                    // $(".btn-success").removeClass("add");
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    $("#my-content-div").html(data);
+
+                    // // this are default for ajax errors
+                    // var errors = jqXhr.responseJSON;
+                    // var errorsHtml = "";
+                    // $.each(errors["errors"], function (index, value) {
+                    //     $("#kategori-error").html(value);
+                    // });
+                }
+            });
+            // $.get(
+            //     "test",
+            //     function (data) {
+            //         $("#my-content-div").html(data);
+            //     }
+            // );
+            document.getElementById("item-unit").removeAttribute('disabled');
+            document.getElementById("item-stock").removeAttribute('disabled');
             // alert('click');
             // $.ajax({
             //     headers: {

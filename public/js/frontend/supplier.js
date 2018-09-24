@@ -7,7 +7,7 @@ var Supplier = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getsupplier",
+                        url: "/get-supplier",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
