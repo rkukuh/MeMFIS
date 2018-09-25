@@ -16,36 +16,36 @@ class TypesTableSeeder extends Seeder
 
         Type::create([
             'name' => 'Work',
-            'of'  => 'phone',
+            'of'   => 'phone',
         ]);
 
         Type::create([
             'name' => 'Personal',
-            'of'  => 'phone',
+            'of'   => 'phone',
         ]);
 
         /** EMAIL */
 
         Type::create([
             'name' => 'Work',
-            'of'  => 'email',
+            'of'   => 'email',
         ]);
 
         Type::create([
             'name' => 'Personal',
-            'of'  => 'email',
+            'of'   => 'email',
         ]);
 
         /** FAX */
 
         Type::create([
             'name' => 'Work',
-            'of'  => 'fax',
+            'of'   => 'fax',
         ]);
 
         Type::create([
             'name' => 'Personal',
-            'of'  => 'fax',
+            'of'   => 'fax',
         ]);
 
         /** JOURNAL */
@@ -57,22 +57,90 @@ class TypesTableSeeder extends Seeder
 
         Type::create([
             'name' => 'Pasiva',
-            'of'  => 'journal',
+            'of'   => 'journal',
         ]);
 
         Type::create([
             'name' => 'Ekuitas',
-            'of'  => 'journal',
+            'of'   => 'journal',
         ]);
 
         Type::create([
             'name' => 'Pendapatan',
-            'of'  => 'journal',
+            'of'   => 'journal',
         ]);
 
         Type::create([
             'name' => 'Biaya',
-            'of'  => 'journal',
+            'of'   => 'journal',
+        ]);
+
+        /** ELIGIBILTY */
+
+        Type::create([
+            'name' => 'DHC-6',
+            'of'   => 'eligibility',
+        ]);
+
+        /** ARC */
+
+        Type::create([
+            'name' => 'Tested',
+            'of'   => 'arc',
+        ]);
+
+        Type::create([
+            'name' => 'Inspected',
+            'of'   => 'arc',
+        ]);
+
+        Type::create([
+            'name' => 'Repaired',
+            'of'   => 'arc',
+        ]);
+
+        Type::create([
+            'name' => 'Overhauled',
+            'of'   => 'arc',
+        ]);
+
+        /** CAPABILITY */
+
+        Type::create([
+            'name' => 'Inspection',
+            'of'   => 'capability',
+        ]);
+
+        Type::create([
+            'name' => 'Check and Test',
+            'of'   => 'capability',
+        ]);
+
+        Type::create([
+            'name' => 'Repair',
+            'of'   => 'capability',
+        ]);
+
+        Type::create([
+            'name' => 'Overhaul',
+            'of'   => 'capability',
+        ]);
+
+        /** REGULATOR / AUTHORITY */
+
+        Type::create([
+            'name' => 'DGCA',
+            'of'   => 'regulator',
+        ]);
+
+        Type::create([
+            'name' => 'EASA',
+            'of'   => 'regulator',
+        ]);
+
+        Type::create([
+            'name' => 'FAA',
+            'of'   => 'regulator',
         ]);
 
     }
