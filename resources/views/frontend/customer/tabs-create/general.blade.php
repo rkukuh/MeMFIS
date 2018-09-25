@@ -116,11 +116,6 @@
             @slot('id', 'accountcode')
             @slot('style', 'width:100%')
         @endcomponent
-
-        {{-- @component('frontend.common.input.text')
-            @slot('text', 'AccountCode')
-            @slot('name', 'accountcode')
-        @endcomponent --}}
     </div>
     {{-- <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
