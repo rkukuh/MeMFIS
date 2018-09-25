@@ -34,14 +34,4 @@ class BankStore extends FormRequest
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 
-    // public function messages()
-    // {
-    //     return [
-    //         'name.required' => 'Harus diisi',
-    //         'name.min' => 'minimal 3 karakter',
-    //         'name.max' => 'maximal 50 karakter',
-    //         'name.regex' => 'Berisi Huruf dan Spasi',
-    //         // 'body.required'  => 'A message is required',
-    //     ];
-    // }
 }
