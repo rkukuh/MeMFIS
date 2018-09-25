@@ -1,7 +1,6 @@
 @extends('frontend.master')
 
 @section('content')
-    <!-- BEGIN: Subheader -->
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
@@ -28,13 +27,10 @@
             </div>
         </div>
     </div>
-    <!-- END: Subheader -->
 
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
-                <!--begin::Portlet-->
-                <!--begin::Form-->
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="myForm">
                     <div class="m-portlet">
                         <div class="m-portlet__head">
@@ -99,9 +95,7 @@
                             </div>
                         </div>
                     </form>
-                    <!--end::Form-->
                 </div>
-                <!--end::Portlet-->
             </div>
         </div>
 @endsection
