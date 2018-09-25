@@ -295,11 +295,8 @@ var Category = {
                     document.getElementById("name").value = data.name;
                     document.getElementById("description").value = data.description;
                     document.getElementById("id").value = data.uuid;
-                    // $(".btn-success").addClass("update");
-                    // $(".btn-success").removeClass("add");
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function (index, value) {
@@ -394,39 +391,6 @@ var Category = {
                 }
             });
         });
-
-        // var show = $(".m_datatable").on("click", ".show", function () {
-        //     $("#button").hide();
-        //     var triggerid = $(this).data("uuid");
-        //     $("#simpan").text("Perbarui");
-        //     $.ajax({
-        //         headers: {
-        //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-        //         },
-        //         type: "get",
-        //         url: "/category/" + triggerid,
-        //         success: function (data) {
-        //             document.getElementById("TitleModalCustomer").innerHTML =
-        //                 "Detail Customer #ID-" + triggerid;
-
-        //             document.getElementById("name").value = data.name;
-        //             document.getElementById("name").readOnly = true;
-        //             //   document.getElementById('id').value=data.id;
-        //             //   $('.btn-success').removeClass('simpan');
-        //             //   $('.btn-success').addClass('update');
-        //         },
-        //         error: function (jqXhr, json, errorThrown) {
-        //             // this are default for ajax errors
-        //             var errors = jqXhr.responseJSON;
-        //             var errorsHtml = "";
-        //             $.each(errors["errors"], function (index, value) {
-        //                 $("#kategori-error").html(value);
-        //             });
-        //         }
-        //     });
-        // });
-
-
         var remove = $(".m_datatable").on("click", ".delete", function () {
             var triggerid = $(this).data("id");
             swal({
