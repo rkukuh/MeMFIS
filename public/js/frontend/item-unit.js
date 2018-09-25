@@ -1,13 +1,13 @@
 var ItemUnit = {
     init: function() {
-        $(".m_datatable").mDatatable({
+        $(".m_datatable1").mDatatable({
             data: {
                 type: "remote",
                 source: {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getitem-unit",
+                        url: "/get-item-units",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;

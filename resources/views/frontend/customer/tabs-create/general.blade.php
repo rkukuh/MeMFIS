@@ -122,7 +122,7 @@
             @slot('name', 'accountcode')
         @endcomponent --}}
     </div>
-    <div class="col-sm-6 col-md-6 col-lg-6">
+    {{-- <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             Leveling @include('frontend.common.label.optional')
         </label>
@@ -131,9 +131,9 @@
             @slot('text', 'Leveling')
             @slot('name', 'leveling')
         @endcomponent
-    </div>
+    </div> --}}
 </div>
-<div class="form-group m-form__group row ">
+{{-- <div class="form-group m-form__group row ">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             xType @include('frontend.common.label.optional')
@@ -177,4 +177,4 @@
             xType
         </span>
     </div>
-</div>
+</div> --}}

@@ -58,6 +58,19 @@ Route::name('frontend.')->group(function () {
         Route::resource('type', 'TypeController');
         Route::resource('accountcode', 'AccountCodeController');
 
+        Route::get('update-button', function(){
+            return View::make('frontend.common.buttons.update')
+            ->render();
+        
+        });
+
+        Route::get('update-button/{id}', function($id){
+            return View::make('frontend.common.buttons.submit')
+                ->with("", "")
+                ->render();
+        
+        });
+
 
         Route::get('/quotation-doc', function () {
             $pdf = \PDF::loadView('frontend/form/quotation');

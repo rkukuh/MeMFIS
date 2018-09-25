@@ -7,7 +7,7 @@ var TaskCard = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/gettaskcard",
+                        url: "/get-taskcards",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJournalsTable extends Migration
+class CreateWarehousesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,22 @@ class CreateJournalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('journals', function (Blueprint $table) {
+        Schema::create('warehouses', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code',50);
-            $table->string('name')->nullable();
-            $table->unsignedInteger('type_id')->nullable();
-            $table->integer('level')->nullable();
-            $table->string('description')->nullable();
+            $table->string('name');
+            $table->text('description');
+            $table->unsignedInteger('account_code')->nullable();
+            $table->integer('active');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('type_id')
-                  ->references('id')->on('types')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+            $table->foreign('account_code')
+            ->references('id')->on('journals')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');          
+
         });
     }
 
@@ -38,6 +39,6 @@ class CreateJournalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journals');
+        Schema::dropIfExists('warehouses');
     }
 }
