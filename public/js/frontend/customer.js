@@ -5,11 +5,9 @@ var Customer = {
                 type: "remote",
                 source: {
                     read: {
-                        // sample GET method
                         method: "GET",
                         url: "/get-customers",
                         map: function(raw) {
-                            // sample data mapping
                             var dataSet = raw;
                             if (typeof raw.data !== "undefined") {
                                 dataSet = raw.data;
@@ -124,7 +122,6 @@ var Customer = {
             $("#simpan").text("Simpan");
             var registerForm = $("#CustomerForm");
             var formData = registerForm.serialize();
-            // var tes = $("input[name=name]").val();
             $("#name-error").html("");
             $.ajax({
                 headers: {
@@ -143,9 +140,6 @@ var Customer = {
                             $("#name-error").html(data.errors.name[0]);
                             document.getElementById("name").value = name;
                         }
-                        // if(data.errors.email){
-                        //     $( '#email-error' ).html( data.errors.email[0] );
-                        // }
                     } else {
                         $("#modal_customer").modal("hide");
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
@@ -176,7 +170,6 @@ var Customer = {
                     $(".btn-success").removeClass("add");
                 },
                 error: function(jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function(index, value) {
@@ -209,9 +202,6 @@ var Customer = {
                             $("#name-error").html(data.errors.name[0]);
                             document.getElementById("name").value = name;
                         }
-                        // if(data.errors.email){
-                        //     $( '#email-error' ).html( data.errors.email[0] );
-                        // }
                     } else {
                         $("#modal_customer").modal("hide");
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
@@ -241,12 +231,8 @@ var Customer = {
 
                     document.getElementById("name").value = data.name;
                     document.getElementById("name").readOnly = true;
-                    //   document.getElementById('id').value=data.id;
-                    //   $('.btn-success').removeClass('simpan');
-                    //   $('.btn-success').addClass('update');
                 },
                 error: function(jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function(index, value) {
@@ -287,7 +273,6 @@ var Customer = {
                             table.reload();
                         },
                         error: function(jqXhr, json, errorThrown) {
-                            // this are default for ajax errors
                             var errors = jqXhr.responseJSON;
                             var errorsHtml = "";
                             $.each(errors["errors"], function(index, value) {
