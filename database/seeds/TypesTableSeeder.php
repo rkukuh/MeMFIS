@@ -143,5 +143,17 @@ class TypesTableSeeder extends Seeder
             'of'   => 'regulator',
         ]);
 
+        /** CUSTOMER'S COMPONENT REPAIR STATUS */
+
+        Type::create([
+            'name' => 'SERVICEABLE',
+            'of'   => 'customer-component',
+        ]);
+
+        Type::create([
+            'name' => 'UNSERVICEABLE',
+            'of'   => 'customer-component',
+        ]);
+
     }
 }
