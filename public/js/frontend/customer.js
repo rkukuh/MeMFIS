@@ -40,12 +40,6 @@ var Customer = {
             },
             columns: [
                 {
-                    field: "id",
-                    title: "#",
-                    sortable: !1,
-                    width: 40
-                },
-                {
                     field: "code",
                     title: "Code",
                     sortable: "asc",
@@ -68,13 +62,6 @@ var Customer = {
                     template: "{{address}}, {{city}}"
                 },
                 {
-                    field: "email",
-                    title: "Email",
-                    sortable: "asc",
-                    filterable: !1,
-                    width: 150
-                },
-                {
                     field: "phone",
                     title: "Phone",
                     sortable: "asc",
@@ -89,6 +76,13 @@ var Customer = {
                     width: 150,
                 },
                 {
+                    field: "email",
+                    title: "Email",
+                    sortable: "asc",
+                    filterable: !1,
+                    width: 150
+                },
+                {
                     field: "npwp",
                     title: "NPWP",
                     sortable: "asc",
@@ -96,8 +90,8 @@ var Customer = {
                     width: 150,
                 },
                 {
-                    field: "npwpa_ddress",
-                    title: "NPWP Address",
+                    field: "top",
+                    title: "ToP",
                     sortable: "asc",
                     filterable: !1,
                     width: 150,
