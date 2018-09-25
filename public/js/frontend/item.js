@@ -140,73 +140,40 @@ var Item = {
             $("#simpan").text("Simpan");
             var registerForm = $("#CustomerForm");
             var formData = registerForm.serialize();
-            // var tes = $("input[name=name]").val();
             $("#name-error").html("");
+            document.getElementById("item-unit").removeAttribute('disabled');
+            document.getElementById("item-stock").removeAttribute('disabled');
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: "get",
-                url: "/test",
-                success: function (data) {
-                                        $("#my-content-div").html(data);
-
-                    // document.getElementById("name").value = data.name;
-                    // document.getElementById("id").value = data.id;
-                    // $(".btn-success").addClass("update");
-                    // $(".btn-success").removeClass("add");
+                type: "post",
+                url: "/item",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    name: name
                 },
-                error: function (jqXhr, json, errorThrown) {
-                    $("#my-content-div").html(data);
-
-                    // // this are default for ajax errors
-                    // var errors = jqXhr.responseJSON;
-                    // var errorsHtml = "";
-                    // $.each(errors["errors"], function (index, value) {
-                    //     $("#kategori-error").html(value);
-                    // });
+                success: function(data) {
+                    console.log(data);
+                    if (data.errors) {
+                        if (data.errors.name) {
+                            $("#name-error").html(data.errors.name[0]);
+                            document.getElementById("name").value = name;
+                        }
+                        // if(data.errors.email){
+                        //     $( '#email-error' ).html( data.errors.email[0] );
+                        // }
+                    } else {
+                        $("#modal_customer").modal("hide");
+                        toastr.success("Berhasil Disimpan.", "Sukses!!", {
+                            timeOut: 5000
+                        });
+                        var table = $(".m_datatable").mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
                 }
             });
-            // $.get(
-            //     "test",
-            //     function (data) {
-            //         $("#my-content-div").html(data);
-            //     }
-            // );
-            document.getElementById("item-unit").removeAttribute('disabled');
-            document.getElementById("item-stock").removeAttribute('disabled');
-            // alert('click');
-            // $.ajax({
-            //     headers: {
-            //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-            //     },
-            //     type: "post",
-            //     url: "/item",
-            //     data: {
-            //         _token: $("input[name=_token]").val(),
-            //         name: name
-            //     },
-            //     success: function(data) {
-            //         console.log(data);
-            //         if (data.errors) {
-            //             if (data.errors.name) {
-            //                 $("#name-error").html(data.errors.name[0]);
-            //                 document.getElementById("name").value = name;
-            //             }
-            //             // if(data.errors.email){
-            //             //     $( '#email-error' ).html( data.errors.email[0] );
-            //             // }
-            //         } else {
-            //             $("#modal_customer").modal("hide");
-            //             toastr.success("Berhasil Disimpan.", "Sukses!!", {
-            //                 timeOut: 5000
-            //             });
-            //             var table = $(".m_datatable").mDatatable();
-            //             table.originalDataSet = [];
-            //             table.reload();
-            //         }
-            //     }
-            // });
         });
 
         var edit = $(".m_datatable").on("click", ".edit", function () {
