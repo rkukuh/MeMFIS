@@ -7,7 +7,7 @@ var ItemUnit = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/get-item-unit",
+                        url: "/get-item-units",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;

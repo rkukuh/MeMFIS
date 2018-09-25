@@ -7,7 +7,7 @@ var Quotation = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/get-taskcard",
+                        url: "/get-taskcards",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;

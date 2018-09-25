@@ -7,7 +7,7 @@ var Category = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/get-journal",
+                        url: "/get-journals",
                         map: function (raw) {
                             // sample data mapping
                             var dataSet = raw;

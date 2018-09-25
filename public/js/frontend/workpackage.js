@@ -7,7 +7,7 @@ var Workpackage = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/get-workpackge",
+                        url: "/get-workpackges",
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
