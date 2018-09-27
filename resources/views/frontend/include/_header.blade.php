@@ -16,13 +16,9 @@
     });
 </script>
 
-<!--begin::Page Vendors Styles -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/vendors/custom/fullcalendar/fullcalendar.bundle.css') }}">
-<!--end::Page Vendors Styles -->
 
-<!--begin::Base Styles -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/vendors/base/vendors.bundle.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/demo/default/base/style.bundle.css') }}">
-<!--end::Base Styles -->
 
 <link rel="shortcut icon" href="{{ asset('assets/metronic/demo/default/media/img/logo/favicon.ico') }}">

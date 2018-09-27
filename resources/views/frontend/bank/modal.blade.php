@@ -8,7 +8,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="BankForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
@@ -41,7 +40,6 @@
                             @slot('color', 'secondary')
                             @slot('data_dismiss', 'modal')
                         @endcomponent
-
                         @component('frontend.common.buttons.submit')
                             @slot('size', 'md')
                             @slot('class', 'add2')
@@ -49,7 +47,6 @@
                         @endcomponent
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

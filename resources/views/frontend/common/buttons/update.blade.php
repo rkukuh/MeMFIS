@@ -14,5 +14,4 @@
         <i class="fa {{ $icon or 'fa-save' }}"></i>
         <span>{{ $text or 'Update' }}</span>
     </span>
-    {{$value2 or ''}}
 </button>

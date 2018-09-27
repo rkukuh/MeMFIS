@@ -5,11 +5,9 @@ var Item = {
                 type: "remote",
                 source: {
                     read: {
-                        // sample GET method
                         method: "GET",
                         url: "/get-items",
                         map: function (raw) {
-                            // sample data mapping
                             var dataSet = raw;
                             if (typeof raw.data !== "undefined") {
                                 dataSet = raw.data;
@@ -43,12 +41,6 @@ var Item = {
                 }
             },
             columns: [
-                // {
-                //     field: "id",
-                //     title: "#",
-                //     sortable: !1,
-                //     width: 40
-                // },
                 {
                     field: "code",
                     title: "Code",
@@ -160,9 +152,6 @@ var Item = {
                             $("#name-error").html(data.errors.name[0]);
                             document.getElementById("name").value = name;
                         }
-                        // if(data.errors.email){
-                        //     $( '#email-error' ).html( data.errors.email[0] );
-                        // }
                     } else {
                         $("#modal_customer").modal("hide");
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
@@ -193,7 +182,6 @@ var Item = {
                     $(".btn-success").removeClass("add");
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function (index, value) {
@@ -226,9 +214,6 @@ var Item = {
                             $("#name-error").html(data.errors.name[0]);
                             document.getElementById("name").value = name;
                         }
-                        // if(data.errors.email){
-                        //     $( '#email-error' ).html( data.errors.email[0] );
-                        // }
                     } else {
                         $("#modal_customer").modal("hide");
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
@@ -258,12 +243,8 @@ var Item = {
 
                     document.getElementById("name").value = data.name;
                     document.getElementById("name").readOnly = true;
-                    //   document.getElementById('id').value=data.id;
-                    //   $('.btn-success').removeClass('simpan');
-                    //   $('.btn-success').addClass('update');
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function (index, value) {
@@ -305,7 +286,6 @@ var Item = {
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            // this are default for ajax errors
                             var errors = jqXhr.responseJSON;
                             var errorsHtml = "";
                             $.each(errors["errors"], function (index, value) {
