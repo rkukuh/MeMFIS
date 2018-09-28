@@ -20,10 +20,6 @@ class CreateActivityLogTable extends Migration
             $table->string('causer_type')->nullable();
             $table->text('properties')->nullable();
             $table->timestamps();
-
-            $table->index('log_name');
-            $table->index('description');
-            $table->index('properties');
         });
     }
 

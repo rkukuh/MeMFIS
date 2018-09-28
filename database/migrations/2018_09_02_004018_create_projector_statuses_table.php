@@ -15,9 +15,6 @@ class CreateProjectorStatusesTable extends Migration
             $table->boolean('has_received_all_events')->default(false);
             $table->integer('last_processed_event_id')->default(0);
             $table->timestamps();
-
-            $table->index('projector_name');
-            $table->index('stream');
         });
     }
 

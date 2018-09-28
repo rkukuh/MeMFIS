@@ -14,8 +14,6 @@ class CreateStoredEventsTable extends Migration
             $table->json('event_properties');
             $table->json('meta_data');
             $table->timestamp('created_at');
-
-            $table->index('event_class');
         });
     }
 
