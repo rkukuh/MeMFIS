@@ -22,9 +22,11 @@ class CreateEmployeesTable extends Migration
             $table->string('last_name')->nullable();
             $table->date('dob')->nullable();
             $table->enum('gender', ['f', 'm'])->nullable();
-            $table->string('address');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('address')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->dateTime('hired_at')->nullable();
+            $table->dateTime('left_at')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -33,6 +35,9 @@ class CreateEmployeesTable extends Migration
             $table->index('middle_name');
             $table->index('last_name');
             $table->index('address');
+            $table->index('latitude');
+            $table->index('longitude');
+            $table->index('note');
         });
     }
 
