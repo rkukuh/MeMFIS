@@ -22,7 +22,6 @@ class CreateTypesTable extends Migration
             $table->softDeletes();
 
             $table->index('name');
-            $table->index('of');
         });
     }
 
