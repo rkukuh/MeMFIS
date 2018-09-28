@@ -17,9 +17,15 @@ class CreateCountriesTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('name');
+            $table->string('iso_2');
+            $table->string('iso_3');
             $table->string('phone_code');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('name');
+            $table->index('iso_2');
+            $table->index('iso_3');
         });
     }
 
