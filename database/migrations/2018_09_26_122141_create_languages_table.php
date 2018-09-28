@@ -16,12 +16,12 @@ class CreateLanguagesTable extends Migration
         Schema::create('languages', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code');
+            $table->string('iso_code');
             $table->string('language');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index('code');
+            $table->index('iso_code');
             $table->index('language');
         });
     }
