@@ -15,50 +15,19 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('employee_number',10);
+            $table->char('uuid', 36)->unique();
+            $table->string('code');
             $table->string('first_name');
-            $table->string('middle_name');
-            $table->string('last_name');
-            $table->unsignedInteger('nationality_id')->nullable();
-            $table->date('date_of_birth');
-            $table->char('gender',1);
-            $table->unsignedInteger('job_title_id')->nullable();
-            $table->unsignedInteger('employment_status_id')->nullable();
-            $table->unsignedInteger('pay_grade_id')->nullable();
+            $table->string('middle_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->date('dob')->nullable();
+            $table->enum('gender', ['f', 'm'])->nullable();
             $table->string('address');
-            $table->unsignedInteger('city_id')->nullable();
-            $table->date('joined_date');
-            $table->date('termination_date');
-            $table->unsignedInteger('department_id')->nullable();
-            $table->string('descriptions')->nullabke();
-
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('nationality_id')
-            ->references('id')->on('nationalities')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
-            $table->foreign('job_title_id')
-            ->references('id')->on('job_titles')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
-            $table->foreign('employment_status_id')
-            ->references('id')->on('employment_statuses')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
-            $table->foreign('pay_grade_id')
-            ->references('id')->on('pay_grades')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
-            $table->foreign('city_id')
-            ->references('id')->on('cities')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
-            $table->foreign('department_id')
-            ->references('id')->on('departments')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
         });
     }
 
