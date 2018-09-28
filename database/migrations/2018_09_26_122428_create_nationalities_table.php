@@ -16,10 +16,17 @@ class CreateNationalitiesTable extends Migration
         Schema::create('nationalities', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('name');
-            $table->text('descriptions');
+            $table->string('nationality');
+            $table->unsignedInteger('country_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('country_id')
+                  ->references('id')->on('countries')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->index('nationality');
         });
     }
 
