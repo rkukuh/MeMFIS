@@ -28,6 +28,11 @@ class CreateEmployeesTable extends Migration
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('first_name');
+            $table->index('middle_name');
+            $table->index('last_name');
+            $table->index('address');
         });
     }
 
