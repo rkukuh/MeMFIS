@@ -20,18 +20,12 @@ class CreateFamiliesTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
             $table->enum('gender', ['f', 'm'])->nullable();
-            $table->unsignedInteger('relationship_type');
             $table->boolean('is_emergency_contact')->default(false);
             $table->string('address')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('relationship_type')
-                  ->references('id')->on('types')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
 
             $table->index('first_name');
             $table->index('middle_name');
