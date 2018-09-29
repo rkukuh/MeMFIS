@@ -61,9 +61,6 @@ var simpan = $(".modal-footer").on("click", ".add2", function() {
                 toastr.success("Berhasil Disimpan.", "Sukses!!", {
                     timeOut: 5000
                 });
-                // var table = $(".m_datatable").mDatatable();
-                // table.originalDataSet = [];
-                // table.reload();
             }
         }
     });

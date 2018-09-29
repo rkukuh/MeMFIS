@@ -1,1 +1,0 @@
-<!-- mi mas yendi skip -->

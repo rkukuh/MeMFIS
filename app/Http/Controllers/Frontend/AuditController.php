@@ -115,7 +115,8 @@ class AuditController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.audit.index');
+
     }
 
     /**

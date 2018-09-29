@@ -139,7 +139,7 @@ class JournalController extends Controller
         $journal = Journal::create([
             'code' => $request->code,
             'name' => $request->name,
-            'type' => $request->type,
+            'type_id' => $request->type,
             'level' => $request->level,
             'description' => $request->description,
         ]);
@@ -181,7 +181,7 @@ class JournalController extends Controller
         // $journal = Journal::find($journal);
         $journal->code = $request->code;
         $journal->name = $request->name;
-        $journal->type = $request->type;
+        $journal->type_id = $request->type;
         $journal->level = $request->level;
         $journal->description = $request->description;
         $journal->save();

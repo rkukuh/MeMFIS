@@ -8,7 +8,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CategoryForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
@@ -17,7 +16,6 @@
                                 <label class="form-control-label">
                                     Code @include('frontend.common.label.required')
                                 </label>
-
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
@@ -27,7 +25,6 @@
                                 <label class="form-control-label">
                                     Name @include('frontend.common.label.optional')
                                 </label>
-
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
@@ -39,7 +36,6 @@
                                 <label class="form-control-label">
                                     Description @include('frontend.common.label.optional')
                                 </label>
-
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
                                     @slot('name', 'description')
@@ -50,7 +46,6 @@
                                 <label class="form-control-label">
                                     Account Code @include('frontend.common.label.optional')
                                 </label>
-
                                 @component('frontend.common.input.select')
                                     @slot('id', 'accountcode')
                                     @slot('text', 'AccountCode')
@@ -76,7 +71,6 @@
                         @endcomponent
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

@@ -3,7 +3,6 @@
         <label class="form-control-label">
             Country @include('frontend.common.label.optional')
         </label>
-
         @component('frontend.common.input.select')
             @slot('id', 'country')
             @slot('text', 'Country')
@@ -15,7 +14,6 @@
         <label class="form-control-label">
             City @include('frontend.common.label.optional')
         </label>
-
         @component('frontend.common.input.select')
             @slot('id', 'city')
             @slot('text', 'City')
@@ -29,7 +27,6 @@
         <label class="form-control-label">
             Address @include('frontend.common.label.optional')
         </label>
-
         @component('frontend.common.input.textarea')
             @slot('rows', '3')
             @slot('text', 'Address')
@@ -41,7 +38,6 @@
         <label class="form-control-label">
             ZipCode @include('frontend.common.label.optional')
         </label>
-
         @component('frontend.common.input.text')
             @slot('text', 'ZipCode')
             @slot('name', 'zipcpde')

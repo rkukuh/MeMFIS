@@ -115,7 +115,7 @@ class ItemStockController extends Controller
      */
     public function index()
     {
-        return view('frontend.item-stock.index');
+        //
     }
 
     /**

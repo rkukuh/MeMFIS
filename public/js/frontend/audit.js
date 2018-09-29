@@ -1,26 +1,14 @@
 var Customer = {
     init: function() {
-        // var tes =(<?php echo $message; ?>);
-        // var tes ='<?php echo $abc?>';
-        // <?php
-        // header("Content-type: application/javascript");
-        // ?>
-        // var jsvar='something';
-        // var othervar='<?php echo $phpVar; ?>';
-        //<?php //some php ;?>
-        // alert(tes);
-
 
         $(".m_datatable").mDatatable({
             data: {
                 type: "remote",
                 source: {
                     read: {
-                        // sample GET method
                         method: "GET",
-                        url: "/getaudit",
+                        url: "/get-audits",
                         map: function(raw) {
-                            // sample data mapping
                             var dataSet = raw;
                             if (typeof raw.data !== "undefined") {
                                 dataSet = raw.data;
@@ -152,8 +140,6 @@ var Customer = {
                                 '>\t\t\t\t\t\t\t<i class="la la-info-circle"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t' 
                                 );
                               }
-                        // alert(tes); 
-                        // "<?php echo $message; ?>"
                         // return (
                         //     '<a href="/audit/1" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
                         //     t.id +

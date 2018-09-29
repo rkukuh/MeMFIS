@@ -81,16 +81,19 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.close')
+                        <div id="button-div">
+                            @component('frontend.common.buttons.submit')
+                                @slot('size', 'md')
+                                @slot('class', 'add')
+                            @endcomponent
+                        </div>
+                        @component('frontend.common.buttons.reset')
                             @slot('size', 'md')
-                            @slot('color', 'secondary')
-                            @slot('data_dismiss', 'modal')
                         @endcomponent
 
-                        @component('frontend.common.buttons.submit')
+                        @component('frontend.common.buttons.close')
                             @slot('size', 'md')
-                            @slot('class', 'add')
-                            @slot('color', 'success')
+                            @slot('data_dismiss', 'modal')
                         @endcomponent
                     </div>
                 </form>

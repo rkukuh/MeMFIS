@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class BankAccountUpdate extends FormRequest
 {
@@ -13,7 +15,7 @@ class BankAccountUpdate extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,13 @@ class BankAccountUpdate extends FormRequest
     public function rules()
     {
         return [
-            //
+            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
     }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
+    }
+
 }
+

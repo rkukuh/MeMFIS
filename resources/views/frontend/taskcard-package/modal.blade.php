@@ -74,7 +74,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--begin: Datatable -->
                     <div class="m_datatable2" id="second"></div>
                     <br>
                     <div class="modal-footer">

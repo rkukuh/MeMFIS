@@ -7,7 +7,7 @@ var Category = {
                     read: {
                         // sample GET method
                         method: "GET",
-                        url: "/getjournal",
+                        url: "/get-journals",
                         map: function (raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -43,12 +43,12 @@ var Category = {
                 }
             },
             columns: [
-                {
-                    field: "id",
-                    title: "#",
-                    sortable: !1,
-                    width: 40
-                },
+                // {
+                //     field: "id",
+                //     title: "#",
+                //     sortable: !1,
+                //     width: 40
+                // },
                 {
                     field: "code",
                     title: "Code",
@@ -64,7 +64,7 @@ var Category = {
                     width: 150
                 },
                 {
-                    field: "type",
+                    field: "type_id",
                     title: "Type",
                     sortable: "asc",
                     filterable: !1,
@@ -96,10 +96,10 @@ var Category = {
                             // t.id +
                             // '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '<button data-toggle="modal" data-target="#modal_journal" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            t.id +
+                            t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
-                            t.id +
+                            t.uuid +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
                         );
                     }
@@ -108,7 +108,7 @@ var Category = {
         });
 
         $(document).ready(function () {
-            var select = document.getElementById("m_select2_1");
+            var select = document.getElementById("type");
 
             $.ajax({
                 url: "/type",
@@ -160,7 +160,7 @@ var Category = {
         var simpan = $(".modal-footer").on("click", ".add", function () {
             var code = $("input[name=code]").val();
             var name = $("input[name=name]").val();
-            var type = $("#m_select2_1").val();
+            var type = $("#type").val();
             var level = $("#level").val();
             var description = $("#description").val();
             $("#simpan").text("Simpan");
@@ -187,7 +187,7 @@ var Category = {
                             $("#code-error").html(data.errors.code[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -195,7 +195,7 @@ var Category = {
                             $("#name-error").html(data.errors.name[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -203,7 +203,7 @@ var Category = {
                             $("#type-error").html(data.errors.type[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -211,7 +211,7 @@ var Category = {
                             $("#level-error").html(data.errors.level[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -219,7 +219,7 @@ var Category = {
                             $("#description-error").html(data.errors.description[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -262,7 +262,7 @@ var Category = {
                     //         alert(data2.name);
                     //     },
                     // });
-                    var select = document.getElementById("m_select2_1");
+                    var select = document.getElementById("type");
                     $('select[name="type"]').append(
                         "<option value='0' selected>Edit Type</option>"
                     );
@@ -280,15 +280,23 @@ var Category = {
                     $('select[name="level"]').append(
                         "<option value='0' selected> Edit Level</option>"
                     );
+                    $.ajax({
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                        },
+                        type: "get",
+                        url: "/update-button",
+                        success: function (data) {
+                            $("#button-div").html(data);
+        
+                        }
+                    });
                     document.getElementById("code").value = data.code;
                     document.getElementById("name").value = data.name;
                     document.getElementById("description").value = data.description;
-                    document.getElementById("id").value = data.id;
-                    $(".btn-success").addClass("update");
-                    $(".btn-success").removeClass("add");
+                    document.getElementById("id").value = data.uuid;
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function (index, value) {
@@ -301,7 +309,7 @@ var Category = {
         var update = $(".modal-footer").on("click", ".update", function () {
             var code = $("input[name=code]").val();
             var name = $("input[name=name]").val();
-            var type = $("#m_select2_1").val();
+            var type = $("#type").val();
             var level = $("#level").val();
             var description = $("#description").val();
             $("#name-error").html("");
@@ -329,7 +337,7 @@ var Category = {
                             $("#code-error").html(data.errors.code[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -337,7 +345,7 @@ var Category = {
                             $("#name-error").html(data.errors.name[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -345,7 +353,7 @@ var Category = {
                             $("#type-error").html(data.errors.type[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -353,7 +361,7 @@ var Category = {
                             $("#level-error").html(data.errors.level[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -361,7 +369,7 @@ var Category = {
                             $("#description-error").html(data.errors.description[0]);
                             document.getElementById("code").value = code;
                             document.getElementById("name").value = name;
-                            document.getElementById("m_select2_1").value = type;
+                            document.getElementById("type").value = type;
                             document.getElementById("level").value = level;
                             document.getElementById("description").value = description;
                         }
@@ -383,39 +391,6 @@ var Category = {
                 }
             });
         });
-
-        var show = $(".m_datatable").on("click", ".show", function () {
-            $("#button").hide();
-            var triggerid = $(this).data("id");
-            $("#simpan").text("Perbarui");
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                type: "get",
-                url: "/category/" + triggerid,
-                success: function (data) {
-                    document.getElementById("TitleModalCustomer").innerHTML =
-                        "Detail Customer #ID-" + triggerid;
-
-                    document.getElementById("name").value = data.name;
-                    document.getElementById("name").readOnly = true;
-                    //   document.getElementById('id').value=data.id;
-                    //   $('.btn-success').removeClass('simpan');
-                    //   $('.btn-success').addClass('update');
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
-                    var errors = jqXhr.responseJSON;
-                    var errorsHtml = "";
-                    $.each(errors["errors"], function (index, value) {
-                        $("#kategori-error").html(value);
-                    });
-                }
-            });
-        });
-
-
         var remove = $(".m_datatable").on("click", ".delete", function () {
             var triggerid = $(this).data("id");
             swal({

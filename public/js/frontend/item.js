@@ -5,11 +5,9 @@ var Item = {
                 type: "remote",
                 source: {
                     read: {
-                        // sample GET method
                         method: "GET",
-                        url: "/getitem",
+                        url: "/get-items",
                         map: function (raw) {
-                            // sample data mapping
                             var dataSet = raw;
                             if (typeof raw.data !== "undefined") {
                                 dataSet = raw.data;
@@ -43,12 +41,6 @@ var Item = {
                 }
             },
             columns: [
-                // {
-                //     field: "id",
-                //     title: "#",
-                //     sortable: !1,
-                //     width: 40
-                // },
                 {
                     field: "code",
                     title: "Code",
@@ -140,42 +132,37 @@ var Item = {
             $("#simpan").text("Simpan");
             var registerForm = $("#CustomerForm");
             var formData = registerForm.serialize();
-            // var tes = $("input[name=name]").val();
             $("#name-error").html("");
-            document.getElementById("item-unit").removeAttribute('disabled')
-            document.getElementById("item-stock").removeAttribute('disabled')
-            // alert('click');
-            // $.ajax({
-            //     headers: {
-            //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-            //     },
-            //     type: "post",
-            //     url: "/item",
-            //     data: {
-            //         _token: $("input[name=_token]").val(),
-            //         name: name
-            //     },
-            //     success: function(data) {
-            //         console.log(data);
-            //         if (data.errors) {
-            //             if (data.errors.name) {
-            //                 $("#name-error").html(data.errors.name[0]);
-            //                 document.getElementById("name").value = name;
-            //             }
-            //             // if(data.errors.email){
-            //             //     $( '#email-error' ).html( data.errors.email[0] );
-            //             // }
-            //         } else {
-            //             $("#modal_customer").modal("hide");
-            //             toastr.success("Berhasil Disimpan.", "Sukses!!", {
-            //                 timeOut: 5000
-            //             });
-            //             var table = $(".m_datatable").mDatatable();
-            //             table.originalDataSet = [];
-            //             table.reload();
-            //         }
-            //     }
-            // });
+            document.getElementById("item-unit").removeAttribute('disabled');
+            document.getElementById("item-stock").removeAttribute('disabled');
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "post",
+                url: "/item",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    name: name
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data.errors) {
+                        if (data.errors.name) {
+                            $("#name-error").html(data.errors.name[0]);
+                            document.getElementById("name").value = name;
+                        }
+                    } else {
+                        $("#modal_customer").modal("hide");
+                        toastr.success("Berhasil Disimpan.", "Sukses!!", {
+                            timeOut: 5000
+                        });
+                        var table = $(".m_datatable").mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
         });
 
         var edit = $(".m_datatable").on("click", ".edit", function () {
@@ -195,7 +182,6 @@ var Item = {
                     $(".btn-success").removeClass("add");
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function (index, value) {
@@ -228,9 +214,6 @@ var Item = {
                             $("#name-error").html(data.errors.name[0]);
                             document.getElementById("name").value = name;
                         }
-                        // if(data.errors.email){
-                        //     $( '#email-error' ).html( data.errors.email[0] );
-                        // }
                     } else {
                         $("#modal_customer").modal("hide");
                         toastr.success("Berhasil Disimpan.", "Sukses!!", {
@@ -260,12 +243,8 @@ var Item = {
 
                     document.getElementById("name").value = data.name;
                     document.getElementById("name").readOnly = true;
-                    //   document.getElementById('id').value=data.id;
-                    //   $('.btn-success').removeClass('simpan');
-                    //   $('.btn-success').addClass('update');
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
                     $.each(errors["errors"], function (index, value) {
@@ -307,7 +286,6 @@ var Item = {
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            // this are default for ajax errors
                             var errors = jqXhr.responseJSON;
                             var errorsHtml = "";
                             $.each(errors["errors"], function (index, value) {

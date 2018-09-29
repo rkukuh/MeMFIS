@@ -116,13 +116,8 @@
             @slot('id', 'accountcode')
             @slot('style', 'width:100%')
         @endcomponent
-
-        {{-- @component('frontend.common.input.text')
-            @slot('text', 'AccountCode')
-            @slot('name', 'accountcode')
-        @endcomponent --}}
     </div>
-    <div class="col-sm-6 col-md-6 col-lg-6">
+    <div class="col-sm-6 col-md-6 col-lg-6" style="display: none">
         <label class="form-control-label">
             Leveling @include('frontend.common.label.optional')
         </label>
@@ -133,7 +128,7 @@
         @endcomponent
     </div>
 </div>
-<div class="form-group m-form__group row ">
+<div class="form-group m-form__group row" style="display: none">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <label class="form-control-label">
             xType @include('frontend.common.label.optional')

@@ -1,7 +1,6 @@
 @extends('frontend.master')
 
 @section('content')
-    <!-- BEGIN: Subheader -->
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
@@ -28,11 +27,9 @@
             </div>
         </div>
     </div>
-    <!-- END: Subheader -->
     <div class="m-content">
         <div class="row">
                 <div class="col-lg-6">
-                        <!--begin::Portlet-->
                         <div class="m-portlet">
                             <div class="m-portlet__head">
                                 <div class="m-portlet__head-caption">
@@ -48,31 +45,11 @@
                             </div>
                             <div class="m-portlet m-portlet--mobile">
                                 <div class="m-portlet__body">
-                                    <!--begin: Search Form -->
-                                    {{-- <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                        <div class="row align-items-center">
-                                            <div class="col-xl-8 order-2 order-xl-1">
-                                                <div class="form-group m-form__group row align-items-center">
-                                                    <div class="col-md-4">
-                                                        <div class="m-input-icon m-input-icon--left">
-                                                            <input type="text" class="form-control m-input" placeholder="Search..."
-                                                                id="generalSearch">
-                                                            <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                                <span><i class="la la-search"></i></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div> --}}
-                                    <!--end: Search Form -->
                                     <div class="m-portlet__body">
                                             <div class="form-group m-form__group row ">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Code
+                                                        Part Number
                                                     @component('frontend.common.label.required')
                                                     @endcomponent
                                                     </label>
@@ -105,25 +82,6 @@
                                                         @slot('name', 'barcode')
                                                     @endcomponent
                                                 </div>
-                                                {{-- <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Bank
-                                                    @component('frontend.common.label.optional')
-                                                    @endcomponent
-                                                    </label>
-                                                    @component('frontend.common.input.select')
-                                                        @slot('text', 'Bank')
-                                                        @slot('name', 'bank')
-                                                        @slot('id', 'm_select2_1')
-                                                        @slot('style', 'width:100%')
-                                                    @endcomponent
-                    
-                                                    @component('frontend.common.buttons.create-new')
-                                                        @slot('size', 'sm')
-                                                        @slot('text', 'add bank')
-                                                        @slot('data_target', '#modal_bank')
-                                                    @endcomponent
-                                                </div> --}}
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Category
@@ -146,22 +104,12 @@
                                             </div>
                                             <div class="form-group m-form__group row ">
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            {{-- <label class="form-control-label">
-                                                                Active
-                                                            @component('frontend.common.label.optional')
-                                                            @endcomponent
-                                                            </label> --}}
                                                             @component('frontend.common.input.checkbox')
                                                                 @slot('text', 'Active')
                                                                 @slot('name', 'active')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-4 col-md-4 col-lg-4">
-                                                                {{-- <label class="form-control-label">
-                                                                    IsPPn
-                                                                    @component('frontend.common.label.optional')
-                                                                    @endcomponent
-                                                                        </label> --}}
                                                                 @component('frontend.common.input.checkbox')
                                                                     @slot('text', 'IsPPn')
                                                                     @slot('name', 'isppn')
@@ -169,12 +117,6 @@
                                 
                                                             </div>
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
-                                                                    {{-- <label class="form-control-label">
-                                                                        IsStock
-                                                                    </label>
-                                                                    @component('frontend.common.label.optional')
-                                                                    @endcomponent --}}
-        
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('text', 'IsStock')
                                                                         @slot('name', 'isstock')
@@ -204,9 +146,7 @@
                                                             @slot('text', 'xPicture')
                                                             @slot('name', 'xpicture')
                                                         @endcomponent
-                                                    </div>
-    
-            
+                                                    </div>            
                                             </div>
                                             <div class="form-group m-form__group row ">
                                             </div>
@@ -287,19 +227,11 @@
                                                 </div>
                                             </div>
                                         </div>
-        
-                                    <!--begin: Datatable -->
-                                    {{-- <div class="m_datatable" id="scrolling_both"></div> --}}
-                                    <!--end: Datatable -->
                                 </div>
                             </div>
-                            <!--end::Form-->
                         </div>
-                        <!--end::Portlet-->
                     </div>
             <div class="col-lg-6">
-
-                                <!--begin::Portlet-->
                                 <div class="m-portlet">
                                         <div class="m-portlet__head">
                                             <div class="m-portlet__head-caption">
@@ -315,10 +247,8 @@
                                         </div>
                                         <div class="m-portlet m-portlet--mobile">
                                             <div class="m-portlet__body">
-                                                <!--begin: Search Form -->
                                                 <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                    <div class="row align-items-center">
-                                                        
+                                                    <div class="row align-items-center">                                                        
                                                         <div class="col-xl-5 order-1 order-xl-2 m--align-right">
                                                             @component('frontend.common.buttons.create-new')
                                                                 @slot('id', 'item-unit')
@@ -333,19 +263,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--end: Search Form -->
-                    
                                                 @include('frontend.item-unit.modal')
-                    
-                                                <!--begin: Datatable -->
                                                 <div class="m_datatable1" id="fisrt"></div>
-                                                <!--end: Datatable -->
                                             </div>
                                         </div>
-                                        <!--end::Form-->
                                     </div>
-                                    <!--end::Portlet-->
-                                    <!--begin::Portlet-->
                                     <div class="m-portlet">
                                             <div class="m-portlet__head">
                                                 <div class="m-portlet__head-caption">
@@ -363,7 +285,6 @@
                                                 <div class="m-portlet__body">
                                                     
                                                         <div class="m-portlet__body">
-                                                                                           <!--begin: Search Form -->
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                     <div class="row align-items-center">
                                        
@@ -381,14 +302,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end: Search Form -->
     
                                 @include('frontend.warehouse.modal')
                                 @include('frontend.item-stock.modal')
     
-                                <!--begin: Datatable -->
                                 <div class="m_datatable2" id="second"></div>
-                                <!--end: Datatable -->
 
 
                                                             </div>
@@ -396,7 +314,6 @@
                                                    
                                                 </div>
                                             </div>
-                                            <!--end::Form-->
                                         </div>
             </div>
             
@@ -407,7 +324,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    {{-- <script src="{{ asset('assets/metronic//demo/default/custom/crud/forms/widgets/typeahead.js')}}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/accountcode.js')}}"></script>
     <script src="{{ asset('js/frontend/bank.js')}}"></script>
