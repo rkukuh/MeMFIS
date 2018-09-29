@@ -18,14 +18,8 @@ class CreateLanguagesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('language');
             $table->string('iso_code');
-            $table->unsignedInteger('country_id');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('country_id')
-                  ->references('id')->on('countries')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
 
             $table->index('language');
             $table->index('iso_code');
