@@ -17,6 +17,7 @@ class CreatePositionsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('name');
+            $table->integer('level')->default(0);
             $table->timestamps();
             $table->softDeletes();
 
