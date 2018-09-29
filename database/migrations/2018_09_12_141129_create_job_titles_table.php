@@ -13,18 +13,12 @@ class CreatePositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('positions', function (Blueprint $table) {
+        Schema::create('job_titles', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('name');
-            $table->unsignedInteger('parent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('parent_id')
-                  ->references('id')->on('positions')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
 
             $table->index('name');
         });
