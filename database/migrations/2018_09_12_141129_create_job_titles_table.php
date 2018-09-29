@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitiesTable extends Migration
+class CreateJobTitlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('job_titles', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('name');
-            $table->unsignedInteger('city_id')->nullable();
+            $table->integer('level')->default(0);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('city_id')
-            ->references('id')->on('cities')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
+            $table->index('name');
         });
     }
 
@@ -35,6 +32,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('positions');
     }
 }

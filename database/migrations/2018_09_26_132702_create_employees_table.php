@@ -25,8 +25,7 @@ class CreateEmployeesTable extends Migration
             $table->string('address')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->dateTime('hired_at')->nullable();
-            $table->dateTime('left_at')->nullable();
+            $table->timestamp('hired_at')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
