@@ -18,15 +18,8 @@ class CreateEmergencyContactsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('name');
             $table->string('relationship');
-            $table->unsignedInteger('phone_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('phone_id')
-            ->references('id')->on('phones')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
-
         });
     }
 
