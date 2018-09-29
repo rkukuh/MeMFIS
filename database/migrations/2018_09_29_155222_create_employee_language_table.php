@@ -16,10 +16,10 @@ class CreateEmployeeLanguageTable extends Migration
         Schema::create('employee_language', function (Blueprint $table) {
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('language_id');
-            $table->string('reading_score')->nullable();
-            $table->string('speaking_score')->nullable();
-            $table->string('writing_score')->nullable();
-            $table->string('understanding_score')->nullable();
+            $table->unsignedInteger('reading_level')->nullable();
+            $table->unsignedInteger('speaking_level')->nullable();
+            $table->unsignedInteger('writing_level')->nullable();
+            $table->unsignedInteger('understanding_level')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')
@@ -32,6 +32,25 @@ class CreateEmployeeLanguageTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
+            $table->foreign('reading_level')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->foreign('speaking_level')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->foreign('writing_level')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->foreign('understanding_level')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
         });
     }
 
