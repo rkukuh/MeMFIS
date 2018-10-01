@@ -37,7 +37,6 @@ var simpan = $('#add').click(function () {
                 $('#simpan').text('Simpan');
                 $('#clean').text('Bersihkan');
             }
-
         },
     });
 });
