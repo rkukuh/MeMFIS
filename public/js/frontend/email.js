@@ -28,7 +28,7 @@ var simpan = $('#add').click(function () {
             } else {
                 $('#modal_email').modal('hide');
 
-                toastr.success('Berhasil Disimpan.', 'Sukses!!', {
+                toastr.success('Data berhasil disimpan.', 'Sukses', {
                     timeOut: 5000
                 });
 
