@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    var select = document.getElementById("m_select2_1");
+    var select = document.getElementById('m_select2_1');
 
     $.ajax({
-        url: "/addres/country/",
-        type: "GET",
-        dataType: "json",
+        url: '/addres/country/',
+        type: 'GET',
+        dataType: 'json',
         success: function (data) {
             var angka = 1;
 
@@ -18,14 +18,14 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('select[name="country"]').on("change", function () {
+    $('select[name="country"]').on('change', function () {
         var stateID = $(this).val();
 
         if (stateID) {
             $.ajax({
-                url: "/addres/city/" + stateID,
-                type: "GET",
-                dataType: "json",
+                url: '/addres/city/' + stateID,
+                type: 'GET',
+                dataType: 'json',
                 success: function (data) {
                     var angka = 1;
 
@@ -34,14 +34,14 @@ $(document).ready(function () {
                     $.each(data, function (key, value) {
                         if (angka == 1) {
                             $('select[name="city"]').append(
-                                "<option> Select a City</option>"
+                                '<option> Select a City</option>'
                             );
 
                             angka = 0;
                         }
 
                         $('select[name="city"]').append(
-                            '<option value="' + key + '">' + value + "</option>"
+                            '<option value="' + key + '">' + value + '</option>'
                         );
                     });
                 }
