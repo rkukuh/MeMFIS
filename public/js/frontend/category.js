@@ -1,5 +1,5 @@
 var Category = {
-    init: function() {
+    init: function () {
         $(".m_datatable").mDatatable({
             data: {
                 type: "remote",
@@ -7,7 +7,7 @@ var Category = {
                     read: {
                         method: "GET",
                         url: "/get-categories",
-                        map: function(raw) {
+                        map: function (raw) {
                             var dataSet = raw;
                             if (typeof raw.data !== "undefined") {
                                 dataSet = raw.data;
@@ -30,14 +30,17 @@ var Category = {
             sortable: !0,
             filterable: !1,
             pagination: !0,
-            search: { input: $("#generalSearch") },
+            search: {
+                input: $("#generalSearch")
+            },
             toolbar: {
                 items: {
-                    pagination: { pageSizeSelect: [5, 10, 20, 30, 50, 100] }
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: "code",
                     title: "Code",
                     sortable: "asc",
@@ -65,14 +68,14 @@ var Category = {
                     filterable: !1,
                     width: 150
                 },
-               
+
                 {
                     field: "Actions",
                     width: 110,
                     title: "Actions",
                     sortable: !1,
                     overflow: "visible",
-                    template: function(t, e, i) {
+                    template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
                             t.id +
@@ -89,12 +92,14 @@ var Category = {
             ]
         });
 
-        var simpan = $(".modal-footer").on("click", ".add", function() {
-            var name = $("input[name=name]").val();
-            $("#simpan").text("Simpan");
-            var registerForm = $("#CustomerForm");
-            var formData = registerForm.serialize();
+        var simpan = $(".modal-footer").on("click", ".add", function () {
             $("#name-error").html("");
+            $("#simpan").text("Simpan");
+
+            var registerForm = $("#CustomerForm");
+            var name = $("input[name=name]").val();
+            var formData = registerForm.serialize();
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -105,22 +110,22 @@ var Category = {
                     _token: $("input[name=_token]").val(),
                     name: name
                 },
-                success: function(data) {
-                    console.log(data);
+                success: function (data) {
                     if (data.errors) {
                         if (data.errors.name) {
                             $("#name-error").html(data.errors.name[0]);
+
                             document.getElementById("name").value = name;
                         }
-                        // if(data.errors.email){
-                        //     $( '#email-error' ).html( data.errors.email[0] );
-                        // }
                     } else {
                         $("#modal_customer").modal("hide");
-                        toastr.success("Berhasil Disimpan.", "Sukses!!", {
+
+                        toastr.success("Data berhasil disimpan.", "Sukses", {
                             timeOut: 5000
                         });
+
                         var table = $(".m_datatable").mDatatable();
+
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -128,39 +133,45 @@ var Category = {
             });
         });
 
-        var edit = $(".m_datatable").on("click", ".edit", function() {
+        var edit = $(".m_datatable").on("click", ".edit", function () {
             $("#button").show();
-            var triggerid = $(this).data("id");
             $("#simpan").text("Perbarui");
+
+            var triggerid = $(this).data("id");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
                 url: "/category/" + triggerid + "/edit",
-                success: function(data) {
-                    document.getElementById("name").value = data.name;
+                success: function (data) {
                     document.getElementById("id").value = data.id;
+                    document.getElementById("name").value = data.name;
+
                     $(".btn-success").addClass("update");
                     $(".btn-success").removeClass("add");
                 },
-                error: function(jqXhr, json, errorThrown) {
+                error: function (jqXhr, json, errorThrown) {
                     // this are default for ajax errors
-                    var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
-                    $.each(errors["errors"], function(index, value) {
+                    var errors = jqXhr.responseJSON;
+
+                    $.each(errors["errors"], function (index, value) {
                         $("#kategori-error").html(value);
                     });
                 }
             });
         });
 
-        var update = $(".modal-footer").on("click", ".update", function() {
-            var name = $("input[name=name]").val();
-            $("#name-error").html("");
+        var update = $(".modal-footer").on("click", ".update", function () {
             $("#button").show();
-            var triggerid = $("input[name=id]").val();
+            $("#name-error").html("");
             $("#simpan").text("Perbarui");
+
+            var name = $("input[name=name]").val();
+            var triggerid = $("input[name=id]").val();
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -171,22 +182,22 @@ var Category = {
                     _token: $("input[name=_token]").val(),
                     name: name
                 },
-                success: function(data) {
-                    console.log(data);
+                success: function (data) {
                     if (data.errors) {
                         if (data.errors.name) {
                             $("#name-error").html(data.errors.name[0]);
+
                             document.getElementById("name").value = name;
                         }
-                        // if(data.errors.email){
-                        //     $( '#email-error' ).html( data.errors.email[0] );
-                        // }
                     } else {
                         $("#modal_customer").modal("hide");
-                        toastr.success("Berhasil Disimpan.", "Sukses!!", {
+
+                        toastr.success("Data berhasil disimpan.", "Sukses", {
                             timeOut: 5000
                         });
+
                         var table = $(".m_datatable").mDatatable();
+
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -194,27 +205,28 @@ var Category = {
             });
         });
 
-        var show = $(".m_datatable").on("click", ".show", function() {
+        var show = $(".m_datatable").on("click", ".show", function () {
             $("#button").hide();
-            var triggerid = $(this).data("id");
             $("#simpan").text("Perbarui");
+
+            var triggerid = $(this).data("id");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
                 url: "/category/" + triggerid,
-                success: function(data) {
-                    document.getElementById("TitleModalCustomer").innerHTML =
-                        "Detail Customer #ID-" + triggerid;
-
+                success: function (data) {
+                    document.getElementById("TitleModalCustomer").innerHTML = "Detail Customer #ID-" + triggerid;
                     document.getElementById("name").value = data.name;
                     document.getElementById("name").readOnly = true;
                 },
-                error: function(jqXhr, json, errorThrown) {
+                error: function (jqXhr, json, errorThrown) {
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = "";
-                    $.each(errors["errors"], function(index, value) {
+
+                    $.each(errors["errors"], function (index, value) {
                         $("#kategori-error").html(value);
                     });
                 }
@@ -222,8 +234,9 @@ var Category = {
         });
 
 
-        var remove = $(".m_datatable").on("click", ".delete", function() {
+        var remove = $(".m_datatable").on("click", ".delete", function () {
             var triggerid = $(this).data("id");
+
             swal({
                 title: "Are you sure?",
                 text: "You will not be able to recover this imaginary file!",
@@ -241,20 +254,23 @@ var Category = {
                         },
                         type: "DELETE",
                         url: "/category/" + triggerid + "",
-                        success: function(data) {
+                        success: function (data) {
                             toastr.success(
                                 "Data Berhasil Dihapus.",
-                                "Sukses!!!",
-                                { timeOut: 5000 }
+                                "Sukses", {
+                                    timeOut: 5000
+                                }
                             );
                             var table = $(".m_datatable").mDatatable();
+
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function(jqXhr, json, errorThrown) {
-                            var errors = jqXhr.responseJSON;
+                        error: function (jqXhr, json, errorThrown) {
                             var errorsHtml = "";
-                            $.each(errors["errors"], function(index, value) {
+                            var errors = jqXhr.responseJSON;
+
+                            $.each(errors["errors"], function (index, value) {
                                 $("#delete-error").html(value);
                             });
                         }
@@ -266,7 +282,7 @@ var Category = {
                     );
                 } else {
                     swal(
-                        "Cancelled",
+                        "Canceled",
                         "Your imaginary file is safe :)",
                         "error"
                     );
@@ -274,16 +290,14 @@ var Category = {
             });
         });
 
-        $('#modal_customer').on('hidden.bs.modal', function(e) {
+        $('#modal_customer').on('hidden.bs.modal', function (e) {
             $(this).find('#CustomerForm')[0].reset();
+
             $("#name-error").html("");
-
-          });
-
+        });
     }
 };
 
-
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     Category.init();
 });
