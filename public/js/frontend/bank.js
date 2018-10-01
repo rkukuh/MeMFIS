@@ -21,7 +21,7 @@ $(document).ready(function () {
                     }
 
                     $('select[name="bank"]').append(
-                        '<option value="' + key + ''>' + value + '</option>'
+                        '<option value="' + key + '">' + value + '</option>'
                     );
                 });
             }
