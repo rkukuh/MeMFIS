@@ -16,8 +16,8 @@ class CreateEmployeeSchoolTable extends Migration
         Schema::create('employee_school', function (Blueprint $table) {
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('school_id');
-            $table->timestamp('start_at');
-            $table->timestamp('graduated_at');
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('graduated_at')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')
