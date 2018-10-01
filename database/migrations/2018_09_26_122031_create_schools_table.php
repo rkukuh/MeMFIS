@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQualificationsTable extends Migration
+class CreateSchoolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,20 @@ class CreateQualificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('qualifications', function (Blueprint $table) {
+        Schema::create('schools', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('name');
-            $table->string('title');
+            $table->unsignedInteger('degree')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('degree')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->index('name');
         });
     }
 
@@ -30,6 +37,6 @@ class CreateQualificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qualifications');
+        Schema::dropIfExists('schools');
     }
 }

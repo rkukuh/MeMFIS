@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSkillsTable extends Migration
+class CreateStatusablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateSkillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('skills', function (Blueprint $table) {
-            $table->increments('id');
-            $table->char('uuid', 36)->unique();
-            $table->string('name');
-            $table->text('detil');
+        Schema::create('statusables', function (Blueprint $table) {
+            $table->integer('status_id');
+            $table->integer('statusable_id');
+            $table->string('statusable_type');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateSkillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('statusables');
     }
 }

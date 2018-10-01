@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeStatusTable extends Migration
+class CreateEmployeeSchoolTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateEmployeeStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_status', function (Blueprint $table) {
+        Schema::create('employee_school', function (Blueprint $table) {
             $table->unsignedInteger('employee_id');
-            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('school_id');
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('graduated_at')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')
@@ -23,10 +25,11 @@ class CreateEmployeeStatusTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('status_id')
-                    ->references('id')->on('statuses')
+            $table->foreign('school_id')
+                    ->references('id')->on('schools')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
         });
     }
 
@@ -37,6 +40,6 @@ class CreateEmployeeStatusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_status');
+        Schema::dropIfExists('employee_school');
     }
 }
