@@ -1,16 +1,16 @@
 var Customer = {
     init: function () {
-        $(".m_datatable").mDatatable({
+        $('.m_datatable').mDatatable({
             data: {
-                type: "remote",
+                type: 'remote',
                 source: {
                     read: {
-                        method: "GET",
-                        url: "/get-audits",
+                        method: 'GET',
+                        url: '/get-audits',
                         map: function (raw) {
                             var dataSet = raw;
 
-                            if (typeof raw.data !== "undefined") {
+                            if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
 
@@ -24,8 +24,8 @@ var Customer = {
                 serverSorting: !0
             },
             layout: {
-                theme: "default",
-                class: "",
+                theme: 'default',
+                class: '',
                 scroll: false,
                 footer: !1
             },
@@ -33,7 +33,7 @@ var Customer = {
             filterable: !1,
             pagination: !0,
             search: {
-                input: $("#generalSearch")
+                input: $('#generalSearch')
             },
             toolbar: {
                 items: {
@@ -43,103 +43,103 @@ var Customer = {
                 }
             },
             columns: [{
-                    field: "id",
-                    title: "#",
+                    field: 'id',
+                    title: '#',
                     sortable: !1,
                     width: 40
                 },
                 {
-                    field: "user_type",
-                    title: "User Type",
-                    sortable: "asc",
+                    field: 'user_type',
+                    title: 'User Type',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 60
                 },
                 {
-                    field: "user_id",
-                    title: "ID User",
-                    sortable: "asc",
+                    field: 'user_id',
+                    title: 'ID User',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "event",
-                    title: "Event",
-                    sortable: "asc",
+                    field: 'event',
+                    title: 'Event',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: "auditable_type",
-                    title: "Auditable Type",
-                    sortable: "asc",
+                    field: 'auditable_type',
+                    title: 'Auditable Type',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "old_values",
-                    title: "Old Value",
-                    sortable: "asc",
+                    field: 'old_values',
+                    title: 'Old Value',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: "new_values",
-                    title: "new Value",
-                    sortable: "asc",
+                    field: 'new_values',
+                    title: 'new Value',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: "url",
-                    title: "URL",
-                    sortable: "asc",
+                    field: 'url',
+                    title: 'URL',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: "ip_address",
-                    title: "IP Address",
-                    sortable: "asc",
+                    field: 'ip_address',
+                    title: 'IP Address',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: "user_agent",
-                    title: "User Agent",
-                    sortable: "asc",
+                    field: 'user_agent',
+                    title: 'User Agent',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: "tags",
-                    title: "Tags",
-                    sortable: "asc",
+                    field: 'tags',
+                    title: 'Tags',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
 
                 {
-                    field: "Actions",
+                    field: 'Actions',
                     width: 110,
-                    title: "Actions",
+                    title: 'Actions',
                     sortable: !1,
-                    overflow: "visible",
+                    overflow: 'visible',
                     template: function (t, e, i) {
                         if (tes == 2) {
                             return (
-                                '<a href="/audit/1" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                                '<a href="audit1"><button type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id="' +
                                 t.id +
-                                '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t'
+                                '">\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t'
                             );
                         } else {
                             return (
-                                '<button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                                '<button type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id="' +
                                 t.id +
-                                '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                                '<a href="audit/' + t.id + '" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="audit" data-id=' +
+                                '">\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                                '<a href="audit/' + t.id + '"><button type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="audit" data-id="' +
                                 t.id +
-                                '>\t\t\t\t\t\t\t<i class="la la-info-circle"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t'
+                                '">\t\t\t\t\t\t\t<i class="la la-info-circle"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t'
                             );
                         }
                     }
