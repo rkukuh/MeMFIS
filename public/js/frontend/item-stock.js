@@ -1,17 +1,19 @@
 var ItemStock = {
-    init: function() {
-        $(".m_datatable2").mDatatable({
+    init: function () {
+        $('.m_datatable2').mDatatable({
             data: {
-                type: "remote",
+                type: 'remote',
                 source: {
                     read: {
-                        method: "GET",
-                        url: "/get-item-stocks",
-                        map: function(raw) {
+                        method: 'GET',
+                        url: '/get-item-stocks',
+                        map: function (raw) {
                             var dataSet = raw;
-                            if (typeof raw.data !== "undefined") {
+
+                            if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
+
                             return dataSet;
                         }
                     }
@@ -22,101 +24,108 @@ var ItemStock = {
                 serverSorting: !0
             },
             layout: {
-                theme: "default",
-                class: "",
+                theme: 'default',
+                class: '',
                 scroll: false,
                 footer: !1
             },
             sortable: !0,
             filterable: !1,
             pagination: !0,
-            search: { input: $("#generalSearch") },
+            search: {
+                input: $('#generalSearch')
+            },
             toolbar: {
                 items: {
-                    pagination: { pageSizeSelect: [5, 10, 20, 30, 50, 100] }
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
                 }
             },
-            columns: [
-                {
-                    field: "code",
-                    title: "Code",
-                    sortable: "asc",
+            columns: [{
+                    field: 'code',
+                    title: 'Code',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 60
                 },
                 {
-                    field: "id_storage",
-                    title: "Storage",
-                    sortable: "asc",
+                    field: 'id_storage',
+                    title: 'Storage',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "max",
-                    title: "Max",
-                    sortable: "asc",
+                    field: 'max',
+                    title: 'Max',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "min",
-                    title: "Min",
-                    sortable: "asc",
+                    field: 'min',
+                    title: 'Min',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "Actions",
+                    field: 'Actions',
                     width: 110,
-                    title: "Actions",
+                    title: 'Actions',
                     sortable: !1,
-                    overflow: "visible",
-                    template: function(t, e, i) {
+                    overflow: 'visible',
+                    template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id="' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
+                            '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="' +
                             t.id +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
+                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
             ]
         });
 
-        var simpan = $(".modal-footer").on("click", ".add", function() {
-            var name = $("input[name=name]").val();
-            $("#simpan").text("Simpan");
-            var registerForm = $("#CustomerForm");
+        var simpan = $('.modal-footer').on('click', '.add', function () {
+            $('#name-error').html('');
+            $('#simpan').text('Simpan');
+
+            var registerForm = $('#CustomerForm');
+            var name = $('input[name=name]').val();
             var formData = registerForm.serialize();
-            $("#name-error").html("");
+
             $.ajax({
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: "post",
-                url: "/itemstock",
+                type: 'post',
+                url: '/itemstock',
                 data: {
-                    _token: $("input[name=_token]").val(),
+                    _token: $('input[name=_token]').val(),
                     name: name
                 },
-                success: function(data) {
-                    console.log(data);
+                success: function (data) {
                     if (data.errors) {
                         if (data.errors.name) {
-                            $("#name-error").html(data.errors.name[0]);
-                            document.getElementById("name").value = name;
+                            $('#name-error').html(data.errors.name[0]);
+                            document.getElementById('name').value = name;
                         }
                     } else {
-                        $("#modal_customer").modal("hide");
-                        toastr.success("Berhasil Disimpan.", "Sukses!!", {
+                        $('#modal_customer').modal('hide');
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
-                        var table = $(".m_datatable").mDatatable();
+
+                        var table = $('.m_datatable').mDatatable();
+
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -124,61 +133,70 @@ var ItemStock = {
             });
         });
 
-        var edit = $(".m_datatable").on("click", ".edit", function() {
-            $("#button").show();
-            var triggerid = $(this).data("id");
-            $("#simpan").text("Perbarui");
+        var edit = $('.m_datatable').on('click', '.edit', function () {
+            $('#button').show();
+            $('#simpan').text('Perbarui');
+
+            var triggerid = $(this).data('id');
+
             $.ajax({
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: "get",
-                url: "/itemstock/" + triggerid + "/edit",
-                success: function(data) {
-                    document.getElementById("name").value = data.name;
-                    document.getElementById("id").value = data.id;
-                    $(".btn-success").addClass("update");
-                    $(".btn-success").removeClass("add");
+                type: 'get',
+                url: '/itemstock/' + triggerid + '/edit',
+                success: function (data) {
+                    document.getElementById('id').value = data.id;
+                    document.getElementById('name').value = data.name;
+
+                    $('.btn-success').addClass('update');
+                    $('.btn-success').removeClass('add');
                 },
-                error: function(jqXhr, json, errorThrown) {
+                error: function (jqXhr, json, errorThrown) {
+                    var errorsHtml = '';
                     var errors = jqXhr.responseJSON;
-                    var errorsHtml = "";
-                    $.each(errors["errors"], function(index, value) {
-                        $("#kategori-error").html(value);
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
                     });
                 }
             });
         });
 
-        var update = $(".modal-footer").on("click", ".update", function() {
-            var name = $("input[name=name]").val();
-            $("#name-error").html("");
-            $("#button").show();
-            var triggerid = $("input[name=id]").val();
-            $("#simpan").text("Perbarui");
+        var update = $('.modal-footer').on('click', '.update', function () {
+            $('#button').show();
+            $('#name-error').html('');
+            $('#simpan').text('Perbarui');
+
+            var name = $('input[name=name]').val();
+            var triggerid = $('input[name=id]').val();
+
             $.ajax({
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: "put",
-                url: "/itemstock/" + triggerid,
+                type: 'put',
+                url: '/itemstock/' + triggerid,
                 data: {
-                    _token: $("input[name=_token]").val(),
+                    _token: $('input[name=_token]').val(),
                     name: name
                 },
-                success: function(data) {
-                    console.log(data);
+                success: function (data) {
                     if (data.errors) {
                         if (data.errors.name) {
-                            $("#name-error").html(data.errors.name[0]);
-                            document.getElementById("name").value = name;
+                            $('#name-error').html(data.errors.name[0]);
+
+                            document.getElementById('name').value = name;
                         }
                     } else {
-                        $("#modal_customer").modal("hide");
-                        toastr.success("Berhasil Disimpan.", "Sukses!!", {
+                        $('#modal_customer').modal('hide');
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
-                        var table = $(".m_datatable").mDatatable();
+
+                        var table = $('.m_datatable').mDatatable();
+
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -186,96 +204,96 @@ var ItemStock = {
             });
         });
 
-        var show = $(".m_datatable").on("click", ".show", function() {
-            $("#button").hide();
-            var triggerid = $(this).data("id");
-            $("#simpan").text("Perbarui");
+        var show = $('.m_datatable').on('click', '.show', function () {
+            $('#button').hide();
+            $('#simpan').text('Perbarui');
+
+            var triggerid = $(this).data('id');
+
             $.ajax({
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: "get",
-                url: "/itemstock/" + triggerid,
-                success: function(data) {
-                    document.getElementById("TitleModalCustomer").innerHTML =
-                        "Detail Customer #ID-" + triggerid;
-
-                    document.getElementById("name").value = data.name;
-                    document.getElementById("name").readOnly = true;
+                type: 'get',
+                url: '/itemstock/' + triggerid,
+                success: function (data) {
+                    document.getElementById('TitleModalCustomer').innerHTML = 'Detail Customer #ID-' + triggerid;
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('name').readOnly = true;
                 },
-                error: function(jqXhr, json, errorThrown) {
+                error: function (jqXhr, json, errorThrown) {
+                    var errorsHtml = '';
                     var errors = jqXhr.responseJSON;
-                    var errorsHtml = "";
-                    $.each(errors["errors"], function(index, value) {
-                        $("#kategori-error").html(value);
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
                     });
                 }
             });
         });
 
+        var remove = $('.m_datatable').on('click', '.delete', function () {
+            var triggerid = $(this).data('id');
 
-        var remove = $(".m_datatable").on("click", ".delete", function() {
-            var triggerid = $(this).data("id");
             swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this imaginary file!',
+                type: 'warning',
                 showCancelButton: true,
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, keep it"
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
             }).then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
                             )
                         },
-                        type: "DELETE",
-                        url: "/itemstock/" + triggerid + "",
-                        success: function(data) {
-                            toastr.success(
-                                "Data Berhasil Dihapus.",
-                                "Sukses!!!",
-                                { timeOut: 5000 }
-                            );
-                            var table = $(".m_datatable").mDatatable();
+                        type: 'DELETE',
+                        url: '/itemstock/' + triggerid + '',
+                        success: function (data) {
+                            toastr.success('Data berhasil disimpan.', 'Sukses', {
+                                timeOut: 5000
+                            });
+
+                            var table = $('.m_datatable').mDatatable();
+
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function(jqXhr, json, errorThrown) {
+                        error: function (jqXhr, json, errorThrown) {
+                            var errorsHtml = '';
                             var errors = jqXhr.responseJSON;
-                            var errorsHtml = "";
-                            $.each(errors["errors"], function(index, value) {
-                                $("#delete-error").html(value);
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
                             });
                         }
                     });
                     swal(
-                        "Deleted!",
-                        "Your imaginary file has been deleted.",
-                        "success"
+                        'Deleted!',
+                        'Your imaginary file has been deleted.',
+                        'success'
                     );
                 } else {
                     swal(
-                        "Cancelled",
-                        "Your imaginary file is safe :)",
-                        "error"
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
                     );
                 }
             });
         });
 
-        $('#modal_customer').on('hidden.bs.modal', function(e) {
+        $('#modal_customer').on('hidden.bs.modal', function (e) {
             $(this).find('#CustomerForm')[0].reset();
-            $("#name-error").html("");
 
-          });
-
+            $('#name-error').html('');
+        });
     }
 };
 
-
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     ItemStock.init();
 });
