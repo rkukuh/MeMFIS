@@ -64,21 +64,23 @@ var Select2 = {
                         pagination: {
                             more: 30 * t.page < e.total_count
                         }
-                    }
+                    };
                 },
                 cache: !0
             },
             escapeMarkup: function (e) {
-                return e
+                return e;
             },
             minimumInputLength: 1,
             templateResult: function (e) {
                 if (e.loading) return e.text;
+
                 var t = "<div class='select2-result-repository clearfix'><div class='select2-result-repository__meta'><div class='select2-result-repository__title'>" + e.full_name + "</div>";
-                return e.description && (t += "<div class='select2-result-repository__description'>" + e.description + "</div>"), t += "<div class='select2-result-repository__statistics'><div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + e.forks_count + " Forks</div><div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + e.stargazers_count + " Stars</div><div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + e.watchers_count + " Watchers</div></div></div></div>"
+
+                return e.description && (t += "<div class='select2-result-repository__description'>" + e.description + "</div>"), t += "<div class='select2-result-repository__statistics'><div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + e.forks_count + " Forks</div><div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + e.stargazers_count + " Stars</div><div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + e.watchers_count + " Watchers</div></div></div></div>";
             },
             templateSelection: function (e) {
-                return e.full_name || e.text
+                return e.full_name || e.text;
             }
         }), $("#m_select2_12_1, #m_select2_12_2, #m_select2_12_3, #m_select2_12_4").select2({
             placeholder: "Select an option"
@@ -111,6 +113,7 @@ var Select2 = {
         })
     }
 };
+
 jQuery(document).ready(function () {
-    Select2.init()
+    Select2.init();
 });
