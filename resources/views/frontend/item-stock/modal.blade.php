@@ -26,20 +26,20 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Warehouse @include('frontend.common.label.required')
+                                    Storage @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.select')
-                                    @slot('text', 'Warehouse')
-                                    @slot('name', 'warehouse')
+                                    @slot('text', 'Storage')
+                                    @slot('name', 'storage')
                                     @slot('id', 'm_select2_1')
                                     @slot('style', 'width:100%')
                                 @endcomponent
 
                                 @component('frontend.common.buttons.create-new')
                                     @slot('size', 'sm')
-                                    @slot('text', 'add warehouse')
-                                    @slot('data_target', '#modal_werehouse')
+                                    @slot('text', 'add storage')
+                                    @slot('data_target', '#modal_storage')
                                 @endcomponent
                             </div>
                         </div>

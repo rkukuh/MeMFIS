@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\model\ListUtil;
-use App\Models\Warehouse;
+use App\Models\Storage;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\WarehouseStore;
-use App\Http\Requests\Frontend\WarehouseUpdate;
+use App\Http\Requests\Frontend\StorageStore;
+use App\Http\Requests\Frontend\StorageUpdate;
 
-class WarehouseController extends Controller
+class StorageController extends Controller
 {
     /**
      * Show data from model for DataTable.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getWarehouses()
+    public function getStorages()
     {
-        $warehouses = Warehouse::All();
+        $storages = Storage::All();
 
-        $data = $alldata = json_decode($warehouses);
+        $data = $alldata = json_decode($storages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -115,7 +115,7 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        return view('frontend.warehouse.index');
+        return view('frontend.storage.index');
     }
 
     /**
@@ -131,68 +131,68 @@ class WarehouseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\WarehouseStore  $request
+     * @param  \App\Http\Requests\Frontend\StorageStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WarehouseStore $request)
+    public function store(StorageStore $request)
     {
-        $warehouse = Warehouse::create([
+        $storage = Storage::create([
             // 'abbr' => $request->abbr,
             // 'name' => $request->name,
         ]);
 
-        return response()->json($warehouse);
+        return response()->json($storage);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Warehouse  $warehouse
+     * @param  \App\Models\Storage  $storage
      * @return \Illuminate\Http\Response
      */
-    public function show(Warehouse $warehouse)
+    public function show(Storage $storage)
     {
-        return response()->json($warehouse);
+        return response()->json($storage);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Warehouse  $warehouse
+     * @param  \App\Models\Storage  $storage
      * @return \Illuminate\Http\Response
      */
-    public function edit(Warehouse $warehouse)
+    public function edit(Storage $storage)
     {
-        return response()->json($warehouse);
+        return response()->json($storage);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\WarehouseUpdate  $request
-     * @param  \App\Models\Warehouse  $warehouse
+     * @param  \App\Http\Requests\Frontend\StorageUpdate  $request
+     * @param  \App\Models\Storage  $storage
      * @return \Illuminate\Http\Response
      */
-    public function update(WarehouseUpdate $request, Warehouse $warehouse)
+    public function update(StorageUpdate $request, Storage $storage)
     {
-        $warehouse = Warehouse::find($warehouse);
-        // $warehouse->name = $request->name;
-        // $warehouse->save();
+        $storage = Storage::find($storage);
+        // $storage->name = $request->name;
+        // $storage->save();
 
-        return response()->json($warehouse);
+        return response()->json($storage);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Warehouse  $warehouse
+     * @param  \App\Models\Storage  $storage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Warehouse $warehouse)
+    public function destroy(Storage $storage)
     {
-        $warehouse->delete();
+        $storage->delete();
 
-        return response()->json($warehouse);
+        return response()->json($storage);
     }
 
     /**

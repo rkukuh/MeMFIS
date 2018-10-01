@@ -17,12 +17,12 @@ class CreateItemStocksTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code',50);
-            $table->unsignedInteger('warehouse_id')->nullable();
+            $table->unsignedInteger('storage_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('warehouse_id')
-            ->references('id')->on('warehouses')
+            $table->foreign('storage_id')
+            ->references('id')->on('storages')
             ->onUpdate('cascade')
             ->onDelete('restrict');
 

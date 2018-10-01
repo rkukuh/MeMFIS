@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWarehousesTable extends Migration
+class CreateStoragesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWarehousesTable extends Migration
      */
     public function up()
     {
-        Schema::create('warehouses', function (Blueprint $table) {
+        Schema::create('storages', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code',50);
@@ -25,9 +25,9 @@ class CreateWarehousesTable extends Migration
             $table->softDeletes();
 
             $table->foreign('account_code')
-            ->references('id')->on('journals')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');          
+                  ->references('id')->on('journals')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
 
         });
     }
@@ -39,6 +39,6 @@ class CreateWarehousesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('warehouses');
+        Schema::dropIfExists('storages');
     }
 }

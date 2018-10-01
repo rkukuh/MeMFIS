@@ -45,8 +45,8 @@ var ItemStock = {
                     width: 60
                 },
                 {
-                    field: "id_warehouse",
-                    title: "Warehouse",
+                    field: "id_storage",
+                    title: "Storage",
                     sortable: "asc",
                     filterable: !1,
                     width: 150

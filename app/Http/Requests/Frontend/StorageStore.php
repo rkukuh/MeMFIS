@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class WarehouseUpdate extends FormRequest
+class StorageStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,3 +34,4 @@ class WarehouseUpdate extends FormRequest
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }
+
