@@ -56,7 +56,7 @@ var Select2 = {
                     return {
                         q: e.term,
                         page: e.page
-                    }
+                    };
                 },
                 processResults: function (e, t) {
                     return t.page = t.page || 1, {
@@ -133,8 +133,8 @@ var Select2 = {
             }), $('#m_select2_4_modal').select2({
                 placeholder: 'Select a state',
                 allowClear: !0
-            })
-        })
+            });
+        });
     }
 };
 
