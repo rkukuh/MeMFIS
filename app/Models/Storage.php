@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class Warehouse extends MemfisModel
+class Storage extends MemfisModel
 {
     //
 }

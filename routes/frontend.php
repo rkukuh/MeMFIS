@@ -26,8 +26,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('item-unit', 'ItemUnitController');
         Route::get('/get-item-units','ItemUnitController@getItemUnits')->name('get-itemunits');
 
-        Route::resource('warehouse', 'WarehouseController');
-        Route::get('/get-warehouses','WarehouseController@getWarehouses')->name('get-warehouses');
+        Route::resource('storage', 'StorageController');
+        Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
         Route::resource('supplier', 'SupplierController');
         Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');

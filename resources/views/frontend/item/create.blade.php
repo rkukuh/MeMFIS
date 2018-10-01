@@ -94,7 +94,7 @@
                                                         @slot('id', 'm_select2_2')
                                                         @slot('style', 'width:100%')
                                                     @endcomponent
-                    
+
                                                     @component('frontend.common.buttons.create-new')
                                                         @slot('size', 'sm')
                                                         @slot('text', 'add category')
@@ -114,7 +114,7 @@
                                                                     @slot('text', 'IsPPn')
                                                                     @slot('name', 'isppn')
                                                                 @endcomponent
-                                
+
                                                             </div>
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                                     @component('frontend.common.input.checkbox')
@@ -146,7 +146,7 @@
                                                             @slot('text', 'xPicture')
                                                             @slot('name', 'xpicture')
                                                         @endcomponent
-                                                    </div>            
+                                                    </div>
                                             </div>
                                             <div class="form-group m-form__group row ">
                                             </div>
@@ -164,21 +164,21 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Warehouse
+                                                            Storage
                                                         @component('frontend.common.label.required')
                                                         @endcomponent
                                                         </label>
                                                         @component('frontend.common.input.select')
-                                                            @slot('text', 'Warehouse')
-                                                            @slot('name', 'warehouse')
+                                                            @slot('text', 'Storage')
+                                                            @slot('name', 'storage')
                                                             @slot('id', 'm_select2_1')
                                                             @slot('style', 'width:100%')
                                                         @endcomponent
-                        
+
                                                         @component('frontend.common.buttons.create-new')
                                                             @slot('size', 'sm')
-                                                            @slot('text', 'add warehouse')
-                                                            @slot('data_target', '#modal_werehouse')
+                                                            @slot('text', 'add storage')
+                                                            @slot('data_target', '#modal_storage')
                                                         @endcomponent
                                                     </div>
 
@@ -206,7 +206,7 @@
                                                                     @slot('name', 'min')
                                                                 @endcomponent
                                                             </div>
-        
+
                                                     </div>
                                                     <div class="form-group m-form__group row ">
                                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
@@ -248,7 +248,7 @@
                                         <div class="m-portlet m-portlet--mobile">
                                             <div class="m-portlet__body">
                                                 <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                    <div class="row align-items-center">                                                        
+                                                    <div class="row align-items-center">
                                                         <div class="col-xl-5 order-1 order-xl-2 m--align-right">
                                                             @component('frontend.common.buttons.create-new')
                                                                 @slot('id', 'item-unit')
@@ -258,7 +258,7 @@
                                                                 @slot('text', 'Add Item Unit')
                                                                 @slot('data_target', '#modal_itemsunit')
                                                             @endcomponent
-                    
+
                                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                         </div>
                                                     </div>
@@ -283,11 +283,11 @@
                                             </div>
                                             <div class="m-portlet m-portlet--mobile">
                                                 <div class="m-portlet__body">
-                                                    
+
                                                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                     <div class="row align-items-center">
-                                       
+
                                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('id', 'item-stock')
@@ -297,26 +297,26 @@
                                                 @slot('text', 'Add Item Stock')
                                                 @slot('data_target', '#modal_itemstock')
                                             @endcomponent
-    
+
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                         </div>
                                     </div>
                                 </div>
-    
-                                @include('frontend.warehouse.modal')
+
+                                @include('frontend.storage.modal')
                                 @include('frontend.item-stock.modal')
-    
+
                                 <div class="m_datatable2" id="second"></div>
 
 
                                                             </div>
-                    
-                                                   
+
+
                                                 </div>
                                             </div>
                                         </div>
             </div>
-            
+
 
         </div>
     </div>

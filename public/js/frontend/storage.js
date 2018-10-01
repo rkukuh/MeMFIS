@@ -1,4 +1,4 @@
-var Warehouse = {
+var Storage = {
     init: function() {
         $(".m_datatable").mDatatable({
             data: {
@@ -6,7 +6,7 @@ var Warehouse = {
                 source: {
                     read: {
                         method: "GET",
-                        url: "/get-warehouses",
+                        url: "/get-storages",
                         map: function(raw) {
                             var dataSet = raw;
                             if (typeof raw.data !== "undefined") {
@@ -106,7 +106,7 @@ var Warehouse = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "post",
-                url: "/werehouse",
+                url: "/storage",
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -140,7 +140,7 @@ var Warehouse = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/werehouse/" + triggerid + "/edit",
+                url: "/storage/" + triggerid + "/edit",
                 success: function(data) {
                     document.getElementById("name").value = data.name;
                     document.getElementById("id").value = data.id;
@@ -168,7 +168,7 @@ var Warehouse = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "put",
-                url: "/werehouse/" + triggerid,
+                url: "/storage/" + triggerid,
                 data: {
                     _token: $("input[name=_token]").val(),
                     name: name
@@ -202,7 +202,7 @@ var Warehouse = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "get",
-                url: "/werehouse/" + triggerid,
+                url: "/storage/" + triggerid,
                 success: function(data) {
                     document.getElementById("TitleModalCustomer").innerHTML =
                         "Detail Customer #ID-" + triggerid;
@@ -239,7 +239,7 @@ var Warehouse = {
                             )
                         },
                         type: "DELETE",
-                        url: "/werehouse/" + triggerid + "",
+                        url: "/storage/" + triggerid + "",
                         success: function(data) {
                             toastr.success(
                                 "Data Berhasil Dihapus.",
@@ -284,5 +284,5 @@ var Warehouse = {
 
 
 jQuery(document).ready(function() {
-    Warehouse.init();
+    Storage.init();
 });
