@@ -157,7 +157,7 @@ var Category = {
                     var errorsHtml = '';
                     var errors = jqXhr.responseJSON;
 
-                    $.each(errors['errors'], function (index, value) {
+                    $.each(errors.errors, function (index, value) {
                         $('#kategori-error').html(value);
                     });
                 }
@@ -226,7 +226,7 @@ var Category = {
                     var errors = jqXhr.responseJSON;
                     var errorsHtml = '';
 
-                    $.each(errors['errors'], function (index, value) {
+                    $.each(errors.errors, function (index, value) {
                         $('#kategori-error').html(value);
                     });
                 }
@@ -270,7 +270,7 @@ var Category = {
                             var errorsHtml = '';
                             var errors = jqXhr.responseJSON;
 
-                            $.each(errors['errors'], function (index, value) {
+                            $.each(errors.errors, function (index, value) {
                                 $('#delete-error').html(value);
                             });
                         }
