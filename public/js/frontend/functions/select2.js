@@ -1,56 +1,56 @@
 var Select2 = {
     init: function () {
-        $("#m_select2_1, #m_select2_1_validate").select2({
-            placeholder: "Select a Country"
-        }), $("#m_select2_2, #m_select2_2_validate").select2({
-            placeholder: "Select a City"
-        }), $("#m_select2_3, #m_select2_3_validate").select2({
-            placeholder: "Select a state"
-        }), $("#m_select2_3a, #m_select2_3a_validate").select2({
-            placeholder: "Select a state"
-        }), $("#accountcode, #accountcode_validate").select2({
-            placeholder: "Select a Accountcode"
-        }), $("#type, #type_validate").select2({
-            placeholder: "Select a Type"
-        }), $("#unit, #unit_validate").select2({
-            placeholder: "Select a Unit"
-        }), $("#currency, #currency_validate").select2({
-            placeholder: "Select a Currency"
-        }), $("#customer, #customer_validate").select2({
-            placeholder: "Select a Customer"
-        }), $("#number, #number_validate").select2({
-            placeholder: "Select a Number"
-        }), $("#country, #country_validate").select2({
-            placeholder: "Select a Country"
-        }), $("#city, #city_validate").select2({
-            placeholder: "Select a City"
-        }), $("#m_select2_4").select2({
-            placeholder: "Select a state",
+        $('#m_select2_1, #m_select2_1_validate').select2({
+            placeholder: 'Select a Country'
+        }), $('#m_select2_2, #m_select2_2_validate').select2({
+            placeholder: 'Select a City'
+        }), $('#m_select2_3, #m_select2_3_validate').select2({
+            placeholder: 'Select a state'
+        }), $('#m_select2_3a, #m_select2_3a_validate').select2({
+            placeholder: 'Select a state'
+        }), $('#accountcode, #accountcode_validate').select2({
+            placeholder: 'Select a Accountcode'
+        }), $('#type, #type_validate').select2({
+            placeholder: 'Select a Type'
+        }), $('#unit, #unit_validate').select2({
+            placeholder: 'Select a Unit'
+        }), $('#currency, #currency_validate').select2({
+            placeholder: 'Select a Currency'
+        }), $('#customer, #customer_validate').select2({
+            placeholder: 'Select a Customer'
+        }), $('#number, #number_validate').select2({
+            placeholder: 'Select a Number'
+        }), $('#country, #country_validate').select2({
+            placeholder: 'Select a Country'
+        }), $('#city, #city_validate').select2({
+            placeholder: 'Select a City'
+        }), $('#m_select2_4').select2({
+            placeholder: 'Select a state',
             allowClear: !0
-        }), $("#m_select2_5").select2({
-            placeholder: "Select a value",
+        }), $('#m_select2_5').select2({
+            placeholder: 'Select a value',
             data: [{
                 id: 0,
-                text: "Enhancement"
+                text: 'Enhancement'
             }, {
                 id: 1,
-                text: "Bug"
+                text: 'Bug'
             }, {
                 id: 2,
-                text: "Duplicate"
+                text: 'Duplicate'
             }, {
                 id: 3,
-                text: "Invalid"
+                text: 'Invalid'
             }, {
                 id: 4,
-                text: "Wontfix"
+                text: 'Wontfix'
             }]
-        }), $("#m_select2_6").select2({
-            placeholder: "Search for git repositories",
+        }), $('#m_select2_6').select2({
+            placeholder: 'Search for git repositories',
             allowClear: !0,
             ajax: {
-                url: "https://api.github.com/search/repositories",
-                dataType: "json",
+                url: 'https://api.github.com/search/repositories',
+                dataType: 'json',
                 delay: 250,
                 data: function (e) {
                     return {
@@ -75,39 +75,39 @@ var Select2 = {
             templateResult: function (e) {
                 if (e.loading) return e.text;
 
-                var t = "<div class='select2-result-repository clearfix'><div class='select2-result-repository__meta'><div class='select2-result-repository__title'>" + e.full_name + "</div>";
+                var t = '<div class="select2-result-repository clearfix"><div class="select2-result-repository__meta"><div class="select2-result-repository__title">' + e.full_name + '</div>';
 
-                return e.description && (t += "<div class='select2-result-repository__description'>" + e.description + "</div>"), t += "<div class='select2-result-repository__statistics'><div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + e.forks_count + " Forks</div><div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + e.stargazers_count + " Stars</div><div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + e.watchers_count + " Watchers</div></div></div></div>";
+                return e.description && (t += '<div class="select2-result-repository__description">' + e.description + '</div>'), t += '<div class="select2-result-repository__statistics"><div class="select2-result-repository__forks"><i class="fa fa-flash"></i> ' + e.forks_count + ' Forks</div><div class="select2-result-repository__stargazers"><i class="fa fa-star"></i> ' + e.stargazers_count + ' Stars</div><div class="select2-result-repository__watchers"><i class="fa fa-eye"></i> ' + e.watchers_count + ' Watchers</div></div></div></div>';
             },
             templateSelection: function (e) {
                 return e.full_name || e.text;
             }
-        }), $("#m_select2_12_1, #m_select2_12_2, #m_select2_12_3, #m_select2_12_4").select2({
-            placeholder: "Select an option"
-        }), $("#m_select2_7").select2({
-            placeholder: "Select an option"
-        }), $("#m_select2_8").select2({
-            placeholder: "Select an option"
-        }), $("#m_select2_9").select2({
-            placeholder: "Select an option",
+        }), $('#m_select2_12_1, #m_select2_12_2, #m_select2_12_3, #m_select2_12_4').select2({
+            placeholder: 'Select an option'
+        }), $('#m_select2_7').select2({
+            placeholder: 'Select an option'
+        }), $('#m_select2_8').select2({
+            placeholder: 'Select an option'
+        }), $('#m_select2_9').select2({
+            placeholder: 'Select an option',
             maximumSelectionLength: 2
-        }), $("#m_select2_10").select2({
-            placeholder: "Select an option",
+        }), $('#m_select2_10').select2({
+            placeholder: 'Select an option',
             minimumResultsForSearch: 1 / 0
-        }), $("#m_select2_11").select2({
-            placeholder: "Add a tag",
+        }), $('#m_select2_11').select2({
+            placeholder: 'Add a tag',
             tags: !0
-        }), $(".m-select2-general").select2({
-            placeholder: "Select an option"
-        }), $("#m_select2_modal").on("shown.bs.modal", function () {
-            $("#m_select2_1_modal").select2({
-                placeholder: "Select a state"
-            }), $("#m_select2_2_modal").select2({
-                placeholder: "Select a state"
-            }), $("#m_select2_3_modal").select2({
-                placeholder: "Select a state"
-            }), $("#m_select2_4_modal").select2({
-                placeholder: "Select a state",
+        }), $('.m-select2-general').select2({
+            placeholder: 'Select an option'
+        }), $('#m_select2_modal').on('shown.bs.modal', function () {
+            $('#m_select2_1_modal').select2({
+                placeholder: 'Select a state'
+            }), $('#m_select2_2_modal').select2({
+                placeholder: 'Select a state'
+            }), $('#m_select2_3_modal').select2({
+                placeholder: 'Select a state'
+            }), $('#m_select2_4_modal').select2({
+                placeholder: 'Select a state',
                 allowClear: !0
             })
         })
