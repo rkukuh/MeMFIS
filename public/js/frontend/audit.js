@@ -1,6 +1,5 @@
 var Customer = {
-    init: function() {
-
+    init: function () {
         $(".m_datatable").mDatatable({
             data: {
                 type: "remote",
@@ -8,11 +7,13 @@ var Customer = {
                     read: {
                         method: "GET",
                         url: "/get-audits",
-                        map: function(raw) {
+                        map: function (raw) {
                             var dataSet = raw;
+
                             if (typeof raw.data !== "undefined") {
                                 dataSet = raw.data;
                             }
+
                             return dataSet;
                         }
                     }
@@ -31,14 +32,17 @@ var Customer = {
             sortable: !0,
             filterable: !1,
             pagination: !0,
-            search: { input: $("#generalSearch") },
+            search: {
+                input: $("#generalSearch")
+            },
             toolbar: {
                 items: {
-                    pagination: { pageSizeSelect: [5, 10, 20, 30, 50, 100] }
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: "id",
                     title: "#",
                     sortable: !1,
@@ -121,49 +125,30 @@ var Customer = {
                     title: "Actions",
                     sortable: !1,
                     overflow: "visible",
-                    template: function(t, e, i) {
-                        if(tes == 2) {
-                        return (
-                            '<a href="/audit/1" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t' 
+                    template: function (t, e, i) {
+                        if (tes == 2) {
+                            return (
+                                '<a href="/audit/1" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                                t.id +
+                                '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t'
                             );
-
-                    }
-                          else {
+                        } else {
                             return (
                                 '<button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
                                 t.id +
-                                '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'+
-                                '<a href="audit/'+t.id+'" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="audit" data-id=' +
+                                '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                                '<a href="audit/' + t.id + '" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="audit" data-id=' +
                                 t.id +
-                                '>\t\t\t\t\t\t\t<i class="la la-info-circle"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t' 
-                                );
-                              }
-                        // return (
-                        //     '<a href="/audit/1" ><button   type="button" href="" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                        //     t.id +
-                        //     '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t'+ 
-                        //     // '"<?php echo $message; ?>"'
-                        //     // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                        //     // t.id +
-                        //     // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                        //     // '\t\t\t\t\t\t    \t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
-                        //     // t.id +
-                        //     // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
-                        // );
+                                '>\t\t\t\t\t\t\t<i class="la la-info-circle"></i>\t\t\t\t\t\t</button></a>\t\t\t\t\t\t'
+                            );
+                        }
                     }
                 }
             ]
         });
-
-
-
-
     }
 };
 
-
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     Customer.init();
 });
