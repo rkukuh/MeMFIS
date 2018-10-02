@@ -12,8 +12,6 @@ class TypesOfPhone extends Seeder
      */
     public function run()
     {
-        /** PHONE */
-
         Type::create([
             'name' => 'Work',
             'of'   => 'phone',
