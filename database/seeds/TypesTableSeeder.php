@@ -33,5 +33,10 @@ class TypesTableSeeder extends Seeder
             'of'   => 'customer-component',
         ]);
 
+        // TODO: Make STATUS composite seeders for
+        // - Customer's component repair status
+        // - Marital status
+        // - Employment status
+
     }
 }
