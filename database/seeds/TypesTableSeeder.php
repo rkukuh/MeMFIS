@@ -15,33 +15,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfEmail::class);
         $this->call(TypesOfFax::class);
-
-        /** JOURNAL */
-
-        Type::create([
-            'name' => 'Aktiva',
-            'of'  => 'journal',
-        ]);
-
-        Type::create([
-            'name' => 'Pasiva',
-            'of'   => 'journal',
-        ]);
-
-        Type::create([
-            'name' => 'Ekuitas',
-            'of'   => 'journal',
-        ]);
-
-        Type::create([
-            'name' => 'Pendapatan',
-            'of'   => 'journal',
-        ]);
-
-        Type::create([
-            'name' => 'Biaya',
-            'of'   => 'journal',
-        ]);
+        $this->call(TypesOfJournal::class);
 
         /** ELIGIBILTY */
 
