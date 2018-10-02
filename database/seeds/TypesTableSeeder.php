@@ -13,18 +13,7 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         $this->call(TypesOfPhone::class);
-
-        /** EMAIL */
-
-        Type::create([
-            'name' => 'Work',
-            'of'   => 'email',
-        ]);
-
-        Type::create([
-            'name' => 'Personal',
-            'of'   => 'email',
-        ]);
+        $this->call(TypesOfEmail::class);
 
         /** FAX */
 
