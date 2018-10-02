@@ -16,13 +16,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfEmail::class);
         $this->call(TypesOfFax::class);
         $this->call(TypesOfJournal::class);
-
-        /** ELIGIBILTY */
-
-        Type::create([
-            'name' => 'DHC-6',
-            'of'   => 'eligibility',
-        ]);
+        $this->call(TypesOfEligibility::class);
 
         /** ARC */
 
