@@ -12,17 +12,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        /** PHONE */
-
-        Type::create([
-            'name' => 'Work',
-            'of'   => 'phone',
-        ]);
-
-        Type::create([
-            'name' => 'Personal',
-            'of'   => 'phone',
-        ]);
+        $this->call(TypesOfPhone::class);
 
         /** EMAIL */
 
