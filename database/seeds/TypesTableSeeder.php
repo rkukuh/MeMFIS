@@ -19,23 +19,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfEligibility::class);
         $this->call(TypesOfARC::class);
         $this->call(TypesOfCapability::class);
-
-        /** REGULATOR / AUTHORITY */
-
-        Type::create([
-            'name' => 'DGCA',
-            'of'   => 'regulator',
-        ]);
-
-        Type::create([
-            'name' => 'EASA',
-            'of'   => 'regulator',
-        ]);
-
-        Type::create([
-            'name' => 'FAA',
-            'of'   => 'regulator',
-        ]);
+        $this->call(TypesOfRegulator::class);
 
         /** CUSTOMER'S COMPONENT REPAIR STATUS */
 
