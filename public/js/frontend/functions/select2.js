@@ -1,4 +1,4 @@
-var Select2 = {
+let Select2 = {
     init: function () {
         $('#m_select2_1, #m_select2_1_validate').select2({
             placeholder: 'Select a Country'
@@ -75,7 +75,7 @@ var Select2 = {
             templateResult: function (e) {
                 if (e.loading) return e.text;
 
-                var t = `
+                let t = `
                     <div class="select2-result-repository clearfix">
                         <div class="select2-result-repository__meta">
                             <div class="select2-result-repository__title">

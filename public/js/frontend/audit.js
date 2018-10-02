@@ -1,4 +1,4 @@
-var Customer = {
+let Customer = {
     init: function () {
         $('.m_datatable').mDatatable({
             data: {
@@ -8,7 +8,7 @@ var Customer = {
                         method: 'GET',
                         url: '/get-audits',
                         map: function (raw) {
-                            var dataSet = raw;
+                            let dataSet = raw;
 
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
