@@ -18,28 +18,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfJournal::class);
         $this->call(TypesOfEligibility::class);
         $this->call(TypesOfARC::class);
-
-        /** CAPABILITY */
-
-        Type::create([
-            'name' => 'Inspection',
-            'of'   => 'capability',
-        ]);
-
-        Type::create([
-            'name' => 'Check and Test',
-            'of'   => 'capability',
-        ]);
-
-        Type::create([
-            'name' => 'Repair',
-            'of'   => 'capability',
-        ]);
-
-        Type::create([
-            'name' => 'Overhaul',
-            'of'   => 'capability',
-        ]);
+        $this->call(TypesOfCapability::class);
 
         /** REGULATOR / AUTHORITY */
 
