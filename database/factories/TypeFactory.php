@@ -7,7 +7,11 @@ $factory->define(Type::class, function (Faker $faker) {
 
     return [
         'name' => 'Type #' . $faker->unixTime(),
-        'of'   => $faker->randomElement(['phone', 'email', 'fax'])
+        'of'   => $faker->randomElement([
+            'phone',
+            'email',
+            'fax'
+        ])
     ];
 
 });

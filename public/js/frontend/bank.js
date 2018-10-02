@@ -1,13 +1,13 @@
 $(document).ready(function () {
     bank = function () {
-        var select = document.getElementById('m_select2_1');
+        let select = document.getElementById('m_select2_1');
 
         $.ajax({
             url: '/bank/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                var angka = 1;
+                let angka = 1;
 
                 $('select[name="bank"]').empty();
 
@@ -30,9 +30,9 @@ $(document).ready(function () {
     bank();
 });
 
-var simpan = $('.modal-footer').on('click', '.add2', function () {
-    var code = $('input[name=code]').val();
-    var name = $('input[name=bank_name]').val();
+let simpan = $('.modal-footer').on('click', '.add2', function () {
+    let code = $('input[name=code]').val();
+    let name = $('input[name=bank_name]').val();
 
     $('#simpan').text('Simpan');
     $('#name-error').html('');

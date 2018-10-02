@@ -1,12 +1,12 @@
-var simpan = $('#add').click(function () {
-    var namearray = [];
+let simpan = $('#add').click(function () {
+    let namearray = [];
 
     $('#name ').each(function (i) {
         namearray[i] = document.getElementsByName('[' + i + '][name]')[0].value;
     });
 
-    var registerForm = $('#AjaxTest');
-    var formData = registerForm.serialize();
+    let registerForm = $('#AjaxTest');
+    let formData = registerForm.serialize();
 
     $('#ajax-error').html('');
 
@@ -32,7 +32,7 @@ var simpan = $('#add').click(function () {
                     timeOut: 5000
                 });
 
-                var table = $('.m_datatable').mDatatable();
+                let table = $('.m_datatable').mDatatable();
 
                 $('#simpan').text('Simpan');
                 $('#clean').text('Bersihkan');

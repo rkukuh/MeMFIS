@@ -1,4 +1,4 @@
-var Customer = {
+let Customer = {
     init: function () {
         $('.m_datatable').mDatatable({
             data: {
@@ -8,7 +8,7 @@ var Customer = {
                         method: 'GET',
                         url: '/get-customers',
                         map: function (raw) {
-                            var dataSet = raw;
+                            let dataSet = raw;
 
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
@@ -122,13 +122,13 @@ var Customer = {
             ]
         });
 
-        var simpan = $('.modal-footer').on('click', '.add', function () {
+        let simpan = $('.modal-footer').on('click', '.add', function () {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
-            var name = $('input[name=name]').val();
-            var registerForm = $('#CustomerForm');
-            var formData = registerForm.serialize();
+            let name = $('input[name=name]').val();
+            let registerForm = $('#CustomerForm');
+            let formData = registerForm.serialize();
 
             $.ajax({
                 headers: {
@@ -153,7 +153,7 @@ var Customer = {
                             timeOut: 5000
                         });
 
-                        var table = $('.m_datatable').mDatatable();
+                        let table = $('.m_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -162,11 +162,11 @@ var Customer = {
             });
         });
 
-        var edit = $('.m_datatable').on('click', '.edit', function () {
+        let edit = $('.m_datatable').on('click', '.edit', function () {
             $('#button').show();
             $('#simpan').text('Perbarui');
 
-            var triggerid = $(this).data('id');
+            let triggerid = $(this).data('id');
 
             $.ajax({
                 headers: {
@@ -182,8 +182,8 @@ var Customer = {
                     $('.btn-success').removeClass('add');
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    var errorsHtml = '';
-                    var errors = jqXhr.responseJSON;
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
 
                     $.each(errors.errors, function (index, value) {
                         $('#kategori-error').html(value);
@@ -192,13 +192,13 @@ var Customer = {
             });
         });
 
-        var update = $('.modal-footer').on('click', '.update', function () {
+        let update = $('.modal-footer').on('click', '.update', function () {
             $('#button').show();
             $('#name-error').html('');
             $('#simpan').text('Perbarui');
 
-            var triggerid = $('input[name=id]').val();
-            var name = $('input[name=name]').val();
+            let triggerid = $('input[name=id]').val();
+            let name = $('input[name=name]').val();
 
             $.ajax({
                 headers: {
@@ -223,7 +223,7 @@ var Customer = {
                             timeOut: 5000
                         });
 
-                        var table = $('.m_datatable').mDatatable();
+                        let table = $('.m_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -232,11 +232,11 @@ var Customer = {
             });
         });
 
-        var show = $('.m_datatable').on('click', '.show', function () {
+        let show = $('.m_datatable').on('click', '.show', function () {
             $('#button').hide();
             $('#simpan').text('Perbarui');
 
-            var triggerid = $(this).data('id');
+            let triggerid = $(this).data('id');
 
             $.ajax({
                 headers: {
@@ -250,8 +250,8 @@ var Customer = {
                     document.getElementById('name').readOnly = true;
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    var errorsHtml = '';
-                    var errors = jqXhr.responseJSON;
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
 
                     $.each(errors.errors, function (index, value) {
                         $('#kategori-error').html(value);
@@ -261,8 +261,8 @@ var Customer = {
         });
 
 
-        var remove = $('.m_datatable').on('click', '.delete', function () {
-            var triggerid = $(this).data('id');
+        let remove = $('.m_datatable').on('click', '.delete', function () {
+            let triggerid = $(this).data('id');
 
             swal({
                 title: 'Are you sure?',
@@ -288,14 +288,14 @@ var Customer = {
                                     timeOut: 5000
                                 }
                             );
-                            var table = $('.m_datatable').mDatatable();
+                            let table = $('.m_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            var errorsHtml = '';
-                            var errors = jqXhr.responseJSON;
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
 
                             $.each(errors.errors, function (index, value) {
                                 $('#delete-error').html(value);

@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    var select = document.getElementById('m_select2_1');
+    let select = document.getElementById('m_select2_1');
 
     $.ajax({
         url: '/addres/country/',
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            var angka = 1;
+            let angka = 1;
 
             $('select[name="country"]').empty();
 
@@ -19,7 +19,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('select[name="country"]').on('change', function () {
-        var stateID = $(this).val();
+        let stateID = $(this).val();
 
         if (stateID) {
             $.ajax({
@@ -27,7 +27,7 @@ $(document).ready(function () {
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    var angka = 1;
+                    let angka = 1;
 
                     $('select[name="city"]').empty();
 

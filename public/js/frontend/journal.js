@@ -1,4 +1,4 @@
-var Category = {
+let Category = {
     init: function () {
         $('.m_datatable').mDatatable({
             data: {
@@ -8,7 +8,7 @@ var Category = {
                         method: 'GET',
                         url: '/get-journals',
                         map: function (raw) {
-                            var dataSet = raw;
+                            let dataSet = raw;
 
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
@@ -99,14 +99,14 @@ var Category = {
         });
 
         $(document).ready(function () {
-            var select = document.getElementById('type');
+            let select = document.getElementById('type');
 
             $.ajax({
                 url: '/type',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    var angka = 1;
+                    let angka = 1;
 
                     $('select[name="type"]').empty();
 
@@ -126,14 +126,14 @@ var Category = {
         });
 
         $(document).ready(function () {
-            var select = document.getElementById('level');
+            let select = document.getElementById('level');
 
             $.ajax({
                 url: '/type',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    var angka = 1;
+                    let angka = 1;
 
                     $('select[name="level"]').empty();
 
@@ -154,16 +154,16 @@ var Category = {
             });
         });
 
-        var simpan = $('.modal-footer').on('click', '.add', function () {
+        let simpan = $('.modal-footer').on('click', '.add', function () {
             $('#simpan').text('Simpan');
 
-            var type = $('#type').val();
-            var level = $('#level').val();
-            var registerForm = $('#CustomerForm');
-            var code = $('input[name=code]').val();
-            var name = $('input[name=name]').val();
-            var formData = registerForm.serialize();
-            var description = $('#description').val();
+            let type = $('#type').val();
+            let level = $('#level').val();
+            let registerForm = $('#CustomerForm');
+            let code = $('input[name=code]').val();
+            let name = $('input[name=name]').val();
+            let formData = registerForm.serialize();
+            let description = $('#description').val();
 
             $.ajax({
                 headers: {
@@ -248,7 +248,7 @@ var Category = {
                         $('#level-error').html('');
                         $('#description-error').html('');
 
-                        var table = $('.m_datatable').mDatatable();
+                        let table = $('.m_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -257,11 +257,11 @@ var Category = {
             });
         });
 
-        var edit = $('.m_datatable').on('click', '.edit', function () {
+        let edit = $('.m_datatable').on('click', '.edit', function () {
             $('#button').show();
             $('#simpan').text('Perbarui');
 
-            var triggerid = $(this).data('id');
+            let triggerid = $(this).data('id');
 
             $.ajax({
                 headers: {
@@ -270,13 +270,14 @@ var Category = {
                 type: 'get',
                 url: '/journal/' + triggerid + '/edit',
                 success: function (data) {
-                    var select = document.getElementById('type');
+                    let select = document.getElementById('type');
 
                     $('select[name="type"]').append(
                         '<option value="0" selected>Edit Type</option>'
                     );
 
-                    var select = document.getElementById('level');
+                    // FIXME: 'select' has already been declared.
+                    // let select = document.getElementById('level');
 
                     $('select[name="level"]').append(
                         '<option value="0" selected> Edit Level</option>'
@@ -300,8 +301,8 @@ var Category = {
                     document.getElementById('description').value = data.description;
                 },
                 error: function (jqXhr, json, errorThrown) {
-                    var errorsHtml = '';
-                    var errors = jqXhr.responseJSON;
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
 
                     $.each(errors.errors, function (index, value) {
                         $('#journal-error').html(value);
@@ -310,17 +311,17 @@ var Category = {
             });
         });
 
-        var update = $('.modal-footer').on('click', '.update', function () {
+        let update = $('.modal-footer').on('click', '.update', function () {
             $('#button').show();
             $('#name-error').html('');
             $('#simpan').text('Perbarui');
 
-            var type = $('#type').val();
-            var level = $('#level').val();
-            var code = $('input[name=code]').val();
-            var name = $('input[name=name]').val();
-            var description = $('#description').val();
-            var triggerid = $('input[name=id]').val();
+            let type = $('#type').val();
+            let level = $('#level').val();
+            let code = $('input[name=code]').val();
+            let name = $('input[name=name]').val();
+            let description = $('#description').val();
+            let triggerid = $('input[name=id]').val();
 
             $.ajax({
                 headers: {
@@ -394,7 +395,7 @@ var Category = {
                             timeOut: 5000
                         });
 
-                        var table = $('.m_datatable').mDatatable();
+                        let table = $('.m_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -409,8 +410,8 @@ var Category = {
             });
         });
 
-        var remove = $('.m_datatable').on('click', '.delete', function () {
-            var triggerid = $(this).data('id');
+        let remove = $('.m_datatable').on('click', '.delete', function () {
+            let triggerid = $(this).data('id');
 
             swal({
                 title: 'Are you sure?',
@@ -437,14 +438,14 @@ var Category = {
                                 }
                             );
 
-                            var table = $('.m_datatable').mDatatable();
+                            let table = $('.m_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            var errorsHtml = '';
-                            var errors = jqXhr.responseJSON;
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
 
                             $.each(errors.errors, function (index, value) {
                                 $('#delete-error').html(value);
