@@ -54,7 +54,7 @@ class Rebuild extends Command
      */
     protected function commandOperations()
     {
-        shell_exec('composer dumpautoload');
+        exec('composer dumpautoload');
 
         $this->call('memfis:fresh');
 
