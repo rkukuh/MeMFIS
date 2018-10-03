@@ -1,7 +1,7 @@
 $(document).ready(function () {
     accountcode = function () {
         $.ajax({
-            url: '/accountcode/',
+            url: '/get-accountcode/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -33,7 +33,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     category = function () {
         $.ajax({
-            url: '/accountcode/',
+            url: '/get-category/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
