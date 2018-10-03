@@ -15,14 +15,36 @@ class Type extends MemfisModel
     /******************************************* SCOPE *******************************************/
 
     /**
-     * Scope a query to only include category of phone.
+     * Scope a query to only include category of arc.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfPhone(Builder $query)
+    public function scopeOfArc(Builder $query)
     {
-        return $query->where('of', 'phone');
+        return $query->where('of', 'arc');
+    }
+
+    /**
+     * Scope a query to only include category of capability.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCapability(Builder $query)
+    {
+        return $query->where('of', 'capability');
+    }
+
+    /**
+     * Scope a query to only include category of eligibility.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfEligibility(Builder $query)
+    {
+        return $query->where('of', 'eligibility');
     }
 
     /**
@@ -59,36 +81,14 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of eligibility.
+     * Scope a query to only include category of phone.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfEligibility(Builder $query)
+    public function scopeOfPhone(Builder $query)
     {
-        return $query->where('of', 'eligibility');
-    }
-
-    /**
-     * Scope a query to only include category of arc.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOfArc(Builder $query)
-    {
-        return $query->where('of', 'arc');
-    }
-
-    /**
-     * Scope a query to only include category of capability.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOfCapability(Builder $query)
-    {
-        return $query->where('of', 'capability');
+        return $query->where('of', 'phone');
     }
 
     /**
