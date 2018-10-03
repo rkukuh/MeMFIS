@@ -20,11 +20,5 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfJournal::class);
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfRegulator::class);
-
-        // TODO: Make STATUS composite seeders for
-        // - Customer's component repair status
-        // - Marital status
-        // - Employment status
-
     }
 }
