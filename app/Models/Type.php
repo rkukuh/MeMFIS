@@ -58,6 +58,50 @@ class Type extends MemfisModel
         return $query->where('of', 'journal');
     }
 
+    /**
+     * Scope a query to only include category of eligibility.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfEligibility(Builder $query)
+    {
+        return $query->where('of', 'eligibility');
+    }
+
+    /**
+     * Scope a query to only include category of arc.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfArc(Builder $query)
+    {
+        return $query->where('of', 'arc');
+    }
+
+    /**
+     * Scope a query to only include category of capability.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCapability(Builder $query)
+    {
+        return $query->where('of', 'capability');
+    }
+
+    /**
+     * Scope a query to only include category of regulator.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRegulator(Builder $query)
+    {
+        return $query->where('of', 'regulator');
+    }
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
