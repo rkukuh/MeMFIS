@@ -71,6 +71,22 @@
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row ">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Description
+                                                        @component('frontend.common.label.optional')
+                                                        @endcomponent
+                                                        </label>
+                                                        @component('frontend.common.input.textarea')
+                                                            @slot('rows', '3')
+                                                            @slot('name', 'description')
+                                                            @slot('text', 'Description')
+                                                        @endcomponent
+                                                    </div>
+    
+                                                </div>
+    
+                                            <div class="form-group m-form__group row ">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Barcode
@@ -91,7 +107,7 @@
                                                     @component('frontend.common.input.select')
                                                         @slot('text', 'Category')
                                                         @slot('name', 'category')
-                                                        @slot('id', 'm_select2_2')
+                                                        @slot('id', 'category')
                                                         @slot('style', 'width:100%')
                                                     @endcomponent
 
@@ -124,90 +140,33 @@
                                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row ">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Description
-                                                    @component('frontend.common.label.optional')
-                                                    @endcomponent
-                                                    </label>
-                                                    @component('frontend.common.input.textarea')
-                                                        @slot('rows', '3')
-                                                        @slot('name', 'description')
-                                                        @slot('text', 'Description')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            xPicture
-                                                        @component('frontend.common.label.optional')
-                                                        @endcomponent
-                                                        </label>
-                                                        @component('frontend.common.input.upload')
-                                                            @slot('text', 'xPicture')
-                                                            @slot('name', 'xpicture')
-                                                        @endcomponent
-                                                    </div>
-                                            </div>
-                                            <div class="form-group m-form__group row ">
-                                            </div>
-                                            <div class="form-group m-form__group row ">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                xPicture
+                                                            @component('frontend.common.label.optional')
+                                                            @endcomponent
+                                                            </label>
+                                                            @component('frontend.common.input.upload')
+                                                                @slot('text', 'xPicture')
+                                                                @slot('name', 'xpicture')
+                                                            @endcomponent
+                                                        </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         AccountCode
                                                     @component('frontend.common.label.optional')
                                                     @endcomponent
                                                     </label>
-                                                    @component('frontend.common.input.text')
+                                                    @component('frontend.common.input.select')
                                                         @slot('text', 'AccountCode')
                                                         @slot('name', 'accountcode')
+                                                        @slot('id', 'accountcode2')
+                                                        @slot('style', 'width:100%')
                                                     @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Storage
-                                                        @component('frontend.common.label.required')
-                                                        @endcomponent
-                                                        </label>
-                                                        @component('frontend.common.input.select')
-                                                            @slot('text', 'Storage')
-                                                            @slot('name', 'storage')
-                                                            @slot('id', 'm_select2_1')
-                                                            @slot('style', 'width:100%')
-                                                        @endcomponent
-
-                                                        @component('frontend.common.buttons.create-new')
-                                                            @slot('size', 'sm')
-                                                            @slot('text', 'add storage')
-                                                            @slot('data_target', '#modal_storage')
-                                                        @endcomponent
-                                                    </div>
+                                                                                        </div>
+                                            
 
                                             </div>
-                                            <div class="form-group m-form__group row ">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Max
-                                                            @component('frontend.common.label.required')
-                                                            @endcomponent
-                                                            </label>
-                                                            @component('frontend.common.input.number')
-                                                                @slot('text', 'Max')
-                                                                @slot('name', 'max')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                <label class="form-control-label">
-                                                                    Min
-                                                                @component('frontend.common.label.required')
-                                                                @endcomponent
-                                                                </label>
-                                                                @component('frontend.common.input.number')
-                                                                    @slot('text', 'Min')
-                                                                    @slot('name', 'min')
-                                                                @endcomponent
-                                                            </div>
-
-                                                    </div>
                                                     <div class="form-group m-form__group row ">
                                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
 
@@ -249,7 +208,7 @@
                                             <div class="m-portlet__body">
                                                 <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                                     <div class="row align-items-center">
-                                                        <div class="col-xl-5 order-1 order-xl-2 m--align-right">
+                                                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                             @component('frontend.common.buttons.create-new')
                                                                 @slot('id', 'item-unit')
                                                                 @slot('size', 'md')
@@ -303,8 +262,9 @@
                                     </div>
                                 </div>
 
-                                @include('frontend.storage.modal')
+                                @include('frontend.category.modal')
                                 @include('frontend.item-stock.modal')
+                                @include('frontend.storage.modal')
 
                                 <div class="m_datatable2" id="second"></div>
 
@@ -326,7 +286,7 @@
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/accountcode.js')}}"></script>
-    <script src="{{ asset('js/frontend/bank.js')}}"></script>
+
 
     <script src="{{ asset('js/frontend/item.js') }}"></script>
     <script src="{{ asset('js/frontend/item-unit.js')}}"></script>

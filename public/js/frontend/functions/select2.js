@@ -10,12 +10,16 @@ let Select2 = {
             placeholder: 'Select a state'
         }), $('#accountcode, #accountcode_validate').select2({
             placeholder: 'Select a Accountcode'
+        }), $('#accountcode2, #accountcode2_validate').select2({
+            placeholder: 'Select a Accountcode'
         }), $('#type, #type_validate').select2({
             placeholder: 'Select a Type'
         }), $('#unit, #unit_validate').select2({
             placeholder: 'Select a Unit'
         }), $('#currency, #currency_validate').select2({
             placeholder: 'Select a Currency'
+        }), $('#category, #category_validate').select2({
+            placeholder: 'Select a Category'
         }), $('#customer, #customer_validate').select2({
             placeholder: 'Select a Customer'
         }), $('#number, #number_validate').select2({
