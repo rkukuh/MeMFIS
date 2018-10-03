@@ -12,6 +12,8 @@ use App\Models\Email;
 use App\Policies\EmailPolicy;
 use App\Models\Phone;
 use App\Policies\PhonePolicy;
+use App\models\Status;
+use App\Policies\StatusPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
@@ -33,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         Type::class => TypePolicy::class,
         Email::class => EmailPolicy::class,
         Phone::class => PhonePolicy::class,
+        Status::class => StatusPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
     ];

@@ -18,10 +18,14 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleHasPermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
 
+        /** INITIAL DATA */
+
+        $this->call(TypesTableSeeder::class);
+        $this->call(StatusesTableSeeder::class);
+
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);
-        $this->call(TypesTableSeeder::class);
         $this->call(EmailsTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
 
