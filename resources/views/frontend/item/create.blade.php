@@ -29,235 +29,224 @@
     </div>
     <div class="m-content">
         <div class="row">
-                <div class="col-lg-6">
-                        <div class="m-portlet">
-                            <div class="m-portlet__head">
-                                <div class="m-portlet__head-caption">
-                                    <div class="m-portlet__head-title">
-                                        <span class="m-portlet__head-icon m--hide">
-                                            <i class="la la-gear"></i>
-                                        </span>
-                                        <h3 class="m-portlet__head-text">
-                                            Item Create
-                                        </h3>
+            <div class="col-lg-6">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text">
+                                    Item Create
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-portlet__body">
+                                <fieldset class="border p-2">
+                                    <legend class="w-auto">Identifier</legend>
+
+                                    <div class="form-group m-form__group row ">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Part Number @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'Code')
+                                                @slot('name', 'code')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Name @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'Name')
+                                                @slot('name', 'name')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row ">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '3')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                            @endcomponent
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+
+                                <div class="form-group m-form__group row ">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                            Barcode @include('frontend.common.label.optional')
+                                        </label>
+
+                                        @component('frontend.common.input.text')
+                                            @slot('text', 'Barcode')
+                                            @slot('name', 'barcode')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                            Category @include('frontend.common.label.required')
+                                        </label>
+
+                                        @component('frontend.common.input.select')
+                                            @slot('id', 'category')
+                                            @slot('text', 'Category')
+                                            @slot('name', 'category')
+                                            @slot('multiple', 'multiple')
+                                            @slot('style', 'width:100%')
+                                        @endcomponent
+
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('size', 'sm')
+                                            @slot('text', 'add category')
+                                            @slot('data_target', '#modal_category')
+                                        @endcomponent
                                     </div>
                                 </div>
-                            </div>
-                            <div class="m-portlet m-portlet--mobile">
-                                <div class="m-portlet__body">
-                                    <div class="m-portlet__body">
-                                            <fieldset class="border p-2">
-                                                    <legend  class="w-auto">Identifier</legend>
+                                <div class="form-group m-form__group row ">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('text', 'Active')
+                                            @slot('name', 'active')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('text', 'IsPPn')
+                                            @slot('name', 'isppn')
+                                        @endcomponent
 
-                                                  
-                                            <div class="form-group m-form__group row ">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Part Number
-                                                    @component('frontend.common.label.required')
-                                                    @endcomponent
-                                                    </label>
-                                                    @component('frontend.common.input.text')
-                                                        @slot('text', 'Code')
-                                                        @slot('name', 'code')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Name
-                                                    @component('frontend.common.label.optional')
-                                                    @endcomponent
-                                                    </label>
-                                                    @component('frontend.common.input.text')
-                                                        @slot('text', 'Name')
-                                                        @slot('name', 'name')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row ">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Description
-                                                        @component('frontend.common.label.optional')
-                                                        @endcomponent
-                                                        </label>
-                                                        @component('frontend.common.input.textarea')
-                                                            @slot('rows', '3')
-                                                            @slot('name', 'description')
-                                                            @slot('text', 'Description')
-                                                        @endcomponent
-                                                    </div>
-    
-                                                </div>
-                                            </fieldset>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('text', 'IsStock')
+                                            @slot('name', 'isstock')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row ">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                            xPicture @include('frontend.common.label.optional')
+                                        </label>
 
-                                            <div class="form-group m-form__group row ">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Barcode
-                                                    @component('frontend.common.label.optional')
-                                                    @endcomponent
-                                                    </label>
-                                                    @component('frontend.common.input.text')
-                                                        @slot('text', 'Barcode')
-                                                        @slot('name', 'barcode')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Category
-                                                    @component('frontend.common.label.required')
-                                                    @endcomponent
-                                                    </label>
-                                                    @component('frontend.common.input.select')
-                                                        @slot('text', 'Category')
-                                                        @slot('name', 'category')
-                                                        @slot('id', 'category')
-                                                        @slot('multiple', 'multiple')
-                                                        @slot('style', 'width:100%')
-                                                    @endcomponent
-                                                    
+                                        @component('frontend.common.input.upload')
+                                            @slot('text', 'xPicture')
+                                            @slot('name', 'xpicture')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                            AccountCode @include('frontend.common.label.optional')
+                                        </label>
 
-                                                    @component('frontend.common.buttons.create-new')
-                                                        @slot('size', 'sm')
-                                                        @slot('text', 'add category')
-                                                        @slot('data_target', '#modal_category')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row ">
-                                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            @component('frontend.common.input.checkbox')
-                                                                @slot('text', 'Active')
-                                                                @slot('name', 'active')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                                                @component('frontend.common.input.checkbox')
-                                                                    @slot('text', 'IsPPn')
-                                                                    @slot('name', 'isppn')
-                                                                @endcomponent
+                                        @component('frontend.common.input.select')
+                                            @slot('id', 'accountcode2')
+                                            @slot('text', 'AccountCode')
+                                            @slot('name', 'accountcode')
+                                            @slot('style', 'width:100%')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row ">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                        @component('frontend.common.buttons.submit')
+                                            @slot('size', 'md')
+                                            @slot('class', 'add22')
+                                        @endcomponent
 
-                                                            </div>
-                                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('text', 'IsStock')
-                                                                        @slot('name', 'isstock')
-                                                                    @endcomponent
-                                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row ">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                xPicture
-                                                            @component('frontend.common.label.optional')
-                                                            @endcomponent
-                                                            </label>
-                                                            @component('frontend.common.input.upload')
-                                                                @slot('text', 'xPicture')
-                                                                @slot('name', 'xpicture')
-                                                            @endcomponent
-                                                        </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        AccountCode
-                                                    @component('frontend.common.label.optional')
-                                                    @endcomponent
-                                                    </label>
-                                                    @component('frontend.common.input.select')
-                                                        @slot('text', 'AccountCode')
-                                                        @slot('name', 'accountcode')
-                                                        @slot('id', 'accountcode2')
-                                                        @slot('style', 'width:100%')
-                                                    @endcomponent
-                                                                                        </div>
-                                            
+                                        @component('frontend.common.buttons.reset')
+                                            @slot('size', 'md')
+                                        @endcomponent
 
-                                            </div>
-                                                    <div class="form-group m-form__group row ">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
-
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('size', 'md')
-                                                        @slot('class', 'add22')
-                                                    @endcomponent
-
-                                                    @component('frontend.common.buttons.reset')
-                                                        @slot('size', 'md')
-                                                    @endcomponent
-
-                                                    @component('frontend.common.buttons.close')
-                                                        @slot('size', 'md')
-                                                        @slot('data_dismiss', 'modal')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @component('frontend.common.buttons.close')
+                                            @slot('size', 'md')
+                                            @slot('data_dismiss', 'modal')
+                                        @endcomponent
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
             <div class="col-lg-6">
-                                <div class="m-portlet">
-                                        <div class="m-portlet__head">
-                                            <div class="m-portlet__head-caption">
-                                                <div class="m-portlet__head-title">
-                                                    <span class="m-portlet__head-icon m--hide">
-                                                        <i class="la la-gear"></i>
-                                                    </span>
-                                                    <h3 class="m-portlet__head-text">
-                                                        Item Unit Datalist
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="m-portlet m-portlet--mobile">
-                                            <div class="m-portlet__body">
-                                                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                            @component('frontend.common.buttons.create-new')
-                                                                @slot('id', 'item-unit')
-                                                                @slot('size', 'md')
-                                                                @slot('color', 'primary')
-                                                                @slot('attribute', 'disabled')
-                                                                @slot('text', 'Add Item Unit')
-                                                                @slot('data_target', '#modal_itemsunit')
-                                                            @endcomponent
-
-                                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @include('frontend.item-unit.modal')
-                                                <div class="m_datatable1" id="fisrt"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="m-portlet">
-                                            <div class="m-portlet__head">
-                                                <div class="m-portlet__head-caption">
-                                                    <div class="m-portlet__head-title">
-                                                        <span class="m-portlet__head-icon m--hide">
-                                                            <i class="la la-gear"></i>
-                                                        </span>
-                                                        <h3 class="m-portlet__head-text">
-                                                            Item Stock
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="m-portlet m-portlet--mobile">
-                                                <div class="m-portlet__body">
-
-                                                        <div class="m-portlet__body">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text">
+                                    Item Unit Datalist
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('size', 'md')
+                                            @slot('id', 'item-unit')
+                                            @slot('color', 'primary')
+                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Add Item Unit')
+                                            @slot('data_target', '#modal_itemsunit')
+                                        @endcomponent
+
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @include('frontend.item-unit.modal')
+
+                            <div class="m_datatable1" id="fisrt"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text">
+                                    Item Stock
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-portlet__body">
+                                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                     <div class="row align-items-center">
 
                                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                             @component('frontend.common.buttons.create-new')
-                                                @slot('id', 'item-stock')
                                                 @slot('size', 'md')
+                                                @slot('id', 'item-stock')
                                                 @slot('color', 'primary')
                                                 @slot('attribute', 'disabled')
                                                 @slot('text', 'Add Item Stock')
@@ -269,22 +258,16 @@
                                     </div>
                                 </div>
 
+                                @include('frontend.storage.modal')
                                 @include('frontend.category.modal')
                                 @include('frontend.item-stock.modal')
-                                @include('frontend.storage.modal')
 
                                 <div class="m_datatable2" id="second"></div>
-
-
-                                                            </div>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
         </div>
     </div>
 @endsection
