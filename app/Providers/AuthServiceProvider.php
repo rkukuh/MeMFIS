@@ -12,7 +12,7 @@ use App\Models\Email;
 use App\Policies\EmailPolicy;
 use App\Models\Phone;
 use App\Policies\PhonePolicy;
-use App\models\Status;
+use App\Models\Status;
 use App\Policies\StatusPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
