@@ -21,18 +21,6 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfRegulator::class);
 
-        /** CUSTOMER'S COMPONENT REPAIR STATUS */
-
-        Type::create([
-            'name' => 'SERVICEABLE',
-            'of'   => 'customer-component',
-        ]);
-
-        Type::create([
-            'name' => 'UNSERVICEABLE',
-            'of'   => 'customer-component',
-        ]);
-
         // TODO: Make STATUS composite seeders for
         // - Customer's component repair status
         // - Marital status
