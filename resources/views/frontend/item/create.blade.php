@@ -46,6 +46,10 @@
                             <div class="m-portlet m-portlet--mobile">
                                 <div class="m-portlet__body">
                                     <div class="m-portlet__body">
+                                            <fieldset class="border p-2">
+                                                    <legend  class="w-auto">Identifier</legend>
+
+                                                  
                                             <div class="form-group m-form__group row ">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
@@ -85,7 +89,8 @@
                                                     </div>
     
                                                 </div>
-    
+                                            </fieldset>
+
                                             <div class="form-group m-form__group row ">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
