@@ -6,9 +6,15 @@ let Select2 = {
             placeholder: 'Select a City'
         }), $('#m_select2_3, #m_select2_3_validate').select2({
             placeholder: 'Select a state'
+        }), $('#category, #category_validate').select2({
+            placeholder: 'Select a Category'
         }), $('#m_select2_3a, #m_select2_3a_validate').select2({
             placeholder: 'Select a state'
+        }), $('#storage, #storage_validate').select2({
+            placeholder: 'Select a Storage'
         }), $('#accountcode, #accountcode_validate').select2({
+            placeholder: 'Select a Accountcode'
+        }), $('#accountcode2, #accountcode2_validate').select2({
             placeholder: 'Select a Accountcode'
         }), $('#type, #type_validate').select2({
             placeholder: 'Select a Type'
@@ -16,6 +22,8 @@ let Select2 = {
             placeholder: 'Select a Unit'
         }), $('#currency, #currency_validate').select2({
             placeholder: 'Select a Currency'
+        }), $('#category, #category_validate').select2({
+            placeholder: 'Select a Category'
         }), $('#customer, #customer_validate').select2({
             placeholder: 'Select a Customer'
         }), $('#number, #number_validate').select2({

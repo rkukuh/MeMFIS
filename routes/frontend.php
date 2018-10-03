@@ -56,7 +56,8 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-journals', 'JournalController@getJournals')->name('get-journals');
 
         Route::resource('type', 'TypeController');
-        Route::resource('accountcode', 'AccountCodeController');
+        Route::get('get-accountcode', 'FillComboxController@accountcode')->name('get-accountcode');
+        Route::get('get-category', 'FillComboxController@category')->name('get-category');
 
 
         Route::get('/quotation-doc', function () {
