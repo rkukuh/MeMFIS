@@ -5,7 +5,7 @@
     class="btn
            btn-{{ $color or 'success' }}
            btn-{{ $size or 'md' }}
-               {{ $class or '' }}"
+               {{ $class or '' }} add"
     style="{{ $style or '' }}"
     value="{{ $value or '' }}"
     target="{{ $target or '' }}">

@@ -91,7 +91,7 @@ let Category = {
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
                             t.uuid +
-                            'title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
                         );
                     }
                 }
@@ -124,6 +124,55 @@ let Category = {
                 }
             });
         });
+
+        let save = $('.align-items-center').on('click', '.btn-primary', function () {
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/submit-button',
+                success: function (data) {
+                    $('#button-div').html(data);
+
+                }
+            });
+            
+            $.ajax({
+                url: '/type',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let angka = 1;
+
+                    $('select[name="level"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (angka == 1) {
+                            $('select[name="level"]').append(
+                                '<option> Select a Level</option>'
+                            );
+
+                            angka = 0;
+                        }
+
+                        $('select[name="level"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+
+
+            document.getElementById('code').value = "";
+            document.getElementById('name').value = "";
+            document.getElementById('type').value = "";
+            document.getElementById('level').value = "";
+            document.getElementById('description').value = "";
+
+        });
+
 
         $(document).ready(function () {
             let select = document.getElementById('level');
@@ -422,6 +471,8 @@ let Category = {
                 cancelButtonText: 'No, keep it'
             }).then(result => {
                 if (result.value) {
+
+                    alert(triggerid);
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
