@@ -10,10 +10,14 @@ Route::name('admin.')->group(function () {
 
     ], function () {
 
+        /** INITIAL DATA */
+
+        Route::resource('type', 'TypeController');
+        Route::resource('status', 'StatusController');
+
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
-        Route::resource('type', 'TypeController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
 

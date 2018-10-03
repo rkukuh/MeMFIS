@@ -38,27 +38,32 @@ Route::name('frontend.')->group(function () {
         Route::resource('audit', 'AuditController');
         Route::get('/get-audits','AuditController@getAudits')->name('get-audits');
 
-        Route::resource('bank', 'BankController');
-        Route::resource('bankaccount', 'BankAccountController');
-        Route::resource('phone', 'PhoneController');
         Route::resource('fax', 'FaxController');
+        Route::resource('type', 'TypeController');
+        Route::resource('bank', 'BankController');
         Route::resource('email', 'EmailController');
+        Route::resource('phone', 'PhoneController');
+        Route::resource('status', 'StatusController');
         Route::resource('department', 'DepartmentController');
+        Route::resource('bankaccount', 'BankAccountController');
+
         Route::resource('taskcard', 'TaskCardController');
         Route::get('/get-taskcards', 'TaskCardController@getTaskCards')->name('get-taskcards');
+
         Route::resource('taskcard-package', 'TaskCardPackageController');
         Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
+
         Route::resource('workpackage', 'WorkPackageController');
         Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
+
         Route::resource('quotation', 'QuotationController');
         Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
+
         Route::resource('journal', 'JournalController');
         Route::get('/get-journals', 'JournalController@getJournals')->name('get-journals');
 
-        Route::resource('type', 'TypeController');
         Route::get('get-accountcode', 'FillComboxController@accountcode')->name('get-accountcode');
         Route::get('get-category', 'FillComboxController@category')->name('get-category');
-
 
         Route::get('/quotation-doc', function () {
             $pdf = \PDF::loadView('frontend/form/quotation');
