@@ -22,7 +22,7 @@
                                 @component('frontend.common.input.select')
                                     @slot('text', 'Storage')
                                     @slot('name', 'storage')
-                                    @slot('id', 'm_select2_1')
+                                    @slot('id', 'storage')
                                     @slot('style', 'width:100%')
                                 @endcomponent
 
