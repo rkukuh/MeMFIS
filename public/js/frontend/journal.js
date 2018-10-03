@@ -125,6 +125,55 @@ let Category = {
             });
         });
 
+        let save = $('.align-items-center').on('click', '.btn-primary', function () {
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/submit-button',
+                success: function (data) {
+                    $('#button-div').html(data);
+
+                }
+            });
+            
+            $.ajax({
+                url: '/type',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let angka = 1;
+
+                    $('select[name="level"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (angka == 1) {
+                            $('select[name="level"]').append(
+                                '<option> Select a Level</option>'
+                            );
+
+                            angka = 0;
+                        }
+
+                        $('select[name="level"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+
+
+            document.getElementById('code').value = "";
+            document.getElementById('name').value = "";
+            document.getElementById('type').value = "";
+            document.getElementById('level').value = "";
+            document.getElementById('description').value = "";
+
+        });
+
+
         $(document).ready(function () {
             let select = document.getElementById('level');
 

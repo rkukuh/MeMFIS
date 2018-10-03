@@ -6,10 +6,9 @@ Route::get('update-button', function(){
 
 });
 
-// Route::get('update-button/{id}', function($id){
-//     return View::make('frontend.common.buttons.submit')
-//         ->with("", "")
-//         ->render();
+Route::get('submit-button', function(){
+    return View::make('frontend.common.buttons.submit')
+    ->render();
 
-// });
+});
 

@@ -84,7 +84,6 @@
                         <div id="button-div">
                             @component('frontend.common.buttons.submit')
                                 @slot('size', 'md')
-                                @slot('class', 'add')
                             @endcomponent
                         </div>
                         @component('frontend.common.buttons.reset')
