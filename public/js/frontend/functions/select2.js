@@ -6,6 +6,8 @@ let Select2 = {
             placeholder: 'Select a City'
         }), $('#m_select2_3, #m_select2_3_validate').select2({
             placeholder: 'Select a state'
+        }), $('#category, #category_validate').select2({
+            placeholder: 'Select a Category'
         }), $('#m_select2_3a, #m_select2_3a_validate').select2({
             placeholder: 'Select a state'
         }), $('#storage, #storage_validate').select2({

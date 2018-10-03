@@ -113,8 +113,10 @@
                                                         @slot('text', 'Category')
                                                         @slot('name', 'category')
                                                         @slot('id', 'category')
+                                                        @slot('multiple', 'multiple')
                                                         @slot('style', 'width:100%')
                                                     @endcomponent
+                                                    
 
                                                     @component('frontend.common.buttons.create-new')
                                                         @slot('size', 'sm')
