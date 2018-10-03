@@ -12,3 +12,5 @@ Route::get('submit-button', function(){
 
 });
 
+Route::get('get-accountcode', 'FillComboxController@accountcode')->name('get-accountcode');
+Route::get('get-category', 'FillComboxController@category')->name('get-category');

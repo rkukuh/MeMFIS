@@ -11,6 +11,15 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
 
+        Route::resource('fax', 'FaxController');
+        Route::resource('type', 'TypeController');
+        Route::resource('bank', 'BankController');
+        Route::resource('email', 'EmailController');
+        Route::resource('phone', 'PhoneController');
+        Route::resource('status', 'StatusController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('bankaccount', 'BankAccountController');
+
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 
@@ -38,15 +47,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('audit', 'AuditController');
         Route::get('/get-audits','AuditController@getAudits')->name('get-audits');
 
-        Route::resource('fax', 'FaxController');
-        Route::resource('type', 'TypeController');
-        Route::resource('bank', 'BankController');
-        Route::resource('email', 'EmailController');
-        Route::resource('phone', 'PhoneController');
-        Route::resource('status', 'StatusController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('bankaccount', 'BankAccountController');
-
         Route::resource('taskcard', 'TaskCardController');
         Route::get('/get-taskcards', 'TaskCardController@getTaskCards')->name('get-taskcards');
 
@@ -61,9 +61,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('journal', 'JournalController');
         Route::get('/get-journals', 'JournalController@getJournals')->name('get-journals');
-
-        Route::get('get-accountcode', 'FillComboxController@accountcode')->name('get-accountcode');
-        Route::get('get-category', 'FillComboxController@category')->name('get-category');
 
         Route::get('/quotation-doc', function () {
             $pdf = \PDF::loadView('frontend/form/quotation');
@@ -91,7 +88,6 @@ Route::name('frontend.')->group(function () {
             $pdf = \PDF::loadView('frontend/form/wp');
             return $pdf->stream();
         });
-
     });
 
 });
