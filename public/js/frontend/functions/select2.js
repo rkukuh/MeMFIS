@@ -8,6 +8,8 @@ let Select2 = {
             placeholder: 'Select a state'
         }), $('#m_select2_3a, #m_select2_3a_validate').select2({
             placeholder: 'Select a state'
+        }), $('#storage, #storage_validate').select2({
+            placeholder: 'Select a Storage'
         }), $('#accountcode, #accountcode_validate').select2({
             placeholder: 'Select a Accountcode'
         }), $('#accountcode2, #accountcode2_validate').select2({
