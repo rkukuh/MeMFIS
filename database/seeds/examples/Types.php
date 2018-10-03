@@ -12,6 +12,6 @@ class Types extends Seeder
      */
     public function run()
     {
-        factory(Type::class, 10)->create();
+        factory(Type::class, 20)->create();
     }
 }
