@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Builder;
 class Type extends MemfisModel
 {
     protected $fillable = [
+        'code',
         'name',
         'of',
+        'description',
     ];
 
     /******************************************* SCOPE *******************************************/
