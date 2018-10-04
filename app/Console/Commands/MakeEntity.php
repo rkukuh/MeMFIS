@@ -43,5 +43,20 @@ class MakeEntity extends Command
         $namespace = $this->option('namespace');
 
         $this->call('make:model', ['name' => 'Models/' . $entity]);     // Model
+
+        if (strtolower($namespace) == 'both') {
+
+            $this->call('make:migration', [
+                'name' => 'Admin/' . $entity,
+                '--model' => 'Models/' . $entity,
+                '--resource' => true,
+            ]);
+
+            $this->call('make:migration', [
+                'name' => 'Frontend/' . $entity,
+                '--model' => 'Models/' . $entity,
+                '--resource' => true,
+            ]);
+        }
     }
 }
