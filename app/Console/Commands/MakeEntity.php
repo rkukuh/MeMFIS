@@ -13,7 +13,7 @@ class MakeEntity extends Command
      */
     protected $signature = 'memfis:make-entity
                             {entity : Name of the entity, eg: Post, Product, Employee}
-                            {--namespace=frontend : Where this entity should resides, eg: Frontend | Admin}';
+                            {--namespace=Both : Where this entity should resides, eg: Frontend | Admin | Both | None}';
 
     /**
      * The console command description.
@@ -39,9 +39,9 @@ class MakeEntity extends Command
      */
     public function handle()
     {
-        $user = $this->argument('user');
-        $namespace = $this->argument('namespace');
+        $entity = $this->argument('entity');
+        $namespace = $this->option('namespace');
 
-        dump($user, $namespace);
+        //
     }
 }
