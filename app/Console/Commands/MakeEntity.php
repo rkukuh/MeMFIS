@@ -47,13 +47,13 @@ class MakeEntity extends Command
         if (strtolower($namespace) == 'both') {
 
             $this->call('make:controller', [
-                'name' => 'Admin/' . $entity,
+                'name' => 'Admin/' . $entity . 'Controller',
                 '--model' => 'Models/' . $entity,
                 '--resource' => true,
             ]);
 
             $this->call('make:controller', [
-                'name' => 'Frontend/' . $entity,
+                'name' => 'Frontend/' . $entity . 'Controller',
                 '--model' => 'Models/' . $entity,
                 '--resource' => true,
             ]);
