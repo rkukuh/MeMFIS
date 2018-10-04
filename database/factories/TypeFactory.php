@@ -5,8 +5,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Type::class, function (Faker $faker) {
 
+    $name = 'Type #' . $faker->unixTime();
+
     return [
-        'name' => 'Type #' . $faker->unixTime(),
+        'code' => str_slug($name),
+        'name' => $name,
         'of'   => $faker->randomElement([
             'arc',
             'fax',
@@ -16,7 +19,8 @@ $factory->define(Type::class, function (Faker $faker) {
             'regulator',
             'capability',
             'eligibility',
-        ])
+        ]),
+        'description',
     ];
 
 });
