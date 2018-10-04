@@ -16,7 +16,7 @@ class CreateItemStocksTable extends Migration
         Schema::create('item_stocks', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->unsignedInteger('storage_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

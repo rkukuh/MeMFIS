@@ -16,7 +16,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->string('name');
             $table->string('barcode');
             $table->unsignedInteger('category_id')->nullable();
@@ -36,7 +36,7 @@ class CreateItemsTable extends Migration
             $table->foreign('account_code')
             ->references('id')->on('journals')
             ->onUpdate('cascade')
-            ->onDelete('restrict');          
+            ->onDelete('restrict');
 
         });
     }

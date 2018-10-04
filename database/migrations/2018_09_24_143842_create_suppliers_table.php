@@ -16,7 +16,7 @@ class CreateSuppliersTable extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->integer('city_id');
             $table->text('address');
             $table->string('npwp');
@@ -33,7 +33,7 @@ class CreateSuppliersTable extends Migration
             $table->foreign('account_code')
             ->references('id')->on('journals')
             ->onUpdate('cascade')
-            ->onDelete('restrict');          
+            ->onDelete('restrict');
 
         });
     }
