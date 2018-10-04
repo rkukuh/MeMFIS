@@ -12,8 +12,8 @@ class MakeEntity extends Command
      * @var string
      */
     protected $signature = 'memfis:make-entity
-                            {entity : Name of the entity, eg: Post, Product, Employee}
-                            {--namespace=Both : Where this entity should resides, eg: Frontend | Admin | Both | None}';
+                            {entity : Name of the Entity, eg: Post, Product, Employee}
+                            {--namespace=Both : eg: Frontend | Admin | Both | None}';
 
     /**
      * The console command description.
