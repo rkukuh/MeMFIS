@@ -41,7 +41,7 @@ class FreshMigrationWithSeed extends Command
 
             $this->info('[START] Rebuild database schema..........');
 
-            $this->call('migrate:fresh', ['--force' => true]);
+            $this->callSilent('migrate:fresh', ['--force' => true]);
 
             $this->info('[DONE ] Rebuild database schema.');
 
