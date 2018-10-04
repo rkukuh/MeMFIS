@@ -13,22 +13,26 @@ class StatusesOfEmployment extends Seeder
     public function run()
     {
         Status::create([
-            'name' => 'Part-Time',
+            'code' => 'part-time',
+            'name' => 'Part Time',
             'of'   => 'employment',
         ]);
 
         Status::create([
-            'name' => 'Full-Time',
+            'code' => 'full-time',
+            'name' => 'Full Time',
             'of'   => 'employment',
         ]);
 
         Status::create([
-            'name' => 'Internship (Magang)',
+            'code' => 'internship',
+            'name' => 'Magang',
             'of'   => 'employment',
         ]);
 
         Status::create([
-            'name' => 'Remote / Freelance',
+            'code' => 'freelance',
+            'name' => 'Freelance',
             'of'   => 'employment',
         ]);
     }

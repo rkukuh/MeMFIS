@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->string('name');
             $table->text('description');
             $table->unsignedInteger('account_code')->nullable();
@@ -26,7 +26,7 @@ class CreateCategoriesTable extends Migration
             $table->foreign('account_code')
             ->references('id')->on('journals')
             ->onUpdate('cascade')
-            ->onDelete('restrict');          
+            ->onDelete('restrict');
 
         });
     }

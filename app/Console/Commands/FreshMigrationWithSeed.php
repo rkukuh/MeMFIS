@@ -37,28 +37,36 @@ class FreshMigrationWithSeed extends Command
      */
     public function handle()
     {
-        if ($this->confirm('Continue to Fresh migration and Seeding data?')) {
+        if ($this->confirm('Continue to Fresh the migration and Seeding data?')) {
 
-            $this->info('[START] Fresh migration and Seeding data..........');
+            $this->info('[START] Rebuild database schema..........');
 
-            $this->callSilent('migrate:fresh', [
-                '--seed'  => true,
-                '--force' => true
-            ]);
+            $this->callSilent('migrate:fresh', ['--force' => true]);
 
-            $this->info('[DONE ] Fresh migration and Seeding data.');
+            $this->info('[DONE ] Rebuild database schema.');
+
+            if ($this->confirm('Install initial data?')) {
+
+                $this->info('[START] Install initial data..........');
+
+                $this->call('db:seed', ['--force' => true]);
+
+                $this->info('[DONE ] Install initial data.');
+            }
 
             if ($this->confirm('Install example data?')) {
 
                 $this->info('[START] Install example data..........');
 
-                $this->call('db:seed', ['--class' => 'ExampleDataSeeder']);
+                $this->call('db:seed', [
+                    '--class' => 'ExampleDataSeeder',
+                    '--force' => true,
+                ]);
 
                 $this->info('[DONE ] Install example data.');
             }
 
             $this->info('');
-
         }
     }
 }

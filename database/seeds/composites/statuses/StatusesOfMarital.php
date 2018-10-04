@@ -13,21 +13,25 @@ class StatusesOfMarital extends Seeder
     public function run()
     {
         Status::create([
+            'code' => 'married',
             'name' => 'Menikah',
             'of'   => 'marital',
         ]);
 
         Status::create([
+            'code' => 'single',
             'name' => 'Belum Menikah',
             'of'   => 'marital',
         ]);
 
         Status::create([
+            'code' => 'janda',
             'name' => 'Janda',
             'of'   => 'marital',
         ]);
 
         Status::create([
+            'code' => 'duda',
             'name' => 'Duda',
             'of'   => 'marital',
         ]);

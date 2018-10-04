@@ -13,6 +13,7 @@ class TypesOfEligibility extends Seeder
     public function run()
     {
         Type::create([
+            'code' => 'dhc-6',
             'name' => 'DHC-6',
             'of'   => 'eligibility',
         ]);

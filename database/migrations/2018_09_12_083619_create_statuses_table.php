@@ -16,8 +16,10 @@ class CreateStatusesTable extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('code');
             $table->string('name');
             $table->string('of');
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

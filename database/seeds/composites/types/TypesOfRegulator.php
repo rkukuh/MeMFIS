@@ -13,17 +13,20 @@ class TypesOfRegulator extends Seeder
     public function run()
     {
         Type::create([
-            'name' => 'DGCA',
+            'code' => 'dgca',
+            'name' => 'DGCA (Directorate General Of Civil Aviation)',
             'of'   => 'regulator',
         ]);
 
         Type::create([
-            'name' => 'EASA',
+            'code' => 'easa',
+            'name' => 'EASA (European Aviation Safety Agency)',
             'of'   => 'regulator',
         ]);
 
         Type::create([
-            'name' => 'FAA',
+            'code' => 'faa',
+            'name' => 'FAA (Federal Aviation Administration)',
             'of'   => 'regulator',
         ]);
     }

@@ -13,11 +13,13 @@ class TypesOfFax extends Seeder
     public function run()
     {
         Type::create([
+            'code' => 'work',
             'name' => 'Work',
             'of'   => 'fax',
         ]);
 
         Type::create([
+            'code' => 'personal',
             'name' => 'Personal',
             'of'   => 'fax',
         ]);

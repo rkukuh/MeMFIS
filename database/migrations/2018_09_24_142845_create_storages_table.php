@@ -16,7 +16,7 @@ class CreateStoragesTable extends Migration
         Schema::create('storages', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->string('name');
             $table->text('description');
             $table->unsignedInteger('account_code')->nullable();

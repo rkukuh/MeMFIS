@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->string('name');
             $table->integer('city_id');
             $table->text('address');
@@ -32,7 +32,7 @@ class CreateCustomersTable extends Migration
             $table->foreign('account_code')
             ->references('id')->on('journals')
             ->onUpdate('cascade')
-            ->onDelete('restrict');          
+            ->onDelete('restrict');
 
 
         });

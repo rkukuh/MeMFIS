@@ -16,7 +16,7 @@ class CreateItemUnitsTable extends Migration
         Schema::create('item_units', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code',50);
+            $table->string('code');
             $table->unsignedInteger('unit_id')->nullable();
             $table->integer('active');
             $table->timestamps();
