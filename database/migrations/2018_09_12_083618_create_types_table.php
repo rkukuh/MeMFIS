@@ -16,8 +16,10 @@ class CreateTypesTable extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('code');
             $table->string('name');
             $table->string('of');
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
