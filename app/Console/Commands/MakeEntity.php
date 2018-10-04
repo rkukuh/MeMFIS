@@ -42,6 +42,6 @@ class MakeEntity extends Command
         $entity = $this->argument('entity');
         $namespace = $this->option('namespace');
 
-        //
+        $this->call('make:model', ['name' => 'Models/' . $entity]);     // Model
     }
 }
