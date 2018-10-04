@@ -48,19 +48,40 @@ class MakeEntity extends Command
 
         /** CONTROLLER */
 
-        if (strtolower($namespace) == 'both') {
+        switch (strtolower($namespace)) {
+            case 'both':
+                $this->call('make:controller', [
+                    'name' => 'Admin/' . $entity . 'Controller',
+                    '--model' => 'Models/' . $entity,
+                    '--resource' => true,
+                ]);
 
-            $this->call('make:controller', [
-                'name' => 'Admin/' . $entity . 'Controller',
-                '--model' => 'Models/' . $entity,
-                '--resource' => true,
-            ]);
+                $this->call('make:controller', [
+                    'name' => 'Frontend/' . $entity . 'Controller',
+                    '--model' => 'Models/' . $entity,
+                    '--resource' => true,
+                ]);
 
-            $this->call('make:controller', [
-                'name' => 'Frontend/' . $entity . 'Controller',
-                '--model' => 'Models/' . $entity,
-                '--resource' => true,
-            ]);
+                break;
+
+            case 'none':
+                $this->call('make:controller', [
+                    'name' => $entity . 'Controller',
+                    '--model' => 'Models/' . $entity,
+                    '--resource' => true,
+                ]);
+
+                break;
+
+            default:
+
+                $this->call('make:controller', [
+                    'name' => $namespace . '/' . $entity . 'Controller',
+                    '--model' => 'Models/' . $entity,
+                    '--resource' => true,
+                ]);
+
+                break;
         }
     }
 }
