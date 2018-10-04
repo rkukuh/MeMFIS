@@ -74,7 +74,6 @@ class MakeEntity extends Command
                 break;
 
             default:
-
                 $this->call('make:controller', [
                     'name' => $namespace . '/' . $entity . 'Controller',
                     '--model' => 'Models/' . $entity,
