@@ -26,10 +26,50 @@
                                         <div class="form-group m-form__group row ">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
 
+                                                        <div class="form-group m-form__group row ">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <label class="form-control-label">
+                                                                        Email @include('frontend.common.label.required')
+                                                                    </label>
+                                                                    <div id="m_repeater_1a">
+                                                                        <div class="" id="m_repeater_1a">
+                                                                            <div data-repeater-list="">
+                                                                                <div data-repeater-item class="row">
+                                                                                    <div class="form-group m-form__group row align-items-center">
+                                                                                        <div class="col-md-6">
+                                                        <input type="file" id="largeImage" name="name">
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                        </div>
+                                                                                        <div class="col-md-1">
+                                                                                            <div data-repeater-delete="" class="btn-sm btn btn-danger">
+                                                                                                <span>
+                                                                                                    <i class="la la-trash-o"></i>
+                                                                                                    <span>Delete</span>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="m-form__group form-group row">
+                                                                            <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                                                <span>
+                                                                                    <i class="la la-plus"></i>
+                                                                                    <span>Add</span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         {{-- <input type="file" id="largeImage"> --}}
-                                                        @component('frontend.common.input.upload')
+                                                        {{-- @component('frontend.common.input.upload')
                                                         @slot('id', 'largeImage')
-                                                    @endcomponent
+                                                    @endcomponent --}}
 
                                                         {{-- <div class ="radio01">
                                                             <label for="question1">question1</label><input type="radio" name="question1"  id="question1" value="answer1">
@@ -108,5 +148,6 @@
 
 @push('footer-scripts')
     {{-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> --}}
+    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/testing/test.js')}}"></script>
 @endpush

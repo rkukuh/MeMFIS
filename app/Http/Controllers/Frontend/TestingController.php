@@ -47,9 +47,16 @@ class TestingController extends Controller
      */
     public function store(Request $request)
     {
+        // foreach($arrays as $array){
+        //     echo"tes";
+        // }
         $file = Input::file('fileInput');
         $ext = $file->getClientOriginalExtension();
-        $fileName = md5(time()).".$ext";
+        $length = 10;
+        $randomString = substr(str_shuffle(md5(time())),0,$length);
+        // echo $randomString;
+        // $fileName = md5(time()).".$ext";
+        $fileName = $randomString.".$ext";
 
         $destinationPath = "uploads/".date('Y').'/'.date('m').'/';
         $moved_file = $file->move($destinationPath, $fileName);
