@@ -13,11 +13,13 @@ class TypesOfEmail extends Seeder
     public function run()
     {
         Type::create([
+            'code' => 'work',
             'name' => 'Work',
             'of'   => 'email',
         ]);
 
         Type::create([
+            'code' => 'personal',
             'name' => 'Personal',
             'of'   => 'email',
         ]);

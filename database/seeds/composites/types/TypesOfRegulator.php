@@ -13,16 +13,19 @@ class TypesOfRegulator extends Seeder
     public function run()
     {
         Type::create([
+            'code' => 'dgca',
             'name' => 'DGCA',
             'of'   => 'regulator',
         ]);
 
         Type::create([
+            'code' => 'easa',
             'name' => 'EASA',
             'of'   => 'regulator',
         ]);
 
         Type::create([
+            'code' => 'faa',
             'name' => 'FAA',
             'of'   => 'regulator',
         ]);

@@ -13,21 +13,25 @@ class TypesOfCapability extends Seeder
     public function run()
     {
         Type::create([
+            'code' => 'inspection',
             'name' => 'Inspection',
             'of'   => 'capability',
         ]);
 
         Type::create([
+            'code' => 'check-test',
             'name' => 'Check and Test',
             'of'   => 'capability',
         ]);
 
         Type::create([
+            'code' => 'repair',
             'name' => 'Repair',
             'of'   => 'capability',
         ]);
 
         Type::create([
+            'code' => 'overhaul',
             'name' => 'Overhaul',
             'of'   => 'capability',
         ]);

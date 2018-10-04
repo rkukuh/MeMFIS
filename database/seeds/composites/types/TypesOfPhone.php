@@ -13,11 +13,13 @@ class TypesOfPhone extends Seeder
     public function run()
     {
         Type::create([
+            'code' => 'work',
             'name' => 'Work',
             'of'   => 'phone',
         ]);
 
         Type::create([
+            'code' => 'personal',
             'name' => 'Personal',
             'of'   => 'phone',
         ]);
