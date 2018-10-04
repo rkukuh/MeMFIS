@@ -20,7 +20,7 @@ class MakeEntity extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new entity (model, controller, requests, factory, migration, seeder, policy, tests)';
+    protected $description = 'Create a new Entity (Model, Controller, Requests, Factory, Migration, Seeder, Policy, Tests)';
 
     /**
      * Create a new command instance.
