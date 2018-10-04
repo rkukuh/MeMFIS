@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Type::class, function (Faker $faker) {
 
-    $name = 'Type #' . $faker->unixTime();
+    $name = 'Type-test #' . $faker->unixTime();
 
     return [
         'code' => str_slug($name),
@@ -20,7 +20,6 @@ $factory->define(Type::class, function (Faker $faker) {
             'capability',
             'eligibility',
         ]),
-        'description',
     ];
 
 });
