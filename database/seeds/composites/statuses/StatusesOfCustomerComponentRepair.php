@@ -13,12 +13,14 @@ class StatusesOfCustomerComponentRepair extends Seeder
     public function run()
     {
         Status::create([
-            'name' => 'Serviceable',
+            'code' => 'serviceable',
+            'name' => 'SERVICEABLE',
             'of'   => 'customer-component-repair',
         ]);
 
         Status::create([
-            'name' => 'Unserviceable',
+            'code' => 'unserviceable',
+            'name' => 'UNSERVICABLE',
             'of'   => 'customer-component-repair',
         ]);
     }
