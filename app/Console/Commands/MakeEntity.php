@@ -44,13 +44,10 @@ class MakeEntity extends Command
 
         /** MODEL */
 
-        $this->info('[START] Creating new model.....');
-
         $model = 'Models/' . $entity;
         $this->callSilent('make:model', ['name' => $model]);
 
-        $this->info('[DONE ] Model created: ' . $model . '.php');
-        $this->info('');
+        $this->info('Model created: ' . $model . '.php');
 
         /** CONTROLLER */
 
@@ -64,11 +61,15 @@ class MakeEntity extends Command
                     '--resource' => true,
                 ]);
 
+                $this->info('Controller created: ' . 'Admin/' . $controller . '.php');
+
                 $this->call('make:controller', [
                     'name' => 'Frontend/' . $controller,
                     '--model' => $model,
                     '--resource' => true,
                 ]);
+
+                $this->info('Controller created: ' . 'Frontend/' . $controller . '.php');
 
                 break;
 
@@ -79,6 +80,8 @@ class MakeEntity extends Command
                     '--resource' => true,
                 ]);
 
+                $this->info('Controller created: ' . $controller . '.php');
+
                 break;
 
             default:
@@ -87,6 +90,8 @@ class MakeEntity extends Command
                     '--model' => $model,
                     '--resource' => true,
                 ]);
+
+                $this->info('Controller created: ' . $namespace . '/' . $controller . '.php');
 
                 break;
         }
