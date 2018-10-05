@@ -20,7 +20,7 @@ class MakeEntity extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new Entity (Model, Controller, Requests, Factory, Migration, Seeder, Policy, Tests)';
+    protected $description = 'Create a new Entity (Model, Migration, Controller, Requests, Factory, Seeder, Policy, Tests)';
 
     /**
      * Create a new command instance.
@@ -48,6 +48,18 @@ class MakeEntity extends Command
         $this->callSilent('make:model', ['name' => $model]);
 
         $this->info('Model created: ' . $model . '.php');
+
+        /** MIGRATION */
+
+        $pluralizedEntity = str_plural(strtolower($entity));
+        $migration = 'create_' . $pluralizedEntity . '_table';
+
+        $this->callSilent('make:migration', [
+            'name' => $migration,
+            '--create' => $pluralizedEntity,
+        ]);
+
+        $this->info('Migration created: ' . $migration . '.php');
 
         /** CONTROLLER */
 
@@ -146,17 +158,5 @@ class MakeEntity extends Command
         ]);
 
         $this->info('Factory created: ' . 'factories/' . $factory . '.php');
-
-        /** MIGRATION */
-
-        $pluralizedEntity = str_plural(strtolower($entity));
-        $migration = 'create_' . $pluralizedEntity . '_table';
-
-        $this->callSilent('make:migration', [
-            'name' => $migration,
-            '--create' => $pluralizedEntity,
-        ]);
-
-        $this->info('Migration created: ' . $migration . '.php');
     }
 }
