@@ -154,7 +154,7 @@ class MakeEntity extends Command
 
         $this->callSilent('make:migration', [
             'name' => $migration,
-            'create' => ''
+            '--create' => $pluralizedEntity,
         ]);
 
         $this->info('Migration created: ' . $pluralizedEntity . '.php');
