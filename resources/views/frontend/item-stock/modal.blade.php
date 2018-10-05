@@ -39,10 +39,9 @@
                                     Max @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.text')
+                                @component('frontend.common.input.numeric')
                                     @slot('text', 'Max')
                                     @slot('name', 'max')
-                                    @slot('class', 'number')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -50,10 +49,9 @@
                                     Min @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.text')
+                                @component('frontend.common.input.numeric')
                                     @slot('text', 'Min')
                                     @slot('name', 'min')
-                                    @slot('class', 'number')
                                 @endcomponent
                             </div>
                         </div>
