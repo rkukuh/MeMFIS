@@ -164,7 +164,7 @@ class MakeEntity extends Command
 
         $seederTable = ($pluralizedEntity) . 'TableSeeder';
 
-        $this->callSilent('make:factory', ['name' => $seederTable]);
+        $this->callSilent('make:seeder', ['name' => $seederTable]);
 
         $this->info('Table Seeder created: ' . 'seeds/' . $seederTable . '.php');
     }
