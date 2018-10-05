@@ -44,21 +44,24 @@ class MakeEntity extends Command
 
         /** MODEL */
 
-        $this->call('make:model', ['name' => 'Models/' . $entity]);
+        $model = 'Models/' . $entity;
+        $this->call('make:model', ['name' => $model]);
 
         /** CONTROLLER */
+
+        $controller = $entity . 'Controller';
 
         switch (strtolower($namespace)) {
             case 'both':
                 $this->call('make:controller', [
-                    'name' => 'Admin/' . $entity . 'Controller',
-                    '--model' => 'Models/' . $entity,
+                    'name' => 'Admin/' . $controller,
+                    '--model' => $model,
                     '--resource' => true,
                 ]);
 
                 $this->call('make:controller', [
-                    'name' => 'Frontend/' . $entity . 'Controller',
-                    '--model' => 'Models/' . $entity,
+                    'name' => 'Frontend/' . $controller,
+                    '--model' => $model,
                     '--resource' => true,
                 ]);
 
@@ -66,8 +69,8 @@ class MakeEntity extends Command
 
             case 'none':
                 $this->call('make:controller', [
-                    'name' => $entity . 'Controller',
-                    '--model' => 'Models/' . $entity,
+                    'name' => $controller,
+                    '--model' => $model,
                     '--resource' => true,
                 ]);
 
@@ -75,8 +78,8 @@ class MakeEntity extends Command
 
             default:
                 $this->call('make:controller', [
-                    'name' => $namespace . '/' . $entity . 'Controller',
-                    '--model' => 'Models/' . $entity,
+                    'name' => $namespace . '/' . $controller,
+                    '--model' => $model,
                     '--resource' => true,
                 ]);
 
