@@ -87,10 +87,10 @@ let Category = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_journal" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            t.id +
+                            t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
-                            t.id +
+                            t.uuid +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t    \t'
                         );
                     }
@@ -472,7 +472,6 @@ let Category = {
             }).then(result => {
                 if (result.value) {
 
-                    alert(triggerid);
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
