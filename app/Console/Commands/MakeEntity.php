@@ -138,7 +138,7 @@ class MakeEntity extends Command
 
         /** FACTORY */
 
-        $factory = $entity;
+        $factory = $entity . 'Factory';
 
         $this->callSilent('make:factory', [
             'name' => $factory,
