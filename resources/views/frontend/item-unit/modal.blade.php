@@ -31,9 +31,10 @@
                                         Qty @include('frontend.common.label.required')
                                     </label>
 
-                                    @component('frontend.common.input.number')
+                                    @component('frontend.common.input.text')
                                         @slot('text', 'Qty')
                                         @slot('name', 'qty')
+                                        @slot('class', 'number')
                                     @endcomponent
                                 </div>
                         </div>
