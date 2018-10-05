@@ -157,6 +157,6 @@ class MakeEntity extends Command
             '--create' => $pluralizedEntity,
         ]);
 
-        $this->info('Migration created: ' . $pluralizedEntity . '.php');
+        $this->info('Migration created: ' . $migration . '.php');
     }
 }
