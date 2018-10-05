@@ -103,43 +103,27 @@ class MakeEntity extends Command
 
         switch (strtolower($namespace)) {
             case 'both':
-                $this->call('make:request', [
-                    'name' => 'Admin/' . $requestStore,
-                ]);
+                $this->callSilent('make:request', ['name' => 'Admin/' . $requestStore]);
 
-                $this->call('make:request', [
-                    'name' => 'Admin/' . $requestUpdate,
-                ]);
+                $this->callSilent('make:request', ['name' => 'Admin/' . $requestUpdate]);
 
-                $this->call('make:request', [
-                    'name' => 'Frontend/' . $requestStore,
-                ]);
+                $this->callSilent('make:request', ['name' => 'Frontend/' . $requestStore]);
 
-                $this->call('make:request', [
-                    'name' => 'Frontend/' . $requestUpdate,
-                ]);
+                $this->callSilent('make:request', ['name' => 'Frontend/' . $requestUpdate]);
 
                 break;
 
             case 'none':
-                $this->call('make:request', [
-                    'name' => $requestStore,
-                ]);
+                $this->callSilent('make:request', ['name' => $requestStore]);
 
-                $this->call('make:request', [
-                    'name' => $requestUpdate,
-                ]);
+                $this->callSilent('make:request', ['name' => $requestUpdate]);
 
                 break;
 
             default:
-                $this->call('make:request', [
-                    'name' => $namespace . '/' . $requestStore,
-                ]);
+                $this->callSilent('make:request', ['name' => $namespace . '/' . $requestStore]);
 
-                $this->call('make:request', [
-                    'name' => $namespace . '/' . $requestUpdate,
-                ]);
+                $this->callSilent('make:request', ['name' => $namespace . '/' . $requestUpdate]);
 
                 break;
         }
