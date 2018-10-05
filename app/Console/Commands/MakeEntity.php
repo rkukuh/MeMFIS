@@ -104,26 +104,34 @@ class MakeEntity extends Command
         switch (strtolower($namespace)) {
             case 'both':
                 $this->callSilent('make:request', ['name' => 'Admin/' . $requestStore]);
+                $this->info('Request created: ' . 'Admin/' . $requestStore . '.php');
 
                 $this->callSilent('make:request', ['name' => 'Admin/' . $requestUpdate]);
+                $this->info('Request created: ' . 'Admin/' . $requestUpdate . '.php');
 
                 $this->callSilent('make:request', ['name' => 'Frontend/' . $requestStore]);
+                $this->info('Request created: ' . 'Frontend/' . $requestStore . '.php');
 
                 $this->callSilent('make:request', ['name' => 'Frontend/' . $requestUpdate]);
+                $this->info('Request created: ' . 'Frontend/' . $requestUpdate . '.php');
 
                 break;
 
             case 'none':
                 $this->callSilent('make:request', ['name' => $requestStore]);
+                $this->info('Request created: ' . $requestStore . '.php');
 
                 $this->callSilent('make:request', ['name' => $requestUpdate]);
+                $this->info('Request created: ' . $requestUpdate . '.php');
 
                 break;
 
             default:
                 $this->callSilent('make:request', ['name' => $namespace . '/' . $requestStore]);
+                $this->info('Request created: ' . $namespace . '/' . $requestStore . '.php');
 
                 $this->callSilent('make:request', ['name' => $namespace . '/' . $requestUpdate]);
+                $this->info('Request created: ' . $namespace . '/' . $requestUpdate . '.php');
 
                 break;
         }
