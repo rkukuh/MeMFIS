@@ -146,5 +146,17 @@ class MakeEntity extends Command
         ]);
 
         $this->info('Factory created: ' . 'factories/' . $factory . '.php');
+
+        /** MIGRATION */
+
+        $pluralizedEntity = str_plural(strtolower($entity));
+        $migration = 'create_' . $pluralizedEntity . '_table';
+
+        $this->callSilent('make:migration', [
+            'name' => $migration,
+            'create' => ''
+        ]);
+
+        $this->info('Migration created: ' . $pluralizedEntity . '.php');
     }
 }
