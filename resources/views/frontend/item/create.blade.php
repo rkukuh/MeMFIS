@@ -280,4 +280,6 @@
     <script src="{{ asset('js/frontend/item.js') }}"></script>
     <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
     <script src="{{ asset('js/frontend/item-stock.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
+
 @endpush
