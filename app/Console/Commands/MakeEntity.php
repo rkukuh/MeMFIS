@@ -45,6 +45,7 @@ class MakeEntity extends Command
         /** MODEL */
 
         $model = 'Models/' . $entity;
+
         $this->callSilent('make:model', ['name' => $model]);
 
         $this->info('Model created: ' . $model . '.php');
