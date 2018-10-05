@@ -44,12 +44,12 @@ class MakeEntity extends Command
 
         /** MODEL */
 
-        $this->info('Create new model.....');
+        $this->info('[START] Creating new model.....');
 
         $model = 'Models/' . $entity;
-        $this->call('make:model', ['name' => $model]);
+        $this->callSilent('make:model', ['name' => $model]);
 
-        $this->info('Model created: ' . $model);
+        $this->info('[DONE ] Model created: ' . $model);
         $this->info('');
 
         /** CONTROLLER */
