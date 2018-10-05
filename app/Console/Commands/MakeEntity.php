@@ -51,12 +51,12 @@ class MakeEntity extends Command
 
         /** MIGRATION */
 
-        $pluralizedEntity = str_plural(strtolower($entity));
-        $migration = 'create_' . $pluralizedEntity . '_table';
+        $pluralizedEntity = str_plural($entity);
+        $migration = 'create_' . strtolower($pluralizedEntity) . '_table';
 
         $this->callSilent('make:migration', [
             'name' => $migration,
-            '--create' => $pluralizedEntity,
+            '--create' => strtolower($pluralizedEntity),
         ]);
 
         $this->info('Migration created: ' . $migration . '.php');
@@ -158,5 +158,13 @@ class MakeEntity extends Command
         ]);
 
         $this->info('Factory created: ' . 'factories/' . $factory . '.php');
+
+        /** SEEDER: Table Seeder */
+
+        $seederTable = ($pluralizedEntity) . 'TableSeeder';
+
+        $this->callSilent('make:factory', ['name' => $seederTable]);
+
+        $this->info('Table Seeder created: ' . 'seeds/' . $seederTable . '.php');
     }
 }
