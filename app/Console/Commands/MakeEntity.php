@@ -135,5 +135,16 @@ class MakeEntity extends Command
 
                 break;
         }
+
+        /** FACTORY */
+
+        $factory = $entity;
+
+        $this->callSilent('make:factory', [
+            'name' => $factory,
+            '--model' => $model,
+        ]);
+
+        $this->info('Factory created: ' . 'factories/' . $requestUpdate . '.php');
     }
 }
