@@ -55,7 +55,7 @@ class MakeEntity extends Command
 
         switch (strtolower($namespace)) {
             case 'both':
-                $this->call('make:controller', [
+                $this->callSilent('make:controller', [
                     'name' => 'Admin/' . $controller,
                     '--model' => $model,
                     '--resource' => true,
@@ -63,7 +63,7 @@ class MakeEntity extends Command
 
                 $this->info('Controller created: ' . 'Admin/' . $controller . '.php');
 
-                $this->call('make:controller', [
+                $this->callSilent('make:controller', [
                     'name' => 'Frontend/' . $controller,
                     '--model' => $model,
                     '--resource' => true,
@@ -74,7 +74,7 @@ class MakeEntity extends Command
                 break;
 
             case 'none':
-                $this->call('make:controller', [
+                $this->callSilent('make:controller', [
                     'name' => $controller,
                     '--model' => $model,
                     '--resource' => true,
@@ -85,7 +85,7 @@ class MakeEntity extends Command
                 break;
 
             default:
-                $this->call('make:controller', [
+                $this->callSilent('make:controller', [
                     'name' => $namespace . '/' . $controller,
                     '--model' => $model,
                     '--resource' => true,
