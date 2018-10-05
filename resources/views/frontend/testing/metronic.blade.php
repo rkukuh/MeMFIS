@@ -37,7 +37,11 @@
                                                                                 <div data-repeater-item class="row">
                                                                                     <div class="form-group m-form__group row align-items-center">
                                                                                         <div class="col-md-6">
-                                                        <input type="file" id="largeImage" name="name">
+                                                        {{-- <input type="file" id="largeImage" name="name"> --}}
+                                                        @component('frontend.common.input.upload')
+                                                            @slot('id', 'largeImage')
+                                                            @slot('name', 'name')
+                                                        @endcomponent
 
                                                                                         </div>
                                                                                         <div class="col-md-3">

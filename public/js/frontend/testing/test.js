@@ -36,8 +36,8 @@ $('.card-body').on('click', '.add', function () {
                 type: 'POST',
                 success: function(data){
                     if(data.uploaded==true){
-                        // $('input[type=file]').val("") ;
-                        // document.getElementById('largeImage-label').innerHTML = '';
+                        $('input[type=file]').val("") ;
+                        document.getElementById('largeImage-label').innerHTML = '';
                         alert(data.url);
     
                     }
