@@ -85,5 +85,53 @@ class MakeEntity extends Command
 
                 break;
         }
+
+        /** REQUEST */
+
+        $requestStore  = $entity . 'Store';
+        $requestUpdate = $entity . 'Update';
+
+        switch (strtolower($namespace)) {
+            case 'both':
+                $this->call('make:request', [
+                    'name' => 'Admin/' . $requestStore,
+                ]);
+
+                $this->call('make:request', [
+                    'name' => 'Admin/' . $requestUpdate,
+                ]);
+
+                $this->call('make:request', [
+                    'name' => 'Frontend/' . $requestStore,
+                ]);
+
+                $this->call('make:request', [
+                    'name' => 'Frontend/' . $requestUpdate,
+                ]);
+
+                break;
+
+            case 'none':
+                $this->call('make:request', [
+                    'name' => $requestStore,
+                ]);
+
+                $this->call('make:request', [
+                    'name' => $requestUpdate,
+                ]);
+
+                break;
+
+            default:
+                $this->call('make:request', [
+                    'name' => $namespace . '/' . $requestStore,
+                ]);
+
+                $this->call('make:request', [
+                    'name' => $namespace . '/' . $requestUpdate,
+                ]);
+
+                break;
+        }
     }
 }
