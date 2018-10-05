@@ -49,7 +49,7 @@ class MakeEntity extends Command
         $model = 'Models/' . $entity;
         $this->callSilent('make:model', ['name' => $model]);
 
-        $this->info('[DONE ] Model created: ' . $model);
+        $this->info('[DONE ] Model created: ' . $model . '.php');
         $this->info('');
 
         /** CONTROLLER */
