@@ -13,7 +13,16 @@ class MakeEntity extends Command
      */
     protected $signature = 'memfis:make-entity
                             {entity : Name of the Entity, eg: Post, Product, Employee}
-                            {--namespace=Both : eg: Frontend | Admin | Both | None}';
+                            {--namespace=Both : eg: Frontend | Admin | Both | None | [your-choice]}
+                            {--M|model : Generate an entity\'s Model}
+                            {--m|migration : Generate an entity\'s Migration}
+                            {--c|controller : Generate an entity\'s Controller}
+                            {--r|request : Generate an entity\'s Request}
+                            {--f|factory : Generate an entity\'s Factory}
+                            {--s|seeder : Generate an entity\'s Table Seeder}
+                            {--e|example : Generate an entity\'s Example Seeder}
+                            {--p|policy : Generate an entity\'s Policy}
+                            {--t|test : Generate an entity\'s Unit and Feature Test} ';
 
     /**
      * The console command description.
