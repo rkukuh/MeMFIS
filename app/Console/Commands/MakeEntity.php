@@ -145,6 +145,6 @@ class MakeEntity extends Command
             '--model' => $model,
         ]);
 
-        $this->info('Factory created: ' . 'factories/' . $requestUpdate . '.php');
+        $this->info('Factory created: ' . 'factories/' . $factory . '.php');
     }
 }
