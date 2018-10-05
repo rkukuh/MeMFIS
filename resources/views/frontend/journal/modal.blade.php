@@ -56,10 +56,11 @@
                                     Level @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.number')
+                                @component('frontend.common.input.text')
                                     @slot('value', '1')
                                     @slot('text', 'Level')
                                     @slot('name', 'level')
+                                    @slot('class', 'number')
                                     @slot('id_error', 'code')
                                 @endcomponent
                             </div>
