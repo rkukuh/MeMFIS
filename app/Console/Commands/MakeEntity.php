@@ -105,9 +105,10 @@ class MakeEntity extends Command
 
             $this->callSilent('make:model', ['name' => $this->model]);
 
-            $path = $this->getPath($this->entity);
-
-            $this->files->put($path, $this->compileModelStub());
+            $path = base_path() . '/app/Models/' . $this->entity . '.php';
+            $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
+            $stub = str_replace('{{class}}', $this->entity, $stub);
+            $this->files->put($path, $stub);
 
             $data['artefact'] = 'Model';
             $data['location'] = $this->model . '.php';
@@ -479,43 +480,5 @@ class MakeEntity extends Command
         $this->line('"Make Entity" artisan command');
         $this->line('version 1.0 by @rkukuh');
         $this->line('');
-    }
-
-    /**
-     * Get the path to where we should store the migration.
-     *
-     * @param  string $name
-     * @return string
-     */
-    protected function getPath($name)
-    {
-        return base_path() . '/app/Models/' . $name . '.php';
-    }
-
-    /**
-     * Replace the class name in the stub.
-     *
-     * @param  string $stub
-     * @return $this
-     */
-    protected function replaceClassName(&$stub)
-    {
-        $stub = str_replace('{{class}}', $this->entity, $stub);
-
-        return $this;
-    }
-
-    /**
-     * Compile the migration stub.
-     *
-     * @return string
-     */
-    protected function compileModelStub()
-    {
-        $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
-
-        $this->replaceClassName($stub);
-
-        return $stub;
     }
 }
