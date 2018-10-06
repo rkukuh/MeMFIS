@@ -20,7 +20,7 @@ class MakeEntity extends Command
      *
      * @var string
      */
-    protected $signature = 'make:entity
+    protected $signature = 'memfis:make:entity
                             {entity : Name of the Entity, eg: Post, Product, Employee}
                             {--namespace=Both : eg: Frontend | Admin | Both | None | [your-choice]}
                             {--a|all : Generate an entity\'s along with its following artefacts below:}
@@ -110,8 +110,6 @@ class MakeEntity extends Command
             array_push($this->tableContents, $data);
 
             $this->info($data['artefact'] . ' created.');
-
-            array_push($this->additionalSteps, 'Replace model base class');
         }
     }
 
