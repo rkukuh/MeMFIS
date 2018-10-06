@@ -203,6 +203,32 @@ class MakeEntity extends Command
             $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
         }
 
+        /** POLICY */
+
+        if ($this->option('all') || $this->option('policy')) {
+
+            $policy = $entity . 'Policy';
+
+            $this->callSilent('make:policy', [
+                'name' => $policy,
+                '--model' => $model,
+            ]);
+        }
+
+        /** TEST (Feature and Unit tests) */
+
+        if ($this->option('all') || $this->option('test')) {
+
+            $test = $entity . 'Test';
+
+            $this->callSilent('make:test', ['name' => $test]);
+
+            $this->callSilent('make:test', [
+                'name' => $test,
+                '--unit' => true,
+            ]);
+        }
+
         $this->comment('[DONE ] Creating new entity.');
         $this->info('');
 
