@@ -500,9 +500,7 @@ class MakeEntity extends Command
      */
     protected function replaceClassName(&$stub)
     {
-        $className = ucwords(camel_case($this->argument('name')));
-
-        $stub = str_replace('{{class}}', $className, $stub);
+        $stub = str_replace('{{class}}', $this->entity, $stub);
 
         return $this;
     }
