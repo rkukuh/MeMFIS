@@ -72,6 +72,8 @@ class MakeEntity extends Command
             $data['artefact'] = 'Model';
             $data['location'] = $model . '.php';
             array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
         }
 
         /** MIGRATION */
@@ -89,6 +91,8 @@ class MakeEntity extends Command
             $data['artefact'] = 'Migration';
             $data['location'] = $migration;
             array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
         }
 
         /** CONTROLLER */
@@ -149,6 +153,8 @@ class MakeEntity extends Command
 
                     break;
             }
+
+            $this->info($data['artefact'] . ' created.');
         }
 
         /** REQUEST */
@@ -216,6 +222,8 @@ class MakeEntity extends Command
 
                     break;
             }
+
+            $this->info($data['artefact'] . ' created.');
         }
 
         /** FACTORY */
@@ -232,6 +240,8 @@ class MakeEntity extends Command
             $data['artefact'] = 'Model Factory';
             $data['location'] = $factory . '.php';
             array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
         }
 
         /** POLICY */
@@ -248,6 +258,8 @@ class MakeEntity extends Command
             $data['artefact'] = 'Policy';
             $data['location'] = $policy . '.php';
             array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
 
             array_push($additionalSteps, 'Register the Policy');
         }
@@ -274,6 +286,8 @@ class MakeEntity extends Command
             $data['location'] = 'seeds/examples/' . $seederExample . '.php';
             array_push($tableContents, $data);
 
+            $this->info($data['artefact'] . ' created.');
+
             array_push($additionalSteps, 'Fix the Example Seeder class name');
         }
 
@@ -297,6 +311,8 @@ class MakeEntity extends Command
             $data['artefact'] = 'Test: Unit';
             $data['location'] = 'tests/Unit/' . $test . '.php';
             array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
         }
 
         if ($this->option('all') ||
@@ -313,11 +329,14 @@ class MakeEntity extends Command
 
             $this->error('No files has been created. You may missed an option or two');
         }
-        else {
-            $this->table($tableHeaders, $tableContents);
-        }
 
         $this->comment('[DONE ] Creating new entity.');
+        $this->info('');
+
+        if (in_array(true, $this->options(), true) === true) {
+
+            $this->table($tableHeaders, $tableContents);
+        }
         $this->info('');
 
         /** TODO */
