@@ -200,5 +200,14 @@ class MakeEntity extends Command
 
             $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
         }
+
+        /** TODO */
+
+        $this->info('');
+        $this->comment('ATTENTION: You may have to proceed these additional steps:');
+        $this->info('- Use generated Requests for the generated Controller');
+        $this->info('- Register the Policy');
+        $this->info('- Fix the Example Seeder class name');
+        $this->info('');
     }
 }
