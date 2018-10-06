@@ -54,136 +54,151 @@ class MakeEntity extends Command
 
         /** MODEL */
 
-        $model = 'Models/' . $entity;
+        if ($this->option('all') || $this->option('model')) {
 
-        $this->callSilent('make:model', ['name' => $model]);
+            $model = 'Models/' . $entity;
 
-        $this->info('Model created: ' . $model . '.php');
+            $this->callSilent('make:model', ['name' => $model]);
+
+            $this->info('Model created: ' . $model . '.php');
+        }
 
         /** MIGRATION */
 
-        $pluralizedEntity = str_plural($entity);
-        $migration = 'create_' . strtolower($pluralizedEntity) . '_table';
+        if ($this->option('all') || $this->option('migration')) {
 
-        $this->callSilent('make:migration', [
-            'name' => $migration,
-            '--create' => strtolower($pluralizedEntity),
-        ]);
+            $pluralizedEntity = str_plural($entity);
+            $migration = 'create_' . strtolower($pluralizedEntity) . '_table';
 
-        $this->info('Migration created: ' . $migration . '.php');
+            $this->callSilent('make:migration', [
+                'name' => $migration,
+                '--create' => strtolower($pluralizedEntity),
+            ]);
+
+            $this->info('Migration created: ' . $migration . '.php');
+        }
 
         /** CONTROLLER */
 
-        $controller = $entity . 'Controller';
+        if ($this->option('all') || $this->option('controller')) {
 
-        switch (strtolower($namespace)) {
-            case 'both':
-                $this->callSilent('make:controller', [
-                    'name' => 'Admin/' . $controller,
-                    '--model' => $model,
-                    '--resource' => true,
-                ]);
+            $controller = $entity . 'Controller';
 
-                $this->info('Controller created: ' . 'Admin/' . $controller . '.php');
+            switch (strtolower($namespace)) {
+                case 'both':
+                    $this->callSilent('make:controller', [
+                        'name' => 'Admin/' . $controller,
+                        '--model' => $model,
+                        '--resource' => true,
+                    ]);
 
-                $this->callSilent('make:controller', [
-                    'name' => 'Frontend/' . $controller,
-                    '--model' => $model,
-                    '--resource' => true,
-                ]);
+                    $this->info('Controller created: ' . 'Admin/' . $controller . '.php');
 
-                $this->info('Controller created: ' . 'Frontend/' . $controller . '.php');
+                    $this->callSilent('make:controller', [
+                        'name' => 'Frontend/' . $controller,
+                        '--model' => $model,
+                        '--resource' => true,
+                    ]);
 
-                break;
+                    $this->info('Controller created: ' . 'Frontend/' . $controller . '.php');
 
-            case 'none':
-                $this->callSilent('make:controller', [
-                    'name' => $controller,
-                    '--model' => $model,
-                    '--resource' => true,
-                ]);
+                    break;
 
-                $this->info('Controller created: ' . $controller . '.php');
+                case 'none':
+                    $this->callSilent('make:controller', [
+                        'name' => $controller,
+                        '--model' => $model,
+                        '--resource' => true,
+                    ]);
 
-                break;
+                    $this->info('Controller created: ' . $controller . '.php');
 
-            default:
-                $this->callSilent('make:controller', [
-                    'name' => $namespace . '/' . $controller,
-                    '--model' => $model,
-                    '--resource' => true,
-                ]);
+                    break;
 
-                $this->info('Controller created: ' . $namespace . '/' . $controller . '.php');
+                default:
+                    $this->callSilent('make:controller', [
+                        'name' => $namespace . '/' . $controller,
+                        '--model' => $model,
+                        '--resource' => true,
+                    ]);
 
-                break;
+                    $this->info('Controller created: ' . $namespace . '/' . $controller . '.php');
+
+                    break;
+            }
         }
 
         /** REQUEST */
 
-        $requestStore  = $entity . 'Store';
-        $requestUpdate = $entity . 'Update';
+        if ($this->option('all') || $this->option('request')) {
 
-        switch (strtolower($namespace)) {
-            case 'both':
-                $this->callSilent('make:request', ['name' => 'Admin/' . $requestStore]);
-                $this->info('Request created: ' . 'Admin/' . $requestStore . '.php');
+            $requestStore  = $entity . 'Store';
+            $requestUpdate = $entity . 'Update';
 
-                $this->callSilent('make:request', ['name' => 'Admin/' . $requestUpdate]);
-                $this->info('Request created: ' . 'Admin/' . $requestUpdate . '.php');
+            switch (strtolower($namespace)) {
+                case 'both':
+                    $this->callSilent('make:request', ['name' => 'Admin/' . $requestStore]);
+                    $this->info('Request created: ' . 'Admin/' . $requestStore . '.php');
 
-                $this->callSilent('make:request', ['name' => 'Frontend/' . $requestStore]);
-                $this->info('Request created: ' . 'Frontend/' . $requestStore . '.php');
+                    $this->callSilent('make:request', ['name' => 'Admin/' . $requestUpdate]);
+                    $this->info('Request created: ' . 'Admin/' . $requestUpdate . '.php');
 
-                $this->callSilent('make:request', ['name' => 'Frontend/' . $requestUpdate]);
-                $this->info('Request created: ' . 'Frontend/' . $requestUpdate . '.php');
+                    $this->callSilent('make:request', ['name' => 'Frontend/' . $requestStore]);
+                    $this->info('Request created: ' . 'Frontend/' . $requestStore . '.php');
 
-                break;
+                    $this->callSilent('make:request', ['name' => 'Frontend/' . $requestUpdate]);
+                    $this->info('Request created: ' . 'Frontend/' . $requestUpdate . '.php');
 
-            case 'none':
-                $this->callSilent('make:request', ['name' => $requestStore]);
-                $this->info('Request created: ' . $requestStore . '.php');
+                    break;
 
-                $this->callSilent('make:request', ['name' => $requestUpdate]);
-                $this->info('Request created: ' . $requestUpdate . '.php');
+                case 'none':
+                    $this->callSilent('make:request', ['name' => $requestStore]);
+                    $this->info('Request created: ' . $requestStore . '.php');
 
-                break;
+                    $this->callSilent('make:request', ['name' => $requestUpdate]);
+                    $this->info('Request created: ' . $requestUpdate . '.php');
 
-            default:
-                $this->callSilent('make:request', ['name' => $namespace . '/' . $requestStore]);
-                $this->info('Request created: ' . $namespace . '/' . $requestStore . '.php');
+                    break;
 
-                $this->callSilent('make:request', ['name' => $namespace . '/' . $requestUpdate]);
-                $this->info('Request created: ' . $namespace . '/' . $requestUpdate . '.php');
+                default:
+                    $this->callSilent('make:request', ['name' => $namespace . '/' . $requestStore]);
+                    $this->info('Request created: ' . $namespace . '/' . $requestStore . '.php');
 
-                break;
+                    $this->callSilent('make:request', ['name' => $namespace . '/' . $requestUpdate]);
+                    $this->info('Request created: ' . $namespace . '/' . $requestUpdate . '.php');
+
+                    break;
+            }
         }
 
         /** FACTORY */
 
-        $factory = $entity . 'Factory';
+        if ($this->option('all') || $this->option('factory')) {
 
-        $this->callSilent('make:factory', [
-            'name' => $factory,
-            '--model' => $model,
-        ]);
+            $factory = $entity . 'Factory';
 
-        $this->info('Factory created: ' . 'factories/' . $factory . '.php');
+            $this->callSilent('make:factory', [
+                'name' => $factory,
+                '--model' => $model,
+            ]);
 
-        /** SEEDER: Table Seeder */
+            $this->info('Factory created: ' . 'factories/' . $factory . '.php');
 
-        $seederTable = ($pluralizedEntity) . 'TableSeeder';
+            /** SEEDER: Table Seeder */
 
-        $this->callSilent('make:seeder', ['name' => $seederTable]);
+            $seederTable = ($pluralizedEntity) . 'TableSeeder';
 
-        $this->info('Table Seeder created: ' . 'seeds/' . $seederTable . '.php');
+            $this->callSilent('make:seeder', ['name' => $seederTable]);
 
-        /** SEEDER: Example Seeder */
+            $this->info('Table Seeder created: ' . 'seeds/' . $seederTable . '.php');
 
-        $seederExample = ($pluralizedEntity);
+            /** SEEDER: Example Seeder */
 
-        $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
+            $seederExample = ($pluralizedEntity);
 
-        $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
+            $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
+
+            $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
+        }
     }
 }
