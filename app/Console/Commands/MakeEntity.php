@@ -101,14 +101,9 @@ class MakeEntity extends Command
     {
         if ($this->option('model')) {
 
+            $this->compileModelStub();
+
             $this->model = 'Models/' . $this->entity;
-
-            $this->callSilent('make:model', ['name' => $this->model]);
-
-            $path = base_path() . '/app/Models/' . $this->entity . '.php';
-            $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
-            $stub = str_replace('{{class}}', $this->entity, $stub);
-            $this->files->put($path, $stub);
 
             $data['artefact'] = 'Model';
             $data['location'] = $this->model . '.php';
@@ -118,6 +113,18 @@ class MakeEntity extends Command
 
             array_push($this->additionalSteps, 'Replace model base class');
         }
+    }
+
+    protected function compileModelStub()
+    {
+        $path = base_path() . '/app/Models/' . $this->entity . '.php';
+
+        $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
+        $stub = str_replace('{{class}}', $this->entity, $stub);
+
+        $this->files->put($path, $stub);
+
+        return $this;
     }
 
     /**
