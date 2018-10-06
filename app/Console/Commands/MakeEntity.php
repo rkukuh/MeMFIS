@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-// use Illuminate\Console\Command;
-use Illuminate\Console\GeneratorCommand;
+use Illuminate\Console\Command;
 
-class MakeEntity extends GeneratorCommand
+class MakeEntity extends Command
 {
     protected $model;
     protected $entity;
