@@ -102,6 +102,8 @@ class MakeEntity extends Command
 
             $this->callSilent('make:model', ['name' => $this->model]);
 
+            $this->files->put($path, $this->compileMigrationStub());
+
             $data['artefact'] = 'Model';
             $data['location'] = $this->model . '.php';
             array_push($this->tableContents, $data);
@@ -482,5 +484,34 @@ class MakeEntity extends Command
     protected function getStub()
     {
         return __DIR__ . '/stubs/model.stub';
+    }
+
+    /**
+     * Replace the class name in the stub.
+     *
+     * @param  string $stub
+     * @return $this
+     */
+    protected function replaceClassName(&$stub)
+    {
+        $className = ucwords(camel_case($this->argument('name')));
+
+        $stub = str_replace('{{class}}', $className, $stub);
+
+        return $this;
+    }
+
+    /**
+     * Compile the migration stub.
+     *
+     * @return string
+     */
+    protected function compileMigrationStub()
+    {
+        $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
+
+        $this->replaceClassName($stub);
+
+        return $stub;
     }
 }
