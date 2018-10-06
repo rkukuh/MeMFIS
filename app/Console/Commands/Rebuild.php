@@ -19,7 +19,7 @@ class Rebuild extends Command
      *
      * @var string
      */
-    protected $description = 'Fresh migration, Seeding data, Clearing cache, config, and log files';
+    protected $description = 'Rebuilding the app from scratch';
 
     /**
      * Create a new command instance.
@@ -73,9 +73,9 @@ class Rebuild extends Command
         $this->info('[DONE ] Flush the application cache.');
         $this->line('');
 
-        $this->info('[START] Clear configuration file..........');
+        $this->info('[START] Remove the configuration cache file..........');
         $this->callSilent('config:clear');
-        $this->info('[DONE ] Clear configuration file.');
+        $this->info('[DONE ] Remove the configuration cache file.');
         $this->line('');
 
         $this->info('[START] Remove the route cache file..........');
