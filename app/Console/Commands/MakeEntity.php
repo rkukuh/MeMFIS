@@ -213,6 +213,8 @@ class MakeEntity extends Command
                 'name' => $policy,
                 '--model' => $model,
             ]);
+
+            $this->info('Policy created: ' . 'Policies/' . $policy . '.php');
         }
 
         /** TEST (Feature and Unit tests) */
@@ -223,10 +225,14 @@ class MakeEntity extends Command
 
             $this->callSilent('make:test', ['name' => $test]);
 
+            $this->info('Feature Test created: ' . 'tests/Feature/' . $test . '.php');
+
             $this->callSilent('make:test', [
                 'name' => $test,
                 '--unit' => true,
             ]);
+
+            $this->info('Unit Test created: ' . 'tests/Unit/' . $test . '.php');
         }
 
         $this->comment('[DONE ] Creating new entity.');
