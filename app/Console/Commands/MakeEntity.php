@@ -49,6 +49,8 @@ class MakeEntity extends Command
      */
     public function handle()
     {
+        $this->comment('[START] Creating new entity.....');
+
         $entity = $this->argument('entity');
         $namespace = $this->option('namespace');
 
@@ -201,13 +203,15 @@ class MakeEntity extends Command
             $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
         }
 
+        $this->comment('[DONE ] Creating new entity.....');
+        $this->info('');
+
         /** TODO */
 
-        $this->info('');
         $this->comment('ATTENTION: You may have to proceed these additional steps:');
-        $this->info('- Use generated Requests for the generated Controller');
         $this->info('- Register the Policy');
         $this->info('- Fix the Example Seeder class name');
+        $this->info('- Use generated Requests for the generated Controller');
         $this->info('');
     }
 }
