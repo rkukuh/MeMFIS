@@ -6,13 +6,12 @@ use Illuminate\Console\Command;
 
 class MakeEntity extends Command
 {
-    private $model;
-    private $entity;
-    private $namespace;
-    private $additionalSteps = [];
-
-    private $tableContents = [];
-    private $tableHeaders  = ['Artefact', 'Location'];
+    protected $model;
+    protected $entity;
+    protected $namespace;
+    protected $additionalSteps  = [];
+    protected $tableContents    = [];
+    protected $tableHeaders     = ['Artefact', 'Location'];
 
     /**
      * The name and signature of the console command.
@@ -65,9 +64,46 @@ class MakeEntity extends Command
         $this->namespace  = $this->option('namespace');
 
         $this->makeModel();
+        $this->makeMigration();
+        $this->makeController();
+        $this->makeRequest();
+        $this->makeFactory();
+        $this->makePolicy();
+        $this->makeSeeder();
+        $this->makeTest();
 
-        /** MIGRATION */
+        $this->printReport();
+        $this->printAdditionalSteps();
+    }
 
+    /**
+     * Run make:model command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makeModel()
+    {
+        if ($this->option('all') || $this->option('model')) {
+
+            $this->model = 'Models/' . $this->entity;
+
+            $this->callSilent('make:model', ['name' => $this->model]);
+
+            $data['artefact'] = 'Model';
+            $data['location'] = $this->model . '.php';
+            array_push($this->tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
+        }
+    }
+
+    /**
+     * Run make:migration command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makeMigration()
+    {
         if ($this->option('all') || $this->option('migration')) {
 
             $pluralizedEntity = str_plural($this->entity);
@@ -84,9 +120,15 @@ class MakeEntity extends Command
 
             $this->info($data['artefact'] . ' created.');
         }
+    }
 
-        /** CONTROLLER */
-
+    /**
+     * Run make:controller command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makeController()
+    {
         if ($this->option('all') || $this->option('controller')) {
 
             $controller = $this->entity . 'Controller';
@@ -146,9 +188,15 @@ class MakeEntity extends Command
 
             $this->info($data['artefact'] . ' created.');
         }
+    }
 
-        /** REQUEST */
-
+    /**
+     * Run make:request command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makeRequest()
+    {
         if ($this->option('all') || $this->option('request')) {
 
             $requestStore  = $this->entity . 'Store';
@@ -215,9 +263,15 @@ class MakeEntity extends Command
 
             $this->info($data['artefact'] . ' created.');
         }
+    }
 
-        /** FACTORY */
-
+    /**
+     * Run make:factory command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makeFactory()
+    {
         if ($this->option('all') || $this->option('factory')) {
 
             $factory = $this->entity . 'Factory';
@@ -233,9 +287,15 @@ class MakeEntity extends Command
 
             $this->info($data['artefact'] . ' created.');
         }
+    }
 
-        /** POLICY */
-
+    /**
+     * Run make:policy command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makePolicy()
+    {
         if ($this->option('all') || $this->option('policy')) {
 
             $policy = $this->entity . 'Policy';
@@ -253,10 +313,18 @@ class MakeEntity extends Command
 
             array_push($this->additionalSteps, 'Register the Policy');
         }
+    }
 
-        /** SEEDER: Table Seeder */
+    /**
+     * Run make:seed command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makeSeeder()
+    {
+        /** Table seeder */
 
-        if ($this->option('all') || $this->option('factory')) {
+        if ($this->option('all') || $this->option('seeder')) {
 
             $seederTable = ($pluralizedEntity) . 'TableSeeder';
 
@@ -267,25 +335,36 @@ class MakeEntity extends Command
             array_push($this->tableContents, $data);
 
             $this->info($data['artefact'] . ' created.');
-
-            /** SEEDER: Example Seeder */
-
-            $seederExample = ($pluralizedEntity);
-
-            $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
-
-            $data['artefact'] = 'Seeder: Example Data';
-            $data['location'] = 'seeds/examples/' . $seederExample . '.php';
-            array_push($this->tableContents, $data);
-
-            $this->info($data['artefact'] . ' created.');
-
-            array_push($this->additionalSteps, 'Fix the Example Seeder class name');
         }
 
-        /** TEST (Feature and Unit tests) */
+        /** Example data seeder */
 
+        if ($this->option('all') || $this->option('example')) {
+
+             $seederExample = ($pluralizedEntity);
+
+             $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
+
+             $data['artefact'] = 'Seeder: Example Data';
+             $data['location'] = 'seeds/examples/' . $seederExample . '.php';
+             array_push($this->tableContents, $data);
+
+             $this->info($data['artefact'] . ' created.');
+
+             array_push($this->additionalSteps, 'Fix the Example Seeder class name');
+        }
+    }
+
+    /**
+     * Run make:test command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makeTest()
+    {
         if ($this->option('all') || $this->option('test')) {
+
+            /** Feature test */
 
             $test = $this->entity . 'Test';
 
@@ -296,6 +375,8 @@ class MakeEntity extends Command
             array_push($this->tableContents, $data);
 
             $this->info($data['artefact'] . ' created.');
+
+            /** Unit test */
 
             $this->callSilent('make:test', [
                 'name' => $test,
@@ -308,7 +389,15 @@ class MakeEntity extends Command
 
             $this->info($data['artefact'] . ' created.');
         }
+    }
 
+    /**
+     * Print the whole command result / report
+     *
+     * @return void
+     */
+    protected function printReport()
+    {
         if ($this->option('all') ||
            ($this->option('controller') && $this->option('request'))) {
 
@@ -337,9 +426,15 @@ class MakeEntity extends Command
             $this->table($this->tableHeaders, $this->tableContents);
             $this->line('');
         }
+    }
 
-        /** TODO */
-
+    /**
+     * Print additional steps, if any
+     *
+     * @return void
+     */
+    protected function printAdditionalSteps()
+    {
         if ($this->additionalSteps) {
 
             $this->comment('ATTENTION: You may have to proceed these additional steps:');
@@ -349,22 +444,6 @@ class MakeEntity extends Command
             }
 
             $this->line('');
-        }
-    }
-
-    protected function makeModel()
-    {
-        if ($this->option('all') || $this->option('model')) {
-
-            $this->model = 'Models/' . $this->entity;
-
-            $this->callSilent('make:model', ['name' => $this->model]);
-
-            $data['artefact'] = 'Model';
-            $data['location'] = $this->model . '.php';
-            array_push($this->tableContents, $data);
-
-            $this->info($data['artefact'] . ' created.');
         }
     }
 
