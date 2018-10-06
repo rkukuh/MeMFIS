@@ -14,7 +14,6 @@ class MakeEntity extends Command
     protected $tableContents    = [];
     protected $tableHeaders     = ['Artefact', 'Location'];
 
-
     /**
      * The name and signature of the console command.
      *
