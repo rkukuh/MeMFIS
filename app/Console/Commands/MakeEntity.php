@@ -103,7 +103,7 @@ class MakeEntity extends Command
 
             $this->model = 'Models/' . $this->entity;
 
-            $this->callSilent('make:model', ['name' => $this->model]);
+            // $this->callSilent('make:model', ['name' => $this->model]);
 
             $path = $this->getPath($this->entity);
 
