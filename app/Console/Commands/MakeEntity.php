@@ -328,6 +328,10 @@ class MakeEntity extends Command
 
             array_push($additionalSteps, 'Use generated Requests for the Controller');
         }
+        else if ($this->option('controller')) {
+
+            array_push($additionalSteps, 'Define a route for the generated Controller');
+        }
 
         if (in_array(true, $this->options(), true) === false) {
 
