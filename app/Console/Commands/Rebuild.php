@@ -117,6 +117,7 @@ class Rebuild extends Command
     protected function copyright()
     {
         $this->info('');
-        $this->question('"Rebuild" artisan command v1.0 by @rkukuh');
+        $this->line('"Rebuild" artisan command');
+        $this->line('version 1.0 by @rkukuh');
     }
 }
