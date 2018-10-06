@@ -107,6 +107,8 @@ class MakeEntity extends Command
             array_push($this->tableContents, $data);
 
             $this->info($data['artefact'] . ' created.');
+
+            array_push($this->additionalSteps, 'Replace model base class');
         }
     }
 
