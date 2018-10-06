@@ -1,10 +1,10 @@
 <?php
 
-namespace DummyNamespace;
+namespace App\Models;
 
 use App\MemfisModel;
 
-class DummyClass extends MemfisModel
+class {{class}} extends MemfisModel
 {
     //
 }
