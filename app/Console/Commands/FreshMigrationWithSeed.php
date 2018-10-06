@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Composer;
 
 class FreshMigrationWithSeed extends Command
 {
@@ -21,15 +22,16 @@ class FreshMigrationWithSeed extends Command
     protected $description = 'Fresh migration and Seeding data';
 
     /**
-     * Create a new command instance.
+     * Create a new migration install command instance.
      *
+     * @param  \Illuminate\Support\Composer  $composer
      * @return void
      */
-    public function __construct()
+    public function __construct(Composer $composer)
     {
         parent::__construct();
 
-        $this->composer = app()['composer'];
+        $this->composer = $composer;
     }
 
     /**
