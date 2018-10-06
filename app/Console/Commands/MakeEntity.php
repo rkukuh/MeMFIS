@@ -429,14 +429,15 @@ class MakeEntity extends Command
 
             $this->error('No files has been created. You may missed an option or two');
         }
-        else {
+
+        $this->comment('[DONE ] Creating new entity.');
+        $this->line('');
+
+        if (in_array(true, $this->options(), true) === true) {
 
             $this->table($this->tableHeaders, $this->tableContents);
             $this->line('');
         }
-
-        $this->comment('[DONE ] Creating new entity.');
-        $this->line('');
     }
 
     /**
