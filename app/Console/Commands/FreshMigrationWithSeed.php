@@ -28,6 +28,8 @@ class FreshMigrationWithSeed extends Command
     public function __construct()
     {
         parent::__construct();
+
+        $this->composer = app()['composer'];
     }
 
     /**
@@ -44,6 +46,8 @@ class FreshMigrationWithSeed extends Command
             $this->callSilent('migrate:fresh', ['--force' => true]);
 
             $this->info('[DONE ] Rebuild database schema.');
+
+            $this->composer->dumpAutoloads();
 
             if ($this->confirm('Install initial data?')) {
 
