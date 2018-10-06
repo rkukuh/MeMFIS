@@ -11,17 +11,18 @@ class MakeEntity extends Command
      *
      * @var string
      */
-    protected $signature = 'memfis:make-entity
+    protected $signature = 'make:entity
                             {entity : Name of the Entity, eg: Post, Product, Employee}
                             {--namespace=Both : eg: Frontend | Admin | Both | None | [your-choice]}
+                            {--a|all : Generate an entity\'s along with its following artefacts below:}
                             {--M|model : Generate an entity\'s Model}
                             {--m|migration : Generate an entity\'s Migration}
                             {--c|controller : Generate an entity\'s Controller}
                             {--r|request : Generate an entity\'s Request}
                             {--f|factory : Generate an entity\'s Factory}
+                            {--p|policy : Generate an entity\'s Policy}
                             {--s|seeder : Generate an entity\'s Table Seeder}
                             {--e|example : Generate an entity\'s Example Seeder}
-                            {--p|policy : Generate an entity\'s Policy}
                             {--t|test : Generate an entity\'s Unit and Feature Test} ';
 
     /**
@@ -29,7 +30,7 @@ class MakeEntity extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new Entity (Model, Migration, Controller, Requests, Factory, Seeder, Policy, Tests)';
+    protected $description = 'Create a new Entity (Model, Migration, Controller, Requests, Factory, Policy, Seeder, Tests)';
 
     /**
      * Create a new command instance.
@@ -48,141 +49,323 @@ class MakeEntity extends Command
      */
     public function handle()
     {
-        $entity = $this->argument('entity');
-        $namespace = $this->option('namespace');
+        $this->copyright();
+
+        $this->comment('[START] Creating new entity.....');
+
+        $entity     = $this->argument('entity');
+        $namespace  = $this->option('namespace');
+
+        $tableHeaders   = ['Artefact', 'Location'];
+        $tableContents  = [];
+
+        $additionalSteps = [];
 
         /** MODEL */
 
-        $model = 'Models/' . $entity;
+        if ($this->option('all') || $this->option('model')) {
 
-        $this->callSilent('make:model', ['name' => $model]);
+            $model = 'Models/' . $entity;
 
-        $this->info('Model created: ' . $model . '.php');
+            $this->callSilent('make:model', ['name' => $model]);
+
+            $data['artefact'] = 'Model';
+            $data['location'] = $model . '.php';
+            array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
+        }
 
         /** MIGRATION */
 
-        $pluralizedEntity = str_plural($entity);
-        $migration = 'create_' . strtolower($pluralizedEntity) . '_table';
+        if ($this->option('all') || $this->option('migration')) {
 
-        $this->callSilent('make:migration', [
-            'name' => $migration,
-            '--create' => strtolower($pluralizedEntity),
-        ]);
+            $pluralizedEntity = str_plural($entity);
+            $migration = 'create_' . strtolower($pluralizedEntity) . '_table';
 
-        $this->info('Migration created: ' . $migration . '.php');
+            $this->callSilent('make:migration', [
+                'name' => $migration . '.php',
+                '--create' => strtolower($pluralizedEntity),
+            ]);
+
+            $data['artefact'] = 'Migration';
+            $data['location'] = $migration;
+            array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
+        }
 
         /** CONTROLLER */
 
-        $controller = $entity . 'Controller';
+        if ($this->option('all') || $this->option('controller')) {
 
-        switch (strtolower($namespace)) {
-            case 'both':
-                $this->callSilent('make:controller', [
-                    'name' => 'Admin/' . $controller,
-                    '--model' => $model,
-                    '--resource' => true,
-                ]);
+            $controller = $entity . 'Controller';
 
-                $this->info('Controller created: ' . 'Admin/' . $controller . '.php');
+            switch (strtolower($namespace)) {
+                case 'both':
+                    $this->callSilent('make:controller', [
+                        'name' => 'Admin/' . $controller,
+                        '--model' => $model,
+                        '--resource' => true,
+                    ]);
 
-                $this->callSilent('make:controller', [
-                    'name' => 'Frontend/' . $controller,
-                    '--model' => $model,
-                    '--resource' => true,
-                ]);
+                    $data['artefact'] = 'Controller';
+                    $data['location'] = 'Admin/' . $controller . '.php';
+                    array_push($tableContents, $data);
 
-                $this->info('Controller created: ' . 'Frontend/' . $controller . '.php');
+                    $this->callSilent('make:controller', [
+                        'name' => 'Frontend/' . $controller,
+                        '--model' => $model,
+                        '--resource' => true,
+                    ]);
 
-                break;
+                    $data['artefact'] = 'Controller';
+                    $data['location'] = 'Frontend/' . $controller . '.php';
+                    array_push($tableContents, $data);
 
-            case 'none':
-                $this->callSilent('make:controller', [
-                    'name' => $controller,
-                    '--model' => $model,
-                    '--resource' => true,
-                ]);
+                    break;
 
-                $this->info('Controller created: ' . $controller . '.php');
+                case 'none':
+                    $this->callSilent('make:controller', [
+                        'name' => $controller,
+                        '--model' => $model,
+                        '--resource' => true,
+                    ]);
 
-                break;
+                    $this->info('Controller created: ' . $controller . '.php');
 
-            default:
-                $this->callSilent('make:controller', [
-                    'name' => $namespace . '/' . $controller,
-                    '--model' => $model,
-                    '--resource' => true,
-                ]);
+                    $data['artefact'] = 'Controller';
+                    $data['location'] = $controller . '.php';
+                    array_push($tableContents, $data);
 
-                $this->info('Controller created: ' . $namespace . '/' . $controller . '.php');
+                    break;
 
-                break;
+                default:
+                    $this->callSilent('make:controller', [
+                        'name' => $namespace . '/' . $controller,
+                        '--model' => $model,
+                        '--resource' => true,
+                    ]);
+
+                    $data['artefact'] = 'Controller';
+                    $data['location'] = $namespace . '/' . $controller . '.php';
+                    array_push($tableContents, $data);
+
+                    break;
+            }
+
+            $this->info($data['artefact'] . ' created.');
         }
 
         /** REQUEST */
 
-        $requestStore  = $entity . 'Store';
-        $requestUpdate = $entity . 'Update';
+        if ($this->option('all') || $this->option('request')) {
 
-        switch (strtolower($namespace)) {
-            case 'both':
-                $this->callSilent('make:request', ['name' => 'Admin/' . $requestStore]);
-                $this->info('Request created: ' . 'Admin/' . $requestStore . '.php');
+            $requestStore  = $entity . 'Store';
+            $requestUpdate = $entity . 'Update';
 
-                $this->callSilent('make:request', ['name' => 'Admin/' . $requestUpdate]);
-                $this->info('Request created: ' . 'Admin/' . $requestUpdate . '.php');
+            switch (strtolower($namespace)) {
+                case 'both':
+                    $this->callSilent('make:request', ['name' => 'Admin/' . $requestStore]);
 
-                $this->callSilent('make:request', ['name' => 'Frontend/' . $requestStore]);
-                $this->info('Request created: ' . 'Frontend/' . $requestStore . '.php');
+                    $data['artefact'] = 'Form Request';
+                    $data['location'] = 'Admin/' . $requestStore . '.php';
+                    array_push($tableContents, $data);
 
-                $this->callSilent('make:request', ['name' => 'Frontend/' . $requestUpdate]);
-                $this->info('Request created: ' . 'Frontend/' . $requestUpdate . '.php');
+                    $this->callSilent('make:request', ['name' => 'Admin/' . $requestUpdate]);
 
-                break;
+                    $data['artefact'] = 'Form Request';
+                    $data['location'] = 'Admin/' . $requestUpdate . '.php';
+                    array_push($tableContents, $data);
 
-            case 'none':
-                $this->callSilent('make:request', ['name' => $requestStore]);
-                $this->info('Request created: ' . $requestStore . '.php');
+                    $this->callSilent('make:request', ['name' => 'Frontend/' . $requestStore]);
 
-                $this->callSilent('make:request', ['name' => $requestUpdate]);
-                $this->info('Request created: ' . $requestUpdate . '.php');
+                    $data['artefact'] = 'Form Request';
+                    $data['location'] = 'Frontend/' . $requestStore . '.php';
+                    array_push($tableContents, $data);
 
-                break;
+                    $this->callSilent('make:request', ['name' => 'Frontend/' . $requestUpdate]);
 
-            default:
-                $this->callSilent('make:request', ['name' => $namespace . '/' . $requestStore]);
-                $this->info('Request created: ' . $namespace . '/' . $requestStore . '.php');
+                    $data['artefact'] = 'Form Request';
+                    $data['location'] = 'Frontend/' . $requestUpdate . '.php';
+                    array_push($tableContents, $data);
 
-                $this->callSilent('make:request', ['name' => $namespace . '/' . $requestUpdate]);
-                $this->info('Request created: ' . $namespace . '/' . $requestUpdate . '.php');
+                    break;
 
-                break;
+                case 'none':
+                    $this->callSilent('make:request', ['name' => $requestStore]);
+
+                    $data['artefact'] = 'Form Request';
+                    $data['location'] = $requestStore . '.php';
+                    array_push($tableContents, $data);
+
+                    $this->callSilent('make:request', ['name' => $requestUpdate]);
+
+                    $data['artefact'] = 'Form Request';
+                    $data['location'] = $requestUpdate . '.php';
+                    array_push($tableContents, $data);
+
+                    break;
+
+                default:
+                    $this->callSilent('make:request', ['name' => $namespace . '/' . $requestStore]);
+
+                    $data['artefact'] = 'Form Request';
+                    $data['location'] = $namespace . '/' . $requestStore . '.php';
+                    array_push($tableContents, $data);
+
+                    $this->callSilent('make:request', ['name' => $namespace . '/' . $requestUpdate]);
+
+                    $data['artefact'] = 'Form Request';
+                    $data['location'] = $namespace . '/' . $requestUpdate . '.php';
+                    array_push($tableContents, $data);
+
+                    break;
+            }
+
+            $this->info($data['artefact'] . ' created.');
         }
 
         /** FACTORY */
 
-        $factory = $entity . 'Factory';
+        if ($this->option('all') || $this->option('factory')) {
 
-        $this->callSilent('make:factory', [
-            'name' => $factory,
-            '--model' => $model,
-        ]);
+            $factory = $entity . 'Factory';
 
-        $this->info('Factory created: ' . 'factories/' . $factory . '.php');
+            $this->callSilent('make:factory', [
+                'name' => $factory,
+                '--model' => $model,
+            ]);
+
+            $data['artefact'] = 'Model Factory';
+            $data['location'] = $factory . '.php';
+            array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
+        }
+
+        /** POLICY */
+
+        if ($this->option('all') || $this->option('policy')) {
+
+            $policy = $entity . 'Policy';
+
+            $this->callSilent('make:policy', [
+                'name' => $policy,
+                '--model' => $model,
+            ]);
+
+            $data['artefact'] = 'Policy';
+            $data['location'] = $policy . '.php';
+            array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
+
+            array_push($additionalSteps, 'Register the Policy');
+        }
 
         /** SEEDER: Table Seeder */
 
-        $seederTable = ($pluralizedEntity) . 'TableSeeder';
+        if ($this->option('all') || $this->option('factory')) {
 
-        $this->callSilent('make:seeder', ['name' => $seederTable]);
+            $seederTable = ($pluralizedEntity) . 'TableSeeder';
 
-        $this->info('Table Seeder created: ' . 'seeds/' . $seederTable . '.php');
+            $this->callSilent('make:seeder', ['name' => $seederTable]);
 
-        /** SEEDER: Example Seeder */
+            $data['artefact'] = 'Seeder: Table';
+            $data['location'] = 'seeds/' . $seederTable . '.php';
+            array_push($tableContents, $data);
 
-        $seederExample = ($pluralizedEntity);
+            $this->info($data['artefact'] . ' created.');
 
-        $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
+            /** SEEDER: Example Seeder */
 
-        $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
+            $seederExample = ($pluralizedEntity);
+
+            $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
+
+            $data['artefact'] = 'Seeder: Example Data';
+            $data['location'] = 'seeds/examples/' . $seederExample . '.php';
+            array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
+
+            array_push($additionalSteps, 'Fix the Example Seeder class name');
+        }
+
+        /** TEST (Feature and Unit tests) */
+
+        if ($this->option('all') || $this->option('test')) {
+
+            $test = $entity . 'Test';
+
+            $this->callSilent('make:test', ['name' => $test]);
+
+            $data['artefact'] = 'Test: Feature';
+            $data['location'] = 'tests/Feature/' . $test . '.php';
+            array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
+
+            $this->callSilent('make:test', [
+                'name' => $test,
+                '--unit' => true,
+            ]);
+
+            $data['artefact'] = 'Test: Unit';
+            $data['location'] = 'tests/Unit/' . $test . '.php';
+            array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
+        }
+
+        if ($this->option('all') ||
+           ($this->option('controller') && $this->option('request'))) {
+
+            array_push($additionalSteps, 'Use generated Requests for the generated Controller');
+        }
+        else if ($this->option('request')) {
+
+            array_push($additionalSteps, 'Use generated Requests for the Controller');
+        }
+
+        if (in_array(true, $this->options(), true) === false) {
+
+            $this->error('No files has been created. You may missed an option or two');
+        }
+
+        $this->comment('[DONE ] Creating new entity.');
+        $this->info('');
+
+        if (in_array(true, $this->options(), true) === true) {
+
+            $this->table($tableHeaders, $tableContents);
+            $this->info('');
+        }
+
+        /** TODO */
+
+        if ($additionalSteps) {
+
+            $this->comment('ATTENTION: You may have to proceed these additional steps:');
+
+            foreach ($additionalSteps as $key => $step) {
+                $this->info('- ' . $step);
+            }
+
+            $this->info('');
+        }
+    }
+
+    /**
+     * Command's copyright'
+     *
+     * @return mixed
+     */
+    protected function copyright()
+    {
+        $this->info('');
+        $this->question('"Make Entity" artisan command v1.0 by @rkukuh');
+        $this->info('');
     }
 }

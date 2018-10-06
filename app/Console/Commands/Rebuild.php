@@ -38,6 +38,8 @@ class Rebuild extends Command
      */
     public function handle()
     {
+        $this->copyright();
+
         if (App::environment(['prod', 'production'])) {
             if ($this->confirm('You are in PRODUCTION environment. Continue?')) {
                 $this->commandOperations();
@@ -105,5 +107,16 @@ class Rebuild extends Command
         $this->callSilent('storage:link');
         $this->info('[DONE ] Create a symbolic link.');
         $this->info('');
+    }
+
+    /**
+     * Command's copyright'
+     *
+     * @return mixed
+     */
+    protected function copyright()
+    {
+        $this->info('');
+        $this->question('"Rebuild" artisan command v1.0 by @rkukuh');
     }
 }
