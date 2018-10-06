@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Composer;
 
 class FreshMigrationWithSeed extends Command
 {
@@ -21,13 +22,16 @@ class FreshMigrationWithSeed extends Command
     protected $description = 'Fresh migration and Seeding data';
 
     /**
-     * Create a new command instance.
+     * Create a new migration install command instance.
      *
+     * @param  \Illuminate\Support\Composer  $composer
      * @return void
      */
-    public function __construct()
+    public function __construct(Composer $composer)
     {
         parent::__construct();
+
+        $this->composer = $composer;
     }
 
     /**
@@ -44,6 +48,8 @@ class FreshMigrationWithSeed extends Command
             $this->callSilent('migrate:fresh', ['--force' => true]);
 
             $this->info('[DONE ] Rebuild database schema.');
+
+            $this->composer->dumpAutoloads();
 
             if ($this->confirm('Install initial data?')) {
 
@@ -66,7 +72,7 @@ class FreshMigrationWithSeed extends Command
                 $this->info('[DONE ] Install example data.');
             }
 
-            $this->info('');
+            $this->line('');
         }
     }
 }
