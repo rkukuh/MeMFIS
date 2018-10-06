@@ -314,7 +314,7 @@ class MakeEntity extends Command
             $this->error('No files has been created. You may missed an option or two');
         }
 
-        $this->table($headers, $artefacts);
+        $this->table($tableHeaders, $tableContents);
 
         $this->comment('[DONE ] Creating new entity.');
         $this->info('');
