@@ -484,13 +484,14 @@ class MakeEntity extends Command
     }
 
     /**
-     * Get the stub file for the generator.
+     * Get the path to where we should store the migration.
      *
+     * @param  string $name
      * @return string
      */
-    protected function getStub()
+    protected function getPath($name)
     {
-        return __DIR__ . '/stubs/model.stub';
+        return base_path() . '/app/Models/' . $name . '.php';
     }
 
     /**
