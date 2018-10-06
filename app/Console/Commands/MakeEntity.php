@@ -335,12 +335,12 @@ class MakeEntity extends Command
         }
 
         $this->comment('[DONE ] Creating new entity.');
-        $this->info('');
+        $this->line('');
 
         if (in_array(true, $this->options(), true) === true) {
 
             $this->table($tableHeaders, $tableContents);
-            $this->info('');
+            $this->line('');
         }
 
         /** TODO */
@@ -353,7 +353,7 @@ class MakeEntity extends Command
                 $this->info('- ' . $step);
             }
 
-            $this->info('');
+            $this->line('');
         }
     }
 
@@ -364,9 +364,9 @@ class MakeEntity extends Command
      */
     protected function copyright()
     {
-        $this->info('');
+        $this->line('');
         $this->line('"Make Entity" artisan command');
         $this->line('version 1.0 by @rkukuh');
-        $this->info('');
+        $this->line('');
     }
 }
