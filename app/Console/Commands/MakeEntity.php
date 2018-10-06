@@ -20,9 +20,9 @@ class MakeEntity extends Command
                             {--c|controller : Generate an entity\'s Controller}
                             {--r|request : Generate an entity\'s Request}
                             {--f|factory : Generate an entity\'s Factory}
+                            {--p|policy : Generate an entity\'s Policy}
                             {--s|seeder : Generate an entity\'s Table Seeder}
                             {--e|example : Generate an entity\'s Example Seeder}
-                            {--p|policy : Generate an entity\'s Policy}
                             {--t|test : Generate an entity\'s Unit and Feature Test} ';
 
     /**
@@ -30,7 +30,7 @@ class MakeEntity extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new Entity (Model, Migration, Controller, Requests, Factory, Seeder, Policy, Tests)';
+    protected $description = 'Create a new Entity (Model, Migration, Controller, Requests, Factory, Policy, Seeder, Tests)';
 
     /**
      * Create a new command instance.
@@ -53,6 +53,8 @@ class MakeEntity extends Command
 
         $entity = $this->argument('entity');
         $namespace = $this->option('namespace');
+
+        $additionalSteps = [];
 
         /** MODEL */
 
@@ -185,22 +187,6 @@ class MakeEntity extends Command
             ]);
 
             $this->info('Factory created: ' . 'factories/' . $factory . '.php');
-
-            /** SEEDER: Table Seeder */
-
-            $seederTable = ($pluralizedEntity) . 'TableSeeder';
-
-            $this->callSilent('make:seeder', ['name' => $seederTable]);
-
-            $this->info('Table Seeder created: ' . 'seeds/' . $seederTable . '.php');
-
-            /** SEEDER: Example Seeder */
-
-            $seederExample = ($pluralizedEntity);
-
-            $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
-
-            $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
         }
 
         /** POLICY */
@@ -215,6 +201,29 @@ class MakeEntity extends Command
             ]);
 
             $this->info('Policy created: ' . 'Policies/' . $policy . '.php');
+
+            array_push($additionalSteps, 'Register the Policy');
+        }
+
+        /** SEEDER: Table Seeder */
+
+        if ($this->option('all') || $this->option('factory')) {
+
+            $seederTable = ($pluralizedEntity) . 'TableSeeder';
+
+            $this->callSilent('make:seeder', ['name' => $seederTable]);
+
+            $this->info('Table Seeder created: ' . 'seeds/' . $seederTable . '.php');
+
+            /** SEEDER: Example Seeder */
+
+            $seederExample = ($pluralizedEntity);
+
+            $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
+
+            $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
+
+            array_push($additionalSteps, 'Fix the Example Seeder class name');
         }
 
         /** TEST (Feature and Unit tests) */
@@ -235,15 +244,22 @@ class MakeEntity extends Command
             $this->info('Unit Test created: ' . 'tests/Unit/' . $test . '.php');
         }
 
+        if ($this->option('all') ||
+           ($this->option('controller')) && ($this->option('request'))) {
+            array_push($additionalSteps, 'Use generated Requests for the generated Controller');
+        }
+
         $this->comment('[DONE ] Creating new entity.');
         $this->info('');
 
         /** TODO */
 
         $this->comment('ATTENTION: You may have to proceed these additional steps:');
-        $this->info('- Register the Policy');
-        $this->info('- Fix the Example Seeder class name');
-        $this->info('- Use generated Requests for the generated Controller');
+
+        foreach ($additionalSteps as $key => $step) {
+            $this->info('- ' . $step);
+        }
+
         $this->info('');
     }
 }
