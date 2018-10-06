@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+// use Illuminate\Console\Command;
+use Illuminate\Console\GeneratorCommand;
 
-class MakeEntity extends Command
+class MakeEntity extends GeneratorCommand
 {
     protected $model;
     protected $entity;
@@ -472,5 +473,15 @@ class MakeEntity extends Command
         $this->line('"Make Entity" artisan command');
         $this->line('version 1.0 by @rkukuh');
         $this->line('');
+    }
+
+    /**
+     * Get the stub file for the generator.
+     *
+     * @return string
+     */
+    protected function getStub()
+    {
+        return __DIR__ . '/stubs/model.stub';
     }
 }
