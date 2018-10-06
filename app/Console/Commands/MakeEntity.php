@@ -336,8 +336,8 @@ class MakeEntity extends Command
         if (in_array(true, $this->options(), true) === true) {
 
             $this->table($tableHeaders, $tableContents);
+            $this->info('');
         }
-        $this->info('');
 
         /** TODO */
 
