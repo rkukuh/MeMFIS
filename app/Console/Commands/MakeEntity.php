@@ -286,9 +286,7 @@ class MakeEntity extends Command
     protected function copyright()
     {
         $this->info('');
-        $this->question('Make Entity artisan command is:');
-        $this->question('- created by: @rkukuh');
-        $this->question('- version: 1.0');
+        $this->question('"Make Entity" artisan command v1.0 by @rkukuh');
         $this->info('');
     }
 }
