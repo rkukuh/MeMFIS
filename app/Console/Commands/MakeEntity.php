@@ -245,8 +245,13 @@ class MakeEntity extends Command
         }
 
         if ($this->option('all') ||
-           ($this->option('controller')) && ($this->option('request'))) {
+           ($this->option('controller') && $this->option('request'))) {
+
             array_push($additionalSteps, 'Use generated Requests for the generated Controller');
+        }
+        else if ($this->option('request')) {
+
+            array_push($additionalSteps, 'Use generated Requests for the Controller');
         }
 
         $this->comment('[DONE ] Creating new entity.');
