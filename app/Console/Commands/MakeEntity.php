@@ -105,7 +105,11 @@ class MakeEntity extends Command
 
             $this->callSilent('make:model', ['name' => $this->model]);
 
-            $this->files->put($path, $this->compileMigrationStub());
+            if ($this->files->exists($path = $this->getPath($name))) {
+                return $this->error('Model already exists!');
+            }
+
+            $this->files->put($path, $this->compileModelStub());
 
             $data['artefact'] = 'Model';
             $data['location'] = $this->model . '.php';
@@ -509,7 +513,7 @@ class MakeEntity extends Command
      *
      * @return string
      */
-    protected function compileMigrationStub()
+    protected function compileModelStub()
     {
         $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
 
