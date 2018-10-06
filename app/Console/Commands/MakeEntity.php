@@ -57,6 +57,18 @@ class MakeEntity extends Command
      */
     public function handle()
     {
+        if ($this->option('all')) {
+            $this->input->setOption('model', true);
+            $this->input->setOption('migration', true);
+            $this->input->setOption('controller', true);
+            $this->input->setOption('request', true);
+            $this->input->setOption('factory', true);
+            $this->input->setOption('policy', true);
+            $this->input->setOption('seeder', true);
+            $this->input->setOption('example', true);
+            $this->input->setOption('test', true);
+        }
+
         $this->copyright();
 
         $this->comment('[START] Creating new entity.....');
@@ -84,7 +96,7 @@ class MakeEntity extends Command
      */
     protected function makeModel()
     {
-        if ($this->option('all') || $this->option('model')) {
+        if ($this->option('model')) {
 
             $this->model = 'Models/' . $this->entity;
 
@@ -105,7 +117,7 @@ class MakeEntity extends Command
      */
     protected function makeMigration()
     {
-        if ($this->option('all') || $this->option('migration')) {
+        if ($this->option('migration')) {
 
             $this->pluralizedEntity = str_plural($this->entity);
             $migration = 'create_' . strtolower($this->pluralizedEntity) . '_table';
@@ -130,7 +142,7 @@ class MakeEntity extends Command
      */
     protected function makeController()
     {
-        if ($this->option('all') || $this->option('controller')) {
+        if ($this->option('controller')) {
 
             $controller = $this->entity . 'Controller';
 
@@ -198,7 +210,7 @@ class MakeEntity extends Command
      */
     protected function makeRequest()
     {
-        if ($this->option('all') || $this->option('request')) {
+        if ($this->option('request')) {
 
             $requestStore  = $this->entity . 'Store';
             $requestUpdate = $this->entity . 'Update';
@@ -273,7 +285,7 @@ class MakeEntity extends Command
      */
     protected function makeFactory()
     {
-        if ($this->option('all') || $this->option('factory')) {
+        if ($this->option('factory')) {
 
             $factory = $this->entity . 'Factory';
 
@@ -297,7 +309,7 @@ class MakeEntity extends Command
      */
     protected function makePolicy()
     {
-        if ($this->option('all') || $this->option('policy')) {
+        if ($this->option('policy')) {
 
             $policy = $this->entity . 'Policy';
 
@@ -325,7 +337,7 @@ class MakeEntity extends Command
     {
         /** Table seeder */
 
-        if ($this->option('all') || $this->option('seeder')) {
+        if ($this->option('seeder')) {
 
             $seederTable = ($this->pluralizedEntity) . 'TableSeeder';
 
@@ -340,7 +352,7 @@ class MakeEntity extends Command
 
         /** Example data seeder */
 
-        if ($this->option('all') || $this->option('example')) {
+        if ($this->option('example')) {
 
              $seederExample = ($this->pluralizedEntity);
 
@@ -363,7 +375,7 @@ class MakeEntity extends Command
      */
     protected function makeTest()
     {
-        if ($this->option('all') || $this->option('test')) {
+        if ($this->option('test')) {
 
             /** Feature test */
 
@@ -399,8 +411,7 @@ class MakeEntity extends Command
      */
     protected function printReport()
     {
-        if ($this->option('all') ||
-           ($this->option('controller') && $this->option('request'))) {
+        if ($this->option('controller') && $this->option('request')) {
 
             array_push($this->additionalSteps, 'Define a route for the generated Controller');
             array_push($this->additionalSteps, 'Use generated Requests for the generated Controller');
