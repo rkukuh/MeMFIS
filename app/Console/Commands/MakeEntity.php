@@ -350,7 +350,7 @@ class MakeEntity extends Command
             $this->comment('ATTENTION: You may have to proceed these additional steps:');
 
             foreach ($additionalSteps as $key => $step) {
-                $this->info('- ' . $step);
+                $this->line('- ' . $step);
             }
 
             $this->line('');

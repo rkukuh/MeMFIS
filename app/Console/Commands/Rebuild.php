@@ -66,47 +66,47 @@ class Rebuild extends Command
         $this->info('[START] Flush Spatie\'s Permission cache..........');
         app()['cache']->forget('spatie.permission.cache');
         $this->info('[DONE ] Flush Spatie\'s Permission cache.');
-        $this->info('');
+        $this->line('');
 
         $this->info('[START] Flush the application cache..........');
         $this->callSilent('cache:clear');
         $this->info('[DONE ] Flush the application cache.');
-        $this->info('');
+        $this->line('');
 
         $this->info('[START] Clear configuration file..........');
         $this->callSilent('config:clear');
         $this->info('[DONE ] Clear configuration file.');
-        $this->info('');
+        $this->line('');
 
         $this->info('[START] Remove the route cache file..........');
         $this->callSilent('route:clear');
         $this->info('[DONE ] Remove the route cache file.');
-        $this->info('');
+        $this->line('');
 
         $this->info('[START] Clear all compiled view files..........');
         $this->callSilent('view:clear');
         $this->info('[DONE ] Clear all compiled view files.');
-        $this->info('');
+        $this->line('');
 
         $this->info('[START] Flush expired password reset tokens..........');
         $this->callSilent('auth:clear-resets');
         $this->info('[DONE ] Flush expired password reset tokens.');
-        $this->info('');
+        $this->line('');
 
         $this->info('[START] Clear compiled class files..........');
         $this->callSilent('clear-compiled');
         $this->info('[DONE ] Clear compiled class files.');
-        $this->info('');
+        $this->line('');
 
         $this->info('[START] Rebuild the cached package manifest..........');
         $this->callSilent('package:discover');
         $this->info('[DONE ] Rebuild the cached package manifest.');
-        $this->info('');
+        $this->line('');
 
         $this->info('[START] Create a symbolic link..........');
         $this->callSilent('storage:link');
         $this->info('[DONE ] Create a symbolic link.');
-        $this->info('');
+        $this->line('');
     }
 
     /**
@@ -116,7 +116,7 @@ class Rebuild extends Command
      */
     protected function copyright()
     {
-        $this->info('');
+        $this->line('');
         $this->line('"Rebuild" artisan command');
         $this->line('version 1.0 by @rkukuh');
     }

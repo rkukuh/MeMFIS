@@ -72,7 +72,7 @@ class FreshMigrationWithSeed extends Command
                 $this->info('[DONE ] Install example data.');
             }
 
-            $this->info('');
+            $this->line('');
         }
     }
 }
