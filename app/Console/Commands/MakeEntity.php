@@ -259,12 +259,15 @@ class MakeEntity extends Command
 
         /** TODO */
 
-        $this->comment('ATTENTION: You may have to proceed these additional steps:');
+        if ($additionalSteps) {
 
-        foreach ($additionalSteps as $key => $step) {
-            $this->info('- ' . $step);
+            $this->comment('ATTENTION: You may have to proceed these additional steps:');
+
+            foreach ($additionalSteps as $key => $step) {
+                $this->info('- ' . $step);
+            }
+
+            $this->info('');
         }
-
-        $this->info('');
     }
 }
