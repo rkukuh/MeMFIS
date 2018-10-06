@@ -276,6 +276,8 @@ class MakeEntity extends Command
             $data['location'] = 'seeds/' . $seederTable . '.php';
             array_push($tableContents, $data);
 
+            $this->info($data['artefact'] . ' created.');
+
             /** SEEDER: Example Seeder */
 
             $seederExample = ($pluralizedEntity);
@@ -302,6 +304,8 @@ class MakeEntity extends Command
             $data['artefact'] = 'Test: Feature';
             $data['location'] = 'tests/Feature/' . $test . '.php';
             array_push($tableContents, $data);
+
+            $this->info($data['artefact'] . ' created.');
 
             $this->callSilent('make:test', [
                 'name' => $test,
