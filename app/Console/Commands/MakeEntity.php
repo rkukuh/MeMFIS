@@ -11,9 +11,10 @@ class MakeEntity extends Command
      *
      * @var string
      */
-    protected $signature = 'memfis:make-entity
+    protected $signature = 'make:entity
                             {entity : Name of the Entity, eg: Post, Product, Employee}
                             {--namespace=Both : eg: Frontend | Admin | Both | None | [your-choice]}
+                            {--a|all : Generate an entity\'s along with its following artefacts below:}
                             {--M|model : Generate an entity\'s Model}
                             {--m|migration : Generate an entity\'s Migration}
                             {--c|controller : Generate an entity\'s Controller}
