@@ -203,7 +203,7 @@ class MakeEntity extends Command
             $this->info('Example Seeder created: ' . 'seeds/examples/' . $seederExample . '.php');
         }
 
-        $this->comment('[DONE ] Creating new entity.....');
+        $this->comment('[DONE ] Creating new entity.');
         $this->info('');
 
         /** TODO */
