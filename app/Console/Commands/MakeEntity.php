@@ -49,6 +49,8 @@ class MakeEntity extends Command
      */
     public function handle()
     {
+        $this->copyright();
+
         $this->comment('[START] Creating new entity.....');
 
         $entity = $this->argument('entity');
@@ -274,5 +276,19 @@ class MakeEntity extends Command
 
             $this->info('');
         }
+    }
+
+    /**
+     * Command's copyright'
+     *
+     * @return mixed
+     */
+    protected function copyright()
+    {
+        $this->info('');
+        $this->question('Make Entity artisan command is:');
+        $this->question('- created by: @rkukuh');
+        $this->question('- version: 1.0');
+        $this->info('');
     }
 }
