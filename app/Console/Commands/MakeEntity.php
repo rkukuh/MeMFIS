@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 class MakeEntity extends Command
 {
@@ -45,9 +46,11 @@ class MakeEntity extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Filesystem $files)
     {
         parent::__construct();
+
+        $this->files = $files;
     }
 
     /**
