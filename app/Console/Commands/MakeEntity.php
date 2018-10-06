@@ -9,9 +9,11 @@ class MakeEntity extends Command
     protected $model;
     protected $entity;
     protected $namespace;
+    protected $pluralizedEntity;
     protected $additionalSteps  = [];
     protected $tableContents    = [];
     protected $tableHeaders     = ['Artefact', 'Location'];
+
 
     /**
      * The name and signature of the console command.
@@ -106,12 +108,12 @@ class MakeEntity extends Command
     {
         if ($this->option('all') || $this->option('migration')) {
 
-            $pluralizedEntity = str_plural($this->entity);
-            $migration = 'create_' . strtolower($pluralizedEntity) . '_table';
+            $this->pluralizedEntity = str_plural($this->entity);
+            $migration = 'create_' . strtolower($this->pluralizedEntity) . '_table';
 
             $this->callSilent('make:migration', [
                 'name' => $migration . '.php',
-                '--create' => strtolower($pluralizedEntity),
+                '--create' => strtolower($this->pluralizedEntity),
             ]);
 
             $data['artefact'] = 'Migration';
@@ -326,7 +328,7 @@ class MakeEntity extends Command
 
         if ($this->option('all') || $this->option('seeder')) {
 
-            $seederTable = ($pluralizedEntity) . 'TableSeeder';
+            $seederTable = ($this->pluralizedEntity) . 'TableSeeder';
 
             $this->callSilent('make:seeder', ['name' => $seederTable]);
 
@@ -341,7 +343,7 @@ class MakeEntity extends Command
 
         if ($this->option('all') || $this->option('example')) {
 
-             $seederExample = ($pluralizedEntity);
+             $seederExample = ($this->pluralizedEntity);
 
              $this->callSilent('make:seeder', ['name' => 'examples/' . $seederExample]);
 
