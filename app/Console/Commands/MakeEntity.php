@@ -105,7 +105,7 @@ class MakeEntity extends Command
 
             $this->callSilent('make:model', ['name' => $this->model]);
 
-            if ($this->files->exists($path = $this->getPath($name))) {
+            if ($this->files->exists($path = $this->getPath($this->entity))) {
                 return $this->error('Model already exists!');
             }
 
