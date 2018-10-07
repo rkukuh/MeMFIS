@@ -120,7 +120,7 @@ class MakeEntity extends Command
             $this->compileModelStub($path);
 
             $this->addToTable('Model', $this->modelNamespace);
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
@@ -159,7 +159,7 @@ class MakeEntity extends Command
             ]);
 
             $this->addToTable('Migration', $migration);
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
@@ -234,7 +234,7 @@ class MakeEntity extends Command
                     break;
             }
 
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
@@ -310,7 +310,7 @@ class MakeEntity extends Command
                     break;
             }
 
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
@@ -361,7 +361,7 @@ class MakeEntity extends Command
             $data['location'] = $factory . '.php';
             array_push($this->tableContents, $data);
 
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
@@ -385,7 +385,7 @@ class MakeEntity extends Command
             $data['location'] = $policy . '.php';
             array_push($this->tableContents, $data);
 
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
 
             array_push($this->additionalSteps, 'Register the Policy');
         }
@@ -410,7 +410,7 @@ class MakeEntity extends Command
             $data['location'] = 'seeds/' . $seederTable . '.php';
             array_push($this->tableContents, $data);
 
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
         }
 
         /** Example data seeder */
@@ -425,7 +425,7 @@ class MakeEntity extends Command
              $data['location'] = 'seeds/examples/' . $seederExample . '.php';
              array_push($this->tableContents, $data);
 
-             $this->info($data['artefact'] . ' created.');
+             $this->info($this->data['artefact'] . ' created.');
 
              array_push($this->additionalSteps, 'Fix the Example Seeder class name');
         }
@@ -450,7 +450,7 @@ class MakeEntity extends Command
             $data['location'] = 'tests/Feature/' . $test . '.php';
             array_push($this->tableContents, $data);
 
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
 
             /** Unit test */
 
@@ -460,7 +460,7 @@ class MakeEntity extends Command
             ]);
 
             $this->addToTable('Test: Unit', 'tests/Unit/' . $test . '.php');
-            $this->info($data['artefact'] . ' created.');
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
