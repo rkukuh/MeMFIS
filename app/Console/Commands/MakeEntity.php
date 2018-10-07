@@ -175,11 +175,15 @@ class MakeEntity extends Command
 
             switch (strtolower($this->namespace)) {
                 case 'both':
-                    $this->callSilent('make:controller', [
-                        'name' => 'Admin/' . $controller,
-                        '--model' => $this->model,
-                        '--resource' => true,
-                    ]);
+                    if ($this->files->exists(
+                            $path = base_path().'/app/Http/Controllers/Admin/' . $this->controller . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Admin/' . $this->controller . '.php file already exists!');
+                    }
+
+                    $this->compileControllerStub($path);
 
                     $data['artefact'] = 'Controller';
                     $data['location'] = 'Admin/' . $controller . '.php';
