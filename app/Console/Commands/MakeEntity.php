@@ -90,6 +90,7 @@ class MakeEntity extends Command
 
         $this->comment('[START] Creating new entity.....');
 
+        $this->makeModel();
         $this->makeMigration();
         $this->makeRequest();
         $this->makeController();
@@ -128,8 +129,6 @@ class MakeEntity extends Command
                 $this->modelNamespace = $answer;
             }
         }
-
-        $this->makeModel();
     }
 
     /**
