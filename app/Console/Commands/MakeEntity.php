@@ -349,11 +349,11 @@ class MakeEntity extends Command
             $factory = $this->entity . 'Factory';
 
             if ($this->files->exists(
-                $path = base_path() . '/database/factories/' . $this->factory . '.php')
+                $path = base_path() . '/database/factories/' . $factory . '.php')
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->error($this->factory . '.php already exists!');
+                return $this->error($factory . '.php already exists!');
             }
 
             $this->compileFactoryStub($path);
