@@ -7,7 +7,6 @@ use Illuminate\Filesystem\Filesystem;
 
 class MakeEntity extends Command
 {
-    protected $path;
     protected $model;
     protected $entity;
     protected $namespace;
@@ -105,7 +104,7 @@ class MakeEntity extends Command
             $this->model = 'Models/' . $this->entity;
 
             if ($this->files->exists(
-                    $this->path = base_path() . '/app/' . $this->model . '.php')
+                    $path = base_path() . '/app/' . $this->model . '.php')
             ) {
                 $this->input->setOption('model', false);
 
@@ -127,7 +126,7 @@ class MakeEntity extends Command
         $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
         $stub = str_replace('{{class}}', $this->entity, $stub);
 
-        $this->files->put($this->path, $stub);
+        $this->files->put($path, $stub);
 
         return $this;
     }
