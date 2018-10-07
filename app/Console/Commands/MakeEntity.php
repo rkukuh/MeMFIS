@@ -128,13 +128,9 @@ class MakeEntity extends Command
 
                 $this->input->setOption('model', $answer);
             }
-
-            dd($this->option('model'));
-
-            return true;
         }
 
-        return false;
+        $this->makeModel();
     }
 
     /**
