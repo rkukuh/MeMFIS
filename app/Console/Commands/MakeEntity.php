@@ -544,8 +544,6 @@ class MakeEntity extends Command
             array_push($this->additionalSteps, 'Use generated Requests for the Controller');
         }
 
-        dump($this->arguments(), $this->options());
-
         if (in_array(true, $this->options(), true) === false) {
 
             $this->error('No files has been created.');
