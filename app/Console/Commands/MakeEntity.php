@@ -478,16 +478,12 @@ class MakeEntity extends Command
      */
     protected function printReport()
     {
-        if ($this->option('controller') && $this->option('request')) {
-
-            array_push($this->additionalSteps, 'Define a route for the generated Controller');
-            array_push($this->additionalSteps, 'Use generated Requests for the generated Controller');
-        }
-        else if ($this->option('request')) {
+        if ($this->option('request')) {
 
             array_push($this->additionalSteps, 'Use generated Requests for the Controller');
         }
-        else if ($this->option('controller')) {
+        else if ($this->option('controller') ||
+                ($this->option('controller') && $this->option('request'))) {
 
             array_push($this->additionalSteps, 'Define a route for the generated Controller');
         }
