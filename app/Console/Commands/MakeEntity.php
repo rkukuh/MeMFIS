@@ -13,9 +13,9 @@ class MakeEntity extends Command
     protected $modelName;
     protected $modelNamespace;
     protected $controllerName;
+    protected $pluralizedEntity;
     protected $requestStoreName;
     protected $requestUpdateName;
-    protected $pluralizedEntity;
     protected $additionalSteps  = [];
     protected $tableContents    = [];
     protected $tableHeaders     = ['Artefact', 'Location'];
