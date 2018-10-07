@@ -119,9 +119,9 @@ class MakeEntity extends Command
 
             $this->compileModelStub($path);
 
-            $this->info($this->data['artefact'] . ' created.');
-
             $this->addToTable('Model', $this->modelNamespace . '.php');
+
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
