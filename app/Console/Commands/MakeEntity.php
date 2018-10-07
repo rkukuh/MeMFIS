@@ -434,11 +434,11 @@ class MakeEntity extends Command
             $seederExample = $this->pluralizedEntity;
 
             if ($this->files->exists(
-                $path = base_path() . '/seeds/examples/' . $this->seederExample . '.php')
+                $path = base_path() . '/seeds/examples/' . $seederExample . '.php')
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->error($this->seederExample . '.php already exists!');
+                return $this->error($seederExample . '.php already exists!');
             }
 
             $this->compileExampleSeederStub($path);
