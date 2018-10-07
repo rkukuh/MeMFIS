@@ -114,7 +114,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('model', false);
 
-                return $this->error($this->modelNamespace . '.php file already exists!');
+                return $this->error($this->modelNamespace . '.php already exists!');
             }
 
             $this->compileModelStub($path);
@@ -251,33 +251,33 @@ class MakeEntity extends Command
 
             switch (strtolower($this->namespace)) {
                 case 'both':
+                    /** ADMIN Controller */
+
                     if ($this->files->exists(
                             $path = base_path() . '/app/Http/Controllers/Admin/' . $this->controllerName . '.php')
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Admin/' . $this->controllerName . '.php file already exists!');
+                        return $this->error('Admin/' . $this->controllerName . '.php already exists!');
                     }
 
                     $this->compileControllerStub($path, 'Admin');
 
-                    $data['artefact'] = 'Controller';
-                    $data['location'] = 'Admin/' . $this->controllerName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Controller', 'Admin/' . $this->controllerName . '.php');
+
+                    /** FRONTEND Controller */
 
                     if ($this->files->exists(
                         $path = base_path() . '/app/Http/Controllers/Frontend/' . $this->controllerName . '.php')
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Frontend/' . $this->controllerName . '.php file already exists!');
+                        return $this->error('Frontend/' . $this->controllerName . '.php already exists!');
                     }
 
                     $this->compileControllerStub($path, 'Frontend');
 
-                    $data['artefact'] = 'Controller';
-                    $data['location'] = 'Frontend/' . $this->controllerName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Controller', 'Frontend/' . $this->controllerName . '.php');
 
                     break;
 
@@ -288,11 +288,7 @@ class MakeEntity extends Command
                         '--resource' => true,
                     ]);
 
-                    $this->info('Controller created: ' . $this->controllerName . '.php');
-
-                    $data['artefact'] = 'Controller';
-                    $data['location'] = $this->controllerName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Controller', $this->controllerName . '.php');
 
                     break;
 
@@ -303,9 +299,7 @@ class MakeEntity extends Command
                         '--resource' => true,
                     ]);
 
-                    $data['artefact'] = 'Controller';
-                    $data['location'] = $this->namespace . '/' . $this->controllerName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Controller', $this->namespace . '/' . $this->controllerName . '.php');
 
                     break;
             }
