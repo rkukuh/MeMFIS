@@ -115,7 +115,9 @@ class MakeEntity extends Command
 
     protected function compileModelStub()
     {
-        $path = base_path() . '/app/Models/' . $this->entity . '.php';
+        if ($this->files->exists($path = base_path() . '/app/Models/' . $this->entity . '.php')) {
+            return $this->error('Model already exists!');
+        }
 
         $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
         $stub = str_replace('{{class}}', $this->entity, $stub);
