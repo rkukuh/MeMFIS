@@ -11,6 +11,9 @@ class MakeEntity extends Command
     protected $namespace;
     protected $modelName;
     protected $modelNamespace;
+    protected $controllerName;
+    protected $requestStoreName;
+    protected $requestUpdateName;
     protected $pluralizedEntity;
     protected $additionalSteps  = [];
     protected $tableContents    = [];
@@ -173,63 +176,63 @@ class MakeEntity extends Command
     {
         if ($this->option('request')) {
 
-            $requestStore  = $this->entity . 'Store';
-            $requestUpdate = $this->entity . 'Update';
+            $this->requestStoreName  = $this->entity . 'Store';
+            $this->requestUpdateName = $this->entity . 'Update';
 
             switch (strtolower($this->namespace)) {
                 case 'both':
-                    $this->callSilent('make:request', ['name' => 'Admin/' . $requestStore]);
+                    $this->callSilent('make:request', ['name' => 'Admin/' . $this->requestStoreName]);
 
                     $data['artefact'] = 'Form Request';
-                    $data['location'] = 'Admin/' . $requestStore . '.php';
+                    $data['location'] = 'Admin/' . $this->requestStoreName . '.php';
                     array_push($this->tableContents, $data);
 
-                    $this->callSilent('make:request', ['name' => 'Admin/' . $requestUpdate]);
+                    $this->callSilent('make:request', ['name' => 'Admin/' . $this->requestUpdateName]);
 
                     $data['artefact'] = 'Form Request';
-                    $data['location'] = 'Admin/' . $requestUpdate . '.php';
+                    $data['location'] = 'Admin/' . $this->requestUpdateName . '.php';
                     array_push($this->tableContents, $data);
 
-                    $this->callSilent('make:request', ['name' => 'Frontend/' . $requestStore]);
+                    $this->callSilent('make:request', ['name' => 'Frontend/' . $this->requestStoreName]);
 
                     $data['artefact'] = 'Form Request';
-                    $data['location'] = 'Frontend/' . $requestStore . '.php';
+                    $data['location'] = 'Frontend/' . $this->requestStoreName . '.php';
                     array_push($this->tableContents, $data);
 
-                    $this->callSilent('make:request', ['name' => 'Frontend/' . $requestUpdate]);
+                    $this->callSilent('make:request', ['name' => 'Frontend/' . $this->requestUpdateName]);
 
                     $data['artefact'] = 'Form Request';
-                    $data['location'] = 'Frontend/' . $requestUpdate . '.php';
+                    $data['location'] = 'Frontend/' . $this->requestUpdateName . '.php';
                     array_push($this->tableContents, $data);
 
                     break;
 
                 case 'none':
-                    $this->callSilent('make:request', ['name' => $requestStore]);
+                    $this->callSilent('make:request', ['name' => $this->requestStoreName]);
 
                     $data['artefact'] = 'Form Request';
-                    $data['location'] = $requestStore . '.php';
+                    $data['location'] = $this->requestStoreName . '.php';
                     array_push($this->tableContents, $data);
 
-                    $this->callSilent('make:request', ['name' => $requestUpdate]);
+                    $this->callSilent('make:request', ['name' => $this->requestUpdateName]);
 
                     $data['artefact'] = 'Form Request';
-                    $data['location'] = $requestUpdate . '.php';
+                    $data['location'] = $this->requestUpdateName . '.php';
                     array_push($this->tableContents, $data);
 
                     break;
 
                 default:
-                    $this->callSilent('make:request', ['name' => $this->namespace . '/' . $requestStore]);
+                    $this->callSilent('make:request', ['name' => $this->namespace . '/' . $this->requestStoreName]);
 
                     $data['artefact'] = 'Form Request';
-                    $data['location'] = $this->namespace . '/' . $requestStore . '.php';
+                    $data['location'] = $this->namespace . '/' . $this->requestStoreName . '.php';
                     array_push($this->tableContents, $data);
 
-                    $this->callSilent('make:request', ['name' => $this->namespace . '/' . $requestUpdate]);
+                    $this->callSilent('make:request', ['name' => $this->namespace . '/' . $this->requestUpdateName]);
 
                     $data['artefact'] = 'Form Request';
-                    $data['location'] = $this->namespace . '/' . $requestUpdate . '.php';
+                    $data['location'] = $this->namespace . '/' . $this->requestUpdateName . '.php';
                     array_push($this->tableContents, $data);
 
                     break;
@@ -248,64 +251,64 @@ class MakeEntity extends Command
     {
         if ($this->option('controller')) {
 
-            $controllerName = $this->entity . 'Controller';
+            $this->controllerName = $this->entity . 'Controller';
 
             switch (strtolower($this->namespace)) {
                 case 'both':
                     if ($this->files->exists(
-                            $path = base_path() . '/app/Http/Controllers/Admin/' . $controllerName . '.php')
+                            $path = base_path() . '/app/Http/Controllers/Admin/' . $this->controllerName . '.php')
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Admin/' . $controllerName . '.php file already exists!');
+                        return $this->error('Admin/' . $this->controllerName . '.php file already exists!');
                     }
 
                     $this->compileControllerStub($path, 'Admin');
 
                     $data['artefact'] = 'Controller';
-                    $data['location'] = 'Admin/' . $controllerName . '.php';
+                    $data['location'] = 'Admin/' . $this->controllerName . '.php';
                     array_push($this->tableContents, $data);
 
                     if ($this->files->exists(
-                        $path = base_path() . '/app/Http/Controllers/Frontend/' . $controllerName . '.php')
+                        $path = base_path() . '/app/Http/Controllers/Frontend/' . $this->controllerName . '.php')
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Frontend/' . $controllerName . '.php file already exists!');
+                        return $this->error('Frontend/' . $this->controllerName . '.php file already exists!');
                     }
 
                     $this->compileControllerStub($path, 'Frontend');
 
                     $data['artefact'] = 'Controller';
-                    $data['location'] = 'Frontend/' . $controllerName . '.php';
+                    $data['location'] = 'Frontend/' . $this->controllerName . '.php';
                     array_push($this->tableContents, $data);
 
                     break;
 
                 case 'none':
                     $this->callSilent('make:controller', [
-                        'name' => $controllerName,
+                        'name' => $this->controllerName,
                         '--model' => $this->modelNamespace,
                         '--resource' => true,
                     ]);
 
-                    $this->info('Controller created: ' . $controllerName . '.php');
+                    $this->info('Controller created: ' . $this->controllerName . '.php');
 
                     $data['artefact'] = 'Controller';
-                    $data['location'] = $controllerName . '.php';
+                    $data['location'] = $this->controllerName . '.php';
                     array_push($this->tableContents, $data);
 
                     break;
 
                 default:
                     $this->callSilent('make:controller', [
-                        'name' => $this->namespace . '/' . $controllerName,
+                        'name' => $this->namespace . '/' . $this->controllerName,
                         '--model' => $this->modelNamespace,
                         '--resource' => true,
                     ]);
 
                     $data['artefact'] = 'Controller';
-                    $data['location'] = $this->namespace . '/' . $controllerName . '.php';
+                    $data['location'] = $this->namespace . '/' . $this->controllerName . '.php';
                     array_push($this->tableContents, $data);
 
                     break;
@@ -327,6 +330,15 @@ class MakeEntity extends Command
 
         $stub = str_replace('{{classNamespace}}', $namespace, $stub);
         $stub = str_replace('{{modelName}}', $this->modelName, $stub);
+        $stub = str_replace('{{className}}', $this->controllerName, $stub);
+
+        $stub = str_replace('{{requestStoreNamespace}}', $namespace, $stub);
+        $stub = str_replace('{{requestStoreName}}', $this->requestStoreName, $stub);
+
+        $stub = str_replace('{{requestUpdateNamespace}}', $namespace, $stub);
+        $stub = str_replace('{{requestUpdateName}}', $this->requestUpdateName, $stub);
+
+        $stub = str_replace('{{modelNameVariabel}}', camel_case($this->entity), $stub);
 
         $this->files->put($path, $stub);
 
