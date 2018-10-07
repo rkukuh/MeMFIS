@@ -431,18 +431,40 @@ class MakeEntity extends Command
 
         if ($this->option('example')) {
 
-            $seederExample = ($this->pluralizedEntity);
+            $seederExample = $this->pluralizedEntity;
 
-            $this->callSilent('make:seeder', [
-                 'name' => 'examples/' . $seederExample
-            ]);
+            if ($this->files->exists(
+                $path = base_path() . '/seeds/examples/' . $this->seederExample . '.php')
+            ) {
+                $this->input->setOption('example', false);
+
+                return $this->error($this->seederExample . '.php already exists!');
+            }
+
+            $this->compileExampleSeederStub($path);
 
             $this->addToTable('Seeder: Example Data', 'seeds/examples/' . $seederExample . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
-
-            array_push($this->additionalSteps, 'Fix the Example Seeder class name');
         }
+    }
+
+    /**
+     * Compile the example data Seeder stub
+     *
+     * @param String $path
+     * @return void
+     */
+    protected function compileExampleSeederStub($path)
+    {
+        $stub = $this->files->get(__DIR__ . '/stubs/seeder.example.stub');
+
+        $stub = str_replace('{{modelName}}', $this->modelName, $stub);
+        $stub = str_replace('{{className}}', $this->pluralizedEntity, $stub);
+
+        $this->files->put($path, $stub);
+
+        return $this;
     }
 
     /**
