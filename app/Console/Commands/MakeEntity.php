@@ -109,7 +109,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('model', false);
 
-                return $this->error($this->model . ' already exists!');
+                return $this->error($this->model . '.php file already exists!');
             }
 
             $this->compileModelStub();
