@@ -29,7 +29,7 @@ class MakeEntity extends Command
     protected $signature = 'memfis:entity
                             {name : Name of the entity, eg: Post, Product, Employee}
                             {--namespace=Both : eg: Both | None | [your-choice]}
-                            {--a|all : Generate an entity\'s along with its all artefacts}
+                            {--a|all=true : Generate an entity\'s along with its all artefacts}
                             {--m|migration : Generate an entity\'s Migration}
                             {--r|request : Generate an entity\'s Request}
                             {--c|controller : Generate an entity\'s Controller}
