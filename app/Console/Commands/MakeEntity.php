@@ -123,12 +123,14 @@ class MakeEntity extends Command
                 $this->makeModel();
             }
 
-            if ($modelChoice = 'Use existing model') {
+            if ($modelChoice == 'Use existing model') {
                 $answer = $this->ask('Where your model resides (Namespace, if any + File name without .php extension)?');
 
                 $this->modelNamespace = $answer;
             }
         }
+
+        return true;
     }
 
     /**
