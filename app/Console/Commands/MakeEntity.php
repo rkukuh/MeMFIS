@@ -11,6 +11,7 @@ class MakeEntity extends Command
     protected $entity;
     protected $namespace;
     protected $modelName;
+    protected $modelPath;
     protected $modelNamespace;
     protected $controllerName;
     protected $pluralizedEntity;
@@ -81,29 +82,10 @@ class MakeEntity extends Command
         $this->entity    = $this->argument('name');
         $this->namespace = $this->option('namespace');
 
-        /** START: Check for existing model, if any */
-
-        $this->modelName = $this->entity;
-        $this->modelNamespace = 'Models/' . $this->modelName;
-
-        if ($this->files->exists(
-                $path = base_path() . '/app/' . $this->modelNamespace . '.php')
-        ) {
-            $this->error('Model already exists: ' . $this->modelNamespace . '.php');
-
-            $modelChoice = $this->choice('What should we do?', [
-                'Create new model',
-                'Use existing model'
-            ], 0);
-
-            dd($modelChoice);
-        }
-
-        /** END: Check for existing model, if any */
+        $this->checkExistingModel();
 
         $this->comment('[START] Creating new entity.....');
 
-        $this->makeModel($path);
         $this->makeMigration();
         $this->makeRequest();
         $this->makeController();
@@ -116,12 +98,33 @@ class MakeEntity extends Command
         $this->printAdditionalSteps();
     }
 
+    protected function checkExistingModel()
+    {
+        $this->modelName = $this->entity;
+        $this->modelNamespace = 'Models/' . $this->modelName;
+
+        if ($this->files->exists(
+            $this->modelPath = base_path() . '/app/' . $this->modelNamespace . '.php')
+        ) {
+            $this->error('Model already exists: ' . $this->modelNamespace . '.php');
+
+            $modelChoice = $this->choice('What should we do?', [
+                'Create new model',
+                'Use existing model'
+            ], 0);
+
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Run make:model command with defined entity name and/or namespace
      *
      * @return void
      */
-    protected function makeModel($path)
+    protected function makeModel()
     {
         $this->compileModelStub($path);
 
