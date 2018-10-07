@@ -253,11 +253,11 @@ class MakeEntity extends Command
             switch (strtolower($this->namespace)) {
                 case 'both':
                     if ($this->files->exists(
-                            $path = base_path() . '/app/Http/Controllers/Admin/' . $this->controllerName . '.php')
+                            $path = base_path() . '/app/Http/Controllers/Admin/' . $controllerName . '.php')
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Admin/' . $this->controllerName . '.php file already exists!');
+                        return $this->error('Admin/' . $controllerName . '.php file already exists!');
                     }
 
                     $this->compileControllerStub($path, 'Admin');
@@ -267,11 +267,11 @@ class MakeEntity extends Command
                     array_push($this->tableContents, $data);
 
                     if ($this->files->exists(
-                        $path = base_path() . '/app/Http/Controllers/Frontend/' . $this->controllerName . '.php')
+                        $path = base_path() . '/app/Http/Controllers/Frontend/' . $controllerName . '.php')
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Frontend/' . $this->controllerName . '.php file already exists!');
+                        return $this->error('Frontend/' . $controllerName . '.php file already exists!');
                     }
 
                     $this->compileControllerStub($path, 'Frontend');
