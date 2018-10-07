@@ -105,6 +105,7 @@ class MakeEntity extends Command
 
     protected function checkExistingModel()
     {
+        $modelChoice = '';
         $this->modelName = $this->entity;
         $this->modelNamespace = 'Models/' . $this->modelName;
 
