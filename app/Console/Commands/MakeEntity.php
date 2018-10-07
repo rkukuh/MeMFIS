@@ -523,8 +523,8 @@ class MakeEntity extends Command
     /**
      * Add new row of data to output table
      *
-     * @param [type] $artefact
-     * @param [type] $location
+     * @param String $artefact
+     * @param String $location
      * @return void
      */
     protected function addToTable($artefact, $location)
