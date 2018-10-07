@@ -83,7 +83,10 @@ class MakeEntity extends Command
         $this->namespace = $this->option('namespace');
 
         if ($this->checkExistingModel() == 'Abort') {
-            $this->info('Aborted.');
+            $this->line('Aborted.');
+            $this->info('');
+
+            return;
         }
 
         $this->comment('[START] Creating new entity.....');
@@ -115,7 +118,7 @@ class MakeEntity extends Command
                 'Create new model',
                 'Use existing model',
                 'Abort'
-            ], 0);
+            ]);
 
             return true;
         }
