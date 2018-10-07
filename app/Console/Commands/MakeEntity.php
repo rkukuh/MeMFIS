@@ -120,6 +120,12 @@ class MakeEntity extends Command
                 'Abort'
             ]);
 
+            if ($modelChoice = 'Use existing model') {
+                $this->setOption('model', $this->ask('Where your model resides?'));
+            }
+
+            dd($this->option('model'));
+
             return true;
         }
 
