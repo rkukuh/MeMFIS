@@ -11,11 +11,12 @@ class MakeEntity extends Command
     protected $entity;
     protected $namespace;
     protected $modelName;
+    protected $modelPath;
     protected $modelNamespace;
     protected $controllerName;
+    protected $pluralizedEntity;
     protected $requestStoreName;
     protected $requestUpdateName;
-    protected $pluralizedEntity;
     protected $additionalSteps  = [];
     protected $tableContents    = [];
     protected $tableHeaders     = ['Artefact', 'Location'];
@@ -26,10 +27,9 @@ class MakeEntity extends Command
      * @var string
      */
     protected $signature = 'memfis:entity
-                            {entity : Name of the Entity, eg: Post, Product, Employee}
-                            {--namespace=Both : eg: Frontend | Admin | Both | None | [your-choice]}
-                            {--a|all : Generate an entity\'s along with its following artefacts below:}
-                            {--M|model : Generate an entity\'s Model}
+                            {name : Name of the entity, eg: Post, Product, Employee}
+                            {--namespace=Both : eg: Both | None | [your-choice]}
+                            {--a|all=true : Generate an entity\'s and its all artefacts}
                             {--m|migration : Generate an entity\'s Migration}
                             {--r|request : Generate an entity\'s Request}
                             {--c|controller : Generate an entity\'s Controller}
@@ -66,7 +66,6 @@ class MakeEntity extends Command
     public function handle()
     {
         if ($this->option('all')) {
-            $this->input->setOption('model', true);
             $this->input->setOption('migration', true);
             $this->input->setOption('request', true);
             $this->input->setOption('controller', true);
@@ -79,10 +78,17 @@ class MakeEntity extends Command
 
         $this->copyright();
 
-        $this->comment('[START] Creating new entity.....');
+        $this->entity    = $this->argument('name');
+        $this->namespace = $this->option('namespace');
 
-        $this->entity     = $this->argument('entity');
-        $this->namespace  = $this->option('namespace');
+        if ($this->checkExistingModel() == 'Abort') {
+            $this->line('Aborted.');
+            $this->info('');
+
+            return;
+        }
+
+        $this->comment('[START] Creating new entity.....');
 
         $this->makeModel();
         $this->makeMigration();
@@ -97,6 +103,36 @@ class MakeEntity extends Command
         $this->printAdditionalSteps();
     }
 
+    protected function checkExistingModel()
+    {
+        $this->modelName = $this->entity;
+        $this->modelNamespace = 'Models/' . $this->modelName;
+
+        if ($this->files->exists(
+            $this->modelPath = base_path() . '/app/' . $this->modelNamespace . '.php')
+        ) {
+            $this->error('Model already exists: ' . $this->modelNamespace . '.php');
+
+            $modelChoice = $this->choice('What should we do?', [
+                'Create new model',
+                'Use existing model',
+                'Abort'
+            ]);
+
+            if ($modelChoice == 'Create new model') {
+                $this->makeModel();
+            }
+
+            if ($modelChoice == 'Use existing model') {
+                $answer = $this->ask('Where your model resides (Namespace, if any + File name without .php extension)?');
+
+                $this->modelNamespace = $answer;
+            }
+        }
+
+        return $modelChoice;
+    }
+
     /**
      * Run make:model command with defined entity name and/or namespace
      *
@@ -104,25 +140,11 @@ class MakeEntity extends Command
      */
     protected function makeModel()
     {
-        if ($this->option('model')) {
+        $this->compileModelStub($this->modelPath);
 
-            $this->modelName = $this->entity;
-            $this->modelNamespace = 'Models/' . $this->modelName;
+        $this->addToTable('Model', $this->modelNamespace . '.php');
 
-            if ($this->files->exists(
-                    $path = base_path() . '/app/' . $this->modelNamespace . '.php')
-            ) {
-                $this->input->setOption('model', false);
-
-                return $this->error($this->modelNamespace . '.php already exists!');
-            }
-
-            $this->compileModelStub($path);
-
-            $this->addToTable('Model', $this->modelNamespace . '.php');
-
-            $this->info($this->data['artefact'] . ' created.');
-        }
+        $this->info($this->data['artefact'] . ' created.');
     }
 
     /**
@@ -260,7 +282,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Admin/' . $this->controllerName . '.php already exists!');
+                        return $this->error('Controller already exists: Admin/' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path, 'Admin');
@@ -274,7 +296,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Frontend/' . $this->controllerName . '.php already exists!');
+                        return $this->error('Controller already exists: Frontend/' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path, 'Frontend');
@@ -353,7 +375,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->error($factory . '.php already exists!');
+                return $this->error('Model Factory already exists: ' . $factory . '.php');
             }
 
             $this->compileFactoryStub($path);
@@ -438,7 +460,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->error($seederExample . '.php already exists!');
+                return $this->error('Seeder: Example data already exists: ' . $seederExample . '.php');
             }
 
             $this->compileExampleSeederStub($path);
