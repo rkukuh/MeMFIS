@@ -78,6 +78,11 @@ class MakeEntity extends Command
 
         $this->copyright();
 
+        $this->entity    = $this->argument('name');
+        $this->namespace = $this->option('namespace');
+
+        /** START: Check for existing model, if any */
+
         $this->modelName = $this->entity;
         $this->modelNamespace = 'Models/' . $this->modelName;
 
@@ -86,17 +91,19 @@ class MakeEntity extends Command
         ) {
             $this->error($this->modelNamespace . '.php already exists!');
 
-            $modelChoice = $this->choice('What should we do?', ['Create new model', 'Use existing model'], 0);
+            $modelChoice = $this->choice('What should we do?', [
+                'Create new model',
+                'Use existing model'
+            ], 0);
 
             dd($modelChoice);
         }
 
+        /** END: Check for existing model, if any */
+
         $this->comment('[START] Creating new entity.....');
 
-        $this->entity    = $this->argument('name');
-        $this->namespace = $this->option('namespace');
-
-        $this->makeModel();
+        $this->makeModel($path);
         $this->makeMigration();
         $this->makeRequest();
         $this->makeController();
@@ -114,7 +121,7 @@ class MakeEntity extends Command
      *
      * @return void
      */
-    protected function makeModel()
+    protected function makeModel($path)
     {
         $this->compileModelStub($path);
 
