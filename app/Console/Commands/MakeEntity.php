@@ -66,7 +66,6 @@ class MakeEntity extends Command
     public function handle()
     {
         if ($this->option('all')) {
-            $this->input->setOption('model', true);
             $this->input->setOption('migration', true);
             $this->input->setOption('request', true);
             $this->input->setOption('controller', true);
@@ -79,10 +78,23 @@ class MakeEntity extends Command
 
         $this->copyright();
 
+        $this->modelName = $this->entity;
+        $this->modelNamespace = 'Models/' . $this->modelName;
+
+        if ($this->files->exists(
+                $path = base_path() . '/app/' . $this->modelNamespace . '.php')
+        ) {
+            $this->error($this->modelNamespace . '.php already exists!');
+
+            $modelChoice = $this->choice('What should we do?', ['Create new model', 'Use existing model'], 0);
+
+            dd($modelChoice);
+        }
+
         $this->comment('[START] Creating new entity.....');
 
-        $this->entity     = $this->argument('name');
-        $this->namespace  = $this->option('namespace');
+        $this->entity    = $this->argument('name');
+        $this->namespace = $this->option('namespace');
 
         $this->makeModel();
         $this->makeMigration();
@@ -104,25 +116,11 @@ class MakeEntity extends Command
      */
     protected function makeModel()
     {
-        if ($this->option('model')) {
+        $this->compileModelStub($path);
 
-            $this->modelName = $this->entity;
-            $this->modelNamespace = 'Models/' . $this->modelName;
+        $this->addToTable('Model', $this->modelNamespace . '.php');
 
-            if ($this->files->exists(
-                    $path = base_path() . '/app/' . $this->modelNamespace . '.php')
-            ) {
-                $this->input->setOption('model', false);
-
-                return $this->error($this->modelNamespace . '.php already exists!');
-            }
-
-            $this->compileModelStub($path);
-
-            $this->addToTable('Model', $this->modelNamespace . '.php');
-
-            $this->info($this->data['artefact'] . ' created.');
-        }
+        $this->info($this->data['artefact'] . ' created.');
     }
 
     /**
