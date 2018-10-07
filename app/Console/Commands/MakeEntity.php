@@ -89,7 +89,7 @@ class MakeEntity extends Command
         if ($this->files->exists(
                 $path = base_path() . '/app/' . $this->modelNamespace . '.php')
         ) {
-            $this->error($this->modelNamespace . '.php already exists!');
+            $this->error('Model already exists: ' . $this->modelNamespace . '.php');
 
             $modelChoice = $this->choice('What should we do?', [
                 'Create new model',
