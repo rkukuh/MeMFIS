@@ -434,7 +434,7 @@ class MakeEntity extends Command
             $seederExample = $this->pluralizedEntity;
 
             if ($this->files->exists(
-                $path = base_path() . 'database/seeds/examples/' . $seederExample . '.php')
+                $path = base_path() . '/database/seeds/examples/' . $seederExample . '.php')
             ) {
                 $this->input->setOption('example', false);
 
