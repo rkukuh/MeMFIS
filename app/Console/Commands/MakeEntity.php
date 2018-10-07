@@ -422,7 +422,7 @@ class MakeEntity extends Command
                 'name' => $seederTable
             ]);
 
-            $this->addToTable('Seeder: Table', 'seeds/' . $seederTable . '.php');
+            $this->addToTable('Seeder: Table', 'database/seeds/' . $seederTable . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
@@ -434,7 +434,7 @@ class MakeEntity extends Command
             $seederExample = $this->pluralizedEntity;
 
             if ($this->files->exists(
-                $path = base_path() . '/seeds/examples/' . $seederExample . '.php')
+                $path = base_path() . 'database/seeds/examples/' . $seederExample . '.php')
             ) {
                 $this->input->setOption('example', false);
 
@@ -443,7 +443,7 @@ class MakeEntity extends Command
 
             $this->compileExampleSeederStub($path);
 
-            $this->addToTable('Seeder: Example Data', 'seeds/examples/' . $seederExample . '.php');
+            $this->addToTable('Seeder: Example Data', 'database/seeds/examples/' . $seederExample . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
