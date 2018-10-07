@@ -130,7 +130,7 @@ class MakeEntity extends Command
             }
         }
 
-        return true;
+        return $modelChoice;
     }
 
     /**
