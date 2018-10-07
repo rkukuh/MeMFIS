@@ -102,7 +102,7 @@ class MakeEntity extends Command
     {
         if ($this->option('model')) {
 
-            if ($this->files->exists($path = base_path() . '/app/Models/' . $this->entity . '.php')) {
+            if ($this->files->exists($this->path = base_path() . '/app/Models/' . $this->entity . '.php')) {
                 return $this->error('Model already exists!');
             }
 
@@ -111,7 +111,7 @@ class MakeEntity extends Command
             $this->model = 'Models/' . $this->entity;
 
             $data['artefact'] = 'Model';
-            $data['location'] = $path;
+            $data['location'] = $this->path;
             array_push($this->tableContents, $data);
 
             $this->info($data['artefact'] . ' created.');
@@ -123,7 +123,7 @@ class MakeEntity extends Command
         $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
         $stub = str_replace('{{class}}', $this->entity, $stub);
 
-        $this->files->put($path, $stub);
+        $this->files->put($this->path, $stub);
 
         return $this;
     }
