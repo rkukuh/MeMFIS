@@ -121,6 +121,12 @@ class MakeEntity extends Command
         }
     }
 
+    /**
+     * Compile the Model stub
+     *
+     * @param String $path
+     * @return void
+     */
     protected function compileModelStub($path)
     {
         $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
