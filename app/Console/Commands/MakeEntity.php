@@ -348,15 +348,37 @@ class MakeEntity extends Command
 
             $factory = $this->entity . 'Factory';
 
-            $this->callSilent('make:factory', [
-                'name' => $factory,
-                '--model' => $this->modelNamespace,
-            ]);
+            if ($this->files->exists(
+                $path = base_path() . '/database/factories/' . $this->factory . '.php')
+            ) {
+                $this->input->setOption('factory', false);
+
+                return $this->error($this->factory . '.php already exists!');
+            }
+
+            $this->compileFactoryStub($path);
 
             $this->addToTable('Model Factory', $factory . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
+    }
+
+    /**
+     * Compile the Factory stub
+     *
+     * @param String $path
+     * @return void
+     */
+    protected function compileFactoryStub($path)
+    {
+        $stub = $this->files->get(__DIR__ . '/stubs/factory.stub');
+
+        $stub = str_replace('{{modelName}}', $this->modelName, $stub);
+
+        $this->files->put($path, $stub);
+
+        return $this;
     }
 
     /**
