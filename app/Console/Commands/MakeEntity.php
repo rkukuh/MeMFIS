@@ -7,6 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class MakeEntity extends Command
 {
+    protected $path;
     protected $model;
     protected $entity;
     protected $namespace;
@@ -107,7 +108,7 @@ class MakeEntity extends Command
 
             $this->compileModelStub();
 
-            // $this->model = 'Models/' . $this->entity;
+            $this->model = 'Models/' . $this->entity;
 
             $data['artefact'] = 'Model';
             $data['location'] = $path;
