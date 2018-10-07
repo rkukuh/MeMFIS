@@ -119,10 +119,7 @@ class MakeEntity extends Command
 
             $this->compileModelStub($path);
 
-            $data['artefact'] = 'Model';
-            $data['location'] = $this->modelNamespace;
-            array_push($this->tableContents, $data);
-
+            $this->addToTable('Model', $this->modelNamespace);
             $this->info($data['artefact'] . ' created.');
         }
     }
@@ -136,6 +133,7 @@ class MakeEntity extends Command
     protected function compileModelStub($path)
     {
         $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
+
         $stub = str_replace('{{class}}', $this->entity, $stub);
 
         $this->files->put($path, $stub);
@@ -160,10 +158,7 @@ class MakeEntity extends Command
                 '--create' => strtolower($this->pluralizedEntity),
             ]);
 
-            $data['artefact'] = 'Migration';
-            $data['location'] = $migration;
-            array_push($this->tableContents, $data);
-
+            $this->addToTable('Migration', $migration);
             $this->info($data['artefact'] . ' created.');
         }
     }
@@ -182,59 +177,59 @@ class MakeEntity extends Command
 
             switch (strtolower($this->namespace)) {
                 case 'both':
-                    $this->callSilent('make:request', ['name' => 'Admin/' . $this->requestStoreName]);
+                    $this->callSilent('make:request', [
+                        'name' => 'Admin/' . $this->requestStoreName
+                    ]);
 
-                    $data['artefact'] = 'Form Request';
-                    $data['location'] = 'Admin/' . $this->requestStoreName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Form Request', 'Admin/' . $this->requestStoreName . '.php');
 
-                    $this->callSilent('make:request', ['name' => 'Admin/' . $this->requestUpdateName]);
+                    $this->callSilent('make:request', [
+                        'name' => 'Admin/' . $this->requestUpdateName
+                    ]);
 
-                    $data['artefact'] = 'Form Request';
-                    $data['location'] = 'Admin/' . $this->requestUpdateName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Form Request', 'Admin/' . $this->requestUpdateName . '.php');
 
-                    $this->callSilent('make:request', ['name' => 'Frontend/' . $this->requestStoreName]);
+                    $this->callSilent('make:request', [
+                        'name' => 'Frontend/' . $this->requestStoreName
+                    ]);
 
-                    $data['artefact'] = 'Form Request';
-                    $data['location'] = 'Frontend/' . $this->requestStoreName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Form Request', 'Frontend/' . $this->requestStoreName . '.php');
 
-                    $this->callSilent('make:request', ['name' => 'Frontend/' . $this->requestUpdateName]);
+                    $this->callSilent('make:request', [
+                        'name' => 'Frontend/' . $this->requestUpdateName
+                    ]);
 
-                    $data['artefact'] = 'Form Request';
-                    $data['location'] = 'Frontend/' . $this->requestUpdateName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Form Request', 'Frontend/' . $this->requestUpdateName . '.php');
 
                     break;
 
                 case 'none':
-                    $this->callSilent('make:request', ['name' => $this->requestStoreName]);
+                    $this->callSilent('make:request', [
+                        'name' => $this->requestStoreName
+                    ]);
 
-                    $data['artefact'] = 'Form Request';
-                    $data['location'] = $this->requestStoreName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Form Request', $this->requestStoreName . '.php');
 
-                    $this->callSilent('make:request', ['name' => $this->requestUpdateName]);
+                    $this->callSilent('make:request', [
+                        'name' => $this->requestUpdateName
+                    ]);
 
-                    $data['artefact'] = 'Form Request';
-                    $data['location'] = $this->requestUpdateName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Form Request', $this->requestUpdateName . '.php');
 
                     break;
 
                 default:
-                    $this->callSilent('make:request', ['name' => $this->namespace . '/' . $this->requestStoreName]);
+                    $this->callSilent('make:request', [
+                        'name' => $this->namespace . '/' . $this->requestStoreName
+                    ]);
 
-                    $data['artefact'] = 'Form Request';
-                    $data['location'] = $this->namespace . '/' . $this->requestStoreName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Form Request', $this->namespace . '/' . $this->requestStoreName . '.php');
 
-                    $this->callSilent('make:request', ['name' => $this->namespace . '/' . $this->requestUpdateName]);
+                    $this->callSilent('make:request', [
+                        'name' => $this->namespace . '/' . $this->requestUpdateName
+                    ]);
 
-                    $data['artefact'] = 'Form Request';
-                    $data['location'] = $this->namespace . '/' . $this->requestUpdateName . '.php';
-                    array_push($this->tableContents, $data);
+                    $this->addToTable('Form Request', $this->namespace . '/' . $this->requestUpdateName . '.php');
 
                     break;
             }
