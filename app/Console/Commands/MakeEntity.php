@@ -282,7 +282,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Admin/' . $this->controllerName . '.php already exists!');
+                        return $this->error('Controller already exists: Admin/' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path, 'Admin');
@@ -296,7 +296,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Frontend/' . $this->controllerName . '.php already exists!');
+                        return $this->error('Controller already exists: Frontend/' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path, 'Frontend');
@@ -375,7 +375,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->error($factory . '.php already exists!');
+                return $this->error('Model Factory already exists: ' . $factory . '.php');
             }
 
             $this->compileFactoryStub($path);
@@ -460,7 +460,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->error($seederExample . '.php already exists!');
+                return $this->error('Seeder: Example data already exists: ' . $seederExample . '.php');
             }
 
             $this->compileExampleSeederStub($path);
