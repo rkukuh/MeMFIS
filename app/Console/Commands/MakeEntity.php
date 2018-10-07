@@ -29,7 +29,6 @@ class MakeEntity extends Command
     protected $signature = 'memfis:entity
                             {name : Name of the entity, eg: Post, Product, Employee}
                             {--namespace=Both : eg: Both | None | [your-choice]}
-                            {--model : Generate an entity for the given model}
                             {--a|all : Generate an entity\'s along with its all artefacts}
                             {--m|migration : Generate an entity\'s Migration}
                             {--r|request : Generate an entity\'s Request}
@@ -124,9 +123,9 @@ class MakeEntity extends Command
             }
 
             if ($modelChoice = 'Use existing model') {
-                $answer = $this->ask('Where your model resides (namespace + file name + .php)?');
+                $answer = $this->ask('Where your model resides (Namespace, if any + File name without .php extension)?');
 
-                $this->input->setOption('model', $answer);
+                $this->modelNamespace = $answer;
             }
         }
 
