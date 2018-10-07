@@ -7,6 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class MakeEntity extends Command
 {
+    protected $data;
     protected $entity;
     protected $namespace;
     protected $modelName;
@@ -463,10 +464,7 @@ class MakeEntity extends Command
                 '--unit' => true,
             ]);
 
-            $data['artefact'] = 'Test: Unit';
-            $data['location'] = 'tests/Unit/' . $test . '.php';
-            array_push($this->tableContents, $data);
-
+            $this->addToTable('Test: Unit', 'tests/Unit/' . $test . '.php');
             $this->info($data['artefact'] . ' created.');
         }
     }
@@ -520,6 +518,21 @@ class MakeEntity extends Command
 
             $this->line('');
         }
+    }
+
+    /**
+     * Add new row of data to output table
+     *
+     * @param [type] $artefact
+     * @param [type] $location
+     * @return void
+     */
+    protected function addToTable($artefact, $location)
+    {
+        $this->data['artefact'] = $artefact;
+        $this->data['location'] = $location;
+
+        array_push($this->tableContents, $this->data);
     }
 
     /**
