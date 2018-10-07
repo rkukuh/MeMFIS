@@ -91,7 +91,6 @@ class MakeEntity extends Command
 
         $this->comment('[START] Creating new entity.....');
 
-        $this->makeModel();
         $this->makeMigration();
         $this->makeRequest();
         $this->makeController();
@@ -120,8 +119,14 @@ class MakeEntity extends Command
                 'Abort'
             ]);
 
+            if ($modelChoice == 'Create new model') {
+                $this->makeModel();
+            }
+
             if ($modelChoice = 'Use existing model') {
-                $this->setOption('model', $this->ask('Where your model resides?'));
+                $answer = $this->ask('Where your model resides (namespace + file name + .php)?');
+
+                $this->input->setOption('model', $answer);
             }
 
             dd($this->option('model'));
@@ -538,6 +543,8 @@ class MakeEntity extends Command
 
             array_push($this->additionalSteps, 'Use generated Requests for the Controller');
         }
+
+        dump($this->arguments(), $this->options());
 
         if (in_array(true, $this->options(), true) === false) {
 
