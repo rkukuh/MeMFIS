@@ -102,8 +102,10 @@ class MakeEntity extends Command
     {
         if ($this->option('model')) {
 
+            $this->model = 'Models/' . $this->entity;
+
             if ($this->files->exists(
-                    $this->path = base_path() . '/app/Models/' . $this->entity . '.php')
+                    $this->path = base_path() . '/app/' . $this->model . '.php')
             ) {
                 $this->input->setOption('model', false);
 
@@ -111,8 +113,6 @@ class MakeEntity extends Command
             }
 
             $this->compileModelStub();
-
-            $this->model = 'Models/' . $this->entity;
 
             $data['artefact'] = 'Model';
             $data['location'] = $this->model;
