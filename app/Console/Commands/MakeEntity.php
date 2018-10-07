@@ -111,7 +111,7 @@ class MakeEntity extends Command
                 return $this->error($this->model . '.php file already exists!');
             }
 
-            $this->compileModelStub();
+            $this->compileModelStub($path);
 
             $data['artefact'] = 'Model';
             $data['location'] = $this->model;
@@ -121,7 +121,7 @@ class MakeEntity extends Command
         }
     }
 
-    protected function compileModelStub()
+    protected function compileModelStub($path)
     {
         $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
         $stub = str_replace('{{class}}', $this->entity, $stub);
