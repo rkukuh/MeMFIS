@@ -26,10 +26,10 @@ class MakeEntity extends Command
      * @var string
      */
     protected $signature = 'memfis:entity
-                            {entity : Name of the Entity, eg: Post, Product, Employee}
-                            {--namespace=Both : eg: Frontend | Admin | Both | None | [your-choice]}
-                            {--a|all : Generate an entity\'s along with its following artefacts below:}
-                            {--M|model : Generate an entity\'s Model}
+                            {name : Name of the entity, eg: Post, Product, Employee}
+                            {--namespace=Both : eg: Both | None | [your-choice]}
+                            {--model : Generate an entity for the given model}
+                            {--a|all : Generate an entity\'s along with its all artefacts}
                             {--m|migration : Generate an entity\'s Migration}
                             {--r|request : Generate an entity\'s Request}
                             {--c|controller : Generate an entity\'s Controller}
@@ -81,7 +81,7 @@ class MakeEntity extends Command
 
         $this->comment('[START] Creating new entity.....');
 
-        $this->entity     = $this->argument('entity');
+        $this->entity     = $this->argument('name');
         $this->namespace  = $this->option('namespace');
 
         $this->makeModel();
