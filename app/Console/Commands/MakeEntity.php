@@ -127,7 +127,7 @@ class MakeEntity extends Command
      */
     protected function makeModel()
     {
-        $this->compileModelStub($path);
+        $this->compileModelStub($this->modelPath);
 
         $this->addToTable('Model', $this->modelNamespace . '.php');
 
