@@ -27,8 +27,8 @@ class MakeEntity extends Command
                             {--a|all : Generate an entity\'s along with its following artefacts below:}
                             {--M|model : Generate an entity\'s Model}
                             {--m|migration : Generate an entity\'s Migration}
-                            {--c|controller : Generate an entity\'s Controller}
                             {--r|request : Generate an entity\'s Request}
+                            {--c|controller : Generate an entity\'s Controller}
                             {--f|factory : Generate an entity\'s Factory}
                             {--p|policy : Generate an entity\'s Policy}
                             {--s|seeder : Generate an entity\'s Table Seeder}
@@ -64,8 +64,8 @@ class MakeEntity extends Command
         if ($this->option('all')) {
             $this->input->setOption('model', true);
             $this->input->setOption('migration', true);
-            $this->input->setOption('controller', true);
             $this->input->setOption('request', true);
+            $this->input->setOption('controller', true);
             $this->input->setOption('factory', true);
             $this->input->setOption('policy', true);
             $this->input->setOption('seeder', true);
@@ -82,8 +82,8 @@ class MakeEntity extends Command
 
         $this->makeModel();
         $this->makeMigration();
-        $this->makeController();
         $this->makeRequest();
+        $this->makeController();
         $this->makeFactory();
         $this->makePolicy();
         $this->makeSeeder();
@@ -165,74 +165,6 @@ class MakeEntity extends Command
     }
 
     /**
-     * Run make:controller command with defined entity name and/or namespace
-     *
-     * @return void
-     */
-    protected function makeController()
-    {
-        if ($this->option('controller')) {
-
-            $controllerName = $this->entity . 'Controller';
-
-            switch (strtolower($this->namespace)) {
-                case 'both':
-                    $this->callSilent('make:controller', [
-                        'name' => 'Admin/' . $controllerName,
-                        '--model' => $this->modelNamespace,
-                        '--resource' => true,
-                    ]);
-
-                    $data['artefact'] = 'Controller';
-                    $data['location'] = 'Admin/' . $controllerName . '.php';
-                    array_push($this->tableContents, $data);
-
-                    $this->callSilent('make:controller', [
-                        'name' => 'Frontend/' . $controllerName,
-                        '--model' => $this->modelNamespace,
-                        '--resource' => true,
-                    ]);
-
-                    $data['artefact'] = 'Controller';
-                    $data['location'] = 'Frontend/' . $controllerName . '.php';
-                    array_push($this->tableContents, $data);
-
-                    break;
-
-                case 'none':
-                    $this->callSilent('make:controller', [
-                        'name' => $controllerName,
-                        '--model' => $this->modelNamespace,
-                        '--resource' => true,
-                    ]);
-
-                    $this->info('Controller created: ' . $controllerName . '.php');
-
-                    $data['artefact'] = 'Controller';
-                    $data['location'] = $controllerName . '.php';
-                    array_push($this->tableContents, $data);
-
-                    break;
-
-                default:
-                    $this->callSilent('make:controller', [
-                        'name' => $this->namespace . '/' . $controllerName,
-                        '--model' => $this->modelNamespace,
-                        '--resource' => true,
-                    ]);
-
-                    $data['artefact'] = 'Controller';
-                    $data['location'] = $this->namespace . '/' . $controllerName . '.php';
-                    array_push($this->tableContents, $data);
-
-                    break;
-            }
-
-            $this->info($data['artefact'] . ' created.');
-        }
-    }
-
-    /**
      * Run make:request command with defined entity name and/or namespace
      *
      * @return void
@@ -305,6 +237,100 @@ class MakeEntity extends Command
 
             $this->info($data['artefact'] . ' created.');
         }
+    }
+
+    /**
+     * Run make:controller command with defined entity name and/or namespace
+     *
+     * @return void
+     */
+    protected function makeController()
+    {
+        if ($this->option('controller')) {
+
+            $controllerName = $this->entity . 'Controller';
+
+            switch (strtolower($this->namespace)) {
+                case 'both':
+                    if ($this->files->exists(
+                            $path = base_path() . '/app/Http/Controllers/Admin/' . $this->controllerName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Admin/' . $this->controllerName . '.php file already exists!');
+                    }
+
+                    $this->compileControllerStub($path, 'Admin');
+
+                    $data['artefact'] = 'Controller';
+                    $data['location'] = 'Admin/' . $controllerName . '.php';
+                    array_push($this->tableContents, $data);
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Controllers/Frontend/' . $this->controllerName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Frontend/' . $this->controllerName . '.php file already exists!');
+                    }
+
+                    $this->compileControllerStub($path, 'Frontend');
+
+                    $data['artefact'] = 'Controller';
+                    $data['location'] = 'Frontend/' . $controllerName . '.php';
+                    array_push($this->tableContents, $data);
+
+                    break;
+
+                case 'none':
+                    $this->callSilent('make:controller', [
+                        'name' => $controllerName,
+                        '--model' => $this->modelNamespace,
+                        '--resource' => true,
+                    ]);
+
+                    $this->info('Controller created: ' . $controllerName . '.php');
+
+                    $data['artefact'] = 'Controller';
+                    $data['location'] = $controllerName . '.php';
+                    array_push($this->tableContents, $data);
+
+                    break;
+
+                default:
+                    $this->callSilent('make:controller', [
+                        'name' => $this->namespace . '/' . $controllerName,
+                        '--model' => $this->modelNamespace,
+                        '--resource' => true,
+                    ]);
+
+                    $data['artefact'] = 'Controller';
+                    $data['location'] = $this->namespace . '/' . $controllerName . '.php';
+                    array_push($this->tableContents, $data);
+
+                    break;
+            }
+
+            $this->info($data['artefact'] . ' created.');
+        }
+    }
+
+    /**
+     * Compile the Controller stub
+     *
+     * @param String $path
+     * @return void
+     */
+    protected function compileControllerStub($path, $namespace)
+    {
+        $stub = $this->files->get(__DIR__ . '/stubs/controller.stub');
+
+        $stub = str_replace('{{classNamespace}}', $namespace, $stub);
+        $stub = str_replace('{{modelName}}', $this->modelName, $stub);
+
+        $this->files->put($path, $stub);
+
+        return $this;
     }
 
     /**
