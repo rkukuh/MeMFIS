@@ -101,12 +101,16 @@ class MakeEntity extends Command
     {
         if ($this->option('model')) {
 
+            if ($this->files->exists($path = base_path() . '/app/Models/' . $this->entity . '.php')) {
+                return $this->error('Model already exists!');
+            }
+
             $this->compileModelStub();
 
-            $this->model = 'Models/' . $this->entity;
+            // $this->model = 'Models/' . $this->entity;
 
             $data['artefact'] = 'Model';
-            $data['location'] = $this->model . '.php';
+            $data['location'] = $path;
             array_push($this->tableContents, $data);
 
             $this->info($data['artefact'] . ' created.');
@@ -115,10 +119,6 @@ class MakeEntity extends Command
 
     protected function compileModelStub()
     {
-        if ($this->files->exists($path = base_path() . '/app/Models/' . $this->entity . '.php')) {
-            return $this->error('Model already exists!');
-        }
-
         $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
         $stub = str_replace('{{class}}', $this->entity, $stub);
 
