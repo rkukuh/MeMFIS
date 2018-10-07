@@ -372,7 +372,7 @@ class MakeEntity extends Command
      */
     protected function compileFactoryStub($path)
     {
-        $stub = $this->files->get(__DIR__ . '/stubs/factory.stub');
+        $stub = $this->files->get(__DIR__ . '/stubs/model.factory.stub');
 
         $stub = str_replace('{{modelName}}', $this->modelName, $stub);
 
@@ -422,7 +422,7 @@ class MakeEntity extends Command
                 'name' => $seederTable
             ]);
 
-            $this->addToTable('Seeder: Table', 'seeds/' . $seederTable . '.php');
+            $this->addToTable('Seeder: Table', 'database/seeds/' . $seederTable . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
@@ -431,18 +431,40 @@ class MakeEntity extends Command
 
         if ($this->option('example')) {
 
-            $seederExample = ($this->pluralizedEntity);
+            $seederExample = $this->pluralizedEntity;
 
-            $this->callSilent('make:seeder', [
-                 'name' => 'examples/' . $seederExample
-            ]);
+            if ($this->files->exists(
+                $path = base_path() . '/database/seeds/examples/' . $seederExample . '.php')
+            ) {
+                $this->input->setOption('example', false);
 
-            $this->addToTable('Seeder: Example Data', 'seeds/examples/' . $seederExample . '.php');
+                return $this->error($seederExample . '.php already exists!');
+            }
+
+            $this->compileExampleSeederStub($path);
+
+            $this->addToTable('Seeder: Example Data', 'database/seeds/examples/' . $seederExample . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
-
-            array_push($this->additionalSteps, 'Fix the Example Seeder class name');
         }
+    }
+
+    /**
+     * Compile the example data Seeder stub
+     *
+     * @param String $path
+     * @return void
+     */
+    protected function compileExampleSeederStub($path)
+    {
+        $stub = $this->files->get(__DIR__ . '/stubs/seeder.example.stub');
+
+        $stub = str_replace('{{modelName}}', $this->modelName, $stub);
+        $stub = str_replace('{{className}}', $this->pluralizedEntity, $stub);
+
+        $this->files->put($path, $stub);
+
+        return $this;
     }
 
     /**
