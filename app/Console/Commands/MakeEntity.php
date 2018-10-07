@@ -133,7 +133,7 @@ class MakeEntity extends Command
      */
     protected function compileModelStub($path)
     {
-        $stub = $this->files->get(__DIR__ . '/stubs/model.factory.stub');
+        $stub = $this->files->get(__DIR__ . '/stubs/model.stub');
 
         $stub = str_replace('{{class}}', $this->entity, $stub);
 
@@ -372,7 +372,7 @@ class MakeEntity extends Command
      */
     protected function compileFactoryStub($path)
     {
-        $stub = $this->files->get(__DIR__ . '/stubs/factory.stub');
+        $stub = $this->files->get(__DIR__ . '/stubs/model.factory.stub');
 
         $stub = str_replace('{{modelName}}', $this->modelName, $stub);
 
