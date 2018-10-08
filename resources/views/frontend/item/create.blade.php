@@ -136,12 +136,12 @@
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            xPicture @include('frontend.common.label.optional')
+                                            Photos @include('frontend.common.label.optional')
                                         </label>
 
                                         @component('frontend.common.input.upload')
-                                            @slot('text', 'xPicture')
-                                            @slot('name', 'xpicture')
+                                            @slot('text', 'Photo')
+                                            @slot('name', 'photo')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
