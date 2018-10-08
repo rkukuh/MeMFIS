@@ -1,3 +1,9 @@
-.footer {
-    text-align: right;
+.flex {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-buttons {
+    /* TODO: Cari property flex untuk me-reverse content (A-Z <--> Z-A) */
+    /* flex-direction: row-reverse; */
 }
