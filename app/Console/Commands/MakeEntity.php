@@ -336,11 +336,15 @@ class MakeEntity extends Command
                     break;
 
                 default:
-                    $this->callSilent('make:controller', [
-                        'name' => $this->namespace . '/' . $this->controllerName,
-                        '--model' => $this->modelNamespace,
-                        '--resource' => true,
-                    ]);
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Controllers/' . $this->controllerName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Controller: use existing: ' . $this->controllerName . '.php');
+                    }
+
+                    $this->compileControllerStub($path, $this->namespace);
 
                     $this->addToTable('Controller', $this->namespace . '/' . $this->controllerName . '.php');
 
