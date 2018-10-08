@@ -327,6 +327,16 @@ class MakeEntity extends Command
                         '--resource' => true,
                     ]);
 
+                    if ($this->files->exists(
+                            $path = base_path() . '/app/Http/Controllers/' . $this->controllerName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Controller: use existing: ' . $this->controllerName . '.php');
+                    }
+
+                    $this->compileControllerStub($path);
+
                     $this->addToTable('Controller', $this->controllerName . '.php');
 
                     break;
@@ -353,7 +363,7 @@ class MakeEntity extends Command
      * @param String $path
      * @return void
      */
-    protected function compileControllerStub($path, $namespace)
+    protected function compileControllerStub($path, $namespace = '')
     {
         $stub = $this->files->get(__DIR__ . '/stubs/controller.stub');
 
