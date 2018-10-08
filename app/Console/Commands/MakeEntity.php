@@ -90,12 +90,26 @@ class MakeEntity extends Command
 
                 break;
 
-            case 'Overwrite existing model':
-                $this->makeModel();
-
             case 'Use existing model':
+                $this->info('Use existing model: ' . $this->modelNamespace . '.php');
+
+                $this->makeMigration();
+                $this->makeRequest();
+                $this->makeController();
+                $this->makeFactory();
+                $this->makePolicy();
+                $this->makeSeeder();
+                $this->makeTest();
+
+                $this->printReport();
+                $this->printAdditionalSteps();
+
+                break;
+
+            case 'Overwrite existing model':
 
             default:
+                $this->makeModel();
                 $this->makeMigration();
                 $this->makeRequest();
                 $this->makeController();
