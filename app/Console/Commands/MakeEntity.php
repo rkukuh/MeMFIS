@@ -295,12 +295,13 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller: use existing: Admin/' . $this->controllerName . '.php');
+                        $this->error('Controller: use existing: Admin/' . $this->controllerName . '.php');
                     }
+                    else {
+                        $this->compileControllerStub($path, 'Admin');
 
-                    $this->compileControllerStub($path, 'Admin');
-
-                    $this->addToTable('Controller', 'Admin/' . $this->controllerName . '.php');
+                        $this->addToTable('Controller', 'Admin/' . $this->controllerName . '.php');
+                    }
 
                     /** Frontend's Controller */
 
@@ -309,12 +310,13 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller: use existing: Frontend/' . $this->controllerName . '.php');
+                        $this->error('Controller: use existing: Frontend/' . $this->controllerName . '.php');
                     }
+                    else {
+                        $this->compileControllerStub($path, 'Frontend');
 
-                    $this->compileControllerStub($path, 'Frontend');
-
-                    $this->addToTable('Controller', 'Frontend/' . $this->controllerName . '.php');
+                        $this->addToTable('Controller', 'Frontend/' . $this->controllerName . '.php');
+                    }
 
                     break;
 
