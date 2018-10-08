@@ -3,7 +3,9 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TitleModalCustomer">Item Unit</h5>
+                <h5 class="modal-title" id="TitleModalCustomer">
+                    Create new: UoM (Unit of Measurement)
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

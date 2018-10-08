@@ -38,7 +38,8 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Create new: Item
+                                    @include('frontend.common.label.create-new')
+                                    Item
                                 </h3>
                             </div>
                         </div>
