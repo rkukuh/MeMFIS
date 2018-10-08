@@ -16,6 +16,7 @@ class CreateItemUnitTable extends Migration
         Schema::create('item_unit', function (Blueprint $table) {
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('unit_id');
+            $table->double('quantity', 8, 2);
             $table->timestamps();
 
             $table->foreign('item_id')
