@@ -210,7 +210,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.item-unit.modal')
+                            @include('frontend.item.uom.modal')
 
                             <div class="m_datatable1" id="fisrt"></div>
                         </div>
@@ -251,7 +251,7 @@
 
                                 @include('frontend.storage.modal')
                                 @include('frontend.category.modal')
-                                @include('frontend.item-stock.modal')
+                                @include('frontend.item.storage.modal')
 
                                 <div class="m_datatable2" id="second"></div>
                             </div>
