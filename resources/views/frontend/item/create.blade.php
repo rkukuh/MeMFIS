@@ -119,13 +119,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row ">
-                                    <div class="col-sm-4 col-md-12 col-lg-12">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
                                         @endcomponent
                                     </div>
-                                    <div class="col-sm-4 col-md-12 col-lg-12">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Dikenai PPN?')
                                             @slot('name', 'isppn')
