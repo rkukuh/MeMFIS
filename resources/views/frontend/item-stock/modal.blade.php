@@ -39,7 +39,7 @@
                                     Max @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.number')
+                                @component('frontend.common.input.numeric')
                                     @slot('text', 'Max')
                                     @slot('name', 'max')
                                 @endcomponent
@@ -49,7 +49,7 @@
                                     Min @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.number')
+                                @component('frontend.common.input.numeric')
                                     @slot('text', 'Min')
                                     @slot('name', 'min')
                                 @endcomponent
