@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\model\ListUtil;
-use App\Models\ItemUnit;
+use App\Models\Pivots\ItemUnit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemUnitStore;
 use App\Http\Requests\Frontend\ItemUnitUpdate;
