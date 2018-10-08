@@ -151,7 +151,7 @@
 
                                         @component('frontend.common.input.select')
                                             @slot('id', 'accountcode2')
-                                            @slot('text', 'AccountCode')
+                                            @slot('text', 'Account Code')
                                             @slot('name', 'accountcode')
                                             @slot('style', 'width:100%')
                                         @endcomponent
