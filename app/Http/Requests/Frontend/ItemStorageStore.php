@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ItemStockStore extends FormRequest
+class ItemStorageStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +26,11 @@ class ItemStockStore extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            //
         ];
     }
 
-    protected function failedValidation(Validator $validator) { 
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()])); 
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

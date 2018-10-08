@@ -1,4 +1,4 @@
-let ItemStock = {
+let ItemStorage = {
     init: function () {
         $('.m_datatable2').mDatatable({
             data: {
@@ -6,7 +6,7 @@ let ItemStock = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-item-stocks',
+                        url: '/get-item-storages',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -106,7 +106,7 @@ let ItemStock = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/itemstock',
+                url: '/item-storage',
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name
@@ -144,7 +144,7 @@ let ItemStock = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/itemstock/' + triggerid + '/edit',
+                url: '/item-storage/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('id').value = data.id;
                     document.getElementById('name').value = data.name;
@@ -176,7 +176,7 @@ let ItemStock = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/itemstock/' + triggerid,
+                url: '/item-storage/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name
@@ -215,7 +215,7 @@ let ItemStock = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/itemstock/' + triggerid,
+                url: '/item-storage/' + triggerid,
                 success: function (data) {
                     document.getElementById('TitleModalCustomer').innerHTML = 'Detail Customer #ID-' + triggerid;
                     document.getElementById('name').value = data.name;
@@ -251,7 +251,7 @@ let ItemStock = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/itemstock/' + triggerid + '',
+                        url: '/item-storage/' + triggerid + '',
                         success: function (data) {
                             toastr.success('Data berhasil disimpan.', 'Sukses', {
                                 timeOut: 5000
@@ -295,5 +295,5 @@ let ItemStock = {
 };
 
 jQuery(document).ready(function () {
-    ItemStock.init();
+    ItemStorage.init();
 });

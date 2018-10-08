@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ItemStockUpdate extends FormRequest
+class ItemStoragekUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class ItemStockUpdate extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            //
         ];
     }
 
