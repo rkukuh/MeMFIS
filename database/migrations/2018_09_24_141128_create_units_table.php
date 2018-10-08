@@ -20,6 +20,9 @@ class CreateUnitsTable extends Migration
             $table->string('symbol');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('name');
+            $table->index('symbol');
         });
     }
 

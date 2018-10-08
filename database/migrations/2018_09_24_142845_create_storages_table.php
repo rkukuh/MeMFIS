@@ -18,9 +18,9 @@ class CreateStoragesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedInteger('account_code')->nullable();
-            $table->integer('active');
+            $table->boolean('is_active');
             $table->timestamps();
             $table->softDeletes();
 
