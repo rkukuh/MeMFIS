@@ -42,13 +42,7 @@ let ItemStorage = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
-                    title: 'Code',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 60
-                },
+            columns: [
                 {
                     field: 'id_storage',
                     title: 'Storage',
