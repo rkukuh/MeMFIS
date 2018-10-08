@@ -337,11 +337,11 @@ class MakeEntity extends Command
 
                 default:
                     if ($this->files->exists(
-                        $path = base_path() . '/app/Http/Controllers/' . $this->controllerName . '.php')
+                        $path = base_path() . '/app/Http/Controllers/' . $this->namespace .'/' . $this->controllerName . '.php')
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller: use existing: ' . $this->controllerName . '.php');
+                        return $this->error('Controller: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path, $this->namespace);
