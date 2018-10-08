@@ -321,12 +321,6 @@ class MakeEntity extends Command
                     break;
 
                 case 'none':
-                    $this->callSilent('make:controller', [
-                        'name' => $this->controllerName,
-                        '--model' => $this->modelNamespace,
-                        '--resource' => true,
-                    ]);
-
                     if ($this->files->exists(
                             $path = base_path() . '/app/Http/Controllers/' . $this->controllerName . '.php')
                     ) {
