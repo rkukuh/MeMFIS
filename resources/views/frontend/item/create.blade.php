@@ -108,13 +108,13 @@
                                             @slot('text', 'Category')
                                             @slot('name', 'category')
                                             @slot('multiple', 'multiple')
-                                            @slot('style', 'width:100%')
                                         @endcomponent
 
                                         @component('frontend.common.buttons.create-new')
                                             @slot('size', 'sm')
                                             @slot('text', 'add category')
                                             @slot('data_target', '#modal_category')
+                                            @slot('style', 'margin-top: 10px;')
                                         @endcomponent
                                     </div>
                                 </div>
