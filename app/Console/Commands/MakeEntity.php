@@ -91,7 +91,7 @@ class MakeEntity extends Command
                 break;
 
             case 'Use existing model':
-                $this->info('Use existing model: ' . $this->modelNamespace . '.php');
+                $this->info('Model: use existing.');
 
                 $this->makeMigration();
                 $this->makeRequest();
@@ -295,7 +295,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller already exists: Admin/' . $this->controllerName . '.php');
+                        return $this->error('Controller: use existing: Admin/' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path, 'Admin');
@@ -309,7 +309,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller already exists: Frontend/' . $this->controllerName . '.php');
+                        return $this->error('Controller: use existing: Frontend/' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path, 'Frontend');
@@ -388,7 +388,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->error('Model Factory already exists: ' . $factory . '.php');
+                return $this->error('Model Factory: use existing: ' . $factory . '.php');
             }
 
             $this->compileFactoryStub($path);
@@ -473,7 +473,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->error('Seeder: Example data already exists: ' . $seederExample . '.php');
+                return $this->error('Seeder: Example data: use existing: ' . $seederExample . '.php');
             }
 
             $this->compileExampleSeederStub($path);
