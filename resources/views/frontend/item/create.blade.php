@@ -251,9 +251,9 @@
                                 </div>
                             </div>
 
+                            @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
-                            @include('frontend.item.storage.modal')
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
@@ -277,6 +277,6 @@
 
     <script src="{{ asset('js/frontend/item.js') }}"></script>
     <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/item-stock.js')}}"></script>
+    <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
 @endpush

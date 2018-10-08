@@ -78,29 +78,51 @@ class MakeEntity extends Command
 
         $this->copyright();
 
+        $this->comment('[START] Creating new entity.....');
+
         $this->entity    = $this->argument('name');
         $this->namespace = $this->option('namespace');
 
-        if ($this->checkExistingModel() == 'Abort') {
-            $this->line('Aborted.');
-            $this->info('');
+        switch ($this->checkExistingModel()) {
+            case 'Abort':
+                $this->line('Aborted.');
+                $this->info('');
 
-            return;
+                break;
+
+            case 'Use existing model':
+                $this->info('Model: use existing.');
+
+                $this->makeMigration();
+                $this->makeRequest();
+                $this->makeController();
+                $this->makeFactory();
+                $this->makePolicy();
+                $this->makeSeeder();
+                $this->makeTest();
+
+                $this->printReport();
+                $this->printAdditionalSteps();
+
+                break;
+
+            case 'Overwrite existing model':
+
+            default:
+                $this->makeModel();
+                $this->makeMigration();
+                $this->makeRequest();
+                $this->makeController();
+                $this->makeFactory();
+                $this->makePolicy();
+                $this->makeSeeder();
+                $this->makeTest();
+
+                $this->printReport();
+                $this->printAdditionalSteps();
+
+                break;
         }
-
-        $this->comment('[START] Creating new entity.....');
-
-        $this->makeModel();
-        $this->makeMigration();
-        $this->makeRequest();
-        $this->makeController();
-        $this->makeFactory();
-        $this->makePolicy();
-        $this->makeSeeder();
-        $this->makeTest();
-
-        $this->printReport();
-        $this->printAdditionalSteps();
     }
 
     protected function checkExistingModel()
@@ -115,20 +137,10 @@ class MakeEntity extends Command
             $this->error('Model already exists: ' . $this->modelNamespace . '.php');
 
             $modelChoice = $this->choice('What should we do?', [
-                'Create new model',
+                'Overwrite existing model',
                 'Use existing model',
                 'Abort'
             ]);
-
-            if ($modelChoice == 'Create new model') {
-                $this->makeModel();
-            }
-
-            if ($modelChoice == 'Use existing model') {
-                $answer = $this->ask('Where your model resides (Namespace, if any + File name without .php extension)?');
-
-                $this->modelNamespace = $answer;
-            }
         }
 
         return $modelChoice;
@@ -283,12 +295,13 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller already exists: Admin/' . $this->controllerName . '.php');
+                        $this->error('Controller: use existing: Admin/' . $this->controllerName . '.php');
                     }
+                    else {
+                        $this->compileControllerStub($path, 'Admin');
 
-                    $this->compileControllerStub($path, 'Admin');
-
-                    $this->addToTable('Controller', 'Admin/' . $this->controllerName . '.php');
+                        $this->addToTable('Controller', 'Admin/' . $this->controllerName . '.php');
+                    }
 
                     /** Frontend's Controller */
 
@@ -297,32 +310,41 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller already exists: Frontend/' . $this->controllerName . '.php');
+                        $this->error('Controller: use existing: Frontend/' . $this->controllerName . '.php');
                     }
+                    else {
+                        $this->compileControllerStub($path, 'Frontend');
 
-                    $this->compileControllerStub($path, 'Frontend');
-
-                    $this->addToTable('Controller', 'Frontend/' . $this->controllerName . '.php');
+                        $this->addToTable('Controller', 'Frontend/' . $this->controllerName . '.php');
+                    }
 
                     break;
 
                 case 'none':
-                    $this->callSilent('make:controller', [
-                        'name' => $this->controllerName,
-                        '--model' => $this->modelNamespace,
-                        '--resource' => true,
-                    ]);
+                    if ($this->files->exists(
+                            $path = base_path() . '/app/Http/Controllers/' . $this->controllerName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Controller: use existing: ' . $this->controllerName . '.php');
+                    }
+
+                    $this->compileControllerStub($path);
 
                     $this->addToTable('Controller', $this->controllerName . '.php');
 
                     break;
 
                 default:
-                    $this->callSilent('make:controller', [
-                        'name' => $this->namespace . '/' . $this->controllerName,
-                        '--model' => $this->modelNamespace,
-                        '--resource' => true,
-                    ]);
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Controllers/' . $this->namespace .'/' . $this->controllerName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Controller: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
+                    }
+
+                    $this->compileControllerStub($path, $this->namespace);
 
                     $this->addToTable('Controller', $this->namespace . '/' . $this->controllerName . '.php');
 
@@ -339,9 +361,14 @@ class MakeEntity extends Command
      * @param String $path
      * @return void
      */
-    protected function compileControllerStub($path, $namespace)
+    protected function compileControllerStub($path, $namespace = '')
     {
-        $stub = $this->files->get(__DIR__ . '/stubs/controller.stub');
+        if ($namespace) {
+            $stub = $this->files->get(__DIR__ . '/stubs/controller.stub');
+        }
+        else {
+            $stub = $this->files->get(__DIR__ . '/stubs/controller.none.stub');
+        }
 
         $stub = str_replace('{{classNamespace}}', $namespace, $stub);
         $stub = str_replace('{{modelName}}', $this->modelName, $stub);
@@ -354,6 +381,8 @@ class MakeEntity extends Command
         $stub = str_replace('{{requestUpdateName}}', $this->requestUpdateName, $stub);
 
         $stub = str_replace('{{modelNameVariabel}}', camel_case($this->entity), $stub);
+
+        $this->makeDirectory($path);
 
         $this->files->put($path, $stub);
 
@@ -376,7 +405,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->error('Model Factory already exists: ' . $factory . '.php');
+                return $this->error('Model Factory: use existing: ' . $factory . '.php');
             }
 
             $this->compileFactoryStub($path);
@@ -445,7 +474,7 @@ class MakeEntity extends Command
                 'name' => $seederTable
             ]);
 
-            $this->addToTable('Seeder: Table', 'database/seeds/' . $seederTable . '.php');
+            $this->addToTable('Table Seeder', 'database/seeds/' . $seederTable . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
@@ -461,12 +490,12 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->error('Seeder: Example data already exists: ' . $seederExample . '.php');
+                return $this->error('Example Seeder: use existing: ' . $seederExample . '.php');
             }
 
             $this->compileExampleSeederStub($path);
 
-            $this->addToTable('Seeder: Example Data', 'database/seeds/examples/' . $seederExample . '.php');
+            $this->addToTable('Example Seeder', 'database/seeds/examples/' . $seederExample . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
@@ -521,6 +550,19 @@ class MakeEntity extends Command
             $this->addToTable('Test: Unit', 'tests/Unit/' . $test . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
+        }
+    }
+
+    /**
+     * Build the directory for the class if necessary.
+     *
+     * @param  string $path
+     * @return string
+     */
+    protected function makeDirectory($path)
+    {
+        if (! $this->files->isDirectory(dirname($path))) {
+            $this->files->makeDirectory(dirname($path), 0777, true, true);
         }
     }
 
