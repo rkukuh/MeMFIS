@@ -359,7 +359,12 @@ class MakeEntity extends Command
      */
     protected function compileControllerStub($path, $namespace = '')
     {
-        $stub = $this->files->get(__DIR__ . '/stubs/controller.stub');
+        if ($namespace) {
+            $stub = $this->files->get(__DIR__ . '/stubs/controller.stub');
+        }
+        else {
+            $stub = $this->files->get(__DIR__ . '/stubs/controller.none.stub');
+        }
 
         $stub = str_replace('{{classNamespace}}', $namespace, $stub);
         $stub = str_replace('{{modelName}}', $this->modelName, $stub);
