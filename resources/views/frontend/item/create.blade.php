@@ -139,10 +139,43 @@
                                             Photos @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.upload')
-                                            @slot('text', 'Photo')
-                                            @slot('name', 'photo')
-                                        @endcomponent
+                                        <div id="m_repeater_1">
+                                                <div class="" id="m_repeater_1">
+                                                    <div data-repeater-list="">
+                                                        <div data-repeater-item class="row">
+                                                            <div class="m-form__group row" style="margin-left: 15px">
+                                                                <table style="margin-right:10px">
+                                                                    <tr>
+                                                                        <td>
+                                                                            @component('frontend.common.input.upload')
+                                                                                @slot('text', 'Photo')
+                                                                                @slot('name', 'photo')
+                                                                            @endcomponent
+                                                                        </td>
+                                                                        <td>
+                                                                                <div data-repeater-delete="" class="btn-sm btn btn-danger"  >
+                                                                                        <span>
+                                                                                            <i class="la la-trash-o"></i>
+                                                                                            <span>Delete</span>
+                                                                                        </span>
+                                                                                    </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-form__group form-group row" style="margin-top:20px;margin-left:5px">
+                                                    <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                        <span>
+                                                            <i class="la la-plus"></i>
+                                                            <span>Add</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
