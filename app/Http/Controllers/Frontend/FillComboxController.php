@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Journal;
 use App\Models\Category;
+use App\Models\Currency;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,11 +15,11 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function accountcode()
+    public function accountCodes()
     {
-        $accountCode = Journal::pluck('code', 'id');
+        $accountCodes = Journal::pluck('code', 'id');
 
-        return json_encode($accountCode);
+        return json_encode($accountCodes);
 
     }
 
@@ -27,11 +28,24 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function category()
+    public function categories()
     {
-        $category = Category::pluck('name', 'id');
-        
-        return json_encode($category);
+        $categories = Category::pluck('name', 'id');
+
+        return json_encode($categories);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function currencies()
+    {
+        $currencies = Currency::pluck('name', 'id');
+
+        return json_encode($currencies);
 
     }
 }
