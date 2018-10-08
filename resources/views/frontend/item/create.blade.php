@@ -37,10 +37,9 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
-                                <h3 class="m-portlet__head-text">
-                                    @include('frontend.common.label.create-new')
-                                    Item
-                                </h3>
+                                @include('frontend.common.label.create-new')
+
+                                <h3 class="m-portlet__head-text">Item</h3>
                             </div>
                         </div>
                     </div>
@@ -187,6 +186,8 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
                                     Item &rsaquo; UoM (Unit of Measurement)
                                 </h3>
@@ -224,8 +225,10 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
-                                        Item &rsaquo; Min/Max Stock
+                                    Item &rsaquo; Min/Max Stock
                                 </h3>
                             </div>
                         </div>
