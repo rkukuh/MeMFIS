@@ -121,14 +121,14 @@
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                         @component('frontend.common.input.checkbox')
-                                            @slot('text', 'IsPPn')
+                                            @slot('text', 'Dikenai PPN?')
                                             @slot('name', 'isppn')
                                         @endcomponent
 
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                         @component('frontend.common.input.checkbox')
-                                            @slot('text', 'IsStock')
+                                            @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
                                         @endcomponent
                                     </div>
@@ -200,7 +200,6 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('size', 'md')
                                             @slot('id', 'item-unit')
-                                            @slot('color', 'primary')
                                             @slot('attribute', 'disabled')
                                             @slot('text', 'Add Item Unit')
                                             @slot('data_target', '#modal_itemsunit')
@@ -240,7 +239,6 @@
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('size', 'md')
                                                 @slot('id', 'item-stock')
-                                                @slot('color', 'primary')
                                                 @slot('attribute', 'disabled')
                                                 @slot('text', 'Add Item Stock')
                                                 @slot('data_target', '#modal_itemstock')
