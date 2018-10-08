@@ -121,12 +121,6 @@
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                         @component('frontend.common.input.checkbox')
-                                            @slot('text', 'Active')
-                                            @slot('name', 'active')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
                                             @slot('text', 'IsPPn')
                                             @slot('name', 'isppn')
                                         @endcomponent
