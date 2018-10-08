@@ -165,7 +165,6 @@
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                        {{-- TODO: Wrap semua action buttons dalam .flex > .action-buttons --}}
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
