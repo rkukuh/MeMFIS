@@ -7,7 +7,7 @@
             <div class="" id="m_repeater_1">
                 <div data-repeater-list="">
                     <div data-repeater-item class="row">
-                        <div class="m-form__group row">
+                        <div class="m-form__group row" style="margin-top:-20px">
                             <div class="col-md-0">
                                 @component('frontend.common.input.number')
                                     @slot('text', 'Phone')
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="m-form__group form-group row">
+            <div class="m-form__group form-group row" style="margin-top:-40px">
                 <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
                     <span>
                         <i class="la la-plus"></i>
@@ -49,7 +49,7 @@
             <div class="" id="m_repeater_1a">
                 <div data-repeater-list="">
                     <div data-repeater-item class="row">
-                        <div class="m-form__group row">
+                        <div class="m-form__group row" style="margin-top:-20px">
                             <div class="col-md-0">
                                 @component('frontend.common.input.email')
                                     @slot('text', 'Email')
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            <div class="m-form__group form-group row">
+            <div class="m-form__group form-group row" style="margin-top:-40px">
                 <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
                     <span>
                         <i class="la la-plus"></i>
@@ -92,7 +92,7 @@
         <div id="m_repeater_1b">
             <div class="" id="m_repeater_1b">
                 <div data-repeater-list="">
-                    <div data-repeater-item class="row">
+                    <div data-repeater-item class="row" style="margin-top:-40px">
                         <div class="m-form__group row">
                             <div class="col-md-0">
                                 @component('frontend.common.input.text')
@@ -113,7 +113,7 @@
                     </div>
                 </div>
             </div>
-            <div class="m-form__group form-group row">
+            <div class="m-form__group form-group row" style="margin-top:-20px">
                 <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
                     <span>
                         <i class="la la-plus"></i>
