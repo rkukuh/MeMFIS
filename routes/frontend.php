@@ -20,6 +20,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
 
+        // TODO: Route for Currency
+
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 

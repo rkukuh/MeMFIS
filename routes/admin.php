@@ -28,6 +28,7 @@ Route::name('admin.')->group(function () {
         /** FINANCE */
 
         Route::resource('bank', 'BankController');
+        Route::resource('currency', 'CurrencyController');
         Route::resource('bank-account', 'BankAccountController');
 
     });
