@@ -4,7 +4,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="TitleModalCustomer">
-                    Create new: Min/Max Stock
+                    @include('frontend.common.label.create-new')
+                    Min/Max Stock
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
