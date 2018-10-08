@@ -459,7 +459,7 @@ class MakeEntity extends Command
                 'name' => $seederTable
             ]);
 
-            $this->addToTable('Seeder: Table', 'database/seeds/' . $seederTable . '.php');
+            $this->addToTable('Table Seeder', 'database/seeds/' . $seederTable . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
@@ -475,12 +475,12 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->error('Seeder: Example data: use existing: ' . $seederExample . '.php');
+                return $this->error('Example Seeder: use existing: ' . $seederExample . '.php');
             }
 
             $this->compileExampleSeederStub($path);
 
-            $this->addToTable('Seeder: Example Data', 'database/seeds/examples/' . $seederExample . '.php');
+            $this->addToTable('Example Seeder', 'database/seeds/examples/' . $seederExample . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
