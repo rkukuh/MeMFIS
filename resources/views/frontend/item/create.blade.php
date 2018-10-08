@@ -163,21 +163,28 @@
                                         @endcomponent
                                     </div>
                                 </div>
-                                <div class="form-group m-form__group row ">
+                                <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                        @component('frontend.common.buttons.submit')
-                                            @slot('size', 'md')
-                                            @slot('class', 'add22')
-                                        @endcomponent
+                                        {{-- TODO: Posisi action buttons di sebelah kanan (konsistensi) --}}
+                                        <div class="m-grid">
+                                            <div class="m-grid-row">
+                                                <div class="m-grid-col m-grid-col-md-12 m-grid-col-right">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('size', 'md')
+                                                        @slot('class', 'add22')
+                                                    @endcomponent
 
-                                        @component('frontend.common.buttons.reset')
-                                            @slot('size', 'md')
-                                        @endcomponent
+                                                    @component('frontend.common.buttons.reset')
+                                                        @slot('size', 'md')
+                                                    @endcomponent
 
-                                        @component('frontend.common.buttons.close')
-                                            @slot('size', 'md')
-                                            @slot('data_dismiss', 'modal')
-                                        @endcomponent
+                                                    @component('frontend.common.buttons.close')
+                                                        @slot('size', 'md')
+                                                        @slot('data_dismiss', 'modal')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
