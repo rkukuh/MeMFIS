@@ -94,6 +94,8 @@ class MakeEntity extends Command
                 $this->makeModel();
 
             case 'Use existing model':
+
+            default:
                 $this->makeMigration();
                 $this->makeRequest();
                 $this->makeController();
@@ -105,9 +107,6 @@ class MakeEntity extends Command
                 $this->printReport();
                 $this->printAdditionalSteps();
 
-                break;
-
-            default:
                 break;
         }
     }
