@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Item Create
+                                    Create new: Item
                                 </h3>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Item Unit Datalist
+                                    Item &rsaquo; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
@@ -196,13 +196,13 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                    <div class="col-xl-4 order-1 order-xl-2">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('size', 'md')
-                                            @slot('id', 'item-unit')
+                                            @slot('id', 'item-uom')
+                                            @slot('text', 'Add UoM')
                                             @slot('attribute', 'disabled')
-                                            @slot('text', 'Add Item Unit')
-                                            @slot('data_target', '#modal_itemsunit')
+                                            @slot('data_target', '#modal_uom')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -224,37 +224,34 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Item Stock
+                                        Item &rsaquo; Min/Max Stock
                                 </h3>
                             </div>
                         </div>
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <div class="m-portlet__body">
-                                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                    <div class="row align-items-center">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-4 order-1 order-xl-2">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('size', 'md')
+                                            @slot('id', 'item-stock')
+                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Add Item Stock')
+                                            @slot('data_target', '#modal_itemstock')
+                                        @endcomponent
 
-                                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                            @component('frontend.common.buttons.create-new')
-                                                @slot('size', 'md')
-                                                @slot('id', 'item-stock')
-                                                @slot('attribute', 'disabled')
-                                                @slot('text', 'Add Item Stock')
-                                                @slot('data_target', '#modal_itemstock')
-                                            @endcomponent
-
-                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                        </div>
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
-
-                                @include('frontend.storage.modal')
-                                @include('frontend.category.modal')
-                                @include('frontend.item.storage.modal')
-
-                                <div class="m_datatable2" id="second"></div>
                             </div>
+
+                            @include('frontend.storage.modal')
+                            @include('frontend.category.modal')
+                            @include('frontend.item.storage.modal')
+
+                            <div class="m_datatable2" id="second"></div>
                         </div>
                     </div>
                 </div>
