@@ -20,9 +20,9 @@
                                 </label>
 
                                 @component('frontend.common.input.select')
+                                    @slot('id', 'storage')
                                     @slot('text', 'Storage')
                                     @slot('name', 'storage')
-                                    @slot('id', 'storage')
                                     @slot('style', 'width:100%')
                                 @endcomponent
 
