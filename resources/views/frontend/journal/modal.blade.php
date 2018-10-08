@@ -81,19 +81,27 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <div id="button-div">
-                            @component('frontend.common.buttons.submit')
-                                @slot('size', 'md')
-                            @endcomponent
+                        <div class="flex">
+                            <div class="action-buttons">
+                                    <div class="flex">
+                                        <div class="action-buttons">
+                                                <div id="button-div">
+                                                        @component('frontend.common.buttons.submit')
+                                                            @slot('size', 'md')
+                                                        @endcomponent
+                                                    </div>
+                                                        @component('frontend.common.buttons.reset')
+                                                            @slot('size', 'md')
+                                                        @endcomponent
+                                
+                                                        @component('frontend.common.buttons.close')
+                                                            @slot('size', 'md')
+                                                            @slot('data_dismiss', 'modal')
+                                                        @endcomponent                                
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
-                        @component('frontend.common.buttons.reset')
-                            @slot('size', 'md')
-                        @endcomponent
-
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
                     </div>
                 </form>
 
