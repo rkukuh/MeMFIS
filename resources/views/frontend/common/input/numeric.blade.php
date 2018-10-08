@@ -13,5 +13,5 @@
 <div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>
 
 <span class="m-form__help">
-    {{ $text or '' }}
+    {{ $help_text or '' }}
 </span>

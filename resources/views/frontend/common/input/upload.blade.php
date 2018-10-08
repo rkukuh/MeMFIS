@@ -12,3 +12,7 @@
         {{ $text or '' }}
     </label>
 </div>
+
+<span class="m-form__help">
+    {{ $help_text or '' }}
+</span>
