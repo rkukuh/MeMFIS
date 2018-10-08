@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemStorageTable extends Migration
+class CreateItemUnitTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,18 @@ class CreateItemStorageTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_storage', function (Blueprint $table) {
-            $table->increments('id');
-            $table->char('uuid', 36)->unique();
+        Schema::create('item_unit', function (Blueprint $table) {
             $table->unsignedInteger('item_id');
-            $table->unsignedInteger('storage_id');
-            $table->double('min', 8, 2);
-            $table->double('max', 8, 2);
+            $table->unsignedInteger('unit_id');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('item_id')
                   ->references('id')->on('items')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
 
-            $table->foreign('storage_id')
-                  ->references('id')->on('storages')
+            $table->foreign('unit_id')
+                  ->references('id')->on('units')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
         });
@@ -42,6 +37,6 @@ class CreateItemStorageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_storage');
+        Schema::dropIfExists('item_unit');
     }
 }
