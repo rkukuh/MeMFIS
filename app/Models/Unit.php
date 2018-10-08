@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class ItemUnit extends MemfisModel
+class Unit extends MemfisModel
 {
     //
 }

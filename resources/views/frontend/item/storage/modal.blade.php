@@ -1,9 +1,11 @@
-<div class="modal fade" id="modal_itemstock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_minmaxstock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TitleModalCustomer">Item Stock</h5>
+                @include('frontend.common.label.create-new')
+
+                <h5 class="modal-title" id="TitleModalCustomer">Min/Max Stock</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,9 +22,9 @@
                                 </label>
 
                                 @component('frontend.common.input.select')
+                                    @slot('id', 'storage')
                                     @slot('text', 'Storage')
                                     @slot('name', 'storage')
-                                    @slot('id', 'storage')
                                     @slot('style', 'width:100%')
                                 @endcomponent
 
@@ -39,7 +41,7 @@
                                     Max @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.number')
+                                @component('frontend.common.input.numeric')
                                     @slot('text', 'Max')
                                     @slot('name', 'max')
                                 @endcomponent
@@ -49,7 +51,7 @@
                                     Min @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.number')
+                                @component('frontend.common.input.numeric')
                                     @slot('text', 'Min')
                                     @slot('name', 'min')
                                 @endcomponent

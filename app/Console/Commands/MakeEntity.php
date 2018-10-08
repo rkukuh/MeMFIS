@@ -105,6 +105,7 @@ class MakeEntity extends Command
 
     protected function checkExistingModel()
     {
+        $modelChoice = '';
         $this->modelName = $this->entity;
         $this->modelNamespace = 'Models/' . $this->modelName;
 
@@ -177,7 +178,7 @@ class MakeEntity extends Command
             $migration = 'create_' . strtolower($this->pluralizedEntity) . '_table';
 
             $this->callSilent('make:migration', [
-                'name' => $migration . '.php',
+                'name' => $migration,
                 '--create' => strtolower($this->pluralizedEntity),
             ]);
 

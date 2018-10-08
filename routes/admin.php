@@ -23,11 +23,13 @@ Route::name('admin.')->group(function () {
 
         /** MASTER */
 
+        Route::resource('unit', 'UnitController');
         Route::resource('department', 'DepartmentController');
 
         /** FINANCE */
 
         Route::resource('bank', 'BankController');
+        Route::resource('currency', 'CurrencyController');
         Route::resource('bank-account', 'BankAccountController');
 
     });

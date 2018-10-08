@@ -4,7 +4,7 @@
     name="{{ $name or 'create' }}"
     value="{{ $value or '' }}"
     class="btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air
-           btn-{{ $color or 'default' }}
+           btn-{{ $color or 'primary' }}
            btn-{{ $size or 'md' }}
                {{ $class or '' }}"
     style="{{ $style or '' }}"

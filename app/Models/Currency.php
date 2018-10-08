@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class ItemStock extends MemfisModel
+class Currency extends MemfisModel
 {
     //
 }

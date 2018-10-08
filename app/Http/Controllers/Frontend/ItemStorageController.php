@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\model\ListUtil;
-use App\Models\ItemStock;
+use App\Models\ItemStorage;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\ItemStockStore;
-use App\Http\Requests\Frontend\ItemStockUpdate;
+use App\Http\Requests\Frontend\ItemStorageStore;
+use App\Http\Requests\Frontend\ItemStorageUpdate;
 
-class ItemStockController extends Controller
+class ItemStorageController extends Controller
 {
         /**
      * Show data from model for DataTable.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getItemStocks()
+    public function getItemStorages()
     {
-        $items = ItemStock::All();
+        $data = ItemStorage::All();
 
-        $data = $alldata = json_decode($items);
+        $data = $alldata = json_decode($data);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -131,67 +131,67 @@ class ItemStockController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ItemStockStore  $request
+     * @param  \App\Http\Requests\Frontend\ItemStorageStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemStockStore $request)
+    public function store(ItemStorageStore $request)
     {
-        $itemStock = ItemStock::create([
+        $itemStorage = ItemStorage::create([
             // 'name' => $request->name,
         ]);
 
-        return response()->json($itemStock);
+        return response()->json($itemStorage);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ItemStock  $itemStock
+     * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function show(ItemStock $itemStock)
+    public function show(ItemStorage $itemStorage)
     {
-        return response()->json($itemStock);
+        return response()->json($itemStorage);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ItemStock  $itemStock
+     * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function edit(ItemStock $itemStock)
+    public function edit(ItemStorage $itemStorage)
     {
-        return response()->json($itemStock);
+        return response()->json($itemStorage);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ItemStockUpdate  $request
-     * @param  \App\Models\ItemStock  $itemStock
+     * @param  \App\Http\Requests\Frontend\ItemStorageUpdate  $request
+     * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemStockUpdate $request, ItemStock $itemStock)
+    public function update(ItemStorageUpdate $request, ItemStorage $itemStorage)
     {
-        $itemStock = ItemStock::find($itemStock);
+        $itemStorage = ItemStorage::find($itemStorage);
         // $Item->name = $request->name;
-        $itemStock->save();
+        $itemStorage->save();
 
-        return response()->json($itemStock);
+        return response()->json($itemStorage);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ItemStock  $itemStock
+     * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemStock $itemStock)
+    public function destroy(ItemStorage $itemStorage)
     {
-        $itemStock->delete();
+        $itemStorage->delete();
 
-        return response()->json($itemStock);
+        return response()->json($itemStorage);
     }
 
     /**

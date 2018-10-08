@@ -29,11 +29,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('item', 'ItemController');
         Route::get('/get-items','ItemController@getItems')->name('get-items');
 
-        Route::resource('item-stock', 'ItemStockController');
-        Route::get('/get-item-stocks','ItemStockController@getItemStocks')->name('get-itemstocks');
+        Route::resource('item-storage', 'ItemStorageController');
+        Route::get('/get-item-storages','ItemStorageController@getItemStorages')->name('get-item-storages');
 
         Route::resource('item-unit', 'ItemUnitController');
-        Route::get('/get-item-units','ItemUnitController@getItemUnits')->name('get-itemunits');
+        Route::get('/get-uom','ItemUnitController@getUoM')->name('get-uom');
 
         Route::resource('storage', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');

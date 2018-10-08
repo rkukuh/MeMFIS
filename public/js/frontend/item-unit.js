@@ -6,7 +6,7 @@ let ItemUnit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-item-units',
+                        url: '/get-uom',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -42,13 +42,7 @@ let ItemUnit = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
-                    title: 'Code',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 60
-                },
+            columns: [
                 {
                     field: 'id_unit',
                     title: 'Unit',
@@ -59,34 +53,6 @@ let ItemUnit = {
                 {
                     field: 'qty',
                     title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'purchasingprice',
-                    title: 'PurchasingPrice',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'sellingprice2',
-                    title: 'SellingPrice2',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'sellingprice3',
-                    title: 'SellingPrice3',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'sellingprice4',
-                    title: 'SellingPrice4',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -127,7 +93,7 @@ let ItemUnit = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/itemunit',
+                url: '/item-unit',
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name
@@ -166,7 +132,7 @@ let ItemUnit = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/itemunit/' + triggerid + '/edit',
+                url: '/item-unit/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('id').value = data.id;
                     document.getElementById('name').value = data.name;
@@ -198,7 +164,7 @@ let ItemUnit = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/itemunit/' + triggerid,
+                url: '/item-unit/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name
@@ -237,7 +203,7 @@ let ItemUnit = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/itemunit/' + triggerid,
+                url: '/item-unit/' + triggerid,
                 success: function (data) {
                     document.getElementById('TitleModalCustomer').innerHTML = 'Detail Customer #ID-' + triggerid;
                     document.getElementById('name').value = data.name;
@@ -273,7 +239,7 @@ let ItemUnit = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/itemunit/' + triggerid + '',
+                        url: '/item-unit/' + triggerid + '',
                         success: function (data) {
                             toastr.success(
                                 'Data Berhasil Dihapus.',
