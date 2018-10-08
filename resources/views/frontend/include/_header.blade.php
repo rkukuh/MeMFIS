@@ -23,4 +23,6 @@
 
 <link rel="shortcut icon" href="{{ asset('assets/metronic/demo/default/media/img/logo/favicon.ico') }}">
 
+<link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
+
 @stack('header-scripts')
