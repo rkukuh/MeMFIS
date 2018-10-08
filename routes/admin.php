@@ -23,6 +23,7 @@ Route::name('admin.')->group(function () {
 
         /** MASTER */
 
+        Route::resource('unit', 'UnitController');
         Route::resource('department', 'DepartmentController');
 
         /** FINANCE */

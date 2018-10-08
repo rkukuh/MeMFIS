@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Unit;
 use App\Models\Journal;
 use App\Models\Category;
 use App\Models\Currency;
@@ -33,6 +34,19 @@ class FillComboxController extends Controller
         $categories = Category::pluck('name', 'id');
 
         return json_encode($categories);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function units()
+    {
+        $units = Unit::pluck('name', 'id');
+
+        return json_encode($units);
 
     }
 
