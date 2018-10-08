@@ -7,8 +7,7 @@
 >
 
     <i class="la {{ $icon or 'la-th-list' }}"></i>
-
-    {{ $text or 'Datalist' }}
+    <span>{{ $text or 'Datalist' }}</span>
 </span>
 
 @push('header-scripts')

@@ -7,8 +7,7 @@
 >
 
     <i class="la {{ $icon or 'la-file-o' }}"></i>
-
-    {{ $text or 'Create New' }}
+    <span>{{ $text or 'Create New' }}</span>
 </span>
 
 @push('header-scripts')
