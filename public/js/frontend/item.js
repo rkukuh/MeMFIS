@@ -138,7 +138,7 @@ let Item = {
             let formData = registerForm.serialize();
 
             document.getElementById('item-uom').removeAttribute('disabled');
-            document.getElementById('item-stock').removeAttribute('disabled');
+            document.getElementById('item-minmaxstock').removeAttribute('disabled');
 
             $.ajax({
                 headers: {

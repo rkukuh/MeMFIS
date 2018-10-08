@@ -236,10 +236,10 @@
                                     <div class="col-xl-4 order-1 order-xl-2">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('size', 'md')
-                                            @slot('id', 'item-stock')
+                                            @slot('id', 'item-minmaxstock')
                                             @slot('attribute', 'disabled')
-                                            @slot('text', 'Add Item Stock')
-                                            @slot('data_target', '#modal_itemstock')
+                                            @slot('text', 'Add Min/Max Stock')
+                                            @slot('data_target', '#modal_minmaxstock')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
