@@ -115,19 +115,18 @@ class MakeEntity extends Command
             $this->error('Model already exists: ' . $this->modelNamespace . '.php');
 
             $modelChoice = $this->choice('What should we do?', [
-                'Create new model',
+                'Overwrite existing model',
                 'Use existing model',
                 'Abort'
             ]);
 
-            if ($modelChoice == 'Create new model') {
+            if ($modelChoice == 'Overwrite existing model') {
                 $this->makeModel();
             }
 
             if ($modelChoice == 'Use existing model') {
-                $answer = $this->ask('Where your model resides (Namespace, if any + File name without .php extension)?');
-
-                $this->modelNamespace = $answer;
+                $this->line('Ok, we will use this existing model:');
+                $this->info($this->modelPath);
             }
         }
 
