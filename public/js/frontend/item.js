@@ -137,7 +137,7 @@ let Item = {
             let name = $('input[name=name]').val();
             let formData = registerForm.serialize();
 
-            document.getElementById('item-unit').removeAttribute('disabled');
+            document.getElementById('item-uom').removeAttribute('disabled');
             document.getElementById('item-stock').removeAttribute('disabled');
 
             $.ajax({
