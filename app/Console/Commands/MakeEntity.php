@@ -382,6 +382,8 @@ class MakeEntity extends Command
 
         $stub = str_replace('{{modelNameVariabel}}', camel_case($this->entity), $stub);
 
+        $this->makeDirectory($path);
+
         $this->files->put($path, $stub);
 
         return $this;
@@ -548,6 +550,19 @@ class MakeEntity extends Command
             $this->addToTable('Test: Unit', 'tests/Unit/' . $test . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
+        }
+    }
+
+    /**
+     * Build the directory for the class if necessary.
+     *
+     * @param  string $path
+     * @return string
+     */
+    protected function makeDirectory($path)
+    {
+        if (! $this->files->isDirectory(dirname($path))) {
+            $this->files->makeDirectory(dirname($path), 0777, true, true);
         }
     }
 
