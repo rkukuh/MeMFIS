@@ -251,9 +251,9 @@
                                 </div>
                             </div>
 
+                            @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
-                            @include('frontend.item.storage.modal')
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
