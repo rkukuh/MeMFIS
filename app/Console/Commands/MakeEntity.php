@@ -78,29 +78,38 @@ class MakeEntity extends Command
 
         $this->copyright();
 
+        $this->comment('[START] Creating new entity.....');
+
         $this->entity    = $this->argument('name');
         $this->namespace = $this->option('namespace');
 
-        if ($this->checkExistingModel() == 'Abort') {
-            $this->line('Aborted.');
-            $this->info('');
+        switch ($this->checkExistingModel()) {
+            case 'Abort':
+                $this->line('Aborted.');
+                $this->info('');
 
-            return;
+                break;
+
+            case 'Overwrite existing model':
+                $this->makeModel();
+
+            case 'Use existing model':
+                $this->makeMigration();
+                $this->makeRequest();
+                $this->makeController();
+                $this->makeFactory();
+                $this->makePolicy();
+                $this->makeSeeder();
+                $this->makeTest();
+
+                $this->printReport();
+                $this->printAdditionalSteps();
+
+                break;
+
+            default:
+                break;
         }
-
-        $this->comment('[START] Creating new entity.....');
-
-        $this->makeModel();
-        $this->makeMigration();
-        $this->makeRequest();
-        $this->makeController();
-        $this->makeFactory();
-        $this->makePolicy();
-        $this->makeSeeder();
-        $this->makeTest();
-
-        $this->printReport();
-        $this->printAdditionalSteps();
     }
 
     protected function checkExistingModel()
@@ -119,15 +128,6 @@ class MakeEntity extends Command
                 'Use existing model',
                 'Abort'
             ]);
-
-            if ($modelChoice == 'Overwrite existing model') {
-                $this->makeModel();
-            }
-
-            if ($modelChoice == 'Use existing model') {
-                $this->line('Ok, we will use this existing model:');
-                $this->info($this->modelPath);
-            }
         }
 
         return $modelChoice;
