@@ -9,6 +9,7 @@ Route::name('component.')->group(function () {
     Route::get('get-accountcodes', 'Frontend\FillComboxController@accountCodes')->name('get-accountcodes');    
     Route::get('get-units', 'Frontend\FillComboxController@units')->name('get-units');    
     Route::get('get-currencies', 'Frontend\FillComboxController@currencies')->name('get-currencies');    
+    Route::get('get-storages', 'Frontend\FillComboxController@storages')->name('get-storages');    
 
 });
 
