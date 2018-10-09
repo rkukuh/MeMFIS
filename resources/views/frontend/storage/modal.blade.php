@@ -3,6 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                @include('frontend.common.label.create-new')
                 <h5 class="modal-title" id="TitleModalCustomer">Storage</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -22,7 +23,6 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
-                                    @slot('help_text','code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -33,7 +33,6 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
-                                    @slot('help_text','name')
                                 @endcomponent
                             </div>
                         </div>
@@ -47,7 +46,6 @@
                                     @slot('rows', '3')
                                     @slot('text', 'Description')
                                     @slot('name', 'description')
-                                    @slot('help_text','description')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -56,13 +54,12 @@
                                 </label>
 
                                 @component('frontend.common.input.select')
+                                    @slot('id', 'accountcode')
                                     @slot('text', 'AccountCode')
                                     @slot('name', 'accountcode')
-                                    @slot('id', 'accountcode')
                                     @slot('style', 'width:100%')
-                                    @slot('help_text','accountcode')
                                 @endcomponent
-                                                </div>
+                            </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -73,8 +70,6 @@
                                 @component('frontend.common.input.checkbox')
                                     @slot('text', 'Active')
                                     @slot('name', 'active')
-                                    @slot('help_text', 'Active')
-                                    @slot('help_text','active')
                                 @endcomponent
                             </div>
                         </div>
@@ -83,9 +78,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @include('frontend.common.buttons.submit')
-            
                                 @include('frontend.common.buttons.reset')
-            
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>
