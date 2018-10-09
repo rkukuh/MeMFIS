@@ -41,7 +41,6 @@ class CreateItemsTable extends Migration
             $table->index('code');
             $table->index('name');
             $table->index('barcode');
-            $table->index('description');
         });
     }
 
