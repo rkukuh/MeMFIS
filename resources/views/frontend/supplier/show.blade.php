@@ -86,11 +86,13 @@
                             <div class="m-form__actions m-form__actions--solid">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        @component('frontend.common.buttons.back')
-                                            @slot('size', 'md')
-                                            @slot('color', 'primary')
-                                            @slot('href', route('frontend.supplier.index'))
-                                        @endcomponent
+                                        <div class="flex">
+                                            <div class="action-buttons">
+                                                @component('frontend.common.buttons.back')
+                                                    @slot('href', route('frontend.supplier.index'))
+                                                @endcomponent        
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

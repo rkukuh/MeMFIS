@@ -1,8 +1,24 @@
 .flex {
     display: flex;
     justify-content: flex-end;
+
 }
 
 .action-buttons {
-    /* flex-direction: row-reverse; */
+    flex-direction: row-reverse;
 }
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+  
+.child:nth-child(3) {
+    order: -1;
+}
+
+/* <div class="container">
+        <div class="child">1</div>
+        <div class="child">2</div>
+        <div class="child">3</div>
+</div> */

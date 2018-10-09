@@ -11,7 +11,7 @@
     data-dismiss="{{ $data_dismiss or 'modal' }}">
 
     <span>
-        <i class="la la-{{ $icon or 'close' }}"></i>
+        <i class="fa {{ $icon or 'fa-times' }}"></i>
         <span>{{ $text or 'Close' }}</span>
     </span>
 </button>

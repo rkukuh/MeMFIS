@@ -23,6 +23,7 @@
                                     @slot('id', 'customer')
                                     @slot('text', 'Customer')
                                     @slot('name', 'customer')
+                                    @slot('help_text','customer')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -35,6 +36,7 @@
                                     @slot('id', 'currency')
                                     @slot('text', 'Currency')
                                     @slot('name', 'currency')
+                                    @slot('help_text','currency')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -47,8 +49,9 @@
 
                                 @component('frontend.common.input.datepicker')
                                     @slot('rows', '3')
-                                    @slot('name', 'description')
-                                    @slot('text', 'Description')
+                                    @slot('name', 'valid')
+                                    @slot('text', 'valid')
+                                    @slot('help_text','valid')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -60,6 +63,7 @@
                                     @slot('rows', '3')
                                     @slot('name', 'subject')
                                     @slot('text', 'Subject')
+                                    @slot('help_text','subject')
                                 @endcomponent
                             </div>
                         </div>
@@ -80,6 +84,7 @@
                                     @slot('size', 'sm')
                                     @slot('text', 'add Workpackage')
                                     @slot('data_target', '#modal_workpackage')
+                                    @slot('style', 'margin-top: 10px;')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -92,6 +97,7 @@
                                     @slot('text', 'Additional')
                                     @slot('name', 'additional')
                                     @slot('style', 'width:100%')
+                                    @slot('help_text','additional')
                                 @endcomponent
                             </div>
                         </div>
@@ -107,19 +113,15 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.submit')
-                            @slot('size', 'md')
-                            @slot('class', 'add')
-                        @endcomponent
-
-                        @component('frontend.common.buttons.reset')
-                            @slot('size', 'md')
-                        @endcomponent
-
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
+                        <div class="flex">
+                            <div class="action-buttons">
+                                @include('frontend.common.buttons.submit')
+            
+                                @include('frontend.common.buttons.reset')
+            
+                                @include('frontend.common.buttons.close')        
+                            </div>
+                        </div>
                     </div>
                 </form>
 

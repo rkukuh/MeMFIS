@@ -44,7 +44,9 @@ class FillComboxController extends Controller
      */
     public function units()
     {
-        $units = Unit::pluck('name', 'id');
+        $units = Unit::ofQuantity()
+                     ->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
+                     ->pluck('name', 'id');
 
         return json_encode($units);
 
@@ -57,7 +59,8 @@ class FillComboxController extends Controller
      */
     public function currencies()
     {
-        $currencies = Currency::pluck('name', 'id');
+        $currencies = Currency::selectRaw('id, CONCAT(name, " (", symbol ,")") as full_name')
+        ->pluck('full_name', 'id');
 
         return json_encode($currencies);
 

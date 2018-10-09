@@ -27,12 +27,14 @@
                                                             @slot('text', 'fax')
                                                             @slot('name', 'name')
                                                             @slot('placeholder', 'fax')
+                                                            @slot('help_text','fax')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-md-3">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('text', 'Primary')
                                                             @slot('name', 'is_primary')
+                                                            @slot('help_text','primary')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-md-1">
@@ -62,6 +64,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
+                                    @slot('help_text','name')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -84,19 +87,15 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.submit')
-                            @slot('size', 'md')
-                            @slot('class', 'add')
-                        @endcomponent
-
-                        @component('frontend.common.buttons.reset')
-                            @slot('size', 'md')
-                        @endcomponent
-
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
+                        <div class="flex">
+                            <div class="action-buttons">
+                                @include('frontend.common.buttons.submit')
+            
+                                @include('frontend.common.buttons.reset')
+            
+                                @include('frontend.common.buttons.close')
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

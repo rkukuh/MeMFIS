@@ -7,6 +7,7 @@
             @slot('id', 'country')
             @slot('text', 'Country')
             @slot('name', 'country')
+            @slot('help_text','country')
             @slot('style', 'width:100%')
         @endcomponent
     </div>
@@ -18,6 +19,7 @@
             @slot('id', 'city')
             @slot('text', 'City')
             @slot('name', 'city')
+            @slot('help_text','city')
             @slot('style', 'width:100%')
         @endcomponent
     </div>
@@ -31,7 +33,7 @@
             @slot('rows', '3')
             @slot('text', 'Address')
             @slot('name', 'address')
-            @slot('placeholder', 'Address')
+            @slot('help_text','address')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -41,6 +43,7 @@
         @component('frontend.common.input.text')
             @slot('text', 'ZipCode')
             @slot('name', 'zipcpde')
+            @slot('help_text','zipcode')
         @endcomponent
     </div>
 </div>

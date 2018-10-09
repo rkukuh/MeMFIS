@@ -63,8 +63,6 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'md')
-                                            @slot('color', 'primary')
                                             @slot('text', 'Add Task Card')
                                             @slot('data_target', '#modal_taskcard')
                                         @endcomponent

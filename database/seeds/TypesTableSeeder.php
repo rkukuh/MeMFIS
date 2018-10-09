@@ -20,5 +20,6 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfJournal::class);
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfRegulator::class);
+        $this->call(TypesOfUnit::class);
     }
 }

@@ -9,6 +9,7 @@
             @slot('name', 'name')
             @slot('value', 'text')
             @slot('editable', 'readonly')
+            @slot('help_text','name')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -21,6 +22,8 @@
             @slot('name', 'code')
             @slot('value', 'text')
             @slot('editable', 'readonly')
+            @slot('help_text','code')
+
         @endcomponent
     </div>
 </div>
@@ -35,6 +38,7 @@
             @slot('name', 'npwp')
             @slot('value', 'text')
             @slot('editable', 'readonly')
+            @slot('help_text','npwp')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -48,7 +52,7 @@
             @slot('name', 'npwpaddress')
             @slot('text', 'NPWP Address')
             @slot('editable', 'readonly')
-            @slot('placeholder', 'NPWP Address')
+            @slot('help_text','npwp address')
         @endcomponent
     </div>
 </div>
@@ -63,6 +67,7 @@
             @slot('name', 'top')
             @slot('value', 'text')
             @slot('editable', 'readonly')
+            @slot('help_text','top')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -75,6 +80,7 @@
             @slot('value', 'text')
             @slot('name', 'id_type')
             @slot('editable', 'readonly')
+            @slot('help_text','type')
         @endcomponent
     </div>
 </div>
@@ -89,6 +95,7 @@
             @slot('text', 'Number')
             @slot('name', 'id_number')
             @slot('editable', 'readonly')
+            @slot('help_text','number')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -102,6 +109,7 @@
             @slot('value', 'checked')
             @slot('color', 'disabled')
             @slot('editable', 'disabled')
+            @slot('help_text','active')
         @endcomponent
     </div>
 
@@ -117,62 +125,7 @@
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
             @slot('editable', 'readonly')
+            @slot('help_text','accountcode')
         @endcomponent
     </div>
-    {{-- <div class="col-sm-6 col-md-6 col-lg-6">
-        <label class="form-control-label">
-            Leveling @include('frontend.common.label.optional')
-        </label>
-
-        @component('frontend.common.input.text')
-            @slot('value', 'text')
-            @slot('text', 'Leveling')
-            @slot('name', 'leveling')
-            @slot('editable', 'readonly')
-        @endcomponent
-    </div> --}}
 </div>
-{{-- <div class="form-group m-form__group row ">
-    <div class="col-sm-6 col-md-6 col-lg-6">
-        <label class="form-control-label">
-            xType @include('frontend.common.label.optional')
-        </label>
-
-        <div id="m_repeater_1c">
-            <div class="" id="m_repeater_1c">
-                <div data-repeater-list="">
-                    <div data-repeater-item class="row">
-                        <div class="m-form__group row">
-                            <div class="col-md-0">
-                                @component('frontend.common.input.text')
-                                    @slot('text', 'xType')
-                                    @slot('name', 'xtype')
-                                @endcomponent
-                            </div>
-                            <div class="col-md-1">
-                                <div data-repeater-delete="" class="btn-sm btn btn-danger">
-                                    <span>
-                                        <i class="la la-trash-o"></i>
-                                        <span>Delete</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="m-form__group form-group row">
-                <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
-                    <span>
-                        <i class="la la-plus"></i>
-                        <span>Add</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="form-control-feedback text-danger" id="phone-error"></div>
-        <span class="m-form__help">
-            xType
-        </span>
-    </div>
-</div> --}}

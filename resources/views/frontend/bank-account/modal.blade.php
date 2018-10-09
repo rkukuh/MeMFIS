@@ -20,6 +20,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Holder Name')
                                     @slot('name', 'holder_name')
+                                    @slot('help_text','holder name')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -30,22 +31,19 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Account No')
                                     @slot('name', 'account_no')
+                                    @slot('help_text','account no')
                                 @endcomponent
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('color', 'secondary')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
-
-                        @component('frontend.common.buttons.submit')
-                            @slot('size', 'md')
-                            @slot('class', 'add')
-                            @slot('color', 'success')
-                        @endcomponent
+                        <div class="flex">
+                            <div class="action-buttons">
+                                @include('frontend.common.buttons.close')
+        
+                                @include('frontend.common.buttons.submit')
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

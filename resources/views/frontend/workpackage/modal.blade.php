@@ -21,6 +21,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
+                                    @slot('help_text','code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -31,6 +32,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
+                                    @slot('help_text','name')
                                 @endcomponent
                             </div>
                         </div>
@@ -51,6 +53,7 @@
                                     @slot('size', 'sm')
                                     @slot('text', 'add TP')
                                     @slot('data_target', '#modal_tp')
+                                    @slot('style', 'margin-top: 10px;')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -61,24 +64,21 @@
                                 @component('frontend.common.input.upload')
                                     @slot('text', 'file')
                                     @slot('name', 'file')
+                                    @slot('help_text','file')
                                 @endcomponent
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @component('frontend.common.buttons.submit')
-                            @slot('size', 'md')
-                            @slot('class', 'add')
-                        @endcomponent
-
-                        @component('frontend.common.buttons.reset')
-                            @slot('size', 'md')
-                        @endcomponent
-
-                        @component('frontend.common.buttons.close')
-                            @slot('size', 'md')
-                            @slot('data_dismiss', 'modal')
-                        @endcomponent
+                        <div class="flex">
+                            <div class="action-buttons">
+                                @include('frontend.common.buttons.submit')
+            
+                                @include('frontend.common.buttons.reset')
+            
+                                @include('frontend.common.buttons.close')
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

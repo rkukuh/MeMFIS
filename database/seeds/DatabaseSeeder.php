@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         /** INITIAL DATA */
 
         $this->call(TypesTableSeeder::class);
+        $this->call(UnitsTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
 
         /** POLYMORPH */
