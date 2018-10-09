@@ -94,12 +94,15 @@ let Category = {
             ]
         });
 
-        let simpan = $('.modal-footer').on('click', '.add', function () {
+        let simpan = $('.modal-footer').on('click', '.add-category', function () {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
             let registerForm = $('#CustomerForm');
-            let name = $('input[name=name]').val();
+            let code = $('input[name=code_category]').val();
+            let name = $('input[name=name_category]').val();
+            let description =$('#description_category').val();
+            let accountcode = $('#accountcode3').val();
             let formData = registerForm.serialize();
 
             $.ajax({
@@ -110,17 +113,48 @@ let Category = {
                 url: '/category',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name
+                    name: name,
+                    code: code,
+                    description: description,
+                    accountcode: accountcode
                 },
                 success: function (data) {
                     if (data.errors) {
+                        if (data.errors.code) {
+                            $('#code-error').html(data.errors.code[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('accountcode').value =accountcode;
+                        }
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
 
+                            document.getElementById('code').value = code;
                             document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('accountcode').value =accountcode;
                         }
+                        if (data.errors.description) {
+                            $('#description-error').html(data.errors.description[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('accountcode').value =accountcode;
+                       }
+                       if (data.errors.accountcode) {
+                        $('#accountcode-error').html(data.errors.accountcode[0]);
+
+                        document.getElementById('code').value = code;
+                        document.getElementById('name').value = name;
+                        document.getElementById('description').value = description;
+                        document.getElementById('accountcode').value =accountcode;
+                   }
+
                     } else {
-                        $('#modal_customer').modal('hide');
+                        $('#modal_category').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000

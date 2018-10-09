@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\model\ListUtil;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Fronted\CategoryStore;
+use App\Http\Requests\Frontend\CategoryStore;
 use App\Http\Requests\Fronted\CategoryUpdate;
 
 class CategoryController extends Controller
@@ -137,7 +137,10 @@ class CategoryController extends Controller
     public function store(CategoryStore $request)
     {
         $category = Category::create([
-            //
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'account_code' => $request->accountcode,
         ]);
 
         return response()->json($category);

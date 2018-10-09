@@ -18,7 +18,7 @@
                                 </label>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
-                                    @slot('name', 'code')
+                                    @slot('name', 'code_category')
                                     @slot('help_text','code')
                                 @endcomponent
                             </div>
@@ -28,7 +28,7 @@
                                 </label>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
-                                    @slot('name', 'name')
+                                    @slot('name', 'name_category')
                                     @slot('help_text','name')
                                 @endcomponent
                             </div>
@@ -40,7 +40,8 @@
                                 </label>
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
-                                    @slot('name', 'description')
+                                    @slot('name', 'description_category')
+                                    @slot('id', 'description_category')
                                     @slot('text', 'Description')
                                 @endcomponent
                             </div>
@@ -49,9 +50,9 @@
                                     Account Code @include('frontend.common.label.optional')
                                 </label>
                                 @component('frontend.common.input.select')
-                                    @slot('id', 'accountcode')
+                                    @slot('id', 'accountcode3')
                                     @slot('text', 'AccountCode')
-                                    @slot('name', 'accountcode')
+                                    @slot('name', 'accountcode_category')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -60,8 +61,10 @@
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                @include('frontend.common.buttons.submit')
-        
+                                @component('frontend.common.buttons.submit')
+                                    @slot('class', 'add-category')
+                                @endcomponent
+
                                 @include('frontend.common.buttons.reset')
 
                                 @include('frontend.common.buttons.close')
