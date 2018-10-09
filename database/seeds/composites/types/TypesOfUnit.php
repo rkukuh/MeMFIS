@@ -23,5 +23,11 @@ class TypesOfUnit extends Seeder
             'name' => 'Dimension',
             'of'   => 'unit',
         ]);
+
+        Type::create([
+            'code' => 'quantity',
+            'name' => 'Quantity',
+            'of'   => 'unit',
+        ]);
     }
 }

@@ -13,6 +13,44 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
+        /** QUANTITY */
+
+        Unit::create([
+            'name' => 'Each',
+            'symbol' => 'ea',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Unit',
+            'symbol' => 'unt',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Box',
+            'symbol' => 'box',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Roll',
+            'symbol' => 'roll',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Dozen',
+            'symbol' => 'dz',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Sheet',
+            'symbol' => 'sheet',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
         /** WEIGHT */
 
         Unit::create([
@@ -27,6 +65,12 @@ class UnitsTableSeeder extends Seeder
             'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
         ]);
 
+        Unit::create([
+            'name' => 'Liter',
+            'symbol' => 'lt',
+            'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
+        ]);
+
         /** DIMENSION */
 
         Unit::create([
@@ -38,6 +82,12 @@ class UnitsTableSeeder extends Seeder
         Unit::create([
             'name' => 'Meter',
             'symbol' => 'm',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Inch',
+            'symbol' => 'in',
             'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
         ]);
     }
