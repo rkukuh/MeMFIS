@@ -18,8 +18,14 @@ class CreateUnitsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('name');
             $table->string('symbol');
+            $table->unsignedInteger('type_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('type_id')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
 
             $table->index('name');
             $table->index('symbol');
