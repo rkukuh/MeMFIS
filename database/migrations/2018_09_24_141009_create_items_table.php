@@ -21,9 +21,9 @@ class CreateItemsTable extends Migration
             $table->string('barcode')->nullable();
             $table->unsignedInteger('category_id')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('isppn');
+            $table->boolean('is_ppn');
             $table->integer('ppn_amount')->nullable();
-            $table->boolean('istock');
+            $table->boolean('is_stock');
             $table->unsignedInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
