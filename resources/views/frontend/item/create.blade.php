@@ -156,14 +156,12 @@
                                                                             @component('frontend.common.input.upload')
                                                                                 @slot('text', 'Photo')
                                                                                 @slot('name', 'photo')
-                                                                                @slot('help_text','photo')
                                                                             @endcomponent
                                                                         </td>
                                                                         <td>
                                                                                 <div data-repeater-delete="" class="btn-sm btn btn-danger"  >
                                                                                         <span>
-                                                                                            <i class="la la-trash-o"></i>
-                                                                                            <span>Delete</span>
+                                                                                            <i class="la la-close"></i>
                                                                                         </span>
                                                                                     </div>
                                                                         </td>

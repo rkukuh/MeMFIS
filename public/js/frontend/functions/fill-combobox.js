@@ -75,7 +75,7 @@ $(document).ready(function () {
                 $.each(data, function (key, value) {
                     if (angka == 1) {
                         $('select[name="unit"]').append(
-                            '<option> Select a Category</option>'
+                            '<option> Select a Unit</option>'
                         );
 
                         angka = 0;
@@ -106,7 +106,7 @@ $(document).ready(function () {
                 $.each(data, function (key, value) {
                     if (angka == 1) {
                         $('select[name="unit2"]').append(
-                            '<option> Select a Category</option>'
+                            '<option> Select a Unit</option>'
                         );
 
                         angka = 0;
