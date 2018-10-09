@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Illuminate\Database\Eloquent\Builder;
 
 class Unit extends MemfisModel
 {
