@@ -40,4 +40,17 @@ class Unit extends MemfisModel
 
         return $query->where('type_id', $id);
     }
+
+    /**
+     * Scope a query to only include type of quantity.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfQuantity(Builder $query)
+    {
+        $id = Type::ofUnit()->where('code', 'quantity')->first()->id;
+
+        return $query->where('type_id', $id);
+    }
 }
