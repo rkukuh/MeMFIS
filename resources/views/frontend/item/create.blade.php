@@ -80,6 +80,7 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '3')
                                                 @slot('name', 'description')
+                                                @slot('id', 'description')
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>
@@ -123,13 +124,27 @@
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
+                                            @slot('id', 'isstock')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('text', 'Dikenai PPN?')
-                                            @slot('name', 'isppn')
-                                        @endcomponent
+                                        <div class="checkbox">
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('text', 'Dikenai PPN?')
+                                                @slot('name', 'isppn')
+                                                @slot('id', 'isppn')
+                                            @endcomponent    
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding:0px">
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'PPN')
+                                                @slot('name', 'ppn')
+                                                @slot('id', 'ppn')
+                                                @slot('class', 'ppn')
+                                                @slot('editable', 'disabled')
+                                            @endcomponent
+                                        </div>
 
                                     </div>
                                 </div>
@@ -194,7 +209,7 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
-                                                    @slot('class', 'add22')
+                                                    @slot('class', 'add-item')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -303,6 +318,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
 
     <script src="{{ asset('js/frontend/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/category.js') }}"></script>
     <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
     <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
