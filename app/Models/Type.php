@@ -104,6 +104,17 @@ class Type extends MemfisModel
         return $query->where('of', 'regulator');
     }
 
+    /**
+     * Scope a query to only include category of unit.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfUnit(Builder $query)
+    {
+        return $query->where('of', 'unit');
+    }
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
