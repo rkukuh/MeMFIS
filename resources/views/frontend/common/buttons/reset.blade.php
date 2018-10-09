@@ -11,7 +11,7 @@
     data-dismiss="{{ $data_dismiss or 'modal' }}">
 
     <span>
-        <i class="la la-{{ $icon or 'mail-reply' }}"></i>
+        <i class="fa {{ $icon or 'fa-undo' }}"></i>
         <span>{{ $text or 'Reset' }}</span>
     </span>
 </button>
