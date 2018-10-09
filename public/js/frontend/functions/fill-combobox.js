@@ -29,6 +29,38 @@ $(document).ready(function () {
     accountcode();
 });
 
+$(document).ready(function () {
+    accountcode_category = function () {
+        $.ajax({
+            url: '/get-accountcodes/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let angka2 = 1;
+
+                $('select[name="accountcode_category"]').empty();
+
+                $.each(data, function (key, value) {
+                    if (angka2 == 1) {
+                        $('select[name="accountcode_category"]').append(
+                            '<option> Select a Accountcode</option>'
+                        );
+
+                        angka2 = 0;
+                    }
+
+                    $('select[name="accountcode_category"]').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    );
+                });
+            }
+        });
+    };
+
+    accountcode_category();
+});
+
+
 
 $(document).ready(function () {
     category = function () {
@@ -37,17 +69,17 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka = 1;
+                let angka3 = 1;
 
                 $('select[name="category"]').empty();
 
                 $.each(data, function (key, value) {
-                    if (angka == 1) {
+                    if (angka3 == 1) {
                         $('select[name="category"]').append(
                             '<option> Select a Category</option>'
                         );
 
-                        angka = 0;
+                        angka3 = 0;
                     }
 
                     $('select[name="category"]').append(
@@ -68,17 +100,17 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka = 1;
+                let angka4 = 1;
 
                 $('select[name="unit"]').empty();
 
                 $.each(data, function (key, value) {
-                    if (angka == 1) {
+                    if (angka4 == 1) {
                         $('select[name="unit"]').append(
                             '<option> Select a Unit</option>'
                         );
 
-                        angka = 0;
+                        angka4 = 0;
                     }
 
                     $('select[name="unit"]').append(
@@ -99,17 +131,17 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka = 1;
+                let angka5 = 1;
 
                 $('select[name="unit2"]').empty();
 
                 $.each(data, function (key, value) {
-                    if (angka == 1) {
+                    if (angka5 == 1) {
                         $('select[name="unit2"]').append(
                             '<option> Select a Unit</option>'
                         );
 
-                        angka = 0;
+                        angka5 = 0;
                     }
 
                     $('select[name="unit2"]').append(
@@ -130,17 +162,17 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka = 1;
+                let angka6 = 1;
 
                 $('select[name="currency"]').empty();
 
                 $.each(data, function (key, value) {
-                    if (angka == 1) {
+                    if (angka6 == 1) {
                         $('select[name="currency"]').append(
                             '<option> Select a Category</option>'
                         );
 
-                        angka = 0;
+                        angka6 = 0;
                     }
 
                     $('select[name="currency"]').append(
