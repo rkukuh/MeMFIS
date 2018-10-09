@@ -36,6 +36,7 @@
             @slot('text', 'Address')
             @slot('name', 'address')
             @slot('editable', 'readonly')
+            @slot('help_text','address')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -48,6 +49,7 @@
             @slot('text', 'ZipCode')
             @slot('name', 'zipcpde')
             @slot('editable', 'readonly')
+            @slot('help_text','zipcode')
         @endcomponent
     </div>
 </div>

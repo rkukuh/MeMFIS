@@ -58,6 +58,7 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Code')
                                                 @slot('name', 'code')
+                                                @slot('help_text','code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,6 +69,7 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Name')
                                                 @slot('name', 'name')
+                                                @slot('help_text','name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -81,6 +83,7 @@
                                                 @slot('rows', '3')
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
+                                                @slot('help_text','description')
                                             @endcomponent
                                         </div>
 
@@ -96,6 +99,7 @@
                                         @component('frontend.common.input.text')
                                             @slot('text', 'Barcode')
                                             @slot('name', 'barcode')
+                                            @slot('help_text','barcode')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -123,12 +127,14 @@
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
+                                            @slot('help_text','stockable')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Dikenai PPN?')
                                             @slot('name', 'isppn')
+                                            @slot('help_text','dikenai ppn')
                                         @endcomponent
 
                                     </div>
@@ -139,10 +145,44 @@
                                             Photos @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.upload')
-                                            @slot('text', 'Photo')
-                                            @slot('name', 'photo')
-                                        @endcomponent
+                                        <div id="m_repeater_1">
+                                                <div class="" id="m_repeater_1">
+                                                    <div data-repeater-list="">
+                                                        <div data-repeater-item class="row">
+                                                            <div class="m-form__group row" style="margin-left: 15px">
+                                                                <table style="margin-right:10px">
+                                                                    <tr>
+                                                                        <td>
+                                                                            @component('frontend.common.input.upload')
+                                                                                @slot('text', 'Photo')
+                                                                                @slot('name', 'photo')
+                                                                                @slot('help_text','photo')
+                                                                            @endcomponent
+                                                                        </td>
+                                                                        <td>
+                                                                                <div data-repeater-delete="" class="btn-sm btn btn-danger"  >
+                                                                                        <span>
+                                                                                            <i class="la la-trash-o"></i>
+                                                                                            <span>Delete</span>
+                                                                                        </span>
+                                                                                    </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-form__group form-group row" style="margin-top:20px;margin-left:5px">
+                                                    <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                        <span>
+                                                            <i class="la la-plus"></i>
+                                                            <span>Add</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
@@ -154,6 +194,7 @@
                                             @slot('text', 'Account Code')
                                             @slot('name', 'accountcode')
                                             @slot('style', 'width:100%')
+                                            @slot('help_text','accountcode')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -162,13 +203,10 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
-                                                    @slot('size', 'md')
                                                     @slot('class', 'add22')
                                                 @endcomponent
 
-                                                @component('frontend.common.buttons.reset')
-                                                    @slot('size', 'md')
-                                                @endcomponent
+                                                @include('frontend.common.buttons.reset')
                                             </div>
                                         </div>
                                     </div>
@@ -200,7 +238,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-4 order-1 order-xl-2">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'md')
                                             @slot('id', 'item-uom')
                                             @slot('text', 'Add UoM')
                                             @slot('attribute', 'disabled')
@@ -239,7 +276,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-4 order-1 order-xl-2">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'md')
                                             @slot('id', 'item-minmaxstock')
                                             @slot('attribute', 'disabled')
                                             @slot('text', 'Add Min/Max Stock')
