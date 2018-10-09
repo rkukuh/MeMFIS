@@ -5,7 +5,11 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalCustomer">UoM (Unit of Measurement)</h5>
+                <h5 class="modal-title" id="TitleModalCustomer">
+                    UoM (Unit of Measurement) for
+
+                    <small id="item" class="m--font-focus">DHC-9012 Baling-baling</small>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -32,7 +36,7 @@
                                         <label class="form-control-label">
                                             Unit @include('frontend.common.label.required')
                                         </label>
-        
+
                                         @component('frontend.common.input.select')
                                             @slot('id', 'unit')
                                             @slot('text', 'Unit')
@@ -40,14 +44,14 @@
                                             @slot('style', 'width:100%')
                                         @endcomponent
                             </div>
-        
+
                         </div>
                         <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                             Qty @include('frontend.common.label.required')
                                         </label>
-    
+
                                         @component('frontend.common.input.numeric')
                                             @slot('text', 'Qty')
                                             @slot('name', 'qty2')
@@ -59,7 +63,7 @@
                                             <label class="form-control-label">
                                                 Unit @include('frontend.common.label.required')
                                             </label>
-            
+
                                             @component('frontend.common.input.select')
                                                 @slot('id', 'unit2')
                                                 @slot('text', 'Unit')
@@ -67,16 +71,16 @@
                                                 @slot('style', 'width:100%')
                                             @endcomponent
                                 </div>
-            
+
                             </div>
                     </div>
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
                                 @include('frontend.common.buttons.submit')
-            
+
                                 @include('frontend.common.buttons.reset')
-            
+
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>

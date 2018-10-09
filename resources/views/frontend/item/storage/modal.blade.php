@@ -5,7 +5,11 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalCustomer">Min/Max Stock</h5>
+                <h5 class="modal-title" id="TitleModalCustomer">
+                    Min/Max Stock
+
+                    <small id="item" class="m--font-focus">DHC-9012 Baling-baling</small>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -65,9 +69,9 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @include('frontend.common.buttons.submit')
-            
+
                                 @include('frontend.common.buttons.reset')
-            
+
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>
