@@ -44,7 +44,8 @@ class FillComboxController extends Controller
      */
     public function units()
     {
-        $units = Unit::selectRaw('id, CONCAT(name, " (", symbol ,")") as full_name')
+        $units = Unit::ofQuantity()
+                     ->selectRaw('id, CONCAT(name, " (", symbol ,")") as full_name')
                      ->pluck('full_name', 'id');
 
         return json_encode($units);
