@@ -38,12 +38,10 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.close')
-                                    @slot('size', 'md')
                                     @slot('data_dismiss', 'modal')
                                 @endcomponent
         
                                 @component('frontend.common.buttons.submit')
-                                    @slot('size', 'md')
                                     @slot('class', 'add')
                                 @endcomponent        
                             </div>

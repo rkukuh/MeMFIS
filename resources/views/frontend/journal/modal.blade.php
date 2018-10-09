@@ -87,15 +87,12 @@
                                         <div class="action-buttons">
                                                 <div id="button-div">
                                                         @component('frontend.common.buttons.submit')
-                                                            @slot('size', 'md')
                                                         @endcomponent
                                                     </div>
                                                         @component('frontend.common.buttons.reset')
-                                                            @slot('size', 'md')
                                                         @endcomponent
                                 
                                                         @component('frontend.common.buttons.close')
-                                                            @slot('size', 'md')
                                                             @slot('data_dismiss', 'modal')
                                                         @endcomponent                                
                                         </div>

@@ -47,17 +47,14 @@
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                    @component('frontend.common.buttons.submit')
-                                    @slot('size', 'md')
+                                @component('frontend.common.buttons.submit')
                                     @slot('class', 'add')
                                 @endcomponent
         
                                 @component('frontend.common.buttons.reset')
-                                    @slot('size', 'md')
                                 @endcomponent
         
                                 @component('frontend.common.buttons.close')
-                                    @slot('size', 'md')
                                     @slot('data_dismiss', 'modal')
                                 @endcomponent        
                             </div>

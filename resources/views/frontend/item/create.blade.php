@@ -195,12 +195,10 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
-                                                    @slot('size', 'md')
                                                     @slot('class', 'add22')
                                                 @endcomponent
 
                                                 @component('frontend.common.buttons.reset')
-                                                    @slot('size', 'md')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -233,7 +231,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-4 order-1 order-xl-2">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'md')
                                             @slot('id', 'item-uom')
                                             @slot('text', 'Add UoM')
                                             @slot('attribute', 'disabled')
@@ -272,7 +269,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-4 order-1 order-xl-2">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'md')
                                             @slot('id', 'item-minmaxstock')
                                             @slot('attribute', 'disabled')
                                             @slot('text', 'Add Min/Max Stock')

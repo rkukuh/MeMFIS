@@ -67,7 +67,6 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'md')
                                             @slot('text', 'Add Supplier')
                                             @slot('data_target', '#modal_supplier')
                                         @endcomponent

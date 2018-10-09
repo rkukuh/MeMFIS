@@ -88,7 +88,6 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('size', 'md')
                                                     @slot('href', route('frontend.customer.index') )
                                                 @endcomponent        
                                             </div>
