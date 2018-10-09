@@ -206,8 +206,7 @@
                                                     @slot('class', 'add22')
                                                 @endcomponent
 
-                                                @component('frontend.common.buttons.reset')
-                                                @endcomponent
+                                                @include('frontend.common.buttons.reset')
                                             </div>
                                         </div>
                                     </div>
