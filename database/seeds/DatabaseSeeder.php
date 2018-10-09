@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         /** INITIAL DATA */
 
+        $this->call(UnitsTableSeeder::class);
         $this->call(TypesTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
 
