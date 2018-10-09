@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Unit;
+use App\Models\Storage;
 use App\Models\Journal;
 use App\Models\Category;
 use App\Models\Currency;
@@ -64,6 +65,19 @@ class FillComboxController extends Controller
         ->pluck('full_name', 'id');
 
         return json_encode($currencies);
+
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function storages()
+    {
+        $storages = Storage::pluck('name', 'id');
+
+        return json_encode($storages);
 
     }
 }
