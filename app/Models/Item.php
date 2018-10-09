@@ -49,4 +49,19 @@ class Item extends MemfisModel implements HasMedia
                     ->withPivot('quantity')
                     ->withTimestamps();
     }
+
+    /**
+     * Many-to-Many: An item may have zero or many storage.
+     *
+     * This function will retrieve the storages of an item.
+     * See: Unit's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function storages()
+    {
+        return $this->belongsToMany(Storage::class)
+                    ->withPivot('min', 'max')
+                    ->withTimestamps();
+    }
 }
