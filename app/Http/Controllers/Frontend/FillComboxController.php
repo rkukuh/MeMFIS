@@ -31,7 +31,8 @@ class FillComboxController extends Controller
      */
     public function categories()
     {
-        $categories = Category::pluck('name', 'id');
+        $categories = Category::ofItem()
+                              ->pluck('name', 'id');
 
         return json_encode($categories);
 
