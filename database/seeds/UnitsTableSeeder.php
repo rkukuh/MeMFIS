@@ -13,6 +13,26 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
+        /** DIMENSION */
+
+        Unit::create([
+            'name' => 'Centimeter',
+            'symbol' => 'cm',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Meter',
+            'symbol' => 'm',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Inch',
+            'symbol' => 'in',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
         /** QUANTITY */
 
         Unit::create([
@@ -69,26 +89,6 @@ class UnitsTableSeeder extends Seeder
             'name' => 'Liter',
             'symbol' => 'lt',
             'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
-        ]);
-
-        /** DIMENSION */
-
-        Unit::create([
-            'name' => 'Centimeter',
-            'symbol' => 'cm',
-            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
-        ]);
-
-        Unit::create([
-            'name' => 'Meter',
-            'symbol' => 'm',
-            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
-        ]);
-
-        Unit::create([
-            'name' => 'Inch',
-            'symbol' => 'in',
-            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
         ]);
     }
 }
