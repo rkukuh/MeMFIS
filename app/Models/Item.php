@@ -14,7 +14,6 @@ class Item extends MemfisModel implements HasMedia
         'code',
         'name',
         'barcode',
-        'category_id',
         'description',
         'is_ppn',
         'ppn_amount',
