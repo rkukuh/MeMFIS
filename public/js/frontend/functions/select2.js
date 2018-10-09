@@ -16,6 +16,8 @@ let Select2 = {
             placeholder: 'Select a Account Code'
         }), $('#accountcode2, #accountcode2_validate').select2({
             placeholder: 'Select a Account Code'
+        }), $('#accountcode3, #accountcode3_validate').select2({
+            placeholder: 'Select a Account Code'
         }), $('#type, #type_validate').select2({
             placeholder: 'Select a Type'
         }), $('#unit, #unit_validate').select2({
