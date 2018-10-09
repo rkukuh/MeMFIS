@@ -86,16 +86,12 @@
                                     <div class="flex">
                                         <div class="action-buttons">
                                                 <div id="button-div">
-                                                        @component('frontend.common.buttons.submit')
-                                                        @endcomponent
-                                                    </div>
-                                                        @component('frontend.common.buttons.reset')
-                                                        @endcomponent
-                                
-                                                        @component('frontend.common.buttons.close')
-                                                            @slot('data_dismiss', 'modal')
-                                                        @endcomponent                                
-                                        </div>
+                                                        @include('frontend.common.buttons.submit')
+                                                    </div>            
+                                                    @include('frontend.common.buttons.reset')
+                            
+                                                    @include('frontend.common.buttons.close')
+                                            </div>
                                     </div>
                             </div>
                         </div>

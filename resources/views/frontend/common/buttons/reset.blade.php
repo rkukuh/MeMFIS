@@ -6,7 +6,7 @@
     class="btn
            btn-{{ $color or 'warning' }}
            btn-{{ $size or 'md' }}
-           {{ $class or '' }}"
+           {{ $class or '' }} reset"
     style="{{ $style or '' }}"
     data-dismiss="{{ $data_dismiss or 'modal' }}">
 
