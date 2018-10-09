@@ -84,6 +84,7 @@
                                     @slot('size', 'sm')
                                     @slot('text', 'add Workpackage')
                                     @slot('data_target', '#modal_workpackage')
+                                    @slot('style', 'margin-top: 10px;')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">

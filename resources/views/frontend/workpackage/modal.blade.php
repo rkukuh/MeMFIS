@@ -53,6 +53,7 @@
                                     @slot('size', 'sm')
                                     @slot('text', 'add TP')
                                     @slot('data_target', '#modal_tp')
+                                    @slot('style', 'margin-top: 10px;')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">

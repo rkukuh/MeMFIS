@@ -75,6 +75,7 @@
             @slot('size', 'sm')
             @slot('text', 'add Type')
             @slot('data_target', '#modal_')
+            @slot('style', 'margin-top: 10px;')
         @endcomponent
     </div>
 </div>
@@ -95,6 +96,7 @@
             @slot('size', 'sm')
             @slot('text', 'add Number')
             @slot('data_target', '#modal_')
+            @slot('style', 'margin-top: 10px;')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
