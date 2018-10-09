@@ -39,13 +39,11 @@
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.close')
                                     @slot('size', 'md')
-                                    @slot('color', 'secondary')
                                     @slot('data_dismiss', 'modal')
                                 @endcomponent
                                 @component('frontend.common.buttons.submit')
                                     @slot('size', 'md')
                                     @slot('class', 'add2')
-                                    @slot('color', 'success')
                                 @endcomponent        
                             </div>
                         </div>

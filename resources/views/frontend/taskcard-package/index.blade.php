@@ -66,7 +66,6 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.create-new')
                                                     @slot('size', 'md')
-                                                    @slot('color', 'primary')
                                                     @slot('text', 'Add Task Card')
                                                     @slot('data_target', '#modal_tp')
                                                 @endcomponent

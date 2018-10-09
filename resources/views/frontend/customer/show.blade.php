@@ -89,7 +89,6 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.back')
                                                     @slot('size', 'md')
-                                                    @slot('color', 'primary')
                                                     @slot('href', route('frontend.customer.index') )
                                                 @endcomponent        
                                             </div>
