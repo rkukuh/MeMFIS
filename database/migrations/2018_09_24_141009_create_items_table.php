@@ -19,7 +19,6 @@ class CreateItemsTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->string('barcode')->nullable();
-            $table->unsignedInteger('category_id')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_ppn');
             $table->integer('ppn_amount')->nullable();
@@ -27,11 +26,6 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('category_id')
-                  ->references('id')->on('categories')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
 
             $table->foreign('account_code')
                   ->references('id')->on('journals')
