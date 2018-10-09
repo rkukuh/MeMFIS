@@ -68,4 +68,22 @@ class Unit extends MemfisModel
 
         return $query->where('type_id', $id);
     }
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Many-to-Many: An item may have zero or many unit.
+     *
+     * This function will retrieve the items of a unit.
+     * See: Item's units() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class)
+                    ->as('uom')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
 }

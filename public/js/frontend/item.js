@@ -45,66 +45,16 @@ let Item = {
             },
             columns: [{
                     field: 'code',
-                    title: 'Code',
+                    title: 'Part No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 60
                 },
                 {
                     field: 'name',
-                    title: 'Category',
+                    title: 'Item Name',
                     sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'barcode',
-                    title: 'Barcode',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'id_category',
-                    title: 'Category',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'active',
-                    title: 'Active',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'isppn',
-                    title: 'IsPPn',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'isstock',
-                    title: 'IsStock',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'accountcode',
-                    title: 'AccountCode',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
+                    filterable: !1
                 },
                 {
                     field: 'Actions',

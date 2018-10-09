@@ -38,8 +38,10 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
-                                    Item Datalist
+                                    Item
                                 </h3>
                             </div>
                         </div>
@@ -63,7 +65,7 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
-                                            @slot('text', 'Add Item New Page')
+                                            @slot('text', 'Add Item')
                                             @slot('href', route('frontend.item.create') )
                                         @endcomponent
 

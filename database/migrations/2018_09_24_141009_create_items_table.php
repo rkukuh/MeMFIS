@@ -18,26 +18,23 @@ class CreateItemsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->string('barcode');
-            $table->unsignedInteger('category_id')->nullable();
-            $table->text('description');
-            $table->integer('active');
-            $table->integer('isppn');
-            $table->integer('istock');
-            $table->string('xpicture');
+            $table->string('barcode')->nullable();
+            $table->text('description')->nullable();
+            $table->boolean('is_ppn');
+            $table->integer('ppn_amount')->nullable();
+            $table->boolean('is_stock');
             $table->unsignedInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('category_id')
-            ->references('id')->on('categories')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
             $table->foreign('account_code')
-            ->references('id')->on('journals')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
+                  ->references('id')->on('journals')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
 
+            $table->index('code');
+            $table->index('name');
+            $table->index('barcode');
         });
     }
 

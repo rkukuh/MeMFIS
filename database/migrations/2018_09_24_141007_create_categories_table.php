@@ -18,16 +18,19 @@ class CreateCategoriesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->text('description');
+            $table->string('of');
+            $table->text('description')->nullable();
             $table->unsignedInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('account_code')
-            ->references('id')->on('journals')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
+                  ->references('id')->on('journals')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
 
+            $table->index('code');
+            $table->index('name');
         });
     }
 
