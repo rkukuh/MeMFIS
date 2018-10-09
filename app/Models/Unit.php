@@ -11,4 +11,32 @@ class Unit extends MemfisModel
         'symbol',
         'type_id',
     ];
+
+    /******************************************* SCOPE *******************************************/
+
+    /**
+     * Scope a query to only include type of weight.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfWeight(Builder $query)
+    {
+        $id = Type::ofUnit()->where('code', 'weight')->first()->id;
+
+        return $query->where('type_id', $id);
+    }
+
+    /**
+     * Scope a query to only include type of dimension.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDimension(Builder $query)
+    {
+        $id = Type::ofUnit()->where('code', 'dimension')->first()->id;
+
+        return $query->where('type_id', $id);
+    }
 }
