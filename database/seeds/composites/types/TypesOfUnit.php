@@ -13,12 +13,6 @@ class TypesOfUnit extends Seeder
     public function run()
     {
         Type::create([
-            'code' => 'weight',
-            'name' => 'Weight',
-            'of'   => 'unit',
-        ]);
-
-        Type::create([
             'code' => 'dimension',
             'name' => 'Dimension',
             'of'   => 'unit',
@@ -27,6 +21,12 @@ class TypesOfUnit extends Seeder
         Type::create([
             'code' => 'quantity',
             'name' => 'Quantity',
+            'of'   => 'unit',
+        ]);
+
+        Type::create([
+            'code' => 'weight',
+            'name' => 'Weight',
             'of'   => 'unit',
         ]);
     }
