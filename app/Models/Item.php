@@ -20,4 +20,17 @@ class Item extends MemfisModel implements HasMedia
         'is_stock',
         'account_code',
     ];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * M-M Polymorphic: An item can have none or many categories.
+     *
+     * This function will get all of the categories that are assigned to this item.
+     * See: Category's items() method for the inverse
+     */
+    public function categories()
+    {
+        return $this->morphToMany(Category::class, 'categorizable');
+    }
 }

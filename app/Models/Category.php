@@ -28,4 +28,17 @@ class Category extends MemfisModel
 
         static::addGlobalScope(new OrderByColumn('name'));
     }
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * M-M Polymorphic: An item can have none or many categories.
+     *
+     * This function will get all of the items that are assigned to this category.
+     * See: Item's categories() method for the inverse
+     */
+    public function items()
+    {
+        return $this->morphedByMany(Item::class, 'categorizable');
+    }
 }
