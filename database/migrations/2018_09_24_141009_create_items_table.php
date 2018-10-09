@@ -18,12 +18,12 @@ class CreateItemsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->string('barcode');
+            $table->string('barcode')->nullable();
             $table->unsignedInteger('category_id')->nullable();
-            $table->text('description');
-            $table->integer('active');
-            $table->integer('isppn');
-            $table->integer('istock');
+            $table->text('description')->nullable();
+            $table->boolean('isppn');
+            $table->integer('ppn_amount')->nullable();
+            $table->boolean('istock');
             $table->unsignedInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -38,6 +38,10 @@ class CreateItemsTable extends Migration
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
 
+            $table->index('code');
+            $table->index('name');
+            $table->index('barcode');
+            $table->index('description');
         });
     }
 
