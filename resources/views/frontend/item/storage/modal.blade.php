@@ -66,7 +66,9 @@
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                @include('frontend.common.buttons.submit')
+                                    @component('frontend.common.buttons.submit')
+                                        @slot('class', 'add-stock')
+                                    @endcomponent
                                 @include('frontend.common.buttons.reset')
                                 @include('frontend.common.buttons.close')
                             </div>
