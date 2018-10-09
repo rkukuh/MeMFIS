@@ -24,19 +24,19 @@ class CreateItemsTable extends Migration
             $table->integer('active');
             $table->integer('isppn');
             $table->integer('istock');
-            $table->string('xpicture');
             $table->unsignedInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('category_id')
-            ->references('id')->on('categories')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
+                  ->references('id')->on('categories')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
             $table->foreign('account_code')
-            ->references('id')->on('journals')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
+                  ->references('id')->on('journals')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
 
         });
     }
