@@ -79,45 +79,130 @@ let Item = {
             ]
         });
 
-        let simpan = $('.footer').on('click', '.add22', function () {
-            $('#name-error').html('');
-            $('#simpan').text('Simpan');
+            $(document).ready(function () {
+                $('.btn-success').removeClass('add');
 
-            let registerForm = $('#CustomerForm');
-            let name = $('input[name=name]').val();
-            let formData = registerForm.serialize();
+                // if(document.getElementById("isppn").checked){
+                //     document.getElementById('isppn').removeAttribute('disabled');
+                // }
+
+            });
+
+
+            $('.checkbox').on('click', '#isppn', function () {
+                    $('.ppn').removeAttr("disabled");
+            });
+
+            $('.footer').on('click', '.add-item', function () {
+            
+            if(document.getElementById("isstock").checked){
+                isstock = 1;
+            }
+            else{
+                isstock = 0;
+            }
+
+            if(document.getElementById("isppn").checked){
+                isppn = 1;
+            }
+            else{
+                isppn = 0;
+            }
+
+            $('#simpan').text('Simpan');
 
             document.getElementById('item-uom').removeAttribute('disabled');
             document.getElementById('item-minmaxstock').removeAttribute('disabled');
+            let accountcode2 = $('#accountcode2').val();
+            let code = $('input[name=code]').val();
+            let name = $('input[name=name]').val();
+            let description = $('#description').val();
+            let barcode = $('input[name=barcode]').val();
+            let ppn = $('input[name=ppn]').val();
+
+
+            var fd = new FormData();
+            // fd.append( "fileInput", $("#poster")[0].files[0]);
+            fd.append("code", code);
+            fd.append("name", name);
+            fd.append("description", description);
+            fd.append("barcode", barcode);
+            fd.append("accountcode", accountcode2);
+            fd.append("isstock", isstock);
+            fd.append("isppn", isppn);
+            fd.append("ppn", ppn);
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
+                processData: false,
+                contentType: false,
                 type: 'post',
                 url: '/item',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    name: name
-                },
+                data : fd,
                 success: function (data) {
                     if (data.errors) {
+                        if (data.errors.code) {
+                            $('#code-error').html(data.errors.code[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('barcode').value = barcode;
+                            document.getElementById('accountcode2').value = accountcode2;
+                        }
+
+
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
 
+                            document.getElementById('code').value = code;
                             document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('barcode').value = barcode;
+                            document.getElementById('accountcode2').value = accountcode2;
+                        }
+
+                        if (data.errors.description) {
+                            $('#description-error').html(data.errors.type[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('barcode').value = barcode;
+                            document.getElementById('accountcode2').value = accountcode2;
+                        }
+                        if (data.errors.barcode) {
+                            $('#barcode-error').html(data.errors.barcode[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('barcode').value = barcode;
+                            document.getElementById('accountcode2').value = accountcode2;
+                        }
+                        if (data.errors.accountcode) {
+                            $('#description-error').html(data.errors.barcode[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('barcode').value = barcode;
+                            document.getElementById('accountcode2').value = accountcode2;
                         }
                     } else {
-                        $('#modal_customer').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
+                        // document.getElementById('poster-label').innerHTML = '';
+                        $('input[type=file]').val("") ;
+                        $('#code-error').html('');
+                        $('#name-error').html('');
+                        $('#description-error').html('');
+                        $('#barcode-error').html('');
                     }
                 }
             });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Item;
 use App\model\ListUtil;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Frontend\ItemStore;
 use App\Http\Requests\Frontend\ItemUpdate;
 
@@ -136,7 +137,16 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
-        $item = Item::create([
+            $item = Item::create([
+            'code' => $request->input('code'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'barcode' => $request->input('barcode'),
+            'account_code' => $request->input('accountcode'),
+            'is_ppn' => $request->input('isppn'),
+            'is_stock' => $request->input('isstock'),
+            'ppn_amount' => $request->input('ppn'),
+
             // 'name' => $request->name,
         ]);
 
