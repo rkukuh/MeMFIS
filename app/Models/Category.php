@@ -32,7 +32,7 @@ class Category extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * M-M Polymorphic: An item can have none or many categories.
+     * M-M Polymorphic: An item can have zero or many categories.
      *
      * This function will get all of the items that are assigned to this category.
      * See: Item's categories() method for the inverse
