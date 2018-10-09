@@ -45,6 +45,7 @@
                                 @component('frontend.common.input.numeric')
                                     @slot('text', 'Max')
                                     @slot('name', 'max')
+                                    @slot('help_text','max')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -55,6 +56,7 @@
                                 @component('frontend.common.input.numeric')
                                     @slot('text', 'Min')
                                     @slot('name', 'min')
+                                    @slot('help_text','min')
                                 @endcomponent
                             </div>
                         </div>

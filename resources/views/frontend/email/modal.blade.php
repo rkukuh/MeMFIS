@@ -25,12 +25,14 @@
                                                         @component('frontend.common.input.email')
                                                             @slot('name', 'name')
                                                             @slot('placeholder', 'Email')
+                                                            @slot('help_text','email')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-md-3">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('text', 'Primary')
                                                             @slot('name', 'is_primary')
+                                                            @slot('help_text','primary')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-md-1">

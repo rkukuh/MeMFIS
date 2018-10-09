@@ -9,9 +9,10 @@
                     <div data-repeater-item class="row">
                         <div class="m-form__group row" style="margin-top:-20px">
                             <div class="col-md-0">
-                                @component('frontend.common.input.number')
+                                @component('frontend.common.input.numeric')
                                     @slot('text', 'Phone')
                                     @slot('name', 'phone')
+                                    @slot('help_text','phone')
                                 @endcomponent
                             </div>
                             <div class="col-md-1">
@@ -54,6 +55,7 @@
                                 @component('frontend.common.input.email')
                                     @slot('text', 'Email')
                                     @slot('name', 'email')
+                                    @slot('help_text','email')
                                 @endcomponent
                             </div>
                             <div class="col-md-1">
@@ -98,6 +100,7 @@
                                 @component('frontend.common.input.number')
                                     @slot('text', 'Fax')
                                     @slot('name', 'fax')
+                                    @slot('help_text','fax')
                                 @endcomponent
                             </div>
                             <div class="col-md-1">

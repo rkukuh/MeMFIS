@@ -27,12 +27,14 @@
                                                             @slot('text', 'fax')
                                                             @slot('name', 'name')
                                                             @slot('placeholder', 'fax')
+                                                            @slot('help_text','fax')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-md-3">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('text', 'Primary')
                                                             @slot('name', 'is_primary')
+                                                            @slot('help_text','primary')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-md-1">
@@ -62,6 +64,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
+                                    @slot('help_text','name')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">

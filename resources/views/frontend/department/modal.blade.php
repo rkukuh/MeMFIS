@@ -22,6 +22,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('name', 'name')
                                     @slot('text', 'Department Name')
+                                    @slot('help_text','name')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -34,6 +35,7 @@
                                     @slot('parent_id', 'name')
                                     @slot('id', 'm_select2_1')
                                     @slot('style', 'width:100%')
+                                    @slot('help_text','parent')
                                 @endcomponent
                             </div>
                         </div>

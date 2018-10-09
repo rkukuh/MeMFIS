@@ -28,6 +28,7 @@
                                                             @component('frontend.common.input.text')
                                                                 @slot('name', 'name')
                                                                 @slot('text', 'Phone')
+                                                                @slot('help_text','phone')
                                                             @endcomponent
                                                         </td>
                                                         <td width="20%">
@@ -38,6 +39,7 @@
                                                             @component('frontend.common.input.text')
                                                                 @slot('name', 'ext')
                                                                 @slot('text', 'Ext')
+                                                                @slot('help_text','ext')
                                                             @endcomponent
                                                         </td>
                                                         <td width="5%"></td>

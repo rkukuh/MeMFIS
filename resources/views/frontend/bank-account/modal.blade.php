@@ -20,6 +20,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Holder Name')
                                     @slot('name', 'holder_name')
+                                    @slot('help_text','holder name')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -30,6 +31,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Account No')
                                     @slot('name', 'account_no')
+                                    @slot('help_text','account no')
                                 @endcomponent
                             </div>
                         </div>

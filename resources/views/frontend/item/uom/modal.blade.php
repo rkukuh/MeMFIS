@@ -36,6 +36,7 @@
                                     @component('frontend.common.input.numeric')
                                         @slot('text', 'Qty')
                                         @slot('name', 'qty')
+                                        @slot('help_text','qty')
                                     @endcomponent
                                 </div>
                         </div>

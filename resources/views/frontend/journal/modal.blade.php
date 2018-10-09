@@ -23,6 +23,7 @@
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
                                     @slot('id_error', 'code')
+                                    @slot('help_text','code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -34,6 +35,7 @@
                                     @slot('id', 'name')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
+                                    @slot('help_text','name')
                                 @endcomponent
                             </div>
                         </div>
@@ -49,6 +51,7 @@
                                     @slot('name', 'type')
                                     @slot('type', 'text')
                                     @slot('style', 'width:100%')
+                                    @slot('help_text','type')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -60,6 +63,7 @@
                                     @slot('value', '1')
                                     @slot('text', 'Level')
                                     @slot('name', 'level')
+                                    @slot('help_text','level')
                                     @slot('id_error', 'code')
                                 @endcomponent
                             </div>
@@ -76,6 +80,7 @@
                                     @slot('name', 'description')
                                     @slot('text', 'Description')
                                     @slot('description', 'text')
+                                    @slot('help_text','description')
                                 @endcomponent
                             </div>
                         </div>

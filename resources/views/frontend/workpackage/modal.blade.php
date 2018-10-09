@@ -21,6 +21,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
+                                    @slot('help_text','code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -31,6 +32,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
+                                    @slot('help_text','name')
                                 @endcomponent
                             </div>
                         </div>
@@ -61,6 +63,7 @@
                                 @component('frontend.common.input.upload')
                                     @slot('text', 'file')
                                     @slot('name', 'file')
+                                    @slot('help_text','file')
                                 @endcomponent
                             </div>
                         </div>

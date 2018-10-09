@@ -58,6 +58,7 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Code')
                                                 @slot('name', 'code')
+                                                @slot('help_text','code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,6 +69,7 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Name')
                                                 @slot('name', 'name')
+                                                @slot('help_text','name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -81,6 +83,7 @@
                                                 @slot('rows', '3')
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
+                                                @slot('help_text','description')
                                             @endcomponent
                                         </div>
 
@@ -96,6 +99,7 @@
                                         @component('frontend.common.input.text')
                                             @slot('text', 'Barcode')
                                             @slot('name', 'barcode')
+                                            @slot('help_text','barcode')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -123,12 +127,14 @@
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
+                                            @slot('help_text','stockable')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Dikenai PPN?')
                                             @slot('name', 'isppn')
+                                            @slot('help_text','dikenai ppn')
                                         @endcomponent
 
                                     </div>
@@ -150,6 +156,7 @@
                                                                             @component('frontend.common.input.upload')
                                                                                 @slot('text', 'Photo')
                                                                                 @slot('name', 'photo')
+                                                                                @slot('help_text','photo')
                                                                             @endcomponent
                                                                         </td>
                                                                         <td>
@@ -187,6 +194,7 @@
                                             @slot('text', 'Account Code')
                                             @slot('name', 'accountcode')
                                             @slot('style', 'width:100%')
+                                            @slot('help_text','accountcode')
                                         @endcomponent
                                     </div>
                                 </div>

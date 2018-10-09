@@ -7,6 +7,7 @@
         @component('frontend.common.input.text')
             @slot('text', 'Name')
             @slot('name', 'name')
+            @slot('help_text','name')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -17,6 +18,7 @@
         @component('frontend.common.input.text')
             @slot('text', 'Code')
             @slot('name', 'code')
+            @slot('help_text','code')
         @endcomponent
     </div>
 </div>
@@ -29,6 +31,7 @@
         @component('frontend.common.input.text')
             @slot('text', 'NPWP')
             @slot('name', 'npwp')
+            @slot('help_text','npwp')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -39,9 +42,9 @@
         @component('frontend.common.input.textarea')
             @slot('text', 'NPWP Address')
             @slot('name', 'npwpaddress')
-            @slot('placeholder', 'NPWP Address')
             @slot('rows', '3')
-        @endcomponent
+            @slot('help_text','npwp address')
+            @endcomponent
     </div>
 </div>
 <div class="form-group m-form__group row ">
@@ -53,6 +56,7 @@
         @component('frontend.common.input.text')
             @slot('text', 'ToP')
             @slot('name', 'top')
+            @slot('help_text','top')
         @endcomponent
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -101,6 +105,7 @@
         @component('frontend.common.input.checkbox')
             @slot('text', 'Active')
             @slot('name', 'active')
+            @slot('help_text','active')
         @endcomponent
     </div>
 </div>
@@ -114,6 +119,7 @@
             @slot('text', 'AccountCode')
             @slot('name', 'accountcode')
             @slot('id', 'accountcode')
+            @slot('help_text','accountcode')
             @slot('style', 'width:100%')
         @endcomponent
     </div>
@@ -125,6 +131,7 @@
         @component('frontend.common.input.text')
             @slot('text', 'Leveling')
             @slot('name', 'leveling')
+            @slot('help_text','leveling')
         @endcomponent
     </div>
 </div>
@@ -144,6 +151,7 @@
                                     @slot('id', 'xtype')
                                     @slot('text', 'xType')
                                     @slot('name', 'xtype')
+                                    @slot('help_text','xtype')
                                 @endcomponent
                             </div>
                             <div class="col-md-1">
