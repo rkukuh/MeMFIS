@@ -24,7 +24,7 @@ class Item extends MemfisModel implements HasMedia
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * M-M Polymorphic: An item can have none or many categories.
+     * M-M Polymorphic: An item can have zero or many categories.
      *
      * This function will get all of the categories that are assigned to this item.
      * See: Category's items() method for the inverse
@@ -32,5 +32,21 @@ class Item extends MemfisModel implements HasMedia
     public function categories()
     {
         return $this->morphToMany(Category::class, 'categorizable');
+    }
+
+    /**
+     * Many-to-Many: An item may have zero or many unit.
+     *
+     * This function will retrieve the units of an item.
+     * See: Unit's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function units()
+    {
+        return $this->belongsToMany(Unit::class)
+                    ->as('uom')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
     }
 }
