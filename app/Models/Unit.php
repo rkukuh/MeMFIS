@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Scopes\OrderByColumn;
 use Illuminate\Database\Eloquent\Builder;
 
 class Unit extends MemfisModel
@@ -12,6 +13,20 @@ class Unit extends MemfisModel
         'symbol',
         'type_id',
     ];
+
+    /******************************************* BOOT ********************************************/
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OrderByColumn('name'));
+    }
 
     /******************************************* SCOPE *******************************************/
 
