@@ -8,7 +8,7 @@
                 <h5 class="modal-title" id="TitleModalCustomer">
                     UoM (Unit of Measurement) for
 
-                    <small id="item" class="m--font-focus"></small>
+                    <small id="item-unit" class="m--font-focus"></small>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

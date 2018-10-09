@@ -108,11 +108,6 @@ let Item = {
             else{
                 isppn = 0;
             }
-
-            $('#simpan').text('Simpan');
-
-            document.getElementById('item-uom').removeAttribute('disabled');
-            document.getElementById('item-minmaxstock').removeAttribute('disabled');
             let accountcode2 = $('#accountcode2').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
@@ -203,6 +198,10 @@ let Item = {
                         $('#name-error').html('');
                         $('#description-error').html('');
                         $('#barcode-error').html('');
+                        document.getElementById('item-uom').removeAttribute('disabled');
+                        document.getElementById('item-minmaxstock').removeAttribute('disabled');  
+                        $('#item-storage').html(code);          
+                        $('#item-unit').html(code);          
                     }
                 }
             });
