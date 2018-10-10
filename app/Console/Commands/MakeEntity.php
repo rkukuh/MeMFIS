@@ -642,6 +642,14 @@ class MakeEntity extends Command
 
             $test = $this->entity . 'Test';
 
+            if ($this->files->exists(
+                $path = base_path() . '/tests/Feature/' . $test . '.php')
+            ) {
+                $this->input->setOption('test', false);
+
+                return $this->line('Test: Feature: use existing: ' . $test . '.php');
+            }
+
             $this->callSilent('make:test', [
                 'name' => $test
             ]);
@@ -651,6 +659,14 @@ class MakeEntity extends Command
             $this->info($this->data['artefact'] . ' created.');
 
             /** Unit test */
+
+            if ($this->files->exists(
+                $path = base_path() . '/tests/Unit/' . $test . '.php')
+            ) {
+                $this->input->setOption('test', false);
+
+                return $this->line('Test: Unit: use existing: ' . $test . '.php');
+            }
 
             $this->callSilent('make:test', [
                 'name' => $test,
