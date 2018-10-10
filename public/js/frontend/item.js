@@ -79,33 +79,52 @@ let Item = {
             ]
         });
 
-            $(document).ready(function () {
-                $('.btn-success').removeClass('add');
+        $(document).ready(function () {
+            document.getElementById('isppn').onchange = function () {
+                document.getElementById('ppn').disabled = !this.checked;
+            };
+            //     $('.btn-success').removeClass('add');
 
-                // if(document.getElementById("isppn").checked){
-                //     document.getElementById('isppn').removeAttribute('disabled');
-                // }
+            // if(document.getElementById("isppn").checked){
+            //     document.getElementById('isppn').removeAttribute('disabled');
+        });
 
-            });
+        // });
+
+        // function toggleTB(what) {
+        //     if (what.checked) {
+        //         document.getElementById('ppn').disabled = 1
+        //     } else {
+        //         document.getElementById('ppn').disabled = 0
+        //     }
+        // }
 
 
-            $('.checkbox').on('click', '#isppn', function () {
-                    $('.ppn').removeAttr("disabled");
-            });
+        $('.footer').on('click', '.add-item', function () {
 
-            $('.footer').on('click', '.add-item', function () {
-            
-            if(document.getElementById("isstock").checked){
-                isstock = 1;
+            if ($('#category :selected').length > 0) {
+                var selectedcategories = [];
+                $('#category :selected').each(function (i, selected) {
+                    selectedcategories[i] = $(selected).val();
+                });
             }
-            else{
+
+            // if ($('#photo').length > 0) {
+            var photos = [];
+            // $('#photo').each(function (i) {
+            //     photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
+            // });
+            // }
+
+            if (document.getElementById("isstock").checked) {
+                isstock = 1;
+            } else {
                 isstock = 0;
             }
 
-            if(document.getElementById("isppn").checked){
+            if (document.getElementById("isppn").checked) {
                 isppn = 1;
-            }
-            else{
+            } else {
                 isppn = 0;
             }
             let accountcode2 = $('#accountcode2').val();
@@ -116,26 +135,27 @@ let Item = {
             let ppn = $('input[name=ppn]').val();
 
 
-            var fd = new FormData();
-            // fd.append( "fileInput", $("#poster")[0].files[0]);
-            fd.append("code", code);
-            fd.append("name", name);
-            fd.append("description", description);
-            fd.append("barcode", barcode);
-            fd.append("accountcode", accountcode2);
-            fd.append("isstock", isstock);
-            fd.append("isppn", isppn);
-            fd.append("ppn", ppn);
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                processData: false,
-                contentType: false,
+                // processData: false,
+                // contentType: false,
                 type: 'post',
                 url: '/item',
-                data : fd,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    code: code,
+                    name: name,
+                    barcode: barcode,
+                    ppn: ppn,
+                    photos: photos,
+                    description: description,
+                    accountcode: accountcode2,
+                    selectedcategories: selectedcategories
+
+                },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.code) {
@@ -188,23 +208,64 @@ let Item = {
                         }
                     } else {
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
+                        // toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        //     timeOut: 5000
+                        // });
 
                         // document.getElementById('poster-label').innerHTML = '';
-                        $('input[type=file]').val("") ;
+                        $('input[type=file]').val("");
                         $('#code-error').html('');
                         $('#name-error').html('');
                         $('#description-error').html('');
                         $('#barcode-error').html('');
                         document.getElementById('item-uom').removeAttribute('disabled');
-                        document.getElementById('item-minmaxstock').removeAttribute('disabled');  
-                        $('#item-storage').html(code);          
-                        $('#item-unit').html();          
+                        document.getElementById('item-minmaxstock').removeAttribute('disabled');
+                        $('#item-storage').html(code);
+                        $('#item-unit').html();
                     }
                 }
             });
+
+            $('#photo').each(function (i) {
+
+                var fd = new FormData();
+
+                fd.append("code", code);
+                fd.append("fileInput", document.getElementsByName('[' + i + '][photo]')[0].files[0]);
+
+                // photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+
+                    url: '/post-photos',
+                    data: fd,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function (data) {
+                        if (data.uploaded == true) {
+                            $('input[type=file]').val("");
+                            // document.getElementById('largeImage-label').innerHTML = '';
+                            // alert(data.url);
+
+                        }
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                });
+            });
+
+
+            toastr.success('Data berhasil disimpan.', 'Sukses', {
+                timeOut: 5000
+            });
+
+
+
         });
 
         let edit = $('.m_datatable').on('click', '.edit', function () {
