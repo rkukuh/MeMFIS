@@ -219,7 +219,7 @@ class MakeEntity extends Command
                     if ($this->files->exists(
                         $path = base_path() . '/app/Http/Requests/Admin/' . $this->requestStoreName . '.php')
                     ) {
-                        $this->input->setOption('controller', false);
+                        $this->input->setOption('request', false);
 
                         $this->line('Form Request for Admin namespace: use existing: ' . $this->requestStoreName . '.php');
                     }
@@ -236,7 +236,7 @@ class MakeEntity extends Command
                     if ($this->files->exists(
                         $path = base_path() . '/app/Http/Requests/Admin/' . $this->requestUpdateName . '.php')
                     ) {
-                        $this->input->setOption('controller', false);
+                        $this->input->setOption('request', false);
 
                         $this->line('Form Request for Admin namespace: use existing: ' . $this->requestUpdateName . '.php');
                     }
@@ -253,7 +253,7 @@ class MakeEntity extends Command
                     if ($this->files->exists(
                         $path = base_path() . '/app/Http/Requests/Frontend/' . $this->requestStoreName . '.php')
                     ) {
-                        $this->input->setOption('controller', false);
+                        $this->input->setOption('request', false);
 
                         $this->line('Form Request for Frontend namespace: use existing: ' . $this->requestStoreName . '.php');
                     }
@@ -270,7 +270,7 @@ class MakeEntity extends Command
                     if ($this->files->exists(
                         $path = base_path() . '/app/Http/Requests/Frontend/' . $this->requestUpdateName . '.php')
                     ) {
-                        $this->input->setOption('controller', false);
+                        $this->input->setOption('request', false);
 
                         $this->line('Form Request for Frontend namespace: use existing: ' . $this->requestUpdateName . '.php');
                     }
