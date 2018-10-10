@@ -538,6 +538,14 @@ class MakeEntity extends Command
 
             $policy = $this->entity . 'Policy';
 
+            if ($this->files->exists(
+                $path = base_path() . '/app/Policies/' . $policy . '.php')
+            ) {
+                $this->input->setOption('policy', false);
+
+                return $this->line('Policy: use existing: ' . $policy . '.php');
+            }
+
             $this->callSilent('make:policy', [
                 'name' => $policy,
                 '--model' => $this->modelNamespace,
@@ -563,6 +571,14 @@ class MakeEntity extends Command
         if ($this->option('seeder')) {
 
             $seederTable = ($this->pluralizedEntity) . 'TableSeeder';
+
+            if ($this->files->exists(
+                $path = base_path() . '/database/seeds/' . $seederTable . '.php')
+            ) {
+                $this->input->setOption('seeder', false);
+
+                return $this->line('Table Seeder: use existing: ' . $seederTable . '.php');
+            }
 
             $this->callSilent('make:seeder', [
                 'name' => $seederTable
