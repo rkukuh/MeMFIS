@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\model\ListUtil;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Fronted\CategoryStore;
-use App\Http\Requests\Fronted\CategoryUpdate;
+use App\Http\Requests\Fronted\CategoryItemStore;
+use App\Http\Requests\Fronted\CategoryItemUpdate;
 
-class CategoryController extends Controller
+class CategoryItemController extends Controller
 {
     /**
      * Show data from model for DataTable.
@@ -131,14 +131,12 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Fronted\CategoryStore  $request
+     * @param  \App\Http\Requests\Fronted\CategoryItemStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryStore $request)
+    public function store(CategoryItemStore $request)
     {
-        $category = Category::create([
-            //
-        ]);
+        $category = Category::create($request->all());
 
         return response()->json($category);
     }
@@ -168,11 +166,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Fronted\CategoryUpdate  $request
+     * @param  \App\Http\Requests\Fronted\CategoryItemUpdate  $request
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryUpdate $request, Category $category)
+    public function update(CategoryItemUpdate $request, Category $category)
     {
         $category = Category::find($category);
         // $category->name = $request->name;

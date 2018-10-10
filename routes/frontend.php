@@ -23,8 +23,10 @@ Route::name('frontend.')->group(function () {
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 
-        Route::resource('category', 'CategoryController');
-        Route::get('/get-categories','CategoryController@getCategories')->name('get-categories');
+        Route::resource('category-item', 'CategoryItemController', [
+            'parameters' => ['category-post' => 'category']
+        ]);
+        Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 
         Route::resource('item', 'ItemController');
         Route::get('/get-items','ItemController@getItems')->name('get-items');
