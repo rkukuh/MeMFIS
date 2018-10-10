@@ -359,7 +359,9 @@ class MakeEntity extends Command
                     break;
             }
 
-            $this->info($this->data['artefact'] . ' created BBB.');
+            if ($this->option('request')) {
+                $this->info($this->data['artefact'] . ' created BBB.');
+            }
         }
     }
 
