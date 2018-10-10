@@ -141,23 +141,9 @@ class ItemUnitController extends Controller
      */
     public function store(ItemUnitStore $request)
     {
-        // dd($request->qty,$request->qty2, $request->unit, $request->unit2);
-
-        // $user = User::find(1);
-        // $unit = Unit::find($request->unit);
-        // dd($request->code);
         $item = Item::where('code',$request->code)->first();
 
-        // $item->units()->attach([$unit=>['quantity' => $request->quantity]]);
         $item->units()->attach([$request->unit => ['quantity' => $request->qty], $request->unit2 => ['quantity' => $request->qty2]]);
-
-
-        // $item->units()->attach($unit);
-
-        // $itemUnit = ItemUnit::create([
-        //     // 'qty' => $request->qty,
-        //     // 'qty2' => $request->qty2,
-        // ]);
 
         return response()->json($item);
     }

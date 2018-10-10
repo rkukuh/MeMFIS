@@ -137,22 +137,11 @@ class ItemStorageController extends Controller
      */
     public function store(ItemStorageStore $request)
     {
-        // dd($request->storage,$request->min, $request->max);
-        // dd($request->code);
         $item = Item::where('code',$request->code)->first();
 
-        // $item->units()->attach([$unit=>['quantity' => $request->quantity]]);
         $item->storages()->attach([$request->storage => ['min' => $request->min, 'max' => $request->max]]);
 
-        // $id = Item::where('code',$request->code)->first();
-        // $itemStorage = ItemStorage::create([
-        //     'item_id' => $id,
-        //     'storage_id' => $request->storage,
-        //     'min' => $request->min,
-        //     'max' => $request->max,
-        //     ]);
-
-        // return response()->json($itemStorage);
+        return response()->json($item);
     }
 
     /**
