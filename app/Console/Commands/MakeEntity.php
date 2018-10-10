@@ -285,17 +285,39 @@ class MakeEntity extends Command
                     break;
 
                 case 'none':
-                    $this->callSilent('make:request', [
-                        'name' => $this->requestStoreName
-                    ]);
+                    /** Store Request */
 
-                    $this->addToTable('Form Request', $this->requestStoreName . '.php');
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/' . $this->requestStoreName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
 
-                    $this->callSilent('make:request', [
-                        'name' => $this->requestUpdateName
-                    ]);
+                        $this->line('Form Request: use existing: ' . $this->requestStoreName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => $this->requestStoreName
+                        ]);
 
-                    $this->addToTable('Form Request', $this->requestUpdateName . '.php');
+                        $this->addToTable('Form Request', $this->requestStoreName . '.php');
+                    }
+
+                    /** Update Request */
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/' . $this->requestUpdateName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
+
+                        $this->line('Form Request: use existing: ' . $this->requestUpdateName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => $this->requestUpdateName
+                        ]);
+
+                        $this->addToTable('Form Request', $this->requestUpdateName . '.php');
+                    }
 
                     break;
 
