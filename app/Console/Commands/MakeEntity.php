@@ -214,29 +214,73 @@ class MakeEntity extends Command
 
             switch (strtolower($this->namespace)) {
                 case 'both':
-                    $this->callSilent('make:request', [
-                        'name' => 'Admin/' . $this->requestStoreName
-                    ]);
+                    /** Store Request on Admin namespace */
 
-                    $this->addToTable('Form Request', 'Admin/' . $this->requestStoreName . '.php');
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/Admin/' . $this->requestStoreName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
 
-                    $this->callSilent('make:request', [
-                        'name' => 'Admin/' . $this->requestUpdateName
-                    ]);
+                        return $this->error('Form Request: use existing: ' . $this->requestStoreName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => 'Admin/' . $this->requestStoreName
+                        ]);
 
-                    $this->addToTable('Form Request', 'Admin/' . $this->requestUpdateName . '.php');
+                        $this->addToTable('Form Request', 'Admin/' . $this->requestStoreName . '.php');
+                    }
 
-                    $this->callSilent('make:request', [
-                        'name' => 'Frontend/' . $this->requestStoreName
-                    ]);
+                    /** Update Request on Admin namespace */
 
-                    $this->addToTable('Form Request', 'Frontend/' . $this->requestStoreName . '.php');
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/Admin/' . $this->requestUpdateName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
 
-                    $this->callSilent('make:request', [
-                        'name' => 'Frontend/' . $this->requestUpdateName
-                    ]);
+                        return $this->error('Form Request: use existing: ' . $this->requestUpdateName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => 'Admin/' . $this->requestUpdateName
+                        ]);
 
-                    $this->addToTable('Form Request', 'Frontend/' . $this->requestUpdateName . '.php');
+                        $this->addToTable('Form Request', 'Admin/' . $this->requestUpdateName . '.php');
+                    }
+
+                    /** Store Request on Frontend namespace */
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/Frontend/' . $this->requestStoreName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Form Request: use existing: ' . $this->requestStoreName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => 'Frontend/' . $this->requestStoreName
+                        ]);
+
+                        $this->addToTable('Form Request', 'Frontend/' . $this->requestStoreName . '.php');
+                    }
+
+                    /** Update Request on Frontend namespace */
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/Frontend/' . $this->requestUpdateName . '.php')
+                    ) {
+                        $this->input->setOption('controller', false);
+
+                        return $this->error('Form Request: use existing: ' . $this->requestUpdateName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => 'Frontend/' . $this->requestUpdateName
+                        ]);
+
+                        $this->addToTable('Form Request', 'Frontend/' . $this->requestUpdateName . '.php');
+                    }
 
                     break;
 
