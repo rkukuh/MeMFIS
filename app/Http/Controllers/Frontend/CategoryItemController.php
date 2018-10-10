@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\model\ListUtil;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Fronted\CategoryItemStore;
-use App\Http\Requests\Fronted\CategoryItemUpdate;
+use App\Http\Requests\Frontend\CategoryItemStore;
+use App\Http\Requests\Frontend\CategoryItemUpdate;
 
 class CategoryItemController extends Controller
 {
@@ -158,8 +158,10 @@ class CategoryItemController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($category)
     {
+        $category = Category::where('uuid',$category)->first();
+
         return response()->json($category);
     }
 
@@ -185,8 +187,10 @@ class CategoryItemController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($category)
     {
+        $category = Category::where('uuid',$category)->first();
+
         $category->delete();
 
         return response()->json($category);

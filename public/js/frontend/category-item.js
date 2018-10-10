@@ -64,7 +64,7 @@ let Category = {
                     width: 150,
                 },
                 {
-                    field: 'accountcode',
+                    field: 'account_code',
                     title: 'Accountcode',
                     sortable: 'asc',
                     filterable: !1,
@@ -79,14 +79,14 @@ let Category = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
+                            '<button data-toggle="modal" data-target="#modal_category" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            t.id +
+                            '<button data-toggle="modal" data-target="#modal_category" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
+                            t.uuid +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -174,7 +174,7 @@ let Category = {
             $('#simpan').text('Perbarui');
 
             let triggerid = $(this).data('id');
-
+            // alert(triggerid);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -183,7 +183,10 @@ let Category = {
                 url: '/category-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('id').value = data.id;
-                    document.getElementById('name').value = data.name;
+                    document.getElementById('code_category').value = data.code;
+                    document.getElementById('name_category').value = data.name;
+                    document.getElementById('description_category').value = data.description;
+                    document.getElementById('accountcode3').value = data.accountcode3;
 
                     $('.btn-success').addClass('update');
                     $('.btn-success').removeClass('add');
@@ -272,7 +275,6 @@ let Category = {
 
         let remove = $('.m_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
-
             swal({
                 title: 'Are you sure?',
                 text: 'You will not be able to recover this imaginary file!',

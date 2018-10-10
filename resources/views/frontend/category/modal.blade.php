@@ -19,6 +19,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
                                     @slot('name', 'code_category')
+                                    @slot('id', 'code_category')
                                     @slot('help_text','code')
                                 @endcomponent
                             </div>
@@ -29,6 +30,7 @@
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
                                     @slot('name', 'name_category')
+                                    @slot('id', 'name_category')
                                     @slot('help_text','name')
                                 @endcomponent
                             </div>
