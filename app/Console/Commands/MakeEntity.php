@@ -416,10 +416,11 @@ class MakeEntity extends Command
 
                         return $this->line('Controller: use existing: ' . $this->controllerName . '.php');
                     }
+                    else {
+                        $this->compileControllerStub($path);
 
-                    $this->compileControllerStub($path);
-
-                    $this->addToTable('Controller', $this->controllerName . '.php');
+                        $this->addToTable('Controller', $this->controllerName . '.php');
+                    }
 
                     break;
 
@@ -431,10 +432,11 @@ class MakeEntity extends Command
 
                         return $this->line('Controller: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
                     }
+                    else {
+                        $this->compileControllerStub($path, $this->namespace);
 
-                    $this->compileControllerStub($path, $this->namespace);
-
-                    $this->addToTable('Controller', $this->namespace . '/' . $this->controllerName . '.php');
+                        $this->addToTable('Controller', $this->namespace . '/' . $this->controllerName . '.php');
+                    }
 
                     break;
             }
