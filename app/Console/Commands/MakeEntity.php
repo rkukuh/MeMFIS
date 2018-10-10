@@ -221,7 +221,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->line('Form Request: use existing: ' . $this->requestStoreName . '.php');
+                        $this->line('Form Request for Admin namespace: use existing: ' . $this->requestStoreName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -238,7 +238,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->line('Form Request: use existing: ' . $this->requestUpdateName . '.php');
+                        $this->line('Form Request for Admin namespace: use existing: ' . $this->requestUpdateName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -255,7 +255,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->line('Form Request: use existing: ' . $this->requestStoreName . '.php');
+                        $this->line('Form Request for Frontend namespace: use existing: ' . $this->requestStoreName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -272,7 +272,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->line('Form Request: use existing: ' . $this->requestUpdateName . '.php');
+                        $this->line('Form Request for Frontend namespace: use existing: ' . $this->requestUpdateName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
