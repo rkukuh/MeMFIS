@@ -385,7 +385,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->line('Controller: use existing: Admin/' . $this->controllerName . '.php');
+                        $this->line('Controller for Admin namespace: use existing: Admin/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, 'Admin');
@@ -400,7 +400,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->line('Controller: use existing: Frontend/' . $this->controllerName . '.php');
+                        $this->line('Controller for Frontend namespace: use existing: Frontend/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, 'Frontend');
@@ -432,7 +432,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->line('Controller: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
+                        return $this->line('Controller for ' . $this->namespace .' namespace: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, $this->namespace);
