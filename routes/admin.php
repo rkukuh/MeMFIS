@@ -13,6 +13,7 @@ Route::name('admin.')->group(function () {
         /** INITIAL DATA */
 
         Route::resource('type', 'TypeController');
+        Route::resource('unit', 'UnitController');
         Route::resource('status', 'StatusController');
 
         /** POLYMORPH */
@@ -23,7 +24,6 @@ Route::name('admin.')->group(function () {
 
         /** MASTER */
 
-        Route::resource('unit', 'UnitController');
         Route::resource('item', 'ItemController');
         Route::resource('department', 'DepartmentController');
 
