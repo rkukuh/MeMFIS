@@ -322,17 +322,39 @@ class MakeEntity extends Command
                     break;
 
                 default:
-                    $this->callSilent('make:request', [
-                        'name' => $this->namespace . '/' . $this->requestStoreName
-                    ]);
+                    /** Store Request */
 
-                    $this->addToTable('Form Request', $this->namespace . '/' . $this->requestStoreName . '.php');
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/' . $this->namespace . '/' . $this->requestStoreName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
 
-                    $this->callSilent('make:request', [
-                        'name' => $this->namespace . '/' . $this->requestUpdateName
-                    ]);
+                        $this->line('Form Request for ' . $this->namespace . ' namespace: use existing: ' . $this->requestStoreName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => $this->namespace . '/' . $this->requestStoreName
+                        ]);
 
-                    $this->addToTable('Form Request', $this->namespace . '/' . $this->requestUpdateName . '.php');
+                        $this->addToTable('Form Request', $this->namespace . '/' . $this->requestStoreName . '.php');
+                    }
+
+                    /** Frontend Request */
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/' . $this->namespace . '/' . $this->requestUpdateName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
+
+                        $this->line('Form Request for ' . $this->namespace . ' namespace: use existing: ' . $this->requestUpdateName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => $this->namespace . '/' . $this->requestUpdateName
+                        ]);
+
+                        $this->addToTable('Form Request', $this->namespace . '/' . $this->requestUpdateName . '.php');
+                    }
 
                     break;
             }
