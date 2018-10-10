@@ -416,7 +416,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->line('Controller already exists: ' . $this->controllerName . '.php');
+                        $this->line('Controller already exists: ' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path);
@@ -432,7 +432,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->line('Controller already exists: ' . $this->namespace .'/' . $this->controllerName . '.php');
+                        $this->line('Controller already exists: ' . $this->namespace .'/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, $this->namespace);
@@ -577,16 +577,17 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('seeder', false);
 
-                return $this->line('Table Seeder already exists: ' . $seederTable . '.php');
+                $this->line('Table Seeder already exists: ' . $seederTable . '.php');
             }
+            else {
+                $this->callSilent('make:seeder', [
+                    'name' => $seederTable
+                ]);
 
-            $this->callSilent('make:seeder', [
-                'name' => $seederTable
-            ]);
+                $this->addToTable('Table Seeder', 'database/seeds/' . $seederTable . '.php');
 
-            $this->addToTable('Table Seeder', 'database/seeds/' . $seederTable . '.php');
-
-            $this->info($this->data['artefact'] . ' created.');
+                $this->info($this->data['artefact'] . ' created.');
+            }
         }
 
         /** Example data seeder */
@@ -600,14 +601,15 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->line('Example Seeder already exists: ' . $seederExample . '.php');
+                $this->line('Example Seeder already exists: ' . $seederExample . '.php');
             }
+            else {
+                $this->compileExampleSeederStub($path);
 
-            $this->compileExampleSeederStub($path);
+                $this->addToTable('Example Seeder', 'database/seeds/examples/' . $seederExample . '.php');
 
-            $this->addToTable('Example Seeder', 'database/seeds/examples/' . $seederExample . '.php');
-
-            $this->info($this->data['artefact'] . ' created.');
+                $this->info($this->data['artefact'] . ' created.');
+            }
         }
     }
 
