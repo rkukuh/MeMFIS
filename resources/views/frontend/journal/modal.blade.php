@@ -90,9 +90,9 @@
                             <div class="action-buttons">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                                <div id="button-div">
-                                                        @include('frontend.common.buttons.submit')
-                                                    </div>            
+                                                {{-- <div id="button-div" style="height:0px;"> --}}
+                                                    @include('frontend.common.buttons.submit')
+                                                {{-- </div>  --}}
                                                     @include('frontend.common.buttons.reset')
                             
                                                     @include('frontend.common.buttons.close')
