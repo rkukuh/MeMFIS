@@ -493,7 +493,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->info('Model Factory: use existing: ' . $factory . '.php');
+                return $this->line('Model Factory: use existing: ' . $factory . '.php');
             }
 
             $this->compileFactoryStub($path);
@@ -578,7 +578,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->info('Example Seeder: use existing: ' . $seederExample . '.php');
+                return $this->line('Example Seeder: use existing: ' . $seederExample . '.php');
             }
 
             $this->compileExampleSeederStub($path);
