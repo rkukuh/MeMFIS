@@ -499,12 +499,12 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->line('Model Factory already exists: ' . $factory . '.php');
+                return $this->line('Factory already exists: ' . $factory . '.php');
             }
 
             $this->compileFactoryStub($path);
 
-            $this->addToTable('Model Factory', $factory . '.php');
+            $this->addToTable('Factory', $factory . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
