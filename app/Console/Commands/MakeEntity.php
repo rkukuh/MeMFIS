@@ -196,7 +196,7 @@ class MakeEntity extends Command
 
             $this->addToTable('Migration', $migration . '.php');
 
-            $this->info($this->data['artefact'] . ' created AAA.');
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
@@ -360,7 +360,7 @@ class MakeEntity extends Command
             }
 
             if ($this->option('request')) {
-                $this->info($this->data['artefact'] . ' created BBB.');
+                $this->info($this->data['artefact'] . ' created.');
             }
         }
     }
@@ -443,7 +443,9 @@ class MakeEntity extends Command
                     break;
             }
 
-            $this->info($this->data['artefact'] . ' created CCC.');
+            if ($this->option('controller')) {
+                $this->info($this->data['artefact'] . ' created.');
+            }
         }
     }
 
@@ -504,7 +506,7 @@ class MakeEntity extends Command
 
             $this->addToTable('Model Factory', $factory . '.php');
 
-            $this->info($this->data['artefact'] . ' created DDD.');
+            $this->info($this->data['artefact'] . ' created.');
         }
     }
 
