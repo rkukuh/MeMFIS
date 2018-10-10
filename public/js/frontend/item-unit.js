@@ -1,92 +1,113 @@
 let ItemUnit = {
     init: function () {
-        $('.m_datatable1').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/get-uom',
-                        map: function (raw) {
-                            let dataSet = raw;
+        load_table = function () {
+            let code = $('input[name=code]').val();
+            // alert(code);
+            // let table2 = $('.m_datatable1').mDatatable();
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
+            // table2.originalDataSet =[];
+            // table2.reload();
+
+
+            $('.m_datatable1').mDatatable({
+                data: {
+                    type: 'remote',
+                    source: {
+                        read: {
+                            method: 'GET',
+                            url: '/get-uom/' + code + '/',
+                            map: function (raw) {
+                                let dataSet = raw;
+
+                                if (typeof raw.data !== 'undefined') {
+                                    dataSet = raw.data;
+                                }
+
+                                return dataSet;
                             }
-
-                            return dataSet;
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: !0,
+                    serverFiltering: !0,
+                    serverSorting: !0
+                },
+                layout: {
+                    theme: 'default',
+                    class: '',
+                    scroll: false,
+                    footer: !1
+                },
+                sortable: !0,
+                filterable: !1,
+                pagination: !0,
+                search: {
+                    input: $('#generalSearch')
+                },
+                toolbar: {
+                    items: {
+                        pagination: {
+                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
                         }
                     }
                 },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                columns: [{
+                        field: 'id_unit',
+                        title: 'Unit',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'qty',
+                        title: 'Qty',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'Actions',
+                        width: 110,
+                        title: 'Actions',
+                        sortable: !1,
+                        overflow: 'visible',
+                        template: function (t, e, i) {
+                            return (
+                                '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                                t.id +
+                                '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                                '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                                t.id +
+                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                                t.id +
+                                ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                            );
+                        }
                     }
-                }
-            },
-            columns: [
-                {
-                    field: 'id_unit',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'qty',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                }
-            ]
-        });
+                ]
+            });
+        };
+        // data33 = function () {
+        //     let table = $('.m_datatable1').mDatatable();
 
-        let simpan = $('.modal-footer').on('click', '.add', function () {
-            $('#name-error').html('');
-            $('#simpan').text('Simpan');
+        //     table.originalDataSet =[];
+        //     table.reload();
+        // };
 
-            let registerForm = $('#CustomerForm');
-            let name = $('input[name=name]').val();
-            let formData = registerForm.serialize();
+
+        let simpan = $('.modal-footer').on('click', '.add-uom', function () {
+            let code = $('input[name=code]').val();
+            // alert(code);
+            // $('#name-error').html('');
+            // $('#simpan').text('Simpan');
+
+            // let registerForm = $('#CustomerForm');
+            let qty = $('input[name=qty]').val();
+            let qty2 = $('input[name=qty2]').val();
+            let unit = $('#unit').val();
+            let unit2 = $('#unit2').val();
+            // let formData = registerForm.serialize();
 
             $.ajax({
                 headers: {
@@ -96,26 +117,60 @@ let ItemUnit = {
                 url: '/item-unit',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name
+                    code: code,
+                    qty: qty,
+                    qty2: qty2,
+                    unit: unit,
+                    unit2: unit2
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                        if (data.errors.qty) {
+                            $('#qty-error').html(data.errors.qty[0]);
 
-                            document.getElementById('name').value = name;
+                            document.getElementById('qty').value = qty;
+                            document.getElementById('qty2').value = qty2;
+                            document.getElementById('unit').value = unit;
+                            document.getElementById('unit2').value = unit2;
                         }
+                        if (data.errors.qty) {
+                            $('#qty2-error').html(data.errors.qty[0]);
+
+                            document.getElementById('qty').value = qty;
+                            document.getElementById('qty2').value = qty2;
+                            document.getElementById('unit').value = unit;
+                            document.getElementById('unit2').value = unit2;
+                        }
+                        if (data.errors.unit) {
+                            $('#unit-error').html(data.errors.qty[0]);
+
+                            document.getElementById('qty').value = qty;
+                            document.getElementById('qty2').value = qty2;
+                            document.getElementById('unit').value = unit;
+                            document.getElementById('unit2').value = unit2;
+                        }
+                        if (data.errors.unit2) {
+                            $('#unit2-error').html(data.errors.qty[0]);
+
+                            document.getElementById('qty').value = qty;
+                            document.getElementById('qty2').value = qty2;
+                            document.getElementById('unit').value = unit;
+                            document.getElementById('unit2').value = unit2;
+                        }
+                        2
                     } else {
-                        $('#modal_customer').modal('hide');
+                        $('#modal_uom').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
+                        load_table();
 
-                        let table = $('.m_datatable').mDatatable();
+                        let table = $('.m_datatable1').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
+
                     }
                 }
             });
@@ -287,4 +342,5 @@ let ItemUnit = {
 
 jQuery(document).ready(function () {
     ItemUnit.init();
+    // data22();
 });

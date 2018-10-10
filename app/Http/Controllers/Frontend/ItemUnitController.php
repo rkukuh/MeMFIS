@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Unit;
+use App\Models\Item;
 use App\model\ListUtil;
 use App\Models\Pivots\ItemUnit;
 use App\Http\Controllers\Controller;
@@ -15,9 +17,12 @@ class ItemUnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getItemUnits()
+    public function getUoM($uom)
     {
-        $itemUnits = ItemUnit::All();
+        // dd($uom);
+        $item = Item::where('code',$uom)->get();
+        dd($item);
+        // $itemUnits = ItemUnit::All();
 
         $data = $alldata = json_decode($itemUnits);
 
@@ -136,12 +141,25 @@ class ItemUnitController extends Controller
      */
     public function store(ItemUnitStore $request)
     {
-        $itemUnit = ItemUnit::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
-        ]);
+        // dd($request->qty,$request->qty2, $request->unit, $request->unit2);
 
-        return response()->json($itemUnit);
+        // $user = User::find(1);
+        // $unit = Unit::find($request->unit);
+        // dd($request->code);
+        $item = Item::where('code',$request->code)->first();
+
+        // $item->units()->attach([$unit=>['quantity' => $request->quantity]]);
+        $item->units()->attach([$request->unit => ['quantity' => $request->qty], $request->unit2 => ['quantity' => $request->qty2]]);
+
+
+        // $item->units()->attach($unit);
+
+        // $itemUnit = ItemUnit::create([
+        //     // 'qty' => $request->qty,
+        //     // 'qty2' => $request->qty2,
+        // ]);
+
+        return response()->json($item);
     }
 
     /**

@@ -201,7 +201,7 @@ let Item = {
                         document.getElementById('item-uom').removeAttribute('disabled');
                         document.getElementById('item-minmaxstock').removeAttribute('disabled');  
                         $('#item-storage').html(code);          
-                        $('#item-unit').html(code);          
+                        $('#item-unit').html();          
                     }
                 }
             });

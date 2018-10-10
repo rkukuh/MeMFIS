@@ -35,7 +35,7 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-item-storages','ItemStorageController@getItemStorages')->name('get-item-storages');
 
         Route::resource('item-unit', 'ItemUnitController');
-        Route::get('/get-uom','ItemUnitController@getUoM')->name('get-uom');
+        Route::get('/get-uom/{code}','ItemUnitController@getUoM')->name('get-uom');
 
         Route::resource('storage', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');

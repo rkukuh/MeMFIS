@@ -1,5 +1,7 @@
 let ItemStorage = {
     init: function () {
+        let code = $('input[name=code]').val();
+
         $('.m_datatable2').mDatatable({
             data: {
                 type: 'remote',
@@ -87,13 +89,16 @@ let ItemStorage = {
             ]
         });
 
-        let simpan = $('.modal-footer').on('click', '.add', function () {
+        let simpan = $('.modal-footer').on('click', '.add-stock', function () {
+            let code = $('input[name=code]').val();
             $('#name-error').html('');
-            $('#simpan').text('Simpan');
+            // $('#simpan').text('Simpan');
 
-            let registerForm = $('#CustomerForm');
-            let name = $('input[name=name]').val();
-            let formData = registerForm.serialize();
+            // let registerForm = $('#CustomerForm');
+            let storage = $('#storage').val();
+            let min = $('input[name=min]').val();
+            let max = $('input[name=max]').val();
+            // let formData = registerForm.serialize();
 
             $.ajax({
                 headers: {
@@ -103,22 +108,39 @@ let ItemStorage = {
                 url: '/item-storage',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name
+                    storage: storage,
+                    min: min,
+                    max: max,
+                    code:code,
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-                            document.getElementById('name').value = name;
+                        if (data.errors.storage) {
+                            $('#storage-error').html(data.errors.storage[0]);
+                            document.getElementById('storage').value = storage;
+                            document.getElementById('min').value = min;
+                            document.getElementById('max').value = max;
+                        }
+                        if (data.errors.min) {
+                            $('#min-error').html(data.errors.min[0]);
+                            document.getElementById('storage').value = storage;
+                            document.getElementById('min').value = min;
+                            document.getElementById('max').value = max;
+                        }
+                        if (data.errors.max) {
+                            $('#max-error').html(data.errors.max[0]);
+                            document.getElementById('storage').value = storage;
+                            document.getElementById('min').value = min;
+                            document.getElementById('max').value = max;
                         }
                     } else {
-                        $('#modal_customer').modal('hide');
+                        $('#modal_minmaxstock').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
+                        let table = $('.m_datatable2').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -127,104 +149,6 @@ let ItemStorage = {
             });
         });
 
-        let edit = $('.m_datatable').on('click', '.edit', function () {
-            $('#button').show();
-            $('#simpan').text('Perbarui');
-
-            let triggerid = $(this).data('id');
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/item-storage/' + triggerid + '/edit',
-                success: function (data) {
-                    document.getElementById('id').value = data.id;
-                    document.getElementById('name').value = data.name;
-
-                    $('.btn-success').addClass('update');
-                    $('.btn-success').removeClass('add');
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
-                    });
-                }
-            });
-        });
-
-        let update = $('.modal-footer').on('click', '.update', function () {
-            $('#button').show();
-            $('#name-error').html('');
-            $('#simpan').text('Perbarui');
-
-            let name = $('input[name=name]').val();
-            let triggerid = $('input[name=id]').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'put',
-                url: '/item-storage/' + triggerid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    name: name
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-
-                            document.getElementById('name').value = name;
-                        }
-                    } else {
-                        $('#modal_customer').modal('hide');
-
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
-
-                        let table = $('.m_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
-
-        let show = $('.m_datatable').on('click', '.show', function () {
-            $('#button').hide();
-            $('#simpan').text('Perbarui');
-
-            let triggerid = $(this).data('id');
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/item-storage/' + triggerid,
-                success: function (data) {
-                    document.getElementById('TitleModalCustomer').innerHTML = 'Detail Customer #ID-' + triggerid;
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('name').readOnly = true;
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
-                    });
-                }
-            });
-        });
 
         let remove = $('.m_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');

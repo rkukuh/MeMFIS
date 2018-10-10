@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Item;
 use App\model\ListUtil;
-use App\Models\ItemStorage;
+use App\Models\Pivots\ItemStorage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemStorageStore;
 use App\Http\Requests\Frontend\ItemStorageUpdate;
@@ -136,11 +137,22 @@ class ItemStorageController extends Controller
      */
     public function store(ItemStorageStore $request)
     {
-        $itemStorage = ItemStorage::create([
-            // 'name' => $request->name,
-        ]);
+        // dd($request->storage,$request->min, $request->max);
+        // dd($request->code);
+        $item = Item::where('code',$request->code)->first();
 
-        return response()->json($itemStorage);
+        // $item->units()->attach([$unit=>['quantity' => $request->quantity]]);
+        $item->storages()->attach([$request->storage => ['min' => $request->min, 'max' => $request->max]]);
+
+        // $id = Item::where('code',$request->code)->first();
+        // $itemStorage = ItemStorage::create([
+        //     'item_id' => $id,
+        //     'storage_id' => $request->storage,
+        //     'min' => $request->min,
+        //     'max' => $request->max,
+        //     ]);
+
+        // return response()->json($itemStorage);
     }
 
     /**
