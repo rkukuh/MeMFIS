@@ -91,7 +91,7 @@ class MakeEntity extends Command
                 break;
 
             case 'Use existing model':
-                $this->info('Model: use existing.');
+                $this->line('Model: use existing: ' . $this->modelNamespace . '.php');
 
                 $this->makeMigration();
                 $this->makeRequest();
