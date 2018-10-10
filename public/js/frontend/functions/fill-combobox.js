@@ -189,7 +189,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     storages = function () {
         $.ajax({
-            url: '/get-storages/',
+            url: '/get-storages-combobox/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
