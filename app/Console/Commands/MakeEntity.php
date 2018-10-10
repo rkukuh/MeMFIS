@@ -221,7 +221,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->error('Form Request: use existing: ' . $this->requestStoreName . '.php');
+                        $this->line('Form Request: use existing: ' . $this->requestStoreName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -238,7 +238,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->error('Form Request: use existing: ' . $this->requestUpdateName . '.php');
+                        $this->line('Form Request: use existing: ' . $this->requestUpdateName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -255,7 +255,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->error('Form Request: use existing: ' . $this->requestStoreName . '.php');
+                        $this->line('Form Request: use existing: ' . $this->requestStoreName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -272,7 +272,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->error('Form Request: use existing: ' . $this->requestUpdateName . '.php');
+                        $this->line('Form Request: use existing: ' . $this->requestUpdateName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -339,7 +339,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->error('Controller: use existing: Admin/' . $this->controllerName . '.php');
+                        $this->line('Controller: use existing: Admin/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, 'Admin');
@@ -354,7 +354,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->error('Controller: use existing: Frontend/' . $this->controllerName . '.php');
+                        $this->line('Controller: use existing: Frontend/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, 'Frontend');
@@ -370,7 +370,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller: use existing: ' . $this->controllerName . '.php');
+                        return $this->line('Controller: use existing: ' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path);
@@ -385,7 +385,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
+                        return $this->line('Controller: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
                     }
 
                     $this->compileControllerStub($path, $this->namespace);
