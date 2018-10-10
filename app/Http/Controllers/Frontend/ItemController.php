@@ -137,20 +137,59 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
-            $item = Item::create([
-            'code' => $request->input('code'),
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'barcode' => $request->input('barcode'),
-            'account_code' => $request->input('accountcode'),
-            'is_ppn' => $request->input('isppn'),
-            'is_stock' => $request->input('isstock'),
-            'ppn_amount' => $request->input('ppn'),
+        $item = Item::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'barcode' => $request->barcode,
+            'account_code' => $request->accountcode,
+            'is_ppn' => $request->isppn,
+            'is_stock' => $request->isstock,
+            'ppn_amount' => $request->ppn,
 
             // 'name' => $request->name,
         ]);
 
+        $categories = $request->selectedcategories;
+        foreach($categories as $category){
+            $item->categories()->attach([$category=>['categorizable_type'=>'1']]);
+        }
+
+
+
         return response()->json($item);
+    }
+    
+ 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postPhotos(ItemStore $request)
+    {
+        $item = Item::where('code',$request->input('code')) ;  
+        // $photos = $request->photos;
+        // foreach($photos as $photo){
+            $item->addMedia($request->input('fileInput'))->toMediaCollection();
+        // }
+
+        // dd($request->input('selectedcategories'));
+        //     $item = Item::create([
+        //     'code' => $request->input('code'),
+        //     'name' => $request->input('name'),
+        //     'description' => $request->input('description'),
+        //     'barcode' => $request->input('barcode'),
+        //     'account_code' => $request->input('accountcode'),
+        //     'is_ppn' => $request->input('isppn'),
+        //     'is_stock' => $request->input('isstock'),
+        //     'ppn_amount' => $request->input('ppn'),
+
+        //     // 'name' => $request->name,
+        // ]);
+
+        // return response()->json($item);
     }
 
     /**
