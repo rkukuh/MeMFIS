@@ -647,16 +647,17 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('test', false);
 
-                return $this->line('Test: Feature already exists: ' . $test . '.php');
+                $this->line('Test: Feature already exists: ' . $test . '.php');
             }
+            else {
+                $this->callSilent('make:test', [
+                    'name' => $test
+                ]);
 
-            $this->callSilent('make:test', [
-                'name' => $test
-            ]);
+                $this->addToTable('Test: Feature', 'tests/Feature/' . $test . '.php');
 
-            $this->addToTable('Test: Feature', 'tests/Feature/' . $test . '.php');
-
-            $this->info($this->data['artefact'] . ' created.');
+                $this->info($this->data['artefact'] . ' created.');
+            }
 
             /** Unit test */
 
@@ -665,17 +666,18 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('test', false);
 
-                return $this->line('Test: Unit already exists: ' . $test . '.php');
+                $this->line('Test: Unit already exists: ' . $test . '.php');
             }
+            else {
+                $this->callSilent('make:test', [
+                    'name' => $test,
+                    '--unit' => true,
+                ]);
 
-            $this->callSilent('make:test', [
-                'name' => $test,
-                '--unit' => true,
-            ]);
+                $this->addToTable('Test: Unit', 'tests/Unit/' . $test . '.php');
 
-            $this->addToTable('Test: Unit', 'tests/Unit/' . $test . '.php');
-
-            $this->info($this->data['artefact'] . ' created.');
+                $this->info($this->data['artefact'] . ' created.');
+            }
         }
     }
 
