@@ -137,8 +137,11 @@ class StorageController extends Controller
     public function store(StorageStore $request)
     {
         $storage = Storage::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'account_code' => $request->accountcode,
+            'is_active' => $request->active,
         ]);
 
         return response()->json($storage);

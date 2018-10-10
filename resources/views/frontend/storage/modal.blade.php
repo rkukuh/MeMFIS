@@ -46,6 +46,7 @@
                                     @slot('rows', '3')
                                     @slot('text', 'Description')
                                     @slot('name', 'description')
+                                    @slot('id', 'description')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -70,6 +71,7 @@
                                 @component('frontend.common.input.checkbox')
                                     @slot('text', 'Active')
                                     @slot('name', 'active')
+                                    @slot('id', 'active')
                                 @endcomponent
                             </div>
                         </div>

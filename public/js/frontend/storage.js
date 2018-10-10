@@ -64,14 +64,14 @@ let Storage = {
                     width: 150
                 },
                 {
-                    field: 'accountcode',
+                    field: 'account_code',
                     title: 'AccountCode',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'active',
+                    field: 'is_active',
                     title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
@@ -85,14 +85,14 @@ let Storage = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
+                            '<button data-toggle="modal" data-target="#modal_storage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            t.id +
+                            '<button data-toggle="modal" data-target="#modal_storage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
+                            t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -104,9 +104,19 @@ let Storage = {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
-            let registerForm = $('#CustomerForm');
+            if(document.getElementById("active").checked){
+                active = 1;
+            }
+            else{
+                active = 0;
+            }
+
+            // let registerForm = $('#CustomerForm');
+            let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
-            let formData = registerForm.serialize();
+            let description = $('#description').val();
+            let accountcode = $('#accountcode').val();
+            // let formData = registerForm.serialize();
 
             $.ajax({
                 headers: {
@@ -116,17 +126,48 @@ let Storage = {
                 url: '/storage',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name
+                    code: code,
+                    name: name,
+                    description: description,
+                    accountcode: accountcode,
+                    active: active
                 },
                 success: function (data) {
                     if (data.errors) {
+                        if (data.errors.code) {
+                            $('#code-error').html(data.errors.code[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('accountcode').value = accountcode;
+                        }
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
 
+                            document.getElementById('code').value = code;
                             document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('accountcode').value = accountcode;
+                        }
+                        if (data.errors.description) {
+                            $('#description-error').html(data.errors.description[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('accountcode').value = accountcode;
+                        }
+                        if (data.errors.accountcode) {
+                            $('#accountcode-error').html(data.errors.accountcode[0]);
+
+                            document.getElementById('code').value = code;
+                            document.getElementById('name').value = name;
+                            document.getElementById('description').value = description;
+                            document.getElementById('accountcode').value = accountcode;
                         }
                     } else {
-                        $('#modal_customer').modal('hide');
+                        $('#modal_storage').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
