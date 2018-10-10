@@ -587,6 +587,8 @@ class MakeEntity extends Command
                 $this->addToTable('Table Seeder', 'seeds/' . $seederTable . '.php');
 
                 $this->info($this->data['artefact'] . ' created.');
+
+                array_push($this->additionalSteps, 'Call the Table seeder in DatabaseSeeder');
             }
         }
 
@@ -609,6 +611,8 @@ class MakeEntity extends Command
                 $this->addToTable('Example Seeder', 'seeds/examples/' . $seederExample . '.php');
 
                 $this->info($this->data['artefact'] . ' created.');
+
+                array_push($this->additionalSteps, 'Call the Example seeder in ExampleDataSeeder');
             }
         }
     }

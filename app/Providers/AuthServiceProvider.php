@@ -10,6 +10,8 @@ use App\Models\Type;
 use App\Policies\TypePolicy;
 use App\Models\Unit;
 use App\Policies\UnitPolicy;
+use App\Models\Item;
+use App\Policies\ItemPolicy;
 use App\Models\Email;
 use App\Policies\EmailPolicy;
 use App\Models\Phone;
@@ -38,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         Bank::class => BankPolicy::class,
         Type::class => TypePolicy::class,
         Unit::class => UnitPolicy::class,
+        Item::class => ItemPolicy::class,
         Email::class => EmailPolicy::class,
         Phone::class => PhonePolicy::class,
         Status::class => StatusPolicy::class,

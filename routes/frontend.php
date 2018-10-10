@@ -24,7 +24,7 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 
         Route::resource('category-item', 'CategoryItemController', [
-            'parameters' => ['category-post' => 'category']
+            'parameters' => ['category-item' => 'category']
         ]);
         Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 
