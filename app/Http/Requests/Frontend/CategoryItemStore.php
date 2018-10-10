@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 
-class CategoryUpdate extends FormRequest
+class CategoryItemStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,23 @@ class CategoryUpdate extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            //
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+
+            $this->merge(['of' => 'item']);
+
+        });
     }
 
     protected function failedValidation(Validator $validator) {

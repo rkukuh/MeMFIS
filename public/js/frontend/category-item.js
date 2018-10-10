@@ -6,7 +6,7 @@ let Category = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-categories',
+                        url: '/get-item-categories',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -110,7 +110,7 @@ let Category = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/category',
+                url: '/category-item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name,
@@ -180,7 +180,7 @@ let Category = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/category/' + triggerid + '/edit',
+                url: '/category-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('id').value = data.id;
                     document.getElementById('name').value = data.name;
@@ -213,7 +213,7 @@ let Category = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/category/' + triggerid,
+                url: '/category-item/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name
@@ -252,7 +252,7 @@ let Category = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/category/' + triggerid,
+                url: '/category-item/' + triggerid,
                 success: function (data) {
                     document.getElementById('TitleModalCustomer').innerHTML = 'Detail Customer #ID-' + triggerid;
                     document.getElementById('name').value = data.name;
@@ -289,7 +289,7 @@ let Category = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/category/' + triggerid + '',
+                        url: '/category-item/' + triggerid + '',
                         success: function (data) {
                             toastr.success(
                                 'Data berhasil dihapus.',
