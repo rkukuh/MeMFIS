@@ -612,7 +612,7 @@ class MakeEntity extends Command
 
                 $this->info($this->data['artefact'] . ' created.');
 
-                array_push($this->additionalSteps, 'Call the Table seeder in ExampleDataSeeder');
+                array_push($this->additionalSteps, 'Call the Example seeder in ExampleDataSeeder');
             }
         }
     }
