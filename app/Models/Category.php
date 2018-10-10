@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 use App\Scopes\OrderByColumn;
+use Illuminate\Database\Eloquent\Builder;
 
 class Category extends MemfisModel
 {
@@ -27,6 +28,19 @@ class Category extends MemfisModel
         parent::boot();
 
         static::addGlobalScope(new OrderByColumn('name'));
+    }
+
+    /******************************************* SCOPE *******************************************/
+
+    /**
+     * Scope a query to only include category of item.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfItem(Builder $query)
+    {
+        return $query->where('of', 'item');
     }
 
     /*************************************** RELATIONSHIP ****************************************/
