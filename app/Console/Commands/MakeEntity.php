@@ -91,7 +91,7 @@ class MakeEntity extends Command
                 break;
 
             case 'Use existing model':
-                $this->line('Model: use existing: ' . $this->modelNamespace . '.php');
+                $this->line('Model already exists: ' . $this->modelNamespace . '.php');
 
                 $this->makeMigration();
                 $this->makeRequest();
@@ -221,7 +221,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('request', false);
 
-                        $this->line('Form Request: use existing: Admin/' . $this->requestStoreName . '.php');
+                        $this->line('Form Request already exists: Admin/' . $this->requestStoreName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -238,7 +238,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('request', false);
 
-                        $this->line('Form Request: use existing: Admin/' . $this->requestUpdateName . '.php');
+                        $this->line('Form Request already exists: Admin/' . $this->requestUpdateName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -255,7 +255,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('request', false);
 
-                        $this->line('Form Request: use existing: Frontend/' . $this->requestStoreName . '.php');
+                        $this->line('Form Request already exists: Frontend/' . $this->requestStoreName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -272,7 +272,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('request', false);
 
-                        $this->line('Form Request: use existing: Frontend/' . $this->requestUpdateName . '.php');
+                        $this->line('Form Request already exists: Frontend/' . $this->requestUpdateName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -292,7 +292,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('request', false);
 
-                        $this->line('Form Request: use existing: ' . $this->requestStoreName . '.php');
+                        $this->line('Form Request already exists: ' . $this->requestStoreName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -309,7 +309,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('request', false);
 
-                        $this->line('Form Request: use existing: ' . $this->requestUpdateName . '.php');
+                        $this->line('Form Request already exists: ' . $this->requestUpdateName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -329,7 +329,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('request', false);
 
-                        $this->line('Form Request: use existing: ' . $this->namespace . '/' . $this->requestStoreName . '.php');
+                        $this->line('Form Request already exists: ' . $this->namespace . '/' . $this->requestStoreName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -346,7 +346,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('request', false);
 
-                        $this->line('Form Request: use existing: ' . $this->namespace . '/' . $this->requestUpdateName . '.php');
+                        $this->line('Form Request already exists: ' . $this->namespace . '/' . $this->requestUpdateName . '.php');
                     }
                     else {
                         $this->callSilent('make:request', [
@@ -385,7 +385,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->line('Controller: use existing: Admin/' . $this->controllerName . '.php');
+                        $this->line('Controller already exists: Admin/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, 'Admin');
@@ -400,7 +400,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->line('Controller: use existing: Frontend/' . $this->controllerName . '.php');
+                        $this->line('Controller already exists: Frontend/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, 'Frontend');
@@ -416,7 +416,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->line('Controller: use existing: ' . $this->controllerName . '.php');
+                        return $this->line('Controller already exists: ' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path);
@@ -432,7 +432,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->line('Controller: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
+                        return $this->line('Controller already exists: ' . $this->namespace .'/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, $this->namespace);
@@ -499,7 +499,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->line('Model Factory: use existing: ' . $factory . '.php');
+                return $this->line('Model Factory already exists: ' . $factory . '.php');
             }
 
             $this->compileFactoryStub($path);
@@ -543,7 +543,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('policy', false);
 
-                return $this->line('Policy: use existing: ' . $policy . '.php');
+                return $this->line('Policy already exists: ' . $policy . '.php');
             }
 
             $this->callSilent('make:policy', [
@@ -577,7 +577,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('seeder', false);
 
-                return $this->line('Table Seeder: use existing: ' . $seederTable . '.php');
+                return $this->line('Table Seeder already exists: ' . $seederTable . '.php');
             }
 
             $this->callSilent('make:seeder', [
@@ -600,7 +600,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->line('Example Seeder: use existing: ' . $seederExample . '.php');
+                return $this->line('Example Seeder already exists: ' . $seederExample . '.php');
             }
 
             $this->compileExampleSeederStub($path);
@@ -647,7 +647,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('test', false);
 
-                return $this->line('Test: Feature: use existing: ' . $test . '.php');
+                return $this->line('Test: Feature already exists: ' . $test . '.php');
             }
 
             $this->callSilent('make:test', [
@@ -665,7 +665,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('test', false);
 
-                return $this->line('Test: Unit: use existing: ' . $test . '.php');
+                return $this->line('Test: Unit already exists: ' . $test . '.php');
             }
 
             $this->callSilent('make:test', [
