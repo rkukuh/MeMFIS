@@ -14,6 +14,7 @@ class ExampleDataSeeder extends Seeder
         /** INITIAL DATA */
 
         $this->call(Types::class);
+        $this->call(Units::class);
         $this->call(Statuses::class);
 
         /** POLYMORPH */
@@ -24,6 +25,7 @@ class ExampleDataSeeder extends Seeder
 
         /** MASTER */
 
+        $this->call(Items::class);
         $this->call(Departments::class);
 
         /** FINANCE */
