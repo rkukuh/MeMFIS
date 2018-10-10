@@ -577,7 +577,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('seeder', false);
 
-                $this->line('Table Seeder already exists: ' . $seederTable . '.php');
+                $this->line('Table Seeder already exists: database/seeds/' . $seederTable . '.php');
             }
             else {
                 $this->callSilent('make:seeder', [
@@ -601,7 +601,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                $this->line('Example Seeder already exists: ' . $seederExample . '.php');
+                $this->line('Example Seeder already exists: database/seeds/examples/' . $seederExample . '.php');
             }
             else {
                 $this->compileExampleSeederStub($path);
