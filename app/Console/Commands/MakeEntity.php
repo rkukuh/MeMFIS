@@ -647,7 +647,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('test', false);
 
-                $this->line('Test: Feature already exists: ' . $test . '.php');
+                $this->line('Test: Feature already exists: tests/Feature/' . $test . '.php');
             }
             else {
                 $this->callSilent('make:test', [
@@ -666,7 +666,7 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('test', false);
 
-                $this->line('Test: Unit already exists: ' . $test . '.php');
+                $this->line('Test: Unit already exists: tests/Unit/' . $test . '.php');
             }
             else {
                 $this->callSilent('make:test', [
