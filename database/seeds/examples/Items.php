@@ -12,8 +12,6 @@ class Items extends Seeder
      */
     public function run()
     {
-        ini_set('memory_limit', '-1');
-
         factory(Item::class, config('memfis.examples.items'))->create();
     }
 }

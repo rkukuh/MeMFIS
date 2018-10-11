@@ -11,6 +11,8 @@ class ExampleDataSeeder extends Seeder
      */
     public function run()
     {
+        ini_set('memory_limit', '-1');
+
         /** INITIAL DATA */
 
         $this->call(Types::class);
