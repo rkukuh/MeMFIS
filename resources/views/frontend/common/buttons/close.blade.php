@@ -1,7 +1,7 @@
 <button
     type="{{ $type or 'button' }}"
     id="{{ $id or '' }}"
-    name="{{ $name or 'create' }}"
+    name="{{ $name or 'close' }}"
     value="{{ $value or '' }}"
     class="btn
            btn-{{ $color or 'secondary' }}

@@ -45,6 +45,7 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
+                            <form id="itemform" name="itemform">
                             <div class="m-portlet__body">
                                 <fieldset class="border p-2">
                                     <legend class="w-auto">Identifier</legend>
@@ -58,6 +59,7 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Code')
                                                 @slot('name', 'code')
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,6 +70,7 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Name')
                                                 @slot('name', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -162,10 +165,13 @@
                                                                 <table style="margin-right:10px">
                                                                     <tr>
                                                                         <td>
-                                                                            @component('frontend.common.input.upload')
+                                                                              <input type="file" id="photo" name="photo">
+
+                                                                            {{-- @component('frontend.common.input.upload')
                                                                                 @slot('text', 'Photo')
                                                                                 @slot('name', 'photo')
-                                                                            @endcomponent
+                                                                                @slot('id', 'photo')
+                                                                            @endcomponent --}}
                                                                         </td>
                                                                         <td>
                                                                                 <div data-repeater-delete="" class="btn-sm btn btn-danger"  >
@@ -218,6 +224,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -246,7 +253,7 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-uom')
                                             @slot('text', 'Add UoM')
-                                            @slot('attribute', 'disabled')
+                                            {{-- @slot('attribute', 'disabled') --}}
                                             @slot('data_target', '#modal_uom')
                                         @endcomponent
 
@@ -283,7 +290,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-minmaxstock')
-                                            @slot('attribute', 'disabled')
+                                            {{-- @slot('attribute', 'disabled') --}}
                                             @slot('text', 'Add Min/Max Stock')
                                             @slot('data_target', '#modal_minmaxstock')
                                         @endcomponent
@@ -313,12 +320,13 @@
 @endpush
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
 
     <script src="{{ asset('js/frontend/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/category-item.js') }}"></script>
     <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
     <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>

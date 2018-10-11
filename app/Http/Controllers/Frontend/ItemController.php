@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Response;
 use App\Models\Item;
 use App\model\ListUtil;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Frontend\ItemStore;
@@ -137,20 +139,57 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
-            $item = Item::create([
-            'code' => $request->input('code'),
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'barcode' => $request->input('barcode'),
-            'account_code' => $request->input('accountcode'),
-            'is_ppn' => $request->input('isppn'),
-            'is_stock' => $request->input('isstock'),
-            'ppn_amount' => $request->input('ppn'),
+        $item = Item::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'barcode' => $request->barcode,
+            'account_code' => $request->accountcode,
+            'is_ppn' => $request->isppn,
+            'is_stock' => $request->isstock,
+            'ppn_amount' => $request->ppn,
 
             // 'name' => $request->name,
         ]);
 
+        $categories = $request->selectedcategories;
+        if($categories <> ""){
+            foreach($categories as $category){
+                $item->categories()->attach([$category=>['categorizable_type'=>'1']]);
+            }    
+        }
+
+
         return response()->json($item);
+    }
+    
+ 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postPhotos(Request $request)
+    {
+        $item = Item::where('code',$request->input('code')) ;  
+        // $photos = $request->photos;
+        // foreach($photos as $photo){
+        $item->addMedia($request->input('fileInput'))->toMediaCollection();
+        // $file = Input::file('fileInput');
+        // $ext = $file->getClientOriginalExtension();
+        // $length = 10;
+        // $randomString = substr(str_shuffle(md5(time())),0,$length);
+        // // echo $randomString;
+        // // $fileName = md5(time()).".$ext";
+        // $fileName = $randomString.".$ext";
+
+        // $destinationPath = "uploads/".date('Y').'/'.date('m').'/';
+        // $moved_file = $file->move($destinationPath, $fileName);
+        // $path = $moved_file->getRealPath();
+
+        // return Response::json(["success"=>true,"uploaded"=>true, "url"=>$path]);
+
     }
 
     /**

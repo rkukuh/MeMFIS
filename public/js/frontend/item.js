@@ -48,7 +48,7 @@ let Item = {
                     title: 'Part No.',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 60
                 },
                 {
                     field: 'name',
@@ -79,33 +79,37 @@ let Item = {
             ]
         });
 
-            $(document).ready(function () {
-                $('.btn-success').removeClass('add');
+        $(document).ready(function () {
+            $('.btn-success').removeClass('add');
+            document.getElementById('isppn').onchange = function () {
+                document.getElementById('ppn').disabled = !this.checked;
+            };
+        });
 
-                // if(document.getElementById("isppn").checked){
-                //     document.getElementById('isppn').removeAttribute('disabled');
-                // }
-
-            });
+        $('.footer').on('click', '.reset', function () {
+            item_reset();
+        });
 
 
-            $('.checkbox').on('click', '#isppn', function () {
-                    $('.ppn').removeAttr("disabled");
-            });
+        $('.footer').on('click', '.add-item', function () {
 
-            $('.footer').on('click', '.add-item', function () {
-
-            if(document.getElementById("isstock").checked){
-                isstock = 1;
+            if ($('#category :selected').length > 0) {
+                var selectedcategories = [];
+                $('#category :selected').each(function (i, selected) {
+                    selectedcategories[i] = $(selected).val();
+                });
             }
-            else{
+
+
+            if (document.getElementById("isstock").checked) {
+                isstock = 1;
+            } else {
                 isstock = 0;
             }
 
-            if(document.getElementById("isppn").checked){
+            if (document.getElementById("isppn").checked) {
                 isppn = 1;
-            }
-            else{
+            } else {
                 isppn = 0;
             }
             let accountcode2 = $('#accountcode2').val();
@@ -116,84 +120,45 @@ let Item = {
             let ppn = $('input[name=ppn]').val();
 
 
-            var fd = new FormData();
-            // fd.append( "fileInput", $("#poster")[0].files[0]);
-            fd.append("code", code);
-            fd.append("name", name);
-            fd.append("description", description);
-            fd.append("barcode", barcode);
-            fd.append("accountcode", accountcode2);
-            fd.append("isstock", isstock);
-            fd.append("isppn", isppn);
-            fd.append("ppn", ppn);
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                processData: false,
-                contentType: false,
                 type: 'post',
                 url: '/item',
-                data : fd,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    code: code,
+                    name: name,
+                    barcode: barcode,
+                    ppn: ppn,
+                    description: description,
+                    accountcode: accountcode2,
+                    selectedcategories: selectedcategories
+
+                },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
 
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
                         }
-
 
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
 
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
                         }
 
-                        if (data.errors.description) {
-                            $('#description-error').html(data.errors.type[0]);
+                        document.getElementById('code').value = code;
+                        document.getElementById('name').value = name;
+                        document.getElementById('description').value = description;
+                        document.getElementById('barcode').value = barcode;
+                        document.getElementById('accountcode2').value = accountcode2;
 
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
-                        }
-                        if (data.errors.barcode) {
-                            $('#barcode-error').html(data.errors.barcode[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
-                        }
-                        if (data.errors.accountcode) {
-                            $('#description-error').html(data.errors.barcode[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
-                        }
                     } else {
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
-
-                        // document.getElementById('poster-label').innerHTML = '';
-                        $('input[type=file]').val("") ;
+                        $('input[type=file]').val("");
                         $('#code-error').html('');
                         $('#name-error').html('');
                         $('#description-error').html('');
@@ -202,9 +167,49 @@ let Item = {
                         document.getElementById('item-minmaxstock').removeAttribute('disabled');
                         $('#item-storage').html(code);
                         $('#item-unit').html();
+                        item_reset();
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+
                     }
                 }
             });
+            if ($('#photo ') != "") {
+                $('#photo ').each(function (i) {
+
+                    var fd = new FormData();
+
+                    fd.append("code", code);
+                    fd.append("fileInput", document.getElementsByName('[' + i + '][photo]')[0].files[0]);
+                    let uploadfile = document.getElementById("photo");
+                    // photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
+                    if ("" == uploadfile.value) {
+
+
+                    } else {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+
+                            url: '/post-photos',
+                            data: fd,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            success: function (data) {
+                                if (data.uploaded == true) {
+                                }
+                            },
+                            error: function (err) {
+                            }
+                        });
+                    }
+
+                });
+            }
+
         });
 
         let edit = $('.m_datatable').on('click', '.edit', function () {

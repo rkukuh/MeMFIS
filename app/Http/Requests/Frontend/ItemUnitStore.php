@@ -26,7 +26,10 @@ class ItemUnitStore extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            'qty' => 'required',
+            'qty2' => 'required',
+            'unit' => 'required',
+            'unit2' => 'required',
         ];
     }
 
