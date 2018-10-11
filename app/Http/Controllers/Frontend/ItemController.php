@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Response;
 use App\Models\Item;
 use App\model\ListUtil;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Frontend\ItemStore;
@@ -151,10 +153,11 @@ class ItemController extends Controller
         ]);
 
         $categories = $request->selectedcategories;
-        foreach($categories as $category){
-            $item->categories()->attach([$category=>['categorizable_type'=>'1']]);
+        if($categories <> ""){
+            foreach($categories as $category){
+                $item->categories()->attach([$category=>['categorizable_type'=>'1']]);
+            }    
         }
-
 
 
         return response()->json($item);
@@ -167,29 +170,22 @@ class ItemController extends Controller
      * @param  \App\Http\Requests\Frontend\ItemStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function postPhotos(ItemStore $request)
+    public function postPhotos(Request $request)
     {
-        $item = Item::where('code',$request->input('code')) ;  
-        // $photos = $request->photos;
-        // foreach($photos as $photo){
-            $item->addMedia($request->input('fileInput'))->toMediaCollection();
-        // }
+        $file = Input::file('fileInput');
+        $ext = $file->getClientOriginalExtension();
+        $length = 10;
+        $randomString = substr(str_shuffle(md5(time())),0,$length);
+        // echo $randomString;
+        // $fileName = md5(time()).".$ext";
+        $fileName = $randomString.".$ext";
 
-        // dd($request->input('selectedcategories'));
-        //     $item = Item::create([
-        //     'code' => $request->input('code'),
-        //     'name' => $request->input('name'),
-        //     'description' => $request->input('description'),
-        //     'barcode' => $request->input('barcode'),
-        //     'account_code' => $request->input('accountcode'),
-        //     'is_ppn' => $request->input('isppn'),
-        //     'is_stock' => $request->input('isstock'),
-        //     'ppn_amount' => $request->input('ppn'),
+        $destinationPath = "uploads/".date('Y').'/'.date('m').'/';
+        $moved_file = $file->move($destinationPath, $fileName);
+        $path = $moved_file->getRealPath();
 
-        //     // 'name' => $request->name,
-        // ]);
+        return Response::json(["success"=>true,"uploaded"=>true, "url"=>$path]);
 
-        // return response()->json($item);
     }
 
     /**
