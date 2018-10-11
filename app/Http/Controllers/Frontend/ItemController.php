@@ -148,22 +148,13 @@ class ItemController extends Controller
             'is_ppn' => $request->isppn,
             'is_stock' => $request->isstock,
             'ppn_amount' => $request->ppn,
-
-            // 'name' => $request->name,
         ]);
 
-        $categories = $request->selectedcategories;
-        if($categories <> ""){
-            foreach($categories as $category){
-                $item->categories()->attach([$category=>['categorizable_type'=>'1']]);
-            }    
-        }
-
+        $item->categories()->attach($request->selectedcategories);
 
         return response()->json($item);
     }
-    
- 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -172,24 +163,10 @@ class ItemController extends Controller
      */
     public function postPhotos(Request $request)
     {
-        $item = Item::where('code',$request->input('code')) ;  
-        // $photos = $request->photos;
-        // foreach($photos as $photo){
-        $item->addMedia($request->input('fileInput'))->toMediaCollection();
-        // $file = Input::file('fileInput');
-        // $ext = $file->getClientOriginalExtension();
-        // $length = 10;
-        // $randomString = substr(str_shuffle(md5(time())),0,$length);
-        // // echo $randomString;
-        // // $fileName = md5(time()).".$ext";
-        // $fileName = $randomString.".$ext";
+        $item = Item::where('code',$request->input('code'))->first();
 
-        // $destinationPath = "uploads/".date('Y').'/'.date('m').'/';
-        // $moved_file = $file->move($destinationPath, $fileName);
-        // $path = $moved_file->getRealPath();
-
-        // return Response::json(["success"=>true,"uploaded"=>true, "url"=>$path]);
-
+        $item->addMediaFromRequest('fileInput')
+             ->toMediaCollection('item');
     }
 
     /**
