@@ -136,7 +136,7 @@
                                                 @slot('text', 'Dikenai PPN?')
                                                 @slot('name', 'isppn')
                                                 @slot('id', 'isppn')
-                                            @endcomponent    
+                                            @endcomponent
                                         </div>
 
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding:0px">
