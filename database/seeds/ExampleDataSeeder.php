@@ -38,6 +38,7 @@ class ExampleDataSeeder extends Seeder
 
         /** TRANSACTION (M-M) */
 
+        $this->call(ItemUnit::class);
         $this->call(ItemStorage::class);
     }
 }
