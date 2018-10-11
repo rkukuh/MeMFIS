@@ -30,7 +30,8 @@
                                     @slot('text', 'Storage')
                                     @slot('name', 'storage')
                                     @slot('style', 'width:100%')
-                                @endcomponent
+                                    @slot('id_error', 'storage')
+                                    @endcomponent
 
                                 @component('frontend.common.buttons.create-new')
                                     @slot('size', 'sm')
@@ -43,24 +44,28 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Max @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.numeric')
-                                    @slot('text', 'Max')
-                                    @slot('name', 'max')
-                                @endcomponent
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
                                     Min @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.numeric')
                                     @slot('text', 'Min')
                                     @slot('name', 'min')
+                                    @slot('id', 'min')
+                                    @slot('id_error', 'min')
                                 @endcomponent
                             </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Max @include('frontend.common.label.required')
+                                    </label>
+    
+                                    @component('frontend.common.input.numeric')
+                                        @slot('text', 'Max')
+                                        @slot('name', 'max')
+                                        @slot('id', 'max')
+                                        @slot('id_error', 'max')
+                                    @endcomponent
+                                </div>
                         </div>
                     </div>
                     <div class="modal-footer">
