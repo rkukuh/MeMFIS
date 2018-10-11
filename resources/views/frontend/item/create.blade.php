@@ -156,7 +156,7 @@
                                         <label class="form-control-label">
                                             Photos @include('frontend.common.label.optional')
                                         </label>
-
+                                        {{-- <input id="file" name="file[]" type="file"  multiple/> --}}
                                         <div id="m_repeater_1">
                                                 <div class="" id="m_repeater_1">
                                                     <div data-repeater-list="">

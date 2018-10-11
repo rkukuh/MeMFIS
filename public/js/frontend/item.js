@@ -175,41 +175,79 @@ let Item = {
                     }
                 }
             });
+
+            // Stops the form from reloading
+            // e.preventDefault();
+
+            // $.ajax({
+            //     url: '/post-photos',
+            //     type: 'POST',
+            //     contentType: false,
+            //     processData: false,
+            //     data: function () {
+            //         var data = new FormData();
+            //         jQuery.each(jQuery('#file')[0].files, function (i, file) {
+            //             data.append('file-' + i, file);
+            //         });
+            //         // data.append('body', $('#body').val());
+            //         // data.append('uid', $('#uid').val());
+            //         return data;
+            //     }(),
+            //     success: function (result) {
+            //         alert(result);
+            //     },
+            //     error: function (xhr, result, errorThrown) {
+            //         alert('Request failed.');
+            //     }
+            // });
             if ($('#photo ') != "") {
+
+                var promises = [];
+
                 $('#photo ').each(function (i) {
 
                     var fd = new FormData();
-
+                    alert(i);
                     fd.append("code", code);
                     fd.append("fileInput", document.getElementsByName('[' + i + '][photo]')[0].files[0]);
-                    let uploadfile = document.getElementById("photo");
+                    // let uploadfile = document.getElementById("photo");
                     // photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
-                    if ("" == uploadfile.value) {
+                    // if ("" == uploadfile.value) {
 
 
-                    } else {
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
+                    // } else {
 
-                            url: '/post-photos',
-                            data: fd,
-                            processData: false,
-                            contentType: false,
-                            type: 'POST',
-                            success: function (data) {
-                                if (data.uploaded == true) {
-                                    //
-                                }
-                            },
-                            error: function (err) {
-                                //
+
+                    // let ajax = function(){
+                    var request = $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+
+                        url: '/post-photos',
+                        data: fd,
+                        processData: false,
+                        contentType: false,
+                        type: 'POST',
+                        success: function (data) {
+                            if (data.uploaded == true) {
+                                alert('sukses');
                             }
-                        });
-                    }
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                    // }
 
+                    // }
+                    alert(i);
+                    promises.push( request);
                 });
+
+                $.when.apply(null, promises).done(function(){
+                    alert('All done')
+                 })
             }
 
         });
