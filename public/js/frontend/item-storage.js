@@ -89,6 +89,11 @@ let ItemStorage = {
             ]
         });
 
+        $('.modal-footer').on('click', '.reset', function () {
+            minmaxstock_reset();
+        });
+
+
         let simpan = $('.modal-footer').on('click', '.add-stock', function () {
             let code = $('input[name=code]').val();
             $('#name-error').html('');
