@@ -1,11 +1,11 @@
-<div class="modal fade" id="modal_minmaxstock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_minmaxstock"  role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalCustomer">
+                <h5 class="modal-title" id="TitleModalMinMaxStock">
                     Min/Max Stock
 
                     <small id="item-storage" class="m--font-focus"></small>
@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="MinMaxStockForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
