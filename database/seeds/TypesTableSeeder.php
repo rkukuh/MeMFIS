@@ -13,6 +13,7 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         $this->call(TypesOfARC::class);
+        $this->call(TypesOfAviationSchoolDegree::class);
         $this->call(TypesOfCapability::class);
         $this->call(TypesOfEligibility::class);
         $this->call(TypesOfEmail::class);

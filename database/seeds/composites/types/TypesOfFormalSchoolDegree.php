@@ -37,6 +37,12 @@ class TypesOfFormalSchoolDegree extends Seeder
         ]);
 
         Type::create([
+            'code' => 'diploma',
+            'name' => 'Diplomag',
+            'of'  => 'formal-school-degree',
+        ]);
+
+        Type::create([
             'code' => 'bachelor',
             'name' => 'S1',
             'of'  => 'formal-school-degree',
