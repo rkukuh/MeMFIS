@@ -48,7 +48,7 @@ let Item = {
                     title: 'Part No.',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 60
+                    width: 150
                 },
                 {
                     field: 'name',
@@ -94,7 +94,7 @@ let Item = {
             });
 
             $('.footer').on('click', '.add-item', function () {
-            
+
             if(document.getElementById("isstock").checked){
                 isstock = 1;
             }
@@ -199,9 +199,9 @@ let Item = {
                         $('#description-error').html('');
                         $('#barcode-error').html('');
                         document.getElementById('item-uom').removeAttribute('disabled');
-                        document.getElementById('item-minmaxstock').removeAttribute('disabled');  
-                        $('#item-storage').html(code);          
-                        $('#item-unit').html();          
+                        document.getElementById('item-minmaxstock').removeAttribute('disabled');
+                        $('#item-storage').html(code);
+                        $('#item-unit').html();
                     }
                 }
             });
