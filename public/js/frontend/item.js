@@ -80,24 +80,15 @@ let Item = {
         });
 
         $(document).ready(function () {
+            $('.btn-success').removeClass('add');
             document.getElementById('isppn').onchange = function () {
                 document.getElementById('ppn').disabled = !this.checked;
             };
-            //     $('.btn-success').removeClass('add');
-
-            // if(document.getElementById("isppn").checked){
-            //     document.getElementById('isppn').removeAttribute('disabled');
         });
 
-        // });
-
-        // function toggleTB(what) {
-        //     if (what.checked) {
-        //         document.getElementById('ppn').disabled = 1
-        //     } else {
-        //         document.getElementById('ppn').disabled = 0
-        //     }
-        // }
+        $('.footer').on('click', '.reset', function () {
+            item_reset();
+        });
 
 
         $('.footer').on('click', '.add-item', function () {
@@ -109,12 +100,6 @@ let Item = {
                 });
             }
 
-            // if ($('#photo').length > 0) {
-            var photos = [];
-            // $('#photo').each(function (i) {
-            //     photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
-            // });
-            // }
 
             if (document.getElementById("isstock").checked) {
                 isstock = 1;
@@ -150,7 +135,7 @@ let Item = {
                     name: name,
                     barcode: barcode,
                     ppn: ppn,
-                    photos: photos,
+                    // photos: photos,
                     description: description,
                     accountcode: accountcode2,
                     selectedcategories: selectedcategories
@@ -161,58 +146,21 @@ let Item = {
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
 
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
                         }
-
 
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
 
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
                         }
 
-                        if (data.errors.description) {
-                            $('#description-error').html(data.errors.type[0]);
+                        document.getElementById('code').value = code;
+                        document.getElementById('name').value = name;
+                        document.getElementById('description').value = description;
+                        document.getElementById('barcode').value = barcode;
+                        document.getElementById('accountcode2').value = accountcode2;
 
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
-                        }
-                        if (data.errors.barcode) {
-                            $('#barcode-error').html(data.errors.barcode[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
-                        }
-                        if (data.errors.accountcode) {
-                            $('#description-error').html(data.errors.barcode[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('barcode').value = barcode;
-                            document.getElementById('accountcode2').value = accountcode2;
-                        }
                     } else {
 
-                        // toastr.success('Data berhasil disimpan.', 'Sukses', {
-                        //     timeOut: 5000
-                        // });
-
-                        // document.getElementById('poster-label').innerHTML = '';
                         $('input[type=file]').val("");
                         $('#code-error').html('');
                         $('#name-error').html('');
@@ -222,49 +170,47 @@ let Item = {
                         document.getElementById('item-minmaxstock').removeAttribute('disabled');
                         $('#item-storage').html(code);
                         $('#item-unit').html();
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+
                     }
                 }
             });
+            if ($('#photo ') != "") {
+                $('#photo ').each(function (i) {
 
-            $('#photo').each(function (i) {
+                    var fd = new FormData();
 
-                var fd = new FormData();
+                    fd.append("code", code);
+                    fd.append("fileInput", document.getElementsByName('[' + i + '][photo]')[0].files[0]);
+                    let uploadfile = document.getElementById("photo");
+                    // photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
+                    if ("" == uploadfile.value) {
 
-                fd.append("code", code);
-                fd.append("fileInput", document.getElementsByName('[' + i + '][photo]')[0].files[0]);
 
-                // photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
+                    } else {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
 
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-
-                    url: '/post-photos',
-                    data: fd,
-                    processData: false,
-                    contentType: false,
-                    type: 'POST',
-                    success: function (data) {
-                        if (data.uploaded == true) {
-                            $('input[type=file]').val("");
-                            // document.getElementById('largeImage-label').innerHTML = '';
-                            // alert(data.url);
-
-                        }
-                    },
-                    error: function (err) {
-                        alert(err);
+                            url: '/post-photos',
+                            data: fd,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            success: function (data) {
+                                if (data.uploaded == true) {
+                                }
+                            },
+                            error: function (err) {
+                            }
+                        });
                     }
+
                 });
-            });
-
-
-            toastr.success('Data berhasil disimpan.', 'Sukses', {
-                timeOut: 5000
-            });
-
-
+            }
 
         });
 
