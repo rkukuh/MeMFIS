@@ -8,6 +8,9 @@ var item_reset = function () {
     $("#category").select2('val', 'All');
     $('input[type=file]').val("");
     $('input[type=checkbox]').prop('checked',false);
+    $('#code-error').html('');
+    $('#name-error').html('');
+
 }
 
 var uom_reset = function () {
@@ -15,6 +18,11 @@ var uom_reset = function () {
     document.getElementById('qty2').value = "";
     $("#unit").select2('val', 'All');
     $("#unit2").select2('val', 'All');
+    $('#qty-error').html('');
+    $('#qty2-error').html('');
+    $('#unit-error').html('');
+    $('#unit2-error').html('');
+
 
 }
 
@@ -22,4 +30,8 @@ var minmaxstock_reset = function () {
     $("#storage").select2('val', 'All');
     document.getElementById('min').value = "";
     document.getElementById('max').value = "";
+    $('#min-error').html('');
+    $('#max-error').html('');
+    $('#storage-error').html('');
+
 }
