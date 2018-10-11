@@ -35,5 +35,9 @@ class ExampleDataSeeder extends Seeder
 
         $this->call(Banks::class);
         $this->call(BankAccounts::class);
+
+        /** TRANSACTION (M-M) */
+
+        $this->call(ItemStorage::class);
     }
 }
