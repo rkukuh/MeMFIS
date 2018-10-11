@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Frontend;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StorageUpdate extends FormRequest
+class StorageStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,7 @@ class StorageUpdate extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -28,9 +26,5 @@ class StorageUpdate extends FormRequest
         return [
             //
         ];
-    }
-
-    protected function failedValidation(Validator $validator) {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }
