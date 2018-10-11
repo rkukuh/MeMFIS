@@ -98,110 +98,85 @@ let Category = {
             ]
         });
 
-        $(document).ready(function () {
-            let select = document.getElementById('type');
-
-            $.ajax({
-                url: '/type',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    let angka = 1;
-
-                    $('select[name="type"]').empty();
-
-                    $.each(data, function (key, value) {
-                        if (angka == 1) {
-                            $('select[name="type"]').append(
-                                '<option> Select a Type</option>'
-                            );
-                            angka = 0;
-                        }
-                        $('select[name="type"]').append(
-                            '<option value="' + key + '">' + value + '</option>'
-                        );
-                    });
-                }
-            });
-        });
-
-        let save = $('.align-items-center').on('click', '.btn-primary', function () {
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/submit-button',
-                success: function (data) {
-                    $('#button-div').html(data);
-
-                }
-            });
-
-            $.ajax({
-                url: '/type',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    let angka = 1;
-
-                    $('select[name="level"]').empty();
-
-                    $.each(data, function (key, value) {
-                        if (angka == 1) {
-                            $('select[name="level"]').append(
-                                '<option> Select a Level</option>'
-                            );
-
-                            angka = 0;
-                        }
-
-                        $('select[name="level"]').append(
-                            '<option value="' + key + '">' + value + '</option>'
-                        );
-                    });
-                }
-            });
 
 
-            document.getElementById('code').value = "";
-            document.getElementById('name').value = "";
-            document.getElementById('type').value = "";
-            document.getElementById('level').value = "";
-            document.getElementById('description').value = "";
+        // let save = $('.align-items-center').on('click', '.btn-primary', function () {
 
-        });
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         type: 'get',
+        //         url: '/submit-button',
+        //         success: function (data) {
+        //             $('#button-div').html(data);
+
+        //         }
+        //     });
+
+        //     $.ajax({
+        //         url: '/type',
+        //         type: 'GET',
+        //         dataType: 'json',
+        //         success: function (data) {
+        //             let angka = 1;
+
+        //             $('select[name="level"]').empty();
+
+        //             $.each(data, function (key, value) {
+        //                 if (angka == 1) {
+        //                     $('select[name="level"]').append(
+        //                         '<option> Select a Level</option>'
+        //                     );
+
+        //                     angka = 0;
+        //                 }
+
+        //                 $('select[name="level"]').append(
+        //                     '<option value="' + key + '">' + value + '</option>'
+        //                 );
+        //             });
+        //         }
+        //     });
 
 
-        $(document).ready(function () {
-            let select = document.getElementById('level');
+        //     document.getElementById('code').value = "";
+        //     document.getElementById('name').value = "";
+        //     document.getElementById('type').value = "";
+        //     document.getElementById('level').value = "";
+        //     document.getElementById('description').value = "";
 
-            $.ajax({
-                url: '/type',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    let angka = 1;
+        // });
 
-                    $('select[name="level"]').empty();
 
-                    $.each(data, function (key, value) {
-                        if (angka == 1) {
-                            $('select[name="level"]').append(
-                                '<option> Select a Level</option>'
-                            );
+        // $(document).ready(function () {
+        //     let select = document.getElementById('level');
 
-                            angka = 0;
-                        }
+        //     $.ajax({
+        //         url: '/type',
+        //         type: 'GET',
+        //         dataType: 'json',
+        //         success: function (data) {
+        //             let angka = 1;
 
-                        $('select[name="level"]').append(
-                            '<option value="' + key + '">' + value + '</option>'
-                        );
-                    });
-                }
-            });
-        });
+        //             $('select[name="level"]').empty();
+
+        //             $.each(data, function (key, value) {
+        //                 if (angka == 1) {
+        //                     $('select[name="level"]').append(
+        //                         '<option> Select a Level</option>'
+        //                     );
+
+        //                     angka = 0;
+        //                 }
+
+        //                 $('select[name="level"]').append(
+        //                     '<option value="' + key + '">' + value + '</option>'
+        //                 );
+        //             });
+        //         }
+        //     });
+        // });
 
         let simpan = $('.modal-footer').on('click', '.add', function () {
             $('#simpan').text('Simpan');
