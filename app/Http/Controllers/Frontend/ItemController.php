@@ -163,10 +163,12 @@ class ItemController extends Controller
      */
     public function postPhotos(Request $request)
     {
-            $item = Item::where('code',$request->input('code'))->first();
+        dd($request->photo);
 
-            $item->addMediaFromRequest($request->file)
-                 ->toMediaCollection('item');
+        $item = Item::where('code',$request->input('code'))->first();
+
+        $item->addMediaFromRequest($request->file)
+                ->toMediaCollection('item');
     }
 
     /**
