@@ -125,8 +125,6 @@ let Item = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                // processData: false,
-                // contentType: false,
                 type: 'post',
                 url: '/item',
                 data: {
@@ -135,7 +133,6 @@ let Item = {
                     name: name,
                     barcode: barcode,
                     ppn: ppn,
-                    // photos: photos,
                     description: description,
                     accountcode: accountcode2,
                     selectedcategories: selectedcategories
@@ -170,6 +167,7 @@ let Item = {
                         document.getElementById('item-minmaxstock').removeAttribute('disabled');
                         $('#item-storage').html(code);
                         $('#item-unit').html();
+                        item_reset();
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
