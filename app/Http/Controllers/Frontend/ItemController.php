@@ -172,19 +172,23 @@ class ItemController extends Controller
      */
     public function postPhotos(Request $request)
     {
-        $file = Input::file('fileInput');
-        $ext = $file->getClientOriginalExtension();
-        $length = 10;
-        $randomString = substr(str_shuffle(md5(time())),0,$length);
-        // echo $randomString;
-        // $fileName = md5(time()).".$ext";
-        $fileName = $randomString.".$ext";
+        $item = Item::where('code',$request->input('code')) ;  
+        // $photos = $request->photos;
+        // foreach($photos as $photo){
+        $item->addMedia($request->input('fileInput'))->toMediaCollection();
+        // $file = Input::file('fileInput');
+        // $ext = $file->getClientOriginalExtension();
+        // $length = 10;
+        // $randomString = substr(str_shuffle(md5(time())),0,$length);
+        // // echo $randomString;
+        // // $fileName = md5(time()).".$ext";
+        // $fileName = $randomString.".$ext";
 
-        $destinationPath = "uploads/".date('Y').'/'.date('m').'/';
-        $moved_file = $file->move($destinationPath, $fileName);
-        $path = $moved_file->getRealPath();
+        // $destinationPath = "uploads/".date('Y').'/'.date('m').'/';
+        // $moved_file = $file->move($destinationPath, $fileName);
+        // $path = $moved_file->getRealPath();
 
-        return Response::json(["success"=>true,"uploaded"=>true, "url"=>$path]);
+        // return Response::json(["success"=>true,"uploaded"=>true, "url"=>$path]);
 
     }
 
