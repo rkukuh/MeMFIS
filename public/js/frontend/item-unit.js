@@ -1,14 +1,7 @@
 let ItemUnit = {
     init: function () {
-        load_table = function () {
+        load_table_uom = function () {
             let code = $('input[name=code]').val();
-            // alert(code);
-            // let table2 = $('.m_datatable1').mDatatable();
-
-            // table2.originalDataSet =[];
-            // table2.reload();
-
-
             $('.m_datatable1').mDatatable({
                 data: {
                     type: 'remote',
@@ -126,7 +119,7 @@ let ItemUnit = {
 
                         }
                         if (data.errors.unit) {
-                            $('#unit-error').html(data.errors.qty[0]);
+                            $('#unit-error').html(data.errors.unit[0]);
 
                         }
                         if (data.errors.unit2) {
@@ -143,10 +136,9 @@ let ItemUnit = {
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
-                        load_table();
-
+                        load_table_uom();
+                        uom_reset()
                         let table = $('.m_datatable1').mDatatable();
-
                         table.originalDataSet = [];
                         table.reload();
 
