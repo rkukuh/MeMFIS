@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -20,6 +21,21 @@ class Item extends MemfisModel implements HasMedia
         'is_stock',
         'account_code',
     ];
+
+    /***************************************** OVERRIDE *******************************************/
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('item')
+             ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+             ->width(45)
+             ->height(45);
+    }
 
     /*************************************** RELATIONSHIP ****************************************/
 
