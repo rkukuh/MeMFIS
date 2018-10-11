@@ -200,9 +200,11 @@ let Item = {
                             type: 'POST',
                             success: function (data) {
                                 if (data.uploaded == true) {
+                                    //
                                 }
                             },
                             error: function (err) {
+                                //
                             }
                         });
                     }
