@@ -48,7 +48,7 @@ let Item = {
                     title: 'Part No.',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 60
+                    width: 150
                 },
                 {
                     field: 'name',
