@@ -12,6 +12,6 @@ class Storages extends Seeder
      */
     public function run()
     {
-        //
+        factory(Storage::class, config('memfis.examples.storages'))->create();
     }
 }

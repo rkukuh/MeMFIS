@@ -28,6 +28,7 @@ class ExampleDataSeeder extends Seeder
         /** MASTER */
 
         $this->call(Items::class);
+        $this->call(Storages::class);
         $this->call(Departments::class);
 
         /** FINANCE */

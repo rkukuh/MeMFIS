@@ -7,7 +7,8 @@ return [
      *
      */
     'examples' => [
-        'banks' => 20,
+        'banks' => 50,
         'items' => 1000,
+        'storages' => 10,
     ],
 ];
