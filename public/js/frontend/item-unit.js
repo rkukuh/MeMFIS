@@ -88,26 +88,18 @@ let ItemUnit = {
                 ]
             });
         };
-        // data33 = function () {
-        //     let table = $('.m_datatable1').mDatatable();
 
-        //     table.originalDataSet =[];
-        //     table.reload();
-        // };
+        $('.modal-footer').on('click', '.reset', function () {
+            uom_reset();
+        });
 
 
         let simpan = $('.modal-footer').on('click', '.add-uom', function () {
             let code = $('input[name=code]').val();
-            // alert(code);
-            // $('#name-error').html('');
-            // $('#simpan').text('Simpan');
-
-            // let registerForm = $('#CustomerForm');
             let qty = $('input[name=qty]').val();
             let qty2 = $('input[name=qty2]').val();
             let unit = $('#unit').val();
             let unit2 = $('#unit2').val();
-            // let formData = registerForm.serialize();
 
             $.ajax({
                 headers: {
@@ -128,37 +120,24 @@ let ItemUnit = {
                         if (data.errors.qty) {
                             $('#qty-error').html(data.errors.qty[0]);
 
-                            document.getElementById('qty').value = qty;
-                            document.getElementById('qty2').value = qty2;
-                            document.getElementById('unit').value = unit;
-                            document.getElementById('unit2').value = unit2;
                         }
-                        if (data.errors.qty) {
-                            $('#qty2-error').html(data.errors.qty[0]);
+                        if (data.errors.qty2) {
+                            $('#qty2-error').html(data.errors.qty2[0]);
 
-                            document.getElementById('qty').value = qty;
-                            document.getElementById('qty2').value = qty2;
-                            document.getElementById('unit').value = unit;
-                            document.getElementById('unit2').value = unit2;
                         }
                         if (data.errors.unit) {
                             $('#unit-error').html(data.errors.qty[0]);
 
-                            document.getElementById('qty').value = qty;
-                            document.getElementById('qty2').value = qty2;
-                            document.getElementById('unit').value = unit;
-                            document.getElementById('unit2').value = unit2;
                         }
                         if (data.errors.unit2) {
-                            $('#unit2-error').html(data.errors.qty[0]);
+                            $('#unit2-error').html(data.errors.unit2[0]);
 
-                            document.getElementById('qty').value = qty;
-                            document.getElementById('qty2').value = qty2;
-                            document.getElementById('unit').value = unit;
-                            document.getElementById('unit2').value = unit2;
                         }
-                        2
-                    } else {
+                        document.getElementById('qty').value = qty;
+                        document.getElementById('qty2').value = qty2;
+                        document.getElementById('unit').value = unit;
+                        document.getElementById('unit2').value = unit2;
+                } else {
                         $('#modal_uom').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
