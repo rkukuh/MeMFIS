@@ -20,14 +20,15 @@ class ItemUnitController extends Controller
      */
     public function getUoM($code)
     {
-        $item = Item::where('code',$code)->first();
+        // $item = Item::where('code',$code)->first();
 
-        $itemUnits = $item->units;
+        // $itemUnits = $item->units;
 
         $itemUnits = DB::table('items')
         ->join('item_unit', 'item_unit.item_id', '=', 'items.id')
         ->join('units', 'units.id', '=', 'item_unit.unit_id')
-        ->select('units.name', 'item_unit.quantity')
+        ->select('units.name', 'item_unit.quantity', 'items.code')
+        ->where('items.code',$code)
         ->get();
 
         $data = $alldata = json_decode($itemUnits);
