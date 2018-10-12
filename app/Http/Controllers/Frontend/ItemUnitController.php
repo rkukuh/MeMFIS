@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use DB;
 use App\Models\Unit;
 use App\Models\Item;
-use App\model\ListUtil;
+use App\Models\ListUtil;
 use App\Models\Pivots\ItemUnit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemUnitStore;
