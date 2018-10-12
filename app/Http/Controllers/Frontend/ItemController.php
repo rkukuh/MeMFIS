@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use Response;
 use App\Models\Item;
-use App\model\ListUtil;
+use App\Models\Category;
+use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -198,7 +199,11 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        return response()->json($item);
+        $categories = Category::ofItem()->get();
+        $category_items = $item->categories;
+        // return view('frontend.testing.blank',compact('item','categories','category_items'));
+
+        return view('frontend.item.edit',compact('item','categories','category_items'));
     }
 
     /**
@@ -210,7 +215,15 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-        $item = Item::find($item);
+        $code = $request->code;
+        $name = $request->name;
+        $description = $request->description;
+        $barcode = $request->barcode;
+        $account_code = $request->accountcode;
+        $is_ppn = $request->isppn;
+        $is_stock = $request->isstock;
+        $ppn_amount = $request->ppn;
+
         // $item->name = $request->name;
         $item->save();
 
