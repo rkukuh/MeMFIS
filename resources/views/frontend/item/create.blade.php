@@ -156,45 +156,15 @@
                                         <label class="form-control-label">
                                             Photos @include('frontend.common.label.optional')
                                         </label>
-                                        {{-- <input id="file" name="file[]" type="file"  multiple/> --}}
-                                        <div id="m_repeater_1">
-                                                <div class="" id="m_repeater_1">
-                                                    <div data-repeater-list="">
-                                                        <div data-repeater-item class="row">
-                                                            <div class="m-form__group row" style="margin-left: 15px">
-                                                                <table style="margin-right:10px">
-                                                                    <tr>
-                                                                        <td>
-                                                                              <input type="file" id="photo" name="photo">
+                                        <input id="myInput" type="file" multiple style="display:none" />
+                                        @component('frontend.common.buttons.browse')
+                                            @slot('text', 'Add Files')
+                                            @slot('name', 'myButton')
+                                            @slot('id', 'myButton')
+                                            @slot('icon','fa-plus')
+                                        @endcomponent
 
-                                                                            {{-- @component('frontend.common.input.upload')
-                                                                                @slot('text', 'Photo')
-                                                                                @slot('name', 'photo')
-                                                                                @slot('id', 'photo')
-                                                                            @endcomponent --}}
-                                                                        </td>
-                                                                        <td>
-                                                                                <div data-repeater-delete="" class="btn-sm btn btn-danger"  >
-                                                                                        <span>
-                                                                                            <i class="la la-close"></i>
-                                                                                        </span>
-                                                                                    </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="m-form__group form-group row" style="margin-top:20px;margin-left:5px">
-                                                    <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
-                                                        <span>
-                                                            <i class="la la-plus"></i>
-                                                            <span>Add</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div id="myFiles"></div>
 
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -216,6 +186,7 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
                                                     @slot('class', 'add-item')
+                                                    @slot('id', 'add-item')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -325,9 +296,10 @@
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/item.js') }}"></script>
     <script src="{{ asset('js/frontend/category-item.js') }}"></script>
     <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
     <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
+    <script src="{{ asset('js/frontend/item.js') }}"></script>
+
 @endpush
