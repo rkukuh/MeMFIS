@@ -171,61 +171,66 @@ let Item = {
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
-
+                        // photo();
                     }
                 }
             });
+        });
 
-            // Stops the form from reloading
-            // e.preventDefault();
+        $(function () {
 
-            // $.ajax({
-            //     url: '/post-photos',
-            //     type: 'POST',
-            //     contentType: false,
-            //     processData: false,
-            //     data: function () {
-            //         var data = new FormData();
-            //         jQuery.each(jQuery('#file')[0].files, function (i, file) {
-            //             data.append('file-' + i, file);
-            //         });
-            //         // data.append('body', $('#body').val());
-            //         // data.append('uid', $('#uid').val());
-            //         return data;
-            //     }(),
-            //     success: function (result) {
-            //         alert(result);
-            //     },
-            //     error: function (xhr, result, errorThrown) {
-            //         alert('Request failed.');
-            //     }
-            // });
-            if ($('#photo ') != "") {
+            // klik();
+            let inputFile = $('#myInput');
+            let button = $('#myButton');
+            let buttonSubmit = $('#add-item');
+            let filesContainer = $('#myFiles');
+            let files = [];
 
-                var promises = [];
+            inputFile.change(function () {
+                let newFiles = [];
+                for (let index = 0; index < inputFile[0].files.length; index++) {
+                    let file = inputFile[0].files[index];
+                    newFiles.push(file);
+                    files.push(file);
+                }
 
-                $('#photo ').each(function (i) {
+                newFiles.forEach(file => {
+                    let fileElement = $(`<p>${file.name}</p>`);
+                    fileElement.data('fileData', file);
+                    filesContainer.append(fileElement);
 
-                    var fd = new FormData();
-                    alert(i);
-                    fd.append("code", code);
-                    fd.append("fileInput", document.getElementsByName('[' + i + '][photo]')[0].files[0]);
-                    // let uploadfile = document.getElementById("photo");
-                    // photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
-                    // if ("" == uploadfile.value) {
+                    fileElement.click(function (event) {
+                        let fileElement = $(event.target);
+                        let indexToRemove = files.indexOf(fileElement.data('fileData'));
+                        fileElement.remove();
+                        files.splice(indexToRemove, 1);
+                    });
+                });
+            });
 
+            button.click(function () {
+                inputFile.click();
+            });
+            $('.footer').on('click', '.add-item', function () {
+                let formData = new FormData();
+                let code = $('input[name=code]').val();
+                formData.append('code', code);
 
-                    // } else {
+                let z = 0;
+                files.forEach(file => {
+                    formData.append('file' + z, file);
+                    z++;
+                });
 
+                // console.log('Sending...');
 
-                    // let ajax = function(){
-                    var request = $.ajax({
+                    $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
 
                         url: '/post-photos',
-                        data: fd,
+                        data: formData,
                         processData: false,
                         contentType: false,
                         type: 'POST',
@@ -238,18 +243,7 @@ let Item = {
                             alert(err);
                         }
                     });
-                    // }
-
-                    // }
-                    alert(i);
-                    promises.push( request);
-                });
-
-                $.when.apply(null, promises).done(function(){
-                    alert('All done')
-                 })
-            }
-
+            });
         });
 
         let edit = $('.m_datatable').on('click', '.edit', function () {
