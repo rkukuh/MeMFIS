@@ -21,6 +21,7 @@ class ItemController extends Controller
     public function getItems()
     {
         $items = Item::All();
+        // dd($items);
 
         $data = $alldata = json_decode($items);
 
@@ -163,7 +164,7 @@ class ItemController extends Controller
      */
     public function postPhotos(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $length_request=count($request->all())-1;
         if($length_request==0){
             //
@@ -186,7 +187,8 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return response()->json($item);
+        $categories = $item->categories;
+        return view('frontend.item.show',compact('item','categories'));
     }
 
     /**

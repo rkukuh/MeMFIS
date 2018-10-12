@@ -17,13 +17,12 @@ class ItemUnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getUoM($uom)
+    public function getUoM($code)
     {
-        // dd($uom);
-        $item = Item::where('code',$uom)->get();
-        dd($item);
-        // $itemUnits = ItemUnit::All();
+        $item = Item::where('code',$code)->first();
 
+        $itemUnits = $item->units;
+        dd($itemUnits);
         $data = $alldata = json_decode($itemUnits);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

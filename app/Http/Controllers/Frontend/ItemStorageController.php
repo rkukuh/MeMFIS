@@ -16,11 +16,14 @@ class ItemStorageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getItemStorages()
+    public function getItemStorages($code)
     {
-        $data = ItemStorage::All();
+        $item = Item::where('code',$code)->first();
 
-        $data = $alldata = json_decode($data);
+        $itemStorages = $item->storages;
+        dd($itemStorages);
+
+        $data = $alldata = json_decode($itemStorages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
