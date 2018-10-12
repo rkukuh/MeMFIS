@@ -125,32 +125,7 @@ let Item = {
             ]
         });
 
-        // $(document).ready(function () {
-        //     let uuid = $('input[name=id]').val();
 
-        //     $.ajax({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         type: 'get',
-        //         url: '/get-item/' + uuid + '/edit',
-        //         success: function (data) {
-
-        //             document.getElementById('code').value = data.code;
-        //             document.getElementById('name').value = data.name;
-        //             document.getElementById('description').value = data.description;
-        //             document.getElementById('barcode').value = data.barcode;
-        //         },
-        //         error: function (jqXhr, json, errorThrown) {
-        //             let errorsHtml = '';
-        //             let errors = jqXhr.responseJSON;
-
-        //             $.each(errors.errors, function (index, value) {
-        //             });
-        //         }
-        //     });
-
-        // });
 
 
         $(document).ready(function () {
@@ -249,6 +224,126 @@ let Item = {
                 }
             });
         });
+
+
+
+
+        let simpan2 = $('.modal-footer').on('click', '.add-uom', function () {
+            let code = $('input[name=code]').val();
+            let qty = $('input[name=qty]').val();
+            let qty2 = $('input[name=qty2]').val();
+            let unit = $('#unit').val();
+            let unit2 = $('#unit2').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/item-unit',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    code: code,
+                    qty: qty,
+                    qty2: qty2,
+                    unit: unit,
+                    unit2: unit2
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.qty) {
+                            $('#qty-error').html(data.errors.qty[0]);
+
+                        }
+                        if (data.errors.qty2) {
+                            $('#qty2-error').html(data.errors.qty2[0]);
+
+                        }
+                        if (data.errors.unit) {
+                            $('#unit-error').html(data.errors.unit[0]);
+
+                        }
+                        if (data.errors.unit2) {
+                            $('#unit2-error').html(data.errors.unit2[0]);
+
+                        }
+                        document.getElementById('qty').value = qty;
+                        document.getElementById('qty2').value = qty2;
+                        document.getElementById('unit').value = unit;
+                        document.getElementById('unit2').value = unit2;
+                } else {
+                        $('#modal_uom').modal('hide');
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+                        uom_reset()
+                        let table = $('.m_datatable1').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                    }
+                }
+            });
+        });
+
+
+        let simpan3 = $('.modal-footer').on('click', '.add-stock', function () {
+            let code = $('input[name=code]').val();
+            $('#name-error').html('');
+            let storage = $('#storage').val();
+            let min = $('input[name=min]').val();
+            let max = $('input[name=max]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/item-storage',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    storage: storage,
+                    min: min,
+                    max: max,
+                    code: code,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.storage) {
+                            $('#storage-error').html(data.errors.storage[0]);
+                            document.getElementById('storage').value = storage;
+                            document.getElementById('min').value = min;
+                            document.getElementById('max').value = max;
+                        }
+                        if (data.errors.min) {
+                            $('#min-error').html(data.errors.min[0]);
+                            document.getElementById('storage').value = storage;
+                            document.getElementById('min').value = min;
+                            document.getElementById('max').value = max;
+                        }
+                        if (data.errors.max) {
+                            $('#max-error').html(data.errors.max[0]);
+                            document.getElementById('storage').value = storage;
+                            document.getElementById('min').value = min;
+                            document.getElementById('max').value = max;
+                        }
+                    } else {
+                        $('#modal_minmaxstock').modal('hide');
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+                        minmaxstock_reset();
+                        let table = $('.m_datatable2').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+
 
     }
 };
