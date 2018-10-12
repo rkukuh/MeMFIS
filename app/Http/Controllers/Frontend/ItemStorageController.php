@@ -27,9 +27,9 @@ class ItemStorageController extends Controller
         ->join('item_storage', 'item_storage.item_id', '=', 'items.id')
         ->join('storages', 'storages.id', '=', 'item_storage.storage_id')
         ->select('storages.name', 'item_storage.max', 'item_storage.min' , 'item_storage.id')
+        ->where('items.code',$code)
         ->get();
 
-        // dd($itemUnits);
         $data = $alldata = json_decode($itemStorages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
