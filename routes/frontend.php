@@ -33,7 +33,7 @@ Route::name('frontend.')->group(function () {
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
 
         Route::resource('item-storage', 'ItemStorageController');
-        Route::get('/get-item-storages','ItemStorageController@getItemStorages')->name('get-item-storages');
+        Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
 
         Route::resource('item-unit', 'ItemUnitController');
         Route::get('/get-uom/{code}','ItemUnitController@getUoM')->name('get-uom');
