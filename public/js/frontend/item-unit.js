@@ -1,7 +1,9 @@
 let ItemUnit = {
     init: function () {
+
         load_table_uom = function () {
             let code = $('input[name=code]').val();
+            
             $('.m_datatable1').mDatatable({
                 data: {
                     type: 'remote',
@@ -45,14 +47,14 @@ let ItemUnit = {
                     }
                 },
                 columns: [{
-                        field: 'id_unit',
+                        field: 'name',
                         title: 'Unit',
                         sortable: 'asc',
                         filterable: !1,
                         width: 150
                     },
                     {
-                        field: 'qty',
+                        field: 'quantity',
                         title: 'Qty',
                         sortable: 'asc',
                         filterable: !1,
@@ -66,12 +68,12 @@ let ItemUnit = {
                         overflow: 'visible',
                         template: function (t, e, i) {
                             return (
-                                '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                                t.id +
-                                '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                                '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                                t.id +
-                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                                // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                                // t.id +
+                                // '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                                // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                                // t.id +
+                                // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                                 '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                                 t.id +
                                 ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
