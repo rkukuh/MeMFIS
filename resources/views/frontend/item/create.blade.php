@@ -59,6 +59,7 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Code')
                                                 @slot('name', 'code')
+                                                @slot('id', 'code')
                                                 @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
@@ -70,6 +71,7 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Name')
                                                 @slot('name', 'name')
+                                                @slot('id', 'name')
                                                 @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
@@ -100,6 +102,7 @@
                                         @component('frontend.common.input.text')
                                             @slot('text', 'Barcode')
                                             @slot('name', 'barcode')
+                                            @slot('id', 'barcode')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
