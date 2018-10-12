@@ -334,7 +334,7 @@
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script> --}}
+    <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
