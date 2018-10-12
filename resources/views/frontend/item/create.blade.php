@@ -224,7 +224,7 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-uom')
                                             @slot('text', 'Add UoM')
-                                            {{-- @slot('attribute', 'disabled') --}}
+                                            @slot('attribute', 'disabled')
                                             @slot('data_target', '#modal_uom')
                                         @endcomponent
 
@@ -261,7 +261,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-minmaxstock')
-                                            {{-- @slot('attribute', 'disabled') --}}
+                                            @slot('attribute', 'disabled')
                                             @slot('text', 'Add Min/Max Stock')
                                             @slot('data_target', '#modal_minmaxstock')
                                         @endcomponent
@@ -300,6 +300,5 @@
     <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
     <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
-    <script src="{{ asset('js/frontend/item.js') }}"></script>
-
+    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
 @endpush
