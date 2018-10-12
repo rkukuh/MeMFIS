@@ -57,6 +57,18 @@ let Item = {
                     filterable: !1
                 },
                 {
+                    field: 'Photo',
+                    width: 110,
+                    title: 'Photo',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<img src="/img/LogoMMF.png" width="30px">'
+                        );
+                    }
+                },
+                {
                     field: 'Actions',
                     width: 110,
                     title: 'Actions',
