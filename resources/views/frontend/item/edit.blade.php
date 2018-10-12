@@ -258,8 +258,8 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-                                    <div class="col-xl-4 order-1 order-xl-2">
-                                        @component('frontend.common.buttons.create-new')
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                            @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-uom')
                                             @slot('text', 'Add UoM')
                                             @slot('data_target', '#modal_uom')
@@ -295,7 +295,7 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-                                    <div class="col-xl-4 order-1 order-xl-2">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-minmaxstock')
                                             @slot('text', 'Add Min/Max Stock')
