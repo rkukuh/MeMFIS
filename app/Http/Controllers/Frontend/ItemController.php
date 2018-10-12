@@ -207,17 +207,6 @@ class ItemController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function editItem(Item $item)
-    {
-        return response()->json($item);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\ItemUpdate  $request
