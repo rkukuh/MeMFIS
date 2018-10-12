@@ -125,6 +125,34 @@ let Item = {
             ]
         });
 
+        // $(document).ready(function () {
+        //     let uuid = $('input[name=id]').val();
+
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         type: 'get',
+        //         url: '/get-item/' + uuid + '/edit',
+        //         success: function (data) {
+
+        //             document.getElementById('code').value = data.code;
+        //             document.getElementById('name').value = data.name;
+        //             document.getElementById('description').value = data.description;
+        //             document.getElementById('barcode').value = data.barcode;
+        //         },
+        //         error: function (jqXhr, json, errorThrown) {
+        //             let errorsHtml = '';
+        //             let errors = jqXhr.responseJSON;
+
+        //             $.each(errors.errors, function (index, value) {
+        //             });
+        //         }
+        //     });
+
+        // });
+
+
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
             document.getElementById('isppn').onchange = function () {
@@ -216,6 +244,7 @@ let Item = {
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
+                        location.reload();
                         // photo();
                     }
                 }

@@ -53,6 +53,7 @@
                                         @slot('name', 'id')
                                         @slot('id', 'id')
                                         @slot('value', $item->uuid)
+                                        @slot('id_error', 'code')
                                     @endcomponent
 
                                     <div class="form-group m-form__group row ">

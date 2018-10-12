@@ -207,6 +207,17 @@ class ItemController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Item  $item
+     * @return \Illuminate\Http\Response
+     */
+    public function editItem(Item $item)
+    {
+        return response()->json($item);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\ItemUpdate  $request
@@ -215,14 +226,14 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-        $code = $request->code;
-        $name = $request->name;
-        $description = $request->description;
-        $barcode = $request->barcode;
-        $account_code = $request->accountcode;
-        $is_ppn = $request->isppn;
-        $is_stock = $request->isstock;
-        $ppn_amount = $request->ppn;
+        $item->code = $request->code;
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->barcode = $request->barcode;
+        $item->account_code = $request->accountcode;
+        $item->is_ppn = $request->isppn;
+        $item->is_stock = $request->isstock;
+        $item->ppn_amount = $request->ppn;
 
         // $item->name = $request->name;
         $item->save();
