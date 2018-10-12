@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use DB;
 use App\Models\Item;
 use App\model\ListUtil;
 use App\Models\Pivots\ItemStorage;
@@ -21,8 +22,14 @@ class ItemStorageController extends Controller
         $item = Item::where('code',$code)->first();
 
         $itemStorages = $item->storages;
-        dd($itemStorages);
 
+        $itemStorages = DB::table('items')
+        ->join('item_storage', 'item_storage.item_id', '=', 'items.id')
+        ->join('storages', 'storages.id', '=', 'item_storage.storage_id')
+        ->select('storages.name', 'item_storage.max', 'item_storage.min' , 'item_storage.id')
+        ->get();
+
+        // dd($itemUnits);
         $data = $alldata = json_decode($itemStorages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

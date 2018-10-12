@@ -21,7 +21,6 @@ class ItemController extends Controller
     public function getItems()
     {
         $items = Item::All();
-        // dd($items);
 
         $data = $alldata = json_decode($items);
 

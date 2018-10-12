@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use DB;
 use App\Models\Unit;
 use App\Models\Item;
 use App\model\ListUtil;
@@ -22,7 +23,13 @@ class ItemUnitController extends Controller
         $item = Item::where('code',$code)->first();
 
         $itemUnits = $item->units;
-        dd($itemUnits);
+
+        $itemUnits = DB::table('items')
+        ->join('item_unit', 'item_unit.item_id', '=', 'items.id')
+        ->join('units', 'units.id', '=', 'item_unit.unit_id')
+        ->select('units.name', 'item_unit.quantity')
+        ->get();
+
         $data = $alldata = json_decode($itemUnits);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
