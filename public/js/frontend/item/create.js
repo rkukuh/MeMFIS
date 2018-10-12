@@ -157,7 +157,7 @@ let Item = {
                         type: 'POST',
                         success: function (data) {
                             if (data.uploaded == true) {
-                                alert('sukses');
+                                // alert('sukses');
                             }
                         },
                         error: function (err) {

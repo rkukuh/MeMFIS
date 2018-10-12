@@ -191,6 +191,7 @@
                                                 @component('frontend.common.buttons.submit')
                                                     @slot('class', 'add-item')
                                                     @slot('id', 'add-item')
+                                                    @slot('type','button')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
