@@ -14,44 +14,51 @@ class TypesOfAviationSchoolDegree extends Seeder
     {
         Type::create([
             'code' => 'a1',
-            'name' => 'A1 - Airframe',
-            'of'  => 'aviation-school-degree',
+            'name' => 'A1',
+            'description' => 'Airframe Airplane / Fixed Wing',
+            'of' => 'aviation-school-degree',
         ]);
 
         Type::create([
             'code' => 'a2',
-            'name' => 'A2 - Airframe',
-            'of'  => 'aviation-school-degree',
+            'name' => 'A2',
+            'description' => 'Airframe Helicopter / Rotary Wing',
+            'of' => 'aviation-school-degree',
         ]);
 
         Type::create([
             'code' => 'a3',
-            'name' => 'A3 - Piston Engine',
-            'of'  => 'aviation-school-degree',
+            'name' => 'A3',
+            'description' => 'Piston Engine',
+            'of' => 'aviation-school-degree',
         ]);
 
         Type::create([
             'code' => 'a4',
-            'name' => 'A4 - Turbine Engine',
-            'of'  => 'aviation-school-degree',
+            'name' => 'A4',
+            'description' => 'Turbine Engine',
+            'of' => 'aviation-school-degree',
         ]);
 
         Type::create([
             'code' => 'c1',
-            'name' => 'C1 - Radio & Electronics',
-            'of'  => 'aviation-school-degree',
+            'name' => 'C1',
+            'description' => 'Radio & Electronics',
+            'of' => 'aviation-school-degree',
         ]);
 
         Type::create([
             'code' => 'c2',
-            'name' => 'C2 - Instrument',
-            'of'  => 'aviation-school-degree',
+            'name' => 'C2',
+            'description' => 'Instrument',
+            'of' => 'aviation-school-degree',
         ]);
 
         Type::create([
             'code' => 'c4',
-            'name' => 'C4 - Electrical',
-            'of'  => 'aviation-school-degree',
+            'name' => 'C4',
+            'description' => 'Electrical',
+            'of' => 'aviation-school-degree',
         ]);
     }
 }
