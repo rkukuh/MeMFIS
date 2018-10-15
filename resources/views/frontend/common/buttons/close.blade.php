@@ -6,7 +6,7 @@
     class="btn
            btn-{{ $color or 'secondary' }}
            btn-{{ $size or 'md' }}
-           {{ $class or '' }}"
+           {{ $class or '' }} clse"
     style="{{ $style or '' }}"
     data-dismiss="{{ $data_dismiss or 'modal' }}">
 
