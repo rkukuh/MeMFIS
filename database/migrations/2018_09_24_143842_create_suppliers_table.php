@@ -17,8 +17,6 @@ class CreateSuppliersTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
-            $table->integer('city_id');
-            $table->text('address');
             $table->string('npwp');
             $table->string('nppkp');
             $table->integer('top');

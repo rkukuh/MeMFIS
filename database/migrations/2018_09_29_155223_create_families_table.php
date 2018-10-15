@@ -21,18 +21,12 @@ class CreateFamiliesTable extends Migration
             $table->string('last_name')->nullable();
             $table->enum('gender', ['f', 'm'])->nullable();
             $table->boolean('is_emergency_contact')->default(false);
-            $table->string('address')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->index('first_name');
             $table->index('middle_name');
             $table->index('last_name');
-            $table->index('address');
-            $table->index('latitude');
-            $table->index('longitude');
         });
     }
 
