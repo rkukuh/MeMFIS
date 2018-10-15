@@ -28,6 +28,8 @@ use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
+use App\Models\Manufacturer;
+use App\Policies\ManufacturerPolicy;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -53,6 +55,7 @@ class AuthServiceProvider extends ServiceProvider
         Currency::class => CurrencyPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
+        Manufacturer::class => ManufacturerPolicy::class,
     ];
 
     /**

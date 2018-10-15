@@ -21,6 +21,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('address', 'AddressController');
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
+        Route::resource('manufacturer', 'ManufacturerController');
 
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
