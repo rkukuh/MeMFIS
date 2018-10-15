@@ -28,6 +28,8 @@ use App\Models\Currency;
 use App\Policies\CurrencyPolicy;
 use App\Models\Aircraft;
 use App\Policies\AircraftPolicy;
+use App\Models\Employee;
+use App\Policies\EmployeePolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
@@ -61,6 +63,7 @@ class AuthServiceProvider extends ServiceProvider
         License::class => LicensePolicy::class,
         Currency::class => CurrencyPolicy::class,
         Aircraft::class => AircraftPolicy::class,
+        Employee::class => EmployeePolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,

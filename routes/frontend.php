@@ -20,6 +20,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('status', 'StatusController');
         Route::resource('address', 'AddressController');
         Route::resource('license', 'LicenseController');
+        Route::resource('employee', 'EmployeeController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
