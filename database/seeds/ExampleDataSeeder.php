@@ -24,6 +24,7 @@ class ExampleDataSeeder extends Seeder
         $this->call(Faxes::class);
         $this->call(Emails::class);
         $this->call(Phones::class);
+        $this->call(Addresses::class);
 
         /** MASTER */
 

@@ -21,6 +21,7 @@ Route::name('admin.')->group(function () {
         Route::resource('fax', 'FaxController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+        Route::resource('address', 'AddressController');
 
         /** MASTER */
 
