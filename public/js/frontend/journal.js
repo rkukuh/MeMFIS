@@ -98,7 +98,9 @@ let Category = {
             ]
         });
 
-
+        $('.modal-footer').on('click', '.reset', function () {
+            journal_reset();
+        });
 
         // let save = $('.align-items-center').on('click', '.btn-primary', function () {
 
@@ -282,8 +284,8 @@ let Category = {
         });
 
         let edit = $('.m_datatable').on('click', '.edit', function () {
-            $('#button').show();
-            $('#simpan').text('Perbarui');
+            // $('#button').show();
+            // $('#simpan').text('Perbarui');
 
             let triggerid = $(this).data('id');
 
@@ -323,6 +325,7 @@ let Category = {
                     document.getElementById('code').value = data.code;
                     document.getElementById('name').value = data.name;
                     document.getElementById('description').value = data.description;
+                    update_button();
                 },
                 error: function (jqXhr, json, errorThrown) {
                     let errorsHtml = '';
@@ -412,7 +415,10 @@ let Category = {
                             document.getElementById('level').value = level;
                             document.getElementById('description').value = description;
                         }
+
+
                     } else {
+                        save_button();
                         $('#modal_journal').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
