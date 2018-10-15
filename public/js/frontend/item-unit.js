@@ -68,14 +68,8 @@ let ItemUnit = {
                         overflow: 'visible',
                         template: function (t, e, i) {
                             return (
-                                // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                                // t.id +
-                                // '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                                // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                                // t.id +
-                                // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                                t.id +
+                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="' + t.uom.item_id + '"' +
+                                'data-unit_id="' + t.uom.unit_id + '"' +
                                 ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                             );
                         }
@@ -132,7 +126,7 @@ let ItemUnit = {
                         document.getElementById('qty2').value = qty2;
                         document.getElementById('unit').value = unit;
                         document.getElementById('unit2').value = unit2;
-                } else {
+                    } else {
                         $('#modal_uom').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
@@ -248,8 +242,10 @@ let ItemUnit = {
             });
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
+        let remove_uom = $('.m_datatable1').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
+            let triggerid2 = $(this).data('unit_id');
+            // alert(triggerid);
 
             swal({
                 title: 'Are you sure?',
@@ -267,7 +263,7 @@ let ItemUnit = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/item-unit/' + triggerid + '',
+                        url: '/item-unit/' + triggerid + '/' + triggerid2,
                         success: function (data) {
                             toastr.success(
                                 'Data Berhasil Dihapus.',
@@ -276,8 +272,7 @@ let ItemUnit = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
-
+                            let table = $('.m_datatable1').mDatatable();
                             table.originalDataSet = [];
                             table.reload();
                         },
