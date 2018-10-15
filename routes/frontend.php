@@ -40,7 +40,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('item-unit', 'ItemUnitController');
         Route::get('/get-uom/{code}','ItemUnitController@getUoM')->name('get-uom');
 
-        Route::resource('storage', 'StorageController');
+        Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
         Route::resource('supplier', 'SupplierController');
