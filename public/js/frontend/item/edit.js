@@ -43,7 +43,7 @@ let Item = {
                 }
             },
             columns: [{
-                    field: 'quantity',
+                    field: 'uom.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
@@ -109,14 +109,14 @@ let Item = {
                     width: 150
                 },
                 {
-                    field: 'max',
+                    field: 'pivot.max',
                     title: 'Max',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'min',
+                    field: 'pivot.min',
                     title: 'Min',
                     sortable: 'asc',
                     filterable: !1,

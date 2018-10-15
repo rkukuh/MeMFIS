@@ -54,7 +54,7 @@ let ItemUnit = {
                         width: 150
                     },
                     {
-                        field: 'quantity',
+                        field: 'uom.quantity',
                         title: 'Qty',
                         sortable: 'asc',
                         filterable: !1,
