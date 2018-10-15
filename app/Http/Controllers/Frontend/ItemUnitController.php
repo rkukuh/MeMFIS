@@ -190,11 +190,12 @@ class ItemUnitController extends Controller
      * @param  \App\Models\ItemUnit  $itemUnit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemUnit $itemUnit)
+    public function destroy($itemUnit, $unit)
     {
-        $itemUnit->delete();
+        $item = Item::find($itemUnit);
+        $item->units()->detach($unit);
 
-        return response()->json($itemUnit);
+        return response()->json($item);
     }
 
     /**
