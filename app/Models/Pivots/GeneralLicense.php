@@ -2,9 +2,9 @@
 
 namespace App\Models\Pivots;
 
-use App\MemfisModel;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class GeneralLicense extends MemfisModel
+class GeneralLicense extends Pivot
 {
     //
 }
