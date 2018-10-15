@@ -53,7 +53,7 @@ class ManufacturersTableSeeder extends Seeder
         ]);
 
         Manufacturer::create([
-            'code' => 'di',
+            'code' => 'ptdi',
             'name' => 'PT. Dirgantara Indonesia'
         ]);
 
