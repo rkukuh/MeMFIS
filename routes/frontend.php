@@ -34,10 +34,12 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-items','ItemController@getItems')->name('get-items');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
 
-        Route::resource('item-storage', 'ItemStorageController');
+        Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
+        Route::delete('item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
         Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
 
-        Route::resource('item-unit', 'ItemUnitController');
+        Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
+        Route::delete('item-unit/{item_unit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
         Route::get('/get-uom/{code}','ItemUnitController@getUoM')->name('get-uom');
 
         Route::resource('storages', 'StorageController');
