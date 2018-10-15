@@ -12,6 +12,8 @@ class AircraftsTableSeeder extends Seeder
      */
     public function run()
     {
+        /** BOEING */
+
         $boeing = Manufacturer::where('code', 'boeing')->first();
 
         $boeing->aircrafts()->create([
@@ -42,6 +44,40 @@ class AircraftsTableSeeder extends Seeder
         $boeing->aircrafts()->create([
             'code' => 'B737-900ER',
             'name' => 'B737-900ER',
+        ]);
+
+        /** FOKKER */
+
+        $fokker = Manufacturer::where('code', 'fokker')->first();
+
+        $fokker->aircrafts()->create([
+            'code' => 'F-50',
+            'name' => 'F-50',
+        ]);
+
+        $fokker->aircrafts()->create([
+            'code' => 'F-28',
+            'name' => 'F-28',
+        ]);
+
+        $fokker->aircrafts()->create([
+            'code' => 'F-27-MK500',
+            'name' => 'F-27-MK500',
+        ]);
+
+        $fokker->aircrafts()->create([
+            'code' => 'F-27-MK50',
+            'name' => 'F-27-MK50',
+        ]);
+
+        $fokker->aircrafts()->create([
+            'code' => 'F-27-MK200',
+            'name' => 'F-27-MK200',
+        ]);
+
+        $fokker->aircrafts()->create([
+            'code' => 'F-100',
+            'name' => 'F-100',
         ]);
     }
 }
