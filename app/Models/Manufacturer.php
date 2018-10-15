@@ -25,4 +25,19 @@ class Manufacturer extends MemfisModel
 
         static::addGlobalScope(new OrderByColumn('name'));
     }
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A manufacturer may have zero or many aircrafts.
+     *
+     * This function will retrieve the aircrafts of a manufacturer.
+     * See: Aircraft's manufacturer() method for the inverse
+     *
+     * @return mixed
+     */
+    public function aircrafts()
+    {
+        return $this->hasMany(Aircraft::class);
+    }
 }
