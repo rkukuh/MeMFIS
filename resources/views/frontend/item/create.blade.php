@@ -303,10 +303,9 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
 
     <script src="{{ asset('js/frontend/category-item.js') }}"></script>
-    <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
+    <script src="{{ asset('js/frontend/item/create/item-unit.js')}}"></script>
+    <script src="{{ asset('js/frontend/item/create/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/component.js')}}"></script>
-    
 @endpush
