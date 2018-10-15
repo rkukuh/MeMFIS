@@ -19,18 +19,9 @@ class ItemStorageController extends Controller
      */
     public function getItemStorages($code)
     {
-        $item = Item::where('code',$code)->first();
+        $item = Item::with('storages')->where('code',$code)->first();
 
-        $itemStorages = $item->storages;
-
-        $itemStorages = DB::table('items')
-        ->join('item_storage', 'item_storage.item_id', '=', 'items.id')
-        ->join('storages', 'storages.id', '=', 'item_storage.storage_id')
-        ->select('storages.name', 'item_storage.max', 'item_storage.min' , 'item_storage.id')
-        ->where('items.code',$code)
-        ->get();
-
-        $data = $alldata = json_decode($itemStorages);
+        $data = $alldata = json_decode($item->storages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
