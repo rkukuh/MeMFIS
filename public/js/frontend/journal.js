@@ -298,33 +298,27 @@ let Category = {
                 success: function (data) {
                     let select = document.getElementById('type');
 
-                    $('select[name="type"]').append(
-                        '<option value="0" selected>Edit Type</option>'
-                    );
 
                     // FIXME: 'select' has already been declared.
                     // let select = document.getElementById('level');
 
-                    $('select[name="level"]').append(
-                        '<option value="0" selected> Edit Level</option>'
-                    );
+                    document.getElementById('id').value = data.uuid;
+                    document.getElementById('code').value = data.code;
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('description').value = data.description;
 
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         type: 'get',
-                        url: '/update-button',
-                        success: function (data) {
-                            $('#button-div').html(data);
-
+                        url: '/type/'+data.type_id+'/edit',
+                        success: function (data2) {
+                            $('select[name="type"]').append(
+                                '<option value="'+data2.id+'" selected>'+data2.name+'</option>'
+                            );
                         }
                     });
-
-                    document.getElementById('id').value = data.uuid;
-                    document.getElementById('code').value = data.code;
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('description').value = data.description;
                     update_button();
                 },
                 error: function (jqXhr, json, errorThrown) {
