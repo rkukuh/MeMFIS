@@ -3,7 +3,7 @@ let ItemUnit = {
 
         load_table_uom = function () {
             let code = $('input[name=code]').val();
-            
+
             $('.m_datatable1').mDatatable({
                 data: {
                     type: 'remote',
@@ -54,7 +54,7 @@ let ItemUnit = {
                         width: 150
                     },
                     {
-                        field: 'quantity',
+                        field: 'uom.quantity',
                         title: 'Qty',
                         sortable: 'asc',
                         filterable: !1,
