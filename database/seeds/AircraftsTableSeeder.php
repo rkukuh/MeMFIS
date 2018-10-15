@@ -111,5 +111,32 @@ class AircraftsTableSeeder extends Seeder
             'code' => 'ATR-42',
             'name' => 'ATR-42',
         ]);
+
+        /** DHC */
+
+        $dhc = Manufacturer::where('code', 'dhc')->first();
+
+        $dhc->aircrafts()->create([
+            'code' => 'DHC-6',
+            'name' => 'DHC-6',
+        ]);
+
+        /** PT. DI */
+
+        $ptdi = Manufacturer::where('code', 'ptdi')->first();
+
+        $ptdi->aircrafts()->create([
+            'code' => 'CN-235',
+            'name' => 'CN-235',
+        ]);
+
+        /** CASA */
+
+        $casa = Manufacturer::where('code', 'casa')->first();
+
+        $casa->aircrafts()->create([
+            'code' => 'CA-212',
+            'name' => 'CA-212',
+        ]);
     }
 }
