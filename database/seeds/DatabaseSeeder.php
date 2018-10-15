@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartmentsTableSeeder::class);
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AircraftsTableSeeder::class);
+        $this->call(LicensesTableSeeder::class);
 
         /** FINANCE */
 

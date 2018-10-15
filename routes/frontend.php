@@ -19,6 +19,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('phone', 'PhoneController');
         Route::resource('status', 'StatusController');
         Route::resource('address', 'AddressController');
+        Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
