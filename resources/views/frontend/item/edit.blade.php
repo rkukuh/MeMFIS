@@ -49,6 +49,12 @@
                             <div class="m-portlet__body">
                                 <fieldset class="border p-2">
                                     <legend class="w-auto">Identifier</legend>
+                                    @component('frontend.common.input.hidden')
+                                        @slot('name', 'id')
+                                        @slot('id', 'id')
+                                        @slot('value', $item->uuid)
+                                        @slot('id_error', 'code')
+                                    @endcomponent
 
                                     <div class="form-group m-form__group row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -60,6 +66,7 @@
                                                 @slot('text', 'Code')
                                                 @slot('name', 'code')
                                                 @slot('id', 'code')
+                                                @slot('value', $item->code)
                                                 @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
@@ -72,6 +79,7 @@
                                                 @slot('text', 'Name')
                                                 @slot('name', 'name')
                                                 @slot('id', 'name')
+                                                @slot('value', $item->name)
                                                 @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
@@ -86,6 +94,7 @@
                                                 @slot('rows', '3')
                                                 @slot('name', 'description')
                                                 @slot('id', 'description')
+                                                @slot('value', $item->description)
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>
@@ -103,19 +112,34 @@
                                             @slot('text', 'Barcode')
                                             @slot('name', 'barcode')
                                             @slot('id', 'barcode')
+                                            @slot('value', $item->code)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                             Category @include('frontend.common.label.optional')
                                         </label>
-
-                                        @component('frontend.common.input.select')
+                                        <select id="category" name="category"  class="form-control m-select2" multiple>
+                                            <option value="">
+                                                &mdash; Select Category &mdash;
+                                            </option>
+                                            @foreach($category_items as $category_item)
+                                                <option value="{{$category_item->id}}" selected>
+                                                    {{$category_item->name}}
+                                                </option>
+                                            @endforeach
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">
+                                                    {{$category->name}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        {{-- @component('frontend.common.input.select')
                                             @slot('id', 'category')
                                             @slot('text', 'Category')
                                             @slot('name', 'category')
                                             @slot('multiple', 'multiple')
-                                        @endcomponent
+                                        @endcomponent --}}
 
                                         @component('frontend.common.buttons.create-new')
                                             @slot('size', 'sm')
@@ -131,6 +155,9 @@
                                             @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
                                             @slot('id', 'isstock')
+                                            @if($item->is_stock==1)
+                                                @slot('editable','checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -139,6 +166,9 @@
                                                 @slot('text', 'Dikenai PPN?')
                                                 @slot('name', 'isppn')
                                                 @slot('id', 'isppn')
+                                                @if($item->is_ppn==1)
+                                                    @slot('editable','checked')
+                                                @endif
                                             @endcomponent
                                         </div>
 
@@ -147,8 +177,11 @@
                                                 @slot('text', 'PPN')
                                                 @slot('name', 'ppn')
                                                 @slot('id', 'ppn')
+                                                @slot('value', $item->ppn_amount)
                                                 @slot('class', 'ppn')
-                                                @slot('editable', 'disabled')
+                                                @if($item->is_ppn==0)
+                                                    @slot('editable', 'disabled')
+                                                @endif
                                             @endcomponent
                                         </div>
 
@@ -189,9 +222,9 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
-                                                    @slot('class', 'add-item')
-                                                    @slot('id', 'add-item')
-                                                    @slot('type','button')
+                                                    @slot('class', 'edit-item')
+                                                    @slot('id', 'edit-item')
+                                                    @slot('text', 'update')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -226,10 +259,9 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
+                                            @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-uom')
                                             @slot('text', 'Add UoM')
-                                            @slot('attribute', 'disabled')
                                             @slot('data_target', '#modal_uom')
                                         @endcomponent
 
@@ -263,11 +295,9 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-minmaxstock')
-                                            @slot('attribute', 'disabled')
                                             @slot('text', 'Add Min/Max Stock')
                                             @slot('data_target', '#modal_minmaxstock')
                                         @endcomponent
@@ -297,14 +327,15 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let code = '{{$item->code}}';
+    </script>
+
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/category-item.js') }}"></script>
-    <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
-    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
 @endpush

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\model\ListUtil;
+use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;

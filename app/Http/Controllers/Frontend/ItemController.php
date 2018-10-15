@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use Response;
 use App\Models\Item;
-use App\model\ListUtil;
+use App\Models\Category;
+use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -163,12 +164,19 @@ class ItemController extends Controller
      */
     public function postPhotos(Request $request)
     {
-        dd($request->photo);
-
-        $item = Item::where('code',$request->input('code'))->first();
-
-        $item->addMediaFromRequest($request->file)
-                ->toMediaCollection('item');
+        // dd($request->all());
+        $length_request=count($request->all())-1;
+        if($length_request==0){
+            //
+        }
+        elseif($length_request>=1){
+            for ($i = 0; $i < $length_request; $i++) {
+                $item = Item::where('code',$request->code)->first();
+                $item->addMediaFromRequest('file'.$i)
+                 ->toMediaCollection('item');
+            }
+            dd('done');            
+        }
     }
 
     /**
@@ -179,7 +187,8 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return response()->json($item);
+        $categories = $item->categories;
+        return view('frontend.item.show',compact('item','categories'));
     }
 
     /**
@@ -190,7 +199,11 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        return response()->json($item);
+        $categories = Category::ofItem()->get();
+        $category_items = $item->categories;
+        // return view('frontend.testing.blank',compact('item','categories','category_items'));
+
+        return view('frontend.item.edit',compact('item','categories','category_items'));
     }
 
     /**
@@ -202,7 +215,15 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-        $item = Item::find($item);
+        $item->code = $request->code;
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->barcode = $request->barcode;
+        $item->account_code = $request->accountcode;
+        $item->is_ppn = $request->isppn;
+        $item->is_stock = $request->isstock;
+        $item->ppn_amount = $request->ppn;
+
         // $item->name = $request->name;
         $item->save();
 

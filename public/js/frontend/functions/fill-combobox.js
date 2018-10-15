@@ -65,7 +65,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     category = function () {
         $.ajax({
-            url: '/get-categories/',
+            url: '/get-categories-item/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

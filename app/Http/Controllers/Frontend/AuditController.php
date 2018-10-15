@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Audit;
-use App\model\ListUtil;
+use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

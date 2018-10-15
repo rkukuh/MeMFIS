@@ -6,9 +6,8 @@
     class="btn
            btn-{{ $color or 'secondary' }}
            btn-{{ $size or 'md' }}
-           {{ $class or '' }} clse"
-    style="{{ $style or '' }}"
-    data-dismiss="{{ $data_dismiss or 'modal' }}">
+           {{ $class or '' }}"
+    style="{{ $style or '' }}">
 
     <span>
         <i class="fa {{ $icon or 'fa-times' }}"></i>

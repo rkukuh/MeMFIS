@@ -98,7 +98,9 @@ let Category = {
             ]
         });
 
-
+        $('.modal-footer').on('click', '.reset', function () {
+            journal_reset();
+        });
 
         // let save = $('.align-items-center').on('click', '.btn-primary', function () {
 
@@ -282,8 +284,8 @@ let Category = {
         });
 
         let edit = $('.m_datatable').on('click', '.edit', function () {
-            $('#button').show();
-            $('#simpan').text('Perbarui');
+            // $('#button').show();
+            // $('#simpan').text('Perbarui');
 
             let triggerid = $(this).data('id');
 
@@ -296,33 +298,28 @@ let Category = {
                 success: function (data) {
                     let select = document.getElementById('type');
 
-                    $('select[name="type"]').append(
-                        '<option value="0" selected>Edit Type</option>'
-                    );
 
                     // FIXME: 'select' has already been declared.
                     // let select = document.getElementById('level');
 
-                    $('select[name="level"]').append(
-                        '<option value="0" selected> Edit Level</option>'
-                    );
+                    document.getElementById('id').value = data.uuid;
+                    document.getElementById('code').value = data.code;
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('description').value = data.description;
 
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         type: 'get',
-                        url: '/update-button',
-                        success: function (data) {
-                            $('#button-div').html(data);
-
+                        url: '/type/'+data.type_id+'/edit',
+                        success: function (data2) {
+                            $('select[name="type"]').append(
+                                '<option value="'+data2.id+'" selected>'+data2.name+'</option>'
+                            );
                         }
                     });
-
-                    document.getElementById('id').value = data.uuid;
-                    document.getElementById('code').value = data.code;
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('description').value = data.description;
+                    update_button();
                 },
                 error: function (jqXhr, json, errorThrown) {
                     let errorsHtml = '';
@@ -412,7 +409,10 @@ let Category = {
                             document.getElementById('level').value = level;
                             document.getElementById('description').value = description;
                         }
+
+
                     } else {
+                        save_button();
                         $('#modal_journal').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {

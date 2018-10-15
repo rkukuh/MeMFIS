@@ -61,7 +61,7 @@
     <button id="mySubmitButton" type="button" style="border-radius: 5px; background-color: #fff; color: green;">Send Files</button>
 
     <div id="myFiles"></div>
-    <script>
+    {{-- <script>
 $(function(){
   let inputFile = $('#myInput');
   let button = $('#myButton');
@@ -80,7 +80,7 @@ $(function(){
     newFiles.forEach(file => {
       let fileElement = $(`<p>${file.name}</p>`);
       fileElement.data('fileData', file);
-      filesContainer.append(fileElement);
+    //   filesContainer.append(fileElement);
 
       fileElement.click(function(event) {
         let fileElement = $(event.target);
@@ -97,9 +97,13 @@ $(function(){
 
   buttonSubmit.click(function() {
     let formData = new FormData();
+    formData.append('code' , 'tes123');
 
+    let z = 0;
     files.forEach(file => {
-      formData.append('file', file);
+      formData.append('file'+z , file);
+    //   formData.append('file2' , file);
+      z++;
     });
 
     console.log('Sending...');
@@ -138,7 +142,7 @@ $(function(){
                     });
   });
 });
-    </script>
+    </script> --}}
         
 </body>
 </html>

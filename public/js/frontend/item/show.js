@@ -1,13 +1,72 @@
 let Item = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.m_datatable1').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/get-uom/' + code + '/',
+                        map: function (raw) {
+                            let dataSet = raw;
 
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'quantity',
+                    title: 'Qty',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'name',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+            ]
+        });
+
+        $('.m_datatable2').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/get-item-storages/'+code+'/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -44,38 +103,26 @@ let Item = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'Part No.',
+                    field: 'name',
+                    title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'name',
-                    title: 'Item Name',
+                    field: 'max',
+                    title: 'Max',
                     sortable: 'asc',
-                    filterable: !1
+                    filterable: !1,
+                    width: 150
                 },
                 {
-                    field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                }
+                    field: 'min',
+                    title: 'Min',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
             ]
         });
 
@@ -171,61 +218,66 @@ let Item = {
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
-
+                        // photo();
                     }
                 }
             });
+        });
 
-            // Stops the form from reloading
-            // e.preventDefault();
+        $(function () {
 
-            // $.ajax({
-            //     url: '/post-photos',
-            //     type: 'POST',
-            //     contentType: false,
-            //     processData: false,
-            //     data: function () {
-            //         var data = new FormData();
-            //         jQuery.each(jQuery('#file')[0].files, function (i, file) {
-            //             data.append('file-' + i, file);
-            //         });
-            //         // data.append('body', $('#body').val());
-            //         // data.append('uid', $('#uid').val());
-            //         return data;
-            //     }(),
-            //     success: function (result) {
-            //         alert(result);
-            //     },
-            //     error: function (xhr, result, errorThrown) {
-            //         alert('Request failed.');
-            //     }
-            // });
-            if ($('#photo ') != "") {
+            // klik();
+            let inputFile = $('#myInput');
+            let button = $('#myButton');
+            let buttonSubmit = $('#add-item');
+            let filesContainer = $('#myFiles');
+            let files = [];
 
-                var promises = [];
+            inputFile.change(function () {
+                let newFiles = [];
+                for (let index = 0; index < inputFile[0].files.length; index++) {
+                    let file = inputFile[0].files[index];
+                    newFiles.push(file);
+                    files.push(file);
+                }
 
-                $('#photo ').each(function (i) {
+                newFiles.forEach(file => {
+                    let fileElement = $(`<p>${file.name}</p>`);
+                    fileElement.data('fileData', file);
+                    filesContainer.append(fileElement);
 
-                    var fd = new FormData();
-                    alert(i);
-                    fd.append("code", code);
-                    fd.append("fileInput", document.getElementsByName('[' + i + '][photo]')[0].files[0]);
-                    // let uploadfile = document.getElementById("photo");
-                    // photos[i] = document.getElementsByName('[' + i + '][photo]')[0].files[0];
-                    // if ("" == uploadfile.value) {
+                    fileElement.click(function (event) {
+                        let fileElement = $(event.target);
+                        let indexToRemove = files.indexOf(fileElement.data('fileData'));
+                        fileElement.remove();
+                        files.splice(indexToRemove, 1);
+                    });
+                });
+            });
 
+            button.click(function () {
+                inputFile.click();
+            });
+            $('.footer').on('click', '.add-item', function () {
+                let formData = new FormData();
+                let code = $('input[name=code]').val();
+                formData.append('code', code);
 
-                    // } else {
+                let z = 0;
+                files.forEach(file => {
+                    formData.append('file' + z, file);
+                    z++;
+                });
 
+                // console.log('Sending...');
 
-                    // let ajax = function(){
-                    var request = $.ajax({
+                    $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
 
                         url: '/post-photos',
-                        data: fd,
+                        data: formData,
                         processData: false,
                         contentType: false,
                         type: 'POST',
@@ -238,18 +290,7 @@ let Item = {
                             alert(err);
                         }
                     });
-                    // }
-
-                    // }
-                    alert(i);
-                    promises.push( request);
-                });
-
-                $.when.apply(null, promises).done(function(){
-                    alert('All done')
-                 })
-            }
-
+            });
         });
 
         let edit = $('.m_datatable').on('click', '.edit', function () {

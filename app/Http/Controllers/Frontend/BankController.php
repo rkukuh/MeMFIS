@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Bank;
-use App\model\ListUtil;
+use App\Models\ListUtil;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\BankStore;
 use App\Http\Requests\Frontend\BankUpdate;

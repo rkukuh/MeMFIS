@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use DB;
 use App\Models\Unit;
 use App\Models\Item;
-use App\model\ListUtil;
+use App\Models\ListUtil;
 use App\Models\Pivots\ItemUnit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemUnitStore;
@@ -17,12 +18,18 @@ class ItemUnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getUoM($uom)
+    public function getUoM($code)
     {
-        // dd($uom);
-        $item = Item::where('code',$uom)->get();
-        dd($item);
-        // $itemUnits = ItemUnit::All();
+        // $item = Item::where('code',$code)->first();
+
+        // $itemUnits = $item->units;
+
+        $itemUnits = DB::table('items')
+        ->join('item_unit', 'item_unit.item_id', '=', 'items.id')
+        ->join('units', 'units.id', '=', 'item_unit.unit_id')
+        ->select('units.name', 'item_unit.quantity', 'items.code')
+        ->where('items.code',$code)
+        ->get();
 
         $data = $alldata = json_decode($itemUnits);
 

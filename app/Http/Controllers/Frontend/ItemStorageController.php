@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use DB;
 use App\Models\Item;
-use App\model\ListUtil;
+use App\Models\ListUtil;
 use App\Models\Pivots\ItemStorage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemStorageStore;
@@ -16,11 +17,20 @@ class ItemStorageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getItemStorages()
+    public function getItemStorages($code)
     {
-        $data = ItemStorage::All();
+        $item = Item::where('code',$code)->first();
 
-        $data = $alldata = json_decode($data);
+        $itemStorages = $item->storages;
+
+        $itemStorages = DB::table('items')
+        ->join('item_storage', 'item_storage.item_id', '=', 'items.id')
+        ->join('storages', 'storages.id', '=', 'item_storage.storage_id')
+        ->select('storages.name', 'item_storage.max', 'item_storage.min' , 'item_storage.id')
+        ->where('items.code',$code)
+        ->get();
+
+        $data = $alldata = json_decode($itemStorages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

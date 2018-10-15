@@ -53,41 +53,33 @@
                                     <div class="form-group m-form__group row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Part Number @include('frontend.common.label.required')
+                                                Part Number 
                                             </label>
-
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Code')
-                                                @slot('name', 'code')
-                                                @slot('id', 'code')
-                                                @slot('id_error', 'code')
+                                            @component('frontend.common.label.p')
+                                                @slot('text', $item->code)
                                             @endcomponent
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Name @include('frontend.common.label.optional')
+                                                Name 
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Name')
-                                                @slot('name', 'name')
-                                                @slot('id', 'name')
-                                                @slot('id_error', 'name')
+                                            @component('frontend.common.label.p')
+                                                @slot('text', $item->name)
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row ">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Description @include('frontend.common.label.optional')
+                                                Description 
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '3')
-                                                @slot('name', 'description')
-                                                @slot('id', 'description')
-                                                @slot('text', 'Description')
+                                            @component('frontend.common.label.p')
+                                                @slot('text', $item->description)
                                             @endcomponent
+
                                         </div>
 
                                     </div>
@@ -96,33 +88,22 @@
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Barcode @include('frontend.common.label.optional')
+                                            Barcode 
                                         </label>
 
-                                        @component('frontend.common.input.text')
-                                            @slot('text', 'Barcode')
-                                            @slot('name', 'barcode')
-                                            @slot('id', 'barcode')
+                                        @component('frontend.common.label.p')
+                                            @slot('text', $item->barcode)
                                         @endcomponent
-                                    </div>
+                                </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Category @include('frontend.common.label.optional')
+                                        <label class="form-control-label" style="margin-right:100%">
+                                            Category 
                                         </label>
-
-                                        @component('frontend.common.input.select')
-                                            @slot('id', 'category')
-                                            @slot('text', 'Category')
-                                            @slot('name', 'category')
-                                            @slot('multiple', 'multiple')
-                                        @endcomponent
-
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'sm')
-                                            @slot('text', 'add category')
-                                            @slot('data_target', '#modal_category')
-                                            @slot('style', 'margin-top: 10px;')
-                                        @endcomponent
+                                        @foreach($categories as $category)
+                                            @component('frontend.common.label.label')
+                                                @slot('text', $category->name.',')
+                                            @endcomponent
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row ">
@@ -131,6 +112,9 @@
                                             @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
                                             @slot('id', 'isstock')
+                                                @if($item->is_stock==1)
+                                                    @slot('editable','checked')
+                                                @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -139,62 +123,47 @@
                                                 @slot('text', 'Dikenai PPN?')
                                                 @slot('name', 'isppn')
                                                 @slot('id', 'isppn')
+                                                @if($item->is_ppn==1)
+                                                    @slot('editable','checked')
+                                                @endif
+                                                @endcomponent
+                                            @component('frontend.common.label.label')
+                                                @slot('text', 'PPN : ')
+                                            @endcomponent
+                                            @component('frontend.common.label.label')
+                                                @slot('text', $item->ppn_amount)
                                             @endcomponent
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding:0px">
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'PPN')
-                                                @slot('name', 'ppn')
-                                                @slot('id', 'ppn')
-                                                @slot('class', 'ppn')
-                                                @slot('editable', 'disabled')
-                                            @endcomponent
-                                        </div>
 
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Photos @include('frontend.common.label.optional')
+                                            Photos 
                                         </label>
                                         <br>
-                                        <input id="myInput" type="file" multiple style="display:none" />
-                                        @component('frontend.common.buttons.browse')
-                                            @slot('text', 'Add Files')
-                                            @slot('name', 'myButton')
-                                            @slot('id', 'myButton')
-                                            @slot('icon','fa-plus')
-                                        @endcomponent
-
-                                        <div id="myFiles"></div>
+                                        <img src="{{asset('img/LogoMMF.png')}}" alt="" width="100px">
 
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Account Code @include('frontend.common.label.optional')
+                                            Account Code 
                                         </label>
-
-                                        @component('frontend.common.input.select')
-                                            @slot('id', 'accountcode2')
-                                            @slot('text', 'Account Code')
-                                            @slot('name', 'accountcode')
-                                            @slot('style', 'width:100%')
+                                        @component('frontend.common.label.p')
+                                            @slot('text', $item->account_code)
                                         @endcomponent
+
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.submit')
-                                                    @slot('class', 'add-item')
-                                                    @slot('id', 'add-item')
-                                                    @slot('type','button')
-                                                @endcomponent
-
-                                                @include('frontend.common.buttons.reset')
+                                                @component('frontend.common.buttons.back')
+                                                    @slot('href', route('frontend.item.index') )
+                                                @endcomponent        
                                             </div>
                                         </div>
                                     </div>
@@ -225,16 +194,6 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'item-uom')
-                                            @slot('text', 'Add UoM')
-                                            @slot('attribute', 'disabled')
-                                            @slot('data_target', '#modal_uom')
-                                        @endcomponent
-
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -263,17 +222,6 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'item-minmaxstock')
-                                            @slot('attribute', 'disabled')
-                                            @slot('text', 'Add Min/Max Stock')
-                                            @slot('data_target', '#modal_minmaxstock')
-                                        @endcomponent
-
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -297,14 +245,11 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
+    <script>
+        let code = '{{$item->code}}';
+    </script>
 
-    <script src="{{ asset('js/frontend/category-item.js') }}"></script>
-    <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
-    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
+
+    <script src="{{ asset('js/frontend/item/show.js') }}"></script>
 @endpush
