@@ -1,4 +1,4 @@
-var item_reset = function () {
+let item_reset = function () {
     document.getElementById('code').value = "";
     document.getElementById('name').value = "";
     document.getElementById('description').value = "";
@@ -13,7 +13,7 @@ var item_reset = function () {
 
 }
 
-var uom_reset = function () {
+let uom_reset = function () {
     document.getElementById('qty').value = "";
     document.getElementById('qty2').value = "";
     $("#unit").select2('val', 'All');
@@ -26,7 +26,7 @@ var uom_reset = function () {
 
 }
 
-var minmaxstock_reset = function () {
+let minmaxstock_reset = function () {
     $("#storage").select2('val', 'All');
     document.getElementById('min').value = "";
     document.getElementById('max').value = "";
