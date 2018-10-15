@@ -90,4 +90,5 @@
 
     <script src="{{ asset('js/frontend/journal.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/component.js')}}"></script>
 @endpush
