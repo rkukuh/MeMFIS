@@ -26,6 +26,7 @@ class CreateGeneralLicensesTable extends Migration
             $table->string('attendance_no')->nullable();
             $table->timestamp('issued_at')->nullable();
             $table->timestamp('revoke_at')->nullable();
+            $table->timestamps();
 
             $table->foreign('employee_id')
                     ->references('id')->on('employees')
