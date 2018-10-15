@@ -25,6 +25,15 @@ let uom_reset = function () {
 
 
 }
+let minmaxstock_reset = function () {
+    $("#storage").select2('val', 'All');
+    document.getElementById('min').value = "";
+    document.getElementById('max').value = "";
+    $('#min-error').html('');
+    $('#max-error').html('');
+    $('#storage-error').html('');
+
+}
 
 let journal_reset = function () {
     $("#type").select2('val', 'All');
