@@ -19,6 +19,7 @@ Route::name('admin.')->group(function () {
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
+        Route::resource('note', 'NoteController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');

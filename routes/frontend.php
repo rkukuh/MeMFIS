@@ -14,6 +14,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('fax', 'FaxController');
         Route::resource('type', 'TypeController');
         Route::resource('bank', 'BankController');
+        Route::resource('note', 'NoteController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('status', 'StatusController');
