@@ -79,5 +79,37 @@ class AircraftsTableSeeder extends Seeder
             'code' => 'F-100',
             'name' => 'F-100',
         ]);
+
+        /** XIAN */
+
+        $xian = Manufacturer::where('code', 'xian')->first();
+
+        $xian->aircrafts()->create([
+            'code' => 'MA-60',
+            'name' => 'MA-60',
+        ]);
+
+        /** CESSNA */
+
+        $cessna = Manufacturer::where('code', 'cessna')->first();
+
+        $cessna->aircrafts()->create([
+            'code' => 'CESSNA172',
+            'name' => 'CESSNA172',
+        ]);
+
+        /** ATR */
+
+        $atr = Manufacturer::where('code', 'atr')->first();
+
+        $atr->aircrafts()->create([
+            'code' => 'ATR-72',
+            'name' => 'ATR-72',
+        ]);
+
+        $atr->aircrafts()->create([
+            'code' => 'ATR-42',
+            'name' => 'ATR-42',
+        ]);
     }
 }
