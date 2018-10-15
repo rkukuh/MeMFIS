@@ -46,5 +46,10 @@ class ManufacturersTableSeeder extends Seeder
             'code' => 'caravan',
             'name' => 'Caravan'
         ]);
+
+        Manufacturer::create([
+            'code' => 'atr',
+            'name' => 'Aerei da Trasporto Regionale'
+        ]);
     }
 }
