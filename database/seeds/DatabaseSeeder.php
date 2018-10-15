@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StoragesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
         $this->call(ManufacturersTableSeeder::class);
+        $this->call(AircraftsTableSeeder::class);
 
         /** FINANCE */
 

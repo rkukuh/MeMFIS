@@ -24,6 +24,8 @@ use App\Models\Address;
 use App\Policies\AddressPolicy;
 use App\Models\Currency;
 use App\Policies\CurrencyPolicy;
+use App\Models\Aircraft;
+use App\Policies\AircraftPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
@@ -53,6 +55,7 @@ class AuthServiceProvider extends ServiceProvider
         Status::class => StatusPolicy::class,
         Address::class => AddressPolicy::class,
         Currency::class => CurrencyPolicy::class,
+        Aircraft::class => AircraftPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,

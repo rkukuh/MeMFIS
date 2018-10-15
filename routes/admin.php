@@ -27,6 +27,7 @@ Route::name('admin.')->group(function () {
         /** MASTER */
 
         Route::resource('item', 'ItemController');
+        Route::resource('aircraft', 'AircraftController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
 
