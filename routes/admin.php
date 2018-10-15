@@ -32,6 +32,10 @@ Route::name('admin.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
 
+        /** EDUCATION */
+
+        Route::resource('general-license', 'GeneralLicenseController');
+
         /** FINANCE */
 
         Route::resource('bank', 'BankController');
