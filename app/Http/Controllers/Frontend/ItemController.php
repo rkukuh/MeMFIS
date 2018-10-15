@@ -230,6 +230,31 @@ class ItemController extends Controller
         return response()->json($item);
     }
 
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemUpdate  $request
+     * @param  \App\Models\Item  $item
+     * @return \Illuminate\Http\Response
+     */
+    public function itemUpdate(ItemUpdate $request, $code)
+    {
+        $item=Item::where('code',$code)->first();
+        $item->code = $request->code;
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->barcode = $request->barcode;
+        $item->account_code = $request->accountcode;
+        $item->is_ppn = $request->isppn;
+        $item->is_stock = $request->isstock;
+        $item->ppn_amount = $request->ppn;
+
+        // $item->name = $request->name;
+        $item->save();
+
+        return response()->json($item);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
