@@ -15,7 +15,20 @@ class CreateAircraftsTable extends Migration
     {
         Schema::create('aircrafts', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('code');
+            $table->string('name');
+            $table->unsignedInteger('manufacturer_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('manufacturer_id')
+                  ->references('id')->on('manufacturers')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->index('code');
+            $table->index('name');
         });
     }
 
