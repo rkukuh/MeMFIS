@@ -23,14 +23,12 @@ class CreateEmployeesTable extends Migration
             $table->date('dob')->nullable();
             $table->enum('gender', ['f', 'm'])->nullable();
             $table->timestamp('hired_at')->nullable();
-            $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->index('first_name');
             $table->index('middle_name');
             $table->index('last_name');
-            $table->index('note');
         });
     }
 
