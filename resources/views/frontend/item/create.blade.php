@@ -307,4 +307,6 @@
     <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/component.js')}}"></script>
+    
 @endpush
