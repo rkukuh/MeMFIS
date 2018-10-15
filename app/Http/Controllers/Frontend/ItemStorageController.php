@@ -189,11 +189,12 @@ class ItemStorageController extends Controller
      * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemStorage $itemStorage)
+    public function destroy($itemStorage, $storages)
     {
-        $itemStorage->delete();
+        $item = Item::find($itemStorage);
+        $item->storages()->detach($storages);
 
-        return response()->json($itemStorage);
+        return response()->json($item);
     }
 
     /**
