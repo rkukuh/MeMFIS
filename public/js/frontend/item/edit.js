@@ -47,15 +47,34 @@ let Item = {
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 50
                 },
                 {
                     field: 'name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
+                {
+                    field: 'Actions',
+                    width: 110,
+                    title: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            // t.id +
+                            // '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            // t.id +
+                            // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="'+t.uom.item_id+'"' +
+                            'data-unit_id="'+t.uom.unit_id+'"'+
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -113,15 +132,35 @@ let Item = {
                     title: 'Max',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 50
                 },
                 {
                     field: 'pivot.min',
                     title: 'Min',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 50
                 },
+                {
+                    field: 'Actions',
+                    width: 110,
+                    title: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            // t.id +
+                            // '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            // '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            // t.id +
+                            // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="'+t.pivot.item_id+'"' +
+                            'data-storage_id="'+t.pivot.storage_id+'"'+
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -338,10 +377,127 @@ let Item = {
                         let table = $('.m_datatable2').mDatatable();
                         table.originalDataSet = [];
                         table.reload();
-                    }
+                    }   
                 }
             });
         });
+
+        let remove_uom = $('.m_datatable1').on('click', '.delete', function () {
+            let triggerid = $(this).data('id');
+            let triggerid2 = $(this).data('unit_id');
+            // alert(triggerid);
+
+            swal({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this imaginary file!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/item-unit/' + triggerid + '/'+ triggerid2,
+                        success: function (data) {
+                            toastr.success(
+                                'Data Berhasil Dihapus.',
+                                'Sukses!', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.m_datatable1').mDatatable();
+                            table.originalDataSet =[];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                    swal(
+                        'Deleted!',
+                        'Your imaginary file has been deleted.',
+                        'success'
+                    );
+                } else {
+                    swal(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    );
+                }
+            });
+        });
+
+        let remove_storages = $('.m_datatable2').on('click', '.delete', function () {
+            let triggerid = $(this).data('id');
+            let triggerid2 = $(this).data('storage_id');
+            // alert(triggerid);
+
+            swal({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this imaginary file!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/item-storage/' + triggerid + '/'+ triggerid2,
+                        success: function (data) {
+                            toastr.success(
+                                'Data Berhasil Dihapus.',
+                                'Sukses!', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.m_datatable2').mDatatable();
+                            table.originalDataSet =[];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                    swal(
+                        'Deleted!',
+                        'Your imaginary file has been deleted.',
+                        'success'
+                    );
+                } else {
+                    swal(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    );
+                }
+            });
+        });
+
 
 
 
