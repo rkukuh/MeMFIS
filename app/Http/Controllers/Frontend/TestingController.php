@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Testing;
 use Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,47 @@ use Illuminate\Support\Facades\Input;
 
 class TestingController extends Controller
 {
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function text(Request $request)
+    {
+            $item = Testing::create([
+                'name' => $request->name,
+            ]);
+    
+    
+            return response()->json($item);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function photo(Request $request)
+    {
+        // dd($request->all());
+        $length_request=count($request->all())-1;
+        if($length_request==0){
+            //
+        }
+        elseif($length_request>=1){
+            for ($i = 0; $i < $length_request; $i++) {
+                $item = Testing::where('name',$request->name)->first();
+                $item->addMediaFromRequest('file'.$i)
+                 ->toMediaCollection('item');
+            }
+            dd('done');            
+        }
+    }
+    public function view()
+    {
+        return view('frontend.testing.photo');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -62,6 +104,29 @@ class TestingController extends Controller
         $moved_file = $file->move($destinationPath, $fileName);
         $path = $moved_file->getRealPath();
         return Response::json(["success"=>true,"uploaded"=>true, "url"=>$path]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postPhotos(Request $request)
+    {
+        // dd($request->all());
+        $length_request=count($request->all())-1;
+        if($length_request==0){
+            //
+        }
+        elseif($length_request>=1){
+            for ($i = 0; $i < $length_request; $i++) {
+                $item = Testing::where('code',$request->code)->first();
+                $item->addMediaFromRequest('file'.$i)
+                 ->toMediaCollection('item');
+            }
+            dd('done');            
+        }
     }
 
     /**
