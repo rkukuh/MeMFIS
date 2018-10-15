@@ -15,7 +15,20 @@ class CreateLicensesTable extends Migration
     {
         Schema::create('licenses', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('code');
+            $table->string('name');
+            $table->unsignedInteger('regulator')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('regulator')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->index('code');
+            $table->index('name');
         });
     }
 
