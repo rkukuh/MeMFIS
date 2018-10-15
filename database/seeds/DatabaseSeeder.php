@@ -38,6 +38,14 @@ class DatabaseSeeder extends Seeder
         $this->call(ItemsTableSeeder::class);
         $this->call(StoragesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
+        $this->call(ManufacturersTableSeeder::class);
+        $this->call(AircraftsTableSeeder::class);
+        $this->call(EmployeesTableSeeder::class);
+        $this->call(LicensesTableSeeder::class);
+
+        /** EDUCATION */
+
+        $this->call(GeneralLicensesTableSeeder::class);
 
         /** FINANCE */
 

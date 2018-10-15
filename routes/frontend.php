@@ -19,8 +19,13 @@ Route::name('frontend.')->group(function () {
         Route::resource('phone', 'PhoneController');
         Route::resource('status', 'StatusController');
         Route::resource('address', 'AddressController');
+        Route::resource('license', 'LicenseController');
+        Route::resource('employee', 'EmployeeController');
+        Route::resource('aircraft', 'AircraftController');
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
+        Route::resource('manufacturer', 'ManufacturerController');
+        Route::resource('general-license', 'GeneralLicenseController');
 
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');

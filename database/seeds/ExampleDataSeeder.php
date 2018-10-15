@@ -32,6 +32,14 @@ class ExampleDataSeeder extends Seeder
         $this->call(Items::class);
         $this->call(Storages::class);
         $this->call(Departments::class);
+        $this->call(Manufacturers::class);
+        $this->call(Aircrafts::class);
+        $this->call(Employees::class);
+        $this->call(Licenses::class);
+
+        /** EDUCATION */
+
+        $this->call(GeneralLicenses::class);
 
         /** FINANCE */
 

@@ -27,7 +27,15 @@ Route::name('admin.')->group(function () {
         /** MASTER */
 
         Route::resource('item', 'ItemController');
+        Route::resource('license', 'LicenseController');
+        Route::resource('aircraft', 'AircraftController');
+        Route::resource('employee', 'EmployeeController');
         Route::resource('department', 'DepartmentController');
+        Route::resource('manufacturer', 'ManufacturerController');
+
+        /** EDUCATION */
+
+        Route::resource('general-license', 'GeneralLicenseController');
 
         /** FINANCE */
 

@@ -22,12 +22,22 @@ use App\Models\Status;
 use App\Policies\StatusPolicy;
 use App\Models\Address;
 use App\Policies\AddressPolicy;
+use App\Models\License;
+use App\Policies\LicensePolicy;
 use App\Models\Currency;
 use App\Policies\CurrencyPolicy;
+use App\Models\Aircraft;
+use App\Policies\AircraftPolicy;
+use App\Models\Employee;
+use App\Policies\EmployeePolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
+use App\Models\Manufacturer;
+use App\Policies\ManufacturerPolicy;
+use App\Models\Pivots\GeneralLicense;
+use App\Policies\GeneralLicensePolicy;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -50,9 +60,14 @@ class AuthServiceProvider extends ServiceProvider
         Phone::class => PhonePolicy::class,
         Status::class => StatusPolicy::class,
         Address::class => AddressPolicy::class,
+        License::class => LicensePolicy::class,
         Currency::class => CurrencyPolicy::class,
+        Aircraft::class => AircraftPolicy::class,
+        Employee::class => EmployeePolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
+        Manufacturer::class => ManufacturerPolicy::class,
+        GeneralLicense::class => GeneralLicensePolicy::class,
     ];
 
     /**

@@ -29,7 +29,6 @@ class CreateEmployeeSchoolTable extends Migration
                     ->references('id')->on('schools')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
-
         });
     }
 
