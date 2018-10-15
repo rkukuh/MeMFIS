@@ -49,7 +49,27 @@ class ManufacturersTableSeeder extends Seeder
 
         Manufacturer::create([
             'code' => 'atr',
-            'name' => 'Aerei da Trasporto Regionale'
+            'name' => 'ATR (Aerei da Trasporto Regionale)'
+        ]);
+
+        Manufacturer::create([
+            'code' => 'di',
+            'name' => 'PT. Dirgantara Indonesia'
+        ]);
+
+        Manufacturer::create([
+            'code' => 'dhc',
+            'name' => 'DHC (de Havilland Aircraft of Canada Ltd.)'
+        ]);
+
+        Manufacturer::create([
+            'code' => 'casa',
+            'name' => 'CASA (Construcciones Aeronáuticas SA)'
+        ]);
+
+        Manufacturer::create([
+            'code' => 'bombardier',
+            'name' => 'Bombardier Aerospace'
         ]);
     }
 }
