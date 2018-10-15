@@ -31,6 +31,7 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 
         Route::resource('item', 'ItemController');
+        Route::put('item/{code}/update', 'ItemController@itemUpdate')->name('frontend.item.itemUpdate');
         Route::get('/get-items','ItemController@getItems')->name('get-items');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
 
