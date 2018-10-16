@@ -16,25 +16,16 @@ class CreateGeneralLicensesTable extends Migration
         /** M-M: Employee and License, for General License */
 
         Schema::create('general_licenses', function (Blueprint $table) {
-            $table->unsignedInteger('employee_id');
-            $table->unsignedInteger('license_id');
-            $table->string('code');
+            $table->unsignedInteger('licensed_employee_id');
             $table->unsignedInteger('aviation_degree');
             $table->string('aviation_degree_code');
             $table->string('exam_no')->nullable();
             $table->timestamp('exam_date')->nullable();
             $table->string('attendance_no')->nullable();
-            $table->timestamp('issued_at')->nullable();
-            $table->timestamp('revoke_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('employee_id')
-                    ->references('id')->on('employees')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('license_id')
-                    ->references('id')->on('licenses')
+            $table->foreign('licensed_employee_id')
+                    ->references('id')->on('employee_license')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
