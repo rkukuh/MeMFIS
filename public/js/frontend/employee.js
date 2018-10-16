@@ -207,10 +207,10 @@ let Employee = {
                 },
                 {
                     field: 'code',
-                    title: 'Employee Name',
+                    title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
-                    // width: 250
+                    width: 220
                 },
                 {
                     field: 'code',
@@ -232,7 +232,7 @@ let Employee = {
                 },
                 {
                     field: 'Actions',
-                    // width: 110,
+                    width: 110,
                     title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
@@ -361,7 +361,7 @@ let Employee = {
                 },
                 {
                     field: 'code',
-                    title: 'Employee Name',
+                    title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                     // width: 250
@@ -515,7 +515,7 @@ let Employee = {
                 },
                 {
                     field: 'code',
-                    title: 'Employee Name',
+                    title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                     width: 250
@@ -562,10 +562,9 @@ let Employee = {
                     sortable: 'asc',
                     filterable: !1
                 },
-
                 {
                     field: 'Actions',
-                    width: 110,
+                    width: 140,
                     title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
@@ -696,18 +695,6 @@ let Employee = {
                     title: 'Item Name',
                     sortable: 'asc',
                     filterable: !1
-                },
-                {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
                 },
                 {
                     field: 'Actions',
@@ -844,18 +831,6 @@ let Employee = {
                     filterable: !1
                 },
                 {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo2',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
-                },
-                {
                     field: 'Actions',
                     width: 110,
                     title: 'Actions',
@@ -986,7 +961,7 @@ let Employee = {
                 },
                 {
                     field: 'code',
-                    title: 'Employee Name',
+                    title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                     width: 200
@@ -1156,18 +1131,6 @@ let Employee = {
                     filterable: !1
                 },
                 {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo2',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
-                },
-                {
                     field: 'Actions',
                     width: 110,
                     title: 'Actions',
@@ -1300,18 +1263,6 @@ let Employee = {
                     title: 'Item Name2',
                     sortable: 'asc',
                     filterable: !1
-                },
-                {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo2',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
                 },
                 {
                     field: 'Actions',
@@ -1448,18 +1399,6 @@ let Employee = {
                     filterable: !1
                 },
                 {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo2',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
-                },
-                {
                     field: 'Actions',
                     width: 110,
                     title: 'Actions',
@@ -1592,18 +1531,6 @@ let Employee = {
                     title: 'Item Name2',
                     sortable: 'asc',
                     filterable: !1
-                },
-                {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo2',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
                 },
                 {
                     field: 'Actions',
