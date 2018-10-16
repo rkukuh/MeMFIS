@@ -40,6 +40,8 @@ use App\Models\Manufacturer;
 use App\Policies\ManufacturerPolicy;
 use App\Models\Pivots\GeneralLicense;
 use App\Policies\GeneralLicensePolicy;
+use App\Models\EmployeeLicense;
+use App\Policies\EmployeeLicensePolicy;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -71,6 +73,7 @@ class AuthServiceProvider extends ServiceProvider
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
         GeneralLicense::class => GeneralLicensePolicy::class,
+        EmployeeLicense::class => EmployeeLicensePolicy::class,
     ];
 
     /**
