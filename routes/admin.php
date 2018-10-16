@@ -36,6 +36,7 @@ Route::name('admin.')->group(function () {
         /** EDUCATION */
 
         Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('ame-license', 'AmeLicenseController');
 
         /** FINANCE */
 

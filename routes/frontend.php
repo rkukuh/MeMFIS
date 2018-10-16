@@ -33,7 +33,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
- 
+
         //Travel Request
         Route::resource('travel-request', 'TravelRequestController');
         Route::get('get-travel-requests', 'TravelRequestController@getTravelRequests')->name('get-travel-requests');
@@ -48,7 +48,7 @@ Route::name('frontend.')->group(function () {
         //HR Forms
         Route::resource('hr-form', 'HRFormController');
         Route::get('get-hr-forms', 'HRFormController@getHRForms')->name('get-hr-forms');
-        
+
         Route::resource('employee-form', 'EmployeeFormController');
         Route::get('get-employee-formss', 'EmployeeFormController@getEmployeeForms')->name('get-employee-form');
 
@@ -122,7 +122,7 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('quotation', 'QuotationController');
         Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
-        
+
         Route::resource('item', 'ItemController');
         Route::get('/get-items','ItemController@getItems')->name('get-items');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
@@ -147,7 +147,7 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
         Route::delete('/item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
 
-    
+
     });
 
 });
