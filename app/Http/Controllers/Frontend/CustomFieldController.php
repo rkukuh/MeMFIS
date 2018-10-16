@@ -7,14 +7,14 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DocumentManagementController extends Controller
+class CustomFieldController extends Controller
 {
-       /**
+    /**
      * Show data from model for DataTable.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getDocumentManagements()
+    public function getCustomFields()
     {
         $employees = Employee::All();
 
