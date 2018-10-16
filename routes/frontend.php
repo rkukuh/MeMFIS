@@ -26,13 +26,21 @@ Route::name('frontend.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
+ 
         Route::resource('travel-request', 'TravelRequestController');
-        Route::resource('general-license', 'GeneralLicenseController');
-        Route::resource('employee-history', 'EmployeeHistoryController');
-        Route::resource('hr-form-management', 'HRFormManagementController');
-        Route::resource('monitor-attendance', 'MonitorAttendanceController');
-        Route::resource('document-management', 'DocumentManagementController');
+        Route::get('get-travel-requests', 'TravelRequestController@getTravelRequest')->name('get-travel-requests');
 
+        Route::resource('employee-history', 'EmployeeHistoryController');
+        Route::get('get-employee-histories', 'EmployeeHistoryController@getEmployeeHistory')->name('get-employee-histories');
+
+        Route::resource('hr-form-management', 'HRFormManagementController');
+        Route::get('get-hr-form-managements', 'HRFormManagementController@getHRFormManagement')->name('get-hr-form-managements');
+
+        Route::resource('monitor-attendance', 'MonitorAttendanceController');
+        Route::get('get-monitor-attendances', 'MonitorAttendanceController@getMonitorAttendance')->name('get-monitor-attendances');
+
+        Route::resource('document-management', 'DocumentManagementController');
+        Route::get('get-document-managements', 'DocumentManagementController@getDocumentManagements')->name('get-document-managements');
 
         Route::resource('otr', 'OTRController');
         Route::get('/get-otrs', 'OTRController@getOTRs')->name('get-otrs');
