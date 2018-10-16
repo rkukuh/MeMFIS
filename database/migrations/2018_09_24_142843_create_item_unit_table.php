@@ -15,10 +15,8 @@ class CreateItemUnitTable extends Migration
     {
         Schema::create('item_unit', function (Blueprint $table) {
             $table->unsignedInteger('item_id');
-            $table->unsignedInteger('unit1_id');
-            $table->double('quantity1', 8, 2);
-            $table->unsignedInteger('unit2_id');
-            $table->double('quantity2', 8, 2);
+            $table->unsignedInteger('unit_id');
+            $table->double('quantity', 8, 2);
             $table->timestamps();
 
             $table->foreign('item_id')
@@ -26,12 +24,7 @@ class CreateItemUnitTable extends Migration
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
 
-            $table->foreign('unit1_id')
-                  ->references('id')->on('units')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
-
-            $table->foreign('unit2_id')
+            $table->foreign('unit_id')
                   ->references('id')->on('units')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
