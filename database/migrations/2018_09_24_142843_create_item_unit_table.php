@@ -26,7 +26,12 @@ class CreateItemUnitTable extends Migration
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
 
-            $table->foreign('unit_id')
+            $table->foreign('unit1_id')
+                  ->references('id')->on('units')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->foreign('unit2_id')
                   ->references('id')->on('units')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
