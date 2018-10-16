@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\GeneralLicense;
 use Illuminate\Database\Seeder;
-use App\Models\Pivots\GeneralLicense;
 
 class GeneralLicenses extends Seeder
 {

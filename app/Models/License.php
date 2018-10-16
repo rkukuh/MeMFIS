@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\MemfisModel;
 use App\Scopes\OrderByColumn;
-use App\Models\Pivots\GeneralLicense;
 
 class License extends MemfisModel
 {

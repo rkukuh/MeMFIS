@@ -38,7 +38,7 @@ use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
 use App\Models\Manufacturer;
 use App\Policies\ManufacturerPolicy;
-use App\Models\Pivots\GeneralLicense;
+use App\Models\GeneralLicense;
 use App\Policies\GeneralLicensePolicy;
 use App\Models\Pivots\EmployeeLicense;
 use App\Policies\EmployeeLicensePolicy;

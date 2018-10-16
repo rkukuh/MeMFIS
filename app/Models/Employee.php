@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\MemfisModel;
-use App\Models\Pivots\GeneralLicense;
 
 class Employee extends MemfisModel
 {
