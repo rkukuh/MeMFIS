@@ -12,6 +12,6 @@ class Licenses extends Seeder
      */
     public function run()
     {
-        //
+        factory(License::class, config('memfis.examples.licenses'))->create();
     }
 }
