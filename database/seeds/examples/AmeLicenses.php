@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\AmeLicense;
+use App\Models\Pivots\AmeLicense;
 use Illuminate\Database\Seeder;
 
 class AmeLicenses extends Seeder
