@@ -7,14 +7,14 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HRFormManagementController extends Controller
+class HRFormController extends Controller
 {
     /**
      * Show data from model for DataTable.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getEmployeeHistories()
+    public function getHRForms()
     {
         $employees = Employee::All();
 
