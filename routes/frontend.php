@@ -25,6 +25,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
+        Route::resource('licensed-employee', 'EmployeeLicenseController');
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('ame-license', 'AmeLicenseController');
 
