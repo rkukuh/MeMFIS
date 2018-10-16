@@ -29,7 +29,12 @@ class CertifiedStaff extends Seeder
 
         $aldrin->licenses()->attach($general_license, [
             'code' => 'E/I.3475',
-            'issued_at' => '2011-08-15',
+            'issued_at' => Carbon::createFromFormat('Y-m-d', '2011-08-15'),
+        ]);
+
+        $aldrin->licenses()->attach($general_license, [
+            'code' => 'A/P.3475',
+            'issued_at' => Carbon::createFromFormat('Y-m-d', '2011-08-15'),
         ]);
 
         /** Assign EMPLOYEE to AME LICENSE */
