@@ -37,7 +37,21 @@ class CertifiedStaff extends Seeder
             'issued_at' => Carbon::createFromFormat('Y-m-d', '2011-08-15'),
         ]);
 
+        /** Assign GENERAL LICENSE to AVIATION DEGREE */
+
+        //
+
         /** Assign EMPLOYEE to AME LICENSE */
+
+        $amel = License::where('code', 'amel-dgca')->first();
+
+        $aldrin->licenses()->attach($amel, [
+            'code' => '2126',
+            'issued_at' => Carbon::createFromFormat('Y-m-d', '2007-06-05'),
+            'valid_until' => Carbon::createFromFormat('Y-m-d', '2009-06-05'),
+        ]);
+
+        /** Assign AME LICENSE to RATING */
 
         //
     }
