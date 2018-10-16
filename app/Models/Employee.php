@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\EmployeeLicense;
 
 class Employee extends MemfisModel
 {
@@ -29,6 +30,7 @@ class Employee extends MemfisModel
     public function licenses()
     {
         return $this->belongsToMany(License::class)
+                    ->using(EmployeeLicense::class)
                     ->as('licensed_employee')
                     ->withPivot(
                         'code',

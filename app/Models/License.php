@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 use App\Scopes\OrderByColumn;
+use App\Models\Pivots\EmployeeLicense;
 
 class License extends MemfisModel
 {
@@ -40,6 +41,7 @@ class License extends MemfisModel
     public function employees()
     {
         return $this->belongsToMany(Employee::class)
+                    ->using(EmployeeLicense::class)
                     ->as('licensed_employee')
                     ->withPivot(
                         'code',
