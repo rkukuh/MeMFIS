@@ -27,7 +27,14 @@ Route::name('frontend.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
+        Route::resource('travel-request', 'TravelRequestController');
         Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('employee-history', 'EmployeeHistoryController');
+        Route::resource('hr-form-management', 'HRFormManagementController');
+        Route::resource('monitor-attendance', 'MonitorAttendanceController');
+        Route::resource('document-management', 'DocumentManagementController');
+
+        
 
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
