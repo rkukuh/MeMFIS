@@ -9,6 +9,8 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
+        require_once('print.php');
+
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
 
         Route::resource('fax', 'FaxController');
@@ -30,23 +32,10 @@ Route::name('frontend.')->group(function () {
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 
-        Route::resource('category-item', 'CategoryItemController', [
-            'parameters' => ['category-item' => 'category']
-        ]);
-        Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
-
         Route::resource('item', 'ItemController');
-        Route::put('item/{code}/update', 'ItemController@itemUpdate')->name('frontend.item.itemUpdate');
         Route::get('/get-items','ItemController@getItems')->name('get-items');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
-
-        Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
-        Route::delete('item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
-        Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
-
-        Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
-        Route::delete('item-unit/{item_unit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
-        Route::get('/get-uom/{code}','ItemUnitController@getUoM')->name('get-uom');
+        Route::put('item/{code}/update', 'ItemController@itemUpdate')->name('frontend.item.itemUpdate');
 
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
@@ -54,53 +43,41 @@ Route::name('frontend.')->group(function () {
         Route::resource('supplier', 'SupplierController');
         Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');
 
-        Route::get('/addres/country','AddresController@Country')->name('country');
-        Route::get('/addres/city/{id}','AddresController@City')->name('city');
+        Route::resource('category-item', 'CategoryItemController', [
+            'parameters' => ['category-item' => 'category']
+        ]);
+        Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 
         Route::resource('audit', 'AuditController');
         Route::get('/get-audits','AuditController@getAudits')->name('get-audits');
 
-        Route::resource('taskcard', 'TaskCardController');
-        Route::get('/get-taskcards', 'TaskCardController@getTaskCards')->name('get-taskcards');
-
-        Route::resource('taskcard-package', 'TaskCardPackageController');
-        Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
-
-        Route::resource('workpackage', 'WorkPackageController');
-        Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
-
-        Route::resource('quotation', 'QuotationController');
-        Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
+        Route::get('/addres/city/{id}','AddresController@City')->name('city');
+        Route::get('/addres/country','AddresController@Country')->name('country');
 
         Route::resource('journal', 'JournalController');
         Route::get('/get-journals', 'JournalController@getJournals')->name('get-journals');
 
-        Route::get('/quotation-doc', function () {
-            $pdf = \PDF::loadView('frontend/form/quotation');
-            return $pdf->stream();
-        });
+        Route::resource('taskcard', 'TaskCardController');
+        Route::get('/get-taskcards', 'TaskCardController@getTaskCards')->name('get-taskcards');
 
-        Route::get('/preliminary', function () {
-            $pdf = \PDF::loadView('frontend/form/preliminary');
-            return $pdf->stream();
-        });
+        Route::resource('quotation', 'QuotationController');
+        Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
 
-        Route::get('/summaryworkpackage', function () {
-            $pdf = \PDF::loadView('frontend/form/summary_wp');
-            // $pdf->setPaper('A4', 'landscape');
-            return $pdf->stream();
-        });
 
-        Route::get('/workpackage-doc', function () {
-            $pdf = \PDF::loadView('frontend/form/workpackage');
-            $pdf->setPaper('A4', 'landscape');
-            return $pdf->stream();
-        });
+        Route::resource('workpackage', 'WorkPackageController');
+        Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
 
-        Route::get('/wp-summart-doc', function () {
-            $pdf = \PDF::loadView('frontend/form/wp');
-            return $pdf->stream();
-        });
+        Route::resource('taskcard-package', 'TaskCardPackageController');
+        Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
+
+        Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
+        Route::get('/get-uom/{code}','ItemUnitController@getUoM')->name('get-uom');
+        Route::delete('item-unit/{item_unit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
+
+        Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
+        Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
+        Route::delete('item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
+
     });
 
 });
