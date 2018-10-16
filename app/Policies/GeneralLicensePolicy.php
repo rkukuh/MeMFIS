@@ -14,7 +14,7 @@ class GeneralLicensePolicy
      * Determine whether the user can view the general license.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\GeneralLicense  $generalLicense
+     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
      * @return mixed
      */
     public function view(User $user, GeneralLicense $generalLicense)
@@ -37,7 +37,7 @@ class GeneralLicensePolicy
      * Determine whether the user can update the general license.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\GeneralLicense  $generalLicense
+     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
      * @return mixed
      */
     public function update(User $user, GeneralLicense $generalLicense)
@@ -49,7 +49,7 @@ class GeneralLicensePolicy
      * Determine whether the user can delete the general license.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\GeneralLicense  $generalLicense
+     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
      * @return mixed
      */
     public function delete(User $user, GeneralLicense $generalLicense)
@@ -61,7 +61,7 @@ class GeneralLicensePolicy
      * Determine whether the user can restore the general license.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\GeneralLicense  $generalLicense
+     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
      * @return mixed
      */
     public function restore(User $user, GeneralLicense $generalLicense)
@@ -73,7 +73,7 @@ class GeneralLicensePolicy
      * Determine whether the user can permanently delete the general license.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\GeneralLicense  $generalLicense
+     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
      * @return mixed
      */
     public function forceDelete(User $user, GeneralLicense $generalLicense)
