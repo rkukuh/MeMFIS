@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\EmployeeLicense;
 use Illuminate\Database\Seeder;
+use App\Models\Pivots\EmployeeLicense;
 
 class EmployeeLicenses extends Seeder
 {

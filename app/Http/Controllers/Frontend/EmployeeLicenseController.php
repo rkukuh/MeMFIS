@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\EmployeeLicense;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\EmployeeLicense;
 use App\Http\Requests\Frontend\EmployeeLicenseStore;
 use App\Http\Requests\Frontend\EmployeeLicenseUpdate;
 
@@ -43,8 +43,8 @@ class EmployeeLicenseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EmployeeLicense  $employeeLicense
      * @return \Illuminate\Http\Response
+     * @param  \App\Models\Pivots\EmployeeLicense  $employeeLicense
      */
     public function show(EmployeeLicense $employeeLicense)
     {
@@ -54,8 +54,8 @@ class EmployeeLicenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EmployeeLicense  $employeeLicense
      * @return \Illuminate\Http\Response
+     * @param  \App\Models\Pivots\EmployeeLicense  $employeeLicense
      */
     public function edit(EmployeeLicense $employeeLicense)
     {
@@ -66,8 +66,8 @@ class EmployeeLicenseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\EmployeeLicenseUpdate  $request
-     * @param  \App\Models\EmployeeLicense  $employeeLicense
      * @return \Illuminate\Http\Response
+     * @param  \App\Models\Pivots\EmployeeLicense  $employeeLicense
      */
     public function update(EmployeeLicenseUpdate $request, EmployeeLicense $employeeLicense)
     {
@@ -77,8 +77,8 @@ class EmployeeLicenseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EmployeeLicense  $employeeLicense
      * @return \Illuminate\Http\Response
+     * @param  \App\Models\Pivots\EmployeeLicense  $employeeLicense
      */
     public function destroy(EmployeeLicense $employeeLicense)
     {

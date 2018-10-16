@@ -40,7 +40,7 @@ use App\Models\Manufacturer;
 use App\Policies\ManufacturerPolicy;
 use App\Models\Pivots\GeneralLicense;
 use App\Policies\GeneralLicensePolicy;
-use App\Models\EmployeeLicense;
+use App\Models\Pivots\EmployeeLicense;
 use App\Policies\EmployeeLicensePolicy;
 
 use Illuminate\Support\Facades\Gate;
