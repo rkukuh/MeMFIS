@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Type;
 use App\Models\License;
 use Illuminate\Database\Seeder;
 
