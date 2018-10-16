@@ -15,7 +15,7 @@ class HRFormManagementController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.employees.hr-form-management.index');
     }
 
     /**

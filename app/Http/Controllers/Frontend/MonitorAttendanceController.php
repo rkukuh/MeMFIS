@@ -15,7 +15,7 @@ class MonitorAttendanceController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.employees.monitor-attendance.index');
     }
 
     /**
