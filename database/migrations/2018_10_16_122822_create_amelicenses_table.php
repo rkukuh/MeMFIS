@@ -13,7 +13,7 @@ class CreateAmelicensesTable extends Migration
      */
     public function up()
     {
-        Schema::create('amelicenses', function (Blueprint $table) {
+        Schema::create('ame_licenses', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateAmelicensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('amelicenses');
+        Schema::dropIfExists('ame_licenses');
     }
 }
