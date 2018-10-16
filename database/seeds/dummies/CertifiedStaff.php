@@ -15,6 +15,16 @@ class CertifiedStaff extends Seeder
      */
     public function run()
     {
+        /** Create EMPLOYEE */
+
+        //
+
+        /** Assign EMPLOYEE to GENERAL LICENSE */
+
+        //
+
+        /** Assign EMPLOYEE to AME LICENSE */
+
         //
     }
 }
