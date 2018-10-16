@@ -9,11 +9,11 @@ Route::name('testing.')->group(function () {
         });
 
         Route::resource('/testing', 'Frontend\TestingController');
-        Route::get('/metronic', 'Frontend\TestingController@metronic')->name('metronic');
-        Route::post('/photo', 'Frontend\TestingController@photo')->name('photo');
-        Route::post('/text', 'Frontend\TestingController@text')->name('text');
-        Route::get('/view', 'Frontend\TestingController@view')->name('view');
         Route::view('/maps', 'frontend\testing\maps')->name('maps');
+        Route::get('/view', 'Frontend\TestingController@view')->name('view');
+        Route::post('/text', 'Frontend\TestingController@text')->name('text');
+        Route::post('/photo', 'Frontend\TestingController@photo')->name('photo');
+        Route::get('/metronic', 'Frontend\TestingController@metronic')->name('metronic');
         Route::post('/testing-photos','Frontend\TestingController@postPhotos')->name('testing-photos');
 
 
