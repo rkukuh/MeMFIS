@@ -27,18 +27,14 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function general_licenses()
+    public function licenses()
     {
-        return $this->belongsToMany(GeneralLicense::class)
-                    ->as('general_license')
+        return $this->belongsToMany(License::class)
+                    ->as('licensed_employee')
                     ->withPivot(
                         'code',
-                        'aviation_degree',
-                        'aviation_degree_code',
-                        'exam_no',
-                        'exam_date',
-                        'attendance_no',
                         'issued_at',
+                        'valid_until',
                         'revoke_at'
                     )
                     ->withTimestamps();
