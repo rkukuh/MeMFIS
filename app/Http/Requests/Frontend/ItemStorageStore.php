@@ -26,7 +26,9 @@ class ItemStorageStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'storage' => 'required',
+            'min' => 'required',
+            'max' => 'required',
         ];
     }
 

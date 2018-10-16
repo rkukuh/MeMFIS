@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use DB;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -58,8 +59,9 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Type $type)
+    public function edit($type)
     {
+        $type= DB::table('types')->find($type);
         return response()->json($type);
     }
 

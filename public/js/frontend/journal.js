@@ -98,110 +98,87 @@ let Category = {
             ]
         });
 
-        $(document).ready(function () {
-            let select = document.getElementById('type');
-
-            $.ajax({
-                url: '/type',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    let angka = 1;
-
-                    $('select[name="type"]').empty();
-
-                    $.each(data, function (key, value) {
-                        if (angka == 1) {
-                            $('select[name="type"]').append(
-                                '<option> Select a Type</option>'
-                            );
-                            angka = 0;
-                        }
-                        $('select[name="type"]').append(
-                            '<option value="' + key + '">' + value + '</option>'
-                        );
-                    });
-                }
-            });
+        $('.modal-footer').on('click', '.reset', function () {
+            journal_reset();
         });
 
-        let save = $('.align-items-center').on('click', '.btn-primary', function () {
+        // let save = $('.align-items-center').on('click', '.btn-primary', function () {
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/submit-button',
-                success: function (data) {
-                    $('#button-div').html(data);
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         type: 'get',
+        //         url: '/submit-button',
+        //         success: function (data) {
+        //             $('#button-div').html(data);
 
-                }
-            });
+        //         }
+        //     });
 
-            $.ajax({
-                url: '/type',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    let angka = 1;
+        //     $.ajax({
+        //         url: '/type',
+        //         type: 'GET',
+        //         dataType: 'json',
+        //         success: function (data) {
+        //             let angka = 1;
 
-                    $('select[name="level"]').empty();
+        //             $('select[name="level"]').empty();
 
-                    $.each(data, function (key, value) {
-                        if (angka == 1) {
-                            $('select[name="level"]').append(
-                                '<option> Select a Level</option>'
-                            );
+        //             $.each(data, function (key, value) {
+        //                 if (angka == 1) {
+        //                     $('select[name="level"]').append(
+        //                         '<option> Select a Level</option>'
+        //                     );
 
-                            angka = 0;
-                        }
+        //                     angka = 0;
+        //                 }
 
-                        $('select[name="level"]').append(
-                            '<option value="' + key + '">' + value + '</option>'
-                        );
-                    });
-                }
-            });
-
-
-            document.getElementById('code').value = "";
-            document.getElementById('name').value = "";
-            document.getElementById('type').value = "";
-            document.getElementById('level').value = "";
-            document.getElementById('description').value = "";
-
-        });
+        //                 $('select[name="level"]').append(
+        //                     '<option value="' + key + '">' + value + '</option>'
+        //                 );
+        //             });
+        //         }
+        //     });
 
 
-        $(document).ready(function () {
-            let select = document.getElementById('level');
+        //     document.getElementById('code').value = "";
+        //     document.getElementById('name').value = "";
+        //     document.getElementById('type').value = "";
+        //     document.getElementById('level').value = "";
+        //     document.getElementById('description').value = "";
 
-            $.ajax({
-                url: '/type',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    let angka = 1;
+        // });
 
-                    $('select[name="level"]').empty();
 
-                    $.each(data, function (key, value) {
-                        if (angka == 1) {
-                            $('select[name="level"]').append(
-                                '<option> Select a Level</option>'
-                            );
+        // $(document).ready(function () {
+        //     let select = document.getElementById('level');
 
-                            angka = 0;
-                        }
+        //     $.ajax({
+        //         url: '/type',
+        //         type: 'GET',
+        //         dataType: 'json',
+        //         success: function (data) {
+        //             let angka = 1;
 
-                        $('select[name="level"]').append(
-                            '<option value="' + key + '">' + value + '</option>'
-                        );
-                    });
-                }
-            });
-        });
+        //             $('select[name="level"]').empty();
+
+        //             $.each(data, function (key, value) {
+        //                 if (angka == 1) {
+        //                     $('select[name="level"]').append(
+        //                         '<option> Select a Level</option>'
+        //                     );
+
+        //                     angka = 0;
+        //                 }
+
+        //                 $('select[name="level"]').append(
+        //                     '<option value="' + key + '">' + value + '</option>'
+        //                 );
+        //             });
+        //         }
+        //     });
+        // });
 
         let simpan = $('.modal-footer').on('click', '.add', function () {
             $('#simpan').text('Simpan');
@@ -307,8 +284,8 @@ let Category = {
         });
 
         let edit = $('.m_datatable').on('click', '.edit', function () {
-            $('#button').show();
-            $('#simpan').text('Perbarui');
+            // $('#button').show();
+            // $('#simpan').text('Perbarui');
 
             let triggerid = $(this).data('id');
 
@@ -321,33 +298,28 @@ let Category = {
                 success: function (data) {
                     let select = document.getElementById('type');
 
-                    $('select[name="type"]').append(
-                        '<option value="0" selected>Edit Type</option>'
-                    );
 
                     // FIXME: 'select' has already been declared.
                     // let select = document.getElementById('level');
 
-                    $('select[name="level"]').append(
-                        '<option value="0" selected> Edit Level</option>'
-                    );
+                    document.getElementById('id').value = data.uuid;
+                    document.getElementById('code').value = data.code;
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('description').value = data.description;
 
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         type: 'get',
-                        url: '/update-button',
-                        success: function (data) {
-                            $('#button-div').html(data);
-
+                        url: '/type/'+data.type_id+'/edit',
+                        success: function (data2) {
+                            $('select[name="type"]').append(
+                                '<option value="'+data2.id+'" selected>'+data2.name+'</option>'
+                            );
                         }
                     });
-
-                    document.getElementById('id').value = data.uuid;
-                    document.getElementById('code').value = data.code;
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('description').value = data.description;
+                    update_button();
                 },
                 error: function (jqXhr, json, errorThrown) {
                     let errorsHtml = '';
@@ -437,7 +409,10 @@ let Category = {
                             document.getElementById('level').value = level;
                             document.getElementById('description').value = description;
                         }
+
+
                     } else {
+                        save_button();
                         $('#modal_journal').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {

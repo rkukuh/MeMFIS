@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\model\ListUtil;
-use App\Models\ItemStorage;
+use DB;
+use App\Models\Item;
+use App\Models\ListUtil;
+use App\Models\Pivots\ItemStorage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemStorageStore;
 use App\Http\Requests\Frontend\ItemStorageUpdate;
@@ -15,11 +17,11 @@ class ItemStorageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getItemStorages()
+    public function getItemStorages($code)
     {
-        $data = ItemStorage::All();
+        $item = Item::with('storages')->where('code',$code)->first();
 
-        $data = $alldata = json_decode($data);
+        $data = $alldata = json_decode($item->storages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -136,11 +138,11 @@ class ItemStorageController extends Controller
      */
     public function store(ItemStorageStore $request)
     {
-        $itemStorage = ItemStorage::create([
-            // 'name' => $request->name,
-        ]);
+        $item = Item::where('code',$request->code)->first();
 
-        return response()->json($itemStorage);
+        $item->storages()->attach([$request->storage => ['min' => $request->min, 'max' => $request->max]]);
+
+        return response()->json($item);
     }
 
     /**
@@ -187,11 +189,12 @@ class ItemStorageController extends Controller
      * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemStorage $itemStorage)
+    public function destroy($itemStorage, $storages)
     {
-        $itemStorage->delete();
+        $item = Item::find($itemStorage);
+        $item->storages()->detach($storages);
 
-        return response()->json($itemStorage);
+        return response()->json($item);
     }
 
     /**

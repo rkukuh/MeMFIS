@@ -14,28 +14,43 @@ Route::name('frontend.')->group(function () {
         Route::resource('fax', 'FaxController');
         Route::resource('type', 'TypeController');
         Route::resource('bank', 'BankController');
+        Route::resource('note', 'NoteController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('status', 'StatusController');
+        Route::resource('address', 'AddressController');
+        Route::resource('license', 'LicenseController');
+        Route::resource('employee', 'EmployeeController');
+        Route::resource('aircraft', 'AircraftController');
         Route::resource('department', 'DepartmentController');
         Route::resource('bankaccount', 'BankAccountController');
+        Route::resource('manufacturer', 'ManufacturerController');
+        Route::resource('licensed-employee', 'EmployeeLicenseController');
+        Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('ame-license', 'AmeLicenseController');
 
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 
-        Route::resource('category', 'CategoryController');
-        Route::get('/get-categories','CategoryController@getCategories')->name('get-categories');
+        Route::resource('category-item', 'CategoryItemController', [
+            'parameters' => ['category-item' => 'category']
+        ]);
+        Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 
         Route::resource('item', 'ItemController');
+        Route::put('item/{code}/update', 'ItemController@itemUpdate')->name('frontend.item.itemUpdate');
         Route::get('/get-items','ItemController@getItems')->name('get-items');
+        Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
 
-        Route::resource('item-storage', 'ItemStorageController');
-        Route::get('/get-item-storages','ItemStorageController@getItemStorages')->name('get-item-storages');
+        Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
+        Route::delete('item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
+        Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
 
-        Route::resource('item-unit', 'ItemUnitController');
-        Route::get('/get-uom','ItemUnitController@getUoM')->name('get-uom');
+        Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
+        Route::delete('item-unit/{item_unit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
+        Route::get('/get-uom/{code}','ItemUnitController@getUoM')->name('get-uom');
 
-        Route::resource('storage', 'StorageController');
+        Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
         Route::resource('supplier', 'SupplierController');

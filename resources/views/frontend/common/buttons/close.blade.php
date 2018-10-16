@@ -1,12 +1,12 @@
 <button
     type="{{ $type or 'button' }}"
     id="{{ $id or '' }}"
-    name="{{ $name or 'create' }}"
+    name="{{ $name or 'close' }}"
     value="{{ $value or '' }}"
     class="btn
            btn-{{ $color or 'secondary' }}
            btn-{{ $size or 'md' }}
-           {{ $class or '' }}"
+           {{ $class or '' }} clse"
     style="{{ $style or '' }}"
     data-dismiss="{{ $data_dismiss or 'modal' }}">
 

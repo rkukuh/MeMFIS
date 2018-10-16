@@ -10,8 +10,6 @@ class Customer extends MemfisModel
         'branch_id',
         'code',
         'name',
-        'address',
-        'city',
         'email',
         'phone1',
         'phone2',

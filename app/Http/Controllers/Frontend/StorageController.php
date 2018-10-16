@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\model\ListUtil;
+use App\Models\ListUtil;
 use App\Models\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\StorageStore;
@@ -137,8 +137,11 @@ class StorageController extends Controller
     public function store(StorageStore $request)
     {
         $storage = Storage::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'account_code' => $request->accountcode,
+            'is_active' => $request->active,
         ]);
 
         return response()->json($storage);

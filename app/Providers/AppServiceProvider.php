@@ -14,12 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Relation::morphMap([
-            'fax' => 'App\Models\Fax',
-            'phone' => 'App\Models\Phone',
-            'email' => 'App\Models\Email',
-            'bank-account' => 'App\Models\BankAccount',
-        ]);
+        //
     }
 
     /**

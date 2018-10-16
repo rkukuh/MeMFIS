@@ -14,8 +14,6 @@ class CreateItemStorageTable extends Migration
     public function up()
     {
         Schema::create('item_storage', function (Blueprint $table) {
-            $table->increments('id');
-            $table->char('uuid', 36)->unique();
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('storage_id');
             $table->double('min', 8, 2);

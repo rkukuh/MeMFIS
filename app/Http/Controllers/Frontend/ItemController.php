@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Response;
 use App\Models\Item;
-use App\model\ListUtil;
+use App\Models\Category;
+use App\Models\ListUtil;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Frontend\ItemStore;
 use App\Http\Requests\Frontend\ItemUpdate;
 
@@ -137,10 +141,42 @@ class ItemController extends Controller
     public function store(ItemStore $request)
     {
         $item = Item::create([
-            // 'name' => $request->name,
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'barcode' => $request->barcode,
+            'account_code' => $request->accountcode,
+            'is_ppn' => $request->isppn,
+            'is_stock' => $request->isstock,
+            'ppn_amount' => $request->ppn,
         ]);
 
+        $item->categories()->attach($request->selectedcategories);
+
         return response()->json($item);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postPhotos(Request $request)
+    {
+        // dd($request->all());
+        $length_request=count($request->all())-1;
+        if($length_request==0){
+            //
+        }
+        elseif($length_request>=1){
+            for ($i = 0; $i < $length_request; $i++) {
+                $item = Item::where('code',$request->code)->first();
+                $item->addMediaFromRequest('file'.$i)
+                 ->toMediaCollection('item');
+            }
+            dd('done');            
+        }
     }
 
     /**
@@ -151,7 +187,8 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return response()->json($item);
+        $categories = $item->categories;
+        return view('frontend.item.show',compact('item','categories'));
     }
 
     /**
@@ -162,7 +199,11 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        return response()->json($item);
+        $categories = Category::ofItem()->get();
+        $category_items = $item->categories;
+        // return view('frontend.testing.blank',compact('item','categories','category_items'));
+
+        return view('frontend.item.edit',compact('item','categories','category_items'));
     }
 
     /**
@@ -174,7 +215,40 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-        $item = Item::find($item);
+        $item->code = $request->code;
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->barcode = $request->barcode;
+        $item->account_code = $request->accountcode;
+        $item->is_ppn = $request->isppn;
+        $item->is_stock = $request->isstock;
+        $item->ppn_amount = $request->ppn;
+
+        // $item->name = $request->name;
+        $item->save();
+
+        return response()->json($item);
+    }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemUpdate  $request
+     * @param  \App\Models\Item  $item
+     * @return \Illuminate\Http\Response
+     */
+    public function itemUpdate(ItemUpdate $request, $code)
+    {
+        $item=Item::where('code',$code)->first();
+        $item->code = $request->code;
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->barcode = $request->barcode;
+        $item->account_code = $request->accountcode;
+        $item->is_ppn = $request->isppn;
+        $item->is_stock = $request->isstock;
+        $item->ppn_amount = $request->ppn;
+
         // $item->name = $request->name;
         $item->save();
 

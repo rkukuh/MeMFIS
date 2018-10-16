@@ -11,6 +11,7 @@
             class="{{ $class or ''}}"
             style="{{$style or ''}}"
             value="{{$value or ''}}"
+            onclick="{{$onclik or ''}}"
             {{$editable or ''}}>
 
         {{$text or '' }}

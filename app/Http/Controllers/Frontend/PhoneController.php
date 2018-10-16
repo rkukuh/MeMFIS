@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Phone;
-use App\model\ListUtil;
+use App\Models\ListUtil;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\PhoneStore;
 use App\Http\Requests\Frontend\PhoneUpdate;

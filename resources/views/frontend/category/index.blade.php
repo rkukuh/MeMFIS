@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.category.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.category-item.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Category
                             </span>
@@ -84,5 +84,5 @@
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
-    <script src="{{ asset('js/frontend/category.js')}}"></script>
+    <script src="{{ asset('js/frontend/category-item.js')}}"></script>
 @endpush

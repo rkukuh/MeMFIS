@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\model\ListUtil;
+use DB;
+use App\Models\Unit;
+use App\Models\Item;
+use App\Models\ListUtil;
 use App\Models\Pivots\ItemUnit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemUnitStore;
@@ -15,11 +18,11 @@ class ItemUnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getItemUnits()
+    public function getUoM($code)
     {
-        $itemUnits = ItemUnit::All();
+        $item = Item::with('units')->where('code', $code)->first();
 
-        $data = $alldata = json_decode($itemUnits);
+        $data = $alldata = json_decode($item->units);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -136,12 +139,11 @@ class ItemUnitController extends Controller
      */
     public function store(ItemUnitStore $request)
     {
-        $itemUnit = ItemUnit::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
-        ]);
+        $item = Item::where('code',$request->code)->first();
 
-        return response()->json($itemUnit);
+        $item->units()->attach([$request->unit => ['quantity' => $request->qty], $request->unit2 => ['quantity' => $request->qty2]]);
+
+        return response()->json($item);
     }
 
     /**
@@ -188,11 +190,12 @@ class ItemUnitController extends Controller
      * @param  \App\Models\ItemUnit  $itemUnit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemUnit $itemUnit)
+    public function destroy($itemUnit, $unit)
     {
-        $itemUnit->delete();
+        $item = Item::find($itemUnit);
+        $item->units()->detach($unit);
 
-        return response()->json($itemUnit);
+        return response()->json($item);
     }
 
     /**

@@ -45,6 +45,7 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
+                            <form id="itemform" name="itemform">
                             <div class="m-portlet__body">
                                 <fieldset class="border p-2">
                                     <legend class="w-auto">Identifier</legend>
@@ -58,6 +59,8 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Code')
                                                 @slot('name', 'code')
+                                                @slot('id', 'code')
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,6 +71,8 @@
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Name')
                                                 @slot('name', 'name')
+                                                @slot('id', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -80,6 +85,7 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '3')
                                                 @slot('name', 'description')
+                                                @slot('id', 'description')
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>
@@ -96,6 +102,7 @@
                                         @component('frontend.common.input.text')
                                             @slot('text', 'Barcode')
                                             @slot('name', 'barcode')
+                                            @slot('id', 'barcode')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -123,13 +130,27 @@
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
+                                            @slot('id', 'isstock')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('text', 'Dikenai PPN?')
-                                            @slot('name', 'isppn')
-                                        @endcomponent
+                                        <div class="checkbox">
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('text', 'Dikenai PPN?')
+                                                @slot('name', 'isppn')
+                                                @slot('id', 'isppn')
+                                            @endcomponent
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding:0px">
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'PPN')
+                                                @slot('name', 'ppn')
+                                                @slot('id', 'ppn')
+                                                @slot('class', 'ppn')
+                                                @slot('editable', 'disabled')
+                                            @endcomponent
+                                        </div>
 
                                     </div>
                                 </div>
@@ -138,42 +159,16 @@
                                         <label class="form-control-label">
                                             Photos @include('frontend.common.label.optional')
                                         </label>
+                                        <br>
+                                        <input id="myInput" type="file" multiple style="display:none" />
+                                        @component('frontend.common.buttons.browse')
+                                            @slot('text', 'Add Files')
+                                            @slot('name', 'myButton')
+                                            @slot('id', 'myButton')
+                                            @slot('icon','fa-plus')
+                                        @endcomponent
 
-                                        <div id="m_repeater_1">
-                                                <div class="" id="m_repeater_1">
-                                                    <div data-repeater-list="">
-                                                        <div data-repeater-item class="row">
-                                                            <div class="m-form__group row" style="margin-left: 15px">
-                                                                <table style="margin-right:10px">
-                                                                    <tr>
-                                                                        <td>
-                                                                            @component('frontend.common.input.upload')
-                                                                                @slot('text', 'Photo')
-                                                                                @slot('name', 'photo')
-                                                                            @endcomponent
-                                                                        </td>
-                                                                        <td>
-                                                                                <div data-repeater-delete="" class="btn-sm btn btn-danger"  >
-                                                                                        <span>
-                                                                                            <i class="la la-close"></i>
-                                                                                        </span>
-                                                                                    </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="m-form__group form-group row" style="margin-top:20px;margin-left:5px">
-                                                    <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
-                                                        <span>
-                                                            <i class="la la-plus"></i>
-                                                            <span>Add</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div id="myFiles"></div>
 
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -194,7 +189,9 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
-                                                    @slot('class', 'add22')
+                                                    @slot('class', 'add-item')
+                                                    @slot('id', 'add-item')
+                                                    @slot('type','button')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -203,6 +200,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -227,7 +225,7 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-                                    <div class="col-xl-4 order-1 order-xl-2">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-uom')
                                             @slot('text', 'Add UoM')
@@ -265,7 +263,8 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-                                    <div class="col-xl-4 order-1 order-xl-2">
+
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-minmaxstock')
                                             @slot('attribute', 'disabled')
@@ -298,12 +297,15 @@
 @endpush
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/item-unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/item-storage.js')}}"></script>
+    <script src="{{ asset('js/frontend/category-item.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/create/item-unit.js')}}"></script>
+    <script src="{{ asset('js/frontend/item/create/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
+    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/component.js')}}"></script>
 @endpush

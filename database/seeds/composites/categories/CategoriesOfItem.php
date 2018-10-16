@@ -19,6 +19,12 @@ class CategoriesOfItem extends Seeder
         ]);
 
         Category::create([
+            'code' => 'component',
+            'name' => 'Component',
+            'of' => 'item',
+        ]);
+
+        Category::create([
             'code' => 'tool',
             'name' => 'Tools',
             'of' => 'item',

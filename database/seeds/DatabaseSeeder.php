@@ -28,12 +28,26 @@ class DatabaseSeeder extends Seeder
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);
+        $this->call(NotesTableSeeder::class);
         $this->call(EmailsTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
+        $this->call(AddressesTableSeeder::class);
 
         /** MASTER */
 
+        $this->call(ItemsTableSeeder::class);
+        $this->call(StoragesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
+        $this->call(ManufacturersTableSeeder::class);
+        $this->call(AircraftsTableSeeder::class);
+        $this->call(EmployeesTableSeeder::class);
+        $this->call(LicensesTableSeeder::class);
+
+        /** EDUCATION */
+
+        $this->call(EmployeeLicensesTableSeeder::class);
+        $this->call(GeneralLicensesTableSeeder::class);
+        $this->call(AmeLicensesTableSeeder::class);
 
         /** FINANCE */
 

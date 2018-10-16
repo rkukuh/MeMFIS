@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_journal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_journal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -90,9 +90,9 @@
                             <div class="action-buttons">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                                <div id="button-div">
-                                                        @include('frontend.common.buttons.submit')
-                                                    </div>            
+                                                {{-- <div id="button-div" style="height:0px;"> --}}
+                                                    @include('frontend.common.buttons.submit')
+                                                {{-- </div>  --}}
                                                     @include('frontend.common.buttons.reset')
                             
                                                     @include('frontend.common.buttons.close')

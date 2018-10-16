@@ -91,7 +91,7 @@ class MakeEntity extends Command
                 break;
 
             case 'Use existing model':
-                $this->info('Model: use existing.');
+                $this->line('Model already exists: ' . $this->modelNamespace . '.php');
 
                 $this->makeMigration();
                 $this->makeRequest();
@@ -214,64 +214,154 @@ class MakeEntity extends Command
 
             switch (strtolower($this->namespace)) {
                 case 'both':
-                    $this->callSilent('make:request', [
-                        'name' => 'Admin/' . $this->requestStoreName
-                    ]);
+                    /** Store Request on Admin namespace */
 
-                    $this->addToTable('Form Request', 'Admin/' . $this->requestStoreName . '.php');
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/Admin/' . $this->requestStoreName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
 
-                    $this->callSilent('make:request', [
-                        'name' => 'Admin/' . $this->requestUpdateName
-                    ]);
+                        $this->line('Form Request already exists: Admin/' . $this->requestStoreName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => 'Admin/' . $this->requestStoreName
+                        ]);
 
-                    $this->addToTable('Form Request', 'Admin/' . $this->requestUpdateName . '.php');
+                        $this->addToTable('Form Request', 'Admin/' . $this->requestStoreName . '.php');
+                    }
 
-                    $this->callSilent('make:request', [
-                        'name' => 'Frontend/' . $this->requestStoreName
-                    ]);
+                    /** Update Request on Admin namespace */
 
-                    $this->addToTable('Form Request', 'Frontend/' . $this->requestStoreName . '.php');
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/Admin/' . $this->requestUpdateName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
 
-                    $this->callSilent('make:request', [
-                        'name' => 'Frontend/' . $this->requestUpdateName
-                    ]);
+                        $this->line('Form Request already exists: Admin/' . $this->requestUpdateName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => 'Admin/' . $this->requestUpdateName
+                        ]);
 
-                    $this->addToTable('Form Request', 'Frontend/' . $this->requestUpdateName . '.php');
+                        $this->addToTable('Form Request', 'Admin/' . $this->requestUpdateName . '.php');
+                    }
+
+                    /** Store Request on Frontend namespace */
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/Frontend/' . $this->requestStoreName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
+
+                        $this->line('Form Request already exists: Frontend/' . $this->requestStoreName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => 'Frontend/' . $this->requestStoreName
+                        ]);
+
+                        $this->addToTable('Form Request', 'Frontend/' . $this->requestStoreName . '.php');
+                    }
+
+                    /** Update Request on Frontend namespace */
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/Frontend/' . $this->requestUpdateName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
+
+                        $this->line('Form Request already exists: Frontend/' . $this->requestUpdateName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => 'Frontend/' . $this->requestUpdateName
+                        ]);
+
+                        $this->addToTable('Form Request', 'Frontend/' . $this->requestUpdateName . '.php');
+                    }
 
                     break;
 
                 case 'none':
-                    $this->callSilent('make:request', [
-                        'name' => $this->requestStoreName
-                    ]);
+                    /** Store Request */
 
-                    $this->addToTable('Form Request', $this->requestStoreName . '.php');
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/' . $this->requestStoreName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
 
-                    $this->callSilent('make:request', [
-                        'name' => $this->requestUpdateName
-                    ]);
+                        $this->line('Form Request already exists: ' . $this->requestStoreName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => $this->requestStoreName
+                        ]);
 
-                    $this->addToTable('Form Request', $this->requestUpdateName . '.php');
+                        $this->addToTable('Form Request', $this->requestStoreName . '.php');
+                    }
+
+                    /** Update Request */
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/' . $this->requestUpdateName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
+
+                        $this->line('Form Request already exists: ' . $this->requestUpdateName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => $this->requestUpdateName
+                        ]);
+
+                        $this->addToTable('Form Request', $this->requestUpdateName . '.php');
+                    }
 
                     break;
 
                 default:
-                    $this->callSilent('make:request', [
-                        'name' => $this->namespace . '/' . $this->requestStoreName
-                    ]);
+                    /** Store Request */
 
-                    $this->addToTable('Form Request', $this->namespace . '/' . $this->requestStoreName . '.php');
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/' . $this->namespace . '/' . $this->requestStoreName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
 
-                    $this->callSilent('make:request', [
-                        'name' => $this->namespace . '/' . $this->requestUpdateName
-                    ]);
+                        $this->line('Form Request already exists: ' . $this->namespace . '/' . $this->requestStoreName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => $this->namespace . '/' . $this->requestStoreName
+                        ]);
 
-                    $this->addToTable('Form Request', $this->namespace . '/' . $this->requestUpdateName . '.php');
+                        $this->addToTable('Form Request', $this->namespace . '/' . $this->requestStoreName . '.php');
+                    }
+
+                    /** Frontend Request */
+
+                    if ($this->files->exists(
+                        $path = base_path() . '/app/Http/Requests/' . $this->namespace . '/' . $this->requestUpdateName . '.php')
+                    ) {
+                        $this->input->setOption('request', false);
+
+                        $this->line('Form Request already exists: ' . $this->namespace . '/' . $this->requestUpdateName . '.php');
+                    }
+                    else {
+                        $this->callSilent('make:request', [
+                            'name' => $this->namespace . '/' . $this->requestUpdateName
+                        ]);
+
+                        $this->addToTable('Form Request', $this->namespace . '/' . $this->requestUpdateName . '.php');
+                    }
 
                     break;
             }
 
-            $this->info($this->data['artefact'] . ' created.');
+            if ($this->option('request')) {
+                $this->info($this->data['artefact'] . ' created.');
+            }
         }
     }
 
@@ -295,7 +385,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->error('Controller: use existing: Admin/' . $this->controllerName . '.php');
+                        $this->line('Controller already exists: Admin/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, 'Admin');
@@ -310,7 +400,7 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        $this->error('Controller: use existing: Frontend/' . $this->controllerName . '.php');
+                        $this->line('Controller already exists: Frontend/' . $this->controllerName . '.php');
                     }
                     else {
                         $this->compileControllerStub($path, 'Frontend');
@@ -326,12 +416,13 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller: use existing: ' . $this->controllerName . '.php');
+                        $this->line('Controller already exists: ' . $this->controllerName . '.php');
                     }
+                    else {
+                        $this->compileControllerStub($path);
 
-                    $this->compileControllerStub($path);
-
-                    $this->addToTable('Controller', $this->controllerName . '.php');
+                        $this->addToTable('Controller', $this->controllerName . '.php');
+                    }
 
                     break;
 
@@ -341,17 +432,20 @@ class MakeEntity extends Command
                     ) {
                         $this->input->setOption('controller', false);
 
-                        return $this->error('Controller: use existing: ' . $this->namespace .'/' . $this->controllerName . '.php');
+                        $this->line('Controller already exists: ' . $this->namespace .'/' . $this->controllerName . '.php');
                     }
+                    else {
+                        $this->compileControllerStub($path, $this->namespace);
 
-                    $this->compileControllerStub($path, $this->namespace);
-
-                    $this->addToTable('Controller', $this->namespace . '/' . $this->controllerName . '.php');
+                        $this->addToTable('Controller', $this->namespace . '/' . $this->controllerName . '.php');
+                    }
 
                     break;
             }
 
-            $this->info($this->data['artefact'] . ' created.');
+            if ($this->option('controller')) {
+                $this->info($this->data['artefact'] . ' created.');
+            }
         }
     }
 
@@ -405,12 +499,12 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('factory', false);
 
-                return $this->error('Model Factory: use existing: ' . $factory . '.php');
+                return $this->line('Factory already exists: ' . $factory . '.php');
             }
 
             $this->compileFactoryStub($path);
 
-            $this->addToTable('Model Factory', $factory . '.php');
+            $this->addToTable('Factory', $factory . '.php');
 
             $this->info($this->data['artefact'] . ' created.');
         }
@@ -444,6 +538,14 @@ class MakeEntity extends Command
 
             $policy = $this->entity . 'Policy';
 
+            if ($this->files->exists(
+                $path = base_path() . '/app/Policies/' . $policy . '.php')
+            ) {
+                $this->input->setOption('policy', false);
+
+                return $this->line('Policy already exists: ' . $policy . '.php');
+            }
+
             $this->callSilent('make:policy', [
                 'name' => $policy,
                 '--model' => $this->modelNamespace,
@@ -470,13 +572,24 @@ class MakeEntity extends Command
 
             $seederTable = ($this->pluralizedEntity) . 'TableSeeder';
 
-            $this->callSilent('make:seeder', [
-                'name' => $seederTable
-            ]);
+            if ($this->files->exists(
+                $path = base_path() . '/database/seeds/' . $seederTable . '.php')
+            ) {
+                $this->input->setOption('seeder', false);
 
-            $this->addToTable('Table Seeder', 'database/seeds/' . $seederTable . '.php');
+                $this->line('Table Seeder already exists: seeds/' . $seederTable . '.php');
+            }
+            else {
+                $this->callSilent('make:seeder', [
+                    'name' => $seederTable
+                ]);
 
-            $this->info($this->data['artefact'] . ' created.');
+                $this->addToTable('Table Seeder', 'seeds/' . $seederTable . '.php');
+
+                $this->info($this->data['artefact'] . ' created.');
+
+                array_push($this->additionalSteps, 'Call the Table seeder in DatabaseSeeder');
+            }
         }
 
         /** Example data seeder */
@@ -490,14 +603,17 @@ class MakeEntity extends Command
             ) {
                 $this->input->setOption('example', false);
 
-                return $this->error('Example Seeder: use existing: ' . $seederExample . '.php');
+                $this->line('Example Seeder already exists: seeds/examples/' . $seederExample . '.php');
             }
+            else {
+                $this->compileExampleSeederStub($path);
 
-            $this->compileExampleSeederStub($path);
+                $this->addToTable('Example Seeder', 'seeds/examples/' . $seederExample . '.php');
 
-            $this->addToTable('Example Seeder', 'database/seeds/examples/' . $seederExample . '.php');
+                $this->info($this->data['artefact'] . ' created.');
 
-            $this->info($this->data['artefact'] . ' created.');
+                array_push($this->additionalSteps, 'Call the Example seeder in ExampleDataSeeder');
+            }
         }
     }
 
@@ -532,24 +648,42 @@ class MakeEntity extends Command
 
             $test = $this->entity . 'Test';
 
-            $this->callSilent('make:test', [
-                'name' => $test
-            ]);
+            if ($this->files->exists(
+                $path = base_path() . '/tests/Feature/' . $test . '.php')
+            ) {
+                $this->input->setOption('test', false);
 
-            $this->addToTable('Test: Feature', 'tests/Feature/' . $test . '.php');
+                $this->line('Test: Feature already exists: tests/Feature/' . $test . '.php');
+            }
+            else {
+                $this->callSilent('make:test', [
+                    'name' => $test
+                ]);
 
-            $this->info($this->data['artefact'] . ' created.');
+                $this->addToTable('Test: Feature', 'tests/Feature/' . $test . '.php');
+
+                $this->info($this->data['artefact'] . ' created.');
+            }
 
             /** Unit test */
 
-            $this->callSilent('make:test', [
-                'name' => $test,
-                '--unit' => true,
-            ]);
+            if ($this->files->exists(
+                $path = base_path() . '/tests/Unit/' . $test . '.php')
+            ) {
+                $this->input->setOption('test', false);
 
-            $this->addToTable('Test: Unit', 'tests/Unit/' . $test . '.php');
+                $this->line('Test: Unit already exists: tests/Unit/' . $test . '.php');
+            }
+            else {
+                $this->callSilent('make:test', [
+                    'name' => $test,
+                    '--unit' => true,
+                ]);
 
-            $this->info($this->data['artefact'] . ' created.');
+                $this->addToTable('Test: Unit', 'tests/Unit/' . $test . '.php');
+
+                $this->info($this->data['artefact'] . ' created.');
+            }
         }
     }
 
