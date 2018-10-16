@@ -27,20 +27,40 @@ Route::name('frontend.')->group(function () {
         Route::resource('bankaccount', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
  
+        //Travel Request
         Route::resource('travel-request', 'TravelRequestController');
-        Route::get('get-travel-requests', 'TravelRequestController@getTravelRequest')->name('get-travel-requests');
+        Route::get('get-travel-requests', 'TravelRequestController@getTravelRequests')->name('get-travel-requests');
 
+        Route::resource('custom-field', 'CustomFieldController');
+        Route::get('get-custom-fields', 'CustomFieldController@getCustomFields')->name('get-custom-fields');
+
+        //Employee History
         Route::resource('employee-history', 'EmployeeHistoryController');
-        Route::get('get-employee-histories', 'EmployeeHistoryController@getEmployeeHistory')->name('get-employee-histories');
+        Route::get('get-employee-histories', 'EmployeeHistoryController@getEmployeeHistories')->name('get-employee-histories');
 
-        Route::resource('hr-form-management', 'HRFormManagementController');
-        Route::get('get-hr-form-managements', 'HRFormManagementController@getHRFormManagement')->name('get-hr-form-managements');
+        //HR Forms
+        Route::resource('hr-form', 'HRFormController');
+        Route::get('get-hr-forms', 'HRFormController@getHRForms')->name('get-hr-forms');
+        
+        Route::resource('employee-form', 'EmployeeFormController');
+        Route::get('get-employee-formss', 'EmployeeFormController@getEmployeeForms')->name('get-employee-form');
 
+        //Monitor Attendance
         Route::resource('monitor-attendance', 'MonitorAttendanceController');
-        Route::get('get-monitor-attendances', 'MonitorAttendanceController@getMonitorAttendance')->name('get-monitor-attendances');
+        Route::get('get-monitor-attendances', 'MonitorAttendanceController@getMonitorAttendances')->name('get-monitor-attendances');
 
-        Route::resource('document-management', 'DocumentManagementController');
-        Route::get('get-document-managements', 'DocumentManagementController@getDocumentManagements')->name('get-document-managements');
+        Route::resource('current-clocked-in-status', 'CurrentClockedInStatusController');
+        Route::get('get-current-clocked-in-status', 'CurrentClockedInStatusController@getCurrentClockedInStatus')->name('get-current-clocked-in-status');
+
+        //DocumentManagement
+        Route::resource('company-document', 'CompanyDocumentController');
+        Route::get('get-company-documents', 'CompanyDocumentController@getCompanyDocuments')->name('get-company-documents');
+
+        Route::resource('document-type', 'DocumentTypeController');
+        Route::get('get-document-types', 'DocumentTypeController@getDocumentTypes')->name('get-document-types');
+
+        Route::resource('employee-document', 'EmployeeDocumentController');
+        Route::get('get-employee-documents', 'EmployeeDocumentController@getEmployeeDocuments')->name('get-employee-documents');
 
         Route::resource('otr', 'OTRController');
         Route::get('/get-otrs', 'OTRController@getOTRs')->name('get-otrs');
@@ -120,6 +140,7 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
         Route::delete('/item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
 
+    
     });
 
 });
