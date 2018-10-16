@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\ListUtil;
-use App\Models\Pivots\GeneralLicense;
+use App\Models\Employee;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\GeneralLicenseStore;
-use App\Http\Requests\Frontend\GeneralLicenseUpdate;
 
-class GeneralLicenseController extends Controller
+class DocumentController extends Controller
 {
     /**
      * Show data from model for DataTable.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getGeneralLicenses()
+    public function getDocuments()
     {
         $employees = Employee::All();
 
@@ -131,10 +130,10 @@ class GeneralLicenseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\GeneralLicenseStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GeneralLicenseStore $request)
+    public function store(Request $request)
     {
         //
     }
@@ -142,10 +141,10 @@ class GeneralLicenseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(GeneralLicense $generalLicense)
+    public function show(Employee $employee)
     {
         //
     }
@@ -153,10 +152,10 @@ class GeneralLicenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(GeneralLicense $generalLicense)
+    public function edit(Employee $employee)
     {
         //
     }
@@ -164,11 +163,11 @@ class GeneralLicenseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\GeneralLicenseUpdate  $request
-     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(GeneralLicenseUpdate $request, GeneralLicense $generalLicense)
+    public function update(Request $request, Employee $employee)
     {
         //
     }
@@ -176,10 +175,10 @@ class GeneralLicenseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GeneralLicense $generalLicense)
+    public function destroy(Employee $employee)
     {
         //
     }
