@@ -22,8 +22,8 @@ class Employee extends MemfisModel
     /**
      * Many-to-Many: An employee may have zero or many general license.
      *
-     * This function will retrieve the general licenses of an employee.
-     * See: GeneralLicense's employees() method for the inverse
+     * This function will retrieve all the licenses of an employee.
+     * See: License's employees() method for the inverse
      *
      * @return mixed
      */
