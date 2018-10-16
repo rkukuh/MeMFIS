@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Employee
+                    HR Form
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.employee.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr-form.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Employee
+                                HR Form
                             </span>
                         </a>
                     </li>
@@ -56,7 +56,7 @@
                                 @include('frontend.employees.hr-form-management.include.hr-form')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                                @include('frontend.employees.mhr-form-management.include.employee-form')
+                                @include('frontend.employees.hr-form-management.include.employee-form')
                         </div>
                     </div>      
                 </div>

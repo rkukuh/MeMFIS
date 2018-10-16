@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Employee
+                    Employee History
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.employee.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.employee-history.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Employee
+                                Employee History
                             </span>
                         </a>
                     </li>
@@ -48,7 +48,7 @@
                 <div class="m-portlet__body">                   
                     <div class="tab-content">
                         <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                @include('frontend.employees.employee.include.employee-basic-detatail')
+                                @include('frontend/employees/employee-history/include/employee-basic-detail')
                         </div>
                         
                     </div>      

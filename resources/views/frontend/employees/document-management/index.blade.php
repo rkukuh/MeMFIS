@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Employee
+                    Document Management
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.employee.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.company-document.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Employee
+                                Document Management
                             </span>
                         </a>
                     </li>
