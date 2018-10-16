@@ -1,4 +1,5 @@
 <?php
+
 Route::get('/quotation-doc', function () {
     $pdf = \PDF::loadView('frontend/form/quotation');
     return $pdf->stream();
