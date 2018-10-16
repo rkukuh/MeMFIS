@@ -26,4 +26,27 @@ class License extends MemfisModel
 
         static::addGlobalScope(new OrderByColumn('name'));
     }
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Many-to-Many: An employee may have zero or many license.
+     *
+     * This function will retrieve all the employess of a license.
+     * See: Employee's licenses() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class)
+                    ->as('licensed_employee')
+                    ->withPivot(
+                        'code',
+                        'issued_at',
+                        'valid_until',
+                        'revoke_at'
+                    )
+                    ->withTimestamps();
+    }
 }
