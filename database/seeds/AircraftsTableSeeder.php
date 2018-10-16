@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Manufacturer;
+use Illuminate\Database\Seeder;
 
 class AircraftsTableSeeder extends Seeder
 {
