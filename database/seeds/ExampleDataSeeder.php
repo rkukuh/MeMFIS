@@ -40,6 +40,7 @@ class ExampleDataSeeder extends Seeder
         /** EDUCATION */
 
         $this->call(GeneralLicenses::class);
+        $this->call(AmeLicenses::class);
 
         /** FINANCE */
 

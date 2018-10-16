@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
         /** EDUCATION */
 
         $this->call(GeneralLicensesTableSeeder::class);
+        $this->call(AmeLicensesTableSeeder::class);
 
         /** FINANCE */
 

@@ -32,6 +32,8 @@ use App\Models\Employee;
 use App\Policies\EmployeePolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
+use App\Models\AmeLicense;
+use App\Policies\AmeLicensePolicy;
 use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
 use App\Models\Manufacturer;
@@ -65,6 +67,7 @@ class AuthServiceProvider extends ServiceProvider
         Aircraft::class => AircraftPolicy::class,
         Employee::class => EmployeePolicy::class,
         Department::class => DepartmentPolicy::class,
+        AmeLicense::class => AmeLicensePolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
         GeneralLicense::class => GeneralLicensePolicy::class,
