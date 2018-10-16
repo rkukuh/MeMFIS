@@ -14,10 +14,10 @@ class CreateAmelicensesTable extends Migration
     public function up()
     {
         Schema::create('ame_licenses', function (Blueprint $table) {
-            $table->unsignedInteger('licensed_employee_id');
+            $table->unsignedInteger('employee_license_id');
             $table->timestamps();
 
-            $table->foreign('licensed_employee_id')
+            $table->foreign('employee_license_id')
                     ->references('id')->on('employee_license')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
