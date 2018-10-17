@@ -41,7 +41,7 @@
 
                                 @component('frontend.common.buttons.create-new')
                                     @slot('size', 'sm')
-                                    @slot('text', 'add School')
+                                    @slot('text', 'Add School')
                                     @slot('data_target', '#modal_school')
                                     @slot('style', 'margin-top: 10px;')
                                 @endcomponent
