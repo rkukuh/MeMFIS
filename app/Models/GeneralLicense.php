@@ -9,7 +9,7 @@ class GeneralLicense extends MemfisModel
 {
     protected $fillable = [
         'aviation_degree',
-        'aviation_degree_code',
+        'aviation_degree_no',
         'exam_no',
         'exam_date',
         'attendance_no',
@@ -25,8 +25,8 @@ class GeneralLicense extends MemfisModel
      *
      * @return mixed
      */
-    public function header()
+    public function employee_license()
     {
-        return $this->belongsTo(EmployeeLicense::class, 'employee_license_id');
+        return $this->belongsTo(EmployeeLicense::class);
     }
 }
