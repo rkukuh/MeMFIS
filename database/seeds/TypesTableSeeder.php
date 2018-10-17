@@ -18,10 +18,10 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfEligibility::class);
         $this->call(TypesOfEmail::class);
         $this->call(TypesOfFax::class);
-        $this->call(TypesOfFormalSchoolDegree::class);
         $this->call(TypesOfJournal::class);
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfRegulator::class);
+        $this->call(TypesOfSchoolDegree::class);
         $this->call(TypesOfUnit::class);
     }
 }
