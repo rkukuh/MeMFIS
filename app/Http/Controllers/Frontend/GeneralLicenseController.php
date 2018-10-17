@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Employee;
 use App\Models\ListUtil;
 use App\Models\GeneralLicense;
 use App\Http\Controllers\Controller;
@@ -17,9 +18,10 @@ class GeneralLicenseController extends Controller
      */
     public function getGeneralLicenses()
     {
-        $employees = Employee::All();
+        $employees = Employee::with('general_licenses')->first();
 
-        $data = $alldata = json_decode($employees);
+        $data = $alldata = json_decode($employees->general_licenses);
+
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
