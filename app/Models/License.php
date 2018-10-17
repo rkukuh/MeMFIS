@@ -42,7 +42,6 @@ class License extends MemfisModel
     {
         return $this->belongsToMany(Employee::class)
                     ->using(EmployeeLicense::class)
-                    ->as('licensed_employee')
                     ->withPivot(
                         'code',
                         'issued_at',
