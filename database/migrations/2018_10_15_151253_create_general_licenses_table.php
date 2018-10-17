@@ -16,6 +16,8 @@ class CreateGeneralLicensesTable extends Migration
         /** M-M: Employee and License, for General License */
 
         Schema::create('general_licenses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->unsignedInteger('employee_license_id');
             $table->unsignedInteger('aviation_degree');
             $table->string('aviation_degree_no');
@@ -34,6 +36,10 @@ class CreateGeneralLicensesTable extends Migration
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            $table->index('aviation_degree_no');
+            $table->index('exam_no');
+            $table->index('attendance_no');
         });
     }
 
