@@ -20,7 +20,7 @@ class Employee extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * Many-to-Many: An employee may have zero or many general license.
+     * Many-to-Many: An employee may have zero or many license.
      *
      * This function will retrieve all the licenses of an employee.
      * See: License's employees() method for the inverse
@@ -31,7 +31,6 @@ class Employee extends MemfisModel
     {
         return $this->belongsToMany(License::class)
                     ->using(EmployeeLicense::class)
-                    ->as('licensed_employee')
                     ->withPivot(
                         'code',
                         'issued_at',
@@ -39,5 +38,27 @@ class Employee extends MemfisModel
                         'revoke_at'
                     )
                     ->withTimestamps();
+    }
+
+    /**
+     * One-Way: An employee may have zero or many general license.
+     *
+     * @return mixed
+     */
+    public function general_licenses()
+    {
+        return $this->hasMany(EmployeeLicense::class)
+                    ->where('license_id', License::ofGeneralLicense()->first()->id);
+    }
+
+    /**
+     * One-Way: An employee may have zero or many AME License (by DGCA).
+     *
+     * @return mixed
+     */
+    public function ame_licenses_dgca()
+    {
+        return $this->hasMany(EmployeeLicense::class)
+                    ->where('license_id', License::ofAMELicenseDGCA()->first()->id);
     }
 }

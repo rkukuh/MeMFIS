@@ -5,6 +5,7 @@ namespace App\Models;
 use App\MemfisModel;
 use App\Scopes\OrderByColumn;
 use App\Models\Pivots\EmployeeLicense;
+use Illuminate\Database\Eloquent\Builder;
 
 class License extends MemfisModel
 {
@@ -28,6 +29,30 @@ class License extends MemfisModel
         static::addGlobalScope(new OrderByColumn('name'));
     }
 
+    /******************************************* SCOPE *******************************************/
+
+    /**
+     * Scope a query to only include license of General License.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfGeneralLicense(Builder $query)
+    {
+        return $query->where('code', 'general-license');
+    }
+
+    /**
+     * Scope a query to only include license of AME License.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAMELicenseDGCA(Builder $query)
+    {
+        return $query->where('code', 'amel-dgca');
+    }
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
@@ -42,7 +67,6 @@ class License extends MemfisModel
     {
         return $this->belongsToMany(Employee::class)
                     ->using(EmployeeLicense::class)
-                    ->as('licensed_employee')
                     ->withPivot(
                         'code',
                         'issued_at',
