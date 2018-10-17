@@ -10,80 +10,96 @@
             </div>
             <div class="modal-body">
 
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="LanguagesForm">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="EducationForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.text')
-                                    @slot('id', 'code')
-                                    @slot('text', 'Code')
-                                    @slot('name', 'code')
-                                    @slot('id_error', 'code')
-                                    @slot('help_text','code')
-                                @endcomponent
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Name @include('frontend.common.label.optional')
-                                </label>
-
-                                @component('frontend.common.input.text')
-                                    @slot('id', 'name')
-                                    @slot('text', 'Name')
-                                    @slot('name', 'name')
-                                    @slot('help_text','name')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Type @include('frontend.common.label.optional')
+                                    Name @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.select')
-                                    @slot('id', 'type')
-                                    @slot('text', 'Type')
-                                    @slot('name', 'type')
-                                    @slot('type', 'text')
+                                    @slot('id', 'name5')
+                                    @slot('text', 'Name')
+                                    @slot('name', 'name')
                                     @slot('style', 'width:100%')
-                                    @slot('help_text','type')
                                 @endcomponent
+
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Level @include('frontend.common.label.optional')
+                                    Language @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.numeric')
-                                    @slot('value', '1')
-                                    @slot('text', 'Level')
-                                    @slot('name', 'level')
-                                    @slot('help_text','level')
-                                    @slot('id_error', 'code')
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'language')
+                                    @slot('text', 'Language')
+                                    @slot('name', 'language')
+                                    @slot('style', 'width:100%')
+                                @endcomponent
+
+                                @component('frontend.common.buttons.create-new')
+                                    @slot('size', 'sm')
+                                    @slot('text', 'Add Language')
+                                    @slot('data_target', '#modal_language')
+                                    @slot('style', 'margin-top: 10px;')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Description @include('frontend.common.label.optional')
+                                    Reading Level @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.textarea')
-                                    @slot('rows', '3')
-                                    @slot('id', 'description')
-                                    @slot('name', 'description')
-                                    @slot('text', 'Description')
-                                    @slot('description', 'text')
-                                    @slot('help_text','description')
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'reading')
+                                    @slot('text', 'Reading')
+                                    @slot('name', 'reading')
+                                    @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Speaking Level @include('frontend.common.label.optional')
+                                </label>
+
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'speaking')
+                                    @slot('text', 'Speaking')
+                                    @slot('name', 'speaking')
+                                    @slot('style', 'width:100%')
+                                @endcomponent
+                            </div>
+
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Writing Level @include('frontend.common.label.optional')
+                                </label>
+
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'writing')
+                                    @slot('text', 'Writing')
+                                    @slot('name', 'writing')
+                                    @slot('style', 'width:100%')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Understanding Level @include('frontend.common.label.optional')
+                                </label>
+
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'understanding')
+                                    @slot('text', 'Understanding')
+                                    @slot('name', 'understanding')
+                                    @slot('style', 'width:100%')
+                                @endcomponent
+                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
