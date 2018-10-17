@@ -41,9 +41,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('travel-request', 'TravelRequestController');
         Route::get('get-travel-requests', 'TravelRequestController@getTravelRequests')->name('get-travel-requests');
 
-        Route::resource('custom-field', 'CustomFieldController');
-        Route::get('get-custom-fields', 'CustomFieldController@getCustomFields')->name('get-custom-fields');
-
         //Employee History
         Route::resource('employee-history', 'EmployeeHistoryController');
         Route::get('get-employee-histories', 'EmployeeHistoryController@getEmployeeHistories')->name('get-employee-histories');

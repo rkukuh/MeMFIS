@@ -50,22 +50,19 @@
                     </div>
                 </div>
                 </div>
-                <div class="m-portlet__body">                   
+                <div class="m-portlet__body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
                                 @include('frontend.employees.travel-request.include.travel-request')
                         </div>
-                        <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                                @include('frontend.employees.travel-request.include.custom-field')
-                        </div>
-                    </div>      
+                    </div>
                 </div>
             </div>
-        </div>      
+        </div>
     </div>
 </div>
 
-   
+
 @endsection
 
 @push('footer-scripts')
