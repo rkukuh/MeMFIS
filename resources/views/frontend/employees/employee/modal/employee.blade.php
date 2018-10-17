@@ -24,64 +24,87 @@
                                     @slot('text', 'Code')
                                     @slot('name', 'code')
                                     @slot('id_error', 'code')
-                                    @slot('help_text','code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name @include('frontend.common.label.optional')
+                                    First Name @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'name')
-                                    @slot('text', 'Name')
-                                    @slot('name', 'name')
-                                    @slot('help_text','name')
+                                    @slot('id', 'first_name')
+                                    @slot('text', 'First Name')
+                                    @slot('name', 'first_name')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Middle Name @include('frontend.common.label.optional')
+                                    </label>
+        
+                                    @component('frontend.common.input.text')
+                                        @slot('id', 'middle_name')
+                                        @slot('text', 'Middle Name')
+                                        @slot('name', 'middle_name')
+                                    @endcomponent
+                                    </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Type @include('frontend.common.label.optional')
+                                    Last Name @include('frontend.common.label.optional')
+                                 </label>
+            
+                                    @component('frontend.common.input.text')
+                                        @slot('id', 'last_name')
+                                        @slot('text', 'Last Name')
+                                        @slot('name', 'last_name')
+                                    @endcomponent
+                                </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Date of birth @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.select')
-                                    @slot('id', 'type')
-                                    @slot('text', 'Type')
-                                    @slot('name', 'type')
-                                    @slot('type', 'text')
-                                    @slot('style', 'width:100%')
-                                    @slot('help_text','type')
+                                @component('frontend.common.input.datepicker')
+                                    @slot('id', 'dob')
+                                    @slot('name','dob')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Level @include('frontend.common.label.optional')
-                                </label>
-
-                                @component('frontend.common.input.numeric')
-                                    @slot('value', '1')
-                                    @slot('text', 'Level')
-                                    @slot('name', 'level')
-                                    @slot('help_text','level')
-                                    @slot('id_error', 'code')
-                                @endcomponent
+                                    <label class="form-control-label">
+                                        Gender @include('frontend.common.label.required')
+                                    </label>
+                                    <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
+                                        @component('frontend.common.input.radio')
+                                            @slot('id', 'gender')
+                                            @slot('name','gender')
+                                            @slot('text', 'Male')
+                                            @slot('value', 'm')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
+                                        @component('frontend.common.input.radio')
+                                            @slot('id', 'gender')
+                                            @slot('name','gender')
+                                            @slot('text', 'Female')
+                                            @slot('value', 'f')
+                                        @endcomponent
+                                    </div>
+    
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Description @include('frontend.common.label.optional')
+                                    Hired At @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.textarea')
-                                    @slot('rows', '3')
-                                    @slot('id', 'description')
-                                    @slot('name', 'description')
-                                    @slot('text', 'Description')
-                                    @slot('description', 'text')
-                                    @slot('help_text','description')
+                                @component('frontend.common.input.datepicker')
+                                    @slot('id', 'hired_at')
+                                    @slot('name','hired_at')
                                 @endcomponent
                             </div>
                         </div>
