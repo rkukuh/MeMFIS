@@ -32,7 +32,7 @@ use App\Models\Employee;
 use App\Policies\EmployeePolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
-use App\Models\Pivots\AmeLicense;
+use App\Models\AmeLicense;
 use App\Policies\AmeLicensePolicy;
 use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
