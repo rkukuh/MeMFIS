@@ -40,6 +40,18 @@ let Select2 = {
             placeholder: 'Select a Name'
         }), $('#name11, #name11_validate').select2({
             placeholder: 'Select a Name'
+        }), $('#language, #language_validate').select2({
+            placeholder: 'Select a Language'
+        }), $('#understanding, #understanding_validate').select2({
+            placeholder: 'Select a Understanding Level'
+        }), $('#reading, #reading_validate').select2({
+            placeholder: 'Select a Reading Level'
+        }), $('#Writing, #Writing_validate').select2({
+            placeholder: 'Select a Writing Level'
+        }), $('#speaking, #speaking_validate').select2({
+            placeholder: 'Select a Speaking Level'
+        }), $('#writing, #writing_validate').select2({
+            placeholder: 'Select a Writing Level'
         }), $('#certification, #certification_validate').select2({
             placeholder: 'Select a Certification'
         }), $('#school, #school_validate').select2({
