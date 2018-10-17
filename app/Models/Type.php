@@ -17,14 +17,25 @@ class Type extends MemfisModel
     /******************************************* SCOPE *******************************************/
 
     /**
-     * Scope a query to only include category of arc.
+     * Scope a query to only include category of ARC.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfArc(Builder $query)
+    public function scopeOfARC(Builder $query)
     {
         return $query->where('of', 'arc');
+    }
+
+    /**
+     * Scope a query to only include category of Aviation School Degree.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAviationSchoolDegree(Builder $query)
+    {
+        return $query->where('of', 'aviation-school-degree');
     }
 
     /**
