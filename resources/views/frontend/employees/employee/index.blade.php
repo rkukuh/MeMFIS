@@ -133,5 +133,7 @@
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
     <script src="{{ asset('js/frontend/employee/employee.js')}}"></script>
 @endpush
