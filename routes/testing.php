@@ -16,7 +16,6 @@ Route::name('testing.')->group(function () {
         Route::get('/metronic', 'Frontend\TestingController@metronic')->name('metronic');
         Route::post('/testing-photos','Frontend\TestingController@postPhotos')->name('testing-photos');
 
-
         Route::get('/certified-staff/{staffId}', function ($staffId) {
 
             /** Get a specific license of a given employee and license's number */
