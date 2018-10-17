@@ -58,6 +58,8 @@ let Select2 = {
             placeholder: 'Select a School'
         }), $('#license, #license_validate').select2({
             placeholder: 'Select a License'
+        }), $('#license2, #license2_validate').select2({
+            placeholder: 'Select a License'
         }), $('#unit, #unit_validate').select2({
             placeholder: 'Select a Unit'
         }), $('#unit2, #unit2_validate').select2({
