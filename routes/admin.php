@@ -14,6 +14,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('type', 'TypeController');
         Route::resource('unit', 'UnitController');
+        Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
 
         /** POLYMORPH */
