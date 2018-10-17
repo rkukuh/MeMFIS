@@ -39,4 +39,15 @@ class Employee extends MemfisModel
                     )
                     ->withTimestamps();
     }
+
+    /**
+     * One-Way: An employee may have zero or many general license.
+     *
+     * @return mixed
+     */
+    public function general_licenses()
+    {
+        return $this->hasMany(EmployeeLicense::class)
+                    ->where('license_id', License::ofGeneralLicense()->first()->id);
+    }
 }
