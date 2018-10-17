@@ -279,7 +279,7 @@ let Employee = {
                                 }
                             );
 
-                            let table = $('.m_datatable_edducation').mDatatable();
+                            let table = $('.m_datatable_education').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -998,7 +998,6 @@ let Employee = {
                 },
                 {
                     field: 'Actions',
-                    width: 110,
                     title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
