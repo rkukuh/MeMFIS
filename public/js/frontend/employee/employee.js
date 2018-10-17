@@ -6,7 +6,7 @@ let Employee = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/get-employees',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -51,30 +51,30 @@ let Employee = {
                     // width: 150
                 },
                 {
-                    field: 'name3',
+                    field: 'name',
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                     // width: 250,
-                    template: "{{name}}  {{code}}  {{created_at}}"
+                    template: "{{first_name}}  {{middle_name}}  {{last_name}}"
                 },
                 {
-                    field: 'name',
+                    field: 'dob',
                     title: 'dob',
                     sortable: 'asc',
-                    filterable: !1
+                    filterable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'gender',
                     title: 'Gender',
                     sortable: 'asc',
-                    filterable: !1
+                    filterable: !1,
                 },
                 {
-                    field: 'name',
-                    title: 'Hire At',
+                    field: 'hired_at',
+                    title: 'Hired At',
                     sortable: 'asc',
-                    filterable: !1
+                    filterable: !1,
                 },
                 {
                     field: 'Actions',
@@ -84,9 +84,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -160,7 +160,7 @@ let Employee = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/get-educations',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -197,8 +197,7 @@ let Employee = {
                     }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -238,9 +237,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -314,7 +313,7 @@ let Employee = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/get-certifications',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -351,8 +350,7 @@ let Employee = {
                     }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -392,9 +390,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -468,7 +466,7 @@ let Employee = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/get-general-licenses',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -505,8 +503,7 @@ let Employee = {
                     }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -514,56 +511,56 @@ let Employee = {
                     // width: 100
                 },
                 {
-                    field: 'code',
+                    field: 'employee_id',
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                     width: 250
                 },
                 {
-                    field: 'code',
+                    field: 'license_id',
                     title: 'License',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'aciation_degree',
                     title: 'Aciation Degree',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'name',
+                    field: 'exam_no',
                     title: 'Exam No',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'name',
+                    field: 'exam_date',
                     title: 'Exam Date',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'name',
+                    field: 'attendace_no',
                     title: 'Attendace No',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'name',
+                    field: 'issued_at',
                     title: 'Issued At',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'name',
+                    field: 'valid_until',
                     title: 'Valid Until',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'name',
+                    field: 'revoke_at',
                     title: 'Revoke At',
                     sortable: 'asc',
                     filterable: !1
@@ -576,9 +573,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -652,7 +649,7 @@ let Employee = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/get-amels',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -689,8 +686,7 @@ let Employee = {
                     }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -698,32 +694,32 @@ let Employee = {
                     // width: 100
                 },
                 {
-                    field: 'code',
+                    field: 'employee_id',
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                     width: 250
                 },
                 {
-                    field: 'code',
+                    field: 'license_id',
                     title: 'License',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'issued_at',
                     title: 'Issued At',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'name',
+                    field: 'valid_until',
                     title: 'Valid Until',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'name',
+                    field: 'revoke_at',
                     title: 'Revoke At',
                     sortable: 'asc',
                     filterable: !1
@@ -736,9 +732,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -870,9 +866,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -983,8 +979,7 @@ let Employee = {
                     }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -1035,9 +1030,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -1169,9 +1164,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -1303,9 +1298,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -1437,9 +1432,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
@@ -1571,9 +1566,9 @@ let Employee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
