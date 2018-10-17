@@ -50,4 +50,15 @@ class Employee extends MemfisModel
         return $this->hasMany(EmployeeLicense::class)
                     ->where('license_id', License::ofGeneralLicense()->first()->id);
     }
+
+    /**
+     * One-Way: An employee may have zero or many AME License (by DGCA).
+     *
+     * @return mixed
+     */
+    public function ame_licenses_dgca()
+    {
+        return $this->hasMany(EmployeeLicense::class)
+                    ->where('license_id', License::ofAMELicenseDGCA()->first()->id);
+    }
 }
