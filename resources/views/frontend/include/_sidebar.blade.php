@@ -153,7 +153,7 @@
                         <span class="m-menu__arrow"></span>
                         <ul class="m-menu__subnav">
                             <li class="m-menu__item " aria-haspopup="true" >
-                            <a  href="{{ route('frontend.item.index') }}" class="m-menu__link ">
+                            <a  href="{{ route('frontend.qualification') }}" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                 <span></span>
                                 </i>
@@ -163,7 +163,7 @@
                             </a>
                             </li>
                             <li class="m-menu__item " aria-haspopup="true" >
-                            <a  href="{{ route('frontend.category-item.index') }}" class="m-menu__link ">
+                            <a  href="{{ route('frontend.personal-dashboard') }}" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                 <span></span>
                                 </i>
@@ -173,7 +173,7 @@
                             </a>
                             </li>
                             <li class="m-menu__item " aria-haspopup="true" >
-                                <a  href="{{ route('frontend.category-item.index') }}" class="m-menu__link ">
+                                <a  href="{{ route('frontend.dependents') }}" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -183,7 +183,7 @@
                                 </a>
                             </li>
                             <li class="m-menu__item " aria-haspopup="true" >
-                                <a  href="{{ route('frontend.category-item.index') }}" class="m-menu__link ">
+                                <a  href="{{ route('frontend.emergency-contacts') }}" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -193,7 +193,7 @@
                                 </a>
                             </li>
                             <li class="m-menu__item " aria-haspopup="true" >
-                                <a  href="{{ route('frontend.category-item.index') }}" class="m-menu__link ">
+                                <a  href="{{ route('frontend.basic-information') }}" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
