@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\ListUtil;
-use App\Models\Pivots\GeneralLicense;
+use App\Models\GeneralLicense;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GeneralLicenseStore;
 use App\Http\Requests\Frontend\GeneralLicenseUpdate;
@@ -142,7 +141,7 @@ class GeneralLicenseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
+     * @param  \App\Models\GeneralLicense  $generalLicense
      * @return \Illuminate\Http\Response
      */
     public function show(GeneralLicense $generalLicense)
@@ -153,7 +152,7 @@ class GeneralLicenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
+     * @param  \App\Models\GeneralLicense  $generalLicense
      * @return \Illuminate\Http\Response
      */
     public function edit(GeneralLicense $generalLicense)
@@ -165,7 +164,7 @@ class GeneralLicenseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\GeneralLicenseUpdate  $request
-     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
+     * @param  \App\Models\GeneralLicense  $generalLicense
      * @return \Illuminate\Http\Response
      */
     public function update(GeneralLicenseUpdate $request, GeneralLicense $generalLicense)
@@ -176,7 +175,7 @@ class GeneralLicenseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pivots\GeneralLicense  $generalLicense
+     * @param  \App\Models\GeneralLicense  $generalLicense
      * @return \Illuminate\Http\Response
      */
     public function destroy(GeneralLicense $generalLicense)
