@@ -22,6 +22,8 @@ let Select2 = {
             placeholder: 'Select a Type'
         }), $('#name2, #name2_validate').select2({
             placeholder: 'Select a Name'
+        }), $('#certification, #certification_validate').select2({
+            placeholder: 'Select a Certification'
         }), $('#school, #school_validate').select2({
             placeholder: 'Select a School'
         }), $('#unit, #unit_validate').select2({
