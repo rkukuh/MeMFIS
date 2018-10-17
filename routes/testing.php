@@ -4,7 +4,7 @@ Route::name('testing.')->group(function () {
 
     Route::group(['prefix' => '_test'], function () {
 
-        Route::get('/greeting/{name?}', function($name = 'World') {
+        Route::get('/greeting/{name?}', function ($name = 'World') {
             return "Hello $name !";
         });
 
@@ -17,6 +17,11 @@ Route::name('testing.')->group(function () {
         Route::post('/testing-photos','Frontend\TestingController@postPhotos')->name('testing-photos');
 
 
+        Route::get('/certified-staff/{id}', function ($id) {
+            $employee = App\Models\Employee::with('licenses')->find($id);
+
+            return $employee;
+        });
 
     });
 
