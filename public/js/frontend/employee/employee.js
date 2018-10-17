@@ -558,13 +558,19 @@ let Employee = {
                 },
                 {
                     field: 'name',
+                    title: 'Valid Until',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'name',
                     title: 'Revoke At',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
                     field: 'Actions',
-                    width: 140,
+                    // width: 170,
                     title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
@@ -683,16 +689,42 @@ let Employee = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'code',
-                    title: 'Part No.',
+                    title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    // width: 100
+                },
+                {
+                    field: 'code',
+                    title: 'Name',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 250
+                },
+                {
+                    field: 'code',
+                    title: 'License',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'name',
-                    title: 'Item Name',
+                    title: 'Issued At',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'name',
+                    title: 'Valid Until',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'name',
+                    title: 'Revoke At',
                     sortable: 'asc',
                     filterable: !1
                 },
