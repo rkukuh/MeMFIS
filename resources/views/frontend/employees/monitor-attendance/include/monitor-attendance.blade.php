@@ -14,13 +14,15 @@
                     </div>
                 </div>
                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create')
-                        @slot('text', 'Add Item')
-                        @slot('href', route('frontend.item.create') )
+                    @component('frontend.common.buttons.create-new')
+                        @slot('text', 'Add Monitor Attendance')
+                        @slot('data_target', '#modal_monitor_attendance')
                     @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-        <div class="m_datatable_certification" id="scrolling_both"></div>
+            @include('frontend.employees.monitor-attendance.modal.monitor-attendance')
+
+        <div class="m_datatable_monitor_attendace" id="scrolling_both"></div>
     </div>
