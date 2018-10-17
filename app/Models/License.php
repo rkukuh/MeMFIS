@@ -42,6 +42,17 @@ class License extends MemfisModel
         return $query->where('code', 'general-license');
     }
 
+    /**
+     * Scope a query to only include license of AME License.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAMELicenseDGCA(Builder $query)
+    {
+        return $query->where('code', 'amel-dgca');
+    }
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
