@@ -18,6 +18,8 @@ use App\Models\Email;
 use App\Policies\EmailPolicy;
 use App\Models\Phone;
 use App\Policies\PhonePolicy;
+use App\Models\Level;
+use App\Policies\LevelPolicy;
 use App\Models\Status;
 use App\Policies\StatusPolicy;
 use App\Models\Address;
@@ -62,6 +64,7 @@ class AuthServiceProvider extends ServiceProvider
         Note::class => NotePolicy::class,
         Email::class => EmailPolicy::class,
         Phone::class => PhonePolicy::class,
+        Level::class => LevelPolicy::class,
         Status::class => StatusPolicy::class,
         Address::class => AddressPolicy::class,
         License::class => LicensePolicy::class,
