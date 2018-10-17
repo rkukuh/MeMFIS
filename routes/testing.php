@@ -17,10 +17,18 @@ Route::name('testing.')->group(function () {
         Route::post('/testing-photos','Frontend\TestingController@postPhotos')->name('testing-photos');
 
 
-        Route::get('/certified-staff/{id}', function ($id) {
-            $employee = App\Models\Employee::with('licenses')->find($id);
+        Route::get('/certified-staff/{staffId}', function ($staffId) {
 
-            return $employee;
+            /** Get a specific license of a given employee and license's number */
+
+            $result = App\Models\Pivots\EmployeeLicense::with('employee', 'license')
+                        ->whereHas('employee', function ($query) use ($staffId) {
+                            $query->where('employee_id', $staffId);
+                        })
+                        ->where('code', 'E/I.3475') // license's number, omittable
+                        ->get();
+
+            return $result;
         });
 
     });
