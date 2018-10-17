@@ -34,6 +34,21 @@ var BootstrapDatepicker = function () {
                 todayHighlight: !0,
                 orientation: "bottom left",
                 templates: t
+            }), $("#exam_date, #exam_date_validate").datepicker({
+                rtl: mUtil.isRTL(),
+                todayHighlight: !0,
+                orientation: "bottom left",
+                templates: t
+            }), $("#issued_at, #issued_at_validate").datepicker({
+                rtl: mUtil.isRTL(),
+                todayHighlight: !0,
+                orientation: "bottom left",
+                templates: t
+            }), $("#revoke_at, #revoke_at_validate").datepicker({
+                rtl: mUtil.isRTL(),
+                todayHighlight: !0,
+                orientation: "bottom left",
+                templates: t
             }), $("#m_datepicker_1_modal").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
