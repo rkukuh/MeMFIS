@@ -24,6 +24,16 @@ var BootstrapDatepicker = function () {
                 todayHighlight: !0,
                 orientation: "bottom left",
                 templates: t
+            }), $("#start_at, #start_at_validate").datepicker({
+                rtl: mUtil.isRTL(),
+                todayHighlight: !0,
+                orientation: "bottom left",
+                templates: t
+            }), $("#graduated_at, #graduated_at_validate").datepicker({
+                rtl: mUtil.isRTL(),
+                todayHighlight: !0,
+                orientation: "bottom left",
+                templates: t
             }), $("#m_datepicker_1_modal").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
