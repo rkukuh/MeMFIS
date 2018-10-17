@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Pivots\AmeLicense;
+use App\Models\AmeLicense;
 use Faker\Generator as Faker;
 
 $factory->define(AmeLicense::class, function (Faker $faker) {
