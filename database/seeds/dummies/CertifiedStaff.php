@@ -39,7 +39,10 @@ class CertifiedStaff extends Seeder
 
         /** Assign GENERAL LICENSE to AVIATION DEGREE */
 
-        //
+        $degree_a1 = Type::ofAviationSchoolDegree()->where('code', 'a1')->first();
+        $degree_a4 = Type::ofAviationSchoolDegree()->where('code', 'a4')->first();
+        $degree_c2 = Type::ofAviationSchoolDegree()->where('code', 'c2')->first();
+        $degree_c4 = Type::ofAviationSchoolDegree()->where('code', 'c4')->first();
 
         /** Assign EMPLOYEE to AME LICENSE */
 
