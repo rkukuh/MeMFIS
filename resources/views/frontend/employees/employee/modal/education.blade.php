@@ -16,72 +16,56 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.text')
-                                    @slot('id', 'code')
-                                    @slot('text', 'Code')
-                                    @slot('name', 'code')
-                                    @slot('id_error', 'code')
-                                    @slot('help_text','code')
-                                @endcomponent
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Name @include('frontend.common.label.optional')
-                                </label>
-
-                                @component('frontend.common.input.text')
-                                    @slot('id', 'name')
-                                    @slot('text', 'Name')
-                                    @slot('name', 'name')
-                                    @slot('help_text','name')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Type @include('frontend.common.label.optional')
+                                    Name @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.select')
-                                    @slot('id', 'type')
-                                    @slot('text', 'Type')
-                                    @slot('name', 'type')
-                                    @slot('type', 'text')
+                                    @slot('id', 'name2')
+                                    @slot('text', 'Name')
+                                    @slot('name', 'name')
                                     @slot('style', 'width:100%')
-                                    @slot('help_text','type')
                                 @endcomponent
+
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Level @include('frontend.common.label.optional')
+                                    School @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.numeric')
-                                    @slot('value', '1')
-                                    @slot('text', 'Level')
-                                    @slot('name', 'level')
-                                    @slot('help_text','level')
-                                    @slot('id_error', 'code')
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'school')
+                                    @slot('text', 'School')
+                                    @slot('name', 'school')
+                                    @slot('style', 'width:100%')
+                                @endcomponent
+
+                                @component('frontend.common.buttons.create-new')
+                                    @slot('size', 'sm')
+                                    @slot('text', 'add School')
+                                    @slot('data_target', '#modal_school')
+                                    @slot('style', 'margin-top: 10px;')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Description @include('frontend.common.label.optional')
+                                    Start At @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.textarea')
-                                    @slot('rows', '3')
-                                    @slot('id', 'description')
-                                    @slot('name', 'description')
-                                    @slot('text', 'Description')
-                                    @slot('description', 'text')
-                                    @slot('help_text','description')
+                                @component('frontend.common.input.datepicker')
+                                    @slot('id', 'start_at')
+                                    @slot('name','start_at')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Graduated At @include('frontend.common.label.optional')
+                                </label>
+
+                                @component('frontend.common.input.datepicker')
+                                    @slot('id', 'graduated_at')
+                                    @slot('name','graduated_at')
                                 @endcomponent
                             </div>
                         </div>
