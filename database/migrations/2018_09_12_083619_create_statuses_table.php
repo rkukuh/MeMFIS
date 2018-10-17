@@ -23,6 +23,7 @@ class CreateStatusesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->index('code');
             $table->index('name');
         });
     }
