@@ -21,9 +21,13 @@ class EmployeeLicense extends Pivot
      *
      * @return mixed
      */
-    public function general_license_details()
+    public function general_licenses()
     {
-        return $this->hasMany(GeneralLicense::class);
+        // This method must have a second parameter as FK column (employee_license_id),
+        // so these following error will not thrown:
+        // "Too few arguments to function Illuminate\Database\Eloquent\Model::setAttribute()"
+
+        return $this->hasMany(GeneralLicense::class, 'employee_license_id');
     }
 
     /**
