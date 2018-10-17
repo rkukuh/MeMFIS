@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\MemfisModel;
 
-class GeneralLicense extends Pivot
+class GeneralLicense extends MemfisModel
 {
     protected $fillable = [
         'aviation_degree',
