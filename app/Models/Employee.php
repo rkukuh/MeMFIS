@@ -20,7 +20,7 @@ class Employee extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * Many-to-Many: An employee may have zero or many general license.
+     * Many-to-Many: An employee may have zero or many license.
      *
      * This function will retrieve all the licenses of an employee.
      * See: License's employees() method for the inverse
