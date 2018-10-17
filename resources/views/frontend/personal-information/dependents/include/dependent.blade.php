@@ -14,13 +14,15 @@
                     </div>
                 </div>
                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                    {{-- @component('frontend.common.buttons.create-new')
-                        @slot('text', '')
-                        @slot('data_target', '#modal_')
-                    @endcomponent --}}
+                    @component('frontend.common.buttons.create-new')
+                        @slot('text', 'Add Dependent')
+                        @slot('data_target', '#modal_dependent')
+                    @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
+            @include('frontend.personal-information.dependents.modal.dependent')
+
         <div class="m_datatable_employee_hitory" id="scrolling_both"></div>
     </div>
