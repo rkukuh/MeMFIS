@@ -12,6 +12,6 @@ class Levels extends Seeder
      */
     public function run()
     {
-        //
+        factory(Level::class, 20)->create();
     }
 }
