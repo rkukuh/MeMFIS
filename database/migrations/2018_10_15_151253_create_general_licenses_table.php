@@ -18,11 +18,12 @@ class CreateGeneralLicensesTable extends Migration
         Schema::create('general_licenses', function (Blueprint $table) {
             $table->unsignedInteger('employee_license_id');
             $table->unsignedInteger('aviation_degree');
-            $table->string('aviation_degree_code');
+            $table->string('aviation_degree_no');
             $table->string('exam_no')->nullable();
             $table->timestamp('exam_date')->nullable();
             $table->string('attendance_no')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('employee_license_id')
                     ->references('id')->on('employee_license')
