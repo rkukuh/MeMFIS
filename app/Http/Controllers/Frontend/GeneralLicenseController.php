@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\ListUtil;
 use App\Models\GeneralLicense;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GeneralLicenseStore;
