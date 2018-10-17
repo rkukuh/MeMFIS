@@ -14,4 +14,17 @@ class Level extends MemfisModel
         'score',
         'description',
     ];
+
+    /******************************************* SCOPE *******************************************/
+
+    /**
+     * Scope a query to only include level of Language proficiency.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfLanguage(Builder $query)
+    {
+        return $query->where('of', 'language');
+    }
 }
