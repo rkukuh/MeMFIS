@@ -20,8 +20,8 @@ $factory->define(Type::class, function (Faker $faker) {
             'regulator',
             'capability',
             'eligibility',
+            'aviation-degree',
             'formal-school-degree',
-            'aviation-school-degree',
         ]),
     ];
 
@@ -36,5 +36,5 @@ $factory->state(Type::class, 'journal', ['of' => 'journal']);
 $factory->state(Type::class, 'regulator', ['of' => 'regulator']);
 $factory->state(Type::class, 'capability', ['of' => 'capability']);
 $factory->state(Type::class, 'eligibility', ['of' => 'eligibility']);
+$factory->state(Type::class, 'aviation-degree', ['of' => 'aviation-degree']);
 $factory->state(Type::class, 'formal-school-degree', ['of' => 'formal-school-degree']);
-$factory->state(Type::class, 'aviation-school-degree', ['of' => 'aviation-school-degree']);

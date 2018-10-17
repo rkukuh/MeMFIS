@@ -57,11 +57,11 @@ class CertifiedStaff extends Seeder
             ->general_licenses()
             ->createMany([
                 [
-                    'aviation_degree' => Type::ofAviationSchoolDegree()->where('code', 'c2')->first()->id,
+                    'aviation_degree' => Type::ofAviationDegree()->where('code', 'c2')->first()->id,
                     'aviation_degree_no' => '214/1746/1932',
                 ],
                 [
-                    'aviation_degree' => Type::ofAviationSchoolDegree()->where('code', 'c4')->first()->id,
+                    'aviation_degree' => Type::ofAviationDegree()->where('code', 'c4')->first()->id,
                     'aviation_degree_no' => '159/3800/1135',
                 ],
             ]);
@@ -82,11 +82,11 @@ class CertifiedStaff extends Seeder
             ->general_licenses()
             ->createMany([
                 [
-                    'aviation_degree' => Type::ofAviationSchoolDegree()->where('code', 'a1')->first()->id,
+                    'aviation_degree' => Type::ofAviationDegree()->where('code', 'a1')->first()->id,
                     'aviation_degree_no' => '166/0010/2427',
                 ],
                 [
-                    'aviation_degree' => Type::ofAviationSchoolDegree()->where('code', 'a4')->first()->id,
+                    'aviation_degree' => Type::ofAviationDegree()->where('code', 'a4')->first()->id,
                     'aviation_degree_no' => '156/0894/2397',
                 ],
             ]);
