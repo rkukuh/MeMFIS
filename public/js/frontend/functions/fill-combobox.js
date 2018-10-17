@@ -74,7 +74,7 @@ $(document).ready(function () {
                 $.each(data, function (key, value) {
                     if (angka3 == 1) {
                         $('select[name="certification"]').append(
-                            '<option> Select a Name</option>'
+                            '<option> Select a certification</option>'
                         );
 
                         angka3 = 0;
@@ -90,6 +90,38 @@ $(document).ready(function () {
 
     certification();
 });
+
+$(document).ready(function () {
+    license = function () {
+        $.ajax({
+            url: '/get-categories-item/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let angka3 = 1;
+
+                $('select[name="license"]').empty();
+
+                $.each(data, function (key, value) {
+                    if (angka3 == 1) {
+                        $('select[name="license"]').append(
+                            '<option> Select a License</option>'
+                        );
+
+                        angka3 = 0;
+                    }
+
+                    $('select[name="license"]').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    );
+                });
+            }
+        });
+    };
+
+    license();
+});
+
 
 $(document).ready(function () {
     name2 = function () {
