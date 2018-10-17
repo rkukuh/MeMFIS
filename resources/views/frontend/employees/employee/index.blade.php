@@ -92,7 +92,6 @@
                         </div>
                         <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
                                 @include('frontend.employees.employee.include.education')
-
                         </div>
                         <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
                                 @include('frontend.employees.employee.include.certification')
@@ -133,5 +132,5 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/employee.js')}}"></script>
+    <script src="{{ asset('js/frontend/employee/employee.js')}}"></script>
 @endpush

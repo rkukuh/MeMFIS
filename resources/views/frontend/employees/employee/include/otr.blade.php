@@ -14,13 +14,15 @@
                     </div>
                 </div>
                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create')
-                        @slot('text', 'Add Item')
-                        @slot('href', route('frontend.item.create') )
+                    @component('frontend.common.buttons.create-new')
+                        @slot('text', 'Add OTR')
+                        @slot('data_target', '#modal_otr')
                     @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
+            @include('frontend.employees.employee.modal.otr')
+
         <div class="m_datatable_otr" id="scrolling_both"></div>
     </div>
