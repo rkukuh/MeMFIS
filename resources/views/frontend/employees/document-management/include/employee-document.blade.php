@@ -14,13 +14,16 @@
                     </div>
                 </div>
                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create')
-                        @slot('text', 'Add Item')
-                        @slot('href', route('frontend.item.create') )
+                    @component('frontend.common.buttons.create-new')
+                        @slot('text', 'Employee Document')
+                        @slot('data_target', '#modal_employee_document')
                     @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-        <div class="m_datatable_employee" id="scrolling_both"></div>
+
+            @include('frontend.employees.document-management.modal.employee-document')
+
+        <div class="m_datatable_employee_document" id="scrolling_both"></div>
     </div>

@@ -78,5 +78,5 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/employee.js')}}"></script>
+    <script src="{{ asset('js/frontend/employee/document-management.js')}}"></script>
 @endpush
