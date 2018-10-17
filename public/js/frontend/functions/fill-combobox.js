@@ -92,6 +92,162 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    language = function () {
+        $.ajax({
+            url: '/get-categories-item/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let angka3 = 1;
+
+                $('select[name="language"]').empty();
+
+                $.each(data, function (key, value) {
+                    if (angka3 == 1) {
+                        $('select[name="language"]').append(
+                            '<option> Select a Language</option>'
+                        );
+
+                        angka3 = 0;
+                    }
+
+                    $('select[name="language"]').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    );
+                });
+            }
+        });
+    };
+
+    language();
+});
+
+$(document).ready(function () {
+    understanding = function () {
+        $.ajax({
+            url: '/get-categories-item/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let angka3 = 1;
+
+                $('select[name="understanding"]').empty();
+
+                $.each(data, function (key, value) {
+                    if (angka3 == 1) {
+                        $('select[name="understanding"]').append(
+                            '<option> Select a Understanding Level</option>'
+                        );
+
+                        angka3 = 0;
+                    }
+
+                    $('select[name="understanding"]').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    );
+                });
+            }
+        });
+    };
+
+    understanding();
+});
+
+$(document).ready(function () {
+    speaking = function () {
+        $.ajax({
+            url: '/get-categories-item/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let angka3 = 1;
+
+                $('select[name="speaking"]').empty();
+
+                $.each(data, function (key, value) {
+                    if (angka3 == 1) {
+                        $('select[name="speaking"]').append(
+                            '<option> Select a Speaking Level</option>'
+                        );
+
+                        angka3 = 0;
+                    }
+
+                    $('select[name="speaking"]').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    );
+                });
+            }
+        });
+    };
+
+    speaking();
+});
+
+$(document).ready(function () {
+    reading = function () {
+        $.ajax({
+            url: '/get-categories-item/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let angka3 = 1;
+
+                $('select[name="reading"]').empty();
+
+                $.each(data, function (key, value) {
+                    if (angka3 == 1) {
+                        $('select[name="reading"]').append(
+                            '<option> Select a Reading Level</option>'
+                        );
+
+                        angka3 = 0;
+                    }
+
+                    $('select[name="reading"]').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    );
+                });
+            }
+        });
+    };
+
+    reading();
+});
+
+$(document).ready(function () {
+    writinng = function () {
+        $.ajax({
+            url: '/get-categories-item/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let angka3 = 1;
+
+                $('select[name="writing"]').empty();
+
+                $.each(data, function (key, value) {
+                    if (angka3 == 1) {
+                        $('select[name="writing"]').append(
+                            '<option> Select a Writing Level</option>'
+                        );
+
+                        angka3 = 0;
+                    }
+
+                    $('select[name="writing"]').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    );
+                });
+            }
+        });
+    };
+
+    writinng();
+});
+
+
+$(document).ready(function () {
     license = function () {
         $.ajax({
             url: '/get-categories-item/',
