@@ -18,7 +18,7 @@ class CreateLevelsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->unsignedInteger('sequence')->default(1);
+            $table->unsignedInteger('score')->default(1);
             $table->string('of');
             $table->text('description')->nullable();
             $table->timestamps();
