@@ -44,6 +44,11 @@ var BootstrapDatepicker = function () {
                 todayHighlight: !0,
                 orientation: "bottom left",
                 templates: t
+            }), $("#valid_until, #valid_until_validate").datepicker({
+                rtl: mUtil.isRTL(),
+                todayHighlight: !0,
+                orientation: "bottom left",
+                templates: t
             }), $("#revoke_at, #revoke_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
