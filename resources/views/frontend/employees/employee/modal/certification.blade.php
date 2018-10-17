@@ -20,7 +20,7 @@
                                 </label>
 
                                 @component('frontend.common.input.select')
-                                    @slot('id', 'name2')
+                                    @slot('id', 'name3')
                                     @slot('text', 'Name')
                                     @slot('name', 'name')
                                     @slot('style', 'width:100%')
