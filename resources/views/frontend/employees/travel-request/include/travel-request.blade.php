@@ -14,13 +14,15 @@
                     </div>
                 </div>
                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create')
-                        @slot('text', 'Add Item')
-                        @slot('href', route('frontend.item.create') )
+                    @component('frontend.common.buttons.create-new')
+                        @slot('text', 'Add Travel Request')
+                        @slot('data_target', '#modal_travel_request')
                     @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-        <div class="m_datatable_certification" id="scrolling_both"></div>
+            @include('frontend.employees.travel-request.modal.travel-request')
+
+        <div class="m_datatable_travel_request" id="scrolling_both"></div>
     </div>
