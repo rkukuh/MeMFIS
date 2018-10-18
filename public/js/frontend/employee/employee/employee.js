@@ -116,8 +116,6 @@ let Employee = {
             let gender = $('input[name=gender]:checked').val();
             let dob = $('#dob').val();
             let hired_at = $('#hired_at').val();
-            alert(gender);
-
 
             $.ajax({
                 headers: {
@@ -144,7 +142,7 @@ let Employee = {
                         }
 
                         if (data.errors.first_name) {
-                            $('#first_name-error').html(data.errors.name[0]);
+                            $('#first_name-error').html(data.errors.first_name[0]);
 
                         }
 
@@ -152,11 +150,22 @@ let Employee = {
                         document.getElementById('first_name').value = first_name;
                         document.getElementById('middle_name').value = middle_name;
                         document.getElementById('last_name').value = last_name;
-                        document.getElementById('gender').value = gender;
-                        document.getElementById('dob').value = dob;
+                        if(gender == 'f'){
+                            document.getElementById('f').checked = true;
+                        }
+                        else if(gender == 'm'){
+                            document.getElementById('m').checked = true;
+                        }
+                            document.getElementById('dob').value = dob;
                         document.getElementById('hired_at').value = hired_at;
 
                     } else {
+                        
+                        let table = $('.m_datatable_employee').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
 
                         employee_employee_reset();
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
@@ -188,7 +197,7 @@ let Employee = {
                     if(data.gender == 'f'){
                         document.getElementById('f').checked = true;
                     }
-                    else{
+                    else if(gender == 'm'){
                         document.getElementById('m').checked = true;
                     }
 
