@@ -35,7 +35,6 @@
                                     @slot('id', 'first_name')
                                     @slot('text', 'First Name')
                                     @slot('name', 'first_name')
-                                    @slot('id_error', 'first-name')
                                 @endcomponent
                             </div>
                         </div>
@@ -110,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer modal-footer-employee">
+                    <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
                                     <div class="flex">
