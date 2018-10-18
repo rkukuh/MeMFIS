@@ -136,7 +136,16 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
-        dd($request->all());
+        $employee = Employee::create([
+            'code' => $request->code,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'dob' => $request->dob,
+            'hired_at' => $request->hired_at,
+        ]);
+
+        return response()->json($employee);
     }
 
     /**
