@@ -136,7 +136,7 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -158,7 +158,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return response()->json($employee);
     }
 
     /**
