@@ -273,6 +273,8 @@ let Employee = {
                         document.getElementById('hired_at').value = hired_at;
 
                     } else {
+                        employee_employee_reset();
+
                         save_button();
                         $('#modal_employee').modal('hide');
 
