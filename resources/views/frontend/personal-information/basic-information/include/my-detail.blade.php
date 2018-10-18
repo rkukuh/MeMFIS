@@ -1,6 +1,4 @@
 <div class="col-lg-12 col-md-12 col-sm-12">
-{{-- <div class="m-content">
-        <div class="row"> --}}
             <div class="m-content">
                 <div class="row">
                     <table>
@@ -17,20 +15,6 @@
                             </td>
                         </tr>
                     </table>
-                        {{-- <div class="col-sm-3 col-md-3 col-lg-3">
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-lg-9">
-                        </div> --}}
-                        {{-- <div class="col-sm-3 col-md-3 col-lg-3">
-                            <h5>Date of Birth </h5> 
-                            <p>March 17th, 1984 </p> 
-                            <h5>Joined Date </h5> 
-                            <p>August 3rd, 2005 </p> 
-                        </div>                    
-                        <div class="col-sm-3 col-md-3 col-lg-3">
-                            <h5>Gender </h5> 
-                            <p>Male </p> 
-                        </div>                             --}}
                 </div>
             </div>
             <div class="m-portlet m-portlet--bordered m-portlet--rounded m-portlet--unair">
@@ -148,6 +132,4 @@
                             </div>
                 </div>
             </div>	
-        {{-- </div>
-    </div> --}}
 </div>
