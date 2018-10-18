@@ -20,10 +20,10 @@
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'code')
+                                    @slot('id', 'code_employee')
                                     @slot('text', 'Code')
-                                    @slot('name', 'code')
-                                    @slot('id_error', 'code')
+                                    @slot('name', 'code_employee')
+                                    @slot('id_error', 'code_employee')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -35,7 +35,7 @@
                                     @slot('id', 'first_name')
                                     @slot('text', 'First Name')
                                     @slot('name', 'first_name')
-                                    @slot('id_error', 'first-name')
+                                    @slot('id_error', 'first_name')
                                 @endcomponent
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                     </label>
                                     <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
                                         @component('frontend.common.input.radio')
-                                            @slot('id', 'gender')
+                                            @slot('id', 'm')
                                             @slot('name','gender')
                                             @slot('text', 'Male')
                                             @slot('value', 'm')
@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
                                         @component('frontend.common.input.radio')
-                                            @slot('id', 'gender')
+                                            @slot('id', 'f')
                                             @slot('name','gender')
                                             @slot('text', 'Female')
                                             @slot('value', 'f')
@@ -116,8 +116,11 @@
                                     <div class="flex">
                                         <div class="action-buttons">
                                                 {{-- <div id="button-div" style="height:0px;"> --}}
-                                                    @include('frontend.common.buttons.submit')
-                                                {{-- </div>  --}}
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('class', 'add-employee')
+                                                        @slot('id', 'add-employee')
+                                                    @endcomponent
+                                                    {{-- </div>  --}}
                                                     @include('frontend.common.buttons.reset')
                             
                                                     @include('frontend.common.buttons.close')
