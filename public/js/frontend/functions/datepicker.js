@@ -18,13 +18,13 @@ var BootstrapDatepicker = function () {
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
-                format: "yyyy-mm-dd 00:00:00",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#hired_at, #hired_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
-                format: "yyyy-mm-dd 00:00:00",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#start_at, #start_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
