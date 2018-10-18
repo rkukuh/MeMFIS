@@ -44,16 +44,11 @@ class CertifiedStaff extends Seeder
 
         // E/I.3475 details:
 
-        $ei_3475 = EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
-                        return $query->where('employee_id', $aldrin->id);
-                    })
-                    ->where('code', 'E/I.3475')
-                    ->first();
-
         EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
-                $query->where('employee_id', $aldrin->id);
+                return $query->where('employee_id', $aldrin->id);
             })
-            ->find($ei_3475->id)
+            ->where('code', 'E/I.3475')
+            ->first()
             ->general_licenses()
             ->createMany([
                 [
@@ -66,19 +61,13 @@ class CertifiedStaff extends Seeder
                 ],
             ]);
 
-
         // A/P.3475 details:
 
-        $ap_3475 = EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
-                        return $query->where('employee_id', $aldrin->id);
-                    })
-                    ->where('code', 'A/P.3475')
-                    ->first();
-
         EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
-                $query->where('employee_id', $aldrin->id);
+                return $query->where('employee_id', $aldrin->id);
             })
-            ->find($ap_3475->id)
+            ->where('code', 'A/P.3475')
+            ->first()
             ->general_licenses()
             ->createMany([
                 [
