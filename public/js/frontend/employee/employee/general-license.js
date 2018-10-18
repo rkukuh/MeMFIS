@@ -1,12 +1,13 @@
-let Item = {
+let Employee = {
     init: function () {
-        $('.m_datatable').mDatatable({
+
+        $('.m_datatable_general_license').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/get-general-licenses',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -34,7 +35,7 @@ let Item = {
             filterable: !1,
             pagination: !0,
             search: {
-                input: $('#generalSearch')
+                input: $('#generalSearch4')
             },
             toolbar: {
                 items: {
@@ -45,41 +46,78 @@ let Item = {
             },
             columns: [{
                     field: 'code',
-                    title: 'Part No.',
+                    title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    // width: 100
                 },
                 {
-                    field: 'name',
-                    title: 'Item Name',
+                    field: 'employee_id',
+                    title: 'Name',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 250
+                },
+                {
+                    field: 'license_id',
+                    title: 'License',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'aciation_degree',
+                    title: 'Aciation Degree',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
+                    field: 'exam_no',
+                    title: 'Exam No',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'exam_date',
+                    title: 'Exam Date',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'attendace_no',
+                    title: 'Attendace No',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'issued_at',
+                    title: 'Issued At',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'valid_until',
+                    title: 'Valid Until',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'revoke_at',
+                    title: 'Revoke At',
+                    sortable: 'asc',
+                    filterable: !1
                 },
                 {
                     field: 'Actions',
-                    width: 110,
+                    // width: 170,
                     title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
@@ -89,7 +127,7 @@ let Item = {
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
+        let remove_general_license = $('.m_datatable_general_license').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({
@@ -117,7 +155,7 @@ let Item = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.m_datatable_general_license').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -146,9 +184,12 @@ let Item = {
             });
         });
 
+
+
+
     }
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    Employee.init();
 });

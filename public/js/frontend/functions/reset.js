@@ -45,3 +45,17 @@ let journal_reset = function () {
     $('#nameerror').html('');
 
 }
+
+let employee_employee_reset = function () {
+    // $("#type").select2('val', 'All');
+    document.getElementById('code').value = "";
+    document.getElementById('first_name').value = "";
+    document.getElementById('middle_name').value = "";
+    document.getElementById('last_name').value = "";
+    document.getElementById('dob').value = "";
+    document.getElementById('gender').value = "";
+    document.getElementById('hired_at').value = "";
+    $('#code_employee-error').html('');
+    $('#first-name-error').html('');
+
+}

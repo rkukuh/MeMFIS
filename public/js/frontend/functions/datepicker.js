@@ -18,11 +18,13 @@ var BootstrapDatepicker = function () {
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd 00:00:00",
                 templates: t
             }), $("#hired_at, #hired_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd 00:00:00",
                 templates: t
             }), $("#start_at, #start_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
@@ -40,6 +42,11 @@ var BootstrapDatepicker = function () {
                 orientation: "bottom left",
                 templates: t
             }), $("#issued_at, #issued_at_validate").datepicker({
+                rtl: mUtil.isRTL(),
+                todayHighlight: !0,
+                orientation: "bottom left",
+                templates: t
+            }), $("#valid_until, #valid_until_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",

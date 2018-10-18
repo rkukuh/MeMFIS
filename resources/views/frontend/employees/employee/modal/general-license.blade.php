@@ -85,13 +85,13 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Attendance No @include('frontend.common.label.optional')
+                                    Exam No @include('frontend.common.label.optional')
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'attendance_no')
-                                    @slot('name','attendance_no')
-                                    @slot('text', 'Attendance No')
+                                    @slot('id', 'exam_no')
+                                    @slot('name','exam_no')
+                                    @slot('text', 'Exam No')
                                 @endcomponent
                             </div>
                         </div>
@@ -129,6 +129,18 @@
                                     @slot('name','issued_at')
                                 @endcomponent
                             </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Valid Until @include('frontend.common.label.optional')
+                                </label>
+
+                                @component('frontend.common.input.datepicker')
+                                    @slot('id', 'valid_until')
+                                    @slot('name','valid_until')
+                                @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Revoke At @include('frontend.common.label.optional')

@@ -1,12 +1,12 @@
-let Item = {
+let Employee = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.m_datatable_certification').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/get-certifications',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -34,7 +34,7 @@ let Item = {
             filterable: !1,
             pagination: !0,
             search: {
-                input: $('#generalSearch')
+                input: $('#generalSearch3')
             },
             toolbar: {
                 items: {
@@ -45,28 +45,35 @@ let Item = {
             },
             columns: [{
                     field: 'code',
-                    title: 'Part No.',
+                    title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    // width: 100
+                },
+                {
+                    field: 'code',
+                    title: 'Name',
+                    sortable: 'asc',
+                    filterable: !1,
+                    // width: 250
+                },
+                {
+                    field: 'code',
+                    title: 'Institute',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'name',
-                    title: 'Item Name',
+                    title: 'Start At',
                     sortable: 'asc',
                     filterable: !1
                 },
                 {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
+                    field: 'name',
+                    title: 'Graduated At',
+                    sortable: 'asc',
+                    filterable: !1
                 },
                 {
                     field: 'Actions',
@@ -76,10 +83,10 @@ let Item = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
@@ -89,7 +96,7 @@ let Item = {
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
+        let remove_certification = $('.m_datatable_certification').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({
@@ -117,7 +124,7 @@ let Item = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.m_datatable_certification').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -146,9 +153,11 @@ let Item = {
             });
         });
 
+
+
     }
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    Employee.init();
 });

@@ -1,6 +1,6 @@
-let Item = {
+let Employee = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.m_datatable_terminated_employee_data').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -34,7 +34,7 @@ let Item = {
             filterable: !1,
             pagination: !0,
             search: {
-                input: $('#generalSearch')
+                input: $('#generalSearch12')
             },
             toolbar: {
                 items: {
@@ -45,28 +45,16 @@ let Item = {
             },
             columns: [{
                     field: 'code',
-                    title: 'Part No.',
+                    title: 'Part No.2',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
                     field: 'name',
-                    title: 'Item Name',
+                    title: 'Item Name2',
                     sortable: 'asc',
                     filterable: !1
-                },
-                {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
-                        );
-                    }
                 },
                 {
                     field: 'Actions',
@@ -76,10 +64,10 @@ let Item = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
+                            '<a href="item/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a href="item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
+                            '<a href="item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
@@ -89,7 +77,7 @@ let Item = {
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
+        let remove_terminated_employee_data = $('.m_datatable_terminated_employee_data').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({
@@ -117,7 +105,7 @@ let Item = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.m_datatable_terminated_employee_data').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -145,10 +133,9 @@ let Item = {
                 }
             });
         });
-
     }
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    Employee.init();
 });

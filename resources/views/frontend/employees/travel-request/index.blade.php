@@ -41,11 +41,6 @@
                                     <i class="la la-cog"></i> Travel Request
                                 </a>
                             </li>
-                            <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_2" role="tab">
-                                    <i class="la la-briefcase"></i> Custom Field
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
