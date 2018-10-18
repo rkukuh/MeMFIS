@@ -55,7 +55,7 @@ let employee_employee_reset = function () {
     document.getElementById('dob').value = "";
     document.getElementById('gender').value = "";
     document.getElementById('hired_at').value = "";
-    $('#code-error').html('');
+    $('#code_employee-error').html('');
     $('#first-name-error').html('');
 
 }
