@@ -124,7 +124,7 @@ let Employee = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/post-employees',
+                url: '/employee',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
