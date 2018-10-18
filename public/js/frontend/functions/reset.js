@@ -53,7 +53,6 @@ let employee_employee_reset = function () {
     document.getElementById('middle_name').value = "";
     document.getElementById('last_name').value = "";
     document.getElementById('dob').value = "";
-    document.getElementById('gender').value = "";
     document.getElementById('hired_at').value = "";
     $('#code_employee-error').html('');
     $('#first-name-error').html('');
