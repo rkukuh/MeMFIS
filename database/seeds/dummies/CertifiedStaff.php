@@ -5,6 +5,7 @@ use App\Models\Type;
 use App\Models\License;
 use App\Models\Employee;
 use Illuminate\Database\Seeder;
+use App\Models\Pivots\EmployeeLicense;
 
 class CertifiedStaff extends Seeder
 {
@@ -23,6 +24,7 @@ class CertifiedStaff extends Seeder
             'last_name' => 'Collins',
         ]);
 
+
         /** Assign EMPLOYEE to GENERAL LICENSE */
 
         $general_license = License::where('code', 'general-license')->first();
@@ -37,12 +39,57 @@ class CertifiedStaff extends Seeder
             'issued_at' => Carbon::createFromFormat('Y-m-d', '2011-08-15'),
         ]);
 
+
         /** Assign GENERAL LICENSE to AVIATION DEGREE */
 
-        $degree_a1 = Type::ofAviationSchoolDegree()->where('code', 'a1')->first();
-        $degree_a4 = Type::ofAviationSchoolDegree()->where('code', 'a4')->first();
-        $degree_c2 = Type::ofAviationSchoolDegree()->where('code', 'c2')->first();
-        $degree_c4 = Type::ofAviationSchoolDegree()->where('code', 'c4')->first();
+        // E/I.3475 details:
+
+        $ei_3475 = EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
+                        return $query->where('employee_id', $aldrin->id);
+                    })
+                    ->where('code', 'E/I.3475')
+                    ->first();
+
+        EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
+                $query->where('employee_id', $aldrin->id);
+            })
+            ->find($ei_3475->id)
+            ->general_licenses()
+            ->createMany([
+                [
+                    'aviation_degree' => Type::ofAviationDegree()->where('code', 'c2')->first()->id,
+                    'aviation_degree_no' => '214/1746/1932',
+                ],
+                [
+                    'aviation_degree' => Type::ofAviationDegree()->where('code', 'c4')->first()->id,
+                    'aviation_degree_no' => '159/3800/1135',
+                ],
+            ]);
+
+
+        // A/P.3475 details:
+
+        $ap_3475 = EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
+                        return $query->where('employee_id', $aldrin->id);
+                    })
+                    ->where('code', 'A/P.3475')
+                    ->first();
+
+        EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
+                $query->where('employee_id', $aldrin->id);
+            })
+            ->find($ap_3475->id)
+            ->general_licenses()
+            ->createMany([
+                [
+                    'aviation_degree' => Type::ofAviationDegree()->where('code', 'a1')->first()->id,
+                    'aviation_degree_no' => '166/0010/2427',
+                ],
+                [
+                    'aviation_degree' => Type::ofAviationDegree()->where('code', 'a4')->first()->id,
+                    'aviation_degree_no' => '156/0894/2397',
+                ],
+            ]);
 
         /** Assign EMPLOYEE to AME LICENSE */
 
