@@ -160,7 +160,8 @@ let Employee = {
                         document.getElementById('hired_at').value = hired_at;
 
                     } else {
-                        
+                        $('#modal_employee').modal('hide');
+
                         let table = $('.m_datatable_employee').mDatatable();
 
                         table.originalDataSet = [];
@@ -194,15 +195,20 @@ let Employee = {
                     // document.getElementById('gender').value = data.gender;
                     document.getElementById('dob').value = data.dob;
                     document.getElementById('hired_at').value = data.hired_at;
-                    if(data.gender == 'f'){
-                        document.getElementById('f').checked = true;
+                    document.getElementById('id_employ').value = data.uuid;
+                    
+                    if(data.gender != null){
+                        if(data.gender == 'f'){
+                            document.getElementById('f').checked = true;
+                        }
+                        else if(data.gender == 'm'){
+                            document.getElementById('m').checked = true;
+                        }    
                     }
-                    else if(gender == 'm'){
-                        document.getElementById('m').checked = true;
-                    }
+                        $('.btn-success').removeClass('add-employee');
+                        $('.btn-success').addClass('update-employee');
+                        $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save Changes</span></span>");
 
-
-                    update_button();
                 },
                 error: function (jqXhr, json, errorThrown) {
                     let errorsHtml = '';
@@ -215,89 +221,73 @@ let Employee = {
             });
         });
 
-        // $('.modal-footer-employee').on('click', '.edit-employee', function () {
-        //     alert('edit');
-        //     // if ($('#category :selected').length > 0) {
-        //     //     var selectedcategories = [];
-        //     //     $('#category :selected').each(function (i, selected) {
-        //     //         selectedcategories[i] = $(selected).val();
-        //     //     });
-        //     // }
+        let update = $('.modal-footer').on('click', '.update-employee', function () {
+            let code = $('input[name=code_employee]').val();
+            let first_name = $('input[name=first_name]').val();
+            let middle_name = $('input[name=middle_name]').val();
+            let last_name = $('input[name=last_name]').val();
+            let gender = $('input[name=gender]:checked').val();
+            let dob = $('#dob').val();
+            let hired_at = $('#hired_at').val();
+            let triggerid = $('input[name=id_employ]').val();
 
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/employee/' + triggerid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    code: code,
+                    first_name: first_name,
+                    middle_name: middle_name,
+                    last_name: last_name,
+                    gender: gender,
+                    dob: dob,
+                    hired_at: hired_at,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.code) {
+                            $('#code_employee-error').html(data.errors.code[0]);
 
-        //     // if (document.getElementById("isstock").checked) {
-        //     //     isstock = 1;
-        //     // } else {
-        //     //     isstock = 0;
-        //     // }
+                        }
 
-        //     // if (document.getElementById("isppn").checked) {
-        //     //     isppn = 1;
-        //     // } else {
-        //     //     isppn = 0;
-        //     // }
-        //     // let accountcode2 = $('#accountcode2').val();
-        //     // let code = $('input[name=code]').val();
-        //     // let name = $('input[name=name]').val();
-        //     // let description = $('#description').val();
-        //     // let barcode = $('input[name=barcode]').val();
-        //     // let ppn = $('input[name=ppn]').val();
-        //     // $.ajax({
-        //     //     headers: {
-        //     //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     //     },
-        //     //     type: 'PUT',
-        //     //     url: '/item/'+code+'/update',
-        //     //     data: {
-        //     //         _token: $('input[name=_token]').val(),
-        //     //         code: code,
-        //     //         name: name,
-        //     //         barcode: barcode,
-        //     //         ppn: ppn,
-        //     //         description: description,
-        //     //         accountcode: accountcode2,
-        //     //         selectedcategories: selectedcategories
+                        else if (data.errors.first_name) {
+                            $('#first_name-error').html(data.errors.first_name[0]);
 
-        //     //     },
-        //     //     success: function (data) {
-        //     //         if (data.errors) {
-        //     //             if (data.errors.code) {
-        //     //                 $('#code-error').html(data.errors.code[0]);
+                        }
 
-        //     //             }
+                        document.getElementById('code_employee').value = code;
+                        document.getElementById('first_name').value = first_name;
+                        document.getElementById('middle_name').value = middle_name;
+                        document.getElementById('last_name').value = last_name;
+                        if(gender == 'f'){
+                            document.getElementById('f').checked = true;
+                        }
+                        else if(gender == 'm'){
+                            document.getElementById('m').checked = true;
+                        }
+                            document.getElementById('dob').value = dob;
+                        document.getElementById('hired_at').value = hired_at;
 
-        //     //             if (data.errors.name) {
-        //     //                 $('#name-error').html(data.errors.name[0]);
+                    } else {
+                        save_button();
+                        $('#modal_employee').modal('hide');
 
-        //     //             }
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
 
-        //     //             document.getElementById('code').value = code;
-        //     //             document.getElementById('name').value = name;
-        //     //             document.getElementById('description').value = description;
-        //     //             document.getElementById('barcode').value = barcode;
-        //     //             document.getElementById('accountcode2').value = accountcode2;
+                        let table = $('.m_datatable_employee').mDatatable();
 
-        //     //         } else {
-
-        //     //             $('input[type=file]').val("");
-        //     //             $('#code-error').html('');
-        //     //             $('#name-error').html('');
-        //     //             $('#description-error').html('');
-        //     //             $('#barcode-error').html('');
-        //     //             // document.getElementById('item-uom').removeAttribute('disabled');
-        //     //             // document.getElementById('item-minmaxstock').removeAttribute('disabled');
-        //     //             $('#item-storage').html(code);
-        //     //             $('#item-unit').html();
-        //     //             // item_reset();
-        //     //             toastr.success('Data berhasil disimpan.', 'Sukses', {
-        //     //                 timeOut: 5000
-        //     //             });
-        //     //             // location.reload();
-        //     //             // photo();
-        //     //         }
-        //     //     }
-        //     // });
-        // });
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
 
         let remove_employee = $('.m_datatable_employee').on('click', '.delete-employee', function () {
             let triggerid = $(this).data('id');
