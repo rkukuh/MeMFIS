@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use DB;
 use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\License;
@@ -22,10 +23,21 @@ class GeneralLicenseController extends Controller
      */
     public function getGeneralLicenses()
     {
-        $employees = Employee::with('general_licenses')->first();
+        // GeneralLicense::with('employee_license')->get()
+        // $employees = Employee::with('general_licenses')->get();
+        // $employees = Employee::with('general_licenses')->first();
+        $general_licenses = DB::table('employees')
+                ->join('employee_license', 'employee_license.employee_id', '=', 'employees.id')
+                ->join('licenses', 'licenses.id', '=', 'employee_license.license_id')
+                ->join('general_licenses', 'general_licenses.employee_license_id', '=', 'employee_license.id')
+                ->select('general_licenses.*', 'employee_license.code', 'employee_license.issued_at', 'employee_license.revoke_at', 'employee_license.valid_until','employee_license.employee_id','employees.first_name')
+                // ->where('employee_license.employee_id',$employee)
+                // ->where('general_licenses.id',$generallicense)
+                ->get();
 
-        $data = $alldata = json_decode($employees->general_licenses);
+        
 
+        $data = $alldata = json_decode($general_licenses);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -142,7 +154,6 @@ class GeneralLicenseController extends Controller
      */
     public function store(GeneralLicenseStore $request)
     {
-        // dd($request->all());
         $employee =  Employee::find($request->name);
         $general_license = License::where('code', 'general-license')->first();
 
@@ -191,9 +202,40 @@ class GeneralLicenseController extends Controller
      * @param  \App\Models\GeneralLicense  $generalLicense
      * @return \Illuminate\Http\Response
      */
-    public function edit(GeneralLicense $generalLicense)
+    public function edit($generallicense, $employee)
     {
-        //
+        $general_license = DB::table('employees')
+                ->join('employee_license', 'employee_license.employee_id', '=', 'employees.id')
+                ->join('licenses', 'licenses.id', '=', 'employee_license.license_id')
+                ->join('general_licenses', 'general_licenses.employee_license_id', '=', 'employee_license.id')
+                ->select('general_licenses.*', 'employee_license.code', 'employee_license.issued_at', 'employee_license.revoke_at', 'employee_license.valid_until','employee_license.employee_id','employees.first_name')
+                ->where('employee_license.employee_id',$employee)
+                ->where('general_licenses.id',$generallicense)
+                ->first();
+        // dd($general_licenses);
+        // $employee = Employee::with('general_licenses')->find($employee);
+        //     dd($employee);
+        //    dd($employee->general_licenses->code);
+        // $general_license = GeneralLicense::find($generallicense);
+        return response()->json($general_license);
+
+        // dd($general_license);
+
+    }
+
+        /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\GeneralLicense  $generalLicense
+     * @return \Illuminate\Http\Response
+     */
+    public function employeeLicense($generallicense, $employee)
+    {
+        $general_license = EmployeeLicense::find($generallicense);
+        return response()->json($general_license);
+
+        // dd($general_license);
+
     }
 
     /**
