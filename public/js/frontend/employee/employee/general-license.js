@@ -52,20 +52,14 @@ let GeneralLicense = {
                     // width: 100
                 },
                 {
-                    field: 'employee_id',
+                    field: 'first_name',
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                     // width: 250
                 },
                 {
-                    field: 'license_id',
-                    title: 'License',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'aciation_degree',
+                    field: 'aviation_degree',
                     title: 'Aciation Degree',
                     sortable: 'asc',
                     filterable: !1
@@ -83,7 +77,7 @@ let GeneralLicense = {
                     filterable: !1
                 },
                 {
-                    field: 'attendace_no',
+                    field: 'attendance_no',
                     title: 'Attendace No',
                     sortable: 'asc',
                     filterable: !1
@@ -108,7 +102,7 @@ let GeneralLicense = {
                 },
                 {
                     field: 'Actions',
-                    // width: 170,
+                    width: 170,
                     title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
@@ -116,10 +110,11 @@ let GeneralLicense = {
                         return (
                             // '<a  data-toggle="modal" data-target="#modal_employee" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             // '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a  data-toggle="modal" data-target="#modal_general_license" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<a  data-toggle="modal" data-target="#modal_general_license" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-general-license" title="Edit" data-employee="'+t.employee_id+'"  data-id=' +
+                            t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-general-license" href="#" data-id=' +
-                            t.uuid +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-general-license" href="#" data-employee="'+t.employee_id+'" data-id=' +
+                            t.id +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -217,36 +212,40 @@ let GeneralLicense = {
             });
         });
 
-        let edit = $('.m_datatable-general-license').on('click', '.edit-general-license', function () {
+        let edit = $('.m_datatable_general_license').on('click', '.edit-general-license', function () {
             let triggerid = $(this).data('id');
-
+            let triggerid2 = $(this).data('employee');
+            // alert(triggerid);
+            // alert(triggerid2);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/general-license/' + triggerid + '/edit',
+                url: '/general-license/'+triggerid+'/'+triggerid2+ '/edit',
                 success: function (data) {
-                    document.getElementById('code_employee').value = data.code;
-                    document.getElementById('first_name').value = data.first_name;
-                    document.getElementById('middle_name').value = data.middle_name;
-                    document.getElementById('last_name').value = data.last_name;
-                    // document.getElementById('gender').value = data.gender;
-                    document.getElementById('dob').value = data.dob;
-                    document.getElementById('hired_at').value = data.hired_at;
-                    document.getElementById('id_employ').value = data.uuid;
+                    document.getElementById('name4').text = data.first_name;
+                    // document.getElementById('aviation_degree').value = data.first_name;
+                    document.getElementById('code_general_license').value = data.code;
+                    document.getElementById('exam_no').value = data.exam_no;
+                    document.getElementById('exam_date').value = data.exam_date;
+                    document.getElementById('attendance_no').value = data.attendance_no;
+                    document.getElementById('aviation_degree_no').value = data.aviation_degree_no;
+                    document.getElementById('issued_at').value = data.issued_at;
+                    document.getElementById('valid_until').value = data.valid_until;
+                    document.getElementById('revoke_at').value = data.revoke_at;
                     
-                    if(data.gender != null){
-                        if(data.gender == 'f'){
-                            document.getElementById('f').checked = true;
-                        }
-                        else if(data.gender == 'm'){
-                            document.getElementById('m').checked = true;
-                        }    
-                    }
-                        $('.btn-success').removeClass('add-employee');
-                        $('.btn-success').addClass('update-employee');
-                        $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save Changes</span></span>");
+                    // if(data.gender != null){
+                    //     if(data.gender == 'f'){
+                    //         document.getElementById('f').checked = true;
+                    //     }
+                    //     else if(data.gender == 'm'){
+                    //         document.getElementById('m').checked = true;
+                    //     }    
+                    // }
+                    //     $('.btn-success').removeClass('add-employee');
+                    //     $('.btn-success').addClass('update-employee');
+                    //     $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save Changes</span></span>");
 
                 },
                 error: function (jqXhr, json, errorThrown) {
@@ -334,6 +333,7 @@ let GeneralLicense = {
 
         let remove_general_license = $('.m_datatable_general_license').on('click', '.delete-general-license', function () {
             let triggerid = $(this).data('id');
+            let triggerid2 = $(this).data('employee');
 
             swal({
                 title: 'Are you sure?',
