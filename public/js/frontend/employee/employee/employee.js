@@ -221,7 +221,7 @@ let Employee = {
             });
         });
 
-        let update = $('.modal-footer').on('click', '.update-employee', function () {
+        let update = $('.modal-footer-employee').on('click', '.update-employee', function () {
             let code = $('input[name=code_employee]').val();
             let first_name = $('input[name=first_name]').val();
             let middle_name = $('input[name=middle_name]').val();
