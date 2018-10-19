@@ -29,60 +29,52 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    License @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.select')
-                                    @slot('id', 'license')
-                                    @slot('text', 'License')
-                                    @slot('name', 'license')
-                                    @slot('style', 'width:100%')
-                                @endcomponent
-
-                                @component('frontend.common.buttons.create-new')
-                                    @slot('size', 'sm')
-                                    @slot('text', 'Add Licanse')
-                                    @slot('data_target', '#modal_licanse')
-                                    @slot('style', 'margin-top: 10px;')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
                                     Code @include('frontend.common.label.optional')
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'code')
-                                    @slot('name','code')
+                                    @slot('id', 'code_general_license')
+                                    @slot('name','code_general_license')
                                     @slot('text', 'Code')
                                 @endcomponent
                             </div>
+
+                        </div>
+                        <div class="form-group m-form__group row ">
+                           
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Aviation Degree @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.text')
+                                @component('frontend.common.input.select')
                                     @slot('id', 'aviation_degree')
-                                    @slot('name','aviation_degree')
-                                    @slot('text', 'Aviation Degree')
+                                    @slot('text', 'aviation_degree')
+                                    @slot('name', 'aviation_degree')
+                                    @slot('style', 'width:100%')
                                 @endcomponent
+                                @component('frontend.common.buttons.create-new')
+                                    @slot('size', 'sm')
+                                    @slot('text', 'Add Aviation Degree')
+                                    @slot('data_target', '#modal_aviation_degree')
+                                    @slot('style', 'margin-top: 10px;')
+                                @endcomponent
+
                             </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Aviation degree Code @include('frontend.common.label.optional')
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'aviation_degree_code')
-                                    @slot('name','aviation_degree_code')
-                                    @slot('text', 'Aviation degree Code')
+                                    @slot('id', 'aviation_degree_no')
+                                    @slot('name','aviation_degree_no')
+                                    @slot('text', 'Aviation degree No')
                                 @endcomponent
                             </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
+ 
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Exam No @include('frontend.common.label.optional')
@@ -94,8 +86,6 @@
                                     @slot('text', 'Exam No')
                                 @endcomponent
                             </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Exam Date @include('frontend.common.label.optional')
@@ -106,6 +96,9 @@
                                     @slot('name','exam_date')
                                 @endcomponent
                             </div>
+
+                        </div>
+                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Attendance No @include('frontend.common.label.optional')
@@ -117,8 +110,6 @@
                                     @slot('text', 'Attendance No')
                                 @endcomponent
                             </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Issued At @include('frontend.common.label.optional')
@@ -129,6 +120,8 @@
                                     @slot('name','issued_at')
                                 @endcomponent
                             </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Valid Until @include('frontend.common.label.optional')
@@ -139,8 +132,6 @@
                                     @slot('name','valid_until')
                                 @endcomponent
                             </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Revoke At @include('frontend.common.label.optional')
@@ -151,15 +142,19 @@
                                     @slot('name','revoke_at')
                                 @endcomponent
                             </div>
+
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer modal-footer-general-license">
                         <div class="flex">
                             <div class="action-buttons">
                                     <div class="flex">
                                         <div class="action-buttons">
                                                 {{-- <div id="button-div" style="height:0px;"> --}}
-                                                    @include('frontend.common.buttons.submit')
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('class', 'add-general-license')
+                                                        @slot('id', 'add-general-license')
+                                                    @endcomponent
                                                 {{-- </div>  --}}
                                                     @include('frontend.common.buttons.reset')
                             
