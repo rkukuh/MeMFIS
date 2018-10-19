@@ -1,5 +1,5 @@
 <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="row align-items-center">
+        <div class="row align-items-center" style="padding-bottom:15px">
                 <div class="col-xl-8 order-2 order-xl-1">
                     <div class="form-group m-form__group row align-items-center">
                         <div class="col-md-4">
