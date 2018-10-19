@@ -21,6 +21,10 @@ Route::name('component.')->group(function () {
     Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');    
     Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
     Route::get('get-accountcodes', 'FillComboxController@accountCodes')->name('get-accountcodes');    
+    Route::get('get-licenses', 'FillComboxController@licenses')->name('get-licenses');    
+    Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data'); 
+    Route::get('get-aviation-degree', 'FillComboxController@aviationDegrees')->name('get-eaviation-degree'); 
+      
     });
 });
 
