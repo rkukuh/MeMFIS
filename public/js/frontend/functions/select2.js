@@ -56,6 +56,8 @@ let Select2 = {
             placeholder: 'Select a Certification'
         }), $('#school, #school_validate').select2({
             placeholder: 'Select a School'
+        }), $('#aviation_degree, #aviation_degree_validate').select2({
+            placeholder: 'Select a aviation Degree'
         }), $('#license, #license_validate').select2({
             placeholder: 'Select a License'
         }), $('#license2, #license2_validate').select2({
