@@ -139,5 +139,6 @@
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
     <script src="{{ asset('js/frontend/employee/employee/employee.js')}}"></script>
+    <script src="{{ asset('js/frontend/employee/employee/general-license.js')}}"></script>
     {{-- <script src="{{ asset('js/frontend/employee/employee.js')}}"></script> --}}
 @endpush
