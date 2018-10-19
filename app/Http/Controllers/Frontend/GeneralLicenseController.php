@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Carbon\Carbon;
+use App\Models\Type;
+use App\Models\License;
 use App\Models\Employee;
 use App\Models\ListUtil;
 use App\Models\GeneralLicense;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\EmployeeLicense;
 use App\Http\Requests\Frontend\GeneralLicenseStore;
 use App\Http\Requests\Frontend\GeneralLicenseUpdate;
 
@@ -138,7 +142,36 @@ class GeneralLicenseController extends Controller
      */
     public function store(GeneralLicenseStore $request)
     {
-        //
+        // dd($request->all());
+        $employee =  Employee::find($request->name);
+        $general_license = License::where('code', 'general-license')->first();
+
+        $employee->licenses()->attach($general_license, [
+            'code' => $request->code,
+            'issued_at' => Carbon::createFromFormat('Y-m-d', $request->issued_at),
+            'valid_until' => Carbon::createFromFormat('Y-m-d', $request->valid_until),
+            'revoke_at' => Carbon::createFromFormat('Y-m-d', $request->revoke_at),
+        ]);
+
+        $employeelicense = EmployeeLicense::whereHas('employee', function ($query) use ($employee) {
+            return $query->where('employee_id', $employee->id);
+        })
+        ->where('code', $request->code)
+        ->first()
+        ->general_licenses()
+        ->createMany([
+            [
+                'aviation_degree' => $request->aviation_degree,
+                'aviation_degree_no' => $request->aviation_degree_no,
+                'exam_no' => $request->exam_no,
+                'exam_date' => Carbon::createFromFormat('Y-m-d',$request->exam_date),
+                'attendance_no' => $request->attendance_no,
+            ]
+        ]);
+
+        return response()->json($employeelicense);
+
+
     }
 
     /**
@@ -183,6 +216,6 @@ class GeneralLicenseController extends Controller
      */
     public function destroy(GeneralLicense $generalLicense)
     {
-        //
+        $user->roles()->detach($roleId);
     }
 }
