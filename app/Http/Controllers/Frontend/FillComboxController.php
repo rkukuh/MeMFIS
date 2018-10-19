@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Type;
 use App\Models\Unit;
+use App\Models\Employee;
+use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
 use App\Models\Category;
@@ -68,7 +71,7 @@ class FillComboxController extends Controller
 
     }
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -80,4 +83,46 @@ class FillComboxController extends Controller
         return json_encode($storages);
 
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function licenses()
+    {
+        $licenses = License::pluck('name', 'id');
+
+        return json_encode($licenses);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employees()
+    {
+        $employees = Employee::selectRaw('id, CONCAT(first_name, " ", middle_name ," ", last_name) as name')
+                    ->pluck('name', 'id');
+
+        return json_encode($employees);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aviationDegrees()
+    {
+        $aviation_degrees = Type::ofAviationDegree()
+                    ->pluck('name', 'id');
+
+        return json_encode($aviation_degrees);
+
+    }
+
 }
