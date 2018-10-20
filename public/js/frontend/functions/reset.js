@@ -59,15 +59,19 @@ let employee_employee_reset = function () {
 
 }
 
-let employee_general_license = function () {
-    // $("#type").select2('val', 'All');
-    // document.getElementById('code').value = "";
-    // document.getElementById('first_name').value = "";
-    // document.getElementById('middle_name').value = "";
-    // document.getElementById('last_name').value = "";
-    // document.getElementById('dob').value = "";
-    // document.getElementById('hired_at').value = "";
-    // $('#code_employee-error').html('');
-    // $('#first-name-error').html('');
+let employee_general_license_reset = function () {
+    document.getElementById('code_general_license').value = "";
+    document.getElementById('exam_no').value = "";
+    document.getElementById('exam_date').value = "";
+    document.getElementById('attendance_no').value = "";
+    document.getElementById('aviation_degree_no').value = "";
+    document.getElementById('issued_at').value = "";
+    document.getElementById('valid_until').value = "";
+    document.getElementById('revoke_at').value = "";
+    document.getElementById('general_license').value = "";
+    document.getElementById('employee_license').value = "";
+    $("#name4").select2('val', 'All');
+    $("#aviation_degree").select2('val', 'All');
+
 
 }
