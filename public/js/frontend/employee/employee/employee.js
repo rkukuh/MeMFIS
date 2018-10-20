@@ -103,6 +103,11 @@ let Employee = {
             // };
         });
 
+        $('.employee_class').on('click', '.btn-primary', function () {
+            save_general_license_button();
+            employee_employee_reset();
+        });
+
         $('.modal-footer-employee').on('click', '.reset-employee', function () {
             employee_employee_reset();
         });
