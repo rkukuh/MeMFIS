@@ -9,9 +9,10 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="EducationForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="general_license" id="general_license">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="employee_license" id="employee_license">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -29,13 +30,14 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code @include('frontend.common.label.optional')
+                                    License @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.text')
-                                    @slot('id', 'code_general_license')
-                                    @slot('name','code_general_license')
-                                    @slot('text', 'Code')
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'license')
+                                    @slot('text', 'License')
+                                    @slot('name', 'license')
+                                    @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
 
@@ -63,6 +65,19 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
+                                    Code @include('frontend.common.label.optional')
+                                </label>
+
+                                @component('frontend.common.input.text')
+                                    @slot('id', 'code_general_license')
+                                    @slot('name','code_general_license')
+                                    @slot('text', 'Code')
+                                @endcomponent
+                            </div>                         
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
                                     Aviation degree Code @include('frontend.common.label.optional')
                                 </label>
 
@@ -72,9 +87,6 @@
                                     @slot('text', 'Aviation degree No')
                                 @endcomponent
                             </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
- 
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Exam No @include('frontend.common.label.optional')
@@ -86,6 +98,10 @@
                                     @slot('text', 'Exam No')
                                 @endcomponent
                             </div>
+                          
+
+                        </div>
+                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Exam Date @include('frontend.common.label.optional')
@@ -96,9 +112,6 @@
                                     @slot('name','exam_date')
                                 @endcomponent
                             </div>
-
-                        </div>
-                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Attendance No @include('frontend.common.label.optional')
@@ -110,6 +123,8 @@
                                     @slot('text', 'Attendance No')
                                 @endcomponent
                             </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Issued At @include('frontend.common.label.optional')
@@ -120,8 +135,6 @@
                                     @slot('name','issued_at')
                                 @endcomponent
                             </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Valid Until @include('frontend.common.label.optional')
@@ -132,6 +145,8 @@
                                     @slot('name','valid_until')
                                 @endcomponent
                             </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Revoke At @include('frontend.common.label.optional')
@@ -142,7 +157,6 @@
                                     @slot('name','revoke_at')
                                 @endcomponent
                             </div>
-
                         </div>
                     </div>
                     <div class="modal-footer modal-footer-general-license">
