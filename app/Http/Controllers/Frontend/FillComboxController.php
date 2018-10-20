@@ -10,6 +10,7 @@ use App\Models\Storage;
 use App\Models\Journal;
 use App\Models\Category;
 use App\Models\Currency;
+use App\Models\Pivots\EmployeeLicense;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -89,9 +90,12 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function licenses()
+    public function licenses($id)
     {
-        $licenses = License::pluck('name', 'id');
+        $general_license = License::where('code', 'general-license')->first();
+        $licenses = EmployeeLicense::where('employee_id',$id)
+                    ->where('license_id',$general_license->id)
+                    ->pluck('code', 'id');
 
         return json_encode($licenses);
 
@@ -122,6 +126,21 @@ class FillComboxController extends Controller
                     ->pluck('name', 'id');
 
         return json_encode($aviation_degrees);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generalLicenses($id)
+    {
+        $general_license = EmployeeLicense::find($id);
+        // dd($id,$license);
+        // $aviation_degrees = Type::ofAviationDegree()
+        //             ->pluck('name', 'id');
+        return response()->json($general_license);
 
     }
 
