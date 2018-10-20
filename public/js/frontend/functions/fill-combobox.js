@@ -248,38 +248,78 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    license = function () {
-        $.ajax({
-            url: '/get-licenses/',
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                let angka3 = 1;
 
-                $('select[name="license"]').empty();
 
-                $.each(data, function (key, value) {
-                    if (angka3 == 1) {
+    $('select[name="name"]').on('change', function () {
+        let select = document.getElementById('license');
+
+        let id = $(this).val();
+        // alert(stateID);
+
+        license = function () {
+            $.ajax({
+                url: '/get-licenses/' + id + '/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let angka3 = 1;
+
+                    $('select[name="license"]').empty();
+                    $.each(data, function (key, value) {
+                        if (angka3 == 1) {
+                            $('select[name="license"]').append(
+                                '<option> Select a License</option>'
+                            );
+
+                            angka3 = 0;
+                        }
+
                         $('select[name="license"]').append(
-                            '<option> Select a License</option>'
+                            // '<option value="' + key + '">' + value + '</option>'
+                            select.options[select.options.length] = new Option(value, key)
                         );
+                    });
+                }
+            });
+        };
 
-                        angka3 = 0;
-                    }
+        license();
+    });
 
-                    $('select[name="license"]').append(
-                        '<option value="' + key + '">' + value + '</option>'
-                    );
+});
+
+$(document).ready(function () {
+    $('select[name="license"]').on('change', function () {
+        let license = $('#license').val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'get',
+            url: '/get-gnrl-license/' + license + '/',
+            success: function (data) {
+                document.getElementById('issued_at').value = data.issued_at;
+                document.getElementById('valid_until').value = data.valid_until;
+                document.getElementById('revoke_at').value = data.revoke_at;
+                document.getElementById('code_general_license').value = data.code;
+            },
+            error: function (jqXhr, json, errorThrown) {
+                let errorsHtml = '';
+                let errors = jqXhr.responseJSON;
+
+                $.each(errors.errors, function (index, value) {
+                    $('#general-license-error').html(value);
                 });
             }
         });
-    };
-
-    license();
+    });
 });
 
 
 $(document).ready(function () {
+    let select = document.getElementById('name4');
+
     name2 = function () {
         $.ajax({
             url: '/get-employees-data/',
@@ -300,7 +340,9 @@ $(document).ready(function () {
                     }
 
                     $('select[name="name"]').append(
-                        '<option value="' + key + '">' + value + '</option>'
+                        // '<option value="' + key + '">' + value + '</option>'
+                        select.options[select.options.length] = new Option(value, key)
+
                     );
                 });
             }
@@ -309,6 +351,9 @@ $(document).ready(function () {
 
     name2();
 });
+
+
+
 
 $(document).ready(function () {
     school = function () {
