@@ -31,6 +31,7 @@ class GeneralLicenseController extends Controller
                 ->join('licenses', 'licenses.id', '=', 'employee_license.license_id')
                 ->join('general_licenses', 'general_licenses.employee_license_id', '=', 'employee_license.id')
                 ->select('general_licenses.*', 'employee_license.code', 'employee_license.issued_at', 'employee_license.revoke_at', 'employee_license.valid_until','employee_license.employee_id','employees.first_name')
+                ->where('general_licenses.deleted_at',null)
                 // ->where('employee_license.employee_id',$employee)
                 // ->where('general_licenses.id',$generallicense)
                 ->get();
@@ -256,8 +257,16 @@ class GeneralLicenseController extends Controller
      * @param  \App\Models\GeneralLicense  $generalLicense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GeneralLicense $generalLicense)
+    public function destroy($generalLicense, $employee)
     {
-        $user->roles()->detach($roleId);
+        $generalLicense=GeneralLicense::find($generalLicense);
+        $generalLicense->delete();
+
+        // $employee =  Employee::find($employee);
+        // $general_license = License::where('code', 'general-license')->first();
+
+        // $employee->licenses()->detach($general_license);
+
+        return response()->json($generalLicense);
     }
 }
