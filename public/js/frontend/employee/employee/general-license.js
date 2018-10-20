@@ -351,7 +351,7 @@ let GeneralLicense = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/general-license/' + triggerid + '',
+                        url: '/general-license/' +triggerid+'/'+triggerid2+ '/',
                         success: function (data) {
                             toastr.success(
                                 'Data berhasil dihapus.',
