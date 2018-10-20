@@ -155,33 +155,56 @@ class GeneralLicenseController extends Controller
      */
     public function store(GeneralLicenseStore $request)
     {
-        $employee =  Employee::find($request->name);
-        $general_license = License::where('code', 'general-license')->first();
+        if($request->license == null){
+            $employee =  Employee::find($request->name);
+            $general_license = License::where('code', 'general-license')->first();
 
-        $employee->licenses()->attach($general_license, [
-            'code' => $request->code,
-            'issued_at' => Carbon::createFromFormat('Y-m-d', $request->issued_at),
-            'valid_until' => Carbon::createFromFormat('Y-m-d', $request->valid_until),
-            'revoke_at' => Carbon::createFromFormat('Y-m-d', $request->revoke_at),
-        ]);
+            $employee->licenses()->attach($general_license, [
+                'code' => $request->code,
+                'issued_at' => Carbon::createFromFormat('Y-m-d', $request->issued_at),
+                'valid_until' => Carbon::createFromFormat('Y-m-d', $request->valid_until),
+                'revoke_at' => Carbon::createFromFormat('Y-m-d', $request->revoke_at),
+            ]);
 
-        $employeelicense = EmployeeLicense::whereHas('employee', function ($query) use ($employee) {
-            return $query->where('employee_id', $employee->id);
-        })
-        ->where('code', $request->code)
-        ->first()
-        ->general_licenses()
-        ->createMany([
-            [
-                'aviation_degree' => $request->aviation_degree,
-                'aviation_degree_no' => $request->aviation_degree_no,
-                'exam_no' => $request->exam_no,
-                'exam_date' => Carbon::createFromFormat('Y-m-d',$request->exam_date),
-                'attendance_no' => $request->attendance_no,
-            ]
-        ]);
+            $employeelicense = EmployeeLicense::whereHas('employee', function ($query) use ($employee) {
+                return $query->where('employee_id', $employee->id);
+            })
+            ->where('code', $request->code)
+            ->first()
+            ->general_licenses()
+            ->createMany([
+                [
+                    'aviation_degree' => $request->aviation_degree,
+                    'aviation_degree_no' => $request->aviation_degree_no,
+                    'exam_no' => $request->exam_no,
+                    'exam_date' => Carbon::createFromFormat('Y-m-d',$request->exam_date),
+                    'attendance_no' => $request->attendance_no,
+                ]
+            ]);
 
-        return response()->json($employeelicense);
+            return response()->json($employeelicense);
+
+        }
+        else{
+            $employee =  Employee::find($request->name);
+            $employeelicense = EmployeeLicense::whereHas('employee', function ($query) use ($employee) {
+                return $query->where('employee_id', $employee->id);
+            })
+            ->where('code', $request->code)
+            ->first()
+            ->general_licenses()
+            ->createMany([
+                [
+                    'aviation_degree' => $request->aviation_degree,
+                    'aviation_degree_no' => $request->aviation_degree_no,
+                    'exam_no' => $request->exam_no,
+                    'exam_date' => Carbon::createFromFormat('Y-m-d',$request->exam_date),
+                    'attendance_no' => $request->attendance_no,
+                ]
+            ]);
+
+            return response()->json($employeelicense);
+        }
 
 
     }
@@ -209,35 +232,33 @@ class GeneralLicenseController extends Controller
                 ->join('employee_license', 'employee_license.employee_id', '=', 'employees.id')
                 ->join('licenses', 'licenses.id', '=', 'employee_license.license_id')
                 ->join('general_licenses', 'general_licenses.employee_license_id', '=', 'employee_license.id')
-                ->select('general_licenses.*', 'employee_license.code', 'employee_license.issued_at', 'employee_license.revoke_at', 'employee_license.valid_until','employee_license.employee_id','employees.first_name')
+                ->join('types', 'general_licenses.aviation_degree', '=', 'types.id')
+                ->select('general_licenses.*', 'employee_license.code', 'employee_license.issued_at', 'employee_license.revoke_at', 'employee_license.valid_until','employee_license.employee_id','employees.first_name', 'employees.id as employee_id','types.code as code_aviation_degree')
                 ->where('employee_license.employee_id',$employee)
                 ->where('general_licenses.id',$generallicense)
                 ->first();
-        // dd($general_licenses);
         // $employee = Employee::with('general_licenses')->find($employee);
         //     dd($employee);
         //    dd($employee->general_licenses->code);
         // $general_license = GeneralLicense::find($generallicense);
+
         return response()->json($general_license);
-
-        // dd($general_license);
-
     }
 
-        /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GeneralLicense  $generalLicense
-     * @return \Illuminate\Http\Response
-     */
-    public function employeeLicense($generallicense, $employee)
-    {
-        $general_license = EmployeeLicense::find($generallicense);
-        return response()->json($general_license);
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  \App\Models\GeneralLicense  $generalLicense
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function employeeLicense($generallicense, $employee)
+    // {
+    //     $general_license = EmployeeLicense::find($generallicense);
+    //     return response()->json($general_license);
 
-        // dd($general_license);
+    //     // dd($general_license);
 
-    }
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -248,7 +269,21 @@ class GeneralLicenseController extends Controller
      */
     public function update(GeneralLicenseUpdate $request, GeneralLicense $generalLicense)
     {
-        //
+        $generalLicense->aviation_degree = $request->aviation_degree;
+        $generalLicense->aviation_degree_no = $request->aviation_degree_no;
+        $generalLicense->exam_no = $request->exam_no;
+        $generalLicense->exam_date = $request->exam_date;
+        $generalLicense->attendance_no = $request->attendance_no;
+        
+        $generalLicense->save();
+        $employeelicense = EmployeeLicense::find($request->employee_license);
+        $employeelicense->code = $request->code;
+        $employeelicense->issued_at = $request->exam_date;
+        $employeelicense->valid_until = $request->exam_date;
+        $employeelicense->revoke_at = $request->exam_date;
+        $employeelicense->save();
+
+        return response()->json($generalLicense);
     }
 
     /**
