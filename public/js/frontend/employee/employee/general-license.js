@@ -110,10 +110,10 @@ let GeneralLicense = {
                         return (
                             // '<a  data-toggle="modal" data-target="#modal_employee" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
                             // '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '<a  data-toggle="modal" data-target="#modal_general_license" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-general-license" title="Edit" data-employee="'+t.employee_id+'"  data-id=' +
+                            '<a  data-toggle="modal" data-target="#modal_general_license" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-general-license" title="Edit" data-employee="' + t.employee_id + '"  data-id=' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-general-license" href="#" data-employee="'+t.employee_id+'" data-id=' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-general-license" href="#" data-employee="' + t.employee_id + '" data-id=' +
                             t.id +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
@@ -135,6 +135,7 @@ let GeneralLicense = {
 
 
         $('.modal-footer-general-license').on('click', '.add-general-license', function () {
+            let license = $('#license').val();
             let name = $('#name4').val();
             let aviation_degree = $('#aviation_degree').val();
             let code = $('input[name=code_general_license]').val();
@@ -147,72 +148,79 @@ let GeneralLicense = {
             let valid_until = $('#valid_until').val();
             let revoke_at = $('#revoke_at').val();
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/general-license',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    name: name,
-                    aviation_degree: aviation_degree,
-                    code: code,
-                    aviation_degree_no: aviation_degree_no,
-                    exam_no: exam_no,
-                    exam_date: exam_date,
-                    attendance_no: attendance_no,
-                    issued_at: issued_at,
-                    valid_until: valid_until,
-                    revoke_at: revoke_at,
+            if (license == "Select a License") {
+                alert('eror');
+            } else {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'post',
+                    url: '/general-license',
+                    data: {
+                        _token: $('input[name=_token]').val(),
+                        name: name,
+                        aviation_degree: aviation_degree,
+                        code: code,
+                        aviation_degree_no: aviation_degree_no,
+                        exam_no: exam_no,
+                        license: license,
+                        exam_date: exam_date,
+                        attendance_no: attendance_no,
+                        issued_at: issued_at,
+                        valid_until: valid_until,
+                        revoke_at: revoke_at,
 
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        alert('errors');
-                        // if (data.errors.code) {
-                        //     $('#code_employee-error').html(data.errors.code[0]);
+                    },
+                    success: function (data) {
+                        if (data.errors) {
+                            alert('errors');
+                            // if (data.errors.code) {
+                            //     $('#code_employee-error').html(data.errors.code[0]);
 
-                        // }
+                            // }
 
-                        // if (data.errors.first_name) {
-                        //     $('#first_name-error').html(data.errors.first_name[0]);
+                            // if (data.errors.first_name) {
+                            //     $('#first_name-error').html(data.errors.first_name[0]);
 
-                        // }
+                            // }
 
-                        // document.getElementById('code_employee').value = code;
-                        // document.getElementById('first_name').value = first_name;
-                        // document.getElementById('middle_name').value = middle_name;
-                        // document.getElementById('last_name').value = last_name;
-                        // if(gender == 'f'){
-                        //     document.getElementById('f').checked = true;
-                        // }
-                        // else if(gender == 'm'){
-                        //     document.getElementById('m').checked = true;
-                        // }
-                        //     document.getElementById('dob').value = dob;
-                        // document.getElementById('hired_at').value = hired_at;
+                            // document.getElementById('code_employee').value = code;
+                            // document.getElementById('first_name').value = first_name;
+                            // document.getElementById('middle_name').value = middle_name;
+                            // document.getElementById('last_name').value = last_name;
+                            // if(gender == 'f'){
+                            //     document.getElementById('f').checked = true;
+                            // }
+                            // else if(gender == 'm'){
+                            //     document.getElementById('m').checked = true;
+                            // }
+                            //     document.getElementById('dob').value = dob;
+                            // document.getElementById('hired_at').value = hired_at;
 
-                    } else {
-                        $('#modal_general_license').modal('hide');
+                        } else {
+                            $('#modal_general_license').modal('hide');
 
-                        let table = $('.m_datatable_general_license').mDatatable();
+                            let table = $('.m_datatable_general_license').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
 
 
-                        employee_employee_reset();
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
-                        update_item_button();
+                            employee_employee_reset();
+                            toastr.success('Data berhasil disimpan.', 'Sukses', {
+                                timeOut: 5000
+                            });
+                            update_item_button();
+                        }
                     }
-                }
-            });
+                });
+            }
         });
 
         let edit = $('.m_datatable_general_license').on('click', '.edit-general-license', function () {
+            $('.btn-success').removeClass('add-general-license');
+            $('.btn-success').addClass('update-general-license');        
             let triggerid = $(this).data('id');
             let triggerid2 = $(this).data('employee');
             // alert(triggerid);
@@ -222,9 +230,15 @@ let GeneralLicense = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/general-license/'+triggerid+'/'+triggerid2+ '/edit',
+                url: '/general-license/' + triggerid + '/' + triggerid2 + '/edit',
                 success: function (data) {
-                    document.getElementById('name4').text = data.first_name;
+                    $('select[name="name"]').append(
+                        '<option value="'+data.employee_id+'" selected>'+data.first_name+'</option>'
+                    );
+                    $('select[name="aviation_degree"]').append(
+                        '<option value="'+data.aviation_degree+'" selected>'+data.code_aviation_degree+'</option>'
+                    );
+                    // document.getElementById('name4').text = data.first_name;
                     // document.getElementById('aviation_degree').value = data.first_name;
                     document.getElementById('code_general_license').value = data.code;
                     document.getElementById('exam_no').value = data.exam_no;
@@ -234,6 +248,8 @@ let GeneralLicense = {
                     document.getElementById('issued_at').value = data.issued_at;
                     document.getElementById('valid_until').value = data.valid_until;
                     document.getElementById('revoke_at').value = data.revoke_at;
+                    document.getElementById('general_license').value = data.uuid;
+                    document.getElementById('employee_license').value = data.employee_license_id;
                     
                     // if(data.gender != null){
                     //     if(data.gender == 'f'){
@@ -260,39 +276,49 @@ let GeneralLicense = {
         });
 
         let update = $('.modal-footer').on('click', '.update-general-license', function () {
-            let code = $('input[name=code_employee]').val();
-            let first_name = $('input[name=first_name]').val();
-            let middle_name = $('input[name=middle_name]').val();
-            let last_name = $('input[name=last_name]').val();
-            let gender = $('input[name=gender]:checked').val();
-            let dob = $('#dob').val();
-            let hired_at = $('#hired_at').val();
-            let triggerid = $('input[name=id_employ]').val();
-
+            let id = $('input[name=general_license]').val();
+            let employee_license = $('input[name=employee_license]').val();
+            let license = $('#license').val();
+            let name = $('#name4').val();
+            let aviation_degree = $('#aviation_degree').val();
+            let code = $('input[name=code_general_license]').val();
+            // let aviation_degree = $('input[name=aviation_degree]').val();
+            let aviation_degree_no = $('input[name=aviation_degree_no]').val();
+            let exam_no = $('input[name=exam_no]').val();
+            let exam_date = $('#exam_date').val();
+            let attendance_no = $('input[name=attendance_no]').val();
+            let issued_at = $('#issued_at').val();
+            let valid_until = $('#valid_until').val();
+            let revoke_at = $('#revoke_at').val();
+            // let triggerid = $('input[name=id_employ]').val();
+            // alert(id);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/general-license/' + triggerid,
+                url: '/general-license/' + id +'/',
                 data: {
                     _token: $('input[name=_token]').val(),
+                    employee_license:employee_license,
+                    name: name,
+                    aviation_degree: aviation_degree,
                     code: code,
-                    first_name: first_name,
-                    middle_name: middle_name,
-                    last_name: last_name,
-                    gender: gender,
-                    dob: dob,
-                    hired_at: hired_at,
-                },
+                    aviation_degree_no: aviation_degree_no,
+                    exam_no: exam_no,
+                    license: license,
+                    exam_date: exam_date,
+                    attendance_no: attendance_no,
+                    issued_at: issued_at,
+                    valid_until: valid_until,
+                    revoke_at: revoke_at,
+            },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.code) {
                             $('#code_employee-error').html(data.errors.code[0]);
 
-                        }
-
-                        else if (data.errors.first_name) {
+                        } else if (data.errors.first_name) {
                             $('#first_name-error').html(data.errors.first_name[0]);
 
                         }
@@ -301,17 +327,16 @@ let GeneralLicense = {
                         document.getElementById('first_name').value = first_name;
                         document.getElementById('middle_name').value = middle_name;
                         document.getElementById('last_name').value = last_name;
-                        if(gender == 'f'){
+                        if (gender == 'f') {
                             document.getElementById('f').checked = true;
-                        }
-                        else if(gender == 'm'){
+                        } else if (gender == 'm') {
                             document.getElementById('m').checked = true;
                         }
-                            document.getElementById('dob').value = dob;
+                        document.getElementById('dob').value = dob;
                         document.getElementById('hired_at').value = hired_at;
 
                     } else {
-                        employee_general_license_reset();
+                        // employee_general_license_reset();
 
                         save_button();
                         $('#modal_general_license').modal('hide');
@@ -351,7 +376,7 @@ let GeneralLicense = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/general-license/' +triggerid+'/'+triggerid2+ '/',
+                        url: '/general-license/' + triggerid + '/' + triggerid2 + '/',
                         success: function (data) {
                             toastr.success(
                                 'Data berhasil dihapus.',
