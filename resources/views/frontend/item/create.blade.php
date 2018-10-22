@@ -207,28 +207,8 @@
                                             <label class="form-control-label">
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
-    
-                                            <div style="background-color: beige; padding: 10px;">
-                                                    Search the account code
-        
-                                                    @component('frontend.common.buttons.create-new')
-                                                        @slot('text', '')
-                                                        @slot('class', 'pull-right')
-                                                        @slot('icon', 'search')
-                                                        @slot('data_target', '#modal_account_code')
-                                                    @endcomponent
-                                                </div>
-        
-                                                <div style="background-color: beige; padding: 10px;">
-                                                    100001000012 - Biaya Item
-        
-                                                    @component('frontend.common.buttons.create-new')
-                                                        @slot('text', '')
-                                                        @slot('class', 'pull-right')
-                                                        @slot('icon', 'search')
-                                                        @slot('data_target', '#modal_account_code')
-                                                    @endcomponent
-                                                </div>
+                                            @include('frontend.common.account-code.index')
+
                                         </div>
                                 </div>
                                 <div class="form-group m-form__group row ">
@@ -370,7 +350,6 @@
                             @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
-                            @include('frontend.item.journal-modal')
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
@@ -408,5 +387,6 @@
     <script src="{{ asset('js/frontend/item/create/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/journal.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/component.js')}}"></script>
 @endpush
