@@ -1,4 +1,4 @@
-let Language = {
+let LanguageSelect2 = {
     init: function () {
         $('#language, #language_validate').select2({
             placeholder: 'Select a Language'
@@ -7,5 +7,5 @@ let Language = {
 };
 
 jQuery(document).ready(function () {
-    Language.init();
+    LanguageSelect2.init();
 });

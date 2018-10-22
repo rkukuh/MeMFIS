@@ -1,4 +1,4 @@
-let Name = {
+let NameSelect2 = {
     init: function () {
         $('#name2, #name2_validate').select2({
             placeholder: 'Select a Name'
@@ -25,5 +25,5 @@ let Name = {
 };
 
 jQuery(document).ready(function () {
-    Name.init();
+    NameSelect2.init();
 });

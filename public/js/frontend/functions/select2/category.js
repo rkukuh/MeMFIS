@@ -1,4 +1,4 @@
-let Category = {
+let CategorySelect2 = {
     init: function () {
         $('#category, #category_validate').select2({
             placeholder: 'Select a Category'
@@ -7,5 +7,5 @@ let Category = {
 };
 
 jQuery(document).ready(function () {
-    Category.init();
+    CategorySelect2.init();
 });

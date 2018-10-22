@@ -1,4 +1,4 @@
-let Unit = {
+let UnitSelect2 = {
     init: function () {
         $('#unit, #unit_validate').select2({
             placeholder: 'Select a Unit'
@@ -9,5 +9,5 @@ let Unit = {
 };
 
 jQuery(document).ready(function () {
-    Unit.init();
+    UnitSelect2.init();
 });

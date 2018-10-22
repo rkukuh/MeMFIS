@@ -1,4 +1,4 @@
-let School = {
+let SchoolSelect2 = {
     init: function () {
         $('#school, #school_validate').select2({
             placeholder: 'Select a School'
@@ -7,5 +7,5 @@ let School = {
 };
 
 jQuery(document).ready(function () {
-    School.init();
+    SchoolSelect2.init();
 });

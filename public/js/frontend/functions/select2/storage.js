@@ -1,4 +1,4 @@
-let Storage = {
+let StorageSelect2 = {
     init: function () {
         $('#storage, #storage_validate').select2({
             placeholder: 'Select a Storage'
@@ -7,5 +7,5 @@ let Storage = {
 };
 
 jQuery(document).ready(function () {
-    Storage.init();
+    StorageSelect2.init();
 });

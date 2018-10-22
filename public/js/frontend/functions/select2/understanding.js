@@ -1,4 +1,4 @@
-let Uderstanding = {
+let UderstandingSelect2 = {
     init: function () {
         $('#understanding, #understanding_validate').select2({
             placeholder: 'Select a Understanding Level'
@@ -7,5 +7,5 @@ let Uderstanding = {
 };
 
 jQuery(document).ready(function () {
-    Uderstanding.init();
+    UderstandingSelect2.init();
 });

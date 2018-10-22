@@ -1,4 +1,4 @@
-let AccountCode = {
+let AccountCodeSelect2 = {
     init: function () {
         $('#accountcode, #accountcode_validate').select2({
             placeholder: 'Select a Account Code'
@@ -11,5 +11,5 @@ let AccountCode = {
 };
 
 jQuery(document).ready(function () {
-    AccountCode.init();
+    AccountCodeSelect2.init();
 });

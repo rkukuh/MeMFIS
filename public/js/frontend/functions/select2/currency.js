@@ -1,4 +1,4 @@
-let Currency = {
+let CurrencySelect2 = {
     init: function () {
         $('#currency, #currency_validate').select2({
             placeholder: 'Select a Currency'
@@ -7,5 +7,5 @@ let Currency = {
 };
 
 jQuery(document).ready(function () {
-    Currency.init();
+    CurrencySelect2.init();
 });

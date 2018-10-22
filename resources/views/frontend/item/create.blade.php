@@ -302,8 +302,16 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/select2.js')}}"></script> --}}
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script> --}}
+    <script src="{{ asset('js/frontend/functions/select2/account-code.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
 
