@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_journal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_account_code" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,12 +7,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            {{-- <div class="modal-body"> --}}
 
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="JournalForm">
+                {{-- <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="JournalForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
-                    <div class="m-portlet__body">
-                        <div class="form-group m-form__group row ">
+                    <div class="m-portlet__body"> --}}
+                        {{-- <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Code @include('frontend.common.label.required')
@@ -38,8 +38,8 @@
                                     @slot('help_text','name')
                                 @endcomponent
                             </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
+                        </div> --}}
+                        {{-- <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Type @include('frontend.common.label.optional')
@@ -67,8 +67,8 @@
                                     @slot('id_error', 'code')
                                 @endcomponent
                             </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
+                        </div> --}}
+                        {{-- <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Description @include('frontend.common.label.optional')
@@ -82,6 +82,40 @@
                                     @slot('description', 'text')
                                     @slot('help_text','description')
                                 @endcomponent
+                            </div>
+                        </div> --}}
+                        <div class="m-portlet m-portlet--mobile">
+                            <div class="m-portlet__body">
+                                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                    <div class="row align-items-center">
+                                        <div class="col-xl-8 order-2 order-xl-1">
+                                            <div class="form-group m-form__group row align-items-center">
+                                                <div class="col-md-4">
+                                                    <div class="m-input-icon m-input-icon--left">
+                                                        <input type="text" class="form-control m-input" placeholder="Search..."
+                                                            id="generalSearch">
+                                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                            <span><i class="la la-search"></i></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                            @component('frontend.common.buttons.create')
+                                                @slot('text', 'Add Item')
+                                                @slot('href', route('frontend.item.create') )
+                                            @endcomponent
+    
+                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m_datatable1" id="fisrt"></div>
+
+                                {{-- @include('frontend.item.uom.modal') --}}
+
+                                {{-- <div class="m_datatable_journal" id="scrolling_both"></div> --}}
                             </div>
                         </div>
                     </div>
@@ -104,9 +138,9 @@
                                     </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-               </div>
+                    {{-- </div>
+                </form> --}}
+               {{-- </div> --}}
             </div>
         </div>
     </div>
