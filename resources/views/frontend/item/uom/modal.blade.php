@@ -17,7 +17,7 @@
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="UoMForm" name="form_uom">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
-                        <div class="form-group m-form__group row ">
+                        <div class="form-group m-form__group row item-info">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <h5 class="item-name">Item-A001</h5>
 
@@ -76,3 +76,11 @@
         </div>
     </div>
 </div>
+
+@push('header-scripts')
+    <style>
+        .item-info {
+            background-color: beige;
+        }
+    </style>
+@endpush
