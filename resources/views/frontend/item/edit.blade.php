@@ -260,7 +260,7 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                            @component('frontend.common.buttons.create-new')
+                                        @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-uom')
                                             @slot('text', 'Add UoM')
                                             @slot('data_target', '#modal_uom')
