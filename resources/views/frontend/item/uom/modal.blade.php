@@ -6,9 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalUoM">
-                    UoM (Unit of Measurement) for
-
-                    <small id="item-unit" class="m--font-focus"></small>
+                    UoM (Unit of Measurement)
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -20,30 +18,17 @@
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label class="form-control-label">
-                                        Qty @include('frontend.common.label.required')
-                                    </label>
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <h5 class="item-name">Item-A001</h5>
 
-                                    @component('frontend.common.input.numeric')
-                                        @slot('id', 'qty')
-                                        @slot('text', 'Qty')
-                                        @slot('name', 'qty')
-                                        @slot('id_error', 'qty')
-                                    @endcomponent
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <strong>Quantity:</strong> 1
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <strong>Unit:</strong> Each (ea)
+                                    </div>
                                 </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Unit @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.select')
-                                    @slot('id', 'unit')
-                                    @slot('text', 'Unit')
-                                    @slot('name', 'unit')
-                                    @slot('id_error', 'unit')
-                                    @slot('style', 'width:100%')
-                                @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
