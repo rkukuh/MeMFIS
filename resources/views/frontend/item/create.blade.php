@@ -93,7 +93,7 @@
                                 </fieldset>
 
                                 <div class="form-group m-form__group row ">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                         <label class="form-control-label">
                                             Barcode @include('frontend.common.label.optional')
                                         </label>
@@ -106,14 +106,15 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Category @include('frontend.common.label.optional')
+                                            Category @include('frontend.common.label.required')
                                         </label>
 
                                         @component('frontend.common.input.select')
                                             @slot('id', 'category')
                                             @slot('text', 'Category')
                                             @slot('name', 'category')
-                                            @slot('multiple', 'multiple')
+                                            @slot('style', 'width:100%')
+
                                         @endcomponent
 
                                         @component('frontend.common.buttons.create-new')
@@ -123,6 +124,27 @@
                                             @slot('style', 'margin-top: 10px;')
                                         @endcomponent
                                     </div>
+
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Tag @include('frontend.common.label.optional')
+                                            </label>
+    
+                                            @component('frontend.common.input.select')
+                                                @slot('id', 'tag')
+                                                @slot('text', 'Tag')
+                                                @slot('name', 'tag')
+                                                @slot('style', 'width:100%')
+                                                @slot('multiple', 'multiple')
+                                            @endcomponent
+    
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('size', 'sm')
+                                                @slot('text', 'add tag')
+                                                @slot('data_target', '#modal_tag')
+                                                @slot('style', 'margin-top: 10px;')
+                                            @endcomponent
+                                        </div>
                                 </div>
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -199,6 +221,11 @@
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
+
+                                                @component('frontend.common.buttons.back')
+                                                    @slot('href', route('frontend.item.index') )
+                                                @endcomponent        
+
                                             </div>
                                         </div>
                                     </div>
@@ -304,13 +331,15 @@
 @push('footer-scripts')
     {{-- <script src="{{ asset('js/frontend/functions/select2.js')}}"></script> --}}
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script> --}}
-    <script src="{{ asset('js/frontend/functions/select2/account-code.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tag.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/account-code.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
