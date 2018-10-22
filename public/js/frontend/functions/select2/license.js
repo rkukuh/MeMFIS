@@ -1,4 +1,4 @@
-let Select2 = {
+let License = {
     init: function () {
         $('#license, #license_validate').select2({
             placeholder: 'Select a License'
@@ -9,5 +9,5 @@ let Select2 = {
 };
 
 jQuery(document).ready(function () {
-    Select2.init();
+    License.init();
 });

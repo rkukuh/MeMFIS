@@ -1,4 +1,4 @@
-let Select2 = {
+let Speaking = {
     init: function () {
         $('#speaking, #speaking_validate').select2({
             placeholder: 'Select a Speaking Level'
@@ -7,5 +7,5 @@ let Select2 = {
 };
 
 jQuery(document).ready(function () {
-    Select2.init();
+    Speaking.init();
 });

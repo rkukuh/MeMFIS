@@ -1,4 +1,4 @@
-let Select2 = {
+let Customer = {
     init: function () {
         $('#customer, #customer_validate').select2({
             placeholder: 'Select a Customer'
@@ -7,5 +7,5 @@ let Select2 = {
 };
 
 jQuery(document).ready(function () {
-    Select2.init();
+    Customer.init();
 });

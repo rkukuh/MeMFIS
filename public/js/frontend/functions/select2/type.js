@@ -1,4 +1,4 @@
-let Select2 = {
+let Type = {
     init: function () {
         $('#type, #type_validate').select2({
             placeholder: 'Select a Type'
@@ -7,5 +7,5 @@ let Select2 = {
 };
 
 jQuery(document).ready(function () {
-    Select2.init();
+    Type.init();
 });

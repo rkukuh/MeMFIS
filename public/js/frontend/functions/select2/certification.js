@@ -1,4 +1,4 @@
-let Select2 = {
+let Certification = {
     init: function () {
         $('#certification, #certification_validate').select2({
             placeholder: 'Select a Certification'
@@ -7,5 +7,5 @@ let Select2 = {
 };
 
 jQuery(document).ready(function () {
-    Select2.init();
+    Certification.init();
 });

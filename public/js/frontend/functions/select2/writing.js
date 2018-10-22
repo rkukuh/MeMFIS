@@ -1,4 +1,4 @@
-let Select2 = {
+let Writing = {
     init: function () {
         $('#writing, #writing_validate').select2({
             placeholder: 'Select a Writing Level'
@@ -7,5 +7,5 @@ let Select2 = {
 };
 
 jQuery(document).ready(function () {
-    Select2.init();
+    Writing.init();
 });
