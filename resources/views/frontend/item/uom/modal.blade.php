@@ -50,10 +50,10 @@
                                 </label>
 
                                 @component('frontend.common.input.select')
-                                    @slot('id', 'unit2')
+                                    @slot('id', 'unit')
                                     @slot('text', 'Unit')
-                                    @slot('name', 'unit2')
-                                    @slot('id_error', 'unit2')
+                                    @slot('name', 'unit')
+                                    @slot('id_error', 'unit')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
