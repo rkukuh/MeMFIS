@@ -89,7 +89,6 @@
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>
-
                                     </div>
                                 </fieldset>
 
@@ -151,7 +150,6 @@
                                                 @slot('editable', 'disabled')
                                             @endcomponent
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row ">
@@ -169,7 +167,6 @@
                                         @endcomponent
 
                                         <div id="myFiles"></div>
-
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
@@ -189,7 +186,6 @@
                                             @slot('data_target', '#modal_journal')
                                             @slot('style', 'margin-top: 10px;')
                                         @endcomponent
-
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
