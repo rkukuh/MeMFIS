@@ -10,68 +10,8 @@ let Select2 = {
             placeholder: 'Select a Category'
         }), $('#m_select2_3a, #m_select2_3a_validate').select2({
             placeholder: 'Select a state'
-        }), $('#storage, #storage_validate').select2({
-            placeholder: 'Select a Storage'
-        }), $('#accountcode, #accountcode_validate').select2({
-            placeholder: 'Select a Account Code'
-        }), $('#accountcode2, #accountcode2_validate').select2({
-            placeholder: 'Select a Account Code'
-        }), $('#accountcode3, #accountcode3_validate').select2({
-            placeholder: 'Select a Account Code'
-        }), $('#type, #type_validate').select2({
-            placeholder: 'Select a Type'
-        }), $('#name2, #name2_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name3, #name3_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name4, #name4_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name5, #name5_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name6, #name6_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name7, #name7_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name8, #name8_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name9, #name9_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name10, #name10_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#name11, #name11_validate').select2({
-            placeholder: 'Select a Name'
-        }), $('#language, #language_validate').select2({
-            placeholder: 'Select a Language'
-        }), $('#understanding, #understanding_validate').select2({
-            placeholder: 'Select a Understanding Level'
-        }), $('#reading, #reading_validate').select2({
-            placeholder: 'Select a Reading Level'
-        }), $('#Writing, #Writing_validate').select2({
+        }), $('#Writing, #Writing_validate').slect2({
             placeholder: 'Select a Writing Level'
-        }), $('#speaking, #speaking_validate').select2({
-            placeholder: 'Select a Speaking Level'
-        }), $('#writing, #writing_validate').select2({
-            placeholder: 'Select a Writing Level'
-        }), $('#certification, #certification_validate').select2({
-            placeholder: 'Select a Certification'
-        }), $('#school, #school_validate').select2({
-            placeholder: 'Select a School'
-        }), $('#aviation_degree, #aviation_degree_validate').select2({
-            placeholder: 'Select a aviation Degree'
-        }), $('#license, #license_validate').select2({
-            placeholder: 'Select a License'
-        }), $('#license2, #license2_validate').select2({
-            placeholder: 'Select a License'
-        }), $('#unit, #unit_validate').select2({
-            placeholder: 'Select a Unit'
-        }), $('#unit2, #unit2_validate').select2({
-            placeholder: 'Select a Unit'
-        }), $('#currency, #currency_validate').select2({
-            placeholder: 'Select a Currency'
-        }), $('#category, #category_validate').select2({
-            placeholder: 'Select a Category'
-        }), $('#customer, #customer_validate').select2({
-            placeholder: 'Select a Customer'
         }), $('#number, #number_validate').select2({
             placeholder: 'Select a Number'
         }), $('#country, #country_validate').select2({
