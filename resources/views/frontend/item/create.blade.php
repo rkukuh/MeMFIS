@@ -147,7 +147,36 @@
                                         </div>
                                 </div>
                                 <div class="form-group m-form__group row ">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
+
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                            Qty @include('frontend.common.label.required')
+                                        </label>
+    
+                                        @component('frontend.common.input.numeric')
+                                            @slot('id', 'qty2')
+                                            @slot('text', 'Qty')
+                                            @slot('name', 'qty2')
+                                            @slot('id_error', 'qty2')
+                                        @endcomponent
+                                    </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Unit @include('frontend.common.label.required')
+                                    </label>
+    
+                                    @component('frontend.common.input.select')
+                                        @slot('id', 'unit')
+                                        @slot('text', 'Unit')
+                                        @slot('name', 'unit')
+                                        @slot('id_error', 'unit')
+                                        @slot('style', 'width:100%')
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row ">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.checkbox')
                                             @slot('text', 'Stockable?')
                                             @slot('name', 'isstock')
@@ -163,7 +192,7 @@
                                             @endcomponent
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding:0px">
+                                        <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'PPN')
                                                 @slot('name', 'ppn')
@@ -173,6 +202,34 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Account Code @include('frontend.common.label.optional')
+                                            </label>
+    
+                                            <div style="background-color: beige; padding: 10px;">
+                                                    Search the account code
+        
+                                                    @component('frontend.common.buttons.create-new')
+                                                        @slot('text', '')
+                                                        @slot('class', 'pull-right')
+                                                        @slot('icon', 'search')
+                                                        @slot('data_target', '#modal_account_code')
+                                                    @endcomponent
+                                                </div>
+        
+                                                <div style="background-color: beige; padding: 10px;">
+                                                    100001000012 - Biaya Item
+        
+                                                    @component('frontend.common.buttons.create-new')
+                                                        @slot('text', '')
+                                                        @slot('class', 'pull-right')
+                                                        @slot('icon', 'search')
+                                                        @slot('data_target', '#modal_account_code')
+                                                    @endcomponent
+                                                </div>
+                                        </div>
                                 </div>
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -190,27 +247,29 @@
 
                                         <div id="myFiles"></div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Account Code @include('frontend.common.label.optional')
-                                        </label>
 
-                                        @component('frontend.common.input.select')
-                                            @slot('id', 'accountcode2')
-                                            @slot('text', 'Account Code')
-                                            @slot('name', 'accountcode')
-                                            @slot('style', 'width:100%')
-                                        @endcomponent
-
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'sm')
-                                            @slot('text', 'add journal')
-                                            @slot('data_target', '#modal_journal')
-                                            @slot('style', 'margin-top: 10px;')
-                                        @endcomponent
-                                    </div>
                                 </div>
-                                <div class="form-group m-form__group row">
+                                <div class="modal-footer">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                                <div class="flex">
+                                                    <div class="action-buttons">
+                                                        @component('frontend.common.buttons.submit')
+                                                            @slot('class', 'add-item')
+                                                            @slot('id', 'add-item')
+                                                            @slot('type','button')
+                                                        @endcomponent
+        
+                                                        @include('frontend.common.buttons.reset')
+        
+                                                        @component('frontend.common.buttons.back')
+                                                            @slot('href', route('frontend.item.index') )
+                                                        @endcomponent        
+        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </div>
+                                {{-- <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
@@ -229,7 +288,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </form>
                         </div>
