@@ -146,25 +146,25 @@ let Item = {
 
                 // console.log('Sending...');
 
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
 
-                        url: '/post-photos',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        type: 'POST',
-                        success: function (data) {
-                            if (data.uploaded == true) {
-                                // alert('sukses');
-                            }
-                        },
-                        error: function (err) {
-                            alert(err);
+                    url: '/post-photos',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function (data) {
+                        if (data.uploaded == true) {
+                            // alert('sukses');
                         }
-                    });
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                });
             });
         });
 
@@ -200,7 +200,7 @@ let Item = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'PUT',
-                url: '/item/'+code+'/update',
+                url: '/item/' + code + '/update',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
@@ -247,6 +247,110 @@ let Item = {
                         });
                         // location.reload();
                         // photo();
+                    }
+                }
+            });
+        });
+
+        let simpan = $('.modal-footer').on('click', '.add-journal', function () {
+            $('#simpan').text('Simpan');
+
+            let type = $('#type').val();
+            let level = $('#level').val();
+            let registerForm = $('#CustomerForm');
+            let code = $('input[name=code-journal]').val();
+            let name = $('input[name=name-journal]').val();
+            let formData = registerForm.serialize();
+            let description = $('#description-journal').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/journal',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    code: code,
+                    name: name,
+                    type: type,
+                    level: level,
+                    description: description
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.code) {
+                            $('#code-error').html(data.errors.code[0]);
+
+
+                            document.getElementById('code-journal').value = code;
+                            document.getElementById('name-journal').value = name;
+                            document.getElementById('type').value = type;
+                            document.getElementById('level').value = level;
+
+                            document.getElementById('description-journal').value = description;
+                        }
+
+
+                        if (data.errors.name) {
+                            $('#name-error').html(data.errors.name[0]);
+
+                            document.getElementById('code-journal').value = code;
+                            document.getElementById('name-journal').value = name;
+
+                            document.getElementById('type').value = type;
+                            document.getElementById('level').value = level;
+                            document.getElementById('description-journal').value = description;
+
+                        }
+
+                        if (data.errors.type) {
+                            $('#type-error').html(data.errors.type[0]);
+
+                            document.getElementById('code-journal').value = code;
+                            document.getElementById('name-journal').value = name;
+                            document.getElementById('type').value = type;
+                            document.getElementById('level').value = level;
+                            document.getElementById('description-journal').value = description;
+                        }
+
+                        if (data.errors.level) {
+                            $('#level-error').html(data.errors.level[0]);
+
+                            document.getElementById('code-journal').value = code;
+                            document.getElementById('name-journal').value = name;
+                            document.getElementById('type').value = type;
+                            document.getElementById('level').value = level;
+                            document.getElementById('description-journal').value = description;
+                        }
+
+                        if (data.errors.description) {
+                            $('#description-error').html(data.errors.description[0]);
+
+                            document.getElementById('code-journal').value = code;
+                            document.getElementById('name-journal').value = name;
+                            document.getElementById('type').value = type;
+                            document.getElementById('level').value = level;
+                            document.getElementById('description-journal').value = description;
+                        }
+                    } else {
+                        accountcode();
+                        $('#modal_journal').modal('hide');
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+
+                        $('#code-error').html('');
+                        $('#name-error').html('');
+                        $('#type-error').html('');
+                        $('#level-error').html('');
+                        $('#description-error').html('');
+
+                        let table = $('.m_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
                     }
                 }
             });

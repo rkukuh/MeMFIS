@@ -182,6 +182,14 @@
                                             @slot('name', 'accountcode')
                                             @slot('style', 'width:100%')
                                         @endcomponent
+
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('size', 'sm')
+                                            @slot('text', 'add journal')
+                                            @slot('data_target', '#modal_journal')
+                                            @slot('style', 'margin-top: 10px;')
+                                        @endcomponent
+
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
@@ -280,6 +288,7 @@
                             @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
+                            @include('frontend.item.modal')
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
