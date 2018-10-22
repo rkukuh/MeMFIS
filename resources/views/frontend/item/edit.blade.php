@@ -206,19 +206,16 @@
                                             Account Code @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.select')
-                                            @slot('id', 'accountcode2')
-                                            @slot('text', 'Account Code')
-                                            @slot('name', 'accountcode')
-                                            @slot('style', 'width:100%')
-                                        @endcomponent
+                                        <div style="background-color: beige; padding: 10px;">
+                                            100000100025 - Biaya Item
 
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'sm')
-                                            @slot('text', 'add journal')
-                                            @slot('style', 'margin-top: 10px;')
-                                            @slot('data_target', '#modal_journal')
-                                        @endcomponent
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('text', '')
+                                                @slot('size', 'sm')
+                                                @slot('icon', 'search')
+                                                @slot('data_target', '#modal_account_code')
+                                            @endcomponent
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
