@@ -212,6 +212,13 @@
                                             @slot('name', 'accountcode')
                                             @slot('style', 'width:100%')
                                         @endcomponent
+
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('size', 'sm')
+                                            @slot('text', 'add journal')
+                                            @slot('style', 'margin-top: 10px;')
+                                            @slot('data_target', '#modal_journal')
+                                        @endcomponent
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
