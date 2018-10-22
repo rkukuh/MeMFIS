@@ -64,7 +64,7 @@ let Item = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<img src="/img/LogoMMF.png" width="30px">'
+                            '<img src="/img/LogoMMF-30x13.png"'
                         );
                     }
                 },
