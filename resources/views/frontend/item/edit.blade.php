@@ -207,11 +207,22 @@
                                         </label>
 
                                         <div style="background-color: beige; padding: 10px;">
-                                            100000100025 - Biaya Item
+                                            Search the account code
 
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('text', '')
-                                                @slot('size', 'sm')
+                                                @slot('class', 'pull-right')
+                                                @slot('icon', 'search')
+                                                @slot('data_target', '#modal_account_code')
+                                            @endcomponent
+                                        </div>
+
+                                        <div style="background-color: beige; padding: 10px;">
+                                            100001000012 - Biaya Item
+
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('text', '')
+                                                @slot('class', 'pull-right')
                                                 @slot('icon', 'search')
                                                 @slot('data_target', '#modal_account_code')
                                             @endcomponent
@@ -311,6 +322,7 @@
                             @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
+                            @include('frontend.item.journal-modal')
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
