@@ -28,6 +28,11 @@
                             <div class="col-md-6">
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
+                                        @component('frontend.common.input.numeric') 
+                                            @slot('id', 'numeric') 
+                                            @slot('text', 'numeric') 
+                                            @slot('name', 'numeric') 
+                                        @endcomponent
 
                                         <div class="form-group m-form__group row ">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -134,6 +139,12 @@
 {{--
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> --}}
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
+<script src="{{ asset('/js/frontend/functions/number.js')}}"></script>
+<script src="{{ asset('/js/frontend/functions/accounting/accounting.js')}}"></script>
+<script>
+
+</script>
 <script src="{{ asset('js/frontend/testing/test.js')}}"></script>
+
 
 @endpush
