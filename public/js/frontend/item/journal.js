@@ -1,134 +1,67 @@
 let JournalItem = {
     init: function () {
-        var t;
-        t = $('.m_datatable_journal').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/get-uom/IT-EX-980391467/',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
+        $("#m_datatable_journal").DataTable({
+            // "dom": '<"top"i>rt<"bottom"flp><"clear">'lpi,
+            // "dom": '<"top"f>rt<"bottom">ilp',
+            // "dom": "<'table-scrollable't><'row'<'col-md-3 col-sm-3' p ><'col-md-9 col-sm-9'>>",
+            // "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>f>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>f>r>",
+            responsive: !0,
+            searchDelay: 500,
+            processing: !0,
+            serverSide: !0,
+            ajax: "/get-account-codes/",
             columns: [{
-                    field: 'uom.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 50
-                },
-                {
-                    field: 'name',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="'+t.uom.item_id+'"' +
-                            'data-unit_id="'+t.uom.unit_id+'"'+
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                        );
+                data: "code"
+            }, {
+                data: "name"
+            }, {
+                data: "Actions"
+            }],
+            columnDefs: [{
+                    targets: -1,
+                    title: "Actions",
+                    orderable: !1,
+                    render: function (a, e, t, n) {
+                        return '\n<a  class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill select-accourcode" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<i class="la la-edit"></i>\n</a>'
                     }
-                }
+                },
+
             ]
+        })
+
+
+        // table.button().add(0, {
+        //     action: function (e, dt, button, config) {
+        //         dt.ajax.reload();
+        //     },
+        //     text: 'Reload table'
+        // });
+        $('<a class="btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-promary btn-md refresh" style="margin-left:20px"><span><i class="la la-refresh"></i></span></button>').appendTo('div.dataTables_filter');
+        $('.dataTables_filter').addClass('pull-right');
+        $('.paging_simple_numbers').addClass('pull-right');
+
+
+
+        let refresh = $('.dataTables_filter').on('click', '.refresh', function () {
+            // alert('refresh');
+            $('#m_datatable_journal').DataTable().ajax.reload();
         });
 
-        let remove = $('.m_datatable_journal').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
 
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/item/' + triggerid + '',
-                        success: function (data) {
-                            toastr.success(
-                                'Data berhasil dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
-                            );
+        let select = $('.dataTable').on('click', '.select-accourcode', function () {
+            let triggeruuid = $(this).data('uuid');
+            let triggercode = $(this).data('code');
+            let triggername = $(this).data('name');
 
-                            let table = $('.m_datatable_journal').mDatatable();
+            $('#modal_account_code').modal('hide');
 
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
+            $('.search-journal').html(triggercode + " - " + triggername);
 
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
-                }
-            });
+
+
         });
+
+
 
     }
 };
