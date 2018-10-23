@@ -40,6 +40,8 @@ let JournalItem = {
         // $('.dataTables_filter').addClass('pull-right');
         $('.paging_simple_numbers').addClass('pull-left');
         $('.dataTables_length').addClass('pull-right');
+        $('.dataTables_info').addClass('pull-left');
+        $('.dataTables_info').addClass('margin-info');
         
         
         $('.paging_simple_numbers').addClass('padding-datatable');
