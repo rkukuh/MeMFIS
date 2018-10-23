@@ -154,10 +154,10 @@
                                         </label>
     
                                         @component('frontend.common.input.numeric')
-                                            @slot('id', 'qty2')
+                                            @slot('id', 'qty')
                                             @slot('text', 'Qty')
-                                            @slot('name', 'qty2')
-                                            @slot('id_error', 'qty2')
+                                            @slot('name', 'qty')
+                                            @slot('id_error', 'qty')
                                         @endcomponent
                                     </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -368,6 +368,12 @@
 @push('header-scripts')
     <style>
         fieldset { margin-bottom: 30px; }
+        .padding-datatable {
+            padding : 0px
+        }
+        .margin-info{
+            margin-left: 5px
+        }
     </style>
 @endpush
 
