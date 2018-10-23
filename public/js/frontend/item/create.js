@@ -54,6 +54,8 @@ let Item = {
                     name: name,
                     barcode: barcode,
                     ppn: ppn,
+                    isstock: isstock,
+                    isppn: isppn,
                     description: description,
                     accountcode: accountcode2,
                     selectedcategories: selectedcategories
@@ -87,7 +89,7 @@ let Item = {
                         document.getElementById('item-uom').removeAttribute('disabled');
                         document.getElementById('item-minmaxstock').removeAttribute('disabled');
                         $('#item-storage').html(code);
-                        $('#item-unit').html();
+                        $('#item-unit').html(code);
                         // item_reset();
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
@@ -207,6 +209,8 @@ let Item = {
                     name: name,
                     barcode: barcode,
                     ppn: ppn,
+                    isstock: isstock,
+                    isppn: isppn,
                     description: description,
                     accountcode: accountcode2,
                     selectedcategories: selectedcategories
