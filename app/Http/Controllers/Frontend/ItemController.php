@@ -156,6 +156,11 @@ class ItemController extends Controller
 
         $item->categories()->attach($request->selectedcategories);
 
+        $item = Item::where('code',$request->code)->first();
+
+        $item->units()->attach([$request->unit => ['quantity' => $request->qty]]);
+
+
         return response()->json($item);
     }
 
