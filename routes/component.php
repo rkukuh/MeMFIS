@@ -24,7 +24,8 @@ Route::name('component.')->group(function () {
     Route::get('get-licenses/{id}', 'FillComboxController@licenses')->name('get-licenses');    
     Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data'); 
     Route::get('get-aviation-degree', 'FillComboxController@aviationDegrees')->name('get-eaviation-degree'); 
-    Route::get('get-gnrl-license/{id}', 'FillComboxController@generalLicenses')->name('get-gnrl-license');    
+    Route::get('get-gnrl-license/{id}', 'FillComboxController@generalLicenses')->name('get-gnrl-license');
+    Route::get('get-account-codes', 'AccountCodeController@getJournals')->name('get-account-codes');    
       
     });
 });
