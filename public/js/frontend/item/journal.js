@@ -53,11 +53,12 @@ let JournalItem = {
             let triggercode = $(this).data('code');
             let triggername = $(this).data('name');
 
-            $('#modal_account_code').modal('hide');
 
             $('.search-journal').html(triggercode + " - " + triggername);
+            document.getElementById('accountcode2').value = triggeruuid;
+            $('#modal_account_code').modal('hide');
 
-
+            
 
         });
 
