@@ -350,6 +350,7 @@
                             @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
+                            
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
@@ -367,6 +368,7 @@
 @endpush
 
 @push('footer-scripts')
+
     {{-- <script src="{{ asset('js/frontend/functions/select2.js')}}"></script> --}}
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
@@ -387,6 +389,7 @@
     <script src="{{ asset('js/frontend/item/create/item-storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/journal.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/item/journal.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/component.js')}}"></script>
+
 @endpush
