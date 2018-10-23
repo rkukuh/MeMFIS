@@ -208,6 +208,10 @@
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
                                             @include('frontend.common.account-code.index')
+                                            @component('frontend.common.input.hidden')
+                                                @slot('name', 'accountcode2')
+                                                @slot('id', 'accountcode2')
+                                            @endcomponent
 
                                         </div>
                                 </div>
