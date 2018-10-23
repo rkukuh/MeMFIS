@@ -2,7 +2,7 @@ let JournalItem = {
     init: function () {
         $("#m_datatable_journal").DataTable({
             // "dom": '<"top"i>rt<"bottom"flp><"clear">'lpi,
-            // "dom": '<"top"f>rt<"bottom">ilp',
+            "dom": '<"top"f>rt<"bottom">pl',
             // "dom": "<'table-scrollable't><'row'<'col-md-3 col-sm-3' p ><'col-md-9 col-sm-9'>>",
             // "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>f>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>f>r>",
             responsive: !0,
@@ -36,9 +36,15 @@ let JournalItem = {
         //     },
         //     text: 'Reload table'
         // });
-        $('<a class="btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-promary btn-md refresh" style="margin-left:20px"><span><i class="la la-refresh"></i></span></button>').appendTo('div.dataTables_filter');
-        $('.dataTables_filter').addClass('pull-right');
-        $('.paging_simple_numbers').addClass('pull-right');
+        $('<a class="btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-promary btn-md refresh" style="margin-left:60%"><span><i class="la la-refresh"></i></span></button>').appendTo('div.dataTables_filter');
+        // $('.dataTables_filter').addClass('pull-right');
+        $('.paging_simple_numbers').addClass('pull-left');
+        $('.dataTables_length').addClass('pull-right');
+        
+        
+        $('.paging_simple_numbers').addClass('padding-datatable');
+
+        
 
 
 
