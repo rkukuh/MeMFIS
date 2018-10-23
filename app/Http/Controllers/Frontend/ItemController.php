@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use Response;
 use App\Models\Item;
 use App\Models\Category;
+use App\Models\Journal;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -140,12 +141,14 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
+        $journal =  Journal::find($request->accountcode);
+
         $item = Item::create([
             'code' => $request->code,
             'name' => $request->name,
             'description' => $request->description,
             'barcode' => $request->barcode,
-            'account_code' => $request->accountcode,
+            'account_code' => $journal->id,
             'is_ppn' => $request->isppn,
             'is_stock' => $request->isstock,
             'ppn_amount' => $request->ppn,
