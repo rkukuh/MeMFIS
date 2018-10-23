@@ -36,7 +36,9 @@ let Item = {
             let accountcode2 = $('#accountcode2').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
+            let qty = $('input[name=qty]').val();
             let description = $('#description').val();
+            let unit = $('#unit').val();
             let barcode = $('input[name=barcode]').val();
             let ppn = $('input[name=ppn]').val();
 
@@ -53,7 +55,8 @@ let Item = {
                     code: code,
                     name: name,
                     barcode: barcode,
-                    ppn: ppn,
+                    qty: qty,
+                    unit: unit,
                     isstock: isstock,
                     isppn: isppn,
                     description: description,
