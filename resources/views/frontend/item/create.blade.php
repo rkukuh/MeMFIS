@@ -392,7 +392,7 @@
     <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
+    {{-- <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script> --}}
 
     <script src="{{ asset('js/frontend/category-item.js') }}"></script>
     <script src="{{ asset('js/frontend/item/create/item-unit.js')}}"></script>
