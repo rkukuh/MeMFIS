@@ -109,7 +109,7 @@
                                             Category @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select')
+                                        @component('frontend.common.input.select2')
                                             @slot('id', 'category')
                                             @slot('text', 'Category')
                                             @slot('name', 'category')
@@ -130,7 +130,7 @@
                                                 Tag @include('frontend.common.label.optional')
                                             </label>
     
-                                            @component('frontend.common.input.select')
+                                            @component('frontend.common.input.select2')
                                                 @slot('id', 'tag')
                                                 @slot('text', 'Tag')
                                                 @slot('name', 'tag')
@@ -150,7 +150,7 @@
 
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Qty @include('frontend.common.label.required')
+                                            Quantity @include('frontend.common.label.required')
                                         </label>
     
                                         @component('frontend.common.input.numeric')
@@ -165,7 +165,7 @@
                                         Unit @include('frontend.common.label.required')
                                     </label>
     
-                                    @component('frontend.common.input.select')
+                                    @component('frontend.common.input.select2')
                                         @slot('id', 'unit')
                                         @slot('text', 'Unit')
                                         @slot('name', 'unit')
