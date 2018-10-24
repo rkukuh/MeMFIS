@@ -28,6 +28,9 @@ class ItemStore extends FormRequest
         return [
             'code' => 'required',
             'name' => 'required',
+            'category' => 'required',
+            'qty' => 'required',
+            'unit' => 'required',
         ];
     }
 
