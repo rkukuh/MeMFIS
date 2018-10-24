@@ -23,10 +23,10 @@
 
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <strong>Quantity:</strong> 1
+                                        <strong>Quantity:</strong> {{$item->unit_quantity}}
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <strong>Unit:</strong> Each (ea)
+                                        <strong>Unit:</strong> {{$item->unit->name}} - ( {{{$item->unit->symbol}}} )
                                     </div>
                                 </div>
                             </div>
