@@ -116,47 +116,27 @@
                                                 Category
                                                 @include('frontend.common.label.required')
                                             </label> 
-                                            <select id="category" name="category"  class="form-control m-select2">
-                                                    <option value="">
-                                                        &mdash; Select Category &mdash;
-                                                    </option>
-                                                    @if($category_items->isEmpty())
-                                                    @foreach($categories as $category)
-                                                        <option value="{{$category->id}}">
-                                                            {{$category->name}}
+                                                <select id="category" name="category"  class="form-control m-select2">
+                                                        <option value="">
+                                                            &mdash; Select Category &mdash;
                                                         </option>
-                                                    @endforeach 
-                                                    @else
-                                                    @foreach($categories as $aKey => $aSport)
-                                                        @foreach($category_items as $aItemKey => $aItemSport)
-                                                            <option value="{{$aSport->id}}" @if($aSport->id == $aItemSport->id)selected="selected"@endif>{{$aSport->name}}</option>
+                                                        @if($category_items->isEmpty())
+                                                        @foreach($categories as $category)
+                                                            <option value="{{$category->id}}">
+                                                                {{$category->name}}
+                                                            </option>
+                                                        @endforeach 
+                                                        @else
+                                                        @foreach($categories as $aKey => $aSport)
+                                                            @foreach($category_items as $aItemKey => $aItemSport)
+                                                                <option value="{{$aSport->id}}" @if($aSport->id == $aItemSport->id)selected="selected"@endif>{{$aSport->name}}</option>
+                                                            @endforeach
                                                         @endforeach
-                                                    @endforeach
-                                                    @endif
-                                                    
-                                                    {{-- @foreach($categories as $category)
-                                                        <option value="{{ $category->id }}"  @if($category->id==$model->category) selected='selected' @endif >{{ $category->category }}</option>
-                                                    @endforeach  --}}
-
-                                                    {{-- @foreach($category_items as $category_item)
-                                                        <option value="{{$category_item->id}}" selected>
-                                                            {{$category_item->name}}
-                                                        </option>
-                                                    @endforeach
-                                                    @foreach($categories as $category)
-                                                        <option value="{{$category->id}}">
-                                                            {{$category->name}}
-                                                        </option>
-                                                    @endforeach --}}
+                                                        @endif
                                                 </select>
-
+                                                {{-- @component('frontend.common.input.edit-select2') 
+                                                @endcomponent --}}
                                             
-                                                {{-- @component('frontend.common.input.select2')
-                                                    @slot('id', 'category') 
-                                                    @slot('text', 'Category') 
-                                                    @slot('name', 'category') 
-                                                    @slot('style','width:100%') 
-                                                @endcomponent  --}}
 
                                                 @component('frontend.common.buttons.create-new') 
                                                 @slot('size','sm') 
@@ -204,14 +184,11 @@
                                             <label class="form-control-label">
                                                 Unit @include('frontend.common.label.required')
                                             </label>
-            
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'unit')
-                                                @slot('text', 'Unit')
-                                                @slot('name', 'unit')
-                                                @slot('id_error', 'unit')
-                                                @slot('style', 'width:100%')
-                                            @endcomponent
+                                            <select id="unit" name="unit"  class="form-control m-select2">
+                                                @foreach($units as $aKey => $aSport)
+                                                        <option value="{{$aSport->id}}" @if($aSport->id == $item->unit_id)selected="selected"@endif>{{$aSport->name}}</option>
+                                                    @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 <div class="form-group m-form__group row ">
