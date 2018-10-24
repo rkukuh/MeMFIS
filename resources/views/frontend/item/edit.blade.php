@@ -116,12 +116,47 @@
                                                 Category
                                                 @include('frontend.common.label.required')
                                             </label> 
-                                                @component('frontend.common.input.select')
+                                            <select id="category" name="category"  class="form-control m-select2">
+                                                    <option value="">
+                                                        &mdash; Select Category &mdash;
+                                                    </option>
+                                                    @if($category_items->isEmpty())
+                                                    @foreach($categories as $category)
+                                                        <option value="{{$category->id}}">
+                                                            {{$category->name}}
+                                                        </option>
+                                                    @endforeach 
+                                                    @else
+                                                    @foreach($categories as $aKey => $aSport)
+                                                        @foreach($category_items as $aItemKey => $aItemSport)
+                                                            <option value="{{$aSport->id}}" @if($aSport->id == $aItemSport->id)selected="selected"@endif>{{$aSport->name}}</option>
+                                                        @endforeach
+                                                    @endforeach
+                                                    @endif
+                                                    
+                                                    {{-- @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}"  @if($category->id==$model->category) selected='selected' @endif >{{ $category->category }}</option>
+                                                    @endforeach  --}}
+
+                                                    {{-- @foreach($category_items as $category_item)
+                                                        <option value="{{$category_item->id}}" selected>
+                                                            {{$category_item->name}}
+                                                        </option>
+                                                    @endforeach
+                                                    @foreach($categories as $category)
+                                                        <option value="{{$category->id}}">
+                                                            {{$category->name}}
+                                                        </option>
+                                                    @endforeach --}}
+                                                </select>
+
+                                            
+                                                {{-- @component('frontend.common.input.select2')
                                                     @slot('id', 'category') 
                                                     @slot('text', 'Category') 
                                                     @slot('name', 'category') 
                                                     @slot('style','width:100%') 
-                                                @endcomponent 
+                                                @endcomponent  --}}
 
                                                 @component('frontend.common.buttons.create-new') 
                                                 @slot('size','sm') 
@@ -135,7 +170,7 @@
                                                 Tag
                                                 @include('frontend.common.label.optional')
                                                 </label> 
-                                                @component('frontend.common.input.select')
+                                                @component('frontend.common.input.select2')
                                                     @slot('id', 'tag') 
                                                     @slot('text', 'Tag') 
                                                     @slot('name', 'tag') 
@@ -154,13 +189,14 @@
 
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Qty @include('frontend.common.label.required')
+                                                    Quantity @include('frontend.common.label.required')
                                                 </label>
             
                                                 @component('frontend.common.input.numeric')
                                                     @slot('id', 'qty')
                                                     @slot('text', 'Qty')
                                                     @slot('name', 'qty')
+                                                    @slot('value',$item->unit_quantity) 
                                                     @slot('id_error', 'qty')
                                                 @endcomponent
                                             </div>
@@ -169,7 +205,7 @@
                                                 Unit @include('frontend.common.label.required')
                                             </label>
             
-                                            @component('frontend.common.input.select')
+                                            @component('frontend.common.input.select2')
                                                 @slot('id', 'unit')
                                                 @slot('text', 'Unit')
                                                 @slot('name', 'unit')
@@ -219,10 +255,13 @@
                                                 <label class="form-control-label">
                                                         Account Code @include('frontend.common.label.optional')
                                                     </label>        
-                                                @include('frontend.common.account-code.index')
+                                                @component('frontend.common.account-code.index')
+                                                    @slot('text', $journal_name)                                                    
+                                                @endcomponent
                                                 @component('frontend.common.input.hidden')
                                                     @slot('name', 'accountcode2')
                                                     @slot('id', 'accountcode2')
+                                                    @slot('value',$item->account_code) 
                                                 @endcomponent
                                             </div>
                                     </div>
@@ -249,7 +288,9 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.submit') @slot('class', 'edit-item') @slot('id', 'edit-item') @slot('text', 'update')
+                                                @component('frontend.common.buttons.update') 
+                                                    @slot('class', 'edit-item') 
+                                                    @slot('id', 'edit-item') 
                                                 @endcomponent
                                                 @include('frontend.common.buttons.reset')
                                                 @component('frontend.common.buttons.back')
@@ -354,7 +395,7 @@
 {{-- <script src="{{ asset('js/frontend/functions/select2.js')}}"></script> --}}
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script> --}}
 <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/category.js')}}"></script>
+{{-- <script src="{{ asset('js/frontend/functions/fill-combobox/category.js')}}"></script> --}}
 <script src="{{ asset('js/frontend/functions/select2/tag.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/select2/account-code.js')}}"></script>
