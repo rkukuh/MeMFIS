@@ -14,12 +14,12 @@ let Item = {
 
         $('.footer').on('click', '.add-item', function () {
 
-            if ($('#category :selected').length > 0) {
-                var selectedcategories = [];
-                $('#category :selected').each(function (i, selected) {
-                    selectedcategories[i] = $(selected).val();
-                });
-            }
+            // if ($('#category :selected').length > 0) {
+            //     var selectedcategories = [];
+            //     $('#category :selected').each(function (i, selected) {
+            //         selectedcategories[i] = $(selected).val();
+            //     });
+            // }
 
 
             if (document.getElementById("isstock").checked) {
@@ -38,6 +38,7 @@ let Item = {
             let name = $('input[name=name]').val();
             let qty = $('input[name=qty]').val();
             let description = $('#description').val();
+            let category = $('#category').val();
             let unit = $('#unit').val();
             let barcode = $('input[name=barcode]').val();
             let ppn = $('input[name=ppn]').val();
@@ -59,9 +60,10 @@ let Item = {
                     unit: unit,
                     isstock: isstock,
                     isppn: isppn,
+                    ppn: ppn,
                     description: description,
                     accountcode: accountcode2,
-                    selectedcategories: selectedcategories
+                    category: category
 
                 },
                 success: function (data) {
@@ -73,6 +75,26 @@ let Item = {
 
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
+
+                        }
+
+                        if (data.errors.qty) {
+                            $('#qty-error').html(data.errors.qty[0]);
+
+                        }
+
+                        if (data.errors.unit) {
+                            $('#unit-error').html(data.errors.unit[0]);
+
+                        }
+
+                        if(unit == "Select a Unit"){
+                            $('#unit-error').html("The Unit field is required.");
+                            
+                        }
+
+                        if (data.errors.category) {
+                            $('#category-error').html(data.errors.category[0]);
 
                         }
 
@@ -97,7 +119,7 @@ let Item = {
                             timeOut: 5000
                         });
                         update_item_button();
-                        window.location.href = '/item/'+data.uuid+'/edit';
+                        // window.location.href = '/item/'+data.uuid+'/edit';
                     }
                 }
             });
@@ -172,91 +194,6 @@ let Item = {
             });
         });
 
-        $('.footer').on('click', '.edit-item', function () {
-
-            if ($('#category :selected').length > 0) {
-                var selectedcategories = [];
-                $('#category :selected').each(function (i, selected) {
-                    selectedcategories[i] = $(selected).val();
-                });
-            }
-
-
-            if (document.getElementById("isstock").checked) {
-                isstock = 1;
-            } else {
-                isstock = 0;
-            }
-
-            if (document.getElementById("isppn").checked) {
-                isppn = 1;
-            } else {
-                isppn = 0;
-            }
-            let accountcode2 = $('#accountcode2').val();
-            let code = $('input[name=code]').val();
-            let name = $('input[name=name]').val();
-            let description = $('#description').val();
-            let barcode = $('input[name=barcode]').val();
-            let ppn = $('input[name=ppn]').val();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'PUT',
-                url: '/item/' + code + '/update',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    code: code,
-                    name: name,
-                    barcode: barcode,
-                    ppn: ppn,
-                    isstock: isstock,
-                    isppn: isppn,
-                    description: description,
-                    accountcode: accountcode2,
-                    selectedcategories: selectedcategories
-
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.code) {
-                            $('#code-error').html(data.errors.code[0]);
-
-                        }
-
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-
-                        }
-
-                        document.getElementById('code').value = code;
-                        document.getElementById('name').value = name;
-                        document.getElementById('description').value = description;
-                        document.getElementById('barcode').value = barcode;
-                        document.getElementById('accountcode2').value = accountcode2;
-
-                    } else {
-
-                        $('input[type=file]').val("");
-                        $('#code-error').html('');
-                        $('#name-error').html('');
-                        $('#description-error').html('');
-                        $('#barcode-error').html('');
-                        // document.getElementById('item-uom').removeAttribute('disabled');
-                        // document.getElementById('item-minmaxstock').removeAttribute('disabled');
-                        $('#item-storage').html(code);
-                        $('#item-unit').html();
-                        // item_reset();
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
-                        // location.reload();
-                        // photo();
-                    }
-                }
-            });
-        });
 
         let simpan = $('.modal-footer').on('click', '.add-journal', function () {
             $('#simpan').text('Simpan');
