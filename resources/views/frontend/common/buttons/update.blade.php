@@ -12,6 +12,6 @@
 
     <span>
         <i class="fa {{ $icon or 'fa-save' }}"></i>
-        <span>{{ $text or 'Update' }}</span>
+        <span>{{ $text or ' Save Changes' }}</span>
     </span>
 </button>
