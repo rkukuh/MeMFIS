@@ -142,19 +142,31 @@ class ItemController extends Controller
     public function store(ItemStore $request)
     {
         $journal =  Journal::find($request->accountcode);
+        if($journal == null){
+            $item = Item::create([
+                'code' => $request->code,
+                'name' => $request->name,
+                'description' => $request->description,
+                'barcode' => $request->barcode,
+                'is_ppn' => $request->isppn,
+                'is_stock' => $request->isstock,
+                'ppn_amount' => $request->ppn,
+            ]);
+        }else{
+            $item = Item::create([
+                'code' => $request->code,
+                'name' => $request->name,
+                'description' => $request->description,
+                'barcode' => $request->barcode,
+                'account_code' => $journal->id,
+                'is_ppn' => $request->isppn,
+                'is_stock' => $request->isstock,
+                'ppn_amount' => $request->ppn,
+            ]);
+        }
 
-        $item = Item::create([
-            'code' => $request->code,
-            'name' => $request->name,
-            'description' => $request->description,
-            'barcode' => $request->barcode,
-            'account_code' => $journal->id,
-            'is_ppn' => $request->isppn,
-            'is_stock' => $request->isstock,
-            'ppn_amount' => $request->ppn,
-        ]);
 
-        $item->categories()->attach($request->selectedcategories);
+        $item->categories()->attach($request->category);
 
         $item = Item::where('code',$request->code)->first();
 
@@ -208,11 +220,14 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
+        $journal_id = $item->account_code;
+        $journal =  Journal::find($journal_id);
+        $journal_name = $journal->code." - ".$journal->name; 
         $categories = Category::ofItem()->get();
         $category_items = $item->categories;
         // return view('frontend.testing.blank',compact('item','categories','category_items'));
 
-        return view('frontend.item.edit',compact('item','categories','category_items'));
+        return view('frontend.item.edit',compact('item','categories','category_items','journal_name'));
     }
 
     /**
