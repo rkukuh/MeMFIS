@@ -14,12 +14,14 @@ class Item extends MemfisModel implements HasMedia
     protected $fillable = [
         'code',
         'name',
+        'unit_id',
+        'unit_quantity',
         'barcode',
-        'description',
         'is_ppn',
         'ppn_amount',
         'is_stock',
         'account_code',
+        'description',
     ];
 
     /***************************************** OVERRIDE *******************************************/
@@ -48,6 +50,16 @@ class Item extends MemfisModel implements HasMedia
     public function categories()
     {
         return $this->morphToMany(Category::class, 'categorizable');
+    }
+
+    /**
+     * One-Way 1-1: An item must have initial unit.
+     *
+     * This function will get a unit of a given item.
+     */
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
     }
 
     /**
