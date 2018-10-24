@@ -114,7 +114,7 @@
                                             @slot('text', 'Category')
                                             @slot('name', 'category')
                                             @slot('style', 'width:100%')
-
+                                            @slot('id_error', 'category')
                                         @endcomponent
 
                                         @component('frontend.common.buttons.create-new')
