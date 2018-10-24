@@ -14,10 +14,10 @@ let Item = {
 
         $('.footer').on('click', '.add-item', function () {
 
-            // if ($('#category :selected').length > 0) {
-            //     var selectedcategories = [];
-            //     $('#category :selected').each(function (i, selected) {
-            //         selectedcategories[i] = $(selected).val();
+            // if ($('#tag :selected').length > 0) {
+            //     var selectedtags = [];
+            //     $('#tag :selected').each(function (i, selected) {
+            //         selectedtags[i] = $(selected).val();
             //     });
             // }
 
@@ -63,6 +63,7 @@ let Item = {
                     ppn: ppn,
                     description: description,
                     accountcode: accountcode2,
+                    // selectedtags: selectedtags,
                     category: category
 
                 },
