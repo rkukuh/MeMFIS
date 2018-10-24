@@ -83,7 +83,6 @@ let Item = {
                         document.getElementById('accountcode2').value = accountcode2;
 
                     } else {
-
                         $('input[type=file]').val("");
                         $('#code-error').html('');
                         $('#name-error').html('');
@@ -98,7 +97,7 @@ let Item = {
                             timeOut: 5000
                         });
                         update_item_button();
-                        // photo();
+                        window.location.href = '/item/'+data.uuid+'/edit';
                     }
                 }
             });
