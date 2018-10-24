@@ -219,8 +219,10 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit($item)
     {   
+        $item = Item::with('unit')->where('uuid',$item)->first();
+        // dd($item);
         try {
             $journal_id = $item->account_code;  
             $journal =  Journal::find($journal_id);
