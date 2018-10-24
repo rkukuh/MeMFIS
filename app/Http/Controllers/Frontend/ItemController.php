@@ -221,15 +221,12 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {   
-        // $item = Item::find($item);
-        // dd($item);
         try {
             $journal_id = $item->account_code;  
-            $categories = Category::ofItem()->get();
-            $units = Unit::ofQuantity()->get();
-            $category_items = $item->categories;
-            // dd($category_items);
             $journal =  Journal::find($journal_id);
+            $units = Unit::ofQuantity()->get();
+            $categories = Category::ofItem()->get();
+            $category_items = $item->categories;
             $journal_name = $journal->code." - ".$journal->name; 
             return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));    
         } catch (\Exception $e) {
@@ -250,15 +247,47 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-        $item->code = $request->code;
-        $item->name = $request->name;
-        $item->description = $request->description;
-        $item->barcode = $request->barcode;
-        $item->account_code = $request->accountcode;
-        $item->is_ppn = $request->isppn;
-        $item->is_stock = $request->isstock;
-        $item->ppn_amount = $request->ppn;
-        $item->save();
+
+        $journal =  Journal::where('uuid',$request->accountcode)->first();
+        if($journal == null){
+            $item->code = $request->code;
+            $item->name = $request->name;
+            $item->unit_id = $request->unit;
+            $item->unit_quantity = $request->qty;
+            $item->description = $request->description;
+            $item->barcode = $request->barcode;
+            $item->is_ppn = $request->isppn;
+            $item->is_stock = $request->isstock;
+            $item->ppn_amount = $request->ppn;
+            $item->save();
+
+            // $item = Item::create([    
+            //     'code' => $request->code,
+            //     'name' => $request->name,
+            //     'unit_id' => $request->unit,
+            //     'unit_quantity'=>$request->qty,
+            //     'description' => $request->description,
+            //     'barcode' => $request->barcode,
+            //     'is_ppn' => $request->isppn,
+            //     'is_stock' => $request->isstock,
+            //     'ppn_amount' => $request->ppn,
+            // ]);
+        }else{
+            $item->code = $request->code;
+            $item->name = $request->name;
+            $item->unit_id = $request->unit;
+            $item->unit_quantity = $request->qty;
+            $item->description = $request->description;
+            $item->barcode = $request->barcode;
+            $item->account_code = $journal->id;
+            $item->is_ppn = $request->isppn;
+            $item->is_stock = $request->isstock;
+            $item->ppn_amount = $request->ppn;
+            $item->save();
+        }
+
+        $item->categories()->detach();
+        $item->categories()->attach($request->category);
 
         return response()->json($item);
     }
