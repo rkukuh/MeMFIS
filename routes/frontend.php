@@ -129,7 +129,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('item', 'ItemController');
         Route::get('/get-items','ItemController@getItems')->name('get-items');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
-        Route::put('/item/{code}/update', 'ItemController@itemUpdate')->name('frontend.item.itemUpdate');
 
         Route::resource('workpackage', 'WorkPackageController');
         Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
