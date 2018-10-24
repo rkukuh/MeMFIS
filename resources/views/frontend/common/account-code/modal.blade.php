@@ -25,7 +25,10 @@
                     <div class="action-buttons">
                         <div class="flex">
                             <div class="action-buttons">
-    @include('frontend.common.buttons.close')
+                                {{-- @include('frontend.common.buttons.close') --}}
+                                @component('frontend.common.buttons.close')
+                                    @slot('text', 'Close')
+                                @endcomponent                        
                             </div>
                         </div>
                     </div>
