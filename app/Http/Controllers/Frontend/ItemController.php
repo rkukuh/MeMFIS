@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use Response;
+use App\Models\Unit;
 use App\Models\Item;
-use App\Models\Category;
 use App\Models\Journal;
 use App\Models\ListUtil;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -141,11 +142,15 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
-        $journal =  Journal::find($request->accountcode);
+        // $journal =  Journal::find($request->accountcode);
+        // dd($journal);
+        $journal =  Journal::where('uuid',$request->accountcode)->first();
         if($journal == null){
             $item = Item::create([
                 'code' => $request->code,
                 'name' => $request->name,
+                'unit_id' => $request->unit,
+                'unit_quantity'=>$request->qty,
                 'description' => $request->description,
                 'barcode' => $request->barcode,
                 'is_ppn' => $request->isppn,
@@ -156,6 +161,8 @@ class ItemController extends Controller
             $item = Item::create([
                 'code' => $request->code,
                 'name' => $request->name,
+                'unit_id' => $request->unit,
+                'unit_quantity'=>$request->qty,
                 'description' => $request->description,
                 'barcode' => $request->barcode,
                 'account_code' => $journal->id,
@@ -165,13 +172,7 @@ class ItemController extends Controller
             ]);
         }
 
-
         $item->categories()->attach($request->category);
-
-        $item = Item::where('code',$request->code)->first();
-
-        $item->units()->attach([$request->unit => ['quantity' => $request->qty]]);
-
 
         return response()->json($item);
     }
@@ -219,15 +220,25 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Item $item)
-    {
-        $journal_id = $item->account_code;
-        $journal =  Journal::find($journal_id);
-        $journal_name = $journal->code." - ".$journal->name; 
-        $categories = Category::ofItem()->get();
-        $category_items = $item->categories;
-        // return view('frontend.testing.blank',compact('item','categories','category_items'));
+    {   
+        // $item = Item::find($item);
+        // dd($item);
+        try {
+            $journal_id = $item->account_code;  
+            $categories = Category::ofItem()->get();
+            $units = Unit::ofQuantity()->get();
+            $category_items = $item->categories;
+            // dd($category_items);
+            $journal =  Journal::find($journal_id);
+            $journal_name = $journal->code." - ".$journal->name; 
+            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));    
+        } catch (\Exception $e) {
+            $categories = Category::ofItem()->get();
+            $category_items = $item->categories;
+            $journal_name = "Search the account code";
+            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));              
+        }
 
-        return view('frontend.item.edit',compact('item','categories','category_items','journal_name'));
     }
 
     /**
@@ -247,33 +258,6 @@ class ItemController extends Controller
         $item->is_ppn = $request->isppn;
         $item->is_stock = $request->isstock;
         $item->ppn_amount = $request->ppn;
-
-        // $item->name = $request->name;
-        $item->save();
-
-        return response()->json($item);
-    }
-
-        /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\ItemUpdate  $request
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function itemUpdate(ItemUpdate $request, $code)
-    {
-        $item=Item::where('code',$code)->first();
-        $item->code = $request->code;
-        $item->name = $request->name;
-        $item->description = $request->description;
-        $item->barcode = $request->barcode;
-        $item->account_code = $request->accountcode;
-        $item->is_ppn = $request->isppn;
-        $item->is_stock = $request->isstock;
-        $item->ppn_amount = $request->ppn;
-
-        // $item->name = $request->name;
         $item->save();
 
         return response()->json($item);
