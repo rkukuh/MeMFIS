@@ -120,7 +120,7 @@ let Item = {
                             timeOut: 5000
                         });
                         update_item_button();
-                        // window.location.href = '/item/'+data.uuid+'/edit';
+                        window.location.href = '/item/'+data.uuid+'/edit';
                     }
                 }
             });
