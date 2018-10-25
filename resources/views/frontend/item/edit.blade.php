@@ -268,6 +268,7 @@
                                                 @component('frontend.common.buttons.update') 
                                                     @slot('class', 'edit-item') 
                                                     @slot('id', 'edit-item') 
+                                                    @slot('type','button')
                                                 @endcomponent
                                                 @include('frontend.common.buttons.reset')
                                                 @component('frontend.common.buttons.back')
