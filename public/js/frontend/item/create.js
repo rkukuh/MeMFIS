@@ -36,9 +36,7 @@ let Item = {
             let accountcode2 = $('#accountcode2').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
-            let qty = $('input[name=qty]').val();
-            quantity = qty.split('.').join("");
-            quantity = quantity.split(',').join(".");
+            let quantity = $('input[name=quantity]').val();
 
             let description = $('#description').val();
             let category = $('#category').val();
@@ -59,7 +57,7 @@ let Item = {
                     code: code,
                     name: name,
                     barcode: barcode,
-                    qty: quantity,
+                    quantity: quantity,
                     unit: unit,
                     isstock: isstock,
                     isppn: isppn,
@@ -82,8 +80,8 @@ let Item = {
 
                         }
 
-                        if (data.errors.qty) {
-                            $('#qty-error').html(data.errors.qty[0]);
+                        if (data.errors.quantity) {
+                            $('#quantity-error').html(data.errors.quantity[0]);
 
                         }
 
