@@ -1,4 +1,4 @@
-@extends('frontend.master') 
+@extends('frontend.master')
 @section('content')
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
@@ -47,11 +47,11 @@
                             <div class="m-portlet__body">
                                 <fieldset class="border p-2">
                                     <legend class="w-auto">Identifier</legend>
-                                    @component('frontend.common.input.hidden') 
-                                        @slot('name', 'id') 
-                                        @slot('id', 'id') 
-                                        @slot('value', $item->uuid) 
-                                        @slot('id_error','code') 
+                                    @component('frontend.common.input.hidden')
+                                        @slot('name', 'id')
+                                        @slot('id', 'id')
+                                        @slot('value', $item->uuid)
+                                        @slot('id_error','code')
                                     @endcomponent
 
                                     <div class="form-group m-form__group row ">
@@ -59,26 +59,26 @@
                                             <label class="form-control-label">
                                                 Part Number
                                                 @include('frontend.common.label.required')
-                                            </label> 
+                                            </label>
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Code') 
-                                                @slot('name', 'code') 
-                                                @slot('id', 'code') 
-                                                @slot('value',$item->code) 
-                                                @slot('id_error', 'code') 
+                                                @slot('text', 'Code')
+                                                @slot('name', 'code')
+                                                @slot('id', 'code')
+                                                @slot('value',$item->code)
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Name
                                                 @include('frontend.common.label.optional')
-                                            </label> 
+                                            </label>
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Name') 
-                                                @slot('name', 'name') 
-                                                @slot('id', 'name') 
-                                                @slot('value',$item->name) 
-                                                @slot('id_error', 'name') 
+                                                @slot('text', 'Name')
+                                                @slot('name', 'name')
+                                                @slot('id', 'name')
+                                                @slot('value',$item->name)
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -87,13 +87,13 @@
                                             <label class="form-control-label">
                                                 Description
                                                 @include('frontend.common.label.optional')
-                                            </label> 
+                                            </label>
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3') 
-                                                    @slot('name', 'description') 
-                                                    @slot('id', 'description') 
-                                                    @slot('value',$item->description) 
-                                                    @slot('text', 'Description') 
+                                                    @slot('rows', '3')
+                                                    @slot('name', 'description')
+                                                    @slot('id', 'description')
+                                                    @slot('value',$item->description)
+                                                    @slot('text', 'Description')
                                                 @endcomponent
                                         </div>
                                     </div>
@@ -104,18 +104,18 @@
                                         <label class="form-control-label">
                                                 Barcode
                                                 @include('frontend.common.label.optional')
-                                            </label> 
+                                            </label>
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Barcode') 
-                                                @slot('name', 'barcode') 
-                                                @slot('id', 'barcode') 
+                                                @slot('text', 'Barcode')
+                                                @slot('name', 'barcode')
+                                                @slot('id', 'barcode')
                                             @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                                 Category
                                                 @include('frontend.common.label.required')
-                                            </label> 
+                                            </label>
                                                 <select id="category" name="category"  class="form-control m-select2">
                                                         <option value="">
                                                             &mdash; Select Category &mdash;
@@ -125,7 +125,7 @@
                                                             <option value="{{$category->id}}">
                                                                 {{$category->name}}
                                                             </option>
-                                                        @endforeach 
+                                                        @endforeach
                                                         @else
                                                         @foreach($categories as $aKey => $aSport)
                                                             @foreach($category_items as $aItemKey => $aItemSport)
@@ -134,33 +134,33 @@
                                                         @endforeach
                                                         @endif
                                                 </select>
-                                                {{-- @component('frontend.common.input.edit-select2') 
+                                                {{-- @component('frontend.common.input.edit-select2')
                                                 @endcomponent --}}
-                                            
 
-                                                @component('frontend.common.buttons.create-new') 
-                                                @slot('size','sm') 
-                                                @slot('text', 'add category') 
-                                                @slot('data_target', '#modal_category') 
-                                                @slot('style','margin-top: 10px;') 
+
+                                                @component('frontend.common.buttons.create-new')
+                                                @slot('size','sm')
+                                                @slot('text', 'add category')
+                                                @slot('data_target', '#modal_category')
+                                                @slot('style','margin-top: 10px;')
                                                 @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                                 Tag
                                                 @include('frontend.common.label.optional')
-                                                </label> 
+                                                </label>
                                                 @component('frontend.common.input.select2')
-                                                    @slot('id', 'tag') 
-                                                    @slot('text', 'Tag') 
-                                                    @slot('name', 'tag') 
+                                                    @slot('id', 'tag')
+                                                    @slot('text', 'Tag')
+                                                    @slot('name', 'tag')
                                                     @slot('style', 'width:100%')
-                                                    @slot('multiple', 'multiple') 
-                                                @endcomponent 
+                                                    @slot('multiple', 'multiple')
+                                                @endcomponent
                                                 @component('frontend.common.buttons.create-new')
-                                                    @slot('size', 'sm') 
-                                                    @slot('text', 'add tag') 
-                                                    @slot('data_target', '#modal_tag') 
+                                                    @slot('size', 'sm')
+                                                    @slot('text', 'add tag')
+                                                    @slot('data_target', '#modal_tag')
                                                     @slot('style','margin-top: 10px;')
                                                 @endcomponent
                                     </div>
@@ -171,12 +171,12 @@
                                                 <label class="form-control-label">
                                                     Quantity @include('frontend.common.label.required')
                                                 </label>
-            
+
                                                 @component('frontend.common.input.numeric')
                                                     @slot('id', 'qty')
                                                     @slot('text', 'Qty')
                                                     @slot('name', 'qty')
-                                                    @slot('value',$item->unit_quantity) 
+                                                    @slot('value',$item->unit_quantity)
                                                     @slot('id_error', 'qty')
                                                 @endcomponent
                                             </div>
@@ -186,7 +186,7 @@
                                             </label>
                                             <select id="unit" name="unit"  class="form-control m-select2">
                                                 @foreach($units as $aKey => $aSport)
-                                                        <option value="{{$aSport->id}}" @if($aSport->id == $item->unit_id)selected="selected"@endif>{{$aSport->name}}</option>
+                                                        <option value="{{$aSport->id}}" @if($aSport->id == $item->unit_id)selected="selected"@endif>{{$aSport->name}} ({{$aSport->symbol}})</option>
                                                     @endforeach
                                             </select>
                                         </div>
@@ -194,51 +194,51 @@
                                 <div class="form-group m-form__group row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.checkbox') 
-                                            @slot('text', 'Stockable?') 
-                                            @slot('name', 'isstock') 
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('text', 'Stockable?')
+                                            @slot('name', 'isstock')
                                             @slot('id', 'isstock')
-                                            @if($item->is_stock==1) 
-                                                @slot('editable','checked') 
-                                            @endif 
+                                            @if($item->is_stock==1)
+                                                @slot('editable','checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="checkbox">
-                                            @component('frontend.common.input.checkbox') 
-                                                @slot('text', 'Dikenai PPN?') 
-                                                @slot('name', 'isppn') 
-                                                @slot('id', 'isppn') 
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('text', 'Dikenai PPN?')
+                                                @slot('name', 'isppn')
+                                                @slot('id', 'isppn')
                                                 @if($item->is_ppn==1)
-                                                   @slot('editable','checked') 
-                                                @endif 
+                                                   @slot('editable','checked')
+                                                @endif
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
-                                            @component('frontend.common.input.text') 
-                                                @slot('text', 'PPN') 
-                                                @slot('name', 'ppn') 
-                                                @slot('id', 'ppn') 
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'PPN')
+                                                @slot('name', 'ppn')
+                                                @slot('id', 'ppn')
                                                 @slot('value', $item->ppn_amount)
-                                                @slot('class', 'ppn') 
-                                                @if($item->is_ppn==0) 
-                                                    @slot('editable', 'disabled') 
+                                                @slot('class', 'ppn')
+                                                @if($item->is_ppn==0)
+                                                    @slot('editable', 'disabled')
                                                 @endif
                                             @endcomponent
-                                </div> 
+                                </div>
                                 </div>
                             </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                         Account Code @include('frontend.common.label.optional')
-                                                    </label>        
+                                                    </label>
                                                 @component('frontend.common.account-code.index')
-                                                    @slot('text', $journal_name)                                                    
+                                                    @slot('text', $journal_name)
                                                 @endcomponent
                                                 @component('frontend.common.input.hidden')
                                                     @slot('name', 'accountcode2')
                                                     @slot('id', 'accountcode2')
-                                                    @slot('value',$item->account_code) 
+                                                    @slot('value',$item->account_code)
                                                 @endcomponent
                                             </div>
                                     </div>
@@ -249,31 +249,31 @@
                                             @include('frontend.common.label.optional')
                                         </label>
                                         <br>
-                                        <input id="myInput" type="file" multiple style="display:none" /> 
+                                        <input id="myInput" type="file" multiple style="display:none" />
                                         @component('frontend.common.buttons.browse')
-                                            @slot('text', 'Add Files') 
-                                            @slot('name', 'myButton') 
-                                            @slot('id', 'myButton') 
+                                            @slot('text', 'Add Files')
+                                            @slot('name', 'myButton')
+                                            @slot('id', 'myButton')
                                             @slot('icon','fa-plus')
                                         @endcomponent
 
                                         <div id="myFiles"></div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.update') 
-                                                    @slot('class', 'edit-item') 
-                                                    @slot('id', 'edit-item') 
+                                                @component('frontend.common.buttons.update')
+                                                    @slot('class', 'edit-item')
+                                                    @slot('id', 'edit-item')
                                                     @slot('type','button')
                                                 @endcomponent
                                                 @include('frontend.common.buttons.reset')
                                                 @component('frontend.common.buttons.back')
                                                     @slot('href', route('frontend.item.index') )
-                                                @endcomponent        
+                                                @endcomponent
 
                                             </div>
                                         </div>
