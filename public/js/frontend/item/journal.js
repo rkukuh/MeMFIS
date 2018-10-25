@@ -25,7 +25,7 @@ let JournalItem = {
 
             ]
         })
-        $('<a class="btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-promary btn-md refresh" style="margin-left:60%"><span><i class="la la-refresh"></i></span></button>').appendTo('div.dataTables_filter');
+        $('<a class="btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-promary btn-md refresh" style="margin-left:60%"><span><i class="la la-refresh"></i></span> Reload</button>').appendTo('div.dataTables_filter');
         $('.paging_simple_numbers').addClass('pull-left');
         $('.dataTables_length').addClass('pull-right');
         $('.dataTables_info').addClass('pull-left');
@@ -41,7 +41,7 @@ let JournalItem = {
             let triggeruuid = $(this).data('uuid');
             let triggercode = $(this).data('code');
             let triggername = $(this).data('name');
-            
+
             $('.search-journal').html(triggercode + " - " + triggername);
             document.getElementById('accountcode2').value = triggeruuid;
             $('#modal_account_code').modal('hide');
