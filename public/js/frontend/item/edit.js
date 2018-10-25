@@ -169,12 +169,12 @@ let Item = {
 
         $('.footer').on('click', '.edit-item', function () {
 
-            if ($('#category :selected').length > 0) {
-                var selectedcategories = [];
-                $('#category :selected').each(function (i, selected) {
-                    selectedcategories[i] = $(selected).val();
-                });
-            }
+            // if ($('#tag :selected').length > 0) {
+            //     var selectedtags = [];
+            //     $('#tag :selected').each(function (i, selected) {
+            //         selectedtags[i] = $(selected).val();
+            //     });
+            // }
 
 
             if (document.getElementById("isstock").checked) {
@@ -195,6 +195,11 @@ let Item = {
             let description = $('#description').val();
             let barcode = $('input[name=barcode]').val();
             let ppn = $('input[name=ppn]').val();
+            let category = $('#category').val();
+            let qty = $('input[name=qty]').val();
+            let unit = $('#unit').val();
+
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -205,11 +210,16 @@ let Item = {
                     _token: $('input[name=_token]').val(),
                     code: code,
                     name: name,
+                    qty: qty,
+                    unit: unit,
+                    isstock: isstock,
+                    isppn: isppn,
                     barcode: barcode,
                     ppn: ppn,
                     description: description,
                     accountcode: accountcode2,
-                    selectedcategories: selectedcategories
+                    // selectedtags: selectedtags,
+                    category: category
 
                 },
                 success: function (data) {
@@ -224,6 +234,31 @@ let Item = {
 
                         }
 
+                        if (data.errors.qty) {
+                            $('#qty-error').html(data.errors.qty[0]);
+
+                        }
+
+                        if (data.errors.unit) {
+                            $('#unit-error').html(data.errors.unit[0]);
+
+                        }
+
+                        if (data.errors.category) {
+                            $('#category-error').html(data.errors.category[0]);
+
+                        }
+
+                        if(unit == "Select a Unit"){
+                            $('#unit-error').html("The Unit field is required.");
+                            
+                        }
+
+                        if (data.errors.category) {
+                            $('#category-error').html(data.errors.category[0]);
+
+                        }
+                        
                         document.getElementById('code').value = code;
                         document.getElementById('name').value = name;
                         document.getElementById('description').value = description;

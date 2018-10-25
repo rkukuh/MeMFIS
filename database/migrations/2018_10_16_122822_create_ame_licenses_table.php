@@ -15,6 +15,13 @@ class CreateAmelicensesTable extends Migration
     {
         Schema::create('ame_licenses', function (Blueprint $table) {
             $table->unsignedInteger('employee_license_id');
+            $table->string('station');
+            $table->string('stamp_no');
+            // Scope        : Free text yg bisa di-master-kan
+            // Category     : (Aviation Degree + Free text) --> master data AMEL's category
+            // Rating       : AC + PartNo Komponen
+            // Limitation   : Skills: Supporting Staff (Mechanic), Engineer, Inspector, RII Inspector
+            // Remark       : Free text (optional)
             $table->timestamps();
 
             $table->foreign('employee_license_id')

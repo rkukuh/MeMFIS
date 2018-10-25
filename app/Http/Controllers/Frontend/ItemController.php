@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use Response;
+use App\Models\Unit;
 use App\Models\Item;
-use App\Models\Category;
+use App\Models\Journal;
 use App\Models\ListUtil;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -140,18 +142,38 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
-        $item = Item::create([
-            'code' => $request->code,
-            'name' => $request->name,
-            'description' => $request->description,
-            'barcode' => $request->barcode,
-            'account_code' => $request->accountcode,
-            'is_ppn' => $request->isppn,
-            'is_stock' => $request->isstock,
-            'ppn_amount' => $request->ppn,
-        ]);
+        // $journal =  Journal::find($request->accountcode);
+        // dd($journal);
+        $journal =  Journal::where('uuid',$request->accountcode)->first();
+        if($journal == null){
+            $item = Item::create([
+                'code' => $request->code,
+                'name' => $request->name,
+                'unit_id' => $request->unit,
+                'unit_quantity'=>$request->qty,
+                'description' => $request->description,
+                'barcode' => $request->barcode,
+                'is_ppn' => $request->isppn,
+                'is_stock' => $request->isstock,
+                'ppn_amount' => $request->ppn,
+            ]);
+        }else{
+            $item = Item::create([
+                'code' => $request->code,
+                'name' => $request->name,
+                'unit_id' => $request->unit,
+                'unit_quantity'=>$request->qty,
+                'description' => $request->description,
+                'barcode' => $request->barcode,
+                'account_code' => $journal->id,
+                'is_ppn' => $request->isppn,
+                'is_stock' => $request->isstock,
+                'ppn_amount' => $request->ppn,
+            ]);
+        }
 
-        $item->categories()->attach($request->selectedcategories);
+        $item->categories()->attach($request->category);
+        $item->attachTags($request->selectedtags);
 
         return response()->json($item);
     }
@@ -164,19 +186,20 @@ class ItemController extends Controller
      */
     public function postPhotos(Request $request)
     {
-        // dd($request->all());
-        $length_request=count($request->all())-1;
-        if($length_request==0){
-            //
-        }
-        elseif($length_request>=1){
-            for ($i = 0; $i < $length_request; $i++) {
-                $item = Item::where('code',$request->code)->first();
-                $item->addMediaFromRequest('file'.$i)
-                 ->toMediaCollection('item');
-            }
-            dd('done');            
-        }
+        dump($request->all());
+
+        // $length_request=count($request->all())-1;
+        // if($length_request==0){
+        //     //
+        // }
+        // elseif($length_request>=1){
+        //     for ($i = 0; $i < $length_request; $i++) {
+        //         $item = Item::where('code',$request->code)->first();
+        //         $item->addMediaFromRequest('file'.$i)
+        //          ->toMediaCollection('item');
+        //     }
+        //     dd('done');
+        // }
     }
 
     /**
@@ -197,13 +220,25 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit($item)
     {
-        $categories = Category::ofItem()->get();
-        $category_items = $item->categories;
-        // return view('frontend.testing.blank',compact('item','categories','category_items'));
+        $item = Item::with('unit')->where('uuid',$item)->first();
+        // dd($item);
+        try {
+            $journal_id = $item->account_code;
+            $journal =  Journal::find($journal_id);
+            $units = Unit::ofQuantity()->get();
+            $categories = Category::ofItem()->get();
+            $category_items = $item->categories;
+            $journal_name = $journal->code." - ".$journal->name;
+            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));
+        } catch (\Exception $e) {
+            $categories = Category::ofItem()->get();
+            $category_items = $item->categories;
+            $journal_name = "Search the account code";
+            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));
+        }
 
-        return view('frontend.item.edit',compact('item','categories','category_items'));
     }
 
     /**
@@ -215,42 +250,47 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-        $item->code = $request->code;
-        $item->name = $request->name;
-        $item->description = $request->description;
-        $item->barcode = $request->barcode;
-        $item->account_code = $request->accountcode;
-        $item->is_ppn = $request->isppn;
-        $item->is_stock = $request->isstock;
-        $item->ppn_amount = $request->ppn;
 
-        // $item->name = $request->name;
-        $item->save();
+        $journal =  Journal::where('uuid',$request->accountcode)->first();
+        if($journal == null){
+            $item->code = $request->code;
+            $item->name = $request->name;
+            $item->unit_id = $request->unit;
+            $item->unit_quantity = $request->qty;
+            $item->description = $request->description;
+            $item->barcode = $request->barcode;
+            $item->is_ppn = $request->isppn;
+            $item->is_stock = $request->isstock;
+            $item->ppn_amount = $request->ppn;
+            $item->save();
 
-        return response()->json($item);
-    }
+            // $item = Item::create([
+            //     'code' => $request->code,
+            //     'name' => $request->name,
+            //     'unit_id' => $request->unit,
+            //     'unit_quantity'=>$request->qty,
+            //     'description' => $request->description,
+            //     'barcode' => $request->barcode,
+            //     'is_ppn' => $request->isppn,
+            //     'is_stock' => $request->isstock,
+            //     'ppn_amount' => $request->ppn,
+            // ]);
+        }else{
+            $item->code = $request->code;
+            $item->name = $request->name;
+            $item->unit_id = $request->unit;
+            $item->unit_quantity = $request->qty;
+            $item->description = $request->description;
+            $item->barcode = $request->barcode;
+            $item->account_code = $journal->id;
+            $item->is_ppn = $request->isppn;
+            $item->is_stock = $request->isstock;
+            $item->ppn_amount = $request->ppn;
+            $item->save();
+        }
 
-        /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\ItemUpdate  $request
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function itemUpdate(ItemUpdate $request, $code)
-    {
-        $item=Item::where('code',$code)->first();
-        $item->code = $request->code;
-        $item->name = $request->name;
-        $item->description = $request->description;
-        $item->barcode = $request->barcode;
-        $item->account_code = $request->accountcode;
-        $item->is_ppn = $request->isppn;
-        $item->is_stock = $request->isstock;
-        $item->ppn_amount = $request->ppn;
-
-        // $item->name = $request->name;
-        $item->save();
+        $item->categories()->detach();
+        $item->categories()->attach($request->category);
 
         return response()->json($item);
     }

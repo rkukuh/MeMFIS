@@ -33,9 +33,9 @@ class Type extends MemfisModel
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfAviationSchoolDegree(Builder $query)
+    public function scopeOfAviationDegree(Builder $query)
     {
-        return $query->where('of', 'aviation-school-degree');
+        return $query->where('of', 'aviation-degree');
     }
 
     /**

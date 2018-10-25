@@ -1,5 +1,9 @@
 $(document).ready(function () {
+
 $('.card-body').on('click', '.add', function () {
+    var n = 34523453.345
+    
+    alert(n.toLocaleString());
 
 
     // alert('klik');

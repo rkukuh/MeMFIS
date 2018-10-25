@@ -26,16 +26,17 @@ Route::name('frontend.')->group(function () {
         Route::resource('note', 'NoteController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+        Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('address', 'AddressController');
         Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('department', 'DepartmentController');
+        Route::resource('ame-license', 'AmeLicenseController');
         Route::resource('bankaccount', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('licensed-employee', 'EmployeeLicenseController');
         Route::resource('general-license', 'GeneralLicenseController');
-        Route::resource('ame-license', 'AmeLicenseController');
 
         //Travel Request
         Route::resource('travel-request', 'TravelRequestController');
@@ -85,13 +86,15 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-educations', 'EducationController@getEducations')->name('get-educations');
 
         Route::resource('employee', 'EmployeeController');
-        Route::get('/get-employees', 'EmployeeController@EmployeeController')->name('get-employees');
+        Route::get('/get-employees', 'EmployeeController@getEmployees')->name('get-employees');
 
         Route::resource('certification', 'CertificationController');
         Route::get('/get-certifications', 'CertificationController@getCertifications')->name('get-certifications');
 
-        Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('general-license', 'GeneralLicenseController')->except(['edit']);
         Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');
+        Route::get('/general-license/{generallicense}/{employee}/edit', 'GeneralLicenseController@edit')->name('frontend.general-license.edit');
+        Route::delete('/general-license/{generallicense}/{employee}', 'GeneralLicenseController@destroy')->name('frontend.general-license.destroy');
 
         Route::resource('emergency-contact', 'EmergencyContactController');
         Route::get('/get-emergency-contacts', 'EmergencyContactController@getEmergencyContacts')->name('get-emergency-contacts');
@@ -126,7 +129,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('item', 'ItemController');
         Route::get('/get-items','ItemController@getItems')->name('get-items');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
-        Route::put('/item/{code}/update', 'ItemController@itemUpdate')->name('frontend.item.itemUpdate');
 
         Route::resource('workpackage', 'WorkPackageController');
         Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');

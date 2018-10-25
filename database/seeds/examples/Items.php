@@ -12,6 +12,7 @@ class Items extends Seeder
      */
     public function run()
     {
+        // ? TODO: Model factory is not respecting model observer
         factory(Item::class, config('memfis.examples.items'))->create();
     }
 }

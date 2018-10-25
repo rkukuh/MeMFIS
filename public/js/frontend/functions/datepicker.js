@@ -18,36 +18,49 @@ var BootstrapDatepicker = function () {
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#hired_at, #hired_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#start_at, #start_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#graduated_at, #graduated_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#exam_date, #exam_date_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#issued_at, #issued_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd",
+                templates: t
+            }), $("#valid_until, #valid_until_validate").datepicker({
+                rtl: mUtil.isRTL(),
+                todayHighlight: !0,
+                orientation: "bottom left",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#revoke_at, #revoke_at_validate").datepicker({
                 rtl: mUtil.isRTL(),
                 todayHighlight: !0,
                 orientation: "bottom left",
+                format: "yyyy-mm-dd",
                 templates: t
             }), $("#m_datepicker_1_modal").datepicker({
                 rtl: mUtil.isRTL(),

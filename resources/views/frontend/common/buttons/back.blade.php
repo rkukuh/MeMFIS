@@ -3,7 +3,7 @@
     id={{ $id or '' }}
     name={{ $name or '' }}
     class="btn
-           btn-{{ $color or 'primary' }}
+           btn-{{ $color or 'secondary' }}
            btn-{{ $size or 'md' }}
            {{ $class or '' }}"
     style="{{ $style or '' }}">

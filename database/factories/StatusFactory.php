@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Status::class, function (Faker $faker) {
 
-    $name = 'Status-test #' . $faker->unixTime();
+    $name = 'Status Example #' . $faker->unixTime();
 
     return [
         'code' => str_slug($name),

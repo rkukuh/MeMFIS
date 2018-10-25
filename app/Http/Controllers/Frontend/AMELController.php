@@ -16,9 +16,9 @@ class AMELController extends Controller
      */
     public function getAMELs()
     {
-        $employees = Employee::All();
+        $employees = Employee::with('ame_licenses_dgca')->first();
 
-        $data = $alldata = json_decode($employees);
+        $data = $alldata = json_decode($employees->ame_licenses_dgca);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

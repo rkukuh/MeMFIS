@@ -6,9 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalUoM">
-                    UoM (Unit of Measurement) for
-
-                    <small id="item-unit" class="m--font-focus"></small>
+                    UoM (Unit of Measurement)
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -19,37 +17,24 @@
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="UoMForm" name="form_uom">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label class="form-control-label">
-                                        Qty @include('frontend.common.label.required')
-                                    </label>
+                        <div class="form-group m-form__group row item-info">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <h5 class="item-name">Item-A001</h5>
 
-                                    @component('frontend.common.input.numeric')
-                                        @slot('id', 'qty')
-                                        @slot('text', 'Qty')
-                                        @slot('name', 'qty')
-                                        @slot('id_error', 'qty')
-                                    @endcomponent
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <strong>Quantity:</strong> {{$item->unit_quantity}}
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <strong>Unit:</strong> {{$item->unit->name}} - ( {{{$item->unit->symbol}}} )
+                                    </div>
                                 </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Unit @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.select')
-                                    @slot('id', 'unit')
-                                    @slot('text', 'Unit')
-                                    @slot('name', 'unit')
-                                    @slot('id_error', 'unit')
-                                    @slot('style', 'width:100%')
-                                @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
-                                        Qty @include('frontend.common.label.required')
+                                        Quantity @include('frontend.common.label.required')
                                     </label>
 
                                     @component('frontend.common.input.numeric')
@@ -68,7 +53,7 @@
                                     @slot('id', 'unit2')
                                     @slot('text', 'Unit')
                                     @slot('name', 'unit2')
-                                    @slot('id_error', 'unit2')
+                                    @slot('id_error', 'unit')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -91,3 +76,11 @@
         </div>
     </div>
 </div>
+
+@push('header-scripts')
+    <style>
+        .item-info {
+            background-color: beige;
+        }
+    </style>
+@endpush

@@ -22,3 +22,7 @@
         <div class="child">2</div>
         <div class="child">3</div>
 </div> */
+
+div.hidden {     /* this will hide div with class div_class_name */
+    display:none;
+  }

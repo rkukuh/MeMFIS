@@ -4,6 +4,7 @@ namespace App\Models\Pivots;
 
 use App\Models\License;
 use App\Models\Employee;
+use App\Models\GeneralLicense;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class EmployeeLicense extends Pivot
@@ -11,6 +12,23 @@ class EmployeeLicense extends Pivot
     //
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A general license may have zero or many aviation (school) degree.
+     *
+     * This function will retrieve all the aviation (school) degree of a general license.
+     * See: General License's header() method for the inverse
+     *
+     * @return mixed
+     */
+    public function general_licenses()
+    {
+        // This method must have a second parameter as FK column (employee_license_id),
+        // so these following error will not thrown:
+        // "Too few arguments to function Illuminate\Database\Eloquent\Model::setAttribute()"
+
+        return $this->hasMany(GeneralLicense::class, 'employee_license_id');
+    }
 
     /**
      * One-Way: A license must have an employee assigned to.

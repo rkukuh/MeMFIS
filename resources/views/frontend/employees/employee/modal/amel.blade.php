@@ -10,78 +10,85 @@
             </div>
             <div class="modal-body">
 
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="AMELForm">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="EducationForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code @include('frontend.common.label.required')
+                                    Name @include('frontend.common.label.required')
+                                </label>
+
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'name6')
+                                    @slot('text', 'Name')
+                                    @slot('name', 'name')
+                                    @slot('style', 'width:100%')
+                                @endcomponent
+
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    License @include('frontend.common.label.required')
+                                </label>
+
+                                @component('frontend.common.input.select')
+                                    @slot('id', 'license2')
+                                    @slot('text', 'License')
+                                    @slot('name', 'license')
+                                    @slot('style', 'width:100%')
+                                @endcomponent
+
+                                @component('frontend.common.buttons.create-new')
+                                    @slot('size', 'sm')
+                                    @slot('text', 'Add Licanse')
+                                    @slot('data_target', '#modal_licanse')
+                                    @slot('style', 'margin-top: 10px;')
+                                @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Code @include('frontend.common.label.optional')
                                 </label>
 
                                 @component('frontend.common.input.text')
                                     @slot('id', 'code')
+                                    @slot('name','code')
                                     @slot('text', 'Code')
-                                    @slot('name', 'code')
-                                    @slot('id_error', 'code')
-                                    @slot('help_text','code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name @include('frontend.common.label.optional')
+                                    Issued At @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.text')
-                                    @slot('id', 'name')
-                                    @slot('text', 'Name')
-                                    @slot('name', 'name')
-                                    @slot('help_text','name')
+                                @component('frontend.common.input.datepicker')
+                                    @slot('id', 'issued_at')
+                                    @slot('name','issued_at')
                                 @endcomponent
                             </div>
-                        </div>
+                        </div>                      
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Type @include('frontend.common.label.optional')
+                                    Valid Until @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.select')
-                                    @slot('id', 'type')
-                                    @slot('text', 'Type')
-                                    @slot('name', 'type')
-                                    @slot('type', 'text')
-                                    @slot('style', 'width:100%')
-                                    @slot('help_text','type')
+                                @component('frontend.common.input.datepicker')
+                                    @slot('id', 'valid_until')
+                                    @slot('name','valid_until')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Level @include('frontend.common.label.optional')
+                                    Revoke At @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.numeric')
-                                    @slot('value', '1')
-                                    @slot('text', 'Level')
-                                    @slot('name', 'level')
-                                    @slot('help_text','level')
-                                    @slot('id_error', 'code')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Description @include('frontend.common.label.optional')
-                                </label>
-
-                                @component('frontend.common.input.textarea')
-                                    @slot('rows', '3')
-                                    @slot('id', 'description')
-                                    @slot('name', 'description')
-                                    @slot('text', 'Description')
-                                    @slot('description', 'text')
-                                    @slot('help_text','description')
+                                @component('frontend.common.input.datepicker')
+                                    @slot('id', 'revoke_at')
+                                    @slot('name','revoke_at')
                                 @endcomponent
                             </div>
                         </div>
