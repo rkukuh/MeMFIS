@@ -1,8 +1,9 @@
 <div style="background-color: beige; padding: 15px;">
-    <div class="search-journal" id="search-journal">{{ $text or 'Search the account code' }}</div> 
+    <div class="search-journal" id="search-journal">{{ $text or 'Search the account code' }}</div>
 
     @component('frontend.common.account-code.button-create')
         @slot('size', 'sm')
+        @slot('text', 'Search')
         @slot('style', 'margin-top: -23px')
         @slot('class', 'pull-right')
         @slot('icon', 'search')
