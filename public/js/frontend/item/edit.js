@@ -275,7 +275,7 @@ let Item = {
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
-                        location.reload();
+                        // location.reload();
                         // photo();
                     }
                 }
