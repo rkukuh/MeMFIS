@@ -1,7 +1,7 @@
 $(document).ready(function () {
     tag = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-tags/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -19,7 +19,7 @@ $(document).ready(function () {
                     }
 
                     $('select[name="tag"]').append(
-                        '<option value="' + key + '">' + value + '</option>'
+                        '<option value="' + value + '">' + value + '</option>'
                     );
                 });
             }
