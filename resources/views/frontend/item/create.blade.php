@@ -129,7 +129,7 @@
                                             <label class="form-control-label">
                                                 Tag @include('frontend.common.label.optional')
                                             </label>
-    
+
                                             @component('frontend.common.input.select2')
                                                 @slot('id', 'tag')
                                                 @slot('text', 'Tag')
@@ -137,7 +137,7 @@
                                                 @slot('style', 'width:100%')
                                                 @slot('multiple', 'multiple')
                                             @endcomponent
-    
+
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('size', 'sm')
                                                 @slot('text', 'add tag')
@@ -152,19 +152,20 @@
                                         <label class="form-control-label">
                                             Quantity @include('frontend.common.label.required')
                                         </label>
-    
-                                        @component('frontend.common.input.numeric')
-                                            @slot('id', 'qty')
-                                            @slot('text', 'Qty')
-                                            @slot('name', 'qty')
-                                            @slot('id_error', 'qty')
+
+                                        @component('frontend.common.input.number')
+                                            @slot('value', 1)
+                                            @slot('id', 'quantity')
+                                            @slot('text', 'Quantity')
+                                            @slot('name', 'quantity')
+                                            @slot('id_error', 'quantity')
                                         @endcomponent
                                     </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
                                         Unit @include('frontend.common.label.required')
                                     </label>
-    
+
                                     @component('frontend.common.input.select2')
                                         @slot('id', 'unit')
                                         @slot('text', 'Unit')
@@ -242,13 +243,13 @@
                                                             @slot('id', 'add-item')
                                                             @slot('type','button')
                                                         @endcomponent
-        
+
                                                         @include('frontend.common.buttons.reset')
-        
+
                                                         @component('frontend.common.buttons.back')
                                                             @slot('href', route('frontend.item.index') )
-                                                        @endcomponent        
-        
+                                                        @endcomponent
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,7 +268,7 @@
 
                                                 @component('frontend.common.buttons.back')
                                                     @slot('href', route('frontend.item.index') )
-                                                @endcomponent        
+                                                @endcomponent
 
                                             </div>
                                         </div>
@@ -351,7 +352,7 @@
                             </div>
 
                             @include('frontend.category.modal')
-                            
+
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
