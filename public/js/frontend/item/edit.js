@@ -244,6 +244,11 @@ let Item = {
 
                         }
 
+                        if (data.errors.category) {
+                            $('#category-error').html(data.errors.category[0]);
+
+                        }
+
                         if(unit == "Select a Unit"){
                             $('#unit-error').html("The Unit field is required.");
                             

@@ -97,6 +97,11 @@ let Item = {
                             
                         }
 
+                        if(category == "Select a Category"){
+                            $('#category-error').html("The Category field is required.");
+                            
+                        }
+
                         if (data.errors.category) {
                             $('#category-error').html(data.errors.category[0]);
 
