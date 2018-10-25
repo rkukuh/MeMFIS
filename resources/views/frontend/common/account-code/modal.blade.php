@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped- table-bordered table-hover table-checkable" id="m_datatable_journal">
+                <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_journal">
                     <thead>
                         <tr>
                             <th>Code</th>
@@ -28,7 +28,7 @@
                                 {{-- @include('frontend.common.buttons.close') --}}
                                 @component('frontend.common.buttons.close')
                                     @slot('text', 'Close')
-                                @endcomponent                        
+                                @endcomponent
                             </div>
                         </div>
                     </div>
