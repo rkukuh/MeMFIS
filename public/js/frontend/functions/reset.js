@@ -4,8 +4,12 @@ let item_reset = function () {
     document.getElementById('description').value = "";
     document.getElementById('barcode').value = "";
     document.getElementById('ppn').value = "";
+    document.getElementById('qty').value = "";
+    document.getElementById('search-journal').value = "";
     $("#accountcode2").select2('val', 'All');
     $("#category").select2('val', 'All');
+    $("#unit").select2('val', 'All');
+    $("#tag").select2('val', 'All');
     $('input[type=file]').val("");
     $('input[type=checkbox]').prop('checked',false);
     $('#code-error').html('');
