@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Spatie\Tags\HasTags;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class Item extends MemfisModel implements HasMedia
 {
+    use HasTags;
     use HasMediaTrait;
 
     protected $fillable = [
