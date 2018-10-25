@@ -37,7 +37,7 @@
                                         Quantity @include('frontend.common.label.required')
                                     </label>
 
-                                    @component('frontend.common.input.numeric')
+                                    @component('frontend.common.input.number')
                                         @slot('text', 'Quantity')
                                         @slot('id', 'uom_quantity')
                                         @slot('name', 'uom_quantity')

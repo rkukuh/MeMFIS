@@ -194,10 +194,10 @@
                                         </div>
 
                                         <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
-                                            @component('frontend.common.input.text')
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'ppn')
                                                 @slot('text', 'PPN')
                                                 @slot('name', 'ppn')
-                                                @slot('id', 'ppn')
                                                 @slot('class', 'ppn')
                                                 @slot('editable', 'disabled')
                                             @endcomponent
