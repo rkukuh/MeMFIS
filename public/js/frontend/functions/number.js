@@ -1,23 +1,14 @@
 
 
 $(document).ready(function() {
-    // $('#numeric').on('blur', function() {
-    //     // alert('Handler for .blur() called.');
-    //     let qty = $('#numeric').val();
-    //     let convert = accounting.formatNumber(qty, 2, ".", ",");
-    //     document.getElementById('numeric').value = convert;
+    $('#numeric').on('blur', function() {
+        // alert('Handler for .blur() called.');
+        let qty = $('#numeric').val();
+        let convert = accounting.formatNumber(qty, 2, ".", ",");
+        document.getElementById('numeric').value = convert;
 
-    //     // alert(tes);
-    // });
-    $('#numeric').inputmask("numeric", {
-        //radixPoint: ",",
-        groupSeparator: ",",
-                digits: 0,
-                autoGroup: true,
-                rightAlign: false,
-                oncleared: function () {
-                self.Value(''); }
-        });
+        // alert(tes);
+    });
 }); //end ready
 // var string = numeral(10000000.120).format('0.0,');
 // alert(string);
