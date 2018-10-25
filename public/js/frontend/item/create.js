@@ -37,6 +37,9 @@ let Item = {
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
             let qty = $('input[name=qty]').val();
+            quantity = qty.split('.').join("");
+            quantity = quantity.split(',').join(".");
+
             let description = $('#description').val();
             let category = $('#category').val();
             let unit = $('#unit').val();
@@ -56,7 +59,7 @@ let Item = {
                     code: code,
                     name: name,
                     barcode: barcode,
-                    qty: qty,
+                    qty: quantity,
                     unit: unit,
                     isstock: isstock,
                     isppn: isppn,

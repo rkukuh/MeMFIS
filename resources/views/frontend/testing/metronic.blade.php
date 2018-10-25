@@ -134,13 +134,15 @@
 </div> --}}
 @endsection
  @push('footer-scripts')
+ 
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
 
 {{--
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> --}}
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-<script src="{{ asset('/js/frontend/functions/number.js')}}"></script>
 <script src="{{ asset('/js/frontend/functions/accounting/accounting.js')}}"></script>
+{{-- <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script> --}}
+<script src="{{ asset('/js/frontend/functions/number.js')}}"></script>
 <script>
 
 </script>
