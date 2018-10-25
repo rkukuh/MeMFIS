@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Type;
 use App\Models\Unit;
-use App\Models\Employee;
+use Spatie\Tags\Tag;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
 use App\Models\Category;
 use App\Models\Currency;
-use App\Models\Pivots\EmployeeLicense;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\EmployeeLicense;
 
 class FillComboxController extends Controller
 {
@@ -40,6 +41,19 @@ class FillComboxController extends Controller
                               ->pluck('name', 'id');
 
         return json_encode($categories);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function tags()
+    {
+        $tags = Tag::get()->pluck('name', 'id');
+
+        return json_encode($tags);
 
     }
 
