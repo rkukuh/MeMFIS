@@ -16,8 +16,8 @@ class CreateItemStorageTable extends Migration
         Schema::create('item_storage', function (Blueprint $table) {
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('storage_id');
-            $table->unsignedInteger('min')->nullabel();
-            $table->unsignedInteger('max')->nullabel();
+            $table->unsignedInteger('min')->default(0);
+            $table->unsignedInteger('max')->default(0);
             $table->timestamps();
             $table->softDeletes();
 
