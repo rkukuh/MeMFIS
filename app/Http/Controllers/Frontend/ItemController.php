@@ -173,6 +173,7 @@ class ItemController extends Controller
         }
 
         $item->categories()->attach($request->category);
+        $item->attachTags($request->selectedtags);
 
         return response()->json($item);
     }
@@ -220,22 +221,22 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($item)
-    {   
+    {
         $item = Item::with('unit')->where('uuid',$item)->first();
         // dd($item);
         try {
-            $journal_id = $item->account_code;  
+            $journal_id = $item->account_code;
             $journal =  Journal::find($journal_id);
             $units = Unit::ofQuantity()->get();
             $categories = Category::ofItem()->get();
             $category_items = $item->categories;
-            $journal_name = $journal->code." - ".$journal->name; 
-            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));    
+            $journal_name = $journal->code." - ".$journal->name;
+            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));
         } catch (\Exception $e) {
             $categories = Category::ofItem()->get();
             $category_items = $item->categories;
             $journal_name = "Search the account code";
-            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));              
+            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));
         }
 
     }
@@ -263,7 +264,7 @@ class ItemController extends Controller
             $item->ppn_amount = $request->ppn;
             $item->save();
 
-            // $item = Item::create([    
+            // $item = Item::create([
             //     'code' => $request->code,
             //     'name' => $request->name,
             //     'unit_id' => $request->unit,
