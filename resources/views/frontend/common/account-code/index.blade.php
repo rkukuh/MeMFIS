@@ -15,5 +15,5 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/frontend/item/journal.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
 @endpush
