@@ -174,11 +174,11 @@
                                                 </label>
 
                                                 @component('frontend.common.input.numeric')
-                                                    @slot('id', 'qty')
-                                                    @slot('text', 'Qty')
-                                                    @slot('name', 'qty')
+                                                    @slot('id', 'quantity')
+                                                    @slot('text', 'Quantity')
+                                                    @slot('name', 'quantity')
+                                                    @slot('id_error', 'quantity')
                                                     @slot('value',$item->unit_quantity)
-                                                    @slot('id_error', 'qty')
                                                 @endcomponent
                                             </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
