@@ -2,7 +2,7 @@
     type="number"
     id="{{ $id or $name }}"
     name="{{ $name or '' }}"
-    class="form-control m-input
+    class="form-control m-input text-right
            {{ $class or '' }}"
     style="{{$style or ''}}"
     value="{{$value or ''}}"
