@@ -14,12 +14,12 @@ let Item = {
 
         $('.footer').on('click', '.add-item', function () {
 
-            // if ($('#tag :selected').length > 0) {
-            //     var selectedtags = [];
-            //     $('#tag :selected').each(function (i, selected) {
-            //         selectedtags[i] = $(selected).val();
-            //     });
-            // }
+            if ($('#tag :selected').length > 0) {
+                var selectedtags = [];
+                $('#tag :selected').each(function (i, selected) {
+                    selectedtags[i] = $(selected).val();
+                });
+            }
 
 
             if (document.getElementById("isstock").checked) {
@@ -66,7 +66,7 @@ let Item = {
                     ppn: ppn,
                     description: description,
                     accountcode: accountcode2,
-                    // selectedtags: selectedtags,
+                    selectedtags: selectedtags,
                     category: category
 
                 },
@@ -94,12 +94,12 @@ let Item = {
 
                         if(unit == "Select a Unit"){
                             $('#unit-error').html("The Unit field is required.");
-                            
+
                         }
 
                         if(category == "Select a Category"){
                             $('#category-error').html("The Category field is required.");
-                            
+
                         }
 
                         if (data.errors.category) {
@@ -128,7 +128,7 @@ let Item = {
                             timeOut: 5000
                         });
                         update_item_button();
-                        window.location.href = '/item/'+data.uuid+'/edit';
+                        // window.location.href = '/item/'+data.uuid+'/edit';
                     }
                 }
             });
