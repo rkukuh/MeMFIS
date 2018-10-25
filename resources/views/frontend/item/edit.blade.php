@@ -137,6 +137,7 @@
                                                 {{-- @component('frontend.common.input.edit-select2')
                                                 @endcomponent --}}
 
+                                                <div class="form-control-feedback text-danger" id="category-error"></div>
 
                                                 @component('frontend.common.buttons.create-new')
                                                 @slot('size','sm')
