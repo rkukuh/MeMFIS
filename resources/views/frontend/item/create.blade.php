@@ -312,7 +312,6 @@
                                 </div>
                             </div>
 
-                            @include('frontend.item.uom.modal')
 
                             <div class="m_datatable1" id="fisrt"></div>
                         </div>
@@ -351,8 +350,6 @@
                                 </div>
                             </div>
 
-                            @include('frontend.item.storage.modal')
-                            @include('frontend.storage.modal')
                             @include('frontend.category.modal')
                             
 
@@ -388,7 +385,7 @@
     <script src="{{ asset('js/frontend/functions/select2/account-code.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
