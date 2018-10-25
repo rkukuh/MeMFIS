@@ -16,6 +16,7 @@ Route::name('admin.')->group(function () {
         Route::resource('unit', 'UnitController');
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
+        Route::resource('journal', 'JournalController');
 
         /** POLYMORPH */
 

@@ -19,6 +19,7 @@ class ExampleDataSeeder extends Seeder
         $this->call(Units::class);
         $this->call(Levels::class);
         $this->call(Statuses::class);
+        $this->call(Journals::class);
 
         /** POLYMORPH */
 

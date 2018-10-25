@@ -26,6 +26,8 @@ use App\Models\Address;
 use App\Policies\AddressPolicy;
 use App\Models\License;
 use App\Policies\LicensePolicy;
+use App\Models\Journal;
+use App\Policies\JournalPolicy;
 use App\Models\Currency;
 use App\Policies\CurrencyPolicy;
 use App\Models\Aircraft;
@@ -68,6 +70,7 @@ class AuthServiceProvider extends ServiceProvider
         Status::class => StatusPolicy::class,
         Address::class => AddressPolicy::class,
         License::class => LicensePolicy::class,
+        Journal::class => JournalPolicy::class,
         Currency::class => CurrencyPolicy::class,
         Aircraft::class => AircraftPolicy::class,
         Employee::class => EmployeePolicy::class,
