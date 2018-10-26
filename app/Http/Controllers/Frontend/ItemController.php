@@ -24,8 +24,8 @@ class ItemController extends Controller
      */
     public function getItems()
     {
-        $items = Item::All();
-
+        $items = Item::with('unit')->get();
+        
         $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
