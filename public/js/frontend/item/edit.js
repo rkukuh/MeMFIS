@@ -169,12 +169,12 @@ let Item = {
 
         $('.footer').on('click', '.edit-item', function () {
 
-            // if ($('#tag :selected').length > 0) {
-            //     var selectedtags = [];
-            //     $('#tag :selected').each(function (i, selected) {
-            //         selectedtags[i] = $(selected).val();
-            //     });
-            // }
+            if ($('#tag :selected').length > 0) {
+                var selectedtags = [];
+                $('#tag :selected').each(function (i, selected) {
+                    selectedtags[i] = $(selected).val();
+                });
+            }
 
 
             if (document.getElementById("isstock").checked) {
@@ -218,7 +218,7 @@ let Item = {
                     ppn: ppn,
                     description: description,
                     accountcode: accountcode2,
-                    // selectedtags: selectedtags,
+                    selectedtags: selectedtags,
                     category: category
 
                 },
