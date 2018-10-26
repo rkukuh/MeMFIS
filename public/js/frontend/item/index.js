@@ -57,6 +57,70 @@ let Item = {
                     filterable: !1
                 },
                 {
+                    field: 'unit_quantity',
+                    title: 'Quantity',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'unit.name',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: "is_ppn",
+                    title: "PPN",
+                    template: function (t) {
+                        var e = {
+                            1: {
+                                title: "Yes",
+                                class: "m-badge--brand"
+                            },         
+                            0: {
+                                title: "No",
+                                class: " m-badge--warning"
+                            }
+                        };
+                        return '<span class="m-badge ' + e[t.is_ppn].class + ' m-badge--wide">' + e[t.is_ppn].title + "</span>"
+                    }
+                },
+                {
+                    field: 'ppn_amount',
+                    title: 'PPN',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                // {
+                //     field: 'is_stock',
+                //     title: 'Stock',
+                //     sortable: 'asc',
+                //     filterable: !1
+                // },
+                {
+                    field: "is_stock",
+                    title: "Stock",
+                    template: function (t) {
+                        var e = {
+                            1: {
+                                title: "Yes",
+                                class: "m-badge--brand"
+                            },         
+                            0: {
+                                title: "No",
+                                class: " m-badge--warning"
+                            }
+                        };
+                        return '<span class="m-badge ' + e[t.is_stock].class + ' m-badge--wide">' + e[t.is_stock].title + "</span>"
+                    }
+                },
+                {
+                    field: 'account_code',
+                    title: 'Item Name',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
                     field: 'Photo',
                     width: 110,
                     title: 'Photo',
