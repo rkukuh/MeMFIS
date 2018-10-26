@@ -116,7 +116,7 @@ let Item = {
                 },
                 {
                     field: 'account_code',
-                    title: 'Item Name',
+                    title: 'Account Code',
                     sortable: 'asc',
                     filterable: !1
                 },
