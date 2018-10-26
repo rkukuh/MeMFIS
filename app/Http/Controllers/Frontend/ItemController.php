@@ -211,8 +211,10 @@ class ItemController extends Controller
      */
     public function show($item)
     {
-        try {
         $item = Item::with('unit')->where('uuid',$item)->first();
+
+        try {
+        // $item = Item::with('unit')->where('uuid',$item)->first();
         $categories = $item->categories;
         $tags = $item->tags;
         $journal_id = $item->account_code;
@@ -222,7 +224,6 @@ class ItemController extends Controller
 
         return view('frontend.item.show',compact('item','categories','tags','journal_name'));
         } catch (\Exception $e) {
-            $item = Item::with('unit')->where('uuid',$item)->first();
             $categories = $item->categories;
             $tags = $item->tags;
             $journal_name = "";
