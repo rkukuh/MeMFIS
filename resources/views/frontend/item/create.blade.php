@@ -50,7 +50,7 @@
                                     <fieldset class="border p-2">
                                         <legend class="w-auto">Identifier</legend>
 
-                                        <div class="form-group m-form__group row ">
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Part Number @include('frontend.common.label.required')
@@ -76,7 +76,7 @@
                                                 @endcomponent
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row ">
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
                                                     Description @include('frontend.common.label.optional')
@@ -92,7 +92,7 @@
                                         </div>
                                     </fieldset>
 
-                                    <div class="form-group m-form__group row ">
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">
                                                 Barcode @include('frontend.common.label.optional')
@@ -125,7 +125,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row ">
+                                    <div class="form-group m-form__group row">
 
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -154,7 +154,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row ">
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
