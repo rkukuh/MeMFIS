@@ -191,8 +191,8 @@
                                             @include('frontend.common.account-code.index')
 
                                             @component('frontend.common.input.hidden')
-                                                @slot('id', 'accountcode2')
-                                                @slot('name', 'accountcode2')
+                                                @slot('id', 'accountcode')
+                                                @slot('name', 'accountcode')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -322,7 +322,6 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/category.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/tag.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/account-code.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit2.js')}}"></script>

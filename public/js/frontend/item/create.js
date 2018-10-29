@@ -32,7 +32,7 @@ let Item = {
                 isppn = 0;
             }
 
-            let accountcode2 = $('#accountcode2').val();
+            let accountcode = $('#accountcode').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
             let quantity = $('input[name=quantity]').val();
@@ -60,7 +60,7 @@ let Item = {
                     isppn: isppn,
                     ppn: ppn,
                     description: description,
-                    accountcode: accountcode2,
+                    accountcode: accountcode,
                     selectedtags: selectedtags,
                     category: category
 
@@ -91,7 +91,7 @@ let Item = {
                         document.getElementById('name').value = name;
                         document.getElementById('description').value = description;
                         document.getElementById('barcode').value = barcode;
-                        document.getElementById('accountcode2').value = accountcode2;
+                        document.getElementById('accountcode').value = accountcode;
 
                     } else {
                         $('input[type=file]').val("");
