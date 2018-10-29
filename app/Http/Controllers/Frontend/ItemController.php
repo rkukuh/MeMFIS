@@ -25,7 +25,7 @@ class ItemController extends Controller
     public function getItems()
     {
         $items = Item::with('unit')->get();
-        
+
         $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -143,40 +143,22 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
-        // $journal =  Journal::find($request->accountcode);
-        // dd($journal);
-        $journal =  Journal::where('uuid',$request->accountcode)->first();
-        if($journal == null){
-            $item = Item::create([
-                'code' => $request->code,
-                'name' => $request->name,
-                'unit_id' => $request->unit,
-                'unit_quantity'=>$request->quantity,
-                'description' => $request->description,
-                'barcode' => $request->barcode,
-                'is_ppn' => $request->isppn,
-                'is_stock' => $request->isstock,
-                'ppn_amount' => $request->ppn,
-            ]);
-        }else{
-            $item = Item::create([
-                'code' => $request->code,
-                'name' => $request->name,
-                'unit_id' => $request->unit,
-                'unit_quantity'=>$request->quantity,
-                'description' => $request->description,
-                'barcode' => $request->barcode,
-                'account_code' => $journal->id,
-                'is_ppn' => $request->isppn,
-                'is_stock' => $request->isstock,
-                'ppn_amount' => $request->ppn,
-            ]);
-        }
-
-        $item->categories()->attach($request->category);
-        $item->attachTags($request->selectedtags);
-
-        return response()->json($item);
+        return response()
+                ->json(
+                    Item::create([
+                        'code' => $request->code,
+                        'name' => $request->name,
+                        'unit_id' => $request->unit,
+                        'description' => $request->description,
+                        'is_stock' => $request->is_stock,
+                        'is_ppn' => $request->is_ppn,
+                        'ppn_amount' => $request->ppn_amount,
+                        'barcode' => $request->barcode,
+                        'account_code' => optional(Journal::where('uuid', $request->account_code)->first())->id,
+                    ])
+                    ->categories()
+                    ->attach($request->category)
+                );
     }
 
     /**
@@ -228,7 +210,7 @@ class ItemController extends Controller
             $tags = $item->tags;
             $journal_name = "";
             return view('frontend.item.show',compact('item','categories','tags','journal_name'));
-    
+
         }
 
     }
