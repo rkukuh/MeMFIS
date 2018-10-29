@@ -13,7 +13,6 @@ $factory->define(Item::class, function (Faker $faker) {
         'code' => 'IT-EX-' . $sequence,
         'name' => 'Item Example #' . $sequence,
         'unit_id' => Unit::get()->random()->id,
-        'unit_quantity' => 1,
         'is_ppn' => $is_ppn,
         'ppn_amount' => function() use ($is_ppn) {
             if ($is_ppn) {

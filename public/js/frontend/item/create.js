@@ -34,9 +34,8 @@ let Item = {
 
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
+            let description = $('#description').val()
             let category = $('#category').val();
-            let description = $('#description').val();
-            let quantity = $('input[name=quantity]').val();
             let unit = $('#unit').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
             let account_code = $('#account_code').val();
@@ -51,9 +50,8 @@ let Item = {
                     _token: $('input[name=_token]').val(),
                     code: code,
                     name: name,
-                    category: category,
                     description: description,
-                    quantity: quantity,
+                    category: category,
                     unit: unit,
                     is_stock: is_stock,
                     is_ppn: is_ppn,
@@ -72,10 +70,6 @@ let Item = {
 
                         if (data.errors.category) {
                             $('#category-error').html(data.errors.category[0]);
-                        }
-
-                        if (data.errors.quantity) {
-                            $('#quantity-error').html(data.errors.quantity[0]);
                         }
 
                         if (data.errors.unit) {
