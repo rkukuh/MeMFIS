@@ -157,7 +157,7 @@
                                                     @component('frontend.common.input.checkbox')
                                                         @slot('id', 'is_ppn')
                                                         @slot('name', 'is_ppn')
-                                                        @slot('text', 'Dikenai PPN?')
+                                                        @slot('text', 'Taxable?')
                                                     @endcomponent
                                                 </div>
 
@@ -165,6 +165,7 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('text', 'PPN')
                                                         @slot('id', 'ppn_amount')
+                                                        @slot('input_prepend', 'PPN')
                                                         @slot('input_append', '%')
                                                         @slot('name', 'ppn_amount')
                                                         @slot('editable', 'disabled')
