@@ -52,7 +52,7 @@ let Item = {
                 },
                 {
                     field: 'name',
-                    title: 'Item Name',
+                    title: 'Material Name',
                     sortable: 'asc',
                     filterable: !1
                 },
@@ -98,12 +98,6 @@ let Item = {
                         return ''
                     }
                 },
-                // {
-                //     field: 'is_stock',
-                //     title: 'Stock',
-                //     sortable: 'asc',
-                //     filterable: !1
-                // },
                 {
                     field: "is_stock",
                     title: "Stock",
@@ -118,6 +112,7 @@ let Item = {
                                 class: " m-badge--warning"
                             }
                         };
+
                         return '<span class="m-badge ' + e[t.is_stock].class + ' m-badge--wide">' + e[t.is_stock].title + "</span>"
                     }
                 },

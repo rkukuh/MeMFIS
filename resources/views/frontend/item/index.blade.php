@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Item
+                    Material
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Item
+                                Material
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item
+                                    Material
                                 </h3>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
-                                            @slot('text', 'Add Item')
+                                            @slot('text', 'Add Material')
                                             @slot('href', route('frontend.item.create') )
                                         @endcomponent
 
