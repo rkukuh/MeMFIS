@@ -37,7 +37,7 @@
                         <a  href="#" class="m-menu__link m-menu__toggle">
                           <i class="m-menu__link-icon flaticon-list-3"></i>
                           <span class="m-menu__link-text">
-                            Item
+                            Material
                           </span>
                           <i class="m-menu__ver-arrow la la-angle-right"></i>
                         </a>
@@ -50,7 +50,7 @@
                                   <span></span>
                                 </i>
                                 <span class="m-menu__link-text">
-                                    Items
+                                    Materials
                                 </span>
                               </a>
                             </li>
