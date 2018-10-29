@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
-                                            @slot('text', 'Add Material')
+                                            @slot('text', 'Material')
                                             @slot('href', route('frontend.item.create') )
                                         @endcomponent
 
