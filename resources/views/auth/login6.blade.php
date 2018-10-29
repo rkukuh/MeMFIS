@@ -66,7 +66,9 @@
                             </div>
 
                             <form action="{{ route('login') }}" method="POST" class="m-login__form m-form">
+
                                 @csrf
+
                                 <div class="form-group m-form__group">
                                     <strong>{{ $errors->first('email') }}</strong>
                                     <input type="email" id="email" name="email" placeholder="Email" autofocus class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}">
