@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
 Author: KeenThemes
 Website: http://www.keenthemes.com/
@@ -15,9 +15,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- begin::Head -->
     <head>
         <meta charset="utf-8" />
-        
+
         <title>Metronic | Login Page - 6</title>
-        <meta name="description" content="Latest updates and statistic charts"> 
+        <meta name="description" content="Latest updates and statistic charts">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
         <!--begin::Web font -->
@@ -32,7 +32,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </script>
         <!--end::Web font -->
 
-        
+
 		<!--begin::Base Styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/vendors/base/vendors.bundle.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/demo/default/base/style.bundle.css')}}">
@@ -43,16 +43,16 @@ License: You must have a valid license purchased only from themeforest(the above
             </head>
     <!-- end::Head -->
 
-    
+
     <!-- begin::Body -->
     <body  class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
 
-        
-        
+
+
     	<!-- begin:: Page -->
 <div class="m-grid m-grid--hor m-grid--root m-page">
-    
-			
+
+
 				<div class="m-grid__item m-grid__item--fluid m-grid m-grid--desktop m-grid--ver-desktop m-grid--hor-tablet-and-mobile m-login m-login--6" id="m_login">
 	<div class="m-grid__item   m-grid__item--order-tablet-and-mobile-2  m-grid m-grid--hor m-login__aside " style="background-image: url(../../../assets/metronic/app/media/img//bg/bg-4.jpg);">
 		<div class="m-grid__item">
@@ -113,7 +113,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}">
 
 
-                    {{-- <input class="form-control m-input {{ $errors->has('email') ? ' is-invalid' : '' }}" 
+                    {{-- <input class="form-control m-input {{ $errors->has('email') ? ' is-invalid' : '' }}"
                     type="email" placeholder="Email" name="email" autofocus> --}}
 					</div>
 					<div class="form-group m-form__group">
@@ -122,7 +122,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
                      </div>
 
-                   
+
 				<!--begin::Action-->
 				<div class="m-login__action">
 					<a href="javascript:;" id="m_login_forget_password"  class="m-link">
@@ -185,8 +185,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	</div>
 </div>
 
-				 	 				
-		
+
+
 
 </div>
         <!-- end:: Page -->
