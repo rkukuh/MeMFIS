@@ -2,8 +2,15 @@ let Item = {
     init: function () {
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
+
             document.getElementById('is_ppn').onchange = function () {
                 document.getElementById('ppn_amount').disabled = !this.checked;
+
+                if (document.getElementById("is_ppn").checked) {
+                    document.getElementById('ppn_amount').value = 10;
+                } else {
+                    document.getElementById('ppn_amount').value = '';
+                }
             };
         });
 
