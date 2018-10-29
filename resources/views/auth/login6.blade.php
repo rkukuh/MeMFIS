@@ -21,6 +21,7 @@
 
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/vendors/base/vendors.bundle.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/demo/default/base/style.bundle.css') }}">
+
         <link rel="shortcut icon" href="{{ asset('assets/metronic/demo/default/media/img/logo/favicon.ico') }}">
     </head>
     <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
@@ -56,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="m-grid__item m-grid__item--fluid  m-grid__item--order-tablet-and-mobile-1  m-login__wrapper">
+                <div class="m-grid__item m-grid__item--fluid m-grid__item--order-tablet-and-mobile-1 m-login__wrapper">
                     <div class="m-login__body">
 
                         <div class="m-login__signin">
