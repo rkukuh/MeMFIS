@@ -51,6 +51,8 @@ class FreshMigrationWithSeed extends Command
 
             $this->composer->dumpAutoloads();
 
+            $this->line('');
+
             $this->info('[START] Install initial data..........');
 
             $this->call('db:seed', ['--force' => true]);
