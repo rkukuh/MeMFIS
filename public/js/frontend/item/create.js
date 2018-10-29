@@ -72,37 +72,22 @@ let Item = {
                     if (data.errors) {
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
-
                         }
 
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
-
                         }
 
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
-
                         }
 
                         if (data.errors.unit) {
                             $('#unit-error').html(data.errors.unit[0]);
-
-                        }
-
-                        if(unit == "Select a Unit"){
-                            $('#unit-error').html("The Unit field is required.");
-
-                        }
-
-                        if(category == "Select a Category"){
-                            $('#category-error').html("The Category field is required.");
-
                         }
 
                         if (data.errors.category) {
                             $('#category-error').html(data.errors.category[0]);
-
                         }
 
                         document.getElementById('code').value = code;
@@ -251,7 +236,6 @@ let Item = {
                             document.getElementById('type').value = type;
                             document.getElementById('level').value = level;
                             document.getElementById('description-journal').value = description;
-
                         }
 
                         if (data.errors.type) {
