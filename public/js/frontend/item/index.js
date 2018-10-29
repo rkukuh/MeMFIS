@@ -76,7 +76,7 @@ let Item = {
                             1: {
                                 title: "Yes",
                                 class: "m-badge--brand"
-                            },         
+                            },
                             0: {
                                 title: "No",
                                 class: " m-badge--warning"
@@ -89,7 +89,14 @@ let Item = {
                     field: 'ppn_amount',
                     title: 'PPN',
                     sortable: 'asc',
-                    filterable: !1
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_ppn) {
+                            return [t.ppn_amount] + " %"
+                        }
+
+                        return ''
+                    }
                 },
                 // {
                 //     field: 'is_stock',
@@ -105,7 +112,7 @@ let Item = {
                             1: {
                                 title: "Yes",
                                 class: "m-badge--brand"
-                            },         
+                            },
                             0: {
                                 title: "No",
                                 class: " m-badge--warning"
