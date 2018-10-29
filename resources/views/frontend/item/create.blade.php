@@ -161,26 +161,25 @@
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'isstock')
-                                                    @slot('name', 'isstock')
+                                                    @slot('id', 'is_stock')
+                                                    @slot('name', 'is_stock')
                                                     @slot('text', 'Stockable?')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="checkbox">
                                                     @component('frontend.common.input.checkbox')
-                                                        @slot('id', 'isppn')
-                                                        @slot('name', 'isppn')
+                                                        @slot('id', 'is_ppn')
+                                                        @slot('name', 'is_ppn')
                                                         @slot('text', 'Dikenai PPN?')
                                                     @endcomponent
                                                 </div>
 
                                                 <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
                                                     @component('frontend.common.input.number')
-                                                        @slot('id', 'ppn')
                                                         @slot('text', 'PPN')
-                                                        @slot('name', 'ppn')
-                                                        @slot('class', 'ppn')
+                                                        @slot('id', 'ppn_amount')
+                                                        @slot('name', 'ppn_amount')
                                                         @slot('editable', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -194,8 +193,8 @@
                                             @include('frontend.common.account-code.index')
 
                                             @component('frontend.common.input.hidden')
-                                                @slot('id', 'accountcode')
-                                                @slot('name', 'accountcode')
+                                                @slot('id', 'account_code')
+                                                @slot('name', 'account_code')
                                             @endcomponent
                                         </div>
                                     </div>
