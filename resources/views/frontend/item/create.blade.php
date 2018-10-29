@@ -196,7 +196,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
@@ -314,7 +314,6 @@
         .margin-info {
             margin-left: 5px
         }
-
     </style>
 @endpush
 
