@@ -11,7 +11,6 @@ let Item = {
             item_reset();
         });
 
-
         $('.footer').on('click', '.add-item', function () {
 
             if ($('#tag :selected').length > 0) {
@@ -20,7 +19,6 @@ let Item = {
                     selectedtags[i] = $(selected).val();
                 });
             }
-
 
             if (document.getElementById("isstock").checked) {
                 isstock = 1;
@@ -33,6 +31,7 @@ let Item = {
             } else {
                 isppn = 0;
             }
+
             let accountcode2 = $('#accountcode2').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
@@ -43,8 +42,6 @@ let Item = {
             let unit = $('#unit').val();
             let barcode = $('input[name=barcode]').val();
             let ppn = $('input[name=ppn]').val();
-
-
 
             $.ajax({
                 headers: {
@@ -111,15 +108,13 @@ let Item = {
                             timeOut: 5000
                         });
                         update_item_button();
-                        window.location.href = '/item/'+data.uuid+'/edit';
+                        window.location.href = '/item/' + data.uuid + '/edit';
                     }
                 }
             });
         });
 
         $(function () {
-
-            // klik();
             let inputFile = $('#myInput');
             let button = $('#myButton');
             let buttonSubmit = $('#add-item');
@@ -128,20 +123,24 @@ let Item = {
 
             inputFile.change(function () {
                 let newFiles = [];
+
                 for (let index = 0; index < inputFile[0].files.length; index++) {
                     let file = inputFile[0].files[index];
+
                     newFiles.push(file);
                     files.push(file);
                 }
 
                 newFiles.forEach(file => {
                     let fileElement = $(`<p>${file.name}</p>`);
+
                     fileElement.data('fileData', file);
                     filesContainer.append(fileElement);
 
                     fileElement.click(function (event) {
                         let fileElement = $(event.target);
                         let indexToRemove = files.indexOf(fileElement.data('fileData'));
+
                         fileElement.remove();
                         files.splice(indexToRemove, 1);
                     });
@@ -151,6 +150,7 @@ let Item = {
             button.click(function () {
                 inputFile.click();
             });
+
             $('.footer').on('click', '.add-item', function () {
                 let formData = new FormData();
                 let code = $('input[name=code]').val();
@@ -161,8 +161,6 @@ let Item = {
                     formData.append('file' + z, file);
                     z++;
                 });
-
-                // console.log('Sending...');
 
                 $.ajax({
                     headers: {
@@ -176,7 +174,7 @@ let Item = {
                     type: 'POST',
                     success: function (data) {
                         if (data.uploaded == true) {
-                            // alert('sukses');
+                            //
                         }
                     },
                     error: function (err) {
@@ -185,7 +183,6 @@ let Item = {
                 });
             });
         });
-
 
         let simpan = $('.modal-footer').on('click', '.add-journal', function () {
             $('#simpan').text('Simpan');
@@ -217,22 +214,18 @@ let Item = {
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
 
-
                             document.getElementById('code-journal').value = code;
                             document.getElementById('name-journal').value = name;
                             document.getElementById('type').value = type;
                             document.getElementById('level').value = level;
-
                             document.getElementById('description-journal').value = description;
                         }
-
 
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
 
                             document.getElementById('code-journal').value = code;
                             document.getElementById('name-journal').value = name;
-
                             document.getElementById('type').value = type;
                             document.getElementById('level').value = level;
                             document.getElementById('description-journal').value = description;
@@ -289,7 +282,6 @@ let Item = {
                 }
             });
         });
-
     }
 };
 
