@@ -48,19 +48,17 @@ let Item = {
                     title: 'Part No.',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
+                    template: function (t) {
+                        return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
+                    }
                 },
                 {
                     field: 'name',
                     title: 'Material Name',
                     sortable: 'asc',
-                    filterable: !1
-                },
-                {
-                    field: 'unit_quantity',
-                    title: 'Quantity',
-                    sortable: 'asc',
-                    filterable: !1
+                    filterable: !1,
+                    width: 250
                 },
                 {
                     field: 'unit.name',
@@ -72,35 +70,17 @@ let Item = {
                     field: "is_ppn",
                     title: "PPN",
                     template: function (t) {
-                        var e = {
-                            1: {
-                                title: "Yes",
-                                class: "m-badge--brand"
-                            },
-                            0: {
-                                title: "No",
-                                class: " m-badge--warning"
-                            }
-                        };
-                        return '<span class="m-badge ' + e[t.is_ppn].class + ' m-badge--wide">' + e[t.is_ppn].title + "</span>"
-                    }
-                },
-                {
-                    field: 'ppn_amount',
-                    title: 'PPN',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.is_ppn) {
-                            return [t.ppn_amount] + " %"
+                        if (t.is_ppn === 1) {
+                            return '<span class="m-badge m-badge--brand m-badge--wide">Yes: ' + t.ppn_amount + '%</span>'
                         }
-
-                        return ''
+                        else {
+                            return '<span class="m-badge m-badge--warning m-badge--wide">No</span>'
+                        }
                     }
                 },
                 {
                     field: "is_stock",
-                    title: "Stock",
+                    title: "Stockable?",
                     template: function (t) {
                         var e = {
                             1: {
@@ -142,8 +122,6 @@ let Item = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/item/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" ' +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
                             '<a href="/item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
