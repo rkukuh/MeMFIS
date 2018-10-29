@@ -68,10 +68,10 @@ let Item = {
                 },
                 {
                     field: "is_ppn",
-                    title: "PPN",
+                    title: "Taxable?",
                     template: function (t) {
                         if (t.is_ppn === 1) {
-                            return '<span class="m-badge m-badge--brand m-badge--wide">Yes: ' + t.ppn_amount + '%</span>'
+                            return '<span class="m-badge m-badge--brand m-badge--wide">PPN: ' + t.ppn_amount + '%</span>'
                         }
                         else {
                             return '<span class="m-badge m-badge--warning m-badge--wide">No</span>'
