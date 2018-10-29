@@ -62,28 +62,29 @@
 
                         <div class="m-login__signin">
                             <div class="m-login__title">
-                                <h3>Login Page</h3>
+                                <h3>Login</h3>
                             </div>
 
-                            <form action="{{ route('login') }}" method="POST" class="m-login__form m-form">
+                            <form action="{{ route('login') }}" method="post" class="m-login__form m-form">
 
                                 @csrf
 
-                                <div class="form-group m-form__group">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                    <input type="email" id="email" name="email" placeholder="Email" autofocus class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}">
+                                <div class="form-group m-form__group {{ $errors->has('email') ? ' has-danger' : '' }}">
+                                    <input type="email" id="email" name="email" placeholder="Email" autofocus class="form-control m-input">
+                                    <div id="username-error" class="form-control-feedback">{{ $errors->first('email') }}</div>
                                 </div>
-                                <div class="form-group m-form__group">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                    <input type="password" id="password" name="password" placeholder="Password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
+
+                                <div class="form-group m-form__group {{ $errors->has('password') ? ' has-danger' : '' }}">
+                                    <input type="password" id="password" name="password" placeholder="Password" class="form-control m-input">
+                                    <div id="username-error" class="form-control-feedback">{{ $errors->first('password') }}</div>
                                 </div>
 
                                 <div class="m-login__action">
-                                    <a href="javascript:;" id="m_login_forget_password" class="m-link">
+                                    <a href="javascript:;" id="m_login_forget_password" class="m-link invisible">
                                         <span>Forgot Password ?</span>
                                     </a>
                                     <button type="submit" class="btn btn-primary  m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
-                                        {{ __('Login') }}
+                                        <i class="la la-lock"></i> {{ __('Login') }}
                                     </button>
                                 </div>
                             </form>
