@@ -20,14 +20,8 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('of');
             $table->text('description')->nullable();
-            $table->unsignedInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('account_code')
-                  ->references('id')->on('journals')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
 
             $table->index('code');
             $table->index('name');

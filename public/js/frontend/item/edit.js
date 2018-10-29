@@ -169,12 +169,12 @@ let Item = {
 
         $('.footer').on('click', '.edit-item', function () {
 
-            // if ($('#tag :selected').length > 0) {
-            //     var selectedtags = [];
-            //     $('#tag :selected').each(function (i, selected) {
-            //         selectedtags[i] = $(selected).val();
-            //     });
-            // }
+            if ($('#tag :selected').length > 0) {
+                var selectedtags = [];
+                $('#tag :selected').each(function (i, selected) {
+                    selectedtags[i] = $(selected).val();
+                });
+            }
 
 
             if (document.getElementById("isstock").checked) {
@@ -196,7 +196,7 @@ let Item = {
             let barcode = $('input[name=barcode]').val();
             let ppn = $('input[name=ppn]').val();
             let category = $('#category').val();
-            let qty = $('input[name=qty]').val();
+            let quantity = $('input[name=quantity]').val();
             let unit = $('#unit').val();
 
 
@@ -210,7 +210,7 @@ let Item = {
                     _token: $('input[name=_token]').val(),
                     code: code,
                     name: name,
-                    qty: qty,
+                    quantity: quantity,
                     unit: unit,
                     isstock: isstock,
                     isppn: isppn,
@@ -218,7 +218,7 @@ let Item = {
                     ppn: ppn,
                     description: description,
                     accountcode: accountcode2,
-                    // selectedtags: selectedtags,
+                    selectedtags: selectedtags,
                     category: category
 
                 },
@@ -234,8 +234,8 @@ let Item = {
 
                         }
 
-                        if (data.errors.qty) {
-                            $('#qty-error').html(data.errors.qty[0]);
+                        if (data.errors.quantity) {
+                            $('#quantity-error').html(data.errors.quantity[0]);
 
                         }
 
@@ -251,14 +251,14 @@ let Item = {
 
                         if(unit == "Select a Unit"){
                             $('#unit-error').html("The Unit field is required.");
-                            
+
                         }
 
                         if (data.errors.category) {
                             $('#category-error').html(data.errors.category[0]);
 
                         }
-                        
+
                         document.getElementById('code').value = code;
                         document.getElementById('name').value = name;
                         document.getElementById('description').value = description;
@@ -358,8 +358,8 @@ let Item = {
 
         let simpan2 = $('.modal-footer').on('click', '.add-uom', function () {
             let code = $('input[name=code]').val();
-            let qty = $('input[name=qty]').val();
-            let qty2 = $('input[name=qty2]').val();
+            let quantity = $('input[name=quantity]').val();
+            let uom_quantity = $('input[name=uom_quantity]').val();
             let unit = $('#unit').val();
             let unit2 = $('#unit2').val();
 
@@ -372,19 +372,19 @@ let Item = {
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
-                    qty: qty,
-                    qty2: qty2,
+                    quantity: quantity,
+                    uom_quantity: uom_quantity,
                     unit: unit,
                     unit2: unit2
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.qty) {
-                            $('#qty-error').html(data.errors.qty[0]);
+                        if (data.errors.quantity) {
+                            $('#quantity-error').html(data.errors.quantity[0]);
 
                         }
-                        if (data.errors.qty2) {
-                            $('#qty2-error').html(data.errors.qty2[0]);
+                        if (data.errors.uom_quantity) {
+                            $('#uom_quantity-error').html(data.errors.uom_quantity[0]);
 
                         }
                         if (data.errors.unit) {
@@ -395,8 +395,8 @@ let Item = {
                             $('#unit2-error').html(data.errors.unit2[0]);
 
                         }
-                        document.getElementById('qty').value = qty;
-                        document.getElementById('qty2').value = qty2;
+                        document.getElementById('quantity').value = quantity;
+                        document.getElementById('uom_quantity').value = uom_quantity;
                         document.getElementById('unit').value = unit;
                         document.getElementById('unit2').value = unit2;
                 } else {
@@ -466,7 +466,7 @@ let Item = {
                         let table = $('.m_datatable2').mDatatable();
                         table.originalDataSet = [];
                         table.reload();
-                    }   
+                    }
                 }
             });
         });

@@ -36,4 +36,15 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Overrides:
+     * https://github.com/laravel/framework/blob/5.6/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php#L18
+     *
+     * @return void
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login6');
+    }
 }

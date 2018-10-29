@@ -1,4 +1,8 @@
-<div class="col-sm-6 col-md-6 col-lg-6" style="padding:0px">
+<div class="col-sm-{{ $size or '6' }}
+            col-md-{{ $size or '6' }}
+            col-lg-{{ $size or '6' }}"
+    style="padding-left: {{ $padding_left or '0' }}px">
+
     <label
         class="m-checkbox
             m-checkbox--{{ $color or 'primary' }}
@@ -20,7 +24,11 @@
     </label>
 </div>
 
-<div class="col-sm-6 col-md-6 col-lg-6 " style="padding:0px">
+<div class="col-sm-{{ $size or '6' }}
+            col-md-{{ $size or '6' }}
+            col-lg-{{ $size or '6' }} "
+    style="padding-left: {{ $padding_left or '0' }}px">
+
     <span class="m-form__help">
         {{ $help_text or '' }}
     </span>

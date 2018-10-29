@@ -43,7 +43,7 @@ let AccountCode = {
             let triggername = $(this).data('name');
 
             $('.search-journal').html(triggercode + " - " + triggername);
-            document.getElementById('accountcode2').value = triggeruuid;
+            document.getElementById('account_code').value = triggeruuid;
             $('#modal_account_code').modal('hide');
         });
     }

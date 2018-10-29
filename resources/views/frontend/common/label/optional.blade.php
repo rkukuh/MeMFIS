@@ -3,6 +3,6 @@
     style="font-weight: {{ $font_weight or 'normal' }};
                         {{ $style or '' }};">
 
-    {{ $text or '(optional)' }}
+    (<em>{{ $text or 'optional' }}</em>)
 
 </{{ $html_tag or 'small' }}>

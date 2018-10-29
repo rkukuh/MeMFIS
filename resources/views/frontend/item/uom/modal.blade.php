@@ -37,11 +37,11 @@
                                         Quantity @include('frontend.common.label.required')
                                     </label>
 
-                                    @component('frontend.common.input.numeric')
-                                        @slot('id', 'qty2')
-                                        @slot('text', 'Qty')
-                                        @slot('name', 'qty2')
-                                        @slot('id_error', 'qty2')
+                                    @component('frontend.common.input.number')
+                                        @slot('text', 'Quantity')
+                                        @slot('id', 'uom_quantity')
+                                        @slot('name', 'uom_quantity')
+                                        @slot('id_error', 'uom_quantity')
                                     @endcomponent
                                 </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">

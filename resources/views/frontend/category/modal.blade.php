@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Description @include('frontend.common.label.optional')
                                 </label>
@@ -45,17 +45,6 @@
                                     @slot('name', 'description_category')
                                     @slot('id', 'description_category')
                                     @slot('text', 'Description')
-                                @endcomponent
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Account Code @include('frontend.common.label.optional')
-                                </label>
-                                @component('frontend.common.input.select')
-                                    @slot('id', 'accountcode3')
-                                    @slot('text', 'AccountCode')
-                                    @slot('name', 'accountcode_category')
-                                    @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
                         </div>

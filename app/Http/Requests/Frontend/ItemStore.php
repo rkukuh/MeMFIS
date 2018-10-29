@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Unit;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -28,9 +30,18 @@ class ItemStore extends FormRequest
         return [
             'code' => 'required',
             'name' => 'required',
-            'category' => 'required',
-            'qty' => 'required',
-            'unit' => 'required',
+            'category' => [
+                'required',
+                Rule::exists('categories', 'id')->where(function ($query) {
+                    $query->where('of', 'item');
+                }),
+            ],
+            'unit' => [
+                'required',
+                Rule::exists('units', 'id')->where(function ($query) {
+                    $query->whereIn('type_id', (new Unit())->ofQuantity()->get());
+                }),
+            ],
         ];
     }
 

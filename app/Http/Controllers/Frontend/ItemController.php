@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use Response;
+use Spatie\Tags\Tag;
 use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Journal;
@@ -23,7 +24,7 @@ class ItemController extends Controller
      */
     public function getItems()
     {
-        $items = Item::All();
+        $items = Item::with('unit')->get();
 
         $data = $alldata = json_decode($items);
 
@@ -142,40 +143,22 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
-        // $journal =  Journal::find($request->accountcode);
-        // dd($journal);
-        $journal =  Journal::where('uuid',$request->accountcode)->first();
-        if($journal == null){
-            $item = Item::create([
-                'code' => $request->code,
-                'name' => $request->name,
-                'unit_id' => $request->unit,
-                'unit_quantity'=>$request->qty,
-                'description' => $request->description,
-                'barcode' => $request->barcode,
-                'is_ppn' => $request->isppn,
-                'is_stock' => $request->isstock,
-                'ppn_amount' => $request->ppn,
-            ]);
-        }else{
-            $item = Item::create([
-                'code' => $request->code,
-                'name' => $request->name,
-                'unit_id' => $request->unit,
-                'unit_quantity'=>$request->qty,
-                'description' => $request->description,
-                'barcode' => $request->barcode,
-                'account_code' => $journal->id,
-                'is_ppn' => $request->isppn,
-                'is_stock' => $request->isstock,
-                'ppn_amount' => $request->ppn,
-            ]);
-        }
-
-        $item->categories()->attach($request->category);
-        $item->attachTags($request->selectedtags);
-
-        return response()->json($item);
+        return response()
+                ->json(
+                    Item::create([
+                        'code' => $request->code,
+                        'name' => $request->name,
+                        'unit_id' => $request->unit,
+                        'description' => $request->description,
+                        'is_stock' => $request->is_stock,
+                        'is_ppn' => $request->is_ppn,
+                        'ppn_amount' => $request->ppn_amount,
+                        'barcode' => $request->barcode,
+                        'account_code' => optional(Journal::where('uuid', $request->account_code)->first())->id,
+                    ])
+                    ->categories()
+                    ->attach($request->category)
+                );
     }
 
     /**
@@ -208,10 +191,28 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show($item)
     {
+        $item = Item::with('unit')->where('uuid',$item)->first();
+
+        try {
+        // $item = Item::with('unit')->where('uuid',$item)->first();
         $categories = $item->categories;
-        return view('frontend.item.show',compact('item','categories'));
+        $tags = $item->tags;
+        $journal_id = $item->account_code;
+        $journal =  Journal::find($journal_id);
+        $journal_name = $journal->code." - ".$journal->name;
+
+
+        return view('frontend.item.show',compact('item','categories','tags','journal_name'));
+        } catch (\Exception $e) {
+            $categories = $item->categories;
+            $tags = $item->tags;
+            $journal_name = "";
+            return view('frontend.item.show',compact('item','categories','tags','journal_name'));
+
+        }
+
     }
 
     /**
@@ -222,21 +223,29 @@ class ItemController extends Controller
      */
     public function edit($item)
     {
+        $tags = Tag::get();
+        // dd($tags);
+        $categories = Category::ofItem()->get();
+        // dd($categories);
         $item = Item::with('unit')->where('uuid',$item)->first();
         // dd($item);
         try {
             $journal_id = $item->account_code;
             $journal =  Journal::find($journal_id);
+            $tags = Tag::get();
+            $tag_items = $item->tags;
             $units = Unit::ofQuantity()->get();
             $categories = Category::ofItem()->get();
             $category_items = $item->categories;
             $journal_name = $journal->code." - ".$journal->name;
-            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));
+            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units','tags','tag_items'));
         } catch (\Exception $e) {
+            $tags = Tag::get();
+            $tag_items = $item->tags;
             $categories = Category::ofItem()->get();
             $category_items = $item->categories;
             $journal_name = "Search the account code";
-            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units'));
+            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units','tags','tag_items'));
         }
 
     }
@@ -256,7 +265,7 @@ class ItemController extends Controller
             $item->code = $request->code;
             $item->name = $request->name;
             $item->unit_id = $request->unit;
-            $item->unit_quantity = $request->qty;
+            $item->unit_quantity = $request->quantity;
             $item->description = $request->description;
             $item->barcode = $request->barcode;
             $item->is_ppn = $request->isppn;
@@ -268,7 +277,7 @@ class ItemController extends Controller
             //     'code' => $request->code,
             //     'name' => $request->name,
             //     'unit_id' => $request->unit,
-            //     'unit_quantity'=>$request->qty,
+            //     'unit_quantity'=>$request->quantity,
             //     'description' => $request->description,
             //     'barcode' => $request->barcode,
             //     'is_ppn' => $request->isppn,
@@ -279,7 +288,7 @@ class ItemController extends Controller
             $item->code = $request->code;
             $item->name = $request->name;
             $item->unit_id = $request->unit;
-            $item->unit_quantity = $request->qty;
+            $item->unit_quantity = $request->quantity;
             $item->description = $request->description;
             $item->barcode = $request->barcode;
             $item->account_code = $journal->id;
@@ -291,6 +300,8 @@ class ItemController extends Controller
 
         $item->categories()->detach();
         $item->categories()->attach($request->category);
+        // $item->detachTags();
+        $item->syncTags($request->selectedtags);
 
         return response()->json($item);
     }

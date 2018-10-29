@@ -19,7 +19,6 @@ class CreateItemsTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->unsignedInteger('unit_id');
-            $table->double('unit_quantity', 8, 2);
             $table->string('barcode')->nullable();
             $table->boolean('is_ppn')->nullable();
             $table->integer('ppn_amount')->nullable();

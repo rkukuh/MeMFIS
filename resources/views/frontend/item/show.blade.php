@@ -86,7 +86,7 @@
                                 </fieldset>
 
                                 <div class="form-group m-form__group row ">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                         <label class="form-control-label">
                                             Barcode 
                                         </label>
@@ -101,11 +101,39 @@
                                         </label>
                                         @foreach($categories as $category)
                                             @component('frontend.common.label.label')
-                                                @slot('text', $category->name.',')
+                                                @slot('text', $category->name)
                                             @endcomponent
                                         @endforeach
                                     </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label" style="margin-right:100%">
+                                                Tag 
+                                            </label>
+                                            @foreach($tags as $tag)
+                                                @component('frontend.common.label.label')
+                                                    @slot('text', $tag->name.',')
+                                                @endcomponent
+                                            @endforeach
+                                        </div>
                                 </div>
+                                <div class="form-group m-form__group row ">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label" style="margin-right:100%">
+                                                Quantity 
+                                            </label>
+                                            @component('frontend.common.label.p')
+                                                @slot('text', $item->unit_quantity)
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label" style="margin-right:100%">
+                                                    Unit
+                                                </label>
+                                                @component('frontend.common.label.p')
+                                                    @slot('text', $item->unit->name)
+                                                @endcomponent
+                                            </div>
+                                    </div>
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.checkbox')
@@ -152,7 +180,7 @@
                                             Account Code 
                                         </label>
                                         @component('frontend.common.label.p')
-                                            @slot('text', $item->account_code)
+                                            @slot('text', $journal_name)
                                         @endcomponent
 
                                     </div>
