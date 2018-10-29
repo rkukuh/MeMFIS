@@ -124,27 +124,6 @@
                                                 @slot('style', 'margin-top: 10px;')
                                             @endcomponent
                                         </div>
-
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Tag @include('frontend.common.label.optional')
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'tag')
-                                                @slot('text', 'Tag')
-                                                @slot('name', 'tag')
-                                                @slot('style', 'width:100%')
-                                                @slot('multiple', 'multiple')
-                                            @endcomponent
-
-                                            @component('frontend.common.buttons.create-new')
-                                                @slot('size', 'sm')
-                                                @slot('text', 'add tag')
-                                                @slot('data_target', '#modal_tag')
-                                                @slot('style', 'margin-top: 10px;')
-                                            @endcomponent
-                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row ">
 
@@ -217,24 +196,6 @@
                                             @endcomponent
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row ">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Photos @include('frontend.common.label.optional')
-                                            </label>
-                                            <br>
-                                            <input id="myInput" type="file" multiple style="display:none" />
-                                            @component('frontend.common.buttons.browse')
-                                                @slot('icon','fa-plus')
-                                                @slot('id', 'myButton')
-                                                @slot('name', 'myButton')
-                                                @slot('text', 'Add Files')
-                                            @endcomponent
-
-                                            <div id="myFiles"></div>
-                                        </div>
-
-                                    </div>
                                     <div class="modal-footer">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
@@ -282,17 +243,16 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                        @slot('id', 'item-uom')
-                                        @slot('text', 'Add UoM')
-                                        @slot('attribute', 'disabled')
-                                        @slot('data_target', '#modal_uom')
+                                            @slot('id', 'item-uom')
+                                            @slot('text', 'Add UoM')
+                                            @slot('attribute', 'disabled')
+                                            @slot('data_target', '#modal_uom')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="m_datatable1" id="fisrt"></div>
                         </div>
@@ -317,13 +277,12 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                        @slot('id', 'item-minmaxstock')
-                                        @slot('attribute', 'disabled')
-                                        @slot('text', 'Add Min/Max Stock')
-                                        @slot('data_target', '#modal_minmaxstock')
+                                            @slot('id', 'item-minmaxstock')
+                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Add Min/Max Stock')
+                                            @slot('data_target', '#modal_minmaxstock')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -332,7 +291,6 @@
                             </div>
 
                             @include('frontend.category.modal')
-
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
