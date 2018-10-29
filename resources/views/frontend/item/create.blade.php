@@ -77,7 +77,27 @@
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Category @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('id', 'category')
+                                                    @slot('text', 'Category')
+                                                    @slot('name', 'category')
+                                                    @slot('style', 'width:100%')
+                                                    @slot('id_error', 'category')
+                                                @endcomponent
+
+                                                @component('frontend.common.buttons.create-new')
+                                                    @slot('size', 'sm')
+                                                    @slot('text', 'category')
+                                                    @slot('data_target', '#modal_category')
+                                                    @slot('style', 'margin-top: 10px;')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Description @include('frontend.common.label.optional')
                                                 </label>
@@ -102,26 +122,6 @@
                                                 @slot('id', 'barcode')
                                                 @slot('text', 'Barcode')
                                                 @slot('name', 'barcode')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Category @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'category')
-                                                @slot('text', 'Category')
-                                                @slot('name', 'category')
-                                                @slot('style', 'width:100%')
-                                                @slot('id_error', 'category')
-                                            @endcomponent
-
-                                            @component('frontend.common.buttons.create-new')
-                                                @slot('size', 'sm')
-                                                @slot('text', 'category')
-                                                @slot('data_target', '#modal_category')
-                                                @slot('style', 'margin-top: 10px;')
                                             @endcomponent
                                         </div>
                                     </div>
