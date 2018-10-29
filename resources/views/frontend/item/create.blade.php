@@ -165,6 +165,7 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('text', 'PPN')
                                                         @slot('id', 'ppn_amount')
+                                                        @slot('input_append', '%')
                                                         @slot('name', 'ppn_amount')
                                                         @slot('editable', 'disabled')
                                                     @endcomponent
