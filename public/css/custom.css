@@ -22,7 +22,7 @@ div.hidden {
 }
 
 div.row > .col-sm-12.col-md-12.col-lg-12.footer {
-    border-top: 1px solid gainsboro;
+    border-top: 1px solid #e9ecef;
     margin-top: 20px;
     padding-top: 20px;
 }
