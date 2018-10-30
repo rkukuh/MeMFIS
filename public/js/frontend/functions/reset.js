@@ -18,13 +18,9 @@ let item_reset = function () {
 }
 
 let uom_reset = function () {
-    document.getElementById('qty').value = "";
-    document.getElementById('qty2').value = "";
-    $("#unit").select2('val', 'All');
+    document.getElementById('uom_quantity').value = "";
     $("#unit2").select2('val', 'All');
-    $('#qty-error').html('');
-    $('#qty2-error').html('');
-    $('#unit-error').html('');
+    $('#uom_quantity-error').html('');
     $('#unit2-error').html('');
 
 
