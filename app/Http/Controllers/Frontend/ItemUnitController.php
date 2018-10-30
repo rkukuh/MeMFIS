@@ -141,7 +141,7 @@ class ItemUnitController extends Controller
     {
         $item = Item::where('code',$request->code)->first();
 
-        $item->units()->attach([$request->unit2 => ['quantity' => $request->qty2]]);
+        $item->units()->attach([$request->unit2 => ['quantity' => $request->uom_quantity]]);
 
         return response()->json($item);
     }
