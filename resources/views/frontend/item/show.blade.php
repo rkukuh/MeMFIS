@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Item
+                    Material
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{route('frontend.item.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Item
+                                Material
                             </span>
                         </a>
                     </li>
@@ -39,7 +39,7 @@
                                 </span>
                                 @include('frontend.common.label.create-new')
 
-                                <h3 class="m-portlet__head-text">Item</h3>
+                                <h3 class="m-portlet__head-text">Material</h3>
                             </div>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item &rsaquo; UoM (Unit of Measurement)
+                                    Material &rsaquo; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
@@ -241,7 +241,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item &rsaquo; Min/Max Stock
+                                    Material &rsaquo; Min/Max Stock
                                 </h3>
                             </div>
                         </div>
