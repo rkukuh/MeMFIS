@@ -191,28 +191,15 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show($item)
+    public function show(Item $item)
     {
-        $item = Item::with('unit')->where('uuid',$item)->first();
-
-        try {
-        // $item = Item::with('unit')->where('uuid',$item)->first();
         $categories = $item->categories;
         $tags = $item->tags;
         $journal_id = $item->account_code;
         $journal =  Journal::find($journal_id);
         $journal_name = $journal->code." - ".$journal->name;
 
-
         return view('frontend.item.show',compact('item','categories','tags','journal_name'));
-        } catch (\Exception $e) {
-            $categories = $item->categories;
-            $tags = $item->tags;
-            $journal_name = "";
-            return view('frontend.item.show',compact('item','categories','tags','journal_name'));
-
-        }
-
     }
 
     /**
@@ -224,11 +211,9 @@ class ItemController extends Controller
     public function edit($item)
     {
         $tags = Tag::get();
-        // dd($tags);
         $categories = Category::ofItem()->get();
-        // dd($categories);
         $item = Item::with('unit')->where('uuid',$item)->first();
-        // dd($item);
+
         try {
             $journal_id = $item->account_code;
             $journal =  Journal::find($journal_id);
