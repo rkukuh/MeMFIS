@@ -113,6 +113,16 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
+                                            Unit @include('frontend.common.label.required')
+                                        </label>
+                                        <select id="unit" name="unit"  class="form-control m-select2">
+                                                @foreach($units as $aKey => $aSport)
+                                                        <option value="{{$aSport->id}}" @if($aSport->id == $item->unit_id)selected="selected"@endif>{{$aSport->name}} ({{$aSport->symbol}})</option>
+                                                    @endforeach
+                                            </select>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
                                                 Category
                                                 @include('frontend.common.label.required')
                                             </label>
@@ -134,85 +144,12 @@
                                                         @endforeach
                                                         @endif
                                                 </select>
-                                                {{-- @component('frontend.common.input.edit-select2')
-                                                @endcomponent --}}
-
                                                 <div class="form-control-feedback text-danger" id="category-error"></div>
 
-                                                {{-- @component('frontend.common.buttons.create-new')
-                                                @slot('size','sm')
-                                                @slot('text', 'add category')
-                                                @slot('data_target', '#modal_category')
-                                                @slot('style','margin-top: 10px;')
-                                                @endcomponent --}}
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                                Tag
-                                                @include('frontend.common.label.optional')
-                                                </label>
-                                                <select id="tag" name="tag"  class="form-control m-select2" multiple>
-                                                @if($tag_items->isEmpty())
-                                                @foreach($tags as $category)
-                                                    <option value="{{$category->id}}">
-                                                        {{$category->name}}
-                                                    </option>
-                                                @endforeach
-                                                @else
-                                                @foreach($tags as $aKey => $aSport)
-                                                    @foreach($tag_items as $aItemKey => $aItemSport)
-                                                        <option value="{{$aSport->name}}" @if($aSport->name == $aItemSport->name)selected="selected"@endif>{{$aSport->name}}</option>
-                                                    @endforeach
-                                                @endforeach
-                                                @endif
-                                                </select>
-                                                {{-- <select id="unit" name="unit"  class="form-control m-select2">
-                                                        @foreach($tags as $aKey => $aSport)
-                                                                <option value="{{$aSport->name}}" >{{$aSport->name}}</option>
-                                                            @endforeach
-                                                    </select> --}}
-        
-                                                {{-- @component('frontend.common.input.select2')
-                                                    @slot('id', 'tag')
-                                                    @slot('text', 'Tag')
-                                                    @slot('name', 'tag')
-                                                    @slot('style', 'width:100%')
-                                                    @slot('multiple', 'multiple')
-                                                @endcomponent --}}
-                                                {{-- @component('frontend.common.buttons.create-new')
-                                                    @slot('size', 'sm')
-                                                    @slot('text', 'add tag')
-                                                    @slot('data_target', '#modal_tag')
-                                                    @slot('style','margin-top: 10px;')
-                                                @endcomponent --}}
-                                    </div>
+                                
                                 </div>
-                                <div class="form-group m-form__group row ">
-
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Quantity @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'quantity')
-                                                    @slot('text', 'Quantity')
-                                                    @slot('name', 'quantity')
-                                                    @slot('id_error', 'quantity')
-                                                    @slot('value',$item->unit_quantity)
-                                                @endcomponent
-                                            </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Unit @include('frontend.common.label.required')
-                                            </label>
-                                            <select id="unit" name="unit"  class="form-control m-select2">
-                                                    @foreach($units as $aKey => $aSport)
-                                                            <option value="{{$aSport->id}}" @if($aSport->id == $item->unit_id)selected="selected"@endif>{{$aSport->name}} ({{$aSport->symbol}})</option>
-                                                        @endforeach
-                                                </select>
-                                        </div>
-                                    </div>
+                                
                                 <div class="form-group m-form__group row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -281,7 +218,27 @@
 
                                         <div id="myFiles"></div>
                                     </div>
-
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                                Tag
+                                                @include('frontend.common.label.optional')
+                                                </label>
+                                                <select id="tag" name="tag"  class="form-control m-select2" multiple>
+                                                @if($tag_items->isEmpty())
+                                                @foreach($tags as $category)
+                                                    <option value="{{$category->id}}">
+                                                        {{$category->name}}
+                                                    </option>
+                                                @endforeach
+                                                @else
+                                                @foreach($tags as $aKey => $tag)
+                                                    @foreach($tag_items as $aItemKey => $tag_name)
+                                                        <option value="{{$tag->name}}" @if($tag->name == $tag_name->name)selected="selected"@endif>{{$tag->name}}</option>
+                                                    @endforeach
+                                                @endforeach
+                                                @endif
+                                                </select>
+                                    </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
