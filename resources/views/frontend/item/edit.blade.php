@@ -143,17 +143,7 @@
                                                 @endif
                                             </select>
 
-                                            {{-- @component('frontend.common.input.edit-select2')
-                                            @endcomponent --}}
-
                                             <div class="form-control-feedback text-danger" id="category-error"></div>
-
-                                            {{-- @component('frontend.common.buttons.create-new')
-                                            @slot('size','sm')
-                                            @slot('text', 'add category')
-                                            @slot('data_target', '#modal_category')
-                                            @slot('style','margin-top: 10px;')
-                                            @endcomponent --}}
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -177,26 +167,6 @@
                                                     @endforeach
                                                 @endif
                                             </select>
-
-                                            {{-- <select id="unit" name="unit" class="form-control m-select2">
-                                                @foreach($tags as $aKey => $aSport)
-                                                <option value="{{$aSport->name}}">{{$aSport->name}}</option>
-                                                @endforeach
-                                            </select> --}}
-
-                                            {{-- @component('frontend.common.input.select2')
-                                            @slot('id', 'tag')
-                                            @slot('text', 'Tag')
-                                            @slot('name', 'tag')
-                                            @slot('style', 'width:100%')
-                                            @slot('multiple', 'multiple')
-                                            @endcomponent --}}
-                                            {{-- @component('frontend.common.buttons.create-new')
-                                            @slot('size', 'sm')
-                                            @slot('text', 'add tag')
-                                            @slot('data_target', '#modal_tag')
-                                            @slot('style','margin-top: 10px;')
-                                            @endcomponent --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row ">
@@ -423,21 +393,15 @@
         let code = '{{ $item->code }}';
     </script>
 
-    {{-- <script src="{{ asset('js/frontend/functions/select2.js')}}"></script> --}}
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/category.js')}}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/tag.js')}}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js')}}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/account-code.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
-    {{-- <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script> --}}
 
-    <script src="{{ asset('js/frontend/functions/number.js')}}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
 @endpush
