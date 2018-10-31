@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Part Number 
+                                                Part Number
                                             </label>
                                             @component('frontend.common.label.p')
                                                 @slot('text', $item->code)
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Name 
+                                                Name
                                             </label>
 
                                             @component('frontend.common.label.p')
@@ -73,7 +73,7 @@
                                     <div class="form-group m-form__group row ">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Description 
+                                                Description
                                             </label>
 
                                             @component('frontend.common.label.p')
@@ -88,7 +88,7 @@
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                         <label class="form-control-label">
-                                            Barcode 
+                                            Barcode
                                         </label>
 
                                         @component('frontend.common.label.p')
@@ -97,7 +97,7 @@
                                 </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label" style="margin-right:100%">
-                                            Category 
+                                            Category
                                         </label>
                                         @foreach($categories as $category)
                                             @component('frontend.common.label.label')
@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label" style="margin-right:100%">
-                                                Tag 
+                                                Tag
                                             </label>
                                             @foreach($tags as $tag)
                                                 @component('frontend.common.label.label')
@@ -119,7 +119,7 @@
                                 <div class="form-group m-form__group row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label" style="margin-right:100%">
-                                                Quantity 
+                                                Quantity
                                             </label>
                                             @component('frontend.common.label.p')
                                                 @slot('text', $item->unit_quantity)
@@ -169,7 +169,7 @@
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Photos 
+                                            Photos
                                         </label>
                                         <br>
                                         <img src="{{asset('img/LogoMMF.png')}}" alt="" width="100px">
@@ -177,7 +177,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Account Code 
+                                            Account Code
                                         </label>
                                         @component('frontend.common.label.p')
                                             @slot('text', $journal_name)
@@ -191,7 +191,7 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.back')
                                                     @slot('href', route('frontend.item.index') )
-                                                @endcomponent        
+                                                @endcomponent
                                             </div>
                                         </div>
                                     </div>
