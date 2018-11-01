@@ -113,9 +113,13 @@
                                                 Category
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $item->category)
-                                            @endcomponent
+                                            @if (empty($item->category))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $item->category)
+                                                @endcomponent
+                                            @endif
                                         </div>
                                     </div>
                                     <hr>
@@ -159,13 +163,13 @@
                                                 Account Code
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @if (isset($item->journal))
+                                            @if (isset($item->journal))
+                                                @component('frontend.common.label.data-info')
                                                     @slot('text', $item->account_code_and_name)
-                                                @else
-                                                    @slot('text', 'none')
-                                                @endif
-                                            @endcomponent
+                                                @endcomponent
+                                            @else
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @endif
                                         </div>
                                     </div>
                                     <hr>
