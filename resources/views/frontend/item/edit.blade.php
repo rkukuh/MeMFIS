@@ -280,7 +280,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &rsaquo; UoM (Unit of Measurement)
+                                    Material &harr; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
@@ -314,7 +314,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &rsaquo; Min/Max Stock
+                                    Material &harr; Storage Stock
                                 </h3>
                             </div>
                         </div>
@@ -325,7 +325,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new') @slot('id', 'item-minmaxstock')
-                                        @slot('text', 'Add Min/Max Stock') @slot('data_target',
+                                        @slot('text', 'Storage Stock') @slot('data_target',
                                         '#modal_minmaxstock') @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
