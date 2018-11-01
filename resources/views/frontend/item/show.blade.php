@@ -115,15 +115,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_stock')
                                                     @slot('name', 'is_stock')
                                                     @slot('text', 'Stockable?')
 
-                                                    @if($item->is_stock == 1)
-                                                        @slot('editable','checked')
+                                                    @if ($item->is_stock == 1)
+                                                        @slot('checked', 'checked')
                                                     @endif
                                                 @endcomponent
                                             </div>
@@ -134,8 +134,8 @@
                                                         @slot('name', 'is_ppn')
                                                         @slot('text', 'Dikenai PPN?')
 
-                                                        @if($item->is_ppn == 1)
-                                                            @slot('editable','checked')
+                                                        @if ($item->is_ppn == 1)
+                                                            @slot('checked', 'checked')
                                                         @endif
                                                     @endcomponent
 
