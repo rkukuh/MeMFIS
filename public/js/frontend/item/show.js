@@ -110,21 +110,21 @@ let Item = {
                     title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'pivot.max',
-                    title: 'Max',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
+                    width: 250
                 },
                 {
                     field: 'pivot.min',
                     title: 'Min',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 50
+                },
+                {
+                    field: 'pivot.max',
+                    title: 'Max',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 50
                 },
             ]
         });
