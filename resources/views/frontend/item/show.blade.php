@@ -184,7 +184,11 @@
                                             </label>
 
                                             @component('frontend.common.label.p')
-                                                @slot('text', $journal_name)
+                                                @if (isset($item->journal))
+                                                    @slot('text', $item->journal->name)
+                                                @else
+                                                    @slot('text', 'none')
+                                                @endif
                                             @endcomponent
                                         </div>
                                     </div>
