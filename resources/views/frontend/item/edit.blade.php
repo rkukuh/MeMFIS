@@ -72,7 +72,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Name @include('frontend.common.label.optional')
+                                                    Name @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.text')
@@ -306,8 +306,9 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
+                                            @slot('text', 'UoM')
                                             @slot('id', 'item-uom')
-                                            @slot('text', 'Add UoM') @slot('data_target', '#modal_uom')
+                                            @slot('data_target', '#modal_uom')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
