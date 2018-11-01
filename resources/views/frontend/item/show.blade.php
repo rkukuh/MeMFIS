@@ -114,6 +114,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -121,6 +122,7 @@
                                                     @slot('id', 'is_stock')
                                                     @slot('name', 'is_stock')
                                                     @slot('text', 'Stockable?')
+                                                    @slot('disabled', 'disabled')
 
                                                     @if ($item->is_stock == 1)
                                                         @slot('checked', 'checked')
@@ -133,19 +135,18 @@
                                                         @slot('id', 'is_ppn')
                                                         @slot('name', 'is_ppn')
                                                         @slot('text', 'Dikenai PPN?')
+                                                        @slot('disabled', 'disabled')
 
                                                         @if ($item->is_ppn == 1)
                                                             @slot('checked', 'checked')
                                                         @endif
                                                     @endcomponent
 
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', 'PPN : ')
-                                                    @endcomponent
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', $item->ppn_amount)
-                                                    @endcomponent
+                                                    @if (isset($item->ppn_amount))
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'PPN: ' . $item->ppn_amount . '%')
+                                                        @endcomponent
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -163,6 +164,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
