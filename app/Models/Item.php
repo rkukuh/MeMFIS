@@ -93,4 +93,41 @@ class Item extends MemfisModel implements HasMedia
                     ->withPivot('min', 'max')
                     ->withTimestamps();
     }
+
+    /**
+     * One-to-Many: An item may have zero or one account code (journal).
+     *
+     * This function will retrieve the account code (journal) of an item.
+     * See: Journal's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function journal()
+    {
+        return $this->belongsTo(Journal::class, 'account_code');
+    }
+
+    /***************************************** ACCESSOR ******************************************/
+
+    /**
+     * Get the item's account code and name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getAccountCodeAndNameAttribute($value)
+    {
+        return $this->journal->code.' - '.$this->journal->name;
+    }
+
+    /**
+     * Get the item's single category.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getCategoryAttribute($value)
+    {
+        return optional($this->categories->first())->name;
+    }
 }

@@ -1,11 +1,11 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader ">
+    <div class="m-subheader">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Item
+                    Material
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{route('frontend.item.index')}}" class="m-nav__link">
+                        <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Item
+                                Material
                             </span>
                         </a>
                     </li>
@@ -37,167 +37,183 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
-                                @include('frontend.common.label.create-new')
 
-                                <h3 class="m-portlet__head-text">Item</h3>
+                                @include('frontend.common.label.show')
+
+                                <h3 class="m-portlet__head-text">Material</h3>
                             </div>
                         </div>
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
-                            <div class="m-portlet__body">
-                                <fieldset class="border p-2">
-                                    <legend class="w-auto">Identifier</legend>
+                                <div class="m-portlet__body">
+                                    <fieldset class="border p-2">
+                                        <legend class="w-auto">Identifier</legend>
 
-                                    <div class="form-group m-form__group row ">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Part Number 
-                                            </label>
-                                            @component('frontend.common.label.p')
-                                                @slot('text', $item->code)
-                                            @endcomponent
-
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Name 
-                                            </label>
-
-                                            @component('frontend.common.label.p')
-                                                @slot('text', $item->name)
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row ">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
-                                                Description 
-                                            </label>
-
-                                            @component('frontend.common.label.p')
-                                                @slot('text', $item->description)
-                                            @endcomponent
-
-                                        </div>
-
-                                    </div>
-                                </fieldset>
-
-                                <div class="form-group m-form__group row ">
-                                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
-                                        <label class="form-control-label">
-                                            Barcode 
-                                        </label>
-
-                                        @component('frontend.common.label.p')
-                                            @slot('text', $item->barcode)
-                                        @endcomponent
-                                </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label" style="margin-right:100%">
-                                            Category 
-                                        </label>
-                                        @foreach($categories as $category)
-                                            @component('frontend.common.label.label')
-                                                @slot('text', $category->name)
-                                            @endcomponent
-                                        @endforeach
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label" style="margin-right:100%">
-                                                Tag 
-                                            </label>
-                                            @foreach($tags as $tag)
-                                                @component('frontend.common.label.label')
-                                                    @slot('text', $tag->name.',')
-                                                @endcomponent
-                                            @endforeach
-                                        </div>
-                                </div>
-                                <div class="form-group m-form__group row ">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label" style="margin-right:100%">
-                                                Quantity 
-                                            </label>
-                                            @component('frontend.common.label.p')
-                                                @slot('text', $item->unit_quantity)
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label" style="margin-right:100%">
-                                                    Unit
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Part Number
                                                 </label>
-                                                @component('frontend.common.label.p')
-                                                    @slot('text', $item->unit->name)
+
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $item->code)
                                                 @endcomponent
                                             </div>
-                                    </div>
-                                <div class="form-group m-form__group row ">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('text', 'Stockable?')
-                                            @slot('name', 'isstock')
-                                            @slot('id', 'isstock')
-                                                @if($item->is_stock==1)
-                                                    @slot('editable','checked')
-                                                @endif
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <div class="checkbox">
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('text', 'Dikenai PPN?')
-                                                @slot('name', 'isppn')
-                                                @slot('id', 'isppn')
-                                                @if($item->is_ppn==1)
-                                                    @slot('editable','checked')
-                                                @endif
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Name
+                                                </label>
+
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $item->name)
                                                 @endcomponent
-                                            @component('frontend.common.label.label')
-                                                @slot('text', 'PPN : ')
-                                            @endcomponent
-                                            @component('frontend.common.label.label')
-                                                @slot('text', $item->ppn_amount)
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label class="form-control-label">
+                                                    Description
+                                                </label>
+
+                                                @if (empty($item->description))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $item->description)
+                                                    @endcomponent
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-group m-form__group row hidden">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Barcode
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $item->barcode)
                                             @endcomponent
                                         </div>
-
-
                                     </div>
-                                </div>
-                                <div class="form-group m-form__group row ">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Photos 
-                                        </label>
-                                        <br>
-                                        <img src="{{asset('img/LogoMMF.png')}}" alt="" width="100px">
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Unit
+                                            </label>
 
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Account Code 
-                                        </label>
-                                        @component('frontend.common.label.p')
-                                            @slot('text', $journal_name)
-                                        @endcomponent
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $item->unit->name)
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Category
+                                            </label>
 
+                                            @if (empty($item->category))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $item->category)
+                                                @endcomponent
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                        <div class="flex">
-                                            <div class="action-buttons">
-                                                @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.item.index') )
-                                                @endcomponent        
+                                    <hr>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                @component('frontend.common.input.checkbox')
+                                                    @slot('id', 'is_stock')
+                                                    @slot('name', 'is_stock')
+                                                    @slot('text', 'Stockable?')
+                                                    @slot('disabled', 'disabled')
+
+                                                    @if ($item->is_stock == 1)
+                                                        @slot('checked', 'checked')
+                                                    @endif
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="checkbox">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('id', 'is_ppn')
+                                                        @slot('name', 'is_ppn')
+                                                        @slot('text', 'Taxable?')
+                                                        @slot('disabled', 'disabled')
+
+                                                        @if ($item->is_ppn == 1)
+                                                            @slot('checked', 'checked')
+                                                        @endif
+                                                    @endcomponent
+
+                                                    @if (isset($item->ppn_amount))
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'PPN: ' . $item->ppn_amount . '%')
+                                                        @endcomponent
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Account Code
+                                            </label>
+
+                                            @if (isset($item->journal))
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $item->account_code_and_name)
+                                                @endcomponent
+                                            @else
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Tag
+                                            </label>
+
+                                            <div>
+                                                @if (empty($item->tags))
+                                                    @foreach($item->tags as $tag)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $tag->name)
+                                                        @endcomponent
+                                                    @endforeach
+                                                @else
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Photos
+                                            </label>
+
+                                            <div>
+                                                <img src="{{ asset('img/LogoMMF-100x42.png') }}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.item.index'))
+                                                    @endcomponent
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -210,24 +226,18 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
-                                @include('frontend.common.label.datalist')
+
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item &rsaquo; UoM (Unit of Measurement)
+                                    Material &harr; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                </div>
-                            </div>
-
-                            @include('frontend.item.uom.modal')
-
-                            <div class="m_datatable1" id="fisrt"></div>
+                            <div class="item_unit_datatable" id="item_unit_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -238,26 +248,18 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
-                                @include('frontend.common.label.datalist')
+
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item &rsaquo; Min/Max Stock
+                                    Material &harr; Storage Stock
                                 </h3>
                             </div>
                         </div>
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                </div>
-                            </div>
-
-                            @include('frontend.item.storage.modal')
-                            @include('frontend.storage.modal')
-                            @include('frontend.category.modal')
-
-                            <div class="m_datatable2" id="second"></div>
+                            <div class="item_storage_datatable" id="item_storage_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -268,16 +270,16 @@
 
 @push('header-scripts')
     <style>
-        fieldset { margin-bottom: 30px; }
+        fieldset {
+            margin-bottom: 30px;
+        }
     </style>
 @endpush
 
 @push('footer-scripts')
     <script>
-        let code = '{{$item->code}}';
+        let item_uuid = '{{ $item->uuid }}';
     </script>
-
-    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
 
     <script src="{{ asset('js/frontend/item/show.js') }}"></script>
 @endpush

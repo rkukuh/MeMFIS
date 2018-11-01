@@ -29,4 +29,17 @@ class Journal extends MemfisModel
         return $this->belongsTo(Type::class);
     }
 
+    /**
+     * One-to-Many: An item may have zero or one account code (journal).
+     *
+     * This function will retrieve all items of an account code (journal).
+     * See: Item's account_code() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'account_code');
+    }
+
 }

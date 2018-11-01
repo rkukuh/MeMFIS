@@ -46,25 +46,26 @@ let ItemUnit = {
                         }
                     }
                 },
-                columns: [{
+                columns: [
+                    {
+                        field: 'uom.quantity',
+                        title: 'Quantity',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 100
+                    },
+                    {
                         field: 'name',
                         title: 'Unit',
                         sortable: 'asc',
                         filterable: !1,
-                        width: 150
-                    },
-                    {
-                        field: 'uom.quantity',
-                        title: 'Qty',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 150
+                        width: 250
                     },
                     {
                         field: 'Actions',
-                        width: 110,
                         title: 'Actions',
                         sortable: !1,
+                        width: 100,
                         overflow: 'visible',
                         template: function (t, e, i) {
                             return (

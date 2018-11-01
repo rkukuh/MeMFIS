@@ -10,8 +10,8 @@ $factory->define(Item::class, function (Faker $faker) {
     $is_ppn = $faker->boolean;
 
     return [
-        'code' => 'IT-EX-' . $sequence,
-        'name' => 'Item Example #' . $sequence,
+        'code' => 'MAT-EX-' . $sequence,
+        'name' => 'Material Example #' . $sequence,
         'unit_id' => Unit::get()->random()->id,
         'is_ppn' => $is_ppn,
         'ppn_amount' => function() use ($is_ppn) {

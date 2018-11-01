@@ -16,12 +16,11 @@ class ItemUnitController extends Controller
     /**
      * Show data from model for DataTable.
      *
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function getUoM($code)
+    public function getUoM(Item $item)
     {
-        $item = Item::with('units')->where('code', $code)->first();
-
         $data = $alldata = json_decode($item->units);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -141,7 +140,7 @@ class ItemUnitController extends Controller
     {
         $item = Item::where('code',$request->code)->first();
 
-        $item->units()->attach([$request->unit2 => ['quantity' => $request->qty2]]);
+        $item->units()->attach([$request->unit2 => ['quantity' => $request->uom_quantity]]);
 
         return response()->json($item);
     }

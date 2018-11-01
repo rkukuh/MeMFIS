@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{route('frontend.item.index')}}" class="m-nav__link">
+                        <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Material
                             </span>
@@ -94,7 +94,6 @@
                                             </div>
                                         </div>
                                     </fieldset>
-
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">
@@ -143,8 +142,9 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_stock')
@@ -160,15 +160,14 @@
                                                         @slot('text', 'Taxable?')
                                                     @endcomponent
                                                 </div>
-
-                                                <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
+                                                <div class="col-sm-12 col-md-12 col-lg-12" style="padding-left: 0">
                                                     @component('frontend.common.input.number')
                                                         @slot('text', 'PPN')
                                                         @slot('id', 'ppn_amount')
                                                         @slot('input_append', '%')
                                                         @slot('name', 'ppn_amount')
                                                         @slot('input_prepend', 'PPN')
-                                                        @slot('editable', 'disabled')
+                                                        @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -223,7 +222,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &rsaquo; UoM (Unit of Measurement)
+                                    Material &harr; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
@@ -260,7 +259,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &rsaquo; Min/Max Stock
+                                    Material &harr; Storage Stock
                                 </h3>
                             </div>
                         </div>
@@ -273,7 +272,7 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-minmaxstock')
                                             @slot('attribute', 'disabled')
-                                            @slot('text', 'Min / Max Stock')
+                                            @slot('text', 'Storage Stock')
                                             @slot('data_target', '#modal_minmaxstock')
                                         @endcomponent
 

@@ -5,9 +5,9 @@
            m-badge--{{ $type or 'rounded' }}"
     style="{{ $style or '' }}">
 
-    <i class="{{ $icon or 'la la-file-o' }}"></i>
+    <i class="{{ $icon or 'la la-eye' }}"></i>
 
-    <span>{{ $text or 'Create New' }}</span>
+    <span>{{ $text or 'View' }}</span>
 </span>
 
 @push('header-scripts')

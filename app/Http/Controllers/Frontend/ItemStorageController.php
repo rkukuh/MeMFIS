@@ -12,15 +12,14 @@ use App\Http\Requests\Frontend\ItemStorageUpdate;
 
 class ItemStorageController extends Controller
 {
-        /**
+    /**
      * Show data from model for DataTable.
      *
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function getItemStorages($code)
+    public function getItemStorages(Item $item)
     {
-        $item = Item::with('storages')->where('code',$code)->first();
-
         $data = $alldata = json_decode($item->storages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

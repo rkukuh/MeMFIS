@@ -19,7 +19,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
 
-
         Route::resource('fax', 'FaxController');
         Route::resource('type', 'TypeController');
         Route::resource('bank', 'BankController');
@@ -142,11 +141,11 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
 
         Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
-        Route::get('/get-uom/{code}','ItemUnitController@getUoM')->name('get-uom');
+        Route::get('/get-uom/{item}','ItemUnitController@getUoM')->name('get-uom');
         Route::delete('/item-unit/{item_unit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
 
         Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
-        Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
+        Route::get('/get-item-storages/{item}','ItemStorageController@getItemStorages')->name('get-item-storages');
         Route::delete('/item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
 
 
