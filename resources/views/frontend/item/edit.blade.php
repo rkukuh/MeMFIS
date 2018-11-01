@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Item
+                    Material
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{route('frontend.item.index')}}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Item
+                                Material
                             </span>
                         </a>
                     </li>
@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 @include('frontend.common.label.edit')
-                                <h3 class="m-portlet__head-text">Item</h3>
+                                <h3 class="m-portlet__head-text">Material</h3>
                             </div>
                         </div>
                     </div>
@@ -141,9 +141,9 @@
                                                 @endforeach
                                                 @else
                                                 @foreach($categories as $aKey => $aSport)
-                                                @foreach($category_items as $aItemKey => $aItemSport)
+                                                @foreach($category_items as $aMaterialKey => $aMaterialSport)
                                                 <option value="{{$aSport->id}}" @if($aSport->id ==
-                                                    $aItemSport->id)selected="selected"@endif>{{$aSport->name}}</option>
+                                                    $aMaterialSport->id)selected="selected"@endif>{{$aSport->name}}</option>
                                                 @endforeach
                                                 @endforeach
                                                 @endif
@@ -236,7 +236,7 @@
                                                 @endforeach
                                                 @else
                                                 @foreach($tags as $aKey => $tag)
-                                                @foreach($tag_items as $aItemKey => $tag_name)
+                                                @foreach($tag_items as $aMaterialKey => $tag_name)
                                                 <option value="{{$tag->name}}" @if($tag->name ==
                                                     $tag_name->name)selected="selected"@endif>{{$tag->name}}</option>
                                                 @endforeach
@@ -280,7 +280,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item &rsaquo; UoM (Unit of Measurement)
+                                    Material &rsaquo; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
@@ -314,7 +314,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item &rsaquo; Min/Max Stock
+                                    Material &rsaquo; Min/Max Stock
                                 </h3>
                             </div>
                         </div>
