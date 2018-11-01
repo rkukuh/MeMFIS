@@ -94,18 +94,7 @@
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label" style="margin-right:100%">
-                                                Category
-                                            </label>
-
-                                            @foreach($item->categories as $category)
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $category->name)
-                                                @endcomponent
-                                            @endforeach
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label" style="margin-right:100%">
+                                            <label class="form-control-label">
                                                 Tag
                                             </label>
 
@@ -118,16 +107,7 @@
                                     </div>
                                     <div class="form-group m-form__group row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label" style="margin-right:100%">
-                                                Quantity
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $item->unit_quantity)
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label" style="margin-right:100%">
+                                            <label class="form-control-label">
                                                 Unit
                                             </label>
 
@@ -135,12 +115,23 @@
                                                 @slot('text', $item->unit->name)
                                             @endcomponent
                                         </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Category
+                                            </label>
+
+                                            @foreach($item->categories as $category)
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $category->name)
+                                                @endcomponent
+                                            @endforeach
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row ">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             @component('frontend.common.input.checkbox')
-                                                @slot('id', 'isstock')
-                                                @slot('name', 'isstock')
+                                                @slot('id', 'is_stock')
+                                                @slot('name', 'is_stock')
                                                 @slot('text', 'Stockable?')
 
                                                 @if($item->is_stock == 1)
@@ -151,8 +142,8 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox">
                                                 @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'isppn')
-                                                    @slot('name', 'isppn')
+                                                    @slot('id', 'is_ppn')
+                                                    @slot('name', 'is_ppn')
                                                     @slot('text', 'Dikenai PPN?')
 
                                                     @if($item->is_ppn == 1)
