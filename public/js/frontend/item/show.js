@@ -55,7 +55,10 @@ let Item = {
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
+                    template: function (t) {
+                        return t.name + ' (' + t.symbol + ')'
+                    }
                 },
             ]
         });
