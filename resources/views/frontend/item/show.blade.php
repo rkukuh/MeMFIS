@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader ">
+    <div class="m-subheader">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
@@ -51,7 +51,7 @@
                                     <fieldset class="border p-2">
                                         <legend class="w-auto">Identifier</legend>
 
-                                        <div class="form-group m-form__group row ">
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Part Number
@@ -71,7 +71,7 @@
                                                 @endcomponent
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row ">
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
                                                     Description
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                                    <div class="form-group m-form__group row ">
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">
                                                 Barcode
@@ -105,7 +105,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row ">
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Unit
@@ -127,7 +127,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row ">
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             @component('frontend.common.input.checkbox')
                                                 @slot('id', 'is_stock')
@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row ">
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Photos
