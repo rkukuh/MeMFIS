@@ -142,7 +142,7 @@
                                                     @component('frontend.common.input.checkbox')
                                                         @slot('id', 'is_ppn')
                                                         @slot('name', 'is_ppn')
-                                                        @slot('text', 'Dikenai PPN?')
+                                                        @slot('text', 'Taxable?')
                                                         @slot('disabled', 'disabled')
 
                                                         @if ($item->is_ppn == 1)
@@ -230,7 +230,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &rsaquo; UoM (Unit of Measurement)
+                                    Material &harr; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
@@ -252,7 +252,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &rsaquo; Min/Max Stock
+                                    Material &harr; Storage Stock
                                 </h3>
                             </div>
                         </div>
