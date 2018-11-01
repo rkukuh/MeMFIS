@@ -281,6 +281,5 @@
         let code = '{{ $item->code }}';
     </script>
 
-    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('js/frontend/item/show.js') }}"></script>
 @endpush
