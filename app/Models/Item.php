@@ -106,4 +106,17 @@ class Item extends MemfisModel implements HasMedia
     {
         return $this->belongsTo(Journal::class, 'account_code');
     }
+
+    /***************************************** ACCESSOR ******************************************/
+
+    /**
+     * Get the user's first name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getAccountCodeAndNameAttribute($value)
+    {
+        return $this->journal->code.' - '.$this->journal->name;
+    }
 }
