@@ -57,7 +57,7 @@
                                                     Part Number
                                                 </label>
 
-                                                @component('frontend.common.label.p')
+                                                @component('frontend.common.label.data-info')
                                                     @slot('text', $item->code)
                                                 @endcomponent
                                             </div>
@@ -66,7 +66,7 @@
                                                     Name
                                                 </label>
 
-                                                @component('frontend.common.label.p')
+                                                @component('frontend.common.label.data-info')
                                                     @slot('text', $item->name)
                                                 @endcomponent
                                             </div>
@@ -77,7 +77,7 @@
                                                     Description
                                                 </label>
 
-                                                @component('frontend.common.label.p')
+                                                @component('frontend.common.label.data-info')
                                                     @slot('text', $item->description)
                                                 @endcomponent
                                             </div>
@@ -89,7 +89,7 @@
                                                 Barcode
                                             </label>
 
-                                            @component('frontend.common.label.p')
+                                            @component('frontend.common.label.data-info')
                                                 @slot('text', $item->barcode)
                                             @endcomponent
                                         </div>
@@ -99,7 +99,7 @@
                                             </label>
 
                                             @foreach($item->categories as $category)
-                                                @component('frontend.common.label.label')
+                                                @component('frontend.common.label.data-info')
                                                     @slot('text', $category->name)
                                                 @endcomponent
                                             @endforeach
@@ -110,8 +110,8 @@
                                             </label>
 
                                             @foreach($item->tags as $tag)
-                                                @component('frontend.common.label.label')
-                                                    @slot('text', $tag->name.',')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $tag->name.' ')
                                                 @endcomponent
                                             @endforeach
                                         </div>
@@ -122,7 +122,7 @@
                                                 Quantity
                                             </label>
 
-                                            @component('frontend.common.label.p')
+                                            @component('frontend.common.label.data-info')
                                                 @slot('text', $item->unit_quantity)
                                             @endcomponent
                                         </div>
@@ -131,7 +131,7 @@
                                                 Unit
                                             </label>
 
-                                            @component('frontend.common.label.p')
+                                            @component('frontend.common.label.data-info')
                                                 @slot('text', $item->unit->name)
                                             @endcomponent
                                         </div>
@@ -160,11 +160,11 @@
                                                     @endif
                                                 @endcomponent
 
-                                                @component('frontend.common.label.label')
+                                                @component('frontend.common.label.data-info')
                                                     @slot('text', 'PPN : ')
                                                 @endcomponent
 
-                                                @component('frontend.common.label.label')
+                                                @component('frontend.common.label.data-info')
                                                     @slot('text', $item->ppn_amount)
                                                 @endcomponent
                                             </div>
@@ -183,7 +183,7 @@
                                                 Account Code
                                             </label>
 
-                                            @component('frontend.common.label.p')
+                                            @component('frontend.common.label.data-info')
                                                 @if (isset($item->journal))
                                                     @slot('text', $item->account_code_and_name)
                                                 @else
