@@ -142,6 +142,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -271,7 +272,7 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-minmaxstock')
                                             @slot('attribute', 'disabled')
-                                            @slot('text', 'Min / Max Stock')
+                                            @slot('text', 'Storage Stock')
                                             @slot('data_target', '#modal_minmaxstock')
                                         @endcomponent
 
