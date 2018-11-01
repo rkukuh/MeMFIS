@@ -223,11 +223,6 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                </div>
-                            </div>
-
                             @include('frontend.item.uom.modal')
 
                             <div class="item_unit_datatable" id="item_unit_datatable"></div>
@@ -252,11 +247,6 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                </div>
-                            </div>
-
                             @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
