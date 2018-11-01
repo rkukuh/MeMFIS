@@ -16,7 +16,8 @@
             style="{{ $style or ''}}"
             value="{{ $value or ''}}"
             onclick="{{ $onclik or ''}}"
-            {{ $checked or ''}}>
+            {{ $checked or ''}}
+            {{ $disabled or ''}}>
 
         {{ $text or '' }}
 
