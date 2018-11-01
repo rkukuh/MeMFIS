@@ -172,11 +172,17 @@
                                             </label>
 
                                             <div>
-                                                @foreach($item->tags as $tag)
-                                                    @component('frontend.common.label.badge')
-                                                        @slot('text', $tag->name)
+                                                @if (empty($item->tags))
+                                                    @foreach($item->tags as $tag)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $tag->name)
+                                                        @endcomponent
+                                                    @endforeach
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', '-')
                                                     @endcomponent
-                                                @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
