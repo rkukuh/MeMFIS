@@ -272,7 +272,7 @@
 
 @push('footer-scripts')
     <script>
-        let item_id = '{{ $item->id }}';
+        let item_uuid = '{{ $item->uuid }}';
     </script>
 
     <script src="{{ asset('js/frontend/item/show.js') }}"></script>

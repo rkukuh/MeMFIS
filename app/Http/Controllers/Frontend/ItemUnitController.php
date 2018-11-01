@@ -21,7 +21,6 @@ class ItemUnitController extends Controller
      */
     public function getUoM(Item $item)
     {
-        dd($item);
         $data = $alldata = json_decode($item->units);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

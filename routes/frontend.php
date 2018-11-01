@@ -145,7 +145,7 @@ Route::name('frontend.')->group(function () {
         Route::delete('/item-unit/{item_unit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
 
         Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
-        Route::get('/get-item-storages/{code}','ItemStorageController@getItemStorages')->name('get-item-storages');
+        Route::get('/get-item-storages/{item}','ItemStorageController@getItemStorages')->name('get-item-storages');
         Route::delete('/item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
 
 
