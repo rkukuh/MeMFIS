@@ -109,11 +109,9 @@
                                                 Category
                                             </label>
 
-                                            @foreach($item->categories as $category)
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $category->name)
-                                                @endcomponent
-                                            @endforeach
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $item->category)
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -171,11 +169,13 @@
                                                 Tag
                                             </label>
 
-                                            @foreach($item->tags as $tag)
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $tag->name.' ')
-                                                @endcomponent
-                                            @endforeach
+                                            <div>
+                                                @foreach($item->tags as $tag)
+                                                    @component('frontend.common.label.badge')
+                                                        @slot('text', $tag->name)
+                                                    @endcomponent
+                                                @endforeach
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
