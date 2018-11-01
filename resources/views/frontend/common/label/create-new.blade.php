@@ -1,12 +1,12 @@
 <span
     class="m-badge
            {{ $color or '' }}
-           {{ $length or 'm-badge--wide'}}
-           m-badge--rounded"
-    style="{{ $style or '' }}"
->
+           m-badge--{{ $length or 'wide' }}
+           m-badge--{{ $type or 'rounded' }}"
+    style="{{ $style or '' }}">
 
-    <i class="la {{ $icon or 'la-file-o' }}"></i>
+    <i class="{{ $icon or 'la la-file-o' }}"></i>
+
     <span>{{ $text or 'Create New' }}</span>
 </span>
 
