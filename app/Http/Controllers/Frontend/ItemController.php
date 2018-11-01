@@ -193,11 +193,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        $journal_id = $item->account_code;
-        $journal =  Journal::find($journal_id);
-        $journal_name = $journal->code." - ".$journal->name;
-
-        return view('frontend.item.show',compact('item','journal_name'));
+        return view('frontend.item.show',compact('item'));
     }
 
     /**
