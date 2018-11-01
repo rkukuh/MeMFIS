@@ -77,9 +77,13 @@
                                                     Description
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $item->description)
-                                                @endcomponent
+                                                @if (empty($item->description))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $item->description)
+                                                    @endcomponent
+                                                @endif
                                             </div>
                                         </div>
                                     </fieldset>
@@ -179,9 +183,7 @@
                                                         @endcomponent
                                                     @endforeach
                                                 @else
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', '-')
-                                                    @endcomponent
+                                                    @include('frontend.common.label.data-info-nodata')
                                                 @endif
                                             </div>
                                         </div>
