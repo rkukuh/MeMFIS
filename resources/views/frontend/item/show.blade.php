@@ -83,8 +83,8 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden">
+                                    <div class="form-group m-form__group row hidden">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Barcode
                                             </label>
@@ -92,17 +92,6 @@
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $item->barcode)
                                             @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Tag
-                                            </label>
-
-                                            @foreach($item->tags as $tag)
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $tag->name.' ')
-                                                @endcomponent
-                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -128,46 +117,39 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('id', 'is_stock')
-                                                @slot('name', 'is_stock')
-                                                @slot('text', 'Stockable?')
-
-                                                @if($item->is_stock == 1)
-                                                    @slot('editable','checked')
-                                                @endif
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <div class="checkbox">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'is_ppn')
-                                                    @slot('name', 'is_ppn')
-                                                    @slot('text', 'Dikenai PPN?')
+                                                    @slot('id', 'is_stock')
+                                                    @slot('name', 'is_stock')
+                                                    @slot('text', 'Stockable?')
 
-                                                    @if($item->is_ppn == 1)
+                                                    @if($item->is_stock == 1)
                                                         @slot('editable','checked')
                                                     @endif
                                                 @endcomponent
-
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'PPN : ')
-                                                @endcomponent
-
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $item->ppn_amount)
-                                                @endcomponent
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Photos
-                                            </label>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="checkbox">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('id', 'is_ppn')
+                                                        @slot('name', 'is_ppn')
+                                                        @slot('text', 'Dikenai PPN?')
 
-                                            <img src="{{ asset('img/LogoMMF.png') }}" alt="" width="100px">
+                                                        @if($item->is_ppn == 1)
+                                                            @slot('editable','checked')
+                                                        @endif
+                                                    @endcomponent
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'PPN : ')
+                                                    @endcomponent
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $item->ppn_amount)
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -184,11 +166,31 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Tag
+                                            </label>
+
+                                            @foreach($item->tags as $tag)
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $tag->name.' ')
+                                                @endcomponent
+                                            @endforeach
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Photos
+                                            </label>
+
+                                            <img src="{{ asset('img/LogoMMF.png') }}" alt="" width="100px">
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index') )
+                                                        @slot('href', route('frontend.item.index'))
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -271,12 +273,12 @@
         fieldset {
             margin-bottom: 30px;
         }
-</style>
+    </style>
 @endpush
 
 @push('footer-scripts')
     <script>
-        let code = '{{$item->code}}';
+        let code = '{{ $item->code }}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
