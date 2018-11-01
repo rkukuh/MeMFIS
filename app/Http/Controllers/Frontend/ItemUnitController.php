@@ -16,12 +16,12 @@ class ItemUnitController extends Controller
     /**
      * Show data from model for DataTable.
      *
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function getUoM($code)
+    public function getUoM(Item $item)
     {
-        $item = Item::with('units')->where('code', $code)->first();
-
+        dd($item);
         $data = $alldata = json_decode($item->units);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
