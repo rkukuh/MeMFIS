@@ -231,8 +231,6 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            @include('frontend.item.uom.modal')
-
                             <div class="item_unit_datatable" id="item_unit_datatable"></div>
                         </div>
                     </div>
@@ -255,10 +253,6 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            @include('frontend.item.storage.modal')
-                            @include('frontend.storage.modal')
-                            @include('frontend.category.modal')
-
                             <div class="item_storage_datatable" id="item_storage_datatable"></div>
                         </div>
                     </div>
