@@ -190,7 +190,9 @@
                                                 Photos
                                             </label>
 
-                                            <img src="{{ asset('img/LogoMMF.png') }}" alt="" width="100px">
+                                            <div>
+                                                <img src="{{ asset('img/LogoMMF-100x42.png') }}" alt="">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
