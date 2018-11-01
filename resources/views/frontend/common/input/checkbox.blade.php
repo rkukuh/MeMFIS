@@ -13,12 +13,12 @@
             id="{{ $id or ''}}"
             name="{{ $name or '' }}"
             class="{{ $class or ''}}"
-            style="{{$style or ''}}"
-            value="{{$value or ''}}"
-            onclick="{{$onclik or ''}}"
-            {{$editable or ''}}>
+            style="{{ $style or ''}}"
+            value="{{ $value or ''}}"
+            onclick="{{ $onclik or ''}}"
+            {{ $checked or ''}}>
 
-        {{$text or '' }}
+        {{ $text or '' }}
 
         <span></span>
     </label>
