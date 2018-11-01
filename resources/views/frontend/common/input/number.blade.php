@@ -13,10 +13,10 @@
         name="{{ $name or '' }}"
         class="form-control m-input text-right
                {{ $class or '' }}"
-        style="{{$style or ''}}"
-        value="{{$value or ''}}"
+        style="{{ $style or ''}}"
+        value="{{ $value or ''}}"
         placeholder="{{ $placeholder or '' }}"
-        {{$editable or ''}}
+        {{ $disabled or ''}}
     >
 
     @if (isset($input_append))
