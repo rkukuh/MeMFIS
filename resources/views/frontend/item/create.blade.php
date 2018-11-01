@@ -221,7 +221,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &rsaquo; UoM (Unit of Measurement)
+                                    Material &harr; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
@@ -258,7 +258,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &rsaquo; Min/Max Stock
+                                    Material &harr; Storage Stock
                                 </h3>
                             </div>
                         </div>
