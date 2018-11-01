@@ -185,7 +185,7 @@
 
                                             @component('frontend.common.label.p')
                                                 @if (isset($item->journal))
-                                                    @slot('text', $item->journal->name)
+                                                    @slot('text', $item->account_code_and_name)
                                                 @else
                                                     @slot('text', 'none')
                                                 @endif
