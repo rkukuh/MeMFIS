@@ -110,7 +110,7 @@ class Item extends MemfisModel implements HasMedia
     /***************************************** ACCESSOR ******************************************/
 
     /**
-     * Get the user's first name.
+     * Get the item's account code and name.
      *
      * @param  string  $value
      * @return string
@@ -118,5 +118,16 @@ class Item extends MemfisModel implements HasMedia
     public function getAccountCodeAndNameAttribute($value)
     {
         return $this->journal->code.' - '.$this->journal->name;
+    }
+
+    /**
+     * Get the item's single category.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getCategoryAttribute($value)
+    {
+        return $this->categories->first()->name;
     }
 }
