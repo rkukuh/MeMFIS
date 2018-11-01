@@ -147,9 +147,9 @@
                                                 <div class="form-control-feedback text-danger" id="category-error"></div>
 
                                     </div>
-                                
+
                                 </div>
-                                
+
                                 <div class="form-group m-form__group row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -346,7 +346,7 @@
 
 @endpush @push('footer-scripts')
 <script>
-    let code = '{{$item->code}}';
+    let item_uuid = '{{$item->uuid}}';
 </script>
 
 <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>

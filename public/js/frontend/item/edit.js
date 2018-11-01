@@ -6,7 +6,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-uom/' + code + '/',
+                        url: '/get-uom/' + item_uuid + '/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -78,7 +78,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-item-storages/' + code + '/',
+                        url: '/get-item-storages/' + item_uuid + '/',
                         map: function (raw) {
                             let dataSet = raw;
 
