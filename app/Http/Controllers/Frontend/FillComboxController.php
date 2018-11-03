@@ -66,7 +66,7 @@ class FillComboxController extends Controller
     {
         $units = Unit::ofQuantity()
                      ->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
-                     ->pluck('id', 'name');
+                     ->pluck('name', 'id');
 
         return json_encode($units);
 
