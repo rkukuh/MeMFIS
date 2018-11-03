@@ -162,30 +162,6 @@ class ItemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\ItemStore  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function postPhotos(Request $request)
-    {
-        dump($request->all());
-
-        // $length_request=count($request->all())-1;
-        // if($length_request==0){
-        //     //
-        // }
-        // elseif($length_request>=1){
-        //     for ($i = 0; $i < $length_request; $i++) {
-        //         $item = Item::where('code',$request->code)->first();
-        //         $item->addMediaFromRequest('file'.$i)
-        //          ->toMediaCollection('item');
-        //     }
-        //     dd('done');
-        // }
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Item  $item
