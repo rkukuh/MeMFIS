@@ -103,7 +103,7 @@ let Item = {
                             timeOut: 5000
                         });
 
-                        update_item_button();
+                        save_changes_button();
 
                         window.location.href = '/item/' + data.uuid + '/edit';
                     }
