@@ -27,8 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriesOfItem::class);
         $this->call(StatusesTableSeeder::class);
         $this->call(JournalsTableSeeder::class);
-        $this->call(TestingTableSeeder::class);
-        
+
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);
@@ -57,5 +56,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BanksTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
+
+        /** TESTING */
+
+        $this->call(TestsTableSeeder::class);
     }
 }
