@@ -20,6 +20,7 @@ $factory->define(Item::class, function (Faker $faker) {
             }
         },
         'is_stock' => $faker->boolean,
+        'description' => $faker->randomElement([null, $faker->text]),
     ];
 
 });
