@@ -27,7 +27,7 @@ class Items extends Seeder
                     Category::get()->random()
                 );
 
-                /** Category */
+                /** Tag */
 
                 $tags = Tag::getWithType('item');
 
