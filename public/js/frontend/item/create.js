@@ -99,7 +99,7 @@ let Item = {
                         $('#item-storage').html(code);
                         $('#item-unit').html(code);
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Material has been created.', 'Success', {
                             timeOut: 5000
                         });
 
