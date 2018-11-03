@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Item;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class Items extends Seeder
@@ -12,7 +13,14 @@ class Items extends Seeder
      */
     public function run()
     {
-        // ? TODO: Model factory is not respecting model observer
-        factory(Item::class, config('memfis.examples.items'))->create();
+        // TODO: Model factory is not respecting model observer
+
+        factory(Item::class, config('memfis.examples.items'))
+            ->create()
+            ->each(function ($item) {
+                $item->categories()->attach(
+                    Category::get()->random()
+                );
+            });;
     }
 }
