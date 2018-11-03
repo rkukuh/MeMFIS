@@ -270,10 +270,10 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'item-minmaxstock')
                                             @slot('attribute', 'disabled')
                                             @slot('text', 'Storage Stock')
-                                            @slot('data_target', '#modal_minmaxstock')
+                                            @slot('id', 'item-storage_stock')
+                                            @slot('data_target', '#modal_storage_stock')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>

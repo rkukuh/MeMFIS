@@ -94,7 +94,7 @@ let Item = {
                         $('#description-error').html('');
 
                         document.getElementById('item-uom').removeAttribute('disabled');
-                        document.getElementById('item-minmaxstock').removeAttribute('disabled');
+                        document.getElementById('item-storage_stock').removeAttribute('disabled');
 
                         $('#item-storage').html(code);
                         $('#item-unit').html(code);
