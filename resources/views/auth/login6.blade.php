@@ -40,7 +40,7 @@
 
                     <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver">
                         <div class="m-grid__item m-grid__item--middle">
-                            <span class="m-login__title">MeMFIS v0.1-alpha</span>
+                            <span class="m-login__title">MeMFIS v{{ config('memfis.version', 'x.y.z') }}</span>
                             <span class="m-login__subtitle">Merpati Maintenance Fascility Information System</span>
                         </div>
                     </div>
