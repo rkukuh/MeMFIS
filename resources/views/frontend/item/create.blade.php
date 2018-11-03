@@ -198,7 +198,7 @@
                                                     @include('frontend.common.buttons.reset')
 
                                                     @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index') )
+                                                        @slot('href', route('frontend.item.index'))
                                                     @endcomponent
                                                 </div>
                                             </div>
