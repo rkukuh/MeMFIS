@@ -12,13 +12,13 @@
                 </h4>
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.dashboard') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-line-graph"></i>
                     <span class="m-menu__link-text">Dashboard</span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.customer.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -26,7 +26,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.supplier.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -55,7 +55,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="m-menu__item" aria-haspopup="true">
+                        <li class="m-menu__item" aria-haspopup="true" style="display: none;">
                             <a href="{{ route('frontend.category-item.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
@@ -68,7 +68,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -142,7 +142,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -206,7 +206,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.storages.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -214,7 +214,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.taskcard.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -222,7 +222,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.taskcard-package.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -230,7 +230,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.workpackage.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -238,7 +238,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.quotation.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -246,7 +246,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
                 <a href="{{ route('frontend.journal.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
