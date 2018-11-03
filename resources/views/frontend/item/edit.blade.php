@@ -119,12 +119,9 @@
                                             </label>
 
                                             <select id="unit_item" name="unit_item" class="form-control m-select2">
-                                                @foreach ($units as $key => $unit)
-                                                    <option value="{{$unit->id}}"
-                                                        @if ($unit->id == $item->unit_id)
-                                                            selected
-                                                        @endif
-                                                        >
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->id }}"
+                                                        @if ($unit->id == $item->unit_id) selected @endif>
                                                         {{ $unit->name }} ({{ $unit->symbol }})
                                                     </option>
                                                 @endforeach
@@ -148,7 +145,7 @@
                                                 @else
                                                     @foreach ($categories as $key => $unit)
                                                         @foreach ($category_items as $aMaterialKey => $aMaterialSport)
-                                                            <option value="{{$unit->id}}"
+                                                            <option value="{{ $unit->id }}"
                                                                 @if ($unit->id == $aMaterialSport->id) selected @endif>
                                                                 {{ $unit->name }}
                                                             </option>
@@ -263,7 +260,7 @@
                                                 @else
                                                     @foreach ($tags as $key => $tag)
                                                         @foreach ($tag_items as $aMaterialKey => $tag_name)
-                                                            <option value="{{$tag->name}}"
+                                                            <option value="{{ $tag->name}}"
                                                                 @if ($tag->name == $tag_name->name) selected @endif>
                                                                 {{ $tag->name }}
                                                             </option>
