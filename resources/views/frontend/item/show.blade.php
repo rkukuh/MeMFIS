@@ -180,7 +180,7 @@
                                             </label>
 
                                             <div>
-                                                @if (empty($item->tags))
+                                                @if ($item->tags->isEmpty())
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                     @foreach ($item->tags as $tag)
