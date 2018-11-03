@@ -250,8 +250,8 @@ class ItemController extends Controller
             $item->unit_id = $request->unit;
             $item->description = $request->description;
             $item->barcode = $request->barcode;
-            $item->is_ppn = $request->is_ppn;
-            $item->is_stock = $request->is_stock;
+            // $item->is_ppn = $request->is_ppn;
+            // $item->is_stock = $request->is_stock;
             $item->ppn_amount = $request->ppn;
             $item->save();
 
@@ -274,8 +274,8 @@ class ItemController extends Controller
             $item->description = $request->description;
             $item->barcode = $request->barcode;
             $item->account_code = $journal->id;
-            $item->is_ppn = $request->is_ppn;
-            $item->is_stock = $request->is_stock;
+            // $item->is_ppn = $request->is_ppn;
+            // $item->is_stock = $request->is_stock;
             $item->ppn_amount = $request->ppn;
             $item->save();
         }
