@@ -309,20 +309,20 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tag.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit2.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/component.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit2.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/component.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/item/create/item-unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/item/create/item-storage.js')}}"></script>
+    <script src="{{ asset('js/frontend/item/create/item-unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/create/item-storage.js') }}"></script>
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
     <script src="{{ asset('js/frontend/category-item.js') }}"></script>
 @endpush
