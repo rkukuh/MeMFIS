@@ -25,7 +25,7 @@ class Items extends Seeder
 
                 // The business said that an item has only 1 or 0 category
                 $item->categories()->attach(
-                    Category::get()->random()
+                    Category::ofItem()->get()->random()
                 );
 
                 /** Journal (Account Code) */
