@@ -137,8 +137,8 @@
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('size', 'sm')
                                                 @slot('text', 'category')
-                                                @slot('data_target', '#modal_category')
                                                 @slot('style', 'margin-top: 10px;')
+                                                @slot('data_target', '#modal_category')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -309,17 +309,11 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/component.js') }}"></script>
