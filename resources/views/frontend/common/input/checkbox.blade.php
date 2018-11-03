@@ -1,12 +1,12 @@
 <div class="col-sm-{{ $size or '6' }}
             col-md-{{ $size or '6' }}
             col-lg-{{ $size or '6' }}"
-    style="padding-left: {{ $padding_left or '0' }}px">
-
+    style="padding-left: {{ $padding_left or '0' }}"
+>
     <label
         class="m-checkbox
-            m-checkbox--{{ $color or 'primary' }}
-            {{ $class or '' }}">
+               m-checkbox--{{ $color or 'primary' }}
+               {{ $class or '' }}">
 
         <input
             type="checkbox"
@@ -17,7 +17,8 @@
             value="{{ $value or ''}}"
             onclick="{{ $onclik or ''}}"
             {{ $checked or ''}}
-            {{ $disabled or ''}}>
+            {{ $disabled or ''}}
+        >
 
         {{ $text or '' }}
 
@@ -28,8 +29,8 @@
 <div class="col-sm-{{ $size or '6' }}
             col-md-{{ $size or '6' }}
             col-lg-{{ $size or '6' }} "
-    style="padding-left: {{ $padding_left or '0' }}px">
-
+    style="padding-left: {{ $padding_left or '0' }}"
+>
     <span class="m-form__help">
         {{ $help_text or '' }}
     </span>

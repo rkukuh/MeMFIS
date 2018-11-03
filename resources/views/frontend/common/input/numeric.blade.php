@@ -8,7 +8,8 @@
     style="{{$style or ''}}"
     value="{{$value or ''}}"
     placeholder="{{ $placeholder or '' }}"
-    {{$editable or ''}}>
+    {{$editable or ''}}
+>
 
 <div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>
 
