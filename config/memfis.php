@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'version' => '0.1.1',
 
     /**
      * Quantity of example data
