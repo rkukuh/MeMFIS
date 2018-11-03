@@ -185,28 +185,17 @@
                                                 </div>
                                                 <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
                                                     @component('frontend.common.input.number')
-                                                        @slot('text', 'PPN')
-                                                        @slot('id', 'ppn_amount')
-                                                        @slot('input_append', '%')
-                                                        @slot('name', 'ppn_amount')
-                                                        @slot('value', $item->ppn_amount)
-                                                        @slot('input_prepend', 'PPN')
-                                                        @if ($item->is_ppn == 0)
-                                                            @slot('disabled', 'disabled')
-                                                        @endif
+                                                            @slot('text', 'PPN')
+                                                            @slot('id', 'ppn_amount')
+                                                            @slot('input_append', '%')
+                                                            @slot('name', 'ppn_amount')
+                                                            @slot('input_prepend', 'PPN')
+                                                            @slot('value', $item->ppn_amount)
+
+                                                            @if ($item->is_ppn == 0)
+                                                                @slot('disabled', 'disabled')
+                                                            @endif
                                                     @endcomponent
-
-                                                    {{-- @component('frontend.common.input.number')
-                                                        @slot('text', 'PPN')
-                                                        @slot('id', 'ppn_amount')
-                                                        @slot('name', 'ppn_amount')
-                                                        @slot('class', 'ppn_amount')
-                                                        @slot('value', $item->ppn_amount)
-
-                                                        @if ($item->is_ppn == 0)
-                                                            @slot('editable', 'disabled')
-                                                        @endif
-                                                    @endcomponent --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -357,8 +346,8 @@
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Storage Stock')
-                                            @slot('id', 'item-minmaxstock')
-                                            @slot('data_target', '#modal_minmaxstock')
+                                            @slot('id', 'item-storage_stock')
+                                            @slot('data_target', '#modal_storage_stock')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -366,9 +355,9 @@
                                 </div>
                             </div>
 
-                            @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
+                            @include('frontend.item.storage.modal')
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
@@ -389,17 +378,19 @@
 
 @push('footer-scripts')
     <script>
-        let item_uuid = '{{$item->uuid}}';
+        let item_uuid = '{{ $item->uuid }}';
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
 @endpush
