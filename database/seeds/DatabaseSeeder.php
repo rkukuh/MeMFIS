@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriesOfItem::class);
         $this->call(StatusesTableSeeder::class);
         $this->call(JournalsTableSeeder::class);
-
+        $this->call(TestingTableSeeder::class);
+        
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);

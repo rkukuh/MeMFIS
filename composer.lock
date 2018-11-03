@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88f2187e784af5b157bf317cf03f1d66",
+    "content-hash": "0c1941f64e8280c3d67e467bcc5c5979",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -761,6 +761,50 @@
                 "trusted proxy"
             ],
             "time": "2018-02-07T20:20:57+00:00"
+        },
+        {
+            "name": "flynsarmy/csv-seeder",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Flynsarmy/laravel-csv-seeder.git",
+                "reference": "9b6b261082bf7ff245eeb355261e1038cbd89262"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Flynsarmy/laravel-csv-seeder/zipball/9b6b261082bf7ff245eeb355261e1038cbd89262",
+                "reference": "9b6b261082bf7ff245eeb355261e1038cbd89262",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.1.0",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Flynsarmy\\CsvSeeder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Flyn San",
+                    "email": "flynsarmy@gmail.com"
+                }
+            ],
+            "description": "Allows seeding of the database with CSV files",
+            "keywords": [
+                "csv",
+                "laravel",
+                "seed",
+                "seeding",
+                "seeds"
+            ],
+            "time": "2015-09-04T04:13:30+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
