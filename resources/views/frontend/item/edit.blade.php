@@ -118,7 +118,7 @@
                                                 Unit @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="unit" name="unit" class="form-control m-select2">
+                                            <select id="unit_item" name="unit_item" class="form-control m-select2">
                                                 @foreach($units as $key => $unit)
                                                     <option value="{{$unit->id}}"
                                                         @if ($unit->id == $item->unit_id) selected @endif>
@@ -167,7 +167,7 @@
                                                     @slot('text', 'Stockable?')
 
                                                     @if ($item->is_stock == 1)
-                                                        @slot('editable', 'checked')
+                                                        @slot('checked', 'checked')
                                                     @endif
                                                 @endcomponent
                                             </div>
@@ -179,12 +179,24 @@
                                                         @slot('text', 'Taxable?')
 
                                                         @if ($item->is_ppn == 1)
-                                                            @slot('editable', 'checked')
+                                                            @slot('checked', 'checked')
                                                         @endif
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
                                                     @component('frontend.common.input.number')
+                                                        @slot('text', 'PPN')
+                                                        @slot('id', 'ppn_amount')
+                                                        @slot('input_append', '%')
+                                                        @slot('name', 'ppn_amount')
+                                                        @slot('value', $item->ppn_amount)
+                                                        @slot('input_prepend', 'PPN')
+                                                        @if ($item->is_ppn == 0)
+                                                            @slot('disabled', 'disabled')
+                                                        @endif
+                                                    @endcomponent
+
+                                                    {{-- @component('frontend.common.input.number')
                                                         @slot('text', 'PPN')
                                                         @slot('id', 'ppn_amount')
                                                         @slot('name', 'ppn_amount')
@@ -194,7 +206,7 @@
                                                         @if ($item->is_ppn == 0)
                                                             @slot('editable', 'disabled')
                                                         @endif
-                                                    @endcomponent
+                                                    @endcomponent --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -382,6 +394,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
