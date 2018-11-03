@@ -1,6 +1,6 @@
 let Item = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.item_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -136,7 +136,7 @@ let Item = {
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
+        let remove = $('.item_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({
@@ -164,7 +164,7 @@ let Item = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.item_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

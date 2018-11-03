@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="m_datatable" id="scrolling_both"></div>
+                            <div class="item_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
