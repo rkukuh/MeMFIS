@@ -380,13 +380,13 @@
         let item_uuid = '{{$item->uuid}}';
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tag.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
 
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
 @endpush
