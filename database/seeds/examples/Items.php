@@ -2,6 +2,7 @@
 
 use App\Models\Item;
 use Spatie\Tags\Tag;
+use App\Models\Journal;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
@@ -26,6 +27,15 @@ class Items extends Seeder
                 $item->categories()->attach(
                     Category::get()->random()
                 );
+
+                /** Journal (Account Code) */
+
+                for ($i = 1; $i <= rand(0, 1); $i++) {
+                    $item->journal()->associate(
+                        Journal::get()->random()
+                    )
+                    ->save();
+                }
 
                 /** Tag */
 
