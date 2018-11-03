@@ -37,8 +37,12 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+
                                 @include('frontend.common.label.edit')
-                                <h3 class="m-portlet__head-text">Material</h3>
+
+                                <h3 class="m-portlet__head-text">
+                                    Material
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -136,22 +140,12 @@
                                                     &mdash; Select Category &mdash;
                                                 </option>
 
-                                                @if ($category_items->isEmpty())
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">
-                                                            {{ $category->name }}
-                                                        </option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach ($categories as $key => $unit)
-                                                        @foreach ($category_items as $aMaterialKey => $aMaterialSport)
-                                                            <option value="{{ $unit->id }}"
-                                                                @if ($unit->id == $aMaterialSport->id) selected @endif>
-                                                                {{ $unit->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endforeach
-                                                @endif
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        @if ($category->id == $item->category_id) selected @endif>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
 
                                             <div class="form-control-feedback text-danger" id="category-error"></div>
@@ -204,14 +198,11 @@
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.account-code.index')
-                                                @slot('text', $journal_name)
-                                            @endcomponent
+                                            @include('frontend.common.account-code.index')
 
                                             @component('frontend.common.input.hidden')
-                                                @slot('id', 'accountcode2')
-                                                @slot('name', 'accountcode2')
-                                                @slot('value',$item->account_code)
+                                                @slot('id', 'account_code')
+                                                @slot('name', 'account_code')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -240,22 +231,7 @@
                                             </label>
 
                                             <select id="tag" name="tag" class="form-control m-select2" multiple>
-                                                @if ($tag_items->isEmpty())
-                                                    @foreach ($tags as $category)
-                                                        <option value="{{ $category->id }}">
-                                                            {{ $category->name }}
-                                                        </option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach ($tags as $key => $tag)
-                                                        @foreach ($tag_items as $aMaterialKey => $tag_name)
-                                                            <option value="{{ $tag->name}}"
-                                                                @if ($tag->name == $tag_name->name) selected @endif>
-                                                                {{ $tag->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endforeach
-                                                @endif
+                                                {{-- TODO: Load all tags and selected item's tags --}}
                                             </select>
                                         </div>
                                     </div>
