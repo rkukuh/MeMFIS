@@ -9,7 +9,7 @@ $(document).ready(function () {
 
                 $('select[name="unit2"]').empty();
 
-                $.each(data, function (key, value) {
+                $.each(data, function (value, key) {
                     if (angka5 == 1) {
                         $('select[name="unit2"]').append(
                             '<option> Select a Unit</option>'
