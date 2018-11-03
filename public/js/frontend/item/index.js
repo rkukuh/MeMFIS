@@ -61,7 +61,7 @@ let Item = {
                     width: 250
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -100,21 +100,16 @@ let Item = {
                     }
                 },
                 {
-                    field: 'account_code',
+                    field: 'journal',
                     title: 'Account Code',
                     sortable: 'asc',
-                    filterable: !1
-                },
-                {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF-30x13.png">'
-                        );
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.journal) {
+                            return t.journal.code
+                        }
+
+                        return ''
                     }
                 },
                 {
