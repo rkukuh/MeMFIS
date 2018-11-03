@@ -29,7 +29,6 @@ class ItemUpdate extends FormRequest
             'code' => 'required',
             'name' => 'required',
             'category' => 'required',
-            'quantity' => 'required',
             'unit' => 'required',
         ];
     }
