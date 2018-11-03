@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader">
+    <div class="m-subheader hidden">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
@@ -181,7 +181,7 @@
 
                                             <div>
                                                 @if (empty($item->tags))
-                                                    @foreach($item->tags as $tag)
+                                                    @foreach ($item->tags as $tag)
                                                         @component('frontend.common.label.badge')
                                                             @slot('text', $tag->name)
                                                         @endcomponent

@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader ">
+    <div class="m-subheader hidden">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
@@ -137,8 +137,8 @@
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('size', 'sm')
                                                 @slot('text', 'category')
-                                                @slot('data_target', '#modal_category')
                                                 @slot('style', 'margin-top: 10px;')
+                                                @slot('data_target', '#modal_category')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -198,7 +198,7 @@
                                                     @include('frontend.common.buttons.reset')
 
                                                     @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index') )
+                                                        @slot('href', route('frontend.item.index'))
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -270,10 +270,10 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'item-minmaxstock')
                                             @slot('attribute', 'disabled')
                                             @slot('text', 'Storage Stock')
-                                            @slot('data_target', '#modal_minmaxstock')
+                                            @slot('id', 'item-storage_stock')
+                                            @slot('data_target', '#modal_storage_stock')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -309,20 +309,18 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tag.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/account-code.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit2.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/component.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/item/create/item-unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/item/create/item-storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
     <script src="{{ asset('js/frontend/category-item.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/action-buttons.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/item/create/item-unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/create/item-storage.js') }}"></script>
 @endpush

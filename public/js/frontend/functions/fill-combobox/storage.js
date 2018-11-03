@@ -5,17 +5,17 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka7 = 1;
+                let index = 1;
 
                 $('select[name="storage"]').empty();
 
                 $.each(data, function (key, value) {
-                    if (angka7 == 1) {
+                    if (index == 1) {
                         $('select[name="storage"]').append(
                             '<option> Select a Storage</option>'
                         );
 
-                        angka7 = 0;
+                        index = 0;
                     }
 
                     $('select[name="storage"]').append(

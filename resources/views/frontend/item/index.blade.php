@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader ">
+    <div class="m-subheader hidden">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
@@ -27,7 +27,6 @@
             </div>
         </div>
     </div>
-
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -38,6 +37,7 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
@@ -83,6 +83,6 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/item/index.js')}}"></script>
+    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/index.js') }}"></script>
 @endpush

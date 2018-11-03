@@ -8,8 +8,13 @@
         style="{{$style or ''}}"
     >
 
-    <label class="custom-file-label" for="{{ $for or '' }}" id="{{ $id or '' }}-label">
+    <label class="custom-file-label"
+           for="{{ $for or '' }}"
+           id="{{ $id or '' }}-label"
+    >
+
         {{ $text or '' }}
+
     </label>
 </div>
 

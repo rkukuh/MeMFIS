@@ -162,30 +162,6 @@ class ItemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\ItemStore  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function postPhotos(Request $request)
-    {
-        dump($request->all());
-
-        // $length_request=count($request->all())-1;
-        // if($length_request==0){
-        //     //
-        // }
-        // elseif($length_request>=1){
-        //     for ($i = 0; $i < $length_request; $i++) {
-        //         $item = Item::where('code',$request->code)->first();
-        //         $item->addMediaFromRequest('file'.$i)
-        //          ->toMediaCollection('item');
-        //     }
-        //     dd('done');
-        // }
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Item  $item
@@ -214,11 +190,16 @@ class ItemController extends Controller
             $tags = Tag::get();
             $tag_items = $item->tags;
             $units = Unit::ofQuantity()->get();
+
+            // dd($units);
             $categories = Category::ofItem()->get();
             $category_items = $item->categories;
             $journal_name = $journal->code." - ".$journal->name;
-            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units','tags','tag_items'));
+            return view('frontend.item.edit',compact('item','categories','category_items','units','tags','tag_items'));
         } catch (\Exception $e) {
+            $units = Unit::ofQuantity()->get();
+            // dd($units."2");
+
             $tags = Tag::get();
             $tag_items = $item->tags;
             $categories = Category::ofItem()->get();
@@ -238,17 +219,15 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-
         $journal =  Journal::where('uuid',$request->accountcode)->first();
         if($journal == null){
             $item->code = $request->code;
             $item->name = $request->name;
             $item->unit_id = $request->unit;
-            $item->unit_quantity = $request->quantity;
             $item->description = $request->description;
             $item->barcode = $request->barcode;
-            $item->is_ppn = $request->isppn;
-            $item->is_stock = $request->isstock;
+            // $item->is_ppn = $request->is_ppn;
+            // $item->is_stock = $request->is_stock;
             $item->ppn_amount = $request->ppn;
             $item->save();
 
@@ -271,8 +250,8 @@ class ItemController extends Controller
             $item->description = $request->description;
             $item->barcode = $request->barcode;
             $item->account_code = $journal->id;
-            $item->is_ppn = $request->isppn;
-            $item->is_stock = $request->isstock;
+            // $item->is_ppn = $request->is_ppn;
+            // $item->is_stock = $request->is_stock;
             $item->ppn_amount = $request->ppn;
             $item->save();
         }

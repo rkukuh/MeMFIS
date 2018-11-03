@@ -157,8 +157,13 @@ let Item = {
 
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
-            document.getElementById('isppn').onchange = function () {
-                document.getElementById('ppn').disabled = !this.checked;
+            document.getElementById('is_ppn').onchange = function () {
+                document.getElementById('ppn_amount').disabled = !this.checked;
+                if (document.getElementById("is_ppn").checked) {
+                    // document.getElementById('ppn_amount').value = 10;
+                } else {
+                    document.getElementById('ppn_amount').value = '';
+                }
             };
         });
 
@@ -176,28 +181,29 @@ let Item = {
                 });
             }
 
+            // if (document.getElementById("is_stock").checked) {
+                is_stock = 1;
+            // } else {
+            //     is_stock2 = 0;
+            // }
 
-            if (document.getElementById("isstock").checked) {
-                isstock = 1;
-            } else {
-                isstock = 0;
-            }
-
-            if (document.getElementById("isppn").checked) {
-                isppn = 1;
-            } else {
-                isppn = 0;
-            }
+            // alert(is_stock);
+            // if (document.getElementById("is_ppn").checked) {
+            //     is_ppn = 1;
+            // } else {
+            //     is_ppn = 0;
+            // }
             let accountcode2 = $('#accountcode2').val();
             let uuid = $('input[name=id]').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
             let description = $('#description').val();
             let barcode = $('input[name=barcode]').val();
-            let ppn = $('input[name=ppn]').val();
+            let ppn_amount = $('input[name=ppn_amount]').val();
             let category = $('#category').val();
-            let quantity = $('input[name=quantity]').val();
-            let unit = $('#unit').val();
+            // let quantity = $('input[name=quantity]').val();
+            let unit = $('#unit_item').val();
+            // alert(unit);
 
 
             $.ajax({
@@ -210,14 +216,14 @@ let Item = {
                     _token: $('input[name=_token]').val(),
                     code: code,
                     name: name,
-                    quantity: quantity,
+                    // quantity: quantity,
                     unit: unit,
-                    isstock: isstock,
-                    isppn: isppn,
-                    barcode: barcode,
-                    ppn: ppn,
+                    // is_stock: is_stock,
+                    // is_ppn: is_ppn,
+                    // barcode: barcode,
+                    ppn: ppn_amount,
                     description: description,
-                    accountcode: accountcode2,
+                    // accountcode: accountcode2,
                     selectedtags: selectedtags,
                     category: category
 
@@ -231,11 +237,6 @@ let Item = {
 
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
-
-                        }
-
-                        if (data.errors.quantity) {
-                            $('#quantity-error').html(data.errors.quantity[0]);
 
                         }
 
@@ -287,81 +288,80 @@ let Item = {
             });
         });
 
-        $(function () {
+        // $(function () {
 
-            // klik();
-            let inputFile = $('#myInput');
-            let button = $('#myButton');
-            let buttonSubmit = $('#add-item');
-            let filesContainer = $('#myFiles');
-            let files = [];
+        //     // klik();
+        //     let inputFile = $('#myInput');
+        //     let button = $('#myButton');
+        //     let buttonSubmit = $('#add-item');
+        //     let filesContainer = $('#myFiles');
+        //     let files = [];
 
-            inputFile.change(function () {
-                let newFiles = [];
-                for (let index = 0; index < inputFile[0].files.length; index++) {
-                    let file = inputFile[0].files[index];
-                    newFiles.push(file);
-                    files.push(file);
-                }
+        //     inputFile.change(function () {
+        //         let newFiles = [];
+        //         for (let index = 0; index < inputFile[0].files.length; index++) {
+        //             let file = inputFile[0].files[index];
+        //             newFiles.push(file);
+        //             files.push(file);
+        //         }
 
-                newFiles.forEach(file => {
-                    let fileElement = $(`<p>${file.name}</p>`);
-                    fileElement.data('fileData', file);
-                    filesContainer.append(fileElement);
+        //         newFiles.forEach(file => {
+        //             let fileElement = $(`<p>${file.name}</p>`);
+        //             fileElement.data('fileData', file);
+        //             filesContainer.append(fileElement);
 
-                    fileElement.click(function (event) {
-                        let fileElement = $(event.target);
-                        let indexToRemove = files.indexOf(fileElement.data('fileData'));
-                        fileElement.remove();
-                        files.splice(indexToRemove, 1);
-                    });
-                });
-            });
+        //             fileElement.click(function (event) {
+        //                 let fileElement = $(event.target);
+        //                 let indexToRemove = files.indexOf(fileElement.data('fileData'));
+        //                 fileElement.remove();
+        //                 files.splice(indexToRemove, 1);
+        //             });
+        //         });
+        //     });
 
-            button.click(function () {
-                inputFile.click();
-            });
-            $('.footer').on('click', '.edit-item', function () {
-                let formData = new FormData();
-                let code = $('input[name=code]').val();
-                formData.append('code', code);
+        //     button.click(function () {
+        //         inputFile.click();
+        //     });
+        //     $('.footer').on('click', '.edit-item', function () {
+        //         let formData = new FormData();
+        //         let code = $('input[name=code]').val();
+        //         formData.append('code', code);
 
-                let z = 0;
-                files.forEach(file => {
-                    formData.append('file' + z, file);
-                    z++;
-                });
+        //         let z = 0;
+        //         files.forEach(file => {
+        //             formData.append('file' + z, file);
+        //             z++;
+        //         });
 
-                // console.log('Sending...');
+        //         // console.log('Sending...');
 
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
+        //             $.ajax({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //                 },
 
-                        url: '/post-photos',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        type: 'POST',
-                        success: function (data) {
-                            if (data.uploaded == true) {
-                                // alert('sukses');
-                            }
-                        },
-                        error: function (err) {
-                            alert(err);
-                        }
-                    });
-            });
-        });
+        //                 url: '/post-photos',
+        //                 data: formData,
+        //                 processData: false,
+        //                 contentType: false,
+        //                 type: 'POST',
+        //                 success: function (data) {
+        //                     if (data.uploaded == true) {
+        //                         // alert('sukses');
+        //                     }
+        //                 },
+        //                 error: function (err) {
+        //                     alert(err);
+        //                 }
+        //             });
+        //     });
+        // });
 
         let simpan2 = $('.modal-footer').on('click', '.add-uom', function () {
             let code = $('input[name=code]').val();
-            let quantity = $('input[name=quantity]').val();
             let uom_quantity = $('input[name=uom_quantity]').val();
             let unit = $('#unit').val();
-            let unit2 = $('#unit2').val();
+            // let unit2 = $('#unit2').val();
 
             $.ajax({
                 headers: {
@@ -375,7 +375,7 @@ let Item = {
                     quantity: quantity,
                     uom_quantity: uom_quantity,
                     unit: unit,
-                    unit2: unit2
+                    // unit2: unit2
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -471,121 +471,121 @@ let Item = {
             });
         });
 
-        let remove_uom = $('.m_datatable1').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
-            let triggerid2 = $(this).data('unit_id');
-            // alert(triggerid);
+        // let remove_uom = $('.m_datatable1').on('click', '.delete', function () {
+        //     let triggerid = $(this).data('id');
+        //     let triggerid2 = $(this).data('unit_id');
+        //     // alert(triggerid);
 
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/item-unit/' + triggerid + '/'+ triggerid2,
-                        success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
-                            );
+        //     swal({
+        //         title: 'Are you sure?',
+        //         text: 'You will not be able to recover this imaginary file!',
+        //         type: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonText: 'Yes, delete it!',
+        //         cancelButtonText: 'No, keep it'
+        //     }).then(result => {
+        //         if (result.value) {
+        //             $.ajax({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+        //                         'content'
+        //                     )
+        //                 },
+        //                 type: 'DELETE',
+        //                 url: '/item-unit/' + triggerid + '/'+ triggerid2,
+        //                 success: function (data) {
+        //                     toastr.success(
+        //                         'Data Berhasil Dihapus.',
+        //                         'Sukses!', {
+        //                             timeOut: 5000
+        //                         }
+        //                     );
 
-                            let table = $('.m_datatable1').mDatatable();
-                            table.originalDataSet =[];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
+        //                     let table = $('.m_datatable1').mDatatable();
+        //                     table.originalDataSet =[];
+        //                     table.reload();
+        //                 },
+        //                 error: function (jqXhr, json, errorThrown) {
+        //                     let errorsHtml = '';
+        //                     let errors = jqXhr.responseJSON;
 
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
-                }
-            });
-        });
+        //                     $.each(errors.errors, function (index, value) {
+        //                         $('#delete-error').html(value);
+        //                     });
+        //                 }
+        //             });
+        //             swal(
+        //                 'Deleted!',
+        //                 'Your imaginary file has been deleted.',
+        //                 'success'
+        //             );
+        //         } else {
+        //             swal(
+        //                 'Cancelled',
+        //                 'Your imaginary file is safe :)',
+        //                 'error'
+        //             );
+        //         }
+        //     });
+        // });
 
-        let remove_storages = $('.m_datatable2').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
-            let triggerid2 = $(this).data('storage_id');
-            // alert(triggerid);
+        // let remove_storages = $('.m_datatable2').on('click', '.delete', function () {
+        //     let triggerid = $(this).data('id');
+        //     let triggerid2 = $(this).data('storage_id');
+        //     // alert(triggerid);
 
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/item-storage/' + triggerid + '/'+ triggerid2,
-                        success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
-                            );
+        //     swal({
+        //         title: 'Are you sure?',
+        //         text: 'You will not be able to recover this imaginary file!',
+        //         type: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonText: 'Yes, delete it!',
+        //         cancelButtonText: 'No, keep it'
+        //     }).then(result => {
+        //         if (result.value) {
+        //             $.ajax({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+        //                         'content'
+        //                     )
+        //                 },
+        //                 type: 'DELETE',
+        //                 url: '/item-storage/' + triggerid + '/'+ triggerid2,
+        //                 success: function (data) {
+        //                     toastr.success(
+        //                         'Data Berhasil Dihapus.',
+        //                         'Sukses!', {
+        //                             timeOut: 5000
+        //                         }
+        //                     );
 
-                            let table = $('.m_datatable2').mDatatable();
-                            table.originalDataSet =[];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
+        //                     let table = $('.m_datatable2').mDatatable();
+        //                     table.originalDataSet =[];
+        //                     table.reload();
+        //                 },
+        //                 error: function (jqXhr, json, errorThrown) {
+        //                     let errorsHtml = '';
+        //                     let errors = jqXhr.responseJSON;
 
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
-                }
-            });
-        });
+        //                     $.each(errors.errors, function (index, value) {
+        //                         $('#delete-error').html(value);
+        //                     });
+        //                 }
+        //             });
+        //             swal(
+        //                 'Deleted!',
+        //                 'Your imaginary file has been deleted.',
+        //                 'success'
+        //             );
+        //         } else {
+        //             swal(
+        //                 'Cancelled',
+        //                 'Your imaginary file is safe :)',
+        //                 'error'
+        //             );
+        //         }
+        //     });
+        // });
 
 
 

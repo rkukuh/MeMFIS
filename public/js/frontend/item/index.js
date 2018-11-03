@@ -64,7 +64,10 @@ let Item = {
                     field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
-                    filterable: !1
+                    filterable: !1,
+                    template: function (t) {
+                        return t.unit.name + ' (' + t.unit.symbol + ')'
+                    }
                 },
                 {
                     field: "is_ppn",

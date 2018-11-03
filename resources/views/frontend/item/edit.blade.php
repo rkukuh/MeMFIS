@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader">
+    <div class="m-subheader hidden">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
@@ -118,9 +118,9 @@
                                                 Unit @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="unit" name="unit" class="form-control m-select2">
-                                                @foreach($units as $key => $unit)
-                                                    <option value="{{$unit->id}}"
+                                            <select id="unit_item" name="unit_item" class="form-control m-select2">
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->id }}"
                                                         @if ($unit->id == $item->unit_id) selected @endif>
                                                         {{ $unit->name }} ({{ $unit->symbol }})
                                                     </option>
@@ -137,15 +137,15 @@
                                                 </option>
 
                                                 @if ($category_items->isEmpty())
-                                                    @foreach($categories as $category)
+                                                    @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}">
                                                             {{ $category->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
-                                                    @foreach($categories as $key => $unit)
-                                                        @foreach($category_items as $aMaterialKey => $aMaterialSport)
-                                                            <option value="{{$unit->id}}"
+                                                    @foreach ($categories as $key => $unit)
+                                                        @foreach ($category_items as $aMaterialKey => $aMaterialSport)
+                                                            <option value="{{ $unit->id }}"
                                                                 @if ($unit->id == $aMaterialSport->id) selected @endif>
                                                                 {{ $unit->name }}
                                                             </option>
@@ -167,7 +167,7 @@
                                                     @slot('text', 'Stockable?')
 
                                                     @if ($item->is_stock == 1)
-                                                        @slot('editable', 'checked')
+                                                        @slot('checked', 'checked')
                                                     @endif
                                                 @endcomponent
                                             </div>
@@ -179,21 +179,22 @@
                                                         @slot('text', 'Taxable?')
 
                                                         @if ($item->is_ppn == 1)
-                                                            @slot('editable', 'checked')
+                                                            @slot('checked', 'checked')
                                                         @endif
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
                                                     @component('frontend.common.input.number')
-                                                        @slot('text', 'PPN')
-                                                        @slot('id', 'ppn_amount')
-                                                        @slot('name', 'ppn_amount')
-                                                        @slot('class', 'ppn_amount')
-                                                        @slot('value', $item->ppn_amount)
+                                                            @slot('text', 'PPN')
+                                                            @slot('id', 'ppn_amount')
+                                                            @slot('input_append', '%')
+                                                            @slot('name', 'ppn_amount')
+                                                            @slot('input_prepend', 'PPN')
+                                                            @slot('value', $item->ppn_amount)
 
-                                                        @if ($item->is_ppn == 0)
-                                                            @slot('editable', 'disabled')
-                                                        @endif
+                                                            @if ($item->is_ppn == 0)
+                                                                @slot('disabled', 'disabled')
+                                                            @endif
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -240,15 +241,15 @@
 
                                             <select id="tag" name="tag" class="form-control m-select2" multiple>
                                                 @if ($tag_items->isEmpty())
-                                                    @foreach($tags as $category)
+                                                    @foreach ($tags as $category)
                                                         <option value="{{ $category->id }}">
                                                             {{ $category->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
-                                                    @foreach($tags as $key => $tag)
-                                                        @foreach($tag_items as $aMaterialKey => $tag_name)
-                                                            <option value="{{$tag->name}}"
+                                                    @foreach ($tags as $key => $tag)
+                                                        @foreach ($tag_items as $aMaterialKey => $tag_name)
+                                                            <option value="{{ $tag->name}}"
                                                                 @if ($tag->name == $tag_name->name) selected @endif>
                                                                 {{ $tag->name }}
                                                             </option>
@@ -345,8 +346,8 @@
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Storage Stock')
-                                            @slot('id', 'item-minmaxstock')
-                                            @slot('data_target', '#modal_minmaxstock')
+                                            @slot('id', 'item-storage_stock')
+                                            @slot('data_target', '#modal_storage_stock')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -354,9 +355,9 @@
                                 </div>
                             </div>
 
-                            @include('frontend.item.storage.modal')
                             @include('frontend.storage.modal')
                             @include('frontend.category.modal')
+                            @include('frontend.item.storage.modal')
 
                             <div class="m_datatable2" id="second"></div>
                         </div>
@@ -377,16 +378,19 @@
 
 @push('footer-scripts')
     <script>
-        let item_uuid = '{{$item->uuid}}';
+        let item_uuid = '{{ $item->uuid }}';
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/category.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tag.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
 @endpush

@@ -4,7 +4,8 @@
     class="form-control m-select2
            {{ $class or '' }}"
     style="{{ $style or '' }}"
-    {{ $multiple or '' }}>
+    {{ $multiple or '' }}
+>
 
     <option value="">
         &mdash; Select {{ $entity or '' }} &mdash;

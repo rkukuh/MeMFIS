@@ -1,24 +1,24 @@
 $(document).ready(function () {
-    units2 = function () {
+    units = function () {
         $.ajax({
             url: '/get-units/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka5 = 1;
+                let index = 1;
 
-                $('select[name="unit2"]').empty();
+                $('select[name="unit"]').empty();
 
                 $.each(data, function (key, value) {
-                    if (angka5 == 1) {
-                        $('select[name="unit2"]').append(
+                    if (index == 1) {
+                        $('select[name="unit"]').append(
                             '<option> Select a Unit</option>'
                         );
 
-                        angka5 = 0;
+                        index = 0;
                     }
 
-                    $('select[name="unit2"]').append(
+                    $('select[name="unit"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
@@ -26,5 +26,5 @@ $(document).ready(function () {
         });
     };
 
-    units2();
+    units();
 });
