@@ -178,36 +178,13 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit($item)
+    public function edit(Item $item)
     {
-        $tags = Tag::get();
-        $categories = Category::ofItem()->get();
-        $item = Item::with('unit')->where('uuid',$item)->first();
-
-        try {
-            $journal_id = $item->account_code;
-            $journal =  Journal::find($journal_id);
-            $tags = Tag::get();
-            $tag_items = $item->tags;
-            $units = Unit::ofQuantity()->get();
-
-            // dd($units);
-            $categories = Category::ofItem()->get();
-            $category_items = $item->categories;
-            $journal_name = $journal->code." - ".$journal->name;
-            return view('frontend.item.edit',compact('item','categories','category_items','units','tags','tag_items'));
-        } catch (\Exception $e) {
-            $units = Unit::ofQuantity()->get();
-            // dd($units."2");
-
-            $tags = Tag::get();
-            $tag_items = $item->tags;
-            $categories = Category::ofItem()->get();
-            $category_items = $item->categories;
-            $journal_name = "Search the account code";
-            return view('frontend.item.edit',compact('item','categories','category_items','journal_name','units','tags','tag_items'));
-        }
-
+        return view('frontend.item.edit', [
+            'item' => $item,
+            'units' => Unit::ofQuantity()->get(),
+            'categories' => Category::ofItem()->get(),
+        ]);
     }
 
     /**
