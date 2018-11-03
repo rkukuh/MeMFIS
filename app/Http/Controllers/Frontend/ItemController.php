@@ -24,7 +24,7 @@ class ItemController extends Controller
      */
     public function getItems()
     {
-        $items = Item::with('unit')->get();
+        $items = Item::with('unit', 'journal')->get();
 
         $data = $alldata = json_decode($items);
 
