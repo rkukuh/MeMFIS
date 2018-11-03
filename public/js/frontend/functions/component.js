@@ -1,10 +1,10 @@
-let update_button = function () {
+let save_chagnes_button = function () {
     $('.btn-success').removeClass('add');
     $('.btn-success').addClass('update');
     $('.btn-success').html("<span><i class='fa fa-save'></i><span>Save Changes</span></span>");
 };
 
-let save_button = function () {
+let save_new_button = function () {
     if ($('.update')[0]) {
         $('.btn-success').removeClass('update');
         $('.btn-success').addClass('add');
@@ -13,12 +13,5 @@ let save_button = function () {
 };
 
 let close = $('.modal-footer').on('click', '.close', function () {
-    save_button();
+    save_new_button();
 });
-
-let update_item_button = function () {
-    $('.btn-success').removeClass('add');
-    $('.btn-success').addClass('edit-item');
-    $('.btn-success').removeClass('add-item');
-    $('.btn-success').html("<span><i class='fa fa-save'></i><span>Save Changes</span></span>");
-}
