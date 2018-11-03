@@ -181,7 +181,7 @@
 
                                             <div>
                                                 @if (empty($item->tags))
-                                                    @foreach($item->tags as $tag)
+                                                    @foreach ($item->tags as $tag)
                                                         @component('frontend.common.label.badge')
                                                             @slot('text', $tag->name)
                                                         @endcomponent

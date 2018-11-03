@@ -119,9 +119,12 @@
                                             </label>
 
                                             <select id="unit_item" name="unit_item" class="form-control m-select2">
-                                                @foreach($units as $key => $unit)
+                                                @foreach ($units as $key => $unit)
                                                     <option value="{{$unit->id}}"
-                                                        @if ($unit->id == $item->unit_id) selected @endif>
+                                                        @if ($unit->id == $item->unit_id)
+                                                            selected
+                                                        @endif
+                                                        >
                                                         {{ $unit->name }} ({{ $unit->symbol }})
                                                     </option>
                                                 @endforeach
@@ -137,14 +140,14 @@
                                                 </option>
 
                                                 @if ($category_items->isEmpty())
-                                                    @foreach($categories as $category)
+                                                    @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}">
                                                             {{ $category->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
-                                                    @foreach($categories as $key => $unit)
-                                                        @foreach($category_items as $aMaterialKey => $aMaterialSport)
+                                                    @foreach ($categories as $key => $unit)
+                                                        @foreach ($category_items as $aMaterialKey => $aMaterialSport)
                                                             <option value="{{$unit->id}}"
                                                                 @if ($unit->id == $aMaterialSport->id) selected @endif>
                                                                 {{ $unit->name }}
@@ -252,14 +255,14 @@
 
                                             <select id="tag" name="tag" class="form-control m-select2" multiple>
                                                 @if ($tag_items->isEmpty())
-                                                    @foreach($tags as $category)
+                                                    @foreach ($tags as $category)
                                                         <option value="{{ $category->id }}">
                                                             {{ $category->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
-                                                    @foreach($tags as $key => $tag)
-                                                        @foreach($tag_items as $aMaterialKey => $tag_name)
+                                                    @foreach ($tags as $key => $tag)
+                                                        @foreach ($tag_items as $aMaterialKey => $tag_name)
                                                             <option value="{{$tag->name}}"
                                                                 @if ($tag->name == $tag_name->name) selected @endif>
                                                                 {{ $tag->name }}
