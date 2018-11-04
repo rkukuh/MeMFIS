@@ -42,24 +42,29 @@ let Item = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'uom.quantity',
-                    title: 'Qty',
+                    title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50
+                    width: 150
                 },
                 {
                     field: 'name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return t.name + ' (' + t.symbol + ')'
+                    }
                 },
                 {
                     field: 'actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
+                    width: 50,
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
@@ -115,19 +120,13 @@ let Item = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'name',
                     title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'pivot.max',
-                    title: 'Max',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 50
+                    width: 250
                 },
                 {
                     field: 'pivot.min',
@@ -137,10 +136,17 @@ let Item = {
                     width: 50
                 },
                 {
+                    field: 'pivot.max',
+                    title: 'Max',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 50
+                },
+                {
                     field: 'actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
+                    width: 50,
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
