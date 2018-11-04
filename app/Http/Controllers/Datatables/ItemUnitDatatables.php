@@ -108,17 +108,6 @@ class ItemUnitDatatables extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pivots\ItemUnit  $itemUnit
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ItemUnit $itemUnit)
-    {
-        //
-    }
-
-    /**
      * Show data from model with flter on datatable.
      *
      * @param $list, $args, $operator
