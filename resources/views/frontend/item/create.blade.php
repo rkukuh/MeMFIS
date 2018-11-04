@@ -138,6 +138,8 @@
                                                 @slot('style', 'margin-top: 10px;')
                                                 @slot('data_target', '#modal_category')
                                             @endcomponent
+
+                                            @include('frontend.category.modal')
                                         </div>
                                     </div>
                                     <hr>
@@ -278,8 +280,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            @include('frontend.category.modal')
 
                             <div class="item_storage_datatable" id="item_storage_datatable"></div>
                         </div>
