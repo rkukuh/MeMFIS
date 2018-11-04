@@ -105,7 +105,8 @@ let Item = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'name',
                     title: 'Storage',
                     sortable: 'asc',
