@@ -37,9 +37,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('licensed-employee', 'EmployeeLicenseController');
         Route::resource('general-license', 'GeneralLicenseController');
 
-        //Travel Request
         Route::resource('travel-request', 'TravelRequestController');
-        Route::get('get-travel-requests', 'TravelRequestController@getTravelRequests')->name('get-travel-requests');
 
         //Employee History
         Route::resource('employee-history', 'EmployeeHistoryController');

@@ -14,6 +14,8 @@ Route::name('datatables.')->group(function () {
         Route::get('/item-unit/{item}','ItemUnitDatatables@index')->name('item-unit.index');
         Route::get('/item-storage/{item}','ItemStorageDatatables@index')->name('item-storage.index');
 
+        Route::get('/travel-request/{employee}','TravelRequestDatatables@index')->name('employee-travel-request.index');
+
     });
 
 });
