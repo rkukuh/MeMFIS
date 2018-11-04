@@ -118,7 +118,6 @@
                                                 @slot('text', 'Unit')
                                                 @slot('name', 'unit')
                                                 @slot('id_error', 'unit')
-                                                @slot('style', 'width:100%')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -130,7 +129,6 @@
                                                 @slot('id', 'category')
                                                 @slot('text', 'Category')
                                                 @slot('name', 'category')
-                                                @slot('style', 'width:100%')
                                                 @slot('id_error', 'category')
                                             @endcomponent
 
