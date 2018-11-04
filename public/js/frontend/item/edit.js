@@ -221,7 +221,7 @@ let Item = {
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
                     account_code: account_code,
-                    // selectedtags: selectedtags,
+                    selectedtags: selectedtags,
                 },
                 success: function (data) {
                     if (data.errors) {

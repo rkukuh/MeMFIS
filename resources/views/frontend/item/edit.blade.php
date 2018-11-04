@@ -225,7 +225,26 @@
 
                                             <select id="tag" name="tag" class="form-control m-select2" multiple>
                                                 {{-- TODO: Load all tags and selected item's tags --}}
+
+                                                @if ($item->tags->isEmpty())
+                                                    @foreach ($tags as $tag)
+                                                        <option value="{{ $tag->name }}">
+                                                            {{ $tag->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($tags as $key => $tag)
+                                                        @foreach ($item->tags as $itemKey => $tag_name)
+                                                            <option value="{{ $tag->name}}"
+                                                                @if ($tag->name == $tag_name->name) selected @endif>
+                                                                {{ $tag->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endforeach
+                                                @endif
+
                                             </select>
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
