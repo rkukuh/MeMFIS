@@ -19,7 +19,7 @@ let AccountCode = {
                     title: "Actions",
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '\n<a  class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill select-accourcode" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<i class="la la-edit">Use</i></a>'
+                        return '\n<a  class="m-portlet__nav-link btn m-btn m-btn--hover-brand select-accourcode" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<i class="la la-edit">Use</i></a>'
                     }
                 },
 
