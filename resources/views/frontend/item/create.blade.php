@@ -242,7 +242,7 @@
                                 </div>
                             </div>
 
-                            <div class="m_datatable1" id="fisrt"></div>
+                            <div class="item_unit_datatable" id="item_unit_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -281,7 +281,7 @@
 
                             @include('frontend.category.modal')
 
-                            <div class="m_datatable2" id="second"></div>
+                            <div class="item_storage_datatable" id="item_storage_datatable"></div>
                         </div>
                     </div>
                 </div>
