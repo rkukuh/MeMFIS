@@ -268,59 +268,6 @@ let Item = {
                 }
             });
         });
-
-        $('.modal-footer').on('click', '.add-uom', function () {
-            let unit = $('#unit').val();
-            let code = $('input[name=code]').val();
-            let uom_quantity = $('input[name=uom_quantity]').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/item-unit',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    code: code,
-                    unit: unit,
-                    quantity: quantity,
-                    uom_quantity: uom_quantity,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.quantity) {
-                            $('#quantity-error').html(data.errors.quantity[0]);
-                        }
-
-                        if (data.errors.uom_quantity) {
-                            $('#uom_quantity-error').html(data.errors.uom_quantity[0]);
-                        }
-
-                        if (data.errors.unit) {
-                            $('#unit-error').html(data.errors.unit[0]);
-                        }
-
-                        document.getElementById('unit').value = unit;
-                        document.getElementById('quantity').value = quantity;
-                        document.getElementById('uom_quantity').value = uom_quantity;
-                    } else {
-                        $('#modal_uom').modal('hide');
-
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
-
-                        uom_reset();
-
-                        let table = $('.item_unit_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
     }
 };
 
