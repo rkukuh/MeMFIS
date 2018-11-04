@@ -128,6 +128,6 @@ class Item extends MemfisModel implements HasMedia
      */
     public function getCategoryAttribute($value)
     {
-        return optional($this->categories->first())->name;
+        return optional($this->categories->first());
     }
 }
