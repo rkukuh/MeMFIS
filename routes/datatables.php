@@ -12,6 +12,7 @@ Route::name('datatables.')->group(function () {
 
         Route::get('/item','ItemDatatablesController@index')->name('item.index');
         Route::get('/item-unit/{item}','ItemUnitDatatablesController@index')->name('item-unit.index');
+        Route::get('/item-storage/{item}','ItemStorageDatatablesController@index')->name('item-storage.index');
 
     });
 
