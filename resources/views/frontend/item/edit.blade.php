@@ -227,14 +227,14 @@
                                             <select id="tag" name="tag" class="form-control m-select2" multiple>
                                                 @if ($item->tags->isEmpty())
                                                     @foreach ($tags as $tag)
-                                                        <option value="{{ $tag->name }}">
+                                                        <option value="{{ $tag->id }}">
                                                             {{ $tag->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
                                                     @foreach ($tags as $tag)
                                                         @foreach ($item->tags as $item_tag)
-                                                            <option value="{{ $tag->name}}"
+                                                            <option value="{{ $tag->id }}"
                                                                 @if ($tag->name == $item_tag->name) selected @endif>
                                                                 {{ $tag->name }}
                                                             </option>

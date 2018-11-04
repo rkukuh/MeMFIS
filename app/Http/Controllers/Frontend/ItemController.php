@@ -101,7 +101,7 @@ class ItemController extends Controller
         if ($item->update($request->all())) {
             $item->categories()->sync($request->category);
 
-            $item->syncTags($request->selectedtags);
+            $item->tags()->sync($request->selectedtags);
 
             return response()->json($item);
         }
