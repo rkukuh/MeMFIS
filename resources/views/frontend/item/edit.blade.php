@@ -213,6 +213,7 @@
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'account_code')
                                                 @slot('name', 'account_code')
+                                                @slot('value', $item->account_code)
                                             @endcomponent
                                         </div>
                                     </div>
