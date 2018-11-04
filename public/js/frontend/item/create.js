@@ -21,7 +21,7 @@ let Item = {
         $('.footer').on('click', '.add-item', function () {
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
-            let description = $('#description').val()
+            let description = $('#description').val();
             let unit = $('#unit').val();
             let category = $('#category').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
