@@ -19,13 +19,13 @@ let Item = {
         });
 
         $('.footer').on('click', '.add-item', function () {
-
-            if ($('#tag :selected').length > 0) {
-                var selectedtags = [];
-                $('#tag :selected').each(function (i, selected) {
-                    selectedtags[i] = $(selected).val();
-                });
-            }
+            let code = $('input[name=code]').val();
+            let name = $('input[name=name]').val();
+            let description = $('#description').val()
+            let unit = $('#unit').val();
+            let category = $('#category').val();
+            let ppn_amount = $('input[name=ppn_amount]').val();
+            let account_code = $('#account_code').val();
 
             if (document.getElementById("is_stock").checked) {
                 is_stock = 1;
@@ -39,14 +39,6 @@ let Item = {
                 is_ppn = 0;
             }
 
-            let code = $('input[name=code]').val();
-            let name = $('input[name=name]').val();
-            let description = $('#description').val()
-            let category = $('#category').val();
-            let unit = $('#unit').val();
-            let ppn_amount = $('input[name=ppn_amount]').val();
-            let account_code = $('#account_code').val();
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -58,8 +50,8 @@ let Item = {
                     code: code,
                     name: name,
                     description: description,
-                    category: category,
                     unit: unit,
+                    category: category,
                     is_stock: is_stock,
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
@@ -75,12 +67,12 @@ let Item = {
                             $('#name-error').html(data.errors.name[0]);
                         }
 
-                        if (data.errors.category) {
-                            $('#category-error').html(data.errors.category[0]);
-                        }
-
                         if (data.errors.unit) {
                             $('#unit-error').html(data.errors.unit[0]);
+                        }
+
+                        if (data.errors.category) {
+                            $('#category-error').html(data.errors.category[0]);
                         }
 
                         document.getElementById('code').value = code;
