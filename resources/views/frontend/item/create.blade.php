@@ -243,8 +243,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="item_unit_datatable" id="item_unit_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -280,8 +278,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="item_storage_datatable" id="item_storage_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -307,8 +303,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/category-item.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
@@ -317,8 +311,4 @@
 
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
     <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/action-buttons.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/item/create/item-unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/create/item-storage.js') }}"></script>
 @endpush
