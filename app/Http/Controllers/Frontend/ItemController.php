@@ -17,6 +17,17 @@ use App\Http\Requests\Frontend\ItemUpdate;
 
 class ItemController extends Controller
 {
+    protected $tags;
+    protected $units;
+    protected $categories;
+
+    public function __construct()
+    {
+        $this->tags = Tag::get();
+        $this->units = Unit::ofQuantity()->get();
+        $this->categories = Category::ofItem()->get();
+    }
+
     /**
      * Show data from model for DataTable.
      *
@@ -182,8 +193,8 @@ class ItemController extends Controller
     {
         return view('frontend.item.edit', [
             'item' => $item,
-            'units' => Unit::ofQuantity()->get(),
-            'categories' => Category::ofItem()->get(),
+            'units' => $this->units,
+            'categories' => $this->categories,
         ]);
     }
 
