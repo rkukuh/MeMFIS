@@ -62,9 +62,9 @@ class ItemController extends Controller
                     'ppn_amount' => $request->ppn_amount,
                     'barcode' => $request->barcode,
                     'account_code' => optional(Journal::where('uuid', $request->account_code)->first())->id,
-                ])
-                ->categories()
-                ->attach($request->category);
+                ]);
+
+        $item->categories()->attach($request->category);
 
         return response()->json($item);
     }
