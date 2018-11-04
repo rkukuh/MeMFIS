@@ -19,7 +19,7 @@ class ItemController extends Controller
 
     public function __construct()
     {
-        $this->tags = Tag::get();
+        $this->tags = Tag::getWithType('item');
         $this->units = Unit::ofQuantity()->get();
         $this->categories = Category::ofItem()->get();
     }
@@ -90,6 +90,7 @@ class ItemController extends Controller
     {
         return view('frontend.item.edit', [
             'item' => $item,
+            'tags' => $this->tags,
             'units' => $this->units,
             'categories' => $this->categories,
         ]);
