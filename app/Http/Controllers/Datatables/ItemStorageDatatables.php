@@ -107,13 +107,19 @@ class ItemStorageDatatables extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Show data from model with flter on datatable.
      *
-     * @param  \App\Models\Pivots\ItemStorage  $itemStorage
+     * @param $list, $args, $operator
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemStorage $itemStorage)
+    public function list_filter($list, $args = array(), $operator = 'AND')
     {
-        //
+        if (! is_array($list)) {
+            return array();
+        }
+
+        $util = new ListUtil($list);
+
+        return $util->filter($args, $operator);
     }
 }
