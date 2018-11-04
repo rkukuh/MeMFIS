@@ -98,48 +98,16 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-        $journal =  Journal::where('uuid',$request->account_code)->first();
-        if($journal == null){
-            $item->code = $request->code;
-            $item->name = $request->name;
-            $item->unit_id = $request->unit;
-            $item->description = $request->description;
-            $item->barcode = $request->barcode;
-            $item->is_ppn = $request->is_ppn;
-            $item->is_stock = $request->is_stock;
-            $item->ppn_amount = $request->ppn_amount;
-            $item->save();
+        if ($item->update($request->all())) {
+            $item->categories()->sync($request->category);
 
-            // $item = Item::create([
-            //     'code' => $request->code,
-            //     'name' => $request->name,
-            //     'unit_id' => $request->unit,
-            //     'unit_quantity'=>$request->quantity,
-            //     'description' => $request->description,
-            //     'barcode' => $request->barcode,
-            //     'is_ppn' => $request->isppn,
-            //     'is_stock' => $request->isstock,
-            //     'ppn_amount' => $request->ppn,
-            // ]);
-        }else{
-            $item->code = $request->code;
-            $item->name = $request->name;
-            $item->unit_id = $request->unit;
-            $item->description = $request->description;
-            $item->barcode = $request->barcode;
-            $item->account_code = $journal->id;
-            $item->is_ppn = $request->is_ppn;
-            $item->is_stock = $request->is_stock;
-            $item->ppn_amount = $request->ppn_amount;
-            $item->save();
+            $item->syncTags($request->selectedtags);
+
+            return response()->json($item);
         }
 
-        $item->categories()->detach();
-        $item->categories()->attach($request->category);
-        // $item->detachTags();
-        $item->syncTags($request->selectedtags);
-
-        return response()->json($item);
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**

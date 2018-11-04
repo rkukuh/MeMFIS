@@ -205,7 +205,7 @@ let Item = {
             let name = $('input[name=name]').val();
             let description = $('#description').val();
             let barcode = $('input[name=barcode]').val();
-            let unit = $('#unit_item').val();
+            let unit_id = $('#unit_id').val();
             let category = $('#category').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
             let account_code = $('#account_code').val();
@@ -221,7 +221,7 @@ let Item = {
                     code: code,
                     name: name,
                     description: description,
-                    unit: unit,
+                    unit_id: unit_id,
                     category: category,
                     is_stock: is_stock,
                     is_ppn: is_ppn,
@@ -239,16 +239,8 @@ let Item = {
                             $('#name-error').html(data.errors.name[0]);
                         }
 
-                        if (data.errors.unit) {
-                            $('#unit-error').html(data.errors.unit[0]);
-                        }
-
-                        if (data.errors.category) {
-                            $('#category-error').html(data.errors.category[0]);
-                        }
-
-                        if (unit == "Select a Unit") {
-                            $('#unit-error').html("The Unit field is required.");
+                        if (data.errors.unit_id) {
+                            $('#unit-error').html(data.errors.unit_id[0]);
                         }
 
                         if (data.errors.category) {
@@ -308,10 +300,6 @@ let Item = {
 
                         if (data.errors.unit) {
                             $('#unit-error').html(data.errors.unit[0]);
-                        }
-
-                        if (data.errors.unit2) {
-                            $('#unit2-error').html(data.errors.unit2[0]);
                         }
 
                         document.getElementById('unit').value = unit;

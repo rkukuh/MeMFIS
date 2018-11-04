@@ -122,7 +122,7 @@
                                                 Unit @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="unit_item" name="unit_item" class="form-control m-select2">
+                                            <select id="unit_id" name="unit_id" class="form-control m-select2">
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}"
                                                         @if ($unit->id == $item->unit_id) selected @endif>
@@ -135,6 +135,7 @@
                                             <label class="form-control-label">
                                                 Category @include('frontend.common.label.required')
                                             </label>
+
                                             <select id="category" name="category" class="form-control m-select2">
                                                 <option value="">
                                                     &mdash; Select Category &mdash;
@@ -382,11 +383,9 @@
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
