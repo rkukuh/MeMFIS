@@ -161,7 +161,7 @@
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_stock')
@@ -185,7 +185,7 @@
                                                         @endif
                                                     @endcomponent
                                                 </div>
-                                                <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
+                                                <div class="col-sm-12 col-md-12 col-lg-12" style="padding-left: 0">
                                                     @component('frontend.common.input.number')
                                                             @slot('text', 'PPN')
                                                             @slot('id', 'ppn_amount')
