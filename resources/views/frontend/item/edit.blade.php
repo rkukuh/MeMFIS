@@ -341,8 +341,8 @@
                                 </div>
                             </div>
 
-                            @include('frontend.storage.modal')
                             @include('frontend.item.storage.modal')
+                            @include('frontend.storage.modal')
 
                             <div class="item_storage_datatable" id="item_storage_datatable"></div>
                         </div>
