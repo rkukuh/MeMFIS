@@ -1,6 +1,6 @@
 let Item = {
     init: function () {
-        $('.m_datatable1').mDatatable({
+        $('.item_unit_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -72,7 +72,7 @@ let Item = {
             ]
         });
 
-        $('.m_datatable2').mDatatable({
+        $('.item_storage_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -400,7 +400,7 @@ let Item = {
 
                         uom_reset()
 
-                        let table = $('.m_datatable1').mDatatable();
+                        let table = $('.item_unit_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -457,7 +457,7 @@ let Item = {
                             timeOut: 5000
                         });
                         minmaxstock_reset();
-                        let table = $('.m_datatable2').mDatatable();
+                        let table = $('.item_storage_datatable').mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -465,7 +465,7 @@ let Item = {
             });
         });
 
-        // let remove_uom = $('.m_datatable1').on('click', '.delete', function () {
+        // let remove_uom = $('.item_unit_datatable').on('click', '.delete', function () {
         //     let triggerid = $(this).data('id');
         //     let triggerid2 = $(this).data('unit_id');
         //     // alert(triggerid);
@@ -495,7 +495,7 @@ let Item = {
         //                         }
         //                     );
 
-        //                     let table = $('.m_datatable1').mDatatable();
+        //                     let table = $('.item_unit_datatable').mDatatable();
         //                     table.originalDataSet =[];
         //                     table.reload();
         //                 },
@@ -523,7 +523,7 @@ let Item = {
         //     });
         // });
 
-        // let remove_storages = $('.m_datatable2').on('click', '.delete', function () {
+        // let remove_storages = $('.item_storage_datatable').on('click', '.delete', function () {
         //     let triggerid = $(this).data('id');
         //     let triggerid2 = $(this).data('storage_id');
         //     // alert(triggerid);
@@ -553,7 +553,7 @@ let Item = {
         //                         }
         //                     );
 
-        //                     let table = $('.m_datatable2').mDatatable();
+        //                     let table = $('.item_storage_datatable').mDatatable();
         //                     table.originalDataSet =[];
         //                     table.reload();
         //                 },
