@@ -190,7 +190,7 @@ let Item = {
             // } else {
             //     is_ppn = 0;
             // }
-            let accountcode2 = $('#accountcode2').val();
+            let account_code = $('#account_code').val();
             let uuid = $('input[name=id]').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
@@ -218,7 +218,7 @@ let Item = {
                     // barcode: barcode,
                     ppn: ppn_amount,
                     description: description,
-                    // accountcode: accountcode2,
+                    account_code: account_code,
                     selectedtags: selectedtags,
                     category: category
 
