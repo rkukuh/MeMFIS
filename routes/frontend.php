@@ -140,13 +140,11 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
 
         Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
-        Route::get('/get-uom/{item}','ItemUnitController@getUoM')->name('get-uom');
         Route::delete('/item-unit/{item_unit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
 
         Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
         Route::get('/get-item-storages/{item}','ItemStorageController@getItemStorages')->name('get-item-storages');
         Route::delete('/item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
-
 
     });
 
