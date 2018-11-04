@@ -1,18 +1,17 @@
 <div style="background-color: {{ $background_color or 'beige' }};
-            padding: {{ $padding or '15' }}px;">
+            padding: {{ $padding or '15px' }};">
 
     @if (isset($item->journal))
-    @component('frontend.common.label.data-info')
+        @component('frontend.common.label.data-info')
+            @slot('padding', '0')
+            @slot('class', 'search-journal')
             @slot('text', $item->account_code_and_name)
-            @slot('padding','0')
-            @slot('class','search-journal')
         @endcomponent
     @else
         <div class="search-journal" id="search-journal">
             {{ $text or 'Search account code' }}
         </div>
     @endif
-
 
     @component('frontend.common.account-code.button-create')
         @slot('size', 'sm')
