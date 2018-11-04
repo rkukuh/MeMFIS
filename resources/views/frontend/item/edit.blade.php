@@ -143,13 +143,20 @@
 
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}"
-                                                        @if ($category->id == $item->category_id) selected @endif>
+                                                        @if ($category->id == $item->category->id) selected @endif>
                                                         {{ $category->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
 
                                             <div class="form-control-feedback text-danger" id="category-error"></div>
+
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('size', 'sm')
+                                                @slot('text', 'category')
+                                                @slot('style', 'margin-top: 10px;')
+                                                @slot('data_target', '#modal_category')
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <hr>
