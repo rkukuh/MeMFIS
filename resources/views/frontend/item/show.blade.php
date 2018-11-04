@@ -113,11 +113,11 @@
                                                 Category
                                             </label>
 
-                                            @if (empty($item->category))
+                                            @if (empty($item->category->name))
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $item->category)
+                                                    @slot('text', $item->category->name)
                                                 @endcomponent
                                             @endif
                                         </div>
