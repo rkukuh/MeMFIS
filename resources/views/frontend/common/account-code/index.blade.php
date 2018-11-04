@@ -5,6 +5,7 @@
     @component('frontend.common.label.data-info')
             @slot('text', $item->account_code_and_name)
             @slot('padding','0')
+            @slot('class','search-journal')
         @endcomponent
     @else
         <div class="search-journal" id="search-journal">
