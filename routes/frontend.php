@@ -126,7 +126,6 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
 
         Route::resource('item', 'ItemController');
-        Route::get('/get-items','ItemController@getItems')->name('get-items');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
 
         Route::resource('workpackage', 'WorkPackageController');
