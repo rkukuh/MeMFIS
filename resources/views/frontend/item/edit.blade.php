@@ -218,6 +218,15 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
+                                                Tag @include('frontend.common.label.optional')
+                                            </label>
+
+                                            <select id="tag" name="tag" class="form-control m-select2" multiple>
+                                                {{-- TODO: Load all tags and selected item's tags --}}
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
                                                 Photos @include('frontend.common.label.optional')
                                             </label>
                                             <br>
@@ -232,15 +241,6 @@
                                             @endcomponent
 
                                             <div id="myFiles"></div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Tag @include('frontend.common.label.optional')
-                                            </label>
-
-                                            <select id="tag" name="tag" class="form-control m-select2" multiple>
-                                                {{-- TODO: Load all tags and selected item's tags --}}
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
