@@ -54,9 +54,8 @@
                                         <legend class="w-auto">Identifier</legend>
 
                                         @component('frontend.common.input.hidden')
-                                            @slot('id', 'id')
-                                            @slot('name', 'id')
-                                            @slot('id_error', 'code')
+                                            @slot('id', 'uuid')
+                                            @slot('name', 'uuid')
                                             @slot('value', $item->uuid)
                                         @endcomponent
 
