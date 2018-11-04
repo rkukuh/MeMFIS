@@ -104,9 +104,8 @@
                                             </div>
                                         </div>
                                     </fieldset>
-
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden">
+                                    <div class="form-group m-form__group row hidden">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Barcode @include('frontend.common.label.optional')
                                             </label>
@@ -117,6 +116,8 @@
                                                 @slot('name', 'barcode')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Unit @include('frontend.common.label.required')
