@@ -52,21 +52,14 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
-        $item = Item::create([
-                    'code' => $request->code,
-                    'name' => $request->name,
-                    'unit_id' => $request->unit,
-                    'description' => $request->description,
-                    'is_stock' => $request->is_stock,
-                    'is_ppn' => $request->is_ppn,
-                    'ppn_amount' => $request->ppn_amount,
-                    'barcode' => $request->barcode,
-                    'account_code' => optional(Journal::where('uuid', $request->account_code)->first())->id,
-                ]);
+        if ($item = Item::create($request->all())) {
+            $item->categories()->attach($request->category);
 
-        $item->categories()->attach($request->category);
+            return response()->json($item);
+        }
 
-        return response()->json($item);
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**

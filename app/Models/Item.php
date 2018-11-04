@@ -16,13 +16,13 @@ class Item extends MemfisModel implements HasMedia
     protected $fillable = [
         'code',
         'name',
+        'description',
         'unit_id',
         'barcode',
+        'is_stock',
         'is_ppn',
         'ppn_amount',
-        'is_stock',
         'account_code',
-        'description',
     ];
 
     /***************************************** OVERRIDE *******************************************/

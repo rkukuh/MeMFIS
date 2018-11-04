@@ -114,9 +114,9 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('id', 'unit')
                                                 @slot('text', 'Unit')
-                                                @slot('name', 'unit')
+                                                @slot('id', 'unit_id')
+                                                @slot('name', 'unit_id')
                                                 @slot('id_error', 'unit')
                                             @endcomponent
                                         </div>
