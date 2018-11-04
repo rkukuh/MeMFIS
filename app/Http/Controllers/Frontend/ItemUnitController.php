@@ -89,7 +89,7 @@ class ItemUnitController extends Controller
      * @param  \App\Models\ItemUnit  $itemUnit
      * @return \Illuminate\Http\Response
      */
-    public function destroy($itemUnit)
+    public function destroy(ItemUnit $itemUnit)
     {
         //
     }
