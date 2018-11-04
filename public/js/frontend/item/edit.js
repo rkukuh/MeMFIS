@@ -261,7 +261,7 @@ let Item = {
                         $('#item-storage').html(code);
                         $('input[type=file]').val('');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Material has been updated.', 'Success', {
                             timeOut: 5000
                         });
                     }
