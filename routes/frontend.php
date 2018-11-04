@@ -139,7 +139,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('taskcard-package', 'TaskCardPackageController');
         Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
 
-        Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
+        Route::resource('item-unit', 'ItemUnitController');
 
         Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
         Route::get('/get-item-storages/{item}','ItemStorageController@getItemStorages')->name('get-item-storages');
