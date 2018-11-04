@@ -117,7 +117,9 @@ class Item extends MemfisModel implements HasMedia
      */
     public function getAccountCodeAndNameAttribute($value)
     {
-        return $this->journal->code.' - '.$this->journal->name;
+        if (isset($this->journal)) {
+            return $this->journal->code.' - '.$this->journal->name;
+        }
     }
 
     /**
