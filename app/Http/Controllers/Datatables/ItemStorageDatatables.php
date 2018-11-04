@@ -5,20 +5,19 @@ namespace App\Http\Controllers\Datatables;
 use App\Models\Item;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
-use App\Models\Pivots\ItemUnit;
+use App\Models\Pivots\ItemStorage;
 use App\Http\Controllers\Controller;
 
-class ItemUnitDatatablesController extends Controller
+class ItemStorageDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function index(Item $item)
     {
-        $data = $alldata = json_decode($item->units);
+        $data = $alldata = json_decode($item->storages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -110,28 +109,11 @@ class ItemUnitDatatablesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pivots\ItemUnit  $itemUnit
+     * @param  \App\Models\Pivots\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemUnit $itemUnit)
+    public function destroy(ItemStorage $itemStorage)
     {
         //
-    }
-
-    /**
-     * Show data from model with flter on datatable.
-     *
-     * @param $list, $args, $operator
-     * @return \Illuminate\Http\Response
-     */
-    public function list_filter($list, $args = array(), $operator = 'AND')
-    {
-        if (! is_array($list)) {
-            return array();
-        }
-
-        $util = new ListUtil($list);
-
-        return $util->filter($args, $operator);
     }
 }

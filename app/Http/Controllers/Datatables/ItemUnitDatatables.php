@@ -5,20 +5,20 @@ namespace App\Http\Controllers\Datatables;
 use App\Models\Item;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
+use App\Models\Pivots\ItemUnit;
 use App\Http\Controllers\Controller;
 
-class ItemDatatablesController extends Controller
+class ItemUnitDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Item $item)
     {
-        $items = Item::with('unit', 'journal')->get();
-
-        $data = $alldata = json_decode($items);
+        $data = $alldata = json_decode($item->units);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -105,6 +105,17 @@ class ItemDatatablesController extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Pivots\ItemUnit  $itemUnit
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ItemUnit $itemUnit)
+    {
+        //
     }
 
     /**

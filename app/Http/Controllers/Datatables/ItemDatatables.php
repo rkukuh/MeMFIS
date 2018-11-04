@@ -5,19 +5,20 @@ namespace App\Http\Controllers\Datatables;
 use App\Models\Item;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
-use App\Models\Pivots\ItemStorage;
 use App\Http\Controllers\Controller;
 
-class ItemStorageDatatablesController extends Controller
+class ItemDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Item $item)
+    public function index()
     {
-        $data = $alldata = json_decode($item->storages);
+        $items = Item::with('unit', 'journal')->get();
+
+        $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -107,13 +108,19 @@ class ItemStorageDatatablesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Show data from model with flter on datatable.
      *
-     * @param  \App\Models\Pivots\ItemStorage  $itemStorage
+     * @param $list, $args, $operator
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemStorage $itemStorage)
+    public function list_filter($list, $args = array(), $operator = 'AND')
     {
-        //
+        if (! is_array($list)) {
+            return array();
+        }
+
+        $util = new ListUtil($list);
+
+        return $util->filter($args, $operator);
     }
 }
