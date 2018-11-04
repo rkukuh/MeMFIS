@@ -213,6 +213,7 @@
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'account_code')
                                                 @slot('name', 'account_code')
+                                                @slot('value', $item->account_code)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -376,6 +377,6 @@
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
 @endpush

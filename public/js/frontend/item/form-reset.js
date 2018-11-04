@@ -14,4 +14,11 @@ let item_reset = function () {
 
     document.getElementById('ppn_amount').value = '';
     document.getElementById('ppn_amount').disabled = true;
+    $('.search-journal').html('Search account code');
+    document.getElementById('account_code').value = '';
+
+}
+
+let item_edit_reset = function () {
+    window.location.href = '/item/' + item_uuid + '/edit';
 }

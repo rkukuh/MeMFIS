@@ -104,7 +104,7 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
-        $journal =  Journal::where('uuid',$request->accountcode)->first();
+        $journal =  Journal::where('uuid',$request->account_code)->first();
         if($journal == null){
             $item->code = $request->code;
             $item->name = $request->name;
@@ -131,7 +131,6 @@ class ItemController extends Controller
             $item->code = $request->code;
             $item->name = $request->name;
             $item->unit_id = $request->unit;
-            $item->unit_quantity = $request->quantity;
             $item->description = $request->description;
             $item->barcode = $request->barcode;
             $item->account_code = $journal->id;
