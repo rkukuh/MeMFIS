@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_minmaxstock"  role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_storage_stock"  role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -58,7 +58,7 @@
                                     <label class="form-control-label">
                                         Max @include('frontend.common.label.required')
                                     </label>
-    
+
                                     @component('frontend.common.input.numeric')
                                         @slot('text', 'Max')
                                         @slot('name', 'max')
