@@ -179,7 +179,6 @@ let Item = {
         });
 
         $('.footer').on('click', '.edit-item', function () {
-
             if ($('#tag :selected').length > 0) {
                 var selectedtags = [];
 
