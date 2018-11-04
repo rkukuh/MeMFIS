@@ -63,8 +63,8 @@ let Item = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="'+t.uom.item_id+'"' +
-                            'data-unit_id="'+t.uom.unit_id+'"'+
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="' + t.uom.item_id + '"' +
+                            'data-unit_id="' + t.uom.unit_id + '"' +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -143,8 +143,8 @@ let Item = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="'+t.pivot.item_id+'"' +
-                            'data-storage_id="'+t.pivot.storage_id+'"'+
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="' + t.pivot.item_id + '"' +
+                            'data-storage_id="' + t.pivot.storage_id + '"' +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -152,15 +152,12 @@ let Item = {
             ]
         });
 
-
-
-
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
             document.getElementById('is_ppn').onchange = function () {
                 document.getElementById('ppn_amount').disabled = !this.checked;
                 if (document.getElementById("is_ppn").checked) {
-                    // document.getElementById('ppn_amount').value = 10;
+                    document.getElementById('ppn_amount').value = 10;
                 } else {
                     document.getElementById('ppn_amount').value = '';
                 }
@@ -171,18 +168,18 @@ let Item = {
             item_reset();
         });
 
-
         $('.footer').on('click', '.edit-item', function () {
 
             if ($('#tag :selected').length > 0) {
                 var selectedtags = [];
+
                 $('#tag :selected').each(function (i, selected) {
                     selectedtags[i] = $(selected).val();
                 });
             }
 
             // if (document.getElementById("is_stock").checked) {
-                is_stock = 1;
+            is_stock = 1;
             // } else {
             //     is_stock2 = 0;
             // }
@@ -203,15 +200,13 @@ let Item = {
             let category = $('#category').val();
             // let quantity = $('input[name=quantity]').val();
             let unit = $('#unit_item').val();
-            // alert(unit);
-
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'PUT',
-                url: '/item/'+uuid+'/',
+                url: '/item/' + uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
@@ -232,32 +227,26 @@ let Item = {
                     if (data.errors) {
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
-
                         }
 
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
-
                         }
 
                         if (data.errors.unit) {
                             $('#unit-error').html(data.errors.unit[0]);
-
                         }
 
                         if (data.errors.category) {
                             $('#category-error').html(data.errors.category[0]);
-
                         }
 
-                        if(unit == "Select a Unit"){
+                        if (unit == "Select a Unit") {
                             $('#unit-error').html("The Unit field is required.");
-
                         }
 
                         if (data.errors.category) {
                             $('#category-error').html(data.errors.category[0]);
-
                         }
 
                         document.getElementById('code').value = code;
@@ -273,14 +262,17 @@ let Item = {
                         $('#name-error').html('');
                         $('#description-error').html('');
                         $('#barcode-error').html('');
-                        document.getElementById('item-uom').removeAttribute('disabled');
-                        document.getElementById('item-minmaxstock').removeAttribute('disabled');
                         $('#item-storage').html(code);
                         $('#item-unit').html();
+
+                        document.getElementById('item-uom').removeAttribute('disabled');
+                        document.getElementById('item-minmaxstock').removeAttribute('disabled');
                         // item_reset();
+
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
+
                         // location.reload();
                         // photo();
                     }
@@ -381,32 +373,35 @@ let Item = {
                     if (data.errors) {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
-
                         }
+
                         if (data.errors.uom_quantity) {
                             $('#uom_quantity-error').html(data.errors.uom_quantity[0]);
-
                         }
+
                         if (data.errors.unit) {
                             $('#unit-error').html(data.errors.unit[0]);
-
                         }
+
                         if (data.errors.unit2) {
                             $('#unit2-error').html(data.errors.unit2[0]);
-
                         }
+
                         document.getElementById('quantity').value = quantity;
                         document.getElementById('uom_quantity').value = uom_quantity;
                         document.getElementById('unit').value = unit;
                         document.getElementById('unit2').value = unit2;
-                } else {
+                    } else {
                         $('#modal_uom').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
+
                         uom_reset()
+
                         let table = $('.m_datatable1').mDatatable();
+
                         table.originalDataSet = [];
                         table.reload();
 
@@ -414,7 +409,6 @@ let Item = {
                 }
             });
         });
-
 
         let simpan3 = $('.modal-footer').on('click', '.add-stock', function () {
             let code = $('input[name=code]').val();
@@ -586,10 +580,6 @@ let Item = {
         //         }
         //     });
         // });
-
-
-
-
     }
 };
 
