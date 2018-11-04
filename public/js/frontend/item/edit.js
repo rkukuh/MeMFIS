@@ -265,8 +265,8 @@ let Item = {
                         $('#item-storage').html(code);
                         $('#item-unit').html();
 
-                        document.getElementById('item-uom').removeAttribute('disabled');
-                        document.getElementById('item-minmaxstock').removeAttribute('disabled');
+                        // document.getElementById('item-uom').removeAttribute('disabled');
+                        // document.getElementById('item-minmaxstock').removeAttribute('disabled');
                         // item_reset();
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
