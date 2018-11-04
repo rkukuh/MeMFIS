@@ -182,6 +182,18 @@ let Item = {
                 });
             }
 
+            if (document.getElementById("is_stock").checked) {
+                is_stock = 1;
+            } else {
+                is_stock = 0;
+            }
+
+            if (document.getElementById("is_ppn").checked) {
+                is_ppn = 1;
+            } else {
+                is_ppn = 0;
+            }
+
             let uuid = $('input[name=uuid]').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
@@ -209,7 +221,7 @@ let Item = {
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
                     account_code: account_code,
-                    selectedtags: selectedtags,
+                    // selectedtags: selectedtags,
                 },
                 success: function (data) {
                     if (data.errors) {
