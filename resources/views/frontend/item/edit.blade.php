@@ -377,6 +377,6 @@
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
 @endpush

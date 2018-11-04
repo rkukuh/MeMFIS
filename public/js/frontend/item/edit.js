@@ -165,7 +165,7 @@ let Item = {
         });
 
         $('.footer').on('click', '.reset', function () {
-            item_reset();
+            item_edit_reset();
         });
 
         $('.footer').on('click', '.edit-item', function () {
