@@ -25,6 +25,7 @@ let AccountCode = {
 
             ]
         })
+
         $('<a class="btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-promary btn-md refresh" style="margin-left:53%"><span><i class="la la-refresh">Reload</i></span> </button>').appendTo('div.dataTables_filter');
         $('.paging_simple_numbers').addClass('pull-left');
         $('.dataTables_length').addClass('pull-right');
