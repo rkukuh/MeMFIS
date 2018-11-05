@@ -6,6 +6,8 @@ let AccountCode = {
             searchDelay: 500,
             processing: !0,
             serverSide: !0,
+            lengthMenu: [5, 10, 25, 50 ],
+            pageLength:5,
             ajax: "/get-account-codes/",
             columns: [{
                 data: "code"
