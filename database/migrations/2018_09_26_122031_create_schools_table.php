@@ -16,6 +16,7 @@ class CreateSchoolsTable extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('code');
             $table->string('name');
             $table->unsignedInteger('degree')->nullable();
             $table->timestamps();
@@ -26,6 +27,7 @@ class CreateSchoolsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
+            $table->index('code');
             $table->index('name');
         });
     }
