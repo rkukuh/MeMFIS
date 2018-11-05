@@ -1,9 +1,12 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Type;
 use App\Models\License;
+use App\Models\Aircraft;
 use App\Models\Employee;
 use Illuminate\Database\Seeder;
+use App\Models\Pivots\EmployeeLicense;
 
 class CertifiedStaff_AMELicense extends Seeder
 {
@@ -16,7 +19,7 @@ class CertifiedStaff_AMELicense extends Seeder
     {
         /** Create EMPLOYEE */
 
-        $aldrin = Employee::create([
+        $sugiharto = Employee::create([
             'code' => 'MMF-00002',
             'first_name' => 'Sugiharto',
         ]);
@@ -25,12 +28,29 @@ class CertifiedStaff_AMELicense extends Seeder
 
         $amel = License::where('code', 'amel-dgca')->first();
 
-        $aldrin->licenses()->attach($amel, [
+        $sugiharto->licenses()->attach($amel, [
             'number' => '2126',
             'issued_at' => Carbon::createFromFormat('Y-m-d', '2007-06-05'),
             'valid_until' => Carbon::createFromFormat('Y-m-d', '2009-06-05'),
         ]);
 
-        // TODO: Assign AMEL to Rating
+        /** Assign AMEL to RATING */
+
+        EmployeeLicense::whereHas('employee', function ($query) use ($sugiharto) {
+                return $query->where('employee_id', $sugiharto->id);
+            })
+            ->where('number', '2126')
+            ->first()
+            ->ame_licenses()
+            ->createMany([
+                [
+                    'aircraft_id' => Aircraft::where('code', 'cn-235')->first()->id,
+                    'type_id'     => Type::ofAPERI()->where('code', 'airframe')->first()->id,
+                ],
+                [
+                    'aircraft_id' => Aircraft::where('code', 'b737-300')->first()->id,
+                    'type_id'     => Type::ofAPERI()->where('code', 'airframe')->first()->id,
+                ],
+            ]);
     }
 }
