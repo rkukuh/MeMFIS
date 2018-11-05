@@ -17,6 +17,17 @@ class Type extends MemfisModel
     /******************************************* SCOPE *******************************************/
 
     /**
+     * Scope a query to only include type of AP/ERI.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAPERI(Builder $query)
+    {
+        return $query->where('of', 'aperi');
+    }
+
+    /**
      * Scope a query to only include type of ARC.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
