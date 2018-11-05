@@ -12,6 +12,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(TypesOfAPERI::class);
         $this->call(TypesOfARC::class);
         $this->call(TypesOfAviationDegree::class);
         $this->call(TypesOfCapability::class);
