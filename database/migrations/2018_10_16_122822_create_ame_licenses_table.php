@@ -19,11 +19,6 @@ class CreateAmelicensesTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('employee_license_id');
-            // Scope        : Free text yg bisa di-master-kan
-            // Category     : (Aviation Degree + Free text) --> master data AMEL's category
-            // Rating       : AC + PartNo Komponen
-            // Limitation   : Skills: Supporting Staff (Mechanic), Engineer, Inspector, RII Inspector
-            // Remark       : Free text (optional)
             $table->timestamps();
 
             $table->foreign('employee_license_id')
