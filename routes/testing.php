@@ -9,7 +9,7 @@ Route::name('testing.')->group(function () {
         });
 
         Route::resource('/testing', 'Frontend\TestingController');
-        Route::view('/maps', 'frontend\testing\maps')->name('maps');
+        Route::view('/maps', 'Frontend\testing\maps')->name('maps');
         Route::get('/view', 'Frontend\TestingController@view')->name('view');
         Route::post('/text', 'Frontend\TestingController@text')->name('text');
         Route::post('/photo', 'Frontend\TestingController@photo')->name('photo');
