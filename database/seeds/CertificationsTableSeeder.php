@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Certification;
 use Illuminate\Database\Seeder;
 
 class CertificationsTableSeeder extends Seeder
@@ -11,6 +12,9 @@ class CertificationsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Certification::create([
+            'code' => 'otr',
+            'name' => 'Certificate of Authorization',
+        ]);
     }
 }
