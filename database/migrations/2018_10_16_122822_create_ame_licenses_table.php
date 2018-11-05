@@ -13,12 +13,12 @@ class CreateAmelicensesTable extends Migration
      */
     public function up()
     {
+        /** The details of "Employee-License", for AME License */
+
         Schema::create('ame_licenses', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('employee_license_id');
-            $table->string('station');
-            $table->string('stamp_no');
             // Scope        : Free text yg bisa di-master-kan
             // Category     : (Aviation Degree + Free text) --> master data AMEL's category
             // Rating       : AC + PartNo Komponen

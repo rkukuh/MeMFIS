@@ -17,7 +17,7 @@ class CreateEmployeeLicenseTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('license_id');
-            $table->string('code');
+            $table->string('number');
             $table->timestamp('issued_at')->nullable();
             $table->timestamp('valid_until')->nullable();
             $table->timestamp('revoke_at')->nullable();
@@ -33,7 +33,7 @@ class CreateEmployeeLicenseTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->index('code');
+            $table->index('number');
         });
     }
 
