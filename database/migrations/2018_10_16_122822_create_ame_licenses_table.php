@@ -14,6 +14,8 @@ class CreateAmelicensesTable extends Migration
     public function up()
     {
         Schema::create('ame_licenses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->unsignedInteger('employee_license_id');
             $table->string('station');
             $table->string('stamp_no');
