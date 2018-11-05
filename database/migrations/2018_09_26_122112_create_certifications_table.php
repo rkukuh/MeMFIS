@@ -16,11 +16,13 @@ class CreateCertificationsTable extends Migration
         Schema::create('certifications', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('code');
             $table->string('name');
-            $table->string('authority');
+            $table->string('authority')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
+            $table->index('code');
             $table->index('name');
             $table->index('authority');
         });
