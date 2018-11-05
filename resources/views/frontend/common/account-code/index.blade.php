@@ -28,4 +28,10 @@
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script> --}}
+        
 @endpush
