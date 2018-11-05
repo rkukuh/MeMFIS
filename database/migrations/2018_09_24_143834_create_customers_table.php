@@ -28,11 +28,9 @@ class CreateCustomersTable extends Migration
             $table->softDeletes();
 
             $table->foreign('account_code')
-            ->references('id')->on('journals')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
-
-
+                  ->references('id')->on('journals')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
         });
     }
 
