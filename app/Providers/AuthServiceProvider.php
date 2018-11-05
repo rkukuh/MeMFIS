@@ -48,6 +48,8 @@ use App\Models\GeneralLicense;
 use App\Policies\GeneralLicensePolicy;
 use App\Models\Pivots\EmployeeLicense;
 use App\Policies\EmployeeLicensePolicy;
+use App\Models\Pivots\CertificationEmployee;
+use App\Policies\CertificationEmployeePolicy;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -83,6 +85,7 @@ class AuthServiceProvider extends ServiceProvider
         Certification::class => CertificationPolicy::class,
         GeneralLicense::class => GeneralLicensePolicy::class,
         EmployeeLicense::class => EmployeeLicensePolicy::class,
+        CertificationEmployee::class => CertificationEmployeePolicy::class,
     ];
 
     /**

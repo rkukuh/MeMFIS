@@ -36,11 +36,15 @@ Route::name('admin.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
-        /** EDUCATION */
+        /** LICENSE */
 
         Route::resource('employee-license', 'EmployeeLicenseController');
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('ame-license', 'AmeLicenseController');
+
+        /** CERTIFICATION */
+
+        Route::resource('certification-employee', 'CertificationEmployeeController');
 
         /** FINANCE */
 

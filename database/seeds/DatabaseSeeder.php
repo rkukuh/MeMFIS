@@ -47,11 +47,15 @@ class DatabaseSeeder extends Seeder
         $this->call(LicensesTableSeeder::class);
         $this->call(CertificationsTableSeeder::class);
 
-        /** EDUCATION */
+        /** LICENSE */
 
-        $this->call(EmployeeLicensesTableSeeder::class);
+        $this->call(EmployeeLicenseTableSeeder::class);
         $this->call(GeneralLicensesTableSeeder::class);
         $this->call(AmeLicensesTableSeeder::class);
+
+        /** CERTIFICATION */
+
+        $this->call(CertificationEmployeeTableSeeder::class);
 
         /** FINANCE */
 

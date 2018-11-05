@@ -36,6 +36,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('employee-license', 'EmployeeLicenseController');
         Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('certification-employee', 'CertificationEmployeeController');
 
         Route::resource('travel-request', 'TravelRequestController');
 
