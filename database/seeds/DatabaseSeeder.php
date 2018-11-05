@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
         /** CERTIFICATION */
 
         $this->call(CertificationEmployeeTableSeeder::class);
+        $this->call(OTRCertificationsTableSeeder::class);
 
         /** FINANCE */
 

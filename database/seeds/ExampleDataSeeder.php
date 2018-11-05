@@ -49,6 +49,7 @@ class ExampleDataSeeder extends Seeder
         /** CERTIFICATION */
 
         $this->call(CertificationEmployees::class);
+        $this->call(OTRCertifications::class);
 
         /** FINANCE */
 
