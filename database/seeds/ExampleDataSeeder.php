@@ -38,6 +38,7 @@ class ExampleDataSeeder extends Seeder
         $this->call(Aircrafts::class);
         $this->call(Employees::class);
         $this->call(Licenses::class);
+        $this->call(Certifications::class);
 
         /** EDUCATION */
 

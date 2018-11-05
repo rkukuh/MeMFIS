@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Certification;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\CertificationStore;
-use App\Http\Requests\Frontend\CertificationUpdate;
+use App\Http\Requests\Admin\CertificationStore;
+use App\Http\Requests\Admin\CertificationUpdate;
 
 class CertificationController extends Controller
 {
@@ -32,7 +32,7 @@ class CertificationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\CertificationStore  $request
+     * @param  \App\Http\Requests\Admin\CertificationStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CertificationStore $request)
@@ -65,7 +65,7 @@ class CertificationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\CertificationUpdate  $request
+     * @param  \App\Http\Requests\Admin\CertificationUpdate  $request
      * @param  \App\Models\Certification  $certification
      * @return \Illuminate\Http\Response
      */

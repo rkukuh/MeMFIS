@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AircraftsTableSeeder::class);
         $this->call(EmployeesTableSeeder::class);
         $this->call(LicensesTableSeeder::class);
+        $this->call(CertificationsTableSeeder::class);
 
         /** EDUCATION */
 

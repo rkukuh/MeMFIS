@@ -42,6 +42,8 @@ use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
 use App\Models\Manufacturer;
 use App\Policies\ManufacturerPolicy;
+use App\Models\Certification;
+use App\Policies\CertificationPolicy;
 use App\Models\GeneralLicense;
 use App\Policies\GeneralLicensePolicy;
 use App\Models\Pivots\EmployeeLicense;
@@ -78,6 +80,7 @@ class AuthServiceProvider extends ServiceProvider
         AmeLicense::class => AmeLicensePolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
+        Certification::class => CertificationPolicy::class,
         GeneralLicense::class => GeneralLicensePolicy::class,
         EmployeeLicense::class => EmployeeLicensePolicy::class,
     ];
