@@ -34,7 +34,7 @@ class CertifiedStaff_AMELicense extends Seeder
             'valid_until' => Carbon::createFromFormat('Y-m-d', '2009-06-05'),
         ]);
 
-        /** Assign AMEL to RATING */
+        /** Assign AMEL to RATING (it could be A/C or Engine) */
 
         EmployeeLicense::whereHas('employee', function ($query) use ($sugiharto) {
                 return $query->where('employee_id', $sugiharto->id);
