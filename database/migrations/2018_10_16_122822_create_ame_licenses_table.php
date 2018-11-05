@@ -19,10 +19,22 @@ class CreateAmelicensesTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('employee_license_id');
+            $table->unsignedInteger('aircraft_id');
+            $table->unsignedInteger('type_id');
             $table->timestamps();
 
             $table->foreign('employee_license_id')
                     ->references('id')->on('employee_license')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('aircraft_id')
+                    ->references('id')->on('aircrafts')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('type_id')
+                    ->references('id')->on('aircrafts')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
