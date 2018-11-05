@@ -26,6 +26,12 @@ class DepartmentsTableSeeder extends Seeder
             'parent_id' => $production->id,
         ]);
 
+        Department::create([
+            'code' => 'ss',
+            'name' => 'Special Service',
+            'parent_id' => $production->id,
+        ]);
+
         /** PRODUCTION > WORKSHOP */
 
         $workshop = Department::create([
