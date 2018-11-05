@@ -32,7 +32,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('aircraft', 'AircraftController');
         Route::resource('department', 'DepartmentController');
         Route::resource('ame-license', 'AmeLicenseController');
-        Route::resource('bankaccount', 'BankAccountController');
+        Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('licensed-employee', 'EmployeeLicenseController');
         Route::resource('general-license', 'GeneralLicenseController');
