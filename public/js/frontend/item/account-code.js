@@ -21,14 +21,14 @@ let AccountCode = {
                     title: "Actions",
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a  class="btn btn-primary btn-sm m-btn--hover-brand select-accourcode" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<i class="la la-edit"></i>Use</a>'
+                        return '<a  class="btn btn-primary btn-sm m-btn--hover-brand select-accourcode" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
             ]
         })
 
-        $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left:53%;color:white;"><span><i class="la la-refresh"></i>Reload</span> </button>').appendTo('div.dataTables_filter');
+        $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left:53%;color:white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
         $('.paging_simple_numbers').addClass('pull-left');
         $('.dataTables_length').addClass('pull-right');
         $('.dataTables_info').addClass('pull-left');
