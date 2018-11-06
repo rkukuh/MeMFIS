@@ -14,6 +14,6 @@ class OldDataController extends Controller
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');
 
-        return "Imported.";
+        return '[DONE] Importing: Work Area.';
     }
 }
