@@ -130,6 +130,9 @@
                                                     </option>
                                                 @endforeach
                                             </select>
+
+                                            <div class="form-control-feedback text-danger" id="unit-error"></div>
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
