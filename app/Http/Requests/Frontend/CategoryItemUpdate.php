@@ -27,7 +27,8 @@ class CategoryItemUpdate extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            'code' => 'required',
+            'name' => 'required',
         ];
     }
 
