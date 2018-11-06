@@ -89,7 +89,7 @@ class ItemStorageController extends Controller
      * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemStorage $itemStorage)
+    public function destroy($item_storage , $storage)
     {
         //
     }
