@@ -18,25 +18,3 @@ let item_reset = function () {
     document.getElementById('account_code').value = '';
     $('.search-journal').html('Search account code');
 }
-
-let item_edit_reset = function () {
-    window.location.href = '/item/' + item_uuid + '/edit';
-}
-
-let uom_reset = function () {
-    document.getElementById('uom_quantity').value = '';
-
-    $('#unit2-error').html('');
-    $('#unit2').select2('val', 'All');
-    $('#uom_quantity-error').html('');
-}
-
-let minmaxstock_reset = function () {
-    document.getElementById('min').value = '';
-    document.getElementById('max').value = '';
-
-    $('#min-error').html('');
-    $('#max-error').html('');
-    $('#storage-error').html('');
-    $('#storage').select2('val', 'All');
-}
