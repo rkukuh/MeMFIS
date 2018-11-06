@@ -386,10 +386,14 @@
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
-
+    <script src="{{ asset('js/frontend/functions/select2/unit-item-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/edit/item-unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>
 @endpush
