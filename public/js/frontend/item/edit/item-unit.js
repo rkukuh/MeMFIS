@@ -1,95 +1,14 @@
 let ItemUnit = {
     init: function () {
 
-        load_table_uom = function () {
-            let code = $('input[name=code]').val();
-
-            $('.m_datatable1').mDatatable({
-                data: {
-                    type: 'remote',
-                    source: {
-                        read: {
-                            method: 'GET',
-                            url: '/get-uom/' + code + '/',
-                            map: function (raw) {
-                                let dataSet = raw;
-
-                                if (typeof raw.data !== 'undefined') {
-                                    dataSet = raw.data;
-                                }
-
-                                return dataSet;
-                            }
-                        }
-                    },
-                    pageSize: 10,
-                    serverPaging: !0,
-                    serverFiltering: !0,
-                    serverSorting: !0
-                },
-                layout: {
-                    theme: 'default',
-                    class: '',
-                    scroll: false,
-                    footer: !1
-                },
-                sortable: !0,
-                filterable: !1,
-                pagination: !0,
-                search: {
-                    input: $('#generalSearch')
-                },
-                toolbar: {
-                    items: {
-                        pagination: {
-                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                        }
-                    }
-                },
-                columns: [
-                    {
-                        field: 'uom.quantity',
-                        title: 'Quantity',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 100
-                    },
-                    {
-                        field: 'name',
-                        title: 'Unit',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 250
-                    },
-                    {
-                        field: 'Actions',
-                        title: 'Actions',
-                        sortable: !1,
-                        width: 100,
-                        overflow: 'visible',
-                        template: function (t, e, i) {
-                            return (
-                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="' + t.uom.item_id + '"' +
-                                'data-unit_id="' + t.uom.unit_id + '"' +
-                                ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                            );
-                        }
-                    }
-                ]
-            });
-        };
-
         $('.modal-footer').on('click', '.reset', function () {
             uom_reset();
         });
 
 
         let simpan = $('.modal-footer').on('click', '.add-uom', function () {
-            let code = $('input[name=code]').val();
-            let qty = $('input[name=qty]').val();
-            let qty2 = $('input[name=qty2]').val();
-            let unit = $('#unit').val();
-            let unit2 = $('#unit2').val();
+            let uom_quantity = $('input[name=uom_quantity]').val();
+            let item_unit_id = $('#item_unit_id').val();
 
             $.ajax({
                 headers: {
@@ -99,43 +18,30 @@ let ItemUnit = {
                 url: '/item-unit',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    code: code,
-                    qty: qty,
-                    qty2: qty2,
-                    unit: unit,
-                    unit2: unit2
+                    uuid: item_uuid,
+                    uom_quantity: uom_quantity,
+                    unit_id: item_unit_id,
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.qty) {
-                            $('#qty-error').html(data.errors.qty[0]);
+                        if (data.errors.uom_quantity) {
+                            $('#uom_quantity-error').html(data.errors.uom_quantity[0]);
 
                         }
-                        if (data.errors.qty2) {
-                            $('#qty2-error').html(data.errors.qty2[0]);
+                        if (data.errors.unit_id) {
+                            $('#item_unit-error').html(data.errors.unit_id[0]);
 
                         }
-                        if (data.errors.unit) {
-                            $('#unit-error').html(data.errors.unit[0]);
-
-                        }
-                        if (data.errors.unit2) {
-                            $('#unit2-error').html(data.errors.unit2[0]);
-
-                        }
-                        document.getElementById('qty').value = qty;
-                        document.getElementById('qty2').value = qty2;
-                        document.getElementById('unit').value = unit;
-                        document.getElementById('unit2').value = unit2;
+                        document.getElementById('uom_quantity').value = uom_quantity;
+                        document.getElementById('item_unit_id').value = item_unit_id;
                     } else {
                         $('#modal_uom').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Material has been updated.', 'Success', {
                             timeOut: 5000
                         });
-                        load_table_uom();
-                        uom_reset()
-                        let table = $('.m_datatable1').mDatatable();
+                        uom_reset();
+                        let table = $('.item_unit_datatable').mDatatable();
                         table.originalDataSet = [];
                         table.reload();
 
