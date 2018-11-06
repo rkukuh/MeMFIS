@@ -137,6 +137,17 @@ class Type extends MemfisModel
         return $query->where('of', 'unit');
     }
 
+    /**
+     * Scope a query to only include type of aircraft work area.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfWorkArea(Builder $query)
+    {
+        return $query->where('of', 'work-area');
+    }
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**

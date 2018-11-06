@@ -1,0 +1,138 @@
+ac dist bay,AC DIST BAY,work-area
+ac distribution bay,AC DISTRIBUTION BAY,work-area
+aft cargo bay,AFT CARGO BAY,work-area
+aft cargo comp,AFT CARGO COMP,work-area
+aft cargo compartmen,AFT CARGO COMPARTMEN,work-area
+aft cargo door,AFT CARGO DOOR,work-area
+aft cargo equipment,AFT CARGO EQUIPMENT,work-area
+aft entry door,AFT ENTRY DOOR,work-area
+aft service door,AFT SERVICE DOOR,work-area
+air cycle machine,AIR CYCLE MACHINE,work-area
+apu comparment,APU COMPARMENT,work-area
+apu compartment,APU COMPARTMENT,work-area
+cargo compartment,CARGO COMPARTMENT,work-area
+control cabin,CONTROL CABIN,work-area
+controlcabin,CONTROLCABIN,work-area
+e/e compartment,E/E COMPARTMENT,work-area
+ee comparment,EE COMPARMENT,work-area
+ee compartment,EE COMPARTMENT,work-area
+empenage,EMPENAGE,work-area
+engine,ENGINE,work-area
+engine lh,ENGINE  LH,work-area
+engine lh,ENGINE LH,work-area
+engine rh,ENGINE RH,work-area
+engine/strut,ENGINE/STRUT,work-area
+forward airstairs,FORWARD AIRSTAIRS,work-area
+forward cargo compar,FORWARD CARGO COMPAR,work-area
+forward entry door,FORWARD ENTRY DOOR,work-area
+forward service doo,FORWARD SERVICE  DOO,work-area
+fuselage,FUSELAGE,work-area
+fuselage external,FUSELAGE EXTERNAL,work-area
+fuselage internal,FUSELAGE INTERNAL,work-area
+fuselage external,FUSELAGE��_EXTERNAL,work-area
+fwd & aft galley,FWD & AFT GALLEY,work-area
+fwd & aft lavatory,FWD & AFT LAVATORY,work-area
+fwd cargo comp,FWD CARGO COMP,work-area
+fwd cargo comparment,FWD CARGO COMPARMENT,work-area
+fwd cargo compartmen,FWD CARGO COMPARTMEN,work-area
+fwd cargo door,FWD CARGO DOOR,work-area
+fwd entry door,FWD ENTRY DOOR,work-area
+fwd service door,FWD SERVICE DOOR,work-area
+keel beam,KEEL BEAM,work-area
+l ac equip bay,L AC EQUIP BAY,work-area
+l emergency exit,L EMERGENCY EXIT,work-area
+l engine inlet,L ENGINE INLET,work-area
+l wing ob flaps,L WING  OB FLAPS,work-area
+l wing leading edge,L WING LEADING EDGE,work-area
+landing gear,LANDING GEAR,work-area
+lavatories,LAVATORIES,work-area
+left inlet cowl,LEFT  INLET COWL,work-area
+left ac equip bay,LEFT AC EQUIP BAY,work-area
+left ac equip. bay,LEFT AC EQUIP. BAY,work-area
+left air conditionin,LEFT AIR CONDITIONIN,work-area
+left elevator,LEFT ELEVATOR,work-area
+left elevator and tr,LEFT ELEVATOR AND TR,work-area
+left engine,LEFT ENGINE,work-area
+left hand wing ailer,LEFT HAND WING AILER,work-area
+left horstab,LEFT HORSTAB,work-area
+left main gear,LEFT MAIN GEAR,work-area
+left main w/w,LEFT MAIN W/W,work-area
+left main wheel bay,LEFT MAIN WHEEL BAY,work-area
+left main wheel well,LEFT MAIN WHEEL WELL,work-area
+left pack ram air,LEFT PACK RAM AIR,work-area
+left ram duct,LEFT RAM DUCT,work-area
+left wheel well,LEFT WHEEL WELL,work-area
+left wheelwell,LEFT WHEELWELL,work-area
+left wing,LEFT WING,work-area
+left wing i/b leadin,LEFT WING I/B LEADIN,work-area
+left wing ob flap,LEFT WING OB FLAP,work-area
+left wing ob flaps,LEFT WING OB FLAPS,work-area
+left wing ob leading,LEFT WING OB LEADING,work-area
+left wing te,LEFT WING TE,work-area
+left wing te flaps,LEFT WING TE FLAPS,work-area
+left wings,LEFT WINGS,work-area
+lower & compartment,LOWER & COMPARTMENT,work-area
+lower fuselage,LOWER FUSELAGE,work-area
+lower i/b le,LOWER I/B LE,work-area
+lw outb. le,LW OUTB. LE,work-area
+lw te flaps,LW TE FLAPS,work-area
+lwr fuselage,LWR FUSELAGE,work-area
+lwr nose compartment,LWR NOSE COMPARTMENT,work-area
+main gear left,MAIN GEAR LEFT,work-area
+main gear right,MAIN GEAR RIGHT,work-area
+main wheel well,MAIN WHEEL WELL,work-area
+main wheelwell,MAIN WHEELWELL,work-area
+nose gear,NOSE GEAR,work-area
+nose landing gear,NOSE LANDING GEAR,work-area
+nose w/w,NOSE W/W,work-area
+nose wheel bay,NOSE WHEEL BAY,work-area
+nose wheelwell,NOSE WHEELWELL,work-area
+pass cabin,PASS CABIN,work-area
+r ac equip bay,R AC EQUIP BAY,work-area
+r emergency exit,R EMERGENCY EXIT,work-area
+r engine inlet,R ENGINE INLET,work-area
+r wing leading edge,R WING LEADING EDGE,work-area
+r wing ob flaps,R WING OB FLAPS,work-area
+right elevator,RIGHT  ELEVATOR,work-area
+right main gear,RIGHT  MAIN GEAR,work-area
+right wing,RIGHT  WING,work-area
+right ac equip bay,RIGHT AC EQUIP  BAY,work-area
+right ac equip bay,RIGHT AC EQUIP BAY,work-area
+right ac equip. bay,RIGHT AC EQUIP. BAY,work-area
+right air conditioni,RIGHT AIR CONDITIONI,work-area
+right elevator and t,RIGHT ELEVATOR AND T,work-area
+right engine,RIGHT ENGINE,work-area
+right hand wing aile,RIGHT HAND WING AILE,work-area
+right horstab,RIGHT HORSTAB,work-area
+right inlet cowl,RIGHT INLET COWL,work-area
+right main gear,RIGHT MAIN GEAR,work-area
+right main w/w,RIGHT MAIN W/W,work-area
+right main wheel bay,RIGHT MAIN WHEEL BAY,work-area
+right pack ram air,RIGHT PACK RAM AIR,work-area
+right ram duct,RIGHT RAM DUCT,work-area
+right wheel well,RIGHT WHEEL WELL,work-area
+right wing,RIGHT WING,work-area
+right wing i/b leadi,RIGHT WING I/B LEADI,work-area
+right wing ob flaps,RIGHT WING OB FLAPS,work-area
+right wing ob leadin,RIGHT WING OB LEADIN,work-area
+right wing te,RIGHT WING TE,work-area
+right wing te flaps,RIGHT WING TE FLAPS,work-area
+right wings,RIGHT WINGS,work-area
+rudder,RUDDER,work-area
+rw outboard le,RW OUTBOARD  LE,work-area
+tail,TAIL,work-area
+tail comparment,TAIL COMPARMENT,work-area
+tail compartment,TAIL COMPARTMENT,work-area
+the left main landin,THE LEFT MAIN LANDIN,work-area
+upr fuselage,UPR FUSELAGE,work-area
+vert stab,VERT STAB,work-area
+vertical stab,VERTICAL STAB,work-area
+vertical stabilizer,VERTICAL STABILIZER,work-area
+wheel wells,WHEEL WELLS,work-area
+wing,WING,work-area
+wing & tail section,WING & TAIL SECTION,work-area
+wing lh,WING LH,work-area
+wing rh,WING RH,work-area
+wings,WINGS,work-area
+wing lh,WING LH,work-area
+wing rh,WING RH,work-area

@@ -59,6 +59,18 @@ class FreshMigrationWithSeed extends Command
 
             $this->info('[DONE ] Install initial data.');
 
+            if ($this->confirm('Import data from old system?')) {
+
+                $this->info('[START] Import data from old system..........');
+
+                $this->call('db:seed', [
+                    '--class' => 'ImportDataSeeder',
+                    '--force' => true,
+                ]);
+
+                $this->info('[DONE ] Import data from old system.');
+            }
+
             if ($this->confirm('Install dummy data?')) {
 
                 $this->info('[START] Install dummy data..........');
