@@ -138,7 +138,7 @@ let Item = {
                     } else {
                         $('#modal_category').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Category has been created.', 'Success', {
                             timeOut: 5000
                         });
 

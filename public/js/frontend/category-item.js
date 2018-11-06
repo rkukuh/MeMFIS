@@ -126,7 +126,7 @@ let Category = {
                     } else {
                         $('#modal_category').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Category has been created.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -210,7 +210,7 @@ let Category = {
                     } else {
                         $('#modal_category').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Category has been updated.', 'Success', {
                             timeOut: 5000
                         });
 
