@@ -63,10 +63,7 @@ class FreshMigrationWithSeed extends Command
 
                 $this->info('[START] Import data from old system..........');
 
-                $this->call('db:seed', [
-                    '--class' => 'ImportDataSeeder',
-                    '--force' => true,
-                ]);
+                // TODO: Call the controller's import method
 
                 $this->info('[DONE ] Import data from old system.');
             }
