@@ -20,7 +20,7 @@
                                     @slot('text', 'Code')
                                     @slot('name', 'code_category')
                                     @slot('id', 'code_category')
-                                    @slot('help_text','code')
+                                    @slot('id_error', 'code-category')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -31,7 +31,7 @@
                                     @slot('text', 'Name')
                                     @slot('name', 'name_category')
                                     @slot('id', 'name_category')
-                                    @slot('help_text','name')
+                                    @slot('id_error', 'name-category')
                                 @endcomponent
                             </div>
                         </div>
