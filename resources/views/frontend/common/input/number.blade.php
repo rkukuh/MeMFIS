@@ -7,7 +7,7 @@
         </div>
     @endif
 
-    <div>
+    {{-- <div> --}}
         <input
             type="number"
             id="{{ $id or $name }}"
@@ -19,7 +19,7 @@
             placeholder="{{ $placeholder or '' }}"
             {{ $disabled or ''}}
         >    
-    </div>
+    {{-- </div> --}}
 
     @if (isset($input_append))
         <div class="input-group-append">
