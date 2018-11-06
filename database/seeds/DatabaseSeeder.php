@@ -62,9 +62,5 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BanksTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
-
-        /** TESTING */
-
-        $this->call(TestsTableSeeder::class);
     }
 }
