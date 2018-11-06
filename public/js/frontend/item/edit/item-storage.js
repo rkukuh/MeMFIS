@@ -1,95 +1,19 @@
 let ItemStorage = {
     init: function () {
 
-        load_table_minmaxstock = function () {
-            let code = $('input[name=code]').val();
-
-            $('.m_datatable2').mDatatable({
-                data: {
-                    type: 'remote',
-                    source: {
-                        read: {
-                            method: 'GET',
-                            url: '/get-item-storages/' + code + '/',
-                            map: function (raw) {
-                                let dataSet = raw;
-
-                                if (typeof raw.data !== 'undefined') {
-                                    dataSet = raw.data;
-                                }
-
-                                return dataSet;
-                            }
-                        }
-                    },
-                    pageSize: 10,
-                    serverPaging: !0,
-                    serverFiltering: !0,
-                    serverSorting: !0
-                },
-                layout: {
-                    theme: 'default',
-                    class: '',
-                    scroll: false,
-                    footer: !1
-                },
-                sortable: !0,
-                filterable: !1,
-                pagination: !0,
-                search: {
-                    input: $('#generalSearch')
-                },
-                toolbar: {
-                    items: {
-                        pagination: {
-                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                        }
-                    }
-                },
-                columns: [
-                    {
-                        field: 'name',
-                        title: 'Storage',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 250
-                    },
-                    {
-                        field: 'pivot.min',
-                        title: 'Min',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 50
-                    },
-                    {
-                        field: 'pivot.max',
-                        title: 'Max',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 50
-                    },
-                    {
-                        field: 'Actions',
-                        title: 'Actions',
-                        sortable: !1,
-                        width: 100,
-                        overflow: 'visible',
-                        template: function (t, e, i) {
-                            return (
-                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="'+t.pivot.item_id+'"' +
-                                'data-storage_id="'+t.pivot.storage_id+'"'+
-                                ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                            );
-                        }
-                    }
-                ]
-            });
-        };
+        let minmaxstock_reset = function () {
+            document.getElementById('min').value = '';
+            document.getElementById('max').value = '';
+        
+            $('#min-error').html('');
+            $('#max-error').html('');
+            $('#storage-error').html('');
+            $('#storage').select2('val', 'All');
+        }
 
         $('.modal-footer').on('click', '.reset', function () {
             minmaxstock_reset();
         });
-
 
         let simpan = $('.modal-footer').on('click', '.add-stock', function () {
             let code = $('input[name=code]').val();
@@ -115,31 +39,25 @@ let ItemStorage = {
                     if (data.errors) {
                         if (data.errors.storage) {
                             $('#storage-error').html(data.errors.storage[0]);
-                            document.getElementById('storage').value = storage;
-                            document.getElementById('min').value = min;
-                            document.getElementById('max').value = max;
                         }
                         if (data.errors.min) {
                             $('#min-error').html(data.errors.min[0]);
-                            document.getElementById('storage').value = storage;
-                            document.getElementById('min').value = min;
-                            document.getElementById('max').value = max;
                         }
                         if (data.errors.max) {
                             $('#max-error').html(data.errors.max[0]);
-                            document.getElementById('storage').value = storage;
-                            document.getElementById('min').value = min;
-                            document.getElementById('max').value = max;
                         }
+                        document.getElementById('storage').value = storage;
+                        document.getElementById('min').value = min;
+                        document.getElementById('max').value = max;
+
                     } else {
                         $('#modal_minmaxstock').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
-                        load_table_minmaxstock();
                         minmaxstock_reset();
-                        let table = $('.m_datatable2').mDatatable();
+                        let table = $('.item_storage_datatable').mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -148,8 +66,8 @@ let ItemStorage = {
         });
 
 
-        let remove_storages = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        let remove_storages = $('.item_storage_datatable').on('click', '.delete', function () {
+            let triggerid = $(this).data('item_id');
             let triggerid2 = $(this).data('storage_id');
             // alert(triggerid);
 
@@ -178,7 +96,7 @@ let ItemStorage = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.item_storage_datatable').mDatatable();
                             table.originalDataSet =[];
                             table.reload();
                         },
