@@ -100,6 +100,53 @@ let Item = {
                 }
             });
         });
+
+        // Category
+
+        let simpan = $('.modal-footer').on('click', '.add-category', function () {
+            $('#name-error').html('');
+            $('#simpan').text('Simpan');
+
+            let registerForm = $('#CustomerForm');
+            let code = $('input[name=code_category]').val();
+            let name = $('input[name=name_category]').val();
+            let description =$('#description_category').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/category-item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    name: name,
+                    code: code,
+                    description: description,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.code) {
+                            $('#code-category-error').html(data.errors.code[0]);
+
+                        }
+                        if (data.errors.name) {
+                            $('#name-category-error').html(data.errors.name[0]);
+
+                        }
+
+                    } else {
+                        $('#modal_category').modal('hide');
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+
+                        category();
+                    }
+                }
+            });
+        });
     }
 };
 

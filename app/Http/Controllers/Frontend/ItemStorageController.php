@@ -38,7 +38,7 @@ class ItemStorageController extends Controller
      */
     public function store(ItemStorageStore $request)
     {
-        $item = Item::where('code',$request->code)->first();
+        $item = Item::where('uuid',$request->uuid)->first();
 
         $item->storages()->attach([$request->storage => ['min' => $request->min, 'max' => $request->max]]);
 
@@ -89,8 +89,10 @@ class ItemStorageController extends Controller
      * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemStorage $itemStorage)
+    public function destroy($itemStorage , $storage)
     {
-        //
+        $item = Item::find($itemStorage);
+        $item->storages()->detach($storage);
+        return response()->json($item);
     }
 }

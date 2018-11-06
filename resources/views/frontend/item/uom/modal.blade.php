@@ -50,10 +50,10 @@
                                 </label>
 
                                 @component('frontend.common.input.select')
-                                    @slot('id', 'unit2')
+                                    @slot('id', 'item_unit_id')
                                     @slot('text', 'Unit')
-                                    @slot('name', 'unit2')
-                                    @slot('id_error', 'unit')
+                                    @slot('name', 'item_unit_id')
+                                    @slot('id_error', 'item_unit')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -64,6 +64,7 @@
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
                                     @slot('class', 'add-uom')
+                                    @slot('type', 'button')
                                 @endcomponent
                                 @include('frontend.common.buttons.reset')
                                 @include('frontend.common.buttons.close')

@@ -38,9 +38,9 @@ class ItemUnitController extends Controller
      */
     public function store(ItemUnitStore $request)
     {
-        $item = Item::where('code',$request->code)->first();
+        $item = Item::where('uuid',$request->uuid)->first();
 
-        $item->units()->attach([$request->unit2 => ['quantity' => $request->uom_quantity]]);
+        $item->units()->attach([$request->unit_id => ['quantity' => $request->uom_quantity]]);
 
         return response()->json($item);
     }
@@ -89,8 +89,10 @@ class ItemUnitController extends Controller
      * @param  \App\Models\ItemUnit  $itemUnit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ItemUnit $itemUnit)
+    public function destroy($itemUnit, $unit)
     {
-        //
+        $item = Item::find($itemUnit);
+        $item->units()->detach($unit);
+        return response()->json($item);
     }
 }

@@ -18,7 +18,3 @@ let item_reset = function () {
     document.getElementById('account_code').value = '';
     $('.search-journal').html('Search account code');
 }
-
-let item_edit_reset = function () {
-    window.location.href = '/item/' + item_uuid + '/edit';
-}

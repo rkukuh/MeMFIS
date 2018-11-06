@@ -69,9 +69,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('employee-document', 'EmployeeDocumentController');
         Route::get('get-employee-documents', 'EmployeeDocumentController@getEmployeeDocuments')->name('get-employee-documents');
 
-        Route::resource('otr', 'OTRController');
-        Route::get('/get-otrs', 'OTRController@getOTRs')->name('get-otrs');
-
         Route::resource('amel', 'AMELController');
         Route::get('/get-amels', 'AMELController@getAMELs')->name('get-amels');
 
@@ -139,8 +136,10 @@ Route::name('frontend.')->group(function () {
         Route::resource('taskcard-package', 'TaskCardPackageController');
         Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
 
-        Route::resource('item-unit', 'ItemUnitController');
-        Route::resource('item-storage', 'ItemStorageController');
+        Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
+        Route::delete('/item-unit/{itemUnit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
+        Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
+        Route::delete('/item-storage/{itemStorage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
     });
 
 });

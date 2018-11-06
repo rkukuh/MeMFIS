@@ -73,6 +73,7 @@
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.submit')
                                         @slot('class', 'add-stock')
+                                        @slot('type', 'button')
                                     @endcomponent
                                 @include('frontend.common.buttons.reset')
                                 @include('frontend.common.buttons.close')
