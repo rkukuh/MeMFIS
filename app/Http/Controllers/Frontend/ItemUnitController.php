@@ -38,9 +38,9 @@ class ItemUnitController extends Controller
      */
     public function store(ItemUnitStore $request)
     {
-        $item = Item::where('code',$request->code)->first();
+        $item = Item::where('uuid',$request->uuid)->first();
 
-        $item->units()->attach([$request->unit2 => ['quantity' => $request->uom_quantity]]);
+        $item->units()->attach([$request->unit_id => ['quantity' => $request->uom_quantity]]);
 
         return response()->json($item);
     }
