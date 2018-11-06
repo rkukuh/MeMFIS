@@ -392,7 +392,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/edit/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-unit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>
