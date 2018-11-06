@@ -16,7 +16,6 @@ let ItemStorage = {
         });
 
         let simpan = $('.modal-footer').on('click', '.add-stock', function () {
-            let code = $('input[name=code]').val();
             $('#name-error').html('');
             let storage = $('#storage').val();
             let min = $('input[name=min]').val();
@@ -33,7 +32,7 @@ let ItemStorage = {
                     storage: storage,
                     min: min,
                     max: max,
-                    code: code,
+                    uuid: item_uuid,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -51,7 +50,7 @@ let ItemStorage = {
                         document.getElementById('max').value = max;
 
                     } else {
-                        $('#modal_minmaxstock').modal('hide');
+                        $('#modal_storage_stock').modal('hide');
 
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
