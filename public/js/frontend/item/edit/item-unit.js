@@ -1,10 +1,17 @@
 let ItemUnit = {
     init: function () {
 
+        let uom_reset = function () {
+            document.getElementById('uom_quantity').value = '';
+        
+            $('#unit2-error').html('');
+            $('#unit2').select2('val', 'All');
+            $('#uom_quantity-error').html('');
+        }
+
         $('.modal-footer').on('click', '.reset', function () {
             uom_reset();
         });
-
 
         let simpan = $('.modal-footer').on('click', '.add-uom', function () {
             let uom_quantity = $('input[name=uom_quantity]').val();
@@ -50,8 +57,8 @@ let ItemUnit = {
             });
         });
 
-        let remove_uom = $('.m_datatable1').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        let remove_uom = $('.item_unit_datatable').on('click', '.delete', function () {
+            let triggerid = $(this).data('item_id');
             let triggerid2 = $(this).data('unit_id');
             // alert(triggerid);
 
@@ -80,7 +87,7 @@ let ItemUnit = {
                                 }
                             );
 
-                            let table = $('.m_datatable1').mDatatable();
+                            let table = $('.item_unit_datatable').mDatatable();
                             table.originalDataSet = [];
                             table.reload();
                         },
