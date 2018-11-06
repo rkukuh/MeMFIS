@@ -7,17 +7,19 @@
         </div>
     @endif
 
-    <input
-        type="number"
-        id="{{ $id or $name }}"
-        name="{{ $name or '' }}"
-        class="form-control m-input text-right
-               {{ $class or '' }}"
-        style="{{ $style or ''}}"
-        value="{{ $value or ''}}"
-        placeholder="{{ $placeholder or '' }}"
-        {{ $disabled or ''}}
-    >
+    <div>
+        <input
+            type="number"
+            id="{{ $id or $name }}"
+            name="{{ $name or '' }}"
+            class="form-control m-input text-right
+                   {{ $class or '' }}"
+            style="{{ $style or ''}}"
+            value="{{ $value or ''}}"
+            placeholder="{{ $placeholder or '' }}"
+            {{ $disabled or ''}}
+        >    
+    </div>
 
     @if (isset($input_append))
         <div class="input-group-append">
