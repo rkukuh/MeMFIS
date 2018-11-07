@@ -17,6 +17,7 @@ class CreateTaskcardsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('type_id');
+            $table->unsignedInteger('otr_certification_id');
             $table->unsignedInteger('work_area');
             $table->unsignedInteger('threshold');
             $table->unsignedInteger('repeat');
@@ -27,6 +28,11 @@ class CreateTaskcardsTable extends Migration
 
             $table->foreign('type_id')
                     ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('otr_certification_id')
+                    ->references('id')->on('otr_certifications')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
