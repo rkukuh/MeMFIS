@@ -15,7 +15,12 @@ class CreateVersionsTable extends Migration
     {
         Schema::create('versions', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('number');
+            $table->text('change_log');
+            $table->unsignedInteger('versionable_id');
+            $table->string('versionable_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
