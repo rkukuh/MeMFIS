@@ -105,6 +105,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of A/C maintenance cycle.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfMaintenanceCycle(Builder $query)
+    {
+        return $query->where('of', 'maintenance-cycle');
+    }
+
+    /**
      * Scope a query to only include type of phone.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
