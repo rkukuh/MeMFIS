@@ -14,14 +14,10 @@ class OldDataController extends Controller
     public function engines()
     {
         Excel::import(new EnginesImport, $this->import_directory . 'engines.xlsx');
-
-        return '[DONE] Importing: Aircraft Engine.';
     }
 
     public function workAreas()
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');
-
-        return '[DONE] Importing: Work Area.';
     }
 }
