@@ -23,6 +23,7 @@ class CreateTaskcardsTable extends Migration
             $table->unsignedInteger('repeat');
             $table->string('zone');
             $table->string('access');
+            $table->boolean('rii');
             $table->timestamps();
             $table->softDeletes();
 
