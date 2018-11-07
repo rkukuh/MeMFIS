@@ -1,5 +1,4 @@
 <div class="input-group">
-<div>
     <table>
         <tr>
             <td> 
@@ -34,8 +33,7 @@
                 @endif
             </td>
         </tr>
-    </table>        
-
+    </table>
 </div>
     <div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>
 
