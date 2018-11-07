@@ -29,6 +29,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('status', 'StatusController');
         Route::resource('address', 'AddressController');
         Route::resource('license', 'LicenseController');
+        Route::resource('version', 'VersionController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('department', 'DepartmentController');

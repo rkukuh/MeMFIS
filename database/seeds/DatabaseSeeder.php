@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EmailsTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
+        $this->call(VersionsTableSeeder::class);
 
         /** MASTER */
 
