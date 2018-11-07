@@ -17,9 +17,9 @@ class PersonnelsImport implements ToModel, WithHeadingRow
     {
         return new Employee([
             'code' => $row['nrp'],
-            'first_name' => $row['fname'],
-            'middle_name' => $row['mname'],
-            'last_name' => $row['lname'],
+            'first_name' => ucfirst(strtolower($row['fname'])),
+            'middle_name' => ucfirst(strtolower($row['mname'])),
+            'last_name' => ucfirst(strtolower($row['lname'])),
         ]);
     }
 }
