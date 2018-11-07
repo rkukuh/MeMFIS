@@ -94,8 +94,8 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden">
+                                    <div class="form-group m-form__group row hidden">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Barcode @include('frontend.common.label.optional')
                                             </label>
@@ -114,11 +114,10 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('id', 'unit')
                                                 @slot('text', 'Unit')
-                                                @slot('name', 'unit')
+                                                @slot('id', 'unit_id')
+                                                @slot('name', 'unit_id')
                                                 @slot('id_error', 'unit')
-                                                @slot('style', 'width:100%')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -130,7 +129,6 @@
                                                 @slot('id', 'category')
                                                 @slot('text', 'Category')
                                                 @slot('name', 'category')
-                                                @slot('style', 'width:100%')
                                                 @slot('id_error', 'category')
                                             @endcomponent
 
@@ -140,6 +138,8 @@
                                                 @slot('style', 'margin-top: 10px;')
                                                 @slot('data_target', '#modal_category')
                                             @endcomponent
+
+                                            @include('frontend.category.modal')
                                         </div>
                                     </div>
                                     <hr>
@@ -185,7 +185,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
@@ -243,8 +243,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="m_datatable1" id="fisrt"></div>
                         </div>
                     </div>
                 </div>
@@ -280,10 +278,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            @include('frontend.category.modal')
-
-                            <div class="m_datatable2" id="second"></div>
                         </div>
                     </div>
                 </div>
@@ -309,8 +303,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/category-item.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
@@ -319,8 +311,4 @@
 
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
     <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/action-buttons.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/item/create/item-unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/create/item-storage.js') }}"></script>
 @endpush

@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -26,9 +28,27 @@ class ItemStorageStore extends FormRequest
     public function rules()
     {
         return [
-            'storage' => 'required',
             'min' => 'required',
             'max' => 'required',
+            'storage' => [
+                'required',
+                Rule::exists('storages', 'id')->where(function ($query) {
+                    $query->where('is_active', '1');
+                }),
+            ],
+
+        ];
+    }
+
+    /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'storage.exists' => 'The selected storage is invalid.',
         ];
     }
 

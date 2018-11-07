@@ -28,12 +28,16 @@ use App\Models\License;
 use App\Policies\LicensePolicy;
 use App\Models\Journal;
 use App\Policies\JournalPolicy;
+use App\Models\Version;
+use App\Policies\VersionPolicy;
 use App\Models\Currency;
 use App\Policies\CurrencyPolicy;
 use App\Models\Aircraft;
 use App\Policies\AircraftPolicy;
 use App\Models\Employee;
 use App\Policies\EmployeePolicy;
+use App\Models\TaskCard;
+use App\Policies\TaskCardPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\AmeLicense;
@@ -42,10 +46,16 @@ use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
 use App\Models\Manufacturer;
 use App\Policies\ManufacturerPolicy;
+use App\Models\Certification;
+use App\Policies\CertificationPolicy;
 use App\Models\GeneralLicense;
 use App\Policies\GeneralLicensePolicy;
 use App\Models\Pivots\EmployeeLicense;
 use App\Policies\EmployeeLicensePolicy;
+use App\Models\OTRCertification;
+use App\Policies\OTRCertificationPolicy;
+use App\Models\Pivots\CertificationEmployee;
+use App\Policies\CertificationEmployeePolicy;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -71,15 +81,20 @@ class AuthServiceProvider extends ServiceProvider
         Address::class => AddressPolicy::class,
         License::class => LicensePolicy::class,
         Journal::class => JournalPolicy::class,
+        Version::class => VersionPolicy::class,
         Currency::class => CurrencyPolicy::class,
         Aircraft::class => AircraftPolicy::class,
         Employee::class => EmployeePolicy::class,
+        TaskCard::class => TaskCardPolicy::class,
         Department::class => DepartmentPolicy::class,
         AmeLicense::class => AmeLicensePolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
+        Certification::class => CertificationPolicy::class,
         GeneralLicense::class => GeneralLicensePolicy::class,
         EmployeeLicense::class => EmployeeLicensePolicy::class,
+        OTRCertification::class => OTRCertificationPolicy::class,
+        CertificationEmployee::class => CertificationEmployeePolicy::class,
     ];
 
     /**

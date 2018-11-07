@@ -25,6 +25,7 @@ Route::name('admin.')->group(function () {
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
+        Route::resource('version', 'VersionController');
 
         /** MASTER */
 
@@ -34,18 +35,28 @@ Route::name('admin.')->group(function () {
         Route::resource('employee', 'EmployeeController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
+        Route::resource('certification', 'CertificationController');
 
-        /** EDUCATION */
+        /** LICENSE */
 
-        Route::resource('licensed-employee', 'EmployeeLicenseController');
+        Route::resource('employee-license', 'EmployeeLicenseController');
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('ame-license', 'AmeLicenseController');
+
+        /** CERTIFICATION */
+
+        Route::resource('certification-employee', 'CertificationEmployeeController');
+        Route::resource('otr-certification', 'OTRCertificationController');
 
         /** FINANCE */
 
         Route::resource('bank', 'BankController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('bank-account', 'BankAccountController');
+
+        /** TRANSACTION */
+
+        Route::resource('taskcard', 'TaskCardController');
 
     });
 

@@ -113,11 +113,11 @@
                                                 Category
                                             </label>
 
-                                            @if (empty($item->category))
+                                            @if (empty($item->category->name))
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $item->category)
+                                                    @slot('text', $item->category->name)
                                                 @endcomponent
                                             @endif
                                         </div>
@@ -180,14 +180,14 @@
                                             </label>
 
                                             <div>
-                                                @if (empty($item->tags))
+                                                @if ($item->tags->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
                                                     @foreach ($item->tags as $tag)
                                                         @component('frontend.common.label.badge')
                                                             @slot('text', $tag->name)
                                                         @endcomponent
                                                     @endforeach
-                                                @else
-                                                    @include('frontend.common.label.data-info-nodata')
                                                 @endif
                                             </div>
                                         </div>

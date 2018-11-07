@@ -1,12 +1,12 @@
 let Item = {
     init: function () {
-        $('.m_datatable1').mDatatable({
+        $('.item_unit_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-uom/' + item_uuid + '/',
+                        url: '/datatables/item-unit/' + item_uuid + '/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -42,43 +42,49 @@ let Item = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'uom.quantity',
-                    title: 'Qty',
+                    title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50
+                    width: 150
                 },
                 {
                     field: 'name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return t.name + ' (' + t.symbol + ')'
+                    }
                 },
                 {
-                    field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
+                    field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
+                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="'+t.uom.item_id+'"' +
-                            'data-unit_id="'+t.uom.unit_id+'"'+
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
+                                'data-item_id="' + t.uom.item_id + '" ' +
+                                'data-unit_id="' + t.uom.unit_id + '">' +
+                                    '<i class="la la-trash"></i>' +
+                            '</a>'
                         );
                     }
                 }
             ]
         });
 
-        $('.m_datatable2').mDatatable({
+        $('.item_storage_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-item-storages/' + item_uuid + '/',
+                        url: '/datatables/item-storage/' + item_uuid + '/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -114,19 +120,13 @@ let Item = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'name',
                     title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'pivot.max',
-                    title: 'Max',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 50
+                    width: 250
                 },
                 {
                     field: 'pivot.min',
@@ -136,31 +136,38 @@ let Item = {
                     width: 50
                 },
                 {
-                    field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
+                    field: 'pivot.max',
+                    title: 'Max',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 50
+                },
+                {
+                    field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
+                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id="'+t.pivot.item_id+'"' +
-                            'data-storage_id="'+t.pivot.storage_id+'"'+
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
+                                'data-item_id="' + t.pivot.item_id + '" ' +
+                                'data-storage_id="' + t.pivot.storage_id + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
                         );
                     }
                 }
             ]
         });
 
-
-
-
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
+
             document.getElementById('is_ppn').onchange = function () {
                 document.getElementById('ppn_amount').disabled = !this.checked;
+
                 if (document.getElementById("is_ppn").checked) {
-                    // document.getElementById('ppn_amount').value = 10;
+                    document.getElementById('ppn_amount').value = 10;
                 } else {
                     document.getElementById('ppn_amount').value = '';
                 }
@@ -168,428 +175,147 @@ let Item = {
         });
 
         $('.footer').on('click', '.reset', function () {
-            item_reset();
+            item_edit_reset();
         });
 
-
         $('.footer').on('click', '.edit-item', function () {
-
             if ($('#tag :selected').length > 0) {
                 var selectedtags = [];
+
                 $('#tag :selected').each(function (i, selected) {
                     selectedtags[i] = $(selected).val();
                 });
             }
 
-            // if (document.getElementById("is_stock").checked) {
+            if (document.getElementById("is_stock").checked) {
                 is_stock = 1;
-            // } else {
-            //     is_stock2 = 0;
-            // }
+            } else {
+                is_stock = 0;
+            }
 
-            // alert(is_stock);
-            // if (document.getElementById("is_ppn").checked) {
-            //     is_ppn = 1;
-            // } else {
-            //     is_ppn = 0;
-            // }
-            let accountcode2 = $('#accountcode2').val();
-            let uuid = $('input[name=id]').val();
+            if (document.getElementById("is_ppn").checked) {
+                is_ppn = 1;
+            } else {
+                is_ppn = 0;
+            }
+
+            let uuid = $('input[name=uuid]').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
             let description = $('#description').val();
             let barcode = $('input[name=barcode]').val();
-            let ppn_amount = $('input[name=ppn_amount]').val();
+            let unit_id = $('#unit_id').val();
             let category = $('#category').val();
-            // let quantity = $('input[name=quantity]').val();
-            let unit = $('#unit_item').val();
-            // alert(unit);
-
+            let ppn_amount = $('input[name=ppn_amount]').val();
+            let account_code = $('#account_code').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'PUT',
-                url: '/item/'+uuid+'/',
+                url: '/item/' + uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
                     name: name,
-                    // quantity: quantity,
-                    unit: unit,
-                    // is_stock: is_stock,
-                    // is_ppn: is_ppn,
-                    // barcode: barcode,
-                    ppn: ppn_amount,
                     description: description,
-                    // accountcode: accountcode2,
+                    unit_id: unit_id,
+                    category: category,
+                    is_stock: is_stock,
+                    is_ppn: is_ppn,
+                    ppn_amount: ppn_amount,
+                    account_code: account_code,
                     selectedtags: selectedtags,
-                    category: category
-
                 },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
-
                         }
 
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
-
                         }
 
-                        if (data.errors.unit) {
-                            $('#unit-error').html(data.errors.unit[0]);
-
-                        }
-
-                        if (data.errors.category) {
-                            $('#category-error').html(data.errors.category[0]);
-
-                        }
-
-                        if(unit == "Select a Unit"){
-                            $('#unit-error').html("The Unit field is required.");
-
+                        if (data.errors.unit_id) {
+                            $('#unit-error').html(data.errors.unit_id[0]);
                         }
 
                         if (data.errors.category) {
                             $('#category-error').html(data.errors.category[0]);
-
                         }
 
                         document.getElementById('code').value = code;
                         document.getElementById('name').value = name;
                         document.getElementById('description').value = description;
                         document.getElementById('barcode').value = barcode;
-                        document.getElementById('accountcode2').value = accountcode2;
+                        document.getElementById('account_code').value = account_code;
 
                     } else {
-
-                        $('input[type=file]').val("");
                         $('#code-error').html('');
                         $('#name-error').html('');
                         $('#description-error').html('');
                         $('#barcode-error').html('');
-                        document.getElementById('item-uom').removeAttribute('disabled');
-                        document.getElementById('item-minmaxstock').removeAttribute('disabled');
-                        $('#item-storage').html(code);
                         $('#item-unit').html();
-                        // item_reset();
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        $('#item-storage').html(code);
+                        $('input[type=file]').val('');
+
+                        toastr.success('Material has been updated.', 'Success', {
                             timeOut: 5000
                         });
-                        // location.reload();
-                        // photo();
                     }
                 }
             });
         });
 
-        // $(function () {
+                // Category
 
-        //     // klik();
-        //     let inputFile = $('#myInput');
-        //     let button = $('#myButton');
-        //     let buttonSubmit = $('#add-item');
-        //     let filesContainer = $('#myFiles');
-        //     let files = [];
+                let simpan = $('.modal-footer').on('click', '.add-category', function () {
+                    $('#name-error').html('');
+                    $('#simpan').text('Simpan');
+        
+                    let registerForm = $('#CustomerForm');
+                    let code = $('input[name=code_category]').val();
+                    let name = $('input[name=name_category]').val();
+                    let description =$('#description_category').val();
+        
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'post',
+                        url: '/category-item',
+                        data: {
+                            _token: $('input[name=_token]').val(),
+                            name: name,
+                            code: code,
+                            description: description,
+                        },
+                        success: function (data) {
+                            if (data.errors) {
+                                if (data.errors.code) {
+                                    $('#code-category-error').html(data.errors.code[0]);
+        
+                                }
+                                if (data.errors.name) {
+                                    $('#name-category-error').html(data.errors.name[0]);
+        
+                                }
+        
+                            } else {
+                                $('#modal_category').modal('hide');
+        
+                                toastr.success('Category has been created.', 'Success', {
+                                    timeOut: 5000
+                                });
 
-        //     inputFile.change(function () {
-        //         let newFiles = [];
-        //         for (let index = 0; index < inputFile[0].files.length; index++) {
-        //             let file = inputFile[0].files[index];
-        //             newFiles.push(file);
-        //             files.push(file);
-        //         }
-
-        //         newFiles.forEach(file => {
-        //             let fileElement = $(`<p>${file.name}</p>`);
-        //             fileElement.data('fileData', file);
-        //             filesContainer.append(fileElement);
-
-        //             fileElement.click(function (event) {
-        //                 let fileElement = $(event.target);
-        //                 let indexToRemove = files.indexOf(fileElement.data('fileData'));
-        //                 fileElement.remove();
-        //                 files.splice(indexToRemove, 1);
-        //             });
-        //         });
-        //     });
-
-        //     button.click(function () {
-        //         inputFile.click();
-        //     });
-        //     $('.footer').on('click', '.edit-item', function () {
-        //         let formData = new FormData();
-        //         let code = $('input[name=code]').val();
-        //         formData.append('code', code);
-
-        //         let z = 0;
-        //         files.forEach(file => {
-        //             formData.append('file' + z, file);
-        //             z++;
-        //         });
-
-        //         // console.log('Sending...');
-
-        //             $.ajax({
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //                 },
-
-        //                 url: '/post-photos',
-        //                 data: formData,
-        //                 processData: false,
-        //                 contentType: false,
-        //                 type: 'POST',
-        //                 success: function (data) {
-        //                     if (data.uploaded == true) {
-        //                         // alert('sukses');
-        //                     }
-        //                 },
-        //                 error: function (err) {
-        //                     alert(err);
-        //                 }
-        //             });
-        //     });
-        // });
-
-        let simpan2 = $('.modal-footer').on('click', '.add-uom', function () {
-            let code = $('input[name=code]').val();
-            let uom_quantity = $('input[name=uom_quantity]').val();
-            let unit = $('#unit').val();
-            // let unit2 = $('#unit2').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/item-unit',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    code: code,
-                    quantity: quantity,
-                    uom_quantity: uom_quantity,
-                    unit: unit,
-                    // unit2: unit2
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.quantity) {
-                            $('#quantity-error').html(data.errors.quantity[0]);
-
+                                item_edit_reset();
+    
+                            }
                         }
-                        if (data.errors.uom_quantity) {
-                            $('#uom_quantity-error').html(data.errors.uom_quantity[0]);
-
-                        }
-                        if (data.errors.unit) {
-                            $('#unit-error').html(data.errors.unit[0]);
-
-                        }
-                        if (data.errors.unit2) {
-                            $('#unit2-error').html(data.errors.unit2[0]);
-
-                        }
-                        document.getElementById('quantity').value = quantity;
-                        document.getElementById('uom_quantity').value = uom_quantity;
-                        document.getElementById('unit').value = unit;
-                        document.getElementById('unit2').value = unit2;
-                } else {
-                        $('#modal_uom').modal('hide');
-
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
-                        uom_reset()
-                        let table = $('.m_datatable1').mDatatable();
-                        table.originalDataSet = [];
-                        table.reload();
-
-                    }
-                }
-            });
-        });
-
-
-        let simpan3 = $('.modal-footer').on('click', '.add-stock', function () {
-            let code = $('input[name=code]').val();
-            $('#name-error').html('');
-            let storage = $('#storage').val();
-            let min = $('input[name=min]').val();
-            let max = $('input[name=max]').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/item-storage',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    storage: storage,
-                    min: min,
-                    max: max,
-                    code: code,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.storage) {
-                            $('#storage-error').html(data.errors.storage[0]);
-                            document.getElementById('storage').value = storage;
-                            document.getElementById('min').value = min;
-                            document.getElementById('max').value = max;
-                        }
-                        if (data.errors.min) {
-                            $('#min-error').html(data.errors.min[0]);
-                            document.getElementById('storage').value = storage;
-                            document.getElementById('min').value = min;
-                            document.getElementById('max').value = max;
-                        }
-                        if (data.errors.max) {
-                            $('#max-error').html(data.errors.max[0]);
-                            document.getElementById('storage').value = storage;
-                            document.getElementById('min').value = min;
-                            document.getElementById('max').value = max;
-                        }
-                    } else {
-                        $('#modal_minmaxstock').modal('hide');
-
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
-                        minmaxstock_reset();
-                        let table = $('.m_datatable2').mDatatable();
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
-
-        // let remove_uom = $('.m_datatable1').on('click', '.delete', function () {
-        //     let triggerid = $(this).data('id');
-        //     let triggerid2 = $(this).data('unit_id');
-        //     // alert(triggerid);
-
-        //     swal({
-        //         title: 'Are you sure?',
-        //         text: 'You will not be able to recover this imaginary file!',
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Yes, delete it!',
-        //         cancelButtonText: 'No, keep it'
-        //     }).then(result => {
-        //         if (result.value) {
-        //             $.ajax({
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-        //                         'content'
-        //                     )
-        //                 },
-        //                 type: 'DELETE',
-        //                 url: '/item-unit/' + triggerid + '/'+ triggerid2,
-        //                 success: function (data) {
-        //                     toastr.success(
-        //                         'Data Berhasil Dihapus.',
-        //                         'Sukses!', {
-        //                             timeOut: 5000
-        //                         }
-        //                     );
-
-        //                     let table = $('.m_datatable1').mDatatable();
-        //                     table.originalDataSet =[];
-        //                     table.reload();
-        //                 },
-        //                 error: function (jqXhr, json, errorThrown) {
-        //                     let errorsHtml = '';
-        //                     let errors = jqXhr.responseJSON;
-
-        //                     $.each(errors.errors, function (index, value) {
-        //                         $('#delete-error').html(value);
-        //                     });
-        //                 }
-        //             });
-        //             swal(
-        //                 'Deleted!',
-        //                 'Your imaginary file has been deleted.',
-        //                 'success'
-        //             );
-        //         } else {
-        //             swal(
-        //                 'Cancelled',
-        //                 'Your imaginary file is safe :)',
-        //                 'error'
-        //             );
-        //         }
-        //     });
-        // });
-
-        // let remove_storages = $('.m_datatable2').on('click', '.delete', function () {
-        //     let triggerid = $(this).data('id');
-        //     let triggerid2 = $(this).data('storage_id');
-        //     // alert(triggerid);
-
-        //     swal({
-        //         title: 'Are you sure?',
-        //         text: 'You will not be able to recover this imaginary file!',
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Yes, delete it!',
-        //         cancelButtonText: 'No, keep it'
-        //     }).then(result => {
-        //         if (result.value) {
-        //             $.ajax({
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-        //                         'content'
-        //                     )
-        //                 },
-        //                 type: 'DELETE',
-        //                 url: '/item-storage/' + triggerid + '/'+ triggerid2,
-        //                 success: function (data) {
-        //                     toastr.success(
-        //                         'Data Berhasil Dihapus.',
-        //                         'Sukses!', {
-        //                             timeOut: 5000
-        //                         }
-        //                     );
-
-        //                     let table = $('.m_datatable2').mDatatable();
-        //                     table.originalDataSet =[];
-        //                     table.reload();
-        //                 },
-        //                 error: function (jqXhr, json, errorThrown) {
-        //                     let errorsHtml = '';
-        //                     let errors = jqXhr.responseJSON;
-
-        //                     $.each(errors.errors, function (index, value) {
-        //                         $('#delete-error').html(value);
-        //                     });
-        //                 }
-        //             });
-        //             swal(
-        //                 'Deleted!',
-        //                 'Your imaginary file has been deleted.',
-        //                 'success'
-        //             );
-        //         } else {
-        //             swal(
-        //                 'Cancelled',
-        //                 'Your imaginary file is safe :)',
-        //                 'error'
-        //             );
-        //         }
-        //     });
-        // });
-
-
-
-
+                    });
+                });
     }
 };
 

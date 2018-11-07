@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EmailsTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
+        $this->call(VersionsTableSeeder::class);
 
         /** MASTER */
 
@@ -45,20 +46,26 @@ class DatabaseSeeder extends Seeder
         $this->call(AircraftsTableSeeder::class);
         $this->call(EmployeesTableSeeder::class);
         $this->call(LicensesTableSeeder::class);
+        $this->call(CertificationsTableSeeder::class);
 
-        /** EDUCATION */
+        /** LICENSE */
 
-        $this->call(EmployeeLicensesTableSeeder::class);
+        $this->call(EmployeeLicenseTableSeeder::class);
         $this->call(GeneralLicensesTableSeeder::class);
         $this->call(AmeLicensesTableSeeder::class);
+
+        /** CERTIFICATION */
+
+        $this->call(CertificationEmployeeTableSeeder::class);
+        $this->call(OTRCertificationsTableSeeder::class);
 
         /** FINANCE */
 
         $this->call(BanksTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
 
-        /** TESTING */
+        /** TRANSACTION (M-M) */
 
-        $this->call(TestsTableSeeder::class);
+        $this->call(TaskCardsTableSeeder::class);
     }
 }

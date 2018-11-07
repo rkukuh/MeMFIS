@@ -38,7 +38,7 @@ class TypesOfSchoolDegree extends Seeder
 
         Type::create([
             'code' => 'diploma',
-            'name' => 'Diplomag',
+            'name' => 'Diploma',
             'of'  => 'school-degree',
         ]);
 

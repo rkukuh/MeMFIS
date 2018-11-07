@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestsTable extends Migration
+class CreateVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tests', function (Blueprint $table) {
+        Schema::create('versions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kelas');
-            $table->string('kulit_buah');
-            $table->string('warna');
-            $table->string('ukuran');
-            $table->string('bau');
+            $table->string('number');
+            $table->text('change_log');
+            $table->unsignedInteger('versionable_id');
+            $table->string('versionable_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +31,6 @@ class CreateTestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tests');
+        Schema::dropIfExists('versions');
     }
 }

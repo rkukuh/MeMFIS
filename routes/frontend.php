@@ -29,17 +29,19 @@ Route::name('frontend.')->group(function () {
         Route::resource('status', 'StatusController');
         Route::resource('address', 'AddressController');
         Route::resource('license', 'LicenseController');
+        Route::resource('version', 'VersionController');
         Route::resource('aircraft', 'AircraftController');
+        Route::resource('taskcard', 'TaskCardController');
         Route::resource('department', 'DepartmentController');
         Route::resource('ame-license', 'AmeLicenseController');
-        Route::resource('bankaccount', 'BankAccountController');
+        Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
-        Route::resource('licensed-employee', 'EmployeeLicenseController');
         Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('employee-license', 'EmployeeLicenseController');
+        Route::resource('otr-certification', 'OTRCertificationController');
+        Route::resource('certification-employee', 'CertificationEmployeeController');
 
-        //Travel Request
         Route::resource('travel-request', 'TravelRequestController');
-        Route::get('get-travel-requests', 'TravelRequestController@getTravelRequests')->name('get-travel-requests');
 
         //Employee History
         Route::resource('employee-history', 'EmployeeHistoryController');
@@ -68,9 +70,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('employee-document', 'EmployeeDocumentController');
         Route::get('get-employee-documents', 'EmployeeDocumentController@getEmployeeDocuments')->name('get-employee-documents');
-
-        Route::resource('otr', 'OTRController');
-        Route::get('/get-otrs', 'OTRController@getOTRs')->name('get-otrs');
 
         Route::resource('amel', 'AMELController');
         Route::get('/get-amels', 'AMELController@getAMELs')->name('get-amels');
@@ -126,7 +125,6 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
 
         Route::resource('item', 'ItemController');
-        Route::get('/get-items','ItemController@getItems')->name('get-items');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
 
         Route::resource('workpackage', 'WorkPackageController');
@@ -141,14 +139,9 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
 
         Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
-        Route::get('/get-uom/{item}','ItemUnitController@getUoM')->name('get-uom');
-        Route::delete('/item-unit/{item_unit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
-
+        Route::delete('/item-unit/{itemUnit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
         Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
-        Route::get('/get-item-storages/{item}','ItemStorageController@getItemStorages')->name('get-item-storages');
-        Route::delete('/item-storage/{item_storage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
-
-
+        Route::delete('/item-storage/{itemStorage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
     });
 
 });

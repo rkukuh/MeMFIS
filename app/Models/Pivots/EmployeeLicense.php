@@ -4,6 +4,7 @@ namespace App\Models\Pivots;
 
 use App\Models\License;
 use App\Models\Employee;
+use App\Models\AmeLicense;
 use App\Models\GeneralLicense;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -28,6 +29,23 @@ class EmployeeLicense extends Pivot
         // "Too few arguments to function Illuminate\Database\Eloquent\Model::setAttribute()"
 
         return $this->hasMany(GeneralLicense::class, 'employee_license_id');
+    }
+
+    /**
+     * One-to-Many: An AME license may have zero or many aircraft rating.
+     *
+     * This function will retrieve all the aircraft rating of an AME license.
+     * See: AME License's header() method for the inverse
+     *
+     * @return mixed
+     */
+    public function ame_licenses()
+    {
+        // This method must have a second parameter as FK column (employee_license_id),
+        // so these following error will not thrown:
+        // "Too few arguments to function Illuminate\Database\Eloquent\Model::setAttribute()"
+
+        return $this->hasMany(AmeLicense::class, 'employee_license_id');
     }
 
     /**

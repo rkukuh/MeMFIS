@@ -14,9 +14,12 @@ class CreateCertificationEmployeeTable extends Migration
     public function up()
     {
         Schema::create('certification_employee', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('certification_id');
             $table->unsignedInteger('employee_id');
-            $table->timestamp('issued_at');
+            $table->string('code');
+            $table->timestamp('issued_at')->nullable();
+            $table->timestamp('valid_until')->nullable();
             $table->timestamps();
 
             $table->foreign('certification_id')
@@ -29,6 +32,7 @@ class CreateCertificationEmployeeTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
+            $table->index('code');
         });
     }
 

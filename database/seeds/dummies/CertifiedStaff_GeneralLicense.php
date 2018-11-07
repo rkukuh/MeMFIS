@@ -7,7 +7,7 @@ use App\Models\Employee;
 use Illuminate\Database\Seeder;
 use App\Models\Pivots\EmployeeLicense;
 
-class CertifiedStaff extends Seeder
+class CertifiedStaff_GeneralLicense extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,7 +19,7 @@ class CertifiedStaff extends Seeder
         /** Create EMPLOYEE */
 
         $aldrin = Employee::create([
-            'code' => 'MMF-00900',
+            'code' => 'MMF-00001',
             'first_name' => 'Aldrin',
             'last_name' => 'Collins',
         ]);
@@ -30,12 +30,12 @@ class CertifiedStaff extends Seeder
         $general_license = License::where('code', 'general-license')->first();
 
         $aldrin->licenses()->attach($general_license, [
-            'code' => 'E/I.3475',
+            'number' => 'E/I.3475',
             'issued_at' => Carbon::createFromFormat('Y-m-d', '2011-08-15'),
         ]);
 
         $aldrin->licenses()->attach($general_license, [
-            'code' => 'A/P.3475',
+            'number' => 'A/P.3475',
             'issued_at' => Carbon::createFromFormat('Y-m-d', '2011-08-15'),
         ]);
 
@@ -47,7 +47,7 @@ class CertifiedStaff extends Seeder
         EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
                 return $query->where('employee_id', $aldrin->id);
             })
-            ->where('code', 'E/I.3475')
+            ->where('number', 'E/I.3475')
             ->first()
             ->general_licenses()
             ->createMany([
@@ -66,7 +66,7 @@ class CertifiedStaff extends Seeder
         EmployeeLicense::whereHas('employee', function ($query) use ($aldrin) {
                 return $query->where('employee_id', $aldrin->id);
             })
-            ->where('code', 'A/P.3475')
+            ->where('number', 'A/P.3475')
             ->first()
             ->general_licenses()
             ->createMany([
@@ -79,19 +79,5 @@ class CertifiedStaff extends Seeder
                     'aviation_degree_no' => '156/0894/2397',
                 ],
             ]);
-
-        /** Assign EMPLOYEE to AME LICENSE */
-
-        $amel = License::where('code', 'amel-dgca')->first();
-
-        $aldrin->licenses()->attach($amel, [
-            'code' => '2126',
-            'issued_at' => Carbon::createFromFormat('Y-m-d', '2007-06-05'),
-            'valid_until' => Carbon::createFromFormat('Y-m-d', '2009-06-05'),
-        ]);
-
-        /** Assign AME LICENSE to RATING */
-
-        //
     }
 }

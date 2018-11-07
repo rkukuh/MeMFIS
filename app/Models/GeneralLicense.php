@@ -21,12 +21,12 @@ class GeneralLicense extends MemfisModel
      * One-to-Many: A general license may have zero or many aviation (school) degree.
      *
      * This function will retrieve the header of a general license.
-     * See: Employee License's general_license_details() method for the inverse
+     * See: Employee License's general_licenses() method for the inverse
      *
      * @return mixed
      */
-    public function employee_license()
+    public function header()
     {
-        return $this->belongsTo(EmployeeLicense::class);
+        return $this->belongsTo(EmployeeLicense::class, 'employee_license_id');
     }
 }

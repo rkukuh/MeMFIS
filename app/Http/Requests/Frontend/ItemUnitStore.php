@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Unit;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -27,7 +29,24 @@ class ItemUnitStore extends FormRequest
     {
         return [
             'uom_quantity' => 'required',
-            'unit2' => 'required',
+            'unit_id' => [
+                'required',
+                Rule::exists('units', 'id')->where(function ($query) {
+                    $query->whereIn('type_id', (new Unit())->ofQuantity()->get());
+                }),
+            ],
+        ];
+    }
+
+    /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'unit_id.exists' => 'The selected unit is invalid.',
         ];
     }
 

@@ -1,12 +1,12 @@
 let Item = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.item_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-items',
+                        url: '/datatables/item',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -61,7 +61,7 @@ let Item = {
                     width: 250
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -100,53 +100,49 @@ let Item = {
                     }
                 },
                 {
-                    field: 'account_code',
+                    field: 'journal',
                     title: 'Account Code',
                     sortable: 'asc',
-                    filterable: !1
-                },
-                {
-                    field: 'Photo',
-                    width: 110,
-                    title: 'Photo',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<img src="/img/LogoMMF-30x13.png">'
-                        );
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.journal) {
+                            return t.journal.code
+                        }
+
+                        return ''
                     }
                 },
                 {
-                    field: 'Actions',
+                    field: 'actions',
                     width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/item/'+t.uuid+'/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                            '<a href="/item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
                         );
                     }
                 }
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        $('.item_datatable').on('click', '.delete', function () {
+            let item_uuid = $(this).data('id');
 
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
+            })
+            .then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
@@ -155,22 +151,19 @@ let Item = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/item/' + triggerid + '',
+                        url: '/item/' + item_uuid + '',
                         success: function (data) {
-                            toastr.success(
-                                'Data berhasil dihapus.',
-                                'Sukses!', {
+                            toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.item_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
 
                             $.each(errors.errors, function (index, value) {
@@ -178,21 +171,9 @@ let Item = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });
-
     }
 };
 

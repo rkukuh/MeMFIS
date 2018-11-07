@@ -28,6 +28,7 @@ class ExampleDataSeeder extends Seeder
         $this->call(Emails::class);
         $this->call(Phones::class);
         $this->call(Addresses::class);
+        $this->call(Versions::class);
 
         /** MASTER */
 
@@ -38,12 +39,18 @@ class ExampleDataSeeder extends Seeder
         $this->call(Aircrafts::class);
         $this->call(Employees::class);
         $this->call(Licenses::class);
+        $this->call(Certifications::class);
 
-        /** EDUCATION */
+        /** LICENSE */
 
         $this->call(EmployeeLicenses::class);
         $this->call(GeneralLicenses::class);
         $this->call(AmeLicenses::class);
+
+        /** CERTIFICATION */
+
+        $this->call(CertificationEmployees::class);
+        $this->call(OTRCertifications::class);
 
         /** FINANCE */
 
@@ -54,5 +61,6 @@ class ExampleDataSeeder extends Seeder
 
         $this->call(ItemUnit::class);
         $this->call(ItemStorage::class);
+        $this->call(TaskCardsTableSeeder::class);
     }
 }

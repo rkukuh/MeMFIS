@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Spatie\Tags\Tag;
+use Illuminate\Database\Seeder;
 
 class TagsTableSeeder extends Seeder
 {
@@ -12,8 +12,13 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        Tag::create(['name' => 'Components']);
-        Tag::create(['name' => 'Materials']);
-        Tag::create(['name' => 'Tools']);
+        Tag::findOrCreate('Component', 'item');
+        Tag::findOrCreate('Material', 'item');
+        Tag::findOrCreate('Tool', 'item');
+        Tag::findOrCreate('Engine / Powerplant', 'item');
+        Tag::findOrCreate('Raw Material', 'item');
+        Tag::findOrCreate('Tire', 'item');
+        Tag::findOrCreate('Consumable', 'item');
+        Tag::findOrCreate('Oil', 'item');
     }
 }

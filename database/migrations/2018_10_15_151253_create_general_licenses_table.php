@@ -13,7 +13,7 @@ class CreateGeneralLicensesTable extends Migration
      */
     public function up()
     {
-        /** M-M: Employee and License, for General License */
+        /** The details of "Employee-License", for General License */
 
         Schema::create('general_licenses', function (Blueprint $table) {
             $table->increments('id');

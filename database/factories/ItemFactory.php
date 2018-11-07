@@ -12,7 +12,7 @@ $factory->define(Item::class, function (Faker $faker) {
     return [
         'code' => 'MAT-EX-' . $sequence,
         'name' => 'Material Example #' . $sequence,
-        'unit_id' => Unit::get()->random()->id,
+        'unit_id' => Unit::ofQuantity()->get()->random()->id,
         'is_ppn' => $is_ppn,
         'ppn_amount' => function() use ($is_ppn) {
             if ($is_ppn) {
@@ -20,6 +20,7 @@ $factory->define(Item::class, function (Faker $faker) {
             }
         },
         'is_stock' => $faker->boolean,
+        'description' => $faker->randomElement([null, $faker->text]),
     ];
 
 });

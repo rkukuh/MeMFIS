@@ -149,7 +149,7 @@ class CategoryItemController extends Controller
      */
     public function show(Category $category)
     {
-        return response()->json($category);
+        //
     }
 
     /**
@@ -174,9 +174,10 @@ class CategoryItemController extends Controller
      */
     public function update(CategoryItemUpdate $request, Category $category)
     {
-        $category = Category::find($category);
-        // $category->name = $request->name;
-        // $category->save();
+        $category->code = $request->code;
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
 
         return response()->json($category);
     }

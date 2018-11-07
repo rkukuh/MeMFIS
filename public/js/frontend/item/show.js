@@ -6,7 +6,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-uom/' +  item_uuid  + '/',
+                        url: '/datatables/item-unit/' +  item_uuid  + '/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -69,7 +69,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-item-storages/'+ item_uuid +'/',
+                        url: '/datatables/item-storage/'+ item_uuid +'/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -105,7 +105,8 @@ let Item = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'name',
                     title: 'Storage',
                     sortable: 'asc',

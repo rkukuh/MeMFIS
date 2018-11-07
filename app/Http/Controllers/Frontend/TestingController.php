@@ -10,7 +10,17 @@ use Illuminate\Support\Facades\Input;
 
 class TestingController extends Controller
 {
-        /**
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function blank()
+    {
+        return view('frontend.testing.blank');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

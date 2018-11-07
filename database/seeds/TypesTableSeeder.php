@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Type;
 use Illuminate\Database\Seeder;
 
 class TypesTableSeeder extends Seeder
@@ -12,6 +11,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(TypesOfAPERI::class);
         $this->call(TypesOfARC::class);
         $this->call(TypesOfAviationDegree::class);
         $this->call(TypesOfCapability::class);
@@ -19,9 +19,11 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfEmail::class);
         $this->call(TypesOfFax::class);
         $this->call(TypesOfJournal::class);
+        $this->call(TypesOfMaintenanceCycle::class);
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfRegulator::class);
         $this->call(TypesOfSchoolDegree::class);
+        $this->call(TypesOfTaskCard::class);
         $this->call(TypesOfUnit::class);
     }
 }

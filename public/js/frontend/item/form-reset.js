@@ -14,4 +14,7 @@ let item_reset = function () {
 
     document.getElementById('ppn_amount').value = '';
     document.getElementById('ppn_amount').disabled = true;
+
+    document.getElementById('account_code').value = '';
+    $('.search-journal').html('Search account code');
 }

@@ -13,19 +13,28 @@ class CreateAmelicensesTable extends Migration
      */
     public function up()
     {
+        /** The details of "Employee-License", for AME License */
+
         Schema::create('ame_licenses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->unsignedInteger('employee_license_id');
-            $table->string('station');
-            $table->string('stamp_no');
-            // Scope        : Free text yg bisa di-master-kan
-            // Category     : (Aviation Degree + Free text) --> master data AMEL's category
-            // Rating       : AC + PartNo Komponen
-            // Limitation   : Skills: Supporting Staff (Mechanic), Engineer, Inspector, RII Inspector
-            // Remark       : Free text (optional)
+            $table->unsignedInteger('aircraft_id');
+            $table->unsignedInteger('type_id');
             $table->timestamps();
 
             $table->foreign('employee_license_id')
                     ->references('id')->on('employee_license')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('aircraft_id')
+                    ->references('id')->on('aircrafts')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('type_id')
+                    ->references('id')->on('aircrafts')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

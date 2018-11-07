@@ -64,14 +64,6 @@ let Category = {
                     width: 150,
                 },
                 {
-                    field: 'account_code',
-                    title: 'Accountcode',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-
-                {
                     field: 'Actions',
                     width: 110,
                     title: 'Actions',
@@ -79,10 +71,7 @@ let Category = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_category" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_category" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_category" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-category" title="Edit" data-id=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
@@ -94,6 +83,10 @@ let Category = {
             ]
         });
 
+        $(document).ready(function () {
+            $('.btn-success').removeClass('add');
+        });
+
         let simpan = $('.modal-footer').on('click', '.add-category', function () {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
@@ -102,7 +95,6 @@ let Category = {
             let code = $('input[name=code_category]').val();
             let name = $('input[name=name_category]').val();
             let description =$('#description_category').val();
-            let accountcode = $('#accountcode3').val();
             let formData = registerForm.serialize();
 
             $.ajax({
@@ -116,47 +108,25 @@ let Category = {
                     name: name,
                     code: code,
                     description: description,
-                    accountcode: accountcode
                 },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.code) {
-                            $('#code-error').html(data.errors.code[0]);
+                            $('#code-category-error').html(data.errors.code[0]);
 
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('accountcode').value =accountcode;
                         }
                         if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                            $('#name-category-error').html(data.errors.name[0]);
 
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('accountcode').value =accountcode;
                         }
-                        if (data.errors.description) {
-                            $('#description-error').html(data.errors.description[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('description').value = description;
-                            document.getElementById('accountcode').value =accountcode;
-                       }
-                       if (data.errors.accountcode) {
-                        $('#accountcode-error').html(data.errors.accountcode[0]);
-
-                        document.getElementById('code').value = code;
-                        document.getElementById('name').value = name;
-                        document.getElementById('description').value = description;
-                        document.getElementById('accountcode').value =accountcode;
-                   }
+                //    document.getElementById('code').value = code;
+                //    document.getElementById('name').value = name;
+                //    document.getElementById('description').value = description;
 
                     } else {
                         $('#modal_category').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Category has been created.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -169,7 +139,9 @@ let Category = {
             });
         });
 
-        let edit = $('.m_datatable').on('click', '.edit', function () {
+        let edit = $('.m_datatable').on('click', '.edit-category', function edit () {
+            save_changes_button();
+
             $('#button').show();
             $('#simpan').text('Perbarui');
 
@@ -182,11 +154,10 @@ let Category = {
                 type: 'get',
                 url: '/category-item/' + triggerid + '/edit',
                 success: function (data) {
-                    document.getElementById('id').value = data.id;
+                    document.getElementById('id').value = data.uuid;
                     document.getElementById('code_category').value = data.code;
                     document.getElementById('name_category').value = data.name;
                     document.getElementById('description_category').value = data.description;
-                    document.getElementById('accountcode3').value = data.accountcode3;
 
                     $('.btn-success').addClass('update');
                     $('.btn-success').removeClass('add');
@@ -208,7 +179,9 @@ let Category = {
             $('#name-error').html('');
             $('#simpan').text('Perbarui');
 
-            let name = $('input[name=name]').val();
+            let code = $('input[name=code_category]').val();
+            let name = $('input[name=name_category]').val();
+            let description =$('#description_category').val();
             let triggerid = $('input[name=id]').val();
 
             $.ajax({
@@ -219,19 +192,25 @@ let Category = {
                 url: '/category-item/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name
+                    code: code,
+                    name: name,
+                    description: description
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                        if (data.errors.code) {
+                            $('#code-category-error').html(data.errors.code[0]);
 
-                            document.getElementById('name').value = name;
                         }
-                    } else {
-                        $('#modal_customer').modal('hide');
+                        if (data.errors.name) {
+                            $('#name-category-error').html(data.errors.name[0]);
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        }
+
+                    } else {
+                        $('#modal_category').modal('hide');
+
+                        toastr.success('Category has been updated.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -243,35 +222,6 @@ let Category = {
                 }
             });
         });
-
-        let show = $('.m_datatable').on('click', '.show', function () {
-            $('#button').hide();
-            $('#simpan').text('Perbarui');
-
-            let triggerid = $(this).data('id');
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/category-item/' + triggerid,
-                success: function (data) {
-                    document.getElementById('TitleModalCustomer').innerHTML = 'Detail Customer #ID-' + triggerid;
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('name').readOnly = true;
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
-                    });
-                }
-            });
-        });
-
 
         let remove = $('.m_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');

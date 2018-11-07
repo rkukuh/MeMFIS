@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="m_datatable" id="scrolling_both"></div>
+                            <div class="item_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -83,6 +83,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js') }}"></script>
     <script src="{{ asset('js/frontend/item/index.js') }}"></script>
 @endpush

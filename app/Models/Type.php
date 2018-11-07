@@ -17,6 +17,17 @@ class Type extends MemfisModel
     /******************************************* SCOPE *******************************************/
 
     /**
+     * Scope a query to only include type of AP/ERI.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAPERI(Builder $query)
+    {
+        return $query->where('of', 'aperi');
+    }
+
+    /**
      * Scope a query to only include type of ARC.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -94,6 +105,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of A/C maintenance cycle.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfMaintenanceCycle(Builder $query)
+    {
+        return $query->where('of', 'maintenance-cycle');
+    }
+
+    /**
      * Scope a query to only include type of phone.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -116,6 +138,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of task card.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCard(Builder $query)
+    {
+        return $query->where('of', 'taskcard');
+    }
+
+    /**
      * Scope a query to only include type of unit.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -124,6 +157,17 @@ class Type extends MemfisModel
     public function scopeOfUnit(Builder $query)
     {
         return $query->where('of', 'unit');
+    }
+
+    /**
+     * Scope a query to only include type of aircraft work area.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfWorkArea(Builder $query)
+    {
+        return $query->where('of', 'work-area');
     }
 
     /*************************************** RELATIONSHIP ****************************************/

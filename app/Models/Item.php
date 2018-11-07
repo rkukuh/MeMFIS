@@ -16,13 +16,13 @@ class Item extends MemfisModel implements HasMedia
     protected $fillable = [
         'code',
         'name',
+        'description',
         'unit_id',
         'barcode',
+        'is_stock',
         'is_ppn',
         'ppn_amount',
-        'is_stock',
         'account_code',
-        'description',
     ];
 
     /***************************************** OVERRIDE *******************************************/
@@ -117,7 +117,9 @@ class Item extends MemfisModel implements HasMedia
      */
     public function getAccountCodeAndNameAttribute($value)
     {
-        return $this->journal->code.' - '.$this->journal->name;
+        if (isset($this->journal)) {
+            return $this->journal->code.' - '.$this->journal->name;
+        }
     }
 
     /**
@@ -128,6 +130,6 @@ class Item extends MemfisModel implements HasMedia
      */
     public function getCategoryAttribute($value)
     {
-        return optional($this->categories->first())->name;
+        return optional($this->categories->first());
     }
 }

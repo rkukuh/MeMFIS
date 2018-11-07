@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Datatables;
 
+use App\Models\Item;
 use App\Models\ListUtil;
-use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class OTRController extends Controller
+class ItemDatatables extends Controller
 {
     /**
-     * Show data from model for DataTable.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getOTRs()
+    public function index()
     {
-        $employees = Employee::All();
+        $items = Item::with('unit', 'journal')->get();
 
-        $data = $alldata = json_decode($employees);
+        $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -108,78 +108,19 @@ class OTRController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Show data from model with flter on datatable.
      *
+     * @param $list, $args, $operator
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list_filter($list, $args = array(), $operator = 'AND')
     {
-        //
-    }
+        if (! is_array($list)) {
+            return array();
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $util = new ListUtil($list);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Employee $employee)
-    {
-        //
+        return $util->filter($args, $operator);
     }
 }

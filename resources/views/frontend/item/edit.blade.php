@@ -37,8 +37,12 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+
                                 @include('frontend.common.label.edit')
-                                <h3 class="m-portlet__head-text">Material</h3>
+
+                                <h3 class="m-portlet__head-text">
+                                    Material
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -50,9 +54,8 @@
                                         <legend class="w-auto">Identifier</legend>
 
                                         @component('frontend.common.input.hidden')
-                                            @slot('id', 'id')
-                                            @slot('name', 'id')
-                                            @slot('id_error', 'code')
+                                            @slot('id', 'uuid')
+                                            @slot('name', 'uuid')
                                             @slot('value', $item->uuid)
                                         @endcomponent
 
@@ -100,9 +103,8 @@
                                             </div>
                                         </div>
                                     </fieldset>
-
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden">
+                                    <div class="form-group m-form__group row hidden">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Barcode @include('frontend.common.label.optional')
                                             </label>
@@ -113,12 +115,14 @@
                                                 @slot('name', 'barcode')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Unit @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="unit_item" name="unit_item" class="form-control m-select2">
+                                            <select id="unit_id" name="unit_id" class="form-control m-select2">
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}"
                                                         @if ($unit->id == $item->unit_id) selected @endif>
@@ -126,40 +130,43 @@
                                                     </option>
                                                 @endforeach
                                             </select>
+
+                                            <div class="form-control-feedback text-danger" id="unit-error"></div>
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Category @include('frontend.common.label.required')
                                             </label>
+
                                             <select id="category" name="category" class="form-control m-select2">
                                                 <option value="">
                                                     &mdash; Select Category &mdash;
                                                 </option>
 
-                                                @if ($category_items->isEmpty())
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">
-                                                            {{ $category->name }}
-                                                        </option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach ($categories as $key => $unit)
-                                                        @foreach ($category_items as $aMaterialKey => $aMaterialSport)
-                                                            <option value="{{ $unit->id }}"
-                                                                @if ($unit->id == $aMaterialSport->id) selected @endif>
-                                                                {{ $unit->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endforeach
-                                                @endif
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        @if ($category->id == $item->category->id) selected @endif>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
 
                                             <div class="form-control-feedback text-danger" id="category-error"></div>
+
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('size', 'sm')
+                                                @slot('text', 'category')
+                                                @slot('style', 'margin-top: 10px;')
+                                                @slot('data_target', '#modal_category')
+                                            @endcomponent
+
+                                            @include('frontend.category.modal')
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_stock')
@@ -183,7 +190,7 @@
                                                         @endif
                                                     @endcomponent
                                                 </div>
-                                                <div class="col-sm-12 col-md-12 col-lg-12" style="padding:0px">
+                                                <div class="col-sm-12 col-md-12 col-lg-12" style="padding-left: 0">
                                                     @component('frontend.common.input.number')
                                                             @slot('text', 'PPN')
                                                             @slot('id', 'ppn_amount')
@@ -204,20 +211,42 @@
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.account-code.index')
-                                                @slot('text', $journal_name)
-                                            @endcomponent
+                                            @include('frontend.common.account-code.index')
 
                                             @component('frontend.common.input.hidden')
-                                                @slot('id', 'accountcode2')
-                                                @slot('name', 'accountcode2')
-                                                @slot('value',$item->account_code)
+                                                @slot('id', 'account_code')
+                                                @slot('name', 'account_code')
+                                                @slot('value', $item->account_code)
                                             @endcomponent
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Tag @include('frontend.common.label.optional')
+                                            </label>
+
+                                            <select id="tag" name="tag" class="form-control m-select2" multiple>
+                                                @if ($item->tags->isEmpty())
+                                                    @foreach ($tags as $tag)
+                                                        <option value="{{ $tag->id }}">
+                                                            {{ $tag->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($tags as $tag)
+                                                        @foreach ($item->tags as $item_tag)
+                                                            <option value="{{ $tag->id }}"
+                                                                @if ($tag->name == $item_tag->name) selected @endif>
+                                                                {{ $tag->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">
                                                 Photos @include('frontend.common.label.optional')
                                             </label>
@@ -233,30 +262,6 @@
                                             @endcomponent
 
                                             <div id="myFiles"></div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Tag @include('frontend.common.label.optional')
-                                            </label>
-
-                                            <select id="tag" name="tag" class="form-control m-select2" multiple>
-                                                @if ($tag_items->isEmpty())
-                                                    @foreach ($tags as $category)
-                                                        <option value="{{ $category->id }}">
-                                                            {{ $category->name }}
-                                                        </option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach ($tags as $key => $tag)
-                                                        @foreach ($tag_items as $aMaterialKey => $tag_name)
-                                                            <option value="{{ $tag->name}}"
-                                                                @if ($tag->name == $tag_name->name) selected @endif>
-                                                                {{ $tag->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endforeach
-                                                @endif
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -319,7 +324,7 @@
 
                             @include('frontend.item.uom.modal')
 
-                            <div class="m_datatable1" id="fisrt"></div>
+                            <div class="item_unit_datatable" id="item_unit_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -355,11 +360,10 @@
                                 </div>
                             </div>
 
-                            @include('frontend.storage.modal')
-                            @include('frontend.category.modal')
                             @include('frontend.item.storage.modal')
+                            @include('frontend.storage.modal')
 
-                            <div class="m_datatable2" id="second"></div>
+                            <div class="item_storage_datatable" id="item_storage_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -382,15 +386,17 @@
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
-
+    <script src="{{ asset('js/frontend/functions/select2/unit-item-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/item/edit/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/edit/item-unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>
 @endpush
