@@ -16,8 +16,22 @@ class CreateTaskcardsTable extends Migration
         Schema::create('taskcards', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('work_area');
+            $table->string('zone');
+            $table->string('access');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('type_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('work_area')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
