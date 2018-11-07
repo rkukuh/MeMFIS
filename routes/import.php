@@ -9,7 +9,8 @@ Route::name('import.')->group(function () {
 
     ], function () {
 
-        Route::get('/work-areas','OldDataController@workAreas')->name('old-data.work-area');
+        Route::get('/engines','OldDataController@engines')->name('old-data.engines');
+        Route::get('/work-areas','OldDataController@workAreas')->name('old-data.work-areas');
 
     });
 
