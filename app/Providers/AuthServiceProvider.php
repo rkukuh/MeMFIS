@@ -34,6 +34,8 @@ use App\Models\Aircraft;
 use App\Policies\AircraftPolicy;
 use App\Models\Employee;
 use App\Policies\EmployeePolicy;
+use App\Models\TaskCard;
+use App\Policies\TaskCardPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\AmeLicense;
@@ -80,6 +82,7 @@ class AuthServiceProvider extends ServiceProvider
         Currency::class => CurrencyPolicy::class,
         Aircraft::class => AircraftPolicy::class,
         Employee::class => EmployeePolicy::class,
+        TaskCard::class => TaskCardPolicy::class,
         Department::class => DepartmentPolicy::class,
         AmeLicense::class => AmeLicensePolicy::class,
         BankAccount::class => BankAccountPolicy::class,

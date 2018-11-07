@@ -30,6 +30,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('address', 'AddressController');
         Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
+        Route::resource('taskcard', 'TaskCardController');
         Route::resource('department', 'DepartmentController');
         Route::resource('ame-license', 'AmeLicenseController');
         Route::resource('bank-account', 'BankAccountController');

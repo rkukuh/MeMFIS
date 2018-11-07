@@ -62,5 +62,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BanksTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
+
+        /** TRANSACTION (M-M) */
+
+        $this->call(TaskCardsTableSeeder::class);
     }
 }

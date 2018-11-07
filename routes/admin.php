@@ -53,6 +53,10 @@ Route::name('admin.')->group(function () {
         Route::resource('currency', 'CurrencyController');
         Route::resource('bank-account', 'BankAccountController');
 
+        /** TRANSACTION */
+
+        Route::resource('taskcard', 'TaskCardController');
+
     });
 
 });
