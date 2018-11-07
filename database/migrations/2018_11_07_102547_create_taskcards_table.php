@@ -16,6 +16,7 @@ class CreateTaskcardsTable extends Migration
         Schema::create('taskcards', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('title');
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('otr_certification_id');
             $table->unsignedInteger('work_area');
@@ -23,6 +24,7 @@ class CreateTaskcardsTable extends Migration
             $table->unsignedInteger('repeat');
             $table->string('zone');
             $table->string('access');
+            $table->string('source')->nullabel();
             $table->boolean('rii');
             $table->timestamps();
             $table->softDeletes();
@@ -51,6 +53,8 @@ class CreateTaskcardsTable extends Migration
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            $table->index('title');
         });
     }
 
