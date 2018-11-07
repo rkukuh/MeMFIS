@@ -24,6 +24,7 @@ class EnginesImport implements ToModel, WithHeadingRow
                                 ->where('name', 'Each')
                                 ->first()
                                 ->id,
+            'is_stock'  => false,
         ]);
 
         $item->save();
