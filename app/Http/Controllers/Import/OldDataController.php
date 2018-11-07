@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Import;
 
+use App\Imports\EnginesImport;
 use App\Imports\WorkAreasImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,13 @@ use App\Http\Controllers\Controller;
 class OldDataController extends Controller
 {
     protected $import_directory = 'import/';
+
+    public function engines()
+    {
+        Excel::import(new EnginesImport, $this->import_directory . 'engines.xlsx');
+
+        return '[DONE] Importing: Aircraft Engine.';
+    }
 
     public function workAreas()
     {
