@@ -41,6 +41,9 @@ class OldDataImport extends Command
         $this->line('Importing: Engine...');
         app()->make(OldDataController::class)->engines();
 
+        $this->line('Importing: Personnel...');
+        app()->make(OldDataController::class)->personnels();
+
         $this->line('Importing: Work Area...');
         app()->make(OldDataController::class)->workAreas();
     }
