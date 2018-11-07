@@ -15,7 +15,9 @@ class CreateTaskcardsTable extends Migration
     {
         Schema::create('taskcards', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
