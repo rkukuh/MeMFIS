@@ -18,6 +18,8 @@ class CreateTaskcardsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('work_area');
+            $table->unsignedInteger('threshold');
+            $table->unsignedInteger('repeat');
             $table->string('zone');
             $table->string('access');
             $table->timestamps();
@@ -29,6 +31,16 @@ class CreateTaskcardsTable extends Migration
                     ->onDelete('restrict');
 
             $table->foreign('work_area')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('threshold')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('repeat')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
