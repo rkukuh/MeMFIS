@@ -63,7 +63,7 @@ class FreshMigrationWithSeed extends Command
 
                 $this->info('[START] Import data from old system..........');
 
-                // TODO: Call the controller's import method
+                $this->call('memfis:import');
 
                 $this->info('[DONE ] Import data from old system.');
             }
