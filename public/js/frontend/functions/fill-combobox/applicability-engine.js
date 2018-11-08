@@ -12,7 +12,7 @@ $(document).ready(function () {
                 $.each(data, function (key, value) {
                     if (index == 1) {
                         $('select[name="applicability_engine"]').append(
-                            '<option> Select a Applicabiliy Engine</option>'
+                            '<option> Select a Applicability Engine</option>'
                         );
 
                         index = 0;

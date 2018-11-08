@@ -12,7 +12,7 @@ $(document).ready(function () {
                 $.each(data, function (key, value) {
                     if (index == 1) {
                         $('select[name="otr_certification"]').append(
-                            '<option> Select a Repeat Type</option>'
+                            '<option> Select a OTR Certification</option>'
                         );
 
                         index = 0;
