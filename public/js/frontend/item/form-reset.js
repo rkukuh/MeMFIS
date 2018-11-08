@@ -8,7 +8,7 @@ let item_reset = function () {
     $('#name-error').html('');
     $('#unit-error').html('');
     $('#category-error').html('');
-    $('#unit').select2('val', 'All');
+    $('#unit_id').select2('val', 'All');
     $('#category').select2('val', 'All');
     $('input[type=checkbox]').prop('checked', false);
 
