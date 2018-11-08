@@ -122,16 +122,16 @@ let Item = {
             //             }
 
 
-                        document.getElementById('title').value = title;
-                        document.getElementById('number').value = number;
-                        document.getElementById('threshold_amount').value = threshold_amount;
-                        document.getElementById('repeat_amount').value = repeat_amount;
-                        document.getElementById('source').value = source;
-                        document.getElementById('effectifity').value = effectifity;
-                        document.getElementById('zone').value = zone;
-                        document.getElementById('access').value = access;
-                        document.getElementById('applicability_airplane').value = applicability_airplane;
-                        document.getElementById('description').value = description;
+                        // document.getElementById('title').value = title;
+                        // document.getElementById('number').value = number;
+                        // document.getElementById('threshold_amount').value = threshold_amount;
+                        // document.getElementById('repeat_amount').value = repeat_amount;
+                        // document.getElementById('source').value = source;
+                        // document.getElementById('effectifity').value = effectifity;
+                        // document.getElementById('zone').value = zone;
+                        // document.getElementById('access').value = access;
+                        // document.getElementById('applicability_airplane').value = applicability_airplane;
+                        // document.getElementById('description').value = description;
 
             //         } else {
                            taskcard_reset();
