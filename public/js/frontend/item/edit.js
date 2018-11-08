@@ -160,6 +160,14 @@ let Item = {
             ]
         });
 
+
+        errorMessage = function () {
+            $('#code-error').html('');
+            $('#name-error').html('');
+            $('#unit-error').html('');
+            $('#category-error').html('');
+        };
+
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
 
@@ -205,6 +213,7 @@ let Item = {
         });
 
         $('.footer').on('click', '.edit-item', function () {
+            errorMessage();
             if ($('#tag :selected').length > 0) {
                 var selectedtags = [];
 
@@ -279,10 +288,7 @@ let Item = {
                         document.getElementById('account_code').value = account_code;
 
                     } else {
-                        $('#code-error').html('');
-                        $('#name-error').html('');
-                        $('#description-error').html('');
-                        $('#barcode-error').html('');
+                        errorMessage();
                         $('#item-unit').html();
                         $('#item-storage').html(code);
                         $('input[type=file]').val('');

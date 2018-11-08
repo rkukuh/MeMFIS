@@ -15,7 +15,15 @@ let ItemStorage = {
             minmaxstock_reset();
         });
 
+        errorMessageStorage = function () {
+            $('#min-error').html('');
+            $('#max-error').html('');
+            $('#storage-error').html('');
+        };
+
         let simpan = $('.modal-footer').on('click', '.add-stock', function () {
+
+            errorMessageStorage();
             $('#name-error').html('');
             let storage = $('#storage').val();
             let min = $('input[name=min]').val();
@@ -52,6 +60,7 @@ let ItemStorage = {
                     } else {
                         $('#modal_storage_stock').modal('hide');
 
+                        errorMessageStorage();
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
