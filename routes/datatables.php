@@ -16,6 +16,8 @@ Route::name('datatables.')->group(function () {
 
         Route::get('/travel-request/{employee}','TravelRequestDatatables@index')->name('employee-travel-request.index');
 
+        Route::get('/taskcard','TaskcardDatatables@index')->name('taskcard.index');
+
     });
 
 });
