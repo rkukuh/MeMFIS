@@ -75,8 +75,6 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.modal')
-
                             <div class="m_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
