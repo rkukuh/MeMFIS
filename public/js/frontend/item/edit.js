@@ -172,7 +172,33 @@ let Item = {
                     document.getElementById('ppn_amount').value = '';
                 }
             };
+
+            $('.reset-uom').removeClass('reset');
+            $('.reset-storage').removeClass('reset');
+
         });
+
+        $('.reset-uom').on('click', function () {
+            document.getElementById('uom_quantity').value = '';
+            
+            $('#item_unit_id').select2('val', 'All');
+        
+            $('#uom_quantity-error').html('');
+            $('#item_unit-error').html('');
+        });
+
+        $('.reset-storage').on('click', function () {
+            document.getElementById('min').value = '';
+            document.getElementById('max').value = '';
+            
+            $('#storage').select2('val', 'All');
+        
+            $('#storage-error').html('');
+            $('#min-error').html('');
+            $('#max-error').html('');
+
+        });
+
 
         $('.footer').on('click', '.reset', function () {
             item_edit_reset();
