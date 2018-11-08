@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Item;
 use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
@@ -270,6 +271,17 @@ class FillComboxController extends Controller
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function item()
+    {
+        $items = Item::pluck('name', 'id');
 
+        return json_encode($items);
+
+    }
 
 }
