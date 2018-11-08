@@ -20,12 +20,19 @@ class CreateTaskcardsTable extends Migration
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('otr_certification_id');
             $table->unsignedInteger('work_area');
-            $table->unsignedInteger('threshold');
-            $table->unsignedInteger('repeat');
+            $table->unsignedInteger('threshold_type');
+            $table->integer('threshold_amount');
+            $table->unsignedInteger('repeat_type');
+            $table->integer('repeat_amount');
             $table->string('zone');
             $table->string('access');
-            $table->string('source')->nullabel();
             $table->boolean('rii');
+            $table->string('applicability_airplane');
+            $table->unsignedInteger('applicability_engine')->nullable();
+            $table->boolean('applicability_engine_all')->nullable();
+            $table->string('source')->nullabel();
+            $table->string('effectifity')->nullabel();
+            $table->longText('description')->nullabel();
             $table->timestamps();
             $table->softDeletes();
 
@@ -44,13 +51,18 @@ class CreateTaskcardsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('threshold')
+            $table->foreign('threshold_type')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('repeat')
+            $table->foreign('repeat_type')
                     ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('applicability_engine')
+                    ->references('id')->on('items')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

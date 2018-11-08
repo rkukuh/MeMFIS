@@ -17,7 +17,6 @@ class DepartmentsTableSeeder extends Seeder
         $production = Department::create([
             'code' => 'production',
             'name' => 'Production',
-            'parent_id' => null,
         ]);
 
         Department::create([
@@ -50,26 +49,44 @@ class DepartmentsTableSeeder extends Seeder
 
         /** SUPPORTING */
 
-        $supporting = Department::create([
-            'code' => 'suporting',
-            'name' => 'Suporting',
-            'parent_id' => null,
+        Department::create([
+            'code' => 'supporting',
+            'name' => 'Supporting',
         ]);
 
         /** FINANCE */
 
-        $finance = Department::create([
+        Department::create([
             'code' => 'finance',
             'name' => 'Finance',
-            'parent_id' => null,
         ]);
 
         /** ACCOUNTING */
 
-        $accounting = Department::create([
+        Department::create([
             'code' => 'accounting',
             'name' => 'Accounting',
-            'parent_id' => null,
+        ]);
+
+        /** MARKETING */
+
+        Department::create([
+            'code' => 'marketing',
+            'name' => 'Marketing',
+        ]);
+
+        /** MATERIAL */
+
+        Department::create([
+            'code' => 'material',
+            'name' => 'Material Planning',
+        ]);
+
+        /** QUALITY */
+
+        Department::create([
+            'code' => 'quality',
+            'name' => 'Quality',
         ]);
     }
 }

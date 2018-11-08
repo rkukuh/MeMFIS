@@ -8,6 +8,5 @@ require_once('admin.php');
 require_once('frontend.php');
 require_once('component.php');
 require_once('datatables.php');
-require_once('import.php');
 
 require_once('testing.php');

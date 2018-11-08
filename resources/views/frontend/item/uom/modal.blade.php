@@ -22,10 +22,7 @@
                                 <h5 class="item-name">Item-A001</h5>
 
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <strong>Quantity:</strong> {{$item->unit_quantity}}
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                         <strong>Unit:</strong> {{$item->unit->name}} - ( {{{$item->unit->symbol}}} )
                                     </div>
                                 </div>
