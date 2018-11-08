@@ -6,7 +6,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-taskcards',
+                        url: '/datatables/taskcard',
                         map: function (raw) {
                             let dataSet = raw;
 
