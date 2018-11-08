@@ -65,6 +65,21 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
+                                                    Taskcard Number @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'number')
+                                                    @slot('text', 'Taskcard Number')
+                                                    @slot('name', 'number')
+                                                    @slot('id_error', 'number')
+                                                @endcomponent
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
                                                     Type @include('frontend.common.label.required')
                                                 </label>
 
@@ -75,8 +90,6 @@
                                                     @slot('id_error', 'taskcard')
                                                 @endcomponent
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Otr Certification / Skill @include('frontend.common.label.required')
@@ -89,21 +102,9 @@
                                                     @slot('id_error', 'otr-certification')
                                                 @endcomponent
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Work Area @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Work Area')
-                                                    @slot('id', 'work_area')
-                                                    @slot('name', 'work_area')
-                                                    @slot('id_error', 'work-area')
-                                                @endcomponent
-                                            </div>
-
                                         </div>
                                         <div class="form-group m-form__group row">
+                                            
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Threshold Type @include('frontend.common.label.required')
@@ -209,12 +210,25 @@
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Work Area @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Work Area')
+                                                    @slot('id', 'work_area')
+                                                    @slot('name', 'work_area')
+                                                    @slot('id_error', 'work-area')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
 
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_applicability_engine_all')
                                                     @slot('name', 'is_applicability_engine_all')
-                                                    @slot('text', 'Applicability Engine All?')
+                                                    @slot('text', 'Engine All?')
+                                                    @slot('style_div','margin-top:20px')
                                                 @endcomponent
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_rii')
@@ -338,7 +352,7 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-taskcard')
                                             @slot('text', 'Item Taskcard')
-                                            {{-- @slot('attribute', 'disabled') --}}
+                                            @slot('attribute', 'disabled')
                                             @slot('data_target', '#modal_item_taskcard')
                                         @endcomponent
 
