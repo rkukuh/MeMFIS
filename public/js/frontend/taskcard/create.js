@@ -1,0 +1,101 @@
+let Item = {
+    init: function () {
+        $(document).ready(function () {
+            $('.btn-success').removeClass('add');
+        });
+
+        $('.footer').on('click', '.reset', function () {
+            taskcard_reset();
+        });
+
+        $('.footer').on('click', '.add-taskcard', function () {
+            // let code = $('input[name=code]').val();
+            // let name = $('input[name=name]').val();
+            // let description = $('#description').val();
+            // let unit = $('#unit_id').val();
+            // let category = $('#category').val();
+            // let ppn_amount = $('input[name=ppn_amount]').val();
+            // let account_code = $('#account_code').val();
+
+            // if (document.getElementById("is_stock").checked) {
+            //     is_stock = 1;
+            // } else {
+            //     is_stock = 0;
+            // }
+
+            // if (document.getElementById("is_ppn").checked) {
+            //     is_ppn = 1;
+            // } else {
+            //     is_ppn = 0;
+            // }
+
+            // $.ajax({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     type: 'post',
+            //     url: '/item',
+            //     data: {
+            //         _token: $('input[name=_token]').val(),
+            //         code: code,
+            //         name: name,
+            //         description: description,
+            //         unit_id: unit,
+            //         category: category,
+            //         is_stock: is_stock,
+            //         is_ppn: is_ppn,
+            //         ppn_amount: ppn_amount,
+            //         account_code: account_code,
+            //     },
+            //     success: function (data) {
+            //         if (data.errors) {
+            //             if (data.errors.code) {
+            //                 $('#code-error').html(data.errors.code[0]);
+            //             }
+
+            //             if (data.errors.name) {
+            //                 $('#name-error').html(data.errors.name[0]);
+            //             }
+
+            //             if (data.errors.unit_id) {
+            //                 $('#unit-error').html(data.errors.unit_id[0]);
+            //             }
+
+            //             if (data.errors.category) {
+            //                 $('#category-error').html(data.errors.category[0]);
+            //             }
+
+            //             document.getElementById('code').value = code;
+            //             document.getElementById('name').value = name;
+            //             document.getElementById('description').value = description;
+            //             document.getElementById('account_code').value = account_code;
+
+            //         } else {
+            //             $('#code-error').html('');
+            //             $('#name-error').html('');
+            //             $('#description-error').html('');
+
+            //             document.getElementById('item-uom').removeAttribute('disabled');
+            //             document.getElementById('item-storage_stock').removeAttribute('disabled');
+
+            //             $('#item-storage').html(code);
+            //             $('#item-unit').html(code);
+
+                        toastr.success('Taskcard has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        window.location.href = '/taskcard/1/edit';
+            //         }
+            //     }
+            // });
+        });
+
+        // Category
+
+    }
+};
+
+jQuery(document).ready(function () {
+    Item.init();
+});
