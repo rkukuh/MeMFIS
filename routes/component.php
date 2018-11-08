@@ -35,6 +35,7 @@ Route::name('component.')->group(function () {
     Route::get('get-applicability-engines', 'FillComboxController@applicabilityEngine')->name('get-applicability-engines');
     Route::get('get-aircraft-taskcards', 'FillComboxController@aircraftTaskcard')->name('get-aircraft-taskcards');
     Route::get('get-taskcard-relationships', 'FillComboxController@taskcardRelationship')->name('get-taskcard-relationships');
+    Route::get('get-items', 'FillComboxController@item')->name('get-items');
 
     });
 });
