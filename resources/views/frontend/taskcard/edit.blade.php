@@ -353,10 +353,6 @@
                                                 @slot('text', 'Item Taskcard')
                                                 @slot('id', 'item_taskcard')
                                                 @slot('data_target', '#modal_item')
-                                                {{-- @slot('text', 'Item Taskcard')
-                                                @slot('id', 'modal_item')
-                                                @slot('data_target', '#modal_item') --}}
-
                                             @endcomponent
     
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -392,6 +388,10 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let taskcard_uuid = "$taskcard->uuid";
+    </script>
+
     <script src="{{ asset('js/frontend/functions/select2/taskcard.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
@@ -400,6 +400,10 @@
     <script src="{{ asset('js/frontend/functions/select2/applicability-engine.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/aircraft-taskcard.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-item-uom.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
