@@ -48,14 +48,12 @@ let Item = {
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                     template: function (t) {
                         return t.name + ' (' + t.symbol + ')'
                     }
@@ -64,7 +62,6 @@ let Item = {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
@@ -133,22 +130,26 @@ let Item = {
                     title: 'Min',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50
                 },
                 {
                     field: 'pivot.max',
                     title: 'Max',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
+                            '<button href="#" data-toggle="modal" data-target="#modal_storage_stock"  class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" ' +
+                                'data-min="' + t.pivot.min + '" ' +
+                                'data-max="' + t.pivot.max + '" ' +
+                                'data-item_id="' + t.pivot.item_id + '" ' +
+                                'data-storage_id="' + t.pivot.storage_id + '">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</button>'+
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
                                 'data-item_id="' + t.pivot.item_id + '" ' +
                                 'data-storage_id="' + t.pivot.storage_id + '">' +
