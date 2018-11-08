@@ -27,6 +27,14 @@ Route::name('component.')->group(function () {
     Route::get('get-gnrl-license/{id}', 'FillComboxController@generalLicenses')->name('get-gnrl-license');
     Route::get('get-account-codes', 'AccountCodeController@getJournals')->name('get-account-codes');
     Route::get('get-tags', 'FillComboxController@tags')->name('get-tags');
+    Route::get('get-taskcards', 'FillComboxController@taskcard')->name('get-taskcards');
+    Route::get('get-otr-certifications', 'FillComboxController@otrCertification')->name('get-otr-certifications');
+    Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
+    Route::get('get-threshold-types', 'FillComboxController@thresholdType')->name('get-threshold-types');
+    Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
+    Route::get('get-applicability-engines', 'FillComboxController@applicabilityEngine')->name('get-applicability-engines');
+    Route::get('get-aircraft-taskcards', 'FillComboxController@aircraftTaskcard')->name('get-aircraft-taskcards');
+    Route::get('get-taskcard-relationships', 'FillComboxController@taskcardRelationship')->name('get-taskcard-relationships');
 
     });
 });
