@@ -1,8 +1,10 @@
 let taskcard_reset = function () {
     document.getElementById('title').value = '';
+    document.getElementById('number').value = '';
     document.getElementById('source').value = '';
     document.getElementById('effectifity').value = '';
     document.getElementById('description').value = '';
+    
     $('#taskcard').select2('val', 'All');
     $('#otr_certification').select2('val', 'All');
     $('#work_area').select2('val', 'All');
@@ -14,6 +16,7 @@ let taskcard_reset = function () {
     $('input[type=checkbox]').prop('checked', false);
 
     $('#title-error').html('');
+    $('#number-error').html('');
     $('#taskcard-error').html('');
     $('#otr-certification-error').html('');
     $('#work-area-error').html('');
