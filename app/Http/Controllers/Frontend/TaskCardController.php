@@ -125,7 +125,7 @@ class TaskCardController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.taskcard.create');
     }
 
     /**
@@ -152,7 +152,7 @@ class TaskCardController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return response()->json($taskCard);
+        return view('frontend.taskcard.show');
     }
 
     /**
@@ -163,7 +163,7 @@ class TaskCardController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
-        return response()->json($taskCard);
+        return view('frontend.taskcard.edit');
     }
 
     /**
