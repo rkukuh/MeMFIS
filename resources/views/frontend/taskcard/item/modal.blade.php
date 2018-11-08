@@ -57,7 +57,7 @@
                                             @slot('id', 'item_unit_id')
                                             @slot('text', 'Unit')
                                             @slot('name', 'item_unit_id')
-                                            @slot('id_error', 'item_unit')
+                                            @slot('id_error', 'unit')
                                             @slot('style', 'width:100%')
                                         @endcomponent
                                     </div>
@@ -70,7 +70,9 @@
                                             @slot('class', 'add-item')
                                             @slot('type', 'button')
                                         @endcomponent
-                                    @include('frontend.common.buttons.reset')
+                                        @component('frontend.common.buttons.reset')
+                                            @slot('class', 'reset-item')
+                                        @endcomponent
                                     @include('frontend.common.buttons.close')
                                 </div>
                             </div>
