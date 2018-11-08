@@ -1,7 +1,7 @@
 $(document).ready(function () {
     TaskcardRelationship = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-taskcard-relationships/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

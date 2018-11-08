@@ -1,7 +1,7 @@
 $(document).ready(function () {
     ThresholdType = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-threshold-types/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

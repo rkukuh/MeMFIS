@@ -1,7 +1,7 @@
 $(document).ready(function () {
     OtrCertification = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-otr-certifications/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

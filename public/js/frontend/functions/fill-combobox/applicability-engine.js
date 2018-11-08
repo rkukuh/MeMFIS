@@ -1,7 +1,7 @@
 $(document).ready(function () {
     ApplicabilityEngine = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-applicability-engines/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

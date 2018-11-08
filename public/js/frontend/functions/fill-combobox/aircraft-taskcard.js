@@ -1,7 +1,7 @@
 $(document).ready(function () {
     AircraftTaskcard = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-aircraft-taskcards/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

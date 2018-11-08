@@ -1,7 +1,7 @@
 $(document).ready(function () {
     RepeatType = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-repeat-types/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
