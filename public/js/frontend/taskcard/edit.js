@@ -90,15 +90,29 @@ let Item = {
 
 
         $(document).ready(function () {
-            $('.btn-success').removeClass('add');
+            $('.reset-item').removeClass('reset');
         });
-
-        
 
         $('.footer').on('click', '.reset', function () {
             window.location.href = '/taskcard/1/edit';
         });
 
+        $('.reset-item').on('click', function () {
+            document.getElementById('quantity').value = '';
+            
+            $('#item').select2('val', 'All');
+            $('#item_unit_id').select2('val', 'All');
+        
+            $('#item-error').html('');
+            $('#quantity-error').html('');
+            $('#unit-error').html('');
+
+        });
+
+        
+        // $('#item_taskcard').on('click', function () {
+        //     $('.btn-success').removeClass('reset');
+        // });
         $('.footer').on('click', '.edit-taskcard', function () {
         //     if ($('#tag :selected').length > 0) {
         //         var selectedtags = [];
