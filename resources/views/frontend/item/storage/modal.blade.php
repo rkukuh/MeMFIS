@@ -75,8 +75,10 @@
                                         @slot('class', 'add-stock')
                                         @slot('type', 'button')
                                     @endcomponent
-                                @include('frontend.common.buttons.reset')
-                                @include('frontend.common.buttons.close')
+                                    @component('frontend.common.buttons.reset')
+                                        @slot('class', 'reset-storage')
+                                    @endcomponent
+                                    @include('frontend.common.buttons.close')
                             </div>
                         </div>
                     </div>

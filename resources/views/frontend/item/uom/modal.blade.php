@@ -63,7 +63,9 @@
                                     @slot('class', 'add-uom')
                                     @slot('type', 'button')
                                 @endcomponent
-                                @include('frontend.common.buttons.reset')
+                                @component('frontend.common.buttons.reset')
+                                    @slot('class', 'reset-uom')
+                                @endcomponent
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>
