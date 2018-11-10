@@ -13,6 +13,7 @@ class ItemStorageDatatables extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function index(Item $item)
