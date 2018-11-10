@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\AmeLicenseStore;
 use App\Http\Requests\Frontend\AmeLicenseUpdate;
 
-class AmeLicenseController extends Controller
+class EmployeeAMELController extends Controller
 {
     /**
      * Display a listing of the resource.

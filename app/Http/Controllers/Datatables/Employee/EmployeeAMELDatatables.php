@@ -7,7 +7,7 @@ use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AmeLicenseDatatables extends Controller
+class EmployeeAMELDatatables extends Controller
 {
     /**
      * Show data from model for DataTable.

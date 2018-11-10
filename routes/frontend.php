@@ -41,7 +41,7 @@ Route::name('frontend.')->group(function () {
             Route::name('employee.')->group(function () {
                 Route::prefix('employee')->group(function () {
 
-                    Route::resource('ame_license', 'AmeLicenseController');
+                    Route::resource('amel', 'EmployeeAMELController');
                     Route::resource('history', 'EmployeeHistoryController');
                     Route::resource('document', 'EmployeeDocumentController');
                     Route::resource('travel-request', 'EmployeeTravelRequestController');

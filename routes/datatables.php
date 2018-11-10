@@ -47,7 +47,7 @@ Route::name('datatables.')->group(function () {
 
                 // License
 
-                Route::get('/{employee}/ame_licenses','AmeLicenseDatatables@index')->name('ame_licenses.index');
+                Route::get('/{employee}/amels','EmployeeAMELDatatables@index')->name('amels.index');
 
             });
         });
