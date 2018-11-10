@@ -13,7 +13,12 @@ Route::name('datatables.')->group(function () {
         /** ITEM */
 
         Route::name('item.')->group(function () {
-            Route::group(['prefix' => 'item'], function () {
+            Route::group([
+
+                'prefix'    => 'item',
+                'namespace' => 'Item'
+
+            ], function () {
 
                 Route::get('/','ItemDatatables@index')->name('index');
                 Route::get('/unit/{item}','ItemUnitDatatables@index')->name('unit.index');
@@ -21,6 +26,7 @@ Route::name('datatables.')->group(function () {
 
             });
         });
+
 
         /** EMPLOYEE  */
 
