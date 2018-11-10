@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Item;
 
 use App\Models\Item;
 use App\Models\ListUtil;

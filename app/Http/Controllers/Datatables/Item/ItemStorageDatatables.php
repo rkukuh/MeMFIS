@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Item;
 
 use App\Models\Item;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
-use App\Models\Pivots\ItemUnit;
+use App\Models\Pivots\ItemStorage;
 use App\Http\Controllers\Controller;
 
-class ItemUnitDatatables extends Controller
+class ItemStorageDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class ItemUnitDatatables extends Controller
      */
     public function index(Item $item)
     {
-        $data = $alldata = json_decode($item->units);
+        $data = $alldata = json_decode($item->storages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
