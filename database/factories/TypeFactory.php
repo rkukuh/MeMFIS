@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Type::class, function (Faker $faker) {
 
-    $name = 'Type Example #' . $faker->unixTime();
+    $name = 'Type Dummy #' . $faker->unixTime();
 
     return [
         'code' => str_slug($name),

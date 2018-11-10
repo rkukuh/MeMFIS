@@ -8,8 +8,8 @@ $factory->define(Storage::class, function (Faker $faker) {
     $sequence = $faker->unixTime();
 
     return [
-        'code' => 'ST-EX-' . $sequence,
-        'name' => 'Storage Example #' . $sequence,
+        'code' => 'ST-DUM-' . $sequence,
+        'name' => 'Storage Dummy #' . $sequence,
     ];
 
 });

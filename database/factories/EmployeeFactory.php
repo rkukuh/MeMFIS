@@ -11,7 +11,7 @@ $factory->define(Employee::class, function (Faker $faker) {
     $lastname = $faker->lastName();
 
     return [
-        'code' => 'NRP-' . $faker->unixTime(),
+        'code' => 'EM-' . $faker->unixTime(),
         'first_name' => $faker->randomElement([$firstNameMale, $firstNameFemale]),
         'middle_name' => $faker->randomElement([null, $faker->lastName()]),
         'last_name' => $lastname,

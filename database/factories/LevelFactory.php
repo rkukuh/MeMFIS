@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Level::class, function (Faker $faker) {
 
-    $name = 'Level Example #' . $faker->unixTime();
+    $name = 'Level Dummy #' . $faker->unixTime();
 
     return [
         'code' => str_slug($name),
