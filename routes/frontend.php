@@ -20,12 +20,7 @@ Route::name('frontend.')->group(function () {
 
             Route::resource('item', 'ItemController');
 
-            Route::group([
-
-                'name'   => 'item',
-                'prefix' => 'item',
-
-            ], function () {
+            Route::name('item.')->group(function () {
 
                 Route::resource('unit', 'ItemUnitController');
                 Route::resource('storage', 'ItemStorageController');
@@ -37,18 +32,17 @@ Route::name('frontend.')->group(function () {
 
         /** EMPLOYEE  */
 
-        Route::name('employee.')->group(function () {
-            Route::group([
+        Route::group(['namespace' => 'Employee'], function () {
 
-                'prefix'    => 'employee',
-                'namespace' => 'Employee'
+            Route::resource('employee', 'EmployeeController');
 
-            ], function () {
+            Route::name('employee.')->group(function () {
 
-                Route::resource('history', 'HistoryController');
-                Route::resource('travel-request', 'TravelRequestController');
+                Route::resource('history', 'EmployeeHistoryController');
+                Route::resource('travel-request', 'EmployeeTravelRequestController');
 
             });
+
         });
 
 
@@ -116,7 +110,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('education', 'EducationController');
         Route::get('/get-educations', 'EducationController@getEducations')->name('get-educations');
 
-        Route::resource('employee', 'EmployeeController');
         Route::get('/get-employees', 'EmployeeController@getEmployees')->name('get-employees');
 
         Route::resource('certification', 'CertificationController');
