@@ -14,6 +14,27 @@ Route::name('frontend.')->group(function () {
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
 
 
+        /** ITEM */
+
+        Route::group(['namespace' => 'Item'], function () {
+
+            Route::resource('item', 'ItemController');
+
+            Route::group([
+
+                'name'   => 'item',
+                'prefix' => 'item',
+
+            ], function () {
+
+                Route::resource('unit', 'ItemUnitController');
+                Route::resource('storage', 'ItemStorageController');
+
+            });
+
+        });
+
+
         /** EMPLOYEE  */
 
         Route::name('employee.')->group(function () {
@@ -136,7 +157,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('quotation', 'QuotationController');
         Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
 
-        Route::resource('item', 'ItemController');
         Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
 
         Route::resource('workpackage', 'WorkPackageController');
@@ -149,11 +169,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('taskcard-package', 'TaskCardPackageController');
         Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
-
-        Route::resource('item-unit', 'ItemUnitController')->except(['destroy']);
-        Route::delete('/item-unit/{itemUnit}/{unit}', 'ItemUnitController@destroy')->name('frontend.item-unit.destroy');
-        Route::resource('item-storage', 'ItemStorageController')->except(['destroy']);
-        Route::delete('/item-storage/{itemStorage}/{storage}', 'ItemStorageController@destroy')->name('frontend.item-storage.destroy');
     });
 
 });

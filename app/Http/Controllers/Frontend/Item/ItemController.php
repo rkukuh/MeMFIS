@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Item;
 
 use App\Models\Item;
 use App\Models\Unit;
