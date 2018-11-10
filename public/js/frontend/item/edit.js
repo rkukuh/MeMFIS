@@ -6,7 +6,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item-unit/' + item_uuid + '/',
+                        url: '/datatables/item/unit/' + item_uuid + '/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -84,7 +84,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item-storage/' + item_uuid + '/',
+                        url: '/datatables/item/storage/' + item_uuid + '/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -274,12 +274,12 @@ let Item = {
                 let simpan = $('.modal-footer').on('click', '.add-category', function () {
                     $('#name-error').html('');
                     $('#simpan').text('Simpan');
-        
+
                     let registerForm = $('#CustomerForm');
                     let code = $('input[name=code_category]').val();
                     let name = $('input[name=name_category]').val();
                     let description =$('#description_category').val();
-        
+
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -296,22 +296,22 @@ let Item = {
                             if (data.errors) {
                                 if (data.errors.code) {
                                     $('#code-category-error').html(data.errors.code[0]);
-        
+
                                 }
                                 if (data.errors.name) {
                                     $('#name-category-error').html(data.errors.name[0]);
-        
+
                                 }
-        
+
                             } else {
                                 $('#modal_category').modal('hide');
-        
+
                                 toastr.success('Category has been created.', 'Success', {
                                     timeOut: 5000
                                 });
 
                                 item_edit_reset();
-    
+
                             }
                         }
                     });
