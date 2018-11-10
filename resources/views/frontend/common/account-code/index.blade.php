@@ -16,12 +16,11 @@
             @endif
         </div>
 
-        <div class="col-sm-3 col-md-3 col-lg-3">
+        <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
             @component('frontend.common.account-code.button-create')
+                @slot('text', '')
                 @slot('size', 'sm')
-                @slot('text', 'Search')
                 @slot('icon', 'search')
-                @slot('style', 'margin-top: 0')
                 @slot('data_target', '#modal_account_code')
             @endcomponent
         </div>
