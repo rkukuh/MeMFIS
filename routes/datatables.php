@@ -22,8 +22,8 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/','ItemDatatables@index')->name('all');
-                Route::get('/{item}/unit','ItemUnitDatatables@index')->name('unit.index');
-                Route::get('/{item}/storage','ItemStorageDatatables@index')->name('storage.index');
+                Route::get('/{item}/units','ItemUnitDatatables@index')->name('units.index');
+                Route::get('/{item}/storages','ItemStorageDatatables@index')->name('storages.index');
 
             });
         });
@@ -41,8 +41,9 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/','EmployeeDatatables@index')->name('all');
-                Route::get('/{employee}/history','EmployeeHistoryDatatables@index')->name('history.index');
-                Route::get('/{employee}/travel-request','EmployeeTravelRequestDatatables@index')->name('travel-request.index');
+                Route::get('/{employee}/histories','EmployeeHistoryDatatables@index')->name('histories.index');
+                Route::get('/{employee}/documents','EmployeeDocumentDatatables@index')->name('documents.index');
+                Route::get('/{employee}/travel-requests','EmployeeTravelRequestDatatables@index')->name('travel-requests.index');
 
             });
         });
