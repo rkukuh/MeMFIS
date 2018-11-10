@@ -53,7 +53,7 @@ class ItemUnitController extends Controller
      */
     public function show(ItemUnit $itemUnit)
     {
-        return response()->json($itemUnit);
+        //
     }
 
     /**
@@ -64,7 +64,7 @@ class ItemUnitController extends Controller
      */
     public function edit(ItemUnit $itemUnit)
     {
-        return response()->json($itemUnit);
+        //
     }
 
     /**
@@ -76,11 +76,7 @@ class ItemUnitController extends Controller
      */
     public function update(ItemUnitUpdate $request, ItemUnit $itemUnit)
     {
-        $itemUnit = ItemUnit::find($itemUnit);
-        // $Item->name = $request->name;
-        $itemUnit->save();
-
-        return response()->json($itemUnit);
+        //
     }
 
     /**
