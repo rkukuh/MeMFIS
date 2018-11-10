@@ -53,7 +53,7 @@ class ItemStorageController extends Controller
      */
     public function show(ItemStorage $itemStorage)
     {
-        return response()->json($itemStorage);
+        //
     }
 
     /**
@@ -64,7 +64,7 @@ class ItemStorageController extends Controller
      */
     public function edit(ItemStorage $itemStorage)
     {
-        return response()->json($itemStorage);
+        //
     }
 
     /**
@@ -76,11 +76,7 @@ class ItemStorageController extends Controller
      */
     public function update(ItemStorageUpdate $request, $itemStorage)
     {
-        $item = Item::find($itemStorage);
-        $item->storages()->detach($request->storage);
-        $item->storages()->attach([$request->storage => ['min' => $request->min, 'max' => $request->max]]);
-
-        return response()->json($item);
+        //
     }
 
     /**
