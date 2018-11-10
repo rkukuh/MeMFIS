@@ -6,7 +6,7 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HistoryController extends Controller
+class EmployeeTravelRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return view('frontend.employees.employee-history.index');
+        return view('frontend.employees.travel-request.index');
     }
 
     /**
