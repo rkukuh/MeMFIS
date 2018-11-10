@@ -13,6 +13,7 @@ Route::name('datatables.')->group(function () {
         /** ITEM */
 
         Route::name('item.')->group(function () {
+
             Route::group([
 
                 'prefix'    => 'item',
@@ -31,6 +32,7 @@ Route::name('datatables.')->group(function () {
         /** EMPLOYEE  */
 
         Route::name('employee.')->group(function () {
+
             Route::group([
 
                 'prefix'    => 'employee',
