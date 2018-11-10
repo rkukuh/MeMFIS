@@ -72,7 +72,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('aircraft', 'AircraftController');
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('department', 'DepartmentController');
-        Route::resource('ame-license', 'AmeLicenseController');
         Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('general-license', 'GeneralLicenseController');
