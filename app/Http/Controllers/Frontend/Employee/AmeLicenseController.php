@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Employee;
 
 use App\Models\AmeLicense;
 use App\Http\Controllers\Controller;
