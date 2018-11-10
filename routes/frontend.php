@@ -1,5 +1,7 @@
 <?php
 
+require_once('print.php');
+
 Route::name('frontend.')->group(function () {
 
     Route::group([
@@ -9,9 +11,25 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
-        require_once('print.php');
-
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
+
+
+        /** EMPLOYEE  */
+
+        Route::name('employee.')->group(function () {
+            Route::group([
+
+                'prefix'    => 'employee',
+                'namespace' => 'Employee'
+
+            ], function () {
+
+                Route::resource('history', 'HistoryController');
+                Route::resource('travel-request', 'TravelRequestController');
+
+            });
+        });
+
 
         Route::view('/qualification', 'frontend.personal-information.qualifications.index')->name('qualification');
         Route::view('/personal-dashboard', 'frontend.personal-information.dashboard.index')->name('personal-dashboard');
@@ -40,11 +58,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('employee-license', 'EmployeeLicenseController');
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
-
-        /** EMPLOYEE */
-
-        Route::resource('travel-request', 'TravelRequestController');
-        Route::resource('employee-history', 'EmployeeHistoryController');
 
         //HR Forms
         Route::resource('hr-form', 'HRFormController');

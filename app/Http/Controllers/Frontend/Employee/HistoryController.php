@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Employee;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TravelRequestController extends Controller
+class HistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class TravelRequestController extends Controller
      */
     public function index()
     {
-        return view('frontend.employees.travel-request.index');
+        return view('frontend.employees.employee-history.index');
     }
 
     /**
