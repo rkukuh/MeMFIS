@@ -90,7 +90,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.employee-history.index') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.employee.history.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -110,7 +110,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.travel-request.index') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.employee.travel-request.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
