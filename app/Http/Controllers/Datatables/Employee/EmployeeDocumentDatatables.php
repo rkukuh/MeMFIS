@@ -19,8 +19,6 @@ class EmployeeDocumentDatatables extends Controller
     {
         $data = $alldata = json_decode($employee->documents);
 
-        $data = $alldata = json_decode($employees);
-
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
