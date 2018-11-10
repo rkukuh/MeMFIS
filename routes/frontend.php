@@ -110,8 +110,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('education', 'EducationController');
         Route::get('/get-educations', 'EducationController@getEducations')->name('get-educations');
 
-        Route::get('/get-employees', 'EmployeeController@getEmployees')->name('get-employees');
-
         Route::resource('certification', 'CertificationController');
         Route::get('/get-certifications', 'CertificationController@getCertifications')->name('get-certifications');
 
