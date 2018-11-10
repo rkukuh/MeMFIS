@@ -45,6 +45,10 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{employee}/documents','EmployeeDocumentDatatables@index')->name('documents.index');
                 Route::get('/{employee}/travel-requests','EmployeeTravelRequestDatatables@index')->name('travel-requests.index');
 
+                // License
+
+                Route::get('/{employee}/ame_licenses','AmeLicenseDatatables@index')->name('ame_licenses.index');
+
             });
         });
 

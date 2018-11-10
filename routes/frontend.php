@@ -41,6 +41,7 @@ Route::name('frontend.')->group(function () {
             Route::name('employee.')->group(function () {
                 Route::prefix('employee')->group(function () {
 
+                    Route::resource('ame_license', 'AmeLicenseController');
                     Route::resource('history', 'EmployeeHistoryController');
                     Route::resource('document', 'EmployeeDocumentController');
                     Route::resource('travel-request', 'EmployeeTravelRequestController');
@@ -96,9 +97,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('document-type', 'DocumentTypeController');
         Route::get('get-document-types', 'DocumentTypeController@getDocumentTypes')->name('get-document-types');
-
-        Route::resource('amel', 'AMELController');
-        Route::get('/get-amels', 'AMELController@getAMELs')->name('get-amels');
 
         Route::resource('language', 'LanguageController');
         Route::get('/get-languages', 'LanguageController@getLanguages')->name('get-languages');
