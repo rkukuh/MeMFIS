@@ -10,10 +10,17 @@ Route::name('datatables.')->group(function () {
 
     ], function () {
 
-        Route::get('/item','ItemDatatables@index')->name('item.index');
-        Route::get('/item-unit/{item}','ItemUnitDatatables@index')->name('item-unit.index');
-        Route::get('/item-storage/{item}','ItemStorageDatatables@index')->name('item-storage.index');
+        /** ITEM */
 
+        Route::name('item.')->group(function () {
+            Route::group(['prefix' => 'item'], function () {
+
+                Route::get('/','ItemDatatables@index')->name('index');
+                Route::get('/unit/{item}','ItemUnitDatatables@index')->name('unit.index');
+                Route::get('/storage/{item}','ItemStorageDatatables@index')->name('storage.index');
+
+            });
+        });
 
         /** EMPLOYEE  */
 
