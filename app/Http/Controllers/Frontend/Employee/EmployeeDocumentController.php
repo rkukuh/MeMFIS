@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Employee;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmployeeBasicDetailController extends Controller
+class EmployeeDocumentController extends Controller
 {
     /**
      * Display a listing of the resource.

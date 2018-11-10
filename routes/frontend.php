@@ -39,6 +39,7 @@ Route::name('frontend.')->group(function () {
             Route::name('employee.')->group(function () {
 
                 Route::resource('history', 'EmployeeHistoryController');
+                Route::resource('document', 'EmployeeDocumentController');
                 Route::resource('travel-request', 'EmployeeTravelRequestController');
 
             });
@@ -94,9 +95,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('document-type', 'DocumentTypeController');
         Route::get('get-document-types', 'DocumentTypeController@getDocumentTypes')->name('get-document-types');
-
-        Route::resource('employee-document', 'EmployeeDocumentController');
-        Route::get('get-employee-documents', 'EmployeeDocumentController@getEmployeeDocuments')->name('get-employee-documents');
 
         Route::resource('amel', 'AMELController');
         Route::get('/get-amels', 'AMELController@getAMELs')->name('get-amels');
