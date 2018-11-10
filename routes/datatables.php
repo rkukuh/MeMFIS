@@ -31,10 +31,15 @@ Route::name('datatables.')->group(function () {
         /** EMPLOYEE  */
 
         Route::name('employee.')->group(function () {
-            Route::group(['prefix' => 'employee'], function () {
+            Route::group([
 
-                Route::get('/history/{employee}','EmployeeHistoryDatatables@index')->name('history.index');
-                Route::get('/travel-request/{employee}','TravelRequestDatatables@index')->name('travel-request.index');
+                'prefix'    => 'employee',
+                'namespace' => 'Employee'
+
+            ], function () {
+
+                Route::get('/{employee}/history','HistoryDatatables@index')->name('history.index');
+                Route::get('/{employee}/travel-request','TravelRequestDatatables@index')->name('travel-request.index');
 
             });
         });

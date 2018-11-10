@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Employee;
 
 use App\Models\Employee;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmployeeHistoryDatatables extends Controller
+class TravelRequestDatatables extends Controller
 {
     /**
-     * Show data from model for DataTable.
+     * Display a listing of the resource.
      *
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function index(Employee $employee)
     {
-        $data = $alldata = json_decode($employee->histories);
+        $data = $alldata = json_decode($employee);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
