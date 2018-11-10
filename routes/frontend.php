@@ -7,7 +7,7 @@ Route::name('frontend.')->group(function () {
     Route::group([
 
         'middleware'    => 'auth',
-        'namespace'     => 'Frontend'
+        'namespace'     => 'Frontend',
 
     ], function () {
 

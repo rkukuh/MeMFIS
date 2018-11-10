@@ -6,7 +6,7 @@ Route::name('datatables.')->group(function () {
 
         'middleware'    => 'auth',
         'prefix'        => 'datatables',
-        'namespace'     => 'Datatables'
+        'namespace'     => 'Datatables',
 
     ], function () {
 
@@ -40,6 +40,7 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                Route::get('/','EmployeeDatatables@index')->name('all');
                 Route::get('/{employee}/history','EmployeeHistoryDatatables@index')->name('history.index');
                 Route::get('/{employee}/travel-request','EmployeeTravelRequestDatatables@index')->name('travel-request.index');
 
