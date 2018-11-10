@@ -7,7 +7,7 @@ use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HistoryDatatables extends Controller
+class EmployeeHistoryDatatables extends Controller
 {
     /**
      * Show data from model for DataTable.

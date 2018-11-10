@@ -7,7 +7,7 @@ use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TravelRequestDatatables extends Controller
+class EmployeeTravelRequestDatatables extends Controller
 {
     /**
      * Display a listing of the resource.

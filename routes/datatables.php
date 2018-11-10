@@ -40,8 +40,8 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
-                Route::get('/{employee}/history','HistoryDatatables@index')->name('history.index');
-                Route::get('/{employee}/travel-request','TravelRequestDatatables@index')->name('travel-request.index');
+                Route::get('/{employee}/history','EmployeeHistoryDatatables@index')->name('history.index');
+                Route::get('/{employee}/travel-request','EmployeeTravelRequestDatatables@index')->name('travel-request.index');
 
             });
         });
