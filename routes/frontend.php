@@ -144,8 +144,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('quotation', 'QuotationController');
         Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
 
-        Route::post('/post-photos','ItemController@postPhotos')->name('post-photos');
-
         Route::resource('workpackage', 'WorkPackageController');
         Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
 
