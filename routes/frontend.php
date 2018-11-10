@@ -16,15 +16,17 @@ Route::name('frontend.')->group(function () {
 
         /** ITEM */
 
-        Route::group(['namespace' => 'Item'], function () {
+        Route::namespace('Item')->group(function () {
 
             Route::resource('item', 'ItemController');
 
             Route::name('item.')->group(function () {
+                Route::prefix('item')->group(function () {
 
-                Route::resource('unit', 'ItemUnitController');
-                Route::resource('storage', 'ItemStorageController');
+                    Route::resource('unit', 'ItemUnitController');
+                    Route::resource('storage', 'ItemStorageController');
 
+                });
             });
 
         });
@@ -32,16 +34,18 @@ Route::name('frontend.')->group(function () {
 
         /** EMPLOYEE  */
 
-        Route::group(['namespace' => 'Employee'], function () {
+        Route::namespace('Employee')->group(function () {
 
             Route::resource('employee', 'EmployeeController');
 
             Route::name('employee.')->group(function () {
+                Route::prefix('employee')->group(function () {
 
-                Route::resource('history', 'EmployeeHistoryController');
-                Route::resource('document', 'EmployeeDocumentController');
-                Route::resource('travel-request', 'EmployeeTravelRequestController');
+                    Route::resource('history', 'EmployeeHistoryController');
+                    Route::resource('document', 'EmployeeDocumentController');
+                    Route::resource('travel-request', 'EmployeeTravelRequestController');
 
+                });
             });
 
         });
