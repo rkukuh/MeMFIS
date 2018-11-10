@@ -41,11 +41,10 @@ Route::name('frontend.')->group(function () {
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
 
-        Route::resource('travel-request', 'TravelRequestController');
+        /** EMPLOYEE */
 
-        //Employee History
+        Route::resource('travel-request', 'TravelRequestController');
         Route::resource('employee-history', 'EmployeeHistoryController');
-        Route::get('get-employee-histories', 'EmployeeHistoryController@getEmployeeHistories')->name('get-employee-histories');
 
         //HR Forms
         Route::resource('hr-form', 'HRFormController');
