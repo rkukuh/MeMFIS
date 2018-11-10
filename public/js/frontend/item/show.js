@@ -6,7 +6,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item/unit/' +  item_uuid  + '/',
+                        url: '/datatables/item/' +  item_uuid  + '/unit',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -69,7 +69,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item/storage/'+ item_uuid +'/',
+                        url: '/datatables/item/'+ item_uuid +'/storage',
                         map: function (raw) {
                             let dataSet = raw;
 

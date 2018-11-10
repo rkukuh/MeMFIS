@@ -20,9 +20,9 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
-                Route::get('/','ItemDatatables@index')->name('index');
-                Route::get('/unit/{item}','ItemUnitDatatables@index')->name('unit.index');
-                Route::get('/storage/{item}','ItemStorageDatatables@index')->name('storage.index');
+                Route::get('/','ItemDatatables@index')->name('all');
+                Route::get('/{item}/unit','ItemUnitDatatables@index')->name('unit.index');
+                Route::get('/{item}/storage','ItemStorageDatatables@index')->name('storage.index');
 
             });
         });

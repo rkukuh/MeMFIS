@@ -6,7 +6,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item/unit/' + item_uuid + '/',
+                        url: '/datatables/item/' + item_uuid + '/unit',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -81,7 +81,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item/storage/' + item_uuid + '/',
+                        url: '/datatables/item/' + item_uuid + '/storage',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -189,9 +189,9 @@ let Item = {
 
         $('.reset-uom').on('click', function () {
             document.getElementById('uom_quantity').value = '';
-            
+
             $('#item_unit_id').select2('val', 'All');
-        
+
             $('#uom_quantity-error').html('');
             $('#item_unit-error').html('');
         });
@@ -199,9 +199,9 @@ let Item = {
         $('.reset-storage').on('click', function () {
             document.getElementById('min').value = '';
             document.getElementById('max').value = '';
-            
+
             $('#storage').select2('val', 'All');
-        
+
             $('#storage-error').html('');
             $('#min-error').html('');
             $('#max-error').html('');
