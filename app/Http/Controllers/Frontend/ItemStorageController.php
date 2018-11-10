@@ -74,13 +74,13 @@ class ItemStorageController extends Controller
      * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemStorageUpdate $request, ItemStorage $itemStorage)
+    public function update(ItemStorageUpdate $request, $itemStorage)
     {
-        $itemStorage = ItemStorage::find($itemStorage);
-        // $Item->name = $request->name;
-        $itemStorage->save();
+        $item = Item::find($itemStorage);
+        $item->storages()->detach($request->storage);
+        $item->storages()->attach([$request->storage => ['min' => $request->min, 'max' => $request->max]]);
 
-        return response()->json($itemStorage);
+        return response()->json($item);
     }
 
     /**

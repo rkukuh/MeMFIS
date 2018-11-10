@@ -1,7 +1,7 @@
 <div class="col-sm-{{ $size or '6' }}
             col-md-{{ $size or '6' }}
             col-lg-{{ $size or '6' }}"
-    style="padding-left: {{ $padding_left or '0' }}"
+    style="padding-left: {{ $padding_left or '0' }};{{ $style_div or '' }}"
 >
     <label
         class="m-checkbox

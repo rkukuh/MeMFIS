@@ -39,6 +39,8 @@ Route::name('datatables.')->group(function () {
             });
         });
 
+        Route::get('/taskcard','TaskcardDatatables@index')->name('taskcard.index');
+
     });
 
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Item;
 use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
@@ -155,6 +156,131 @@ class FillComboxController extends Controller
         // $aviation_degrees = Type::ofAviationDegree()
         //             ->pluck('name', 'id');
         return response()->json($general_license);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taskcard()
+    {
+        $taskcards = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($taskcards);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function otrCertification()
+    {
+        $otr_certifications = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($otr_certifications);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function workArea()
+    {
+        $work_areas = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($work_areas);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function thresholdType()
+    {
+        $threshold_types = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($threshold_types);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function repeatType()
+    {
+        $repeat_types = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($repeat_types);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function applicabilityEngine()
+    {
+        $applicability_engines = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($applicability_engines);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aircraftTaskcard()
+    {
+        $aircraft_taskcards = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($aircraft_taskcards);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taskcardRelationship()
+    {
+        $taskcard_relationships = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($taskcard_relationships);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function item()
+    {
+        $items = Item::pluck('name', 'id');
+
+        return json_encode($items);
 
     }
 

@@ -48,14 +48,12 @@ let Item = {
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                     template: function (t) {
                         return t.name + ' (' + t.symbol + ')'
                     }
@@ -64,7 +62,6 @@ let Item = {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
@@ -133,22 +130,26 @@ let Item = {
                     title: 'Min',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50
                 },
                 {
                     field: 'pivot.max',
                     title: 'Max',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
+                            '<button href="#" data-toggle="modal" data-target="#modal_storage_stock"  class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" ' +
+                                'data-min="' + t.pivot.min + '" ' +
+                                'data-max="' + t.pivot.max + '" ' +
+                                'data-item_id="' + t.pivot.item_id + '" ' +
+                                'data-storage_id="' + t.pivot.storage_id + '">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</button>'+
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
                                 'data-item_id="' + t.pivot.item_id + '" ' +
                                 'data-storage_id="' + t.pivot.storage_id + '">' +
@@ -159,6 +160,14 @@ let Item = {
                 }
             ]
         });
+
+
+        errorMessage = function () {
+            $('#code-error').html('');
+            $('#name-error').html('');
+            $('#unit-error').html('');
+            $('#category-error').html('');
+        };
 
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
@@ -172,13 +181,40 @@ let Item = {
                     document.getElementById('ppn_amount').value = '';
                 }
             };
+
+            $('.reset-uom').removeClass('reset');
+            $('.reset-storage').removeClass('reset');
+
         });
+
+        $('.reset-uom').on('click', function () {
+            document.getElementById('uom_quantity').value = '';
+            
+            $('#item_unit_id').select2('val', 'All');
+        
+            $('#uom_quantity-error').html('');
+            $('#item_unit-error').html('');
+        });
+
+        $('.reset-storage').on('click', function () {
+            document.getElementById('min').value = '';
+            document.getElementById('max').value = '';
+            
+            $('#storage').select2('val', 'All');
+        
+            $('#storage-error').html('');
+            $('#min-error').html('');
+            $('#max-error').html('');
+
+        });
+
 
         $('.footer').on('click', '.reset', function () {
             item_edit_reset();
         });
 
         $('.footer').on('click', '.edit-item', function () {
+            errorMessage();
             if ($('#tag :selected').length > 0) {
                 var selectedtags = [];
 
@@ -253,10 +289,7 @@ let Item = {
                         document.getElementById('account_code').value = account_code;
 
                     } else {
-                        $('#code-error').html('');
-                        $('#name-error').html('');
-                        $('#description-error').html('');
-                        $('#barcode-error').html('');
+                        errorMessage();
                         $('#item-unit').html();
                         $('#item-storage').html(code);
                         $('input[type=file]').val('');

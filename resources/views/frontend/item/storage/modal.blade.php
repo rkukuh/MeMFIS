@@ -40,6 +40,11 @@
                                     @slot('data_target', '#modal_storage')
                                 @endcomponent
                             </div>
+                            @component('frontend.common.input.hidden')
+                                @slot('id', 'item_id')
+                                @slot('name', 'item_id')
+                            @endcomponent
+
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -47,7 +52,7 @@
                                     Min @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.numeric')
+                                @component('frontend.common.input.number')
                                     @slot('text', 'Min')
                                     @slot('name', 'min')
                                     @slot('id', 'min')
@@ -59,7 +64,7 @@
                                         Max @include('frontend.common.label.required')
                                     </label>
 
-                                    @component('frontend.common.input.numeric')
+                                    @component('frontend.common.input.number')
                                         @slot('text', 'Max')
                                         @slot('name', 'max')
                                         @slot('id', 'max')
@@ -75,8 +80,10 @@
                                         @slot('class', 'add-stock')
                                         @slot('type', 'button')
                                     @endcomponent
-                                @include('frontend.common.buttons.reset')
-                                @include('frontend.common.buttons.close')
+                                    @component('frontend.common.buttons.reset')
+                                        @slot('class', 'reset-storage')
+                                    @endcomponent
+                                    @include('frontend.common.buttons.close')
                             </div>
                         </div>
                     </div>

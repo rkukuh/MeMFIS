@@ -13,7 +13,15 @@ let ItemUnit = {
             uom_reset();
         });
 
+
+        errorMessageUom = function () {
+            $('#uom_quantity-error').html('');
+            $('#unit2-error').html('');
+        };
+
+
         let simpan = $('.modal-footer').on('click', '.add-uom', function () {
+            errorMessageUom();
             let uom_quantity = $('input[name=uom_quantity]').val();
             let item_unit_id = $('#item_unit_id').val();
 
@@ -42,6 +50,7 @@ let ItemUnit = {
                         document.getElementById('uom_quantity').value = uom_quantity;
                         document.getElementById('item_unit_id').value = item_unit_id;
                     } else {
+                        errorMessageUom();
                         $('#modal_uom').modal('hide');
 
                         toastr.success('Material has been updated.', 'Success', {
