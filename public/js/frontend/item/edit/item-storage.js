@@ -159,16 +159,17 @@ let ItemStorage = {
                         document.getElementById('max').value = max;
 
                     } else {
-                        $('#modal_storage_stock').modal('hide');
+                        $('#item_storage_id').select2('val', 'All');
 
                         errorMessageStorage();
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
-                        minmaxstock_reset();
                         let table = $('.item_storage_datatable').mDatatable();
                         table.originalDataSet = [];
                         table.reload();
+                        $('#modal_storage_stock').modal('hide');
+
                     }
                 }
             });

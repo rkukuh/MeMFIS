@@ -200,7 +200,7 @@ let Item = {
             document.getElementById('min').value = '';
             document.getElementById('max').value = '';
 
-            $('#storage').select2('val', 'All');
+            $('#item_storage_id').select2('val', 'All');
 
             $('#storage-error').html('');
             $('#min-error').html('');
