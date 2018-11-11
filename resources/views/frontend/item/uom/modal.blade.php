@@ -20,13 +20,13 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row item-info">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <h5 class="item-name">Item-A001</h5>
+                                <h5 class="item-name">{{ $item->name }}</h5>
 
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <strong>Unit:</strong>
 
-                                        {{$item->unit->name}} - ({{{$item->unit->symbol}}})
+                                        {{ $item->unit->name }} ({{ $item->unit->symbol }})
                                     </div>
                                 </div>
                             </div>
