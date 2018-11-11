@@ -13,6 +13,7 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
 
+
         /** INITIAL DATA */
 
         Route::resource('type', 'TypeController');
