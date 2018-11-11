@@ -40,7 +40,9 @@ class ItemUnitController extends Controller
      */
     public function store(Item $item, ItemUnitStore $request)
     {
-        $item->units()->attach($request->unit_id, ['quantity' => $request->uom_quantity]);
+        $item->units()->attach($request->unit_id, [
+            'quantity' => $request->uom_quantity
+        ]);
 
         return response()->json($item);
     }

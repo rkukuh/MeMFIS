@@ -40,7 +40,7 @@ let ItemUnit = {
 
                         $('#modal_uom').modal('hide');
 
-                        toastr.success('Material has been updated.', 'Success', {
+                        toastr.success('Item UoM has been created.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -78,9 +78,7 @@ let ItemUnit = {
                         type: 'DELETE',
                         url: '/item/' + item_id + '/' + unit_id,
                         success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
+                            toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );

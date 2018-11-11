@@ -33,14 +33,18 @@ class ItemStorageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \App\Models\Item  $item
      * @param  \App\Http\Requests\Frontend\ItemStorageStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemStorageStore $request)
+    public function store(Item $item, ItemStorageStore $request)
     {
-        $item = Item::where('uuid',$request->uuid)->first();
+        // TODO: @audhy
 
-        $item->storages()->attach([$request->storage => ['min' => $request->min, 'max' => $request->max]]);
+        $item->storages()->attach($request->storage_id, [
+            'min' => $request->min,
+            'max' => $request->max
+        ]);
 
         return response()->json($item);
     }
