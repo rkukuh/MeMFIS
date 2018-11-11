@@ -28,7 +28,7 @@ class ItemUnitStore extends FormRequest
     public function rules()
     {
         return [
-            'uom_quantity' => 'required',
+            'uom_quantity' => 'required|integer|min:1',
             'unit_id' => [
                 'required',
                 Rule::exists('units', 'id')->where(function ($query) {
