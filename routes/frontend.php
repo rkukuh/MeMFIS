@@ -44,6 +44,13 @@ Route::name('frontend.')->group(function () {
         Route::resource('currency', 'CurrencyController');
         Route::resource('bank-account', 'BankAccountController');
 
+        /** LICENSE */
+
+        Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('employee-license', 'EmployeeLicenseController');
+        Route::resource('otr-certification', 'OTRCertificationController');
+        Route::resource('certification-employee', 'CertificationEmployeeController');
+
         /** ITEM */
 
         Route::namespace('Item')->group(function () {
@@ -88,10 +95,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
 
         Route::resource('taskcard', 'TaskCardController');
-        Route::resource('general-license', 'GeneralLicenseController');
-        Route::resource('employee-license', 'EmployeeLicenseController');
-        Route::resource('otr-certification', 'OTRCertificationController');
-        Route::resource('certification-employee', 'CertificationEmployeeController');
+
 
         //HR Forms
         Route::resource('hr-form', 'HRFormController');
