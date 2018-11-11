@@ -38,18 +38,26 @@ Route::name('frontend.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
+        /** LICENSE */
+
+        Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('employee-license', 'EmployeeLicenseController');
+
+        /** CERTIFICATION */
+
+        Route::resource('otr-certification', 'OTRCertificationController');
+        Route::resource('certification-employee', 'CertificationEmployeeController');
+
         /** FINANCE */
 
         Route::resource('bank', 'BankController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('bank-account', 'BankAccountController');
 
-        /** LICENSE */
+        /** TRANSACTION */
 
-        Route::resource('general-license', 'GeneralLicenseController');
-        Route::resource('employee-license', 'EmployeeLicenseController');
-        Route::resource('otr-certification', 'OTRCertificationController');
-        Route::resource('certification-employee', 'CertificationEmployeeController');
+        Route::resource('taskcard', 'TaskCardController');
+
 
         /** ITEM */
 
@@ -67,6 +75,7 @@ Route::name('frontend.')->group(function () {
             });
 
         });
+
 
         /** EMPLOYEE  */
 
@@ -93,9 +102,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/emergency-contacts', 'frontend.personal-information.emergency-contacts.index')->name('emergency-contacts');
         Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
-
-        Route::resource('taskcard', 'TaskCardController');
-
 
         //HR Forms
         Route::resource('hr-form', 'HRFormController');

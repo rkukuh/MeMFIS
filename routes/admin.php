@@ -45,8 +45,8 @@ Route::name('admin.')->group(function () {
 
         /** CERTIFICATION */
 
-        Route::resource('certification-employee', 'CertificationEmployeeController');
         Route::resource('otr-certification', 'OTRCertificationController');
+        Route::resource('certification-employee', 'CertificationEmployeeController');
 
         /** FINANCE */
 

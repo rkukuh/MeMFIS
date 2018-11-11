@@ -20,6 +20,11 @@ Route::name('datatables.')->group(function () {
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
 
 
+        /** TRANSACTION */
+
+        Route::get('/taskcard','TaskcardDatatables@index')->name('taskcard.index');
+
+
         /** ITEM */
 
         Route::name('item.')->group(function () {
@@ -36,6 +41,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{item}/storages','ItemStorageDatatables@index')->name('storages.index');
 
             });
+
         });
 
 
@@ -60,9 +66,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{employee}/amels','EmployeeAMELDatatables@index')->name('amels.index');
 
             });
-        });
 
-        Route::get('/taskcard','TaskcardDatatables@index')->name('taskcard.index');
+        });
 
     });
 
