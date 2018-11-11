@@ -31,7 +31,7 @@ let ItemStorage = {
 
             $('#name-error').html('');
 
-            let storage_id = $('#storage_id').val();
+            let storage_id = $('#item_storage_id').val();
             let min = $('input[name=min]').val();
             let max = $('input[name=max]').val();
 
