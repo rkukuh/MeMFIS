@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Item;
 
 use App\Models\Item;
+use App\Models\Storage;
 use App\Models\Pivots\ItemStorage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemStorageStore;
@@ -72,24 +73,31 @@ class ItemStorageController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  \App\Models\Item  $item
      * @param  \App\Http\Requests\Frontend\ItemStorageUpdate  $request
      * @param  \App\Models\ItemStorage  $itemStorage
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemStorageUpdate $request, $itemStorage)
+    public function update(Item $item, ItemStorageUpdate $request)
     {
-        //
+        $item->storages()->detach($request->storage);
+        $item->storages()->attach($request->storage_id, [
+            'min' => $request->min,
+            'max' => $request->max
+        ]);
+
+        return response()->json($item);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ItemStorage  $itemStorage
+     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Storage  $storage
      * @return \Illuminate\Http\Response
      */
-    public function destroy($itemStorage , $storage)
+    public function destroy(Item $item,Storage $storage)
     {
-        $item = Item::find($itemStorage);
         $item->storages()->detach($storage);
         return response()->json($item);
     }
