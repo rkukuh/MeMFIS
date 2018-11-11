@@ -69,10 +69,11 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('item')->group(function () {
 
                     Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
-                    Route::delete('/{item}/{unit}', 'ItemUnitController@destroy')->name('unit.destroy');
+                    Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
 
                     Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
-                    Route::delete('/{item}/{storage}', 'ItemStorageController@destroy')->name('storage.destroy');
+                    Route::PUT('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
+                    Route::delete('/{item}/{storage}/storage', 'ItemStorageController@destroy')->name('storage.destroy');
 
                 });
             });
