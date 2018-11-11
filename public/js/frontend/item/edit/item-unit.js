@@ -61,7 +61,7 @@ let ItemUnit = {
         });
 
         $('.item_unit_datatable').on('click', '.delete', function () {
-            let item_id = $(this).data('item_id');
+            let item_uuid = $(this).data('item_uuid');
             let unit_id = $(this).data('unit_id');
 
             swal({
@@ -80,7 +80,7 @@ let ItemUnit = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/item/' + item_id + '/' + unit_id+'/unit/',
+                        url: '/item/' + item_uuid + '/' + unit_id+'/unit/',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
