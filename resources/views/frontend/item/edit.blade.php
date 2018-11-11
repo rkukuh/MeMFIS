@@ -54,8 +54,8 @@
                                         <legend class="w-auto">Identifier</legend>
 
                                         @component('frontend.common.input.hidden')
-                                            @slot('id', 'uuid')
-                                            @slot('name', 'uuid')
+                                            @slot('id', 'item_uuid')
+                                            @slot('name', 'item_uuid')
                                             @slot('value', $item->uuid)
                                         @endcomponent
 
@@ -400,5 +400,5 @@
     <script src="{{ asset('js/frontend/item/edit/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>    
+    <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>
 @endpush

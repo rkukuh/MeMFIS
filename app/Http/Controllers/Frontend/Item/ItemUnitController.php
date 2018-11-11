@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Item;
 
 use App\Models\Item;
+use App\Models\Unit;
 use App\Models\Pivots\ItemUnit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemUnitStore;
@@ -81,13 +82,14 @@ class ItemUnitController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ItemUnit  $itemUnit
+     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function destroy($itemUnit, $unit)
+    public function destroy(Item $item, Unit $unit)
     {
-        $item = Item::find($itemUnit);
         $item->units()->detach($unit);
+
         return response()->json($item);
     }
 }

@@ -69,6 +69,7 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('item')->group(function () {
 
                     Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
+                    Route::delete('/{item}/{unit}', 'ItemUnitController@destroy')->name('unit.destroy');
 
                     Route::resource('storage', 'ItemStorageController');
 

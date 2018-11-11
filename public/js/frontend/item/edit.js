@@ -65,8 +65,8 @@ let Item = {
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                                'data-item_id="' + t.uom.item_id + '" ' +
-                                'data-unit_id="' + t.uom.unit_id + '">' +
+                                'data-item_id="' + $('#item_uuid').val() + '" ' +
+                                'data-unit_id="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                             '</a>'
                         );
