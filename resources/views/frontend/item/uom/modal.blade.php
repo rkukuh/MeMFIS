@@ -8,6 +8,7 @@
                 <h5 class="modal-title" id="TitleModalUoM">
                     UoM (Unit of Measurement)
                 </h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,7 +24,9 @@
 
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <strong>Unit:</strong> {{$item->unit->name}} - ( {{{$item->unit->symbol}}} )
+                                        <strong>Unit:</strong>
+
+                                        {{$item->unit->name}} - ({{{$item->unit->symbol}}})
                                     </div>
                                 </div>
                             </div>
@@ -47,11 +50,11 @@
                                 </label>
 
                                 @component('frontend.common.input.select')
-                                    @slot('id', 'item_unit_id')
                                     @slot('text', 'Unit')
+                                    @slot('id', 'item_unit_id')
+                                    @slot('style', 'width: 100%')
                                     @slot('name', 'item_unit_id')
                                     @slot('id_error', 'item_unit')
-                                    @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
                         </div>
@@ -60,12 +63,14 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-uom')
                                     @slot('type', 'button')
+                                    @slot('class', 'add-uom')
                                 @endcomponent
+
                                 @component('frontend.common.buttons.reset')
                                     @slot('class', 'reset-uom')
                                 @endcomponent
+
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>
