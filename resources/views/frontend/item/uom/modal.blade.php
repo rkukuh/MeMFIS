@@ -20,15 +20,16 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row item-info">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <h5 class="item-name">{{ $item->name }}</h5>
+                                <h5 class="item-name">
+                                    {{ $item->name }}
 
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <strong>Unit:</strong>
+                                    <small class="text-muted"> {{ $item->code }}</small>
+                                </h5>
 
-                                        {{ $item->unit->name }} ({{ $item->unit->symbol }})
-                                    </div>
-                                </div>
+                                <h6>
+                                    Unit:
+                                    {{ $item->unit->name }} ({{ $item->unit->symbol }})
+                                </h6>
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
