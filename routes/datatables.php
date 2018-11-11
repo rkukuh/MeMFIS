@@ -10,6 +10,11 @@ Route::name('datatables.')->group(function () {
 
     ], function () {
 
+        /** INITIAL DATA */
+
+        Route::get('/journal','JournalDatatables@index')->name('journal.index');
+
+
         /** ITEM */
 
         Route::name('item.')->group(function () {

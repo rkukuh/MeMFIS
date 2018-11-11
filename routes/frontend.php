@@ -134,9 +134,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
-        //
-        Route::get('/get-journals', 'JournalController@getJournals')->name('get-journals');
-
         Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 
