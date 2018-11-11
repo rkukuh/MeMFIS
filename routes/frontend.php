@@ -13,7 +13,6 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
 
-
         /** INITIAL DATA */
 
         Route::resource('type', 'TypeController');
@@ -21,7 +20,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-
 
         /** POLYMORPH */
 
@@ -32,7 +30,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
 
-
         /** MASTER */
 
         Route::resource('license', 'LicenseController');
@@ -41,13 +38,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
-
         /** FINANCE */
 
         Route::resource('bank', 'BankController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('bank-account', 'BankAccountController');
-
 
         /** ITEM */
 
@@ -65,7 +60,6 @@ Route::name('frontend.')->group(function () {
             });
 
         });
-
 
         /** EMPLOYEE  */
 
@@ -92,8 +86,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/emergency-contacts', 'frontend.personal-information.emergency-contacts.index')->name('emergency-contacts');
         Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
-
-
 
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('general-license', 'GeneralLicenseController');
@@ -127,9 +119,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('education', 'EducationController');
         Route::get('/get-educations', 'EducationController@getEducations')->name('get-educations');
-
-        //
-        Route::get('/get-certifications', 'CertificationController@getCertifications')->name('get-certifications');
 
         Route::resource('general-license', 'GeneralLicenseController')->except(['edit']);
         Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');

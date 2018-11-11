@@ -15,6 +15,11 @@ Route::name('datatables.')->group(function () {
         Route::get('/journal','JournalDatatables@index')->name('journal.index');
 
 
+        /** MASTER */
+
+        Route::get('/certification','CertificationDatatables@index')->name('certification.index');
+
+
         /** ITEM */
 
         Route::name('item.')->group(function () {
