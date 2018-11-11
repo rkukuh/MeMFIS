@@ -39,8 +39,6 @@ class ItemStorageController extends Controller
      */
     public function store(Item $item, ItemStorageStore $request)
     {
-        // TODO: @audhy
-
         $item->storages()->attach($request->storage_id, [
             'min' => $request->min,
             'max' => $request->max
