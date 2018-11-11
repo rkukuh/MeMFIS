@@ -80,7 +80,7 @@ let ItemUnit = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/item/' + item_id + '/' + unit_id,
+                        url: '/item/' + item_id + '/' + unit_id+'/unit/',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
