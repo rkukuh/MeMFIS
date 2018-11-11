@@ -130,8 +130,7 @@ let ItemStorage = {
 
             $('#name-error').html('');
 
-            let item_id = $('input[name=item_id]').val();
-            let storage = $('#storage').val();
+            let storage_id = $('#item_storage_id').val();
             let min = $('input[name=min]').val();
             let max = $('input[name=max]').val();
 
@@ -139,11 +138,11 @@ let ItemStorage = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'put',
-                url: '/item-storage/'+item_id,
+                type: 'PUT',
+                url: '/item/'+item_uuid+'/storage/',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    storage: storage,
+                    storage_id: storage_id,
                     min: min,
                     max: max,
                 },
@@ -198,7 +197,7 @@ let ItemStorage = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/item-storage/' + item_id + '/'+ storage_id,
+                        url: '/item/' + item_id + '/'+ storage_id+ '/storage/',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -211,6 +210,9 @@ let ItemStorage = {
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
+                            alert(item_id);
+                            alert(storage_id);
+        
                             let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
 
