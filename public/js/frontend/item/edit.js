@@ -151,8 +151,8 @@ let Item = {
                                 '<i class="la la-pencil"></i>' +
                             '</button>'+
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                                'data-item_id="' + t.pivot.item_id + '" ' +
-                                'data-storage_id="' + t.pivot.storage_id + '">' +
+                                'data-item_id="' + $('#item_uuid').val() + '" ' +
+                                'data-storage_id="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
                         );
