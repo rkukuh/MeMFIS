@@ -88,10 +88,9 @@ let ItemStorage = {
         $('.item_storage_datatable').on('click', '.edit', function () {
             save_changes_button();
 
-            let item_id = $(this).data('item_id');
             let storage_id = $(this).data('storage_id');
 
-            $('select[name="storage"]').empty();
+            $('select[name="item_storage_id"]').empty();
 
             $.ajax({
                 url: '/get-storages-combobox/',
@@ -100,15 +99,15 @@ let ItemStorage = {
                 success: function (data) {
                     let index = 1;
 
-                    $('select[name="storage"]').empty();
+                    $('select[name="item_storage_id"]').empty();
 
                     $.each(data, function (key, value) {
                         if (key == storage_id) {
-                            $('select[name="storage"]').append(
+                            $('select[name="item_storage_id"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="storage"]').append(
+                            $('select[name="item_storage_id"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }
@@ -122,7 +121,6 @@ let ItemStorage = {
 
             document.getElementById('min').value = min;
             document.getElementById('max').value = max;
-            document.getElementById('item_id').value = item_id;
         });
 
         $('.modal-footer').on('click', '.update-storage', function () {
@@ -157,7 +155,6 @@ let ItemStorage = {
                         if (data.errors.max) {
                             $('#max-error').html(data.errors.max[0]);
                         }
-                        document.getElementById('storage').value = storage;
                         document.getElementById('min').value = min;
                         document.getElementById('max').value = max;
 
@@ -178,8 +175,8 @@ let ItemStorage = {
         });
 
         $('.item_storage_datatable').on('click', '.delete', function () {
-            let item_id = $(this).data('item_id');
-            let storage_id = $(this).data('storage_id');
+            let item_uuid = $(this).data('item_uuid');
+            let storage_uuid = $(this).data('storage_uuid');
 
             swal({
                 title: 'Sure want to remove?',
@@ -197,7 +194,7 @@ let ItemStorage = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/item/' + item_id + '/'+ storage_id+ '/storage/',
+                        url: '/item/' + item_uuid + '/'+ storage_uuid+ '/storage/',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -210,8 +207,6 @@ let ItemStorage = {
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            alert(item_id);
-                            alert(storage_id);
         
                             let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
