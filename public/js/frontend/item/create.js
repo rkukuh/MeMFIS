@@ -23,6 +23,7 @@ let Item = {
             $('#name-error').html('');
             $('#unit-error').html('');
             $('#category-error').html('');
+            $('#ppn_amount-error').html('');
         };
         
         $('.footer').on('click', '.add-item', function () {
@@ -81,6 +82,10 @@ let Item = {
 
                         if (data.errors.category) {
                             $('#category-error').html(data.errors.category[0]);
+                        }
+
+                        if (data.errors.ppn_amount) {
+                            $('#ppn_amount-error').html(data.errors.ppn_amount[0]);
                         }
 
                         document.getElementById('code').value = code;

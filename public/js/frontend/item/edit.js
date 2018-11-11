@@ -166,6 +166,7 @@ let Item = {
             $('#name-error').html('');
             $('#unit-error').html('');
             $('#category-error').html('');
+            $('#ppn_amount-error').html('');
         };
 
         $(document).ready(function () {
@@ -279,6 +280,10 @@ let Item = {
                             $('#category-error').html(data.errors.category[0]);
                         }
 
+                        if (data.errors.ppn_amount) {
+                            $('#ppn_amount-error').html(data.errors.ppn_amount[0]);
+                        }
+
                         document.getElementById('code').value = code;
                         document.getElementById('name').value = name;
                         document.getElementById('description').value = description;
@@ -286,14 +291,14 @@ let Item = {
                         document.getElementById('account_code').value = account_code;
 
                     } else {
+                        toastr.success('Material has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
                         errorMessage();
                         $('#item-unit').html();
                         $('#item-storage').html(code);
                         $('input[type=file]').val('');
 
-                        toastr.success('Material has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
                     }
                 }
             });
