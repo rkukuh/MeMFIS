@@ -44,7 +44,8 @@ let ItemUnit = {
                             timeOut: 5000
                         });
 
-                        uom_reset();
+                        // TODO: @audhy
+                        // uom_reset();
 
                         let table = $('.item_unit_datatable').mDatatable();
 
