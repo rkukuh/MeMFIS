@@ -1,24 +1,10 @@
 let ItemUnit = {
     init: function () {
 
-        let uom_reset = function () {
-            document.getElementById('uom_quantity').value = '';
-
-            $('#unit2-error').html('');
-            $('#unit2').select2('val', 'All');
-            $('#uom_quantity-error').html('');
-        }
-
-        $('.modal-footer').on('click', '.reset', function () {
-            uom_reset();
-        });
-
-
         errorMessageUom = function () {
             $('#uom_quantity-error').html('');
-            $('#unit2-error').html('');
+            $('#item_unit-error').html('');
         };
-
 
         $('.modal-footer').on('click', '.add-uom', function () {
             errorMessageUom();
