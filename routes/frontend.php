@@ -23,6 +23,23 @@ Route::name('frontend.')->group(function () {
         Route::resource('journal', 'JournalController');
 
 
+        /** POLYMORPH */
+
+        Route::resource('fax', 'FaxController');
+        Route::resource('note', 'NoteController');
+        Route::resource('email', 'EmailController');
+        Route::resource('phone', 'PhoneController');
+        Route::resource('address', 'AddressController');
+        Route::resource('version', 'VersionController');
+
+
+        /** FINANCE */
+
+        Route::resource('bank', 'BankController');
+        Route::resource('currency', 'CurrencyController');
+        Route::resource('bank-account', 'BankAccountController');
+
+
         /** ITEM */
 
         Route::namespace('Item')->group(function () {
@@ -67,18 +84,10 @@ Route::name('frontend.')->group(function () {
         Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
 
-        Route::resource('fax', 'FaxController');
-        Route::resource('bank', 'BankController');
-        Route::resource('note', 'NoteController');
-        Route::resource('email', 'EmailController');
-        Route::resource('phone', 'PhoneController');
-        Route::resource('address', 'AddressController');
         Route::resource('license', 'LicenseController');
-        Route::resource('version', 'VersionController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('department', 'DepartmentController');
-        Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
