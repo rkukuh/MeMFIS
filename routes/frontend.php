@@ -68,7 +68,8 @@ Route::name('frontend.')->group(function () {
             Route::name('item.')->group(function () {
                 Route::prefix('item')->group(function () {
 
-                    Route::resource('unit', 'ItemUnitController');
+                    Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
+
                     Route::resource('storage', 'ItemStorageController');
 
                 });

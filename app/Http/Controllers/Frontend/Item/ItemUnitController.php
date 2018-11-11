@@ -33,14 +33,13 @@ class ItemUnitController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \App\Models\Item  $item
      * @param  \App\Http\Requests\Frontend\ItemUnitStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemUnitStore $request)
+    public function store(Item $item, ItemUnitStore $request)
     {
-        $item = Item::where('uuid',$request->uuid)->first();
-
-        $item->units()->attach([$request->unit_id => ['quantity' => $request->uom_quantity]]);
+        $item->units()->attach($request->unit_id, ['quantity' => $request->uom_quantity]);
 
         return response()->json($item);
     }

@@ -31,10 +31,9 @@ let ItemUnit = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/item-unit',
+                url: '/item/' + item_uuid + '/unit',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    uuid: item_uuid,
                     uom_quantity: uom_quantity,
                     unit_id: item_unit_id,
                 },
