@@ -33,6 +33,15 @@ Route::name('frontend.')->group(function () {
         Route::resource('version', 'VersionController');
 
 
+        /** MASTER */
+
+        Route::resource('license', 'LicenseController');
+        Route::resource('aircraft', 'AircraftController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('manufacturer', 'ManufacturerController');
+        Route::resource('certification', 'CertificationController');
+
+
         /** FINANCE */
 
         Route::resource('bank', 'BankController');
@@ -84,11 +93,9 @@ Route::name('frontend.')->group(function () {
         Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
 
-        Route::resource('license', 'LicenseController');
-        Route::resource('aircraft', 'AircraftController');
+
+
         Route::resource('taskcard', 'TaskCardController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
         Route::resource('otr-certification', 'OTRCertificationController');
@@ -121,7 +128,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('education', 'EducationController');
         Route::get('/get-educations', 'EducationController@getEducations')->name('get-educations');
 
-        Route::resource('certification', 'CertificationController');
+        //
         Route::get('/get-certifications', 'CertificationController@getCertifications')->name('get-certifications');
 
         Route::resource('general-license', 'GeneralLicenseController')->except(['edit']);
