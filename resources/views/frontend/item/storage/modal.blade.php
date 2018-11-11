@@ -50,10 +50,6 @@
                                 @endcomponent
                             </div>
 
-                            @component('frontend.common.input.hidden')
-                                @slot('id', 'item_id')
-                                @slot('name', 'item_id')
-                            @endcomponent
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
