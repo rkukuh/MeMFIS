@@ -235,7 +235,7 @@ let Item = {
                 is_ppn = 0;
             }
 
-            let uuid = $('input[name=uuid]').val();
+            let item_uuid = $('input[name=item_uuid]').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
             let description = $('#description').val();
@@ -250,7 +250,7 @@ let Item = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'PUT',
-                url: '/item/' + uuid + '/',
+                url: '/item/' + item_uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
