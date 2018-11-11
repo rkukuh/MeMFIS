@@ -39,9 +39,9 @@ Route::name('admin.')->group(function () {
 
         /** LICENSE */
 
-        Route::resource('employee-license', 'EmployeeLicenseController');
-        Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('ame-license', 'AmeLicenseController');
+        Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('employee-license', 'EmployeeLicenseController');
 
         /** CERTIFICATION */
 
