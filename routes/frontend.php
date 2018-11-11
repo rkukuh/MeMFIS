@@ -98,13 +98,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-
-        Route::view('/qualification', 'frontend.personal-information.qualifications.index')->name('qualification');
-        Route::view('/personal-dashboard', 'frontend.personal-information.dashboard.index')->name('personal-dashboard');
-        Route::view('/emergency-contacts', 'frontend.personal-information.emergency-contacts.index')->name('emergency-contacts');
-        Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
-        Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
-
         //HR Forms
         Route::resource('hr-form', 'HRFormController');
         Route::get('get-hr-forms', 'HRFormController@getHRForms')->name('get-hr-forms');
@@ -113,21 +106,12 @@ Route::name('frontend.')->group(function () {
         Route::resource('monitor-attendance', 'MonitorAttendanceController');
         Route::get('get-monitor-attendances', 'MonitorAttendanceController@getMonitorAttendances')->name('get-monitor-attendances');
 
-        Route::resource('current-clocked-in-status', 'CurrentClockedInStatusController');
-        Route::get('get-current-clocked-in-status', 'CurrentClockedInStatusController@getCurrentClockedInStatus')->name('get-current-clocked-in-status');
-
         //DocumentManagement
         Route::resource('company-document', 'CompanyDocumentController');
         Route::get('get-company-documents', 'CompanyDocumentController@getCompanyDocuments')->name('get-company-documents');
 
-        Route::resource('document-type', 'DocumentTypeController');
-        Route::get('get-document-types', 'DocumentTypeController@getDocumentTypes')->name('get-document-types');
-
         Route::resource('language', 'LanguageController');
         Route::get('/get-languages', 'LanguageController@getLanguages')->name('get-languages');
-
-        Route::resource('document', 'DocumentController');
-        Route::get('/get-documents', 'DocumentController@getDocuments')->name('get-documents');
 
         Route::resource('education', 'EducationController');
         Route::get('/get-educations', 'EducationController@getEducations')->name('get-educations');
@@ -136,15 +120,6 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');
         Route::get('/general-license/{generallicense}/{employee}/edit', 'GeneralLicenseController@edit')->name('frontend.general-license.edit');
         Route::delete('/general-license/{generallicense}/{employee}', 'GeneralLicenseController@destroy')->name('frontend.general-license.destroy');
-
-        Route::resource('emergency-contact', 'EmergencyContactController');
-        Route::get('/get-emergency-contacts', 'EmergencyContactController@getEmergencyContacts')->name('get-emergency-contacts');
-
-        Route::resource('terminated-employee-data', 'TerminatedEmployeeDataController');
-        Route::get('/get-terminated-employee-datas', 'TerminatedEmployeeDataController@getTerminatedEmployeeDatas')->name('get-terminated-employee-datas');
-
-        Route::resource('tamporarily-deactivated-employee', 'TamporarilyDeactivatedEmployeeController');
-        Route::get('/get-tamporarily-deactivated-employees', 'TamporarilyDeactivatedEmployeeController@getTamporarilyDeactivatedEmployees')->name('get-tamporarily-deactivated-employees');
 
         Route::resource('audit', 'AuditController');
         Route::get('/get-audits','AuditController@getAudits')->name('get-audits');
@@ -174,6 +149,12 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('taskcard-package', 'TaskCardPackageController');
         Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
+
+        Route::view('/qualification', 'frontend.personal-information.qualifications.index')->name('qualification');
+        Route::view('/personal-dashboard', 'frontend.personal-information.dashboard.index')->name('personal-dashboard');
+        Route::view('/emergency-contacts', 'frontend.personal-information.emergency-contacts.index')->name('emergency-contacts');
+        Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
+        Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
     });
 
 });
