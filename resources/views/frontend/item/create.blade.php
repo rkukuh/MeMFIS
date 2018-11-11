@@ -167,6 +167,7 @@
                                                         @slot('input_append', '%')
                                                         @slot('name', 'ppn_amount')
                                                         @slot('input_prepend', 'PPN')
+                                                        @slot('id_error', 'ppn_amount')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
