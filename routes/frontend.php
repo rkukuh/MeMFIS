@@ -13,6 +13,14 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
 
+        /** INITIAL DATA */
+
+        Route::resource('type', 'TypeController');
+        Route::resource('unit', 'UnitController');
+        Route::resource('level', 'LevelController');
+        Route::resource('status', 'StatusController');
+        Route::resource('journal', 'JournalController');
+
 
         /** ITEM */
 
@@ -59,13 +67,10 @@ Route::name('frontend.')->group(function () {
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
 
         Route::resource('fax', 'FaxController');
-        Route::resource('type', 'TypeController');
         Route::resource('bank', 'BankController');
         Route::resource('note', 'NoteController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
-        Route::resource('level', 'LevelController');
-        Route::resource('status', 'StatusController');
         Route::resource('address', 'AddressController');
         Route::resource('license', 'LicenseController');
         Route::resource('version', 'VersionController');
@@ -129,7 +134,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
-        Route::resource('journal', 'JournalController');
+        //
         Route::get('/get-journals', 'JournalController@getJournals')->name('get-journals');
 
         Route::resource('customer', 'CustomerController');
