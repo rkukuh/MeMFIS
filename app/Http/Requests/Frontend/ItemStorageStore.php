@@ -28,8 +28,8 @@ class ItemStorageStore extends FormRequest
     public function rules()
     {
         return [
-            'min' => 'required',
-            'max' => 'required',
+            'min' => 'required|integer|min:0',
+            'max' => 'required|gt:min',
             'storage_id' => [
                 'required',
                 Rule::exists('storages', 'id')->where(function ($query) {
