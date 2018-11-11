@@ -43,6 +43,7 @@ class ItemStore extends FormRequest
                     $query->whereIn('type_id', (new Unit())->ofQuantity()->get());
                 }),
             ],
+            'ppn_amount' => 'min: 1', // TODO: @audhy
         ];
     }
 
