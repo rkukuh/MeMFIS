@@ -13,18 +13,23 @@ class CreateAmelsTable extends Migration
      */
     public function up()
     {
-        /** The details of "Employee-License", for AME License */
+        /** The details of "Employee-License", for AMEL: Rating */
 
         Schema::create('amels', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('employee_license_id');
-            $table->string('rating');
+            $table->unsignedInteger('rating');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('employee_license_id')
                     ->references('id')->on('employee_license')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('rating')
+                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
