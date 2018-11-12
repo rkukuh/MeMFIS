@@ -43,7 +43,9 @@ class CertifiedStaff_AMEL extends Seeder
                 ->where('number', '2126')
                 ->first()
                 ->amels()
-                ->create(['rating' => 'Airframe']);
+                ->create([
+                    'rating' => Type::ofAPERI()->where('code', 'airframe')->first()->id
+                ]);
 
         Aircraft::where('code', 'cn-235')
                 ->first()
@@ -63,7 +65,9 @@ class CertifiedStaff_AMEL extends Seeder
                 ->where('number', '2126')
                 ->first()
                 ->amels()
-                ->create(['rating' => 'Engine']);
+                ->create([
+                    'rating' => Type::ofAPERI()->where('code', 'powerplant')->first()->id
+                ]);
 
         Item::where('code', 'ct7-7a')
             ->first()
