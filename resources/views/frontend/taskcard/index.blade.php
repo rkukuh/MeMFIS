@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader ">
+    <div class="m-subheader hidden" >
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
@@ -38,6 +38,9 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
                                     TaskCard Datalist
                                 </h3>
@@ -62,17 +65,15 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Add Task Card')
-                                            @slot('data_target', '#modal_taskcard')
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'Taskcard')
+                                            @slot('href', route('frontend.taskcard.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-
-                            @include('frontend.taskcard.modal')
 
                             <div class="m_datatable" id="scrolling_both"></div>
                         </div>
@@ -85,5 +86,5 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/taskcard.js')}}"></script>
+    <script src="{{ asset('js/frontend/taskcard/index.js')}}"></script>
 @endpush

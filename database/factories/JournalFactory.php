@@ -9,8 +9,8 @@ $factory->define(Journal::class, function (Faker $faker) {
     $sequence = $faker->unixTime();
 
     return [
-        'code' => 'JR-EX-' . $sequence,
-        'name' => 'Journal Example #' . $sequence,
+        'code' => 'JR-DUM-' . $sequence,
+        'name' => 'Journal Dummy #' . $sequence,
         'type_id' => Type::ofJournal()->get()->random()->id,
         'level' => 1,
     ];

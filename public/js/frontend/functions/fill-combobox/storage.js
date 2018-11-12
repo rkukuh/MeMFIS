@@ -7,18 +7,18 @@ $(document).ready(function () {
             success: function (data) {
                 let index = 1;
 
-                $('select[name="storage"]').empty();
+                $('select[name="item_storage_id"]').empty();
 
                 $.each(data, function (key, value) {
                     if (index == 1) {
-                        $('select[name="storage"]').append(
+                        $('select[name="item_storage_id"]').append(
                             '<option> Select a Storage</option>'
                         );
 
                         index = 0;
                     }
 
-                    $('select[name="storage"]').append(
+                    $('select[name="item_storage_id"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });

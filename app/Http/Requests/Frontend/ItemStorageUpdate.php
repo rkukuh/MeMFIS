@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ItemStoragekUpdate extends FormRequest
+class ItemStorageUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +28,15 @@ class ItemStoragekUpdate extends FormRequest
     public function rules()
     {
         return [
-            //
+            'min' => 'required|integer|min:0',
+            'max' => 'required|gt:min',
+            'storage_id' => [
+                'required',
+                Rule::exists('storages', 'id')->where(function ($query) {
+                    $query->where('is_active', '1');
+                }),
+            ],
+
         ];
     }
 

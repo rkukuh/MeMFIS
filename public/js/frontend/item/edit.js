@@ -6,7 +6,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item-unit/' + item_uuid + '/',
+                        url: '/datatables/item/' + item_uuid + '/units',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -48,14 +48,12 @@ let Item = {
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                     template: function (t) {
                         return t.name + ' (' + t.symbol + ')'
                     }
@@ -64,12 +62,11 @@ let Item = {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                                'data-item_id="' + t.uom.item_id + '" ' +
-                                'data-unit_id="' + t.uom.unit_id + '">' +
+                                'data-item_uuid="' + $('#item_uuid').val() + '" ' +
+                                'data-unit_id="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -84,7 +81,7 @@ let Item = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item-storage/' + item_uuid + '/',
+                        url: '/datatables/item/' + item_uuid + '/storages',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -133,25 +130,29 @@ let Item = {
                     title: 'Min',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50
                 },
                 {
                     field: 'pivot.max',
                     title: 'Max',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                                'data-item_id="' + t.pivot.item_id + '" ' +
+                            '<button href="#" data-toggle="modal" data-target="#modal_storage_stock"  class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" ' +
+                                'data-min="' + t.pivot.min + '" ' +
+                                'data-max="' + t.pivot.max + '" ' +
+                                'data-item_uuid="' + $('#item_uuid').val() + '" ' +
                                 'data-storage_id="' + t.pivot.storage_id + '">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</button>'+
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
+                                'data-item_uuid="' + $('#item_uuid').val() + '" ' +
+                                'data-storage_uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -159,6 +160,14 @@ let Item = {
                 }
             ]
         });
+
+        errorMessage = function () {
+            $('#code-error').html('');
+            $('#name-error').html('');
+            $('#unit-error').html('');
+            $('#category-error').html('');
+            $('#ppn_amount-error').html('');
+        };
 
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
@@ -172,6 +181,30 @@ let Item = {
                     document.getElementById('ppn_amount').value = '';
                 }
             };
+
+            $('.reset-uom').removeClass('reset');
+            $('.reset-storage').removeClass('reset');
+
+        });
+
+        $('.reset-uom').on('click', function () {
+            document.getElementById('uom_quantity').value = '';
+
+            $('#item_unit_id').select2('val', 'All');
+
+            $('#uom_quantity-error').html('');
+            $('#item_unit-error').html('');
+        });
+
+        $('.reset-storage').on('click', function () {
+            document.getElementById('min').value = '';
+            document.getElementById('max').value = '';
+
+            $('#item_storage_id').select2('val', 'All');
+
+            $('#storage-error').html('');
+            $('#min-error').html('');
+            $('#max-error').html('');
         });
 
         $('.footer').on('click', '.reset', function () {
@@ -179,6 +212,7 @@ let Item = {
         });
 
         $('.footer').on('click', '.edit-item', function () {
+            errorMessage();
             if ($('#tag :selected').length > 0) {
                 var selectedtags = [];
 
@@ -199,7 +233,7 @@ let Item = {
                 is_ppn = 0;
             }
 
-            let uuid = $('input[name=uuid]').val();
+            let item_uuid = $('input[name=item_uuid]').val();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
             let description = $('#description').val();
@@ -214,7 +248,7 @@ let Item = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'PUT',
-                url: '/item/' + uuid + '/',
+                url: '/item/' + item_uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
@@ -246,6 +280,10 @@ let Item = {
                             $('#category-error').html(data.errors.category[0]);
                         }
 
+                        if (data.errors.ppn_amount) {
+                            $('#ppn_amount-error').html(data.errors.ppn_amount[0]);
+                        }
+
                         document.getElementById('code').value = code;
                         document.getElementById('name').value = name;
                         document.getElementById('description').value = description;
@@ -253,69 +291,60 @@ let Item = {
                         document.getElementById('account_code').value = account_code;
 
                     } else {
-                        $('#code-error').html('');
-                        $('#name-error').html('');
-                        $('#description-error').html('');
-                        $('#barcode-error').html('');
+                        toastr.success('Material has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+                        errorMessage();
                         $('#item-unit').html();
                         $('#item-storage').html(code);
                         $('input[type=file]').val('');
 
-                        toastr.success('Material has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
                     }
                 }
             });
         });
 
-                // Category
+        $('.modal-footer').on('click', '.add-category', function () {
+            $('#name-error').html('');
+            $('#simpan').text('Simpan');
 
-                let simpan = $('.modal-footer').on('click', '.add-category', function () {
-                    $('#name-error').html('');
-                    $('#simpan').text('Simpan');
-        
-                    let registerForm = $('#CustomerForm');
-                    let code = $('input[name=code_category]').val();
-                    let name = $('input[name=name_category]').val();
-                    let description =$('#description_category').val();
-        
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        type: 'post',
-                        url: '/category-item',
-                        data: {
-                            _token: $('input[name=_token]').val(),
-                            name: name,
-                            code: code,
-                            description: description,
-                        },
-                        success: function (data) {
-                            if (data.errors) {
-                                if (data.errors.code) {
-                                    $('#code-category-error').html(data.errors.code[0]);
-        
-                                }
-                                if (data.errors.name) {
-                                    $('#name-category-error').html(data.errors.name[0]);
-        
-                                }
-        
-                            } else {
-                                $('#modal_category').modal('hide');
-        
-                                toastr.success('Category has been created.', 'Success', {
-                                    timeOut: 5000
-                                });
+            let code = $('input[name=code_category]').val();
+            let name = $('input[name=name_category]').val();
+            let description =$('#description_category').val();
 
-                                item_edit_reset();
-    
-                            }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/category-item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    name: name,
+                    code: code,
+                    description: description,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.code) {
+                            $('#code-category-error').html(data.errors.code[0]);
                         }
-                    });
-                });
+
+                        if (data.errors.name) {
+                            $('#name-category-error').html(data.errors.name[0]);
+                        }
+                    } else {
+                        $('#modal_category').modal('hide');
+
+                        toastr.success('Category has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        item_edit_reset();
+                    }
+                }
+            });
+        });
     }
 };
 

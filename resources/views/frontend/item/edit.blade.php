@@ -54,8 +54,8 @@
                                         <legend class="w-auto">Identifier</legend>
 
                                         @component('frontend.common.input.hidden')
-                                            @slot('id', 'uuid')
-                                            @slot('name', 'uuid')
+                                            @slot('id', 'item_uuid')
+                                            @slot('name', 'item_uuid')
                                             @slot('value', $item->uuid)
                                         @endcomponent
 
@@ -197,6 +197,7 @@
                                                             @slot('input_append', '%')
                                                             @slot('name', 'ppn_amount')
                                                             @slot('input_prepend', 'PPN')
+                                                            @slot('id_error', 'ppn_amount')
                                                             @slot('value', $item->ppn_amount)
 
                                                             @if ($item->is_ppn == 0)
@@ -394,6 +395,8 @@
 
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/action-botton/item-storage.js')}}"></script>
 
     <script src="{{ asset('js/frontend/item/edit/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>

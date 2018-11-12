@@ -22,6 +22,7 @@ class CreateEmployeeLicenseTable extends Migration
             $table->timestamp('valid_until')->nullable();
             $table->timestamp('revoke_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('employee_id')
                     ->references('id')->on('employees')

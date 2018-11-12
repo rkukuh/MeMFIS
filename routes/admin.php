@@ -6,7 +6,7 @@ Route::name('admin.')->group(function () {
 
         'middleware'    => 'auth',
         'prefix'        => 'admin',
-        'namespace'     => 'Admin'
+        'namespace'     => 'Admin',
 
     ], function () {
 
@@ -39,14 +39,14 @@ Route::name('admin.')->group(function () {
 
         /** LICENSE */
 
-        Route::resource('employee-license', 'EmployeeLicenseController');
+        Route::resource('amel', 'AmelController');
         Route::resource('general-license', 'GeneralLicenseController');
-        Route::resource('ame-license', 'AmeLicenseController');
+        Route::resource('employee-license', 'EmployeeLicenseController');
 
         /** CERTIFICATION */
 
-        Route::resource('certification-employee', 'CertificationEmployeeController');
         Route::resource('otr-certification', 'OTRCertificationController');
+        Route::resource('certification-employee', 'CertificationEmployeeController');
 
         /** FINANCE */
 

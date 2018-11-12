@@ -56,9 +56,9 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function ame_licenses_dgca()
+    public function amels_dgca()
     {
         return $this->hasMany(EmployeeLicense::class)
-                    ->where('license_id', License::ofAMELicenseDGCA()->first()->id);
+                    ->where('license_id', License::ofAMELDGCA()->first()->id);
     }
 }

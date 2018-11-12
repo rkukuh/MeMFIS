@@ -28,9 +28,9 @@ class ItemStorageStore extends FormRequest
     public function rules()
     {
         return [
-            'min' => 'required',
-            'max' => 'required',
-            'storage' => [
+            'min' => 'required|integer|min:0',
+            'max' => 'required|gt:min',
+            'storage_id' => [
                 'required',
                 Rule::exists('storages', 'id')->where(function ($query) {
                     $query->where('is_active', '1');
@@ -48,8 +48,19 @@ class ItemStorageStore extends FormRequest
     public function messages()
     {
         return [
-            'storage.exists' => 'The selected storage is invalid.',
+            'storage_id.exists' => 'The selected storage is invalid.',
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        //
     }
 
     protected function failedValidation(Validator $validator) {

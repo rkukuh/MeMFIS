@@ -8,6 +8,7 @@
                 <h5 class="modal-title" id="TitleModalUoM">
                     UoM (Unit of Measurement)
                 </h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -19,16 +20,16 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row item-info">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <h5 class="item-name">Item-A001</h5>
+                                <h5 class="item-name">
+                                    {{ $item->name }}
 
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <strong>Quantity:</strong> {{$item->unit_quantity}}
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <strong>Unit:</strong> {{$item->unit->name}} - ( {{{$item->unit->symbol}}} )
-                                    </div>
-                                </div>
+                                    <small class="text-muted"> {{ $item->code }}</small>
+                                </h5>
+
+                                <h6>
+                                    Unit:
+                                    {{ $item->unit->name }} ({{ $item->unit->symbol }})
+                                </h6>
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
@@ -50,11 +51,11 @@
                                 </label>
 
                                 @component('frontend.common.input.select')
-                                    @slot('id', 'item_unit_id')
                                     @slot('text', 'Unit')
+                                    @slot('id', 'item_unit_id')
+                                    @slot('style', 'width: 100%')
                                     @slot('name', 'item_unit_id')
                                     @slot('id_error', 'item_unit')
-                                    @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
                         </div>
@@ -63,10 +64,14 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-uom')
                                     @slot('type', 'button')
+                                    @slot('class', 'add-uom')
                                 @endcomponent
-                                @include('frontend.common.buttons.reset')
+
+                                @component('frontend.common.buttons.reset')
+                                    @slot('class', 'reset-uom')
+                                @endcomponent
+
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>

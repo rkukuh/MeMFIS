@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AmeLicenseTest extends TestCase
+class AmelTest extends TestCase
 {
     /**
      * A basic test example.

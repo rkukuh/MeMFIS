@@ -18,7 +18,16 @@ let Item = {
             item_reset();
         });
 
+        errorMessage = function () {
+            $('#code-error').html('');
+            $('#name-error').html('');
+            $('#unit-error').html('');
+            $('#category-error').html('');
+            $('#ppn_amount-error').html('');
+        };
+        
         $('.footer').on('click', '.add-item', function () {
+            errorMessage();
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
             let description = $('#description').val();
@@ -75,16 +84,17 @@ let Item = {
                             $('#category-error').html(data.errors.category[0]);
                         }
 
+                        if (data.errors.ppn_amount) {
+                            $('#ppn_amount-error').html(data.errors.ppn_amount[0]);
+                        }
+
                         document.getElementById('code').value = code;
                         document.getElementById('name').value = name;
                         document.getElementById('description').value = description;
                         document.getElementById('account_code').value = account_code;
 
                     } else {
-                        $('#code-error').html('');
-                        $('#name-error').html('');
-                        $('#description-error').html('');
-
+                        errorMessage();
                         document.getElementById('item-uom').removeAttribute('disabled');
                         document.getElementById('item-storage_stock').removeAttribute('disabled');
 

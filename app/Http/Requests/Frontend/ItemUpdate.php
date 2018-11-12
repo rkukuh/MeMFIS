@@ -43,6 +43,7 @@ class ItemUpdate extends FormRequest
                     $query->whereIn('type_id', (new Unit())->ofQuantity()->get());
                 }),
             ],
+            'ppn_amount' => 'integer|min:0', 
         ];
     }
 

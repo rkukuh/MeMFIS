@@ -1,6 +1,6 @@
 let StorageSelect2 = {
     init: function () {
-        $('#storage, #storage_validate').select2({
+        $('#item_storage_id, #item_storage_validate').select2({
             placeholder: 'Select a Storage'
         });
     }
