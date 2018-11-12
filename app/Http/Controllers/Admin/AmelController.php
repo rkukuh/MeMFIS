@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\AmeLicense;
+use App\Models\Amel;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AmeLicenseStore;
-use App\Http\Requests\Admin\AmeLicenseUpdate;
+use App\Http\Requests\Admin\AmelStore;
+use App\Http\Requests\Admin\AmelUpdate;
 
-class AmeLicenseController extends Controller
+class AmelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class AmeLicenseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\AmeLicenseStore  $request
+     * @param  \App\Http\Requests\Admin\AmelStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AmeLicenseStore $request)
+    public function store(AmelStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class AmeLicenseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AmeLicense  $ameLicense
+     * @param  \App\Models\Amel  $amel
      * @return \Illuminate\Http\Response
      */
-    public function show(AmeLicense $ameLicense)
+    public function show(Amel $amel)
     {
         //
     }
@@ -54,10 +54,10 @@ class AmeLicenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AmeLicense  $ameLicense
+     * @param  \App\Models\Amel  $amel
      * @return \Illuminate\Http\Response
      */
-    public function edit(AmeLicense $ameLicense)
+    public function edit(Amel $amel)
     {
         //
     }
@@ -65,11 +65,11 @@ class AmeLicenseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\AmeLicenseUpdate  $request
-     * @param  \App\Models\AmeLicense  $ameLicense
+     * @param  \App\Http\Requests\Admin\AmelUpdate  $request
+     * @param  \App\Models\Amel  $amel
      * @return \Illuminate\Http\Response
      */
-    public function update(AmeLicenseUpdate $request, AmeLicense $ameLicense)
+    public function update(AmelUpdate $request, Amel $amel)
     {
         //
     }
@@ -77,10 +77,10 @@ class AmeLicenseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AmeLicense  $ameLicense
+     * @param  \App\Models\Amel  $amel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AmeLicense $ameLicense)
+    public function destroy(Amel $amel)
     {
         //
     }

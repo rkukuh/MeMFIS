@@ -48,7 +48,7 @@ class License extends MemfisModel
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfAMELicenseDGCA(Builder $query)
+    public function scopeOfAMELDGCA(Builder $query)
     {
         return $query->where('code', 'amel-dgca');
     }

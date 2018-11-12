@@ -14,6 +14,8 @@ use App\Models\Item;
 use App\Policies\ItemPolicy;
 use App\Models\Note;
 use App\Policies\NotePolicy;
+use App\Models\Amel;
+use App\Policies\AmelPolicy;
 use App\Models\Email;
 use App\Policies\EmailPolicy;
 use App\Models\Phone;
@@ -40,8 +42,6 @@ use App\Models\TaskCard;
 use App\Policies\TaskCardPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
-use App\Models\AmeLicense;
-use App\Policies\AmeLicensePolicy;
 use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
 use App\Models\Manufacturer;
@@ -74,6 +74,7 @@ class AuthServiceProvider extends ServiceProvider
         Unit::class => UnitPolicy::class,
         Item::class => ItemPolicy::class,
         Note::class => NotePolicy::class,
+        Amel::class => AmelPolicy::class,
         Email::class => EmailPolicy::class,
         Phone::class => PhonePolicy::class,
         Level::class => LevelPolicy::class,
@@ -87,7 +88,6 @@ class AuthServiceProvider extends ServiceProvider
         Employee::class => EmployeePolicy::class,
         TaskCard::class => TaskCardPolicy::class,
         Department::class => DepartmentPolicy::class,
-        AmeLicense::class => AmeLicensePolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
         Certification::class => CertificationPolicy::class,

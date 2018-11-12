@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AmeLicenseUpdate extends FormRequest
+class AmelUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

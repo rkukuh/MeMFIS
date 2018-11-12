@@ -8,7 +8,7 @@ use App\Models\Employee;
 use Illuminate\Database\Seeder;
 use App\Models\Pivots\EmployeeLicense;
 
-class CertifiedStaff_AMELicense extends Seeder
+class CertifiedStaff_AMEL extends Seeder
 {
     /**
      * Run the database seeds.
@@ -41,7 +41,7 @@ class CertifiedStaff_AMELicense extends Seeder
             })
             ->where('number', '2126')
             ->first()
-            ->ame_licenses()
+            ->amels()
             ->createMany([
                 [
                     'aircraft_id' => Aircraft::where('code', 'cn-235')->first()->id,
