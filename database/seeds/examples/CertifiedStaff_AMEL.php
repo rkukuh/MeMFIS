@@ -44,7 +44,17 @@ class CertifiedStaff_AMEL extends Seeder
             ->amels()
             ->saveMany([
                 Aircraft::where('code', 'cn-235')->first(),
-                Aircraft::where('code', 'b737-300')->first()
+                Aircraft::where('code', 'b737-300')->first(),
             ]);
+            // ->createMany([
+            //     [
+            //         'aircraft_id' => Aircraft::where('code', 'cn-235')->first()->id,
+            //         'type_id'     => Type::ofAPERI()->where('code', 'airframe')->first()->id,
+            //     ],
+            //     [
+            //         'aircraft_id' => Aircraft::where('code', 'b737-300')->first()->id,
+            //         'type_id'     => Type::ofAPERI()->where('code', 'airframe')->first()->id,
+            //     ],
+            // ]);
     }
 }
