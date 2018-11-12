@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use App\Models\Type;
+use App\Models\Item;
 use App\Models\License;
 use App\Models\Aircraft;
 use App\Models\Employee;
@@ -34,27 +35,54 @@ class CertifiedStaff_AMEL extends Seeder
             'valid_until' => Carbon::createFromFormat('Y-m-d', '2009-06-05'),
         ]);
 
-        /** Assign AMEL to RATING (it could be Aircraft or Engine) */
+        /** Assign AMEL to Rating: AIRFRAME */
 
-        EmployeeLicense::whereHas('employee', function ($query) use ($sugiharto) {
-                return $query->where('employee_id', $sugiharto->id);
-            })
-            ->where('number', '2126')
+        $amel = EmployeeLicense::whereHas('employee', function ($query) use ($sugiharto) {
+                    return $query->where('employee_id', $sugiharto->id);
+                })
+                ->where('number', '2126')
+                ->first()
+                ->amels()
+                ->create(['rating' => 'Airframe']);
+
+        Aircraft::where('code', 'cn-235')
+                ->first()
+                ->amels()
+                ->save($amel);
+
+        Aircraft::where('code', 'b737-300')
+                ->first()
+                ->amels()
+                ->save($amel);
+
+        /** Assign AMEL to Rating: ENGINE (POWERPLANT) */
+
+        $amel = EmployeeLicense::whereHas('employee', function ($query) use ($sugiharto) {
+                    return $query->where('employee_id', $sugiharto->id);
+                })
+                ->where('number', '2126')
+                ->first()
+                ->amels()
+                ->create(['rating' => 'Engine']);
+
+        Item::where('code', 'ct7-7a')
             ->first()
             ->amels()
-            ->saveMany([
-                Aircraft::where('code', 'cn-235')->first(),
-                Aircraft::where('code', 'b737-300')->first(),
-            ]);
-            // ->createMany([
-            //     [
-            //         'aircraft_id' => Aircraft::where('code', 'cn-235')->first()->id,
-            //         'type_id'     => Type::ofAPERI()->where('code', 'airframe')->first()->id,
-            //     ],
-            //     [
-            //         'aircraft_id' => Aircraft::where('code', 'b737-300')->first()->id,
-            //         'type_id'     => Type::ofAPERI()->where('code', 'airframe')->first()->id,
-            //     ],
-            // ]);
+            ->save($amel);
+
+        Item::where('code', 'cfm56-3')
+            ->first()
+            ->amels()
+            ->save($amel);
+
+        Item::where('code', 'cfm56-3b1')
+            ->first()
+            ->amels()
+            ->save($amel);
+
+        Item::where('code', 'cfm56-3c1')
+            ->first()
+            ->amels()
+            ->save($amel);
     }
 }

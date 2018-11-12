@@ -8,8 +8,7 @@ use App\Models\Pivots\EmployeeLicense;
 class Amel extends MemfisModel
 {
     protected $fillable = [
-        'amelable_id',
-        'amelable_type',
+        'rating',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -28,17 +27,28 @@ class Amel extends MemfisModel
     }
 
     /**
-     * Polymorph: An AMEL content could be aircraft and/or engine.
+     * M-M Polymorph: An AMEL content could be an aircraft.
      *
-     * This function will get all of the owning amelable models.
-     * See:
-     * - Aircraft's amels() method for the inverse
-     * - Item's amels() method for the inverse
+     * This function will get all of the aircrafts that are assigned this AMEL.
+     * See: Aircraft's amels() method for the inverse
      *
      * @return mixed
      */
-    public function amelable()
+    public function aircrafts()
     {
-        return $this->morphTo();
+        return $this->morphedByMany(Aircraft::class, 'amelable');
+    }
+
+    /**
+     * M-M Polymorph: An AMEL content could be an item.
+     *
+     * This function will get all of the items that are assigned this AMEL.
+     * See: Aircraft's amels() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->morphedByMany(Item::class, 'amelable');
     }
 }

@@ -108,7 +108,7 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
-     * Polymorph: An AMEL content could be aircraft and/or engine.
+     * M-M Polymorph: An AMEL content could be aircraft and/or engine.
      *
      * This function will aet all of the Item (engine)'s AMEL.
      * Amel's amelable() method for the inverse
@@ -117,7 +117,7 @@ class Item extends MemfisModel implements HasMedia
      */
     public function amels()
     {
-        return $this->morphMany(Amel::class, 'amelable');
+        return $this->morphToMany(Amel::class, 'amelable');
     }
 
     /***************************************** ACCESSOR ******************************************/

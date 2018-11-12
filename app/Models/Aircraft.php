@@ -28,7 +28,7 @@ class Aircraft extends MemfisModel
     }
 
     /**
-     * Polymorph: An AMEL content could be aircraft and/or engine.
+     * M-M Polymorph: An AMEL content could be aircraft and/or engine.
      *
      * This function will aet all of the aircraft's AMEL.
      * Amel's amelable() method for the inverse
@@ -37,6 +37,6 @@ class Aircraft extends MemfisModel
      */
     public function amels()
     {
-        return $this->morphMany(Amel::class, 'amelable');
+        return $this->morphToMany(Amel::class, 'amelable');
     }
 }
