@@ -45,7 +45,7 @@ class DummyDataSeeder extends Seeder
 
         $this->call(EmployeeLicenses::class);
         $this->call(GeneralLicenses::class);
-        $this->call(AmeLicenses::class);
+        $this->call(Amels::class);
 
         /** CERTIFICATION */
 

@@ -42,4 +42,15 @@ class Level extends MemfisModel
     {
         return $query->where('of', 'language');
     }
+
+    /**
+     * Scope a query to only include level of OTR.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfOTR(Builder $query)
+    {
+        return $query->where('of', 'otr');
+    }
 }

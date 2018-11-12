@@ -17,7 +17,7 @@ class EmployeeAMELDatatables extends Controller
      */
     public function index(Employee $employee)
     {
-        $data = $alldata = json_decode($employee->ame_licenses_dgca);
+        $data = $alldata = json_decode($employee->amels_dgca);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

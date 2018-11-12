@@ -107,6 +107,19 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsTo(Journal::class, 'account_code');
     }
 
+    /**
+     * M-M Polymorph: An AMEL content could be aircraft and/or engine.
+     *
+     * This function will aet all of the Item (engine)'s AMEL.
+     * Amel's amelable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function amels()
+    {
+        return $this->morphToMany(Amel::class, 'amelable');
+    }
+
     /***************************************** ACCESSOR ******************************************/
 
     /**

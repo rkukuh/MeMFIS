@@ -2,15 +2,16 @@
 
 namespace App\Models\Pivots;
 
+use App\Models\Amel;
 use App\Models\License;
 use App\Models\Employee;
-use App\Models\AmeLicense;
 use App\Models\GeneralLicense;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class EmployeeLicense extends Pivot
 {
-    //
+    use SoftDeletes;
 
     /*************************************** RELATIONSHIP ****************************************/
 
@@ -39,13 +40,13 @@ class EmployeeLicense extends Pivot
      *
      * @return mixed
      */
-    public function ame_licenses()
+    public function amels()
     {
         // This method must have a second parameter as FK column (employee_license_id),
         // so these following error will not thrown:
         // "Too few arguments to function Illuminate\Database\Eloquent\Model::setAttribute()"
 
-        return $this->hasMany(AmeLicense::class, 'employee_license_id');
+        return $this->hasMany(Amel::class, 'employee_license_id');
     }
 
     /**

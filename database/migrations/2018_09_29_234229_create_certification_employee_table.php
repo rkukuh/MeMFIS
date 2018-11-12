@@ -17,10 +17,11 @@ class CreateCertificationEmployeeTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('certification_id');
             $table->unsignedInteger('employee_id');
-            $table->string('code');
+            $table->string('number');
             $table->timestamp('issued_at')->nullable();
             $table->timestamp('valid_until')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('certification_id')
                     ->references('id')->on('certifications')
@@ -32,7 +33,7 @@ class CreateCertificationEmployeeTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->index('code');
+            $table->index('number');
         });
     }
 

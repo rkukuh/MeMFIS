@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Amel;
 use Illuminate\Database\Seeder;
 
-class AmeLicensesTableSeeder extends Seeder
+class Amels extends Seeder
 {
     /**
      * Run the database seeds.

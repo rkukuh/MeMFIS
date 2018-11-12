@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(EmployeeLicenseTableSeeder::class);
         $this->call(GeneralLicensesTableSeeder::class);
-        $this->call(AmeLicensesTableSeeder::class);
+        $this->call(AmelsTableSeeder::class);
 
         /** CERTIFICATION */
 

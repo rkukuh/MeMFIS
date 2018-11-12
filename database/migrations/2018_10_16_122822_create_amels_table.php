@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAmelicensesTable extends Migration
+class CreateAmelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,28 +13,23 @@ class CreateAmelicensesTable extends Migration
      */
     public function up()
     {
-        /** The details of "Employee-License", for AME License */
+        /** The details of "Employee-License", for AMEL: Rating */
 
-        Schema::create('ame_licenses', function (Blueprint $table) {
+        Schema::create('amels', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('employee_license_id');
-            $table->unsignedInteger('aircraft_id');
-            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('rating');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('employee_license_id')
                     ->references('id')->on('employee_license')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('aircraft_id')
-                    ->references('id')->on('aircrafts')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('type_id')
-                    ->references('id')->on('aircrafts')
+            $table->foreign('rating')
+                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -47,6 +42,6 @@ class CreateAmelicensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ame_licenses');
+        Schema::dropIfExists('amels');
     }
 }

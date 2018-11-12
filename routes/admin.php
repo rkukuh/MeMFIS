@@ -39,7 +39,7 @@ Route::name('admin.')->group(function () {
 
         /** LICENSE */
 
-        Route::resource('ame-license', 'AmeLicenseController');
+        Route::resource('amel', 'AmelController');
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
 
