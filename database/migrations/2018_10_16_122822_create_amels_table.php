@@ -22,6 +22,7 @@ class CreateAmelsTable extends Migration
             $table->unsignedInteger('amelable_id');
             $table->string('amelable_type');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('employee_license_id')
                     ->references('id')->on('employee_license')
