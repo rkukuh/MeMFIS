@@ -6,11 +6,12 @@ use App\Models\Amel;
 use App\Models\License;
 use App\Models\Employee;
 use App\Models\GeneralLicense;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class EmployeeLicense extends Pivot
 {
-    //
+    use SoftDeletes;
 
     /*************************************** RELATIONSHIP ****************************************/
 
