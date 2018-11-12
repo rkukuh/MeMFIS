@@ -34,7 +34,7 @@ class CertifiedStaff_AMEL extends Seeder
             'valid_until' => Carbon::createFromFormat('Y-m-d', '2009-06-05'),
         ]);
 
-        /** Assign AMEL to RATING (it could be A/C or Engine) */
+        /** Assign AMEL to RATING (it could be Aircraft or Engine) */
 
         EmployeeLicense::whereHas('employee', function ($query) use ($sugiharto) {
                 return $query->where('employee_id', $sugiharto->id);
@@ -42,15 +42,9 @@ class CertifiedStaff_AMEL extends Seeder
             ->where('number', '2126')
             ->first()
             ->amels()
-            ->createMany([
-                [
-                    'aircraft_id' => Aircraft::where('code', 'cn-235')->first()->id,
-                    'type_id'     => Type::ofAPERI()->where('code', 'airframe')->first()->id,
-                ],
-                [
-                    'aircraft_id' => Aircraft::where('code', 'b737-300')->first()->id,
-                    'type_id'     => Type::ofAPERI()->where('code', 'airframe')->first()->id,
-                ],
+            ->saveMany([
+                Aircraft::where('code', 'cn-235')->first(),
+                Aircraft::where('code', 'b737-300')->first()
             ]);
     }
 }
