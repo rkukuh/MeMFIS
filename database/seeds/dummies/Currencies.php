@@ -12,6 +12,6 @@ class Currencies extends Seeder
      */
     public function run()
     {
-        //
+        factory(Currency::class, config('memfis.examples.currencies'))->create();
     }
 }
