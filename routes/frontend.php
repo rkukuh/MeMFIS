@@ -130,7 +130,7 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
         Route::resource('customer', 'CustomerController');
-        Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
+        Route::get('/details/{customer}','CustomerController@details')->name('customer.details');
 
         Route::resource('supplier', 'SupplierController');
         Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');
