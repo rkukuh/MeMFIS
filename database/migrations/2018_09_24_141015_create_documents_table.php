@@ -27,6 +27,8 @@ class CreateDocumentsTable extends Migration
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            $table->index('number');
         });
     }
 
