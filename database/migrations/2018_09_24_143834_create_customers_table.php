@@ -19,7 +19,6 @@ class CreateCustomersTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->string('npwp');
-            $table->text('npwp_address');
             $table->string('leveling');
             $table->integer('active');
             $table->integer('top');
