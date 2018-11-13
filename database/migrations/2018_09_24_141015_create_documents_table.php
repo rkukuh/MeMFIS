@@ -15,6 +15,7 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('documentable_id');
