@@ -12,7 +12,7 @@ $(document).ready(function () {
                 $.each(data, function (key, value) {
                     if (angka6 == 1) {
                         $('select[name="currency"]').append(
-                            '<option> Select a Category</option>'
+                            '<option> Select a Currency</option>'
                         );
 
                         angka6 = 0;
