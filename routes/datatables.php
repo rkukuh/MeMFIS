@@ -23,6 +23,8 @@ Route::name('datatables.')->group(function () {
         /** TRANSACTION */
 
         Route::get('/taskcard','TaskcardDatatables@index')->name('taskcard.index');
+        Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
+        Route::get('/customer','CustomerDatatables@index')->name('customer.index');
 
 
         /** ITEM */
