@@ -96,4 +96,16 @@ class CustomerController extends Controller
 
         return response()->json($customer);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function details(Customer $customer)
+    {
+        return view('frontend.customer.index');
+    }
+
 }
