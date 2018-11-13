@@ -284,4 +284,17 @@ class FillComboxController extends Controller
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function customer()
+    {
+        $customers = Category::ofItem()->pluck('name', 'id');
+
+        return json_encode($customers);
+
+    }
+
 }
