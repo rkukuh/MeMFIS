@@ -39,7 +39,8 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/','TaskCardDatatables@index')->name('all');
                 Route::get('/item','TaskCardItemDatatables@index')->name('item.index');
-                Route::get('/maintenance-cycle','TaskCardMaintenanceCycleDatatables@index')->name('maintenance-cycle.index');
+                Route::get('/repeat','TaskCardMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeat');
+                Route::get('/threshold','TaskCardMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.threshold');
 
             });
 
