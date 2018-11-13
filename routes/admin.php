@@ -27,7 +27,7 @@ Route::name('admin.')->group(function () {
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('document', 'VersionController');
-        Route::resource('maintenance-cycle', 'MaintentanceCycleController');
+        Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */
 

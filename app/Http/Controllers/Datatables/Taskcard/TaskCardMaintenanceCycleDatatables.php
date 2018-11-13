@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\Taskcard;
+namespace App\Http\Controllers\Datatables\TaskCard;
 
 use App\Models\Item;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class RepeatDatatables extends Controller
+class TaskCardMaintenanceCycleDatatables extends Controller
 {
     /**
      * Display a listing of the resource.

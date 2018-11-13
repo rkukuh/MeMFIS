@@ -33,14 +33,13 @@ Route::name('datatables.')->group(function () {
             Route::group([
 
                 'prefix'    => 'taskcard',
-                'namespace' => 'Taskcard'
+                'namespace' => 'TaskCard'
 
             ], function () {
 
-                Route::get('/','TaskcardDatatables@index')->name('all');
-                Route::get('/item','ItemDatatables@index')->name('item.index');
-                Route::get('/repeat','RepeatDatatables@index')->name('repeat.index');
-                Route::get('/threshold','ThresholdDatatables@index')->name('threshold.index');
+                Route::get('/','TaskCardDatatables@index')->name('all');
+                Route::get('/item','TaskCardItemDatatables@index')->name('item.index');
+                Route::get('/maintenance-cycle','TaskCardMaintenanceCycleDatatables@index')->name('maintenance-cycle.index');
 
             });
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\Taskcard;
+namespace App\Http\Controllers\Datatables\TaskCard;
 
-use App\Models\Taskcard;
+use App\Models\TaskCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TaskcardDatatables extends Controller
+class TaskCardDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,7 @@ class TaskcardDatatables extends Controller
      */
     public function index()
     {
-        $taskcards = Taskcard::all();
-
-        $data = $alldata = json_decode($taskcards);
+        $data = $alldata = json_decode(TaskCard::all());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
