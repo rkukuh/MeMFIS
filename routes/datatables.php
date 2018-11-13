@@ -22,10 +22,29 @@ Route::name('datatables.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::get('/taskcard','TaskcardDatatables@index')->name('taskcard.index');
         Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
         Route::get('/customer','CustomerDatatables@index')->name('customer.index');
 
+
+        /** TASKCARD */
+
+        Route::name('taskcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'taskcard',
+                'namespace' => 'Taskcard'
+
+            ], function () {
+
+                Route::get('/','TaskcardDatatables@index')->name('all');
+                Route::get('/item','ItemDatatables@index')->name('item.index');
+                Route::get('/repeat','RepeatDatatables@index')->name('repeat.index');
+                Route::get('/threshold','ThresholdDatatables@index')->name('threshold.index');
+
+            });
+
+        });
 
         /** ITEM */
 
