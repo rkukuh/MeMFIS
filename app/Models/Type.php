@@ -17,6 +17,17 @@ class Type extends MemfisModel
     /******************************************* SCOPE *******************************************/
 
     /**
+     * Scope a query to only include type of Address.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAddress(Builder $query)
+    {
+        return $query->where('of', 'address');
+    }
+
+    /**
      * Scope a query to only include type of AP/ERI.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
