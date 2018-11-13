@@ -61,7 +61,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of capability.
+     * Scope a query to only include type of Capability.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -72,7 +72,18 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of eligibility.
+     * Scope a query to only include type of Document.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDocument(Builder $query)
+    {
+        return $query->where('of', 'document');
+    }
+
+    /**
+     * Scope a query to only include type of Eligibility.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -83,7 +94,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of email.
+     * Scope a query to only include type of Email.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -94,7 +105,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of fax.
+     * Scope a query to only include type of Fax.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -105,7 +116,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of journal.
+     * Scope a query to only include type of Journal.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -116,7 +127,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of A/C maintenance cycle.
+     * Scope a query to only include type of Aircraft Maintenance Cycle.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -127,7 +138,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of phone.
+     * Scope a query to only include type of Phone.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -138,7 +149,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of regulator.
+     * Scope a query to only include type of Regulator.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -149,7 +160,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of task card.
+     * Scope a query to only include type of Task Card.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -160,7 +171,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of unit.
+     * Scope a query to only include type of Unit.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -171,7 +182,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of aircraft work area.
+     * Scope a query to only include type of Aircraft Work Area.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
