@@ -38,6 +38,7 @@ Route::name('admin.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('customer', 'CustomerController');
 
         /** LICENSE */
 

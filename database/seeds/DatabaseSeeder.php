@@ -64,9 +64,9 @@ class DatabaseSeeder extends Seeder
 
         /** FINANCE */
 
+        $this->call(CurrenciesTableSeeder::class);
         $this->call(BanksTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
-        $this->call(CurrenciesTableSeeder::class);
 
         /** TRANSACTION (M-M) */
 

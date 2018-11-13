@@ -57,9 +57,9 @@ class DummyDataSeeder extends Seeder
 
         /** FINANCE */
 
+        $this->call(Currencies::class);
         $this->call(Banks::class);
         $this->call(BankAccounts::class);
-        $this->call(Currencies::class);
 
         /** TRANSACTION (M-M) */
 

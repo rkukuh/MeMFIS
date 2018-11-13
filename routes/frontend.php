@@ -39,6 +39,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('customer', 'CustomerController');
 
         /** LICENSE */
 
@@ -131,7 +132,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
-        Route::resource('customer', 'CustomerController');
         Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
 
         Route::resource('supplier', 'SupplierController');
