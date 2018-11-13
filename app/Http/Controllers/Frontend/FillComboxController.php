@@ -297,18 +297,4 @@ class FillComboxController extends Controller
 
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function currency()
-    {
-        $currencies = Category::ofItem()->pluck('name', 'id');
-
-        return json_encode($currencies);
-
-    }
-
-
 }
