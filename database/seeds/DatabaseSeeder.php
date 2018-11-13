@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsTableSeeder::class);
         $this->call(CategoriesOfItem::class);
         $this->call(StatusesTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
         $this->call(JournalsTableSeeder::class);
 
         /** POLYMORPH */
