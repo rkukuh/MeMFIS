@@ -15,7 +15,25 @@ class CreateMaintenanceCyclesTable extends Migration
     {
         Schema::create('maintenance_cycles', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->unsignedInteger('threshold_type');
+            $table->integer('threshold_amount');
+            $table->unsignedInteger('repeat_type');
+            $table->integer('repeat_amount');
+            $table->unsignedInteger('maintenance_cycleable_id');
+            $table->string('maintenance_cycleable_type');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('threshold_type')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('repeat_type')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
