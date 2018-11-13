@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Taskcard;
 
 use App\Models\Taskcard;
 use App\Models\ListUtil;
