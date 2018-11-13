@@ -58,6 +58,8 @@ use App\Models\Pivots\EmployeeLicense;
 use App\Policies\EmployeeLicensePolicy;
 use App\Models\OTRCertification;
 use App\Policies\OTRCertificationPolicy;
+use App\Models\MaintenanceCycle;
+use App\Policies\MaintenanceCyclePolicy;
 use App\Models\Pivots\CertificationEmployee;
 use App\Policies\CertificationEmployeePolicy;
 
@@ -100,6 +102,7 @@ class AuthServiceProvider extends ServiceProvider
         GeneralLicense::class => GeneralLicensePolicy::class,
         EmployeeLicense::class => EmployeeLicensePolicy::class,
         OTRCertification::class => OTRCertificationPolicy::class,
+        MaintenanceCycle::class => MaintenanceCyclePolicy::class,
         CertificationEmployee::class => CertificationEmployeePolicy::class,
     ];
 

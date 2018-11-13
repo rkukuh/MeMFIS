@@ -29,6 +29,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
+        Route::resource('document', 'DocumentController');
+        Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */
 

@@ -19,7 +19,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Units::class);
         $this->call(Levels::class);
         $this->call(Statuses::class);
-        $this->call(Currencies::class);
         $this->call(Journals::class);
 
         /** POLYMORPH */
@@ -31,6 +30,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Addresses::class);
         $this->call(Versions::class);
         $this->call(Documents::class);
+        $this->call(MaintenanceCycles::class);
 
         /** MASTER */
 
@@ -59,6 +59,7 @@ class DummyDataSeeder extends Seeder
 
         $this->call(Banks::class);
         $this->call(BankAccounts::class);
+        $this->call(Currencies::class);
 
         /** TRANSACTION (M-M) */
 

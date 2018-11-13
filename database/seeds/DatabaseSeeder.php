@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsTableSeeder::class);
         $this->call(CategoriesOfItem::class);
         $this->call(StatusesTableSeeder::class);
-        $this->call(CurrenciesTableSeeder::class);
         $this->call(JournalsTableSeeder::class);
 
         /** POLYMORPH */
@@ -38,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AddressesTableSeeder::class);
         $this->call(VersionsTableSeeder::class);
         $this->call(DocumentsTableSeeder::class);
+        $this->call(MaintenanceCyclesTableSeeder::class);
 
         /** MASTER */
 
@@ -66,6 +66,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BanksTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
 
         /** TRANSACTION (M-M) */
 

@@ -26,6 +26,8 @@ Route::name('admin.')->group(function () {
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
+        Route::resource('document', 'VersionController');
+        Route::resource('maintenance-cycle', 'MaintentanceCycleController');
 
         /** MASTER */
 
