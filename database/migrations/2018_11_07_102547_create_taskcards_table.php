@@ -20,10 +20,13 @@ class CreateTaskcardsTable extends Migration
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('otr_certification_id');
             $table->unsignedInteger('work_area');
+
+            // TODO: 1 Task Card -> M treshold dan repeat
             $table->unsignedInteger('threshold_type');
             $table->integer('threshold_amount');
             $table->unsignedInteger('repeat_type');
             $table->integer('repeat_amount');
+
             $table->string('zone');
             $table->string('access');
             $table->boolean('rii');
