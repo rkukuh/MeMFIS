@@ -42,6 +42,8 @@ use App\Models\TaskCard;
 use App\Policies\TaskCardPolicy;
 use App\Models\Customer;
 use App\Policies\CustomerPolicy;
+use App\Models\Document;
+use App\Policies\DocumentPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
@@ -90,6 +92,7 @@ class AuthServiceProvider extends ServiceProvider
         Employee::class => EmployeePolicy::class,
         TaskCard::class => TaskCardPolicy::class,
         Customer::class => CustomerPolicy::class,
+        Document::class => DocumentPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
