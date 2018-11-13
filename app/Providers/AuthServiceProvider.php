@@ -40,6 +40,8 @@ use App\Models\Employee;
 use App\Policies\EmployeePolicy;
 use App\Models\TaskCard;
 use App\Policies\TaskCardPolicy;
+use App\Models\Customer;
+use App\Policies\CustomerPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
@@ -87,6 +89,7 @@ class AuthServiceProvider extends ServiceProvider
         Aircraft::class => AircraftPolicy::class,
         Employee::class => EmployeePolicy::class,
         TaskCard::class => TaskCardPolicy::class,
+        Customer::class => CustomerPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
