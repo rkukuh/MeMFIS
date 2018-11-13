@@ -9,6 +9,7 @@ return [
      */
     'examples' => [
         'banks' => 50,
+        'currencies' => 10,
         'employees' => 50,
         'items' => 100,
         'journals' => 100,
