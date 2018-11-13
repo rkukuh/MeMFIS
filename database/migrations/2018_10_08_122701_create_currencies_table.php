@@ -16,11 +16,13 @@ class CreateCurrenciesTable extends Migration
         Schema::create('currencies', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('code');
             $table->string('name');
             $table->string('symbol');
             $table->timestamps();
             $table->softDeletes();
 
+            $table->index('code');
             $table->index('name');
             $table->index('symbol');
         });
