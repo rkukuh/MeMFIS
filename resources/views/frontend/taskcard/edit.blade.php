@@ -104,59 +104,6 @@
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
-                                            
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Threshold Type @include('frontend.common.label.required')
-                                                </label>
-    
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'threshold_type')
-                                                    @slot('text', 'Threshold Type')
-                                                    @slot('name', 'threshold_type')
-                                                    @slot('id_error', 'threshold-type')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Threshold Amount @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.number')
-                                                    @slot('text', 'Threshold Amount')
-                                                    @slot('id', 'threshold_amount')
-                                                    @slot('name', 'threshold_mount')
-                                                    @slot('id_error', 'threshold-amount')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Repeat Type @include('frontend.common.label.required')
-                                                </label>
-    
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'repeat_type')
-                                                    @slot('text', 'Repeat Type')
-                                                    @slot('name', 'repeat_type')
-                                                    @slot('id_error', 'repeat-type')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Repeat Amount @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.number')
-                                                    @slot('text', 'Repeat Amount')
-                                                    @slot('id', 'repeat_amount')
-                                                    @slot('name', 'repeat_amount')
-                                                    @slot('id_error', 'repeat-amount')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Zone @include('frontend.common.label.required')
@@ -345,28 +292,105 @@
                         </div>
                     </div>
                     <div class="m-portlet m-portlet--mobile">
-                            <div class="m-portlet__body">
-                                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                    <div class="row align-items-center">
-                                        <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                            @component('frontend.common.buttons.create-new')
-                                                @slot('text', 'Item Taskcard')
-                                                @slot('id', 'item_taskcard')
-                                                @slot('data_target', '#modal_item')
-                                            @endcomponent
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('text', 'Item Taskcard')
+                                            @slot('id', 'item_taskcard')
+                                            @slot('data_target', '#modal_item')
+                                        @endcomponent
     
-                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                        </div>
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
+                            </div>
     
-                                @include('frontend.taskcard.item.modal')
+                            @include('frontend.taskcard.item.modal')
     
-                                <div class="item_datatable" id="item_datatable"></div>
+                            <div class="item_datatable" id="item_datatable"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+    
+                                @include('frontend.common.label.datalist')
+    
+                                <h3 class="m-portlet__head-text">
+                                    Threshold Taskcard 
+                                </h3>
                             </div>
                         </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('text', 'Threshold Taskcard')
+                                            @slot('id', 'threshold_taskcard')
+                                            @slot('data_target', '#modal_threshold')
+                                        @endcomponent
+        
+                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            @include('frontend.taskcard.threshold.modal')
+        
+                            <div class="threshold_datatable" id="item_datatable"></div>
+                        </div>
+                    </div>
                 </div>
+                    <div class="m-portlet">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-caption">
+                                    <div class="m-portlet__head-title">
+                                        <span class="m-portlet__head-icon m--hide">
+                                            <i class="la la-gear"></i>
+                                        </span>
+        
+                                        @include('frontend.common.label.datalist')
+        
+                                        <h3 class="m-portlet__head-text">
+                                            Repeat Taskcard 
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-portlet m-portlet--mobile">
+                                <div class="m-portlet__body">
+                                    <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                                @component('frontend.common.buttons.create-new')
+                                                    @slot('text', 'Repeat Taskcard')
+                                                    @slot('id', 'repeat_taskcard')
+                                                    @slot('data_target', '#modal_repeat')
+                                                @endcomponent
+            
+                                                <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    @include('frontend.taskcard.repeat.modal')
+            
+                                    <div class="repeat_datatable" id="item_datatable"></div>
+                                </div>
+                            </div>
+                        </div>
             </div>
+            
         </div>
     </div>
 @endsection
