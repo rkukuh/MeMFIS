@@ -2,6 +2,7 @@
 
 use App\Models\Address;
 use App\Models\Customer;
+use App\Models\Document;
 use Illuminate\Database\Seeder;
 
 class Customers extends Seeder
@@ -19,14 +20,18 @@ class Customers extends Seeder
 
                 /** Document */
 
-                //
+                for ($i = 1; $i <= rand(1, 3); $i++) {
+                    $customer
+                        ->documents()
+                        ->save(factory(Document::class)->make());
+                }
 
                 /** Address */
 
                 for ($i = 1; $i <= rand(2, 4); $i++) {
-                    $address = factory(Address::class)->make();
-
-                    $customer->addresses()->save($address);
+                    $customer
+                        ->addresses()
+                        ->save(factory(Address::class)->make());
                 }
 
             });
