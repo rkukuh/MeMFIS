@@ -308,4 +308,17 @@ class Type extends MemfisModel
     {
         return $this->hasMany(TaskCard::class);
     }
+
+    /**
+     * One-to-Many: A unit may have zero or many type.
+     *
+     * This function will retrieve all units of a type.
+     * See: Unit's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
 }

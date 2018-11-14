@@ -72,6 +72,19 @@ class Unit extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: A unit may have zero or many type.
+     *
+     * This function will retrieve the type of an unit.
+     * See: Type's units() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
      * Many-to-Many: An item may have zero or many unit.
      *
      * This function will retrieve the items of a unit.
