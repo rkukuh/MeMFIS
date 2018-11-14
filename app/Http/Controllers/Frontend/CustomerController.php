@@ -105,7 +105,7 @@ class CustomerController extends Controller
      */
     public function details(Customer $customer)
     {
-        return view('frontend.customer.index');
+        return response()->json($customer);
     }
 
 }
