@@ -17,6 +17,12 @@ class Customers extends Seeder
             ->create()
             ->each(function ($customer) {
 
+                /** DOCUMENT */
+
+                //
+
+                /** ADDRESS */
+
                 for ($i = 1; $i <= rand(2, 4); $i++) {
                     $address = factory(Address::class)->make();
 
