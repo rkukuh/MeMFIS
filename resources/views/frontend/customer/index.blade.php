@@ -71,8 +71,8 @@
                                     </div>
                                 </div>
                             </div>
-                            @include('frontend.customer.modal')
-                            <div class="m_datatable" id="scrolling_both"></div>
+                            {{-- @include('frontend.customer.modal') --}}
+                            <div class="customer_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -82,11 +82,11 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
+    {{-- <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script> --}}
 
-    <script src="{{ asset('js/frontend/customer.js')}}"></script>
-    <script src="{{ asset('js/frontend/address.js')}}"></script>
+    <script src="{{ asset('js/frontend/customer/index.js')}}"></script>
+    {{-- <script src="{{ asset('js/frontend/address.js')}}"></script> --}}
 
 @endpush
