@@ -225,7 +225,7 @@
                                                         @include('frontend.common.buttons.reset')
 
                                                         @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.taskcard.index'))
+                                                            @slot('href', route('frontend.quotation.index'))
                                                         @endcomponent
                                                     </div>
                                                 </div>

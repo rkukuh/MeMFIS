@@ -202,7 +202,7 @@
                                                 <div class="flex">
                                                     <div class="action-buttons">
                                                         @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.taskcard.index'))
+                                                            @slot('href', route('frontend.quotation.index'))
                                                         @endcomponent
                                                     </div>
                                                 </div>
