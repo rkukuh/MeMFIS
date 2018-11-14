@@ -3,38 +3,24 @@ let Quotation = {
 
         $(document).ready(function () {
             $('select[name="customer"]').on('change', function () {
-                let stateID = $(this).val();
+                let customer = $(this).val();
         
-                if (stateID) {
-                    document.getElementById('name').innerHTML = 'name';
-                    document.getElementById('telp').innerHTML = 'telp/fax';
-                    document.getElementById('attn').innerHTML = 'attn';
-                    document.getElementById('ref').innerHTML = 'ref';
-                    document.getElementById('address').innerHTML = 'address';
-                    // $.ajax({
-                    //     url: '/addres/city/' + stateID,
-                    //     type: 'GET',
-                    //     dataType: 'json',
-                    //     success: function (data) {
-                    //         let angka = 1;
-        
-                    //         $('select[name="city"]').empty();
-        
-                    //         $.each(data, function (key, value) {
-                    //             if (angka == 1) {
-                    //                 $('select[name="city"]').append(
-                    //                     '<option> Select a City</option>'
-                    //                 );
-        
-                    //                 angka = 0;
-                    //             }
-        
-                    //             $('select[name="city"]').append(
-                    //                 '<option value="' + key + '">' + value + '</option>'
-                    //             );
-                    //         });
-                    //     }
-                    // });
+                if (customer) {
+                    let customerId = $('#customer').val();
+
+                    $.ajax({
+                        url: '/details/'+customerId+'/customer',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+
+                            document.getElementById('name').innerHTML = data.name;
+                            document.getElementById('telp').innerHTML = 'telp/fax';
+                            document.getElementById('attn').innerHTML = 'attn';
+                            document.getElementById('ref').innerHTML = 'ref';
+                            document.getElementById('address').innerHTML = 'address';
+                        }
+                    });
                 } else {
                 }
             });
