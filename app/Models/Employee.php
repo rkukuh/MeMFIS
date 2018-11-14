@@ -17,6 +17,8 @@ class Employee extends MemfisModel
         'hired_at',
     ];
 
+    protected $dates = ['hired_at'];
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
