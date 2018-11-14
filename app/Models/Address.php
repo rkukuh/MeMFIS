@@ -32,7 +32,7 @@ class Address extends MemfisModel
     /**
      * One-to-Many: An address may have zero or many type.
      *
-     * This function will retrieve the type of a address.
+     * This function will retrieve the type of an address.
      * See: Type's addresses() method for the inverse
      *
      * @return mixed
