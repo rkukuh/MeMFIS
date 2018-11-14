@@ -245,6 +245,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A fax may have zero or many type.
+     *
+     * This function will retrieve all faxes of a type.
+     * See: Email's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function faxes()
+    {
+        return $this->hasMany(Fax::class);
+    }
+
+    /**
      * One-to-Many: A journal may have zero or many type.
      *
      * This function will retrieve all journals of a type.
