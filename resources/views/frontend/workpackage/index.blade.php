@@ -62,9 +62,9 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Add Task Card')
-                                            @slot('data_target', '#modal_workpackage')
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'Work Package')
+                                            @slot('href', route('frontend.workpackage.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -72,10 +72,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.workpackage.modal')
-                            @include('frontend.taskcard-package.modal')
-
-                            <div class="m_datatable" id="scrolling_both"></div>
+                            <div class="workpackage_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -85,8 +82,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/workpackage.js')}}"></script>
+    <script src="{{ asset('js/frontend/workpackage/index.js')}}"></script>
 @endpush
