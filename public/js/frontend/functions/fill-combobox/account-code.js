@@ -5,19 +5,14 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka = 1;
 
                 $('select[name="accountcode"]').empty();
 
+                $('select[name="accountcode"]').append(
+                    '<option> Select a Accountcode</option>'
+                );
+
                 $.each(data, function (key, value) {
-                    if (angka == 1) {
-                        $('select[name="accountcode"]').append(
-                            '<option> Select a Accountcode</option>'
-                        );
-
-                        angka = 0;
-                    }
-
                     $('select[name="accountcode"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );

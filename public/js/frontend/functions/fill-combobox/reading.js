@@ -5,19 +5,14 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka3 = 1;
 
                 $('select[name="reading"]').empty();
 
+                $('select[name="reading"]').append(
+                    '<option> Select a Reading Level</option>'
+                );
+
                 $.each(data, function (key, value) {
-                    if (angka3 == 1) {
-                        $('select[name="reading"]').append(
-                            '<option> Select a Reading Level</option>'
-                        );
-
-                        angka3 = 0;
-                    }
-
                     $('select[name="reading"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );

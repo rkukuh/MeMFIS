@@ -5,19 +5,13 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let index = 1;
-
                 $('select[name="item_unit_id"]').empty();
 
+                $('select[name="item_unit_id"]').append(
+                    '<option> Select a Unit</option>'
+                );
+
                 $.each(data, function (key, value) {
-                    if (index == 1) {
-                        $('select[name="item_unit_id"]').append(
-                            '<option> Select a Unit</option>'
-                        );
-
-                        index = 0;
-                    }
-
                     $('select[name="item_unit_id"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
