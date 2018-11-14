@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Phone;
+use App\Models\Email;
 use App\Models\Address;
 use App\Models\Customer;
 use App\Models\Document;
@@ -25,6 +26,14 @@ class Customers extends Seeder
                     $customer
                         ->phones()
                         ->save(factory(Phone::class)->make());
+                }
+
+                /** Email */
+
+                for ($i = 1; $i <= rand(1, 2); $i++) {
+                    $customer
+                        ->emails()
+                        ->save(factory(Email::class)->make());
                 }
 
                 /** Document */
