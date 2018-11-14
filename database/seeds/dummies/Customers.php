@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Phone;
 use App\Models\Address;
 use App\Models\Customer;
 use App\Models\Document;
@@ -17,6 +18,14 @@ class Customers extends Seeder
         factory(Customer::class, config('memfis.examples.customers'))
             ->create()
             ->each(function ($customer) {
+
+                /** Phone */
+
+                for ($i = 1; $i <= rand(1, 2); $i++) {
+                    $customer
+                        ->phones()
+                        ->save(factory(Phone::class)->make());
+                }
 
                 /** Document */
 
