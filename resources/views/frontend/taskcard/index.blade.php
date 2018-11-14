@@ -75,7 +75,7 @@
                                 </div>
                             </div>
 
-                            <div class="m_datatable" id="scrolling_both"></div>
+                            <div class="taskcard_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
