@@ -15,4 +15,17 @@ class Customer extends MemfisModel
     ];
 
     protected $dates = ['banned_at'];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Polymorphic: A customer can have zero or many addresses.
+     *
+     * This function will get all of the customer's addresses.
+     * See: Address' addressable() method for the inverse
+     */
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, 'addressable');
+    }
 }
