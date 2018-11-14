@@ -28,4 +28,17 @@ class Phone extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * One-to-Many: A phone may have zero or many type.
+     *
+     * This function will retrieve the type of an phone.
+     * See: Type's phones() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

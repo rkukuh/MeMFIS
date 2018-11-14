@@ -282,4 +282,17 @@ class Type extends MemfisModel
     {
         return $this->hasMany(MaintenanceCycle::class);
     }
+
+    /**
+     * One-to-Many: A phone may have zero or many type.
+     *
+     * This function will retrieve all phones of a type.
+     * See: Phone's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function phones()
+    {
+        return $this->hasMany(Phone::class);
+    }
 }
