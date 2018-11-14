@@ -59,14 +59,13 @@ class FreshMigrationWithSeed extends Command
 
             $this->info('[DONE ] Install initial data.');
 
-            if ($this->confirm('Import data from old system?')) {
+            $this->line('');
 
-                $this->info('[START] Import data from old system..........');
+            $this->info('[START] Import data from old system..........');
 
-                $this->call('memfis:import');
+            $this->call('memfis:import');
 
-                $this->info('[DONE ] Import data from old system.');
-            }
+            $this->info('[DONE ] Import data from old system.');
 
             if ($this->confirm('Install example data?')) {
 
