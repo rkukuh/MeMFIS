@@ -206,6 +206,19 @@ class Type extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: An address may have zero or many type.
+     *
+     * This function will retrieve all addresses of a type.
+     * See: Address's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    /**
      * One-to-Many: A journal may have zero or many type.
      *
      * This function will retrieve all journals of a type.
