@@ -19,17 +19,17 @@ class CreateCustomersTable extends Migration
             $table->string('code');
             $table->string('name');
             // $table->string('leveling');
-            $table->unsignedInteger('payment_term');
-            $table->timestamp('banned_at')->nullable();
+            $table->unsignedInteger('payment_term')->nullable();
             $table->unsignedInteger('account_code')->nullable();
+            $table->timestamp('banned_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('payment_term')
                   ->references('id')->on('types')
                   ->onUpdate('cascade')
-                  ->onDelete('restrict');
 
+                  ->onDelete('restrict');
             $table->foreign('account_code')
                   ->references('id')->on('journals')
                   ->onUpdate('cascade')
