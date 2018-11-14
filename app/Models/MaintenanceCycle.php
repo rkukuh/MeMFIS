@@ -14,7 +14,7 @@ class MaintenanceCycle extends MemfisModel
      * One-to-Many: A maintenance cycle may have zero or many type.
      *
      * This function will retrieve the type of an maintenance cycle.
-     * See: Type's maintenance cycles() method for the inverse
+     * See: Type's maintenance_cycles() method for the inverse
      *
      * @return mixed
      */
