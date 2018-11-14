@@ -217,4 +217,17 @@ class Type extends MemfisModel
     {
         return $this->hasMany(Journal::class);
     }
+
+    /**
+     * One-to-Many: A document may have zero or many type.
+     *
+     * This function will retrieve all documents of a type.
+     * See: Document's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
 }

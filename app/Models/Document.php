@@ -26,4 +26,17 @@ class Document extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * One-to-Many: A document may have zero or many type.
+     *
+     * This function will retrieve the type of a document.
+     * See: Type's documents() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }
