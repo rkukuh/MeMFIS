@@ -311,6 +311,7 @@
 @endpush
 
 @push('footer-scripts')
+    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/customer/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 @endpush
