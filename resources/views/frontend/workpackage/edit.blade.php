@@ -129,8 +129,8 @@
                                                     <div class="action-buttons">
                                                         @component('frontend.common.buttons.update')
                                                             @slot('type', 'button')
-                                                            @slot('id', 'edit-item')
-                                                            @slot('class', 'edit-item')
+                                                            @slot('id', 'edit-workpackage')
+                                                            @slot('class', 'edit-workpackage')
                                                         @endcomponent
     
                                                         @include('frontend.common.buttons.reset')
