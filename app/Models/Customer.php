@@ -44,10 +44,21 @@ class Customer extends MemfisModel
      * Polymorphic: A customer can have zero or many phones.
      *
      * This function will get all of the customer's phones.
-     * See: Document's documentable() method for the inverse
+     * See: Phone's phoneable() method for the inverse
      */
     public function phones()
     {
         return $this->morphMany(Phone::class, 'phoneable');
+    }
+
+    /**
+     * Polymorphic: A customer can have zero or many emailable.
+     *
+     * This function will get all of the customer's emailable.
+     * See: Email's emailable() method for the inverse
+     */
+    public function emails()
+    {
+        return $this->morphMany(Email::class, 'emailable');
     }
 }
