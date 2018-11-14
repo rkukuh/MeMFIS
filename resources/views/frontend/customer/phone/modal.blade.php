@@ -19,15 +19,76 @@
                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="PhoneForm">
                         <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                         <div class="m-portlet__body">
-                                <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                           
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                           
+                                <div class="form-group m-form__group row ">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div id="m_repeater_1a">
+                                            <div class="" id="m_repeater_1a">
+                                                <div data-repeater-list="">
+                                                    <div data-repeater-item class="row">
+                                                        <table>
+                                                            <tr>
+                                                                <td width="30%">
+                                                                    <label class="form-control-label">
+                                                                        Phone @include('frontend.common.label.required')
+                                                                    </label>
+        
+                                                                    @component('frontend.common.input.text')
+                                                                        @slot('name', 'name')
+                                                                        @slot('text', 'Phone')
+                                                                        @slot('help_text','phone')
+                                                                    @endcomponent
+                                                                </td>
+                                                                <td width="20%">
+                                                                    <label class="form-control-label">
+                                                                        Ext. @include('frontend.common.label.optional')
+                                                                    </label>
+        
+                                                                    @component('frontend.common.input.text')
+                                                                        @slot('name', 'ext')
+                                                                        @slot('text', 'Ext')
+                                                                        @slot('help_text','ext')
+                                                                    @endcomponent
+                                                                </td>
+                                                                <td width="5%"></td>
+                                                                <td width="15%">
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Work')
+                                                                        @slot('name', 'type')
+                                                                        @slot('value', 'work')
+                                                                    @endcomponent
+                                                                </td>
+                                                                <td width="15%">
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('name', 'type')
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                    @endcomponent
+                                                                </td>
+                                                                <td width="15%">
+                                                                    <div data-repeater-delete="" class="btn-sm btn btn-danger">
+                                                                        <span>
+                                                                            <i class="la la-trash-o"></i>
+                                                                            <span>Delete</span>
+                                                                        </span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-form__group form-group row">
+                                                <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                    <span>
+                                                        <i class="la la-plus"></i>
+                                                        <span>Add</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                        </div>
+                                </div>
+                            </div>
                         <div class="modal-footer">
                             <div class="flex">
                                 <div class="action-buttons">
