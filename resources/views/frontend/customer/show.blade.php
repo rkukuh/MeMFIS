@@ -59,9 +59,8 @@
                                                     Code @include('frontend.common.label.required')
                                                 </label>
                                         
-                                                @component('frontend.common.input.text')
-                                                    @slot('text', 'Code')
-                                                    @slot('name', 'code')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', 'code')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -71,10 +70,9 @@
                                                         Name  @include('frontend.common.label.required')
                                                     </label>
                                             
-                                                    @component('frontend.common.input.text')
-                                                        @slot('text', 'Name')
-                                                        @slot('name', 'name')
-                                                    @endcomponent
+                                                    @component('frontend.common.label.data-info')
+                                                    @slot('text', 'name')
+                                                @endcomponent
                                                 </div>   
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -83,9 +81,8 @@
                                                     ToP @include('frontend.common.label.required')
                                                 </label>
                                         
-                                                @component('frontend.common.input.text')
-                                                    @slot('text', 'ToP')
-                                                    @slot('name', 'top')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', 'top')
                                                 @endcomponent
                                             </div>
                                             
@@ -100,6 +97,7 @@
                                                     @component('frontend.common.input.checkbox')
                                                         @slot('text', 'Active')
                                                         @slot('name', 'active')
+                                                        @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>   
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -107,12 +105,10 @@
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
 
-                                            @include('frontend.common.account-code.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'account_code')
-                                                @slot('name', 'account_code')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text','xxxx')
                                             @endcomponent
+
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
