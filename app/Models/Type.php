@@ -295,4 +295,17 @@ class Type extends MemfisModel
     {
         return $this->hasMany(Phone::class);
     }
+
+    /**
+     * One-to-Many: A task card may have zero or many type.
+     *
+     * This function will retrieve all task cards of a type.
+     * See: Task Card's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcards()
+    {
+        return $this->hasMany(TaskCard::class);
+    }
 }
