@@ -12,4 +12,18 @@ class Document extends MemfisModel
         'documentable_id',
         'documentable_type',
     ];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Polymorphic: A customer can have zero or many documents.
+     *
+     * This function will get all of the owning addressable models.
+     * See:
+     * - Customer's documents() method for the inverse
+     */
+    public function documentable()
+    {
+        return $this->morphTo();
+    }
 }

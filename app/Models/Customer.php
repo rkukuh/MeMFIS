@@ -28,4 +28,15 @@ class Customer extends MemfisModel
     {
         return $this->morphMany(Address::class, 'addressable');
     }
+
+    /**
+     * Polymorphic: A customer can have zero or many documents.
+     *
+     * This function will get all of the customer's documents.
+     * See: Document's documentable() method for the inverse
+     */
+    public function documents()
+    {
+        return $this->morphMany(Document::class, 'documentable');
+    }
 }
