@@ -19,15 +19,69 @@
                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="FaxForm">
                         <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                         <div class="m-portlet__body">
-                                <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                           
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                           
+                                <div class="form-group m-form__group row ">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Fax @include('frontend.common.label.required')
+                                        </label>
+                                        <div id="m_repeater_1a">
+                                            <div class="" id="m_repeater_1a">
+                                                <div data-repeater-list="">
+                                                    <div data-repeater-item class="row">
+                                                        <div class="form-group m-form__group row align-items-center">
+                                                            <div class="col-md-5">
+                                                                @component('frontend.common.input.text')
+                                                                    @slot('text', 'fax')
+                                                                    @slot('name', 'name')
+                                                                    @slot('placeholder', 'fax')
+                                                                    @slot('help_text','fax')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                @component('frontend.common.input.checkbox')
+                                                                    @slot('text', 'Primary')
+                                                                    @slot('name', 'is_primary')
+                                                                    @slot('help_text','primary')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Work')
+                                                                        @slot('value', 'work')
+                                                                        @slot('name', 'account_no')
+                                                                    @endcomponent
+                                                                    <br>
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                        @slot('name', 'account_no')
+                                                                    @endcomponent
+                                                                </div>
+                                                            <div class="col-md-1">
+                                                                <div data-repeater-delete="" class="btn-sm btn btn-danger">
+                                                                    <span>
+                                                                        <i class="la la-trash-o"></i>
+                                                                        <span>Delete</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-form__group form-group row">
+                                                <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                    <span>
+                                                        <i class="la la-plus"></i>
+                                                        <span>Add</span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                        </div>
+                                    
+                                </div>
+                            </div>
                         <div class="modal-footer">
                             <div class="flex">
                                 <div class="action-buttons">
