@@ -113,7 +113,7 @@
                                                 <div class="flex">
                                                     <div class="action-buttons">
                                                         @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.taskcard.index'))
+                                                            @slot('href', route('frontend.workpackage.index'))
                                                         @endcomponent
                                                     </div>
                                                 </div>
