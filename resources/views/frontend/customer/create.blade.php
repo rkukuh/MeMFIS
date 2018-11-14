@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    HR Form
+                    Customer
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr-form.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.customer.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                HR Form
+                                Customer
                             </span>
                         </a>
                     </li>
@@ -27,81 +27,280 @@
             </div>
         </div>
     </div>
+    <div class="m-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
 
-<div class="m-content">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="m-portlet m-portlet--tabs">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-tools">
-                            <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#general" role="tab">
-                                            <i class="la la-book"></i>
-                                            General
-                                        </a>
-                                    </li>
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#address" role="tab">
-                                            <i class="la la-map"></i>
-                                            Address
-                                        </a>
-                                    </li>
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#contact" role="tab">
-                                            <i class="la la-phone"></i>
-                                            Contact
-                                        </a>
-                                    </li>
-                                </ul>
+                                @include('frontend.common.label.create-new')
+
+                                <h3 class="m-portlet__head-text">
+                                    Customer
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <form id="itemform" name="itemform">
+                                <div class="m-portlet__body">
+                                    <fieldset class="border p-2">
+                                        <legend class="w-auto">Identifier</legend>
+
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label class="form-control-label">
+                                                    Code @include('frontend.common.label.required')
+                                                </label>
+                                        
+                                                @component('frontend.common.input.text')
+                                                    @slot('text', 'Code')
+                                                    @slot('name', 'code')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label class="form-control-label">
+                                                        Name  @include('frontend.common.label.required')
+                                                    </label>
+                                            
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', 'Name')
+                                                        @slot('name', 'name')
+                                                    @endcomponent
+                                                </div>   
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label class="form-control-label">
+                                                    ToP @include('frontend.common.label.required')
+                                                </label>
+                                        
+                                                @component('frontend.common.input.text')
+                                                    @slot('text', 'ToP')
+                                                    @slot('name', 'top')
+                                                @endcomponent
+                                            </div>
+                                            
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Active * @include('frontend.common.label.optional')
+                                                    </label>
+                                            
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('text', 'Active')
+                                                        @slot('name', 'active')
+                                                    @endcomponent
+                                                </div>   
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Account Code @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @include('frontend.common.account-code.index')
+
+                                            @component('frontend.common.input.hidden')
+                                                @slot('id', 'account_code')
+                                                @slot('name', 'account_code')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-item')
+                                                        @slot('class', 'add-item')
+                                                    @endcomponent
+
+                                                    @include('frontend.common.buttons.reset')
+
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.item.index'))
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                </div>
-                <div class="m-portlet__body">
-                    <div class="tab-content">
-                            <div class="tab-pane active" id="general" role="tabpanel">
-                                    @include('frontend.customer.tabs-create.general')
-                                </div>
-                                <div class="tab-pane" id="address" role="tabpanel">
-                                    @include('frontend.customer.tabs-create.address')
-                                </div>
-                                <div class="tab-pane" id="contact" role="tabpanel">
-                                    @include('frontend.customer.tabs-create.contact')
-                                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Address
+                                </h3>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group m-form__group row">
-                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                <div class="flex">
-                                    <div class="action-buttons">
-                                        @component('frontend.common.buttons.submit')
-                                            @slot('type','button')
-                                            @slot('id', 'add-customer')
-                                            @slot('class', 'add-customer')
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('text', 'Address')
+                                            @slot('attribute', 'disabled')
                                         @endcomponent
 
-                                        @include('frontend.common.buttons.reset')
-
-                                        @component('frontend.common.buttons.back')
-                                            @slot('href', route('frontend.item.index'))
-                                        @endcomponent
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Phone
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Phone')
+                                        @endcomponent
+
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Email
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Email')
+                                        @endcomponent
+
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Fax
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Fax')
+                                        @endcomponent
+
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
 @endsection
 
-@push('footer-scripts')
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/employee/hr-form-management.js')}}"></script>
+@push('header-scripts')
+    <style>
+        fieldset {
+            margin-bottom: 30px;
+        }
 
-    <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
+        .padding-datatable {
+            padding: 0px
+        }
+
+        .margin-info {
+            margin-left: 5px
+        }
+    </style>
+@endpush
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
 @endpush
