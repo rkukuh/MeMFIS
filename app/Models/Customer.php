@@ -61,4 +61,15 @@ class Customer extends MemfisModel
     {
         return $this->morphMany(Email::class, 'emailable');
     }
+
+    /**
+     * Polymorphic: A customer can have zero or many faxable.
+     *
+     * This function will get all of the customer's faxable.
+     * See: Email's faxable() method for the inverse
+     */
+    public function faxes()
+    {
+        return $this->morphMany(Fax::class, 'faxable');
+    }
 }
