@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
-                                            @slot('text', 'Taskcard')
+                                            @slot('text', 'Quotation')
                                             @slot('href', route('frontend.quotation.create') )
                                         @endcomponent
 
