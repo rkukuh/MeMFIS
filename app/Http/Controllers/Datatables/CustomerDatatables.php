@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\Cutomer;
+use App\Models\Customer;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
