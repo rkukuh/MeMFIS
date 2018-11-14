@@ -232,6 +232,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: An email may have zero or many type.
+     *
+     * This function will retrieve all emails of a type.
+     * See: Email's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function emails()
+    {
+        return $this->hasMany(Email::class);
+    }
+
+    /**
      * One-to-Many: A journal may have zero or many type.
      *
      * This function will retrieve all journals of a type.
