@@ -46,6 +46,24 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** WORKPACKAGE */
+
+        Route::name('workpackage.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'workpackage',
+                'namespace' => 'WorkPackage'
+
+            ], function () {
+
+                Route::get('/','WorkPackageDatatables@index')->name('all');
+                Route::get('/{workpackage}/taskcard','TaskCardDatatables@index')->name('taskcard.index');
+
+            });
+
+        });
+
         /** ITEM */
 
         Route::name('item.')->group(function () {
