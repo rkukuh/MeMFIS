@@ -6,11 +6,18 @@ use Faker\Generator as Faker;
 
 $factory->define(Address::class, function (Faker $faker) {
 
+    $latitude = $longitude = null;
+
+    if ($faker->boolean) {
+        $latitude = $faker->latitude;
+        $longitude = $faker->longitude;
+    }
+
     return [
         'type_id' => Type::ofAddress()->get()->random()->id,
         'address' => $faker->address,
-        'latitude' => $faker->latitude,
-        'longitude' => $faker->longitude,
+        'latitude' => $latitude,
+        'longitude' => $longitude,
     ];
 
 });
