@@ -54,7 +54,7 @@ class WorkPackageController extends Controller
      */
     public function show(WorkPackage $workPackage)
     {
-        return response()->json($workPackage);
+        return view('frontend.workpackage.show');
     }
 
     /**
