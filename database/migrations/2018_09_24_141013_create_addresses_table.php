@@ -17,7 +17,7 @@ class CreateAddressesTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('type_id');
-            $table->string('address')->nullable();
+            $table->string('address');
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->unsignedInteger('addressable_id');

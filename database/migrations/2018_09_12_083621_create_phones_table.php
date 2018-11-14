@@ -17,7 +17,7 @@ class CreatePhonesTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->string('ext');
+            $table->string('ext')->nullable();
             $table->unsignedInteger('type_id');
             $table->boolean('is_primary');
             $table->integer('phoneable_id');

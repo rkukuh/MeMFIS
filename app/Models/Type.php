@@ -138,6 +138,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of PaymentTerm.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfPaymentTerm(Builder $query)
+    {
+        return $query->where('of', 'payment-term');
+    }
+
+    /**
      * Scope a query to only include type of Phone.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -205,5 +216,18 @@ class Type extends MemfisModel
     public function journals()
     {
         return $this->hasMany(Journal::class);
+    }
+
+    /**
+     * One-to-Many: A document may have zero or many type.
+     *
+     * This function will retrieve all documents of a type.
+     * See: Document's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 }
