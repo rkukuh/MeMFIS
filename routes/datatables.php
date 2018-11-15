@@ -25,6 +25,26 @@ Route::name('datatables.')->group(function () {
         Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
         Route::get('/customer','CustomerDatatables@index')->name('customer.index');
 
+        /** CUSTOMER */
+
+        Route::name('taskcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'customer',
+                'namespace' => 'Customer'
+
+            ], function () {
+
+                Route::get('/','CustomerDatatables@index')->name('all');
+                Route::get('/{customer}/address','AddressDatatables@index')->name('address.index');
+                Route::get('/{customer}/fax','FaxDatatables@index')->name('fax.index');
+                Route::get('/{customer}/email','EmailDatatables@index')->name('email.index');
+                Route::get('/{customer}/phone','PhoneDatatables@index')->name('phone.index');
+
+            });
+
+        });
 
         /** TASKCARD */
 
