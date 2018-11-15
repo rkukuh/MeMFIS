@@ -6,7 +6,7 @@ let Customer = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/customer/'+ customer_uuid +'/address',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -59,7 +59,7 @@ let Customer = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/customer/'+ customer_uuid +'/phone',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -112,7 +112,7 @@ let Customer = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/customer/'+ customer_uuid +'/email',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -151,10 +151,30 @@ let Customer = {
             },
             columns: [
                 {
-                    field: 'name',
-                    title: 'Name',
+                    field: 'address',
+                    title: 'Email',
                     sortable: 'asc',
                     filterable: !1,
+                },               
+                {
+                    field: 'primary',
+                    title: 'Primary',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        var e = {
+                            1: {
+                                title: "Primary",
+                                class: "m-badge--brand"
+                            },
+                            0: {
+                                title: "No",
+                                class: " m-badge--warning"
+                            }
+                        };
+
+                        return '<span class="m-badge ' + e[t.is_primary].class + ' m-badge--wide">' + e[t.is_primary].title + "</span>"
+                    }
                 },               
             ]
         });
@@ -165,7 +185,7 @@ let Customer = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/customer/'+ customer_uuid +'/fax',
                         map: function (raw) {
                             let dataSet = raw;
 
