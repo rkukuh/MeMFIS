@@ -24,8 +24,8 @@
                                         <label class="form-control-label">
                                             Fax @include('frontend.common.label.required')
                                         </label>
-                                        <div id="m_repeater_2a">
-                                            <div class="" id="m_repeater_2a">
+                                        <div id="m_repeater_fax">
+                                            <div class="" id="m_repeater_fax">
                                                 <div data-repeater-list="">
                                                     <div data-repeater-item class="row">
                                                         <div class="form-group m-form__group row align-items-center">
