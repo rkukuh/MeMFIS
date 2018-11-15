@@ -141,7 +141,6 @@
 
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                    {{-- <div class="m-portlet m-portlet--tabs"> --}}
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="m-portlet__head">
                                                     <div class="m-portlet__head-tools">
@@ -198,174 +197,12 @@
                         
                                                     </div>      
                                                 </div>
-                                            {{-- </div> --}}
                                 </div>                            
                             </div>    
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="m-portlet m-portlet--tabs">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="m-portlet__head">
-                            <div class="m-portlet__head-tools">
-                                <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">
-                                            <i class="la la-cog"></i> Document
-                                        </a>
-                                    </li>
-                                    <li class="nav-item m-tabs__item">
-                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_2" role="tab">
-                                                <i class="la la-bell-o"></i> Address
-                                            </a>
-                                    </li>    
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_3" role="tab">
-                                            <i class="la la-briefcase"></i> Phone
-                                        </a>
-                                    </li>
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_4" role="tab">
-                                            <i class="la la-bell-o"></i> Email
-                                        </a>
-                                    </li>
-                                    <li class="nav-item m-tabs__item">
-                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_5" role="tab">
-                                                <i class="la la-bell-o"></i> Fax
-                                            </a>
-                                        </li>
-                                </ul>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="m-portlet__body">                   
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="m_datatable_companay_documenet" id="scrolling_both"></div>
-                                        </div>
-                                </div>
-                                <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                                        @include('frontend.employees.document-management.include.document-type')
-                                </div>
-                                <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
-                                        @include('frontend.employees.document-management.include.employee-document')
-                                </div>
-                                <div class="tab-pane" id="m_tabs_6_4" role="tabpanel">
-                                        @include('frontend.employees.document-management.include.employee-document')
-                                </div>
-                                <div class="tab-pane" id="m_tabs_6_5" role="tabpanel">
-                                        @include('frontend.employees.document-management.include.employee-document')
-                                </div>
-
-                            </div>      
-                        </div>
-                    </div>
-                </div>   --}}
-            {{-- <div class="col-lg-6">
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                @include('frontend.common.label.datalist')
-
-                                <h3 class="m-portlet__head-text">
-                                    Address
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-     
-                            @include('frontend.customer.address.modal')
-
-                            <div class="customer_address_datatable" id="customer_address_datatable"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                @include('frontend.common.label.datalist')
-
-                                <h3 class="m-portlet__head-text">
-                                    Phone
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            
-                            @include('frontend.customer.phone.modal')
-
-                            <div class="customer_phone_datatable" id="customer_phone_datatable"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                @include('frontend.common.label.datalist')
-
-                                <h3 class="m-portlet__head-text">
-                                    Email
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            
-                            @include('frontend.customer.email.modal')
-
-                            <div class="customer_email_datatable" id="customer_email_datatable"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                @include('frontend.common.label.datalist')
-
-                                <h3 class="m-portlet__head-text">
-                                    Fax
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-
-                            @include('frontend.customer.fax.modal')
-                            
-                            <div class="customer_fax_datatable" id="customer_fax_datatable"></div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 @endsection
