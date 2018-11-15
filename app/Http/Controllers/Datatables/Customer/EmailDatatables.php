@@ -12,14 +12,11 @@ class EmailDatatables extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function index(Customer $customer)
     {
-        // dd($customers);
-        // $customer = Customer::where('uuid','acbe5662-6cac-43c0-ba6d-cf98c83aefa3')->first();
-        // dd($customer->emails);
-
         $data = $alldata = json_decode($customer->emails);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
