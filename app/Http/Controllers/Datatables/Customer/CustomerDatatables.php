@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Customer;
 
 use App\Models\Customer;
 use App\Models\ListUtil;
