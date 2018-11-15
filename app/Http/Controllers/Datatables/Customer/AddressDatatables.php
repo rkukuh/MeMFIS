@@ -12,9 +12,10 @@ class AddressDatatables extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Customer  $customers
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Customer $customers)
     {
         $customers = Customer::All();
 
