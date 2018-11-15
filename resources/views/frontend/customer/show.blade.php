@@ -263,5 +263,9 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let customer_uuid = '{{ $customer->uuid }}';
+    </script>
+
     <script src="{{ asset('js/frontend/customer/show.js') }}"></script>
 @endpush
