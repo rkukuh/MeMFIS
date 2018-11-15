@@ -60,7 +60,7 @@
                                                 </label>
                                         
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'code')
+                                                    @slot('text', $customer->code)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -71,8 +71,8 @@
                                                     </label>
                                             
                                                     @component('frontend.common.label.data-info')
-                                                    @slot('text', 'name')
-                                                @endcomponent
+                                                        @slot('text', $customer->name)
+                                                    @endcomponent
                                                 </div>   
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -81,9 +81,13 @@
                                                     ToP @include('frontend.common.label.required')
                                                 </label>
                                         
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'top')
-                                                @endcomponent
+                                                @if (empty($customer->payment_term))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $customer->payment_term)
+                                                    @endcomponent
+                                                @endif
                                             </div>
                                             
                                         </div>
@@ -98,6 +102,10 @@
                                                         @slot('text', 'Active')
                                                         @slot('name', 'active')
                                                         @slot('disabled', 'disabled')
+                                                        @if ($customer->banned_at <> null)
+                                                            @slot('checked', 'checked')
+                                                        @endif
+
                                                     @endcomponent
                                                 </div>   
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -105,9 +113,13 @@
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text','xxxx')
-                                            @endcomponent
+                                            @if (isset($customer->journal))
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $customer->account_code_and_name)
+                                                @endcomponent
+                                            @else
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @endif
 
                                         </div>
                                     </div>
