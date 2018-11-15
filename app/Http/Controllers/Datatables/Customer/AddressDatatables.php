@@ -15,11 +15,9 @@ class AddressDatatables extends Controller
      * @param  \App\Models\Customer  $customers
      * @return \Illuminate\Http\Response
      */
-    public function index(Customer $customers)
+    public function index(Customer $customer)
     {
-        $customers = Customer::All();
-
-        $data = $alldata = json_decode($customers);
+        $data = $alldata = json_decode($customer->addresses);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

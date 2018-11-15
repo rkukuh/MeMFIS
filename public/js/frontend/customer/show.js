@@ -1,5 +1,57 @@
 let Customer = {
     init: function () {
+        $('.customer_document_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/customer/'+ customer_uuid +'/document',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            perpage: 3,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'number',
+                    title: 'Document Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+            ]
+        });
         $('.customer_address_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -45,8 +97,8 @@ let Customer = {
             },
             columns: [
                 {
-                    field: 'name',
-                    title: 'Name',
+                    field: 'address',
+                    title: 'Address',
                     sortable: 'asc',
                     filterable: !1,
                 },
