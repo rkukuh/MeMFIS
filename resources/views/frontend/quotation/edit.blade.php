@@ -105,9 +105,12 @@
                                                                 Ref
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'WO xxx/xxxx/xxx')
+                                                            @component('frontend.common.input.select')
                                                                 @slot('id', 'ref')
+                                                                @slot('text', 'Ref')
+                                                                @slot('name', 'ref')
+                                                                @slot('style', 'width:100%')
+                                                                @slot('id_error', 'ref')
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -246,6 +249,8 @@
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
 
     <script src="{{ asset('js/frontend/quotation/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>

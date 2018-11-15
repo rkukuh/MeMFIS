@@ -17,7 +17,6 @@ let Quotation = {
                             document.getElementById('name').innerHTML = data.name;
                             document.getElementById('telp').innerHTML = 'telp/fax';
                             document.getElementById('attn').innerHTML = 'attn';
-                            document.getElementById('ref').innerHTML = 'ref';
                             document.getElementById('address').innerHTML = 'address';
                         }
                     });

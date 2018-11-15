@@ -102,12 +102,15 @@
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Ref
+                                                                Quotation Ref
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'WO xxx/xxxx/xxx')
+                                                            @component('frontend.common.input.select')
                                                                 @slot('id', 'ref')
+                                                                @slot('text', 'Ref')
+                                                                @slot('name', 'ref')
+                                                                @slot('style', 'width:100%')
+                                                                @slot('id_error', 'ref')
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -141,9 +144,9 @@
                                                 </label>
 
                                                 @component('frontend.common.input.text')
-                                                    @slot('text', 'Threshold Amount')
-                                                    @slot('id', 'threshold_amount')
-                                                    @slot('name', 'threshold_mount')
+                                                    @slot('text', 'Wuotation No')
+                                                    @slot('id', 'quotation_no')
+                                                    @slot('name', 'quotation_no')
                                                     @slot('id_error', 'quotation_no')
                                                 @endcomponent
                                             </div>
@@ -263,6 +266,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
+
 
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
