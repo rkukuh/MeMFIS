@@ -354,6 +354,9 @@
 
 @push('header-scripts')
     <style>
+        #map { height: 500px; }
+    </style>
+    <style>
         fieldset {
             margin-bottom: 30px;
         }
@@ -369,6 +372,24 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        function initMap() {
+            var myLatLng = {lat: -7.265757, lng: 112.734146};
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom    : 10,
+                center  : myLatLng
+            });
+
+            var marker = new google.maps.Marker({
+                position    : myLatLng,
+                map         : map,
+                title       : 'Hello World!'
+            });
+        }
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
     <script src="{{ asset('js/frontend/functions/select2/core.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
