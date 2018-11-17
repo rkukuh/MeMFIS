@@ -28,4 +28,18 @@ class Address extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * One-to-Many: A address may have zero or many type.
+     *
+     * This function will retrieve the type of a address.
+     * See: Type's addresses() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
 }
