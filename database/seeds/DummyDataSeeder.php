@@ -31,6 +31,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Versions::class);
         $this->call(Addresses::class);
         $this->call(Documents::class);
+        $this->call(Descriptions::class);
         $this->call(MaintenanceCycles::class);
 
         /** MASTER */

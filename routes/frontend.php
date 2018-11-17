@@ -31,6 +31,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
         Route::resource('document', 'DocumentController');
+        Route::resource('description', 'DescriptionController');
         Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */
