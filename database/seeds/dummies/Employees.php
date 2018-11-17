@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Address;
+use App\Models\Document;
 use App\Models\Employee;
 use Illuminate\Database\Seeder;
 
@@ -19,9 +20,13 @@ class Employees extends Seeder
 
                 /** Address */
 
-                $employee
-                    ->addresses()
-                    ->saveMany(factory(Address::class, rand(2, 4))->make());
+                $employee->addresses()
+                         ->saveMany(factory(Address::class, rand(2, 4))->make());
+
+                /** Document */
+
+                $employee->documents()
+                         ->saveMany(factory(Document::class, rand(1, 3))->make());
 
             });
     }
