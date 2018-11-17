@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Customer;
 
+use App\Models\Fax;
 use App\Models\Customer;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class FaxDatatables extends Controller
      */
     public function index(Customer $customer)
     {
-        $data = $alldata = json_decode($customer->faxes);
+        $faxes= Fax::with('type')->where('faxable_id',$customer->id)->get();
+
+        $data = $alldata = json_decode($faxes);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
