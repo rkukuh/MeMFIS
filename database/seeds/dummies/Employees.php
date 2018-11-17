@@ -4,6 +4,7 @@ use App\Models\Fax;
 use App\Models\Phone;
 use App\Models\Email;
 use App\Models\Address;
+use App\Models\Website;
 use App\Models\Document;
 use App\Models\Employee;
 use Illuminate\Database\Seeder;
@@ -45,6 +46,11 @@ class Employees extends Seeder
 
                 $employee->phones()
                          ->saveMany(factory(Phone::class, rand(1, 2))->make());
+
+                /** Website */
+
+                $employee->websites()
+                         ->saveMany(factory(Website::class, rand(2, 4))->make());
             });
     }
 }
