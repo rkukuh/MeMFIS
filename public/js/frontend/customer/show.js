@@ -50,6 +50,12 @@ let Customer = {
                     sortable: 'asc',
                     filterable: !1,
                 },
+                {
+                    field: 'type.name',
+                    title: 'Documenr',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
             ]
         });
         $('.customer_address_datatable').mDatatable({
