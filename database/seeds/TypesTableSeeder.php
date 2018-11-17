@@ -28,5 +28,6 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfSchoolDegree::class);
         $this->call(TypesOfTaskCard::class);
         $this->call(TypesOfUnit::class);
+        $this->call(TypesOfWebsite::class);
     }
 }
