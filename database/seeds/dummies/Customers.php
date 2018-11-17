@@ -23,11 +23,9 @@ class Customers extends Seeder
 
                 /** Address */
 
-                for ($i = 1; $i <= rand(2, 4); $i++) {
-                    $customer
-                        ->addresses()
-                        ->save(factory(Address::class)->make());
-                }
+                $customer
+                    ->addresses()
+                    ->save(factory(Address::class, rand(2, 4))->make());
 
                 /** Document */
 
