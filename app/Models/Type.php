@@ -193,6 +193,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Website.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfWebsite(Builder $query)
+    {
+        return $query->where('of', 'website');
+    }
+
+    /**
      * Scope a query to only include type of Aircraft Work Area.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
