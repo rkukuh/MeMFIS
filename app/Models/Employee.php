@@ -55,6 +55,17 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Polymorphic: An employee can have zero or many faxable.
+     *
+     * This function will get all of the employee's faxable.
+     * See: Email's faxable() method for the inverse
+     */
+    public function faxes()
+    {
+        return $this->morphMany(Fax::class, 'faxable');
+    }
+
+    /**
      * Many-to-Many: An employee may have zero or many license.
      *
      * This function will retrieve all the licenses of an employee.
