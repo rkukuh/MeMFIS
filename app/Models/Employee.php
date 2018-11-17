@@ -33,6 +33,17 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Polymorphic: An employee can have zero or many documents.
+     *
+     * This function will get all of the employee's documents.
+     * See: Document's documentable() method for the inverse
+     */
+    public function documents()
+    {
+        return $this->morphMany(Document::class, 'documentable');
+    }
+
+    /**
      * Many-to-Many: An employee may have zero or many license.
      *
      * This function will retrieve all the licenses of an employee.

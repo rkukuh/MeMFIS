@@ -16,11 +16,12 @@ class Document extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * Polymorphic: A customer can have zero or many documents.
+     * Polymorphic: An entity can have zero or many documents.
      *
      * This function will get all of the owning addressable models.
      * See:
      * - Customer's documents() method for the inverse
+     * - Employee's documents() method for the inverse
      */
     public function documentable()
     {
