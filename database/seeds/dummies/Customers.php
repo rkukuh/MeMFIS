@@ -21,12 +21,20 @@ class Customers extends Seeder
             ->create()
             ->each(function ($customer) {
 
-                /** Phone */
+                /** Address */
 
-                for ($i = 1; $i <= rand(1, 2); $i++) {
+                for ($i = 1; $i <= rand(2, 4); $i++) {
                     $customer
-                        ->phones()
-                        ->save(factory(Phone::class)->make());
+                        ->addresses()
+                        ->save(factory(Address::class)->make());
+                }
+
+                /** Document */
+
+                for ($i = 1; $i <= rand(1, 3); $i++) {
+                    $customer
+                        ->documents()
+                        ->save(factory(Document::class)->make());
                 }
 
                 /** Email */
@@ -45,20 +53,12 @@ class Customers extends Seeder
                         ->save(factory(Fax::class)->make());
                 }
 
-                /** Document */
+                /** Phone */
 
-                for ($i = 1; $i <= rand(1, 3); $i++) {
+                for ($i = 1; $i <= rand(1, 2); $i++) {
                     $customer
-                        ->documents()
-                        ->save(factory(Document::class)->make());
-                }
-
-                /** Address */
-
-                for ($i = 1; $i <= rand(2, 4); $i++) {
-                    $customer
-                        ->addresses()
-                        ->save(factory(Address::class)->make());
+                        ->phones()
+                        ->save(factory(Phone::class)->make());
                 }
 
             });
