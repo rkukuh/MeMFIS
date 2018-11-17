@@ -33,11 +33,8 @@ class Customers extends Seeder
 
                 /** Email */
 
-                for ($i = 1; $i <= rand(1, 2); $i++) {
-                    $customer
-                        ->emails()
-                        ->save(factory(Email::class)->make());
-                }
+                $customer->emails()
+                         ->saveMany(factory(Email::class, rand(1, 2))->make());
 
                 /** Fax */
 
