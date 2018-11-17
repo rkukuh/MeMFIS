@@ -66,6 +66,17 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Polymorphic: An employee can have zero or many phones.
+     *
+     * This function will get all of the employee's phones.
+     * See: Phone's phoneable() method for the inverse
+     */
+    public function phones()
+    {
+        return $this->morphMany(Phone::class, 'phoneable');
+    }
+
+    /**
      * Many-to-Many: An employee may have zero or many license.
      *
      * This function will retrieve all the licenses of an employee.
