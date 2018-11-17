@@ -29,6 +29,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
+        Route::resource('website', 'WebsiteController');
         Route::resource('document', 'DocumentController');
         Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
@@ -36,10 +37,10 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
+        Route::resource('customer', 'CustomerController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('customer', 'CustomerController');
 
         /** LICENSE */
 
