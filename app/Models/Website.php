@@ -27,4 +27,17 @@ class Website extends MemfisModel
     {
         return $this->belongsTo(Type::class);
     }
+
+    /**
+     * Polymorphic: An entity can have zero or many websites.
+     *
+     * This function will get all of the owning addressable models.
+     * See:
+     * - Customer's websites() method for the inverse
+     * - Employee's websites() method for the inverse
+     */
+    public function websiteable()
+    {
+        return $this->morphTo();
+    }
 }
