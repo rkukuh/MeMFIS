@@ -41,17 +41,6 @@ class Customer extends MemfisModel
     }
 
     /**
-     * Polymorphic: A customer can have zero or many phones.
-     *
-     * This function will get all of the customer's phones.
-     * See: Phone's phoneable() method for the inverse
-     */
-    public function phones()
-    {
-        return $this->morphMany(Phone::class, 'phoneable');
-    }
-
-    /**
      * Polymorphic: A customer can have zero or many emailable.
      *
      * This function will get all of the customer's emailable.
@@ -71,5 +60,16 @@ class Customer extends MemfisModel
     public function faxes()
     {
         return $this->morphMany(Fax::class, 'faxable');
+    }
+
+    /**
+     * Polymorphic: A customer can have zero or many phones.
+     *
+     * This function will get all of the customer's phones.
+     * See: Phone's phoneable() method for the inverse
+     */
+    public function phones()
+    {
+        return $this->morphMany(Phone::class, 'phoneable');
     }
 }
