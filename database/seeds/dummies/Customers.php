@@ -23,17 +23,13 @@ class Customers extends Seeder
 
                 /** Address */
 
-                $customer
-                    ->addresses()
-                    ->save(factory(Address::class, rand(2, 4))->make());
+                $customer->addresses()
+                         ->saveMany(factory(Address::class, rand(2, 4))->make());
 
                 /** Document */
 
-                for ($i = 1; $i <= rand(1, 3); $i++) {
-                    $customer
-                        ->documents()
-                        ->save(factory(Document::class)->make());
-                }
+                $customer->documents()
+                         ->saveMany(factory(Document::class, rand(1, 3))->make());
 
                 /** Email */
 
