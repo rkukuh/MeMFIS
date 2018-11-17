@@ -18,11 +18,12 @@ class Address extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * Polymorphic: A customer can have zero or many addresses.
+     * Polymorphic: An entity can have zero or many addresses.
      *
      * This function will get all of the owning addressable models.
      * See:
      * - Customer's addresses() method for the inverse
+     * - Employee's addresses() method for the inverse
      */
     public function addressable()
     {
