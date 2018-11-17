@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Fax;
+use App\Models\Phone;
 use App\Models\Email;
 use App\Models\Address;
 use App\Models\Document;
@@ -40,6 +41,10 @@ class Employees extends Seeder
                 $employee->faxes()
                          ->saveMany(factory(Fax::class, rand(1, 2))->make());
 
+                /** Phone */
+
+                $employee->phones()
+                         ->saveMany(factory(Phone::class, rand(1, 2))->make());
             });
     }
 }
