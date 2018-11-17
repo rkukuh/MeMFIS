@@ -64,6 +64,15 @@
                                                     @slot('id_error', 'customer')
                                                 @endcomponent
                                             </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        From 
+                                                    </label>
+    
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'Marketing')
+                                                    @endcomponent
+                                            </div>
                                         </div>
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Identifier</legend>
@@ -80,7 +89,7 @@
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Tlp / Fax
+                                                                Tlp
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
@@ -101,18 +110,15 @@
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Quotation Ref
-                                                            </label>
-
-                                                            @component('frontend.common.input.select')
-                                                                @slot('id', 'ref')
-                                                                @slot('text', 'Ref')
-                                                                @slot('name', 'ref')
-                                                                @slot('style', 'width:100%')
-                                                                @slot('id_error', 'ref')
-                                                            @endcomponent
-                                                        </div>
+                                                                <label class="form-control-label">
+                                                                    Fax
+                                                                </label>
+    
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                    @slot('id', 'telp')
+                                                                @endcomponent
+                                                            </div>
                                                     </div>
                                                     <div class="form-group m-form__group row">        
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -129,15 +135,7 @@
                                             </fieldset>
 
                                         <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    From 
-                                                </label>
-
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Marketing')
-                                                @endcomponent
-                                            </div>
+                                            
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Quotation No. @include('frontend.common.label.required')
@@ -149,6 +147,19 @@
                                                     @slot('name', 'quotation_no')
                                                     @slot('id_error', 'quotation_no')
                                                 @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Quotation Ref
+                                                    </label>
+
+                                                    @component('frontend.common.input.select')
+                                                        @slot('id', 'ref')
+                                                        @slot('text', 'Ref')
+                                                        @slot('name', 'ref')
+                                                        @slot('style', 'width:100%')
+                                                        @slot('id_error', 'ref')
+                                                    @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
