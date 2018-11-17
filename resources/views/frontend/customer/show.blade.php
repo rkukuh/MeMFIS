@@ -144,14 +144,19 @@
                                                                         <i class="la la-bell-o"></i> Address
                                                                     </a>
                                                             </li>    
-                                                            <li class="nav-item dropdown m-tabs__item">
+                                                            <li class="nav-item m-tabs__item">
+                                                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_3" role="tab">
+                                                                        <i class="la la-bell-o"></i> Contact
+                                                                    </a>
+                                                            </li>    
+                                                            {{-- <li class="nav-item dropdown m-tabs__item">
                                                                     <a class="nav-link m-tabs__link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true"><i class="la la-map-marker"></i>Contact</a>
                                                                     <div class="dropdown-menu dropdown-menu-right">
                                                                             <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_3">Phone</a>
                                                                             <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_4">Email</a>
                                                                             <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_5">Fax</a>
                                                                     </div>
-                                                            </li>
+                                                            </li> --}}
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -165,25 +170,48 @@
                                                         </div>
                                                         <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
                                                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <div class="customer_address_datatable" id="customer_document_datatable"></div>
+                                                                <div class="customer_address_datatable" id="customer_address_datatable"></div>
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <div class="customer_phone_datatable" id="customer_document_datatable"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane" id="m_tabs_6_4" role="tabpanel">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <div class="customer_email_datatable" id="customer_document_datatable"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane" id="m_tabs_6_5" role="tabpanel">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <div class="customer_fax_datatable" id="customer_document_datatable"></div>
-                                                            </div>
-                                                        </div>
-                        
+                                                                <div class="m-portlet__head-tools" style="margin-top:-30px;margin-left:15px">
+
+                                                                        <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
+                                                                                <li class="nav-item m-tabs__item">
+                                                                                    <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_4" role="tab">
+                                                                                        <i class="la la-cog"></i> Phone
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="nav-item m-tabs__item">
+                                                                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_5" role="tab">
+                                                                                            <i class="la la-bell-o"></i> Email
+                                                                                        </a>
+                                                                                </li>    
+                                                                                <li class="nav-item m-tabs__item">
+                                                                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_6" role="tab">
+                                                                                            <i class="la la-bell-o"></i> Fax
+                                                                                        </a>
+                                                                                </li>    
+                                                                        </ul>
+                                                                </div>
+                                                                        <div class="tab-content">
+                                                                                <div class="tab-pane active" id="m_tabs_6_4" role="tabpanel">
+                                                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                                        <div class="customer_phone_datatable" id="customer_phone_datatable"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="tab-pane" id="m_tabs_6_5" role="tabpanel">
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                                            <div class="customer_email_datatable" id="customer_email_datatable"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="tab-pane" id="m_tabs_6_6" role="tabpanel">
+                                                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                                                <div class="customer_fax_datatable" id="customer_fax_datatable"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                        </div>                      
                                                     </div>      
                                                 </div>
                                 </div>                            
