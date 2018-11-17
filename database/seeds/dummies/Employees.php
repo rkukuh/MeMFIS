@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Email;
 use App\Models\Address;
 use App\Models\Document;
 use App\Models\Employee;
@@ -27,6 +28,11 @@ class Employees extends Seeder
 
                 $employee->documents()
                          ->saveMany(factory(Document::class, rand(1, 3))->make());
+
+                /** Email */
+
+                $employee->emails()
+                         ->saveMany(factory(Email::class, rand(1, 2))->make());
 
             });
     }
