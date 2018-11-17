@@ -38,11 +38,8 @@ class Customers extends Seeder
 
                 /** Fax */
 
-                for ($i = 1; $i <= rand(1, 2); $i++) {
-                    $customer
-                        ->faxes()
-                        ->save(factory(Fax::class)->make());
-                }
+                $customer->faxes()
+                         ->saveMany(factory(Fax::class, rand(1, 2))->make());
 
                 /** Phone */
 
