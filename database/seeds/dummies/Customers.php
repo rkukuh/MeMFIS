@@ -43,12 +43,8 @@ class Customers extends Seeder
 
                 /** Phone */
 
-                for ($i = 1; $i <= rand(1, 2); $i++) {
-                    $customer
-                        ->phones()
-                        ->save(factory(Phone::class)->make());
-                }
-
+                $customer->phones()
+                         ->saveMany(factory(Phone::class, rand(1, 2))->make());
             });
     }
 }
