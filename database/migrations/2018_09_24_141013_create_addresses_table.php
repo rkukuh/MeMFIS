@@ -16,10 +16,10 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('type_id');
             $table->string('address');
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
+            $table->unsignedInteger('type_id');
             $table->unsignedInteger('addressable_id');
             $table->string('addressable_type');
             $table->timestamps();
