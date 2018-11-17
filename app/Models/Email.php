@@ -17,19 +17,6 @@ class Email extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * Polymorphic: An entity can have zero or many emails.
-     *
-     * This function will get all of the owning addressable models.
-     * See:
-     * - Customer's emails() method for the inverse
-     * - Employee's emails() method for the inverse
-     */
-    public function emailable()
-    {
-        return $this->morphTo();
-    }
-
-    /**
      * One-to-Many: An email may have zero or many type.
      *
      * This function will retrieve the type of an email.
@@ -40,5 +27,18 @@ class Email extends MemfisModel
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many emails.
+     *
+     * This function will get all of the owning addressable models.
+     * See:
+     * - Customer's emails() method for the inverse
+     * - Employee's emails() method for the inverse
+     */
+    public function emailable()
+    {
+        return $this->morphTo();
     }
 }
