@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use App\Models\Employee;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,16 @@ class Employees extends Seeder
      */
     public function run()
     {
-        factory(Employee::class, config('memfis.examples.employees'))->create();
+        factory(Employee::class, config('memfis.examples.employees'))
+            ->create()
+            ->each(function ($employee) {
+
+                /** Address */
+
+                $employee
+                    ->addresses()
+                    ->saveMany(factory(Address::class, rand(2, 4))->make());
+
+            });
     }
 }
