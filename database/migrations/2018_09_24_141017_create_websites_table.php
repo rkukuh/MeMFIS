@@ -15,7 +15,20 @@ class CreateWebsitesTable extends Migration
     {
         Schema::create('websites', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('url');
+            $table->unsignedInteger('type_id');
+            $table->integer('websiteable_id');
+            $table->string('websiteable_type');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('type_id')
+                  ->references('id')->on('types')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->index('url');
         });
     }
 
