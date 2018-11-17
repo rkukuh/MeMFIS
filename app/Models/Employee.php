@@ -77,6 +77,17 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Polymorphic: An employee can have zero or many websites.
+     *
+     * This function will get all of the employee's websites.
+     * See: Phone's websiteable() method for the inverse
+     */
+    public function websites()
+    {
+        return $this->morphMany(Website::class, 'websiteable');
+    }
+
+    /**
      * Many-to-Many: An employee may have zero or many license.
      *
      * This function will retrieve all the licenses of an employee.

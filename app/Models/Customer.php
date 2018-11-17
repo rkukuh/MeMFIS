@@ -77,10 +77,10 @@ class Customer extends MemfisModel
      * Polymorphic: A customer can have zero or many websites.
      *
      * This function will get all of the customer's websites.
-     * See: Website's phoneable() method for the inverse
+     * See: Website's websiteable() method for the inverse
      */
     public function websites()
     {
-        return $this->morphMany(Website::class, 'phoneable');
+        return $this->morphMany(Website::class, 'websiteable');
     }
 }
