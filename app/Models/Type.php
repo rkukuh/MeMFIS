@@ -332,4 +332,17 @@ class Type extends MemfisModel
     {
         return $this->hasMany(Unit::class);
     }
+
+    /**
+     * One-to-Many: A website may have zero or many type.
+     *
+     * This function will retrieve all websites of a type.
+     * See: Website's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function websites()
+    {
+        return $this->hasMany(Website::class);
+    }
 }
