@@ -58,7 +58,7 @@ class Employee extends MemfisModel
      * Polymorphic: An employee can have zero or many faxable.
      *
      * This function will get all of the employee's faxable.
-     * See: Email's faxable() method for the inverse
+     * See: Fax's faxable() method for the inverse
      */
     public function faxes()
     {
