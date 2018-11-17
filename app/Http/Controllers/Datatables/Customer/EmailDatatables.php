@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Customer;
 
+use App\Models\Email;
 use App\Models\Customer;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class EmailDatatables extends Controller
      */
     public function index(Customer $customer)
     {
-        $data = $alldata = json_decode($customer->emails);
+        $emails = Email::with('type')->where('emailable_id',$customer->id)->get();
+
+        $data = $alldata = json_decode($emails);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

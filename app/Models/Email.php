@@ -27,4 +27,18 @@ class Email extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * One-to-Many: A email may have zero or many type.
+     *
+     * This function will retrieve the type of a email.
+     * See: Type's emails() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
 }
