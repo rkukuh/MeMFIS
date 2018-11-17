@@ -166,7 +166,13 @@ let Customer = {
                     title: 'Number',
                     sortable: 'asc',
                     filterable: !1,
-                },               
+                },          
+                {
+                    field: 'type.name',
+                    title: 'Type Phone',
+                    sortable: 'asc',
+                    filterable: !1,
+                },     
                 {
                     field: 'primary',
                     title: 'Primary',
@@ -239,7 +245,13 @@ let Customer = {
                     title: 'Email',
                     sortable: 'asc',
                     filterable: !1,
-                },               
+                },
+                {
+                    field: 'type.name',
+                    title: 'Type Email',
+                    sortable: 'asc',
+                    filterable: !1,
+                },                    
                 {
                     field: 'primary',
                     title: 'Primary',
@@ -312,7 +324,13 @@ let Customer = {
                     title: 'Number',
                     sortable: 'asc',
                     filterable: !1,
-                },               
+                },
+                {
+                    field: 'type.name',
+                    title: 'Type Fax',
+                    sortable: 'asc',
+                    filterable: !1,
+                },                                   
                 {
                     field: 'primary',
                     title: 'Primary',
