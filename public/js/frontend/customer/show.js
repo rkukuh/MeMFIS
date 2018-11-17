@@ -52,7 +52,7 @@ let Customer = {
                 },
                 {
                     field: 'type.name',
-                    title: 'Documenr',
+                    title: 'Type Document',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -105,6 +105,12 @@ let Customer = {
                 {
                     field: 'address',
                     title: 'Address',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'type.name',
+                    title: 'Type Address',
                     sortable: 'asc',
                     filterable: !1,
                 },

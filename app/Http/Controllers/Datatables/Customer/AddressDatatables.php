@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Customer;
 
+use App\Models\Address;
 use App\Models\Customer;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class AddressDatatables extends Controller
      */
     public function index(Customer $customer)
     {
-        $data = $alldata = json_decode($customer->addresses);
+        $addresses= Address::with('type')->where('addressable_id',$customer->id)->get();
+
+        $data = $alldata = json_decode($addresses);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
