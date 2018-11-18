@@ -18,10 +18,6 @@ $factory->define(Category::class, function (Faker $faker) {
 
 });
 
-/** States */
-
-$factory->state(Category::class, 'item', ['of' => 'item']);
-
 /** Callbacks */
 
 $factory->afterCreating(Category::class, function ($category, $faker) {
@@ -30,3 +26,7 @@ $factory->afterCreating(Category::class, function ($category, $faker) {
         $category->descriptions()->save(factory(Description::class)->make()),
     ]);
 });
+
+/** States */
+
+$factory->state(Category::class, 'item', ['of' => 'item']);
