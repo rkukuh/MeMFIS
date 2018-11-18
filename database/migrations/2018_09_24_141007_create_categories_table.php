@@ -19,7 +19,6 @@ class CreateCategoriesTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->string('of');
-            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
