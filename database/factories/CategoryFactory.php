@@ -21,10 +21,9 @@ $factory->define(Category::class, function (Faker $faker) {
 /** Callbacks */
 
 $factory->afterCreating(Category::class, function ($category, $faker) {
-    $faker->randomElement([
-        null,
-        $category->descriptions()->save(factory(Description::class)->make()),
-    ]);
+    if ($faker->boolean) {
+        $category->descriptions()->save(factory(Description::class)->make());
+    }
 });
 
 /** States */
