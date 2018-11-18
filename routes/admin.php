@@ -17,6 +17,7 @@ Route::name('admin.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
+        Route::resource('category', 'CategoryController');
 
         /** POLYMORPH */
 
@@ -26,13 +27,19 @@ Route::name('admin.')->group(function () {
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
+        Route::resource('website', 'WebsiteController');
+        Route::resource('document', 'VersionController');
+        Route::resource('description', 'DescriptionController');
+        Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */
 
         Route::resource('item', 'ItemController');
+        Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('employee', 'EmployeeController');
+        Route::resource('customer', 'CustomerController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');

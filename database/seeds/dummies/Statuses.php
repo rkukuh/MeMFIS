@@ -12,6 +12,6 @@ class Statuses extends Seeder
      */
     public function run()
     {
-        factory(Status::class, 20)->create();
+        factory(Status::class, config('memfis.dummies.statuses'))->create();
     }
 }

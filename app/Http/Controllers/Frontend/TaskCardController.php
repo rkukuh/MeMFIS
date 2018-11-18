@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\ListUtil;
-use App\Models\Taskcard;
+use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardStore;
 use App\Http\Requests\Frontend\TaskCardUpdate;

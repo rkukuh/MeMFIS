@@ -10,8 +10,37 @@ class Phone extends MemfisModel
         'number',
         'ext',
         'type_id',
-        'is_primary',
+        'is_active',
         'phoneable_id',
         'phoneable_type',
     ];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A phone may have zero or many types.
+     *
+     * This function will retrieve the type of an phone.
+     * See: Type's phones() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many phones.
+     *
+     * This function will get all of the owning addressable models.
+     * See:
+     * - Customer's phones() method for the inverse
+     * - Employee's phones() method for the inverse
+     */
+    public function phoneable()
+    {
+        return $this->morphTo();
+    }
+
 }

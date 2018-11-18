@@ -22,31 +22,36 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TagsTableSeeder::class);
         $this->call(TypesTableSeeder::class);
-        $this->call(LevelsTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
-        $this->call(CategoriesOfItem::class);
+        $this->call(LevelsTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
         $this->call(JournalsTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
 
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);
         $this->call(NotesTableSeeder::class);
-        $this->call(EmailsTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
-        $this->call(AddressesTableSeeder::class);
+        $this->call(EmailsTableSeeder::class);
+        $this->call(WebsitesTableSeeder::class);
         $this->call(VersionsTableSeeder::class);
+        $this->call(AddressesTableSeeder::class);
+        $this->call(DocumentsTableSeeder::class);
+        $this->call(DescriptionsTableSeeder::class);
+        $this->call(MaintenanceCyclesTableSeeder::class);
 
         /** MASTER */
 
-        $this->call(ItemsTableSeeder::class);
-        $this->call(StoragesTableSeeder::class);
-        $this->call(DepartmentsTableSeeder::class);
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AircraftsTableSeeder::class);
+        $this->call(DepartmentsTableSeeder::class);
         $this->call(EmployeesTableSeeder::class);
+        $this->call(StoragesTableSeeder::class);
+        $this->call(ItemsTableSeeder::class);
         $this->call(LicensesTableSeeder::class);
         $this->call(CertificationsTableSeeder::class);
+        $this->call(CustomersTableSeeder::class);
 
         /** LICENSE */
 
@@ -61,6 +66,7 @@ class DatabaseSeeder extends Seeder
 
         /** FINANCE */
 
+        $this->call(CurrenciesTableSeeder::class);
         $this->call(BanksTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
 

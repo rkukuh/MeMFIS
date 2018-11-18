@@ -17,7 +17,7 @@ class Journal extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A journal may have zero or many type.
+     * One-to-Many: A journal may have zero or many types.
      *
      * This function will retrieve the type of a journal.
      * See: Type's journals() method for the inverse
@@ -27,6 +27,19 @@ class Journal extends MemfisModel
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * One-to-Many: A customer may have zero or one account code (journal).
+     *
+     * This function will retrieve all customers of an account code (journal).
+     * See: Customer's account_code() method for the inverse
+     *
+     * @return mixed
+     */
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'account_code');
     }
 
     /**

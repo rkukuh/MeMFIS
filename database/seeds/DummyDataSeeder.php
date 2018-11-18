@@ -20,6 +20,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Levels::class);
         $this->call(Statuses::class);
         $this->call(Journals::class);
+        $this->call(Categories::class);
 
         /** POLYMORPH */
 
@@ -27,19 +28,24 @@ class DummyDataSeeder extends Seeder
         $this->call(Notes::class);
         $this->call(Emails::class);
         $this->call(Phones::class);
-        $this->call(Addresses::class);
+        $this->call(Websites::class);
         $this->call(Versions::class);
+        $this->call(Addresses::class);
+        $this->call(Documents::class);
+        $this->call(Descriptions::class);
+        $this->call(MaintenanceCycles::class);
 
         /** MASTER */
 
-        $this->call(Items::class);
-        $this->call(Storages::class);
-        $this->call(Departments::class);
         $this->call(Manufacturers::class);
         $this->call(Aircrafts::class);
+        $this->call(Departments::class);
         $this->call(Employees::class);
+        $this->call(Storages::class);
+        $this->call(Items::class);
         $this->call(Licenses::class);
         $this->call(Certifications::class);
+        $this->call(Customers::class);
 
         /** LICENSE */
 
@@ -54,6 +60,7 @@ class DummyDataSeeder extends Seeder
 
         /** FINANCE */
 
+        $this->call(Currencies::class);
         $this->call(Banks::class);
         $this->call(BankAccounts::class);
 

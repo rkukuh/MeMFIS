@@ -22,8 +22,68 @@ Route::name('datatables.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::get('/taskcard','TaskcardDatatables@index')->name('taskcard.index');
+        Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
+        Route::get('/customer','CustomerDatatables@index')->name('customer.index');
 
+        /** CUSTOMER */
+
+        Route::name('taskcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'customer',
+                'namespace' => 'Customer'
+
+            ], function () {
+
+                Route::get('/','CustomerDatatables@index')->name('all');
+                Route::get('/{customer}/address','AddressDatatables@index')->name('address.index');
+                Route::get('/{customer}/fax','FaxDatatables@index')->name('fax.index');
+                Route::get('/{customer}/email','EmailDatatables@index')->name('email.index');
+                Route::get('/{customer}/phone','PhoneDatatables@index')->name('phone.index');
+                Route::get('/{customer}/document','DecumentDatatables@index')->name('document.index');
+
+            });
+
+        });
+
+        /** TASKCARD */
+
+        Route::name('taskcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'taskcard',
+                'namespace' => 'TaskCard'
+
+            ], function () {
+
+                Route::get('/','TaskCardDatatables@index')->name('all');
+                Route::get('/item','TaskCardItemDatatables@index')->name('item.index');
+                Route::get('/repeat','TaskCardMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeat');
+                Route::get('/threshold','TaskCardMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.threshold');
+
+            });
+
+        });
+
+        /** WORKPACKAGE */
+
+        Route::name('workpackage.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'workpackage',
+                'namespace' => 'WorkPackage'
+
+            ], function () {
+
+                Route::get('/','WorkPackageDatatables@index')->name('all');
+                Route::get('/{workpackage}/taskcard','TaskCardDatatables@index')->name('taskcard.index');
+
+            });
+
+        });
 
         /** ITEM */
 

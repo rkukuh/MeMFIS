@@ -17,10 +17,78 @@ class Employee extends MemfisModel
         'hired_at',
     ];
 
+    protected $dates = ['hired_at'];
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * Many-to-Many: An employee may have zero or many license.
+     * Polymorphic: An employee can have zero or many addresses.
+     *
+     * This function will get all of the employee's addresses.
+     * See: Address' addressable() method for the inverse
+     */
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, 'addressable');
+    }
+
+    /**
+     * Polymorphic: An employee can have zero or many documents.
+     *
+     * This function will get all of the employee's documents.
+     * See: Document's documentable() method for the inverse
+     */
+    public function documents()
+    {
+        return $this->morphMany(Document::class, 'documentable');
+    }
+
+    /**
+     * Polymorphic: An employee can have zero or many emails.
+     *
+     * This function will get all of the employee's emailable.
+     * See: Email's emailable() method for the inverse
+     */
+    public function emails()
+    {
+        return $this->morphMany(Email::class, 'emailable');
+    }
+
+    /**
+     * Polymorphic: An employee can have zero or many faxes.
+     *
+     * This function will get all of the employee's faxable.
+     * See: Fax's faxable() method for the inverse
+     */
+    public function faxes()
+    {
+        return $this->morphMany(Fax::class, 'faxable');
+    }
+
+    /**
+     * Polymorphic: An employee can have zero or many phones.
+     *
+     * This function will get all of the employee's phones.
+     * See: Phone's phoneable() method for the inverse
+     */
+    public function phones()
+    {
+        return $this->morphMany(Phone::class, 'phoneable');
+    }
+
+    /**
+     * Polymorphic: An employee can have zero or many websites.
+     *
+     * This function will get all of the employee's websites.
+     * See: Phone's websiteable() method for the inverse
+     */
+    public function websites()
+    {
+        return $this->morphMany(Website::class, 'websiteable');
+    }
+
+    /**
+     * Many-to-Many: An employee may have zero or many licenses.
      *
      * This function will retrieve all the licenses of an employee.
      * See: License's employees() method for the inverse
@@ -41,7 +109,7 @@ class Employee extends MemfisModel
     }
 
     /**
-     * One-Way: An employee may have zero or many general license.
+     * One-Way: An employee may have zero or many general licenses.
      *
      * @return mixed
      */
@@ -52,7 +120,7 @@ class Employee extends MemfisModel
     }
 
     /**
-     * One-Way: An employee may have zero or many AME License (by DGCA).
+     * One-Way: An employee may have zero or many AME Licenses (by DGCA).
      *
      * @return mixed
      */

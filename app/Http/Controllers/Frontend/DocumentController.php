@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Document;
 use App\Models\ListUtil;
-use App\Models\Employee;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\DocumentStore;
+use App\Http\Requests\Frontend\DocumentUpdate;
 
 class DocumentController extends Controller
 {
@@ -16,9 +17,7 @@ class DocumentController extends Controller
      */
     public function getDocuments()
     {
-        $employees = Employee::All();
-
-        $data = $alldata = json_decode($employees);
+        $data = $alldata = json_decode(Document::All());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -130,10 +129,10 @@ class DocumentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\DocumentStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DocumentStore $request)
     {
         //
     }
@@ -141,10 +140,10 @@ class DocumentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show(Document $document)
     {
         //
     }
@@ -152,10 +151,10 @@ class DocumentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Document $document)
     {
         //
     }
@@ -163,11 +162,11 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Http\Requests\Frontend\DocumentUpdate  $request
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(DocumentUpdate $request, Document $document)
     {
         //
     }
@@ -175,10 +174,10 @@ class DocumentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Document $document)
     {
         //
     }

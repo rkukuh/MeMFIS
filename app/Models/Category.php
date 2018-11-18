@@ -12,7 +12,6 @@ class Category extends MemfisModel
         'code',
         'name',
         'of',
-        'description',
         'account_code',
     ];
 
@@ -44,6 +43,17 @@ class Category extends MemfisModel
     }
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Polymorphic: A category can have zero or many descriptions.
+     *
+     * This function will get all of the category's description.
+     * See: Description's descriptionable() method for the inverse
+     */
+    public function descriptions()
+    {
+        return $this->morphMany(Description::class, 'descriptionable');
+    }
 
     /**
      * M-M Polymorphic: An item can have zero or many categories.

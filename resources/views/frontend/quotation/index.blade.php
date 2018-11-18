@@ -62,19 +62,15 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Add Quotation')
-                                            @slot('data_target', '#modal_quotation')
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'Quotation')
+                                            @slot('href', route('frontend.quotation.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-
-                            @include('frontend.quotation.modal')
-                            @include('frontend.workpackage.modal')
-                            @include('frontend.taskcard-package.modal')
 
                             <div class="m_datatable" id="scrolling_both"></div>
                         </div>
@@ -86,10 +82,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/bootstrap-datepicker.js')}}"></script>
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/summernote.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/quotation.js')}}"></script>
+    <script src="{{ asset('js/frontend/quotation/index.js')}}"></script>
 @endpush

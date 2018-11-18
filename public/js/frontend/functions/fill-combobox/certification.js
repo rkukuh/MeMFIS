@@ -5,19 +5,14 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka3 = 1;
 
                 $('select[name="certification"]').empty();
 
+                $('select[name="certification"]').append(
+                    '<option> Select a certification</option>'
+                );
+
                 $.each(data, function (key, value) {
-                    if (angka3 == 1) {
-                        $('select[name="certification"]').append(
-                            '<option> Select a certification</option>'
-                        );
-
-                        angka3 = 0;
-                    }
-
                     $('select[name="certification"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );

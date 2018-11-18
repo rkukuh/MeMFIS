@@ -20,6 +20,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
+        Route::resource('category', 'CategoryController');
 
         /** POLYMORPH */
 
@@ -29,11 +30,16 @@ Route::name('frontend.')->group(function () {
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
+        Route::resource('website', 'WebsiteController');
+        Route::resource('document', 'DocumentController');
+        Route::resource('description', 'DescriptionController');
+        Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */
 
         Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
+        Route::resource('customer', 'CustomerController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -129,8 +135,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
-        Route::resource('customer', 'CustomerController');
-        Route::get('/get-customers','CustomerController@getCustomers')->name('get-customers');
+        Route::get('/details/{customer}/customer','CustomerController@details')->name('customer.details');
 
         Route::resource('supplier', 'SupplierController');
         Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');

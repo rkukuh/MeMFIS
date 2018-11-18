@@ -9,6 +9,7 @@ use Spatie\Tags\Tag;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
+use App\Models\Customer;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Employee;
@@ -281,6 +282,19 @@ class FillComboxController extends Controller
         $items = Item::pluck('name', 'id');
 
         return json_encode($items);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function customer()
+    {
+        $customers = Customer::pluck('name', 'uuid');
+
+        return json_encode($customers);
 
     }
 

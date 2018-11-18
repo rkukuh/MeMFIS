@@ -5,19 +5,14 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let index = 1;
 
                 $('select[name="otr_certification"]').empty();
 
+                $('select[name="otr_certification"]').append(
+                    '<option> Select a OTR Certification</option>'
+                );
+
                 $.each(data, function (key, value) {
-                    if (index == 1) {
-                        $('select[name="otr_certification"]').append(
-                            '<option> Select a OTR Certification</option>'
-                        );
-
-                        index = 0;
-                    }
-
                     $('select[name="otr_certification"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );

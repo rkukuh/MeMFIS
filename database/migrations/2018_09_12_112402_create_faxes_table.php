@@ -18,7 +18,7 @@ class CreateFaxesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedInteger('type_id');
-            $table->boolean('is_primary');
+            $table->boolean('is_active')->default(true);
             $table->integer('faxable_id');
             $table->string('faxable_type');
             $table->timestamps();

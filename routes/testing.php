@@ -8,14 +8,14 @@ Route::name('testing.')->group(function () {
             return "Hello $name !";
         });
 
-        Route::resource('/testing', 'Frontend\TestingController');
-        Route::view('/maps', 'Frontend\testing\maps')->name('maps');
-        Route::get('/view', 'Frontend\TestingController@view')->name('view');
-        Route::get('/blank', 'Frontend\TestingController@blank')->name('blank');
-        Route::post('/text', 'Frontend\TestingController@text')->name('text');
-        Route::post('/photo', 'Frontend\TestingController@photo')->name('photo');
-        Route::get('/metronic', 'Frontend\TestingController@metronic')->name('metronic');
-        Route::post('/testing-photos','Frontend\TestingController@postPhotos')->name('testing-photos');
+        // Route::resource('/testing', 'Frontend\TestingController');
+        // Route::view('/maps', 'Frontend\testing\maps')->name('maps');
+        // Route::get('/view', 'Frontend\TestingController@view')->name('view');
+        // Route::get('/blank', 'Frontend\TestingController@blank')->name('blank');
+        // Route::post('/text', 'Frontend\TestingController@text')->name('text');
+        // Route::post('/photo', 'Frontend\TestingController@photo')->name('photo');
+        // Route::get('/metronic', 'Frontend\TestingController@metronic')->name('metronic');
+        // Route::post('/testing-photos','Frontend\TestingController@postPhotos')->name('testing-photos');
 
     });
 

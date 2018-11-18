@@ -36,7 +36,7 @@ class MakeEntity extends Command
                             {--f|factory : Generate an entity\'s Factory}
                             {--p|policy : Generate an entity\'s Policy}
                             {--s|seeder : Generate an entity\'s Table Seeder}
-                            {--e|example : Generate an entity\'s Example Seeder}
+                            {--e|dummy : Generate an entity\'s Dummy Seeder}
                             {--t|test : Generate an entity\'s Unit and Feature Test} ';
 
     /**
@@ -72,7 +72,7 @@ class MakeEntity extends Command
             $this->input->setOption('factory', true);
             $this->input->setOption('policy', true);
             $this->input->setOption('seeder', true);
-            $this->input->setOption('example', true);
+            $this->input->setOption('dummy', true);
             $this->input->setOption('test', true);
         }
 
@@ -592,40 +592,40 @@ class MakeEntity extends Command
             }
         }
 
-        /** Example data seeder */
+        /** Dummy data seeder */
 
-        if ($this->option('example')) {
+        if ($this->option('dummy')) {
 
-            $seederExample = $this->pluralizedEntity;
+            $seederDummy = $this->pluralizedEntity;
 
             if ($this->files->exists(
-                $path = base_path() . '/database/seeds/examples/' . $seederExample . '.php')
+                $path = base_path() . '/database/seeds/dummies/' . $seederDummy . '.php')
             ) {
-                $this->input->setOption('example', false);
+                $this->input->setOption('dummy', false);
 
-                $this->line('Example Seeder already exists: seeds/examples/' . $seederExample . '.php');
+                $this->line('Dummy Seeder already exists: seeds/dummies/' . $seederDummy . '.php');
             }
             else {
-                $this->compileExampleSeederStub($path);
+                $this->compileDummySeederStub($path);
 
-                $this->addToTable('Example Seeder', 'seeds/examples/' . $seederExample . '.php');
+                $this->addToTable('Dummy Seeder', 'seeds/dummies/' . $seederDummy . '.php');
 
                 $this->info($this->data['artefact'] . ' created.');
 
-                array_push($this->additionalSteps, 'Call the Example seeder in ExampleDataSeeder');
+                array_push($this->additionalSteps, 'Call the Dummy seeder in DummyDataSeeder');
             }
         }
     }
 
     /**
-     * Compile the example data Seeder stub
+     * Compile the dummy data Seeder stub
      *
      * @param String $path
      * @return void
      */
-    protected function compileExampleSeederStub($path)
+    protected function compileDummySeederStub($path)
     {
-        $stub = $this->files->get(__DIR__ . '/stubs/seeder.example.stub');
+        $stub = $this->files->get(__DIR__ . '/stubs/seeder.dummy.stub');
 
         $stub = str_replace('{{modelName}}', $this->modelName, $stub);
         $stub = str_replace('{{className}}', $this->pluralizedEntity, $stub);

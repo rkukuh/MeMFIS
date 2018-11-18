@@ -32,6 +32,10 @@ use App\Models\Journal;
 use App\Policies\JournalPolicy;
 use App\Models\Version;
 use App\Policies\VersionPolicy;
+use App\Models\Website;
+use App\Policies\WebsitePolicy;
+use App\Models\Category;
+use App\Policies\CategoryPolicy;
 use App\Models\Currency;
 use App\Policies\CurrencyPolicy;
 use App\Models\Aircraft;
@@ -40,10 +44,16 @@ use App\Models\Employee;
 use App\Policies\EmployeePolicy;
 use App\Models\TaskCard;
 use App\Policies\TaskCardPolicy;
+use App\Models\Customer;
+use App\Policies\CustomerPolicy;
+use App\Models\Document;
+use App\Policies\DocumentPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
+use App\Models\Description;
+use App\Policies\DescriptionPolicy;
 use App\Models\Manufacturer;
 use App\Policies\ManufacturerPolicy;
 use App\Models\Certification;
@@ -54,6 +64,8 @@ use App\Models\Pivots\EmployeeLicense;
 use App\Policies\EmployeeLicensePolicy;
 use App\Models\OTRCertification;
 use App\Policies\OTRCertificationPolicy;
+use App\Models\MaintenanceCycle;
+use App\Policies\MaintenanceCyclePolicy;
 use App\Models\Pivots\CertificationEmployee;
 use App\Policies\CertificationEmployeePolicy;
 
@@ -83,17 +95,23 @@ class AuthServiceProvider extends ServiceProvider
         License::class => LicensePolicy::class,
         Journal::class => JournalPolicy::class,
         Version::class => VersionPolicy::class,
+        Website::class => WebsitePolicy::class,
+        Category::class => CategoryPolicy::class,
         Currency::class => CurrencyPolicy::class,
         Aircraft::class => AircraftPolicy::class,
         Employee::class => EmployeePolicy::class,
         TaskCard::class => TaskCardPolicy::class,
+        Customer::class => CustomerPolicy::class,
+        Document::class => DocumentPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
+        Description::class => DescriptionPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
         Certification::class => CertificationPolicy::class,
         GeneralLicense::class => GeneralLicensePolicy::class,
         EmployeeLicense::class => EmployeeLicensePolicy::class,
         OTRCertification::class => OTRCertificationPolicy::class,
+        MaintenanceCycle::class => MaintenanceCyclePolicy::class,
         CertificationEmployee::class => CertificationEmployeePolicy::class,
     ];
 

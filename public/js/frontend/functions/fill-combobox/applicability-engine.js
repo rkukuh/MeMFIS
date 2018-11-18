@@ -5,19 +5,14 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let index = 1;
 
                 $('select[name="applicability_engine"]').empty();
 
+                $('select[name="applicability_engine"]').append(
+                    '<option> Select a Applicability Engine</option>'
+                );
+
                 $.each(data, function (key, value) {
-                    if (index == 1) {
-                        $('select[name="applicability_engine"]').append(
-                            '<option> Select a Applicability Engine</option>'
-                        );
-
-                        index = 0;
-                    }
-
                     $('select[name="applicability_engine"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
