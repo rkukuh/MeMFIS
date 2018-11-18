@@ -31,7 +31,6 @@ $factory->define(Item::class, function (Faker $faker) {
 /** Callbacks */
 
 $factory->afterCreating(Item::class, function ($item, $faker) {
-
     // The business said that an item has only 0 or 1 category
     $item->categories()->attach(Category::ofItem()->get()->random());
 
@@ -44,5 +43,4 @@ $factory->afterCreating(Item::class, function ($item, $faker) {
     if ($faker->boolean) {
         $item->journal()->associate(Journal::get()->random())->save();
     }
-
 });
