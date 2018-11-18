@@ -41,9 +41,9 @@ class Customer extends MemfisModel
     }
 
     /**
-     * Polymorphic: A customer can have zero or many emailable.
+     * Polymorphic: A customer can have zero or many emails.
      *
-     * This function will get all of the customer's emailable.
+     * This function will get all of the customer's emails.
      * See: Email's emailable() method for the inverse
      */
     public function emails()
@@ -52,9 +52,9 @@ class Customer extends MemfisModel
     }
 
     /**
-     * Polymorphic: A customer can have zero or many faxable.
+     * Polymorphic: A customer can have zero or many faxes.
      *
-     * This function will get all of the customer's faxable.
+     * This function will get all of the customer's faxes.
      * See: Fax's faxable() method for the inverse
      */
     public function faxes()
