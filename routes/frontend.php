@@ -20,6 +20,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
+        Route::resource('category', 'CategoryController');
 
         /** POLYMORPH */
 
