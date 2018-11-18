@@ -83,4 +83,17 @@ class Customer extends MemfisModel
     {
         return $this->morphMany(Website::class, 'websiteable');
     }
+
+    /**
+     * One-to-Many: A customer may have zero or one account code (journal).
+     *
+     * This function will retrieve the account code (journal) of an customer.
+     * See: Journal's customers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function journal()
+    {
+        return $this->belongsTo(Journal::class, 'account_code');
+    }
 }

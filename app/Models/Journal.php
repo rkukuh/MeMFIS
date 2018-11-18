@@ -30,6 +30,19 @@ class Journal extends MemfisModel
     }
 
     /**
+     * One-to-Many: A customer may have zero or one account code (journal).
+     *
+     * This function will retrieve all customers of an account code (journal).
+     * See: Customer's account_code() method for the inverse
+     *
+     * @return mixed
+     */
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'account_code');
+    }
+
+    /**
      * One-to-Many: An item may have zero or one account code (journal).
      *
      * This function will retrieve all items of an account code (journal).
