@@ -11,4 +11,18 @@ class Description extends MemfisModel
         'descriptionable_id',
         'descriptionable_type',
     ];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Polymorphic: An entity may have zero or many description.
+     *
+     * This function will get all of the owning descriptionable models.
+     * See:
+     * - ?
+     */
+    public function descriptionable()
+    {
+        return $this->morphTo();
+    }
 }
