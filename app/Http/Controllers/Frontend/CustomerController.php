@@ -54,7 +54,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('frontend.customer.showw',compact('customer'));
+        return view('frontend.customer.show',compact('customer'));
     }
 
     /**
