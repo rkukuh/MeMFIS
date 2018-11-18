@@ -9,7 +9,7 @@ $factory->define(Phone::class, function (Faker $faker) {
     return [
         'number' => $faker->phoneNumber,
         'type_id' => Type::ofPhone()->get()->random()->id,
-        'is_primary' => $faker->boolean,
+        'is_active' => $faker->boolean,
     ];
 
 });

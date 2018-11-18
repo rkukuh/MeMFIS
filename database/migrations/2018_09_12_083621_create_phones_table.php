@@ -19,7 +19,7 @@ class CreatePhonesTable extends Migration
             $table->string('number');
             $table->string('ext')->nullable();
             $table->unsignedInteger('type_id');
-            $table->boolean('is_primary');
+            $table->boolean('is_active')->default(true);
             $table->integer('phoneable_id');
             $table->string('phoneable_type');
             $table->timestamps();

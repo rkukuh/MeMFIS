@@ -10,7 +10,7 @@ class Phone extends MemfisModel
         'number',
         'ext',
         'type_id',
-        'is_primary',
+        'is_active',
         'phoneable_id',
         'phoneable_type',
     ];
