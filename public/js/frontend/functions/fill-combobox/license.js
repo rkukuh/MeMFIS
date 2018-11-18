@@ -11,20 +11,15 @@ $(document).ready(function () {
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    let angka3 = 1;
 
                     $('select[name="license"]').empty();
+
+                    $('select[name="license"]').append(
+                        '<option> Select a License</option>'
+                    );
+
                     $.each(data, function (key, value) {
-                        if (angka3 == 1) {
-                            $('select[name="license"]').append(
-                                '<option> Select a License</option>'
-                            );
-
-                            angka3 = 0;
-                        }
-
                         $('select[name="license"]').append(
-                            // '<option value="' + key + '">' + value + '</option>'
                             select.options[select.options.length] = new Option(value, key)
                         );
                     });

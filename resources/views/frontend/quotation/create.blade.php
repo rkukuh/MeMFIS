@@ -64,6 +64,15 @@
                                                     @slot('id_error', 'customer')
                                                 @endcomponent
                                             </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        From 
+                                                    </label>
+    
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'Marketing')
+                                                    @endcomponent
+                                            </div>
                                         </div>
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Identifier</legend>
@@ -80,7 +89,7 @@
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Tlp / Fax
+                                                                Tlp
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
@@ -101,15 +110,15 @@
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Ref
-                                                            </label>
-
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'WO xxx/xxxx/xxx')
-                                                                @slot('id', 'ref')
-                                                            @endcomponent
-                                                        </div>
+                                                                <label class="form-control-label">
+                                                                    Fax
+                                                                </label>
+    
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                    @slot('id', 'telp')
+                                                                @endcomponent
+                                                            </div>
                                                     </div>
                                                     <div class="form-group m-form__group row">        
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -126,26 +135,31 @@
                                             </fieldset>
 
                                         <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    From 
-                                                </label>
-
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Marketing')
-                                                @endcomponent
-                                            </div>
+                                            
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Quotation No. @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.text')
-                                                    @slot('text', 'Threshold Amount')
-                                                    @slot('id', 'threshold_amount')
-                                                    @slot('name', 'threshold_mount')
+                                                    @slot('text', 'Wuotation No')
+                                                    @slot('id', 'quotation_no')
+                                                    @slot('name', 'quotation_no')
                                                     @slot('id_error', 'quotation_no')
                                                 @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Quotation Ref
+                                                    </label>
+
+                                                    @component('frontend.common.input.select')
+                                                        @slot('id', 'ref')
+                                                        @slot('text', 'Ref')
+                                                        @slot('name', 'ref')
+                                                        @slot('style', 'width:100%')
+                                                        @slot('id_error', 'ref')
+                                                    @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -225,7 +239,7 @@
                                                         @include('frontend.common.buttons.reset')
 
                                                         @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.taskcard.index'))
+                                                            @slot('href', route('frontend.quotation.index'))
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -237,43 +251,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-6">
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                @include('frontend.common.label.datalist')
-
-                                <h3 class="m-portlet__head-text">
-                                    Item Taskcard 
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'item-taskcard')
-                                            @slot('text', 'Item Taskcard')
-                                            @slot('attribute', 'disabled')
-                                            @slot('data_target', '#modal_item_taskcard')
-                                        @endcomponent
-
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 @endsection
@@ -300,6 +277,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
+
 
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>

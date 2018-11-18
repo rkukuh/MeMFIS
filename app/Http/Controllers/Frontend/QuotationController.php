@@ -54,7 +54,7 @@ class QuotationController extends Controller
      */
     public function show(Quotation $quotation)
     {
-        return response()->json($quotation);
+        return view('frontend.quotation.show');
     }
 
     /**
@@ -65,7 +65,7 @@ class QuotationController extends Controller
      */
     public function edit(Quotation $quotation)
     {
-        return response()->json($quotation);
+        return view('frontend.quotation.edit');
     }
 
     /**

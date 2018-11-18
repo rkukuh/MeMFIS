@@ -5,19 +5,14 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let angka6 = 1;
 
                 $('select[name="currency"]').empty();
 
+                $('select[name="currency"]').append(
+                    '<option> Select a Currency</option>'
+                );
+
                 $.each(data, function (key, value) {
-                    if (angka6 == 1) {
-                        $('select[name="currency"]').append(
-                            '<option> Select a Currency</option>'
-                        );
-
-                        angka6 = 0;
-                    }
-
                     $('select[name="currency"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );

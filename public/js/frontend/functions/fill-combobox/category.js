@@ -5,18 +5,14 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let index = 1;
 
                 $('select[name="category"]').empty();
 
-                $.each(data, function (key, value) {
-                    if (index == 1) {
-                        $('select[name="category"]').append(
-                            '<option> Select a Category</option>'
-                        );
+                $('select[name="category"]').append(
+                    '<option> Select a Category</option>'
+                );
 
-                        index = 0;
-                    }
+                $.each(data, function (key, value) {
 
                     $('select[name="category"]').append(
                         '<option value="' + key + '">' + value + '</option>'

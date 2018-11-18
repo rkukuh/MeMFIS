@@ -1,6 +1,6 @@
 let TaskCard = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.taskcard_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
