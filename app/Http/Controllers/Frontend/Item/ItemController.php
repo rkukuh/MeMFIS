@@ -70,7 +70,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return view('frontend.item.show', compact('item'));
+        return view('frontend.item.showz', compact('item'));
     }
 
     /**
