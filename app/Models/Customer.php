@@ -96,4 +96,14 @@ class Customer extends MemfisModel
     {
         return $this->belongsTo(Journal::class, 'account_code');
     }
+
+    /**
+     * One-Way: A customer may have zero or one payment term.
+     *
+     * @return mixed
+     */
+    public function term_of_payment()
+    {
+        return $this->belongsTo(Type::class, 'payment_term');
+    }
 }
