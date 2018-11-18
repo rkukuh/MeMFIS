@@ -20,6 +20,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Levels::class);
         $this->call(Statuses::class);
         $this->call(Journals::class);
+        $this->call(Categories::class);
 
         /** POLYMORPH */
 
