@@ -2,6 +2,9 @@
 
 use App\Models\Unit;
 use App\Models\Item;
+use Spatie\Tags\Tag;
+use App\Models\Journal;
+use App\Models\Category;
 use Faker\Generator as Faker;
 
 $factory->define(Item::class, function (Faker $faker) {
@@ -22,5 +25,24 @@ $factory->define(Item::class, function (Faker $faker) {
         'is_stock' => $faker->boolean,
         'description' => $faker->randomElement([null, $faker->text]),
     ];
+
+});
+
+/** Callbacks */
+
+$factory->afterCreating(Item::class, function ($item, $faker) {
+
+    // The business said that an item has only 0 or 1 category
+    $item->categories()->attach(Category::ofItem()->get()->random());
+
+    $tags = Tag::getWithType('item');
+
+    for ($i = 1; $i <= rand(0, $tags->count()); $i++) {
+        $item->tags()->attach($tags->find($i));
+    }
+
+    if ($faker->boolean) {
+        $item->journal()->associate(Journal::get()->random())->save();
+    }
 
 });
