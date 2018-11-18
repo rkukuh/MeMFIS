@@ -17,7 +17,7 @@ class Journal extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A journal may have zero or many type.
+     * One-to-Many: A journal may have zero or many types.
      *
      * This function will retrieve the type of a journal.
      * See: Type's journals() method for the inverse

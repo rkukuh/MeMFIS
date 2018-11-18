@@ -17,7 +17,7 @@ class Fax extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A fax may have zero or many type.
+     * One-to-Many: A fax may have zero or many types.
      *
      * This function will retrieve the type of an fax.
      * See: Type's faxes() method for the inverse

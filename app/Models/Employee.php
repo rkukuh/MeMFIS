@@ -44,7 +44,7 @@ class Employee extends MemfisModel
     }
 
     /**
-     * Polymorphic: An employee can have zero or many emailable.
+     * Polymorphic: An employee can have zero or many emails.
      *
      * This function will get all of the employee's emailable.
      * See: Email's emailable() method for the inverse
@@ -55,7 +55,7 @@ class Employee extends MemfisModel
     }
 
     /**
-     * Polymorphic: An employee can have zero or many faxable.
+     * Polymorphic: An employee can have zero or many faxes.
      *
      * This function will get all of the employee's faxable.
      * See: Fax's faxable() method for the inverse
@@ -88,7 +88,7 @@ class Employee extends MemfisModel
     }
 
     /**
-     * Many-to-Many: An employee may have zero or many license.
+     * Many-to-Many: An employee may have zero or many licenses.
      *
      * This function will retrieve all the licenses of an employee.
      * See: License's employees() method for the inverse
@@ -109,7 +109,7 @@ class Employee extends MemfisModel
     }
 
     /**
-     * One-Way: An employee may have zero or many general license.
+     * One-Way: An employee may have zero or many general licenses.
      *
      * @return mixed
      */
@@ -120,7 +120,7 @@ class Employee extends MemfisModel
     }
 
     /**
-     * One-Way: An employee may have zero or many AME License (by DGCA).
+     * One-Way: An employee may have zero or many AME Licenses (by DGCA).
      *
      * @return mixed
      */

@@ -18,7 +18,7 @@ class Phone extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A phone may have zero or many type.
+     * One-to-Many: A phone may have zero or many types.
      *
      * This function will retrieve the type of an phone.
      * See: Type's phones() method for the inverse
