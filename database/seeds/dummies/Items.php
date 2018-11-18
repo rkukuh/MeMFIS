@@ -14,6 +14,6 @@ class Items extends Seeder
     {
         // TODO: Model factory is not respecting model observer
 
-        factory(Item::class, config('memfis.examples.items'))->create();
+        factory(Item::class, config('memfis.dummies.items'))->create();
     }
 }

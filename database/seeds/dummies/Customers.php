@@ -12,6 +12,6 @@ class Customers extends Seeder
      */
     public function run()
     {
-        factory(Customer::class, config('memfis.examples.customers'))->create();
+        factory(Customer::class, config('memfis.dummies.customers'))->create();
     }
 }

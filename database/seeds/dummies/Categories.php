@@ -13,6 +13,6 @@ class Categories extends Seeder
      */
     public function run()
     {
-        factory(Category::class, config('memfis.examples.categories'))->create();
+        factory(Category::class, config('memfis.dummies.categories'))->create();
     }
 }

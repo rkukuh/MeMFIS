@@ -12,6 +12,6 @@ class Journals extends Seeder
      */
     public function run()
     {
-        factory(Journal::class, config('memfis.examples.journals'))->create();
+        factory(Journal::class, config('memfis.dummies.journals'))->create();
     }
 }
