@@ -9,7 +9,7 @@ class Fax extends MemfisModel
     protected $fillable = [
         'number',
         'type_id',
-        'is_primary',
+        'is_active',
         'faxable_id',
         'faxable_type',
     ];
