@@ -9,7 +9,7 @@ $factory->define(Email::class, function (Faker $faker) {
     return [
         'address' => $faker->companyEmail,
         'type_id' => Type::ofEmail()->get()->random()->id,
-        'is_primary' => $faker->boolean,
+        'is_active' => $faker->boolean,
     ];
 
 });

@@ -9,7 +9,7 @@ class Email extends MemfisModel
     protected $fillable = [
         'address',
         'type_id',
-        'is_primary',
+        'is_active',
         'emailable_id',
         'emailable_type',
     ];

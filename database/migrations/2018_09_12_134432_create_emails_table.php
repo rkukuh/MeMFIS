@@ -18,7 +18,7 @@ class CreateEmailsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('address');
             $table->unsignedInteger('type_id');
-            $table->boolean('is_primary');
+            $table->boolean('is_active')->default(true);
             $table->integer('emailable_id');
             $table->string('emailable_type');
             $table->timestamps();
