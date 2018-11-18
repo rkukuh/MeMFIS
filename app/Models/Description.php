@@ -15,11 +15,11 @@ class Description extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * Polymorphic: An entity may have zero or many description.
+     * Polymorphic: An entity may have zero or many descriptions.
      *
      * This function will get all of the owning descriptionable models.
      * See:
-     * - ?
+     * - Category's descriptions() method for the inverse
      */
     public function descriptionable()
     {
