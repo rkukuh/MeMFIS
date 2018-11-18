@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'version' => '0.1.1',
+    'version' => '0.3.0',
 
     /**
      * Quantity of example data
@@ -9,6 +9,7 @@ return [
      */
     'examples' => [
         'banks' => 50,
+        'categories' => 10,
         'currencies' => 10,
         'customers' => 20,
         'employees' => 50,
