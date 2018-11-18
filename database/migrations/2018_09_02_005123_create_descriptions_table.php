@@ -15,7 +15,12 @@ class CreateDescriptionsTable extends Migration
     {
         Schema::create('descriptions', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->longText('body');
+            $table->unsignedInteger('descriptionable_id');
+            $table->string('descriptionable_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
