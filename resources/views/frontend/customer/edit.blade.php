@@ -220,6 +220,57 @@
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">    
+                                                        <label class="form-control-label">
+                                                            Website @include('frontend.common.label.required')
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        <label class="form-control-label">
+                                                            Type.
+                                                        </label>        
+                                                    </div>
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                    </div>
+        
+                                                </div>        
+                                                <div class='repeater'>
+                                                    <div data-repeater-list="group-website">
+                                                        <div data-repeater-item>
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-6 col-md-6 col-lg-6">    
+                                                                    @component('frontend.common.input.text')
+                                                                        @slot('text', 'website')
+                                                                        @slot('name', 'name')
+                                                                    @endcomponent
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                        @component('frontend.common.input.radio')
+                                                                            @slot('text', 'Company Profile')
+                                                                            @slot('name', 'type_website')
+                                                                            @slot('id', 'type_website')
+                                                                            @slot('value', 'company_profile')
+                                                                        @endcomponent
+                                                                        @component('frontend.common.input.radio')
+                                                                            @slot('name', 'type_website')
+                                                                            @slot('id', 'type_website')
+                                                                            @slot('text', 'Personal')
+                                                                            @slot('value', 'personal')
+                                                                        @endcomponent
+                                                                </div>
+                                                                <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                                    @include('frontend.common.buttons.delete_repeater')
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @include('frontend.common.buttons.create_repeater')
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group m-form__group row">
                                                     <div class="col-sm-4 col-md-4 col-lg-4">    
                                                         <label class="form-control-label">
                                                             Email @include('frontend.common.label.required')
