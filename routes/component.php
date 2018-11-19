@@ -34,6 +34,8 @@ Route::name('component.')->group(function () {
         Route::get('get-taskcard-relationships', 'FillComboxController@taskcardRelationship')->name('get-taskcard-relationships');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
         Route::get('get-customers', 'FillComboxController@customer')->name('get-customers');
+        Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
+        Route::get('get-address-types', 'FillComboxController@addressType')->name('get-address-types');
     });
 });
 
