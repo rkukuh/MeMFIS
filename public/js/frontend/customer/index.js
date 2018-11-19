@@ -59,11 +59,12 @@ let Customer = {
                     filterable: !1,
                 },
                 {
-                    field: 'payment_term',
+                    field: 'term_of_payment.name',
                     title: 'Term of Payment',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
+                    
                 },
                 {
                     field: 'Actions',
