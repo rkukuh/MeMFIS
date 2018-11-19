@@ -87,7 +87,7 @@
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', $customer->payment_term)
+                                                        @slot('text', $customer->term_of_payment->name)
                                                     @endcomponent
                                                 @endif
                                             </div>
