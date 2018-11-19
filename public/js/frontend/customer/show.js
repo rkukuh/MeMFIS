@@ -178,13 +178,13 @@ let Customer = {
                 },     
                 {
                     field: 'primary',
-                    title: 'Primary',
+                    title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {    
                         var e = {
                             1: {
-                                title: "Primary",
+                                title: "Active",
                                 class: "m-badge--brand"
                             },
                             0: {
@@ -248,6 +248,7 @@ let Customer = {
                     title: 'Email',
                     sortable: 'asc',
                     filterable: !1,
+
                 },
                 {
                     field: 'type.name',
@@ -257,13 +258,13 @@ let Customer = {
                 },                    
                 {
                     field: 'primary',
-                    title: 'Primary',
+                    title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
                         var e = {
                             1: {
-                                title: "Primary",
+                                title: "Active",
                                 class: "m-badge--brand"
                             },
                             0: {
@@ -336,13 +337,13 @@ let Customer = {
                 },                                   
                 {
                     field: 'primary',
-                    title: 'Primary',
+                    title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
                         var e = {
                             1: {
-                                title: "Primary",
+                                title: "Active",
                                 class: "m-badge--brand"
                             },
                             0: {
