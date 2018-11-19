@@ -180,11 +180,16 @@
                                                                                         </a>
                                                                                 </li>    
                                                                                 <li class="nav-item m-tabs__item">
-                                                                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_6" role="tab">
-                                                                                            <i class="la la-bell-o"></i> Fax
-                                                                                        </a>
-                                                                                </li>    
-                                                                        </ul>
+                                                                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_6" role="tab">
+                                                                                        <i class="la la-bell-o"></i> Fax
+                                                                                    </a>
+                                                                            </li>    
+                                                                            <li class="nav-item m-tabs__item">
+                                                                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_7" role="tab">
+                                                                                    <i class="la la-bell-o"></i> Website
+                                                                                </a>
+                                                                        </li>    
+                                                            </ul>
                                                                 </div>
                                                                         <div class="tab-content">
                                                                                 <div class="tab-pane active" id="m_tabs_6_4" role="tabpanel">
@@ -198,12 +203,19 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="tab-pane" id="m_tabs_6_6" role="tabpanel">
-                                                                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                                                <div class="customer_fax_datatable" id="customer_fax_datatable"></div>
-                                                                                            </div>
+                                                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                                            <div class="customer_fax_datatable" id="customer_fax_datatable"></div>
                                                                                         </div>
                                                                                     </div>
-                                                        </div>                      
+                                                                                    <div class="tab-pane" id="m_tabs_6_7" role="tabpanel">
+                                                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                                                <div class="customer_website_datatable" id="customer_website_datatable"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                            </div>                      
                                                     </div>      
                                                 </div>
                                 </div>                            
