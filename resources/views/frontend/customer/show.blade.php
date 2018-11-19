@@ -99,16 +99,15 @@
                                                     <label class="form-control-label">
                                                         Active * @include('frontend.common.label.optional')
                                                     </label>
-                                            
-                                                    @component('frontend.common.input.checkbox')
+                                                    @if($customer->banned_at <> null)
+                                                    @component('frontend.common.label.data-info')
                                                         @slot('text', 'Active')
-                                                        @slot('name', 'active')
-                                                        @slot('disabled', 'disabled')
-                                                        @if ($customer->banned_at <> null)
-                                                            @slot('checked', 'checked')
-                                                        @endif
-
                                                     @endcomponent
+                                                    @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'Banned')
+                                                    @endcomponent
+                                                    @endif
                                                 </div>   
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
