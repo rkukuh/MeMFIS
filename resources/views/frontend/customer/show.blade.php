@@ -149,14 +149,6 @@
                                                                         <i class="la la-bell-o"></i> Contact
                                                                     </a>
                                                             </li>    
-                                                            {{-- <li class="nav-item dropdown m-tabs__item">
-                                                                    <a class="nav-link m-tabs__link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true"><i class="la la-map-marker"></i>Contact</a>
-                                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                                            <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_3">Phone</a>
-                                                                            <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_4">Email</a>
-                                                                            <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_5">Fax</a>
-                                                                    </div>
-                                                            </li> --}}
                                                         </ul>
                                                     </div>
                                                 </div>
