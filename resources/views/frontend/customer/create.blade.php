@@ -80,12 +80,13 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
-                                                    ToP @include('frontend.common.label.required')
+                                                    Term of Payment @include('frontend.common.label.required')
                                                 </label>
                                         
                                                 @component('frontend.common.input.text')
-                                                    @slot('text', 'ToP')
-                                                    @slot('name', 'top')
+                                                    @slot('text', 'Term of Payment')
+                                                    @slot('name', 'payment_term')
+                                                    @slot('id', 'payment_term')
                                                 @endcomponent
                                             </div>
                                             

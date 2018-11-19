@@ -80,7 +80,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
-                                                    ToP @include('frontend.common.label.required')
+                                                    Term of Payment @include('frontend.common.label.required')
                                                 </label>
                                         
                                                 @if (empty($customer->payment_term))
