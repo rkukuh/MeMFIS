@@ -393,7 +393,7 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/core.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
     <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
 @endpush
