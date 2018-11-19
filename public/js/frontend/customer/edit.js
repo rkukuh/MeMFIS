@@ -6,7 +6,7 @@ let Customer = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/customer/'+ customer_uuid +'/document',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -45,8 +45,14 @@ let Customer = {
             },
             columns: [
                 {
-                    field: 'name',
-                    title: 'Name',
+                    field: 'number',
+                    title: 'Document Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'type.name',
+                    title: 'Type Document',
                     sortable: 'asc',
                     filterable: !1,
                 },

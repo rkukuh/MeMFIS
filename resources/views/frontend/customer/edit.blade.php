@@ -374,6 +374,10 @@
 
 @push('footer-scripts')
     <script>
+        let customer_uuid = '{{ $customer->uuid }}';
+    </script>
+
+    <script>
         function initMap() {
             var myLatLng = {lat: -7.265757, lng: 112.734146};
 
