@@ -19,7 +19,6 @@
                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="AddressForm">
                         <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                         <div class="m-portlet__body">
-                                <div id="map"></div>
 
                                 <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -35,6 +34,8 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                <div id="map"></div>
+
 
                         </div>
                         <div class="modal-footer">
