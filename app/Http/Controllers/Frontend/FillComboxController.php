@@ -306,7 +306,7 @@ class FillComboxController extends Controller
     public function paymentTerm()
     {
         $payment_terms = Type::ofPaymentTerm()
-        ->pluck('name', 'id');
+                        ->pluck('name', 'id');
 
         return json_encode($payment_terms);
     }
@@ -318,9 +318,10 @@ class FillComboxController extends Controller
      */
     public function addressType()
     {
-        $customers = Customer::pluck('name', 'uuid');
+        $addresses = Type::ofAddress()
+                        ->pluck('name', 'id');
 
-        return json_encode($customers);
+        return json_encode($addresses);
     }
 
 }

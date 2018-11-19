@@ -451,6 +451,7 @@
     <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/address-type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/address-type.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 

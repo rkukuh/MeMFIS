@@ -34,6 +34,23 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label class="form-control-label">
+                                                    Type @include('frontend.common.label.required')
+                                                </label>
+    
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Addres Type')
+                                                    @slot('id', 'address_type')
+                                                    @slot('name', 'address_type')
+                                                    @slot('id_error', 'address_type')
+                                                    @slot('style', 'width:100%')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                       
+
                                 <div id="map"></div>
 
 
