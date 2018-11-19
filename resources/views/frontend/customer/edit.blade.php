@@ -83,11 +83,12 @@
                                                     Term of Payment @include('frontend.common.label.required')
                                                 </label>
                                         
-                                                @component('frontend.common.input.text')
-                                                @slot('text', 'Term of Payment')
-                                                @slot('name', 'payment_term')
-                                                @slot('id', 'payment_term')
-                                            @endcomponent
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Term of Payment')
+                                                    @slot('id', 'payment_term')
+                                                    @slot('name', 'payment_term')
+                                                    @slot('id_error', 'payment_term')
+                                                @endcomponent
                                             </div>
                                             
                                         </div>
@@ -447,6 +448,9 @@
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/address-type.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 

@@ -77,16 +77,17 @@
                                                     @endcomponent
                                                 </div>   
                                         </div>
-                                        <div class="form-group m-form__group row">
+                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
                                                     Term of Payment @include('frontend.common.label.required')
                                                 </label>
                                         
-                                                @component('frontend.common.input.text')
+                                                @component('frontend.common.input.select2')
                                                     @slot('text', 'Term of Payment')
-                                                    @slot('name', 'payment_term')
                                                     @slot('id', 'payment_term')
+                                                    @slot('name', 'payment_term')
+                                                    @slot('id_error', 'payment_term')
                                                 @endcomponent
                                             </div>
                                             
@@ -394,6 +395,8 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
     <script src="{{ asset('js/frontend/item/create.js') }}"></script>
     <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
 @endpush
