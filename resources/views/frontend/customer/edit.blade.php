@@ -319,7 +319,7 @@
                                                         Active * @include('frontend.common.label.optional')
                                                     </label>
                                             
-                                                    @component('frontend.common.input.checkbox')
+                                                    @component('frontend.common.input.switch')
                                                         @slot('text', 'Active')
                                                         @slot('name', 'active')
                                                     @endcomponent
