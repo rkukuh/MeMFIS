@@ -177,7 +177,7 @@ let Customer = {
                     filterable: !1,
                 },     
                 {
-                    field: 'primary',
+                    field: 'active',
                     title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
@@ -257,7 +257,7 @@ let Customer = {
                     filterable: !1,
                 },                    
                 {
-                    field: 'primary',
+                    field: 'active',
                     title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
@@ -336,7 +336,7 @@ let Customer = {
                     filterable: !1,
                 },                                   
                 {
-                    field: 'primary',
+                    field: 'active',
                     title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
