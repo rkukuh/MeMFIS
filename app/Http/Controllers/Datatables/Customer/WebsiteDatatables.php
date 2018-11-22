@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Datatables\Customer;
 
+use App\Models\Website;
 use App\Models\Customer;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerDatatables extends Controller
+class WebsiteDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Customer $customer)
     {
-        $customers = Customer::with('term_of_payment')->get();
+        $website= Website::with('type')->where('websiteable_id',$customer->id)->get();
 
-        $data = $alldata = json_decode($customers);
+        $data = $alldata = json_decode($website);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

@@ -49,11 +49,12 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show($customer)
     {
+        $customer = Customer::with('term_of_payment')->where('uuid',$customer)->first();
+
         return view('frontend.customer.show',compact('customer'));
     }
 

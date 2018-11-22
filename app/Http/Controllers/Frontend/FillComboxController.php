@@ -298,4 +298,30 @@ class FillComboxController extends Controller
 
     }
 
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function paymentTerm()
+    {
+        $payment_terms = Type::ofPaymentTerm()
+                        ->pluck('name', 'id');
+
+        return json_encode($payment_terms);
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addressType()
+    {
+        $addresses = Type::ofAddress()
+                        ->pluck('name', 'id');
+
+        return json_encode($addresses);
+    }
+
 }

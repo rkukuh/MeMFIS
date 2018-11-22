@@ -20,7 +20,6 @@ let Customer = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
                 serverSorting: !0
             },
             layout: {
@@ -59,11 +58,12 @@ let Customer = {
                     filterable: !1,
                 },
                 {
-                    field: 'payment_term',
-                    title: 'ToP',
+                    field: 'term_of_payment.name',
+                    title: 'Term of Payment',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 50,
+                    width: 150,
+                    
                 },
                 {
                     field: 'Actions',

@@ -42,6 +42,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{customer}/email','EmailDatatables@index')->name('email.index');
                 Route::get('/{customer}/phone','PhoneDatatables@index')->name('phone.index');
                 Route::get('/{customer}/document','DecumentDatatables@index')->name('document.index');
+                Route::get('/{customer}/website','WebsiteDatatables@index')->name('website.index');
 
             });
 
