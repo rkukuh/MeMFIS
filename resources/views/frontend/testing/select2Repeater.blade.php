@@ -466,13 +466,20 @@ $(document).ready(function () {
         // have $(this).show() called on it.
         show: function () {
             $(this).slideDown();
-            $(this).fadeIn();
-            $(this).find(".select2-container--default").remove();
-            // $(this).find(".unit").select2();
+            // $(this).fadeIn();
+            // $(this).find(".select2-container--default").remove();
+            // $(this).find(".unit2").select2();
             // $(this).find('span').remove() 
             // $(this).find('select').select2() 
             // $(this).slideDown()  
-
+            // $('.select2-container').remove();
+            // $('.unit').select2({
+            // placeholder: "Placeholder text",
+            // allowClear: true
+            // });
+            // $('.select2-container').css('width','100%');
+            // $(this).find('select').next('.select2-container').remove();
+            // $(this).find('select').select2();
         },
         // (Optional)
         // "hide" is called when a user clicks on a data-repeater-delete
