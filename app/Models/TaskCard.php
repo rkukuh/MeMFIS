@@ -14,7 +14,7 @@ class TaskCard extends Model
         'otr_certification_id',
         'work_area',
         'zone',
-        'zoneaccess',
+        'access',
         'is_rii',
         'applicability_airplane',
         'applicability_engine',
