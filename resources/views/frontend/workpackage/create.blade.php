@@ -65,14 +65,14 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Template @include('frontend.common.label.required')
+                                                    Title @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
-                                                    @slot('text', 'Template')
-                                                    @slot('id', 'template')
-                                                    @slot('name', 'template')
-                                                    @slot('id_error', 'template')
+                                                    @slot('text', 'title')
+                                                    @slot('id', 'title')
+                                                    @slot('name', 'title')
+                                                    @slot('id_error', 'title')
                                                 @endcomponent
                                             </div>
                                             
@@ -162,7 +162,7 @@
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/title.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/aircraft.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/series.js') }}"></script>
 
