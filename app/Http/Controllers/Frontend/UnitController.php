@@ -37,7 +37,9 @@ class UnitController extends Controller
      */
     public function store(UnitStore $request)
     {
-        //
+            $unit = Unit::create($request->all());
+
+            return response()->json($unit);
     }
 
     /**
@@ -82,6 +84,8 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        //
+        $unit->delete();
+
+        return response()->json($unit);
     }
 }
