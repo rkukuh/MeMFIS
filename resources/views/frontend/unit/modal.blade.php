@@ -18,9 +18,9 @@
                                 </label>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Name')
-                                    @slot('name', 'name_category')
-                                    @slot('id', 'name_category')
-                                    @slot('id_error', 'name-category')
+                                    @slot('name', 'name')
+                                    @slot('id', 'name')
+                                    @slot('id_error', 'name')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -41,10 +41,11 @@
                                     Type @include('frontend.common.label.required')
                                 </label>
                                 @component('frontend.common.input.select2')
-                                    @slot('name', 'type')
-                                    @slot('id', 'type')
+                                    @slot('name', 'type_id')
+                                    @slot('id', 'type_id')
                                     @slot('text', 'Type')
                                     @slot('style', 'width: 100%')
+                                    @slot('id_error', 'type_id')
                                 @endcomponent
                             </div>
                         </div>
@@ -53,7 +54,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-category')
+                                    @slot('class', 'add-unit')
                                     @slot('type', 'button')
                                 @endcomponent
 

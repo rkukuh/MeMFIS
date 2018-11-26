@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             @include('frontend.unit.modal')
-                            <div class="m_datatable" id="scrolling_both"></div>
+                            <div class="unit_datatable" id="unit_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/action-botton/category.js')}}"></script>

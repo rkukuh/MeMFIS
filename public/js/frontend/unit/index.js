@@ -1,6 +1,6 @@
 let Category = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.unit_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -71,10 +71,10 @@ let Category = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_cunit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-category" title="Edit" data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_unit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-category" title="Edit" data-id=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
@@ -87,50 +87,46 @@ let Category = {
             $('.btn-success').removeClass('add');
         });
 
-        let simpan = $('.modal-footer').on('click', '.add-category', function () {
-            $('#name-error').html('');
-            $('#simpan').text('Simpan');
-
-            let registerForm = $('#CustomerForm');
-            let code = $('input[name=code_category]').val();
-            let name = $('input[name=name_category]').val();
-            let description =$('#description_category').val();
-            let formData = registerForm.serialize();
+        let simpan = $('.modal-footer').on('click', '.add-unit', function () {
+            let name = $('input[name=name]').val();
+            let symbol = $('input[name=symbol]').val();
+            let type_id =$('#type_id').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/category-item',
+                url: '/unit',
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name,
-                    code: code,
-                    description: description,
+                    symbol: symbol,
+                    type_id: type_id,
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.code) {
-                            $('#code-category-error').html(data.errors.code[0]);
-
-                        }
                         if (data.errors.name) {
-                            $('#name-category-error').html(data.errors.name[0]);
+                            $('#name-error').html(data.errors.name[0]);
 
                         }
-                //    document.getElementById('code').value = code;
-                //    document.getElementById('name').value = name;
-                //    document.getElementById('description').value = description;
+                        if (data.errors.symbol) {
+                            $('#symbol-error').html(data.errors.symbol[0]);
+
+                        }
+                        if (data.errors.type) {
+                            $('#type-error').html(data.errors.type[0]);
+
+                        }
 
                     } else {
-                        $('#modal_category').modal('hide');
+                        $('#modal_unit').modal('hide');
 
-                        toastr.success('Category has been created.', 'Success', {
+                        toastr.success('Unit has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
+                        let table = $('.unit_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -223,16 +219,18 @@ let Category = {
             });
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        $('.unit_datatable').on('click', '.delete', function () {
+            let unit_uuid = $(this).data('uuid');
+
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
+            })
+            .then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
@@ -241,22 +239,19 @@ let Category = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/category-item/' + triggerid + '',
+                        url: '/unit/' + unit_uuid + '',
                         success: function (data) {
-                            toastr.success(
-                                'Data berhasil dihapus.',
-                                'Sukses', {
+                            toastr.success('Unit has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.unit_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
 
                             $.each(errors.errors, function (index, value) {
@@ -264,17 +259,6 @@ let Category = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Canceled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });
