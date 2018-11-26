@@ -311,7 +311,7 @@ class FillComboxController extends Controller
         return json_encode($payment_terms);
     }
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -323,5 +323,19 @@ class FillComboxController extends Controller
 
         return json_encode($addresses);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unitType()
+    {
+        $units = Type::ofUnit()
+                        ->pluck('name', 'id');
+
+        return json_encode($units);
+    }
+    
 
 }
