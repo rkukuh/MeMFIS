@@ -61,7 +61,7 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        //
+        return response()->json($unit);
     }
 
     /**
@@ -73,7 +73,10 @@ class UnitController extends Controller
      */
     public function update(UnitUpdate $request, Unit $unit)
     {
-        //
+        $unit->update($request->all());
+
+        return response()->json($unit);
+
     }
 
     /**
