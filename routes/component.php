@@ -36,6 +36,7 @@ Route::name('component.')->group(function () {
         Route::get('get-customers', 'FillComboxController@customer')->name('get-customers');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
         Route::get('get-address-types', 'FillComboxController@addressType')->name('get-address-types');
+        Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');
     });
 });
 

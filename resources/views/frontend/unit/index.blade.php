@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Quotation
+                    Unit
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.quotation.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.unit.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Quotation
+                                Unit
                             </span>
                         </a>
                     </li>
@@ -27,7 +27,6 @@
             </div>
         </div>
     </div>
-
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -39,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Quotation Datalist
+                                    Unit Datalist
                                 </h3>
                             </div>
                         </div>
@@ -62,17 +61,17 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create')
-                                            @slot('text', 'Quotation')
-                                            @slot('href', route('frontend.quotation.create') )
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('text', 'Add Unit')
+                                            @slot('data_target', '#modal_unit')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="m_datatable" id="scrolling_both"></div>
+                            @include('frontend.unit.modal')
+                            <div class="unit_datatable" id="unit_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -82,5 +81,9 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/quotation/index.js')}}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/action-botton/unit-type.js')}}"></script>
+    <script src="{{ asset('js/frontend/unit/index.js')}}"></script>
 @endpush
