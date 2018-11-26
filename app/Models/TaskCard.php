@@ -8,6 +8,21 @@ class TaskCard extends Model
 {
     protected $table = 'taskcards';
 
+    protected $fillable = [
+        'title',
+        'type_id',
+        'otr_certification_id',
+        'work_area',
+        'zone',
+        'zoneaccess',
+        'is_rii',
+        'applicability_airplane',
+        'applicability_engine',
+        'is_applicability_engine_all',
+        'source',
+        'effectivity',
+    ];
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
