@@ -248,6 +248,11 @@ let Category = {
             });
         });
 
+        let close = $('.modal-footer').on('click', '.clse', function () {
+            save_button();
+            unit_reset();
+        });
+
         $('.unit_datatable').on('click', '.delete', function () {
             let unit_uuid = $(this).data('uuid');
 
