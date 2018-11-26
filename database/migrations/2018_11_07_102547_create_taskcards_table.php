@@ -25,10 +25,9 @@ class CreateTaskcardsTable extends Migration
             $table->boolean('is_rii');
             $table->string('applicability_airplane');
             $table->unsignedInteger('applicability_engine')->nullable();
-            $table->boolean('applicability_engine_all')->nullable();
+            $table->boolean('is_applicability_engine_all')->nullable();
             $table->string('source')->nullabel();
             $table->string('effectifity')->nullabel();
-            $table->longText('description')->nullabel();
             $table->timestamps();
             $table->softDeletes();
 
