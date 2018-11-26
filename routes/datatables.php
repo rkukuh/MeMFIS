@@ -18,6 +18,7 @@ Route::name('datatables.')->group(function () {
         /** MASTER */
 
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
+        Route::get('/unit','UnitDatatables@index')->name('unit.index');
 
 
         /** TRANSACTION */
