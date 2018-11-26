@@ -82,6 +82,8 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/action-botton/category.js')}}"></script>
     <script src="{{ asset('js/frontend/unit/index.js')}}"></script>
 @endpush
