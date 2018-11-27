@@ -17,6 +17,8 @@ Route::name('testing.')->group(function () {
         // Route::get('/metronic', 'Frontend\TestingController@metronic')->name('metronic');
         // Route::post('/testing-photos','Frontend\TestingController@postPhotos')->name('testing-photos');
 
+        Route::view('/select2', 'frontend/testing/select2')->name('select2');
+
         Route::view('/select2-repeater', 'frontend/testing/select2Repeater')->name('select2-repeater');
 
     });
