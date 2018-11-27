@@ -236,16 +236,19 @@
                                                         </option>
                                                     @endforeach
                                                 @else
-                                                    @foreach ($tags as $tag)
-                                                        @foreach ($item->tags as $item_tag)
-                                                            <option value="{{ $tag->id }}"
-                                                                @if ($tag->name == $item_tag->name) selected @endif>
-                                                                {{ $tag->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endforeach
+                                                @foreach ($tags as $tag)
+                                                    <option value="{{ $tag->id }}"
+                                                        @if (in_array($tag->name, $item_tags))
+                                                            selected
+                                                        @endif
+                                                        >
+                                                        {{ $tag->name }}
+                                                    </option>
+                                            @endforeach
                                                 @endif
                                             </select>
+                                            
+                                            
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">

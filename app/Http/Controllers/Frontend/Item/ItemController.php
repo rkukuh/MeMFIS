@@ -81,8 +81,14 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
+        $tags = array();
+        foreach($item->tags as $i => $item_tag){
+            $tags[$i] =  $item_tag->name;
+        }
+
         return view('frontend.item.edit', [
             'item' => $item,
+            'item_tags' => $tags,
             'tags' => $this->tags,
             'units' => $this->units,
             'categories' => $this->categories,
