@@ -21,6 +21,10 @@ Route::name('testing.')->group(function () {
 
         Route::view('/select2-repeater', 'frontend/testing/select2Repeater')->name('select2-repeater');
 
+        Route::view('/project/create', 'frontend/project/create');
+        Route::view('/project/index', 'frontend/project/index');
+
+
     });
 
 });
