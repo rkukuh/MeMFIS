@@ -1,23 +1,24 @@
 <?php
 
+use App\Models\Type;
 use App\Models\TaskCard;
 use Faker\Generator as Faker;
 
 $factory->define(TaskCard::class, function (Faker $faker) {
 
     return [
-        'title' => '',
-        'type_id' => '',
-        'otr_certification_id' => '',
-        'work_area' => '',
-        'zone' => '',
-        'access' => '',
-        'is_rii' => '',
-        'applicability_airplane' => '',
-        'applicability_engine' => '',
-        'is_applicability_engine_all' => '',
-        'source' => '',
-        'effectivity' => '',
+        'title' => 'TaskCard Dummy #' . $faker->unixTime(),
+        'type_id' => Type::ofTaskCard()->get()->random()->id,
+        'otr_certification_id' => null, // TODO: Refactor its entity name
+        'work_area' => Type::ofWorkArea()->get()->random()->id,
+        'zone' => null,
+        'access' => null,
+        'is_rii' => $faker->boolean,
+        'applicability_airplane' => '', // TODO: Refactor to M-M polymorph
+        'applicability_engine' => '', // TODO: Refactor to M-M polymorph
+        'is_applicability_engine_all' => $faker->boolean,
+        'source' => null,
+        'effectivity' => null,
     ];
 
 });
