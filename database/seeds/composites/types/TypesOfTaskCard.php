@@ -59,5 +59,11 @@ class TypesOfTaskCard extends Seeder
             'name' => 'Overhaul',
             'of'  => 'taskcard',
         ]);
+
+        Type::create([
+            'code' => 'restore',
+            'name' => 'Restore',
+            'of'  => 'taskcard',
+        ]);
     }
 }
