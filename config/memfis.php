@@ -19,6 +19,7 @@ return [
         'levels' => 10,
         'statuses' => 10,
         'storages' => 10,
+        'taskcards' => 10,
         'types' => 10,
     ],
 ];
