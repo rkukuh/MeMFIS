@@ -12,6 +12,6 @@ class TaskCards extends Seeder
      */
     public function run()
     {
-        //
+        factory(TaskCard::class, config('memfis.dummies.taskcards'))->create();
     }
 }
