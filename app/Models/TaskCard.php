@@ -9,6 +9,7 @@ class TaskCard extends MemfisModel
     protected $table = 'taskcards';
 
     protected $fillable = [
+        'number',
         'title',
         'type_id',
         'work_area',
