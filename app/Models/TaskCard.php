@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class TaskCard extends Model
+class TaskCard extends MemfisModel
 {
     protected $table = 'taskcards';
 
     protected $fillable = [
         'title',
         'type_id',
-        'otr_certification_id',
         'work_area',
         'zone',
         'access',
         'is_rii',
-        'applicability_airplane',
-        'applicability_engine',
+        'is_applicability_aircraft_all',
         'is_applicability_engine_all',
         'source',
         'effectivity',
