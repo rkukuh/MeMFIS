@@ -217,8 +217,9 @@
                                                         @slot('id', 'is_rii')
                                                         @slot('name', 'is_rii')
                                                         @slot('text', 'RII?')
+                                                        @slot('style_div','margin-top:30px')
                                                     @endcomponent
-                                                    @component('frontend.common.input.checkbox')
+                                                    {{-- @component('frontend.common.input.checkbox')
                                                         @slot('id', 'all')
                                                         @slot('name', 'all')
                                                         @slot('text', 'Engine All?')
@@ -230,7 +231,7 @@
                                                         @slot('name', 'ac-type')
                                                         @slot('id_error', 'ac-type')
                                                         @slot('disabled', 'disabled')
-                                                    @endcomponent
+                                                    @endcomponent --}}
     
                                                 </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -245,6 +246,25 @@
                                                 @endcomponent
                                             </div>
                                         </div>
+                                        <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        @component('frontend.common.input.checkbox')
+                                                            @slot('id', 'all')
+                                                            @slot('name', 'all')
+                                                            @slot('text', 'Engine All?')
+                                                        @endcomponent
+                
+                                                    </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('text', 'AC Type')
+                                                            @slot('id', 'ac-type')
+                                                            @slot('name', 'ac-type')
+                                                            @slot('id_error', 'ac-type')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                </div>
+                                            </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
