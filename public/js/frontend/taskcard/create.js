@@ -6,12 +6,11 @@ let TaskCard = {
             $('.btn-success').removeClass('add');
             
             document.getElementById('all').onchange = function () {
-                document.getElementById('ac-type').disabled = !this.checked;
+                document.getElementById('ac-type').disabled = !this.unchecked;
 
                 if (document.getElementById("all").checked) {
-                    document.getElementById('ac-type').value = '';
                 } else {
-                    document.getElementById('ac-type').value = '';
+                    $('#ac-type').removeAttr("disabled");
                 }
             };
         });

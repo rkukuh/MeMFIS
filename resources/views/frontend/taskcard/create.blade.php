@@ -261,7 +261,7 @@
                                                             @slot('id', 'ac-type')
                                                             @slot('name', 'ac-type')
                                                             @slot('id_error', 'ac-type')
-                                                            @slot('disabled', 'disabled')
+                                                            {{-- @slot('disabled', 'disabled') --}}
                                                         @endcomponent
                                                 </div>
                                             </div>
