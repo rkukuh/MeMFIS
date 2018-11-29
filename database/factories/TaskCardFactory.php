@@ -7,8 +7,11 @@ use Faker\Generator as Faker;
 
 $factory->define(TaskCard::class, function (Faker $faker) {
 
+    $number = $faker->unixTime();
+
     return [
-        'title' => 'TaskCard Dummy #' . $faker->unixTime(),
+        'number' => $number,
+        'title' => 'TaskCard Dummy #' . $number,
         'type_id' => Type::ofTaskCard()->get()->random()->id,
         'work_area' => Type::ofWorkArea()->get()->random()->id,
         'zone' => 'Zone Dummy #' . $faker->unixTime(),
@@ -18,9 +21,9 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'source' => null,
         'effectivity' => null,
 
-        // 'otr_certification_id' => null, // TODO: Refactor its entity name
-        // 'applicability_aircraft' => '', // TODO: Refactor to M-M polymorph
-        // 'applicability_engine' => '', // TODO: Refactor to M-M polymorph
+        // 'otr_certification_id' => null,  // TODO: Refactor its entity name
+        // 'applicability_aircraft' => '',  // TODO: Refactor to M-M polymorph
+        // 'applicability_engine' => '',    // TODO: Refactor to M-M polymorph
     ];
 
 });
