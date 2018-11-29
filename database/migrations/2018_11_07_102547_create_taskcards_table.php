@@ -16,11 +16,12 @@ class CreateTaskcardsTable extends Migration
         Schema::create('taskcards', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('number');
             $table->string('title');
-            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('type_id'); // NOTE: "Task" section on document
             $table->unsignedInteger('work_area');
-            $table->string('zone');
-            $table->string('access');
+            $table->string('zone')->nullable();
+            $table->string('access')->nullable();
             $table->boolean('is_rii')->default(false);
             $table->boolean('is_applicability_airplane_all')->default(false);
             $table->boolean('is_applicability_engine_all')->default(false);
