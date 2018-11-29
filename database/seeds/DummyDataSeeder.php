@@ -68,6 +68,6 @@ class DummyDataSeeder extends Seeder
 
         $this->call(ItemUnit::class);
         $this->call(ItemStorage::class);
-        $this->call(TaskCardsTableSeeder::class);
+        $this->call(TaskCards::class);
     }
 }
