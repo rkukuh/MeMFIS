@@ -96,7 +96,7 @@
                                                     Work Order Number @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
+                                                @component('frontend.common.input.text')
                                                     @slot('text', 'Work Order')
                                                     @slot('id', 'work-order')
                                                     @slot('name', 'work-order')
@@ -108,7 +108,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Aircraft @include('frontend.common.label.required')
+                                                    Aircraft Type @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
@@ -182,7 +182,7 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/work-package.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
