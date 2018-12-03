@@ -337,5 +337,17 @@ class FillComboxController extends Controller
         return json_encode($units);
     }
     
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function websiteType()
+    {
+        $websites = Type::ofWebsite()
+                        ->pluck('name', 'id');
+
+        return json_encode($websites);
+    }
 
 }
