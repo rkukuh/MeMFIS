@@ -709,53 +709,115 @@ let Customer = {
         });
 
 
-        let edit = $('.m_datatable').on('click', '.edit', function () {
-            $('#button').show();
-            $('#simpan').text('Perbarui');
+        // let edit = $('.m_datatable').on('click', '.edit', function () {
+        //     $('#button').show();
+        //     $('#simpan').text('Perbarui');
 
-            let triggerid = $(this).data('id');
+        //     let triggerid = $(this).data('id');
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/customer/' + triggerid + '/edit',
-                success: function (data) {
-                    document.getElementById('id').value = data.id;
-                    document.getElementById('name').value = data.name;
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         type: 'get',
+        //         url: '/customer/' + triggerid + '/edit',
+        //         success: function (data) {
+        //             document.getElementById('id').value = data.id;
+        //             document.getElementById('name').value = data.name;
 
-                    $('.btn-success').addClass('update');
-                    $('.btn-success').removeClass('add');
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
+        //             $('.btn-success').addClass('update');
+        //             $('.btn-success').removeClass('add');
+        //         },
+        //         error: function (jqXhr, json, errorThrown) {
+        //             let errorsHtml = '';
+        //             let errors = jqXhr.responseJSON;
 
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
-                    });
-                }
-            });
-        });
+        //             $.each(errors.errors, function (index, value) {
+        //                 $('#kategori-error').html(value);
+        //             });
+        //         }
+        //     });
+        // });
 
-        let update = $('.modal-footer').on('click', '.update', function () {
-            $('#button').show();
-            $('#name-error').html('');
-            $('#simpan').text('Perbarui');
+        let update = $('.footer').on('click', '.edit-customer', function () {
 
-            let triggerid = $('input[name=id]').val();
+            // alert('aa')
+            let customer_uuid = $('input[name=customer_uuid]').val();
+            let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
+            let payment_term = $('#payment_term').val();
+            let account_code = $('#account_code').val();
+
+            if (document.getElementById("active").checked) {
+                banned = 1;
+            } else {
+                banned = 0;
+            }
+
+
+            let phone_array = [];
+            $('#phone ').each(function (i) {
+                phone_array[i] = document.getElementsByName('group-phone[' + i + '][phone]')[0].value;
+            });
+        
+
+            let ext_phone_array = [];
+            $('#ext ').each(function (i) {
+                ext_phone_array[i] = document.getElementsByName('group-phone[' + i + '][ext]')[0].value;
+            });
+
+            let type_phone_array = [];
+            $('#phone ').each(function (i) {
+                type_phone_array[i] = $('input[name="group-phone[' + i + '][type_phone]"]:checked').val();
+            });
+
+
+            let fax_array = [];
+            $('#fax ').each(function (i) {
+                fax_array[i] = document.getElementsByName('group-fax[' + i + '][fax]')[0].value;
+            });
+
+            let type_fax_array = [];
+            $('#fax ').each(function (i) {
+                type_fax_array[i] = $('input[name="group-fax[' + i + '][type_fax]"]:checked').val();
+            });
+
+            let website_array = [];
+            $('#website ').each(function (i) {
+                website_array[i] = document.getElementsByName('group-website[' + i + '][website]')[0].value;
+            });
+
+            let email_array = [];
+            $('#email ').each(function (i) {
+                email_array[i] = document.getElementsByName('group-email[' + i + '][email]')[0].value;
+            });
+
+            let type_email_array = [];
+            $('#email ').each(function (i) {
+                type_email_array[i] = $('input[name="group-email[' + i + '][type_email]"]:checked').val();
+            });
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/customer/' + triggerid,
+                url: '/customer/' + customer_uuid,
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name
+                    code: code,
+                    name: name,
+                    payment_term: payment_term,
+                    account_code: account_code,
+                    phone_array: phone_array,
+                    ext_phone_array: ext_phone_array,
+                    type_phone_array: type_phone_array,
+                    fax_array: fax_array,
+                    type_fax_array: type_fax_array,
+                    website_array: website_array,
+                    email_array: email_array,
+                    type_email_array: type_email_array,
+                    // banned: banned
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -770,10 +832,10 @@ let Customer = {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
+                        // let table = $('.m_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                        // table.originalDataSet = [];
+                        // table.reload();
                     }
                 }
             });

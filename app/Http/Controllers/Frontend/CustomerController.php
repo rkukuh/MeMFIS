@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\ListUtil;
 use App\Models\Customer;
+use App\Models\Type;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
 use App\Http\Requests\Frontend\CustomerUpdate;
@@ -68,8 +69,12 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+
+        $payment_terms = Type::ofPaymentTerm()->get();
+
         return view('frontend.customer.edit', [
             'customer' => $customer,
+            'payment_terms' => $payment_terms,
         ]);
     }
 
@@ -82,11 +87,22 @@ class CustomerController extends Controller
      */
     public function update(CustomerUpdate $request, Customer $customer)
     {
-        $customer = Customer::find($customer);
-        $customer->name = $request->name;
-        $customer->save();
+        if ($customer->update($request->all())) {
+            // $customer->categories()->sync($request->category);
 
-        return response()->json($customer);
+            // $customer->tags()->sync($request->selectedtags);
+
+            return response()->json($customer);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
+
+        // $customer = Customer::find($customer);
+        // $customer->name = $request->name;
+        // $customer->save();
+
+        // return response()->json($customer);
     }
 
     /**

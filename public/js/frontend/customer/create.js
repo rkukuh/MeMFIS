@@ -49,8 +49,6 @@ let Customer = {
                 type_email_array[i] = $('input[name="group-email[' + i + '][type_email]"]:checked').val();
             });
 
-
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

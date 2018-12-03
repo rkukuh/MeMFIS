@@ -54,7 +54,12 @@
                                         <div class="m-portlet__body">
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Identifier</legend>
-
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'customer_uuid')
+                                                    @slot('name', 'customer_uuid')
+                                                    @slot('value', $customer->uuid)
+                                                @endcomponent
+    
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
@@ -87,12 +92,24 @@
                                                             Term of Payment @include('frontend.common.label.required')
                                                         </label>
                                                 
-                                                        @component('frontend.common.input.select2')
+                                                        {{-- @component('frontend.common.input.select2')
                                                             @slot('text', 'Term of Payment')
                                                             @slot('id', 'payment_term')
                                                             @slot('name', 'payment_term')
                                                             @slot('id_error', 'payment_term')
-                                                        @endcomponent
+                                                        @endcomponent --}}
+                                                        <select id="payment_term" name="payment_term" class="form-control m-select2">
+                                                            <option value="">
+                                                                &mdash; Select a Term of Payment &mdash;
+                                                            </option>
+            
+                                                            @foreach ($payment_terms as $payment_term)
+                                                                <option value="{{ $payment_term->id }}"
+                                                                    @if ($payment_term->id == $customer->payment_term) selected @endif>
+                                                                    {{ $payment_term->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     
                                                 </div>
@@ -326,6 +343,7 @@
                                                             @component('frontend.common.input.switch')
                                                                 @slot('text', 'Active')
                                                                 @slot('name', 'active')
+                                                                @slot('id', 'active')
                                                             @endcomponent
                                                         </div>   
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -551,7 +569,7 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/address-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/address-type.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/edit.js') }}"></script>
