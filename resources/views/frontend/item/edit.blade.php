@@ -212,7 +212,42 @@
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
 
-                                            @include('frontend.common.account-code.index')
+                                            {{-- @include('frontend.common.account-code.index') --}}
+                                            <div style="background-color:beige;padding: '15px 10px 5px 15px';">
+                                
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-8 col-md-8 col-lg-8">
+                                                        @if (isset($item->journal))
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('padding', '0')
+                                                                @slot('class', 'search-journal')
+                                                                @slot('text', $item->account_code_and_name)
+                                                            @endcomponent
+                                                        @else
+                                                            <div class="search-journal" id="search-journal">
+                                                                Search account code
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                            
+                                                    <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
+                                                        @component('frontend.common.account-code.button-create')
+                                                            @slot('text', '')
+                                                            @slot('size', 'sm')
+                                                            @slot('icon', 'search')
+                                                            @slot('data_target', '#modal_account_code')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
+                                @include('frontend.common.account-code.modal')
+                                
+                                {{-- @push('footer-scripts')
+                                    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
+                                    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+                                @endpush --}}
+                                
 
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'account_code')
@@ -405,4 +440,7 @@
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-unit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+
 @endpush
