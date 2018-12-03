@@ -179,10 +179,10 @@
                                                                 <div class="col-sm-4 col-md-4 col-lg-4">    
                                                                     @component('frontend.common.input.text')
                                                                         @slot('text', 'fax')
-                                                                        @slot('name', 'name')
+                                                                        @slot('name', 'fax')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('text', 'Work')
                                                                             @slot('name', 'type_fax')
@@ -230,22 +230,27 @@
                                                                 <div class="col-sm-4 col-md-4 col-lg-4">    
                                                                     @component('frontend.common.input.text')
                                                                         @slot('text', 'website')
-                                                                        @slot('name', 'name')
+                                                                        @slot('name', 'website')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('text', 'Company Profile')
-                                                                            @slot('name', 'type_website')
-                                                                            @slot('id', 'type_website')
-                                                                            @slot('value', 'company_profile')
-                                                                        @endcomponent
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('name', 'type_website')
-                                                                            @slot('id', 'type_website')
-                                                                            @slot('text', 'Personal')
-                                                                            @slot('value', 'personal')
-                                                                        @endcomponent
+                                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                    @component('frontend.common.input.select')
+                                                                        @slot('text', 'Company Profile')
+                                                                        @slot('name', 'type_website')
+                                                                        @slot('id', 'type_website')
+                                                                    @endcomponent
+                                                                    {{-- @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Company Profile')
+                                                                        @slot('name', 'type_website')
+                                                                        @slot('id', 'type_website')
+                                                                        @slot('value', 'company_profile')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('name', 'type_website')
+                                                                        @slot('id', 'type_website')
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                    @endcomponent --}}
                                                                 </div>
                                                                 <div class="col-sm-2 col-md-2 col-lg-2">    
                                                                     @include('frontend.common.buttons.delete_repeater')
@@ -275,8 +280,22 @@
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-4 col-md-4 col-lg-4">    
                                                                     @component('frontend.common.input.email')
-                                                                        @slot('name', 'name')
+                                                                        @slot('name', 'email')
                                                                         @slot('placeholder', 'Email')
+                                                                    @endcomponent
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Work')
+                                                                        @slot('name', 'type_email')
+                                                                        @slot('id', 'type_email')
+                                                                        @slot('value', 'work')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('name', 'type_email')
+                                                                        @slot('id', 'type_email')
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-2 col-md-2 col-lg-2">    
@@ -319,8 +338,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
+                                                        @slot('id', 'add-customer')
+                                                        @slot('class', 'add-customer')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -397,6 +416,7 @@
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/website.js') }}"></script>
+    <script src="{{ asset('js/frontend/customer/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 @endpush

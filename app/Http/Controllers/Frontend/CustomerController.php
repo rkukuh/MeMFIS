@@ -38,11 +38,13 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
-        $customer = Customer::create([
-            'name' => $request->name,
-        ]);
+        if ($customer = Customer::create($request->all())) {
+            // $item->emails()->attach($request->email_array);
 
-        return response()->json($customer);
+            return response()->json($customer);
+        }
+
+        return false;
 
     }
 
