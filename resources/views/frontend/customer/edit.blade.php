@@ -50,7 +50,7 @@
                         <div class="m-portlet__body">
                             <div class="form-group m-form__group row">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <form id="itemform" name="itemform">
+                                    <form id="customerform" name="customerform">
                                         <div class="m-portlet__body">
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Identifier</legend>
@@ -64,6 +64,7 @@
                                                         @component('frontend.common.input.text')
                                                             @slot('text', 'Code')
                                                             @slot('name', 'code')
+                                                            @slot('value', $customer->code)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -76,6 +77,7 @@
                                                             @component('frontend.common.input.text')
                                                                 @slot('text', 'Name')
                                                                 @slot('name', 'name')
+                                                                @slot('value', $customer->name)
                                                             @endcomponent
                                                         </div>   
                                                 </div>
@@ -181,7 +183,7 @@
                                                         </div>        
                                                         <div class='repeater'>
                                                             <div data-repeater-list="group-fax">
-                                                                <div data-repeater-item>
+                                                                <div data-repeater-customer>
                                                                     <div class="form-group m-form__group row">
                                                                         <div class="col-sm-4 col-md-4 col-lg-4">    
                                                                             @component('frontend.common.input.text')
@@ -239,7 +241,7 @@
                                                         </div>        
                                                         <div class='repeater'>
                                                             <div data-repeater-list="group-website">
-                                                                <div data-repeater-item>
+                                                                <div data-repeater-customer>
                                                                     <div class="form-group m-form__group row">
                                                                         <div class="col-sm-6 col-md-6 col-lg-6">    
                                                                             @component('frontend.common.input.text')
@@ -290,7 +292,7 @@
                                                         </div>        
                                                         <div class='repeater'>
                                                             <div data-repeater-list="group-email">
-                                                                <div data-repeater-item>
+                                                                <div data-repeater-customer>
                                                                     <div class="form-group m-form__group row">
                                                                         <div class="col-sm-4 col-md-4 col-lg-4">    
                                                                             @component('frontend.common.input.email')
@@ -331,11 +333,41 @@
                                                         Account Code @include('frontend.common.label.optional')
                                                     </label>
 
-                                                    @include('frontend.common.account-code.index')
+                                                    {{-- @include('frontend.common.account-code.index') --}}
+                                                    <div style="background-color:beige;padding: '15px 10px 5px 15px';">
+                                
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-8 col-md-8 col-lg-8">
+                                                                @if (isset($customer->journal))
+                                                                    @component('frontend.common.label.data-info')
+                                                                        @slot('padding', '0')
+                                                                        @slot('class', 'search-journal')
+                                                                        @slot('text', $customer->account_code_and_name)
+                                                                    @endcomponent
+                                                                @else
+                                                                    <div class="search-journal" id="search-journal">
+                                                                        Search account code
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                    
+                                                            <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
+                                                                @component('frontend.common.account-code.button-create')
+                                                                    @slot('text', '')
+                                                                    @slot('size', 'sm')
+                                                                    @slot('icon', 'search')
+                                                                    @slot('data_target', '#modal_account_code')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                        
+                                                    @include('frontend.common.account-code.modal')
 
                                                     @component('frontend.common.input.hidden')
                                                         @slot('id', 'account_code')
                                                         @slot('name', 'account_code')
+                                                        @slot('value', $customer->account_code)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -352,7 +384,7 @@
                                                             @include('frontend.common.buttons.reset')
 
                                                             @component('frontend.common.buttons.back')
-                                                                @slot('href', route('frontend.item.index'))
+                                                                @slot('href', route('frontend.customer.index'))
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -524,5 +556,8 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/address-type.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
 @endpush
