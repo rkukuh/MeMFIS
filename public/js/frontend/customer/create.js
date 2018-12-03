@@ -93,6 +93,9 @@ let Customer = {
                         toastr.success('Data berhasil disimpan.', 'Sukses', {
                             timeOut: 5000
                         });
+
+                        window.location.href = '/customer/' + data.uuid + '/edit';
+
                     }
                 }
             });
