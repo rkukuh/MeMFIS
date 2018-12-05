@@ -53,23 +53,6 @@
                             </div>
                             
                         </div>
-                        <div class="form-group m-form__group row">
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <label class="form-control-label">
-                                Account Code @include('frontend.common.label.optional')
-                            </label>
-
-                            @include('frontend.common.account-code.index')
-
-                            @component('frontend.common.input.hidden')
-                                @slot('id', 'account_code')
-                                @slot('name', 'account_code')
-                            @endcomponent
-                        </div>
-                    </div>
-                        
-                        
-                       
                     </div>
                     <div class="modal-footer">
                         <div class="flex">
@@ -88,3 +71,8 @@
         </div>
     </div>
 </div>
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
+@endpush
