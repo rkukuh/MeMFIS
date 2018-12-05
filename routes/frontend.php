@@ -163,8 +163,11 @@ Route::name('frontend.')->group(function () {
         Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
 
-        Route::view('/project/hm', 'frontend.project.hm.index')->name('project-hm');
-        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('project-workshop');
+        Route::view('/project', 'frontend/project/index')->name('project.index');
+        Route::view('/project/hm', 'frontend.project.hm.index')->name('project-hm.index');
+        Route::view('/project/hm/create', 'frontend.project.hm.create')->name('project-hm.create');
+        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('project-workshop.index');
+        Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('project-workshop.create');
 
     });
 
