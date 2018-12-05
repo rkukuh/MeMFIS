@@ -350,4 +350,14 @@ class FillComboxController extends Controller
         return json_encode($websites);
     }
 
+    public function test()
+    {
+        $websites = Type::ofWebsite()->get();
+
+        return view('frontend.testing.repeaterBlank', [
+            'websites' => $websites
+        ]);
+    }
+
+
 }
