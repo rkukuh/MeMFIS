@@ -162,6 +162,10 @@ Route::name('frontend.')->group(function () {
         Route::view('/emergency-contacts', 'frontend.personal-information.emergency-contacts.index')->name('emergency-contacts');
         Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
+
+        Route::view('/project/hm', 'frontend.project.hm.index')->name('project-hm');
+        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('project-workshop');
+
     });
 
 });
