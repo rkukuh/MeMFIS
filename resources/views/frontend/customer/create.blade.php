@@ -234,11 +234,22 @@
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.select')
+                                                                        <select id="type_website" name="type_website" class="form-control">
+                                                                                <option value="">
+                                                                                    &mdash; Select a Website Type &mdash;
+                                                                                </option>
+                                
+                                                                                @foreach ($websites as $website)
+                                                                                    <option value="{{ $website->id }}">
+                                                                                        {{ $website->name }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                    {{-- @component('frontend.common.input.select')
                                                                         @slot('text', 'Company Profile')
                                                                         @slot('name', 'type_website')
                                                                         @slot('id', 'type_website')
-                                                                    @endcomponent
+                                                                    @endcomponent --}}
                                                                     {{-- @component('frontend.common.input.radio')
                                                                         @slot('text', 'Company Profile')
                                                                         @slot('name', 'type_website')
@@ -416,7 +427,7 @@
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/website.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/website.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/customer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 @endpush

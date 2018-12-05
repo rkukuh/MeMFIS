@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\ListUtil;
 use App\Models\Customer;
 use App\Models\Type;
+use App\Models\Email;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
 use App\Http\Requests\Frontend\CustomerUpdate;
@@ -28,7 +29,13 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('frontend.customer.create');
+        $websites = Type::ofWebsite()
+        ->get();
+
+        return view('frontend.customer.create', [
+            'websites' => $websites
+        ]);
+
     }
 
     /**
@@ -41,7 +48,12 @@ class CustomerController extends Controller
     {
         if ($customer = Customer::create($request->all())) {
             // $item->emails()->attach($request->email_array);
-
+            // $customer->emails()->attach($customer->id, ['address' => $request->email_array]);
+            // $customer->emails()->saveMany([Email::class, ['address' => $request->email_array]]);
+            // $employee->emails()->saveMany(factory(Email::class, rand(1, 2))->make());
+            // Email::class, rand(1, 2)
+            $email = Email::class(['address' => $request->email_array]);
+            $email = $customer->emails()->save($email);
             return response()->json($customer);
         }
 
