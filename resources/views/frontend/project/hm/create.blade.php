@@ -51,24 +51,6 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                         <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('text', 'Heavy Maintenance')
-                                                            @slot('name', 'heavy-maintenance')
-                                                            @slot('id', 'heavy-maintenance')
-                                                            @slot('value', 'heavy-maintenance')
-                                                        @endcomponent
-                                               </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('text', 'Workshop')
-                                                            @slot('name', 'workshop')
-                                                            @slot('id', 'workshop')
-                                                            @slot('value', 'workshop')
-                                                        @endcomponent
-                                                </div>
-                                            </div>
-                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Customer @include('frontend.common.label.required')
@@ -120,14 +102,14 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Work Package @include('frontend.common.label.required')
+                                                    Template @include('frontend.common.label.required')
                                                 </label>
     
                                                 @component('frontend.common.input.select2')
-                                                    @slot('id', 'work-package')
+                                                    @slot('id', 'template')
                                                     @slot('text', 'Work Package')
-                                                    @slot('name', 'work-package')
-                                                    @slot('id_error', 'work-package')
+                                                    @slot('name', 'template')
+                                                    @slot('id_error', 'template')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -183,7 +165,7 @@
 
 @push('footer-scripts')
     {{-- <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script> --}}
-    <script src="{{ asset('js/frontend/functions/select2/work-package.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
