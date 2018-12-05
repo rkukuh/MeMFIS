@@ -71,7 +71,7 @@
                                                     @slot('data_target', '#modal_customer')
                                                 @endcomponent
 
-                                                @include('frontend.project.hm.modal')
+                                                @include('frontend.customer.modal')
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
