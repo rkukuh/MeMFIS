@@ -71,7 +71,7 @@
                                                     @slot('data_target', '#modal_customer')
                                                 @endcomponent
 
-                                                @include('frontend.quotation.modal')
+                                                @include('frontend.project.workshop.modal')
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
