@@ -39,7 +39,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
                                 <h3 class="m-portlet__head-text">
-                                    Project Datalist
+                                    Heavy Maintenance Project Datalist
                                 </h3>
                             </div>
                         </div>
@@ -63,8 +63,8 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
-                                            @slot('text', 'Quotation')
-                                            @slot('href', route('frontend.quotation.create') )
+                                            @slot('text', 'HM Project')
+                                            @slot('href', route('frontend.project-hm.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
