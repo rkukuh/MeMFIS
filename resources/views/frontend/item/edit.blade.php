@@ -258,33 +258,6 @@
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Tag @include('frontend.common.label.optional')
-                                            </label>
-
-                                            <select id="tag" name="tag" class="form-control m-select2" multiple>
-                                                @if ($item->tags->isEmpty())
-                                                    @foreach ($tags as $tag)
-                                                        <option value="{{ $tag->id }}">
-                                                            {{ $tag->name }}
-                                                        </option>
-                                                    @endforeach
-                                                @else
-                                                @foreach ($tags as $tag)
-                                                    <option value="{{ $tag->id }}"
-                                                        @if (in_array($tag->name, $item_tags))
-                                                            selected
-                                                        @endif
-                                                        >
-                                                        {{ $tag->name }}
-                                                    </option>
-                                            @endforeach
-                                                @endif
-                                            </select>
-                                            
-                                            
-                                        </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">
                                                 Photos @include('frontend.common.label.optional')
@@ -424,7 +397,6 @@
         let item_uuid = '{{ $item->uuid }}';
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
