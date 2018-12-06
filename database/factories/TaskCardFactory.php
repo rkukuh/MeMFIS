@@ -27,11 +27,3 @@ $factory->define(TaskCard::class, function (Faker $faker) {
     ];
 
 });
-
-/** Callbacks */
-
-$factory->afterCreating(TaskCard::class, function ($category, $faker) {
-    if ($faker->boolean) {
-        $category->descriptions()->save(factory(Description::class)->make());
-    }
-});

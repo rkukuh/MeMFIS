@@ -36,15 +36,4 @@ class TaskCard extends MemfisModel
     {
         return $this->belongsTo(Type::class);
     }
-
-    /**
-     * Polymorphic: A task card can have zero or many descriptions.
-     *
-     * This function will get all of the category's description.
-     * See: Description's descriptionable() method for the inverse
-     */
-    public function descriptions()
-    {
-        return $this->morphMany(Description::class, 'descriptionable');
-    }
 }
