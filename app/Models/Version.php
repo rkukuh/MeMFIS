@@ -14,5 +14,5 @@ class Version extends MemfisModel
         'versionable_type',
     ];
 
-    protected $dates = ['versioned_at']
+    protected $dates = ['versioned_at'];
 }
