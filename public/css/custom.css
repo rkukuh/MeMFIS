@@ -26,7 +26,7 @@ div.row > .col-sm-12.col-md-12.col-lg-12.footer {
     padding-top: 20px;
 }
 
-#shrink div{
+#shrink div {
     transition: 1s ease;
 }
 
@@ -35,4 +35,9 @@ div.row > .col-sm-12.col-md-12.col-lg-12.footer {
     -ms-transform: scale(0.8);
     transform: scale(0.8);
     transition: 1s ease;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
 }
