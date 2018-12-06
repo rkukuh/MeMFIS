@@ -36,4 +36,17 @@ class TaskCard extends MemfisModel
     {
         return $this->belongsTo(Type::class);
     }
+
+    /**
+     * One-to-Many: A task card may have zero or many version.
+     *
+     * This function will retrieve the version of an task card.
+     * See: Version's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function version()
+    {
+        return $this->belongsTo(Version::class);
+    }
 }
