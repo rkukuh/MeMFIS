@@ -32,8 +32,8 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
 /** Callbacks */
 
-$factory->afterCreating(TaskCard::class, function ($employee, $faker) {
+$factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
     if ($faker->boolean) {
-        $employee->versions()->saveMany(factory(Version::class, rand(2, 4))->make());
+        $taskcard->versions()->saveMany(factory(Version::class, rand(2, 4))->make());
     }
 });
