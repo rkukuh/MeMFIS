@@ -15,6 +15,7 @@ class CreateVersionsTable extends Migration
     {
         Schema::create('versions', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->longText('change_log');
             $table->timestamp('versioned_at')->nullable();
