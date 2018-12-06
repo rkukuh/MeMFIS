@@ -27,6 +27,7 @@ class CreateTaskcardsTable extends Migration
             $table->boolean('is_applicability_engine_all')->default(false);
             $table->string('source')->nullable();
             $table->string('effectivity')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

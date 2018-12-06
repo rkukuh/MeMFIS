@@ -25,7 +25,6 @@ Route::name('frontend.')->group(function () {
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
-        Route::resource('note', 'NoteController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
@@ -152,9 +151,6 @@ Route::name('frontend.')->group(function () {
         ]);
         
         Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
-
-        Route::resource('taskcard-package', 'TaskCardPackageController');
-        Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
 
         Route::view('/qualification', 'frontend.personal-information.qualifications.index')->name('qualification');
         Route::view('/personal-dashboard', 'frontend.personal-information.dashboard.index')->name('personal-dashboard');

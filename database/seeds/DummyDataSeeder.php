@@ -25,7 +25,6 @@ class DummyDataSeeder extends Seeder
         /** POLYMORPH */
 
         $this->call(Faxes::class);
-        $this->call(Notes::class);
         $this->call(Emails::class);
         $this->call(Phones::class);
         $this->call(Websites::class);

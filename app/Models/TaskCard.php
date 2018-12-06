@@ -20,6 +20,7 @@ class TaskCard extends MemfisModel
         'is_applicability_engine_all',
         'source',
         'effectivity',
+        'description',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -35,5 +36,16 @@ class TaskCard extends MemfisModel
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * Polymorphic: An employee can have zero or many versions.
+     *
+     * This function will get all of the task card's versions.
+     * See: Version' versionable() method for the inverse
+     */
+    public function versions()
+    {
+        return $this->morphMany(Version::class, 'versionable');
     }
 }
