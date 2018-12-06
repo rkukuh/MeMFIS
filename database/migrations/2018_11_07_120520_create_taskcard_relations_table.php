@@ -13,7 +13,7 @@ class CreateTaskcardRelationshipsTable extends Migration
      */
     public function up()
     {
-        Schema::create('taskcard_relationships', function (Blueprint $table) {
+        Schema::create('taskcard_relations', function (Blueprint $table) {
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('related_to');
             $table->timestamps();
@@ -37,6 +37,6 @@ class CreateTaskcardRelationshipsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taskcard_relationships');
+        Schema::dropIfExists('taskcard_relations');
     }
 }
