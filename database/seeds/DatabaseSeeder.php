@@ -38,7 +38,6 @@ class DatabaseSeeder extends Seeder
         $this->call(VersionsTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
         $this->call(DocumentsTableSeeder::class);
-        $this->call(DescriptionsTableSeeder::class);
         $this->call(MaintenanceCyclesTableSeeder::class);
 
         /** MASTER */

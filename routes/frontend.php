@@ -64,7 +64,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('taskcard', 'TaskCardController');
 
-
         /** ITEM */
 
         Route::namespace('Item')->group(function () {
@@ -85,7 +84,6 @@ Route::name('frontend.')->group(function () {
             });
 
         });
-
 
         /** EMPLOYEE  */
 
@@ -152,6 +150,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
         ]);
+        
         Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 
         Route::resource('taskcard-package', 'TaskCardPackageController');

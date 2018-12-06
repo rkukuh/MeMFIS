@@ -16,7 +16,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.unit.index');
     }
 
     /**
@@ -37,7 +37,9 @@ class UnitController extends Controller
      */
     public function store(UnitStore $request)
     {
-        //
+            $unit = Unit::create($request->all());
+
+            return response()->json($unit);
     }
 
     /**
@@ -59,7 +61,7 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        //
+        return response()->json($unit);
     }
 
     /**
@@ -71,7 +73,10 @@ class UnitController extends Controller
      */
     public function update(UnitUpdate $request, Unit $unit)
     {
-        //
+        $unit->update($request->all());
+
+        return response()->json($unit);
+
     }
 
     /**
@@ -82,6 +87,8 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        //
+        $unit->delete();
+
+        return response()->json($unit);
     }
 }

@@ -166,6 +166,9 @@ let Customer = {
                     title: 'Number',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return '<span>'+t.number+'</span>'
+                    }
                 },          
                 {
                     field: 'type.name',
@@ -174,14 +177,14 @@ let Customer = {
                     filterable: !1,
                 },     
                 {
-                    field: 'primary',
-                    title: 'Primary',
+                    field: 'active',
+                    title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
+                    template: function (t) {    
                         var e = {
                             1: {
-                                title: "Primary",
+                                title: "Active",
                                 class: "m-badge--brand"
                             },
                             0: {
@@ -190,7 +193,7 @@ let Customer = {
                             }
                         };
 
-                        return '<span class="m-badge ' + e[t.is_primary].class + ' m-badge--wide">' + e[t.is_primary].title + "</span>"
+                        return '<span class="m-badge ' + e[t.is_active].class + ' m-badge--wide">' + e[t.is_active].title + '</span>'
                     }
                 },  
             ]
@@ -245,6 +248,7 @@ let Customer = {
                     title: 'Email',
                     sortable: 'asc',
                     filterable: !1,
+
                 },
                 {
                     field: 'type.name',
@@ -253,14 +257,14 @@ let Customer = {
                     filterable: !1,
                 },                    
                 {
-                    field: 'primary',
-                    title: 'Primary',
+                    field: 'active',
+                    title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
                         var e = {
                             1: {
-                                title: "Primary",
+                                title: "Active",
                                 class: "m-badge--brand"
                             },
                             0: {
@@ -269,7 +273,7 @@ let Customer = {
                             }
                         };
 
-                        return '<span class="m-badge ' + e[t.is_primary].class + ' m-badge--wide">' + e[t.is_primary].title + "</span>"
+                        return '<span class="m-badge ' + e[t.is_active].class + ' m-badge--wide">' + e[t.is_active].title + "</span>"
                     }
                 },               
             ]
@@ -332,14 +336,14 @@ let Customer = {
                     filterable: !1,
                 },                                   
                 {
-                    field: 'primary',
-                    title: 'Primary',
+                    field: 'active',
+                    title: 'Active',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
                         var e = {
                             1: {
-                                title: "Primary",
+                                title: "Active",
                                 class: "m-badge--brand"
                             },
                             0: {
@@ -348,9 +352,68 @@ let Customer = {
                             }
                         };
 
-                        return '<span class="m-badge ' + e[t.is_primary].class + ' m-badge--wide">' + e[t.is_primary].title + "</span>"
+                        return '<span class="m-badge ' + e[t.is_active].class + ' m-badge--wide">' + e[t.is_active].title + "</span>"
                     }
                 },  
+            ]
+        });
+
+        $('.customer_website_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/customer/'+ customer_uuid +'/website',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            perpage: 3,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'url',
+                    title: 'URL',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'type.name',
+                    title: 'Type Fax',
+                    sortable: 'asc',
+                    filterable: !1,
+                },                                   
             ]
         });
         

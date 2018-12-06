@@ -32,7 +32,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Versions::class);
         $this->call(Addresses::class);
         $this->call(Documents::class);
-        $this->call(Descriptions::class);
         $this->call(MaintenanceCycles::class);
 
         /** MASTER */
@@ -68,6 +67,6 @@ class DummyDataSeeder extends Seeder
 
         $this->call(ItemUnit::class);
         $this->call(ItemStorage::class);
-        $this->call(TaskCardsTableSeeder::class);
+        $this->call(TaskCards::class);
     }
 }

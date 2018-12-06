@@ -19,7 +19,6 @@
                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="AddressForm">
                         <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                         <div class="m-portlet__body">
-                                <div id="map"></div>
 
                                 <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -35,6 +34,25 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label class="form-control-label">
+                                                    Type @include('frontend.common.label.required')
+                                                </label>
+    
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Addres Type')
+                                                    @slot('id', 'address_type')
+                                                    @slot('name', 'address_type')
+                                                    @slot('id_error', 'address_type')
+                                                    @slot('style', 'width:100%')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                       
+
+                                <div id="map"></div>
+
 
                         </div>
                         <div class="modal-footer">

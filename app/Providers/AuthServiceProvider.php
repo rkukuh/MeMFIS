@@ -52,8 +52,6 @@ use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
 use App\Policies\BankAccountPolicy;
-use App\Models\Description;
-use App\Policies\DescriptionPolicy;
 use App\Models\Manufacturer;
 use App\Policies\ManufacturerPolicy;
 use App\Models\Certification;
@@ -105,7 +103,6 @@ class AuthServiceProvider extends ServiceProvider
         Document::class => DocumentPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
-        Description::class => DescriptionPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
         Certification::class => CertificationPolicy::class,
         GeneralLicense::class => GeneralLicensePolicy::class,

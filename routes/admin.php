@@ -29,7 +29,6 @@ Route::name('admin.')->group(function () {
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
         Route::resource('document', 'VersionController');
-        Route::resource('description', 'DescriptionController');
         Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */

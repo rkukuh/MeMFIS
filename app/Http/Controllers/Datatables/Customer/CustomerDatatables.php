@@ -16,7 +16,7 @@ class CustomerDatatables extends Controller
      */
     public function index()
     {
-        $customers = Customer::All();
+        $customers = Customer::with('term_of_payment')->get();
 
         $data = $alldata = json_decode($customers);
 

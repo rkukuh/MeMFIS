@@ -53,43 +53,31 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Quotation @include('frontend.common.label.required')
+                                                    Code @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
-                                                    @slot('text', 'Quotation')
-                                                    @slot('id', 'quotation')
-                                                    @slot('name', 'quotation')
-                                                    @slot('id_error', 'quotation')
+                                                    @slot('text', 'Code')
+                                                    @slot('id', 'code')
+                                                    @slot('name', 'code')
+                                                    @slot('id_error', 'code')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Customer @include('frontend.common.label.required')
+                                                    Title @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
-                                                    @slot('text', 'Customer')
-                                                    @slot('id', 'customer')
-                                                    @slot('name', 'customer')
-                                                    @slot('id_error', 'customer')
+                                                    @slot('text', 'title')
+                                                    @slot('id', 'title')
+                                                    @slot('name', 'title')
+                                                    @slot('id_error', 'title')
                                                 @endcomponent
                                             </div>
-
+                                            
                                         </div>
                                         <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Template @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Template')
-                                                    @slot('id', 'template')
-                                                    @slot('name', 'template')
-                                                    @slot('id_error', 'template')
-                                                @endcomponent
-                                            </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Aircraft @include('frontend.common.label.required')
@@ -102,9 +90,6 @@
                                                     @slot('id_error', 'aircraft')
                                                 @endcomponent
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Series @include('frontend.common.label.required')
@@ -169,6 +154,7 @@
 @endpush
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/select2/code.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/quotation.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/quotation.js') }}"></script>
@@ -176,7 +162,7 @@
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/title.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/aircraft.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/series.js') }}"></script>
 
