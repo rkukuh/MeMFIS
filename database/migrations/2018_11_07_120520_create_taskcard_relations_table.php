@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaskcardRelationshipsTable extends Migration
+class CreateTaskcardRelationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,6 +17,7 @@ class CreateTaskcardRelationshipsTable extends Migration
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('related_to');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('taskcard_id')
                     ->references('id')->on('taskcards')
