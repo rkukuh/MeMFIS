@@ -19,7 +19,7 @@
                     <tr>
                             <td class="col-sm-4"><input type="text" required="required" class="form-control" placeholder="Nama Tahapan" name="nama_tahapan[]' + counter + '"/></td>
                             <td class="col-sm-1"><input type="text" required="required" class="form-control" placeholder="x Hari" name="lama_pengerjaan[]' + counter + '"/></td>
-                            <td class="col-sm-2"><select name="team[]" id="team" class="select form-control js-example-tags"><option >-</option>
+                            <td class="col-sm-2"><select name="team"  class="select form-control js-example-tags"><option >-</option>
                             @foreach ($websites as $website)
                             <option value="{{$website->id}}">{{$website->name}}</option>
                             @endforeach
@@ -29,7 +29,21 @@
                             <td class="col-sm-1"></td>
         
                     </tr>
-              </table>
+                    <tr>
+                        <td class="col-sm-4"><input type="text" required="required" class="form-control" placeholder="Nama Tahapan" name="nama_tahapan[]' + counter + '"/></td>
+                        <td class="col-sm-1"><input type="text" required="required" class="form-control" placeholder="x Hari" name="lama_pengerjaan[]' + counter + '"/></td>
+                        <td class="col-sm-2"><select name="team"  class="select form-control js-example-tags"><option >-</option>
+                        @foreach ($websites as $website)
+                        <option value="{{$website->id}}">{{$website->name}}</option>
+                        @endforeach
+                        </select></td>
+                        <td class="col-sm-3"><input id="tags_1" type="text" class="tags form-control col-sm-3" name="dokumen[]"/></td>
+                        <td class="col-sm-1"><select name="pengeluaran[]" class="select form-control"><option value="false">Tidak</option> <option value="true">Ya</option></select></td>
+                        <td class="col-sm-1"></td>
+    
+                </tr>
+
+                </table>
               <button type="button" id="addrow">Add</button>
               <div class="tes">
                     <button type="button" class="save" id="save">save</button>
@@ -63,12 +77,12 @@
                 cols += '<td class="col-sm-4"><input type="text" required="required" class="form-control" placeholder="Nama Tahapan" name="nama_tahapan[]' + counter + '"/></td>';
                 cols += '<td class="col-sm-1"><input type="text" required="required" class="form-control" placeholder="x Hari" name="lama_pengerjaan[]' + counter + '"/></td>';
                 x = x+1;
-                cols += '<td class="col-sm-2"><select name="team[]" id="team" class="select form-control ">';
+                cols += '<td class="col-sm-2"><select name="team" class="select form-control ">';
                 cols += '<option >-</option>';
                 for (var i = 0; i < (teams.length - 1); i++) {
                     if(teams[i].id == 1){
                     }else{
-                    cols += '<option value="' + teams[i].id + '" >' + teams[i].name + ' </option>';
+                    cols += '<option value="' + teams[i].uuid + '" >' + teams[i].name + ' </option>';
                     }
                 }
                 ;
@@ -111,22 +125,33 @@
 // var x = document.getElementById("team"); 
 // var myControls = myForm.elements['team[]'];
 
-            // let team_array = [];
-            var myForm = document.forms.myform;
-        var myControls = myForm.elements['team[]'];
+        //     // let team_array = [];
+        //     var myForm = document.forms.myform;
+        // var myControls = myForm.elements['team[]'];
+        // var i = 0;
 
-            $('#team ').each(function (i) {
-                var i = 0;
-            // alert(myControls.value);
-            // var aControl = myControls[i];
-            alert(myControls[i].value);
-            var i = i+1;
+        //     $('#team ').each(function (i) {
+        //     // alert(myControls.value);
+        //     // var aControl = myControls[i];
+        //     alert(i);
+        //     alert(myControls[i].value);
+        //     var i = i+1;
 
-                // alert(team[1].value);
-                // team_array[i] = document.getElementsByName('team[]')[0].value;
-                // alert(team_array[i]);
-            });
+        //         // alert(team[1].value);
+        //         // team_array[i] = document.getElementsByName('team[]')[0].value;
+        //         // alert(team_array[i]);
+        //     });
 
+        var usertype=[];
+$("select[name=team]").each(function(){
+    usertype.push($(this).val());
+    // alert($(this).val());
+}); 
+
+
+  var ajaxdata={"UserType":usertype};	
+  
+  console.log(JSON.stringify(ajaxdata));
 
 // var optionVal = new Array();
 //     $('select option').each(function() {
