@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Type;
+use App\Models\Version;
 use App\Models\TaskCard;
 use App\Models\Description;
 use Faker\Generator as Faker;
@@ -26,4 +27,12 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         // 'applicability_engine' => '',    // TODO: Refactor to M-M polymorph
     ];
 
+});
+
+/** Callbacks */
+
+$factory->afterCreating(TaskCard::class, function ($employee, $faker) {
+    if ($faker->boolean) {
+        $employee->versions()->saveMany(factory(Version::class, rand(2, 4))->make());
+    }
 });
