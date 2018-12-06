@@ -14,12 +14,10 @@ Route::name('datatables.')->group(function () {
 
         Route::get('/journal','JournalDatatables@index')->name('journal.index');
 
-
         /** MASTER */
 
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
         Route::get('/unit','UnitDatatables@index')->name('unit.index');
-
 
         /** TRANSACTION */
 
@@ -105,7 +103,6 @@ Route::name('datatables.')->group(function () {
             });
 
         });
-
 
         /** EMPLOYEE  */
 
