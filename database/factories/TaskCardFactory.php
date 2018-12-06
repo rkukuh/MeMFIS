@@ -21,6 +21,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'is_applicability_engine_all' => $faker->boolean,
         'source' => null,
         'effectivity' => null,
+        'description' => $faker->paragraph(rand(10, 20))
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
         // 'applicability_aircraft' => '',  // TODO: Refactor to M-M polymorph

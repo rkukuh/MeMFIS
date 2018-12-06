@@ -20,6 +20,7 @@ class TaskCard extends MemfisModel
         'is_applicability_engine_all',
         'source',
         'effectivity',
+        'description',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
