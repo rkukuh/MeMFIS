@@ -43,7 +43,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-unit')
+                                    @slot('class', 'add-manufacture')
                                     @slot('type', 'button')
                                 @endcomponent
 
