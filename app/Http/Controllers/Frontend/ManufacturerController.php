@@ -16,7 +16,7 @@ class ManufacturerController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.manufacturer.index');
     }
 
     /**
