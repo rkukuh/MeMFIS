@@ -16,7 +16,7 @@ class AircraftController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.aircraft.index');
     }
 
     /**
