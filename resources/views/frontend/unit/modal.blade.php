@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal_unit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="TitleModalUnit">Unit</h5>
@@ -12,7 +12,7 @@
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Name @include('frontend.common.label.required')
                                 </label>
@@ -23,7 +23,9 @@
                                     @slot('id_error', 'name')
                                 @endcomponent
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Symbol @include('frontend.common.label.required')
                                 </label>
@@ -36,7 +38,7 @@
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Type @include('frontend.common.label.required')
                                 </label>
