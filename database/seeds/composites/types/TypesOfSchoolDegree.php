@@ -55,7 +55,7 @@ class TypesOfSchoolDegree extends Seeder
         ]);
 
         Type::create([
-            'code' => 'bachelor',
+            'code' => 'doctor',
             'name' => 'S3',
             'of'  => 'school-degree',
         ]);
