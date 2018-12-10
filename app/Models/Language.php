@@ -18,7 +18,7 @@ class Language extends MemfisModel
      * Many-to-Many: An employee may have zero or many languages.
      *
      * This function will retrieve all the employees of an language.
-     * See: Language's employees() method for the inverse
+     * See: Employee's languages() method for the inverse
      *
      * @return mixed
      */
