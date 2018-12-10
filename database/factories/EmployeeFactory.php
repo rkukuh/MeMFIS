@@ -5,6 +5,7 @@ use App\Models\Fax;
 use App\Models\Phone;
 use App\Models\Email;
 use App\Models\Level;
+use App\Models\School;
 use App\Models\Address;
 use App\Models\Website;
 use App\Models\Document;
@@ -66,6 +67,18 @@ $factory->afterCreating(Employee::class, function ($employee, $faker) {
                     'speaking_level' => Level::ofLanguage()->get()->random()->score,
                     'writing_level' => Level::ofLanguage()->get()->random()->score,
                     'understanding_level' => Level::ofLanguage()->get()->random()->score,
+                ]
+            );
+        }
+    }
+
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(3, 4); $i++) {
+            $employee->schools()->attach(
+                School::get()->random(),
+                [
+                    'start_at' => Carbon::now()->subYear(rand(3, 5)),
+                    'graduated_at' => $faker->randomElement([null, Carbon::now()->subYear(1, 2)]),
                 ]
             );
         }
