@@ -297,11 +297,6 @@ let Unit = {
             });
         });
 
-        $('#modal_customer').on('hidden.bs.modal', function (e) {
-            $(this).find('#CustomerForm')[0].reset();
-
-            $('#name-error').html('');
-        });
     }
 };
 
