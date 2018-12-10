@@ -103,10 +103,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        //DocumentManagement
-        Route::resource('company-document', 'CompanyDocumentController');
-        Route::get('get-company-documents', 'CompanyDocumentController@getCompanyDocuments')->name('get-company-documents');
-
         Route::resource('language', 'LanguageController');
         Route::get('/get-languages', 'LanguageController@getLanguages')->name('get-languages');
 
