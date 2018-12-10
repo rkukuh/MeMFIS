@@ -20,6 +20,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
         Route::get('/unit','UnitDatatables@index')->name('unit.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
+        Route::get('/aircraft','AircraftDatatables@index')->name('aircraft.index');
 
 
         /** TRANSACTION */

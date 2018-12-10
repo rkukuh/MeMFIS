@@ -13,6 +13,7 @@ use App\Models\Customer;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Employee;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
@@ -348,6 +349,18 @@ class FillComboxController extends Controller
                         ->pluck('name', 'id');
 
         return json_encode($websites);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manufacturer()
+    {
+        $manufacturer = Manufacturer::pluck('name', 'id');
+
+        return json_encode($manufacturer);
     }
 
     public function test()

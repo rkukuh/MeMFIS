@@ -14,19 +14,6 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Name @include('frontend.common.label.required')
-                                </label>
-                                @component('frontend.common.input.text')
-                                    @slot('text', 'Name')
-                                    @slot('name', 'name')
-                                    @slot('id', 'name')
-                                    @slot('id_error', 'name')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label class="form-control-label">
                                     Code @include('frontend.common.label.required')
                                 </label>
                                 @component('frontend.common.input.text')
@@ -34,6 +21,19 @@
                                     @slot('name', 'code')
                                     @slot('id', 'code')
                                     @slot('id_error', 'code')
+                                @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <label class="form-control-label">
+                                    Name @include('frontend.common.label.required')
+                                </label>
+                                @component('frontend.common.input.text')
+                                    @slot('text', 'Name')
+                                    @slot('name', 'name')
+                                    @slot('id', 'name')
+                                    @slot('id_error', 'name')
                                 @endcomponent
                             </div>
                         </div>

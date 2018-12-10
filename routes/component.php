@@ -38,6 +38,7 @@ Route::name('component.')->group(function () {
         Route::get('get-address-types', 'FillComboxController@addressType')->name('get-address-types');
         Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
+        Route::get('get-manufacturers', 'FillComboxController@manufacturer')->name('get-manufacturers');
     });
 });
 

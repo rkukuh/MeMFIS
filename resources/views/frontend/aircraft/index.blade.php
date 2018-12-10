@@ -81,9 +81,9 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/manufacturer.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/manufacturer.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/manufacturer.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/action-botton/unit-type.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/action-botton/aircraft.js')}}"></script>
     <script src="{{ asset('js/frontend/aircraft/index.js')}}"></script>
 @endpush
