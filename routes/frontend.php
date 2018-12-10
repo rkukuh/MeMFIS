@@ -103,10 +103,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        //Monitor Attendance
-        Route::resource('monitor-attendance', 'MonitorAttendanceController');
-        Route::get('get-monitor-attendances', 'MonitorAttendanceController@getMonitorAttendances')->name('get-monitor-attendances');
-
         //DocumentManagement
         Route::resource('company-document', 'CompanyDocumentController');
         Route::get('get-company-documents', 'CompanyDocumentController@getCompanyDocuments')->name('get-company-documents');
