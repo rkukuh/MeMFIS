@@ -4,10 +4,12 @@ use Carbon\Carbon;
 use App\Models\Fax;
 use App\Models\Phone;
 use App\Models\Email;
+use App\Models\Level;
 use App\Models\Address;
 use App\Models\Website;
 use App\Models\Document;
 use App\Models\Employee;
+use App\Models\Language;
 use Faker\Generator as Faker;
 
 $factory->define(Employee::class, function (Faker $faker) {
@@ -53,5 +55,19 @@ $factory->afterCreating(Employee::class, function ($employee, $faker) {
 
     if ($faker->boolean) {
         $employee->websites()->saveMany(factory(Website::class, rand(2, 4))->make());
+    }
+
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(2, 4); $i++) {
+            $employee->languages()->attach(
+                Language::get()->random(),
+                [
+                    'reading_level' => Level::ofLanguage()->get()->random()->score,
+                    'speaking_level' => Level::ofLanguage()->get()->random()->score,
+                    'writing_level' => Level::ofLanguage()->get()->random()->score,
+                    'understanding_level' => Level::ofLanguage()->get()->random()->score,
+                ]
+            );
+        }
     }
 });
