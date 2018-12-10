@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LicensesTableSeeder::class);
         $this->call(CertificationsTableSeeder::class);
         $this->call(CustomersTableSeeder::class);
+        $this->call(LanguageTableSeeder::class);
 
         /** LICENSE */
 

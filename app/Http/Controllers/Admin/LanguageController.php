@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\LanguageStore;
-use App\Http\Requests\Frontend\LanguageUpdate;
+use App\Http\Requests\Admin\LanguageStore;
+use App\Http\Requests\Admin\LanguageUpdate;
 
 class LanguageController extends Controller
 {
@@ -32,7 +32,7 @@ class LanguageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\LanguageStore  $request
+     * @param  \App\Http\Requests\Admin\LanguageStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(LanguageStore $request)
@@ -65,7 +65,7 @@ class LanguageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\LanguageUpdate  $request
+     * @param  \App\Http\Requests\Admin\LanguageUpdate  $request
      * @param  \App\Models\Language  $language
      * @return \Illuminate\Http\Response
      */
