@@ -16,7 +16,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.currency.index');
     }
 
     /**
@@ -37,7 +37,9 @@ class CurrencyController extends Controller
      */
     public function store(CurrencyStore $request)
     {
-        //
+        $currencies = Currency::create($request->all());
+
+        return response()->json($currencies);
     }
 
     /**
@@ -59,7 +61,7 @@ class CurrencyController extends Controller
      */
     public function edit(Currency $currency)
     {
-        //
+        return response()->json($currency);
     }
 
     /**
@@ -71,7 +73,9 @@ class CurrencyController extends Controller
      */
     public function update(CurrencyUpdate $request, Currency $currency)
     {
-        //
+        $currency->update($request->all());
+
+        return response()->json($currency);
     }
 
     /**
@@ -82,6 +86,8 @@ class CurrencyController extends Controller
      */
     public function destroy(Currency $currency)
     {
-        //
+        $currency->delete();
+
+        return response()->json($currency);
     }
 }

@@ -298,6 +298,7 @@
                                                                 {{-- @endcomponent --}}
                                                                 <select
                                                                 {{-- id="{{ $id or '' }}" --}}
+                                                                id="tes"
                                                                 name="unit"
                                                                 class="form-control m-select2 unit unit2"
                                                                 style="width: 100%">
@@ -314,7 +315,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @include('frontend.common.buttons.create_repeater')
+                                                <input data-repeater-create type="button" id="repeater-button" value="Add"/>
+                                            {{-- @include('frontend.common.buttons.create_repeater') --}}
                                             </div>
                                         </div>
                                 </div>
@@ -428,88 +430,111 @@
 
 @push('footer-scripts')
 
+
 {{-- <script src="{{ asset('js/frontend/functions/select2/tes.js') }}"></script> --}}
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script> --}}
+<script>
+        $(document).ready(function () {
+            // $('.repeater').repeater({ 
+            //     show: function () { 
+            //         $(this).find('span').remove() 
+            //         $(this).find('select').select2({}) 
+            //         $(this).slideDown() }, 
+            //     hide: function (remove) { 
+            //         $(this).slideUp(remove); } 
+            //     })
+            $('.repeater').repeater({
+                // (Optional)
+                // start with an empty list of repeaters. Set your first (and only)
+                // "data-repeater-item" with style="display:none;" and pass the
+                // following configuration flag
+                initEmpty: false,
+                // (Optional)
+                // "defaultValues" sets the values of added items.  The keys of
+                // defaultValues refer to the value of the input's name attribute.
+                // If a default value is not specified for an input, then it will
+                // have its value cleared.
+                defaultValues: {
+                    'text-input': ''
+                },
+                // (Optional)
+                // "show" is called just after an item is added.  The item is hidden
+                // at this point.  If a show callback is not given the item will
+                // have $(this).show() called on it.
+                show: function () {
+                    $(this).slideDown();
+                    // $(this).fadeIn();
+                    $(this).find(".select2-container--default").remove();
+                    $(this).find(".unit2").select2({
+                    placeholder: "Placeholder text",
+                    allowClear: true
+                    });
+                    $('.select2-container--default').css('width','100%');
+                    // $(this).find(".unit2").select2();
+                    // $(this).find('span').remove() 
+                    // $(this).find('select').select2() 
+                    // $(this).slideDown()  
+                    // $('.select2-container').remove();
+                    // $('.unit').select2({
+                    // placeholder: "Placeholder text",
+                    // allowClear: true
+                    // });
+                    // $('.select2-container').css('width','100%');
+                    // $(this).find('select').next('.select2-container').remove();
+                    // $(this).find('select').select2();
+                },
+                // (Optional)
+                // "hide" is called when a user clicks on a data-repeater-delete
+                // element.  The item is still visible.  "hide" is passed a function
+                // as its first argument which will properly remove the item.
+                // "hide" allows for a confirmation step, to send a delete request
+                // to the server, etc.  If a hide callback is not given the item
+                // will be deleted.
+                hide: function (deleteElement) {
+                //     if(confirm('Are you sure you want to delete this element?')) {
+                        $(this).slideUp(deleteElement);
+                //     }
+                },
+                // (Optional)
+                // You can use this if you need to manually re-index the list
+                // for example if you are using a drag and drop library to reorder
+                // list items.
+                ready: function (setIndexes) {
+                },
+                // (Optional)
+                // Removes the delete button from the first list item,
+                // defaults to false.
+                isFirstItemUndeletable: true
+            })
+        });
+        </script>
 <script>
 $(".unit").select2({
   placeholder: "To be done by...",
   allowClear: true
 });
 </script>
-<script>
-$(document).ready(function () {
-    // $('.repeater').repeater({ 
-    //     show: function () { 
-    //         $(this).find('span').remove() 
-    //         $(this).find('select').select2({}) 
-    //         $(this).slideDown() }, 
-    //     hide: function (remove) { 
-    //         $(this).slideUp(remove); } 
-    //     })
-    $('.repeater').repeater({
-        // (Optional)
-        // start with an empty list of repeaters. Set your first (and only)
-        // "data-repeater-item" with style="display:none;" and pass the
-        // following configuration flag
-        initEmpty: false,
-        // (Optional)
-        // "defaultValues" sets the values of added items.  The keys of
-        // defaultValues refer to the value of the input's name attribute.
-        // If a default value is not specified for an input, then it will
-        // have its value cleared.
-        defaultValues: {
-            'text-input': ''
-        },
-        // (Optional)
-        // "show" is called just after an item is added.  The item is hidden
-        // at this point.  If a show callback is not given the item will
-        // have $(this).show() called on it.
-        show: function () {
-            $(this).slideDown();
-            // $(this).fadeIn();
-            // $(this).find(".select2-container--default").remove();
-            // $(this).find(".unit2").select2();
-            // $(this).find('span').remove() 
-            // $(this).find('select').select2() 
-            // $(this).slideDown()  
-            // $('.select2-container').remove();
-            // $('.unit').select2({
-            // placeholder: "Placeholder text",
-            // allowClear: true
-            // });
-            // $('.select2-container').css('width','100%');
-            // $(this).find('select').next('.select2-container').remove();
-            // $(this).find('select').select2();
-        },
-        // (Optional)
-        // "hide" is called when a user clicks on a data-repeater-delete
-        // element.  The item is still visible.  "hide" is passed a function
-        // as its first argument which will properly remove the item.
-        // "hide" allows for a confirmation step, to send a delete request
-        // to the server, etc.  If a hide callback is not given the item
-        // will be deleted.
-        hide: function (deleteElement) {
-        //     if(confirm('Are you sure you want to delete this element?')) {
-                $(this).slideUp(deleteElement);
-        //     }
-        },
-        // (Optional)
-        // You can use this if you need to manually re-index the list
-        // for example if you are using a drag and drop library to reorder
-        // list items.
-        ready: function (setIndexes) {
-        },
-        // (Optional)
-        // Removes the delete button from the first list item,
-        // defaults to false.
-        isFirstItemUndeletable: true
-    })
-});
-</script>
+
+{{-- <script type="text/javascript">
+ 
+    $("#repeater-button").click(function(){
+        setTimeout(function(){
+ 
+            $(".unit").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });    
+                  
+        }, 100);
+    });    
+ 
+</script> --}}
+
+
      {{-- <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script> --}}
 {{--    <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script> --}}
-    <script src="{{ asset('js/frontend/testing/select2repeater.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/testing/select2repeater.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script> --}}
     {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> --}}
     {{-- <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet"/> --}}

@@ -212,7 +212,42 @@
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
 
-                                            @include('frontend.common.account-code.index')
+                                            {{-- @include('frontend.common.account-code.index') --}}
+                                            <div style="background-color:beige;padding: '15px 10px 5px 15px';">
+                                
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-8 col-md-8 col-lg-8">
+                                                        @if (isset($item->journal))
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('padding', '0')
+                                                                @slot('class', 'search-journal')
+                                                                @slot('text', $item->account_code_and_name)
+                                                            @endcomponent
+                                                        @else
+                                                            <div class="search-journal" id="search-journal">
+                                                                Search account code
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                            
+                                                    <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
+                                                        @component('frontend.common.account-code.button-create')
+                                                            @slot('text', '')
+                                                            @slot('size', 'sm')
+                                                            @slot('icon', 'search')
+                                                            @slot('data_target', '#modal_account_code')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
+                                @include('frontend.common.account-code.modal')
+                                
+                                {{-- @push('footer-scripts')
+                                    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
+                                    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+                                @endpush --}}
+                                
 
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'account_code')
@@ -223,30 +258,6 @@
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Tag @include('frontend.common.label.optional')
-                                            </label>
-
-                                            <select id="tag" name="tag" class="form-control m-select2" multiple>
-                                                @if ($item->tags->isEmpty())
-                                                    @foreach ($tags as $tag)
-                                                        <option value="{{ $tag->id }}">
-                                                            {{ $tag->name }}
-                                                        </option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach ($tags as $tag)
-                                                        @foreach ($item->tags as $item_tag)
-                                                            <option value="{{ $tag->id }}"
-                                                                @if ($tag->name == $item_tag->name) selected @endif>
-                                                                {{ $tag->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">
                                                 Photos @include('frontend.common.label.optional')
@@ -386,7 +397,6 @@
         let item_uuid = '{{ $item->uuid }}';
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
@@ -402,4 +412,7 @@
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-unit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+
 @endpush

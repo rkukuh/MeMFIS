@@ -16,7 +16,7 @@ class AircraftController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.aircraft.index');
     }
 
     /**
@@ -37,7 +37,9 @@ class AircraftController extends Controller
      */
     public function store(AircraftStore $request)
     {
-        //
+        $aircraft = Aircraft::create($request->all());
+
+        return response()->json($aircraft);
     }
 
     /**
@@ -59,7 +61,7 @@ class AircraftController extends Controller
      */
     public function edit(Aircraft $aircraft)
     {
-        //
+        return response()->json($aircraft);
     }
 
     /**
@@ -71,7 +73,9 @@ class AircraftController extends Controller
      */
     public function update(AircraftUpdate $request, Aircraft $aircraft)
     {
-        //
+        $aircraft->update($request->all());
+
+        return response()->json($aircraft);
     }
 
     /**
@@ -82,6 +86,8 @@ class AircraftController extends Controller
      */
     public function destroy(Aircraft $aircraft)
     {
-        //
+        $aircraft->delete();
+
+        return response()->json($aircraft);
     }
 }

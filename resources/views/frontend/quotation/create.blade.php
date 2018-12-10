@@ -68,8 +68,11 @@
                                                     @slot('size', 'sm')
                                                     @slot('text', 'customer')
                                                     @slot('style', 'margin-top: 10px;')
-                                                    @slot('data_target', '#modal_category')
+                                                    @slot('data_target', '#modal_customer')
                                                 @endcomponent
+
+                                                @include('frontend.quotation.modal')
+
 
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -373,6 +376,7 @@
     <script src="{{ asset('js/frontend/functions/select2/fax.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>

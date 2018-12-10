@@ -1,4 +1,4 @@
-let Category = {
+let Unit = {
     init: function () {
         $('.unit_datatable').mDatatable({
             data: {
@@ -297,14 +297,9 @@ let Category = {
             });
         });
 
-        $('#modal_customer').on('hidden.bs.modal', function (e) {
-            $(this).find('#CustomerForm')[0].reset();
-
-            $('#name-error').html('');
-        });
     }
 };
 
 jQuery(document).ready(function () {
-    Category.init();
+    Unit.init();
 });

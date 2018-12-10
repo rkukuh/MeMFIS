@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Bank;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Unit;
@@ -13,6 +14,7 @@ use App\Models\Customer;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Employee;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
@@ -337,5 +339,53 @@ class FillComboxController extends Controller
         return json_encode($units);
     }
     
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function websiteType()
+    {
+        $websites = Type::ofWebsite()
+                        ->pluck('name', 'id');
+
+        return json_encode($websites);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manufacturer()
+    {
+        $manufacturer = Manufacturer::pluck('name', 'id');
+
+        return json_encode($manufacturer);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bank()
+    {
+        $banks = Bank::selectRaw('id, CONCAT(code, " - ", name) as full_name')
+                     ->pluck('full_name', 'id');
+
+        return json_encode($banks);
+    }
+
+
+    public function test()
+    {
+        $websites = Type::ofWebsite()->get();
+
+        return view('frontend.testing.repeaterBlank', [
+            'websites' => $websites
+        ]);
+    }
+
 
 }

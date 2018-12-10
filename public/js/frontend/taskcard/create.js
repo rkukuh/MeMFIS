@@ -1,7 +1,18 @@
-let Item = {
+let TaskCard = {
     init: function () {
+
         $(document).ready(function () {
+
             $('.btn-success').removeClass('add');
+            
+            document.getElementById('all').onchange = function () {
+                document.getElementById('ac-type').disabled = !this.unchecked;
+
+                if (document.getElementById("all").checked) {
+                } else {
+                    $('#ac-type').removeAttr("disabled");
+                }
+            };
         });
 
         $('.footer').on('click', '.reset', function () {
@@ -153,5 +164,5 @@ let Item = {
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    TaskCard.init();
 });

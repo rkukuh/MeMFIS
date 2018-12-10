@@ -106,4 +106,19 @@ class Customer extends MemfisModel
     {
         return $this->belongsTo(Type::class, 'payment_term');
     }
+
+    /***************************************** ACCESSOR ******************************************/
+
+    /**
+     * Get the item's account code and name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getAccountCodeAndNameAttribute($value)
+    {
+        if (isset($this->journal)) {
+            return $this->journal->code.' - '.$this->journal->name;
+        }
+    }
 }
