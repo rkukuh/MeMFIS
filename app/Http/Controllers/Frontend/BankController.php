@@ -38,10 +38,7 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        $bank = Bank::create([
-            'code' => $request->code,
-            'name' => $request->name,
-        ]);
+        $bank = Bank::create($request->all());
 
         return response()->json($bank);
     }
@@ -65,7 +62,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        //
+        return response()->json($bank);
     }
 
     /**
@@ -77,7 +74,9 @@ class BankController extends Controller
      */
     public function update(BankUpdate $request, Bank $bank)
     {
-        //
+        $currency->update($request->all());
+
+        return response()->json($currency);
     }
 
     /**
@@ -88,6 +87,8 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-        //
+        $bank->delete();
+
+        return response()->json($bank);
     }
 }
