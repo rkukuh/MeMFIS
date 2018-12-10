@@ -22,6 +22,8 @@ use App\Models\Level;
 use App\Policies\LevelPolicy;
 use App\Models\Status;
 use App\Policies\StatusPolicy;
+use App\Models\School;
+use App\Policies\SchoolPolicy;
 use App\Models\Address;
 use App\Policies\AddressPolicy;
 use App\Models\License;
@@ -88,6 +90,7 @@ class AuthServiceProvider extends ServiceProvider
         Phone::class => PhonePolicy::class,
         Level::class => LevelPolicy::class,
         Status::class => StatusPolicy::class,
+        School::class => SchoolPolicy::class,
         Address::class => AddressPolicy::class,
         License::class => LicensePolicy::class,
         Journal::class => JournalPolicy::class,

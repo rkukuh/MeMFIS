@@ -33,6 +33,7 @@ Route::name('admin.')->group(function () {
         /** MASTER */
 
         Route::resource('item', 'ItemController');
+        Route::resource('school', 'SchoolController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
         Route::resource('language', 'LanguageController');
