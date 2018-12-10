@@ -1,4 +1,4 @@
-let Category = {
+let Unit = {
     init: function () {
         $('.unit_datatable').mDatatable({
             data: {
@@ -306,5 +306,5 @@ let Category = {
 };
 
 jQuery(document).ready(function () {
-    Category.init();
+    Unit.init();
 });
