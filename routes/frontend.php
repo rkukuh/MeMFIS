@@ -114,9 +114,6 @@ Route::name('frontend.')->group(function () {
         Route::get('/general-license/{generallicense}/{employee}/edit', 'GeneralLicenseController@edit')->name('frontend.general-license.edit');
         Route::delete('/general-license/{generallicense}/{employee}', 'GeneralLicenseController@destroy')->name('frontend.general-license.destroy');
 
-        Route::resource('audit', 'AuditController');
-        Route::get('/get-audits','AuditController@getAudits')->name('get-audits');
-
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 

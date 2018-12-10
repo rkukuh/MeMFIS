@@ -64,11 +64,6 @@
                                         Contact
                                     </a>
                                 </li>
-                                <li class="nav-item m-tabs__item">
-                                    <a class="nav-link m-tabs__link" href="{{ route('frontend.audit.index') }}"><i class="la la-info-circle"></i>
-                                        Auditable
-                                    </a>
-                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="general" role="tabpanel">
