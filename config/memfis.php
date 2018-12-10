@@ -15,6 +15,7 @@ return [
         'employees' => 50,
         'items' => 50,
         'journals' => 100,
+        'languages' => 10,
         'licenses' => 10,
         'levels' => 10,
         'statuses' => 10,
