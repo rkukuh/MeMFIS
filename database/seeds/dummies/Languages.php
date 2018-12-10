@@ -12,6 +12,6 @@ class Languages extends Seeder
      */
     public function run()
     {
-        //
+        factory(Language::class, config('memfis.dummies.languages'))->create();
     }
 }
