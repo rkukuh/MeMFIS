@@ -77,7 +77,7 @@ Route::name('frontend.')->group(function () {
                     Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
 
                     Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
-                    Route::PUT('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
+                    Route::put('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
                     Route::delete('/{item}/{storage}/storage', 'ItemStorageController@destroy')->name('storage.destroy');
 
                 });
