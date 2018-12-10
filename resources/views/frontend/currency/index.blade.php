@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @include('frontend.manufacturer.modal')
+                            @include('frontend.currency.modal')
                             <div class="currency_datatable" id="currency_datatable"></div>
                         </div>
                     </div>
