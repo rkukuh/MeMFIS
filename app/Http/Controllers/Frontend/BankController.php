@@ -17,10 +17,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::selectRaw('id, CONCAT(code, " - ", name) as full_name')
-                     ->pluck('full_name', 'id');
-
-        return json_encode($banks);
+        return view('frontend.bank.index');
     }
 
     /**
