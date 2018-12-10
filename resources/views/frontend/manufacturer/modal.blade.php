@@ -1,8 +1,8 @@
-<div class="modal fade show" id="modal_manucfaturer" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade show" id="modal_manufacturer" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TitleModalUnit">Manufacturer</h5>
+                <h5 class="modal-title" id="TitleModalManufacturer">Manufacturer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -43,7 +43,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-manufacture')
+                                    @slot('class', 'add-manufacturer')
                                     @slot('type', 'button')
                                 @endcomponent
 

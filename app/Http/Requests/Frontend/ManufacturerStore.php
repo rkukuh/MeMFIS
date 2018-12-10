@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Frontend;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ManufacturerStore extends FormRequest
 {
@@ -13,7 +16,7 @@ class ManufacturerStore extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +27,24 @@ class ManufacturerStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'code' => 'required',
         ];
+    }
+
+    /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'type_id.exists' => 'The selected Type is invalid.',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator) { 
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()])); 
     }
 }

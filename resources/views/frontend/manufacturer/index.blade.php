@@ -63,7 +63,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Add Manufacturer')
-                                            @slot('data_target', '#modal_manucfaturer')
+                                            @slot('data_target', '#modal_manufacturer')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             @include('frontend.manufacturer.modal')
-                            <div class="manucfaturer_datatable" id="manucfaturer_datatable"></div>
+                            <div class="manufacturer_datatable" id="manufacturer_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -81,9 +81,6 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/action-botton/unit-type.js')}}"></script>
-    <script src="{{ asset('js/frontend/manucfaturer/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/action-botton/manufacturer.js')}}"></script>
+    <script src="{{ asset('js/frontend/manufacturer/index.js')}}"></script>
 @endpush
