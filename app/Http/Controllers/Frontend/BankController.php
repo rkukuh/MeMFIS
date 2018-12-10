@@ -36,7 +36,7 @@ class BankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BankStore $request)
     {
         $bank = Bank::create($request->all());
 
@@ -74,9 +74,9 @@ class BankController extends Controller
      */
     public function update(BankUpdate $request, Bank $bank)
     {
-        $currency->update($request->all());
+        $bank->update($request->all());
 
-        return response()->json($currency);
+        return response()->json($bank);
     }
 
     /**
