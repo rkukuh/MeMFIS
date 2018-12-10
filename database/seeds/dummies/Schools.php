@@ -12,6 +12,6 @@ class Schools extends Seeder
      */
     public function run()
     {
-        //
+        factory(School::class, config('memfis.dummies.schools'))->create();
     }
 }
