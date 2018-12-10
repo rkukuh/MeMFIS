@@ -25,25 +25,37 @@
                             </div>                            
                         </div>
                         <div class="form-group m-form__group row ">
-
-                        <div class="col-sm-12 col-md-12 col-lg-12">
-                            <label class="form-control-label">
-                                Name @include('frontend.common.label.required')
-                            </label>
-                            @component('frontend.common.input.text')
-                                @slot('text', 'Name')
-                                @slot('name', 'name')
-                                @slot('id', 'name')
-                                @slot('id_error', 'name')
-                            @endcomponent
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <label class="form-control-label">
+                                    Name @include('frontend.common.label.required')
+                                </label>
+                                @component('frontend.common.input.text')
+                                    @slot('text', 'Name')
+                                    @slot('name', 'name')
+                                    @slot('id', 'name')
+                                    @slot('id_error', 'name')
+                                @endcomponent
+                            </div>
                         </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <label class="form-control-label">
+                                    Symbol @include('frontend.common.label.required')
+                                </label>
+                                @component('frontend.common.input.text')
+                                    @slot('text', 'Symbol')
+                                    @slot('name', 'symbol')
+                                    @slot('id', 'symbol')
+                                    @slot('id_error', 'symbol')
+                                @endcomponent
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-manufacturer')
+                                    @slot('class', 'add-currency')
                                     @slot('type', 'button')
                                 @endcomponent
 

@@ -61,7 +61,7 @@ class CurrencyController extends Controller
      */
     public function edit(Currency $currency)
     {
-        return response()->json($bank);
+        return response()->json($currency);
     }
 
     /**

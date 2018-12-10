@@ -58,6 +58,13 @@ let Currency = {
                     width: 250
                 },
                 {
+                    field: 'symbol',
+                    title: 'Symbol',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 250
+                },
+                {
                     field: 'Actions',
                     width: 110,
                     title: 'Actions',
@@ -80,9 +87,11 @@ let Currency = {
         let currency_reset = function () {
             document.getElementById('code').value = '';
             document.getElementById('name').value = '';
+            document.getElementById('symbol').value = '';
 
             $('#code-error').html('');
             $('#name-error').html('');
+            $('#symbol-error').html('');
         }
 
         $(document).ready(function () {
@@ -92,7 +101,7 @@ let Currency = {
         let simpan = $('.modal-footer').on('click', '.add-currency', function () {
             let name = $('input[name=name]').val();
             let code = $('input[name=code]').val();
-            let type_id =$('#type_id').val();
+            let symbol = $('input[name=symbol]').val();
 
             $.ajax({
                 headers: {
@@ -104,6 +113,7 @@ let Currency = {
                     _token: $('input[name=_token]').val(),
                     name: name,
                     code: code,
+                    symbol:symbol
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -113,6 +123,10 @@ let Currency = {
                         }
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
+
+                        }
+                        if (data.errors.symbol) {
+                            $('#symbol-error').html(data.errors.symbol[0]);
 
                         }
 
@@ -146,6 +160,7 @@ let Currency = {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('name').value = data.name;
                     document.getElementById('code').value = data.code;
+                    document.getElementById('symbol').value = data.symbol;
 
 
                     $('.btn-success').addClass('update');
@@ -166,7 +181,9 @@ let Currency = {
         let update = $('.modal-footer').on('click', '.update', function () {
             let name = $('input[name=name]').val();
             let code = $('input[name=code]').val();
+            let symbol = $('input[name=symbol]').val();
             let triggerid = $('input[name=uuid]').val();
+            
 
             $.ajax({
                 headers: {
@@ -178,6 +195,7 @@ let Currency = {
                     _token: $('input[name=_token]').val(),
                     name: name,
                     code: code,
+                    symbol:symbol
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -187,6 +205,10 @@ let Currency = {
                         }
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
+
+                        }
+                        if (data.errors.symbol) {
+                            $('#symbol-error').html(data.errors.symbol[0]);
 
                         }
 
