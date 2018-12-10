@@ -171,6 +171,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of School Degree.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfSchoolDegree(Builder $query)
+    {
+        return $query->where('of', 'school-degree');
+    }
+
+    /**
      * Scope a query to only include type of Task Card.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
