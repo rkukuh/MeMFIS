@@ -103,10 +103,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        //HR Forms
-        Route::resource('hr-form', 'HRFormController');
-        Route::get('get-hr-forms', 'HRFormController@getHRForms')->name('get-hr-forms');
-
         //Monitor Attendance
         Route::resource('monitor-attendance', 'MonitorAttendanceController');
         Route::get('get-monitor-attendances', 'MonitorAttendanceController@getMonitorAttendances')->name('get-monitor-attendances');
