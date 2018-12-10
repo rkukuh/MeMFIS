@@ -39,6 +39,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('customer', 'CustomerController');
+        Route::resource('language', 'LanguageController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -102,9 +103,6 @@ Route::name('frontend.')->group(function () {
             });
 
         });
-
-        Route::resource('language', 'LanguageController');
-        Route::get('/get-languages', 'LanguageController@getLanguages')->name('get-languages');
 
         Route::resource('education', 'EducationController');
         Route::get('/get-educations', 'EducationController@getEducations')->name('get-educations');
