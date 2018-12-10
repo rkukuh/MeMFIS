@@ -2,11 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class TaskCard extends Model
+class TaskCard extends MemfisModel
 {
     protected $table = 'taskcards';
+
+    protected $fillable = [
+        'number',
+        'title',
+        'type_id',
+        'work_area',
+        'zone',
+        'access',
+        'is_rii',
+        'is_applicability_aircraft_all',
+        'is_applicability_engine_all',
+        'source',
+        'effectivity',
+        'description',
+    ];
 
     /*************************************** RELATIONSHIP ****************************************/
 
@@ -21,5 +36,16 @@ class TaskCard extends Model
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * Polymorphic: An employee can have zero or many versions.
+     *
+     * This function will get all of the task card's versions.
+     * See: Version' versionable() method for the inverse
+     */
+    public function versions()
+    {
+        return $this->morphMany(Version::class, 'versionable');
     }
 }

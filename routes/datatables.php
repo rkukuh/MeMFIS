@@ -14,7 +14,6 @@ Route::name('datatables.')->group(function () {
 
         Route::get('/journal','JournalDatatables@index')->name('journal.index');
 
-
         /** MASTER */
 
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
@@ -23,7 +22,6 @@ Route::name('datatables.')->group(function () {
         Route::get('/aircraft','AircraftDatatables@index')->name('aircraft.index');
         Route::get('/bank','BankDatatables@index')->name('bank.index');
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
-
 
         /** TRANSACTION */
 
@@ -109,7 +107,6 @@ Route::name('datatables.')->group(function () {
             });
 
         });
-
 
         /** EMPLOYEE  */
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaskcardRelationshipsTable extends Migration
+class CreateTaskcardRelationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTaskcardRelationshipsTable extends Migration
      */
     public function up()
     {
-        Schema::create('taskcard_relationships', function (Blueprint $table) {
+        Schema::create('taskcard_relations', function (Blueprint $table) {
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('related_to');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('taskcard_id')
                     ->references('id')->on('taskcards')
@@ -37,6 +38,6 @@ class CreateTaskcardRelationshipsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taskcard_relationships');
+        Schema::dropIfExists('taskcard_relations');
     }
 }

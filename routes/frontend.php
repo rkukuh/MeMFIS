@@ -25,7 +25,6 @@ Route::name('frontend.')->group(function () {
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
-        Route::resource('note', 'NoteController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
@@ -64,7 +63,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('taskcard', 'TaskCardController');
 
-
         /** ITEM */
 
         Route::namespace('Item')->group(function () {
@@ -86,7 +84,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-
         /** EMPLOYEE  */
 
         Route::namespace('Employee')->group(function () {
@@ -106,18 +103,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        //HR Forms
-        Route::resource('hr-form', 'HRFormController');
-        Route::get('get-hr-forms', 'HRFormController@getHRForms')->name('get-hr-forms');
-
-        //Monitor Attendance
-        Route::resource('monitor-attendance', 'MonitorAttendanceController');
-        Route::get('get-monitor-attendances', 'MonitorAttendanceController@getMonitorAttendances')->name('get-monitor-attendances');
-
-        //DocumentManagement
-        Route::resource('company-document', 'CompanyDocumentController');
-        Route::get('get-company-documents', 'CompanyDocumentController@getCompanyDocuments')->name('get-company-documents');
-
         Route::resource('language', 'LanguageController');
         Route::get('/get-languages', 'LanguageController@getLanguages')->name('get-languages');
 
@@ -128,9 +113,6 @@ Route::name('frontend.')->group(function () {
         Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');
         Route::get('/general-license/{generallicense}/{employee}/edit', 'GeneralLicenseController@edit')->name('frontend.general-license.edit');
         Route::delete('/general-license/{generallicense}/{employee}', 'GeneralLicenseController@destroy')->name('frontend.general-license.destroy');
-
-        Route::resource('audit', 'AuditController');
-        Route::get('/get-audits','AuditController@getAudits')->name('get-audits');
 
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
@@ -152,10 +134,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
         ]);
+        
         Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
-
-        Route::resource('taskcard-package', 'TaskCardPackageController');
-        Route::get('/get-taskcardpackages', 'TaskCardPackageController@getTaskCardPackage')->name('get-taskcardpackages');
 
         Route::view('/qualification', 'frontend.personal-information.qualifications.index')->name('qualification');
         Route::view('/personal-dashboard', 'frontend.personal-information.dashboard.index')->name('personal-dashboard');

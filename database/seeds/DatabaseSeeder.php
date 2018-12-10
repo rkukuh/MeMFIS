@@ -31,14 +31,12 @@ class DatabaseSeeder extends Seeder
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);
-        $this->call(NotesTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
         $this->call(EmailsTableSeeder::class);
         $this->call(WebsitesTableSeeder::class);
         $this->call(VersionsTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
         $this->call(DocumentsTableSeeder::class);
-        $this->call(DescriptionsTableSeeder::class);
         $this->call(MaintenanceCyclesTableSeeder::class);
 
         /** MASTER */

@@ -16,19 +16,18 @@ class CreateTaskcardsTable extends Migration
         Schema::create('taskcards', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('number');
             $table->string('title');
-            $table->unsignedInteger('type_id');
-            $table->unsignedInteger('otr_certification_id');
+            $table->unsignedInteger('type_id'); // NOTE: "Task" section on document
             $table->unsignedInteger('work_area');
-            $table->string('zone');
-            $table->string('access');
-            $table->boolean('is_rii');
-            $table->string('applicability_airplane');
-            $table->unsignedInteger('applicability_engine')->nullable();
-            $table->boolean('applicability_engine_all')->nullable();
-            $table->string('source')->nullabel();
-            $table->string('effectifity')->nullabel();
-            $table->longText('description')->nullabel();
+            $table->string('zone')->nullable();
+            $table->string('access')->nullable();
+            $table->boolean('is_rii')->default(false);
+            $table->boolean('is_applicability_airplane_all')->default(false);
+            $table->boolean('is_applicability_engine_all')->default(false);
+            $table->string('source')->nullable();
+            $table->string('effectivity')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -37,18 +36,8 @@ class CreateTaskcardsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('otr_certification_id')
-                    ->references('id')->on('otr_certifications')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
             $table->foreign('work_area')
                     ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('applicability_engine')
-                    ->references('id')->on('items')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

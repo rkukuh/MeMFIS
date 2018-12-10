@@ -108,42 +108,12 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.company-document.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Document Management
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.employee.travel-request.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
                                 <span class="m-menu__link-text">
                                     Travel Requests
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.monitor-attendance.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Monitor Attendance
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.hr-form.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    HR Form Management
                                 </span>
                             </a>
                         </li>
