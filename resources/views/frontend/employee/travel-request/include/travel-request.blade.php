@@ -22,7 +22,7 @@
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-            @include('frontend.employees.travel-request.modal.travel-request')
+            @include('frontend.employee.travel-request.modal.travel-request')
 
         <div class="m_datatable_travel_request" id="scrolling_both"></div>
     </div>

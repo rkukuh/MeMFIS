@@ -22,7 +22,7 @@
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-            @include('frontend.employees.employee.modal.otr')
+            @include('frontend.employee.employee.modal.otr')
 
         <div class="m_datatable_otr" id="scrolling_both"></div>
     </div>

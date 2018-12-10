@@ -23,7 +23,7 @@
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-            @include('frontend.employees.employee.modal.general-license')
+            @include('frontend.employee.employee.modal.general-license')
 
         <div class="m_datatable_general_license" id="scrolling_both"></div>
     </div>

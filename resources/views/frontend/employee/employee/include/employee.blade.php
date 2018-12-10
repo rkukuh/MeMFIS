@@ -24,7 +24,7 @@
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-            @include('frontend.employees.employee.modal.employee')
+            @include('frontend.employee.employee.modal.employee')
 
         <div class="m_datatable_employee" id="scrolling_both"></div>
     </div>

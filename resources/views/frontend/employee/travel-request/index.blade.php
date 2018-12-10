@@ -48,7 +48,7 @@
                 <div class="m-portlet__body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                @include('frontend.employees.travel-request.include.travel-request')
+                                @include('frontend.employee.travel-request.include.travel-request')
                         </div>
                     </div>
                 </div>

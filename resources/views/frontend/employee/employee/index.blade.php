@@ -88,37 +88,37 @@
                 <div class="m-portlet__body">                   
                     <div class="tab-content">
                         <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                @include('frontend.employees.employee.include.employee')
+                                @include('frontend.employee.employee.include.employee')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                                @include('frontend.employees.employee.include.education')
+                                @include('frontend.employee.employee.include.education')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
-                                @include('frontend.employees.employee.include.certification')
+                                @include('frontend.employee.employee.include.certification')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_4" role="tabpanel">
-                                @include('frontend.employees.employee.include.general-license')
+                                @include('frontend.employee.employee.include.general-license')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_5" role="tabpanel">
-                                @include('frontend.employees.employee.include.amel')
+                                @include('frontend.employee.employee.include.amel')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_6" role="tabpanel">
-                                @include('frontend.employees.employee.include.otr')
+                                @include('frontend.employee.employee.include.otr')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_7" role="tabpanel">
-                                @include('frontend.employees.employee.include.languages')
+                                @include('frontend.employee.employee.include.languages')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_9" role="tabpanel">
-                                @include('frontend.employees.employee.include.emergency-contact')
+                                @include('frontend.employee.employee.include.emergency-contact')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_10" role="tabpanel">
-                                @include('frontend.employees.employee.include.document')
+                                @include('frontend.employee.employee.include.document')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_11" role="tabpanel">
-                                @include('frontend.employees.employee.include.temporarily-deactivated-employee')
+                                @include('frontend.employee.employee.include.temporarily-deactivated-employee')
                         </div>
                         <div class="tab-pane" id="m_tabs_6_12" role="tabpanel">
-                                @include('frontend.employees.employee.include.terminated-employee-data')
+                                @include('frontend.employee.employee.include.terminated-employee-data')
                         </div>
                     </div>      
                 </div>

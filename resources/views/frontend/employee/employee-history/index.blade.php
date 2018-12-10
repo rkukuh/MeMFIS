@@ -48,7 +48,7 @@
                 <div class="m-portlet__body">                   
                     <div class="tab-content">
                         <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                @include('frontend.employees.employee-history.include.employee-basic-detail')
+                                @include('frontend.employee.employee-history.include.employee-basic-detail')
                         </div>
                         
                     </div>      

@@ -22,7 +22,7 @@
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-            @include('frontend.employees.employee.modal.emergency-contact')
+            @include('frontend.employee.employee.modal.emergency-contact')
 
         <div class="m_datatable_emergancy_contacts" id="scrolling_both"></div>
     </div>

@@ -15,7 +15,7 @@ class EmployeeTravelRequestController extends Controller
      */
     public function index()
     {
-        return view('frontend.employees.travel-request.index');
+        return view('frontend.employee.travel-request.index');
     }
 
     /**
