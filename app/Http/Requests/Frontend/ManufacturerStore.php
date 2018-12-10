@@ -40,7 +40,7 @@ class ManufacturerStore extends FormRequest
     public function messages()
     {
         return [
-            'type_id.exists' => 'The selected Type is invalid.',
+            //
         ];
     }
 
