@@ -18,6 +18,7 @@ return [
         'languages' => 10,
         'licenses' => 10,
         'levels' => 10,
+        'schools' => 20,
         'statuses' => 10,
         'storages' => 10,
         'taskcards' => 10,
