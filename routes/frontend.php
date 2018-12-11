@@ -109,8 +109,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');
-
         Route::resource('taskcard', 'TaskCardController');
         Route::get('/get-taskcards', 'TaskCardController@getTaskCards')->name('get-taskcards');
 
