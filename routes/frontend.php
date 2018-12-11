@@ -43,6 +43,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('customer', 'CustomerController');
         Route::resource('supplier', 'SupplierController');
         Route::resource('language', 'LanguageController');
+        Route::resource('quotation', 'QuotationController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -108,9 +109,6 @@ Route::name('frontend.')->group(function () {
             });
 
         });
-
-        Route::resource('quotation', 'QuotationController');
-        Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
 
         Route::resource('workpackage', 'WorkPackageController');
         Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
