@@ -41,7 +41,6 @@ Route::name('admin.')->group(function () {
         Route::resource('employee', 'EmployeeController');
         Route::resource('customer', 'CustomerController');
         Route::resource('supplier', 'SupplierController');
-        Route::resource('quotation', 'QuotationController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -66,6 +65,7 @@ Route::name('admin.')->group(function () {
         /** TRANSACTION */
 
         Route::resource('taskcard', 'TaskCardController');
+        Route::resource('quotation', 'QuotationController');
 
     });
 

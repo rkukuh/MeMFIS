@@ -23,14 +23,13 @@ Route::name('datatables.')->group(function () {
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/language','LanguageDatatables@index')->name('language.index');
         Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
-        Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
         Route::get('/general-license','GeneralLicenseDatatables@index')->name('general-license.index');
 
         /** TRANSACTION */
 
-        // 
+        Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
 
         /** ITEM */
 

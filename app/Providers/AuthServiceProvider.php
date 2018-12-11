@@ -52,6 +52,8 @@ use App\Models\Language;
 use App\Policies\LanguagePolicy;
 use App\Models\Supplier;
 use App\Policies\SupplierPolicy;
+use App\Models\Quotation;
+use App\Policies\QuotationPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
@@ -107,6 +109,7 @@ class AuthServiceProvider extends ServiceProvider
         Document::class => DocumentPolicy::class,
         Language::class => LanguagePolicy::class,
         Supplier::class => SupplierPolicy::class,
+        Quotation::class => QuotationPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
