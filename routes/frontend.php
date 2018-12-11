@@ -108,8 +108,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        Route::get('/details/{customer}/customer','CustomerController@details')->name('customer.details');
-
         Route::resource('supplier', 'SupplierController');
         Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');
 
