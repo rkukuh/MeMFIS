@@ -100,6 +100,7 @@ Route::name('frontend.')->group(function () {
                     Route::resource('document', 'EmployeeDocumentController');
                     Route::resource('education', 'EmployeeEducationController');
                     Route::resource('travel-request', 'EmployeeTravelRequestController');
+                    Route::resource('general-license', 'EmployeeGeneralLicenseController');
 
                 });
             });
@@ -107,8 +108,6 @@ Route::name('frontend.')->group(function () {
         });
 
         Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');
-        Route::get('/general-license/{generallicense}/{employee}/edit', 'GeneralLicenseController@edit')->name('frontend.general-license.edit');
-        Route::delete('/general-license/{generallicense}/{employee}', 'GeneralLicenseController@destroy')->name('frontend.general-license.destroy');
 
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
