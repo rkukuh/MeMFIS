@@ -38,6 +38,7 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('school', 'SchoolController');
         Route::resource('license', 'LicenseController');
+        Route::resource('storages', 'StorageController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('customer', 'CustomerController');
         Route::resource('language', 'LanguageController');
@@ -106,9 +107,6 @@ Route::name('frontend.')->group(function () {
             });
 
         });
-
-        Route::resource('storages', 'StorageController');
-        Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
         Route::get('/details/{customer}/customer','CustomerController@details')->name('customer.details');
 

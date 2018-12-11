@@ -18,6 +18,7 @@ Route::name('datatables.')->group(function () {
 
         Route::get('/unit','UnitDatatables@index')->name('unit.index');
         Route::get('/bank','BankDatatables@index')->name('bank.index');
+        Route::get('/storage','StorageDatatables@index')->name('storage.index');
         Route::get('/aircraft','AircraftDatatables@index')->name('aircraft.index');
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/language','LanguageDatatables@index')->name('language.index');

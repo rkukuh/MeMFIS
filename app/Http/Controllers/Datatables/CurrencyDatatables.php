@@ -16,9 +16,7 @@ class CurrencyDatatables extends Controller
      */
     public function index()
     {
-        $currencies = Currency::all();
-
-        $data = $alldata = json_decode($currencies);
+        $data = $alldata = json_decode(Currency::all());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
