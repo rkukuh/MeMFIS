@@ -17,10 +17,9 @@ Route::name('admin.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        Route::resource('category', 'CategoryController');
-
+        
         /** POLYMORPH */
-
+        
         Route::resource('fax', 'FaxController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
@@ -28,6 +27,7 @@ Route::name('admin.')->group(function () {
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
         Route::resource('document', 'VersionController');
+        Route::resource('category', 'CategoryController');
         Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */

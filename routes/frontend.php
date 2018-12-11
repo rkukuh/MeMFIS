@@ -20,19 +20,23 @@ Route::name('frontend.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        Route::resource('category', 'CategoryController');
-
+        
         /** POLYMORPH */
-
+        
         Route::resource('fax', 'FaxController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
+        Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
         Route::resource('description', 'DescriptionController');
         Route::resource('maintenance-cycle', 'MaintenanceCycleController');
+
+        Route::resource('category-item', 'CategoryItemController', [
+            'parameters' => ['category-item' => 'category']
+        ]);
 
         /** MASTER */
 
@@ -112,10 +116,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('workpackage', 'WorkPackageController');
         Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
-
-        Route::resource('category-item', 'CategoryItemController', [
-            'parameters' => ['category-item' => 'category']
-        ]);
         
         Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 
