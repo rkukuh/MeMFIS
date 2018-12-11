@@ -109,8 +109,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        Route::get('/get-taskcards', 'TaskCardController@getTaskCards')->name('get-taskcards');
-
         Route::resource('quotation', 'QuotationController');
         Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
 
