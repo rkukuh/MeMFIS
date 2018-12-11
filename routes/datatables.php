@@ -27,8 +27,8 @@ Route::name('datatables.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
         Route::get('/customer','CustomerDatatables@index')->name('customer.index');
+        Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
 
         /** ITEM */
 
@@ -61,12 +61,12 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/','CustomerDatatables@index')->name('all');
-                Route::get('/{customer}/address','AddressDatatables@index')->name('address.index');
                 Route::get('/{customer}/fax','FaxDatatables@index')->name('fax.index');
                 Route::get('/{customer}/email','EmailDatatables@index')->name('email.index');
                 Route::get('/{customer}/phone','PhoneDatatables@index')->name('phone.index');
-                Route::get('/{customer}/document','DecumentDatatables@index')->name('document.index');
                 Route::get('/{customer}/website','WebsiteDatatables@index')->name('website.index');
+                Route::get('/{customer}/address','AddressDatatables@index')->name('address.index');
+                Route::get('/{customer}/document','DecumentDatatables@index')->name('document.index');
 
             });
 
