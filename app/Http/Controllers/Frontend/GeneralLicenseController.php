@@ -23,17 +23,6 @@ class GeneralLicenseController extends Controller
      */
     public function getGeneralLicenses()
     {
-        // $employees = Employee::with('general_licenses')->get();
-        // $employees = Employee::with('general_licenses')->first();
-        // $general_licenses = DB::table('employees')
-        //         ->join('employee_license', 'employee_license.employee_id', '=', 'employees.id')
-        //         ->join('licenses', 'licenses.id', '=', 'employee_license.license_id')
-        //         ->join('general_licenses', 'general_licenses.employee_license_id', '=', 'employee_license.id')
-        //         ->select('general_licenses.*', 'employee_license.code', 'employee_license.issued_at', 'employee_license.revoke_at', 'employee_license.valid_until','employee_license.employee_id','employees.first_name')
-        //         ->where('general_licenses.deleted_at',null)
-        //         ->get();
-        // $general_licenses = GeneralLicense::get();
-        // $employeelicenses = EmployeeLicense::get();
         $employees = Employee::with('general_licenses')->first();
 
         $data = $alldata = json_decode($employees->general_licenses);
@@ -235,10 +224,6 @@ class GeneralLicenseController extends Controller
                 ->where('employee_license.employee_id',$employee)
                 ->where('general_licenses.id',$generallicense)
                 ->first();
-        // $employee = Employee::with('general_licenses')->find($employee);
-        //     dd($employee);
-        //    dd($employee->general_licenses->code);
-        // $general_license = GeneralLicense::find($generallicense);
 
         return response()->json($general_license);
     }
