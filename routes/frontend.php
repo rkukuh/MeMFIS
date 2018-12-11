@@ -106,7 +106,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        Route::resource('general-license', 'GeneralLicenseController')->except(['edit']);
         Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');
         Route::get('/general-license/{generallicense}/{employee}/edit', 'GeneralLicenseController@edit')->name('frontend.general-license.edit');
         Route::delete('/general-license/{generallicense}/{employee}', 'GeneralLicenseController@destroy')->name('frontend.general-license.destroy');
