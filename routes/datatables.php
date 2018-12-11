@@ -32,7 +32,7 @@ Route::name('datatables.')->group(function () {
 
         /** CUSTOMER */
 
-        Route::name('taskcard.')->group(function () {
+        Route::name('customer.')->group(function () {
 
             Route::group([
 
