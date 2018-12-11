@@ -8,7 +8,7 @@ use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DecumentDatatables extends Controller
+class DocumentDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
