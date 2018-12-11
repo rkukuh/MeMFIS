@@ -15,7 +15,7 @@ class EmployeeHistoryController extends Controller
      */
     public function index()
     {
-        return view('frontend.employees.employee-history.index');
+        return view('frontend.employee.employee-history.index');
     }
 
     /**

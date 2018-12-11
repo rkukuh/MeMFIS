@@ -16,9 +16,7 @@ class UnitDatatables extends Controller
      */
     public function index()
     {
-        $units = Unit::with('type')->get();
-
-        $data = $alldata = json_decode($units);
+        $data = $alldata = json_decode(Unit::with('type')->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

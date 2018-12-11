@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;
@@ -96,5 +95,4 @@ class QuotationController extends Controller
 
         return response()->json($quotation);
     }
-
 }

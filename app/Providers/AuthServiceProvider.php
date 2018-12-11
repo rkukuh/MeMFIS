@@ -22,6 +22,8 @@ use App\Models\Level;
 use App\Policies\LevelPolicy;
 use App\Models\Status;
 use App\Policies\StatusPolicy;
+use App\Models\School;
+use App\Policies\SchoolPolicy;
 use App\Models\Address;
 use App\Policies\AddressPolicy;
 use App\Models\License;
@@ -46,6 +48,12 @@ use App\Models\Customer;
 use App\Policies\CustomerPolicy;
 use App\Models\Document;
 use App\Policies\DocumentPolicy;
+use App\Models\Language;
+use App\Policies\LanguagePolicy;
+use App\Models\Supplier;
+use App\Policies\SupplierPolicy;
+use App\Models\Quotation;
+use App\Policies\QuotationPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
 use App\Models\BankAccount;
@@ -86,6 +94,7 @@ class AuthServiceProvider extends ServiceProvider
         Phone::class => PhonePolicy::class,
         Level::class => LevelPolicy::class,
         Status::class => StatusPolicy::class,
+        School::class => SchoolPolicy::class,
         Address::class => AddressPolicy::class,
         License::class => LicensePolicy::class,
         Journal::class => JournalPolicy::class,
@@ -98,6 +107,9 @@ class AuthServiceProvider extends ServiceProvider
         TaskCard::class => TaskCardPolicy::class,
         Customer::class => CustomerPolicy::class,
         Document::class => DocumentPolicy::class,
+        Language::class => LanguagePolicy::class,
+        Supplier::class => SupplierPolicy::class,
+        Quotation::class => QuotationPolicy::class,
         Department::class => DepartmentPolicy::class,
         BankAccount::class => BankAccountPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,

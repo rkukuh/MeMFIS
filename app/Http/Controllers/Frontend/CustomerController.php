@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\ListUtil;
+use App\Models\Type;
+use App\Models\Email;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
@@ -27,7 +28,11 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('frontend.customer.create');
+        $websites = Type::ofWebsite()->get();
+
+        return view('frontend.customer.create', [
+            'websites' => $websites
+        ]);
     }
 
     /**
@@ -38,24 +43,28 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
-        $customer = Customer::create([
-            'name' => $request->name,
-        ]);
+        if ($customer = Customer::create($request->all())) {
+            $email = Email::class(['address' => $request->email_array]);
+            $email = $customer->emails()->save($email);
 
-        return response()->json($customer);
+            return response()->json($customer);
+        }
 
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
      * Display the specified resource.
      *
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show($customer)
+    public function show(Customer $customer)
     {
-        $customer = Customer::with('term_of_payment')->where('uuid',$customer)->first();
+        $customer = Customer::with('term_of_payment')->find($customer);
 
-        return view('frontend.customer.show',compact('customer'));
+        return view('frontend.customer.show', compact('customer'));
     }
 
     /**
@@ -66,7 +75,12 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        return view('frontend.customer.edit',compact('customer'));
+        $payment_terms = Type::ofPaymentTerm()->get();
+
+        return view('frontend.customer.edit', [
+            'customer' => $customer,
+            'payment_terms' => $payment_terms,
+        ]);
     }
 
     /**
@@ -78,11 +92,12 @@ class CustomerController extends Controller
      */
     public function update(CustomerUpdate $request, Customer $customer)
     {
-        $customer = Customer::find($customer);
-        $customer->name = $request->name;
-        $customer->save();
+        if ($customer->update($request->all())) {
+            return response()->json($customer);
+        }
 
-        return response()->json($customer);
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
@@ -97,16 +112,4 @@ class CustomerController extends Controller
 
         return response()->json($customer);
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function details(Customer $customer)
-    {
-        return response()->json($customer);
-    }
-
 }

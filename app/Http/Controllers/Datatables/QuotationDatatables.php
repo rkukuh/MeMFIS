@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\Quotation;
 use App\Models\ListUtil;
+use App\Models\Quotation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,9 +16,7 @@ class QuotationDatatables extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::All();
-
-        $data = $alldata = json_decode($quotation);
+        $data = $alldata = json_decode(Quotation::All());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\Certification;
 use Illuminate\Http\Request;
+use App\Models\Certification;
 use App\Http\Controllers\Controller;
 
 class CertificationDatatables extends Controller

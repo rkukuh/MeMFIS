@@ -88,6 +88,34 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Many-to-Many: An employee may have zero or many languages.
+     *
+     * This function will retrieve all the languages of an employee.
+     * See: Language's employees() method for the inverse
+     *
+     * @return mixed
+     */
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class)
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: An employee may have zero or many schools.
+     *
+     * This function will retrieve all the schools of an employee.
+     * See: School's employees() method for the inverse
+     *
+     * @return mixed
+     */
+    public function schools()
+    {
+        return $this->belongsToMany(School::class)
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: An employee may have zero or many licenses.
      *
      * This function will retrieve all the licenses of an employee.

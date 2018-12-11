@@ -77,7 +77,7 @@ let Customer = {
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
+                            t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -85,16 +85,16 @@ let Customer = {
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
+        let remove = $('.customer_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({
                 title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
             }).then(result => {
                 if (result.value) {
                     $.ajax({
@@ -112,7 +112,7 @@ let Customer = {
                                     timeOut: 5000
                                 }
                             );
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.customer_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -126,18 +126,8 @@ let Customer = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
-                }
+
+                } 
             });
         });
 

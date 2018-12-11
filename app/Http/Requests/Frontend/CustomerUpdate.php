@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Journal;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -26,8 +28,23 @@ class CustomerUpdate extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $this->merge([
+                'account_code' => optional(Journal::where('uuid', $this->account_code)->first())->id
+            ]);
+        });
     }
 
     protected function failedValidation(Validator $validator) {

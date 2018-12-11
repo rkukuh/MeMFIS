@@ -14,11 +14,13 @@ class CreateEmployeeSchoolTable extends Migration
     public function up()
     {
         Schema::create('employee_school', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('school_id');
             $table->timestamp('start_at')->nullable();
             $table->timestamp('graduated_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('employee_id')
                     ->references('id')->on('employees')

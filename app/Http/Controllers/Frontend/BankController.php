@@ -17,10 +17,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::selectRaw('id, CONCAT(code, " - ", name) as full_name')
-                     ->pluck('full_name', 'id');
-
-        return json_encode($banks);
+        return view('frontend.bank.index');
     }
 
     /**
@@ -39,12 +36,9 @@ class BankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BankStore $request)
     {
-        $bank = Bank::create([
-            'code' => $request->code,
-            'name' => $request->name,
-        ]);
+        $bank = Bank::create($request->all());
 
         return response()->json($bank);
     }
@@ -68,7 +62,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        //
+        return response()->json($bank);
     }
 
     /**
@@ -80,7 +74,9 @@ class BankController extends Controller
      */
     public function update(BankUpdate $request, Bank $bank)
     {
-        //
+        $bank->update($request->all());
+
+        return response()->json($bank);
     }
 
     /**
@@ -91,6 +87,8 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-        //
+        $bank->delete();
+
+        return response()->json($bank);
     }
 }

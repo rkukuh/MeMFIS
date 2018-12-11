@@ -13,13 +13,11 @@ use App\Http\Requests\Frontend\ItemUpdate;
 
 class ItemController extends Controller
 {
-    protected $tags;
     protected $units;
     protected $categories;
 
     public function __construct()
     {
-        $this->tags = Tag::getWithType('item');
         $this->units = Unit::ofQuantity()->get();
         $this->categories = Category::ofItem()->get();
     }
@@ -81,9 +79,13 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
+        $tags = array();
+        foreach($item->tags as $i => $item_tag){
+            $tags[$i] =  $item_tag->name;
+        }
+
         return view('frontend.item.edit', [
             'item' => $item,
-            'tags' => $this->tags,
             'units' => $this->units,
             'categories' => $this->categories,
         ]);
@@ -100,8 +102,6 @@ class ItemController extends Controller
     {
         if ($item->update($request->all())) {
             $item->categories()->sync($request->category);
-
-            $item->tags()->sync($request->selectedtags);
 
             return response()->json($item);
         }
