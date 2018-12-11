@@ -98,15 +98,13 @@ Route::name('frontend.')->group(function () {
                     Route::resource('amel', 'EmployeeAMELController');
                     Route::resource('history', 'EmployeeHistoryController');
                     Route::resource('document', 'EmployeeDocumentController');
+                    Route::resource('education', 'EmployeeEducationController');
                     Route::resource('travel-request', 'EmployeeTravelRequestController');
 
                 });
             });
 
         });
-
-        Route::resource('education', 'EducationController');
-        Route::get('/get-educations', 'EducationController@getEducations')->name('get-educations');
 
         Route::resource('general-license', 'GeneralLicenseController')->except(['edit']);
         Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');
