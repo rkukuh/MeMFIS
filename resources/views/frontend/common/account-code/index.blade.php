@@ -22,6 +22,6 @@
 @include('frontend.common.account-code.modal')
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
+    <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush
