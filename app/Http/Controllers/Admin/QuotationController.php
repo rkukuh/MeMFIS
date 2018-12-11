@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Quotation;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\QuotationStore;
-use App\Http\Requests\Frontend\QuotationUpdate;
+use App\Http\Requests\Admin\QuotationStore;
+use App\Http\Requests\Admin\QuotationUpdate;
 
 class QuotationController extends Controller
 {
@@ -16,7 +16,7 @@ class QuotationController extends Controller
      */
     public function index()
     {
-        return view('frontend.quotation.index');
+        //
     }
 
     /**
@@ -26,23 +26,18 @@ class QuotationController extends Controller
      */
     public function create()
     {
-        return view('frontend.quotation.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\QuotationStore  $request
+     * @param  \App\Http\Requests\Admin\QuotationStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(QuotationStore $request)
     {
-        $quotation = Quotation::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
-        ]);
-
-        return response()->json($quotation);
+        //
     }
 
     /**
@@ -53,7 +48,7 @@ class QuotationController extends Controller
      */
     public function show(Quotation $quotation)
     {
-        return view('frontend.quotation.show');
+        //
     }
 
     /**
@@ -64,23 +59,19 @@ class QuotationController extends Controller
      */
     public function edit(Quotation $quotation)
     {
-        return view('frontend.quotation.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\QuotationUpdate  $request
+     * @param  \App\Http\Requests\Admin\QuotationUpdate  $request
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
-        $quotation = Quotation::find($quotation);
-        // $quotation->name = $request->name;
-        // $quotation->save();
-
-        return response()->json($quotation);
+        //
     }
 
     /**
@@ -91,8 +82,6 @@ class QuotationController extends Controller
      */
     public function destroy(Quotation $quotation)
     {
-        $quotation->delete();
-
-        return response()->json($quotation);
+        //
     }
 }

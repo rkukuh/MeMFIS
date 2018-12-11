@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class Quotation extends Model
+class Quotation extends MemfisModel
 {
     //
 }

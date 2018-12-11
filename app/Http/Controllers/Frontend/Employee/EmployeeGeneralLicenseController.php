@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Employee;
 
+use Illuminate\Http\Request;
 use App\Models\GeneralLicense;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\GeneralLicenseStore;
-use App\Http\Requests\Frontend\GeneralLicenseUpdate;
 
-class GeneralLicenseController extends Controller
+class EmployeeGeneralLicenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +31,10 @@ class GeneralLicenseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\GeneralLicenseStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GeneralLicenseStore $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class GeneralLicenseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\GeneralLicenseUpdate  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\GeneralLicense  $generalLicense
      * @return \Illuminate\Http\Response
      */
-    public function update(GeneralLicenseUpdate $request, GeneralLicense $generalLicense)
+    public function update(Request $request, GeneralLicense $generalLicense)
     {
         //
     }

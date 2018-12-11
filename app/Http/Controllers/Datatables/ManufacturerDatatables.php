@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\Manufacturer;
 use App\Models\ListUtil;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,9 +16,7 @@ class ManufacturerDatatables extends Controller
      */
     public function index()
     {
-        $manufacturers = Manufacturer::all();
-
-        $data = $alldata = json_decode($manufacturers);
+        $data = $alldata = json_decode(Manufacturer::all());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

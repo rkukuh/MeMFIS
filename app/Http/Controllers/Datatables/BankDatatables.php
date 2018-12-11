@@ -16,9 +16,7 @@ class BankDatatables extends Controller
      */
     public function index()
     {
-        $banks = Bank::all();
-
-        $data = $alldata = json_decode($banks);
+        $data = $alldata = json_decode(Bank::all());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

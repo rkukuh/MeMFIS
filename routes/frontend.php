@@ -20,26 +20,32 @@ Route::name('frontend.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        Route::resource('category', 'CategoryController');
-
+        
         /** POLYMORPH */
-
+        
         Route::resource('fax', 'FaxController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
+        Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
         Route::resource('description', 'DescriptionController');
         Route::resource('maintenance-cycle', 'MaintenanceCycleController');
+
+        Route::resource('category-item', 'CategoryItemController', [
+            'parameters' => ['category-item' => 'category']
+        ]);
 
         /** MASTER */
 
         Route::resource('school', 'SchoolController');
         Route::resource('license', 'LicenseController');
+        Route::resource('storages', 'StorageController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('customer', 'CustomerController');
+        Route::resource('supplier', 'SupplierController');
         Route::resource('language', 'LanguageController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
@@ -64,6 +70,7 @@ Route::name('frontend.')->group(function () {
         /** TRANSACTION */
 
         Route::resource('taskcard', 'TaskCardController');
+        Route::resource('quotation', 'QuotationController');
 
         /** ITEM */
 
@@ -100,37 +107,15 @@ Route::name('frontend.')->group(function () {
                     Route::resource('document', 'EmployeeDocumentController');
                     Route::resource('education', 'EmployeeEducationController');
                     Route::resource('travel-request', 'EmployeeTravelRequestController');
+                    Route::resource('general-license', 'EmployeeGeneralLicenseController');
 
                 });
             });
 
         });
 
-        Route::resource('general-license', 'GeneralLicenseController')->except(['edit']);
-        Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');
-        Route::get('/general-license/{generallicense}/{employee}/edit', 'GeneralLicenseController@edit')->name('frontend.general-license.edit');
-        Route::delete('/general-license/{generallicense}/{employee}', 'GeneralLicenseController@destroy')->name('frontend.general-license.destroy');
-
-        Route::resource('storages', 'StorageController');
-        Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
-
-        Route::get('/details/{customer}/customer','CustomerController@details')->name('customer.details');
-
-        Route::resource('supplier', 'SupplierController');
-        Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');
-
-        Route::resource('taskcard', 'TaskCardController');
-        Route::get('/get-taskcards', 'TaskCardController@getTaskCards')->name('get-taskcards');
-
-        Route::resource('quotation', 'QuotationController');
-        Route::get('/get-quotations', 'QuotationController@getQuotations')->name('get-quotations');
-
         Route::resource('workpackage', 'WorkPackageController');
         Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
-
-        Route::resource('category-item', 'CategoryItemController', [
-            'parameters' => ['category-item' => 'category']
-        ]);
         
         Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 

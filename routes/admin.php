@@ -17,17 +17,17 @@ Route::name('admin.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        Route::resource('category', 'CategoryController');
-
+        
         /** POLYMORPH */
-
+        
         Route::resource('fax', 'FaxController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
-        Route::resource('document', 'VersionController');
+        Route::resource('category', 'CategoryController');
+        Route::resource('document', 'DocumentController');
         Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */
@@ -40,6 +40,7 @@ Route::name('admin.')->group(function () {
         Route::resource('aircraft', 'AircraftController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('customer', 'CustomerController');
+        Route::resource('supplier', 'SupplierController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -64,6 +65,7 @@ Route::name('admin.')->group(function () {
         /** TRANSACTION */
 
         Route::resource('taskcard', 'TaskCardController');
+        Route::resource('quotation', 'QuotationController');
 
     });
 

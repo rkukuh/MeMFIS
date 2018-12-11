@@ -1,22 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Customer;
 
-use App\Models\Currency;
+use App\Models\Customer;
+use App\Models\Document;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CurrencyDatatables extends Controller
+class DocumentDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Customer $customer)
     {
-        $data = $alldata = json_decode(Currency::all());
+        $documents= Document::with('type')->where('documentable_id',$customer->id)->get();
+
+        $data = $alldata = json_decode($documents);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

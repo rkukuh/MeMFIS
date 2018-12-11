@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\Currency;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
+use App\Models\GeneralLicense;
 use App\Http\Controllers\Controller;
 
-class CurrencyDatatables extends Controller
+class GeneralLicenseDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class CurrencyDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(Currency::all());
+        $data = $alldata = json_decode(GeneralLicense::all());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
