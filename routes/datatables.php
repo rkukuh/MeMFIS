@@ -23,6 +23,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/language','LanguageDatatables@index')->name('language.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
+        Route::get('/general-license','GeneralLicenseDatatables@index')->name('general-license.index');
 
         /** TRANSACTION */
 

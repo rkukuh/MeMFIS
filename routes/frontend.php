@@ -107,8 +107,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        Route::get('/get-general-licenses', 'GeneralLicenseController@getGeneralLicenses')->name('get-general-licenses');
-
         Route::resource('storages', 'StorageController');
         Route::get('/get-storages','StorageController@getStorages')->name('get-storages');
 
