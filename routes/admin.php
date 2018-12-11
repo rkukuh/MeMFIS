@@ -40,6 +40,7 @@ Route::name('admin.')->group(function () {
         Route::resource('aircraft', 'AircraftController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('customer', 'CustomerController');
+        Route::resource('supplier', 'SupplierController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');

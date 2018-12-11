@@ -41,6 +41,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('storages', 'StorageController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('customer', 'CustomerController');
+        Route::resource('supplier', 'SupplierController');
         Route::resource('language', 'LanguageController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
@@ -108,7 +109,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        Route::resource('supplier', 'SupplierController');
         Route::get('/get-suppliers','SupplierController@getSuppliers')->name('get-suppliers');
 
         Route::resource('taskcard', 'TaskCardController');
