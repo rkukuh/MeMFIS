@@ -115,13 +115,11 @@ Route::name('frontend.')->group(function () {
 
         });
         
-        Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
-
+        Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/qualification', 'frontend.personal-information.qualifications.index')->name('qualification');
         Route::view('/personal-dashboard', 'frontend.personal-information.dashboard.index')->name('personal-dashboard');
-        Route::view('/emergency-contacts', 'frontend.personal-information.emergency-contacts.index')->name('emergency-contacts');
-        Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
         Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
+        Route::view('/emergency-contacts', 'frontend.personal-information.emergency-contacts.index')->name('emergency-contacts');
 
         Route::view('/project', 'frontend/project/index')->name('project.index');
         Route::view('/project/hm', 'frontend.project.hm.index')->name('project-hm.index');

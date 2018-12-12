@@ -42,7 +42,11 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                /** Master Data */
                 Route::get('/','ItemDatatables@index')->name('all');
+                Route::get('/categories','CategoryItemDatatables@index')->name('categories.index');
+
+                /** Transaction */
                 Route::get('/{item}/units','ItemUnitDatatables@index')->name('units.index');
                 Route::get('/{item}/storages','ItemStorageDatatables@index')->name('storages.index');
 
