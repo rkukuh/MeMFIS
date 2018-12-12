@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class WorkPackage extends Model
+class WorkPackage extends MemfisModel
 {
-    //
+    protected $table = 'workpackages';
 }

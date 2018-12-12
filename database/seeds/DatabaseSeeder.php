@@ -75,5 +75,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TaskCardsTableSeeder::class);
         $this->call(QuotationsTableSeeder::class);
+        $this->call(WorkPackagesTableSeeder::class);
     }
 }

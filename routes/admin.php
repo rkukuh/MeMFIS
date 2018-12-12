@@ -66,6 +66,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
+        Route::resource('workpackage', 'WorkPackageController');
 
     });
 

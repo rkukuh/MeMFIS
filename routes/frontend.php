@@ -71,6 +71,7 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
+        Route::resource('workpackage', 'WorkPackageController');
 
         /** ITEM */
 
@@ -113,9 +114,6 @@ Route::name('frontend.')->group(function () {
             });
 
         });
-
-        Route::resource('workpackage', 'WorkPackageController');
-        Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
         
         Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
 
