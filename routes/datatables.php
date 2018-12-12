@@ -75,13 +75,16 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                /** Master Data */
                 Route::get('/','CustomerDatatables@index')->name('all');
-                Route::get('/{customer}/fax','FaxDatatables@index')->name('fax.index');
-                Route::get('/{customer}/email','EmailDatatables@index')->name('email.index');
-                Route::get('/{customer}/phone','PhoneDatatables@index')->name('phone.index');
-                Route::get('/{customer}/website','WebsiteDatatables@index')->name('website.index');
-                Route::get('/{customer}/address','AddressDatatables@index')->name('address.index');
-                Route::get('/{customer}/document','DocumentDatatables@index')->name('document.index');
+
+                /** Polymorph */
+                Route::get('/{customer}/faxes','CustomerFaxDatatables@index')->name('fax.index');
+                Route::get('/{customer}/emails','CustomerEmailDatatables@index')->name('email.index');
+                Route::get('/{customer}/phones','CustomerPhoneDatatables@index')->name('phone.index');
+                Route::get('/{customer}/websites','CustomerWebsiteDatatables@index')->name('website.index');
+                Route::get('/{customer}/addresses','CustomerAddressDatatables@index')->name('address.index');
+                Route::get('/{customer}/documents','CustomerDocumentDatatables@index')->name('document.index');
 
             });
 

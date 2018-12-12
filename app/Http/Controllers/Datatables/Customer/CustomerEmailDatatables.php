@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Datatables\Customer;
 
+use App\Models\Email;
 use App\Models\Customer;
-use App\Models\Document;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DocumentDatatables extends Controller
+class CustomerEmailDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class DocumentDatatables extends Controller
      */
     public function index(Customer $customer)
     {
-        $documents= Document::with('type')->where('documentable_id',$customer->id)->get();
+        $emails = Email::with('type')->where('emailable_id', $customer->id)->get();
 
-        $data = $alldata = json_decode($documents);
+        $data = $alldata = json_decode($emails);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
