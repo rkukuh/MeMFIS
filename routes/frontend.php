@@ -69,6 +69,7 @@ Route::name('frontend.')->group(function () {
 
         /** TRANSACTION */
 
+        Route::resource('project', 'ProjectController');
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('workpackage', 'WorkPackageController');
@@ -114,12 +115,6 @@ Route::name('frontend.')->group(function () {
             });
 
         });
-
-        Route::view('/project', 'frontend/project/index')->name('project.index');
-        Route::view('/project/hm', 'frontend.project.hm.index')->name('project-hm.index');
-        Route::view('/project/hm/create', 'frontend.project.hm.create')->name('project-hm.create');
-        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('project-workshop.index');
-        Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('project-workshop.create');
 
     });
 

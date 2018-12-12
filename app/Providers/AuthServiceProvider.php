@@ -34,6 +34,8 @@ use App\Models\Version;
 use App\Policies\VersionPolicy;
 use App\Models\Website;
 use App\Policies\WebsitePolicy;
+use App\Models\Project;
+use App\Policies\ProjectPolicy;
 use App\Models\Category;
 use App\Policies\CategoryPolicy;
 use App\Models\Currency;
@@ -102,6 +104,7 @@ class AuthServiceProvider extends ServiceProvider
         Journal::class => JournalPolicy::class,
         Version::class => VersionPolicy::class,
         Website::class => WebsitePolicy::class,
+        Project::class => ProjectPolicy::class,
         Category::class => CategoryPolicy::class,
         Currency::class => CurrencyPolicy::class,
         Aircraft::class => AircraftPolicy::class,
