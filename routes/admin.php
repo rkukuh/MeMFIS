@@ -36,11 +36,11 @@ Route::name('admin.')->group(function () {
         Route::resource('school', 'SchoolController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        Route::resource('language', 'LanguageController');
         Route::resource('aircraft', 'AircraftController');
-        Route::resource('employee', 'EmployeeController');
+        Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
         Route::resource('supplier', 'SupplierController');
+        Route::resource('employee', 'EmployeeController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');

@@ -12,20 +12,30 @@ Route::name('datatables.')->group(function () {
 
         /** INITIAL DATA */
 
+        Route::get('/unit','UnitDatatables@index')->name('unit.index');
         Route::get('/journal','JournalDatatables@index')->name('journal.index');
 
         /** MASTER */
 
-        Route::get('/unit','UnitDatatables@index')->name('unit.index');
-        Route::get('/bank','BankDatatables@index')->name('bank.index');
         Route::get('/storage','StorageDatatables@index')->name('storage.index');
         Route::get('/aircraft','AircraftDatatables@index')->name('aircraft.index');
-        Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/language','LanguageDatatables@index')->name('language.index');
         Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
+        
+        /** POLYMORPH */
+
+        // ...
+
+        /** LICENSE */
+        
         Route::get('/general-license','GeneralLicenseDatatables@index')->name('general-license.index');
+
+        /** FINANCE */
+        
+        Route::get('/bank','BankDatatables@index')->name('bank.index');
+        Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
 
         /** TRANSACTION */
 
