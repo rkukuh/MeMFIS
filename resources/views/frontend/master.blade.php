@@ -34,8 +34,6 @@
             <i class="la la-arrow-up"></i>
         </div>
 
-        @include('frontend.include._nav-sticky')
-
         <script src="{{ asset('assets/metronic/vendors/base/vendors.bundle.js') }}"></script>
         <script src="{{ asset('assets/metronic/demo/default/base/scripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/metronic/vendors/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
