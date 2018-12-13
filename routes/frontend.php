@@ -39,6 +39,7 @@ Route::name('frontend.')->group(function () {
 
         /** MASTER */
 
+        Route::resource('user', 'UserController');
         Route::resource('school', 'SchoolController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
