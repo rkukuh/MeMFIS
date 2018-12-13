@@ -80,7 +80,7 @@
                 <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Employees
+                        Employee
                     </span>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
@@ -94,26 +94,6 @@
                                 </i>
                                 <span class="m-menu__link-text">
                                     Employees
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.employee.history.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Employee History
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.employee.travel-request.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Travel Requests
                                 </span>
                             </a>
                         </li>
