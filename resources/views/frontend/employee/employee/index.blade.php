@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Employee
+                    Personnel
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.employee.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Employee
+                                Personnel
                             </span>
                         </a>
                     </li>
@@ -38,7 +38,7 @@
                         <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
                             <li class="nav-item m-tabs__item">
                                 <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">
-                                    <i class="la la-cog"></i> Employees
+                                    <i class="la la-cog"></i> Personnels
                                 </a>
                             </li>
                             <li class="nav-item m-tabs__item">
@@ -77,8 +77,8 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_9">Emergency Contacts</a>
                                         <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_10">Documents</a>
-                                        <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_11">Tamporarily Deactivated Employees</a>
-                                        <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_12">Terminated Employee Data</a>
+                                        <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_11">Tamporarily Deactivated Personnels</a>
+                                        <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_12">Terminated Personnel Data</a>
                                 </div>
                             </li>
                         </ul>
