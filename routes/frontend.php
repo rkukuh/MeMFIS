@@ -135,8 +135,11 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/addresses','EmployeeAddressesController');
                     Route::resource('/{employee}/documents','EmployeeDocumentsController');
 
+                    /** Certifications and Licenses */
+                    Route::resource('/{employee}/otr', 'EmployeeOTRController');
+                    Route::resource('/{employee}/amel', 'EmployeeAMELController');
+
                     /** Transaction */
-                    Route::resource('amel', 'EmployeeAMELController');
                     Route::resource('history', 'EmployeeHistoryController');
                     Route::resource('document', 'EmployeeDocumentController');
                     Route::resource('education', 'EmployeeEducationController');
