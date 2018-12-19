@@ -13,7 +13,7 @@ class CustomerAddressesDatatables extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Models\Customer  $customers
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function index(Customer $customer)

@@ -18,7 +18,7 @@ class CustomerFaxesDatatables extends Controller
      */
     public function index(Customer $customer)
     {
-        $faxes= Fax::with('type')->where('faxable_id',$customer->id)->get();
+        $faxes= Fax::with('type')->where('faxable_id', $customer->id)->get();
 
         $data = $alldata = json_decode($faxes);
 
