@@ -104,7 +104,13 @@ Route::name('frontend.')->group(function () {
             Route::name('customer.')->group(function () {
                 Route::prefix('customer')->group(function () {
 
-                    //
+                /** Polymorph */
+                Route::resource('/{customer}/faxes','CustomerFaxesController');
+                Route::resource('/{customer}/emails','CustomerEmailsController');
+                Route::resource('/{customer}/phones','CustomerPhonesController');
+                Route::resource('/{customer}/websites','CustomerWebsitesController');
+                Route::resource('/{customer}/addresses','CustomerAddressesController');
+                Route::resource('/{customer}/documents','CustomerDocumentsController');
 
                 });
             });
