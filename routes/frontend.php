@@ -20,9 +20,9 @@ Route::name('frontend.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        
+
         /** POLYMORPH */
-        
+
         Route::resource('fax', 'FaxController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
@@ -89,6 +89,22 @@ Route::name('frontend.')->group(function () {
                     Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
                     Route::put('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
                     Route::delete('/{item}/{storage}/storage', 'ItemStorageController@destroy')->name('storage.destroy');
+
+                });
+            });
+
+        });
+
+        /** CUSTOMER  */
+
+        Route::namespace('Customer')->group(function () {
+
+            Route::resource('customer', 'CustomerController');
+
+            Route::name('customer.')->group(function () {
+                Route::prefix('customer')->group(function () {
+
+                    //
 
                 });
             });
