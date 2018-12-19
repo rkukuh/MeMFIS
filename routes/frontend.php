@@ -128,6 +128,15 @@ Route::name('frontend.')->group(function () {
             Route::name('employee.')->group(function () {
                 Route::prefix('employee')->group(function () {
 
+                    /** Polymorph */
+                    Route::resource('/{employee}/faxes','EmployeeFaxesController');
+                    Route::resource('/{employee}/emails','EmployeeEmailsController');
+                    Route::resource('/{employee}/phones','EmployeePhonesController');
+                    Route::resource('/{employee}/websites','EmployeeWebsitesController');
+                    Route::resource('/{employee}/addresses','EmployeeAddressesController');
+                    Route::resource('/{employee}/documents','EmployeeDocumentsController');
+
+                    /** Transaction */
                     Route::resource('amel', 'EmployeeAMELController');
                     Route::resource('history', 'EmployeeHistoryController');
                     Route::resource('document', 'EmployeeDocumentController');
