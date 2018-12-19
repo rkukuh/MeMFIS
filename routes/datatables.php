@@ -101,14 +101,24 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                /** Master Data */
                 Route::get('/','EmployeeDatatables@index')->name('all');
-                Route::get('/{employee}/histories','EmployeeHistoryDatatables@index')->name('histories.index');
-                Route::get('/{employee}/documents','EmployeeDocumentDatatables@index')->name('documents.index');
-                Route::get('/{employee}/travel-requests','EmployeeTravelRequestDatatables@index')->name('travel-requests.index');
 
-                // License
+                /** Polymorph */
+                Route::get('/{customer}/faxes','EmployeeFaxesDatatables@index')->name('faxes.index');
+                Route::get('/{customer}/emails','EmployeeEmailsDatatables@index')->name('emails.index');
+                Route::get('/{customer}/phones','EmployeePhonesDatatables@index')->name('phones.index');
+                Route::get('/{customer}/websites','EmployeeWebsitesDatatables@index')->name('websites.index');
+                Route::get('/{customer}/addresses','EmployeeAddressesDatatables@index')->name('addresses.index');
+                Route::get('/{customer}/documents','EmployeeDocumentsDatatables@index')->name('documents.index');
 
-                Route::get('/{employee}/amels','EmployeeAMELDatatables@index')->name('amels.index');
+                /** Certifications and Licenses */
+                Route::get('/{employee}/otr','EmployeeOTRDatatables@index')->name('otr.index');
+                Route::get('/{employee}/amel','EmployeeAMELDatatables@index')->name('amel.index');
+
+                /** Transaction */
+                Route::get('/{employee}/histories','EmployeeHistoriesDatatables@index')->name('histories.index');
+                Route::get('/{employee}/travel-requests','EmployeeTravelRequestsDatatables@index')->name('travel-requests.index');
 
             });
 

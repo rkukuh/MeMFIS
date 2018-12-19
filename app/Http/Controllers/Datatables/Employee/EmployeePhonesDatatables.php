@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Datatables\Employee;
 
+use App\Models\Phone;
 use App\Models\Employee;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmployeeTravelRequestDatatables extends Controller
+class EmployeePhonesDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +18,9 @@ class EmployeeTravelRequestDatatables extends Controller
      */
     public function index(Employee $employee)
     {
-        $data = $alldata = json_decode($employee);
+        $phones= Phone::with('type')->where('phoneable_id', $employee->id)->get();
+
+        $data = $alldata = json_decode($phones);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
