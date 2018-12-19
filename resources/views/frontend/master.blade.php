@@ -28,13 +28,9 @@
             @include('frontend.include._footer')
         </div>
 
-        @include('frontend.include._control-sidebar')
-
         <div id="m_scroll_top" class="m-scroll-top">
             <i class="la la-arrow-up"></i>
         </div>
-
-        @include('frontend.include._nav-sticky')
 
         <script src="{{ asset('assets/metronic/vendors/base/vendors.bundle.js') }}"></script>
         <script src="{{ asset('assets/metronic/demo/default/base/scripts.bundle.js') }}"></script>

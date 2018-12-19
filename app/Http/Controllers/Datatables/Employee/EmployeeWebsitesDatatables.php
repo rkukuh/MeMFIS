@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\Customer;
+namespace App\Http\Controllers\Datatables\Employee;
 
-use App\Models\Email;
-use App\Models\Customer;
+use App\Models\Website;
+use App\Models\Employee;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerEmailDatatables extends Controller
+class EmployeeWebsitesDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function index(Customer $customer)
+    public function index(Employee $employee)
     {
-        $emails = Email::with('type')->where('emailable_id', $customer->id)->get();
+        $website= Website::with('type')->where('websiteable_id', $employee->id)->get();
 
-        $data = $alldata = json_decode($emails);
+        $data = $alldata = json_decode($website);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

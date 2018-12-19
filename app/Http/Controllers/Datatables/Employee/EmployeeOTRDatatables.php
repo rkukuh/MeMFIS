@@ -1,26 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\Customer;
+namespace App\Http\Controllers\Datatables\Employee;
 
-use App\Models\Website;
-use App\Models\Customer;
+use App\Models\Employee;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerWebsiteDatatables extends Controller
+class EmployeeOTRDatatables extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show data from model for DataTable.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function index(Customer $customer)
+    public function index(Employee $employee)
     {
-        $website= Website::with('type')->where('websiteable_id', $customer->id)->get();
-
-        $data = $alldata = json_decode($website);
+        $data = $alldata = json_decode($employee);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

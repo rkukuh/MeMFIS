@@ -23,17 +23,17 @@ Route::name('datatables.')->group(function () {
         Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
-        
+
         /** POLYMORPH */
 
         // ...
 
         /** LICENSE */
-        
+
         Route::get('/general-license','GeneralLicenseDatatables@index')->name('general-license.index');
 
         /** FINANCE */
-        
+
         Route::get('/bank','BankDatatables@index')->name('bank.index');
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
 
@@ -79,12 +79,12 @@ Route::name('datatables.')->group(function () {
                 Route::get('/','CustomerDatatables@index')->name('all');
 
                 /** Polymorph */
-                Route::get('/{customer}/faxes','CustomerFaxDatatables@index')->name('fax.index');
-                Route::get('/{customer}/emails','CustomerEmailDatatables@index')->name('email.index');
-                Route::get('/{customer}/phones','CustomerPhoneDatatables@index')->name('phone.index');
-                Route::get('/{customer}/websites','CustomerWebsiteDatatables@index')->name('website.index');
-                Route::get('/{customer}/addresses','CustomerAddressDatatables@index')->name('address.index');
-                Route::get('/{customer}/documents','CustomerDocumentDatatables@index')->name('document.index');
+                Route::get('/{customer}/faxes','CustomerFaxesDatatables@index')->name('faxes.index');
+                Route::get('/{customer}/emails','CustomerEmailsDatatables@index')->name('emails.index');
+                Route::get('/{customer}/phones','CustomerPhonesDatatables@index')->name('phones.index');
+                Route::get('/{customer}/websites','CustomerWebsitesDatatables@index')->name('websites.index');
+                Route::get('/{customer}/addresses','CustomerAddressesDatatables@index')->name('addresses.index');
+                Route::get('/{customer}/documents','CustomerDocumentsDatatables@index')->name('documents.index');
 
             });
 
@@ -101,14 +101,24 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                /** Master Data */
                 Route::get('/','EmployeeDatatables@index')->name('all');
-                Route::get('/{employee}/histories','EmployeeHistoryDatatables@index')->name('histories.index');
-                Route::get('/{employee}/documents','EmployeeDocumentDatatables@index')->name('documents.index');
-                Route::get('/{employee}/travel-requests','EmployeeTravelRequestDatatables@index')->name('travel-requests.index');
 
-                // License
+                /** Polymorph */
+                Route::get('/{customer}/faxes','EmployeeFaxesDatatables@index')->name('faxes.index');
+                Route::get('/{customer}/emails','EmployeeEmailsDatatables@index')->name('emails.index');
+                Route::get('/{customer}/phones','EmployeePhonesDatatables@index')->name('phones.index');
+                Route::get('/{customer}/websites','EmployeeWebsitesDatatables@index')->name('websites.index');
+                Route::get('/{customer}/addresses','EmployeeAddressesDatatables@index')->name('addresses.index');
+                Route::get('/{customer}/documents','EmployeeDocumentsDatatables@index')->name('documents.index');
 
-                Route::get('/{employee}/amels','EmployeeAMELDatatables@index')->name('amels.index');
+                /** Certifications and Licenses */
+                Route::get('/{employee}/otr','EmployeeOTRDatatables@index')->name('otr.index');
+                Route::get('/{employee}/amel','EmployeeAMELDatatables@index')->name('amel.index');
+
+                /** Transaction */
+                Route::get('/{employee}/histories','EmployeeHistoriesDatatables@index')->name('histories.index');
+                Route::get('/{employee}/travel-requests','EmployeeTravelRequestsDatatables@index')->name('travel-requests.index');
 
             });
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Customer;
 
 use App\Models\Type;
 use App\Models\Email;

@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\Employee;
+namespace App\Http\Controllers\Datatables\Customer;
 
-use App\Models\Employee;
+use App\Models\Fax;
+use App\Models\Customer;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmployeeHistoryDatatables extends Controller
+class CustomerFaxesDatatables extends Controller
 {
     /**
-     * Show data from model for DataTable.
+     * Display a listing of the resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function index(Employee $employee)
+    public function index(Customer $customer)
     {
-        $data = $alldata = json_decode($employee->histories);
+        $faxes= Fax::with('type')->where('faxable_id', $customer->id)->get();
+
+        $data = $alldata = json_decode($faxes);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Datatables\Customer;
 
-use App\Models\Fax;
+use App\Models\Website;
 use App\Models\Customer;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerFaxDatatables extends Controller
+class CustomerWebsitesDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class CustomerFaxDatatables extends Controller
      */
     public function index(Customer $customer)
     {
-        $faxes= Fax::with('type')->where('faxable_id',$customer->id)->get();
+        $website= Website::with('type')->where('websiteable_id', $customer->id)->get();
 
-        $data = $alldata = json_decode($faxes);
+        $data = $alldata = json_decode($website);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

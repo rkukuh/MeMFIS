@@ -7,7 +7,7 @@ use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmployeeDocumentDatatables extends Controller
+class EmployeeHistoriesDatatables extends Controller
 {
     /**
      * Show data from model for DataTable.
@@ -17,7 +17,7 @@ class EmployeeDocumentDatatables extends Controller
      */
     public function index(Employee $employee)
     {
-        $data = $alldata = json_decode($employee->documents);
+        $data = $alldata = json_decode($employee->histories);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

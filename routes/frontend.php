@@ -20,9 +20,9 @@ Route::name('frontend.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        
+
         /** POLYMORPH */
-        
+
         Route::resource('fax', 'FaxController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
@@ -39,12 +39,12 @@ Route::name('frontend.')->group(function () {
 
         /** MASTER */
 
+        Route::resource('user', 'UserController');
         Route::resource('school', 'SchoolController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('language', 'LanguageController');
-        Route::resource('customer', 'CustomerController');
         Route::resource('supplier', 'SupplierController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
@@ -82,12 +82,36 @@ Route::name('frontend.')->group(function () {
             Route::name('item.')->group(function () {
                 Route::prefix('item')->group(function () {
 
+                    /** Transaction: Unit */
                     Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
                     Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
 
+                    /** Transaction: Storage */
                     Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
                     Route::put('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
                     Route::delete('/{item}/{storage}/storage', 'ItemStorageController@destroy')->name('storage.destroy');
+
+                });
+            });
+
+        });
+
+        /** CUSTOMER  */
+
+        Route::namespace('Customer')->group(function () {
+
+            Route::resource('customer', 'CustomerController');
+
+            Route::name('customer.')->group(function () {
+                Route::prefix('customer')->group(function () {
+
+                    /** Polymorph */
+                    Route::resource('/{customer}/faxes','CustomerFaxesController');
+                    Route::resource('/{customer}/emails','CustomerEmailsController');
+                    Route::resource('/{customer}/phones','CustomerPhonesController');
+                    Route::resource('/{customer}/websites','CustomerWebsitesController');
+                    Route::resource('/{customer}/addresses','CustomerAddressesController');
+                    Route::resource('/{customer}/documents','CustomerDocumentsController');
 
                 });
             });
@@ -103,12 +127,23 @@ Route::name('frontend.')->group(function () {
             Route::name('employee.')->group(function () {
                 Route::prefix('employee')->group(function () {
 
-                    Route::resource('amel', 'EmployeeAMELController');
-                    Route::resource('history', 'EmployeeHistoryController');
-                    Route::resource('document', 'EmployeeDocumentController');
-                    Route::resource('education', 'EmployeeEducationController');
-                    Route::resource('travel-request', 'EmployeeTravelRequestController');
-                    Route::resource('general-license', 'EmployeeGeneralLicenseController');
+                    /** Polymorph */
+                    Route::resource('/{employee}/faxes','EmployeeFaxesController');
+                    Route::resource('/{employee}/emails','EmployeeEmailsController');
+                    Route::resource('/{employee}/phones','EmployeePhonesController');
+                    Route::resource('/{employee}/websites','EmployeeWebsitesController');
+                    Route::resource('/{employee}/addresses','EmployeeAddressesController');
+                    Route::resource('/{employee}/documents','EmployeeDocumentsController');
+
+                    /** Certifications and Licenses */
+                    Route::resource('/{employee}/otr', 'EmployeeOTRController');
+                    Route::resource('/{employee}/amel', 'EmployeeAMELController');
+
+                    /** Transaction */
+                    Route::resource('/{employee}/history', 'EmployeeHistoryController');
+                    Route::resource('/{employee}/education', 'EmployeeEducationController');
+                    Route::resource('/{employee}/travel-request', 'EmployeeTravelRequestController');
+                    Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
 
                 });
             });

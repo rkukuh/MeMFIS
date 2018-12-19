@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Datatables\Customer;
 
-use App\Models\Phone;
+use App\Models\Address;
 use App\Models\Customer;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerPhoneDatatables extends Controller
+class CustomerAddressesDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class CustomerPhoneDatatables extends Controller
      */
     public function index(Customer $customer)
     {
-        $phones= Phone::with('type')->where('phoneable_id', $customer->id)->get();
+        $addresses= Address::with('type')->where('addressable_id', $customer->id)->get();
 
-        $data = $alldata = json_decode($phones);
+        $data = $alldata = json_decode($addresses);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

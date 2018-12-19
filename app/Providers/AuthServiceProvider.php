@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Fax;
 use App\Policies\FaxPolicy;
+use App\Models\User;
+use App\Policies\UserPolicy;
 use App\Models\Bank;
 use App\Policies\BankPolicy;
 use App\Models\Type;
@@ -89,6 +91,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Fax::class => FaxPolicy::class,
+        User::class => UserPolicy::class,
         Bank::class => BankPolicy::class,
         Type::class => TypePolicy::class,
         Unit::class => UnitPolicy::class,
