@@ -83,9 +83,11 @@ Route::name('frontend.')->group(function () {
             Route::name('item.')->group(function () {
                 Route::prefix('item')->group(function () {
 
+                    /** Transaction: Unit */
                     Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
                     Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
 
+                    /** Transaction: Storage */
                     Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
                     Route::put('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
                     Route::delete('/{item}/{storage}/storage', 'ItemStorageController@destroy')->name('storage.destroy');
@@ -104,13 +106,13 @@ Route::name('frontend.')->group(function () {
             Route::name('customer.')->group(function () {
                 Route::prefix('customer')->group(function () {
 
-                /** Polymorph */
-                Route::resource('/{customer}/faxes','CustomerFaxesController');
-                Route::resource('/{customer}/emails','CustomerEmailsController');
-                Route::resource('/{customer}/phones','CustomerPhonesController');
-                Route::resource('/{customer}/websites','CustomerWebsitesController');
-                Route::resource('/{customer}/addresses','CustomerAddressesController');
-                Route::resource('/{customer}/documents','CustomerDocumentsController');
+                    /** Polymorph */
+                    Route::resource('/{customer}/faxes','CustomerFaxesController');
+                    Route::resource('/{customer}/emails','CustomerEmailsController');
+                    Route::resource('/{customer}/phones','CustomerPhonesController');
+                    Route::resource('/{customer}/websites','CustomerWebsitesController');
+                    Route::resource('/{customer}/addresses','CustomerAddressesController');
+                    Route::resource('/{customer}/documents','CustomerDocumentsController');
 
                 });
             });
