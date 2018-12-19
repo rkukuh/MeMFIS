@@ -18,7 +18,8 @@ class CreateTaskcardsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->string('title');
-            $table->unsignedInteger('type_id'); // NOTE: "Task" section on document
+            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('task_type_id');
             $table->unsignedInteger('work_area');
             $table->string('zone')->nullable();
             $table->string('access')->nullable();
