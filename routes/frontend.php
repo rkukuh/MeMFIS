@@ -140,11 +140,11 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/amel', 'EmployeeAMELController');
 
                     /** Transaction */
-                    Route::resource('history', 'EmployeeHistoryController');
-                    Route::resource('document', 'EmployeeDocumentController');
-                    Route::resource('education', 'EmployeeEducationController');
-                    Route::resource('travel-request', 'EmployeeTravelRequestController');
-                    Route::resource('general-license', 'EmployeeGeneralLicenseController');
+                    Route::resource('/{employee}/history', 'EmployeeHistoryController');
+                    Route::resource('/{employee}/document', 'EmployeeDocumentController');
+                    Route::resource('/{employee}/education', 'EmployeeEducationController');
+                    Route::resource('/{employee}/travel-request', 'EmployeeTravelRequestController');
+                    Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
 
                 });
             });
