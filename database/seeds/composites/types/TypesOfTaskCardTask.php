@@ -3,7 +3,7 @@
 use App\Models\Type;
 use Illuminate\Database\Seeder;
 
-class TypesOfTaskCard extends Seeder
+class TypesOfTaskCardTask extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,55 +15,55 @@ class TypesOfTaskCard extends Seeder
         Type::create([
             'code' => 'inspection',
             'name' => 'Inspection',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
 
         Type::create([
             'code' => 'check',
             'name' => 'Check',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
 
         Type::create([
             'code' => 'visual-check',
             'name' => 'Visual Check',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
 
         Type::create([
             'code' => 'service',
             'name' => 'Service',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
 
         Type::create([
             'code' => 'repair',
             'name' => 'Repair',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
 
         Type::create([
             'code' => 'lubrication',
             'name' => 'Lubrication',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
 
         Type::create([
             'code' => 'replacement',
             'name' => 'Replacement',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
 
         Type::create([
             'code' => 'overhaul',
             'name' => 'Overhaul',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
 
         Type::create([
             'code' => 'restore',
             'name' => 'Restore',
-            'of'  => 'taskcard',
+            'of'  => 'taskcard-task',
         ]);
     }
 }
