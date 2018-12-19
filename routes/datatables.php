@@ -23,17 +23,17 @@ Route::name('datatables.')->group(function () {
         Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
-        
+
         /** POLYMORPH */
 
         // ...
 
         /** LICENSE */
-        
+
         Route::get('/general-license','GeneralLicenseDatatables@index')->name('general-license.index');
 
         /** FINANCE */
-        
+
         Route::get('/bank','BankDatatables@index')->name('bank.index');
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
 
@@ -79,12 +79,12 @@ Route::name('datatables.')->group(function () {
                 Route::get('/','CustomerDatatables@index')->name('all');
 
                 /** Polymorph */
-                Route::get('/{customer}/faxes','CustomerFaxDatatables@index')->name('fax.index');
-                Route::get('/{customer}/emails','CustomerEmailDatatables@index')->name('email.index');
-                Route::get('/{customer}/phones','CustomerPhoneDatatables@index')->name('phone.index');
-                Route::get('/{customer}/websites','CustomerWebsiteDatatables@index')->name('website.index');
-                Route::get('/{customer}/addresses','CustomerAddressDatatables@index')->name('address.index');
-                Route::get('/{customer}/documents','CustomerDocumentDatatables@index')->name('document.index');
+                Route::get('/{customer}/faxes','CustomerFaxesDatatables@index')->name('faxes.index');
+                Route::get('/{customer}/emails','CustomerEmailsDatatables@index')->name('emails.index');
+                Route::get('/{customer}/phones','CustomerPhonesDatatables@index')->name('phones.index');
+                Route::get('/{customer}/websites','CustomerWebsitesDatatables@index')->name('websites.index');
+                Route::get('/{customer}/addresses','CustomerAddressesDatatables@index')->name('addresses.index');
+                Route::get('/{customer}/documents','CustomerDocumentsDatatables@index')->name('documents.index');
 
             });
 

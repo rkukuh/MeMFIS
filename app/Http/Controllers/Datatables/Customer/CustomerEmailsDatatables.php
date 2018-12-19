@@ -8,7 +8,7 @@ use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerEmailDatatables extends Controller
+class CustomerEmailsDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
