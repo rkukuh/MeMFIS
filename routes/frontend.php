@@ -141,7 +141,6 @@ Route::name('frontend.')->group(function () {
 
                     /** Transaction */
                     Route::resource('/{employee}/history', 'EmployeeHistoryController');
-                    Route::resource('/{employee}/document', 'EmployeeDocumentController');
                     Route::resource('/{employee}/education', 'EmployeeEducationController');
                     Route::resource('/{employee}/travel-request', 'EmployeeTravelRequestController');
                     Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
