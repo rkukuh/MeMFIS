@@ -212,9 +212,8 @@
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
 
-                                            {{-- @include('frontend.common.account-code.index') --}}
-                                            <div style="background-color:beige;padding: '15px 10px 5px 15px';">
-                                
+                                            <div style="background-color:beige;padding:15px 10px 5px 15px;">
+
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-8 col-md-8 col-lg-8">
                                                         @if (isset($item->journal))
@@ -229,7 +228,7 @@
                                                             </div>
                                                         @endif
                                                     </div>
-                                            
+
                                                     <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
                                                         @component('frontend.common.account-code.button-create')
                                                             @slot('text', '')
@@ -240,14 +239,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                
+
                                 @include('frontend.common.account-code.modal')
-                                
+
                                 {{-- @push('footer-scripts')
                                     <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
                                     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
                                 @endpush --}}
-                                
+
 
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'account_code')
