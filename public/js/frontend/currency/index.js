@@ -48,26 +48,21 @@ let Currency = {
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'name',
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 250
                 },
                 {
                     field: 'symbol',
                     title: 'Symbol',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 250
                 },
                 {
                     field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
@@ -183,7 +178,7 @@ let Currency = {
             let code = $('input[name=code]').val();
             let symbol = $('input[name=symbol]').val();
             let triggerid = $('input[name=uuid]').val();
-            
+
 
             $.ajax({
                 headers: {

@@ -79,7 +79,6 @@ let Quotation = {
                 {
                     field: 'Actions',
                     width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {

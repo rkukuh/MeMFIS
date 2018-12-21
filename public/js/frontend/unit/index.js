@@ -47,26 +47,21 @@ let Unit = {
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 60
                 },
                 {
                     field: 'symbol',
                     title: 'Symbol',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'type.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
@@ -90,7 +85,7 @@ let Unit = {
 
             $('#symbol-error').html('');
             $('#name-error').html('');
-            $('#type-error').html('');        
+            $('#type-error').html('');
         }
 
         $(document).ready(function () {
@@ -166,7 +161,7 @@ let Unit = {
                         dataType: 'json',
                         success: function (unit) {
                             $('select[name="type_id"]').empty();
-            
+
                             $.each(unit, function (key, value) {
                                 if(key == data.type_id){
                                     $('select[name="type_id"]').append(

@@ -48,40 +48,33 @@ let TaskCard = {
                     title: 'Tittle',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'type_id',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'work_area',
                     title: 'Area',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'zone',
                     title: 'Zone',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'rii',
                     title: 'Rii',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {

@@ -46,7 +46,6 @@ let Customer = {
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 160,
                     template: function (t) {
                         return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
                     }
@@ -62,13 +61,10 @@ let Customer = {
                     title: 'Term of Payment',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    
+
                 },
                 {
                     field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
@@ -127,7 +123,7 @@ let Customer = {
                         }
                     });
 
-                } 
+                }
             });
         });
 

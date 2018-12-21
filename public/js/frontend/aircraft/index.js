@@ -46,26 +46,21 @@ let Aircraft = {
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 60
                 },
                 {
                     field: 'name',
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'manufacturer.name',
                     title: 'Manufacturer',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
@@ -166,7 +161,7 @@ let Aircraft = {
                         dataType: 'json',
                         success: function (manufacturer) {
                             $('select[name="manufacturer_id"]').empty();
-            
+
                             $.each(manufacturer, function (key, value) {
                                 if(key == data.manufacturer_id){
                                     $('select[name="manufacturer_id"]').append(
