@@ -101,7 +101,7 @@
                                                             Phone @include('frontend.common.label.required')
                                                         </label>
                                                     </div>
-                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
                                                         <label class="form-control-label">
                                                             Ext. @include('frontend.common.label.optional')
                                                         </label>
@@ -125,7 +125,7 @@
                                                                     @slot('text', 'Phone')
                                                                 @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-2 col-md-2 col-lg-2">
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('name', 'ext')
                                                                                 @slot('text', 'Ext')
