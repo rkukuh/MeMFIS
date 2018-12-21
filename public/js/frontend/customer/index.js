@@ -102,13 +102,11 @@ let Customer = {
                         type: 'DELETE',
                         url: '/customer/' + triggerid + '',
                         success: function (data) {
-                            toastr.success(
-                                'Data berhasil dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
-                            );
-                            let table = $('.customer_datatable').mDatatable();
+                            toastr.success('Material has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                            }
+                        );
+                        let table = $('.customer_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
