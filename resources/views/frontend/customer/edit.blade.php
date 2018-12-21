@@ -59,13 +59,13 @@
                                                     @slot('name', 'customer_uuid')
                                                     @slot('value', $customer->uuid)
                                                 @endcomponent
-    
+
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
                                                             Customer Code @include('frontend.common.label.required')
                                                         </label>
-                                                
+
                                                         @component('frontend.common.input.text')
                                                             @slot('text', 'Code')
                                                             @slot('name', 'code')
@@ -78,20 +78,20 @@
                                                             <label class="form-control-label">
                                                                 Name  @include('frontend.common.label.required')
                                                             </label>
-                                                    
+
                                                             @component('frontend.common.input.text')
                                                                 @slot('text', 'Name')
                                                                 @slot('name', 'name')
                                                                 @slot('value', $customer->name)
                                                             @endcomponent
-                                                        </div>   
+                                                        </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
                                                             Term of Payment @include('frontend.common.label.required')
                                                         </label>
-                                                
+
                                                         {{-- @component('frontend.common.input.select2')
                                                             @slot('text', 'Term of Payment')
                                                             @slot('id', 'payment_term')
@@ -102,7 +102,7 @@
                                                             <option value="">
                                                                 &mdash; Select a Term of Payment &mdash;
                                                             </option>
-            
+
                                                             @foreach ($payment_terms as $payment_term)
                                                                 <option value="{{ $payment_term->id }}"
                                                                     @if ($payment_term->id == $customer->payment_term) selected @endif>
@@ -111,13 +111,13 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </fieldset>
                                         <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group m-form__group row">
-                                                            <div class="col-sm-4 col-md-4 col-lg-4">    
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 <label class="form-control-label">
                                                                     Phone @include('frontend.common.label.required')
                                                                 </label>
@@ -130,17 +130,17 @@
                                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                                                 <label class="form-control-label">
                                                                     Type.
-                                                                </label>        
+                                                                </label>
                                                             </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
                                                             </div>
-                
-                                                        </div>        
+
+                                                        </div>
                                                         <div class='repeater'>
                                                             <div data-repeater-list="group-phone">
                                                                 <div data-repeater-item>
                                                                     <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4">    
+                                                                        <div class="col-sm-4 col-md-4 col-lg-4">
                                                                         @component('frontend.common.input.text')
                                                                             @slot('name', 'phone')
                                                                             @slot('text', 'Phone')
@@ -150,7 +150,7 @@
                                                                                     @component('frontend.common.input.text')
                                                                                         @slot('name', 'ext')
                                                                                         @slot('text', 'Ext')
-                                                                                    @endcomponent    
+                                                                                    @endcomponent
                                                                         </div>
                                                                         <div class="col-sm-2 col-md-2 col-lg-2">
                                                                                 @component('frontend.common.input.radio')
@@ -166,7 +166,7 @@
                                                                                     @slot('value', 'personal')
                                                                                 @endcomponent
                                                                         </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
                                                                             @include('frontend.common.buttons.delete_repeater')
                                                                         </div>
                                                                     </div>
@@ -179,7 +179,7 @@
                                             <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group m-form__group row">
-                                                            <div class="col-sm-4 col-md-4 col-lg-4">    
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 <label class="form-control-label">
                                                                     Fax @include('frontend.common.label.required')
                                                                 </label>
@@ -192,17 +192,17 @@
                                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                                                 <label class="form-control-label">
                                                                     Type.
-                                                                </label>        
+                                                                </label>
                                                             </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
                                                             </div>
-                
-                                                        </div>        
+
+                                                        </div>
                                                         <div class='repeater'>
                                                             <div data-repeater-list="group-fax">
                                                                 <div data-repeater-customer>
                                                                     <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4">    
+                                                                        <div class="col-sm-4 col-md-4 col-lg-4">
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('text', 'fax')
                                                                                 @slot('name', 'name')
@@ -229,7 +229,7 @@
                                                                                     @slot('value', 'personal')
                                                                                 @endcomponent
                                                                         </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
                                                                             @include('frontend.common.buttons.delete_repeater')
                                                                         </div>
                                                                     </div>
@@ -242,7 +242,7 @@
                                             <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group m-form__group row">
-                                                            <div class="col-sm-6 col-md-6 col-lg-6">    
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <label class="form-control-label">
                                                                     Website @include('frontend.common.label.required')
                                                                 </label>
@@ -250,37 +250,36 @@
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 <label class="form-control-label">
                                                                     Type.
-                                                                </label>        
+                                                                </label>
                                                             </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
                                                             </div>
-                
-                                                        </div>        
+
+                                                        </div>
                                                         <div class='repeater'>
                                                             <div data-repeater-list="group-website">
                                                                 <div data-repeater-customer>
                                                                     <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-6 col-md-6 col-lg-6">    
+                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('text', 'website')
                                                                                 @slot('name', 'name')
                                                                             @endcomponent
                                                                         </div>
                                                                         <div class="col-sm-4 col-md-4 col-lg-4">
-                                                                                @component('frontend.common.input.radio')
-                                                                                    @slot('text', 'Company Profile')
-                                                                                    @slot('name', 'type_website')
-                                                                                    @slot('id', 'type_website')
-                                                                                    @slot('value', 'company_profile')
-                                                                                @endcomponent
-                                                                                @component('frontend.common.input.radio')
-                                                                                    @slot('name', 'type_website')
-                                                                                    @slot('id', 'type_website')
-                                                                                    @slot('text', 'Personal')
-                                                                                    @slot('value', 'personal')
-                                                                                @endcomponent
+                                                                            <select id="type_website" name="type_website" class="form-control">
+                                                                                <option value="">
+                                                                                    Select a Website Type
+                                                                                </option>
+
+                                                                                @foreach ($websites as $website)
+                                                                                    <option value="{{ $website->id }}">
+                                                                                        {{ $website->name }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
                                                                         </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
                                                                             @include('frontend.common.buttons.delete_repeater')
                                                                         </div>
                                                                     </div>
@@ -293,7 +292,7 @@
                                             <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group m-form__group row">
-                                                            <div class="col-sm-4 col-md-4 col-lg-4">    
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 <label class="form-control-label">
                                                                     Email @include('frontend.common.label.required')
                                                                 </label>
@@ -303,15 +302,15 @@
                                                                     Primary @include('frontend.common.label.optional')
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
                                                             </div>
-                
-                                                        </div>        
+
+                                                        </div>
                                                         <div class='repeater'>
                                                             <div data-repeater-list="group-email">
                                                                 <div data-repeater-customer>
                                                                     <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4">    
+                                                                        <div class="col-sm-4 col-md-4 col-lg-4">
                                                                             @component('frontend.common.input.email')
                                                                                 @slot('name', 'name')
                                                                                 @slot('placeholder', 'Email')
@@ -324,7 +323,7 @@
                                                                                 @slot('id', 'is_primary_email')
                                                                             @endcomponent
                                                                         </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">    
+                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
                                                                             @include('frontend.common.buttons.delete_repeater')
                                                                         </div>
                                                                     </div>
@@ -339,13 +338,13 @@
                                                             <label class="form-control-label">
                                                                 Active * @include('frontend.common.label.optional')
                                                             </label>
-                                                    
+
                                                             @component('frontend.common.input.switch')
                                                                 @slot('text', 'Active')
                                                                 @slot('name', 'active')
                                                                 @slot('id', 'active')
                                                             @endcomponent
-                                                        </div>   
+                                                        </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Account Code @include('frontend.common.label.optional')
@@ -353,7 +352,7 @@
 
                                                     {{-- @include('frontend.common.account-code.index') --}}
                                                     <div style="background-color:beige;padding: '15px 10px 5px 15px';">
-                                
+
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-8 col-md-8 col-lg-8">
                                                                 @if (isset($customer->journal))
@@ -368,7 +367,7 @@
                                                                     </div>
                                                                 @endif
                                                             </div>
-                                                    
+
                                                             <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
                                                                 @component('frontend.common.account-code.button-create')
                                                                     @slot('text', '')
@@ -379,7 +378,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                        
+
                                                     @include('frontend.common.account-code.modal')
 
                                                     @component('frontend.common.input.hidden')
@@ -447,13 +446,13 @@
                                                                                     @slot('id', 'customer-address')
                                                                                     @slot('data_target', '#modal_address')
                                                                                 @endcomponent
-                                        
+
                                                                                 <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     @include('frontend.customer.address.modal')
-                                        
+
                                                             <div class="customer_address_datatable" id="customer_address_datatable"></div>
                                                         </div>
                                                     </div>
@@ -464,7 +463,7 @@
                                                     </div>
                                                     <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
                                                         <div class="m-portlet__head-tools" style="margin-top:-30px;margin-left:15px">
-            
+
                                                             <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
                                                                 <li class="nav-item m-tabs__item">
                                                                     <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_4" role="tab">
@@ -510,11 +509,11 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-            
+
                                                     </div>
                                                 </div>
                                             </div>
-                                    
+
                                 </div>
                             </div>
                         </div>

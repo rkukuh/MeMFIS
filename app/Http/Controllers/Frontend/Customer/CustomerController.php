@@ -75,11 +75,13 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+        $websites = Type::ofWebsite()->get();
         $payment_terms = Type::ofPaymentTerm()->get();
 
         return view('frontend.customer.edit', [
             'customer' => $customer,
             'payment_terms' => $payment_terms,
+            'websites' => $websites
         ]);
     }
 
