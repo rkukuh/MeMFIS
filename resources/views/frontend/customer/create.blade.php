@@ -182,7 +182,7 @@
                                                                         @slot('name', 'fax')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-2 col-md-2 col-lg-2">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('text', 'Work')
                                                                             @slot('name', 'type_fax')
@@ -282,6 +282,9 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        Type.
+                                                    </div>
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
                                                     </div>
 
                                                 </div>
@@ -295,7 +298,7 @@
                                                                         @slot('placeholder', 'Email')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-2 col-md-2 col-lg-2">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('text', 'Work')
                                                                         @slot('name', 'type_email')
