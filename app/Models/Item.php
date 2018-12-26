@@ -65,6 +65,16 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many: A manufacturer can create zero or many items.
+     *
+     * This function will get a manufacturer of an item.
+     */
+    public function manufacturer()
+    {
+        return $this->belongsTo(Manufacturer::class);
+    }
+
+    /**
      * Many-to-Many: An item may have zero or many unit.
      *
      * This function will retrieve the units of an item.

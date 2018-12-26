@@ -40,4 +40,14 @@ class Manufacturer extends MemfisModel
     {
         return $this->hasMany(Aircraft::class);
     }
+
+    /**
+     * One-to-Many: A manufacturer can create zero or many items.
+     *
+     * This function will get a manufacturer of an item.
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }
