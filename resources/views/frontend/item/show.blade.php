@@ -173,7 +173,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="form-group m-form__group row">
+                                    <div class="form-group m-form__group row" style="display: none">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Tag
