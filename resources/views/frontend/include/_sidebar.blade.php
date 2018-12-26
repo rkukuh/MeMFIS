@@ -12,7 +12,7 @@
                 </h4>
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
                 <a href="{{ route('frontend.dashboard') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-line-graph"></i>
                     <span class="m-menu__link-text">Dashboard</span>
