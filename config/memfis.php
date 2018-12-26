@@ -8,7 +8,6 @@ return [
      *
      */
     'dummies' => [
-        'banks' => 50,
         'categories' => 10,
         'currencies' => 10,
         'customers' => 20,

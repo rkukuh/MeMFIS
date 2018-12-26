@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusesTableSeeder::class);
         $this->call(JournalsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
 
         /** POLYMORPH */
 
@@ -64,12 +65,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CertificationEmployeeTableSeeder::class);
         $this->call(OTRCertificationsTableSeeder::class);
-
-        /** FINANCE */
-
-        $this->call(CurrenciesTableSeeder::class);
-        $this->call(BanksTableSeeder::class);
-        $this->call(BankAccountsTableSeeder::class);
 
         /** TRANSACTION (M-M) */
 

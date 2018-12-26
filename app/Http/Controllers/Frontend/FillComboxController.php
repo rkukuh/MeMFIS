@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Bank;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Unit;
@@ -338,7 +337,7 @@ class FillComboxController extends Controller
 
         return json_encode($units);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -363,20 +362,6 @@ class FillComboxController extends Controller
 
         return json_encode($manufacturer);
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function bank()
-    {
-        $banks = Bank::selectRaw('id, CONCAT(code, " - ", name) as full_name')
-                     ->pluck('full_name', 'id');
-
-        return json_encode($banks);
-    }
-
 
     public function test()
     {

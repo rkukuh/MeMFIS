@@ -6,8 +6,6 @@ use App\Models\Fax;
 use App\Policies\FaxPolicy;
 use App\Models\User;
 use App\Policies\UserPolicy;
-use App\Models\Bank;
-use App\Policies\BankPolicy;
 use App\Models\Type;
 use App\Policies\TypePolicy;
 use App\Models\Unit;
@@ -60,8 +58,6 @@ use App\Models\Quotation;
 use App\Policies\QuotationPolicy;
 use App\Models\Department;
 use App\Policies\DepartmentPolicy;
-use App\Models\BankAccount;
-use App\Policies\BankAccountPolicy;
 use App\Models\WorkPackage;
 use App\Policies\WorkPackagePolicy;
 use App\Models\Manufacturer;
@@ -92,7 +88,6 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Fax::class => FaxPolicy::class,
         User::class => UserPolicy::class,
-        Bank::class => BankPolicy::class,
         Type::class => TypePolicy::class,
         Unit::class => UnitPolicy::class,
         Item::class => ItemPolicy::class,
@@ -119,7 +114,6 @@ class AuthServiceProvider extends ServiceProvider
         Supplier::class => SupplierPolicy::class,
         Quotation::class => QuotationPolicy::class,
         Department::class => DepartmentPolicy::class,
-        BankAccount::class => BankAccountPolicy::class,
         WorkPackage::class => WorkPackagePolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
         Certification::class => CertificationPolicy::class,
