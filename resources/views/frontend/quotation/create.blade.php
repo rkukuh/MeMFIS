@@ -281,12 +281,12 @@
                                                     Term of Payment @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Term of Payment')
-                                                    @slot('id', 'payment_term')
-                                                    @slot('name', 'payment_term')
-                                                    @slot('id_error', 'payment_term')
+                                                @component('frontend.common.input.typeahead')
+                                                    @slot('id', 'term_of_payment')
+                                                    @slot('name', 'term_of_payment')
+                                                    @slot('id_error', 'term_of_payment')
                                                 @endcomponent
+
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -320,8 +320,8 @@
                                                     <div class="action-buttons">
                                                         @component('frontend.common.buttons.submit')
                                                             @slot('type','button')
-                                                            @slot('id', 'add-taskcard')
-                                                            @slot('class', 'add-taskcard')
+                                                            @slot('id', 'add-quotation')
+                                                            @slot('class', 'add-quotation')
                                                         @endcomponent
 
                                                         @include('frontend.common.buttons.reset')
@@ -381,6 +381,7 @@
     </script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
@@ -393,13 +394,11 @@
     <script src="{{ asset('js/frontend/functions/select2/fax.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
-
 
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/typeahead/payment_term.js')}}"></script>
 
 @endpush
