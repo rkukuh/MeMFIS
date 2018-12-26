@@ -77,197 +77,189 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        From 
+                                                        From
                                                     </label>
-    
+
                                                     @component('frontend.common.label.data-info')
                                                         @slot('text', 'Marketing')
                                                     @endcomponent
                                             </div>
                                         </div>
-                                            <fieldset class="border p-2">
-                                                <legend class="w-auto">Identifier</legend>
-                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <div class="m-portlet__head">
-                                                        <div class="m-portlet__head-tools">
-                                                            <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
-                                                                <li class="nav-item m-tabs__item">
-                                                                    <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">
-                                                                                        <i class="la la-bell-o"></i> General
-                                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-item m-tabs__item">
-                                                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_2" role="tab">
-                                                                                        <i class="la la-bell-o"></i> Contact
-                                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-item m-tabs__item">
-                                                                    <a class="nav-link m-tabs__link " data-toggle="tab" href="#m_tabs_6_3" role="tab">
-                                                                                        <i class="la la-cog"></i> Address
-                                                                                    </a>
-                                                                </li>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <fieldset class="border p-2">
+                                                    <legend class="w-auto">Identifier</legend>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="m-portlet__head">
+                                                            <div class="m-portlet__head-tools">
+                                                                <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
+                                                                    <li class="nav-item m-tabs__item">
+                                                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">
+                                                                                            <i class="la la-bell-o"></i> General
+                                                                                        </a>
+                                                                    </li>
+                                                                    <li class="nav-item m-tabs__item">
+                                                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_2" role="tab">
+                                                                                            <i class="la la-bell-o"></i> Contact
+                                                                                        </a>
+                                                                    </li>
+                                                                    <li class="nav-item m-tabs__item">
+                                                                        <a class="nav-link m-tabs__link " data-toggle="tab" href="#m_tabs_6_3" role="tab">
+                                                                                            <i class="la la-cog"></i> Address
+                                                                                        </a>
+                                                                    </li>
 
-                                                            </ul>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="m-portlet__body">
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <div class="form-group m-form__group row">        
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            Name
-                                                                        </label>
+                                                    <div class="m-portlet__body">
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="form-group m-form__group row">
+                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                            <label class="form-control-label">
+                                                                                Name
+                                                                            </label>
 
-                                                                        @component('frontend.common.label.data-info')
-                                                                            @slot('text', 'XXX')
-                                                                            @slot('id', 'name')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            Attn
-                                                                        </label>
+                                                                            @component('frontend.common.label.data-info')
+                                                                                @slot('text', 'XXX')
+                                                                                @slot('id', 'name')
+                                                                            @endcomponent
+                                                                        </div>
+                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                            <label class="form-control-label">
+                                                                                Attention
+                                                                            </label>
 
-                                                                        @component('frontend.common.input.select2')
-                                                                            @slot('text', 'Bp. Romdani')
-                                                                            @slot('id', 'attn')
-                                                                        @endcomponent
+                                                                            @component('frontend.common.input.select2')
+                                                                                @slot('text', 'Bp. Romdani')
+                                                                                @slot('id', 'attention')
+                                                                            @endcomponent
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <div class="form-group m-form__group row">        
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            Phone
-                                                                        </label>
-            
-                                                                        @component('frontend.common.input.select2')
-                                                                            @slot('text', '+62xxxxxxx / 07777777')
-                                                                            @slot('id', 'phone')
-                                                                            @slot('style', 'width: 100%')
-                                                                        @endcomponent
-            
-                                                                    </div>
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="form-group m-form__group row">
+                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                                                             <label class="form-control-label">
-                                                                                Fax
+                                                                                Phone
                                                                             </label>
-                
+
                                                                             @component('frontend.common.input.select2')
                                                                                 @slot('text', '+62xxxxxxx / 07777777')
-                                                                                @slot('id', 'fax')
+                                                                                @slot('id', 'phone')
+                                                                                @slot('style', 'width: 100%')
+                                                                            @endcomponent
+
+                                                                        </div>
+                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                                <label class="form-control-label">
+                                                                                    Fax
+                                                                                </label>
+
+                                                                                @component('frontend.common.input.select2')
+                                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                                    @slot('id', 'fax')
+                                                                                    @slot('style', 'width: 100%')
+                                                                                @endcomponent
+                                                                            </div>
+                                                                    </div>
+                                                                    <div class="form-group m-form__group row">
+                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                            <label class="form-control-label">
+                                                                                Email
+                                                                            </label>
+
+                                                                            @component('frontend.common.input.select2')
+                                                                                @slot('text', '+62xxxxxxx / 07777777')
+                                                                                @slot('id', 'email')
+                                                                                @slot('style', 'width: 100%')
+                                                                            @endcomponent
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="form-group m-form__group row">
+                                                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                            <label class="form-control-label">
+                                                                                Address
+                                                                            </label>
+
+                                                                            @component('frontend.common.input.select2')
+                                                                                @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
+                                                                                @slot('id', 'address')
                                                                                 @slot('style', 'width: 100%')
                                                                             @endcomponent
                                                                         </div>
-                                                                </div>
-                                                                <div class="form-group m-form__group row">        
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            Email
-                                                                        </label>
-            
-                                                                        @component('frontend.common.input.select2')
-                                                                            @slot('text', '+62xxxxxxx / 07777777')
-                                                                            @slot('id', 'email')
-                                                                            @slot('style', 'width: 100%')
-                                                                        @endcomponent
-            
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <div class="form-group m-form__group row">        
-                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                        <label class="form-control-label">
-                                                                            Address
-                                                                        </label>
-            
-                                                                        @component('frontend.common.input.select2')
-                                                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
-                                                                            @slot('id', 'address')
-                                                                            @slot('style', 'width: 100%')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
-                                                                <div id="map"></div>
+                                                                    <div id="map"></div>
 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Date @include('frontend.common.label.required')
+                                                        </label>
+
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', date("d-m-Y"))
+                                                        @endcomponent
+                                                    </div>
                                                 </div>
-                                            </fieldset>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Currency @include('frontend.common.label.required')
+                                                        </label>
 
-                                        <div class="form-group m-form__group row">
-                                            
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Quotation No. @include('frontend.common.label.required')
-                                                </label>
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('id', 'currency')
+                                                            @slot('text', 'Currency')
+                                                            @slot('name', 'currency')
+                                                            @slot('id_error', 'currency')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Profit Center
+                                                        </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('text', 'Wuotation No')
-                                                    @slot('id', 'quotation_no')
-                                                    @slot('name', 'quotation_no')
-                                                    @slot('id_error', 'quotation_no')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Quotation Ref
-                                                    </label>
-
-                                                    @component('frontend.common.input.select')
-                                                        @slot('id', 'ref')
-                                                        @slot('text', 'Ref')
-                                                        @slot('name', 'ref')
-                                                        @slot('style', 'width:100%')
-                                                        @slot('id_error', 'ref')
-                                                    @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Date @include('frontend.common.label.required')
-                                                </label>
-    
-                                                @component('frontend.common.input.datepicker')
-                                                    @slot('id', 'date')
-                                                    @slot('text', 'Date')
-                                                    @slot('name', 'date')
-                                                    @slot('id_error', 'date')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Currency @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'currency')
-                                                    @slot('text', 'Currency')
-                                                    @slot('name', 'currency')
-                                                    @slot('id_error', 'currency')
-                                                @endcomponent
+                                                        @component('frontend.common.input.text')
+                                                            @slot('text', 'Profit_Center')
+                                                            @slot('name', 'profit_center')
+                                                            @slot('id', 'profit_center')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    P. Center
+                                                    Quotation Ref
                                                 </label>
-    
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'MMF01')
+
+                                                @component('frontend.common.input.select')
+                                                    @slot('id', 'ref')
+                                                    @slot('text', 'Ref')
+                                                    @slot('name', 'ref')
+                                                    @slot('style', 'width:100%')
+                                                    @slot('id_error', 'ref')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -280,6 +272,31 @@
                                                     @slot('text', 'Valid Until')
                                                     @slot('name', 'valid_until')
                                                     @slot('id_error', 'valid_until')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Term of Payment @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Term of Payment')
+                                                    @slot('id', 'payment_term')
+                                                    @slot('name', 'payment_term')
+                                                    @slot('id_error', 'payment_term')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Term of Payment Description
+                                                </label>
+
+                                                @component('frontend.common.input.text')
+                                                    @slot('text', 'Top_Description')
+                                                    @slot('name', 'top_description')
+                                                    @slot('id', 'top_description')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -377,6 +394,7 @@
     <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
