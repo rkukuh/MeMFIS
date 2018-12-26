@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Item;
 
+use App\Models\Manufacturer;
 use App\Models\Item;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
@@ -79,15 +80,12 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        $tags = array();
-        foreach($item->tags as $i => $item_tag){
-            $tags[$i] =  $item_tag->name;
-        }
-
+        $manufacturers = Manufacturer::all();
         return view('frontend.item.edit', [
             'item' => $item,
             'units' => $this->units,
             'categories' => $this->categories,
+            'manufacturers' => $manufacturers,
         ]);
     }
 

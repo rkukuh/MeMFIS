@@ -166,6 +166,35 @@
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Manufacturer @include('frontend.common.label.required')
+                                                </label>
+
+                                                <select id="category" name="category" class="form-control m-select2">
+                                                    <option value="">
+                                                        &mdash; Select a Manufacturer &mdash;
+                                                    </option>
+
+                                                    @foreach ($manufacturers as $manufacturer)
+                                                        <option value="{{ $manufacturer->id }}"
+                                                            @if ($manufacturer->id == $item->manufacturer_id) selected @endif>
+                                                            {{ $manufacturer->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                <div class="form-control-feedback text-danger" id="category-error"></div>
+
+                                                @component('frontend.common.buttons.create-new')
+                                                    @slot('size', 'sm')
+                                                    @slot('text', 'category')
+                                                    @slot('style', 'margin-top: 10px;')
+                                                    @slot('data_target', '#modal_category')
+                                                @endcomponent
+
+                                                @include('frontend.category.modal')
+                                            </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
@@ -207,6 +236,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Account Code @include('frontend.common.label.optional')
@@ -240,13 +271,7 @@
                                                 </div>
                                             </div>
 
-                                @include('frontend.common.account-code.modal')
-
-                                {{-- @push('footer-scripts')
-                                    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
-                                    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-                                @endpush --}}
-
+                                            @include('frontend.common.account-code.modal')
 
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'account_code')
