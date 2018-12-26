@@ -1,27 +1,6 @@
 @extends('frontend.master')
 
 @section('content')
-    <!-- BEGIN: Subheader -->
-    <div class="m-subheader ">
-        <div class="d-flex align-items-center">
-            <div class="mr-auto">
-                <h3 class="m-subheader__title ">Dashboard</h3>
-            </div>
-            <div>
-                <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
-                    <span class="m-subheader__daterange-label">
-                        <span class="m-subheader__daterange-title"></span>
-                        <span class="m-subheader__daterange-date m--font-brand"></span>
-                    </span>
-                    <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                        <i class="la la-angle-down"></i>
-                    </a>
-                </span>
-            </div>
-        </div>
-    </div>
-    <!-- END: Subheader -->
-
     <div class="m-content">
         <!--Begin::Section-->
         <div class="m-portlet">
@@ -33,11 +12,11 @@
                             <div class="m-widget1__item">
                                 <div class="row m-row--no-padding align-items-center">
                                     <div class="col">
-                                        <h3 class="m-widget1__title">Member Profit</h3>
+                                        <h3 class="m-widget1__title">Company Profit</h3>
                                         <span class="m-widget1__desc">Awerage Weekly Profit</span>
                                     </div>
                                     <div class="col m--align-right">
-                                        <span class="m-widget1__number m--font-brand">+$17,800</span>
+                                        <span class="m-widget1__number m--font-brand">+$170,800</span>
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +24,7 @@
                                 <div class="row m-row--no-padding align-items-center">
                                     <div class="col">
                                         <h3 class="m-widget1__title">Orders</h3>
-                                        <span class="m-widget1__desc">Weekly Customer Orders</span>
+                                        <span class="m-widget1__desc">Monthly Customer Orders</span>
                                     </div>
                                     <div class="col m--align-right">
                                         <span class="m-widget1__number m--font-danger">+1,800</span>
