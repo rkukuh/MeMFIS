@@ -19,8 +19,7 @@ class CreateEmailsTable extends Migration
             $table->string('address');
             $table->unsignedInteger('type_id');
             $table->boolean('is_active')->default(true);
-            $table->integer('emailable_id');
-            $table->string('emailable_type');
+            $table->morphs('emailable');
             $table->timestamps();
             $table->softDeletes();
 

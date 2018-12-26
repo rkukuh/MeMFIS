@@ -19,8 +19,7 @@ class CreateVersionsTable extends Migration
             $table->string('number');
             $table->longText('change_log');
             $table->timestamp('versioned_at')->nullable();
-            $table->unsignedInteger('versionable_id');
-            $table->string('versionable_type');
+            $table->morphs('versionable');
             $table->timestamps();
             $table->softDeletes();
         });

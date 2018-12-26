@@ -20,8 +20,8 @@ class CreateMaintenanceCyclesTable extends Migration
             $table->integer('threshold_amount');
             $table->unsignedInteger('repeat_type');
             $table->integer('repeat_amount');
-            $table->unsignedInteger('maintenance_cycleable_id');
             $table->string('maintenance_cycleable_type');
+            $table->unsignedInteger('maintenance_cycleable_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -34,6 +34,11 @@ class CreateMaintenanceCyclesTable extends Migration
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            $table->index([
+                'maintenance_cycleable_type',
+                'maintenance_cycleable_id'
+            ], 'maintenance_cycleables_morphs');
         });
     }
 
