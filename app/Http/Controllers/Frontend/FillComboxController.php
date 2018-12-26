@@ -307,7 +307,7 @@ class FillComboxController extends Controller
     public function paymentTerm()
     {
         $payment_terms = Type::ofPaymentTerm()
-                        ->pluck('name', 'id');
+                        ->pluck('name');
 
         return json_encode($payment_terms);
     }
