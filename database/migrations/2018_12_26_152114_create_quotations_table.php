@@ -15,7 +15,12 @@ class CreateQuotationsTable extends Migration
     {
         Schema::create('quotations', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('no');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->index('no');
         });
     }
 
