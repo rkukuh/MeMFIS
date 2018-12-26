@@ -93,13 +93,6 @@ let Customer = {
                     width: 150,
                 },
                 {
-                    field: 'top',
-                    title: 'ToP',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
                     field: 'Actions',
                     width: 110,
                     title: 'Actions',

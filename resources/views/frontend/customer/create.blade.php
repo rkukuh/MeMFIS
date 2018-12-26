@@ -77,21 +77,6 @@
                                                     @endcomponent
                                                 </div>
                                         </div>
-                                         <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label class="form-control-label">
-                                                    Term of Payment @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Term of Payment')
-                                                    @slot('id', 'payment_term')
-                                                    @slot('name', 'payment_term')
-                                                    @slot('id_error', 'payment_term')
-                                                @endcomponent
-                                            </div>
-
-                                        </div>
                                     </fieldset>
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -145,13 +130,15 @@
                                                                             @slot('value', 'personal')
                                                                         @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @include('frontend.common.buttons.create_repeater')
+                                                                </div>
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
                                                                     @include('frontend.common.buttons.delete_repeater')
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @include('frontend.common.buttons.create_repeater')
                                                 </div>
                                             </div>
                                     </div>
@@ -428,8 +415,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/website.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/customer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>

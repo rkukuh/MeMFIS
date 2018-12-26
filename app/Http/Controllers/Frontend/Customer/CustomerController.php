@@ -80,7 +80,6 @@ class CustomerController extends Controller
 
         return view('frontend.customer.edit', [
             'customer' => $customer,
-            'payment_terms' => $payment_terms,
             'websites' => $websites
         ]);
     }

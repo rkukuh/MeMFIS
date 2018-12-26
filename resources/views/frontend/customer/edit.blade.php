@@ -86,33 +86,6 @@
                                                             @endcomponent
                                                         </div>
                                                 </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <label class="form-control-label">
-                                                            Term of Payment @include('frontend.common.label.required')
-                                                        </label>
-
-                                                        {{-- @component('frontend.common.input.select2')
-                                                            @slot('text', 'Term of Payment')
-                                                            @slot('id', 'payment_term')
-                                                            @slot('name', 'payment_term')
-                                                            @slot('id_error', 'payment_term')
-                                                        @endcomponent --}}
-                                                        <select id="payment_term" name="payment_term" class="form-control m-select2">
-                                                            <option value="">
-                                                                &mdash; Select a Term of Payment &mdash;
-                                                            </option>
-
-                                                            @foreach ($payment_terms as $payment_term)
-                                                                <option value="{{ $payment_term->id }}"
-                                                                    @if ($payment_term->id == $customer->payment_term) selected @endif>
-                                                                    {{ $payment_term->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                </div>
                                             </fieldset>
                                         <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
