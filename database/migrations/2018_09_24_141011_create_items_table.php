@@ -19,6 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->unsignedInteger('unit_id');
+            $table->unsignedInteger('manufacturer_id')->nullable();
             $table->string('barcode')->nullable();
             $table->boolean('is_ppn')->nullable();
             $table->integer('ppn_amount')->nullable();
@@ -30,6 +31,11 @@ class CreateItemsTable extends Migration
 
             $table->foreign('account_code')
                   ->references('id')->on('journals')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+
+            $table->foreign('manufacturer_id')
+                  ->references('id')->on('manufacturers')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
 

@@ -17,9 +17,10 @@ Route::name('admin.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        
+        Route::resource('currency', 'CurrencyController');
+
         /** POLYMORPH */
-        
+
         Route::resource('fax', 'FaxController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
@@ -55,12 +56,6 @@ Route::name('admin.')->group(function () {
 
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
-
-        /** FINANCE */
-
-        Route::resource('bank', 'BankController');
-        Route::resource('currency', 'CurrencyController');
-        Route::resource('bank-account', 'BankAccountController');
 
         /** TRANSACTION */
 

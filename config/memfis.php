@@ -1,14 +1,13 @@
 <?php
 
 return [
-    'version' => '0.5.0',
+    'version' => '0.6.0',
 
     /**
      * Dummy data amount
      *
      */
     'dummies' => [
-        'banks' => 50,
         'categories' => 10,
         'currencies' => 10,
         'customers' => 20,

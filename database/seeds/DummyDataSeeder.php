@@ -21,6 +21,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Statuses::class);
         $this->call(Journals::class);
         $this->call(Categories::class);
+        $this->call(Currencies::class);
 
         /** POLYMORPH */
 
@@ -58,12 +59,6 @@ class DummyDataSeeder extends Seeder
 
         $this->call(CertificationEmployees::class);
         $this->call(OTRCertifications::class);
-
-        /** FINANCE */
-
-        $this->call(Currencies::class);
-        $this->call(Banks::class);
-        $this->call(BankAccounts::class);
 
         /** TRANSACTION (M-M) */
 

@@ -18,6 +18,7 @@ class Item extends MemfisModel implements HasMedia
         'name',
         'description',
         'unit_id',
+        'manufacturer_id',
         'barcode',
         'is_stock',
         'is_ppn',
@@ -61,6 +62,16 @@ class Item extends MemfisModel implements HasMedia
     public function unit()
     {
         return $this->belongsTo(Unit::class);
+    }
+
+    /**
+     * One-to-Many: A manufacturer can create zero or many items.
+     *
+     * This function will get a manufacturer of an item.
+     */
+    public function manufacturer()
+    {
+        return $this->belongsTo(Manufacturer::class);
     }
 
     /**

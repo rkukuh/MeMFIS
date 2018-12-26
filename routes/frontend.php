@@ -46,6 +46,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('aircraft', 'AircraftController');
         Route::resource('language', 'LanguageController');
         Route::resource('supplier', 'SupplierController');
+        Route::resource('currency', 'CurrencyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -59,12 +60,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
-
-        /** FINANCE */
-
-        Route::resource('bank', 'BankController');
-        Route::resource('currency', 'CurrencyController');
-        Route::resource('bank-account', 'BankAccountController');
 
         /** TRANSACTION */
 

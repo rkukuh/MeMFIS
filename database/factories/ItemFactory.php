@@ -5,6 +5,7 @@ use App\Models\Item;
 use Spatie\Tags\Tag;
 use App\Models\Journal;
 use App\Models\Category;
+use App\Models\Manufacturer;
 use Faker\Generator as Faker;
 
 $factory->define(Item::class, function (Faker $faker) {
@@ -16,6 +17,7 @@ $factory->define(Item::class, function (Faker $faker) {
         'code' => 'MT-DUM-' . $sequence,
         'name' => 'Material Dummy #' . $sequence,
         'unit_id' => Unit::ofQuantity()->get()->random()->id,
+        'manufacturer_id' => $faker->randomElement([null, Manufacturer::get()->random()->id]),
         'is_ppn' => $is_ppn,
         'ppn_amount' => function() use ($is_ppn) {
             if ($is_ppn) {
