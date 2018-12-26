@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobTitlesTable extends Migration
+class CreateQuotationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateJobTitlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_titles', function (Blueprint $table) {
+        Schema::create('quotations', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('name');
-            $table->integer('level')->default(0);
+            $table->string('no');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index('name');
+            $table->index('no');
         });
     }
 
@@ -32,6 +31,6 @@ class CreateJobTitlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('positions');
+        Schema::dropIfExists('quotations');
     }
 }

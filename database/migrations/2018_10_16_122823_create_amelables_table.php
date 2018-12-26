@@ -16,8 +16,7 @@ class CreateAmelablesTable extends Migration
         Schema::create('amelables', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('amel_id');
-            $table->unsignedInteger('amelable_id');
-            $table->string('amelable_type');
+            $table->morphs('amelable');
             $table->timestamps();
             $table->softDeletes();
 

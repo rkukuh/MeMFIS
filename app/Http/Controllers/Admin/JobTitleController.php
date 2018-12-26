@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Project;
+use App\Models\JobTitle;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\ProjectStore;
-use App\Http\Requests\Frontend\ProjectUpdate;
+use App\Http\Requests\Admin\JobTitleStore;
+use App\Http\Requests\Admin\JobTitleUpdate;
 
-class ProjectController extends Controller
+class JobTitleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('frontend.project.index');
+        //
     }
 
     /**
@@ -32,10 +32,10 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ProjectStore  $request
+     * @param  \App\Http\Requests\Admin\JobTitleStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectStore $request)
+    public function store(JobTitleStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(JobTitle $jobTitle)
     {
         //
     }
@@ -54,10 +54,10 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(JobTitle $jobTitle)
     {
         //
     }
@@ -65,11 +65,11 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ProjectUpdate  $request
-     * @param  \App\Models\Project  $project
+     * @param  \App\Http\Requests\Admin\JobTitleUpdate  $request
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectUpdate $request, Project $project)
+    public function update(JobTitleUpdate $request, JobTitle $jobTitle)
     {
         //
     }
@@ -77,10 +77,10 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(JobTitle $jobTitle)
     {
         //
     }

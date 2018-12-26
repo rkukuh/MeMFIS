@@ -13,9 +13,9 @@ class CreateDepartmentJobTitleTable extends Migration
      */
     public function up()
     {
-        Schema::create('department_job_title', function (Blueprint $table) {
+        Schema::create('department_jobtitle', function (Blueprint $table) {
             $table->unsignedInteger('department_id');
-            $table->unsignedInteger('job_title_id');
+            $table->unsignedInteger('jobtitle_id');
             $table->timestamps();
 
             $table->foreign('department_id')
@@ -23,8 +23,8 @@ class CreateDepartmentJobTitleTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('job_title_id')
-                    ->references('id')->on('job_titles')
+            $table->foreign('jobtitle_id')
+                    ->references('id')->on('jobtitles')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -37,6 +37,6 @@ class CreateDepartmentJobTitleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('department_job_title');
+        Schema::dropIfExists('department_jobtitle');
     }
 }
