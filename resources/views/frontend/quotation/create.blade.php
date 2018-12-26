@@ -215,7 +215,12 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', date("d-m-Y"))
+                                                            @slot('text', date("F d, Y"))
+                                                        @endcomponent
+                                                        @component('frontend.common.input.hidden')
+                                                            @slot('id', 'date')
+                                                            @slot('name', 'date')
+                                                            @slot('text', date("Y-m-d h:i:s"))
                                                         @endcomponent
                                                     </div>
                                                 </div>
