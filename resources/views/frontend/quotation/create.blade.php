@@ -73,21 +73,25 @@
                                                                                 <i class="la la-plus"></i>
                                                                             </span>
                                                                         </div>
-
-                                                                        {{-- <button type="button" id="addrow">Add</button> --}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-sm-1">
+                                                                        <label class="form-control-label">
+                                                                            Project Number
+                                                                        </label>
+                                                                        @component('frontend.common.label.data-info')
+                                                                            @slot('text', 'P-01/HMxxxxx')
+                                                                        @endcomponent
+                                                                        <label class="form-control-label">
+                                                                            Intruction
+                                                                        </label>
+                                                                        @component('frontend.common.label.data-info')
+                                                                            @slot('text', '..........')
+                                                                        @endcomponent
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                                {{-- <div class="tes">
-                                                                    <button type="button" class="save" id="save">save</button>
-                                                                </div> --}}
-                                                        {{-- @component('frontend.common.input.select2')
-                                                            @slot('id', 'project')
-                                                            @slot('text', 'project')
-                                                            @slot('name', 'project')
-                                                            @slot('style', 'width:100%')
-                                                            @slot('id_error', 'project')
-                                                        @endcomponent --}}
                                                     </div>
                                                 </div>
 
@@ -317,12 +321,22 @@
                 }
                 ;
                 cols += '</select></td>';
-                cols += '<td class="col-sm-1"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel"><span><i class="la la-trash-o"></i></span></div></td>';
+                cols += '<td class="col-sm-1"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel"><span><i class="la la-trash-o"></i></span></div></td></tr>';
+                // cols += '<td class="col-sm-1"><select name="pengeluaran[]" class="select form-control"><option value="false">Tidak</option> <option value="true">Ya</option></select></td>';
+                // cols += '<td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
             //   cols += '<td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
                 newRow.append(cols);
                 $("table.order-list").append(newRow);
                 $('.select').select2();
                 counter++;
+                var newRow2 = $("<tr>");
+                var cols = "";
+                cols += 'sas';
+                cols += '<td class="col-sm-1"><label class="form-control-label">Project Number</label><div style="background-color:beige;padding:15px;">P-01/HMxxxxx</div>';
+                cols += '<label class="form-control-label">Intruction</label><div style="background-color:beige;padding:15px;">..........</div></td>';
+                newRow2.append(cols);
+                $("table.order-list").append(newRow2);
+
             });
             $("table.order-list").on("click", ".ibtnDel", function (event) {
                 if (counter >= 1) {
