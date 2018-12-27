@@ -343,6 +343,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A scheduled payment may have zero or many type.
+     *
+     * This function will retrieve all scheduled payments of a type.
+     * See: Scheduled Payment's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function scheduledpayments()
+    {
+        return $this->hasMany(ScheduledPayment::class);
+    }
+
+    /**
      * One-to-Many: A unit may have zero or many type.
      *
      * This function will retrieve all units of a type.
