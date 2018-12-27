@@ -76,14 +76,20 @@
 
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        From
-                                                    </label>
+                                            <label class="form-control-label">
+                                                    Project Ref
+                                                </label>
 
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Marketing')
-                                                    @endcomponent
+                                                @component('frontend.common.input.select')
+                                                    @slot('id', 'ref')
+                                                    @slot('text', 'Ref')
+                                                    @slot('name', 'ref')
+                                                    @slot('style', 'width:100%')
+                                                    @slot('id_error', 'ref')
+                                                @endcomponent
                                             </div>
+                                            {{-- <div class="col-sm-6 col-md-6 col-lg-6">
+                                            </div> --}}
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -214,13 +220,11 @@
                                                             Date @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', date("F d, Y"))
-                                                        @endcomponent
-                                                        @component('frontend.common.input.hidden')
+                                                        @component('frontend.common.input.datepicker')
                                                             @slot('id', 'date')
+                                                            @slot('text', 'Date')
                                                             @slot('name', 'date')
-                                                            @slot('text', date("Y-m-d h:i:s"))
+                                                            @slot('id_error', 'date')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -241,14 +245,15 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
-                                                            Profit Center
+                                                            Exchange Rate @include('frontend.common.label.required')
                                                         </label>
 
                                                         @component('frontend.common.input.text')
-                                                            @slot('text', 'Profit_Center')
-                                                            @slot('name', 'profit_center')
-                                                            @slot('id', 'profit_center')
+                                                            @slot('text', 'exchange')
+                                                            @slot('name', 'exchange')
+                                                            @slot('id', 'exchange')
                                                         @endcomponent
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,16 +261,16 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Quotation Ref
+                                                    Term of Payment @include('frontend.common.label.required')
                                                 </label>
-
-                                                @component('frontend.common.input.select')
-                                                    @slot('id', 'ref')
-                                                    @slot('text', 'Ref')
-                                                    @slot('name', 'ref')
-                                                    @slot('style', 'width:100%')
-                                                    @slot('id_error', 'ref')
+                                                @component('frontend.common.input.number')
+                                                    @slot('text', 'Term of Payment')
+                                                    @slot('id', 'term_of_payment')
+                                                    @slot('input_append', 'Hari')
+                                                    @slot('name', 'term_of_payment')
+                                                    @slot('id_error', 'term_of_payment')
                                                 @endcomponent
+
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -283,19 +288,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Term of Payment @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.typeahead')
-                                                    @slot('id', 'term_of_payment')
-                                                    @slot('name', 'term_of_payment')
-                                                    @slot('id_error', 'term_of_payment')
-                                                @endcomponent
-
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Term of Payment Description
+                                                    Term and Condition
                                                 </label>
 
                                                 @component('frontend.common.input.text')
@@ -303,20 +296,20 @@
                                                     @slot('name', 'top_description')
                                                     @slot('id', 'top_description')
                                                 @endcomponent
+
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Subject @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
+                                                    @slot('rows', '5')
                                                     @slot('id', 'subject')
                                                     @slot('name', 'subject')
                                                     @slot('text', 'Subject')
                                                 @endcomponent
+
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -393,6 +386,8 @@
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/exchange.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/phone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/email.js') }}"></script>
@@ -404,6 +399,5 @@
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/typeahead/payment_term.js')}}"></script>
 
 @endpush
