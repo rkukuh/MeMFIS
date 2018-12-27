@@ -28,10 +28,12 @@ class CustomerController extends Controller
      */
     public function create()
     {
+        $documents = Type::ofDocument()->get();
         $websites = Type::ofWebsite()->get();
 
         return view('frontend.customer.create', [
-            'websites' => $websites
+            'websites' => $websites,
+            'documents' => $documents
         ]);
     }
 
