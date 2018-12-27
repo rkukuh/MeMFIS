@@ -52,49 +52,25 @@
                                 <div class="m-portlet__body">
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Customer @include('frontend.common.label.required')
-                                                </label>
+                                                <div class="form-group m-form__group row">
 
-                                                @component('frontend.common.input.select')
-                                                    @slot('id', 'customer')
-                                                    @slot('text', 'Customer')
-                                                    @slot('name', 'customer')
-                                                    @slot('style', 'width:100%')
-                                                    @slot('id_error', 'customer')
-                                                @endcomponent
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Project
+                                                        </label>
 
-                                                @component('frontend.common.buttons.create-new')
-                                                    @slot('size', 'sm')
-                                                    @slot('text', 'customer')
-                                                    @slot('style', 'margin-top: 10px;')
-                                                    @slot('data_target', '#modal_customer')
-                                                @endcomponent
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('id', 'project')
+                                                            @slot('text', 'project')
+                                                            @slot('name', 'project')
+                                                            @slot('style', 'width:100%')
+                                                            @slot('id_error', 'project')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
 
-                                                @include('frontend.quotation.modal')
-
-
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                    Project Ref
-                                                </label>
-
-                                                @component('frontend.common.input.select')
-                                                    @slot('id', 'ref')
-                                                    @slot('text', 'Ref')
-                                                    @slot('name', 'ref')
-                                                    @slot('style', 'width:100%')
-                                                    @slot('id_error', 'ref')
-                                                @endcomponent
-                                            </div>
-                                            {{-- <div class="col-sm-6 col-md-6 col-lg-6">
-                                            </div> --}}
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <fieldset class="border p-2">
-                                                    <legend class="w-auto">Identifier</legend>
+                                                {{-- <fieldset class="border p-2">
+                                                    <legend class="w-auto">Identifier Customer</legend>
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <div class="m-portlet__head">
                                                             <div class="m-portlet__head-tools">
@@ -213,7 +189,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </fieldset>
+                                                </fieldset> --}}
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group m-form__group row">
@@ -289,35 +265,81 @@
                                                             @slot('id_error', 'term_of_payment')
                                                         @endcomponent
                                                     </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Scheduled Payment Type @include('frontend.common.label.required')
+                                                        </label>
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('id', 'scheduled_payment_type')
+                                                            @slot('text', 'Scheduled Payment Type')
+                                                            @slot('name', 'scheduled_payment_type')
+                                                            @slot('style', 'width:100%')
+                                                            @slot('id_error', 'scheduled_payment_type')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                                Scheduled Payment @include('frontend.common.label.required')
+                                                        </label>
+                                                        <div class='repeater'>
+                                                            <div data-repeater-list="group-phone">
+                                                                <div data-repeater-item>
+                                                                    <div class="form-group m-form__group row">
+                                                                        <div class="col-sm-8 col-md-8 col-lg-8">
+                                                                        @component('frontend.common.input.text')
+                                                                            @slot('name', 'scheduled_payment')
+                                                                            @slot('id', 'scheduled_payment')
+                                                                            @slot('text', 'Phone')
+                                                                        @endcomponent
+                                                                        </div>
+                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                            @include('frontend.common.buttons.create_repeater')
+                                                                        </div>
+                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                            @include('frontend.common.buttons.delete_repeater')
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Subject @include('frontend.common.label.required')
+                                                        </label>
+
+                                                        @component('frontend.common.input.textarea')
+                                                            @slot('rows', '5')
+                                                            @slot('id', 'subject')
+                                                            @slot('name', 'subject')
+                                                            @slot('text', 'Subject')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Term and Condition @include('frontend.common.label.optional')
+                                                        </label>
+
+                                                        @component('frontend.common.input.textarea')
+                                                            @slot('rows', '5')
+                                                            @slot('id', 'top_description')
+                                                            @slot('name', 'top_description')
+                                                            @slot('text', 'Top Description')
+                                                        @endcomponent
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Term and Condition @include('frontend.common.label.optional')
-                                                </label>
 
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('rows', '5')
-                                                    @slot('id', 'top_description')
-                                                    @slot('name', 'top_description')
-                                                    @slot('text', 'Top Description')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Subject @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('rows', '5')
-                                                    @slot('id', 'subject')
-                                                    @slot('name', 'subject')
-                                                    @slot('text', 'Subject')
-                                                @endcomponent
-                                            </div>
-                                        </div>
 
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
@@ -384,6 +406,7 @@
             });
         }
     </script>
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
 
@@ -392,6 +415,8 @@
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
@@ -400,6 +425,7 @@
     <script src="{{ asset('js/frontend/functions/select2/fax.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
