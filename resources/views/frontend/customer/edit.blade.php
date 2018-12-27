@@ -83,6 +83,7 @@
                                                         @slot('name', 'term_of_payment')
                                                         @slot('id_error', 'term_of_payment')
                                                         @slot('value', $customer->payment_term)
+                                                        @slot('width','50%')
                                                     @endcomponent
                                                 </div>
                                             </div>
