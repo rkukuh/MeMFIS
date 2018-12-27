@@ -50,10 +50,10 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
-                                    <fieldset class="border p-2">
-                                        <legend class="w-auto">Identifier</legend>
+                                    {{-- <fieldset class="border p-2">
+                                        <legend class="w-auto">Identifier</legend> --}}
 
-                                        <div class="form-group m-form__group row">
+                                        {{-- <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
                                                     Customer Code @include('frontend.common.label.required')
@@ -64,7 +64,7 @@
                                                     @slot('name', 'code')
                                                 @endcomponent
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
@@ -77,7 +77,7 @@
                                                     @endcomponent
                                                 </div>
                                         </div>
-                                    </fieldset>
+                                    {{-- </fieldset> --}}
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group m-form__group row">
