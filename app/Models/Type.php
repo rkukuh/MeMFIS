@@ -160,6 +160,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Scheduled Payments.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfScheduledPayments(Builder $query)
+    {
+        return $query->where('of', 'scheduled-payments');
+    }
+
+    /**
      * Scope a query to only include type of School Degree.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
