@@ -3,7 +3,7 @@
 use App\Models\Type;
 use Illuminate\Database\Seeder;
 
-class TypesOfScheduledPayments extends Seeder
+class TypesOfScheduledPayment extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,13 +15,13 @@ class TypesOfScheduledPayments extends Seeder
         Type::create([
             'code' => 'persentage',
             'name' => 'Persentage',
-            'of'   => 'scheduled-payments',
+            'of'   => 'scheduled-payment',
         ]);
 
         Type::create([
             'code' => 'amount',
             'name' => 'Amount',
-            'of'   => 'scheduled-payments',
+            'of'   => 'scheduled-payment',
         ]);
     }
 }
