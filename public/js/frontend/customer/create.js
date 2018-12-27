@@ -86,7 +86,7 @@ let Customer = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/customer/' + data.uuid + '/edit';
+                        window.location.href = '/customer/' + data.uuid + '/edit';
 
                     }
                 }
