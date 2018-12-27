@@ -5,7 +5,7 @@
 .third-effect .mask {
    opacity: 0;
    overflow:visible;
-   border:100px solid rgba(0,0,0,0.7);
+   /* border:100px solid rgba(0,0,0,0.7); */
    -moz-box-sizing:border-box;
    -webkit-box-sizing:border-box;
    box-sizing:border-box;
@@ -27,7 +27,7 @@
 }
 .third-effect:hover .mask {
    opacity: 1;
-   border:350px solid rgba(0,0,0,0.7);
+   border:380px solid rgba(0,0,0,0.7);
 }
 .third-effect:hover a.info {
 	opacity:1;
