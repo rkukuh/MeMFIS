@@ -138,17 +138,6 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of PaymentTerm.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOfPaymentTerm(Builder $query)
-    {
-        return $query->where('of', 'payment-term');
-    }
-
-    /**
      * Scope a query to only include type of Phone.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
