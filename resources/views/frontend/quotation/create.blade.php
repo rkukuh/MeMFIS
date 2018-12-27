@@ -142,6 +142,8 @@
                                                                             @component('frontend.common.input.select2')
                                                                                 @slot('text', 'Bp. Romdani')
                                                                                 @slot('id', 'attention')
+                                                                                @slot('name', 'attention')
+                                                                                @slot('style', 'width:100%')
                                                                             @endcomponent
                                                                         </div>
                                                                     </div>
@@ -216,44 +218,76 @@
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <label class="form-control-label">
-                                                            Date @include('frontend.common.label.required')
-                                                        </label>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <label class="form-control-label">
+                                                                    Date @include('frontend.common.label.required')
+                                                                </label>
 
-                                                        @component('frontend.common.input.datepicker')
-                                                            @slot('id', 'date')
-                                                            @slot('text', 'Date')
-                                                            @slot('name', 'date')
-                                                            @slot('id_error', 'date')
-                                                        @endcomponent
+                                                                @component('frontend.common.input.datepicker')
+                                                                    @slot('id', 'date')
+                                                                    @slot('text', 'Date')
+                                                                    @slot('name', 'date')
+                                                                    @slot('id_error', 'date')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <label class="form-control-label">
+                                                                    Valid Until @include('frontend.common.label.required')
+                                                                </label>
+
+                                                                @component('frontend.common.input.datepicker')
+                                                                    @slot('id', 'valid_until')
+                                                                    @slot('text', 'Valid Until')
+                                                                    @slot('name', 'valid_until')
+                                                                    @slot('id_error', 'valid_until')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <label class="form-control-label">
-                                                            Currency @include('frontend.common.label.required')
-                                                        </label>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <label class="form-control-label">
+                                                                    Currency @include('frontend.common.label.required')
+                                                                </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('id', 'currency')
-                                                            @slot('text', 'Currency')
-                                                            @slot('name', 'currency')
-                                                            @slot('id_error', 'currency')
-                                                        @endcomponent
+                                                                @component('frontend.common.input.select2')
+                                                                    @slot('id', 'currency')
+                                                                    @slot('text', 'Currency')
+                                                                    @slot('name', 'currency')
+                                                                    @slot('id_error', 'currency')
+                                                                    @slot('style', 'width:100%')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <label class="form-control-label">
+                                                                    Exchange Rate @include('frontend.common.label.required')
+                                                                </label>
+
+                                                                @component('frontend.common.input.text')
+                                                                    @slot('text', 'exchange')
+                                                                    @slot('name', 'exchange')
+                                                                    @slot('id', 'exchange')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Exchange Rate @include('frontend.common.label.required')
+                                                            Term of Payment @include('frontend.common.label.required')
                                                         </label>
-
-                                                        @component('frontend.common.input.text')
-                                                            @slot('text', 'exchange')
-                                                            @slot('name', 'exchange')
-                                                            @slot('id', 'exchange')
+                                                        @component('frontend.common.input.number')
+                                                            @slot('text', 'Term of Payment')
+                                                            @slot('id', 'term_of_payment')
+                                                            @slot('input_append', 'Hari')
+                                                            @slot('name', 'term_of_payment')
+                                                            @slot('id_error', 'term_of_payment')
                                                         @endcomponent
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -261,41 +295,15 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Term of Payment @include('frontend.common.label.required')
-                                                </label>
-                                                @component('frontend.common.input.number')
-                                                    @slot('text', 'Term of Payment')
-                                                    @slot('id', 'term_of_payment')
-                                                    @slot('input_append', 'Hari')
-                                                    @slot('name', 'term_of_payment')
-                                                    @slot('id_error', 'term_of_payment')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Valid Until @include('frontend.common.label.required')
+                                                    Term and Condition @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @component('frontend.common.input.datepicker')
-                                                    @slot('id', 'valid_until')
-                                                    @slot('text', 'Valid Until')
-                                                    @slot('name', 'valid_until')
-                                                    @slot('id_error', 'valid_until')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Term and Condition
-                                                </label>
-
-                                                @component('frontend.common.input.text')
-                                                    @slot('text', 'Top_Description')
-                                                    @slot('name', 'top_description')
+                                                @component('frontend.common.input.textarea')
+                                                    @slot('rows', '5')
                                                     @slot('id', 'top_description')
+                                                    @slot('name', 'top_description')
+                                                    @slot('text', 'Top Description')
                                                 @endcomponent
-
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -308,9 +316,9 @@
                                                     @slot('name', 'subject')
                                                     @slot('text', 'Subject')
                                                 @endcomponent
-
                                             </div>
                                         </div>
+
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                 <div class="flex">
@@ -342,7 +350,7 @@
 
 @push('header-scripts')
     <style>
-        #map { height: 500px; }
+        #map { height: 200px; }
     </style>
     <style>
         fieldset {
@@ -385,7 +393,6 @@
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/exchange.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/phone.js') }}"></script>
