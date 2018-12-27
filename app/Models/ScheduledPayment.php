@@ -28,4 +28,17 @@ class ScheduledPayment extends MemfisModel
     {
         return $this->belongsTo(Type::class);
     }
+
+    /**
+     * One-to-Many: A quotation may have one or many scheduled payment.
+     *
+     * This function will retrieve the type of an scheduled payment.
+     * See: Quotation's scheduledpayments() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotation()
+    {
+        return $this->belongsTo(Quotation::class);
+    }
 }
