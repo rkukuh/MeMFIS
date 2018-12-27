@@ -1,5 +1,5 @@
 <div class="input-group">
-    <table style="width:100%;" >
+    <table style="width:{{ $width or '100%' }};" >
         <tr>
             @if (isset($input_prepend))
             <td style="width:5%;">
