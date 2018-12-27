@@ -333,13 +333,13 @@
 
                                             </div>
                                             <div class='repeater'>
-                                                <div data-repeater-list="group-website">
+                                                <div data-repeater-list="group-document">
                                                     <div data-repeater-item>
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('text', 'website')
-                                                                    @slot('name', 'website')
+                                                                @component('frontend.common.input.upload')
+                                                                    @slot('label', 'document')
+                                                                    @slot('name', 'document')
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
