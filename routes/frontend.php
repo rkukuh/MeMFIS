@@ -12,6 +12,10 @@ Route::name('frontend.')->group(function () {
     ], function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
+        Route::view('/project/hm', 'frontend.project.hm.index')->name('hm');
+        Route::view('/project/hm/create', 'frontend.project.hm.create')->name('hm.create');
+        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('workshop');
+        Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('workshop.create');
 
         /** INITIAL DATA */
 
