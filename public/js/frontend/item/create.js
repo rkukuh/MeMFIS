@@ -25,7 +25,7 @@ let Item = {
             $('#category-error').html('');
             $('#ppn_amount-error').html('');
         };
-        
+
         $('.footer').on('click', '.add-item', function () {
             errorMessage();
             let code = $('input[name=code]').val();
@@ -33,6 +33,7 @@ let Item = {
             let description = $('#description').val();
             let unit = $('#unit_id').val();
             let category = $('#category').val();
+            let manufacturer_id = $('#manufacturer_id').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
             let account_code = $('#account_code').val();
 
@@ -62,6 +63,7 @@ let Item = {
                     unit_id: unit,
                     category: category,
                     is_stock: is_stock,
+                    manufacturer_id: manufacturer_id,
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
                     account_code: account_code,
