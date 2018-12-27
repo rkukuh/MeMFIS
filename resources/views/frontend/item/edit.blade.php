@@ -171,7 +171,7 @@
                                                     Manufacturer @include('frontend.common.label.required')
                                                 </label>
 
-                                                <select id="category" name="category" class="form-control m-select2">
+                                                <select id="manufacturer_id" name="manufacturer_id" class="form-control m-select2">
                                                     <option value="">
                                                         &mdash; Select a Manufacturer &mdash;
                                                     </option>
@@ -423,6 +423,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/manufacturer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
