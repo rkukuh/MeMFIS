@@ -270,7 +270,6 @@
                                                     @slot('name', 'term_of_payment')
                                                     @slot('id_error', 'term_of_payment')
                                                 @endcomponent
-
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
