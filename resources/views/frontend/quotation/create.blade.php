@@ -307,7 +307,7 @@
                 var newRow = $("<tr>");
                 var cols = "";
                 x = x+1;
-                cols += '<td class="col-sm-2"><select name="project" class="select form-control ">';
+                cols += '<td class="col-sm-2"><select name="project" class="select form-control project">';
                 cols += '<option >-</option>';
                 for (var i = 0; i < (projects.length - 1); i++) {
                     if(projects[i].id == 1){
