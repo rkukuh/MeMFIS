@@ -73,6 +73,7 @@
                                                 @slot('input_append', 'Hari')
                                                 @slot('name', 'term_of_payment')
                                                 @slot('id_error', 'term_of_payment')
+                                                @slot('width','50%')
                                             @endcomponent
 
                                         </div>
