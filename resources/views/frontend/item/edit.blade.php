@@ -188,12 +188,12 @@
 
                                                 @component('frontend.common.buttons.create-new')
                                                     @slot('size', 'sm')
-                                                    @slot('text', 'category')
+                                                    @slot('text', 'manufacturer')
                                                     @slot('style', 'margin-top: 10px;')
-                                                    @slot('data_target', '#modal_category')
+                                                    @slot('data_target', '#modal_manufacturer')
                                                 @endcomponent
 
-                                                @include('frontend.category.modal')
+                                                @include('frontend.manufacturer.modal')
                                             </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
