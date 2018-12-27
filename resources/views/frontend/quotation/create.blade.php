@@ -58,138 +58,39 @@
                                                         <label class="form-control-label">
                                                             Project
                                                         </label>
+                                                            <table class="order-list" style="margin-left:-13px;margin-right:10px">
+                                                                <tr>
+                                                                    <td class="col-sm-2"><select name="project"  class="select form-control js-example-tags project"><option >-</option>
+                                                                    @foreach ($websites as $website)
+                                                                    <option value="{{$website->id}}">{{$website->name}}</option>
+                                                                    @endforeach
+                                                                    </select></td>
+                                                                    <td class="col-sm-1">
+                                                                        <div data-repeater-create=""
+                                                                            class= "btn btn-brand btn-sm"
+                                                                            id="addrow">
+                                                                            <span>
+                                                                                <i class="la la-plus"></i>
+                                                                            </span>
+                                                                        </div>
 
-                                                        @component('frontend.common.input.select2')
+                                                                        {{-- <button type="button" id="addrow">Add</button> --}}
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                                {{-- <div class="tes">
+                                                                    <button type="button" class="save" id="save">save</button>
+                                                                </div> --}}
+                                                        {{-- @component('frontend.common.input.select2')
                                                             @slot('id', 'project')
                                                             @slot('text', 'project')
                                                             @slot('name', 'project')
                                                             @slot('style', 'width:100%')
                                                             @slot('id_error', 'project')
-                                                        @endcomponent
+                                                        @endcomponent --}}
                                                     </div>
                                                 </div>
 
-                                                {{-- <fieldset class="border p-2">
-                                                    <legend class="w-auto">Identifier Customer</legend>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <div class="m-portlet__head">
-                                                            <div class="m-portlet__head-tools">
-                                                                <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
-                                                                    <li class="nav-item m-tabs__item">
-                                                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">
-                                                                                            <i class="la la-bell-o"></i> General
-                                                                                        </a>
-                                                                    </li>
-                                                                    <li class="nav-item m-tabs__item">
-                                                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_2" role="tab">
-                                                                                            <i class="la la-bell-o"></i> Contact
-                                                                                        </a>
-                                                                    </li>
-                                                                    <li class="nav-item m-tabs__item">
-                                                                        <a class="nav-link m-tabs__link " data-toggle="tab" href="#m_tabs_6_3" role="tab">
-                                                                                            <i class="la la-cog"></i> Address
-                                                                                        </a>
-                                                                    </li>
-
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-portlet__body">
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                    <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                            <label class="form-control-label">
-                                                                                Name
-                                                                            </label>
-
-                                                                            @component('frontend.common.label.data-info')
-                                                                                @slot('text', 'XXX')
-                                                                                @slot('id', 'name')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                            <label class="form-control-label">
-                                                                                Attention
-                                                                            </label>
-
-                                                                            @component('frontend.common.input.select2')
-                                                                                @slot('text', 'Bp. Romdani')
-                                                                                @slot('id', 'attention')
-                                                                                @slot('name', 'attention')
-                                                                                @slot('style', 'width:100%')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                    <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                            <label class="form-control-label">
-                                                                                Phone
-                                                                            </label>
-
-                                                                            @component('frontend.common.input.select2')
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
-                                                                                @slot('id', 'phone')
-                                                                                @slot('style', 'width: 100%')
-                                                                            @endcomponent
-
-                                                                        </div>
-                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                                <label class="form-control-label">
-                                                                                    Fax
-                                                                                </label>
-
-                                                                                @component('frontend.common.input.select2')
-                                                                                    @slot('text', '+62xxxxxxx / 07777777')
-                                                                                    @slot('id', 'fax')
-                                                                                    @slot('style', 'width: 100%')
-                                                                                @endcomponent
-                                                                            </div>
-                                                                    </div>
-                                                                    <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                            <label class="form-control-label">
-                                                                                Email
-                                                                            </label>
-
-                                                                            @component('frontend.common.input.select2')
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
-                                                                                @slot('id', 'email')
-                                                                                @slot('style', 'width: 100%')
-                                                                            @endcomponent
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                    <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                            <label class="form-control-label">
-                                                                                Address
-                                                                            </label>
-
-                                                                            @component('frontend.common.input.select2')
-                                                                                @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
-                                                                                @slot('id', 'address')
-                                                                                @slot('style', 'width: 100%')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                    </div>
-                                                                    <div id="map"></div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </fieldset> --}}
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group m-form__group row">
@@ -389,7 +290,68 @@
     </style>
 @endpush
 @push('footer-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
+    <script>
+        $(document).ready(function () {
+            $(".js-example-tags").select2({
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var counter = 0;
+            var projects = {!! json_encode($websites->toArray()) !!}
+            $("#addrow").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td class="col-sm-2"><select name="project" class="select form-control ">';
+                cols += '<option >-</option>';
+                for (var i = 0; i < (projects.length - 1); i++) {
+                    if(projects[i].id == 1){
+                    }else{
+                    cols += '<option value="' + projects[i].uuid + '" >' + projects[i].name + ' </option>';
+                    }
+                }
+                ;
+                cols += '</select></td>';
+                cols += '<td class="col-sm-1"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel"><span><i class="la la-trash-o"></i></span></div></td>';
+            //   cols += '<td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+                newRow.append(cols);
+                $("table.order-list").append(newRow);
+                $('.select').select2();
+                counter++;
+            });
+            $("table.order-list").on("click", ".ibtnDel", function (event) {
+                if (counter >= 1) {
+                    $(this).closest("tr").remove();
+                    counter -= 1
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(".project").on('change', function() {
+            alert('change');
+            // if ($(this).val() == 'selectionKey'){
+            //     DoSomething();
+            // } else {
+            //     DoSomethingElse();
+            // }
+        });
+        let simpan = $('.tes').on('click', '.save', function () {
+        var usertype=[];
+        $("select[name=project]").each(function(){
+            usertype.push($(this).val());
+            // alert($(this).val());
+        });
+        var ajaxdata={"UserType":usertype};
+
+        console.log(JSON.stringify(ajaxdata));
+        });
+    </script>
     <script>
         function initMap() {
             var myLatLng = {lat: -7.265757, lng: 112.734146};
