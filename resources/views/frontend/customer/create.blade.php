@@ -50,34 +50,33 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
-                                    {{-- <fieldset class="border p-2">
-                                        <legend class="w-auto">Identifier</legend> --}}
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Name  @include('frontend.common.label.required')
+                                            </label>
 
-                                        {{-- <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label class="form-control-label">
-                                                    Customer Code @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.text')
-                                                    @slot('text', 'Code')
-                                                    @slot('name', 'code')
-                                                @endcomponent
-                                            </div>
-                                        </div> --}}
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <label class="form-control-label">
-                                                        Name  @include('frontend.common.label.required')
-                                                    </label>
-
-                                                    @component('frontend.common.input.text')
-                                                        @slot('text', 'Name')
-                                                        @slot('name', 'name')
-                                                    @endcomponent
-                                                </div>
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'Name')
+                                                @slot('name', 'name')
+                                            @endcomponent
                                         </div>
-                                    {{-- </fieldset> --}}
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Term of Payment @include('frontend.common.label.required')
+                                            </label>
+                                            @component('frontend.common.input.number')
+                                                @slot('text', 'Term of Payment')
+                                                @slot('id', 'term_of_payment')
+                                                @slot('input_append', 'Hari')
+                                                @slot('name', 'term_of_payment')
+                                                @slot('id_error', 'term_of_payment')
+                                            @endcomponent
+
+                                        </div>
+                                    </div>
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group m-form__group row">
