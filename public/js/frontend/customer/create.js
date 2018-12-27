@@ -2,16 +2,15 @@ let Customer = {
     init: function () {
         let simpan = $('.footer').on('click', '.add-customer', function () {
 
-            let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
-            let payment_term = $('#payment_term').val();
+            let payment_term =  $('input[name=term_of_payment]').val();
             let account_code = $('#account_code').val();
 
             let phone_array = [];
             $('#phone ').each(function (i) {
                 phone_array[i] = document.getElementsByName('group-phone[' + i + '][phone]')[0].value;
             });
-        
+
 
             let ext_phone_array = [];
             $('#ext ').each(function (i) {
@@ -57,34 +56,29 @@ let Customer = {
                 url: '/customer',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    code: code,
                     name: name,
                     payment_term: payment_term,
                     account_code: account_code,
-                    phone_array: phone_array,
-                    ext_phone_array: ext_phone_array,
-                    type_phone_array: type_phone_array,
-                    fax_array: fax_array,
-                    type_fax_array: type_fax_array,
-                    website_array: website_array,
-                    email_array: email_array,
-                    type_email_array: type_email_array
+                    // phone_array: phone_array,
+                    // ext_phone_array: ext_phone_array,
+                    // type_phone_array: type_phone_array,
+                    // fax_array: fax_array,
+                    // type_fax_array: type_fax_array,
+                    // website_array: website_array,
+                    // email_array: email_array,
+                    // type_email_array: type_email_array
 
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.code) {
-                            $('#code-error').html(data.errors.code[0]);
-                        }
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
                         }
                         if (data.errors.payment_term) {
                             $('#payment_term-error').html(data.errors.payment_term[0]);
                         }
-                        document.getElementById('code').value = code;
                         document.getElementById('name').value = name;
-                        document.getElementById('payment_term').value = payment_term;
+                        document.getElementById('term_of_payment').value = payment_term;
 
                     } else {
 
