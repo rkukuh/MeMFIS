@@ -233,6 +233,7 @@ let Item = {
             let barcode = $('input[name=barcode]').val();
             let unit_id = $('#unit_id').val();
             let category = $('#category').val();
+            let manufacturer_id = $('#manufacturer_id').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
             let account_code = $('#account_code').val();
 
@@ -249,6 +250,7 @@ let Item = {
                     description: description,
                     unit_id: unit_id,
                     category: category,
+                    manufacturer_id: manufacturer_id,
                     is_stock: is_stock,
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
