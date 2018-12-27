@@ -19,10 +19,7 @@ $factory->define(Customer::class, function (Faker $faker) {
     return [
         'code' => str_slug($name),
         'name' => $name,
-        'payment_term' => $faker->randomElement([
-            null,
-            Type::ofPaymentTerm()->get()->random()->id
-        ]),
+        'payment_term' => rand(1, 10) * 10,
         'banned_at' => $faker->randomElement([
             null,
             Carbon::now()
