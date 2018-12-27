@@ -64,8 +64,6 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        $customer = Customer::with('term_of_payment')->find($customer);
-
         return view('frontend.customer.show', compact('customer'));
     }
 
@@ -78,7 +76,6 @@ class CustomerController extends Controller
     public function edit(Customer $customer)
     {
         $websites = Type::ofWebsite()->get();
-        $payment_terms = Type::ofPaymentTerm()->get();
 
         return view('frontend.customer.edit', [
             'customer' => $customer,
