@@ -244,7 +244,7 @@
                                 m-dropdown-toggle="click">
                                 <a href="#" class="m-nav__link m-dropdown__toggle">
                                     <span class="m-topbar__userpic">
-                                        <img src="{{ asset('assets/metronic/app/media/img/users/yendy.jpg') }}" class="m--img-rounded m--marginless" alt="">
+                                        <img src="{{ asset('assets/metronic/app/media/img/users/user5.jpg') }}" class="m--img-rounded m--marginless" alt="">
                                     </span>
                                     <span class="m-topbar__username m--hide">Nick</span>
                                 </a>
@@ -254,7 +254,7 @@
                                         <div class="m-dropdown__header m--align-center" style="background: url(assets/metronic/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
                                             <div class="m-card-user m-card-user--skin-dark">
                                                 <div class="m-card-user__pic">
-                                                    <img src="{{ asset('assets/metronic/app/media/img/users/yendy.jpg') }}" class="m--img-rounded m--marginless" alt="">
+                                                    <img src="{{ asset('assets/metronic/app/media/img/users/user5.jpg') }}" class="m--img-rounded m--marginless" alt="">
                                                 </div>
                                                 <div class="m-card-user__details">
                                                     <span class="m-card-user__name m--font-weight-500">Mark Andre</span>
