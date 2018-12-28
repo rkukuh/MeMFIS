@@ -83,7 +83,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         <label class="form-control-label">
-                                                            Phone @include('frontend.common.label.required')
+                                                            Phone @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -147,7 +147,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         <label class="form-control-label">
-                                                            Fax @include('frontend.common.label.required')
+                                                            Fax @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -200,7 +200,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Website @include('frontend.common.label.required')
+                                                            Website @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -269,7 +269,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         <label class="form-control-label">
-                                                            Email @include('frontend.common.label.required')
+                                                            Email @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -320,7 +320,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Document @include('frontend.common.label.required')
+                                                        Document @include('frontend.common.label.optional')
                                                     </label>
                                                 </div>
                                                 <div class="col-sm-4 col-md-4 col-lg-4">
