@@ -96,7 +96,7 @@
                                                                     <div data-repeater-list="group-website">
                                                                         <div data-repeater-item>
                                                                             <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-10 col-md-10 col-lg-10">
+                                                                                <div class="col-sm-9 col-md-9 col-lg-9">
                                                                                         <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
                                                                                                 <option value="">
                                                                                                     Select a Project
@@ -122,7 +122,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-10 col-md-10 col-lg-10">
+                                                                                <div class="col-sm-9 col-md-9 col-lg-9">
                                                                                     <label class="form-control-label">
                                                                                         Project Number
                                                                                     </label>
@@ -132,7 +132,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-10 col-md-10 col-lg-10">
+                                                                                <div class="col-sm-9 col-md-9 col-lg-9">
                                                                                     <label class="form-control-label">
                                                                                         Intruction
                                                                                     </label>
@@ -403,7 +403,8 @@ var x = object;
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
+   <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
