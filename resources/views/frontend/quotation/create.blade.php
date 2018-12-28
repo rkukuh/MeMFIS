@@ -97,7 +97,7 @@
                                                                         <div data-repeater-item>
                                                                             <div class="form-group m-form__group row">
                                                                                 <div class="col-sm-10 col-md-10 col-lg-10">
-                                                                                        <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction()">
+                                                                                        <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
                                                                                                 <option value="">
                                                                                                     Select a Website Type
                                                                                                 </option>
@@ -342,10 +342,12 @@
 @endpush
 @push('footer-scripts')
     <script>
-    function myFunction() {
-        var numItems = $('.project').length
+    function myFunction(object) {
+        // var numItems = $('.project').length
 
-        alert('tes');
+        // var x = this.getElementById("type_website");
+var x = object;
+        console.log(x.name);
     }
     </script>
 
