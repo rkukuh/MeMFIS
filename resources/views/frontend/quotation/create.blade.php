@@ -99,14 +99,19 @@
                                                                                 <div class="col-sm-10 col-md-10 col-lg-10">
                                                                                         <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
                                                                                                 <option value="">
-                                                                                                    Select a Website Type
+                                                                                                    Select a Project
                                                                                                 </option>
-
-                                                                                                @foreach ($websites as $website)
+                                                                                                <option value="1">Project A</option>
+                                                                                                <option value="2">Project B</option>
+                                                                                                <option value="3">Project C</option>
+                                                                                                <option value="4">Project D</option>
+                                                                                                <option value="5">Project E</option>
+                                                                                                <option value="6">Project F</option>
+                                                                                                {{-- @foreach ($websites as $website)
                                                                                                     <option value="{{ $website->id }}">
                                                                                                         {{ $website->name }}
                                                                                                     </option>
-                                                                                                @endforeach
+                                                                                                @endforeach --}}
                                                                                             </select>
                                                                                 </div>
                                                                                 <div class="col-sm-1 col-md-1 col-lg-1">
