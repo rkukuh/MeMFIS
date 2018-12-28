@@ -299,7 +299,7 @@ class FillComboxController extends Controller
 
     }
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -310,6 +310,19 @@ class FillComboxController extends Controller
                         ->pluck('name');
 
         return json_encode($payment_terms);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function scheduledPaymentType()
+    {
+        $scheduled_payment_type = Type::ofScheduledPayment()
+                        ->pluck('name','id');
+
+        return json_encode($scheduled_payment_type);
     }
 
     /**

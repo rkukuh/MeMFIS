@@ -13,18 +13,18 @@ jQuery(document).ready(function () {
 $(document).ready(function () {
     units = function () {
         $.ajax({
-            url: '/get-units/',
+            url: '/get-scheduled-payment-types/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $('select[name="unit_id"]').empty();
+                $('select[name="scheduled_payment_type"]').empty();
 
-                $('select[name="unit_id"]').append(
-                    '<option> Select a Unit</option>'
+                $('select[name="scheduled_payment_type"]').append(
+                    '<option> Select a Scheduled Payment Type</option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="unit_id"]').append(
+                    $('select[name="scheduled_payment_type"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });

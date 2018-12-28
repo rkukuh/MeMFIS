@@ -403,7 +403,8 @@ var x = object;
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
+   <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
