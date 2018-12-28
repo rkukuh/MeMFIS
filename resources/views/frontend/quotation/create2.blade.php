@@ -58,7 +58,7 @@
                                                         <label class="form-control-label">
                                                             Project
                                                         </label>
-                                                            {{-- <table class="order-list" style="margin-left:-13px;margin-right:10px">
+                                                            <table class="order-list" style="margin-left:-13px;margin-right:10px">
                                                                 <tr>
                                                                     <td class="col-sm-2"><select name="project"  class="select form-control js-example-tags project"><option >-</option>
                                                                     @foreach ($websites as $website)
@@ -91,59 +91,7 @@
                                                                         @endcomponent
                                                                     </td>
                                                                 </tr>
-                                                            </table> --}}
-                                                            <div class='repeater'>
-                                                                    <div data-repeater-list="group-website">
-                                                                        <div data-repeater-item>
-                                                                            <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-10 col-md-10 col-lg-10">
-                                                                                        <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
-                                                                                                <option value="">
-                                                                                                    Select a Project
-                                                                                                </option>
-                                                                                                <option value="1">Project A</option>
-                                                                                                <option value="2">Project B</option>
-                                                                                                <option value="3">Project C</option>
-                                                                                                <option value="4">Project D</option>
-                                                                                                <option value="5">Project E</option>
-                                                                                                <option value="6">Project F</option>
-                                                                                                {{-- @foreach ($websites as $website)
-                                                                                                    <option value="{{ $website->id }}">
-                                                                                                        {{ $website->name }}
-                                                                                                    </option>
-                                                                                                @endforeach --}}
-                                                                                            </select>
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                                    @include('frontend.common.buttons.create_repeater')
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                                    @include('frontend.common.buttons.delete_repeater')
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-10 col-md-10 col-lg-10">
-                                                                                    <label class="form-control-label">
-                                                                                        Project Number
-                                                                                    </label>
-                                                                                    @component('frontend.common.label.data-info')
-                                                                                        @slot('text', 'P-01/HMxxxxx')
-                                                                                    @endcomponent
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-10 col-md-10 col-lg-10">
-                                                                                    <label class="form-control-label">
-                                                                                        Intruction
-                                                                                    </label>
-                                                                                    @component('frontend.common.label.data-info')
-                                                                                        @slot('text', '..........')
-                                                                                    @endcomponent
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            </table>
                                                     </div>
                                                 </div>
 
@@ -346,20 +294,61 @@
     </style>
 @endpush
 @push('footer-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <script>
-    function myFunction(object) {
-        // var numItems = $('.project').length
-
-        // var x = this.getElementById("type_website");
-var x = object;
-        console.log(x.name);
-    }
+        $(document).ready(function () {
+            $(".js-example-tags").select2({
+            });
+        });
     </script>
-
     <script type="text/javascript">
-        $("#type_website").on('change', function() {
-            // var numItems = $('.project').length
-            // alert(numItems);
+        $(document).ready(function () {
+            var counter = 0;
+            var projects = {!! json_encode($websites->toArray()) !!}
+            $("#addrow").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td class="col-sm-2"><select name="project" class="select form-control project">';
+                cols += '<option >-</option>';
+                for (var i = 0; i < (projects.length - 1); i++) {
+                    if(projects[i].id == 1){
+                    }else{
+                    cols += '<option value="' + projects[i].uuid + '" >' + projects[i].name + ' </option>';
+                    }
+                }
+                ;
+                cols += '</select></td>';
+                cols += '<td class="col-sm-1"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel"><span><i class="la la-trash-o"></i></span></div></td></tr>';
+                // cols += '<td class="col-sm-1"><select name="pengeluaran[]" class="select form-control"><option value="false">Tidak</option> <option value="true">Ya</option></select></td>';
+                // cols += '<td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+            //   cols += '<td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+                newRow.append(cols);
+                $("table.order-list").append(newRow);
+                $('.select').select2();
+                counter++;
+                var newRow2 = $("<tr>");
+                var cols = "";
+                cols += 'sas';
+                cols += '<td class="col-sm-1"><label class="form-control-label">Project Number</label><div style="background-color:beige;padding:15px;">P-01/HMxxxxx</div>';
+                cols += '<label class="form-control-label">Intruction</label><div style="background-color:beige;padding:15px;">..........</div></td>';
+                newRow2.append(cols);
+                $("table.order-list").append(newRow2);
+
+            });
+            $("table.order-list").on("click", ".ibtnDel", function (event) {
+                if (counter >= 1) {
+                    $(this).closest("tr").remove();
+                    counter -= 1
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(".project").on('change', function() {
+            alert('change');
             // if ($(this).val() == 'selectionKey'){
             //     DoSomething();
             // } else {

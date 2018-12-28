@@ -28,10 +28,12 @@ class CustomerController extends Controller
      */
     public function create()
     {
+        $documents = Type::ofDocument()->get();
         $websites = Type::ofWebsite()->get();
 
         return view('frontend.customer.create', [
-            'websites' => $websites
+            'websites' => $websites,
+            'documents' => $documents
         ]);
     }
 
@@ -44,8 +46,8 @@ class CustomerController extends Controller
     public function store(CustomerStore $request)
     {
         if ($customer = Customer::create($request->all())) {
-            $email = Email::class(['address' => $request->email_array]);
-            $email = $customer->emails()->save($email);
+            // $email = Email::class(['address' => $request->email_array]);
+            // $email = $customer->emails()->save($email);
 
             return response()->json($customer);
         }
@@ -62,8 +64,6 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        $customer = Customer::with('term_of_payment')->find($customer);
-
         return view('frontend.customer.show', compact('customer'));
     }
 
@@ -75,12 +75,13 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+        $documents = Type::ofDocument()->get();
         $websites = Type::ofWebsite()->get();
-        $payment_terms = Type::ofPaymentTerm()->get();
 
         return view('frontend.customer.edit', [
             'customer' => $customer,
-            'websites' => $websites
+            'websites' => $websites,
+            'documents' => $documents
         ]);
     }
 

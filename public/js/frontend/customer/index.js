@@ -57,11 +57,13 @@ let Customer = {
                     filterable: !1,
                 },
                 {
-                    field: 'term_of_payment.name',
+                    field: 'payment_term',
                     title: 'Term of Payment',
                     sortable: 'asc',
                     filterable: !1,
-
+                    template: function (t) {
+                        return t.payment_term+" Hari"
+                    }
                 },
                 {
                     field: 'Actions',

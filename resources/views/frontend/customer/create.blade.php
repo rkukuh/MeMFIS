@@ -73,6 +73,7 @@
                                                 @slot('input_append', 'Hari')
                                                 @slot('name', 'term_of_payment')
                                                 @slot('id_error', 'term_of_payment')
+                                                @slot('width','50%')
                                             @endcomponent
 
                                         </div>
@@ -182,13 +183,15 @@
                                                                             @slot('value', 'personal')
                                                                         @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @include('frontend.common.buttons.create_repeater')
+                                                                </div>
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
                                                                     @include('frontend.common.buttons.delete_repeater')
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @include('frontend.common.buttons.create_repeater')
                                                 </div>
                                             </div>
                                     </div>
@@ -249,13 +252,15 @@
                                                                         @slot('value', 'personal')
                                                                     @endcomponent --}}
                                                                 </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @include('frontend.common.buttons.create_repeater')
+                                                                </div>
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
                                                                     @include('frontend.common.buttons.delete_repeater')
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @include('frontend.common.buttons.create_repeater')
                                                 </div>
                                             </div>
                                     </div>
@@ -298,15 +303,69 @@
                                                                         @slot('value', 'personal')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @include('frontend.common.buttons.create_repeater')
+                                                                </div>
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
                                                                     @include('frontend.common.buttons.delete_repeater')
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @include('frontend.common.buttons.create_repeater')
                                                 </div>
                                             </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Document @include('frontend.common.label.required')
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <label class="form-control-label">
+                                                        Type.
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                </div>
+
+                                            </div>
+                                            <div class='repeater'>
+                                                <div data-repeater-list="group-document">
+                                                    <div data-repeater-item>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                @component('frontend.common.input.upload')
+                                                                    @slot('label', 'document')
+                                                                    @slot('name', 'document')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <select id="type_website" name="type_website" class="form-control">
+                                                                    <option value="">
+                                                                        Select a Document Type
+                                                                    </option>
+
+                                                                    @foreach ($documents as $document)
+                                                                        <option value="{{ $document->id }}">
+                                                                            {{ $document->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @include('frontend.common.buttons.create_repeater')
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @include('frontend.common.buttons.delete_repeater')
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6 hidden">

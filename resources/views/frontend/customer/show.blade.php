@@ -73,6 +73,16 @@
                                                     @endcomponent
                                                 </div>
                                             </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label class="form-control-label">
+                                                            Term of Payment @include('frontend.common.label.required')
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $customer->payment_term)
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </fieldset>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
