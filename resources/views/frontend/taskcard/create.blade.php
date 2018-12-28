@@ -29,7 +29,7 @@
     </div>
     <div class="m-content">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -175,7 +175,7 @@
                                                     <label class="form-control-label">
                                                         Aircraft @include('frontend.common.label.optional')
                                                     </label>
-    
+
                                                     @component('frontend.common.input.select2')
                                                         @slot('text', 'Aircraft Taskcard')
                                                         @slot('id', 'aircraft_taskcard')
@@ -183,10 +183,10 @@
                                                         @slot('id_error', 'aircraft-taskcard')
                                                         @slot('multiple','multiple')
                                                     @endcomponent
-                                            </div>                                               
+                                            </div>
                                         </div>
                                         <div class="form-group m-form__group row">
-                                                
+
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Old Tasckcard Reference @include('frontend.common.label.optional')
@@ -203,7 +203,7 @@
                                                     <label class="form-control-label">
                                                         Source @include('frontend.common.label.optional')
                                                     </label>
-    
+
                                                     @component('frontend.common.input.text')
                                                         @slot('id', 'source')
                                                         @slot('text', 'Source')
@@ -224,7 +224,7 @@
                                                         @slot('name', 'all')
                                                         @slot('text', 'Engine All?')
                                                     @endcomponent
-    
+
                                                     @component('frontend.common.input.select2')
                                                         @slot('text', 'AC Type')
                                                         @slot('id', 'ac-type')
@@ -232,7 +232,7 @@
                                                         @slot('id_error', 'ac-type')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent --}}
-    
+
                                                 </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -253,7 +253,7 @@
                                                             @slot('name', 'all')
                                                             @slot('text', 'Engine All?')
                                                         @endcomponent
-                
+
                                                     </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                         @component('frontend.common.input.select2')
@@ -304,7 +304,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -314,7 +314,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Item Taskcard 
+                                    Item Taskcard
                                 </h3>
                             </div>
                         </div>
@@ -324,7 +324,7 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        
+
                                         @component('frontend.common.buttons.create-new')
                                             @slot('attribute', 'disabled')
                                         @endcomponent
@@ -343,9 +343,9 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
-    
+
                                 <h3 class="m-portlet__head-text">
-                                    Threshold 
+                                    Threshold
                                 </h3>
                             </div>
                         </div>
@@ -359,7 +359,7 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('attribute', 'disabled')
                                         @endcomponent
-    
+
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
@@ -374,9 +374,9 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                     </span>
-                
+
                                 <h3 class="m-portlet__head-text">
-                                    Repeat 
+                                    Repeat
                                 </h3>
                             </div>
                         </div>
@@ -390,7 +390,7 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('attribute', 'disabled')
                                         @endcomponent
-        
+
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
