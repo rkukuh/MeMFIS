@@ -88,10 +88,10 @@
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
                                                         <label class="form-control-label">
-                                                            Ext. @include('frontend.common.label.optional')
+                                                            Ext.
                                                         </label>
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
                                                         <label class="form-control-label">
                                                             Type.
                                                         </label>
@@ -116,7 +116,7 @@
                                                                                 @slot('text', 'Ext')
                                                                             @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('text', 'Work')
                                                                             @slot('name', 'type_phone')
@@ -150,7 +150,7 @@
                                                             Fax @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
                                                         <label class="form-control-label">
                                                             Type.
                                                         </label>
@@ -169,7 +169,7 @@
                                                                         @slot('name', 'fax')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('text', 'Work')
                                                                             @slot('name', 'type_fax')
@@ -203,7 +203,7 @@
                                                             Website @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
-                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
                                                         <label class="form-control-label">
                                                             Type.
                                                         </label>
@@ -222,7 +222,7 @@
                                                                         @slot('name', 'website')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                                         <select id="type_website" name="type_website" class="form-control">
                                                                                 <option value="">
                                                                                     Select a Website Type
@@ -272,7 +272,7 @@
                                                             Email @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
                                                         Type.
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -289,7 +289,7 @@
                                                                         @slot('placeholder', 'Email')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('text', 'Work')
                                                                         @slot('name', 'type_email')
@@ -323,7 +323,7 @@
                                                         Document @include('frontend.common.label.optional')
                                                     </label>
                                                 </div>
-                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
                                                         Type.
                                                     </label>
@@ -342,7 +342,7 @@
                                                                     @slot('name', 'document')
                                                                 @endcomponent
                                                             </div>
-                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                            <div class="col-sm-3 col-md-3 col-lg-3">
                                                                 <select id="type_website" name="type_website" class="form-control">
                                                                     <option value="">
                                                                         Select a Document Type

@@ -97,7 +97,7 @@
                                                             </div>
                                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                                                 <label class="form-control-label">
-                                                                    Ext. @include('frontend.common.label.optional')
+                                                                    Ext.
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm-2 col-md-2 col-lg-2">
