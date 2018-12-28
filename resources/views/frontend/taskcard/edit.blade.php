@@ -29,7 +29,7 @@
     </div>
     <div class="m-content">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -258,7 +258,7 @@
                                                             @slot('id', 'edit-taskcard')
                                                             @slot('class', 'edit-taskcard')
                                                         @endcomponent
-    
+
                                                         @include('frontend.common.buttons.reset')
 
                                                         @component('frontend.common.buttons.back')
@@ -274,7 +274,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -286,7 +286,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item Taskcard 
+                                    Item Taskcard
                                 </h3>
                             </div>
                         </div>
@@ -301,14 +301,14 @@
                                             @slot('id', 'item_taskcard')
                                             @slot('data_target', '#modal_item')
                                         @endcomponent
-    
+
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             @include('frontend.taskcard.item.modal')
-    
+
                             <div class="item_datatable" id="item_datatable"></div>
                         </div>
                     </div>
@@ -320,11 +320,11 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
-    
+
                                 @include('frontend.common.label.datalist')
-    
+
                                 <h3 class="m-portlet__head-text">
-                                    Threshold Taskcard 
+                                    Threshold Taskcard
                                 </h3>
                             </div>
                         </div>
@@ -339,14 +339,14 @@
                                             @slot('id', 'threshold_taskcard')
                                             @slot('data_target', '#modal_threshold')
                                         @endcomponent
-        
+
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-        
+
                             @include('frontend.taskcard.threshold.modal')
-        
+
                             <div class="threshold_datatable" id="item_datatable"></div>
                         </div>
                     </div>
@@ -358,11 +358,11 @@
                                         <span class="m-portlet__head-icon m--hide">
                                             <i class="la la-gear"></i>
                                         </span>
-        
+
                                         @include('frontend.common.label.datalist')
-        
+
                                         <h3 class="m-portlet__head-text">
-                                            Repeat Taskcard 
+                                            Repeat Taskcard
                                         </h3>
                                     </div>
                                 </div>
@@ -377,20 +377,20 @@
                                                     @slot('id', 'repeat_taskcard')
                                                     @slot('data_target', '#modal_repeat')
                                                 @endcomponent
-            
+
                                                 <div class="m-separator m-separator--dashed d-xl-none"></div>
                                             </div>
                                         </div>
                                     </div>
-            
+
                                     @include('frontend.taskcard.repeat.modal')
-            
+
                                     <div class="repeat_datatable" id="item_datatable"></div>
                                 </div>
                             </div>
                         </div>
             </div>
-            
+
         </div>
     </div>
 @endsection
