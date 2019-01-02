@@ -12,6 +12,6 @@ class AircraftAccesses extends Seeder
      */
     public function run()
     {
-        //
+        factory(AircraftAccess::class, config('memfis.dummies.aircraft_accesses'))->create();
     }
 }

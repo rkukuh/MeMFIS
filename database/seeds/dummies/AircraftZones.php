@@ -12,6 +12,6 @@ class AircraftZones extends Seeder
      */
     public function run()
     {
-        //
+        factory(AircraftZone::class, config('memfis.dummies.aircraft_zones'))->create();
     }
 }
