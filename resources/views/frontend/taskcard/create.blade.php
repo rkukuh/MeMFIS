@@ -53,18 +53,6 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Title @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'title')
-                                                    @slot('text', 'Title')
-                                                    @slot('name', 'title')
-                                                    @slot('id_error', 'title')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
                                                     Taskcard Number @include('frontend.common.label.required')
                                                 </label>
 
@@ -75,7 +63,18 @@
                                                     @slot('id_error', 'number')
                                                 @endcomponent
                                             </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Title @include('frontend.common.label.required')
+                                                </label>
 
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'title')
+                                                    @slot('text', 'Title')
+                                                    @slot('name', 'title')
+                                                    @slot('id_error', 'title')
+                                                @endcomponent
+                                            </div>
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
