@@ -102,4 +102,16 @@ class QuotationController extends Controller
 
         return response()->json($quotation);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function project($project)
+    {
+        return response()->json($project);
+    }
+
 }

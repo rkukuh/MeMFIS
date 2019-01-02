@@ -200,7 +200,7 @@
                                                                     Exchange Rate @include('frontend.common.label.required')
                                                                 </label>
 
-                                                                @component('frontend.common.input.text')
+                                                                @component('frontend.common.input.number')
                                                                     @slot('text', 'exchange')
                                                                     @slot('name', 'exchange')
                                                                     @slot('id', 'exchange')
@@ -352,7 +352,28 @@
 
         // var x = this.getElementById("type_website");
 var x = object;
-        console.log(x.name);
+var y = x.name;
+
+var numb = y.match(/\d/g);
+var z = x.value;
+var projectUuid = z;
+$.ajax({
+    url: '/quotation/'+projectUuid+'/project',
+    type: 'GET',
+    dataType: 'json',
+    success: function (data) {
+        document.getElementsByName('group-website['+numb+'][]')[0].setAttribute("value", "my value is high");
+        // alert('masuk');
+        // document.getElementByName('group-website['+numb+'][]').innerHTML = 'tes';
+        // document.getElementById('telp').innerHTML = 'telp/fax';
+        // document.getElementById('attn').innerHTML = 'attn';
+        // document.getElementById('address').innerHTML = 'address';
+    }
+});
+
+// var thenum = x.replace( /^\D+/g, '');
+// alert(z);
+        // console.log(x.name);
     }
     </script>
 
