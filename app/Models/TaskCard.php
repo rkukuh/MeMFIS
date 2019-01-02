@@ -20,6 +20,7 @@ class TaskCard extends MemfisModel
         'access',
         'is_rii',
         'source',
+        'version',
         'effectivity',
         'description',
     ];

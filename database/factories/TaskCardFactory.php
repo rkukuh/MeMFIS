@@ -8,7 +8,8 @@ use Faker\Generator as Faker;
 
 $factory->define(TaskCard::class, function (Faker $faker) {
 
-    $number = $faker->unixTime();
+    $number  = $faker->unixTime();
+    $version = rand(1, 9).'.'.rand(1, 9);
 
     return [
         'number' => $number,
@@ -25,6 +26,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'access' => 'Access Dummy #' . $faker->unixTime(),
         'is_rii' => $faker->boolean,
         'source' => null,
+        'version' => $faker->randomElement([null, $version]),
         'effectivity' => null,
         'description' => $faker->paragraph(rand(10, 20))
 
