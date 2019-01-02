@@ -8,6 +8,8 @@ return [
      *
      */
     'dummies' => [
+        'aircraft_accesses' => 10,
+        'aircraft_zones' => 10,
         'categories' => 10,
         'currencies' => 10,
         'customers' => 20,
