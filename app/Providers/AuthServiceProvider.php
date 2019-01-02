@@ -46,6 +46,7 @@ class AuthServiceProvider extends ServiceProvider
         \Models\Manufacturer::class => \Policies\ManufacturerPolicy::class,
         \Models\Certification::class => \Policies\CertificationPolicy::class,
         \Models\GeneralLicense::class => \Policies\GeneralLicensePolicy::class,
+        \Models\AircraftAccess::class => \Policies\AircraftAccessPolicy::class,
         \Models\EmployeeLicense::class => \Policies\EmployeeLicensePolicy::class,
         \Models\OTRCertification::class => \Policies\OTRCertificationPolicy::class,
         \Models\MaintenanceCycle::class => \Policies\MaintenanceCyclePolicy::class,

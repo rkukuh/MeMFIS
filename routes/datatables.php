@@ -24,6 +24,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
+        Route::get('/aircraft-access','AircraftAccessDatatables@index')->name('aircraft-access.index');
 
         /** POLYMORPH */
 

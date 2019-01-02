@@ -13,7 +13,10 @@ $factory->define(TaskCard::class, function (Faker $faker) {
     return [
         'number' => $number,
         'title' => 'TaskCard Dummy #' . $number,
-        'type_id' => Type::ofTaskCardType()->get()->random()->id,
+        'type_id' => $faker->randomElement([
+            Type::ofTaskCardTypeRoutine()->get()->random()->id,
+            Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
+        ]),
         'task_type_id' => Type::ofTaskCardTask()->get()->random()->id,
         'work_area' => Type::ofWorkArea()->get()->random()->id,
         'manhour' => $faker->randomFloat,
