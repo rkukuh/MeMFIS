@@ -137,10 +137,12 @@
                                                     Applicability Airplane @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.text')
+                                                @component('frontend.common.input.select2')
                                                     @slot('text', 'Applicability Airplane')
                                                     @slot('id', 'applicability_airplane')
                                                     @slot('name', 'applicability_airplane')
+                                                    @slot('name', 'applicability_airplane')
+                                                    @slot('multiple','multiple')
                                                     @slot('id_error', 'applicability-airplane')
                                                 @endcomponent
                                             </div>
@@ -447,6 +449,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
+
 
     <script src="{{ asset('js/frontend/taskcard/create.js') }}"></script>
     {{-- public/js/frontend/taskcard/create.js --}}
