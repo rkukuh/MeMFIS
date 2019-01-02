@@ -37,6 +37,11 @@ class CreateTaskcardsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
+            $table->foreign('task_type_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
             $table->foreign('work_area')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
