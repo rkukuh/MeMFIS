@@ -200,7 +200,7 @@
                                                                     Exchange Rate @include('frontend.common.label.required')
                                                                 </label>
 
-                                                                @component('frontend.common.input.text')
+                                                                @component('frontend.common.input.number')
                                                                     @slot('text', 'exchange')
                                                                     @slot('name', 'exchange')
                                                                     @slot('id', 'exchange')
