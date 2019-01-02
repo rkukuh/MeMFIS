@@ -24,8 +24,6 @@ class CreateTaskcardsTable extends Migration
             $table->string('zone')->nullable();
             $table->string('access')->nullable();
             $table->boolean('is_rii')->default(false);
-            $table->boolean('is_applicability_airplane_all')->default(false);
-            $table->boolean('is_applicability_engine_all')->default(false);
             $table->string('source')->nullable();
             $table->string('effectivity')->nullable();
             $table->longText('description')->nullable();

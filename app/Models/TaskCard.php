@@ -17,8 +17,6 @@ class TaskCard extends MemfisModel
         'zone',
         'access',
         'is_rii',
-        'is_applicability_aircraft_all',
-        'is_applicability_engine_all',
         'source',
         'effectivity',
         'description',
