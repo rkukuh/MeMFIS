@@ -12,4 +12,6 @@ class AircraftAccess extends MemfisModel
         'name',
         'aircraft_id',
     ];
+
+    // TODO: Define 1-M with Aircraft
 }
