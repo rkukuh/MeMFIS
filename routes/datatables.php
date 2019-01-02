@@ -23,6 +23,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
+        Route::get('/aircraft-zone','AircraftZoneDatatables@index')->name('aircraft-zone.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
         Route::get('/aircraft-access','AircraftAccessDatatables@index')->name('aircraft-access.index');
 
