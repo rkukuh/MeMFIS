@@ -198,9 +198,20 @@ class Type extends MemfisModel
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfTaskCardType(Builder $query)
+    public function scopeOfTaskCardTypeRoutine(Builder $query)
     {
-        return $query->where('of', 'taskcard-type');
+        return $query->where('of', 'taskcard-type-routine');
+    }
+
+    /**
+     * Scope a query to only include type of Task Card's type.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardTypeNonRoutine(Builder $query)
+    {
+        return $query->where('of', 'taskcard-type-non-routine');
     }
 
     /**
