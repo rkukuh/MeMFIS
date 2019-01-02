@@ -16,6 +16,8 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'type_id' => Type::ofTaskCardType()->get()->random()->id,
         'task_type_id' => Type::ofTaskCardTask()->get()->random()->id,
         'work_area' => Type::ofWorkArea()->get()->random()->id,
+        'manhour' => $faker->randomFloat,
+        'helper_quantity' => $faker->randomElement(null, rand(1, 10)),
         'zone' => 'Zone Dummy #' . $faker->unixTime(),
         'access' => 'Access Dummy #' . $faker->unixTime(),
         'is_rii' => $faker->boolean,

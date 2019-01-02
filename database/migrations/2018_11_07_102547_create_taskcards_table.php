@@ -21,6 +21,8 @@ class CreateTaskcardsTable extends Migration
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('task_type_id');
             $table->unsignedInteger('work_area');
+            $table->double('manhour');
+            $table->integer('helper_quantity')->nullable();
             $table->string('zone')->nullable();
             $table->string('access')->nullable();
             $table->boolean('is_rii')->default(false);
