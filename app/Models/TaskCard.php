@@ -16,12 +16,11 @@ class TaskCard extends MemfisModel
         'work_area',
         'manhour',
         'helper_quantity',
-        'zone',
-        'access',
         'is_rii',
         'source',
         'effectivity',
         'description',
+        'version',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

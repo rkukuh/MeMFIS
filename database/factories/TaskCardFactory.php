@@ -21,12 +21,11 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'work_area' => Type::ofWorkArea()->get()->random()->id,
         'manhour' => $faker->randomFloat,
         'helper_quantity' => $faker->randomElement(null, rand(1, 10)),
-        'zone' => 'Zone Dummy #' . $faker->unixTime(),
-        'access' => 'Access Dummy #' . $faker->unixTime(),
         'is_rii' => $faker->boolean,
         'source' => null,
         'effectivity' => null,
-        'description' => $faker->paragraph(rand(10, 20))
+        'description' => $faker->paragraph(rand(10, 20)),
+        'version' => null,
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
     ];

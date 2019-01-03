@@ -23,12 +23,11 @@ class CreateTaskcardsTable extends Migration
             $table->unsignedInteger('work_area');
             $table->double('manhour');
             $table->integer('helper_quantity')->nullable();
-            $table->string('zone')->nullable();
-            $table->string('access')->nullable();
             $table->boolean('is_rii')->default(false);
             $table->string('source')->nullable();
             $table->string('effectivity')->nullable();
             $table->longText('description')->nullable();
+            $table->json('version')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
