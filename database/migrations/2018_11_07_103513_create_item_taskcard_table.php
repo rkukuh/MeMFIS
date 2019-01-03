@@ -16,6 +16,7 @@ class CreateItemTaskcardTable extends Migration
         Schema::create('item_taskcard', function (Blueprint $table) {
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('item_id');
+            $table->double('quantity');
             $table->timestamps();
             $table->softDeletes();
 
