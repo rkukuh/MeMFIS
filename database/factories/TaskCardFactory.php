@@ -39,6 +39,7 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
         $taskcard->versions()->saveMany(factory(Version::class, rand(2, 4))->make());
     }
 
-    // TODO: Save to access
-    // TODO: Save to zones
+    // TODO: Save Many (1, 3) the aircraft_taskcard
+    // TODO: Save the aircraft access
+    // TODO: Save the aircraft zones
 });
