@@ -32,7 +32,7 @@ class TypesOfTaskCardEOScheduledPriority extends Seeder
 
         Type::create([
             'code' => 'prior-to',
-            'name' => 'Prior to (Date, Hrs, Cyc)',
+            'name' => 'Prior to (DATE, HRS, CYC)',
             'of'  => 'taskcard-eo-scheduled-priority',
         ]);
     }
