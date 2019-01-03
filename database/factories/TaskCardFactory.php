@@ -38,4 +38,7 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
     if ($faker->boolean) {
         $taskcard->versions()->saveMany(factory(Version::class, rand(2, 4))->make());
     }
+
+    // TODO: Save to access
+    // TODO: Save to zones
 });
