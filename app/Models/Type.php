@@ -182,6 +182,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Task Card EO's Manual Affected.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEOManualAffected(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo-manual-affected');
+    }
+
+    /**
      * Scope a query to only include type of Task Card EO's Recurrence.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
