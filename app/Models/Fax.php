@@ -41,5 +41,4 @@ class Fax extends MemfisModel
     {
         return $this->morphTo();
     }
-
 }
