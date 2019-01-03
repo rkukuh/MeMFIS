@@ -182,6 +182,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Task Card EO's Recurrence.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEORecurrence(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo-recurrence');
+    }
+
+    /**
      * Scope a query to only include type of Task Card EO's Scheduled Priority.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
