@@ -22,8 +22,10 @@ Route::name('admin.')->group(function () {
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
+        Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+        Route::resource('access', 'AccessController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
@@ -44,9 +46,7 @@ Route::name('admin.')->group(function () {
         Route::resource('employee', 'EmployeeController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
-        Route::resource('aircraft-zone', 'AircraftZoneController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('aircraft-access', 'AircraftAccessController');
 
         /** LICENSE */
 

@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AircraftZoneTest extends TestCase
+class AccessTest extends TestCase
 {
     /**
      * A basic test example.

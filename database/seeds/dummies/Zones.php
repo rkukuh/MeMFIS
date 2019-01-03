@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\AircraftZone;
+use App\Models\Zone;
 use Illuminate\Database\Seeder;
 
-class AircraftZones extends Seeder
+class Zones extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class AircraftZones extends Seeder
      */
     public function run()
     {
-        factory(AircraftZone::class, config('memfis.dummies.aircraft_zones'))->create();
+        //
     }
 }

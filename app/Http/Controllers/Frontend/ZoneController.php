@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
-use App\Models\AircraftAccess;
+use App\Models\Zone;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AircraftAccessStore;
-use App\Http\Requests\Admin\AircraftAccessUpdate;
+use App\Http\Requests\Frontend\ZoneStore;
+use App\Http\Requests\Frontend\ZoneUpdate;
 
-class AircraftAccessController extends Controller
+class ZoneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class AircraftAccessController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\AircraftAccessStore  $request
+     * @param  \App\Http\Requests\Frontend\ZoneStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AircraftAccessStore $request)
+    public function store(ZoneStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class AircraftAccessController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AircraftAccess  $aircraftAccess
+     * @param  \App\Models\Zone  $zone
      * @return \Illuminate\Http\Response
      */
-    public function show(AircraftAccess $aircraftAccess)
+    public function show(Zone $zone)
     {
         //
     }
@@ -54,10 +54,10 @@ class AircraftAccessController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AircraftAccess  $aircraftAccess
+     * @param  \App\Models\Zone  $zone
      * @return \Illuminate\Http\Response
      */
-    public function edit(AircraftAccess $aircraftAccess)
+    public function edit(Zone $zone)
     {
         //
     }
@@ -65,11 +65,11 @@ class AircraftAccessController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\AircraftAccessUpdate  $request
-     * @param  \App\Models\AircraftAccess  $aircraftAccess
+     * @param  \App\Http\Requests\Frontend\ZoneUpdate  $request
+     * @param  \App\Models\Zone  $zone
      * @return \Illuminate\Http\Response
      */
-    public function update(AircraftAccessUpdate $request, AircraftAccess $aircraftAccess)
+    public function update(ZoneUpdate $request, Zone $zone)
     {
         //
     }
@@ -77,10 +77,10 @@ class AircraftAccessController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AircraftAccess  $aircraftAccess
+     * @param  \App\Models\Zone  $zone
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AircraftAccess $aircraftAccess)
+    public function destroy(Zone $zone)
     {
         //
     }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\AircraftAccess;
+use App\Models\Access;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\AircraftAccessStore;
-use App\Http\Requests\Frontend\AircraftAccessUpdate;
+use App\Http\Requests\Frontend\AccessStore;
+use App\Http\Requests\Frontend\AccessUpdate;
 
-class AircraftAccessController extends Controller
+class AccessController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class AircraftAccessController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\AircraftAccessStore  $request
+     * @param  \App\Http\Requests\Frontend\AccessStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AircraftAccessStore $request)
+    public function store(AccessStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class AircraftAccessController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AircraftAccess  $aircraftAccess
+     * @param  \App\Models\Access  $access
      * @return \Illuminate\Http\Response
      */
-    public function show(AircraftAccess $aircraftAccess)
+    public function show(Access $access)
     {
         //
     }
@@ -54,10 +54,10 @@ class AircraftAccessController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AircraftAccess  $aircraftAccess
+     * @param  \App\Models\Access  $access
      * @return \Illuminate\Http\Response
      */
-    public function edit(AircraftAccess $aircraftAccess)
+    public function edit(Access $access)
     {
         //
     }
@@ -65,11 +65,11 @@ class AircraftAccessController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\AircraftAccessUpdate  $request
-     * @param  \App\Models\AircraftAccess  $aircraftAccess
+     * @param  \App\Http\Requests\Frontend\AccessUpdate  $request
+     * @param  \App\Models\Access  $access
      * @return \Illuminate\Http\Response
      */
-    public function update(AircraftAccessUpdate $request, AircraftAccess $aircraftAccess)
+    public function update(AccessUpdate $request, Access $access)
     {
         //
     }
@@ -77,10 +77,10 @@ class AircraftAccessController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AircraftAccess  $aircraftAccess
+     * @param  \App\Models\Access  $access
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AircraftAccess $aircraftAccess)
+    public function destroy(Access $access)
     {
         //
     }

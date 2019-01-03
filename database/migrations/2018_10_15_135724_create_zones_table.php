@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAircraftaccessesTable extends Migration
+class CreateZonesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,13 @@ class CreateAircraftaccessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('aircraft_accesses', function (Blueprint $table) {
+        Schema::create('zones', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('name');
-            $table->unsignedInteger('aircraft_id');
+            $table->morphs('zoneable');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('aircraft_id')
-                    ->references('id')->on('aircrafts')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
 
             $table->index('name');
         });
@@ -37,6 +32,6 @@ class CreateAircraftaccessesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aircraft_accesses');
+        Schema::dropIfExists('zones');
     }
 }

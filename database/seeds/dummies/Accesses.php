@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Access;
 use Illuminate\Database\Seeder;
 
-class AircraftZonesTableSeeder extends Seeder
+class Accesses extends Seeder
 {
     /**
      * Run the database seeds.

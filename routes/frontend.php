@@ -28,8 +28,10 @@ Route::name('frontend.')->group(function () {
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
+        Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+        Route::resource('access', 'AccessController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
@@ -53,9 +55,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('currency', 'CurrencyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
-        Route::resource('aircraft-zone', 'AircraftZoneController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('aircraft-access', 'AircraftAccessController');
 
         /** LICENSE */
 
@@ -74,6 +74,24 @@ Route::name('frontend.')->group(function () {
         Route::resource('quotation', 'QuotationController');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
         Route::resource('workpackage', 'WorkPackageController');
+
+        /** AIRCRAFT  */
+
+        Route::namespace('Aircraft')->group(function () {
+
+            Route::resource('aircraft', 'AircraftController');
+
+            Route::name('aircraft.')->group(function () {
+                Route::prefix('aircraft')->group(function () {
+
+                    /** Polymorph */
+                    Route::resource('/{aircraft}/zones','AircraftZonesController');
+                    Route::resource('/{aircraft}/accesses','AircraftAccessesController');
+
+                });
+            });
+
+        });
 
         /** ITEM */
 

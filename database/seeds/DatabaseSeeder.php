@@ -29,23 +29,10 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
 
-        /** POLYMORPH */
-
-        $this->call(FaxesTableSeeder::class);
-        $this->call(PhonesTableSeeder::class);
-        $this->call(EmailsTableSeeder::class);
-        $this->call(WebsitesTableSeeder::class);
-        $this->call(VersionsTableSeeder::class);
-        $this->call(AddressesTableSeeder::class);
-        $this->call(DocumentsTableSeeder::class);
-        $this->call(MaintenanceCyclesTableSeeder::class);
-
         /** MASTER */
 
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AircraftsTableSeeder::class);
-        $this->call(AircraftAccessesTableSeeder::class);
-        $this->call(AircraftZonesTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
         $this->call(SchoolsTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
@@ -56,6 +43,19 @@ class DatabaseSeeder extends Seeder
         $this->call(CertificationsTableSeeder::class);
         $this->call(CustomersTableSeeder::class);
         $this->call(SuppliersTableSeeder::class);
+
+        /** POLYMORPH */
+
+        $this->call(FaxesTableSeeder::class);
+        $this->call(ZonesTableSeeder::class);
+        $this->call(PhonesTableSeeder::class);
+        $this->call(EmailsTableSeeder::class);
+        $this->call(AccessesTableSeeder::class);
+        $this->call(WebsitesTableSeeder::class);
+        $this->call(VersionsTableSeeder::class);
+        $this->call(AddressesTableSeeder::class);
+        $this->call(DocumentsTableSeeder::class);
+        $this->call(MaintenanceCyclesTableSeeder::class);
 
         /** LICENSE */
 
