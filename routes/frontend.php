@@ -28,6 +28,7 @@ Route::name('frontend.')->group(function () {
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
+        Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('access', 'AccessController');
@@ -84,6 +85,7 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('aircraft')->group(function () {
 
                     /** Polymorph */
+                    Route::resource('/{aircraft}/zones','AircraftZonesController');
                     Route::resource('/{aircraft}/accesses','AircraftAccessesController');
 
                 });

@@ -21,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Unit::class => Policies\UnitPolicy::class,
         Models\Item::class => Policies\ItemPolicy::class,
         Models\Amel::class => Policies\AmelPolicy::class,
+        Models\Zoen::class => Policies\ZoenPolicy::class,
         Models\Email::class => Policies\EmailPolicy::class,
         Models\Phone::class => Policies\PhonePolicy::class,
         Models\Level::class => Policies\LevelPolicy::class,

@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);
+        $this->call(ZonesTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
         $this->call(EmailsTableSeeder::class);
         $this->call(AccessesTableSeeder::class);

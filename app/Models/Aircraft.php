@@ -51,4 +51,15 @@ class Aircraft extends MemfisModel
         return $this->belongsTo(Manufacturer::class);
     }
 
+    /**
+     * Polymorphic: An entity can have zero or many zones.
+     *
+     * This function will get all of the aircraft's zones.
+     * See: Zone's accessable() method for the inverse
+     */
+    public function zones()
+    {
+        return $this->morphMany(Zone::class, 'zoneable');
+    }
+
 }

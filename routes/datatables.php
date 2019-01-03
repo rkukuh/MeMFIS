@@ -51,6 +51,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/','AircraftDatatables@index')->name('all');
 
                 /** Polymorph */
+                Route::get('/{aircraft}/zones','AircraftZonesDatatables@index')->name('zones.index');
                 Route::get('/{aircraft}/accesses','AircraftAccessesDatatables@index')->name('accesses.index');
 
             });
