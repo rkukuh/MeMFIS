@@ -182,6 +182,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Task Card EO's Scheduled Priority.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEOScheduledPriority(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo-scheduled-priority');
+    }
+
+    /**
      * Scope a query to only include type of Task Card's task.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
