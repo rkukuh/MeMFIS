@@ -15,6 +15,19 @@ class Aircraft extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * M-M Polymorph: An AMEL content could be aircraft and/or engine.
+     *
+     * This function will aet all of the aircraft's AMEL.
+     * Amel's amelable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function amels()
+    {
+        return $this->morphToMany(Amel::class, 'amelable');
+    }
+
+    /**
      * One-to-Many: A manufacturer may have zero or many aircrafts.
      *
      * This function will retrieve the manufacturer of an aircraft.
@@ -27,16 +40,4 @@ class Aircraft extends MemfisModel
         return $this->belongsTo(Manufacturer::class);
     }
 
-    /**
-     * M-M Polymorph: An AMEL content could be aircraft and/or engine.
-     *
-     * This function will aet all of the aircraft's AMEL.
-     * Amel's amelable() method for the inverse
-     *
-     * @return mixed
-     */
-    public function amels()
-    {
-        return $this->morphToMany(Amel::class, 'amelable');
-    }
 }
