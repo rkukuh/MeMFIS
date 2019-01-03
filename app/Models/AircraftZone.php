@@ -13,5 +13,7 @@ class AircraftZone extends MemfisModel
         'aircraft_id',
     ];
 
+    /*************************************** RELATIONSHIP ****************************************/
+
     // TODO: Define 1-M with Aircraft
 }
