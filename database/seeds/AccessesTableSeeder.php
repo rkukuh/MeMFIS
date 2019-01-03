@@ -13,6 +13,8 @@ class AccessesTableSeeder extends Seeder
      */
     public function run()
     {
+        /** AIRCRAFT */
+
         $count_aircrafts = Aircraft::count();
 
         for ($i = 1; $i <= $count_aircrafts; $i++) {
