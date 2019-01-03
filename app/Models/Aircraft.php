@@ -15,6 +15,17 @@ class Aircraft extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many accesses.
+     *
+     * This function will get all of the aircraft's accesses.
+     * See: Access's accessable() method for the inverse
+     */
+    public function accesses()
+    {
+        return $this->morphMany(Access::class, 'accessable');
+    }
+
+    /**
      * M-M Polymorph: An AMEL content could be aircraft and/or engine.
      *
      * This function will aet all of the aircraft's AMEL.

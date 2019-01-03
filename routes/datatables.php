@@ -15,6 +15,9 @@ Route::name('datatables.')->group(function () {
         Route::get('/unit','UnitDatatables@index')->name('unit.index');
         Route::get('/journal','JournalDatatables@index')->name('journal.index');
 
+        /** POLYMORPH */
+        // INFO: For every polymorph cases, create a grouped route for them
+
         /** MASTER */
 
         Route::get('/storage','StorageDatatables@index')->name('storage.index');
@@ -26,10 +29,6 @@ Route::name('datatables.')->group(function () {
         Route::get('/aircraft-zone','AircraftZoneDatatables@index')->name('aircraft-zone.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
 
-        /** POLYMORPH */
-
-        // ...
-
         /** LICENSE */
 
         Route::get('/general-license','GeneralLicenseDatatables@index')->name('general-license.index');
@@ -37,6 +36,27 @@ Route::name('datatables.')->group(function () {
         /** TRANSACTION */
 
         Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
+
+        /** AIRCRAFT */
+
+        Route::name('aircraft.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'aircraft',
+                'namespace' => 'Aircraft'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/','AircraftDatatables@index')->name('all');
+
+                /** Polymorph */
+                Route::get('/{aircraft}/accesses','AircraftAccessesDatatables@index')->name('accesses.index');
+
+            });
+
+        });
 
         /** ITEM */
 

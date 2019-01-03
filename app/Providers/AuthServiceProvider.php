@@ -26,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Level::class => Policies\LevelPolicy::class,
         Models\Status::class => Policies\StatusPolicy::class,
         Models\School::class => Policies\SchoolPolicy::class,
+        Models\Access::class => Policies\AccessPolicy::class,
         Models\Address::class => Policies\AddressPolicy::class,
         Models\License::class => Policies\LicensePolicy::class,
         Models\Journal::class => Policies\JournalPolicy::class,
