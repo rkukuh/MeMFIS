@@ -17,6 +17,7 @@ class CreateAircraftTaskcardTable extends Migration
             $table->unsignedInteger('aircraft_id');
             $table->unsignedInteger('taskcard_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('aircraft_id')
                     ->references('id')->on('aircrafts')
