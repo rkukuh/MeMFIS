@@ -242,10 +242,11 @@
                                                     Version @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.text')
+                                                @component('frontend.common.input.select2')
                                                     @slot('id', 'version')
                                                     @slot('text', 'Version')
                                                     @slot('name', 'version')
+                                                    @slot('multiple','multiple')
                                                     @slot('id_error', 'version')
                                                 @endcomponent
                                             </div>
@@ -255,7 +256,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '5')
+                                                    @slot('rows', '3')
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')
@@ -264,28 +265,26 @@
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <label class="form-control-label">
-                                                            Effectivity @include('frontend.common.label.optional')
-                                                        </label>
+                                                <label class="form-control-label">
+                                                    Effectivity @include('frontend.common.label.optional')
+                                                </label>
 
-                                                        @component('frontend.common.input.text')
-                                                            @slot('text', 'Effectifity')
-                                                            @slot('id', 'effectifity')
-                                                            @slot('name', 'effectifity')
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        @component('frontend.common.input.upload')
-                                                            @slot('text', 'Taskcard')
-                                                            @slot('id', 'taskcard')
-                                                            @slot('name', 'taskcard')
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
+                                                @component('frontend.common.input.text')
+                                                    @slot('text', 'Effectifity')
+                                                    @slot('id', 'effectifity')
+                                                    @slot('name', 'effectifity')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    File @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.upload')
+                                                    @slot('text', 'Taskcard')
+                                                    @slot('id', 'taskcard')
+                                                    @slot('name', 'taskcard')
+                                                @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -498,7 +497,7 @@
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/typeahead/version.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/taskcard/create.js') }}"></script>
