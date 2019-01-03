@@ -182,6 +182,39 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Task Card EO's Manual Affected.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEOManualAffected(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo-manual-affected');
+    }
+
+    /**
+     * Scope a query to only include type of Task Card EO's Recurrence.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEORecurrence(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo-recurrence');
+    }
+
+    /**
+     * Scope a query to only include type of Task Card EO's Scheduled Priority.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEOScheduledPriority(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo-scheduled-priority');
+    }
+
+    /**
      * Scope a query to only include type of Task Card's task.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -211,7 +244,9 @@ class Type extends MemfisModel
      */
     public function scopeOfTaskCardTypeNonRoutine(Builder $query)
     {
-        return $query->where('of', 'taskcard-type-non-routine');
+        return $query->where('of', 'taskcard-type-non-routine')
+                     ->where('code', '<>', 'si')
+                     ->where('code', '<>', 'htcrr');
     }
 
     /**

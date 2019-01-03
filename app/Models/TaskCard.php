@@ -49,4 +49,7 @@ class TaskCard extends MemfisModel
     {
         return $this->morphMany(Version::class, 'versionable');
     }
+
+    // TODO: M-M relationship with Access
+    // TODO: M-M relationship with Zone
 }

@@ -42,6 +42,17 @@ class Category extends MemfisModel
         return $query->where('of', 'item');
     }
 
+    /**
+     * Scope a query to only include category of task card EO.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEO(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo');
+    }
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**

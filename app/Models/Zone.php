@@ -25,4 +25,6 @@ class Zone extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    // TODO: M-M relationship with Task Card
 }

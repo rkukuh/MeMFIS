@@ -28,6 +28,11 @@ class CreateTaskcardsTable extends Migration
             $table->string('effectivity')->nullable();
             $table->longText('description')->nullable();
             $table->json('version')->nullable();
+
+            /** EO */
+            $table->string('revision')->nullable();
+            $table->string('ref_no')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 

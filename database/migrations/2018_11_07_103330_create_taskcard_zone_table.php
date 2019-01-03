@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemTaskcardTable extends Migration
+class CreateTaskcardZoneTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateItemTaskcardTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_taskcard', function (Blueprint $table) {
+        Schema::create('taskcard_zone', function (Blueprint $table) {
             $table->unsignedInteger('taskcard_id');
-            $table->unsignedInteger('item_id');
-            $table->double('quantity');
+            $table->unsignedInteger('zone_id');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('item_id')
-                    ->references('id')->on('items')
+            $table->foreign('taskcard_id')
+                    ->references('id')->on('taskcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('taskcard_id')
-                    ->references('id')->on('taskcards')
+            $table->foreign('zone_id')
+                    ->references('id')->on('zones')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -39,6 +38,6 @@ class CreateItemTaskcardTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_taskcard');
+        Schema::dropIfExists('taskcard_zone');
     }
 }
