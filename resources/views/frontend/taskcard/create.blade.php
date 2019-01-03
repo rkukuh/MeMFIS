@@ -239,6 +239,18 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
+                                                    Version @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'version')
+                                                    @slot('text', 'Version')
+                                                    @slot('name', 'version')
+                                                    @slot('id_error', 'version')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
                                                     Description @include('frontend.common.label.optional')
                                                 </label>
 
@@ -249,6 +261,8 @@
                                                     @slot('text', 'Description')
                                                 @endcomponent
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -483,6 +497,8 @@
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/typeahead/version.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/taskcard/create.js') }}"></script>
