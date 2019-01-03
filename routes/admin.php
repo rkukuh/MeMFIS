@@ -46,7 +46,6 @@ Route::name('admin.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('aircraft-zone', 'AircraftZoneController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('aircraft-access', 'AircraftAccessController');
 
         /** LICENSE */
 

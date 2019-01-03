@@ -28,19 +28,6 @@ class Aircraft extends MemfisModel
     }
 
     /**
-     * One-to-Many: An aircraft may have zero or many access.
-     *
-     * This function will retrieve the accesses of an aircraft.
-     * See: AircraftAccess's aircraft() method for the inverse
-     *
-     * @return mixed
-     */
-    public function accesses()
-    {
-        return $this->hasMany(AircraftAccess::class);
-    }
-
-    /**
      * One-to-Many: A manufacturer may have zero or many aircrafts.
      *
      * This function will retrieve the manufacturer of an aircraft.
