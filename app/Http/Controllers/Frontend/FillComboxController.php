@@ -10,9 +10,11 @@ use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
 use App\Models\Customer;
+use App\Models\Aircraft;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Employee;
+use App\Models\TaskCard;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -196,7 +198,7 @@ class FillComboxController extends Controller
      */
     public function workArea()
     {
-        $work_areas = Category::ofItem()
+        $work_areas = Type::ofWorkArea()
                               ->pluck('name', 'id');
 
         return json_encode($work_areas);
@@ -266,8 +268,7 @@ class FillComboxController extends Controller
      */
     public function taskcardRelationship()
     {
-        $taskcard_relationships = Category::ofItem()
-                              ->pluck('name', 'id');
+        $taskcard_relationships = Taskcard::pluck('title', 'id');
 
         return json_encode($taskcard_relationships);
 
@@ -383,6 +384,69 @@ class FillComboxController extends Controller
         return view('frontend.testing.repeaterBlank', [
             'websites' => $websites
         ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taskcardType()
+    {
+        $taskcard_types = Type::ofTaskCardTask()
+                        ->pluck('name', 'id');
+
+        return json_encode($taskcard_types);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taskcardTypeRoutine()
+    {
+        $taskcard_type_routines = Type::ofTaskCardTypeRoutine()
+                        ->pluck('name', 'id');
+
+        return json_encode($taskcard_type_routines);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taskcardTypeNonRoutine()
+    {
+        $taskcard_type_non_routines = Type::ofTaskCardTypeNonRoutine()
+                        ->pluck('name', 'id');
+
+        return json_encode($taskcard_type_non_routines);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aircraft()
+    {
+        $aircrafts = Aircraft::pluck('name', 'id');
+
+        return json_encode($aircrafts);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taskType()
+    {
+        $task_types = Type::ofTaskCardTask()->pluck('name', 'id');
+
+        return json_encode($task_types);
     }
 
 

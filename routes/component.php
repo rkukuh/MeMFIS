@@ -40,6 +40,12 @@ Route::name('component.')->group(function () {
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
         Route::get('get-manufacturers', 'FillComboxController@manufacturer')->name('get-manufacturers');
         Route::get('get-scheduled-payment-types', 'FillComboxController@scheduledPaymentType')->name('get-scheduled-payment-types');
+        Route::get('get-takcard-types', 'FillComboxController@taskcardType')->name('get-takcard-types');
+        Route::get('get-takcard-routine-types', 'FillComboxController@taskcardTypeRoutine')->name('get-takcard-routine-types');
+        Route::get('get-takcard-non-routine-types', 'FillComboxController@taskcardTypeNonRoutine')->name('get-takcard-non-routine-types');
+        Route::get('get-aircrafts', 'FillComboxController@aircraft')->name('get-aircrafts');
+        Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
+
 
     });
 });
