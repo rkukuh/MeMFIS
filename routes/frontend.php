@@ -54,7 +54,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('currency', 'CurrencyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
-        Route::resource('aircraft-zone', 'AircraftZoneController');
         Route::resource('certification', 'CertificationController');
 
         /** LICENSE */

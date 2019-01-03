@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AircraftsTableSeeder::class);
-        $this->call(AircraftZonesTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
         $this->call(SchoolsTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
