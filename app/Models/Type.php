@@ -211,7 +211,9 @@ class Type extends MemfisModel
      */
     public function scopeOfTaskCardTypeNonRoutine(Builder $query)
     {
-        return $query->where('of', 'taskcard-type-non-routine');
+        return $query->where('of', 'taskcard-type-non-routine')
+                     ->where('code', '<>', 'si')
+                     ->where('code', '<>', 'htcrr');
     }
 
     /**
