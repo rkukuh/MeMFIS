@@ -17,6 +17,7 @@ class CreateItemTaskcardTable extends Migration
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('taskcard_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('item_id')
                     ->references('id')->on('items')
