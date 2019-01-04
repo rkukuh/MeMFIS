@@ -34,10 +34,9 @@
                                     Storage @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.select')
+                                @component('frontend.common.input.select2')
                                     @slot('text', 'Storage')
                                     @slot('id_error', 'storage')
-                                    @slot('style', 'width: 100%')
                                     @slot('id', 'item_storage_id')
                                     @slot('name', 'item_storage_id')
                                 @endcomponent

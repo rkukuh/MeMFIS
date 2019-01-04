@@ -50,10 +50,9 @@
                                     Unit @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.select')
+                                @component('frontend.common.input.select2')
                                     @slot('text', 'Unit')
                                     @slot('id', 'item_unit_id')
-                                    @slot('style', 'width: 100%')
                                     @slot('name', 'item_unit_id')
                                     @slot('id_error', 'item_unit')
                                 @endcomponent
