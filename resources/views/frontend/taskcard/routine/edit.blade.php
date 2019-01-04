@@ -286,7 +286,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Tool Taskcard
+                                    Tool Required
                                 </h3>
                             </div>
                         </div>
@@ -307,7 +307,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.tool.modal')
+                            @include('frontend.taskcard.routine.tool.modal')
 
                             <div class="tool_datatable" id="tool_datatable"></div>
                         </div>
@@ -324,7 +324,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item Taskcard
+                                    Item Required
                                 </h3>
                             </div>
                         </div>
@@ -345,7 +345,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.item.modal')
+                            @include('frontend.taskcard.routine.item.modal')
 
                             <div class="item_datatable" id="item_datatable"></div>
                         </div>
@@ -383,7 +383,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.threshold.modal')
+                            @include('frontend.taskcard.routine.threshold.modal')
 
                             <div class="threshold_datatable" id="item_datatable"></div>
                         </div>
@@ -421,7 +421,7 @@
                                         </div>
                                     </div>
 
-                                    @include('frontend.taskcard.repeat.modal')
+                                    @include('frontend.taskcard.routine.repeat.modal')
 
                                     <div class="repeat_datatable" id="item_datatable"></div>
                                 </div>

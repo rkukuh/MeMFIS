@@ -322,7 +322,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Tool Taskcard
+                                    Tool Required
                                 </h3>
                             </div>
                         </div>
@@ -353,7 +353,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Taskcard
+                                    Material Required
                                 </h3>
                             </div>
                         </div>

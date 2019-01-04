@@ -28,7 +28,7 @@ class TaskCardController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.create');
+        return view('frontend.taskcard.routine.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class TaskCardController extends Controller
      */
     public function edit(Taskcard $taskCard)
     {
-        return view('frontend.taskcard.edit');
+        return view('frontend.taskcard.routine.edit');
     }
 
     /**
