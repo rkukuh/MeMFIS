@@ -10,7 +10,7 @@ use App\Http\Requests\Frontend\TaskCardUpdate;
 
 class TaskCardController extends Controller
 {
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +28,7 @@ class TaskCardController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.create');
+        return view('frontend.taskcard.nonroutine.create');
     }
 
     /**
