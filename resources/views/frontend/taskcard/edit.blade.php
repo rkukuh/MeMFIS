@@ -294,7 +294,7 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
+                                <div class="row align-tools-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Tool Taskcard')
@@ -309,7 +309,7 @@
 
                             @include('frontend.taskcard.tool.modal')
 
-                            <div class="item_datatable" id="item_datatable"></div>
+                            <div class="tool_datatable" id="tool_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -464,6 +464,8 @@
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
 
