@@ -19,9 +19,9 @@ class CreateTaskcardsTable extends Migration
             $table->string('number');
             $table->string('title');
             $table->unsignedInteger('type_id');
-            $table->unsignedInteger('task_type_id');
-            $table->unsignedInteger('work_area');
-            $table->double('manhour');
+            $table->unsignedInteger('task_type_id')->nullable();
+            $table->unsignedInteger('work_area')->nullable();
+            $table->double('manhour')->nullable();
             $table->integer('helper_quantity')->nullable();
             $table->boolean('is_rii')->default(false);
             $table->string('source')->nullable();
@@ -32,6 +32,15 @@ class CreateTaskcardsTable extends Migration
             /** EO */
             $table->string('revision')->nullable();
             $table->string('ref_no')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedInteger('scheduled_priority_id')->nullable();
+            $table->integer('scheduled_priority_amount')->nullable();
+            $table->string('scheduled_priority_type')->nullable();
+            $table->unsignedInteger('recurrence_id')->nullable();
+            $table->integer('recurrence_amount')->nullable();
+            $table->string('recurrence_type')->nullable();
+            $table->unsignedInteger('manual_affected_id')->nullable();
+            $table->string('manual_affected')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -47,6 +56,26 @@ class CreateTaskcardsTable extends Migration
                     ->onDelete('restrict');
 
             $table->foreign('work_area')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('category_id')
+                    ->references('id')->on('categories')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('scheduled_priority_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('recurrence_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('manual_affected_id')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
