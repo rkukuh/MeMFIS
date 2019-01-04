@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Zone;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
+use App\Models\Access;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
@@ -447,6 +449,30 @@ class FillComboxController extends Controller
         $task_types = Type::ofTaskCardTask()->pluck('name', 'id');
 
         return json_encode($task_types);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function zone()
+    {
+        $zones = Zone::pluck('name', 'id');
+
+        return json_encode($zones);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function access()
+    {
+        $accesses = Access::pluck('name', 'id');
+
+        return json_encode($accesses);
     }
 
 
