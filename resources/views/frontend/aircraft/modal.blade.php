@@ -46,7 +46,6 @@
                                     @slot('name', 'manufacturer_id')
                                     @slot('id', 'manufacturer_id')
                                     @slot('text', 'Manufacturer')
-                                    @slot('style', 'width: 100%')
                                     @slot('id_error', 'manufacturer_id')
                                 @endcomponent
                             </div>
