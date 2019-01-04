@@ -28,6 +28,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'effectivity' => null,
         'description' => $faker->paragraph(rand(10, 20)),
         'version' => null,
+        'performance_factor' => 1,
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
     ];

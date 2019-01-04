@@ -21,6 +21,7 @@ class TaskCard extends MemfisModel
         'effectivity',
         'description',
         'version',
+        'performance_factor',
 
         /** EO */
         'revision',

@@ -28,6 +28,7 @@ class CreateTaskcardsTable extends Migration
             $table->string('effectivity')->nullable();
             $table->longText('description')->nullable();
             $table->json('version')->nullable();
+            $table->unsignedDecimal('performance_factor', 8, 2)->default(1);
 
             /** EO */
             $table->string('revision')->nullable();
