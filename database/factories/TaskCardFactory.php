@@ -34,11 +34,22 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
 });
 
-/** States */
+/** STATES */
 
-// TODO: Define states for: Basic, EO, and SI
+$factory->state(TaskCard::class, 'basic', [
+    '' => '',
+]);
 
-/** Callbacks */
+$factory->state(TaskCard::class, 'eo', [
+    'revision' => null,
+    'ref_no' => null,
+]);
+
+$factory->state(TaskCard::class, 'si', [
+    '' => '',
+]);
+
+/** CALLBACKS */
 
 $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
     if ($faker->boolean) {
