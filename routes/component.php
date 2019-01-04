@@ -47,6 +47,8 @@ Route::name('component.')->group(function () {
         Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
+        Route::get('get-category-taskcard', 'FillComboxController@categorieTakcard')->name('get-category-taskcard');
+
 
 
     });
