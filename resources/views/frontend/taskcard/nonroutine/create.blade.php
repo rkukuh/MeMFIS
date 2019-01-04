@@ -181,7 +181,7 @@
                                                 </div>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <select id="recurrence-select" name="recurrence-select" class="form-control" disabled>
+                                                        <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
                                                             <option value="">
                                                                 Select a Recurrence
                                                             </option>
@@ -691,7 +691,7 @@
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
 
-    <script src="{{ asset('js/frontend/taskcard/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/create.js') }}"></script>
     {{-- public/js/frontend/taskcard/create.js --}}
     <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
 @endpush
