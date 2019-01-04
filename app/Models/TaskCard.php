@@ -18,7 +18,6 @@ class TaskCard extends MemfisModel
         'helper_quantity',
         'is_rii',
         'source',
-        'version',
         'effectivity',
         'description',
         'version',
