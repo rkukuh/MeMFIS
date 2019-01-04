@@ -60,14 +60,13 @@
                                                     @slot('id', 'customer')
                                                     @slot('text', 'Customer')
                                                     @slot('name', 'customer')
-                                                    @slot('style', 'width:100%')
                                                     @slot('id_error', 'customer')
                                                 @endcomponent
                                             </div>
                                         </div>
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Identifier</legend>
-                                                    <div class="form-group m-form__group row">        
+                                                    <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
                                                                 Name
@@ -89,7 +88,7 @@
                                                             @endcomponent
                                                         </div>
                                                     </div>
-                                                    <div class="form-group m-form__group row">        
+                                                    <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
                                                                 Attn
@@ -109,12 +108,11 @@
                                                                 @slot('id', 'ref')
                                                                 @slot('text', 'Ref')
                                                                 @slot('name', 'ref')
-                                                                @slot('style', 'width:100%')
                                                                 @slot('id_error', 'ref')
                                                             @endcomponent
                                                         </div>
                                                     </div>
-                                                    <div class="form-group m-form__group row">        
+                                                    <div class="form-group m-form__group row">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <label class="form-control-label">
                                                                 Address
@@ -131,7 +129,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    From 
+                                                    From
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
@@ -149,12 +147,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
-                                            
+
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Date @include('frontend.common.label.required')
                                                 </label>
-    
+
                                                 @component('frontend.common.label.data-info')
                                                     @slot('text', '18/10/10')
                                                 @endcomponent
@@ -174,7 +172,7 @@
                                                 <label class="form-control-label">
                                                     P. Center
                                                 </label>
-    
+
                                                 @component('frontend.common.label.data-info')
                                                     @slot('text', 'MMF01')
                                                 @endcomponent

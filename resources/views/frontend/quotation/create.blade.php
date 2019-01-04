@@ -192,7 +192,6 @@
                                                                     @slot('text', 'Currency')
                                                                     @slot('name', 'currency')
                                                                     @slot('id_error', 'currency')
-                                                                    @slot('style', 'width:100%')
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -235,7 +234,6 @@
                                                             @slot('id', 'scheduled_payment_type')
                                                             @slot('text', 'Scheduled Payment Type')
                                                             @slot('name', 'scheduled_payment_type')
-                                                            @slot('style', 'width:100%')
                                                             @slot('id_error', 'scheduled_payment_type')
                                                         @endcomponent
                                                     </div>
