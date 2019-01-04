@@ -45,6 +45,8 @@ Route::name('component.')->group(function () {
         Route::get('get-takcard-non-routine-types', 'FillComboxController@taskcardTypeNonRoutine')->name('get-takcard-non-routine-types');
         Route::get('get-aircrafts', 'FillComboxController@aircraft')->name('get-aircrafts');
         Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
+        Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
+        Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
 
 
     });
