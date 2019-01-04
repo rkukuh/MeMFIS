@@ -48,6 +48,9 @@ Route::name('component.')->group(function () {
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
         Route::get('get-category-taskcard', 'FillComboxController@categorieTakcard')->name('get-category-taskcard');
+        Route::get('get-scheduled-priorities', 'FillComboxController@scheduledPriority')->name('get-scheduled-priorities');
+        Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
+        Route::get('get-manual-affecteds', 'FillComboxController@manualAffected')->name('get-manual-affecteds');
 
 
 

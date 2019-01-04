@@ -489,5 +489,44 @@ class FillComboxController extends Controller
         return json_encode($accesses);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function scheduledPriority()
+    {
+        $accesses = Type::ofTaskCardEOScheduledPriority()
+                    ->pluck('name', 'id');
+
+        return json_encode($accesses);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function recurrence()
+    {
+        $accesses = Type::ofTaskCardEORecurrence()
+                    ->pluck('name', 'id');
+
+        return json_encode($accesses);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manualAffected()
+    {
+        $accesses = Type::ofTaskCardEOManualAffected()
+                    ->pluck('name', 'id');
+
+        return json_encode($accesses);
+    }
+
 
 }
