@@ -462,7 +462,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/access.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/access.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
