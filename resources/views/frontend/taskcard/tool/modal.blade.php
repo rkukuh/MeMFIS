@@ -20,19 +20,18 @@
                         <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                         <div class="m-portlet__body">
                             <div class="form-group m-form__group row ">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Item @include('frontend.common.label.required')
-                                            </label>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Tool @include('frontend.common.label.required')
+                                    </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'item')
-                                                @slot('text', 'Item')
-                                                @slot('name', 'item')
-                                                @slot('style', 'width:100%')
-                                                @slot('id_error', 'item')
-                                            @endcomponent
-                                    </div>
+                                    @component('frontend.common.input.select2')
+                                        @slot('id', 'tool')
+                                        @slot('text', 'tool')
+                                        @slot('name', 'tool')
+                                        @slot('id_error', 'tool')
+                                    @endcomponent
+                                </div>
                             </div>
                             <div class="form-group m-form__group row ">
 
@@ -58,7 +57,6 @@
                                             @slot('text', 'Unit')
                                             @slot('name', 'item_unit_id')
                                             @slot('id_error', 'unit')
-                                            @slot('style', 'width:100%')
                                         @endcomponent
                                     </div>
                             </div>

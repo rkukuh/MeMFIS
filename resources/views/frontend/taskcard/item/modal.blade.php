@@ -24,23 +24,22 @@
                                             <label class="form-control-label">
                                                 Item @include('frontend.common.label.required')
                                             </label>
-            
+
                                             @component('frontend.common.input.select2')
                                                 @slot('id', 'item')
                                                 @slot('text', 'Item')
                                                 @slot('name', 'item')
-                                                @slot('style', 'width:100%')
                                                 @slot('id_error', 'item')
                                             @endcomponent
                                     </div>
                             </div>
                             <div class="form-group m-form__group row ">
-                                
+
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
                                         Quantity @include('frontend.common.label.required')
                                     </label>
-    
+
                                     @component('frontend.common.input.number')
                                         @slot('text', 'Quantity')
                                         @slot('name', 'quantity')
@@ -52,13 +51,12 @@
                                         <label class="form-control-label">
                                             Unit @include('frontend.common.label.required')
                                         </label>
-        
-                                        @component('frontend.common.input.select')
+
+                                        @component('frontend.common.input.select2')
                                             @slot('id', 'item_unit_id')
                                             @slot('text', 'Unit')
                                             @slot('name', 'item_unit_id')
                                             @slot('id_error', 'unit')
-                                            @slot('style', 'width:100%')
                                         @endcomponent
                                     </div>
                             </div>
@@ -78,7 +76,7 @@
                             </div>
                         </div>
                     </form>
-    
+
                 </div>
         </div>
     </div>
