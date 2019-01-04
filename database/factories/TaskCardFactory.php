@@ -37,16 +37,33 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 /** STATES */
 
 $factory->state(TaskCard::class, 'basic', [
-    '' => '',
+    //
 ]);
 
-$factory->state(TaskCard::class, 'eo', [
-    'revision' => null,
-    'ref_no' => null,
-]);
+$factory->state(TaskCard::class, 'eo', function ($faker) {
+
+    // TODO: When 'Scheduled Priority' == 'Prior to'
+    // TODO: When 'Recurrence' == 'Repetitive'
+    // TODO: When 'Manual Affected' == 'Other'
+
+    return [
+        'revision' => null,
+        'ref_no' => null,
+        'category_id' => Category::ofTaskCardEO()->get()->random()->id,
+        'scheduled_priority_id' => Type::ofTaskCardEOScheduledPriority()->get()->random()->id,
+        'scheduled_priority_amount' => '',
+        'scheduled_priority_type' => '',
+        'recurrence_id' => Type::ofTaskCardEORecurrence()->get()->random()->id,
+        'recurrence_amount' => '',
+        'recurrence_type' => '',
+        'manual_affected_id' => Type::ofTaskCardEOManualAffected()->get()->random()->id,
+        'manual_affected' => '',
+    ];
+
+});
 
 $factory->state(TaskCard::class, 'si', [
-    '' => '',
+    //
 ]);
 
 /** CALLBACKS */
