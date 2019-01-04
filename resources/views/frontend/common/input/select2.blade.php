@@ -3,7 +3,7 @@
     name="{{ $name or '' }}"
     class="form-control m-select2
            {{ $class or '' }}"
-    style="{{ $style or '' }}"
+    style="{{ $style or 'width:100%' }}"
     {{ $multiple or '' }}
     {{ $disabled or ''}}
 >
