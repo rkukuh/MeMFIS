@@ -58,11 +58,10 @@
                                                         Customer @include('frontend.common.label.required')
                                                     </label>
 
-                                                    @component('frontend.common.input.select')
+                                                    @component('frontend.common.input.select2')
                                                         @slot('id', 'customer')
                                                         @slot('text', 'Customer')
                                                         @slot('name', 'customer')
-                                                        @slot('style', 'width:100%')
                                                         @slot('id_error', 'customer')
                                                     @endcomponent
                                                 </div>
@@ -119,7 +118,6 @@
                                                                                     @slot('text', 'Bp. Romdani')
                                                                                     @slot('id', 'attention')
                                                                                     @slot('name', 'attention')
-                                                                                    @slot('style', 'width:100%')
                                                                                 @endcomponent
                                                                             </div>
                                                                         </div>
@@ -136,7 +134,6 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', '+62xxxxxxx / 07777777')
                                                                                     @slot('id', 'phone')
-                                                                                    @slot('style', 'width: 100%')
                                                                                 @endcomponent
 
                                                                             </div>
@@ -148,7 +145,6 @@
                                                                                     @component('frontend.common.input.select2')
                                                                                         @slot('text', '+62xxxxxxx / 07777777')
                                                                                         @slot('id', 'fax')
-                                                                                        @slot('style', 'width: 100%')
                                                                                     @endcomponent
                                                                                 </div>
                                                                         </div>
@@ -161,7 +157,6 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', '+62xxxxxxx / 07777777')
                                                                                     @slot('id', 'email')
-                                                                                    @slot('style', 'width: 100%')
                                                                                 @endcomponent
 
                                                                             </div>
@@ -179,7 +174,6 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
                                                                                     @slot('id', 'address')
-                                                                                    @slot('style', 'width: 100%')
                                                                                 @endcomponent
                                                                             </div>
                                                                         </div>
