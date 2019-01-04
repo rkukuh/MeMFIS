@@ -18,10 +18,23 @@ class TaskCard extends MemfisModel
         'helper_quantity',
         'is_rii',
         'source',
-        'version',
         'effectivity',
         'description',
         'version',
+        'performance_factor',
+
+        /** EO */
+        'revision',
+        'ref_no',
+        'category_id',
+        'scheduled_priority_id',
+        'scheduled_priority_amount',
+        'scheduled_priority_type',
+        'recurrence_id',
+        'recurrence_amount',
+        'recurrence_type',
+        'manual_affected_id',
+        'manual_affected',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

@@ -26,7 +26,7 @@ class TypesOfTaskCardEORecurrence extends Seeder
 
         Type::create([
             'code' => 'repetitive',
-            'name' => 'Repetitive (interval in HRS, CYC, DAYS, MONTHS)',
+            'name' => 'Repetitive',
             'of'  => 'taskcard-eo-recurrence',
         ]);
     }
