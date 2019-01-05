@@ -7,6 +7,7 @@
             {{$class or ''}}"
         style="{{$style or ''}}"
         placeholder="{{ $placeholder or '' }}"
+        {{ $disabled or ''}}
         readonly
     >
     <div class="input-group-append">
