@@ -1,6 +1,23 @@
 let TaskCard = {
     init: function () {
 
+        $('#prior_to_date').on('click', function () {
+            $('#date').removeAttr("disabled");
+            $('#hour').prop("disabled", true);
+            $('#cycle').prop("disabled", true);
+        });
+        $('#prior_to_hours').on('click', function () {
+            $('#hour').removeAttr("disabled");
+            $('#date').prop("disabled", true);
+            $('#cycle').prop("disabled", true);
+        });
+        $('#prior_to_cycle').on('click', function () {
+            $('#cycle').removeAttr("disabled");
+            $('#date').prop("disabled", true);
+            $('#hour').prop("disabled", true);
+        });
+
+
         $(document).ready(function () {
             $('select[name="recurrence_id"]').on('change', function () {
                 let recurrence = $(this).val();
@@ -10,6 +27,20 @@ let TaskCard = {
                 } else {
                     $('#recurrence').prop("disabled", true);
                     $('#recurrence-select').prop("disabled", true);
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('select[name="scheduled_priority_id"]').on('change', function () {
+                let recurrence = $(this).val();
+                if (recurrence == 71) {
+                $('#prior_to_date').removeAttr("disabled");
+                $('#prior_to_hours').removeAttr("disabled");
+                $('#prior_to_cycle').removeAttr("disabled");
+                } else {
+                    $('#prior_to_date').prop("disabled", true);
+                    $('#prior_to_hours').prop("disabled", true);
+                    $('#prior_to_cycle').prop("disabled", true);
                 }
             });
         });

@@ -148,6 +148,72 @@
 
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label" style="margin-top:13px">
+                                                </label>
+
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('id', 'prior_to_date')
+                                                            @slot('name', 'prior_to')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                                        @component('frontend.common.input.datepicker')
+                                                            @slot('id', 'date')
+                                                            @slot('text', 'date')
+                                                            @slot('name', 'date')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('id', 'prior_to_hours')
+                                                            @slot('name', 'prior_to')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'hour')
+                                                            @slot('text', 'hour')
+                                                            @slot('name', 'hour')
+                                                            @slot('disabled', 'disabled')
+                                                            @slot('input_append', 'Hours')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('id', 'prior_to_cycle')
+                                                            @slot('name', 'prior_to')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'cycle')
+                                                            @slot('text', 'cycle')
+                                                            @slot('name', 'cycle')
+                                                            @slot('disabled', 'disabled')
+                                                            @slot('input_append', 'Cycle')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                {{-- <table>
+                                                        <tr><td><font color='red' size='3'>*</font>CIVIL STATUS</td><td>:</td><td><input type='radio' name='civstat' value='Single' required='required'  onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Single
+                                                            <br><input type='radio' name='civstat' value='Married' required='required'  onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Married
+                                                            <br><input type='radio' name='civstat' value='Annuled' required='required'  onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Annuled
+                                                            <br><input type='radio' name='civstat' value='Widowed' required='required'  onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Widowed
+                                                            <br><input type='radio' name='civstat' value='Seperated' required='required' onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Seperated
+                                                            <br><input type='radio' name='civstat' required='required' onclick='document.getElementById("civstaton").removeAttribute("disabled");'> Others,
+                                                            please specify here<input type='text' name='civstat' id='civstaton' disabled></td>
+                                                            </tr>
+                                                </table> --}}
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -654,6 +720,8 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/recurrence.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/manual-affected.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/manual-affected.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
     {{-- <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
