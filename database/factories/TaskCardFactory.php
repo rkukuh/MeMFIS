@@ -39,9 +39,13 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
 /** STATES */
 
-$factory->state(TaskCard::class, 'basic', [
-    //
-]);
+$factory->state(TaskCard::class, 'basic', function ($faker) {
+
+    return [
+        'type_id' => Type::ofTaskCardTypeRoutine()->get()->random()->id,
+    ];
+
+});
 
 $factory->state(TaskCard::class, 'eo', function ($faker) {
 
@@ -50,6 +54,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
     // TODO: When 'Manual Affected' == 'Other'
 
     return [
+        'type_id' => Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
         'revision' => null,
         'ref_no' => null,
         'category_id' => Category::ofTaskCardEO()->get()->random()->id,
@@ -65,9 +70,11 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
 
 });
 
-$factory->state(TaskCard::class, 'si', [
+$factory->state(TaskCard::class, 'si', function ($faker) {
+
     //
-]);
+
+});
 
 /** CALLBACKS */
 
