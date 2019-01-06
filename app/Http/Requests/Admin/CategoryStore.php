@@ -26,6 +26,7 @@ class CategoryStore extends FormRequest
         return [
             'code' => 'required',
             'name' => 'required',
+            'of' => 'required',
         ];
     }
 }
