@@ -84,5 +84,7 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
     }
 
-    // TODO: Save the aircraft zones
+    if ($faker->boolean) {
+        $taskcard->zones()->saveMany($aircraft->zones);
+    }
 });
