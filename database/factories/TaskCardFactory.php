@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Type;
+use App\Models\Access;
 use App\Models\Version;
 use App\Models\TaskCard;
+use App\Models\Aircraft;
 use App\Models\Description;
 use Faker\Generator as Faker;
 
@@ -28,7 +30,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'effectivity' => null,
         'description' => $faker->paragraph(rand(10, 20)),
         'version' => null,
-        'performance_factor' => 1,
+        'performance_factor' => rand(0, 10) / 10, // 0-1
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
     ];
@@ -70,11 +72,17 @@ $factory->state(TaskCard::class, 'si', [
 /** CALLBACKS */
 
 $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
+    $aircraft = Aircraft::get()->random();
+
     if ($faker->boolean) {
         $taskcard->versions()->saveMany(factory(Version::class, rand(2, 4))->make());
     }
 
     // TODO: Save Many (1, 3) the aircraft_taskcard
-    // TODO: Save the aircraft access
+
+    if ($faker->boolean) {
+        $taskcard->accesses()->saveMany($aircraft->accesses);
+    }
+
     // TODO: Save the aircraft zones
 });
