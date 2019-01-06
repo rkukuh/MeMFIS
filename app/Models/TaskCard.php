@@ -39,9 +39,6 @@ class TaskCard extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
-    // TODO: (self-join) parent
-    // TODO: (self-join) child(s)
-
     /**
      * Many-to-Many: A task card may have zero or many aircraft.
      *
@@ -68,6 +65,33 @@ class TaskCard extends MemfisModel
     {
         return $this->belongsToMany(Access::class, 'access_taskcard', 'taskcard_id', 'access_id')
                     ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many (self-join): A task card may have none or many other related task cards.
+     *
+     * This function will retrieve all the related-to task cards of a task card.
+     * See: TaskCard's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function related_to()
+    {
+        return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'taskcard_id', 'related_to');
+    }
+
+    /**
+     * Many-to-Many (self-join): A task card may have none or many other related task cards.
+     *
+     * This function will retrieve the parent task cards of a (related-to) task cards.
+     * See: TaskCard's related_to() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'related_to', 'taskcard_id')
+                    ->withTrashed();
     }
 
     /**
