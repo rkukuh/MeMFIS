@@ -11,6 +11,8 @@
         class="{{ $class or ''}}"
         style="{{ $style or ''}}"
         value="{{ $value or '' }}"
+        onclick="{{ $onclick or '' }}"
+        {{ $disabled or ''}}
     >
 
     {{ $text or '' }}

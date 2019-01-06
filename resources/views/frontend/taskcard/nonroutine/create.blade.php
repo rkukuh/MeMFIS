@@ -92,21 +92,6 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Effectivity (A/C Type) @include('frontend.common.label.optional')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Applicability Airplane')
-                                                    @slot('id', 'applicability_airplane')
-                                                    @slot('name', 'applicability_airplane')
-                                                    @slot('multiple','multiple')
-                                                    @slot('id_error', 'applicability-airplane')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
                                                     Title @include('frontend.common.label.required')
                                                 </label>
 
@@ -116,8 +101,198 @@
                                                     @slot('name', 'title')
                                                     @slot('id_error', 'title')
                                                 @endcomponent
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Effectivity (A/C Type) @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Applicability Airplane')
+                                                    @slot('id', 'applicability_airplane')
+                                                    @slot('name', 'applicability_airplane')
+                                                    @slot('multiple','multiple')
+                                                    @slot('id_error', 'applicability-airplane')
+                                                @endcomponent
+
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Category @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('id', 'category')
+                                                    @slot('text', 'Category')
+                                                    @slot('name', 'category')
+                                                    @slot('id_error', 'category')
+                                                @endcomponent
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Schedule Priority @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('id', 'scheduled_priority_id')
+                                                    @slot('text', 'Scheduled Priority')
+                                                    @slot('name', 'scheduled_priority_id')
+                                                    @slot('id_error', 'scheduled_priority_id')
+                                                @endcomponent
+
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label" style="margin-top:13px">
+                                                </label>
+
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('id', 'prior_to_date')
+                                                            @slot('name', 'prior_to')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                                        @component('frontend.common.input.datepicker')
+                                                            @slot('id', 'date')
+                                                            @slot('text', 'date')
+                                                            @slot('name', 'date')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('id', 'prior_to_hours')
+                                                            @slot('name', 'prior_to')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'hour')
+                                                            @slot('text', 'hour')
+                                                            @slot('name', 'hour')
+                                                            @slot('disabled', 'disabled')
+                                                            @slot('input_append', 'Hours')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('id', 'prior_to_cycle')
+                                                            @slot('name', 'prior_to')
+                                                            @slot('disabled', 'disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'cycle')
+                                                            @slot('text', 'cycle')
+                                                            @slot('name', 'cycle')
+                                                            @slot('disabled', 'disabled')
+                                                            @slot('input_append', 'Cycle')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                {{-- <table>
+                                                        <tr><td><font color='red' size='3'>*</font>CIVIL STATUS</td><td>:</td><td><input type='radio' name='civstat' value='Single' required='required'  onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Single
+                                                            <br><input type='radio' name='civstat' value='Married' required='required'  onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Married
+                                                            <br><input type='radio' name='civstat' value='Annuled' required='required'  onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Annuled
+                                                            <br><input type='radio' name='civstat' value='Widowed' required='required'  onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Widowed
+                                                            <br><input type='radio' name='civstat' value='Seperated' required='required' onclick='document.getElementById("civstaton").setAttribute("disabled","disabled");document.getElementById("civstaton").value = "";'> Seperated
+                                                            <br><input type='radio' name='civstat' required='required' onclick='document.getElementById("civstaton").removeAttribute("disabled");'> Others,
+                                                            please specify here<input type='text' name='civstat' id='civstaton' disabled></td>
+                                                            </tr>
+                                                </table> --}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Recurrence @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('id', 'recurrence_id')
+                                                    @slot('text', 'Recurrence Id')
+                                                    @slot('name', 'recurrence_id')
+                                                    @slot('id_error', 'recurrence_id')
+                                                @endcomponent
+
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label" style="margin-top:13px">
+                                                </label>
+
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'recurrence')
+                                                            @slot('text', 'Recurrence')
+                                                            @slot('name', 'recurrence')
+                                                            @slot('disabled', 'disabled')
+                                                            @slot('id_error', 'recurrence')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
+                                                            <option value="">
+                                                                Select a Recurrence
+                                                            </option>
+                                                            <option value="cyrcle">
+                                                                Cycle
+                                                            </option>
+                                                            <option value="hourly">
+                                                                Hourly
+                                                            </option>
+                                                            <option value="daily">
+                                                                Daily
+                                                            </option>
+                                                            <option value="yearly">
+                                                                Yearly
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Manuals Affected @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('id', 'manual_affected_id')
+                                                    @slot('text', 'Manual Affected')
+                                                    @slot('name', 'manual_affected_id')
+                                                    @slot('id_error', 'manual_affected_id')
+                                                @endcomponent
+
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label" style="margin-top:13px">
+                                                </label>
+
+                                                @component('frontend.common.input.textarea')
+                                                    @slot('rows', '3')
+                                                    @slot('id', 'note')
+                                                    @slot('name', 'note')
+                                                    @slot('text', 'Note')
+                                                    @slot('disabled', 'disabled')
+                                                @endcomponent
                                             </div>
                                         </div>
                                         {{-- <div class="form-group m-form__group row">
@@ -536,6 +711,17 @@
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/category-taskcard.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/scheduled-priority.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-priority.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/recurrence.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/recurrence.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/manual-affected.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/manual-affected.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
     {{-- <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
@@ -573,7 +759,7 @@
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
 
-    <script src="{{ asset('js/frontend/taskcard/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/create.js') }}"></script>
     {{-- public/js/frontend/taskcard/create.js --}}
     <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
 @endpush
