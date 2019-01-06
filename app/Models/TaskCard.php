@@ -39,6 +39,8 @@ class TaskCard extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
+    // TODO: M-M with Aircraft
+
     /**
      * Many-to-Many: A task card may have zero or many (aircraft) access.
      *
