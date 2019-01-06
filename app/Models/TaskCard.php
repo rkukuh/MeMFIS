@@ -39,7 +39,19 @@ class TaskCard extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
-    // TODO: M-M with Aircraft
+    /**
+     * Many-to-Many: A task card may have zero or many aircraft.
+     *
+     * This function will retrieve all the aircrafts of a task card.
+     * See: Aircraft's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function aircrafts()
+    {
+        return $this->belongsToMany(Aircraft::class, 'aircraft_taskcard', 'taskcard_id', 'aircraft_id')
+                    ->withTimestamps();
+    }
 
     /**
      * Many-to-Many: A task card may have zero or many (aircraft) access.
