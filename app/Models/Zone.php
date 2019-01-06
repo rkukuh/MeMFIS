@@ -26,5 +26,17 @@ class Zone extends MemfisModel
         return $this->morphTo();
     }
 
-    // TODO: M-M relationship with Task Card
+    /**
+     * Many-to-Many: A task card may have zero or many (aircraft) zone.
+     *
+     * This function will retrieve all the task cards of an (aircraft) zone.
+     * See: TaskCard's zones() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcards()
+    {
+        return $this->belongsToMany(TaskCard::class, 'taskcard_zone', 'zone_id', 'taskcard_id')
+                    ->withTimestamps();
+    }
 }

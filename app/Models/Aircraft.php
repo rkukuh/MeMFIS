@@ -14,6 +14,8 @@ class Aircraft extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
+    // TODO: M-M with TaskCard
+
     /**
      * Polymorphic: An entity can have zero or many accesses.
      *

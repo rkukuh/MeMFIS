@@ -26,5 +26,17 @@ class Access extends MemfisModel
         return $this->morphTo();
     }
 
-    // TODO: M-M relationship with Task Card
+    /**
+     * Many-to-Many: A task card may have zero or many (aircraft) access.
+     *
+     * This function will retrieve all the task cards of an (aircraft) access.
+     * See: TaskCard's accesses() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcards()
+    {
+        return $this->belongsToMany(TaskCard::class, 'access_taskcard', 'access_id', 'taskcard_id')
+                    ->withTimestamps();
+    }
 }

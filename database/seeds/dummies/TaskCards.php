@@ -12,10 +12,9 @@ class TaskCards extends Seeder
      */
     public function run()
     {
-        factory(TaskCard::class, config('memfis.dummies.taskcards'))->create();
+        factory(TaskCard::class, config('memfis.dummies.taskcards.basic'))->states('basic')->create();
+        factory(TaskCard::class, config('memfis.dummies.taskcards.basic'))->states('eo')->create();
 
-        // TODO: Generate task card: basic
-        // TODO: Generate task card: eo
         // TODO: Generate task card: si
     }
 }
