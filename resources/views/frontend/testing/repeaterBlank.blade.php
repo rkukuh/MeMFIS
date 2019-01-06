@@ -16,7 +16,7 @@
       </select> --}}
       <form action="" id="myform">
             <table class="order-list">
-                    <tr>
+                    {{-- <tr>
                             <td class="col-sm-4"><input type="text" required="required" class="form-control" placeholder="Nama Tahapan" name="nama_tahapan[]' + counter + '"/></td>
                             <td class="col-sm-1"><input type="text" required="required" class="form-control" placeholder="x Hari" name="lama_pengerjaan[]' + counter + '"/></td>
                             <td class="col-sm-2"><select name="team"  class="select form-control js-example-tags"><option >-</option>
@@ -27,8 +27,8 @@
                             <td class="col-sm-3"><input id="tags_1" type="text" class="tags form-control col-sm-3" name="dokumen[]"/></td>
                             <td class="col-sm-1"><select name="pengeluaran[]" class="select form-control"><option value="false">Tidak</option> <option value="true">Ya</option></select></td>
                             <td class="col-sm-1"></td>
-        
-                    </tr>
+
+                    </tr> --}}
                     <tr>
                         <td class="col-sm-4"><input type="text" required="required" class="form-control" placeholder="Nama Tahapan" name="nama_tahapan[]' + counter + '"/></td>
                         <td class="col-sm-1"><input type="text" required="required" class="form-control" placeholder="x Hari" name="lama_pengerjaan[]' + counter + '"/></td>
@@ -40,21 +40,21 @@
                         <td class="col-sm-3"><input id="tags_1" type="text" class="tags form-control col-sm-3" name="dokumen[]"/></td>
                         <td class="col-sm-1"><select name="pengeluaran[]" class="select form-control"><option value="false">Tidak</option> <option value="true">Ya</option></select></td>
                         <td class="col-sm-1"></td>
-    
+
                 </tr>
 
                 </table>
               <button type="button" id="addrow">Add</button>
               <div class="tes">
                     <button type="button" class="save" id="save">save</button>
-        
+
               </div>
-        
+
       </form>
 
 
 
-      <script src="https://code.jquery.com/jquery-3.3.1.js"></script> 
+      <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
       {{-- <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script> --}}
       {{-- <script src="http://bainternet-js-cdn.googlecode.com/svn/trunk/js/jQuery%20BlockUI%20Plugin/2.39/jquery.blockUI.js"></script> --}}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -112,9 +112,9 @@
 //  alert(myControls.length.value);
 // console.log(myControls.value);
 
-// var x = document.getElementById("team"); 
+// var x = document.getElementById("team");
 // var optionVal = new Array();
-// for (i = 0; i < x.length; i++) { 
+// for (i = 0; i < x.length; i++) {
 //     optionVal.push(x.options[i].text);
 //     alert(x.options[i].text);
 // }
@@ -122,7 +122,7 @@
 // var values = $('.select-meal-type').val();
 // alert(values);
 
-// var x = document.getElementById("team"); 
+// var x = document.getElementById("team");
 // var myControls = myForm.elements['team[]'];
 
         //     // let team_array = [];
@@ -146,11 +146,11 @@
 $("select[name=team]").each(function(){
     usertype.push($(this).val());
     // alert($(this).val());
-}); 
+});
 
 
-  var ajaxdata={"UserType":usertype};	
-  
+  var ajaxdata={"UserType":usertype};
+
   console.log(JSON.stringify(ajaxdata));
 
 // var optionVal = new Array();

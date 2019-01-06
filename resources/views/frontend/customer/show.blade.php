@@ -1,4 +1,4 @@
-@extends('frontend.master') 
+@extends('frontend.master')
 @section('content')
 <div class="m-subheader hidden">
     <div class="d-flex align-items-center">
@@ -57,9 +57,9 @@
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
                                                     Customer Code @include('frontend.common.label.required')
-                                                    </label> 
+                                                    </label>
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', $customer->code) 
+                                                        @slot('text', $customer->code)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -67,53 +67,48 @@
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
                                                         Name @include('frontend.common.label.required')
-                                                    </label> 
+                                                    </label>
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', $customer->name) 
+                                                        @slot('text', $customer->name)
                                                     @endcomponent
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
-                                                    Term of Payment @include('frontend.common.label.required')
-                                                </label> 
-                                                @if (empty($customer->payment_term))
-                                                    @include('frontend.common.label.data-info-nodata') 
-                                                @else 
+                                                            Term of Payment @include('frontend.common.label.required')
+                                                    </label>
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', $customer->term_of_payment->name) 
-                                                    @endcomponent 
-                                                @endif
+                                                        @slot('text', $customer->payment_term)
+                                                    @endcomponent
                                                 </div>
-
                                             </div>
                                         </fieldset>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                         Active * @include('frontend.common.label.optional')
-                                                    </label> 
-                                                    @if($customer->banned_at <> null) 
-                                                        @component('frontend.common.label.data-info') 
+                                                    </label>
+                                                    @if($customer->banned_at <> null)
+                                                        @component('frontend.common.label.data-info')
                                                             @slot('text', 'Active')
-                                                        @endcomponent 
-                                                    @else 
-                                                        @component('frontend.common.label.data-info') 
-                                                            @slot('text','Banned') 
-                                                        @endcomponent 
+                                                        @endcomponent
+                                                    @else
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text','Banned')
+                                                        @endcomponent
                                                     @endif
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                 Account Code  @include('frontend.common.label.optional')
-                                            </label> 
+                                            </label>
                                                 @if (isset($customer->journal))
-                                                    @component('frontend.common.label.data-info') 
+                                                    @component('frontend.common.label.data-info')
                                                         @slot('text', $customer->account_code_and_name)
-                                                    @endcomponent 
+                                                    @endcomponent
                                                 @else
-                                                    @include('frontend.common.label.data-info-nodata') 
+                                                    @include('frontend.common.label.data-info-nodata')
                                                 @endif
 
                                             </div>

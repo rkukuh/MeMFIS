@@ -4,7 +4,7 @@ let Quotation = {
         $(document).ready(function () {
             $('select[name="customer"]').on('change', function () {
                 let customer = $(this).val();
-        
+
                 if (customer) {
                     let customerId = $('#customer').val();
 
@@ -25,9 +25,11 @@ let Quotation = {
             });
         });
 
-        $(".modal-footer").on("click", ".add", function() {
+        $(".footer").on("click", ".add-quotation", function() {
             $("#name-error").html("");
             $("#simpan").text("Simpan");
+
+            let term_of_payment = $('#term_of_payment').val();
 
             let registerForm = $("#CustomerForm");
             let name = $("input[name=name]").val();

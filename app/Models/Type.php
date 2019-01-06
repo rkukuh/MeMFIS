@@ -138,17 +138,6 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of PaymentTerm.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOfPaymentTerm(Builder $query)
-    {
-        return $query->where('of', 'payment-term');
-    }
-
-    /**
      * Scope a query to only include type of Phone.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -171,6 +160,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Scheduled Payment.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfScheduledPayment(Builder $query)
+    {
+        return $query->where('of', 'scheduled-payment');
+    }
+
+    /**
      * Scope a query to only include type of School Degree.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -182,14 +182,71 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Task Card.
+     * Scope a query to only include type of Task Card EO's Manual Affected.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfTaskCard(Builder $query)
+    public function scopeOfTaskCardEOManualAffected(Builder $query)
     {
-        return $query->where('of', 'taskcard');
+        return $query->where('of', 'taskcard-eo-manual-affected');
+    }
+
+    /**
+     * Scope a query to only include type of Task Card EO's Recurrence.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEORecurrence(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo-recurrence');
+    }
+
+    /**
+     * Scope a query to only include type of Task Card EO's Scheduled Priority.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardEOScheduledPriority(Builder $query)
+    {
+        return $query->where('of', 'taskcard-eo-scheduled-priority');
+    }
+
+    /**
+     * Scope a query to only include type of Task Card's task.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardTask(Builder $query)
+    {
+        return $query->where('of', 'taskcard-task');
+    }
+
+    /**
+     * Scope a query to only include type of Task Card's type.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardTypeRoutine(Builder $query)
+    {
+        return $query->where('of', 'taskcard-type-routine');
+    }
+
+    /**
+     * Scope a query to only include type of Task Card's type.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardTypeNonRoutine(Builder $query)
+    {
+        return $query->where('of', 'taskcard-type-non-routine')
+                     ->where('code', '<>', 'si')
+                     ->where('code', '<>', 'htcrr');
     }
 
     /**
@@ -329,6 +386,19 @@ class Type extends MemfisModel
     public function taskcards()
     {
         return $this->hasMany(TaskCard::class);
+    }
+
+    /**
+     * One-to-Many: A scheduled payment may have zero or many type.
+     *
+     * This function will retrieve all scheduled payments of a type.
+     * See: Scheduled Payment's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function scheduledpayments()
+    {
+        return $this->hasMany(ScheduledPayment::class);
     }
 
     /**

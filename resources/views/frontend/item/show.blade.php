@@ -124,6 +124,19 @@
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Manufactur
+                                            </label>
+
+                                            @if (empty($item->manufacturer_id))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $item->manufacturer_id)
+                                                @endcomponent
+                                            @endif
+                                        </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
@@ -158,6 +171,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Account Code
@@ -173,7 +189,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="form-group m-form__group row">
+                                    <div class="form-group m-form__group row" style="display: none">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Tag

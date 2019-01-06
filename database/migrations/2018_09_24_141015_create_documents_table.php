@@ -18,8 +18,7 @@ class CreateDocumentsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedInteger('type_id');
-            $table->unsignedInteger('documentable_id');
-            $table->string('documentable_type');
+            $table->morphs('documentable');
             $table->timestamps();
             $table->softDeletes();
 

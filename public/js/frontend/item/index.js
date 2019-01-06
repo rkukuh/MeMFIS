@@ -47,7 +47,6 @@ let Item = {
                     title: 'Part No.',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                     template: function (t) {
                         return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
                     }
@@ -57,7 +56,6 @@ let Item = {
                     title: 'Material Name',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 250
                 },
                 {
                     field: 'unit',
@@ -113,7 +111,6 @@ let Item = {
                 },
                 {
                     field: 'actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {

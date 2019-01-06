@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TitleModalDepartment">Bank</h5>
+                <h5 class="modal-title" id="TitleModalDepartment">Department</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -44,9 +44,9 @@
                         <div class="flex">
                                 <div class="action-buttons">
                                     @include('frontend.common.buttons.submit')
-            
+
                                     @include('frontend.common.buttons.reset')
-            
+
                                     @include('frontend.common.buttons.close')
                                 </div>
                         </div>

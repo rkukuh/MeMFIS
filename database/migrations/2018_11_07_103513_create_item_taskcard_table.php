@@ -14,10 +14,11 @@ class CreateItemTaskcardTable extends Migration
     public function up()
     {
         Schema::create('item_taskcard', function (Blueprint $table) {
-            $table->string('number');
-            $table->unsignedInteger('item_id');
             $table->unsignedInteger('taskcard_id');
+            $table->unsignedInteger('item_id');
+            $table->double('quantity');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('item_id')
                     ->references('id')->on('items')
@@ -28,8 +29,6 @@ class CreateItemTaskcardTable extends Migration
                     ->references('id')->on('taskcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
-
-            $table->index('number');
         });
     }
 

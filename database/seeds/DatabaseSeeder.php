@@ -27,17 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusesTableSeeder::class);
         $this->call(JournalsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
-
-        /** POLYMORPH */
-
-        $this->call(FaxesTableSeeder::class);
-        $this->call(PhonesTableSeeder::class);
-        $this->call(EmailsTableSeeder::class);
-        $this->call(WebsitesTableSeeder::class);
-        $this->call(VersionsTableSeeder::class);
-        $this->call(AddressesTableSeeder::class);
-        $this->call(DocumentsTableSeeder::class);
-        $this->call(MaintenanceCyclesTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
 
         /** MASTER */
 
@@ -54,6 +44,19 @@ class DatabaseSeeder extends Seeder
         $this->call(CustomersTableSeeder::class);
         $this->call(SuppliersTableSeeder::class);
 
+        /** POLYMORPH */
+
+        $this->call(FaxesTableSeeder::class);
+        $this->call(ZonesTableSeeder::class);
+        $this->call(PhonesTableSeeder::class);
+        $this->call(EmailsTableSeeder::class);
+        $this->call(AccessesTableSeeder::class);
+        $this->call(WebsitesTableSeeder::class);
+        $this->call(VersionsTableSeeder::class);
+        $this->call(AddressesTableSeeder::class);
+        $this->call(DocumentsTableSeeder::class);
+        $this->call(MaintenanceCyclesTableSeeder::class);
+
         /** LICENSE */
 
         $this->call(EmployeeLicenseTableSeeder::class);
@@ -65,15 +68,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CertificationEmployeeTableSeeder::class);
         $this->call(OTRCertificationsTableSeeder::class);
 
-        /** FINANCE */
-
-        $this->call(CurrenciesTableSeeder::class);
-        $this->call(BanksTableSeeder::class);
-        $this->call(BankAccountsTableSeeder::class);
-
         /** TRANSACTION (M-M) */
 
         $this->call(TaskCardsTableSeeder::class);
         $this->call(QuotationsTableSeeder::class);
+        $this->call(WorkPackagesTableSeeder::class);
+        $this->call(ProjectsTableSeeder::class);
     }
 }

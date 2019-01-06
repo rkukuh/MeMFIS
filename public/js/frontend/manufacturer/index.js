@@ -48,19 +48,15 @@ let Manufacturer = {
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'name',
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 250
                 },
                 {
                     field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
@@ -78,8 +74,8 @@ let Manufacturer = {
         });
 
         let manufacturer_reset = function () {
-            document.getElementById('code').value = '';
-            document.getElementById('name').value = '';
+            document.getElementById('code_manufacturer').value = '';
+            document.getElementById('name_manufacturer').value = '';
 
             $('#code-error').html('');
             $('#name-error').html('');
@@ -90,9 +86,8 @@ let Manufacturer = {
         });
 
         let simpan = $('.modal-footer').on('click', '.add-manufacturer', function () {
-            let name = $('input[name=name]').val();
-            let code = $('input[name=code]').val();
-            let type_id =$('#type_id').val();
+            let name = $('input[name=name_manufacturer]').val();
+            let code = $('input[name=code_manufacturer]').val();
 
             $.ajax({
                 headers: {
@@ -108,13 +103,15 @@ let Manufacturer = {
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                            $('#name_manufacturer-error').html(data.errors.name[0]);
 
                         }
                         if (data.errors.code) {
-                            $('#code-error').html(data.errors.code[0]);
+                            $('#code_manufacturer-error').html(data.errors.code[0]);
 
                         }
+                        document.getElementById('code_manufacturer').value = code;
+                        document.getElementById('name_manufacturer').value = name;
 
                     } else {
                         $('#modal_manufacturer').modal('hide');
@@ -144,8 +141,8 @@ let Manufacturer = {
                 url: '/manufacturer/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('code').value = data.code;
+                    document.getElementById('name_manufacturer').value = data.name;
+                    document.getElementById('code_manufacturer').value = data.code;
 
 
                     $('.btn-success').addClass('update');
@@ -164,8 +161,8 @@ let Manufacturer = {
         });
 
         let update = $('.modal-footer').on('click', '.update', function () {
-            let name = $('input[name=name]').val();
-            let code = $('input[name=code]').val();
+            let name = $('input[name=name_manufacturer]').val();
+            let code = $('input[name=code_manufacturer]').val();
             let triggerid = $('input[name=uuid]').val();
 
             $.ajax({
@@ -182,11 +179,11 @@ let Manufacturer = {
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                            $('#name_manufacturer-error').html(data.errors.name[0]);
 
                         }
                         if (data.errors.code) {
-                            $('#code-error').html(data.errors.code[0]);
+                            $('#code_manufacturer-error').html(data.errors.code[0]);
 
                         }
 

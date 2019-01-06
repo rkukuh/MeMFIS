@@ -46,7 +46,6 @@
                                     @slot('name', 'type_id')
                                     @slot('id', 'type_id')
                                     @slot('text', 'Type')
-                                    @slot('style', 'width: 100%')
                                     @slot('id_error', 'type_id')
                                 @endcomponent
                             </div>

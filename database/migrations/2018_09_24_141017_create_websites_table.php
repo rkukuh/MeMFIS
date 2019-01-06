@@ -18,8 +18,7 @@ class CreateWebsitesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('url');
             $table->unsignedInteger('type_id');
-            $table->integer('websiteable_id');
-            $table->string('websiteable_type');
+            $table->morphs('websiteable');
             $table->timestamps();
             $table->softDeletes();
 

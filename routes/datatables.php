@@ -12,24 +12,51 @@ Route::name('datatables.')->group(function () {
 
         /** INITIAL DATA */
 
+        Route::get('/unit','UnitDatatables@index')->name('unit.index');
         Route::get('/journal','JournalDatatables@index')->name('journal.index');
+
+        /** POLYMORPH */
+        // INFO: For every polymorph cases, create a grouped route for them
 
         /** MASTER */
 
-        Route::get('/unit','UnitDatatables@index')->name('unit.index');
-        Route::get('/bank','BankDatatables@index')->name('bank.index');
         Route::get('/storage','StorageDatatables@index')->name('storage.index');
         Route::get('/aircraft','AircraftDatatables@index')->name('aircraft.index');
-        Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/language','LanguageDatatables@index')->name('language.index');
         Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
+        Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
+
+        /** LICENSE */
+
         Route::get('/general-license','GeneralLicenseDatatables@index')->name('general-license.index');
 
         /** TRANSACTION */
 
         Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
+
+        /** AIRCRAFT */
+
+        Route::name('aircraft.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'aircraft',
+                'namespace' => 'Aircraft'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/','AircraftDatatables@index')->name('all');
+
+                /** Polymorph */
+                Route::get('/{aircraft}/zones','AircraftZonesDatatables@index')->name('zones.index');
+                Route::get('/{aircraft}/accesses','AircraftAccessesDatatables@index')->name('accesses.index');
+
+            });
+
+        });
 
         /** ITEM */
 
@@ -42,7 +69,11 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                /** Master Data */
                 Route::get('/','ItemDatatables@index')->name('all');
+                Route::get('/categories','CategoryItemDatatables@index')->name('categories.index');
+
+                /** Transaction */
                 Route::get('/{item}/units','ItemUnitDatatables@index')->name('units.index');
                 Route::get('/{item}/storages','ItemStorageDatatables@index')->name('storages.index');
 
@@ -61,13 +92,16 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                /** Master Data */
                 Route::get('/','CustomerDatatables@index')->name('all');
-                Route::get('/{customer}/fax','FaxDatatables@index')->name('fax.index');
-                Route::get('/{customer}/email','EmailDatatables@index')->name('email.index');
-                Route::get('/{customer}/phone','PhoneDatatables@index')->name('phone.index');
-                Route::get('/{customer}/website','WebsiteDatatables@index')->name('website.index');
-                Route::get('/{customer}/address','AddressDatatables@index')->name('address.index');
-                Route::get('/{customer}/document','DocumentDatatables@index')->name('document.index');
+
+                /** Polymorph */
+                Route::get('/{customer}/faxes','CustomerFaxesDatatables@index')->name('faxes.index');
+                Route::get('/{customer}/emails','CustomerEmailsDatatables@index')->name('emails.index');
+                Route::get('/{customer}/phones','CustomerPhonesDatatables@index')->name('phones.index');
+                Route::get('/{customer}/websites','CustomerWebsitesDatatables@index')->name('websites.index');
+                Route::get('/{customer}/addresses','CustomerAddressesDatatables@index')->name('addresses.index');
+                Route::get('/{customer}/documents','CustomerDocumentsDatatables@index')->name('documents.index');
 
             });
 
@@ -84,14 +118,24 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                /** Master Data */
                 Route::get('/','EmployeeDatatables@index')->name('all');
-                Route::get('/{employee}/histories','EmployeeHistoryDatatables@index')->name('histories.index');
-                Route::get('/{employee}/documents','EmployeeDocumentDatatables@index')->name('documents.index');
-                Route::get('/{employee}/travel-requests','EmployeeTravelRequestDatatables@index')->name('travel-requests.index');
 
-                // License
+                /** Polymorph */
+                Route::get('/{customer}/faxes','EmployeeFaxesDatatables@index')->name('faxes.index');
+                Route::get('/{customer}/emails','EmployeeEmailsDatatables@index')->name('emails.index');
+                Route::get('/{customer}/phones','EmployeePhonesDatatables@index')->name('phones.index');
+                Route::get('/{customer}/websites','EmployeeWebsitesDatatables@index')->name('websites.index');
+                Route::get('/{customer}/addresses','EmployeeAddressesDatatables@index')->name('addresses.index');
+                Route::get('/{customer}/documents','EmployeeDocumentsDatatables@index')->name('documents.index');
 
-                Route::get('/{employee}/amels','EmployeeAMELDatatables@index')->name('amels.index');
+                /** Certifications and Licenses */
+                Route::get('/{employee}/otr','EmployeeOTRDatatables@index')->name('otr.index');
+                Route::get('/{employee}/amel','EmployeeAMELDatatables@index')->name('amel.index');
+
+                /** Transaction */
+                Route::get('/{employee}/histories','EmployeeHistoriesDatatables@index')->name('histories.index');
+                Route::get('/{employee}/travel-requests','EmployeeTravelRequestsDatatables@index')->name('travel-requests.index');
 
             });
 

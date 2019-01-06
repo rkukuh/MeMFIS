@@ -17,12 +17,15 @@ Route::name('admin.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        
+        Route::resource('currency', 'CurrencyController');
+
         /** POLYMORPH */
-        
+
         Route::resource('fax', 'FaxController');
+        Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+        Route::resource('access', 'AccessController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
@@ -36,11 +39,11 @@ Route::name('admin.')->group(function () {
         Route::resource('school', 'SchoolController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        Route::resource('language', 'LanguageController');
         Route::resource('aircraft', 'AircraftController');
-        Route::resource('employee', 'EmployeeController');
+        Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
         Route::resource('supplier', 'SupplierController');
+        Route::resource('employee', 'EmployeeController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -56,16 +59,12 @@ Route::name('admin.')->group(function () {
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
 
-        /** FINANCE */
-
-        Route::resource('bank', 'BankController');
-        Route::resource('currency', 'CurrencyController');
-        Route::resource('bank-account', 'BankAccountController');
-
         /** TRANSACTION */
 
+        Route::resource('project', 'ProjectController');
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
+        Route::resource('workpackage', 'WorkPackageController');
 
     });
 

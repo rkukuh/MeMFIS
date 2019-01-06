@@ -38,6 +38,9 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
                                     Customer Datalist
                                 </h3>
@@ -62,10 +65,10 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                            @component('frontend.common.buttons.create')
-                                                @slot('text', 'Customer')
-                                                @slot('href', route('frontend.customer.create') )
-                                            @endcomponent
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'Customer')
+                                            @slot('href', route('frontend.customer.create') )
+                                        @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>

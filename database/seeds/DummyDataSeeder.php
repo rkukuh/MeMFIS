@@ -21,17 +21,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Statuses::class);
         $this->call(Journals::class);
         $this->call(Categories::class);
-
-        /** POLYMORPH */
-
-        $this->call(Faxes::class);
-        $this->call(Emails::class);
-        $this->call(Phones::class);
-        $this->call(Websites::class);
-        $this->call(Versions::class);
-        $this->call(Addresses::class);
-        $this->call(Documents::class);
-        $this->call(MaintenanceCycles::class);
+        $this->call(Currencies::class);
 
         /** MASTER */
 
@@ -48,6 +38,19 @@ class DummyDataSeeder extends Seeder
         $this->call(Customers::class);
         $this->call(Suppliers::class);
 
+        /** POLYMORPH */
+
+        $this->call(Faxes::class);
+        $this->call(Zones::class);
+        $this->call(Emails::class);
+        $this->call(Phones::class);
+        $this->call(Websites::class);
+        $this->call(Versions::class);
+        $this->call(Accesses::class);
+        $this->call(Addresses::class);
+        $this->call(Documents::class);
+        $this->call(MaintenanceCycles::class);
+
         /** LICENSE */
 
         $this->call(EmployeeLicenses::class);
@@ -59,17 +62,13 @@ class DummyDataSeeder extends Seeder
         $this->call(CertificationEmployees::class);
         $this->call(OTRCertifications::class);
 
-        /** FINANCE */
-
-        $this->call(Currencies::class);
-        $this->call(Banks::class);
-        $this->call(BankAccounts::class);
-
         /** TRANSACTION (M-M) */
 
         $this->call(ItemUnit::class);
         $this->call(ItemStorage::class);
         $this->call(TaskCards::class);
         $this->call(Quotations::class);
+        $this->call(WorkPackages::class);
+        $this->call(Projects::class);
     }
 }

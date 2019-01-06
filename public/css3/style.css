@@ -12,7 +12,7 @@
    cursor: default;
 }
 .view .mask, .view .content {
-   width: 667px;
+   width: 760px;
    height: 1000px;
    position: absolute;
    overflow: hidden;

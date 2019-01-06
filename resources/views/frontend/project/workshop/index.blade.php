@@ -64,7 +64,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
                                             @slot('text', 'Workshop Project')
-                                            @slot('href', route('frontend.project-workshop.create') )
+                                            @slot('href', '/project/workshop/create')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>

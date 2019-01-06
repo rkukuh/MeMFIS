@@ -18,11 +18,11 @@
                                 </label>
                                 @component('frontend.common.input.text')
                                     @slot('text', 'Code')
-                                    @slot('name', 'code')
-                                    @slot('id', 'code')
-                                    @slot('id_error', 'code')
+                                    @slot('name', 'code_manufacturer')
+                                    @slot('id', 'code_manufacturer')
+                                    @slot('id_error', 'code_manufacturer')
                                 @endcomponent
-                            </div>                            
+                            </div>
                         </div>
                         <div class="form-group m-form__group row ">
 
@@ -32,9 +32,9 @@
                             </label>
                             @component('frontend.common.input.text')
                                 @slot('text', 'Name')
-                                @slot('name', 'name')
-                                @slot('id', 'name')
-                                @slot('id_error', 'name')
+                                @slot('name', 'name_manufacturer')
+                                @slot('id', 'name_manufacturer')
+                                @slot('id_error', 'name_manufacturer')
                             @endcomponent
                         </div>
                         </div>

@@ -1,14 +1,15 @@
 <?php
 
 return [
-    'version' => '0.5.0',
+    'version' => '0.8.2',
 
     /**
      * Dummy data amount
      *
      */
     'dummies' => [
-        'banks' => 50,
+        'aircraft_accesses' => 10,
+        'aircraft_zones' => 10,
         'categories' => 10,
         'currencies' => 10,
         'customers' => 20,
@@ -21,7 +22,10 @@ return [
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,
-        'taskcards' => 10,
+        'taskcards' => [
+            'basic' => 10,
+            'eo' => 10,
+        ],
         'types' => 10,
     ],
 ];

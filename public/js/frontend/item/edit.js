@@ -42,8 +42,7 @@ let Item = {
                     }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: 'uom.quantity',
                     title: 'Quantity',
                     sortable: 'asc',
@@ -65,9 +64,9 @@ let Item = {
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                                'data-item_uuid="' + $('#item_uuid').val() + '" ' +
-                                'data-unit_id="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
+                            'data-item_uuid="' + $('#item_uuid').val() + '" ' +
+                            'data-unit_id="' + t.uuid + '">' +
+                            '<i class="la la-trash"></i>' +
                             '</a>'
                         );
                     }
@@ -117,8 +116,7 @@ let Item = {
                     }
                 }
             },
-            columns: [
-                {
+            columns: [{
                     field: 'name',
                     title: 'Storage',
                     sortable: 'asc',
@@ -144,16 +142,16 @@ let Item = {
                     template: function (t, e, i) {
                         return (
                             '<button href="#" data-toggle="modal" data-target="#modal_storage_stock"  class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" ' +
-                                'data-min="' + t.pivot.min + '" ' +
-                                'data-max="' + t.pivot.max + '" ' +
-                                'data-item_uuid="' + $('#item_uuid').val() + '" ' +
-                                'data-storage_id="' + t.pivot.storage_id + '">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</button>'+
+                            'data-min="' + t.pivot.min + '" ' +
+                            'data-max="' + t.pivot.max + '" ' +
+                            'data-item_uuid="' + $('#item_uuid').val() + '" ' +
+                            'data-storage_id="' + t.pivot.storage_id + '">' +
+                            '<i class="la la-pencil"></i>' +
+                            '</button>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                                'data-item_uuid="' + $('#item_uuid').val() + '" ' +
-                                'data-storage_uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
+                            'data-item_uuid="' + $('#item_uuid').val() + '" ' +
+                            'data-storage_uuid="' + t.uuid + '">' +
+                            '<i class="la la-trash"></i>' +
                             '</a>'
                         );
                     }
@@ -233,6 +231,7 @@ let Item = {
             let barcode = $('input[name=barcode]').val();
             let unit_id = $('#unit_id').val();
             let category = $('#category').val();
+            let manufacturer_id = $('#manufacturer_id').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
             let account_code = $('#account_code').val();
 
@@ -249,6 +248,7 @@ let Item = {
                     description: description,
                     unit_id: unit_id,
                     category: category,
+                    manufacturer_id: manufacturer_id,
                     is_stock: is_stock,
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
@@ -302,7 +302,7 @@ let Item = {
 
             let code = $('input[name=code_category]').val();
             let name = $('input[name=name_category]').val();
-            let description =$('#description_category').val();
+            let description = $('#description_category').val();
 
             $.ajax({
                 headers: {
@@ -329,6 +329,47 @@ let Item = {
                         $('#modal_category').modal('hide');
 
                         toastr.success('Category has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        item_edit_reset();
+                    }
+                }
+            });
+        });
+
+        $('.modal-footer').on('click', '.add-manufacturer', function () {
+            let name = $('input[name=name_manufacturer]').val();
+            let code = $('input[name=code_manufacturer]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/manufacturer',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    name: name,
+                    code: code,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.name) {
+                            $('#name_manufacturer-error').html(data.errors.name[0]);
+
+                        }
+                        if (data.errors.code) {
+                            $('#code_manufacturer-error').html(data.errors.code[0]);
+
+                        }
+                        document.getElementById('code_manufacturer').value = code;
+                        document.getElementById('name_manufacturer').value = name;
+
+                    } else {
+                        $('#modal_manufacturer').modal('hide');
+
+                        toastr.success('Manufacturer has been created.', 'Success', {
                             timeOut: 5000
                         });
 

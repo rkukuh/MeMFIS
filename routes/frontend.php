@@ -12,6 +12,10 @@ Route::name('frontend.')->group(function () {
     ], function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
+        Route::view('/project/hm', 'frontend.project.hm.index')->name('hm');
+        Route::view('/project/hm/create', 'frontend.project.hm.create')->name('hm.create');
+        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('workshop');
+        Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('workshop.create');
 
         /** INITIAL DATA */
 
@@ -20,18 +24,19 @@ Route::name('frontend.')->group(function () {
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
         Route::resource('journal', 'JournalController');
-        
+
         /** POLYMORPH */
-        
+
         Route::resource('fax', 'FaxController');
+        Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+        Route::resource('access', 'AccessController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
-        Route::resource('description', 'DescriptionController');
         Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         Route::resource('category-item', 'CategoryItemController', [
@@ -40,13 +45,13 @@ Route::name('frontend.')->group(function () {
 
         /** MASTER */
 
+        Route::resource('user', 'UserController');
         Route::resource('school', 'SchoolController');
+        Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        Route::resource('storages', 'StorageController');
-        Route::resource('aircraft', 'AircraftController');
-        Route::resource('customer', 'CustomerController');
-        Route::resource('supplier', 'SupplierController');
         Route::resource('language', 'LanguageController');
+        Route::resource('supplier', 'SupplierController');
+        Route::resource('currency', 'CurrencyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -61,16 +66,31 @@ Route::name('frontend.')->group(function () {
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
 
-        /** FINANCE */
-
-        Route::resource('bank', 'BankController');
-        Route::resource('currency', 'CurrencyController');
-        Route::resource('bank-account', 'BankAccountController');
-
         /** TRANSACTION */
 
+        Route::resource('project', 'ProjectController');
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
+        Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
+        Route::resource('workpackage', 'WorkPackageController');
+
+        /** AIRCRAFT  */
+
+        Route::namespace('Aircraft')->group(function () {
+
+            Route::resource('aircraft', 'AircraftController');
+
+            Route::name('aircraft.')->group(function () {
+                Route::prefix('aircraft')->group(function () {
+
+                    /** Polymorph */
+                    Route::resource('/{aircraft}/zones','AircraftZonesController');
+                    Route::resource('/{aircraft}/accesses','AircraftAccessesController');
+
+                });
+            });
+
+        });
 
         /** ITEM */
 
@@ -81,12 +101,36 @@ Route::name('frontend.')->group(function () {
             Route::name('item.')->group(function () {
                 Route::prefix('item')->group(function () {
 
+                    /** Transaction: Unit */
                     Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
                     Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
 
+                    /** Transaction: Storage */
                     Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
                     Route::put('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
                     Route::delete('/{item}/{storage}/storage', 'ItemStorageController@destroy')->name('storage.destroy');
+
+                });
+            });
+
+        });
+
+        /** CUSTOMER  */
+
+        Route::namespace('Customer')->group(function () {
+
+            Route::resource('customer', 'CustomerController');
+
+            Route::name('customer.')->group(function () {
+                Route::prefix('customer')->group(function () {
+
+                    /** Polymorph */
+                    Route::resource('/{customer}/faxes','CustomerFaxesController');
+                    Route::resource('/{customer}/emails','CustomerEmailsController');
+                    Route::resource('/{customer}/phones','CustomerPhonesController');
+                    Route::resource('/{customer}/websites','CustomerWebsitesController');
+                    Route::resource('/{customer}/addresses','CustomerAddressesController');
+                    Route::resource('/{customer}/documents','CustomerDocumentsController');
 
                 });
             });
@@ -102,34 +146,28 @@ Route::name('frontend.')->group(function () {
             Route::name('employee.')->group(function () {
                 Route::prefix('employee')->group(function () {
 
-                    Route::resource('amel', 'EmployeeAMELController');
-                    Route::resource('history', 'EmployeeHistoryController');
-                    Route::resource('document', 'EmployeeDocumentController');
-                    Route::resource('education', 'EmployeeEducationController');
-                    Route::resource('travel-request', 'EmployeeTravelRequestController');
-                    Route::resource('general-license', 'EmployeeGeneralLicenseController');
+                    /** Polymorph */
+                    Route::resource('/{employee}/faxes','EmployeeFaxesController');
+                    Route::resource('/{employee}/emails','EmployeeEmailsController');
+                    Route::resource('/{employee}/phones','EmployeePhonesController');
+                    Route::resource('/{employee}/websites','EmployeeWebsitesController');
+                    Route::resource('/{employee}/addresses','EmployeeAddressesController');
+                    Route::resource('/{employee}/documents','EmployeeDocumentsController');
+
+                    /** Certifications and Licenses */
+                    Route::resource('/{employee}/otr', 'EmployeeOTRController');
+                    Route::resource('/{employee}/amel', 'EmployeeAMELController');
+
+                    /** Transaction */
+                    Route::resource('/{employee}/history', 'EmployeeHistoryController');
+                    Route::resource('/{employee}/education', 'EmployeeEducationController');
+                    Route::resource('/{employee}/travel-request', 'EmployeeTravelRequestController');
+                    Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
 
                 });
             });
 
         });
-
-        Route::resource('workpackage', 'WorkPackageController');
-        Route::get('/get-workpakages', 'WorkPackageController@getWorkPackage')->name('get-workpackages');
-        
-        Route::get('/get-item-categories','CategoryItemController@getCategories')->name('get-item-categories');
-
-        Route::view('/qualification', 'frontend.personal-information.qualifications.index')->name('qualification');
-        Route::view('/personal-dashboard', 'frontend.personal-information.dashboard.index')->name('personal-dashboard');
-        Route::view('/emergency-contacts', 'frontend.personal-information.emergency-contacts.index')->name('emergency-contacts');
-        Route::view('/dependents', 'frontend.personal-information.dependents.index')->name('dependents');
-        Route::view('/basic-information', 'frontend.personal-information.basic-information.index')->name('basic-information');
-
-        Route::view('/project', 'frontend/project/index')->name('project.index');
-        Route::view('/project/hm', 'frontend.project.hm.index')->name('project-hm.index');
-        Route::view('/project/hm/create', 'frontend.project.hm.create')->name('project-hm.create');
-        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('project-workshop.index');
-        Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('project-workshop.create');
 
     });
 

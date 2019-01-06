@@ -19,8 +19,7 @@ class CreateFaxesTable extends Migration
             $table->string('number');
             $table->unsignedInteger('type_id');
             $table->boolean('is_active')->default(true);
-            $table->integer('faxable_id');
-            $table->string('faxable_type');
+            $table->morphs('faxable');
             $table->timestamps();
             $table->softDeletes();
 

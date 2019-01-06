@@ -29,7 +29,7 @@
     </div>
     <div class="m-content">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -166,6 +166,35 @@
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Manufacturer @include('frontend.common.label.required')
+                                                </label>
+
+                                                <select id="manufacturer_id" name="manufacturer_id" class="form-control m-select2">
+                                                    <option value="">
+                                                        &mdash; Select a Manufacturer &mdash;
+                                                    </option>
+
+                                                    @foreach ($manufacturers as $manufacturer)
+                                                        <option value="{{ $manufacturer->id }}"
+                                                            @if ($manufacturer->id == $item->manufacturer_id) selected @endif>
+                                                            {{ $manufacturer->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                <div class="form-control-feedback text-danger" id="category-error"></div>
+
+                                                @component('frontend.common.buttons.create-new')
+                                                    @slot('size', 'sm')
+                                                    @slot('text', 'manufacturer')
+                                                    @slot('style', 'margin-top: 10px;')
+                                                    @slot('data_target', '#modal_manufacturer')
+                                                @endcomponent
+
+                                                @include('frontend.manufacturer.modal')
+                                            </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
@@ -207,14 +236,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Account Code @include('frontend.common.label.optional')
                                             </label>
 
-                                            {{-- @include('frontend.common.account-code.index') --}}
-                                            <div style="background-color:beige;padding: '15px 10px 5px 15px';">
-                                
+                                            <div style="background-color:beige;padding:15px 10px 5px 15px;">
+
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-8 col-md-8 col-lg-8">
                                                         @if (isset($item->journal))
@@ -229,7 +259,7 @@
                                                             </div>
                                                         @endif
                                                     </div>
-                                            
+
                                                     <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
                                                         @component('frontend.common.account-code.button-create')
                                                             @slot('text', '')
@@ -240,14 +270,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                
-                                @include('frontend.common.account-code.modal')
-                                
-                                {{-- @push('footer-scripts')
-                                    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
-                                    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-                                @endpush --}}
-                                
+
+                                            @include('frontend.common.account-code.modal')
 
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'account_code')
@@ -301,7 +325,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -399,6 +423,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/manufacturer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
@@ -412,7 +437,7 @@
     <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-unit.js') }}"></script>
     <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/account-code.js') }}"></script>
+    <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
 @endpush

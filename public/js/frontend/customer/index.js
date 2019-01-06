@@ -46,7 +46,6 @@ let Customer = {
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 160,
                     template: function (t) {
                         return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
                     }
@@ -58,17 +57,16 @@ let Customer = {
                     filterable: !1,
                 },
                 {
-                    field: 'term_of_payment.name',
+                    field: 'payment_term',
                     title: 'Term of Payment',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    
+                    template: function (t) {
+                        return t.payment_term+" Hari"
+                    }
                 },
                 {
                     field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
@@ -106,13 +104,11 @@ let Customer = {
                         type: 'DELETE',
                         url: '/customer/' + triggerid + '',
                         success: function (data) {
-                            toastr.success(
-                                'Data berhasil dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
-                            );
-                            let table = $('.customer_datatable').mDatatable();
+                            toastr.success('Material has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                            }
+                        );
+                        let table = $('.customer_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -127,7 +123,7 @@ let Customer = {
                         }
                     });
 
-                } 
+                }
             });
         });
 

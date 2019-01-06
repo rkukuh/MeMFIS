@@ -12,18 +12,48 @@ class TaskCard extends MemfisModel
         'number',
         'title',
         'type_id',
+        'task_type_id',
         'work_area',
-        'zone',
-        'access',
+        'manhour',
+        'helper_quantity',
         'is_rii',
-        'is_applicability_aircraft_all',
-        'is_applicability_engine_all',
         'source',
         'effectivity',
         'description',
+        'version',
+        'performance_factor',
+
+        /** EO */
+        'revision',
+        'ref_no',
+        'category_id',
+        'scheduled_priority_id',
+        'scheduled_priority_amount',
+        'scheduled_priority_type',
+        'recurrence_id',
+        'recurrence_amount',
+        'recurrence_type',
+        'manual_affected_id',
+        'manual_affected',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    // TODO: M-M with Aircraft
+
+    /**
+     * Many-to-Many: A task card may have zero or many (aircraft) access.
+     *
+     * This function will retrieve all the (aircraft) accesses of a task card.
+     * See: Access's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function accesses()
+    {
+        return $this->belongsToMany(Access::class, 'access_taskcard', 'taskcard_id', 'access_id')
+                    ->withTimestamps();
+    }
 
     /**
      * One-to-Many: A task card may have zero or many type.
@@ -47,5 +77,19 @@ class TaskCard extends MemfisModel
     public function versions()
     {
         return $this->morphMany(Version::class, 'versionable');
+    }
+
+    /**
+     * Many-to-Many: A task card may have zero or many (aircraft) zone.
+     *
+     * This function will retrieve all the (aircraft) zones of a task card.
+     * See: Zone's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function zones()
+    {
+        return $this->belongsToMany(Access::class, 'taskcard_zone', 'taskcard_id', 'zone_id')
+                    ->withTimestamps();
     }
 }

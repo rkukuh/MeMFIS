@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Type;
 use App\Models\Quotation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;
@@ -26,7 +27,13 @@ class QuotationController extends Controller
      */
     public function create()
     {
-        return view('frontend.quotation.create');
+        $websites = Type::ofWebsite()->get();
+
+        return view('frontend.quotation.create', [
+            'websites' => $websites
+        ]);
+
+        // return view('frontend.quotation.create');
     }
 
     /**
@@ -95,4 +102,16 @@ class QuotationController extends Controller
 
         return response()->json($quotation);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function project($project)
+    {
+        return response()->json($project);
+    }
+
 }

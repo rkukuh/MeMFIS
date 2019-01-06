@@ -25,7 +25,7 @@ let Item = {
             $('#category-error').html('');
             $('#ppn_amount-error').html('');
         };
-        
+
         $('.footer').on('click', '.add-item', function () {
             errorMessage();
             let code = $('input[name=code]').val();
@@ -33,6 +33,7 @@ let Item = {
             let description = $('#description').val();
             let unit = $('#unit_id').val();
             let category = $('#category').val();
+            let manufacturer_id = $('#manufacturer_id').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
             let account_code = $('#account_code').val();
 
@@ -62,6 +63,7 @@ let Item = {
                     unit_id: unit,
                     category: category,
                     is_stock: is_stock,
+                    manufacturer_id: manufacturer_id,
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
                     account_code: account_code,
@@ -113,14 +115,14 @@ let Item = {
 
         // Category
 
-        let simpan = $('.modal-footer').on('click', '.add-category', function () {
+        $('.modal-footer').on('click', '.add-category', function () {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
             let registerForm = $('#CustomerForm');
             let code = $('input[name=code_category]').val();
             let name = $('input[name=name_category]').val();
-            let description =$('#description_category').val();
+            let description = $('#description_category').val();
 
             $.ajax({
                 headers: {
@@ -153,6 +155,49 @@ let Item = {
                         });
 
                         category();
+                    }
+                }
+            });
+        });
+
+        // Manufacturer
+
+        $('.modal-footer').on('click', '.add-manufacturer', function () {
+            let name = $('input[name=name_manufacturer]').val();
+            let code = $('input[name=code_manufacturer]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/manufacturer',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    name: name,
+                    code: code,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.name) {
+                            $('#name_manufacturer-error').html(data.errors.name[0]);
+
+                        }
+                        if (data.errors.code) {
+                            $('#code_manufacturer-error').html(data.errors.code[0]);
+
+                        }
+                        document.getElementById('code_manufacturer').value = code;
+                        document.getElementById('name_manufacturer').value = name;
+
+                    } else {
+                        $('#modal_manufacturer').modal('hide');
+
+                        toastr.success('Manufacturer has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        manufacturer();
                     }
                 }
             });
