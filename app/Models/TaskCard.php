@@ -69,17 +69,6 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Polymorphic: An employee can have zero or many versions.
-     *
-     * This function will get all of the task card's versions.
-     * See: Version' versionable() method for the inverse
-     */
-    public function versions()
-    {
-        return $this->morphMany(Version::class, 'versionable');
-    }
-
-    /**
      * Many-to-Many: A task card may have zero or many (aircraft) zone.
      *
      * This function will retrieve all the (aircraft) zones of a task card.

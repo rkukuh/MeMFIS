@@ -23,7 +23,7 @@ class Version extends MemfisModel
      *
      * This function will get all of the owning versionable models.
      * See:
-     * - Task Card's versions() method for the inverse
+     * - none
      */
     public function versionable()
     {
