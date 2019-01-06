@@ -121,5 +121,7 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
         $taskcard->zones()->saveMany($aircraft->zones);
     }
 
-    // TODO: Set its child(s), if any
+    if ($faker->boolean) {
+        $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
+    }
 });
