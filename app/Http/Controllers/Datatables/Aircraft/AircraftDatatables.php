@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Aircraft;
 
 use App\Models\Aircraft;
 use App\Models\ListUtil;
