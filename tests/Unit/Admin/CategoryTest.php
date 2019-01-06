@@ -22,4 +22,14 @@ class CategoryTest extends TestCase
 
         $this->post(route('admin.category.store'), $data)->assertSessionHasErrors('code');
     }
+
+    /** @test */
+    public function requires_a_name()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(Category::class)->raw(['name' => null]);
+
+        $this->post(route('admin.category.store'), $data)->assertSessionHasErrors('name');
+    }
 }
