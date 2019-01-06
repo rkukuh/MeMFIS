@@ -22,7 +22,9 @@ return [
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,
-        'taskcards' => 10,
+        'taskcards' => [
+            'basic' => 10,
+        ],
         'types' => 10,
     ],
 ];
