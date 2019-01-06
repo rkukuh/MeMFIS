@@ -22,7 +22,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         ]),
         'task_type_id' => Type::ofTaskCardTask()->get()->random()->id,
         'work_area' => Type::ofWorkArea()->get()->random()->id,
-        'manhour' => $faker->randomFloat,
+        'manhour' => $faker->randomFloat(2, 0, 9999),
         'helper_quantity' => $faker->randomElement(null, rand(1, 10)),
         'is_rii' => $faker->boolean,
         'source' => null,
