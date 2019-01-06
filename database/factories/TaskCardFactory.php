@@ -111,7 +111,7 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
 $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
     $aircraft = Aircraft::get()->random();
 
-    // TODO: Save Many (1, 3) the aircraft_taskcard
+    $taskcard->aircrafts()->save($aircraft);
 
     if ($faker->boolean) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
