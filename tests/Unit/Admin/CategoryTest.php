@@ -14,6 +14,16 @@ class CategoryTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function requires_a_uuid()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $category = factory(Category::class)->create();
+
+        $this->assertDatabaseHas('categories', ['uuid' => $category->uuid]);
+    }
+
+    /** @test */
     public function requires_a_code()
     {
         $this->actingAs(factory(User::class)->create());
