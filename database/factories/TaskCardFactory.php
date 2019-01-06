@@ -120,4 +120,6 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
     if ($faker->boolean) {
         $taskcard->zones()->saveMany($aircraft->zones);
     }
+
+    // TODO: Set its child(s), if any
 });

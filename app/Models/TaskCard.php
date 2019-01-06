@@ -39,6 +39,9 @@ class TaskCard extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
+    // TODO: (self-join) parent
+    // TODO: (self-join) child(s)
+
     /**
      * Many-to-Many: A task card may have zero or many aircraft.
      *
