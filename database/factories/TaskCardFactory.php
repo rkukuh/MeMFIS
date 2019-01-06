@@ -3,6 +3,7 @@
 use App\Models\Type;
 use App\Models\Access;
 use App\Models\Version;
+use App\Models\Category;
 use App\Models\TaskCard;
 use App\Models\Aircraft;
 use App\Models\Description;
@@ -49,23 +50,53 @@ $factory->state(TaskCard::class, 'basic', function ($faker) {
 
 $factory->state(TaskCard::class, 'eo', function ($faker) {
 
-    // TODO: When 'Scheduled Priority' == 'Prior to'
-    // TODO: When 'Recurrence' == 'Repetitive'
-    // TODO: When 'Manual Affected' == 'Other'
+    $scheduled_priority = Type::ofTaskCardEOScheduledPriority()->get()->random();
+    $recurrence = Type::ofTaskCardEORecurrence()->get()->random();
+    $manual_affected = Type::ofTaskCardEOManualAffected()->get()->random();
 
     return [
         'type_id' => Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
         'revision' => null,
         'ref_no' => null,
         'category_id' => Category::ofTaskCardEO()->get()->random()->id,
-        'scheduled_priority_id' => Type::ofTaskCardEOScheduledPriority()->get()->random()->id,
-        'scheduled_priority_amount' => '',
-        'scheduled_priority_type' => '',
-        'recurrence_id' => Type::ofTaskCardEORecurrence()->get()->random()->id,
-        'recurrence_amount' => '',
-        'recurrence_type' => '',
-        'manual_affected_id' => Type::ofTaskCardEOManualAffected()->get()->random()->id,
-        'manual_affected' => '',
+        'scheduled_priority_id' => $scheduled_priority->id,
+        'scheduled_priority_amount' => function () use ($scheduled_priority) {
+            if ($scheduled_priority->code == 'prior-to') {
+                return rand(1, 10);
+            } else {
+                return null;
+            }
+        },
+        'scheduled_priority_type' => function () use ($scheduled_priority, $faker) {
+            if ($scheduled_priority->code == 'prior-to') {
+                return $faker->randomElement(['days', 'weeks', 'months']);
+            } else {
+                return null;
+            }
+        },
+        'recurrence_id' => $recurrence->id,
+        'recurrence_amount' => function () use ($recurrence) {
+            if ($recurrence->code == 'repetitive') {
+                return rand(1, 10);
+            } else {
+                return null;
+            }
+        },
+        'recurrence_type' => function () use ($recurrence, $faker) {
+            if ($recurrence->code == 'repetitive') {
+                return $faker->randomElement(['days', 'weeks', 'months']);
+            } else {
+                return null;
+            }
+        },
+        'manual_affected_id' => $manual_affected->id,
+        'manual_affected' => function () use ($manual_affected, $faker) {
+            if ($manual_affected->code == 'other') {
+                return $faker->text;
+            } else {
+                return null;
+            }
+        },
     ];
 
 });
