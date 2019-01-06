@@ -1,7 +1,5 @@
 <?php
 
-require_once('print.php');
-
 Route::name('frontend.')->group(function () {
 
     Route::group([
