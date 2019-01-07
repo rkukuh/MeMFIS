@@ -41,7 +41,7 @@
                                     @include('frontend.common.label.create-new')
 
                                     <h3 class="m-portlet__head-text">
-                                        Taskcard
+                                        Taskcard Engineering Order
                                     </h3>
                                 </div>
                             </div>

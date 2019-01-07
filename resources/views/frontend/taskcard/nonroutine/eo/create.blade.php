@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Taskcard
+                                    Taskcard Engineering Order
                                 </h3>
                             </div>
                         </div>
@@ -414,43 +414,9 @@
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-    {{-- <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/access.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-non-routine-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/threshold-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/threshold-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/repeat-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/repeat-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/applicability-engine.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-engine.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/aircraft-taskcard.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/aircraft-taskcard.js') }}"></script>
-
-
- --}}
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
-
     <script src="{{ asset('js/frontend/taskcard/non-routine/create.js') }}"></script>
-    {{-- public/js/frontend/taskcard/create.js --}}
+
     <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
 @endpush

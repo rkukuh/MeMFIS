@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Taskcard
+                                    Taskcard Routine
                                 </h3>
                             </div>
                         </div>
@@ -501,8 +501,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
-
     <script src="{{ asset('js/frontend/taskcard/create.js') }}"></script>
-    {{-- public/js/frontend/taskcard/create.js --}}
+
     <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
 @endpush
