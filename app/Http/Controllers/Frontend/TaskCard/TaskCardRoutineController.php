@@ -59,7 +59,7 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(Taskcard $taskCard)
     {
-        //
+        return view('frontend.taskcard.routine.edit');
     }
 
     /**
