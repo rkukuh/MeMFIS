@@ -1,12 +1,12 @@
-let Category = {
+let Journal = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.journal_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-journals',
+                        url: '/datatables/journal',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -86,10 +86,10 @@ let Category = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_journal" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_journal" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-id=' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill  delete" href="#" data-uuid=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
@@ -102,83 +102,18 @@ let Category = {
             journal_reset();
         });
 
-        // let save = $('.align-items-center').on('click', '.btn-primary', function () {
 
-        //     $.ajax({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         type: 'get',
-        //         url: '/submit-button',
-        //         success: function (data) {
-        //             $('#button-div').html(data);
+        let save_changes_button = function () {
+            $('.btn-success').removeClass('add');
+            $('.btn-success').addClass('update');
+            $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save Changes</span></span>");
+        }
 
-        //         }
-        //     });
-
-        //     $.ajax({
-        //         url: '/type',
-        //         type: 'GET',
-        //         dataType: 'json',
-        //         success: function (data) {
-        //             let angka = 1;
-
-        //             $('select[name="level"]').empty();
-
-        //             $.each(data, function (key, value) {
-        //                 if (angka == 1) {
-        //                     $('select[name="level"]').append(
-        //                         '<option> Select a Level</option>'
-        //                     );
-
-        //                     angka = 0;
-        //                 }
-
-        //                 $('select[name="level"]').append(
-        //                     '<option value="' + key + '">' + value + '</option>'
-        //                 );
-        //             });
-        //         }
-        //     });
-
-
-        //     document.getElementById('code').value = "";
-        //     document.getElementById('name').value = "";
-        //     document.getElementById('type').value = "";
-        //     document.getElementById('level').value = "";
-        //     document.getElementById('description').value = "";
-
-        // });
-
-
-        // $(document).ready(function () {
-        //     let select = document.getElementById('level');
-
-        //     $.ajax({
-        //         url: '/type',
-        //         type: 'GET',
-        //         dataType: 'json',
-        //         success: function (data) {
-        //             let angka = 1;
-
-        //             $('select[name="level"]').empty();
-
-        //             $.each(data, function (key, value) {
-        //                 if (angka == 1) {
-        //                     $('select[name="level"]').append(
-        //                         '<option> Select a Level</option>'
-        //                     );
-
-        //                     angka = 0;
-        //                 }
-
-        //                 $('select[name="level"]').append(
-        //                     '<option value="' + key + '">' + value + '</option>'
-        //                 );
-        //             });
-        //         }
-        //     });
-        // });
+        let save_button = function () {
+            $('.btn-success').removeClass('edit');
+            $('.btn-success').addClass('add');
+            $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save New</span></span>");
+        }
 
         let simpan = $('.modal-footer').on('click', '.add', function () {
             $('#simpan').text('Simpan');
@@ -201,7 +136,7 @@ let Category = {
                     _token: $('input[name=_token]').val(),
                     code: code,
                     name: name,
-                    type: type,
+                    type_id: type,
                     level: level,
                     description: description
                 },
@@ -215,52 +150,10 @@ let Category = {
                             document.getElementById('name').value = name;
                             document.getElementById('type').value = type;
                             document.getElementById('level').value = level;
-
                             document.getElementById('description').value = description;
                         }
 
 
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
-
-                        }
-
-                        if (data.errors.type) {
-                            $('#type-error').html(data.errors.type[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
-                        }
-
-                        if (data.errors.level) {
-                            $('#level-error').html(data.errors.level[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
-                        }
-
-                        if (data.errors.description) {
-                            $('#description-error').html(data.errors.description[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
-                        }
                     } else {
                         $('#modal_journal').modal('hide');
 
@@ -269,12 +162,8 @@ let Category = {
                         });
 
                         $('#code-error').html('');
-                        $('#name-error').html('');
-                        $('#type-error').html('');
-                        $('#level-error').html('');
-                        $('#description-error').html('');
 
-                        let table = $('.m_datatable').mDatatable();
+                        let table = $('journal_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -283,12 +172,11 @@ let Category = {
             });
         });
 
-        let edit = $('.m_datatable').on('click', '.edit', function () {
+        let edit = $('.journal_datatable').on('click', '.edit', function () {
             // $('#button').show();
             // $('#simpan').text('Perbarui');
 
-            let triggerid = $(this).data('id');
-
+            let triggerid = $(this).data('uuid');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -302,7 +190,7 @@ let Category = {
                     // FIXME: 'select' has already been declared.
                     // let select = document.getElementById('level');
 
-                    document.getElementById('id').value = data.uuid;
+                    document.getElementById('uuid').value = data.uuid;
                     document.getElementById('code').value = data.code;
                     document.getElementById('name').value = data.name;
                     document.getElementById('description').value = data.description;
@@ -319,7 +207,7 @@ let Category = {
                             );
                         }
                     });
-                    update_button();
+                    save_changes_button();
                 },
                 error: function (jqXhr, json, errorThrown) {
                     let errorsHtml = '';
@@ -342,7 +230,7 @@ let Category = {
             let code = $('input[name=code]').val();
             let name = $('input[name=name]').val();
             let description = $('#description').val();
-            let triggerid = $('input[name=id]').val();
+            let triggerid = $('input[name=uuid]').val();
 
             $.ajax({
                 headers: {
@@ -354,7 +242,7 @@ let Category = {
                     _token: $('input[name=_token]').val(),
                     code: code,
                     name: name,
-                    type: type,
+                    type_id: type,
                     level: level,
                     description: description
                 },
@@ -362,54 +250,7 @@ let Category = {
                     if (data.errors) {
                         if (data.errors.code) {
                             $('#code-error').html(data.errors.code[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
                         }
-
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
-                        }
-
-                        if (data.errors.type) {
-                            $('#type-error').html(data.errors.type[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
-                        }
-
-                        if (data.errors.level) {
-                            $('#level-error').html(data.errors.level[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
-                        }
-
-                        if (data.errors.description) {
-                            $('#description-error').html(data.errors.description[0]);
-
-                            document.getElementById('code').value = code;
-                            document.getElementById('name').value = name;
-                            document.getElementById('type').value = type;
-                            document.getElementById('level').value = level;
-                            document.getElementById('description').value = description;
-                        }
-
 
                     } else {
                         save_button();
@@ -419,7 +260,7 @@ let Category = {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
+                        let table = $('.journal_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -429,21 +270,22 @@ let Category = {
                         $('#type-error').html('');
                         $('#level-error').html('');
                         $('#description-error').html('');
+
                     }
                 }
             });
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        let remove = $('.journal_datatable').on('click', '.delete', function () {
+            let triggerid = $(this).data('uuid');
 
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
             }).then(result => {
                 if (result.value) {
 
@@ -456,14 +298,12 @@ let Category = {
                         type: 'DELETE',
                         url: '/journal/' + triggerid + '',
                         success: function (data) {
-                            toastr.success(
-                                'Data berhasil dihapus.',
-                                'Sukses', {
+                            toastr.success('Journal has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.journal_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -477,29 +317,13 @@ let Category = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });
 
-        $('#modal_customer').on('hidden.bs.modal', function (e) {
-            $(this).find('#CustomerForm')[0].reset();
-
-            $('#name-error').html('');
-        });
     }
 };
 
 jQuery(document).ready(function () {
-    Category.init();
+    Journal.init();
 });
