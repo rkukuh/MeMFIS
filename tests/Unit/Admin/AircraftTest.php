@@ -18,11 +18,10 @@ class AircraftTest extends TestCase
     /** @test */
     public function requires_a_uuid()
     {
-        $this->withoutExceptionHandling();
         $this->actingAs(factory(User::class)->create());
 
         $aircraft = factory(Aircraft::class)->create();
 
-        $this->assertDatabaseHas('aircraftsx', ['uuid' => $aircraft->uuid]);
+        $this->assertDatabaseHas('aircrafts', ['uuid' => $aircraft->uuid]);
     }
 }
