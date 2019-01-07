@@ -46,4 +46,15 @@ class AircraftTest extends TestCase
         $this->post(route('frontend.aircraft.store'), $data)
              ->assertJsonValidationErrors('name');
     }
+
+    /** @test */
+    public function requires_a_manufacturer()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(Aircraft::class)->raw(['manufacturer_id' => null]);
+
+        $this->post(route('frontend.aircraft.store'), $data)
+             ->assertJsonValidationErrors('manufacturer_id');
+    }
 }
