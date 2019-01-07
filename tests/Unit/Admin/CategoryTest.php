@@ -13,6 +13,8 @@ class CategoryTest extends TestCase
     use WithFaker;
     use RefreshDatabase;
 
+    /** ATTRIBUTES */
+
     /** @test */
     public function requires_a_uuid()
     {
