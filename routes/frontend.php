@@ -170,6 +170,7 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('TaskCard')->group(function () {
 
+            Route::resource('taskcard', 'TaskCardController');
             Route::resource('taskcard-routine', 'TaskCardRoutineController');
             Route::resource('taskcard-eo', 'TaskCardEOController');
             Route::resource('taskcard-si', 'TaskCardSIController');
