@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Models\Aircraft;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Manufacturer;
 
 class AircraftTest extends TestCase
 {
@@ -56,5 +57,20 @@ class AircraftTest extends TestCase
 
         $this->post(route('frontend.aircraft.store'), $data)
              ->assertJsonValidationErrors('manufacturer_id');
+    }
+
+    /** @test */
+    public function manufacturer_must_be_an_instance_of_manufacturer()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $manufacturer = factory(Manufacturer::class)->create();
+
+        $data = factory(Aircraft::class)->create([
+            'manufacturer_id' => $manufacturer->id
+            ]);
+
+        $this->assertInstanceOf(Manufacturer::class, $manufacturer);
+        $this->assertDatabaseHas('aircrafts', ['manufacturer_id' => $data->manufacturer_id]);
     }
 }
