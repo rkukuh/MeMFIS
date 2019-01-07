@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\TaskCard;
 
-use App\Models\ListUtil;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\TaskCardStore;
-use App\Http\Requests\Frontend\TaskCardUpdate;
+use App\Http\Requests\Frontend\TaskCardSIStore;
+use App\Http\Requests\Frontend\TaskCardSIUpdate;
 
-class TaskCardController extends Controller
+class TaskCardSIController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +16,7 @@ class TaskCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.taskcard.index');
+        //
     }
 
     /**
@@ -28,23 +26,18 @@ class TaskCardController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\TaskCardStore  $request
+     * @param  \App\Http\Requests\Frontend\TaskCardSIStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskCardStore $request)
+    public function store(TaskCardSIStore $request)
     {
-        $taskCard = TaskCard::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
-        ]);
-
-        return response()->json($taskCard);
+        //
     }
 
     /**
@@ -55,7 +48,7 @@ class TaskCardController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.show');
+        //
     }
 
     /**
@@ -66,23 +59,19 @@ class TaskCardController extends Controller
      */
     public function edit(Taskcard $taskCard)
     {
-        return view('frontend.taskcard.routine.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\TaskCardUpdate  $request
+     * @param  \App\Http\Requests\Frontend\TaskCardSIUpdate  $request
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardUpdate $request, Taskcard $taskCard)
+    public function update(TaskCardSIUpdate $request, Taskcard $taskCard)
     {
-        $taskCard = TaskCard::find($taskCard);
-        // $taskCard->name = $request->name;
-        // $taskCard->save();
-
-        return response()->json($taskCard);
+        //
     }
 
     /**
@@ -93,8 +82,6 @@ class TaskCardController extends Controller
      */
     public function destroy(Taskcard $taskCard)
     {
-        $taskCard->delete();
-
-        return response()->json($taskcard);
+        //
     }
 }

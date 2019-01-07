@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\WorkPackage;
+namespace App\Http\Controllers\Datatables\TaskCard;
 
 use App\Models\TaskCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TaskCardDatatables extends Controller
+class TaskCardRoutineDatatables extends Controller
 {
     /**
      * Display a listing of the resource.

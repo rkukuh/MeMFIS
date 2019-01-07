@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
-                                    Taskcard
+                                    Taskcard Routine
                                 </h3>
                             </div>
                         </div>
@@ -324,7 +324,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item Required
+                                    Material Required
                                 </h3>
                             </div>
                         </div>

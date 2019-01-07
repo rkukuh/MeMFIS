@@ -3,10 +3,8 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class TastCardUpdate extends FormRequest
+class TaskCardEOUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,7 @@ class TastCardUpdate extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,11 +24,7 @@ class TastCardUpdate extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            //
         ];
-    }
-
-    protected function failedValidation(Validator $validator) {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

@@ -4,9 +4,10 @@ Auth::routes();
 
 Route::redirect('/', '/dashboard', 301);
 
-require_once('admin.php');
-require_once('frontend.php');
-require_once('component.php');
-require_once('datatables.php');
+require('admin.php');
+require('print.php');
+require('frontend.php');
+require('component.php');
+require('datatables.php');
 
-require_once('testing.php');
+require('testing.php');

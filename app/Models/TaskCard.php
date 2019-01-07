@@ -39,7 +39,19 @@ class TaskCard extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
-    // TODO: M-M with Aircraft
+    /**
+     * Many-to-Many: A task card may have zero or many aircraft.
+     *
+     * This function will retrieve all the aircrafts of a task card.
+     * See: Aircraft's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function aircrafts()
+    {
+        return $this->belongsToMany(Aircraft::class, 'aircraft_taskcard', 'taskcard_id', 'aircraft_id')
+                    ->withTimestamps();
+    }
 
     /**
      * Many-to-Many: A task card may have zero or many (aircraft) access.
@@ -56,6 +68,33 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many (self-join): A task card may have none or many other related task cards.
+     *
+     * This function will retrieve all the related-to task cards of a task card.
+     * See: TaskCard's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function related_to()
+    {
+        return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'taskcard_id', 'related_to');
+    }
+
+    /**
+     * Many-to-Many (self-join): A task card may have none or many other related task cards.
+     *
+     * This function will retrieve the parent task cards of a (related-to) task cards.
+     * See: TaskCard's related_to() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'related_to', 'taskcard_id')
+                    ->withTrashed();
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of an task card.
@@ -66,17 +105,6 @@ class TaskCard extends MemfisModel
     public function type()
     {
         return $this->belongsTo(Type::class);
-    }
-
-    /**
-     * Polymorphic: An employee can have zero or many versions.
-     *
-     * This function will get all of the task card's versions.
-     * See: Version' versionable() method for the inverse
-     */
-    public function versions()
-    {
-        return $this->morphMany(Version::class, 'versionable');
     }
 
     /**

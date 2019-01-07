@@ -13,11 +13,13 @@ $factory->define(Category::class, function (Faker $faker) {
         'name' => $name,
         'of'   => $faker->randomElement([
             'item',
+            'taskcard-eo',
         ]),
     ];
 
 });
 
-/** States */
+/** STATES */
 
 $factory->state(Category::class, 'item', ['of' => 'item']);
+$factory->state(Category::class, 'taskcard-eo', ['of' => 'taskcard-eo']);

@@ -1,7 +1,5 @@
 <?php
 
-require_once('print.php');
-
 Route::name('frontend.')->group(function () {
 
     Route::group([
@@ -69,10 +67,9 @@ Route::name('frontend.')->group(function () {
         /** TRANSACTION */
 
         Route::resource('project', 'ProjectController');
-        Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
-        Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
         Route::resource('workpackage', 'WorkPackageController');
+        Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
         /** AIRCRAFT  */
 
@@ -163,6 +160,41 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/education', 'EmployeeEducationController');
                     Route::resource('/{employee}/travel-request', 'EmployeeTravelRequestController');
                     Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
+
+                });
+            });
+
+        });
+
+        /** TASK CARD  */
+
+        Route::namespace('TaskCard')->group(function () {
+
+            Route::resource('taskcard', 'TaskCardController');
+            Route::resource('taskcard-routine', 'TaskCardRoutineController');
+            Route::resource('taskcard-eo', 'TaskCardEOController');
+            Route::resource('taskcard-si', 'TaskCardSIController');
+
+            Route::name('taskcard-routine.')->group(function () {
+                Route::prefix('taskcard-routine')->group(function () {
+
+                    //
+
+                });
+            });
+
+            Route::name('taskcard-eo.')->group(function () {
+                Route::prefix('taskcard-eo')->group(function () {
+
+                    //
+
+                });
+            });
+
+            Route::name('taskcard-si.')->group(function () {
+                Route::prefix('taskcard-si')->group(function () {
+
+                    //
 
                 });
             });

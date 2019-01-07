@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\TaskCard;
 
-use App\Models\Aircraft;
+use App\Models\TaskCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AircraftDatatables extends Controller
+class TaskCardEODatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,7 @@ class AircraftDatatables extends Controller
      */
     public function index()
     {
-        $aircrafts = Aircraft::with('manufacturer')->get();
-
-        $data = $alldata = json_decode($aircrafts);
+        $data = $alldata = json_decode(TaskCard::all());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

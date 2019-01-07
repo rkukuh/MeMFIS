@@ -14,8 +14,6 @@ class Aircraft extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
-    // TODO: M-M with TaskCard
-
     /**
      * Polymorphic: An entity can have zero or many accesses.
      *
@@ -51,6 +49,20 @@ class Aircraft extends MemfisModel
     public function manufacturer()
     {
         return $this->belongsTo(Manufacturer::class);
+    }
+
+    /**
+     * Many-to-Many: A task card may have zero or many aircraft.
+     *
+     * This function will retrieve all the task cards of an aircraft.
+     * See: TaskCard's aircrafts() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcards()
+    {
+        return $this->belongsToMany(TaskCard::class, 'aircraft_taskcard', 'aircraft_id', 'taskcard_id')
+                    ->withTimestamps();
     }
 
     /**

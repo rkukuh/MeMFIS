@@ -141,7 +141,7 @@ Route::name('datatables.')->group(function () {
 
         });
 
-        /** TASKCARD */
+        /** TASK CARD: All */
 
         Route::name('taskcard.')->group(function () {
 
@@ -152,10 +152,91 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
+                /** Master Data */
                 Route::get('/','TaskCardDatatables@index')->name('all');
-                Route::get('/item','TaskCardItemDatatables@index')->name('item.index');
-                Route::get('/repeat','TaskCardMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeat');
-                Route::get('/threshold','TaskCardMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.threshold');
+
+            });
+
+        });
+
+        /** TASK CARD: Routine */
+
+        Route::name('taskcard-routine.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'taskcard-routine',
+                'namespace' => 'TaskCard'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/','TaskCardRoutineDatatables@index')->name('all');
+
+                /** Polymorph */
+                // TODO: with (aircraft) Access
+                // TODO: with (aircraft) Zone
+
+                /** Transaction */
+                Route::get('/{taskcard}/tools','TaskCardRoutineItemsDatatables@index')->name('tools.index');
+                Route::get('/{taskcard}/materials','TaskCardRoutineItemsDatatables@index')->name('materials.index');
+                Route::get('/{taskcard}/aircrafts','TaskCardRoutineAircraftsDatatables@index')->name('aircrafts.index');
+                Route::get('/{taskcard}/repeats','TaskCardRoutineMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeats');
+                Route::get('/{taskcard}/thresholds','TaskCardRoutineMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.thresholds');
+
+            });
+
+        });
+
+        /** TASK CARD: EO */
+
+        Route::name('taskcard-eo.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'taskcard-eo',
+                'namespace' => 'TaskCard'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/','TaskCardEODatatables@index')->name('all');
+
+                /** Polymorph */
+                // TODO: with (aircraft) Access
+                // TODO: with (aircraft) Zone
+
+                /** Transaction */
+                Route::get('/{taskcard}/tools','TaskCardEOItemsDatatables@index')->name('tools.index');
+                Route::get('/{taskcard}/materials','TaskCardEOItemsDatatables@index')->name('materials.index');
+                Route::get('/{taskcard}/aircrafts','TaskCardEOAircraftsDatatables@index')->name('aircrafts.index');
+
+            });
+
+        });
+
+        /** TASK CARD: SI */
+
+        Route::name('taskcard-si.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'taskcard-si',
+                'namespace' => 'TaskCard'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/','TaskCardSIDatatables@index')->name('all');
+
+                /** Polymorph */
+                // TODO: with (aircraft) Access
+                // TODO: with (aircraft) Zone
+
+                /** Transaction */
+                Route::get('/{taskcard}/tools','TaskCardSIItemsDatatables@index')->name('tools.index');
+                Route::get('/{taskcard}/materials','TaskCardSIItemsDatatables@index')->name('materials.index');
+                Route::get('/{taskcard}/aircrafts','TaskCardSIAircraftsDatatables@index')->name('aircrafts.index');
 
             });
 
@@ -173,7 +254,6 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/','WorkPackageDatatables@index')->name('all');
-                Route::get('/{workpackage}/taskcard','TaskCardDatatables@index')->name('taskcard.index');
 
             });
 
