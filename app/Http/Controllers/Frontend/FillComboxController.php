@@ -56,6 +56,20 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function categorieTakcard()
+    {
+        $categories = Category::ofTaskCardEO()
+                              ->pluck('name', 'id');
+
+        return json_encode($categories);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function tags()
     {
         $tags = Tag::get()->pluck('name', 'id');
@@ -471,6 +485,45 @@ class FillComboxController extends Controller
     public function access()
     {
         $accesses = Access::pluck('name', 'id');
+
+        return json_encode($accesses);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function scheduledPriority()
+    {
+        $accesses = Type::ofTaskCardEOScheduledPriority()
+                    ->pluck('name', 'id');
+
+        return json_encode($accesses);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function recurrence()
+    {
+        $accesses = Type::ofTaskCardEORecurrence()
+                    ->pluck('name', 'id');
+
+        return json_encode($accesses);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manualAffected()
+    {
+        $accesses = Type::ofTaskCardEOManualAffected()
+                    ->pluck('name', 'id');
 
         return json_encode($accesses);
     }
