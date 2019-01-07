@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Frontend;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -27,8 +26,8 @@ class ManufacturerStore extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
             'code' => 'required',
+            'name' => 'required',
         ];
     }
 
@@ -44,7 +43,7 @@ class ManufacturerStore extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator) { 
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()])); 
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }
