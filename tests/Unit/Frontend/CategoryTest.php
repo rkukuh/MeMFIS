@@ -24,4 +24,14 @@ class CategoryTest extends TestCase
 
         $this->assertDatabaseHas('categories', ['uuid' => $category->uuid]);
     }
+
+    /** @test */
+    public function requires_a_code()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(Category::class)->raw(['code' => null]);
+
+        $this->post(route('frontend.category.store'), $data)->assertSessionHasErrors('code');
+    }
 }
