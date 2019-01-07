@@ -24,4 +24,14 @@ class AircraftTest extends TestCase
 
         $this->assertDatabaseHas('aircrafts', ['uuid' => $aircraft->uuid]);
     }
+
+    /** @test */
+    public function requires_a_code()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(Aircraft::class)->raw(['code' => null]);
+
+        $this->post(route('admin.aircraft.store'), $data)->assertSessionHasErrors('code');
+    }
 }
