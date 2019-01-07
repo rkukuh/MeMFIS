@@ -172,7 +172,7 @@ Route::name('datatables.')->group(function () {
 
         /** TASK CARD: EO */
 
-        Route::name('taskcard-si.')->group(function () {
+        Route::name('taskcard-eo.')->group(function () {
 
             Route::group([
 
