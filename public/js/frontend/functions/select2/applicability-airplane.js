@@ -1,7 +1,7 @@
 let ApplicabilityAirplaneSelect2 = {
     init: function () {
         $('#applicability_airplane, #applicability_airplane_validate').select2({
-            placeholder: 'Select a Applicability',
+            placeholder: 'Select a Aircraft Applicability',
         });
     }
 };

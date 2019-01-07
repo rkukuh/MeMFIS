@@ -136,6 +136,20 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
+                                                    Skill @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Otr Certification')
+                                                    @slot('id', 'otr_certification')
+                                                    @slot('name', 'otr_certification')
+                                                    @slot('id_error', 'otr-certification')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
                                                     Schedule Priority @include('frontend.common.label.required')
                                                 </label>
 
@@ -395,6 +409,9 @@
 @endpush
 
 @push('footer-scripts')
+
+    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>

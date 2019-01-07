@@ -9,7 +9,7 @@ $(document).ready(function () {
                 $('select[name="otr_certification"]').empty();
 
                 $('select[name="otr_certification"]').append(
-                    '<option> Select a OTR Certification</option>'
+                    '<option> Select a Skill</option>'
                 );
 
                 $.each(data, function (key, value) {
