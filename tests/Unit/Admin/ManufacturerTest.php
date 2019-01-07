@@ -24,4 +24,14 @@ class ManufacturerTest extends TestCase
 
         $this->assertDatabaseHas('manufacturers', ['uuid' => $manufacturer->uuid]);
     }
+
+    /** @test */
+    public function requires_a_code()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(Manufacturer::class)->raw(['code' => null]);
+
+        $this->post(route('admin.manufacturer.store'), $data)->assertSessionHasErrors('code');
+    }
 }
