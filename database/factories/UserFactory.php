@@ -10,10 +10,10 @@ $factory->define(User::class, function (Faker $faker)
     $last_name  = $faker->lastName;
 
     return [
-        'name'            => $first_name . ' ' . $last_name,
-        'email'           => strtolower($first_name . '.' . $last_name) . '@memfis.dev',
-        'password'        => Hash::make('rahasia'),
-        'remember_token'  => str_random(10),
+        'name' => $first_name . ' ' . $last_name,
+        'email' => strtolower($first_name . '.' . $last_name) . '@memfis.dev',
+        'password' => Hash::make('rahasia'),
+        'remember_token' => str_random(10),
     ];
 
 });
