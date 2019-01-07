@@ -324,7 +324,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Item Required
+                                    Material Required
                                 </h3>
                             </div>
                         </div>
