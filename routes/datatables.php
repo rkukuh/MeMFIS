@@ -236,7 +236,6 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/','WorkPackageDatatables@index')->name('all');
-                Route::get('/{workpackage}/taskcard','TaskCardDatatables@index')->name('taskcard.index');
 
             });
 
