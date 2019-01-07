@@ -50,8 +50,8 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-8 order-2 order-xl-1">
+                                <div class="row">
+                                    <div class="col-md-8">
                                         <div class="form-group m-form__group row align-items-center">
                                             <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
@@ -64,12 +64,31 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create')
-                                            @slot('text', 'Taskcard')
-                                            @slot('href', route('frontend.taskcard.create') )
-                                        @endcomponent
+                                    <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    @component('frontend.common.buttons.create')
+                                                        @slot('text', 'Taskcard Routine')
+                                                        @slot('href', route('frontend.taskcard-routine.create') )
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="dropdown">
+                                                        @component('frontend.common.buttons.dropdown')
+                                                        @slot('text', 'Taskcard Non-Routine')
+                                                        @slot('id', 'taskcard-non-routine')
+                                                    @endcomponent
 
+                                                    <div class="dropdown-menu" aria-labelledby="taskcard-non-routine" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                        <a class="dropdown-item" href="{{route('frontend.taskcard-eo.create')}}"> Engineering Order</a>
+                                                        <a class="dropdown-item" href="{{route('frontend.taskcard-si.create')}}"> Special Instruction</a>
+                                                    </div>
+
+
+                                                </div>
+
+                                                </div>
+                                            </div>
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
