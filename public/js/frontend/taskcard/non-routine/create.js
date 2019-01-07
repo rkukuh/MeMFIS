@@ -38,9 +38,16 @@ let TaskCard = {
                 $('#prior_to_hours').removeAttr("disabled");
                 $('#prior_to_cycle').removeAttr("disabled");
                 } else {
+                    $('#prior_to_date').prop('checked', false);
                     $('#prior_to_date').prop("disabled", true);
+                    $('#prior_to_hours').prop('checked', false);
                     $('#prior_to_hours').prop("disabled", true);
+                    $('#prior_to_cycle').prop('checked', false);
                     $('#prior_to_cycle').prop("disabled", true);
+                    $('#date').prop("disabled", true);
+                    $('#hour').prop("disabled", true);
+                    $('#cycle').prop("disabled", true);
+
                 }
             });
         });
