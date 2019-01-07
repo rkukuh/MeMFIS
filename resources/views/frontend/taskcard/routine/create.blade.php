@@ -322,7 +322,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Tool Required
+                                    Required Tool
                                 </h3>
                             </div>
                         </div>
@@ -353,7 +353,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Required
+                                    Required Material
                                 </h3>
                             </div>
                         </div>
