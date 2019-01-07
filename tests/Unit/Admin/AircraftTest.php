@@ -32,7 +32,8 @@ class AircraftTest extends TestCase
 
         $data = factory(Aircraft::class)->raw(['code' => null]);
 
-        $this->post(route('admin.aircraft.store'), $data)->assertSessionHasErrors('code');
+        $this->post(route('admin.aircraft.store'), $data)
+             ->assertSessionHasErrors('code');
     }
 
     /** @test */
@@ -42,6 +43,7 @@ class AircraftTest extends TestCase
 
         $data = factory(Aircraft::class)->raw(['name' => null]);
 
-        $this->post(route('admin.aircraft.store'), $data)->assertSessionHasErrors('name');
+        $this->post(route('admin.aircraft.store'), $data)
+             ->assertSessionHasErrors('name');
     }
 }

@@ -32,7 +32,8 @@ class ManufacturerTest extends TestCase
 
         $data = factory(Manufacturer::class)->raw(['code' => null]);
 
-        $this->post(route('admin.manufacturer.store'), $data)->assertSessionHasErrors('code');
+        $this->post(route('admin.manufacturer.store'), $data)
+             ->assertSessionHasErrors('code');
     }
 
     /** @test */
@@ -42,6 +43,7 @@ class ManufacturerTest extends TestCase
 
         $data = factory(Manufacturer::class)->raw(['name' => null]);
 
-        $this->post(route('admin.manufacturer.store'), $data)->assertSessionHasErrors('name');
+        $this->post(route('admin.manufacturer.store'), $data)
+             ->assertSessionHasErrors('name');
     }
 }
