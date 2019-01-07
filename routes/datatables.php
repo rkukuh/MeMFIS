@@ -141,6 +141,24 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** TASK CARD: All */
+
+        Route::name('taskcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'taskcard',
+                'namespace' => 'TaskCard'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/','TaskCardDatatables@index')->name('all');
+
+            });
+
+        });
+
         /** TASK CARD: Routine */
 
         Route::name('taskcard-routine.')->group(function () {
