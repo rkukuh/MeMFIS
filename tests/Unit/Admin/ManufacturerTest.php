@@ -34,4 +34,14 @@ class ManufacturerTest extends TestCase
 
         $this->post(route('admin.manufacturer.store'), $data)->assertSessionHasErrors('code');
     }
+
+    /** @test */
+    public function requires_a_name()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(Manufacturer::class)->raw(['name' => null]);
+
+        $this->post(route('admin.manufacturer.store'), $data)->assertSessionHasErrors('name');
+    }
 }

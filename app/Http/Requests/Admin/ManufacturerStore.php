@@ -25,6 +25,7 @@ class ManufacturerStore extends FormRequest
     {
         return [
             'code' => 'required',
+            'name' => 'required',
         ];
     }
 }
