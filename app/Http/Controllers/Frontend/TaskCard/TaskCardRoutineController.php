@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\TaskCard;
 
-use App\Models\ListUtil;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\TaskCardStore;
-use App\Http\Requests\Frontend\TaskCardUpdate;
+use App\Http\Requests\Frontend\TaskCardRoutineStore;
+use App\Http\Requests\Frontend\TaskCardRoutineUpdate;
 
-class TaskCardController extends Controller
+class TaskCardRoutineController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -34,10 +32,10 @@ class TaskCardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\TaskCardStore  $request
+     * @param  \App\Http\Requests\Frontend\TaskCardRoutineStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskCardStore $request)
+    public function store(TaskCardRoutineStore $request)
     {
         $taskCard = TaskCard::create([
             // 'abbr' => $request->abbr,
@@ -72,11 +70,11 @@ class TaskCardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\TaskCardUpdate  $request
+     * @param  \App\Http\Requests\Frontend\TaskCardRoutineUpdate  $request
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardUpdate $request, Taskcard $taskCard)
+    public function update(TaskCardRoutineUpdate $request, Taskcard $taskCard)
     {
         $taskCard = TaskCard::find($taskCard);
         // $taskCard->name = $request->name;
