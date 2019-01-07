@@ -31,18 +31,6 @@ class ManufacturerStore extends FormRequest
         ];
     }
 
-    /**
-     * Set custom validation error message
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            //
-        ];
-    }
-
     protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
