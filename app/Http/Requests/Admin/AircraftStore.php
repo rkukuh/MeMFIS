@@ -25,6 +25,7 @@ class AircraftStore extends FormRequest
     {
         return [
             'code' => 'required',
+            'name' => 'required',
         ];
     }
 }

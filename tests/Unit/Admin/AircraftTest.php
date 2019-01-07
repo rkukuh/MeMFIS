@@ -34,4 +34,14 @@ class AircraftTest extends TestCase
 
         $this->post(route('admin.aircraft.store'), $data)->assertSessionHasErrors('code');
     }
+
+    /** @test */
+    public function requires_a_name()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(Aircraft::class)->raw(['name' => null]);
+
+        $this->post(route('admin.aircraft.store'), $data)->assertSessionHasErrors('name');
+    }
 }
