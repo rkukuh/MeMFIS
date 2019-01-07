@@ -16,7 +16,7 @@ class TaskCardController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.taskcard.index');
     }
 
     /**
@@ -48,7 +48,7 @@ class TaskCardController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        //
+        return view('frontend.taskcard.show');
     }
 
     /**

@@ -16,7 +16,7 @@ class TaskCardRoutineController extends Controller
      */
     public function index()
     {
-        return view('frontend.taskcard.index');
+        //
     }
 
     /**
@@ -26,7 +26,7 @@ class TaskCardRoutineController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.create');
+        //
     }
 
     /**
@@ -37,12 +37,7 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
-        $taskCard = TaskCard::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
-        ]);
-
-        return response()->json($taskCard);
+        //
     }
 
     /**
@@ -53,7 +48,7 @@ class TaskCardRoutineController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.show');
+        //
     }
 
     /**
@@ -64,7 +59,7 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(Taskcard $taskCard)
     {
-        return view('frontend.taskcard.routine.edit');
+        //
     }
 
     /**
@@ -76,11 +71,7 @@ class TaskCardRoutineController extends Controller
      */
     public function update(TaskCardRoutineUpdate $request, Taskcard $taskCard)
     {
-        $taskCard = TaskCard::find($taskCard);
-        // $taskCard->name = $request->name;
-        // $taskCard->save();
-
-        return response()->json($taskCard);
+        //
     }
 
     /**
@@ -91,8 +82,6 @@ class TaskCardRoutineController extends Controller
      */
     public function destroy(Taskcard $taskCard)
     {
-        $taskCard->delete();
-
-        return response()->json($taskcard);
+        //
     }
 }
