@@ -69,8 +69,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('project', 'ProjectController');
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
-        Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
         Route::resource('workpackage', 'WorkPackageController');
+        Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
         /** AIRCRAFT  */
 
