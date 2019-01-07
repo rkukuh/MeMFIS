@@ -37,7 +37,7 @@ class ManufacturerController extends Controller
      */
     public function store(ManufacturerStore $request)
     {
-        //
+        Manufacturer::create($request->all());
     }
 
     /**
