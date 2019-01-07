@@ -37,7 +37,7 @@ class AircraftController extends Controller
      */
     public function store(AircraftStore $request)
     {
-        Aircraft::create($request->all());
+        //
     }
 
     /**

@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Unit\Admin;
+namespace Tests\Unit\Frontend;
 
 use App\User;
 use Tests\TestCase;
-use App\Models\Aircraft;
+use App\Models\Manufacturer;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AircraftTest extends TestCase
+class ManufacturerTest extends TestCase
 {
     use WithFaker;
     use RefreshDatabase;
@@ -20,9 +20,9 @@ class AircraftTest extends TestCase
     {
         $this->actingAs(factory(User::class)->create());
 
-        $aircraft = factory(Aircraft::class)->create();
+        $manufacturer = factory(Manufacturer::class)->create();
 
-        $this->assertDatabaseHas('aircrafts', ['uuid' => $aircraft->uuid]);
+        $this->assertDatabaseHas('manufacturers', ['uuid' => $manufacturer->uuid]);
     }
 
     /** @test */
@@ -30,9 +30,9 @@ class AircraftTest extends TestCase
     {
         $this->actingAs(factory(User::class)->create());
 
-        $data = factory(Aircraft::class)->raw(['code' => null]);
+        $data = factory(Manufacturer::class)->raw(['code' => null]);
 
-        $this->post(route('admin.aircraft.store'), $data)->assertSessionHasErrors('code');
+        $this->post(route('frontend.manufacturer.store'), $data)->assertJsonValidationErrors('code');
     }
 
     /** @test */
@@ -40,8 +40,8 @@ class AircraftTest extends TestCase
     {
         $this->actingAs(factory(User::class)->create());
 
-        $data = factory(Aircraft::class)->raw(['name' => null]);
+        $data = factory(Manufacturer::class)->raw(['name' => null]);
 
-        $this->post(route('admin.aircraft.store'), $data)->assertSessionHasErrors('name');
+        $this->post(route('frontend.manufacturer.store'), $data)->assertJsonValidationErrors('name');
     }
 }
