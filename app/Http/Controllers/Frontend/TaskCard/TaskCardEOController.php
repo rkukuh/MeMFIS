@@ -26,7 +26,7 @@ class TaskCardEOController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.taskcard.nonroutine.eo.create');
     }
 
     /**

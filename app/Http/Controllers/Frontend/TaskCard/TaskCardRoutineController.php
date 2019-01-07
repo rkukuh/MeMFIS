@@ -26,7 +26,7 @@ class TaskCardRoutineController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.taskcard.routine.create');
     }
 
     /**
