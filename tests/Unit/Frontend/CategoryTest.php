@@ -44,4 +44,14 @@ class CategoryTest extends TestCase
 
         $this->post(route('frontend.category.store'), $data)->assertSessionHasErrors('name');
     }
+
+    /** @test */
+    public function requires_an_of()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(Category::class)->raw(['of' => null]);
+
+        $this->post(route('frontend.category.store'), $data)->assertSessionHasErrors('of');
+    }
 }
