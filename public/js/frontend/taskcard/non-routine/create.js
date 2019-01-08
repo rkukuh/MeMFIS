@@ -22,9 +22,11 @@ let TaskCard = {
             $('select[name="recurrence_id"]').on('change', function () {
                 let recurrence = $(this).val();
                 if (recurrence == 67) {
+                $("#recurrence_div").removeClass("hidden");
                 $('#recurrence').removeAttr("disabled");
                 $('#recurrence-select').removeAttr("disabled");
                 } else {
+                    $("#recurrence_div").addClass("hidden");
                     $('#recurrence').prop("disabled", true);
                     $('#recurrence-select').prop("disabled", true);
                 }
@@ -34,10 +36,12 @@ let TaskCard = {
             $('select[name="scheduled_priority_id"]').on('change', function () {
                 let recurrence = $(this).val();
                 if (recurrence == 71) {
+                $("#prior_to").removeClass("hidden");
                 $('#prior_to_date').removeAttr("disabled");
                 $('#prior_to_hours').removeAttr("disabled");
                 $('#prior_to_cycle').removeAttr("disabled");
                 } else {
+                    $("#prior_to").addClass("hidden");
                     $('#prior_to_date').prop('checked', false);
                     $('#prior_to_date').prop("disabled", true);
                     $('#prior_to_hours').prop('checked', false);
@@ -55,9 +59,11 @@ let TaskCard = {
             $('select[name="manual_affected_id"]').on('change', function () {
                 let manual_affected = $(this).val();
                 if (manual_affected == 64) {
+                $("#note_div").removeClass("hidden");
                 $('#note').removeAttr("disabled");
                 } else {
                     $('#note').prop("disabled", true);
+                    $("#note_div").addClass("hidden");
                 }
             });
         });
