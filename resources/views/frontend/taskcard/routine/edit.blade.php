@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
-                                    Taskcard Routine
+                                    Routine Taskcard
                                 </h3>
                             </div>
                         </div>

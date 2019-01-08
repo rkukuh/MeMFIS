@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Taskcard Engineering Order
+                                    Engineering Order Taskcard
                                 </h3>
                             </div>
                         </div>
@@ -131,6 +131,31 @@
                                                     @slot('id_error', 'category')
                                                 @endcomponent
 
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Skill @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Otr Certification')
+                                                    @slot('id', 'otr_certification')
+                                                    @slot('name', 'otr_certification')
+                                                    @slot('id_error', 'otr-certification')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    File @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.upload')
+                                                    @slot('text', 'Taskcard')
+                                                    @slot('id', 'taskcard')
+                                                    @slot('name', 'taskcard')
+                                                @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -286,6 +311,20 @@
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label class="form-control-label">
+                                                    Description @include('frontend.common.label.optional')
+                                                </label>
+
+                                                @component('frontend.common.input.textarea')
+                                                    @slot('rows', '3')
+                                                    @slot('id', 'description')
+                                                    @slot('name', 'description')
+                                                    @slot('text', 'Description')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                 <div class="flex">
                                                     <div class="action-buttons">
@@ -391,10 +430,40 @@
         .margin-info {
             margin-left: 5px
         }
+        textarea{
+        /* box-sizing: padding-box; */
+        overflow:hidden;
+        /* demo only: */
+        /* padding:10px; */
+        width:250px;
+        font-size:14px;
+        /* margin:50px auto; */
+        display:block;
+        border-radius:10px;
+        border:6px solid #556677;
+        }
+
     </style>
 @endpush
 
 @push('footer-scripts')
+    <script>
+        var textarea = document.querySelector('#description');
+
+        textarea.addEventListener('keydown', autosize);
+
+        function autosize(){
+        var el = this;
+            setTimeout(function(){
+                el.style.cssText = 'height:auto; padding:0';
+                // for box-sizing other than "content-box" use:
+                // el.style.cssText = '-moz-box-sizing:content-box';
+                el.style.cssText = 'height:' + el.scrollHeight + 'px';
+            },0);
+        }
+    </script>
+    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>

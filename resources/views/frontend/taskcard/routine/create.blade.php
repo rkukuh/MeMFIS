@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Taskcard Routine
+                                    Routine Taskcard
                                 </h3>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Applicability @include('frontend.common.label.required')
+                                                    Aircraft Applicability @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
@@ -133,23 +133,37 @@
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Manhour @include('frontend.common.label.required')
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'manhour')
+                                                            @slot('text', 'Manhour')
+                                                            @slot('name', 'manhour')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Performa @include('frontend.common.label.required')
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'performa')
+                                                            @slot('text', 'Performa')
+                                                            @slot('name', 'performa')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_rii')
                                                     @slot('name', 'is_rii')
                                                     @slot('text', 'RII?')
                                                     @slot('style_div','margin-top:30px')
-                                                @endcomponent
-
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Manhour @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'manhour')
-                                                    @slot('text', 'Manhour')
-                                                    @slot('name', 'manhour')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -239,7 +253,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Version @include('frontend.common.label.required')
+                                                    Version @include('frontend.common.label.optional')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
@@ -252,20 +266,6 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Description @include('frontend.common.label.optional')
-                                                </label>
-
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
-                                                    @slot('id', 'description')
-                                                    @slot('name', 'description')
-                                                    @slot('text', 'Description')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
                                                     Effectivity @include('frontend.common.label.optional')
                                                 </label>
 
@@ -275,6 +275,8 @@
                                                     @slot('name', 'effectifity')
                                                 @endcomponent
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     File @include('frontend.common.label.required')
@@ -284,6 +286,20 @@
                                                     @slot('text', 'Taskcard')
                                                     @slot('id', 'taskcard')
                                                     @slot('name', 'taskcard')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label class="form-control-label">
+                                                    Description @include('frontend.common.label.optional')
+                                                </label>
+
+                                                @component('frontend.common.input.textarea')
+                                                    @slot('rows', '3')
+                                                    @slot('id', 'description')
+                                                    @slot('name', 'description')
+                                                    @slot('text', 'Description')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -455,11 +471,37 @@
         .margin-info {
             margin-left: 5px
         }
+        textarea{
+        /* box-sizing: padding-box; */
+        overflow:hidden;
+        /* demo only: */
+        padding:10px;
+        width:250px;
+        font-size:14px;
+        margin:50px auto;
+        display:block;
+        border-radius:10px;
+        border:6px solid #556677;
+        }
     </style>
 @endpush
 
 @push('footer-scripts')
+    <script>
+    var textarea = document.querySelector('textarea');
 
+    textarea.addEventListener('keydown', autosize);
+
+    function autosize(){
+    var el = this;
+    setTimeout(function(){
+        el.style.cssText = 'height:auto; padding:0';
+        // for box-sizing other than "content-box" use:
+        // el.style.cssText = '-moz-box-sizing:content-box';
+        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+    },0);
+    }
+    </script>
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>

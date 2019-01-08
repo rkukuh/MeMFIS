@@ -37,13 +37,7 @@ class JournalController extends Controller
      */
     public function store(JournalStore $request)
     {
-        $journal = Journal::create([
-            'code' => $request->code,
-            'name' => $request->name,
-            'type_id' => $request->type,
-            'level' => $request->level,
-            'description' => $request->description,
-        ]);
+        $journal = Journal::create($request->all());
 
         return response()->json($journal);
     }
@@ -80,12 +74,14 @@ class JournalController extends Controller
     public function update(JournalUpdate $request, Journal $journal)
     {
         // $journal = Journal::find($journal);
-        $journal->code = $request->code;
-        $journal->name = $request->name;
-        $journal->type_id = $request->type;
-        $journal->level = $request->level;
-        $journal->description = $request->description;
-        $journal->save();
+
+        $journal->update($request->all());
+        // $journal->code = $request->code;
+        // $journal->name = $request->name;
+        // $journal->type_id = $request->type;
+        // $journal->level = $request->level;
+        // $journal->description = $request->description;
+        // $journal->save();
 
         return response()->json($journal);
     }

@@ -10,7 +10,7 @@
             <div class="modal-body">
 
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="JournalForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -90,11 +90,12 @@
                             <div class="action-buttons">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                                {{-- <div id="button-div" style="height:0px;"> --}}
-                                                    @include('frontend.common.buttons.submit')
-                                                {{-- </div>  --}}
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type', 'button')
+                                                    @endcomponent
+
                                                     @include('frontend.common.buttons.reset')
-                            
+
                                                     @include('frontend.common.buttons.close')
                                             </div>
                                     </div>
