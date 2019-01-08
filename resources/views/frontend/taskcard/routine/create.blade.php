@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Taskcard Routine
+                                    Routine Taskcard
                                 </h3>
                             </div>
                         </div>
@@ -133,23 +133,37 @@
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Manhour @include('frontend.common.label.required')
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'manhour')
+                                                            @slot('text', 'Manhour')
+                                                            @slot('name', 'manhour')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Performa @include('frontend.common.label.required')
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'performa')
+                                                            @slot('text', 'Performa')
+                                                            @slot('name', 'performa')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_rii')
                                                     @slot('name', 'is_rii')
                                                     @slot('text', 'RII?')
                                                     @slot('style_div','margin-top:30px')
-                                                @endcomponent
-
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Manhour @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'manhour')
-                                                    @slot('text', 'Manhour')
-                                                    @slot('name', 'manhour')
                                                 @endcomponent
                                             </div>
                                         </div>
