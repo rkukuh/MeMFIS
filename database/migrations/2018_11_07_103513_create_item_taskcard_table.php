@@ -29,6 +29,8 @@ class CreateItemTaskcardTable extends Migration
                     ->references('id')->on('taskcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            // TODO: Untuk mengakomodir kebutuhan tabel taskcard_eo's required tools, tabel ini harus jadi polymorph
         });
     }
 

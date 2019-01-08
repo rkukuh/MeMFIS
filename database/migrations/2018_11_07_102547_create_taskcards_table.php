@@ -29,6 +29,7 @@ class CreateTaskcardsTable extends Migration
             $table->longText('description')->nullable();
             $table->json('version')->nullable();
             $table->unsignedDecimal('performance_factor', 8, 2)->default(1);
+            $table->unsignedInteger('sequence')->nullable();
 
             /** EO */
             $table->string('revision')->nullable();
@@ -42,6 +43,9 @@ class CreateTaskcardsTable extends Migration
             $table->string('recurrence_type')->nullable();
             $table->unsignedInteger('manual_affected_id')->nullable();
             $table->string('manual_affected')->nullable();
+
+            // TODO: 1-M tabel taskcard_eo
+            // Columns: id, taskcard_id, work_area, instruction, skill, manhour, helper_quantity, req. RII, tools, materials, notes
 
             $table->timestamps();
             $table->softDeletes();
