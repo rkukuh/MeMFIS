@@ -172,7 +172,7 @@
                                                 @endcomponent
 
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="prior_to">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
@@ -231,7 +231,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row">
+                                        <div class="form-group m-form__group row" >
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Recurrence @include('frontend.common.label.required')
@@ -245,7 +245,7 @@
                                                 @endcomponent
 
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-6 col-md-6 col-lg-6  hidden" id="recurrence_div">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
@@ -297,7 +297,7 @@
                                                 @endcomponent
 
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="note_div">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
@@ -435,7 +435,8 @@
         overflow:hidden;
         /* demo only: */
         /* padding:10px; */
-        width:250px;
+        /* width:250px; */
+        min-height: :5em;
         font-size:14px;
         /* margin:50px auto; */
         display:block;
