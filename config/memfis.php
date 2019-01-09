@@ -24,8 +24,8 @@ return [
         'storages' => 10,
         'taskcards' => [
             'basic' => 20,
-            'eo' => 10,
-            'si' => 10,
+            'eo' => 20,
+            'si' => 20,
         ],
         'types' => 10,
     ],
