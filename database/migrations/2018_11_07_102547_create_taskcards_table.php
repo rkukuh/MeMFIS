@@ -16,6 +16,8 @@ class CreateTaskcardsTable extends Migration
         Schema::create('taskcards', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+
+            /** BASIC / GENERAL */
             $table->string('number');
             $table->string('title');
             $table->unsignedInteger('type_id');
@@ -43,6 +45,11 @@ class CreateTaskcardsTable extends Migration
             $table->string('recurrence_type')->nullable();
             $table->unsignedInteger('manual_affected_id')->nullable();
             $table->string('manual_affected')->nullable();
+
+            /** SI */
+            // Attributes
+            // Fieldset #1 : SI No (r/1), Title (r/2), A/C Type (r/3), Skill (r/4), RII (r/5), Manhour (r/6), Helper Quantity (o/7)
+            // Fieldset #2 : Work Area (o/8), Instruction (r/9), File (o/10), Tools (panel), Materials (panel)
 
             // TODO: 1-M tabel taskcard_eo
             // Columns: id, taskcard_id, work_area, instruction, skill, manhour, helper_quantity, req. RII, tools, materials, note
