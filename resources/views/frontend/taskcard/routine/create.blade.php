@@ -139,7 +139,7 @@
                                                             Manhour @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.number')
+                                                        @component('frontend.common.input.decimal')
                                                             @slot('id', 'manhour')
                                                             @slot('text', 'Manhour')
                                                             @slot('name', 'manhour')
@@ -147,10 +147,10 @@
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Performa @include('frontend.common.label.required')
+                                                            Performa Factor @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.number')
+                                                        @component('frontend.common.input.decimal')
                                                             @slot('id', 'performa')
                                                             @slot('text', 'Performa')
                                                             @slot('name', 'performa')
@@ -279,7 +279,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    File @include('frontend.common.label.required')
+                                                    Task Card Attachment @include('frontend.common.label.optional')
                                                 </label>
 
                                                 @component('frontend.common.input.upload')
@@ -471,36 +471,38 @@
         .margin-info {
             margin-left: 5px
         }
-        textarea{
-        /* box-sizing: padding-box; */
-        overflow:hidden;
-        /* demo only: */
-        padding:10px;
-        width:250px;
-        font-size:14px;
-        margin:50px auto;
-        display:block;
-        border-radius:10px;
-        border:6px solid #556677;
+        textarea {
+            min-height: 5em;
+            width: 100%;
         }
     </style>
 @endpush
 
 @push('footer-scripts')
     <script>
-    var textarea = document.querySelector('textarea');
+        var autoExpand = function (field) {
 
-    textarea.addEventListener('keydown', autosize);
+        // Reset field height
+        field.style.height = 'inherit';
 
-    function autosize(){
-    var el = this;
-    setTimeout(function(){
-        el.style.cssText = 'height:auto; padding:0';
-        // for box-sizing other than "content-box" use:
-        // el.style.cssText = '-moz-box-sizing:content-box';
-        el.style.cssText = 'height:' + el.scrollHeight + 'px';
-    },0);
-    }
+        // Get the computed styles for the element
+        var computed = window.getComputedStyle(field);
+
+        // Calculate the height
+        var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+                    + parseInt(computed.getPropertyValue('padding-top'), 10)
+                    + field.scrollHeight
+                    + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+                    + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+        field.style.height = height + 'px';
+
+        };
+
+        document.addEventListener('input', function (event) {
+        if (event.target.tagName.toLowerCase() !== 'textarea') return;
+        autoExpand(event.target);
+        }, false);
     </script>
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
