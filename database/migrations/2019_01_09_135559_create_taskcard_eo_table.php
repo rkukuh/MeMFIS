@@ -20,6 +20,8 @@ class CreateTaskcardEoTable extends Migration
             $table->decimal('manhour', 8, 2)->nullable();
             $table->integer('helper_quantity')->nullable();
             $table->boolean('is_rii')->default(false);
+            $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
+            $table->unsignedInteger('sequence')->nullable();
             $table->longText('description')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
