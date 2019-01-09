@@ -26,12 +26,11 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'helper_quantity' => $faker->randomElement(null, rand(1, 10)),
         'is_rii' => $faker->boolean,
         'source' => null,
-        'version' => $faker->randomElement([null, $version]),
         'effectivity' => null,
-        'description' => $faker->paragraph(rand(10, 20)),
-        'version' => null,
         'performance_factor' => $faker->randomElement([null, rand(0, 10) / 10]), // min:0-max:1-step:0,1
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
+        'version' => $faker->randomElement([null, $version]),
+        'description' => $faker->paragraph(rand(10, 20)),
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
     ];
@@ -64,8 +63,9 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
         'number' => 'EO-' . $number,
         'title' => 'Engineering Order Dummy #' . $number,
         'type_id' => Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
-        'revision' => null,
-        'ref_no' => null,
+        'version' => null,
+        'revision' => rand(1, 10),
+        'reference' => 'REF-' . $number,
         'category_id' => Category::ofTaskCardEO()->get()->random()->id,
         'scheduled_priority_id' => $scheduled_priority->id,
         'scheduled_priority_amount' => function () use ($scheduled_priority) {
@@ -118,6 +118,7 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
         'title' => 'Special Instruction Dummy #' . $number,
         'type_id' => Type::where('of', 'taskcard-type-non-routine')->where('code', 'si')->first()->id,
         'performance_factor' => null,
+        'version' => null,
     ];
 
 });
