@@ -45,7 +45,7 @@ class CreateTaskcardsTable extends Migration
             $table->string('manual_affected')->nullable();
 
             // TODO: 1-M tabel taskcard_eo
-            // Columns: id, taskcard_id, work_area, instruction, skill, manhour, helper_quantity, req. RII, tools, materials, notes
+            // Columns: id, taskcard_id, work_area, instruction, skill, manhour, helper_quantity, req. RII, tools, materials, note
 
             $table->timestamps();
             $table->softDeletes();
