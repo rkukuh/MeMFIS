@@ -387,7 +387,7 @@
                             @include('frontend.taskcard.nonroutine.eo.tool.modal')
                             @include('frontend.taskcard.nonroutine.eo.item.modal')
 
-                            <div class="tool_datatable" id="tool_datatable"></div>
+                            <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -481,5 +481,6 @@
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
 @endpush
