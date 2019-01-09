@@ -138,7 +138,24 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
         $taskcard->zones()->saveMany($aircraft->zones);
     }
 
+});
+
+$factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $faker) {
+
     if ($faker->boolean) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
+
+});
+
+$factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker) {
+
+    //
+
+});
+
+$factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
+
+    //
+
 });
