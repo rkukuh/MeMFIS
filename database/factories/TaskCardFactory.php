@@ -60,17 +60,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
     $manual_affected = Type::ofTaskCardEOManualAffected()->get()->random();
 
     return [
-        // These attributes are filled on 'taskcard_eo' table
-        'work_area' => null,
-        'manhour' => null,
-        'helper_quantity' => null,
-        'is_rii' => null,
-        'performance_factor' => null,
-        'sequence' => null,
-        'version' => null,
-        'description' => null,
-
-        // EO-only attributes
+        // EO 'header' attributes
         'number' => 'EO-' . $number,
         'title' => 'Engineering Order Dummy #' . $number,
         'type_id' => Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
@@ -115,6 +105,16 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
                 return null;
             }
         },
+
+        // These attributes are filled on 'taskcard_eo' table
+        'work_area' => null,
+        'manhour' => null,
+        'helper_quantity' => null,
+        'is_rii' => null,
+        'performance_factor' => null,
+        'sequence' => null,
+        'version' => null,
+        'description' => null,
     ];
 
 });
