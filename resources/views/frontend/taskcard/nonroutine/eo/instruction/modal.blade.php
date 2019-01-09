@@ -61,24 +61,40 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Helper Quantity @include('frontend.common.label.required')
+                                                    Performa Factor @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'helper_quantity')
-                                                    @slot('text', 'Helper Quantity')
-                                                    @slot('name', 'helper_quantity')
+                                                @component('frontend.common.input.decimal')
+                                                    @slot('id', 'performa')
+                                                    @slot('text', 'Performa')
+                                                    @slot('name', 'performa')
+                                                    @slot('value', '1')
                                                 @endcomponent
                                             </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                    @component('frontend.common.input.checkbox')
-                                        @slot('id', 'is_rii')
-                                        @slot('name', 'is_rii')
-                                        @slot('text', 'RII?')
-                                        @slot('style_div','margin-top:30px')
-                                    @endcomponent
+                                    <div class="row ">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Helper Quantity @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'helper_quantity')
+                                                @slot('text', 'Helper Quantity')
+                                                @slot('name', 'helper_quantity')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('id', 'is_rii')
+                                                @slot('name', 'is_rii')
+                                                @slot('text', 'RII?')
+                                                @slot('style_div','margin-top:30px')
+                                            @endcomponent
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row ">
