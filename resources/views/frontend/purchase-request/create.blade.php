@@ -58,13 +58,23 @@
                                                 <label class="form-control-label">
                                                    Type @include('frontend.common.label.required')
                                                 </label>
+                                                <div class="form-group m-form__group row" >
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('text', 'Heavy Maintenance')
+                                                            @slot('name', 'type')
+                                                            @slot('id', 'type')
+                                                            @slot('value', 'hm')
+                                                        @endcomponent
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('name', 'type')
+                                                            @slot('id', 'type')
+                                                            @slot('text', 'General')
+                                                            @slot('value', 'general')
+                                                        @endcomponent
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'code')
-                                                    @slot('text', 'Code')
-                                                    @slot('name', 'code')
-                                                    @slot('id_error', 'code')
-                                                @endcomponent
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
