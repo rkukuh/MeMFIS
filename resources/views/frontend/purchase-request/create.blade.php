@@ -157,9 +157,10 @@
                                                                     @component('frontend.common.buttons.create-new')
                                                                         @slot('id', 'item')
                                                                         @slot('text', 'item')
-                                                                        @slot('attribute', 'disabled')
                                                                         @slot('data_target', '#modal_item')
                                                                     @endcomponent
+
+                                                                    @include('frontend.common.item.modal')
 
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
@@ -277,5 +278,7 @@
     <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
+    <script src="{{ asset('js/frontend/common/item.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
 @endpush
