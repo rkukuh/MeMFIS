@@ -154,6 +154,7 @@
                                                             @slot('id', 'performa')
                                                             @slot('text', 'Performa')
                                                             @slot('name', 'performa')
+                                                            @slot('value', '1')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -296,7 +297,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
+                                                    @slot('rows', '20')
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')

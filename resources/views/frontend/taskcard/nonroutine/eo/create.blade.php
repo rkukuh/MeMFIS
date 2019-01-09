@@ -53,7 +53,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Number EO @include('frontend.common.label.required')
+                                                    EO Number  @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.text')
@@ -161,7 +161,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Schedule Priority @include('frontend.common.label.required')
+                                                    Scheduled Priority @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
@@ -317,7 +317,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
+                                                    @slot('rows', '20')
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')
