@@ -29,7 +29,7 @@
     </div>
     <div class="m-content">
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-12">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -53,7 +53,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Number EO @include('frontend.common.label.required')
+                                                    EO Number  @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.text')
@@ -63,6 +63,20 @@
                                                     @slot('id_error', 'number')
                                                 @endcomponent
                                             </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Type @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Taskcard Type')
+                                                    @slot('id', 'taskcard_non_routine_type')
+                                                    @slot('name', 'taskcard_non_routine_type')
+                                                    @slot('id_error', 'taskcard_non_routine_type')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Revision @include('frontend.common.label.required')
@@ -75,8 +89,6 @@
                                                     @slot('id_error', 'revision')
                                                 @endcomponent
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Reference @include('frontend.common.label.optional')
@@ -90,6 +102,8 @@
                                                     @slot('id_error', 'taskcard-relationship')
                                                 @endcomponent
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Title @include('frontend.common.label.required')
@@ -103,8 +117,7 @@
                                                 @endcomponent
 
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
+
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Effectivity (A/C Type) @include('frontend.common.label.required')
@@ -119,6 +132,8 @@
                                                 @endcomponent
 
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Category @include('frontend.common.label.required')
@@ -132,8 +147,7 @@
                                                 @endcomponent
 
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
+
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Skill @include('frontend.common.label.required')
@@ -146,9 +160,11 @@
                                                     @slot('id_error', 'otr-certification')
                                                 @endcomponent
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    File @include('frontend.common.label.required')
+                                                    Task Card Attachment @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.upload')
@@ -161,7 +177,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Schedule Priority @include('frontend.common.label.required')
+                                                    Scheduled Priority @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
@@ -317,7 +333,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
+                                                    @slot('rows', '20')
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')
@@ -349,70 +365,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                <h3 class="m-portlet__head-text">
-                                    Required Tool
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('attribute', 'disabled')
-                                        @endcomponent
-
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                <h3 class="m-portlet__head-text">
-                                    Required Material
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('attribute', 'disabled')
-                                        @endcomponent
-
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
@@ -430,18 +382,9 @@
         .margin-info {
             margin-left: 5px
         }
-        textarea{
-        /* box-sizing: padding-box; */
-        overflow:hidden;
-        /* demo only: */
-        /* padding:10px; */
-        /* width:250px; */
-        min-height: :5em;
-        font-size:14px;
-        /* margin:50px auto; */
-        display:block;
-        border-radius:10px;
-        border:6px solid #556677;
+        textarea {
+            min-height: 5em;
+            width: 100%;
         }
 
     </style>
@@ -449,20 +392,34 @@
 
 @push('footer-scripts')
     <script>
-        var textarea = document.querySelector('#description');
+        var autoExpand = function (field) {
 
-        textarea.addEventListener('keydown', autosize);
+        // Reset field height
+        field.style.height = 'inherit';
 
-        function autosize(){
-        var el = this;
-            setTimeout(function(){
-                el.style.cssText = 'height:auto; padding:0';
-                // for box-sizing other than "content-box" use:
-                // el.style.cssText = '-moz-box-sizing:content-box';
-                el.style.cssText = 'height:' + el.scrollHeight + 'px';
-            },0);
-        }
+        // Get the computed styles for the element
+        var computed = window.getComputedStyle(field);
+
+        // Calculate the height
+        var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+                    + parseInt(computed.getPropertyValue('padding-top'), 10)
+                    + field.scrollHeight
+                    + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+                    + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+        field.style.height = height + 'px';
+
+        };
+
+        document.addEventListener('input', function (event) {
+        if (event.target.tagName.toLowerCase() !== 'textarea') return;
+        autoExpand(event.target);
+        }, false);
     </script>
+
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-non-routine-type.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 

@@ -68,14 +68,14 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     @component('frontend.common.buttons.create')
-                                                        @slot('text', 'Taskcard Routine')
+                                                        @slot('text', 'Routine Taskcard ')
                                                         @slot('href', route('frontend.taskcard-routine.create') )
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="dropdown">
                                                         @component('frontend.common.buttons.dropdown')
-                                                        @slot('text', 'Taskcard Non-Routine')
+                                                        @slot('text', 'Non-Routine Taskcard ')
                                                         @slot('id', 'taskcard-non-routine')
                                                     @endcomponent
 

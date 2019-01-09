@@ -26,7 +26,7 @@ class TaskCardSIController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.taskcard.nonroutine.si.create');
     }
 
     /**
