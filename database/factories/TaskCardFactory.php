@@ -30,7 +30,8 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'effectivity' => null,
         'description' => $faker->paragraph(rand(10, 20)),
         'version' => null,
-        'performance_factor' => rand(0, 10) / 10, // 0-1
+        'performance_factor' => $faker->randomElement([null, rand(0, 10) / 10]), // min:0-max:1-step:0,1
+        'sequence' => $faker->randomElement([null, rand(1, 10)]),
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
     ];
@@ -41,7 +42,11 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
 $factory->state(TaskCard::class, 'basic', function ($faker) {
 
+    $number  = $faker->unixTime();
+
     return [
+        'number' => 'TC-' . $number,
+        'title' => 'TaskCard Basic Dummy #' . $number,
         'type_id' => Type::ofTaskCardTypeRoutine()->get()->random()->id,
     ];
 
@@ -49,11 +54,15 @@ $factory->state(TaskCard::class, 'basic', function ($faker) {
 
 $factory->state(TaskCard::class, 'eo', function ($faker) {
 
+    $number  = $faker->unixTime();
+
     $scheduled_priority = Type::ofTaskCardEOScheduledPriority()->get()->random();
     $recurrence = Type::ofTaskCardEORecurrence()->get()->random();
     $manual_affected = Type::ofTaskCardEOManualAffected()->get()->random();
 
     return [
+        'number' => 'EO-' . $number,
+        'title' => 'Engineering Order Dummy #' . $number,
         'type_id' => Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
         'revision' => null,
         'ref_no' => null,
@@ -102,7 +111,14 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
 
 $factory->state(TaskCard::class, 'si', function ($faker) {
 
-    //
+    $number  = $faker->unixTime();
+
+    return [
+        'number' => 'SI-' . $number,
+        'title' => 'Special Instruction Dummy #' . $number,
+        'type_id' => Type::where('of', 'taskcard-type-non-routine')->where('code', 'si')->first()->id,
+        'performance_factor' => null,
+    ];
 
 });
 
