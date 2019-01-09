@@ -50,315 +50,301 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    EO Number  @include('frontend.common.label.required')
-                                                </label>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                EO Number  @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'number')
-                                                    @slot('text', 'Taskcard Number')
-                                                    @slot('name', 'number')
-                                                    @slot('id_error', 'number')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Type @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Taskcard Type')
-                                                    @slot('id', 'taskcard_non_routine_type')
-                                                    @slot('name', 'taskcard_non_routine_type')
-                                                    @slot('id_error', 'taskcard_non_routine_type')
-                                                @endcomponent
-                                            </div>
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'number')
+                                                @slot('text', 'Taskcard Number')
+                                                @slot('name', 'number')
+                                                @slot('id_error', 'number')
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Revision @include('frontend.common.label.required')
-                                                </label>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Type @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'revision')
-                                                    @slot('text', 'Revision')
-                                                    @slot('name', 'revision')
-                                                    @slot('id_error', 'revision')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Reference @include('frontend.common.label.optional')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'relationship')
-                                                    @slot('text', 'Taskcard Relationship')
-                                                    @slot('name', 'relationship')
-                                                    @slot('multiple','multiple')
-                                                    @slot('id_error', 'taskcard-relationship')
-                                                @endcomponent
-                                            </div>
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Taskcard Type')
+                                                @slot('id', 'taskcard_non_routine_type')
+                                                @slot('name', 'taskcard_non_routine_type')
+                                                @slot('id_error', 'taskcard_non_routine_type')
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Title @include('frontend.common.label.required')
-                                                </label>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Revision @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'title')
-                                                    @slot('text', 'Title')
-                                                    @slot('name', 'title')
-                                                    @slot('id_error', 'title')
-                                                @endcomponent
-
-                                            </div>
-
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Effectivity (A/C Type) @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Applicability Airplane')
-                                                    @slot('id', 'applicability_airplane')
-                                                    @slot('name', 'applicability_airplane')
-                                                    @slot('multiple','multiple')
-                                                    @slot('id_error', 'applicability-airplane')
-                                                @endcomponent
-
-                                            </div>
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'revision')
+                                                @slot('text', 'Revision')
+                                                @slot('name', 'revision')
+                                                @slot('id_error', 'revision')
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Category @include('frontend.common.label.required')
-                                                </label>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Reference @include('frontend.common.label.optional')
+                                            </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'category')
-                                                    @slot('text', 'Category')
-                                                    @slot('name', 'category')
-                                                    @slot('id_error', 'category')
-                                                @endcomponent
-
-                                            </div>
-
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Skill @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Otr Certification')
-                                                    @slot('id', 'otr_certification')
-                                                    @slot('name', 'otr_certification')
-                                                    @slot('id_error', 'otr-certification')
-                                                @endcomponent
-                                            </div>
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'relationship')
+                                                @slot('text', 'Taskcard Relationship')
+                                                @slot('name', 'relationship')
+                                                @slot('multiple','multiple')
+                                                @slot('id_error', 'taskcard-relationship')
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Task Card Attachment @include('frontend.common.label.required')
-                                                </label>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.upload')
-                                                    @slot('text', 'Taskcard')
-                                                    @slot('id', 'taskcard')
-                                                    @slot('name', 'taskcard')
-                                                @endcomponent
-                                            </div>
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'title')
+                                                @slot('text', 'Title')
+                                                @slot('name', 'title')
+                                                @slot('id_error', 'title')
+                                            @endcomponent
+
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Scheduled Priority @include('frontend.common.label.required')
-                                                </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'scheduled_priority_id')
-                                                    @slot('text', 'Scheduled Priority')
-                                                    @slot('name', 'scheduled_priority_id')
-                                                    @slot('id_error', 'scheduled_priority_id')
-                                                @endcomponent
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Effectivity (A/C Type) @include('frontend.common.label.required')
+                                            </label>
 
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="prior_to">
-                                                <label class="form-control-label" style="margin-top:13px">
-                                                </label>
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Applicability Airplane')
+                                                @slot('id', 'applicability_airplane')
+                                                @slot('name', 'applicability_airplane')
+                                                @slot('multiple','multiple')
+                                                @slot('id_error', 'applicability-airplane')
+                                            @endcomponent
 
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('id', 'prior_to_date')
-                                                            @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-10 col-md-10 col-lg-10">
-                                                        @component('frontend.common.input.datepicker')
-                                                            @slot('id', 'date')
-                                                            @slot('text', 'date')
-                                                            @slot('name', 'date')
-                                                            @slot('disabled', 'disabled')
-                                                        @endcomponent
-                                                    </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Category @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'category')
+                                                @slot('text', 'Category')
+                                                @slot('name', 'category')
+                                                @slot('id_error', 'category')
+                                            @endcomponent
+
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Task Card Attachment @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.upload')
+                                                @slot('text', 'Taskcard')
+                                                @slot('id', 'taskcard')
+                                                @slot('name', 'taskcard')
+                                            @endcomponent
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Scheduled Priority @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'scheduled_priority_id')
+                                                @slot('text', 'Scheduled Priority')
+                                                @slot('name', 'scheduled_priority_id')
+                                                @slot('id_error', 'scheduled_priority_id')
+                                            @endcomponent
+
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="prior_to">
+                                            <label class="form-control-label" style="margin-top:13px">
+                                            </label>
+
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('id', 'prior_to_date')
+                                                        @slot('name', 'prior_to')
+                                                        @slot('disabled', 'disabled')
+                                                    @endcomponent
                                                 </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('id', 'prior_to_hours')
-                                                            @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-10 col-md-10 col-lg-10">
-                                                        @component('frontend.common.input.number')
-                                                            @slot('id', 'hour')
-                                                            @slot('text', 'hour')
-                                                            @slot('name', 'hour')
-                                                            @slot('disabled', 'disabled')
-                                                            @slot('input_append', 'Hours')
-                                                        @endcomponent
-                                                    </div>
+                                                <div class="col-sm-10 col-md-10 col-lg-10">
+                                                    @component('frontend.common.input.datepicker')
+                                                        @slot('id', 'date')
+                                                        @slot('text', 'date')
+                                                        @slot('name', 'date')
+                                                        @slot('disabled', 'disabled')
+                                                    @endcomponent
                                                 </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('id', 'prior_to_cycle')
-                                                            @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-10 col-md-10 col-lg-10">
-                                                        @component('frontend.common.input.number')
-                                                            @slot('id', 'cycle')
-                                                            @slot('text', 'cycle')
-                                                            @slot('name', 'cycle')
-                                                            @slot('disabled', 'disabled')
-                                                            @slot('input_append', 'Cycle')
-                                                        @endcomponent
-                                                    </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('id', 'prior_to_hours')
+                                                        @slot('name', 'prior_to')
+                                                        @slot('disabled', 'disabled')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-10 col-md-10 col-lg-10">
+                                                    @component('frontend.common.input.number')
+                                                        @slot('id', 'hour')
+                                                        @slot('text', 'hour')
+                                                        @slot('name', 'hour')
+                                                        @slot('disabled', 'disabled')
+                                                        @slot('input_append', 'Hours')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('id', 'prior_to_cycle')
+                                                        @slot('name', 'prior_to')
+                                                        @slot('disabled', 'disabled')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-10 col-md-10 col-lg-10">
+                                                    @component('frontend.common.input.number')
+                                                        @slot('id', 'cycle')
+                                                        @slot('text', 'cycle')
+                                                        @slot('name', 'cycle')
+                                                        @slot('disabled', 'disabled')
+                                                        @slot('input_append', 'Cycle')
+                                                    @endcomponent
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row" >
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Recurrence @include('frontend.common.label.required')
-                                                </label>
+                                    </div>
+                                    <div class="form-group m-form__group row" >
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Recurrence @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'recurrence_id')
-                                                    @slot('text', 'Recurrence Id')
-                                                    @slot('name', 'recurrence_id')
-                                                    @slot('id_error', 'recurrence_id')
-                                                @endcomponent
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'recurrence_id')
+                                                @slot('text', 'Recurrence Id')
+                                                @slot('name', 'recurrence_id')
+                                                @slot('id_error', 'recurrence_id')
+                                            @endcomponent
 
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6  hidden" id="recurrence_div">
-                                                <label class="form-control-label" style="margin-top:13px">
-                                                </label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6  hidden" id="recurrence_div">
+                                            <label class="form-control-label" style="margin-top:13px">
+                                            </label>
 
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        @component('frontend.common.input.number')
-                                                            @slot('id', 'recurrence')
-                                                            @slot('text', 'Recurrence')
-                                                            @slot('name', 'recurrence')
-                                                            @slot('disabled', 'disabled')
-                                                            @slot('id_error', 'recurrence')
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
-                                                            <option value="">
-                                                                Select a Recurrence
-                                                            </option>
-                                                            <option value="cyrcle">
-                                                                Cycle
-                                                            </option>
-                                                            <option value="hourly">
-                                                                Hourly
-                                                            </option>
-                                                            <option value="daily">
-                                                                Daily
-                                                            </option>
-                                                            <option value="yearly">
-                                                                Yearly
-                                                            </option>
-                                                        </select>
-                                                    </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    @component('frontend.common.input.number')
+                                                        @slot('id', 'recurrence')
+                                                        @slot('text', 'Recurrence')
+                                                        @slot('name', 'recurrence')
+                                                        @slot('disabled', 'disabled')
+                                                        @slot('id_error', 'recurrence')
+                                                    @endcomponent
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Manuals Affected @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'manual_affected_id')
-                                                    @slot('text', 'Manual Affected')
-                                                    @slot('name', 'manual_affected_id')
-                                                    @slot('id_error', 'manual_affected_id')
-                                                @endcomponent
-
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="note_div">
-                                                <label class="form-control-label" style="margin-top:13px">
-                                                </label>
-
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
-                                                    @slot('id', 'note')
-                                                    @slot('name', 'note')
-                                                    @slot('text', 'Note')
-                                                    @slot('disabled', 'disabled')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label class="form-control-label">
-                                                    Description @include('frontend.common.label.optional')
-                                                </label>
-
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('rows', '20')
-                                                    @slot('id', 'description')
-                                                    @slot('name', 'description')
-                                                    @slot('text', 'Description')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.submit')
-                                                            @slot('type','button')
-                                                            @slot('id', 'add-taskcard')
-                                                            @slot('class', 'add-taskcard')
-                                                        @endcomponent
-
-                                                        @include('frontend.common.buttons.reset')
-
-                                                        @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.taskcard.index'))
-                                                        @endcomponent
-                                                    </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
+                                                        <option value="">
+                                                            Select a Recurrence
+                                                        </option>
+                                                        <option value="cyrcle">
+                                                            Cycle
+                                                        </option>
+                                                        <option value="hourly">
+                                                            Hourly
+                                                        </option>
+                                                        <option value="daily">
+                                                            Daily
+                                                        </option>
+                                                        <option value="yearly">
+                                                            Yearly
+                                                        </option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Manuals Affected @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'manual_affected_id')
+                                                @slot('text', 'Manual Affected')
+                                                @slot('name', 'manual_affected_id')
+                                                @slot('id_error', 'manual_affected_id')
+                                            @endcomponent
+
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="note_div">
+                                            <label class="form-control-label" style="margin-top:13px">
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '3')
+                                                @slot('id', 'note')
+                                                @slot('name', 'note')
+                                                @slot('text', 'Note')
+                                                @slot('disabled', 'disabled')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '20')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-taskcard')
+                                                        @slot('class', 'add-taskcard')
+                                                    @endcomponent
+
+                                                    @include('frontend.common.buttons.reset')
+
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.taskcard.index'))
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
