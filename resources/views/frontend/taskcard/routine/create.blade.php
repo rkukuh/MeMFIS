@@ -514,9 +514,6 @@
     <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-non-routine-type.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script>
 
