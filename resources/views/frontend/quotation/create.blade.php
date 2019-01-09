@@ -52,46 +52,49 @@
                                 <div class="m-portlet__body">
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Project @include('frontend.common.label.required')
-                                                        </label>
-                                                        <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
-                                                            <option value="">
-                                                                Select a Project
-                                                            </option>
-                                                            <option value="1">Project A</option>
-                                                            <option value="2">Project B</option>
-                                                            <option value="3">Project C</option>
-                                                            <option value="4">Project D</option>
-                                                            <option value="5">Project E</option>
-                                                            <option value="6">Project F</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Project Number
-                                                                </label>
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('text', 'P-01/HMxxxxx')
-                                                                @endcomponent
+                                                <fieldset class="border p-2">
+                                                    <legend class="w-auto">Project</legend>
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Project @include('frontend.common.label.required')
+                                                            </label>
+                                                            <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
+                                                                <option value="">
+                                                                    Select a Project
+                                                                </option>
+                                                                <option value="1">Project A</option>
+                                                                <option value="2">Project B</option>
+                                                                <option value="3">Project C</option>
+                                                                <option value="4">Project D</option>
+                                                                <option value="5">Project E</option>
+                                                                <option value="6">Project F</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <label class="form-control-label">
+                                                                        Project Number
+                                                                    </label>
+                                                                    @component('frontend.common.label.data-info')
+                                                                        @slot('text', 'P-01/HMxxxxx')
+                                                                    @endcomponent
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <label class="form-control-label">
+                                                                        Intruction
+                                                                    </label>
+                                                                    @component('frontend.common.label.data-info')
+                                                                        @slot('text', '..........')
+                                                                    @endcomponent
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Intruction
-                                                                </label>
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
                                                     </div>
-                                                </div>
+                                                </fieldset>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group m-form__group row">
