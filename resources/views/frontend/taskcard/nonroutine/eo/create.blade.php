@@ -65,6 +65,20 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
+                                                    Type @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Taskcard Type')
+                                                    @slot('id', 'taskcard_non_routine_type')
+                                                    @slot('name', 'taskcard_non_routine_type')
+                                                    @slot('id_error', 'taskcard_non_routine_type')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
                                                     Revision @include('frontend.common.label.required')
                                                 </label>
 
@@ -75,8 +89,6 @@
                                                     @slot('id_error', 'revision')
                                                 @endcomponent
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Reference @include('frontend.common.label.optional')
@@ -90,6 +102,8 @@
                                                     @slot('id_error', 'taskcard-relationship')
                                                 @endcomponent
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Title @include('frontend.common.label.required')
@@ -103,8 +117,7 @@
                                                 @endcomponent
 
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
+
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Effectivity (A/C Type) @include('frontend.common.label.required')
@@ -119,6 +132,8 @@
                                                 @endcomponent
 
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Category @include('frontend.common.label.required')
@@ -132,8 +147,7 @@
                                                 @endcomponent
 
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
+
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Skill @include('frontend.common.label.required')
@@ -146,6 +160,8 @@
                                                     @slot('id_error', 'otr-certification')
                                                 @endcomponent
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Task Card Attachment @include('frontend.common.label.required')
@@ -400,6 +416,10 @@
         autoExpand(event.target);
         }, false);
     </script>
+
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-non-routine-type.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
