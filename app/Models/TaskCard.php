@@ -78,7 +78,8 @@ class TaskCard extends MemfisModel
      */
     public function related_to()
     {
-        return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'taskcard_id', 'related_to');
+        return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'taskcard_id', 'related_to')
+                    ->withTimestamps();;
     }
 
     /**
