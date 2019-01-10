@@ -24,4 +24,15 @@ class TaskCardTest extends TestCase
 
         $this->assertDatabaseHas('taskcards', ['uuid' => $taskcard->uuid]);
     }
+
+    /** @test */
+    public function requires_a_number()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(TaskCard::class)->raw(['number' => null]);
+
+        $this->post(route('frontend.taskcard.store'), $data)
+             ->assertJsonValidationErrors('number');
+    }
 }
