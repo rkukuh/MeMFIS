@@ -106,6 +106,21 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: A task card may have zero or many items.
+     *
+     * This function will retrieve all the task cards of an items.
+     * See: TaskCard's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcards()
+    {
+        return $this->belongsToMany(TaskCard::class, 'item_taskcard', 'item_id', 'taskcard_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * One-Way 1-1: An item must have initial unit.
      *
      * This function will get a unit of a given item.

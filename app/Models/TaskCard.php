@@ -82,6 +82,21 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A task card may have zero or many items.
+     *
+     * This function will retrieve all the items of a task card.
+     * See: Item's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_taskcard', 'taskcard_id', 'item_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many (self-join): A task card may have none or many other related task cards.
      *
      * This function will retrieve the parent task cards of a (related-to) task cards.
