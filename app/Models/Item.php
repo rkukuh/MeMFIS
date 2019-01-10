@@ -68,6 +68,21 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: A task card (EO) may have zero or many items.
+     *
+     * This function will retrieve all the EO Instructions of an item.
+     * See: EOInstruction's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function eo_instructions()
+    {
+        return $this->belongsToMany(TaskCard::class, 'eo_item', 'item_id', 'eo_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: An item may have zero or one account code (journal).
      *
      * This function will retrieve the account code (journal) of an item.
@@ -108,7 +123,7 @@ class Item extends MemfisModel implements HasMedia
     /**
      * Many-to-Many: A task card may have zero or many items.
      *
-     * This function will retrieve all the task cards of an items.
+     * This function will retrieve all the task cards of an item.
      * See: TaskCard's items() method for the inverse
      *
      * @return mixed
