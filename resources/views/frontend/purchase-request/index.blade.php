@@ -1,11 +1,11 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader hidden" >
+    <div class="m-subheader hidden">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    TaskCard
+                    Purchase Request
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.taskcard.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.purchase-request.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                TaskCard
+                                    Purchase Request
                             </span>
                         </a>
                     </li>
@@ -27,7 +27,6 @@
             </div>
         </div>
     </div>
-
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -42,7 +41,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    TaskCard Datalist
+                                    Purchase Request
                                 </h3>
                             </div>
                         </div>
@@ -50,8 +49,8 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row">
-                                    <div class="col-md-8">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-8 order-2 order-xl-1">
                                         <div class="form-group m-form__group row align-items-center">
                                             <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
@@ -64,37 +63,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    @component('frontend.common.buttons.create')
-                                                        @slot('text', 'Routine Taskcard ')
-                                                        @slot('href', route('frontend.taskcard-routine.create') )
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="dropdown">
-                                                        @component('frontend.common.buttons.dropdown')
-                                                        @slot('text', 'Non-Routine Taskcard ')
-                                                        @slot('id', 'taskcard-non-routine')
-                                                    @endcomponent
+                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'Purchase Request')
+                                            @slot('href', route('frontend.purchase-request.create') )
+                                        @endcomponent
 
-                                                    <div class="dropdown-menu" aria-labelledby="taskcard-non-routine" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                        <a class="dropdown-item" href="{{route('frontend.taskcard-eo.create')}}"> Engineering Order</a>
-                                                        <a class="dropdown-item" href="{{route('frontend.taskcard-si.create')}}"> Special Instruction</a>
-                                                    </div>
-
-
-                                                </div>
-
-                                                </div>
-                                            </div>
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="taskcard_datatable" id="scrolling_both"></div>
+                            <div class="item_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -104,6 +83,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/taskcard/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/index.js') }}"></script>
 @endpush

@@ -423,7 +423,7 @@ class FillComboxController extends Controller
     public function taskcardTypeRoutine()
     {
         $taskcard_type_routines = Type::ofTaskCardTypeRoutine()
-                        ->pluck('name', 'id');
+                        ->pluck('code', 'id');
 
         return json_encode($taskcard_type_routines);
     }

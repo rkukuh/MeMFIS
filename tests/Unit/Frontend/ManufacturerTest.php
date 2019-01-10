@@ -32,7 +32,8 @@ class ManufacturerTest extends TestCase
 
         $data = factory(Manufacturer::class)->raw(['code' => null]);
 
-        $this->post(route('frontend.manufacturer.store'), $data)->assertJsonValidationErrors('code');
+        $this->post(route('frontend.manufacturer.store'), $data)
+             ->assertJsonValidationErrors('code');
     }
 
     /** @test */
@@ -42,6 +43,7 @@ class ManufacturerTest extends TestCase
 
         $data = factory(Manufacturer::class)->raw(['name' => null]);
 
-        $this->post(route('frontend.manufacturer.store'), $data)->assertJsonValidationErrors('name');
+        $this->post(route('frontend.manufacturer.store'), $data)
+             ->assertJsonValidationErrors('name');
     }
 }

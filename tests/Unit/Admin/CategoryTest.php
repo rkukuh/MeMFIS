@@ -32,7 +32,8 @@ class CategoryTest extends TestCase
 
         $data = factory(Category::class)->raw(['code' => null]);
 
-        $this->post(route('admin.category.store'), $data)->assertSessionHasErrors('code');
+        $this->post(route('admin.category.store'), $data)
+             ->assertSessionHasErrors('code');
     }
 
     /** @test */
@@ -42,7 +43,8 @@ class CategoryTest extends TestCase
 
         $data = factory(Category::class)->raw(['name' => null]);
 
-        $this->post(route('admin.category.store'), $data)->assertSessionHasErrors('name');
+        $this->post(route('admin.category.store'), $data)
+             ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -52,6 +54,7 @@ class CategoryTest extends TestCase
 
         $data = factory(Category::class)->raw(['of' => null]);
 
-        $this->post(route('admin.category.store'), $data)->assertSessionHasErrors('of');
+        $this->post(route('admin.category.store'), $data)
+             ->assertSessionHasErrors('of');
     }
 }

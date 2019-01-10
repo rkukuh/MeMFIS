@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="applicability_airplane"]').empty();
 
                 $('select[name="applicability_airplane"]').append(
-                    '<option> Select an Applicability</option>'
+                    '<option> Select an Aircraft Applicability</option>'
                 );
 
                 $.each(data, function (key, value) {

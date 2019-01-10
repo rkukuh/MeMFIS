@@ -1,7 +1,7 @@
 let OtrCertificationSelect2 = {
     init: function () {
         $('#otr_certification, #otr_certification_validate').select2({
-            placeholder: 'Select a OTR Certification'
+            placeholder: 'Select a Skill'
         });
     }
 };

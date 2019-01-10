@@ -14,6 +14,8 @@ Route::name('frontend.')->group(function () {
         Route::view('/project/hm/create', 'frontend.project.hm.create')->name('hm.create');
         Route::view('/project/workshop', 'frontend.project.workshop.index')->name('workshop');
         Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('workshop.create');
+        Route::view('/purchase-request', 'frontend.purchase-request.index')->name('purchase-request.index');
+        Route::view('/purchase-request/create', 'frontend.purchase-request.create')->name('purchase-request.create');
 
         /** INITIAL DATA */
 

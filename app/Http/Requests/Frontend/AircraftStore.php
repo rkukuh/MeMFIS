@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Frontend;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -27,13 +26,11 @@ class AircraftStore extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
             'code' => 'required',
+            'name' => 'required',
             'manufacturer_id' => [
                 'required',
-                // Rule::exists('type', 'id')->where(function ($query) {
-                //     $query->whereIn('id', (new Type())->ofUnit()->get());
-                // }),
+                // TODO: Validation rule for Manufacturer selection
             ],
         ];
     }
@@ -46,11 +43,11 @@ class AircraftStore extends FormRequest
     public function messages()
     {
         return [
-            'type_id.exists' => 'The selected Type is invalid.',
+            // TODO: Humanly error message for Manufacturer selection
         ];
     }
 
-    protected function failedValidation(Validator $validator) { 
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()])); 
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

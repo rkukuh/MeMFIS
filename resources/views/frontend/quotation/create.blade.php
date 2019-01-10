@@ -51,104 +51,50 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                         <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <div class="form-group m-form__group row">
-
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <label class="form-control-label">
-                                                            Project
-                                                        </label>
-                                                            {{-- <table class="order-list" style="margin-left:-13px;margin-right:10px">
-                                                                <tr>
-                                                                    <td class="col-sm-2"><select name="project"  class="select form-control js-example-tags project"><option >-</option>
-                                                                    @foreach ($websites as $website)
-                                                                    <option value="{{$website->id}}">{{$website->name}}</option>
-                                                                    @endforeach
-                                                                    </select></td>
-                                                                    <td class="col-sm-1">
-                                                                        <div data-repeater-create=""
-                                                                            class= "btn btn-brand btn-sm"
-                                                                            id="addrow">
-                                                                            <span>
-                                                                                <i class="la la-plus"></i>
-                                                                            </span>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-sm-1">
-                                                                        <label class="form-control-label">
-                                                                            Project Number
-                                                                        </label>
-                                                                        @component('frontend.common.label.data-info')
-                                                                            @slot('text', 'P-01/HMxxxxx')
-                                                                        @endcomponent
-                                                                        <label class="form-control-label">
-                                                                            Intruction
-                                                                        </label>
-                                                                        @component('frontend.common.label.data-info')
-                                                                            @slot('text', '..........')
-                                                                        @endcomponent
-                                                                    </td>
-                                                                </tr>
-                                                            </table> --}}
-                                                            <div class='repeater'>
-                                                                    <div data-repeater-list="group-website">
-                                                                        <div data-repeater-item>
-                                                                            <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-9 col-md-9 col-lg-9">
-                                                                                        <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
-                                                                                                <option value="">
-                                                                                                    Select a Project
-                                                                                                </option>
-                                                                                                <option value="1">Project A</option>
-                                                                                                <option value="2">Project B</option>
-                                                                                                <option value="3">Project C</option>
-                                                                                                <option value="4">Project D</option>
-                                                                                                <option value="5">Project E</option>
-                                                                                                <option value="6">Project F</option>
-                                                                                                {{-- @foreach ($websites as $website)
-                                                                                                    <option value="{{ $website->id }}">
-                                                                                                        {{ $website->name }}
-                                                                                                    </option>
-                                                                                                @endforeach --}}
-                                                                                            </select>
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                                    @include('frontend.common.buttons.create_repeater')
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                                    @include('frontend.common.buttons.delete_repeater')
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-9 col-md-9 col-lg-9">
-                                                                                    <label class="form-control-label">
-                                                                                        Project Number
-                                                                                    </label>
-                                                                                    @component('frontend.common.label.data-info')
-                                                                                        @slot('text', 'P-01/HMxxxxx')
-                                                                                    @endcomponent
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-9 col-md-9 col-lg-9">
-                                                                                    <label class="form-control-label">
-                                                                                        Intruction
-                                                                                    </label>
-                                                                                    @component('frontend.common.label.data-info')
-                                                                                        @slot('text', '..........')
-                                                                                    @endcomponent
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <fieldset class="border p-2">
+                                                    <legend class="w-auto">Project</legend>
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Project @include('frontend.common.label.required')
+                                                            </label>
+                                                            <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
+                                                                <option value="">
+                                                                    Select a Project
+                                                                </option>
+                                                                <option value="1">Project A</option>
+                                                                <option value="2">Project B</option>
+                                                                <option value="3">Project C</option>
+                                                                <option value="4">Project D</option>
+                                                                <option value="5">Project E</option>
+                                                                <option value="6">Project F</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <label class="form-control-label">
+                                                                        Project Number
+                                                                    </label>
+                                                                    @component('frontend.common.label.data-info')
+                                                                        @slot('text', 'P-01/HMxxxxx')
+                                                                    @endcomponent
                                                                 </div>
+                                                            </div>
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <label class="form-control-label">
+                                                                        Intruction
+                                                                    </label>
+                                                                    @component('frontend.common.label.data-info')
+                                                                        @slot('text', '..........')
+                                                                    @endcomponent
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                </fieldset>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group m-form__group row">
