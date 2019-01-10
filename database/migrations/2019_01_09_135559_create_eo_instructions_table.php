@@ -15,6 +15,7 @@ class CreateEOInstructionsTable extends Migration
     {
         Schema::create('eo_instructions', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->unsignedInteger('taskcard_id')->nullable();
             $table->unsignedInteger('work_area')->nullable();
             $table->decimal('manhour', 8, 2)->nullable();
