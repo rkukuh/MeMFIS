@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\TaskCard;
 use App\Models\Aircraft;
 use App\Models\Description;
+use App\Models\EOInstruction;
 use Faker\Generator as Faker;
 
 $factory->define(TaskCard::class, function (Faker $faker) {
@@ -23,7 +24,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'task_type_id' => Type::ofTaskCardTask()->get()->random()->id,
         'work_area' => Type::ofWorkArea()->get()->random()->id,
         'manhour' => $faker->randomFloat(2, 0, 9999),
-        'helper_quantity' => $faker->randomElement(null, rand(1, 10)),
+        'helper_quantity' => $faker->randomElement([null, rand(1, 10)]),
         'is_rii' => $faker->boolean,
         'source' => null,
         'effectivity' => null,
@@ -166,21 +167,9 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
 
 $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker) {
 
-    for ($i = 1; $i < rand(5, 10); $i++) {
-        $taskcard->eo_instructions()->create([
-            'work_area' => Type::ofWorkArea()->get()->random()->id,
-            'manhour' => $faker->randomFloat(2, 0, 9999),
-            'helper_quantity' => $faker->randomElement(null, rand(1, 10)),
-            'is_rii' => $faker->boolean,
-            'performance_factor' => $faker->randomElement([
-                null,
-                rand(0, 10) / 10 // min:0-max:1-step:0,1
-            ]),
-            'sequence' => $faker->randomElement([null, rand(1, 10)]),
-            'description' => $faker->paragraph(rand(10, 20)),
-            'note' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
-        ]);
-    }
+    $taskcard->eo_instructions()->saveMany(
+        factory(EOInstruction::class, rand(5, 10))->make()
+    );
 
 });
 
