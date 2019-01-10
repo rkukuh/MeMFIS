@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaskcardEoTable extends Migration
+class CreateEOInstructionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTaskcardEoTable extends Migration
      */
     public function up()
     {
-        Schema::create('taskcard_eo', function (Blueprint $table) {
+        Schema::create('eo_instructions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('taskcard_id')->nullable();
             $table->unsignedInteger('work_area')->nullable();
@@ -46,6 +46,6 @@ class CreateTaskcardEoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taskcard_eo');
+        Schema::dropIfExists('eo_instructions');
     }
 }
