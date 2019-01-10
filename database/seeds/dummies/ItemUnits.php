@@ -4,7 +4,7 @@ use App\Models\Item;
 use App\Models\Unit;
 use Illuminate\Database\Seeder;
 
-class ItemUnit extends Seeder
+class ItemUnits extends Seeder
 {
     /**
      * Run the database seeds.
