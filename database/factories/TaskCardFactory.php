@@ -163,6 +163,9 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
 
+    // TODO: Attach to Item as tools
+    // TODO: Attach to Item as materials
+
 });
 
 $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker) {
@@ -171,10 +174,14 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
         factory(EOInstruction::class, rand(5, 10))->make()
     );
 
+    // TODO: Attach to Item as tools
+    // TODO: Attach to Item as materials
+
 });
 
 $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
 
-    //
+    // TODO: Attach to Item as tools
+    // TODO: Attach to Item as materials
 
 });
