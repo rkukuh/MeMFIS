@@ -44,6 +44,19 @@ class Item extends MemfisModel implements HasMedia
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * M-M Polymorph: An AMEL content could be aircraft and/or engine.
+     *
+     * This function will aet all of the Item (engine)'s AMEL.
+     * Amel's amelable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function amels()
+    {
+        return $this->morphToMany(Amel::class, 'amelable');
+    }
+
+    /**
      * M-M Polymorphic: An item can have zero or many categories.
      *
      * This function will get all of the categories that are assigned to this item.
@@ -55,13 +68,16 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-Way 1-1: An item must have initial unit.
+     * One-to-Many: An item may have zero or one account code (journal).
      *
-     * This function will get a unit of a given item.
+     * This function will retrieve the account code (journal) of an item.
+     * See: Journal's items() method for the inverse
+     *
+     * @return mixed
      */
-    public function unit()
+    public function journal()
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(Journal::class, 'account_code');
     }
 
     /**
@@ -72,22 +88,6 @@ class Item extends MemfisModel implements HasMedia
     public function manufacturer()
     {
         return $this->belongsTo(Manufacturer::class);
-    }
-
-    /**
-     * Many-to-Many: An item may have zero or many unit.
-     *
-     * This function will retrieve the units of an item.
-     * See: Unit's items() method for the inverse
-     *
-     * @return mixed
-     */
-    public function units()
-    {
-        return $this->belongsToMany(Unit::class)
-                    ->as('uom')
-                    ->withPivot('quantity')
-                    ->withTimestamps();
     }
 
     /**
@@ -106,29 +106,29 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-Many: An item may have zero or one account code (journal).
+     * One-Way 1-1: An item must have initial unit.
      *
-     * This function will retrieve the account code (journal) of an item.
-     * See: Journal's items() method for the inverse
-     *
-     * @return mixed
+     * This function will get a unit of a given item.
      */
-    public function journal()
+    public function unit()
     {
-        return $this->belongsTo(Journal::class, 'account_code');
+        return $this->belongsTo(Unit::class);
     }
 
     /**
-     * M-M Polymorph: An AMEL content could be aircraft and/or engine.
+     * Many-to-Many: An item may have zero or many unit.
      *
-     * This function will aet all of the Item (engine)'s AMEL.
-     * Amel's amelable() method for the inverse
+     * This function will retrieve the units of an item.
+     * See: Unit's items() method for the inverse
      *
      * @return mixed
      */
-    public function amels()
+    public function units()
     {
-        return $this->morphToMany(Amel::class, 'amelable');
+        return $this->belongsToMany(Unit::class)
+                    ->as('uom')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
     }
 
     /***************************************** ACCESSOR ******************************************/
