@@ -97,6 +97,18 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * One-to-Many (self-join): A task card EO may have one or many detail.
+     *
+     * This function will retrieve all the detail of a task card EO.
+     *
+     * @return mixed
+     */
+    public function eo_instructions()
+    {
+        return $this->hasMany(EOInstruction::class);
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of an task card.
