@@ -63,7 +63,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
     $manual_affected = Type::ofTaskCardEOManualAffected()->get()->random();
 
     return [
-        // EO 'header' attributes
+        // EO Header attributes
         'number' => 'EO-' . $number,
         'title' => 'Engineering Order Dummy #' . $number,
         'type_id' => Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
