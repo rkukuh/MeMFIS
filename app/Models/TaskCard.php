@@ -79,7 +79,7 @@ class TaskCard extends MemfisModel
     public function related_to()
     {
         return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'taskcard_id', 'related_to')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -97,15 +97,16 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many (self-join): A task card EO may have one or many detail.
+     * One-to-Many: A task card EO may have one or many instructions.
      *
-     * This function will retrieve all the detail of a task card EO.
+     * This function will retrieve all the instructions of a task card EO.
+     * See: EOInstruction's eo_header()
      *
      * @return mixed
      */
     public function eo_instructions()
     {
-        return $this->hasMany(EOInstruction::class);
+        return $this->hasMany(EOInstruction::class, 'taskcard_id');
     }
 
     /**
