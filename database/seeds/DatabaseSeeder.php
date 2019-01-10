@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
         /** TRANSACTION (M-M) */
 
         $this->call(TaskCardsTableSeeder::class);
+        $this->call(EOInstructionsTableSeeder::class);
         $this->call(QuotationsTableSeeder::class);
         $this->call(WorkPackagesTableSeeder::class);
         $this->call(ProjectsTableSeeder::class);

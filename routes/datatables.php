@@ -210,6 +210,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{taskcard}/tools','TaskCardEOItemsDatatables@index')->name('tools.index');
                 Route::get('/{taskcard}/materials','TaskCardEOItemsDatatables@index')->name('materials.index');
                 Route::get('/{taskcard}/aircrafts','TaskCardEOAircraftsDatatables@index')->name('aircrafts.index');
+                Route::get('/{taskcard}/eo-instructions','EOInstructionsDatatables@index')->name('eo-instructions.index');
 
             });
 

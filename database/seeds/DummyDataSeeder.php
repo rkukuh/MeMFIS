@@ -67,6 +67,7 @@ class DummyDataSeeder extends Seeder
         $this->call(ItemUnit::class);
         $this->call(ItemStorage::class);
         $this->call(TaskCards::class);
+        $this->call(EOInstructions::class);
         $this->call(Quotations::class);
         $this->call(WorkPackages::class);
         $this->call(Projects::class);
