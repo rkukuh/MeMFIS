@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Type;
+use App\Models\Item;
 use App\Models\Access;
 use App\Models\Category;
 use App\Models\TaskCard;
@@ -163,8 +164,15 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
 
-    // TODO: Attach to Item as tools
-    // TODO: Attach to Item as materials
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(2, 5); $i++) {
+            $item = Item::get()->random();
+
+            $taskcard->items()->attach($item, [
+                'quantity' => rand(1, 10)
+            ]);
+        }
+    }
 
 });
 
@@ -174,14 +182,18 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
         factory(EOInstruction::class, rand(5, 10))->make()
     );
 
-    // TODO: Attach to Item as tools
-    // TODO: Attach to Item as materials
-
 });
 
 $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
 
-    // TODO: Attach to Item as tools
-    // TODO: Attach to Item as materials
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(2, 5); $i++) {
+            $item = Item::get()->random();
+
+            $taskcard->items()->attach($item, [
+                'quantity' => rand(1, 10)
+            ]);
+        }
+    }
 
 });
