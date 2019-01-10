@@ -46,4 +46,8 @@ class TaskCardTest extends TestCase
         $this->post(route('frontend.taskcard.store'), $data)
              ->assertJsonValidationErrors('title');
     }
+
+    // TODO: Requires a Type, must be one of 'taskcard-type-routine' or 'taskcard-type-non-routine'
+    // TODO: Requires a Task type, must be one of 'taskcard-task'
+    // TODO: Requires a Skill, must be one of ?
 }
