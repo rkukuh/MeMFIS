@@ -24,7 +24,7 @@ class TaskCard extends MemfisModel
         'performance_factor',
         'sequence',
 
-        /** EO */
+        /** EO Header */
         'revision',
         'ref_no',
         'category_id',
