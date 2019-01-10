@@ -27,6 +27,7 @@ class TaskCardStore extends FormRequest
     {
         return [
             'number' => 'required',
+            'title' => 'required',
         ];
     }
 

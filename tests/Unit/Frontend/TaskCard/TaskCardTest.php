@@ -35,4 +35,15 @@ class TaskCardTest extends TestCase
         $this->post(route('frontend.taskcard.store'), $data)
              ->assertJsonValidationErrors('number');
     }
+
+    /** @test */
+    public function requires_a_title()
+    {
+        $this->actingAs(factory(User::class)->create());
+
+        $data = factory(TaskCard::class)->raw(['title' => null]);
+
+        $this->post(route('frontend.taskcard.store'), $data)
+             ->assertJsonValidationErrors('title');
+    }
 }
