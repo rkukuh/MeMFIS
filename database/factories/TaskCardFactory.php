@@ -27,7 +27,10 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'is_rii' => $faker->boolean,
         'source' => null,
         'effectivity' => null,
-        'performance_factor' => $faker->randomElement([null, rand(0, 10) / 10]), // min:0-max:1-step:0,1
+        'performance_factor' => $faker->randomElement([
+            null,
+            rand(0, 10) / 10 // min:0-max:1-step:0,1
+        ]),
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
         'version' => $faker->randomElement([null, $version]),
         'description' => $faker->paragraph(rand(10, 20)),
@@ -126,7 +129,9 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
     return [
         'number' => 'SI-' . $number,
         'title' => 'Special Instruction Dummy #' . $number,
-        'type_id' => Type::where('of', 'taskcard-type-non-routine')->where('code', 'si')->first()->id,
+        'type_id' => Type::where('of', 'taskcard-type-non-routine')
+                         ->where('code', 'si')
+                         ->first()->id,
         'performance_factor' => null,
         'version' => null,
     ];
@@ -161,7 +166,19 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
 
 $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker) {
 
-    //
+    $eo_detail = [
+        'work_area' => Type::ofWorkArea()->get()->random()->id,
+        'manhour' => $faker->randomFloat(2, 0, 9999),
+        'helper_quantity' => $faker->randomElement(null, rand(1, 10)),
+        'is_rii' => $faker->boolean,
+        'performance_factor' => $faker->randomElement([
+            null,
+            rand(0, 10) / 10 // min:0-max:1-step:0,1
+        ]),
+        'sequence' => $faker->randomElement([null, rand(1, 10)]),
+        'description' => $faker->paragraph(rand(10, 20)),
+        'note' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
+    ];
 
 });
 
