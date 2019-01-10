@@ -164,14 +164,12 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
 
-    if ($faker->boolean) {
-        for ($i = 1; $i <= rand(2, 5); $i++) {
-            $item = Item::get()->random();
+    for ($i = 1; $i <= rand(2, 5); $i++) {
+        $item = Item::get()->random();
 
-            $taskcard->items()->attach($item, [
-                'quantity' => rand(1, 10)
-            ]);
-        }
+        $taskcard->items()->attach($item, [
+            'quantity' => rand(1, 10)
+        ]);
     }
 
 });
@@ -182,18 +180,26 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
         factory(EOInstruction::class, rand(5, 10))->make()
     );
 
+    foreach ($taskcard->eo_instructions as $eo_instruction) {
+        for ($i = 1; $i <= rand(2, 5); $i++) {
+            $item = Item::get()->random();
+
+            $eo_instruction->items()->attach($item, [
+                'quantity' => rand(1, 10)
+            ]);
+        }
+    }
+
 });
 
 $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
 
-    if ($faker->boolean) {
-        for ($i = 1; $i <= rand(2, 5); $i++) {
-            $item = Item::get()->random();
+    for ($i = 1; $i <= rand(2, 5); $i++) {
+        $item = Item::get()->random();
 
-            $taskcard->items()->attach($item, [
-                'quantity' => rand(1, 10)
-            ]);
-        }
+        $taskcard->items()->attach($item, [
+            'quantity' => rand(1, 10)
+        ]);
     }
 
 });
