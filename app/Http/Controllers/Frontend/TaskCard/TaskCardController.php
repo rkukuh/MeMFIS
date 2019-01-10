@@ -37,7 +37,9 @@ class TaskCardController extends Controller
      */
     public function store(TaskCardStore $request)
     {
-        //
+        $taskcard = TaskCard::create($request->all());
+
+        return response()->json($taskcard);
     }
 
     /**
