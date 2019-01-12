@@ -211,7 +211,7 @@ class TaskCardRoutineDatatables extends Controller
         }
 
         // get all raw data
-        $taskcards = Taskcard::All();
+        $taskcards = Taskcard::where('type_id',81)->get();
 
         $alldata = json_decode( $taskcards, true);
 
@@ -382,7 +382,7 @@ class TaskCardRoutineDatatables extends Controller
             }
 
             // get all raw data
-            $taskcards = Taskcard::All();
+            $taskcards = Taskcard::where('type_id',82)->get();
 
             $alldata = json_decode( $taskcards, true);
 
@@ -553,7 +553,7 @@ class TaskCardRoutineDatatables extends Controller
             }
 
             // get all raw data
-            $taskcards = Taskcard::All();
+            $taskcards = Taskcard::where('type_id',83)->get();
 
             $alldata = json_decode( $taskcards, true);
 
