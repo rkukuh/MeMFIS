@@ -174,7 +174,6 @@
 @endpush
 
 @push('footer-scripts')
-
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
@@ -190,4 +189,6 @@
 
     <script src="{{ asset('js/frontend/workpackage/create.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/datatables.js')}}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush
