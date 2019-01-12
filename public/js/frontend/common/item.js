@@ -1,4 +1,4 @@
-let Item = {
+let ItemDatatables = {
     init: function () {
         $("#item_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
@@ -57,5 +57,5 @@ let Item = {
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    ItemDatatables.init();
 });
