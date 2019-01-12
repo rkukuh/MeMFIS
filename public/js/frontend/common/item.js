@@ -8,7 +8,7 @@ let AccountCode = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/datatables/get-item/",
+            ajax: "/datatables/item/modal/",
             columns: [
                 {
                     data: "code"
