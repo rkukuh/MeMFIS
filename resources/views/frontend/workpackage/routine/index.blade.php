@@ -2,9 +2,9 @@
     <div class="m-portlet__body">
         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
             <div class="row align-items-center">
-                <div class="col-xl-8 order-2 order-xl-1">
+                <div class="col-xl-6 order-2 order-xl-1">
                     <div class="form-group m-form__group row align-items-center">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="m-input-icon m-input-icon--left">
                                 <input type="text" class="form-control m-input" placeholder="Search..."
                                     id="generalSearch">
@@ -15,9 +15,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                <div class="col-xl-6 order-1 order-xl-2 m--align-right">
                     @component('frontend.common.buttons.create')
                         @slot('text', 'Basic')
+                        @slot('href', route('frontend.workpackage.create') )
+                    @endcomponent
+                    @component('frontend.common.buttons.create')
+                        @slot('text', 'Basic Summary')
                         @slot('href', route('frontend.workpackage.create') )
                     @endcomponent
 
