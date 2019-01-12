@@ -197,11 +197,12 @@ class TaskCardSIDatatables extends Controller
             }
 
             $columnsDefault = [
-                'code'     => true,
-                'name'     => true,
-                'uuid'     => true,
+                'number'     => true,
+                'title'     => true,
+                'work_area'     => true,
+                'manhour'     => true,
                 'Actions'      => true,
-            ];
+                ];
 
             if ( isset( $_REQUEST['columnsDef'] ) && is_array( $_REQUEST['columnsDef'] ) ) {
                 $columnsDefault = [];
