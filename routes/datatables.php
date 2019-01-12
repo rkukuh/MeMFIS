@@ -14,7 +14,6 @@ Route::name('datatables.')->group(function () {
 
         Route::get('/unit','UnitDatatables@index')->name('unit.index');
         Route::get('/journal','JournalDatatables@index')->name('journal.index');
-        Route::get('/get-item', 'ItemDatatables@getItems')->name('get-item');
 
         /** POLYMORPH */
         // INFO: For every polymorph cases, create a grouped route for them
@@ -72,6 +71,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/','ItemDatatables@index')->name('all');
+                Route::get('/modal', 'ItemDatatables@indexModal')->name('modal.index');
                 Route::get('/categories','CategoryItemDatatables@index')->name('categories.index');
 
                 /** Transaction */
