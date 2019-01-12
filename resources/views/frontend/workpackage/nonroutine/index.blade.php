@@ -17,12 +17,12 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                        @component('frontend.common.buttons.create')
+                        @component('frontend.common.buttons.create-new')
                             @slot('text', 'AD/SB')
-                            @slot('href', route('frontend.workpackage.create') )
-                        @endcomponent
-                        @component('frontend.common.buttons.create')
-                            @slot('text', 'AD/SB')
+                            @slot('data_target', '#modal_ad_sb')
+                            @endcomponent
+                        @component('frontend.common.buttons.summary')
+                            @slot('text', 'AD/SB Summary')
                             @slot('href', route('frontend.workpackage.create') )
                         @endcomponent
 
@@ -53,12 +53,12 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                        @component('frontend.common.buttons.create')
+                        @component('frontend.common.buttons.create-new')
                             @slot('text', 'CMR/AWL')
-                            @slot('href', route('frontend.workpackage.create') )
-                        @endcomponent
-                        @component('frontend.common.buttons.create')
-                            @slot('text', 'CMR/AWL')
+                            @slot('data_target', '#modal_cmr_awl')
+                            @endcomponent
+                        @component('frontend.common.buttons.summary')
+                            @slot('text', 'CMR/AWL Summary')
                             @slot('href', route('frontend.workpackage.create') )
                         @endcomponent
 
@@ -90,11 +90,11 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                        @component('frontend.common.buttons.create')
+                        @component('frontend.common.buttons.create-new')
                             @slot('text', 'Special Instruction')
-                            @slot('href', route('frontend.workpackage.create') )
-                        @endcomponent
-                        @component('frontend.common.buttons.create')
+                            @slot('data_target', '#modal_si')
+                            @endcomponent
+                        @component('frontend.common.buttons.summary')
                             @slot('text', 'SI Summary')
                             @slot('href', route('frontend.workpackage.create') )
                         @endcomponent
