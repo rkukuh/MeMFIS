@@ -235,6 +235,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/','TaskCardSIDatatables@index')->name('all');
+                Route::get('/si/modal','TaskCardSIDatatables@siModal')->name('si.modal');
 
                 /** Polymorph */
                 // TODO: with (aircraft) Access
