@@ -2,18 +2,19 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TitleModalItem">Item</h5>
+                    <h5 class="modal-title" id="TitleModalCmrAwl">CMR/AWL</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-bordered table-hover table-checkable" id="item_datatable">
+                    <table class="table table-striped table-bordered table-hover table-checkable" id="cmrawl_datatable">
                         <thead>
                             <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Actions</th>
+                                <th>Number</th>
+                                <th>Title</th>
+                                <th>WorkArea</th>
+                                <th>Manhour</th>
                             </tr>
                         </thead>
                     </table>
