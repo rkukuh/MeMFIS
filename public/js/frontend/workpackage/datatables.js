@@ -44,7 +44,7 @@ let Datatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
+            ajax: "/datatables/taskcard-routine/sip/modal",
             columns: [
                 {
                     data: "number"
@@ -80,7 +80,7 @@ let Datatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
+            ajax: "/datatables/taskcard-routine/cpcp/modal",
             columns: [
                 {
                     data: "number"
@@ -116,7 +116,7 @@ let Datatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
+            ajax: "/datatables/taskcard-eo/adsb/modal",
             columns: [
                 {
                     data: "number"
@@ -152,7 +152,7 @@ let Datatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
+            ajax: "/datatables/taskcard-eo/cmrawl/modal",
             columns: [
                 {
                     data: "number"
@@ -188,7 +188,7 @@ let Datatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
+            ajax: "/datatables/taskcard-si/si/modal",
             columns: [
                 {
                     data: "number"
