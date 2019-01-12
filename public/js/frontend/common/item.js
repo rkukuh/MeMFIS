@@ -1,4 +1,4 @@
-let AccountCode = {
+let Item = {
     init: function () {
         $("#item_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
@@ -57,5 +57,5 @@ let AccountCode = {
 };
 
 jQuery(document).ready(function () {
-    AccountCode.init();
+    Item.init();
 });
