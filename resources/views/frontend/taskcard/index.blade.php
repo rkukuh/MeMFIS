@@ -75,11 +75,24 @@
 
                                                 <div class="m-btn-group btn-group" role="group">
                                                 <button id="btnGroupDrop1" type="button" class="btn btn-primary m-btn m-btn--pill-last dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Non - Routine
+                                                    <span>
+                                                        <i class="la la-plus-circle"></i>
+                                                    <span>Non - Routine</span>
+                                                    </span>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                    <a class="dropdown-item" href="{{route('frontend.taskcard-eo.create')}}"> Engineering Order</a>
-                                                    <a class="dropdown-item" href="{{route('frontend.taskcard-si.create')}}"> Special Instruction</a>
+                                                    <a class="dropdown-item" href="{{route('frontend.taskcard-eo.create')}}">
+                                                        <span>
+                                                            <i class="la la-plus-circle"></i>
+                                                        <span>Engineering Order</span>
+                                                        </span>
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{route('frontend.taskcard-si.create')}}">
+                                                        <span>
+                                                            <i class="la la-plus-circle"></i>
+                                                        <span>Special Instruction</span>
+                                                        </span>
+                                                    </a>
                                                 </div>
                                                 </div>
                                             </div>
