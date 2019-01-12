@@ -17,9 +17,9 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create')
+                    @component('frontend.common.buttons.create-new')
                         @slot('text', 'Basic')
-                        @slot('href', route('frontend.workpackage.create') )
+                        @slot('data_target', '#modal_basic')
                     @endcomponent
                     @component('frontend.common.buttons.create')
                         @slot('text', 'Basic Summary')
@@ -53,10 +53,10 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create')
+                    @component('frontend.common.buttons.create-new')
                         @slot('text', 'SIP')
-                        @slot('href', route('frontend.workpackage.create') )
-                    @endcomponent
+                        @slot('data_target', '#modal_sip')
+                        @endcomponent
                     @component('frontend.common.buttons.create')
                         @slot('text', 'SIP Summary')
                         @slot('href', route('frontend.workpackage.create') )
@@ -90,10 +90,10 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create')
+                    @component('frontend.common.buttons.create-new')
                         @slot('text', 'CPCP')
-                        @slot('href', route('frontend.workpackage.create') )
-                    @endcomponent
+                        @slot('data_target', '#modal_cpcp')
+                        @endcomponent
                     @component('frontend.common.buttons.create')
                         @slot('text', 'CPCP Summary')
                         @slot('href', route('frontend.workpackage.create') )
