@@ -165,7 +165,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.common.item.modal')
+                                                        @include('frontend.purchase-request.modal')
 
                                                     </div>
                                                 </div>
