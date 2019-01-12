@@ -121,4 +121,24 @@ class TaskCardEODatatables extends Controller
 
         return $util->filter($args, $operator);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function adsbModal()
+    {
+        //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cmrawlModal()
+    {
+        //
+    }
 }

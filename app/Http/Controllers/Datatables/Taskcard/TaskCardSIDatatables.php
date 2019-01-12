@@ -121,4 +121,15 @@ class TaskCardSIDatatables extends Controller
 
         return $util->filter($args, $operator);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function siModal()
+    {
+        //
+    }
+
 }
