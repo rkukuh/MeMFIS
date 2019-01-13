@@ -160,12 +160,13 @@
                                                                         @slot('data_target', '#modal_item')
                                                                     @endcomponent
 
-                                                                    @include('frontend.common.item.modal')
 
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        @include('frontend.purchase-request.modal')
+
                                                     </div>
                                                 </div>
                                             </div>

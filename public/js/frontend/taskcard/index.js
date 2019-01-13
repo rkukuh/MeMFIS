@@ -71,27 +71,6 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'is_rii',
-                    title: 'Rii?',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        var e = {
-                            1: {
-                                title: "Yes",
-                                class: "m-badge--brand"
-                            },
-                            0: {
-                                title: "No",
-                                class: " m-badge--warning"
-                            }
-                        };
-
-                        return '<span class="m-badge ' + e[t.is_rii].class + ' m-badge--wide">' + e[t.is_rii].title + "</span>"
-                    }
-
-                },
-                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',

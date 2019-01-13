@@ -1,4 +1,4 @@
-let AccountCode = {
+let ItemDatatables = {
     init: function () {
         $("#item_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
@@ -8,7 +8,7 @@ let AccountCode = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/get-account-codes/",
+            ajax: "/datatables/item/modal/",
             columns: [
                 {
                     data: "code"
@@ -57,5 +57,5 @@ let AccountCode = {
 };
 
 jQuery(document).ready(function () {
-    AccountCode.init();
+    ItemDatatables.init();
 });

@@ -23,6 +23,13 @@ Route::get('/workpackage-doc', function () {
 });
 
 Route::get('/wp-summart-doc', function () {
-    $pdf = \PDF::loadView('frontend/form/wp');
+    $pdf = \PDF::loadView('frontend/form/quotation');
     return $pdf->stream();
 });
+
+Route::get('/purchase-request-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/purchase_request');
+    return $pdf->stream();
+});
+
+

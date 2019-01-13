@@ -203,6 +203,15 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        /** WORKPACKAGE  */
+        Route::view('/summary/basic', 'frontend.workpackage.routine.basic.basic-summary')->name('summary.basic');
+        Route::view('/summary/sip', 'frontend.workpackage.routine.sip.sip-summary')->name('summary.sip');
+        Route::view('/summary/cpcp', 'frontend.workpackage.routine.cpcp.cpcp-summary')->name('summary.cpcp');
+        Route::view('/summary/ad-sb', 'frontend.workpackage.nonroutine.adsb.ad-sb-summary')->name('summary.ad-sb');
+        Route::view('/summary/cmr-awl', 'frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary')->name('summary.cmr-awl');
+        Route::view('/summary/si', 'frontend.workpackage.nonroutine.si.si-summary')->name('summary.si');
+
+
     });
 
 });

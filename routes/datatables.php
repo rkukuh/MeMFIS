@@ -71,6 +71,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/','ItemDatatables@index')->name('all');
+                Route::get('/modal', 'ItemDatatables@indexModal')->name('modal.index');
                 Route::get('/categories','CategoryItemDatatables@index')->name('categories.index');
 
                 /** Transaction */
@@ -172,6 +173,9 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/','TaskCardRoutineDatatables@index')->name('all');
+                Route::get('/basic/modal','TaskCardRoutineDatatables@basicModal')->name('basic.modal');
+                Route::get('/sip/modal','TaskCardRoutineDatatables@sipModal')->name('sip.modal');
+                Route::get('/cpcp/modal','TaskCardRoutineDatatables@cpcpModal')->name('cpcp.modal');
 
                 /** Polymorph */
                 // TODO: with (aircraft) Access
@@ -201,6 +205,8 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/','TaskCardEODatatables@index')->name('all');
+                Route::get('/adsb/modal','TaskCardEODatatables@adsbModal')->name('adsb.modal');
+                Route::get('/cmrawl/modal','TaskCardEODatatables@cmrawlModal')->name('cmrawl.modal');
 
                 /** Polymorph */
                 // TODO: with (aircraft) Access
@@ -229,6 +235,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/','TaskCardSIDatatables@index')->name('all');
+                Route::get('/si/modal','TaskCardSIDatatables@siModal')->name('si.modal');
 
                 /** Polymorph */
                 // TODO: with (aircraft) Access

@@ -42,36 +42,38 @@ let Workpackage = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'id',
-                    title: '#',
+                    title: 'Workpakage Number',
                     sortable: !1,
-                    width: 40
                 },
                 {
                     field: 'quotation',
-                    title: 'Quotation',
+                    title: 'Created Date',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'customer',
-                    title: 'Customer',
+                    title: 'Workpakage Title',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'status',
-                    title: 'Status',
+                    title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
+                },
+                {
+                    field: 'statu',
+                    title: 'A/C Type',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'Actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
