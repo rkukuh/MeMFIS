@@ -19,18 +19,6 @@ let TaskCard = {
 
 
         $(document).ready(function () {
-            $('select[name="recurrence_id"]').on('change', function () {
-                let recurrence = $(this).val();
-                if (recurrence == 67) {
-                $("#recurrence_div").removeClass("hidden");
-                $('#recurrence').removeAttr("disabled");
-                $('#recurrence-select').removeAttr("disabled");
-                } else {
-                    $("#recurrence_div").addClass("hidden");
-                    $('#recurrence').prop("disabled", true);
-                    $('#recurrence-select').prop("disabled", true);
-                }
-            });
         });
         $(document).ready(function () {
             $('select[name="scheduled_priority_id"]').on('change', function () {
@@ -56,30 +44,13 @@ let TaskCard = {
             });
         });
         $(document).ready(function () {
-            $('select[name="manual_affected_id"]').on('change', function () {
-                let manual_affected = $(this).val();
-                if (manual_affected == 64) {
-                $("#note_div").removeClass("hidden");
-                $('#note').removeAttr("disabled");
-                } else {
-                    $('#note').prop("disabled", true);
-                    $("#note_div").addClass("hidden");
-                }
-            });
-        });
+
+                });
 
         $(document).ready(function () {
 
             $('.btn-success').removeClass('add');
 
-            document.getElementById('all').onchange = function () {
-                document.getElementById('ac-type').disabled = !this.unchecked;
-
-                if (document.getElementById("all").checked) {
-                } else {
-                    $('#ac-type').removeAttr("disabled");
-                }
-            };
         });
 
         $('.footer').on('click', '.reset', function () {
@@ -87,7 +58,7 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.edit-taskcard', function () {
-            taskcard_reset();
+            // taskcard_reset();
             let title = $('input[name=title]').val();
             let number = $('input[name=number]').val();
             let otr_certification = $('#otr_certification').val();
@@ -109,18 +80,20 @@ let TaskCard = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'post',
-                url: '/taskcard',
+                type: 'put',
+                url: '/taskcard-si/'+taskcard_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     title: title,
-                    name: name,
-                    otr_certification: otr_certification,
-                    applicability_airplane: applicability_airplane,
+                    type_id: '89',
+                    number: number,
                     work_area: work_area,
                     manhour: manhour,
                     helper_quantity: helper_quantity,
                     description: description,
+
+                    // otr_certification: otr_certification,
+                    // applicability_airplane: applicability_airplane,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -159,7 +132,7 @@ let TaskCard = {
                         document.getElementById('description').value = description;
 
                     } else {
-                           taskcard_reset();
+                        //    taskcard_reset();
 
 
                         toastr.success('Taskcard has been updated.', 'Success', {

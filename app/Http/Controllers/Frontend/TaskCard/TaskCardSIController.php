@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\TaskCard;
 
+use App\Models\Type;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardSIStore;
@@ -9,6 +10,15 @@ use App\Http\Requests\Frontend\TaskCardSIUpdate;
 
 class TaskCardSIController extends Controller
 {
+    protected $applicability_airplane;
+    protected $skill;
+    protected $work_area;
+
+    public function __construct()
+    {
+        $this->work_area = Type::ofWorkArea()->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +47,14 @@ class TaskCardSIController extends Controller
      */
     public function store(TaskCardSIStore $request)
     {
-        //
+        if ($taskcard = TaskCard::create($request->all())) {
+            // $item->categories()->attach($request->category);
+
+            return response()->json($taskcard);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
@@ -57,9 +74,15 @@ class TaskCardSIController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(Taskcard $taskCard)
+    public function edit($taskCard)
     {
-        //
+        //TODO Data binding not work
+        $taskCard = TaskCard::where('uuid',$taskCard)->first();
+        // dd($taskCard);
+        return view('frontend.taskcard.nonroutine.si.edit', [
+            'taskcard' => $taskCard,
+            'work_areas' => $this->work_area,
+        ]);
     }
 
     /**
@@ -69,9 +92,21 @@ class TaskCardSIController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardSIUpdate $request, Taskcard $taskCard)
+    public function update(TaskCardSIUpdate $request,$taskCard)
     {
-        //
+        //TODO Data binding not work
+
+        $taskCard = TaskCard::where('uuid',$taskCard)->first();
+
+        // dd($request->all());
+        if ($taskCard->update($request->all())) {
+            // $item->categories()->sync($request->category);
+
+            return response()->json($taskCard);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
