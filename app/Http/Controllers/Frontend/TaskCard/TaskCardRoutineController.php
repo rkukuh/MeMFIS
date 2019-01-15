@@ -118,7 +118,6 @@ class TaskCardRoutineController extends Controller
 
         // TODO: Return error message as JSON
         return false;
-
     }
 
     /**
