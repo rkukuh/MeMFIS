@@ -206,7 +206,7 @@
                                                 Work Area @include('frontend.common.label.optional')
                                             </label>
 
-                                            <select id="task_type_id" name="task_type_id" class="form-control m-select2">
+                                            <select id="work_area" name="work_area" class="form-control m-select2">
                                                 <option value="">
                                                     &mdash; Select a Work Area &mdash;
                                                 </option>
