@@ -60,6 +60,7 @@
                                                 @slot('id', 'number')
                                                 @slot('text', 'Taskcard Number')
                                                 @slot('name', 'number')
+                                                @slot('value', $taskcard->number)
                                                 @slot('id_error', 'number')
                                             @endcomponent
                                         </div>
@@ -68,12 +69,19 @@
                                                 Type @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Taskcard Type')
-                                                @slot('id', 'taskcard_routine_type')
-                                                @slot('name', 'taskcard_routine_type')
-                                                @slot('id_error', 'taskcard_routine_type')
-                                            @endcomponent
+                                            <select id="taskcard_routine_type" name="taskcard_routine_type" class="form-control m-select2">
+                                                <option value="">
+                                                    &mdash; Select a Taskcard Routine Type &mdash;
+                                                </option>
+
+                                                @foreach ($types as $type)
+                                                    <option value="{{ $type->id }}"
+                                                        @if ($type->id == $taskcard->type_id) selected @endif>
+                                                        {{ $type->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -86,6 +94,7 @@
                                                 @slot('id', 'title')
                                                 @slot('text', 'Title')
                                                 @slot('name', 'title')
+                                                @slot('value', $taskcard->title)
                                                 @slot('id_error', 'title')
                                             @endcomponent
                                         </div>
@@ -109,12 +118,18 @@
                                                 Task @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Task')
-                                                @slot('id', 'task_type_id')
-                                                @slot('name', 'task_type_id')
-                                                @slot('id_error', 'task_type_id')
-                                            @endcomponent
+                                            <select id="task_type_id" name="task_type_id" class="form-control m-select2">
+                                                <option value="">
+                                                    &mdash; Select a Taskcard &mdash;
+                                                </option>
+
+                                                @foreach ($tasks as $task)
+                                                    <option value="{{ $task->id }}"
+                                                        @if ($task->id == $taskcard->task_type_id) selected @endif>
+                                                        {{ $task->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
 
                                         </div>
 
@@ -143,6 +158,7 @@
                                                         @slot('id', 'manhour')
                                                         @slot('text', 'Manhour')
                                                         @slot('name', 'manhour')
+                                                        @slot('value', $taskcard->manhour)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -155,6 +171,7 @@
                                                         @slot('text', 'Performa')
                                                         @slot('name', 'performa')
                                                         @slot('value', '1')
+                                                        @slot('value', $taskcard->performance_factor)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -178,6 +195,7 @@
                                                 @slot('id', 'helper_quantity')
                                                 @slot('text', 'Helper Quantity')
                                                 @slot('name', 'helper_quantity')
+                                                @slot('value', $taskcard->helper_quantity)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -185,12 +203,19 @@
                                                 Work Area @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Work Area')
-                                                @slot('id', 'work_area')
-                                                @slot('name', 'work_area')
-                                                @slot('id_error', 'work-area')
-                                            @endcomponent
+                                            <select id="task_type_id" name="task_type_id" class="form-control m-select2">
+                                                <option value="">
+                                                    &mdash; Select a Work Area &mdash;
+                                                </option>
+
+                                                @foreach ($work_areas as $work_area)
+                                                    <option value="{{ $work_area->id }}"
+                                                        @if ($work_area->id == $taskcard->work_area) selected @endif>
+                                                        {{ $work_area->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -234,6 +259,7 @@
                                                 @slot('id', 'source')
                                                 @slot('text', 'Source')
                                                 @slot('name', 'source')
+                                                @slot('value', $taskcard->source)
                                             @endcomponent
 
                                         </div>
@@ -274,6 +300,7 @@
                                                 @slot('text', 'Effectifity')
                                                 @slot('id', 'effectifity')
                                                 @slot('name', 'effectifity')
+                                                @slot('value', $taskcard->effectivity)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -301,6 +328,7 @@
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
+                                                @slot('value', $taskcard->description)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -546,16 +574,16 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/access.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/threshold-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/threshold-type.js') }}"></script>

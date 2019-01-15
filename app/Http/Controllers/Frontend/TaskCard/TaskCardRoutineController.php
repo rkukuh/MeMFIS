@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\TaskCard;
 
+use App\Models\Type;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -9,6 +10,23 @@ use App\Http\Requests\Frontend\TaskCardRoutineUpdate;
 
 class TaskCardRoutineController extends Controller
 {
+
+    protected $type;
+    protected $applicability_airplane;
+    protected $task;
+    protected $skill;
+    protected $work_area;
+    protected $access;
+    protected $zone;
+    protected $relationship;
+
+    public function __construct()
+    {
+        $this->type = Type::ofTaskCardTypeRoutine()->get();
+        $this->work_area = Type::ofWorkArea()->get();
+        $this->task = Type::ofTaskCardTask()->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -64,10 +82,16 @@ class TaskCardRoutineController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(Taskcard $taskCard)
+    public function edit($taskCard)
     {
+        //TODO Data binding not work
+        $taskCard = TaskCard::where('uuid',$taskCard)->first();
+        // dd($taskCard);
         return view('frontend.taskcard.routine.edit', [
             'taskcard' => $taskCard,
+            'types' => $this->type,
+            'work_areas' => $this->work_area,
+            'tasks' => $this->task,
         ]);
 
     }
