@@ -271,9 +271,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Effectifity')
-                                                @slot('id', 'effectifity')
-                                                @slot('name', 'effectifity')
+                                                @slot('text', 'Effectivity')
+                                                @slot('id', 'effectivity')
+                                                @slot('name', 'effectivity')
                                             @endcomponent
                                         </div>
                                     </div>

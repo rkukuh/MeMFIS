@@ -37,7 +37,14 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
-        //
+        if ($taskcard = TaskCard::create($request->all())) {
+            // $item->categories()->attach($request->category);
+
+            return response()->json($taskcard);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
@@ -59,7 +66,10 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(Taskcard $taskCard)
     {
-        return view('frontend.taskcard.routine.edit');
+        return view('frontend.taskcard.routine.edit', [
+            'taskcard' => $taskCard,
+        ]);
+
     }
 
     /**
