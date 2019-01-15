@@ -72,14 +72,6 @@ let TaskCard = {
 
             $('.btn-success').removeClass('add');
 
-            document.getElementById('all').onchange = function () {
-                document.getElementById('ac-type').disabled = !this.unchecked;
-
-                if (document.getElementById("all").checked) {
-                } else {
-                    $('#ac-type').removeAttr("disabled");
-                }
-            };
         });
 
         $('.footer').on('click', '.reset', function () {
@@ -87,7 +79,7 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-            taskcard_reset();
+            // taskcard_reset();
             let title = $('input[name=title]').val();
             let number = $('input[name=number]').val();
             let otr_certification = $('#otr_certification').val();
@@ -110,17 +102,20 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard',
+                url: '/taskcard-si',
                 data: {
                     _token: $('input[name=_token]').val(),
                     title: title,
-                    name: name,
-                    otr_certification: otr_certification,
-                    applicability_airplane: applicability_airplane,
+                    type_id: '89',
+                    number: number,
                     work_area: work_area,
                     manhour: manhour,
                     helper_quantity: helper_quantity,
                     description: description,
+
+                    // otr_certification: otr_certification,
+                    // applicability_airplane: applicability_airplane,
+
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -159,14 +154,14 @@ let TaskCard = {
                         document.getElementById('description').value = description;
 
                     } else {
-                           taskcard_reset();
+                        //    taskcard_reset();
 
 
                         toastr.success('Taskcard has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard/1/edit';
+                        window.location.href = '/taskcard-si/'+data.uuid+'/edit';
                     }
                 }
             });
