@@ -181,6 +181,9 @@
                                                 @slot('id', 'is_rii')
                                                 @slot('name', 'is_rii')
                                                 @slot('text', 'RII?')
+                                                @if ($taskcard->is_rii == 1)
+                                                    @slot('checked', 'checked')
+                                                @endif
                                                 @slot('style_div','margin-top:30px')
                                             @endcomponent
                                         </div>
@@ -336,10 +339,10 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-taskcard')
-                                                        @slot('class', 'add-taskcard')
+                                                    @component('frontend.common.buttons.update')
+                                                        @slot('type', 'button')
+                                                        @slot('id', 'edit-taskcard')
+                                                        @slot('class', 'edit-taskcard')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -564,7 +567,7 @@
         }, false);
     </script>
     <script>
-        let taskcard_uuid = "$taskcard->uuid";
+        let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
@@ -605,7 +608,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/routine/edit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
 @endpush

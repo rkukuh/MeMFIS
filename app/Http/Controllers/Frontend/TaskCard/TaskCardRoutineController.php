@@ -103,9 +103,22 @@ class TaskCardRoutineController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardRoutineUpdate $request, Taskcard $taskCard)
+    public function update(TaskCardRoutineUpdate $request, $taskCard)
     {
-        //
+        //TODO Data binding not work
+
+        $taskCard = TaskCard::where('uuid',$taskCard)->first();
+
+        // dd($request->all());
+        if ($taskCard->update($request->all())) {
+            // $item->categories()->sync($request->category);
+
+            return response()->json($taskCard);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
+
     }
 
     /**
