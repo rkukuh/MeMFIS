@@ -9,15 +9,15 @@
 
 <div class="tab-content">
     <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
-        @include('frontend.workpackage.routine.index')
-        @include('frontend.workpackage.routine.basic.modal')
-        @include('frontend.workpackage.routine.sip.modal')
-        @include('frontend.workpackage.routine.cpcp.modal')
+        @include('frontend.project.hm.taskcard.routine.index')
+        @include('frontend.project.hm.taskcard.routine.basic.modal')
+        @include('frontend.project.hm.taskcard.routine.sip.modal')
+        @include('frontend.project.hm.taskcard.routine.cpcp.modal')
     </div>
     <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-        @include('frontend.workpackage.nonroutine.index')
-        @include('frontend.workpackage.nonroutine.adsb.modal')
-        @include('frontend.workpackage.nonroutine.cmrawl.modal')
-        @include('frontend.workpackage.nonroutine.si.modal')
+        @include('frontend.project.hm.taskcard.nonroutine.index')
+        @include('frontend.project.hm.taskcard.nonroutine.adsb.modal')
+        @include('frontend.project.hm.taskcard.nonroutine.cmrawl.modal')
+        @include('frontend.project.hm.taskcard.nonroutine.si.modal')
     </div>
 </div>
