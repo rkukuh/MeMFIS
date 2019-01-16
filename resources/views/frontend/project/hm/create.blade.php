@@ -271,7 +271,7 @@
                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                     @component('frontend.common.buttons.create-new')
                                                         @slot('text', 'HM Project')
-                                                        @slot('data_target', '#modal_basic')
+                                                        @slot('data_target', '#modal_project')
                                                     @endcomponent
 
                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -293,9 +293,118 @@
                                                     </div>
                                                     <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1" style="">
                                                         <div class="m-accordion__item-content">
-                                                            <p>
-                                                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                                            </p>
+                                                            <ul class="nav nav-tabs" role="tablist">
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">General Tool and Material</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner">Engineer Team</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_manhour">Manhours Propotion</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility Used</a>
+                                                                </li>
+                                                            </ul>
+
+                                                            <div class="tab-content">
+                                                                <div class="tab-pane active show" id="m_tabs_taskcard" role="tabpanel">
+                                                                    <ul class="nav nav-tabs" role="tablist">
+                                                                            <li class="nav-item">
+                                                                                <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Routine</a>
+                                                                            </li>
+                                                                            <li class="nav-item">
+                                                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
+                                                                            </li>
+                                                                            <li class="nav-item">
+                                                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
+                                                                            </li>
+                                                                        </ul>
+
+                                                                        <div class="tab-content">
+                                                                            <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
+                                                                                @include('frontend.workpackage.routine.index')
+                                                                                @include('frontend.workpackage.routine.basic.modal')
+                                                                                @include('frontend.workpackage.routine.sip.modal')
+                                                                                @include('frontend.workpackage.routine.cpcp.modal')
+                                                                            </div>
+                                                                            <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
+                                                                                @include('frontend.workpackage.nonroutine.index')
+                                                                                @include('frontend.workpackage.nonroutine.adsb.modal')
+                                                                                @include('frontend.workpackage.nonroutine.cmrawl.modal')
+                                                                                @include('frontend.workpackage.nonroutine.si.modal')
+                                                                            </div>
+                                                                            <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
+                                                                                @include('frontend.workpackage.item.index')
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
+                                                                    <p>m_tabs_tool_material</p>
+                                                                </div>
+                                                                <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
+                                                                    <table border="1px" width="100%">
+                                                                        <tr>
+                                                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                                                Airframe
+                                                                            </td>
+                                                                            <td width="70%" style="text-align:center">
+                                                                                Budi
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                                                Powerplant
+                                                                            </td>
+                                                                            <td width="70%" style="text-align:center">
+                                                                                Yemima
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                                                Radio
+                                                                            </td>
+                                                                            <td width="70%" style="text-align:center">
+                                                                                Husni
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                                                Electrical
+                                                                            </td>
+                                                                            <td width="70%" style="text-align:center">
+                                                                                Yendi
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                                                Instrument
+                                                                            </td>
+                                                                            <td width="70%" style="text-align:center">
+                                                                                Kukuh
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                                                Cabin Maintenance
+                                                                            </td>
+                                                                            <td width="70%" style="text-align:center">
+                                                                                Audhy
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="tab-pane" id="m_tabs_manhourr" role="tabpanel">
+                                                                    <p>m_tabs_manhourr</p>
+                                                                </div>
+                                                                <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
+                                                                    <p>m_tabs_facility</p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
