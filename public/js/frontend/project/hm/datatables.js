@@ -1,5 +1,41 @@
 let Datatables = {
     init: function () {
+        $("#project_datatable").DataTable({
+            "dom": '<"top"f>rt<"bottom">pl',
+            responsive: !0,
+            searchDelay: 500,
+            processing: !0,
+            serverSide: !0,
+            lengthMenu: [5, 10, 25, 50],
+            pageLength: 5,
+            ajax: "/datatables/taskcard-routine/basic/modal",
+            columns: [
+                {
+                    data: "number"
+                },
+                {
+                    data: "title"
+                },
+                {
+                    data: "work_area"
+                },
+                {
+                    data: "manhour"
+                },
+                {
+                    data: "Actions"
+                }
+            ],
+            columnDefs: [{
+                    targets: -1,
+                    orderable: !1,
+                    render: function (a, e, t, n) {
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                    }
+                },
+
+            ]
+        })
         $("#basic_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
