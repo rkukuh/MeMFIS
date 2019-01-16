@@ -204,14 +204,12 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        A/C Serial Number @include('frontend.common.label.required')
+                                                        File Work Order
                                                     </label>
-
-                                                    @component('frontend.common.input.text')
-                                                        @slot('text', 'Serial Number')
-                                                        @slot('id', 'serial-number')
-                                                        @slot('name', 'serial-number')
-                                                        @slot('id_error', 'serial-number')
+                                                    @component('frontend.common.input.upload')
+                                                        @slot('id', 'work-order-file')
+                                                        @slot('name', 'work-order-file')
+                                                        @slot('id_error', 'work-order-file')
                                                     @endcomponent
 
                                                 </div>
@@ -220,93 +218,36 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        A/C Type @include('frontend.common.label.required')
+                                                        Aircraft Type @include('frontend.common.label.required')
                                                     </label>
 
                                                     @component('frontend.common.input.select2')
-                                                        @slot('text', 'Applicability Airplane')
-                                                        @slot('id', 'applicability_airplane')
-                                                        @slot('name', 'applicability_airplane')
-                                                        @slot('id_error', 'applicability-airplane')
+                                                        @slot('text', 'Aircraft')
+                                                        @slot('id', 'aircraft')
+                                                        @slot('name', 'aircraft')
+                                                        @slot('id_error', 'aircraft')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        A/C Reg @include('frontend.common.label.required')
+                                                        Template @include('frontend.common.label.required')
                                                     </label>
 
-                                                    @component('frontend.common.input.text')
-                                                        @slot('text', 'Red')
-                                                        @slot('id', 'reg')
-                                                        @slot('name', 'reg')
-                                                        @slot('id_error', 'reg')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <label class="form-control-label">
-                                                        Description @include('frontend.common.label.optional')
-                                                    </label>
-
-                                                    @component('frontend.common.input.textarea')
-                                                        @slot('rows', '8')
-                                                        @slot('id', 'description')
-                                                        @slot('name', 'description')
-                                                        @slot('text', 'Description')
+                                                    @component('frontend.common.input.select2')
+                                                        @slot('id', 'template')
+                                                        @slot('text', 'Work Package')
+                                                        @slot('name', 'template')
+                                                        @slot('id_error', 'template')
                                                     @endcomponent
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <div class="row align-items-center">
-                                                <div class="col-xl-8 order-2 order-xl-1">
-                                                    <div class="form-group m-form__group row align-items-center">
-                                                        <div class="col-md-4">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                    @component('frontend.common.buttons.create-new')
-                                                        @slot('text', 'HM Project')
-                                                        @slot('data_target', '#modal_basic')
-                                                    @endcomponent
-
-                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @include('frontend.project.hm.modal')
-
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
-                                                <div class="m-accordion__item">
-                                                    <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
-                                                        <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
-                                                        <span class="m-accordion__item-title">C-Check</span>
-                                                        <span class="m-accordion__item-mode"></span>
-                                                    </div>
-                                                    <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1" style="">
-                                                        <div class="m-accordion__item-content">
-                                                            <p>
-                                                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        {{-- <div class="form-group m-form__group row">
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="taskcard_datatable" id="second"></div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                 <div class="flex">
@@ -374,9 +315,6 @@
         }
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
-
     {{-- <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
 
@@ -394,7 +332,4 @@
 
     <script src="{{ asset('js/frontend/project/create.js') }}"></script>
     <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
-    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-
 @endpush
