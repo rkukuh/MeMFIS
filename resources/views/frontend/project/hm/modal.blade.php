@@ -1,14 +1,14 @@
-<div class="modal fade" id="modal_basic" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_project" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TitleModalBasic">Project</h5>
+                    <h5 class="modal-title" id="TitleModalproject">Project</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-bordered table-hover table-checkable" id="basic_datatable">
+                    <table class="table table-striped table-bordered table-hover table-checkable" id="project_datatable">
                         <thead>
                             <tr>
                                 <th>Number</th>
