@@ -54,11 +54,11 @@
                                     Account Code @include('frontend.common.label.optional')
                                 </label>
 
-                                @component('frontend.common.input.select')
-                                    @slot('id', 'accountcode')
-                                    @slot('text', 'AccountCode')
-                                    @slot('name', 'accountcode')
-                                    @slot('style', 'width:100%')
+                                @include('frontend.common.account-code.index')
+
+                                @component('frontend.common.input.hidden')
+                                    @slot('id', 'account_code')
+                                    @slot('name', 'account_code')
                                 @endcomponent
                             </div>
                         </div>
