@@ -313,161 +313,19 @@
 
                                                             <div class="tab-content">
                                                                 <div class="tab-pane active show" id="m_tabs_taskcard" role="tabpanel">
-                                                                    <ul class="nav nav-tabs" role="tablist">
-                                                                            <li class="nav-item">
-                                                                                <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Routine</a>
-                                                                            </li>
-                                                                            <li class="nav-item">
-                                                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
-                                                                            </li>
-                                                                            <li class="nav-item">
-                                                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
-                                                                            </li>
-                                                                        </ul>
-
-                                                                        <div class="tab-content">
-                                                                            <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
-                                                                                @include('frontend.workpackage.routine.index')
-                                                                                @include('frontend.workpackage.routine.basic.modal')
-                                                                                @include('frontend.workpackage.routine.sip.modal')
-                                                                                @include('frontend.workpackage.routine.cpcp.modal')
-                                                                            </div>
-                                                                            <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-                                                                                @include('frontend.workpackage.nonroutine.index')
-                                                                                @include('frontend.workpackage.nonroutine.adsb.modal')
-                                                                                @include('frontend.workpackage.nonroutine.cmrawl.modal')
-                                                                                @include('frontend.workpackage.nonroutine.si.modal')
-                                                                            </div>
-                                                                            <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
-                                                                                @include('frontend.workpackage.item.index')
-                                                                            </div>
-                                                                        </div>
+                                                                    @include('frontend.project.hm.taskcard.index')
                                                                 </div>
                                                                 <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
-                                                                    <p>m_tabs_tool_material</p>
+                                                                    @include('frontend.project.hm.item.index')
                                                                 </div>
                                                                 <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
-                                                                    <table border="1px" width="100%">
-                                                                        <tr>
-                                                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                                                Airframe
-                                                                            </td>
-                                                                            <td width="70%" style="text-align:center">
-                                                                                Budi
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                                                Powerplant
-                                                                            </td>
-                                                                            <td width="70%" style="text-align:center">
-                                                                                Yemima
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                                                Radio
-                                                                            </td>
-                                                                            <td width="70%" style="text-align:center">
-                                                                                Husni
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                                                Electrical
-                                                                            </td>
-                                                                            <td width="70%" style="text-align:center">
-                                                                                Yendi
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                                                Instrument
-                                                                            </td>
-                                                                            <td width="70%" style="text-align:center">
-                                                                                Kukuh
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                                                Cabin Maintenance
-                                                                            </td>
-                                                                            <td width="70%" style="text-align:center">
-                                                                                Audhy
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
+                                                                    @include('frontend.project.hm.engineer.index')
                                                                 </div>
                                                                 <div class="tab-pane" id="m_tabs_manhour" role="tabpanel">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label class="form-control-label">
-                                                                                    Inspector @include('frontend.common.label.required')
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                @component('frontend.common.input.number')
-                                                                                    @slot('text', 'inspector')
-                                                                                    @slot('id', 'inspector')
-                                                                                    @slot('input_append', '%')
-                                                                                    @slot('name', 'inspector')
-                                                                                    @slot('id_error', 'inspector')
-                                                                                @endcomponent
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label class="form-control-label">
-                                                                                    Engineer @include('frontend.common.label.required')
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                @component('frontend.common.input.number')
-                                                                                    @slot('text', 'engineer')
-                                                                                    @slot('id', 'engineer')
-                                                                                    @slot('input_append', '%')
-                                                                                    @slot('name', 'engineer')
-                                                                                    @slot('id_error', 'engineer')
-                                                                                @endcomponent
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label class="form-control-label">
-                                                                                    Mechanic @include('frontend.common.label.required')
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                @component('frontend.common.input.number')
-                                                                                    @slot('text', 'mechanic')
-                                                                                    @slot('id', 'mechanic')
-                                                                                    @slot('input_append', '%')
-                                                                                    @slot('name', 'mechanic')
-                                                                                    @slot('id_error', 'mechanic')
-                                                                                @endcomponent
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label class="form-control-label">
-                                                                                    Supporting @include('frontend.common.label.required')
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                @component('frontend.common.input.number')
-                                                                                    @slot('text', 'supporting')
-                                                                                    @slot('id', 'supporting')
-                                                                                    @slot('input_append', '%')
-                                                                                    @slot('name', 'supporting')
-                                                                                    @slot('id_error', 'supporting')
-                                                                                @endcomponent
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
+                                                                    @include('frontend.project.hm.manhour.index')
                                                                 </div>
                                                                 <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
-                                                                    <p>m_tabs_facility</p>
+                                                                    @include('frontend.project.hm.facility.index')
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -476,30 +334,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                        {{-- <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <div class="taskcard_datatable" id="second"></div>
-                                            </div>
-                                        </div> --}}
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.submit')
-                                                            @slot('type','button')
-                                                            @slot('id', 'add-taskcard')
-                                                            @slot('class', 'add-taskcard')
-                                                        @endcomponent
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-taskcard')
+                                                        @slot('class', 'add-taskcard')
+                                                    @endcomponent
 
-                                                        @include('frontend.common.buttons.reset')
+                                                    @include('frontend.common.buttons.reset')
 
-                                                        @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.workpackage.index'))
-                                                        @endcomponent
-                                                    </div>
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.workpackage.index'))
+                                                    @endcomponent
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -570,5 +423,6 @@
     <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
 @endpush
