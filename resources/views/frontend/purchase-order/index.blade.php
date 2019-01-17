@@ -62,6 +62,19 @@
                                                     </span>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4">
+                                                <div class="m-form__group m-form__group--inline">
+                                                    <div class="m-form__label">
+                                                        <label>Date:</label>
+                                                    </div>
+                                                    <div class="m-form__control">
+                                                        @component('frontend.common.input.daterangepicker')
+                                                            @slot('id','daterange_purchase_order')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-none m--margin-bottom-10"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
@@ -86,4 +99,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/purchase-order/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/daterange/purchase-order.js') }}" ></script>
+
 @endpush
