@@ -212,6 +212,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/summary/si', 'frontend.workpackage.nonroutine.si.si-summary')->name('summary.si');
         Route::view('/vendor', 'frontend.vendor.index')->name('vendor.index');
         Route::view('/vendor/create', 'frontend.vendor.create')->name('vendor.create');
+        Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
 
 
     });
