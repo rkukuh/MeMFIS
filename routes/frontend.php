@@ -213,6 +213,8 @@ Route::name('frontend.')->group(function () {
         Route::view('/vendor', 'frontend.vendor.index')->name('vendor.index');
         Route::view('/vendor/create', 'frontend.vendor.create')->name('vendor.create');
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
+        Route::view('/purchase-order', 'frontend.purchase-order.index')->name('purchase-order.index');
+        Route::view('/purchase-order/create', 'frontend.purchase-order.create')->name('purchase-order.create');
 
 
     });
