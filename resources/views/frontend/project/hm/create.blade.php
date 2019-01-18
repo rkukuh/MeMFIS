@@ -246,14 +246,14 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
-                                                        Description @include('frontend.common.label.optional')
+                                                        Project Title @include('frontend.common.label.optional')
                                                     </label>
 
                                                     @component('frontend.common.input.textarea')
                                                         @slot('rows', '8')
-                                                        @slot('id', 'description')
-                                                        @slot('name', 'description')
-                                                        @slot('text', 'Description')
+                                                        @slot('id', 'project_title')
+                                                        @slot('name', 'project_title')
+                                                        @slot('text', 'Project Title')
                                                     @endcomponent
                                                 </div>
                                             </div>
