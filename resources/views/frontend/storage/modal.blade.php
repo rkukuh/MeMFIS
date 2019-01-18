@@ -36,7 +36,7 @@
                                 @endcomponent
                             </div>
                         </div>
-                        <div class="form-group m-form__group row ">
+                        <div class="form-group m-form__group row">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Description @include('frontend.common.label.optional')
@@ -54,7 +54,7 @@
                                     Account Code @include('frontend.common.label.optional')
                                 </label>
 
-                                @include('frontend.common.account-code.index')
+                                @include('frontend.common.account-code-modal.index')
 
                                 @component('frontend.common.input.hidden')
                                     @slot('id', 'account_code')
@@ -91,3 +91,7 @@
         </div>
     </div>
 </div>
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+@endpush

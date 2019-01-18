@@ -71,6 +71,7 @@
                                 </div>
                             </div>
                             @include('frontend.storage.modal')
+                            @include('frontend.common.account-code.modal')
                             <div class="m_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
