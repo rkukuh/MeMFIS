@@ -14,6 +14,7 @@
                 @slot('size', 'sm')
                 @slot('icon', 'search')
                 @slot('data_target', '#modal_purchase_request')
+                @slot('style','margin-top:1px')
             @endcomponent
         </div>
     </div>
