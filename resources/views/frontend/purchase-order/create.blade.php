@@ -99,9 +99,7 @@
                                                         <label class="form-control-label">
                                                             Ref PR @include('frontend.common.label.required')
                                                         </label>
-                                                        @component('frontend.common.purchase-request.index')
-                                                            @slot('padding','10px 2px 1px 12px')
-                                                        @endcomponent
+                                                        @include('frontend.common.purchase-request.index') 
 
                                                         @component('frontend.common.input.hidden')
                                                             @slot('id', 'ref-pr')
