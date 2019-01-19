@@ -199,7 +199,7 @@
 
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Access @include('frontend.common.label.optional')
+                                                Access @include('frontend.common.label.optional-multiple')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -213,7 +213,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Zone @include('frontend.common.label.optional')
+                                                Zone @include('frontend.common.label.optional-multiple')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -241,7 +241,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Related Card @include('frontend.common.label.optional')
+                                                Related Card @include('frontend.common.label.optional-multiple')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -256,7 +256,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Version @include('frontend.common.label.optional')
+                                                Version @include('frontend.common.label.optional-multiple')
                                             </label>
 
                                             @component('frontend.common.input.select2')
