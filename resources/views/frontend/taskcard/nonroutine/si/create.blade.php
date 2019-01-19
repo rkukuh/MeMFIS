@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Special instruction Taskcard
+                                    Special Instruction Task Card
                                 </h3>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Tool
+                                    Required Tools
                                 </h3>
                             </div>
                         </div>
@@ -226,7 +226,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Material
+                                    Required Materials
                                 </h3>
                             </div>
                         </div>

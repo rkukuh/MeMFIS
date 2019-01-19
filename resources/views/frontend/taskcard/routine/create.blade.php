@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Routine Taskcard
+                                    Routine Task Card
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Taskcard Number @include('frontend.common.label.required')
+                                                Task Card Number @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
@@ -341,7 +341,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Tool
+                                    Required Tools
                                 </h3>
                             </div>
                         </div>
@@ -372,7 +372,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Material
+                                    Required Materials
                                 </h3>
                             </div>
                         </div>
@@ -403,7 +403,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Threshold
+                                    Thresholds
                                 </h3>
                             </div>
                         </div>
@@ -434,7 +434,7 @@
                                     </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Repeat
+                                    Repeats
                                 </h3>
                             </div>
                         </div>

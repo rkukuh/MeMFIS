@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
-                                    Routine Taskcard
+                                    Routine Task Card
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Taskcard Number @include('frontend.common.label.required')
+                                                Task Card Number @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
@@ -372,7 +372,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Tool Required
+                                    Tool Requireds
                                 </h3>
                             </div>
                         </div>
@@ -410,7 +410,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Required
+                                    Material Requireds
                                 </h3>
                             </div>
                         </div>
@@ -448,7 +448,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Threshold Taskcard
+                                    Threshold Taskcards
                                 </h3>
                             </div>
                         </div>
@@ -486,7 +486,7 @@
                                         @include('frontend.common.label.datalist')
 
                                         <h3 class="m-portlet__head-text">
-                                            Repeat Taskcard
+                                            Repeat Taskcards
                                         </h3>
                                     </div>
                                 </div>
