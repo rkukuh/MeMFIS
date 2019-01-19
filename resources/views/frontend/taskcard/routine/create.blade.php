@@ -271,9 +271,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Effectifity')
-                                                @slot('id', 'effectifity')
-                                                @slot('name', 'effectifity')
+                                                @slot('text', 'Effectivity')
+                                                @slot('id', 'effectivity')
+                                                @slot('name', 'effectivity')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -543,7 +543,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/routine/create.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
 @endpush

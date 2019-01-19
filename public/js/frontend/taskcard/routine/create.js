@@ -4,15 +4,6 @@ let TaskCard = {
         $(document).ready(function () {
 
             $('.btn-success').removeClass('add');
-            
-            document.getElementById('all').onchange = function () {
-                document.getElementById('ac-type').disabled = !this.unchecked;
-
-                if (document.getElementById("all").checked) {
-                } else {
-                    $('#ac-type').removeAttr("disabled");
-                }
-            };
         });
 
         $('.footer').on('click', '.reset', function () {
@@ -20,39 +11,70 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-            taskcard_reset();
+            // taskcard_reset();
             let title = $('input[name=title]').val();
             let number = $('input[name=number]').val();
-            let description = $('#description').val();
-            let threshold_amount = $('input[name=threshold_amount]').val();
-            let repeat_amount = $('input[name=repeat_amount]').val();
-            let source = $('input[name=source]').val();
-            let effectifity = $('input[name=effectifity]').val();
+            let taskcard_routine_type = $('#taskcard_routine_type').val();
+            let applicability_airplane = $('#applicability_airplane').val();
+            let task_type_id = $('#task_type_id').val();
             let otr_certification = $('#otr_certification').val();
-            let threshold_type = $('#threshold_type').val();
-            let repeat_type = $('#repeat_type').val();
-            let taskcard = $('#taskcard').val();
-            let zone = $('input[name=zone]').val();
-            let access = $('input[name=access]').val();
-            let applicability_airplane = $('input[name=applicability_airplane]').val();
-            let applicability_engine = $('#applicability_engine').val();
+            let manhour = $('input[name=manhour]').val();
+            let performa = $('input[name=performa]').val();
+            let helper_quantity = $('input[name=helper_quantity]').val();
             let work_area = $('#work_area').val();
+            let access = $('#access').val();
+            let zone = $('#zone').val();
+            let source = $('input[name=source]').val();
             let relationship = $('#relationship').val();
+            let version = $('#version').val();
+            let effectivity = $('input[name=effectivity]').val();
+            let description = $('#description').val();
 
-            if ($('#aircraft_taskcard :selected').length > 0) {
-                var aircraft_taskcards = [];
 
-                $('#aircraft_taskcard :selected').each(function (i, selected) {
-                    aircraft_taskcards[i] = $(selected).val();
+            if ($('#applicability_airplane :selected').length > 0) {
+                let applicability_airplanes = [];
+
+                $('#applicability_airplane :selected').each(function (i, selected) {
+                    applicability_airplanes[i] = $(selected).val();
                 });
             }
 
 
-            if (document.getElementById("is_applicability_engine_all").checked) {
-                is_applicability_engine_all = 1;
-            } else {
-                is_applicability_engine_all = 0;
+            if ($('#access :selected').length > 0) {
+                let accesses = [];
+
+                $('#access :selected').each(function (i, selected) {
+                    accesses[i] = $(selected).val();
+                });
             }
+
+
+            if ($('#zone :selected').length > 0) {
+                let zones = [];
+
+                $('#zone :selected').each(function (i, selected) {
+                    zones[i] = $(selected).val();
+                });
+            }
+
+
+            if ($('#relationship :selected').length > 0) {
+                let relationships = [];
+
+                $('#relationship :selected').each(function (i, selected) {
+                    relationships[i] = $(selected).val();
+                });
+            }
+
+
+            if ($('#version :selected').length > 0) {
+                let versions = [];
+
+                $('#version :selected').each(function (i, selected) {
+                    versions[i] = $(selected).val();
+                });
+            }
+
 
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
@@ -60,102 +82,99 @@ let TaskCard = {
                 is_rii = 0;
             }
 
-            // $.ajax({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     type: 'post',
-            //     url: '/taskcard',
-            //     data: {
-            //         _token: $('input[name=_token]').val(),
-            //         code: code,
-            //         name: name,
-            //         description: description,
-            //         unit_id: unit,
-            //         category: category,
-            //         is_stock: is_stock,
-            //         is_ppn: is_ppn,
-            //         ppn_amount: ppn_amount,
-            //         account_code: account_code,
-            //     },
-            //     success: function (data) {
-            //         if (data.errors) {
-            //             if (data.errors.title) {
-            //                 $('#title-error').html(data.errors.title[0]);
-            //             }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    number: number,
+                    title: title,
+                    type_id: taskcard_routine_type,
+                    task_type_id: task_type_id,
+                    work_area: work_area,
+                    helper_quantity: helper_quantity,
+                    is_rii:is_rii,
+                    performance_factor: performa,
+                    manhour: manhour,
+                    description: description,
+                    // version: version,
+                    effectivity: effectivity,
+                    source: source,
 
-            //             if (data.errors.number) {
-            //                 $('#number-error').html(data.errors.number[0]);
-            //             }
+                    // applicability_airplane: applicability_airplane,
+                    // otr_certification: otr_certification,
+                    // access: access,
+                    // zone: zone,
+                    // relationship: relationship,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.title) {
+                            $('#title-error').html(data.errors.title[0]);
+                        }
 
-            //             if (data.errors.taskcard) {
-            //                 $('#taskcard-error').html(data.errors.taskcard[0]);
-            //             }
+                        if (data.errors.number) {
+                            $('#number-error').html(data.errors.number[0]);
+                        }
 
-            //             if (data.errors.otr_certification) {
-            //                 $('#otr-certification-error').html(data.errors.otr_certification[0]);
-            //             }
+                        if (data.errors.taskcard_routine_type) {
+                            $('#taskcard_routine_type-error').html(data.errors.taskcard_routine_type[0]);
+                        }
 
-            //             if (data.errors.threshold_type) {
-            //                 $('#threshold-type-error').html(data.errors.threshold_type[0]);
-            //             }
+                        if (data.errors.otr_certification) {
+                            $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                        }
 
-            //             if (data.errors.threshold_amount) {
-            //                 $('#threshold-amount-error').html(data.errors.threshold_amount[0]);
-            //             }
+                        if (data.errors.applicability_airplane) {
+                            $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                        }
 
-            //             if (data.errors.repeat_type) {
-            //                 $('#repeat-type-error').html(data.errors.repeat_type[0]);
-            //             }
+                        if (data.errors.task_type_id) {
+                            $('#task_type_id-error').html(data.errors.task_type_id[0]);
+                        }
 
-            //             if (data.errors.repeat_amount) {
-            //                 $('#repeat-amount-error').html(data.errors.repeat_amount[0]);
-            //             }
+                        if (data.errors.manhour) {
+                            $('#manhour-error').html(data.errors.manhour[0]);
+                        }
 
-            //             if (data.errors.zone) {
-            //                 $('#zone-error').html(data.errors.zone[0]);
-            //             }
-
-            //             if (data.errors.access) {
-            //                 $('#access-error').html(data.errors.access[0]);
-            //             }
-
-            //             if (data.errors.applicability_airplane) {
-            //                 $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
-            //             }
-
-            //             if (data.errors.applicability_engine) {
-            //                 $('#applicability-engine-error').html(data.errors.applicability_engine[0]);
-            //             }
-
-            //             if (data.errors.work_area) {
-            //                 $('#work-area-error').html(data.errors.work_area[0]);
-            //             }
+                        if (data.errors.performa) {
+                            $('#performa-error').html(data.errors.performa[0]);
+                        }
 
 
-                        // document.getElementById('title').value = title;
-                        // document.getElementById('number').value = number;
-                        // document.getElementById('threshold_amount').value = threshold_amount;
-                        // document.getElementById('repeat_amount').value = repeat_amount;
-                        // document.getElementById('source').value = source;
-                        // document.getElementById('effectifity').value = effectifity;
-                        // document.getElementById('zone').value = zone;
-                        // document.getElementById('access').value = access;
-                        // document.getElementById('applicability_airplane').value = applicability_airplane;
-                        // document.getElementById('description').value = description;
+                        document.getElementById('title').value = title;
+                        document.getElementById('number').value = number;
+                        document.getElementById('taskcard_routine_type').value = taskcard_routine_type;
+                        document.getElementById('applicability_airplane').value = applicability_airplane;
+                        document.getElementById('task_type_id').value = task_type_id;
+                        document.getElementById('otr_certification').value = otr_certification;
+                        document.getElementById('manhour').value = manhour;
+                        document.getElementById('performa').value = performa;
+                        document.getElementById('helper_quantity').value = helper_quantity;
+                        document.getElementById('work_area').value = work_area;
+                        document.getElementById('access').value = access;
+                        document.getElementById('zone').value = zone;
+                        document.getElementById('source').value = source;
+                        document.getElementById('relationship').value = relationship;
+                        document.getElementById('version').value = version;
+                        document.getElementById('effectifity').value = effectifity;
+                        document.getElementById('description').value = description;
 
-            //         } else {
-                           taskcard_reset();
+                    } else {
+                        //    taskcard_reset();
 
 
                         toastr.success('Taskcard has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard/1/edit';
-            //         }
-            //     }
-            // });
+                        window.location.href = '/taskcard-routine/'+data.uuid+'/edit';
+                    }
+                }
+            });
         });
 
         // Category

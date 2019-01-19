@@ -29,7 +29,7 @@
     </div>
     <div class="m-content">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -283,7 +283,7 @@
                                                     <div data-repeater-list="group-email">
                                                         <div data-repeater-item>
                                                             <div class="form-group m-form__group row">
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.email')
                                                                         @slot('name', 'email')
                                                                         @slot('placeholder', 'Email')
@@ -416,7 +416,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">

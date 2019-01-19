@@ -56,7 +56,7 @@
                                                     Title @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
+                                                @component('frontend.common.input.text')
                                                     @slot('text', 'title')
                                                     @slot('id', 'title')
                                                     @slot('name', 'title')
@@ -183,7 +183,6 @@
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/title.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/aircraft.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/series.js') }}"></script>
 

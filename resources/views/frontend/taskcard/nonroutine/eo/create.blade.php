@@ -462,7 +462,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/non-routine/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/create.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script> --}}
 @endpush

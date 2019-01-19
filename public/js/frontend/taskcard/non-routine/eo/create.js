@@ -19,18 +19,18 @@ let TaskCard = {
 
 
         $(document).ready(function () {
-            $('select[name="recurrence_id"]').on('change', function () {
-                let recurrence = $(this).val();
-                if (recurrence == 67) {
-                $("#recurrence_div").removeClass("hidden");
-                $('#recurrence').removeAttr("disabled");
-                $('#recurrence-select').removeAttr("disabled");
-                } else {
-                    $("#recurrence_div").addClass("hidden");
-                    $('#recurrence').prop("disabled", true);
-                    $('#recurrence-select').prop("disabled", true);
-                }
-            });
+            // $('select[name="recurrence_id"]').on('change', function () {
+            //     let recurrence = $(this).val();
+            //     if (recurrence == 67) {
+            //     $("#recurrence_div").removeClass("hidden");
+            //     $('#recurrence').removeAttr("disabled");
+            //     $('#recurrence-select').removeAttr("disabled");
+            //     } else {
+            //         $("#recurrence_div").addClass("hidden");
+            //         $('#recurrence').prop("disabled", true);
+            //         $('#recurrence-select').prop("disabled", true);
+            //     }
+            // });
         });
         $(document).ready(function () {
             $('select[name="scheduled_priority_id"]').on('change', function () {
@@ -83,56 +83,64 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.reset', function () {
-            taskcard_reset();
+            // taskcard_reset();
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-            taskcard_reset();
+            // taskcard_reset();
             let title = $('input[name=title]').val();
             let number = $('input[name=number]').val();
-            let description = $('#description').val();
-            let threshold_amount = $('input[name=threshold_amount]').val();
-            let repeat_amount = $('input[name=repeat_amount]').val();
-            let source = $('input[name=source]').val();
-            let effectifity = $('input[name=effectifity]').val();
-            let otr_certification = $('#otr_certification').val();
-            let threshold_type = $('#threshold_type').val();
-            let repeat_type = $('#repeat_type').val();
-            let taskcard = $('#taskcard').val();
-            let zone = $('input[name=zone]').val();
-            let access = $('input[name=access]').val();
-            let applicability_airplane = $('input[name=applicability_airplane]').val();
-            let applicability_engine = $('#applicability_engine').val();
-            let work_area = $('#work_area').val();
+            let taskcard_non_routine_type = $('#taskcard_non_routine_type').val();
+            let applicability_airplane = $('#applicability_airplane').val();
+            let revision = $('input[name=revision]').val();
             let relationship = $('#relationship').val();
+            let description = $('#description').val();
+            let scheduled_priority_id = $('#scheduled_priority_id').val();
+            let recurrence_id = $('#recurrence_id').val();
+            let manual_affected_id = $('#manual_affected_id').val();
 
-            if ($('#aircraft_taskcard :selected').length > 0) {
-                var aircraft_taskcards = [];
 
-                $('#aircraft_taskcard :selected').each(function (i, selected) {
-                    aircraft_taskcards[i] = $(selected).val();
+            let task_type_id = $('#task_type_id').val();
+            let otr_certification = $('#otr_certification').val();
+            let manhour = $('input[name=manhour]').val();
+            let performa = $('input[name=performa]').val();
+            let helper_quantity = $('input[name=helper_quantity]').val();
+            let work_area = $('#work_area').val();
+            let access = $('#access').val();
+            let zone = $('#zone').val();
+            let source = $('input[name=source]').val();
+            let version = $('#version').val();
+            let effectivity = $('input[name=effectivity]').val();
+
+            if ($('#applicability_airplane :selected').length > 0) {
+                var applicability_airplanes = [];
+
+                $('#applicability_airplane :selected').each(function (i, selected) {
+                    applicability_airplanes[i] = $(selected).val();
                 });
             }
 
 
-            if (document.getElementById("is_applicability_engine_all").checked) {
-                is_applicability_engine_all = 1;
-            } else {
-                is_applicability_engine_all = 0;
-            }
 
-            if (document.getElementById("is_rii").checked) {
-                is_rii = 1;
-            } else {
-                is_rii = 0;
-            }
+
+            // if (document.getElementById("is_applicability_engine_all").checked) {
+            //     is_applicability_engine_all = 1;
+            // } else {
+            //     is_applicability_engine_all = 0;
+            // }
+
+            // if (document.getElementById("is_rii").checked) {
+            //     is_rii = 1;
+            // } else {
+            //     is_rii = 0;
+            // }
 
             // $.ajax({
             //     headers: {
             //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             //     },
             //     type: 'post',
-            //     url: '/taskcard',
+            //     url: '/taskcard-eo',
             //     data: {
             //         _token: $('input[name=_token]').val(),
             //         code: code,
@@ -212,14 +220,14 @@ let TaskCard = {
                         // document.getElementById('description').value = description;
 
             //         } else {
-                           taskcard_reset();
+                        //    taskcard_reset();
 
 
                         toastr.success('Taskcard has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard/1/edit';
+                        window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
             //         }
             //     }
             // });
