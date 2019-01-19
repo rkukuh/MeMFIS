@@ -143,6 +143,7 @@
                                                         @slot('id', 'manhour')
                                                         @slot('text', 'Manhour')
                                                         @slot('name', 'manhour')
+                                                        @slot('id_error', 'manhour')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -155,6 +156,7 @@
                                                         @slot('text', 'Performa')
                                                         @slot('name', 'performa')
                                                         @slot('value', '1')
+                                                        @slot('id_error', 'performa')
                                                     @endcomponent
                                                 </div>
                                             </div>
