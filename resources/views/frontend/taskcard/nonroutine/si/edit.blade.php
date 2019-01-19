@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    A/C Type @include('frontend.common.label.required-multiple')
+                                                    A/C Type @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
@@ -103,6 +103,7 @@
                                                     @slot('id', 'applicability_airplane')
                                                     @slot('name', 'applicability_airplane')
                                                     @slot('multiple','multiple')
+                                                    @slot('help_text','You can chose multiple value')
                                                     @slot('id_error', 'applicability-airplane')
                                                 @endcomponent
 

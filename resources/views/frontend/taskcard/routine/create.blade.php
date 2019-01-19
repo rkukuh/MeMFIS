@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Aircraft Applicability @include('frontend.common.label.required-multiple')
+                                                Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -99,6 +99,7 @@
                                                 @slot('id', 'applicability_airplane')
                                                 @slot('name', 'applicability_airplane')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                                 @slot('id_error', 'applicability-airplane')
                                             @endcomponent
                                         </div>
@@ -199,7 +200,7 @@
 
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Access @include('frontend.common.label.optional-multiple')
+                                                Access @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -208,12 +209,13 @@
                                                 @slot('name', 'access')
                                                 @slot('id_error', 'access')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
 
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Zone @include('frontend.common.label.optional-multiple')
+                                                Zone @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -222,6 +224,7 @@
                                                 @slot('name', 'zone')
                                                 @slot('id_error', 'zone')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
 
                                         </div>
@@ -241,7 +244,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Related Card @include('frontend.common.label.optional-multiple')
+                                                Related Card @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -250,13 +253,14 @@
                                                 @slot('name', 'relationship')
                                                 @slot('multiple','multiple')
                                                 @slot('id_error', 'taskcard-relationship')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Version @include('frontend.common.label.optional-multiple')
+                                                Version @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -265,6 +269,7 @@
                                                 @slot('name', 'version')
                                                 @slot('multiple','multiple')
                                                 @slot('id_error', 'version')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
