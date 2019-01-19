@@ -87,7 +87,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/taskcard-routine/'+taskcard_uuid+'/',
+                url: '/taskcard-routine/' + taskcard_uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     number: number,
@@ -96,7 +96,7 @@ let TaskCard = {
                     task_type_id: task_type_id,
                     work_area: work_area,
                     helper_quantity: helper_quantity,
-                    is_rii:is_rii,
+                    is_rii: is_rii,
                     performance_factor: performa,
                     manhour: manhour,
                     description: description,
@@ -170,14 +170,10 @@ let TaskCard = {
                         toastr.success('Taskcard has been updated.', 'Success', {
                             timeOut: 5000
                         });
-
-                        // window.location.href = '/taskcard-routine/'+data.uuid+'/edit';
                     }
                 }
             });
         });
-
-        // Category
 
     }
 };
