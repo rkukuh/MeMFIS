@@ -154,7 +154,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
+                                                    @slot('rows', '20')
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')
