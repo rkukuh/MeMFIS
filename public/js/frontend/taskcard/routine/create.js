@@ -2,16 +2,36 @@ let TaskCard = {
     init: function () {
 
         $(document).ready(function () {
+            var autoExpand = function (field) {
+
+                field.style.height = 'inherit';
+
+                var computed = window.getComputedStyle(field);
+
+                var height = parseInt(computed.getPropertyValue('border-top-width'), 10) +
+                    parseInt(computed.getPropertyValue('padding-top'), 10) +
+                    field.scrollHeight +
+                    parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+                    parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+                field.style.height = height + 'px';
+
+            };
+
+            document.addEventListener('input', function (event) {
+                if (event.target.tagName.toLowerCase() !== 'textarea') return;
+                autoExpand(event.target);
+            }, false);
 
             $('.btn-success').removeClass('add');
         });
 
         $('.footer').on('click', '.reset', function () {
-            taskcard_reset();
+            routine_reset();
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-            // taskcard_reset();
+            routine_reset();
             let title = $('input[name=title]').val();
             let number = $('input[name=number]').val();
             let taskcard_routine_type = $('#taskcard_routine_type').val();
@@ -96,7 +116,7 @@ let TaskCard = {
                     task_type_id: task_type_id,
                     work_area: work_area,
                     helper_quantity: helper_quantity,
-                    is_rii:is_rii,
+                    is_rii: is_rii,
                     performance_factor: performa,
                     manhour: manhour,
                     description: description,
@@ -164,20 +184,19 @@ let TaskCard = {
                         document.getElementById('description').value = description;
 
                     } else {
-                        //    taskcard_reset();
+                        routine_reset();
 
 
                         toastr.success('Taskcard has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard-routine/'+data.uuid+'/edit';
+                        window.location.href = '/taskcard-routine/' + data.uuid + '/edit';
                     }
                 }
             });
         });
 
-        // Category
 
     }
 };
