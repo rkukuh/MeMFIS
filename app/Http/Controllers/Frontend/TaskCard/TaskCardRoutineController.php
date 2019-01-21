@@ -87,9 +87,15 @@ class TaskCardRoutineController extends Controller
      */
     public function edit($taskCard)
     {
+
         //TODO Data binding not work
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
         // dd($taskCard);
+        // $aircraft = array();
+        // foreach($item->tags as $i => $item_tag){
+        //     $aircrafts[$i] =  $item_tag->name;
+        // }
+
         return view('frontend.taskcard.routine.edit', [
             'taskcard' => $taskCard,
             'types' => $this->type,

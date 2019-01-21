@@ -111,6 +111,25 @@
                                                 @slot('help_text','You can chose multiple value')
                                                 @slot('id_error', 'applicability-airplane')
                                             @endcomponent
+
+                                            {{-- <select id="tag" name="tag" class="form-control m-select2" multiple>
+                                                @if ($item->tags->isEmpty())
+                                                    @foreach ($tags as $tag)
+                                                        <option value="{{ $tag->id }}">
+                                                            {{ $tag->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($tags as $tag)
+                                                        @foreach ($item->tags as $item_tag)
+                                                            <option value="{{ $tag->id }}"
+                                                                @if ($tag->name == $item_tag->name) selected @endif>
+                                                                {{ $tag->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endforeach
+                                                @endif
+                                            </select> --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -582,6 +601,11 @@
         let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
@@ -622,5 +646,5 @@
 
     <script src="{{ asset('js/frontend/taskcard/routine/edit.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/routine/form-reset.js') }}"></script>
 @endpush
