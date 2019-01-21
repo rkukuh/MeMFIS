@@ -51,6 +51,7 @@ Route::name('component.')->group(function () {
         Route::get('get-scheduled-priorities', 'FillComboxController@scheduledPriority')->name('get-scheduled-priorities');
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
         Route::get('get-manual-affecteds', 'FillComboxController@manualAffected')->name('get-manual-affecteds');
+        Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
 
 
 

@@ -528,5 +528,17 @@ class FillComboxController extends Controller
         return json_encode($accesses);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function tool()
+    {
+        $tools = Item::with('categories')->where('categories->name','tool')->get();
+
+        return json_encode($tools);
+    }
+
 
 }
