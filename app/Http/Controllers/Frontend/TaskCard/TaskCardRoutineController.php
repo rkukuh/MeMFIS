@@ -56,7 +56,10 @@ class TaskCardRoutineController extends Controller
     public function store(TaskCardRoutineStore $request)
     {
         if ($taskcard = TaskCard::create($request->all())) {
-            // $item->categories()->attach($request->category);
+            $taskcard->aircrafts()->attach($request->applicability_airplane);
+            $taskcard->accesses()->attach($request->access);
+            $taskcard->zones()->attach($request->zone);
+            $taskcard->related_to()->attach($request->relationship);
 
             return response()->json($taskcard);
         }
