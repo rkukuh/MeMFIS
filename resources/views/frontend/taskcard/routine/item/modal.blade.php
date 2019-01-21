@@ -26,10 +26,10 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('id', 'item')
-                                                @slot('text', 'Item')
-                                                @slot('name', 'item')
-                                                @slot('id_error', 'item')
+                                                @slot('id', 'material')
+                                                @slot('text', 'Material')
+                                                @slot('name', 'material')
+                                                @slot('id_error', 'material')
                                             @endcomponent
                                     </div>
                             </div>
