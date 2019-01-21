@@ -11,7 +11,7 @@ $(document).ready(function () {
                 $('select[name="name"]').empty();
 
                 $('select[name="name"]').append(
-                    '<option> Select a Name</option>'
+                    '<option value=""> Select a Name</option>'
                 );
 
                 $.each(data, function (key, value) {

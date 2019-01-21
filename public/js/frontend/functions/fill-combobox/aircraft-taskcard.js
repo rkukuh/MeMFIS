@@ -9,7 +9,7 @@ $(document).ready(function () {
                 $('select[name="aircraft_taskcard"]').empty();
 
                 $('select[name="aircraft_taskcard"]').append(
-                    '<option> Select a Aircraft</option>'
+                    '<option value=""> Select a Aircraft</option>'
                 );
 
                 $.each(data, function (key, value) {

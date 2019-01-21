@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="taskcard_non_routine_type"]').empty();
 
                 $('select[name="taskcard_non_routine_type"]').append(
-                    '<option> Select a Taskcard Non Routine type</option>'
+                    '<option value=""> Select a Taskcard Non Routine type</option>'
                 );
 
                 $.each(data, function (key, value) {
