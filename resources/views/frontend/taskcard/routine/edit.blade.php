@@ -290,15 +290,21 @@
                                             <label class="form-control-label">
                                                 Version @include('frontend.common.label.optional')
                                             </label>
+                                            @php
+                                                $versions = json_decode($taskcard->version, TRUE);
+                                            @endphp
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'version')
-                                                @slot('text', 'Version')
-                                                @slot('name', 'version')
-                                                @slot('multiple','multiple')
-                                                @slot('id_error', 'version')
-                                                @slot('help_text','You can chose multiple value')
-                                            @endcomponent
+                                            <select id="version" name="version" class="form-control m-select2" multiple style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Work Area &mdash;
+                                                </option>
+
+                                                @foreach ($versions as $version)
+                                                    <option selected>
+                                                        {{ $version }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">

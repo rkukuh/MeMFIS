@@ -46,6 +46,7 @@ let TaskCard = {
             let source = $('input[name=source]').val();
             let relationship = $('#relationship').val();
             let version = $('#version').val();
+            var JsonVersion = JSON.stringify(version);
             let effectivity = $('input[name=effectivity]').val();
             let description = $('#description').val();
 
@@ -119,15 +120,15 @@ let TaskCard = {
                     performance_factor: performa,
                     manhour: manhour,
                     description: description,
-                    // version: version,
+                    version: JsonVersion,
                     effectivity: effectivity,
                     source: source,
 
-                    // applicability_airplane: applicability_airplane,
-                    // otr_certification: otr_certification,
-                    // access: access,
-                    // zone: zone,
-                    // relationship: relationship,
+                    applicability_airplane: applicability_airplane,
+                    otr_certification: otr_certification,
+                    access: access,
+                    zone: zone,
+                    relationship: relationship,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -183,8 +184,6 @@ let TaskCard = {
                         document.getElementById('description').value = description;
 
                     } else {
-                        routine_reset();
-
 
                         toastr.success('Taskcard has been created.', 'Success', {
                             timeOut: 5000
