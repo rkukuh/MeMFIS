@@ -69,7 +69,7 @@
                                                 Type @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="taskcard_routine_type" name="taskcard_routine_type" class="form-control m-select2">
+                                            <select id="taskcard_routine_type" name="taskcard_routine_type" class="form-control m-select2" style="width:100%">
                                                 <option value="">
                                                     &mdash; Select a Taskcard Routine Type &mdash;
                                                 </option>
@@ -119,7 +119,7 @@
                                                 Task @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="task_type_id" name="task_type_id" class="form-control m-select2">
+                                            <select id="task_type_id" name="task_type_id" class="form-control m-select2" style="width:100%">
                                                 <option value="">
                                                     &mdash; Select a Taskcard &mdash;
                                                 </option>
@@ -208,7 +208,7 @@
                                                 Work Area @include('frontend.common.label.optional')
                                             </label>
 
-                                            <select id="work_area" name="work_area" class="form-control m-select2">
+                                            <select id="work_area" name="work_area" class="form-control m-select2" style="width:100%">
                                                 <option value="">
                                                     &mdash; Select a Work Area &mdash;
                                                 </option>
