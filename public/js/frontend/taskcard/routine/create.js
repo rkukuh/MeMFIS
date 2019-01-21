@@ -31,7 +31,6 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-            routine_reset();
             let title = $('input[name=title]').val();
             let number = $('input[name=number]').val();
             let taskcard_routine_type = $('#taskcard_routine_type').val();
@@ -180,7 +179,7 @@ let TaskCard = {
                         document.getElementById('source').value = source;
                         document.getElementById('relationship').value = relationship;
                         document.getElementById('version').value = version;
-                        document.getElementById('effectifity').value = effectifity;
+                        document.getElementById('effectivity').value = effectivity;
                         document.getElementById('description').value = description;
 
                     } else {
