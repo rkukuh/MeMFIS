@@ -455,107 +455,106 @@
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-sm-5">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="m-portlet__head">
-                                                    <div class="m-portlet__head-tools">
-                                                        <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
-                                                            <li class="nav-item m-tabs__item">
-                                                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">
-                                                                                    <i class="la la-bell-o"></i> Address
-                                                                                </a>
-                                                            </li>
-                                                            <li class="nav-item m-tabs__item">
-                                                                <a class="nav-link m-tabs__link " data-toggle="tab" href="#m_tabs_6_2" role="tab">
-                                                                                    <i class="la la-cog"></i> Document
-                                                                                </a>
-                                                            </li>
-                                                            <li class="nav-item m-tabs__item">
-                                                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_3" role="tab">
-                                                                                    <i class="la la-bell-o"></i> Contact
-                                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                        <div class="m-portlet__head">
+                                            <div class="m-portlet__head-tools">
+                                                <ul class="nav nav-pills" role="tablist">
+                                                    <li class="nav-item ">
+                                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1"> 
+                                                            <i class="la la-bell-o"></i> Address
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item dropdown">
+                                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="la la-gift"></i> More
+                                                        </a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_2">Document</a>
+                                                            <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_3">Contact</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>  
+                                            </div>
                                         </div>
-                                        <div class="m-portlet__body">
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                                        <div class="row align-items-center">
-                                                                            <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                                                                @component('frontend.common.buttons.create-new')
-                                                                                    @slot('text', 'Address')
-                                                                                    @slot('id', 'customer-address')
-                                                                                    @slot('data_target', '#modal_address')
-                                                                                @endcomponent
+                                    </div>
+                                    <div class="m-portlet__body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                                <div class="row align-items-center">
+                                                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                                                        @component('frontend.common.buttons.create-new')
+                                                                            @slot('text', 'Address')
+                                                                            @slot('id', 'customer-address')
+                                                                            @slot('data_target', '#modal_address')
+                                                                        @endcomponent
 
-                                                                                <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                                            </div>
-                                                                        </div>
+                                                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                     </div>
-                                                                    @include('frontend.customer.address.modal')
+                                                                </div>
+                                                            </div>
+                                                            @include('frontend.customer.address.modal')
 
-                                                            <div class="customer_address_datatable" id="customer_address_datatable"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                                            <div class="customer_document_datatable" id="customer_document_datatable"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
-                                                        <div class="m-portlet__head-tools" style="margin-top:-30px;margin-left:15px">
-
-                                                            <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
-                                                                <li class="nav-item m-tabs__item">
-                                                                    <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_4" role="tab">
-                                                                                                    <i class="la la-cog"></i> Phone
-                                                                                                </a>
-                                                                </li>
-                                                                <li class="nav-item m-tabs__item">
-                                                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_5" role="tab">
-                                                                                                        <i class="la la-bell-o"></i> Email
-                                                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-item m-tabs__item">
-                                                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_6" role="tab">
-                                                                                                    <i class="la la-bell-o"></i> Fax
-                                                                                                </a>
-                                                                </li>
-                                                                <li class="nav-item m-tabs__item">
-                                                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_7" role="tab">
-                                                                                                <i class="la la-bell-o"></i> Website
-                                                                                            </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active" id="m_tabs_6_4" role="tabpanel">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                    <div class="customer_phone_datatable" id="customer_phone_datatable"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" id="m_tabs_6_5" role="tabpanel">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                    <div class="customer_email_datatable" id="customer_email_datatable"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" id="m_tabs_6_6" role="tabpanel">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                    <div class="customer_fax_datatable" id="customer_fax_datatable"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane" id="m_tabs_6_7" role="tabpanel">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                    <div class="customer_website_datatable" id="customer_website_datatable"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
+                                                    <div class="customer_address_datatable" id="customer_address_datatable"></div>
                                                 </div>
                                             </div>
+                                            <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="customer_document_datatable" id="customer_document_datatable"></div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
+                                                <div class="m-portlet__head-tools" style="margin-top:-30px;margin-left:15px">
+
+                                                    <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
+                                                        <li class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_4" role="tab">
+                                                                                            <i class="la la-cog"></i> Phone
+                                                                                        </a>
+                                                        </li>
+                                                        <li class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_5" role="tab">
+                                                                                                <i class="la la-bell-o"></i> Email
+                                                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_6" role="tab">
+                                                                                            <i class="la la-bell-o"></i> Fax
+                                                                                        </a>
+                                                        </li>
+                                                        <li class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_7" role="tab">
+                                                                                        <i class="la la-bell-o"></i> Website
+                                                                                    </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="m_tabs_6_4" role="tabpanel">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="customer_phone_datatable" id="customer_phone_datatable"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="m_tabs_6_5" role="tabpanel">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="customer_email_datatable" id="customer_email_datatable"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="m_tabs_6_6" role="tabpanel">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="customer_fax_datatable" id="customer_fax_datatable"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="m_tabs_6_7" role="tabpanel">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="customer_website_datatable" id="customer_website_datatable"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
