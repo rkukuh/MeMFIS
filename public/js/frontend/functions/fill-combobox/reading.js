@@ -9,7 +9,7 @@ $(document).ready(function () {
                 $('select[name="reading"]').empty();
 
                 $('select[name="reading"]').append(
-                    '<option> Select a Reading Level</option>'
+                    '<option value=""> Select a Reading Level</option>'
                 );
 
                 $.each(data, function (key, value) {

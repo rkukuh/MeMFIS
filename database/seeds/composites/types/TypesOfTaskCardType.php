@@ -22,13 +22,13 @@ class TypesOfTaskCardType extends Seeder
 
         Type::create([
             'code' => 'sip',
-            'name' => 'Structure Inspection Program',
+            'name' => 'SIP',
             'of'  => 'taskcard-type-routine',
         ]);
 
         Type::create([
             'code' => 'cpcp',
-            'name' => 'Corrotion Prevention and Control Programs',
+            'name' => 'CPCP',
             'of'  => 'taskcard-type-routine',
         ]);
 
@@ -36,49 +36,49 @@ class TypesOfTaskCardType extends Seeder
 
         Type::create([
             'code' => 'ad',
-            'name' => 'Airworthiness Directive',
+            'name' => 'AD',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'sb',
-            'name' => 'Service Bulletin',
+            'name' => 'SB',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'eo',
-            'name' => 'Engineering Order',
+            'name' => 'EO',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'ea',
-            'name' => 'Engineering Authorization',
+            'name' => 'EA',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'htcrr',
-            'name' => 'Hard Time / Component Remove and Replacement',
+            'name' => 'HT/CRR',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'si',
-            'name' => 'Special Instruction',
+            'name' => 'SI',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'cmr',
-            'name' => 'Certification Maintenance Requirements',
+            'name' => 'CMR',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'awl',
-            'name' => 'Airworthiness Limitation',
+            'name' => 'AWL',
             'of'  => 'taskcard-type-non-routine',
         ]);
     }

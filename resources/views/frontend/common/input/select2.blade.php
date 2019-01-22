@@ -16,5 +16,10 @@
 <div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>
 
 <span class="m-form__help">
-    {{ $help_text or '' }}
+    @if (isset($help_text))
+        <small>
+            <i class="fa fa-info-circle m--font-info"></i>
+            {{ $help_text }}
+        </small>
+    @endif
 </span>

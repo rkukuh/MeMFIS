@@ -1,51 +1,180 @@
 let TaskCard = {
     init: function () {
+        $('.tool_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/taskcard/item/',
+                        map: function (raw) {
+                            let dataSet = raw;
 
-        $('#prior_to_date').on('click', function () {
-            $('#date').removeAttr("disabled");
-            $('#hour').prop("disabled", true);
-            $('#cycle').prop("disabled", true);
-        });
-        $('#prior_to_hours').on('click', function () {
-            $('#hour').removeAttr("disabled");
-            $('#date').prop("disabled", true);
-            $('#cycle').prop("disabled", true);
-        });
-        $('#prior_to_cycle').on('click', function () {
-            $('#cycle').removeAttr("disabled");
-            $('#date').prop("disabled", true);
-            $('#hour').prop("disabled", true);
-        });
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
 
-
-        $(document).ready(function () {
-        });
-        $(document).ready(function () {
-            $('select[name="scheduled_priority_id"]').on('change', function () {
-                let recurrence = $(this).val();
-                if (recurrence == 71) {
-                $("#prior_to").removeClass("hidden");
-                $('#prior_to_date').removeAttr("disabled");
-                $('#prior_to_hours').removeAttr("disabled");
-                $('#prior_to_cycle').removeAttr("disabled");
-                } else {
-                    $("#prior_to").addClass("hidden");
-                    $('#prior_to_date').prop('checked', false);
-                    $('#prior_to_date').prop("disabled", true);
-                    $('#prior_to_hours').prop('checked', false);
-                    $('#prior_to_hours').prop("disabled", true);
-                    $('#prior_to_cycle').prop('checked', false);
-                    $('#prior_to_cycle').prop("disabled", true);
-                    $('#date').prop("disabled", true);
-                    $('#hour').prop("disabled", true);
-                    $('#cycle').prop("disabled", true);
-
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            perpage: 5,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
                 }
-            });
+            },
+            columns: [{
+                    field: 'name',
+                    title: 'Item',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'quantity',
+                    title: 'Quantity',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return t.name + ' (' + t.symbol + ')'
+                    }
+                },
+                {
+                    field: 'unit',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return t.name + ' (' + t.symbol + ')'
+                    }
+                },
+                {
+                    field: 'actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    width: 50,
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
+                            'data-item_id="' + t.uuid + '" ' +
+                            'data-unit_id="' + t.uuid + '">' +
+                            '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
+                }
+            ]
         });
-        $(document).ready(function () {
+        $('.item_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/taskcard/item/',
+                        map: function (raw) {
+                            let dataSet = raw;
 
-                });
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            perpage: 5,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [{
+                    field: 'name',
+                    title: 'Item',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'quantity',
+                    title: 'Quantity',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return t.name + ' (' + t.symbol + ')'
+                    }
+                },
+                {
+                    field: 'unit',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return t.name + ' (' + t.symbol + ')'
+                    }
+                },
+                {
+                    field: 'actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    width: 50,
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
+                            'data-item_id="' + t.uuid + '" ' +
+                            'data-unit_id="' + t.uuid + '">' +
+                            '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
+                }
+            ]
+        });
+
 
         $(document).ready(function () {
 
@@ -81,7 +210,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/taskcard-si/'+taskcard_uuid+'/',
+                url: '/taskcard-si/' + taskcard_uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     title: title,
@@ -147,8 +276,8 @@ let TaskCard = {
         // Category
 
     }
-  };
+};
 
-  jQuery(document).ready(function () {
+jQuery(document).ready(function () {
     TaskCard.init();
-  });
+});

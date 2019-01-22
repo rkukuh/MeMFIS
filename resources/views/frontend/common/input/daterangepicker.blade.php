@@ -4,4 +4,4 @@
     id="{{ $id or '' }}"
     name="{{ $name or '' }}"
     readonly placeholder="{{ $placeholder or 'Select date' }}"
-    />
+/>

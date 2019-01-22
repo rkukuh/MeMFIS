@@ -56,7 +56,10 @@ class TaskCardRoutineController extends Controller
     public function store(TaskCardRoutineStore $request)
     {
         if ($taskcard = TaskCard::create($request->all())) {
-            // $item->categories()->attach($request->category);
+            $taskcard->aircrafts()->attach($request->applicability_airplane);
+            $taskcard->accesses()->attach($request->access);
+            $taskcard->zones()->attach($request->zone);
+            $taskcard->related_to()->attach($request->relationship);
 
             return response()->json($taskcard);
         }
@@ -84,9 +87,15 @@ class TaskCardRoutineController extends Controller
      */
     public function edit($taskCard)
     {
+
         //TODO Data binding not work
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
         // dd($taskCard);
+        // $aircraft = array();
+        // foreach($item->tags as $i => $item_tag){
+        //     $aircrafts[$i] =  $item_tag->name;
+        // }
+
         return view('frontend.taskcard.routine.edit', [
             'taskcard' => $taskCard,
             'types' => $this->type,

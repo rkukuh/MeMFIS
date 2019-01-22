@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
-                                    Special instruction Taskcard
+                                    Special Instruction Task Card
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Special instruction Number @include('frontend.common.label.required')
+                                                    Special Instruction Number @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.text')
@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    (A/C Type) @include('frontend.common.label.required')
+                                                    A/C Type @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
@@ -103,6 +103,7 @@
                                                     @slot('id', 'applicability_airplane')
                                                     @slot('name', 'applicability_airplane')
                                                     @slot('multiple','multiple')
+                                                    @slot('help_text','You can chose multiple value')
                                                     @slot('id_error', 'applicability-airplane')
                                                 @endcomponent
 
@@ -164,7 +165,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
+                                                    @slot('rows', '20')
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')
@@ -206,8 +207,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
-                                    Required Tool
+                                    Tool Requireds
                                 </h3>
                             </div>
                         </div>
@@ -215,17 +218,22 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
+                                <div class="row align-tools-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Tool Taskcard')
+                                            @slot('id', 'tool_taskcard')
+                                            @slot('data_target', '#modal_tool')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
+
+                            @include('frontend.taskcard.nonroutine.si.tool.modal')
+
+                            <div class="tool_datatable" id="tool_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -237,8 +245,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
-                                    Required Material
+                                    Material Requireds
                                 </h3>
                             </div>
                         </div>
@@ -248,15 +258,20 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Item Taskcard')
+                                            @slot('id', 'item_taskcard')
+                                            @slot('data_target', '#modal_item')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
+
+                            @include('frontend.taskcard.nonroutine.si.item.modal')
+
+                            <div class="item_datatable" id="item_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -315,6 +330,11 @@
     <script>
         let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
 

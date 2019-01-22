@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="scheduled_priority_id"]').empty();
 
                 $('select[name="scheduled_priority_id"]').append(
-                    '<option> Select a Scheduled Priority</option>'
+                    '<option value=""> Select a Scheduled Priority</option>'
                 );
 
                 $.each(data, function (key, value) {

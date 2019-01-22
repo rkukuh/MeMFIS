@@ -204,22 +204,6 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        A/C Serial Number @include('frontend.common.label.required')
-                                                    </label>
-
-                                                    @component('frontend.common.input.text')
-                                                        @slot('text', 'Serial Number')
-                                                        @slot('id', 'serial-number')
-                                                        @slot('name', 'serial-number')
-                                                        @slot('id_error', 'serial-number')
-                                                    @endcomponent
-
-                                                </div>
-
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
                                                         A/C Type @include('frontend.common.label.required')
                                                     </label>
 
@@ -230,6 +214,8 @@
                                                         @slot('id_error', 'applicability-airplane')
                                                     @endcomponent
                                                 </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         A/C Reg @include('frontend.common.label.required')
@@ -241,6 +227,19 @@
                                                         @slot('name', 'reg')
                                                         @slot('id_error', 'reg')
                                                     @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        A/C Serial Number @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', 'Serial Number')
+                                                        @slot('id', 'serial-number')
+                                                        @slot('name', 'serial-number')
+                                                        @slot('id_error', 'serial-number')
+                                                    @endcomponent
+
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -269,10 +268,23 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                    @component('frontend.common.buttons.create-new')
-                                                        @slot('text', 'HM Project')
-                                                        @slot('data_target', '#modal_project')
-                                                    @endcomponent
+                                                    <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                        <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Workpackage</span>
+                                                            </span>
+                                                        </button>
+
+                                                        <div class="m-btn-group btn-group" role="group">
+                                                        <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Blank Workpackage</span>
+                                                            </span>
+                                                        </button>
+                                                        </div>
+                                                    </div>
 
                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                 </div>

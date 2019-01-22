@@ -1,19 +1,19 @@
 $(document).ready(function () {
-    language = function () {
+    material = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-items/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
 
-                $('select[name="language"]').empty();
+                $('select[name="material"]').empty();
 
-                $('select[name="language"]').append(
-                    '<option value=""> Select a Language</option>'
+                $('select[name="material"]').append(
+                    '<option value=""> Select a Material</option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="language"]').append(
+                    $('select[name="material"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
@@ -21,5 +21,5 @@ $(document).ready(function () {
         });
     };
 
-    language();
+    material();
 });

@@ -9,7 +9,7 @@ $(document).ready(function () {
                 $('select[name="applicability_engine"]').empty();
 
                 $('select[name="applicability_engine"]').append(
-                    '<option> Select a Applicability Engine</option>'
+                    '<option value=""> Select a Applicability Engine</option>'
                 );
 
                 $.each(data, function (key, value) {

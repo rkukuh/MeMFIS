@@ -18,12 +18,35 @@ $factory->define(TaskCard::class, function (Faker $faker) {
     return [
         'number' => $number,
         'title' => 'TaskCard Dummy #' . $number,
-        'type_id' => $faker->randomElement([
-            Type::ofTaskCardTypeRoutine()->get()->random()->id,
-            Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
-        ]),
-        'task_type_id' => Type::ofTaskCardTask()->get()->random()->id,
-        'work_area' => Type::ofWorkArea()->get()->random()->id,
+        'type_id' => function () use ($faker) {
+            if (Type::ofTaskCardTypeRoutine()->count()
+                || Type::ofTaskCardTypeNonRoutine()->count())
+            {
+                return $faker->randomElement([
+                    Type::ofTaskCardTypeRoutine()->get()->random()->id,
+                    Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
+                ]);
+            }
+
+            return $faker->randomElement([
+                factory(Type::class)->states('taskcard-type-routine')->create()->id,
+                factory(Type::class)->states('taskcard-type-non-routine')->create()->id,
+            ]);
+        },
+        'task_type_id' => function () {
+            if (Type::ofTaskCardTask()->count()) {
+                Type::ofTaskCardTask()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('taskcard-task')->create()->id;
+        },
+        'work_area' => function () {
+            if (Type::ofWorkArea()->count()) {
+                return Type::ofWorkArea()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('work-area')->create()->id;
+        },
         'manhour' => $faker->randomFloat(2, 0, 9999),
         'helper_quantity' => $faker->randomElement([null, rand(1, 10)]),
         'is_rii' => $faker->boolean,
@@ -140,11 +163,17 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
 
 });
 
-/** CALLBACKS */
+/** CALLBACKS for General */
 
 $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
-    $aircraft = Aircraft::get()->random();
+    $aircraft = null;
+
+    if (Aircraft::count()) {
+        $aircraft = Aircraft::get()->random();
+    } else {
+        $aircraft = factory(Aircraft::class)->create();
+    }
 
     $taskcard->aircrafts()->save($aircraft);
 
@@ -157,6 +186,8 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
     }
 
 });
+
+/** CALLBACKS for States */
 
 $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $faker) {
 

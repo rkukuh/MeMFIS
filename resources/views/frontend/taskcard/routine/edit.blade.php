@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
-                                    Routine Taskcard
+                                    Routine Task Card
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Taskcard Number @include('frontend.common.label.required')
+                                                Task Card Number @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
@@ -69,7 +69,7 @@
                                                 Type @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="taskcard_routine_type" name="taskcard_routine_type" class="form-control m-select2">
+                                            <select id="taskcard_routine_type" name="taskcard_routine_type" class="form-control m-select2" style="width:100%">
                                                 <option value="">
                                                     &mdash; Select a Taskcard Routine Type &mdash;
                                                 </option>
@@ -108,8 +108,28 @@
                                                 @slot('id', 'applicability_airplane')
                                                 @slot('name', 'applicability_airplane')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                                 @slot('id_error', 'applicability-airplane')
                                             @endcomponent
+
+                                            {{-- <select id="tag" name="tag" class="form-control m-select2" multiple>
+                                                @if ($item->tags->isEmpty())
+                                                    @foreach ($tags as $tag)
+                                                        <option value="{{ $tag->id }}">
+                                                            {{ $tag->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($tags as $tag)
+                                                        @foreach ($item->tags as $item_tag)
+                                                            <option value="{{ $tag->id }}"
+                                                                @if ($tag->name == $item_tag->name) selected @endif>
+                                                                {{ $tag->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endforeach
+                                                @endif
+                                            </select> --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -118,7 +138,7 @@
                                                 Task @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="task_type_id" name="task_type_id" class="form-control m-select2">
+                                            <select id="task_type_id" name="task_type_id" class="form-control m-select2" style="width:100%">
                                                 <option value="">
                                                     &mdash; Select a Taskcard &mdash;
                                                 </option>
@@ -188,6 +208,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -206,7 +227,7 @@
                                                 Work Area @include('frontend.common.label.optional')
                                             </label>
 
-                                            <select id="work_area" name="work_area" class="form-control m-select2">
+                                            <select id="work_area" name="work_area" class="form-control m-select2" style="width:100%">
                                                 <option value="">
                                                     &mdash; Select a Work Area &mdash;
                                                 </option>
@@ -234,6 +255,7 @@
                                                 @slot('name', 'access')
                                                 @slot('id_error', 'access')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
 
                                         </div>
@@ -248,6 +270,7 @@
                                                 @slot('name', 'zone')
                                                 @slot('id_error', 'zone')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
 
                                         </div>
@@ -277,6 +300,7 @@
                                                 @slot('name', 'relationship')
                                                 @slot('multiple','multiple')
                                                 @slot('id_error', 'taskcard-relationship')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -285,14 +309,24 @@
                                             <label class="form-control-label">
                                                 Version @include('frontend.common.label.optional')
                                             </label>
+                                            @php
+                                                $versions = json_decode($taskcard->version, TRUE);
+                                            @endphp
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'version')
-                                                @slot('text', 'Version')
-                                                @slot('name', 'version')
-                                                @slot('multiple','multiple')
-                                                @slot('id_error', 'version')
-                                            @endcomponent
+                                            <select id="version" name="version" class="form-control m-select2" multiple style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Version &mdash;
+                                                </option>
+
+                                                @if (isset($versions))
+                                                    @foreach ($versions as $version)
+                                                        <option selected>
+                                                            {{ $version }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+
+                                            </select>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -372,7 +406,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Tool Required
+                                    Tool Requireds
                                 </h3>
                             </div>
                         </div>
@@ -410,7 +444,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Required
+                                    Material Requireds
                                 </h3>
                             </div>
                         </div>
@@ -448,7 +482,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Threshold Taskcard
+                                    Threshold Taskcards
                                 </h3>
                             </div>
                         </div>
@@ -486,7 +520,7 @@
                                         @include('frontend.common.label.datalist')
 
                                         <h3 class="m-portlet__head-text">
-                                            Repeat Taskcard
+                                            Repeat Taskcards
                                         </h3>
                                     </div>
                                 </div>
@@ -570,6 +604,17 @@
         let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+
+
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
@@ -610,5 +655,5 @@
 
     <script src="{{ asset('js/frontend/taskcard/routine/edit.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/routine/form-reset.js') }}"></script>
 @endpush

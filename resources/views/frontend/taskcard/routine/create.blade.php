@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Routine Taskcard
+                                    Routine Task Card
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Taskcard Number @include('frontend.common.label.required')
+                                                Task Card Number @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
@@ -99,6 +99,7 @@
                                                 @slot('id', 'applicability_airplane')
                                                 @slot('name', 'applicability_airplane')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                                 @slot('id_error', 'applicability-airplane')
                                             @endcomponent
                                         </div>
@@ -143,6 +144,7 @@
                                                         @slot('id', 'manhour')
                                                         @slot('text', 'Manhour')
                                                         @slot('name', 'manhour')
+                                                        @slot('id_error', 'manhour')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -155,6 +157,7 @@
                                                         @slot('text', 'Performa')
                                                         @slot('name', 'performa')
                                                         @slot('value', '1')
+                                                        @slot('id_error', 'performa')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -168,6 +171,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -206,6 +210,7 @@
                                                 @slot('name', 'access')
                                                 @slot('id_error', 'access')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
 
                                         </div>
@@ -220,6 +225,7 @@
                                                 @slot('name', 'zone')
                                                 @slot('id_error', 'zone')
                                                 @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
 
                                         </div>
@@ -248,6 +254,7 @@
                                                 @slot('name', 'relationship')
                                                 @slot('multiple','multiple')
                                                 @slot('id_error', 'taskcard-relationship')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -263,6 +270,7 @@
                                                 @slot('name', 'version')
                                                 @slot('multiple','multiple')
                                                 @slot('id_error', 'version')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -339,7 +347,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Tool
+                                    Required Tools
                                 </h3>
                             </div>
                         </div>
@@ -370,7 +378,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Material
+                                    Required Materials
                                 </h3>
                             </div>
                         </div>
@@ -401,7 +409,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Threshold
+                                    Thresholds
                                 </h3>
                             </div>
                         </div>
@@ -432,7 +440,7 @@
                                     </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Repeat
+                                    Repeats
                                 </h3>
                             </div>
                         </div>
@@ -480,31 +488,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script>
-        var autoExpand = function (field) {
-
-        // Reset field height
-        field.style.height = 'inherit';
-
-        // Get the computed styles for the element
-        var computed = window.getComputedStyle(field);
-
-        // Calculate the height
-        var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
-                    + parseInt(computed.getPropertyValue('padding-top'), 10)
-                    + field.scrollHeight
-                    + parseInt(computed.getPropertyValue('padding-bottom'), 10)
-                    + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
-
-        field.style.height = height + 'px';
-
-        };
-
-        document.addEventListener('input', function (event) {
-        if (event.target.tagName.toLowerCase() !== 'textarea') return;
-        autoExpand(event.target);
-        }, false);
-    </script>
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
@@ -545,5 +528,5 @@
 
     <script src="{{ asset('js/frontend/taskcard/routine/create.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/routine/form-reset.js') }}"></script>
 @endpush

@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="threshold_type"]').empty();
 
                 $('select[name="threshold_type"]').append(
-                    '<option> Select a Threshold Type</option>'
+                    '<option value=""> Select a Threshold Type</option>'
                 );
 
                 $.each(data, function (key, value) {

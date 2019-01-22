@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Engineering Order Taskcard
+                                    Engineering Order Task Card
                                 </h3>
                             </div>
                         </div>
@@ -100,6 +100,7 @@
                                                 @slot('name', 'relationship')
                                                 @slot('multiple','multiple')
                                                 @slot('id_error', 'taskcard-relationship')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -129,6 +130,7 @@
                                                 @slot('name', 'applicability_airplane')
                                                 @slot('multiple','multiple')
                                                 @slot('id_error', 'applicability-airplane')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
 
                                         </div>
@@ -158,8 +160,8 @@
                                                 @slot('name', 'taskcard')
                                             @endcomponent
                                         </div>
-
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">

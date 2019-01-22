@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Special instruction Taskcard
+                                    Special Instruction Task Card
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Special instruction Number @include('frontend.common.label.required')
+                                                    Special Instruction Number @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.text')
@@ -93,7 +93,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    (A/C Type) @include('frontend.common.label.required')
+                                                    A/C Type @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
@@ -101,6 +101,7 @@
                                                     @slot('id', 'applicability_airplane')
                                                     @slot('name', 'applicability_airplane')
                                                     @slot('multiple','multiple')
+                                                    @slot('help_text','You can chose multiple value')
                                                     @slot('id_error', 'applicability-airplane')
                                                 @endcomponent
 
@@ -153,7 +154,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
+                                                    @slot('rows', '20')
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')
@@ -195,7 +196,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Tool
+                                    Required Tools
                                 </h3>
                             </div>
                         </div>
@@ -226,7 +227,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Material
+                                    Required Materials
                                 </h3>
                             </div>
                         </div>

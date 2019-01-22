@@ -1,19 +1,18 @@
 $(document).ready(function () {
-    language = function () {
+    unittools = function () {
         $.ajax({
-            url: '/get-categories-item/',
+            url: '/get-units/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
+                $('select[name="unit_tool"]').empty();
 
-                $('select[name="language"]').empty();
-
-                $('select[name="language"]').append(
-                    '<option value=""> Select a Language</option>'
+                $('select[name="unit_tool"]').append(
+                    '<option value=""> Select a Unit</option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="language"]').append(
+                    $('select[name="unit_tool"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
@@ -21,5 +20,5 @@ $(document).ready(function () {
         });
     };
 
-    language();
+    unittools();
 });
