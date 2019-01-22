@@ -315,14 +315,17 @@
 
                                             <select id="version" name="version" class="form-control m-select2" multiple style="width:100%">
                                                 <option value="">
-                                                    &mdash; Select a Work Area &mdash;
+                                                    &mdash; Select a Version &mdash;
                                                 </option>
 
-                                                @foreach ($versions as $version)
-                                                    <option selected>
-                                                        {{ $version }}
-                                                    </option>
-                                                @endforeach
+                                                {{-- @if (isset($versions)) --}}
+                                                    @foreach ($versions as $version)
+                                                        <option selected>
+                                                            {{ $version }}
+                                                        </option>
+                                                    @endforeach
+                                                {{-- @endif --}}
+
                                             </select>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
