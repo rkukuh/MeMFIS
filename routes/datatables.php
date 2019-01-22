@@ -182,8 +182,8 @@ Route::name('datatables.')->group(function () {
                 // TODO: with (aircraft) Zone
 
                 /** Transaction */
-                Route::get('/{taskcard}/tools','TaskCardRoutineItemsDatatables@index')->name('tools.index');
-                Route::get('/{taskcard}/materials','TaskCardRoutineItemsDatatables@index')->name('materials.index');
+                Route::get('/{taskcard}/tools','TaskCardRoutineItemsDatatables@tool')->name('tools.index');
+                Route::get('/{taskcard}/materials','TaskCardRoutineItemsDatatables@material')->name('materials.index');
                 Route::get('/{taskcard}/aircrafts','TaskCardRoutineAircraftsDatatables@index')->name('aircrafts.index');
                 Route::get('/{taskcard}/repeats','TaskCardRoutineMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeats');
                 Route::get('/{taskcard}/thresholds','TaskCardRoutineMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.thresholds');
