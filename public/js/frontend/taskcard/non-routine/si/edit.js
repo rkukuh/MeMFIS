@@ -258,7 +258,7 @@ let TaskCard = {
                         document.getElementById('work_area').value = work_area;
                         document.getElementById('manhour').value = manhour;
                         document.getElementById('helper_quantity').value = helper_quantity;
-                        document.getElementById('description').value = description;
+                        document.getElementById('instruction').value = instruction;
 
                     } else {
                         //    taskcard_reset();
