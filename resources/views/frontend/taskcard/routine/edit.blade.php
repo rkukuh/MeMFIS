@@ -318,13 +318,13 @@
                                                     &mdash; Select a Version &mdash;
                                                 </option>
 
-                                                {{-- @if (isset($versions)) --}}
+                                                @if (isset($versions))
                                                     @foreach ($versions as $version)
                                                         <option selected>
                                                             {{ $version }}
                                                         </option>
                                                     @endforeach
-                                                {{-- @endif --}}
+                                                @endif
 
                                             </select>
                                         </div>
