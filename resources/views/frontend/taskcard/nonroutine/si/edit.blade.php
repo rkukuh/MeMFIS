@@ -207,8 +207,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
-                                    Required Tools
+                                    Tool Requireds
                                 </h3>
                             </div>
                         </div>
@@ -216,17 +218,22 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
+                                <div class="row align-tools-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Tool Taskcard')
+                                            @slot('id', 'tool_taskcard')
+                                            @slot('data_target', '#modal_tool')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
+
+                            @include('frontend.taskcard.nonroutine.si.tool.modal')
+
+                            <div class="tool_datatable" id="tool_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -238,8 +245,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
-                                    Required Materials
+                                    Material Requireds
                                 </h3>
                             </div>
                         </div>
@@ -249,15 +258,20 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('attribute', 'disabled')
+                                            @slot('text', 'Item Taskcard')
+                                            @slot('id', 'item_taskcard')
+                                            @slot('data_target', '#modal_item')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
+
+                            @include('frontend.taskcard.nonroutine.si.item.modal')
+
+                            <div class="item_datatable" id="item_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -316,6 +330,11 @@
     <script>
         let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
+
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
 
