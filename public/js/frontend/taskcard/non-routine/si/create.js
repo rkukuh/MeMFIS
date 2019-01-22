@@ -19,7 +19,7 @@ let TaskCard = {
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
             let helper_quantity = $('input[name=helper_quantity]').val();
-            let description = $('#description').val();
+            let instruction = $('#instruction').val();
 
             if ($('#applicability_airplane :selected').length > 0) {
                 var applicability_airplanes = [];
@@ -43,7 +43,7 @@ let TaskCard = {
                     work_area: work_area,
                     manhour: manhour,
                     helper_quantity: helper_quantity,
-                    description: description,
+                    description: instruction,
 
                     otr_certification: otr_certification,
                     applicability_airplane: applicability_airplane,
@@ -72,7 +72,7 @@ let TaskCard = {
                         }
 
                         if (data.errors.description) {
-                            $('#description-error').html(data.errors.description[0]);
+                            $('#instruction-error').html(data.errors.description[0]);
                         }
 
 
@@ -83,7 +83,7 @@ let TaskCard = {
                         document.getElementById('work_area').value = work_area;
                         document.getElementById('manhour').value = manhour;
                         document.getElementById('helper_quantity').value = helper_quantity;
-                        document.getElementById('description').value = description;
+                        document.getElementById('instruction').value = instruction;
 
                     } else {
                         toastr.success('Taskcard has been created.', 'Success', {

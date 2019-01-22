@@ -50,52 +50,6 @@ let TaskCard = {
             let effectivity = $('input[name=effectivity]').val();
             let description = $('#description').val();
 
-
-            if ($('#applicability_airplane :selected').length > 0) {
-                let applicability_airplanes = [];
-
-                $('#applicability_airplane :selected').each(function (i, selected) {
-                    applicability_airplanes[i] = $(selected).val();
-                });
-            }
-
-
-            if ($('#access :selected').length > 0) {
-                let accesses = [];
-
-                $('#access :selected').each(function (i, selected) {
-                    accesses[i] = $(selected).val();
-                });
-            }
-
-
-            if ($('#zone :selected').length > 0) {
-                let zones = [];
-
-                $('#zone :selected').each(function (i, selected) {
-                    zones[i] = $(selected).val();
-                });
-            }
-
-
-            if ($('#relationship :selected').length > 0) {
-                let relationships = [];
-
-                $('#relationship :selected').each(function (i, selected) {
-                    relationships[i] = $(selected).val();
-                });
-            }
-
-
-            if ($('#version :selected').length > 0) {
-                let versions = [];
-
-                $('#version :selected').each(function (i, selected) {
-                    versions[i] = $(selected).val();
-                });
-            }
-
-
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {

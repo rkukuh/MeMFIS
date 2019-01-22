@@ -155,9 +155,10 @@
 
                                                 @component('frontend.common.input.textarea')
                                                     @slot('rows', '20')
-                                                    @slot('id', 'description')
-                                                    @slot('name', 'description')
-                                                    @slot('text', 'Description')
+                                                    @slot('id', 'instruction')
+                                                    @slot('name', 'instruction')
+                                                    @slot('text', 'instruction')
+                                                    @slot('id_error', 'instruction')
                                                 @endcomponent
                                             </div>
                                         </div>
