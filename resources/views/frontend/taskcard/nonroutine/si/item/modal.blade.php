@@ -53,10 +53,10 @@
                                         </label>
 
                                         @component('frontend.common.input.select2')
-                                            @slot('id', 'item_unit_id')
+                                            @slot('id', 'unit_material')
                                             @slot('text', 'Unit')
-                                            @slot('name', 'item_unit_id')
-                                            @slot('id_error', 'unit')
+                                            @slot('name', 'unit_material')
+                                            @slot('id_error', 'unit_material')
                                         @endcomponent
                                     </div>
                             </div>

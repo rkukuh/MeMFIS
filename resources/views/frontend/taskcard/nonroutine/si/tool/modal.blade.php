@@ -52,11 +52,11 @@
                                             Unit @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select')
-                                            @slot('id', 'item_unit_id')
+                                        @component('frontend.common.input.select2')
+                                            @slot('id', 'unit_tool')
                                             @slot('text', 'Unit')
-                                            @slot('name', 'item_unit_id')
-                                            @slot('id_error', 'unit')
+                                            @slot('name', 'unit_tool')
+                                            @slot('id_error', 'unit_tool')
                                         @endcomponent
                                     </div>
                             </div>
