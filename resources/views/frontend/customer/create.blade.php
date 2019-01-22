@@ -63,10 +63,29 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                            <label class="form-control-label">
+                                                Level Customer @include('frontend.common.label.required')
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-7 col-md-7 col-lg-7">
                                             <label class="form-control-label">
                                                 Term of Payment @include('frontend.common.label.required')
                                             </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                            <select id="level_customer" name="level_customer" class="form-control">
+                                                <option value="1">
+                                                    1
+                                                </option>
+                                                <option value="2">
+                                                    2
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-7 col-md-7 col-lg-7">
                                             @component('frontend.common.input.number')
                                                 @slot('text', 'Term of Payment')
                                                 @slot('id', 'term_of_payment')
@@ -75,8 +94,8 @@
                                                 @slot('id_error', 'term_of_payment')
                                                 @slot('width','50%')
                                             @endcomponent
-
                                         </div>
+                                       
                                     </div>
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
