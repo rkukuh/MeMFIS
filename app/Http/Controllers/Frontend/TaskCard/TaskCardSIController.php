@@ -48,7 +48,7 @@ class TaskCardSIController extends Controller
     public function store(TaskCardSIStore $request)
     {
         if ($taskcard = TaskCard::create($request->all())) {
-            // $item->categories()->attach($request->category);
+            $taskcard->aircrafts()->attach($request->applicability_airplane);
 
             return response()->json($taskcard);
         }
