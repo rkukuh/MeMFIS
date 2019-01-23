@@ -138,6 +138,7 @@
                                                     @slot('id', 'manhour')
                                                     @slot('text', 'Manhour')
                                                     @slot('name', 'manhour')
+                                                    @slot('id_error', 'manhour')
                                                     @slot('value', $taskcard->manhour)
                                                 @endcomponent
                                             </div>

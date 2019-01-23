@@ -129,6 +129,7 @@
                                                     @slot('id', 'manhour')
                                                     @slot('text', 'Manhour')
                                                     @slot('name', 'manhour')
+                                                    @slot('id_error', 'manhour')
                                                 @endcomponent
                                             </div>
 
