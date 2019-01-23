@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Datatables\TaskCard;
 
-use App\TaskCard;
+use App\Models\Item;
+use App\Models\TaskCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,7 @@ class TaskCardRoutineItemsDatatables extends Controller
      */
     public function material()
     {
-        $data = $alldata = json_decode(TaskCard::with('items')->get());
+        $data = $alldata = json_decode(Item::with('taskcards')->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -110,8 +111,9 @@ class TaskCardRoutineItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool()
+    public function tool($taskcard)
     {
+        // $data = $alldata = json_decode(TaskCard::with('items')->where('uuid',$taskcard)->get());
         $data = $alldata = json_decode(Item::with('taskcards')->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

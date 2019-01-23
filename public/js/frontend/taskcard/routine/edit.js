@@ -6,7 +6,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard/item/',
+                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -56,9 +56,6 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'unit',
@@ -66,9 +63,6 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'actions',
@@ -93,7 +87,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard/item/',
+                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
