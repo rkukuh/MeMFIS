@@ -465,8 +465,8 @@ let TaskCard = {
                             $('#manhour-error').html(data.errors.manhour[0]);
                         }
 
-                        if (data.errors.performa) {
-                            $('#performa-error').html(data.errors.performa[0]);
+                        if (data.errors.performance_factor) {
+                            $('#performa-error').html(data.errors.performance_factor[0]);
                         }
 
 
