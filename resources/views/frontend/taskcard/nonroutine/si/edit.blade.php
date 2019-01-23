@@ -339,6 +339,10 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
