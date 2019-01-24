@@ -238,15 +238,22 @@
                                                 Access @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Access')
-                                                @slot('id', 'access')
-                                                @slot('name', 'access')
-                                                @slot('id_error', 'access')
-                                                @slot('multiple','multiple')
-                                                @slot('help_text','You can chose multiple value')
-                                            @endcomponent
-
+                                            <select id="access" name="access" class="form-control m-select2" multiple>
+                                                @if ($taskcard->accesses->isEmpty())
+                                                    @foreach ($accesses as $access)
+                                                        <option value="{{ $access->id }}">
+                                                            {{ $access->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($accesses as $access)
+                                                        <option value="{{ $access->id }}"
+                                                            @if(in_array( $access->id ,$access_taskcards)) selected @endif>
+                                                            {{ $access->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -290,14 +297,22 @@
                                                 Related Card @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'relationship')
-                                                @slot('text', 'Taskcard Relationship')
-                                                @slot('name', 'relationship')
-                                                @slot('multiple','multiple')
-                                                @slot('id_error', 'taskcard-relationship')
-                                                @slot('help_text','You can chose multiple value')
-                                            @endcomponent
+                                            <select id="relationship" name="relationship" class="form-control m-select2" multiple>
+                                                @if ($taskcard->related_to->isEmpty())
+                                                    @foreach ($taskcards as $taskcard)
+                                                        <option value="{{ $taskcard->id }}">
+                                                            {{ $taskcard->title }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($taskcards as $taskcard)
+                                                        <option value="{{ $taskcard->id }}"
+                                                            @if(in_array( $taskcard->id ,$relation_taskcards)) selected @endif>
+                                                            {{ $taskcard->title }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -612,10 +627,10 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/access.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/access.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
 
@@ -636,7 +651,6 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-engine.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}

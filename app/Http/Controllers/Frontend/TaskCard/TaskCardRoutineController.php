@@ -17,17 +17,19 @@ class TaskCardRoutineController extends Controller
     protected $type;
     protected $aircraft;
     protected $task;
+    protected $taskcard;
     protected $skill;
     protected $work_area;
-    protected $accesses;
+    protected $access;
     protected $zones;
     protected $relationship;
 
     public function __construct()
     {
         $this->aircraft = Aircraft::get();
-        $this->accesses = Access::get();
+        $this->access = Access::get();
         $this->zones = Zone::get();
+        $this->taskcard = TaskCard::get();
         $this->type = Type::ofTaskCardTypeRoutine()->get();
         $this->work_area = Type::ofWorkArea()->get();
         $this->task = Type::ofTaskCardTask()->get();
@@ -103,11 +105,15 @@ class TaskCardRoutineController extends Controller
         }
         $access_taskcards = array();
         foreach($taskCard->accesses as $i => $access_taskcard){
-            $access_taskcards[$i] =  $access_taskcard->id;
+            $access_taskcards[$i] =  $access_taskcard->pivot->access_id;
         }
         $zone_taskcards = array();
         foreach($taskCard->zones as $i => $zone_taskcard){
             $zone_taskcards[$i] =  $zone_taskcard->id;
+        }
+        $relation_taskcards = array();
+        foreach($taskCard->related_to as $i => $relation_taskcard){
+            $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
         return view('frontend.taskcard.routine.edit', [
@@ -117,10 +123,12 @@ class TaskCardRoutineController extends Controller
             'tasks' => $this->task,
             'aircrafts' => $this->aircraft,
             'aircraft_taskcards' => $aircraft_taskcards,
-            'accesses' => $this->accesses,
+            'accesses' => $this->access,
             'access_taskcards' => $access_taskcards,
             'zones' => $this->zones,
             'zone_taskcards' => $zone_taskcards,
+            'taskcards' => $this->taskcard,
+            'relation_taskcards' => $relation_taskcards,
         ]);
 
     }
