@@ -148,7 +148,10 @@ class TaskCardRoutineController extends Controller
 
         // dd($request->all());
         if ($taskCard->update($request->all())) {
-            // $item->categories()->sync($request->category);
+            $taskCard->aircrafts()->sync($request->applicability_airplane);
+            $taskCard->accesses()->sync($request->access);
+            $taskCard->zones()->sync($request->zone);
+            $taskCard->related_to()->sync($request->relationship);
 
             return response()->json($taskCard);
         }
