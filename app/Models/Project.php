@@ -10,6 +10,7 @@ class Project extends MemfisModel
         'code',
         'title',
         'customer_id',
+        'aircraft_id',
         'no_wo',
         'aircraft_register',
         'aircraft_sn',
@@ -28,5 +29,18 @@ class Project extends MemfisModel
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    /**
+     * One-to-Many: A project must have an aircraft
+     *
+     * This function will retrieve the aircraft of a project.
+     * See: Aircraft's projects() method for the inverse
+     *
+     * @return mixed
+     */
+    public function aircraft()
+    {
+        return $this->belongsTo(Aircraft::class);
     }
 }

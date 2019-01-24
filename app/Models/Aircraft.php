@@ -52,6 +52,19 @@ class Aircraft extends MemfisModel
     }
 
     /**
+     * One-to-Many: A project must have an aircraft
+     *
+     * This function will retrieve all the projects of an aircraft.
+     * See: Project's aircraft() method for the inverse
+     *
+     * @return mixed
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    /**
      * Many-to-Many: A task card may have zero or many aircraft.
      *
      * This function will retrieve all the task cards of an aircraft.
