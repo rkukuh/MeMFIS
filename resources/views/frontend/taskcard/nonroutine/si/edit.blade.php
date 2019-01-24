@@ -114,15 +114,9 @@
                                                         @endforeach
                                                     @endif
                                                 </select>
-
-                                                {{-- @component('frontend.common.input.select2')
-                                                    @slot('text', 'Applicability Airplane')
-                                                    @slot('id', 'applicability_airplane')
-                                                    @slot('name', 'applicability_airplane')
-                                                    @slot('multiple','multiple')
-                                                    @slot('help_text','You can chose multiple value')
-                                                    @slot('id_error', 'applicability-airplane')
-                                                @endcomponent --}}
+                                            @component('frontend.common.label.help-text')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
 
                                             </div>
                                         </div>

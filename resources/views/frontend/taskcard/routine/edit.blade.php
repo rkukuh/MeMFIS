@@ -119,6 +119,9 @@
                                                     @endforeach
                                                 @endif
                                             </select>
+                                            @component('frontend.common.label.help-text')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -254,6 +257,9 @@
                                                     @endforeach
                                                 @endif
                                             </select>
+                                            @component('frontend.common.label.help-text')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -276,6 +282,9 @@
                                                     @endforeach
                                                 @endif
                                             </select>
+                                            @component('frontend.common.label.help-text')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -313,6 +322,9 @@
                                                     @endforeach
                                                 @endif
                                             </select>
+                                            @component('frontend.common.label.help-text')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
