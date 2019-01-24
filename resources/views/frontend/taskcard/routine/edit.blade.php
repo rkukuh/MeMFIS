@@ -253,15 +253,22 @@
                                                 Zone @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'zone')
-                                                @slot('text', 'Zone')
-                                                @slot('name', 'zone')
-                                                @slot('id_error', 'zone')
-                                                @slot('multiple','multiple')
-                                                @slot('help_text','You can chose multiple value')
-                                            @endcomponent
-
+                                            <select id="zone" name="zone" class="form-control m-select2" multiple>
+                                                @if ($taskcard->zones->isEmpty())
+                                                    @foreach ($zones as $zone)
+                                                        <option value="{{ $zone->id }}">
+                                                            {{ $zone->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($zones as $zone)
+                                                        <option value="{{ $zone->id }}"
+                                                            @if(in_array( $zone->id ,$zone_taskcards)) selected @endif>
+                                                            {{ $zone->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

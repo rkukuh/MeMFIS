@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend\TaskCard;
 
 use App\Models\Type;
+use App\Models\Zone;
 use App\Models\Aircraft;
+use App\Models\Access;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -14,17 +16,18 @@ class TaskCardRoutineController extends Controller
 
     protected $type;
     protected $aircraft;
-    protected $applicability_airplane;
     protected $task;
     protected $skill;
     protected $work_area;
-    protected $access;
-    protected $zone;
+    protected $accesses;
+    protected $zones;
     protected $relationship;
 
     public function __construct()
     {
         $this->aircraft = Aircraft::get();
+        $this->accesses = Access::get();
+        $this->zones = Zone::get();
         $this->type = Type::ofTaskCardTypeRoutine()->get();
         $this->work_area = Type::ofWorkArea()->get();
         $this->task = Type::ofTaskCardTask()->get();
@@ -98,6 +101,14 @@ class TaskCardRoutineController extends Controller
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
+        $access_taskcards = array();
+        foreach($taskCard->accesses as $i => $access_taskcard){
+            $access_taskcards[$i] =  $access_taskcard->id;
+        }
+        $zone_taskcards = array();
+        foreach($taskCard->zones as $i => $zone_taskcard){
+            $zone_taskcards[$i] =  $zone_taskcard->id;
+        }
 
         return view('frontend.taskcard.routine.edit', [
             'taskcard' => $taskCard,
@@ -106,6 +117,10 @@ class TaskCardRoutineController extends Controller
             'tasks' => $this->task,
             'aircrafts' => $this->aircraft,
             'aircraft_taskcards' => $aircraft_taskcards,
+            'accesses' => $this->accesses,
+            'access_taskcards' => $access_taskcards,
+            'zones' => $this->zones,
+            'zone_taskcards' => $zone_taskcards,
         ]);
 
     }
