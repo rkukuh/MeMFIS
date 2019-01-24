@@ -12,6 +12,6 @@ class Projects extends Seeder
      */
     public function run()
     {
-        //
+        factory(Project::class, config('memfis.dummies.projects'))->create();
     }
 }
