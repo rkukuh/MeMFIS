@@ -32,3 +32,7 @@ $factory->define(Project::class, function (Faker $faker) {
     ];
 
 });
+
+/** CALLBACKS */
+
+// TODO: Create callback
