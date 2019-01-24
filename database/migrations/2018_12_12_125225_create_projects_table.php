@@ -17,7 +17,10 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
-            $table->string('name');
+            $table->string('title');
+            $table->string('no_wo');
+            $table->string('aircraft_register');
+            $table->string('aircraft_sn');
             $table->timestamps();
             $table->softDeletes();
 
