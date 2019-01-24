@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\TaskCard;
 
 use App\Models\Type;
+use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -12,6 +13,7 @@ class TaskCardRoutineController extends Controller
 {
 
     protected $type;
+    protected $aircraft;
     protected $applicability_airplane;
     protected $task;
     protected $skill;
@@ -22,6 +24,7 @@ class TaskCardRoutineController extends Controller
 
     public function __construct()
     {
+        $this->aircraft = Aircraft::get();
         $this->type = Type::ofTaskCardTypeRoutine()->get();
         $this->work_area = Type::ofWorkArea()->get();
         $this->task = Type::ofTaskCardTask()->get();
@@ -91,16 +94,18 @@ class TaskCardRoutineController extends Controller
         //TODO Data binding not work
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
         // dd($taskCard);
-        // $aircraft = array();
-        // foreach($item->tags as $i => $item_tag){
-        //     $aircrafts[$i] =  $item_tag->name;
-        // }
+        $aircraft_taskcards = array();
+        foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
+            $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
+        }
 
         return view('frontend.taskcard.routine.edit', [
             'taskcard' => $taskCard,
             'types' => $this->type,
             'work_areas' => $this->work_area,
             'tasks' => $this->task,
+            'aircrafts' => $this->aircraft,
+            'aircraft_taskcards' => $aircraft_taskcards,
         ]);
 
     }

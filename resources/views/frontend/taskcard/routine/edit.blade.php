@@ -103,33 +103,22 @@
                                                 Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Applicability Airplane')
-                                                @slot('id', 'applicability_airplane')
-                                                @slot('name', 'applicability_airplane')
-                                                @slot('multiple','multiple')
-                                                @slot('help_text','You can chose multiple value')
-                                                @slot('id_error', 'applicability-airplane')
-                                            @endcomponent
-
-                                            {{-- <select id="tag" name="tag" class="form-control m-select2" multiple>
-                                                @if ($item->tags->isEmpty())
-                                                    @foreach ($tags as $tag)
-                                                        <option value="{{ $tag->id }}">
-                                                            {{ $tag->name }}
+                                            <select id="applicability_airplane" name="applicability_airplane" class="form-control m-select2" multiple>
+                                                @if ($taskcard->aircrafts->isEmpty())
+                                                    @foreach ($aircrafts as $aircraft)
+                                                        <option value="{{ $aircraft->id }}">
+                                                            {{ $aircraft->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
-                                                    @foreach ($tags as $tag)
-                                                        @foreach ($item->tags as $item_tag)
-                                                            <option value="{{ $tag->id }}"
-                                                                @if ($tag->name == $item_tag->name) selected @endif>
-                                                                {{ $tag->name }}
-                                                            </option>
-                                                        @endforeach
+                                                    @foreach ($aircrafts as $aircraft)
+                                                        <option value="{{ $aircraft->id }}"
+                                                            @if(in_array( $aircraft->id ,$aircraft_taskcards)) selected @endif>
+                                                            {{ $aircraft->name }}
+                                                        </option>
                                                     @endforeach
                                                 @endif
-                                            </select> --}}
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -622,16 +611,13 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/access.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/threshold-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/threshold-type.js') }}"></script>
@@ -642,14 +628,11 @@
     <script src="{{ asset('js/frontend/functions/select2/applicability-engine.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-engine.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/aircraft-taskcard.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/aircraft-taskcard.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
