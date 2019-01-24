@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('code');
             $table->string('title');
             $table->unsignedInteger('customer_id');
+            $table->unsignedInteger('aircraft_id');
             $table->string('no_wo');
             $table->string('aircraft_register');
             $table->string('aircraft_sn');
@@ -27,6 +28,11 @@ class CreateProjectsTable extends Migration
 
             $table->foreign('customer_id')
                     ->references('id')->on('customers')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('aircraft_id')
+                    ->references('id')->on('aircrafts')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
