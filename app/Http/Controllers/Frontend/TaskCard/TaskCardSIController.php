@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\TaskCard;
 
 use App\Models\Type;
+use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardSIStore;
@@ -10,12 +11,13 @@ use App\Http\Requests\Frontend\TaskCardSIUpdate;
 
 class TaskCardSIController extends Controller
 {
-    protected $applicability_airplane;
+    protected $aircraft;
     protected $skill;
     protected $work_area;
 
     public function __construct()
     {
+        $this->aircraft = Aircraft::get();
         $this->work_area = Type::ofWorkArea()->get();
     }
 
@@ -78,10 +80,15 @@ class TaskCardSIController extends Controller
     {
         //TODO Data binding not work
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
-        // dd($taskCard);
+        $aircraft_taskcards = array();
+        foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
+            $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
+        }
         return view('frontend.taskcard.nonroutine.si.edit', [
             'taskcard' => $taskCard,
             'work_areas' => $this->work_area,
+            'aircrafts' => $this->aircraft,
+            'aircraft_taskcards' => $aircraft_taskcards,
         ]);
     }
 
@@ -98,9 +105,8 @@ class TaskCardSIController extends Controller
 
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
 
-        // dd($request->all());
         if ($taskCard->update($request->all())) {
-            // $item->categories()->sync($request->category);
+            $taskCard->aircrafts()->sync($request->applicability_airplane);
 
             return response()->json($taskCard);
         }

@@ -352,9 +352,9 @@ let TaskCard = {
             let source = $('input[name=source]').val();
             let relationship = $('#relationship').val();
             let version = $('#version').val();
+            var JsonVersion = JSON.stringify(version);
             let effectivity = $('input[name=effectivity]').val();
             let description = $('#description').val();
-
 
             if ($('#applicability_airplane :selected').length > 0) {
                 let applicability_airplanes = [];
@@ -400,7 +400,6 @@ let TaskCard = {
                 });
             }
 
-
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -425,15 +424,15 @@ let TaskCard = {
                     performance_factor: performa,
                     manhour: manhour,
                     description: description,
-                    // version: version,
+                    version: JsonVersion,
                     effectivity: effectivity,
                     source: source,
 
-                    // applicability_airplane: applicability_airplane,
-                    // otr_certification: otr_certification,
-                    // access: access,
-                    // zone: zone,
-                    // relationship: relationship,
+                    applicability_airplane: applicability_airplane,
+                    otr_certification: otr_certification,
+                    access: access,
+                    zone: zone,
+                    relationship: relationship,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -465,8 +464,8 @@ let TaskCard = {
                             $('#manhour-error').html(data.errors.manhour[0]);
                         }
 
-                        if (data.errors.performa) {
-                            $('#performa-error').html(data.errors.performa[0]);
+                        if (data.errors.performance_factor) {
+                            $('#performa-error').html(data.errors.performance_factor[0]);
                         }
 
 

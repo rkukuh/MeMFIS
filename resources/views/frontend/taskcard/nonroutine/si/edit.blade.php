@@ -98,14 +98,25 @@
                                                     A/C Type @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Applicability Airplane')
-                                                    @slot('id', 'applicability_airplane')
-                                                    @slot('name', 'applicability_airplane')
-                                                    @slot('multiple','multiple')
-                                                    @slot('help_text','You can chose multiple value')
-                                                    @slot('id_error', 'applicability-airplane')
-                                                @endcomponent
+                                                <select id="applicability_airplane" name="applicability_airplane" class="form-control m-select2" multiple>
+                                                    @if ($taskcard->aircrafts->isEmpty())
+                                                        @foreach ($aircrafts as $aircraft)
+                                                            <option value="{{ $aircraft->id }}">
+                                                                {{ $aircraft->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($aircrafts as $aircraft)
+                                                            <option value="{{ $aircraft->id }}"
+                                                                @if(in_array( $aircraft->id ,$aircraft_taskcards)) selected @endif>
+                                                                {{ $aircraft->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            @component('frontend.common.label.help-text')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
 
                                             </div>
                                         </div>
@@ -351,7 +362,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category-taskcard.js') }}"></script>
