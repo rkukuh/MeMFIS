@@ -105,9 +105,8 @@ class TaskCardSIController extends Controller
 
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
 
-        // dd($request->all());
         if ($taskCard->update($request->all())) {
-            // $item->categories()->sync($request->category);
+            $taskCard->aircrafts()->sync($request->applicability_airplane);
 
             return response()->json($taskCard);
         }
