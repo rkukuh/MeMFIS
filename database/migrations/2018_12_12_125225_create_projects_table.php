@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('code');
             $table->string('title');
             $table->unsignedInteger('customer_id');
-            $table->unsignedInteger('aircraft_id');
+            $table->unsignedInteger('aircraft_id')->nullable();
             $table->string('no_wo');
             $table->string('aircraft_register');
             $table->string('aircraft_sn');
