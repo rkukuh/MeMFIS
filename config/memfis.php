@@ -29,5 +29,6 @@ return [
             'si' => 20,
         ],
         'types' => 10,
+        'workpackages' => 20,
     ],
 ];
