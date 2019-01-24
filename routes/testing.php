@@ -23,6 +23,7 @@ Route::name('testing.')->group(function () {
         Route::view('/select2-repeater', 'frontend/testing/select2Repeater')->name('select2-repeater');
         Route::view('/select2-repeater2', 'frontend/testing/repeaterBlank')->name('select2-repeater2');
         Route::view('/datatable', 'frontend/testing/datatable')->name('datatable');
+        Route::view('/welcome', 'frontend/testing/welcome')->name('welcome');
     });
 
 });

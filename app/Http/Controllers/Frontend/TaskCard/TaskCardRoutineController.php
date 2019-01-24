@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Frontend\TaskCard;
 
 use App\Models\Type;
+use App\Models\Zone;
+use App\Models\Aircraft;
+use App\Models\Access;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -12,16 +15,21 @@ class TaskCardRoutineController extends Controller
 {
 
     protected $type;
-    protected $applicability_airplane;
+    protected $aircraft;
     protected $task;
+    protected $taskcard;
     protected $skill;
     protected $work_area;
     protected $access;
-    protected $zone;
+    protected $zones;
     protected $relationship;
 
     public function __construct()
     {
+        $this->aircraft = Aircraft::get();
+        $this->access = Access::get();
+        $this->zones = Zone::get();
+        $this->taskcard = TaskCard::get();
         $this->type = Type::ofTaskCardTypeRoutine()->get();
         $this->work_area = Type::ofWorkArea()->get();
         $this->task = Type::ofTaskCardTask()->get();
@@ -91,16 +99,36 @@ class TaskCardRoutineController extends Controller
         //TODO Data binding not work
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
         // dd($taskCard);
-        // $aircraft = array();
-        // foreach($item->tags as $i => $item_tag){
-        //     $aircrafts[$i] =  $item_tag->name;
-        // }
+        $aircraft_taskcards = array();
+        foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
+            $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
+        }
+        $access_taskcards = array();
+        foreach($taskCard->accesses as $i => $access_taskcard){
+            $access_taskcards[$i] =  $access_taskcard->pivot->access_id;
+        }
+        $zone_taskcards = array();
+        foreach($taskCard->zones as $i => $zone_taskcard){
+            $zone_taskcards[$i] =  $zone_taskcard->id;
+        }
+        $relation_taskcards = array();
+        foreach($taskCard->related_to as $i => $relation_taskcard){
+            $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
+        }
 
         return view('frontend.taskcard.routine.edit', [
             'taskcard' => $taskCard,
             'types' => $this->type,
             'work_areas' => $this->work_area,
             'tasks' => $this->task,
+            'aircrafts' => $this->aircraft,
+            'aircraft_taskcards' => $aircraft_taskcards,
+            'accesses' => $this->access,
+            'access_taskcards' => $access_taskcards,
+            'zones' => $this->zones,
+            'zone_taskcards' => $zone_taskcards,
+            'taskcards' => $this->taskcard,
+            'relation_taskcards' => $relation_taskcards,
         ]);
 
     }
