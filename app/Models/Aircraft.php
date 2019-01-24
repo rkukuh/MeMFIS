@@ -79,6 +79,19 @@ class Aircraft extends MemfisModel
     }
 
     /**
+     * One-to-Many: A workpackage must have an aircraft
+     *
+     * This function will retrieve all the projects of a workpackage.
+     * See: WorkPackage's aircraft() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workpackages()
+    {
+        return $this->hasMany(WorkPackage::class);
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many zones.
      *
      * This function will get all of the aircraft's zones.
