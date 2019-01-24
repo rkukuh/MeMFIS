@@ -19,9 +19,15 @@ class CreateWorkpackagesTable extends Migration
             $table->string('code')->nullable();
             $table->string('title');
             $table->boolean('is_template');
+            $table->unsignedInteger('aircraft_id');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('aircraft_id')
+                    ->references('id')->on('aircrafts')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->index('code');
             $table->index('title');
