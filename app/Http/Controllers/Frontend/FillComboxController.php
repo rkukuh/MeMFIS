@@ -228,7 +228,7 @@ class FillComboxController extends Controller
      */
     public function thresholdType()
     {
-        $threshold_types = Category::ofItem()
+        $threshold_types = Type::ofMaintenanceCycle()
                               ->pluck('name', 'id');
 
         return json_encode($threshold_types);

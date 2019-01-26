@@ -6,7 +6,7 @@ let Project = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/project',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -42,15 +42,17 @@ let Project = {
                     }
                 }
             },
-            columns: [{
-                    field: 'id',
-                    title: '#',
-                    sortable: !1,
-                    width: 40
+            columns: [
+                {
+                    field: 'code',
+                    title: 'Project Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
                 },
                 {
-                    field: 'type',
-                    title: 'type',
+                    field: 'title',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -60,25 +62,36 @@ let Project = {
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'work order',
-                    title: 'Work Order',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
+                    template: function (t) {
+                        return t.customer.name
+                    }
                 },
                 {
                     field: 'aircraft',
                     title: 'Aircraft',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return t.aircraft.name
+                    }
+                },
+                {
+                    field: 'no_wo',
+                    title: 'Work Order Number',
+                    sortable: 'asc',
+                    filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'workpackage',
-                    title: 'WorkPackage',
+                    field: 'aircraft_register',
+                    title: 'Aircraft Register',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
+                    field: 'aircraft_sn',
+                    title: 'Aircraft Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,

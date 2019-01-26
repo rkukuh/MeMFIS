@@ -267,6 +267,25 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** PROJECT */
+
+        Route::name('workpackage.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'project',
+                'namespace' => 'Project'
+
+            ], function () {
+
+                Route::get('/','ProjectDatatables@index')->name('all');
+
+            });
+
+        });
+
+
+
     });
 
 });
