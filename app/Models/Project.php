@@ -19,19 +19,6 @@ class Project extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A project must have a customer
-     *
-     * This function will retrieve the customer of a project.
-     * See: Customer's projects() method for the inverse
-     *
-     * @return mixed
-     */
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
-
-    /**
      * One-to-Many: A project must have an aircraft
      *
      * This function will retrieve the aircraft of a project.
@@ -42,5 +29,18 @@ class Project extends MemfisModel
     public function aircraft()
     {
         return $this->belongsTo(Aircraft::class);
+    }
+
+    /**
+     * One-to-Many: A project must have a customer
+     *
+     * This function will retrieve the customer of a project.
+     * See: Customer's projects() method for the inverse
+     *
+     * @return mixed
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 }
