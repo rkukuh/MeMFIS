@@ -176,6 +176,21 @@ class Item extends MemfisModel implements HasMedia
                     ->withTimestamps();
     }
 
+    /**
+     * Many-to-Many: A work package may have one or many item.
+     *
+     * This function will retrieve all the work packages of an item.
+     * See: WorkPackage's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workpackages()
+    {
+        return $this->belongsToMany(WorkPackage::class, 'item_workpackage', 'item_id', 'workpackage_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
     /***************************************** ACCESSOR ******************************************/
 
     /**

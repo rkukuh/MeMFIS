@@ -31,6 +31,21 @@ class WorkPackage extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A work package may have one or many item.
+     *
+     * This function will retrieve all the items of a work package.
+     * See: Item's workpackages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_workpackage', 'workpackage_id', 'item_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A project may have one or many workpackage.
      *
      * This function will retrieve all the projects of a work package.

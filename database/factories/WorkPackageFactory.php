@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Item;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\WorkPackage;
@@ -41,6 +42,24 @@ $factory->afterCreating(WorkPackage::class, function ($workpackage, $faker) {
         }
 
         $workpackage->taskcards()->save($taskcard);
+    }
+
+    // Item
+
+    if ($faker->boolean) {
+        $item = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            $workpackage->items()->save($item, [
+                'quantity' => rand(1, 10)
+            ]);
+        }
     }
 
 });
