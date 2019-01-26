@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\WorkPackage;
+namespace App\Http\Controllers\Datatables\Project;
 
-use App\Models\WorkPackage;
+use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class WorkPackageDatatables extends Controller
+class ProjectDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class WorkPackageDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(WorkPackage::with('aircraft')->get());
+        $data = $alldata = json_decode(Project::with('aircraft','customer')->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
