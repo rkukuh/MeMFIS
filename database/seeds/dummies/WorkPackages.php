@@ -12,6 +12,6 @@ class WorkPackages extends Seeder
      */
     public function run()
     {
-        //
+        factory(WorkPackage::class, config('memfis.dummies.workpackages'))->create();
     }
 }

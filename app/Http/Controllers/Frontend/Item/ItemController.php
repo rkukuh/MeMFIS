@@ -16,10 +16,12 @@ class ItemController extends Controller
 {
     protected $units;
     protected $categories;
+    protected $manufacturers;
 
     public function __construct()
     {
         $this->units = Unit::ofQuantity()->get();
+        $this->manufacturers = Manufacturer::all();
         $this->categories = Category::ofItem()->get();
     }
 
@@ -80,12 +82,11 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        $manufacturers = Manufacturer::all();
         return view('frontend.item.edit', [
             'item' => $item,
             'units' => $this->units,
             'categories' => $this->categories,
-            'manufacturers' => $manufacturers,
+            'manufacturers' => $this->manufacturers,
         ]);
     }
 

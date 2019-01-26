@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="task_type_id"]').empty();
 
                 $('select[name="task_type_id"]').append(
-                    '<option> Select a Taskcard</option>'
+                    '<option value=""> Select a Taskcard</option>'
                 );
 
                 $.each(data, function (key, value) {

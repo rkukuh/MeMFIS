@@ -9,7 +9,7 @@ $(document).ready(function () {
                 $('select[name="aviation_degree"]').empty();
 
                 $('select[name="aviation_degree"]').append(
-                    '<option> Select a Aviation Degree</option>'
+                    '<option value=""> Select a Aviation Degree</option>'
                 );
 
                 $.each(data, function (key, value) {

@@ -81,11 +81,11 @@
                                                     Ref Project No. @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'name')
-                                                    @slot('text', 'Name')
-                                                    @slot('name', 'name')
-                                                    @slot('id_error', 'name')
+                                                @component('frontend.common.input.select2')
+                                                    @slot('id', 'project')
+                                                    @slot('text', 'project')
+                                                    @slot('name', 'project')
+                                                    @slot('id_error', 'project')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -113,21 +113,6 @@
                                                     @slot('name', 'date-required')
                                                     @slot('id_error', 'date-required')
                                                 @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    A/C Type @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Applicability Airplane')
-                                                    @slot('id', 'applicability_airplane')
-                                                    @slot('name', 'applicability_airplane')
-                                                    @slot('id_error', 'applicability-airplane')
-                                                @endcomponent
-
                                             </div>
                                         </div>
                                     </fieldset>
@@ -160,12 +145,13 @@
                                                                         @slot('data_target', '#modal_item')
                                                                     @endcomponent
 
-                                                                    @include('frontend.common.item.modal')
 
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        @include('frontend.purchase-request.modal')
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -262,8 +248,8 @@
         }, false);
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/manufacturer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/manufacturer.js') }}"></script>

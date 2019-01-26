@@ -29,7 +29,7 @@
     </div>
     <div class="m-content">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -63,10 +63,29 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                            <label class="form-control-label">
+                                                Level Customer @include('frontend.common.label.required')
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-7 col-md-7 col-lg-7">
                                             <label class="form-control-label">
                                                 Term of Payment @include('frontend.common.label.required')
                                             </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                            <select id="level_customer" name="level_customer" class="form-control">
+                                                <option value="1">
+                                                    1
+                                                </option>
+                                                <option value="2">
+                                                    2
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-7 col-md-7 col-lg-7">
                                             @component('frontend.common.input.number')
                                                 @slot('text', 'Term of Payment')
                                                 @slot('id', 'term_of_payment')
@@ -75,13 +94,13 @@
                                                 @slot('id_error', 'term_of_payment')
                                                 @slot('width','50%')
                                             @endcomponent
-
                                         </div>
+                                       
                                     </div>
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
                                                         <label class="form-control-label">
                                                             Phone @include('frontend.common.label.optional')
                                                         </label>
@@ -104,7 +123,7 @@
                                                     <div data-repeater-list="group-phone">
                                                         <div data-repeater-item>
                                                             <div class="form-group m-form__group row">
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
                                                                 @component('frontend.common.input.text')
                                                                     @slot('name', 'phone')
                                                                     @slot('text', 'Phone')
@@ -145,7 +164,7 @@
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
                                                         <label class="form-control-label">
                                                             Fax @include('frontend.common.label.optional')
                                                         </label>
@@ -163,7 +182,7 @@
                                                     <div data-repeater-list="group-fax">
                                                         <div data-repeater-item>
                                                             <div class="form-group m-form__group row">
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
                                                                     @component('frontend.common.input.text')
                                                                         @slot('text', 'fax')
                                                                         @slot('name', 'fax')
@@ -198,7 +217,7 @@
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
                                                         <label class="form-control-label">
                                                             Website @include('frontend.common.label.optional')
                                                         </label>
@@ -216,13 +235,13 @@
                                                     <div data-repeater-list="group-website">
                                                         <div data-repeater-item>
                                                             <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
                                                                     @component('frontend.common.input.text')
                                                                         @slot('text', 'website')
                                                                         @slot('name', 'website')
                                                                     @endcomponent
                                                                 </div>
-                                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
                                                                         <select id="type_website" name="type_website" class="form-control">
                                                                                 <option value="">
                                                                                     Select a Website Type
@@ -267,13 +286,15 @@
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
                                                         <label class="form-control-label">
                                                             Email @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        Type.
+                                                        <label class="form-control-label">
+                                                            Type.
+                                                        </label>
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
                                                     </div>
@@ -283,7 +304,7 @@
                                                     <div data-repeater-list="group-email">
                                                         <div data-repeater-item>
                                                             <div class="form-group m-form__group row">
-                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
                                                                     @component('frontend.common.input.email')
                                                                         @slot('name', 'email')
                                                                         @slot('placeholder', 'Email')
@@ -318,7 +339,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-5 col-md-5 col-lg-5">
                                                     <label class="form-control-label">
                                                         Document @include('frontend.common.label.optional')
                                                     </label>
@@ -336,13 +357,13 @@
                                                 <div data-repeater-list="group-document">
                                                     <div data-repeater-item>
                                                         <div class="form-group m-form__group row">
-                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
                                                                 @component('frontend.common.input.upload')
                                                                     @slot('label', 'document')
                                                                     @slot('name', 'document')
                                                                 @endcomponent
                                                             </div>
-                                                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
                                                                 <select id="type_website" name="type_website" class="form-control">
                                                                     <option value="">
                                                                         Select a Document Type
@@ -416,7 +437,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">

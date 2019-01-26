@@ -24,7 +24,7 @@ class TaskCard extends MemfisModel
         'performance_factor',
         'sequence',
 
-        /** EO */
+        /** EO Header */
         'revision',
         'ref_no',
         'category_id',
@@ -69,16 +69,31 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Many-to-Many (self-join): A task card may have none or many other related task cards.
+     * One-to-Many: A task card EO may have one or many instructions.
      *
-     * This function will retrieve all the related-to task cards of a task card.
-     * See: TaskCard's parent() method for the inverse
+     * This function will retrieve all the instructions of a task card EO.
+     * See: EOInstruction's eo_header()
      *
      * @return mixed
      */
-    public function related_to()
+    public function eo_instructions()
     {
-        return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'taskcard_id', 'related_to');
+        return $this->hasMany(EOInstruction::class, 'taskcard_id');
+    }
+
+    /**
+     * Many-to-Many: A task card may have zero or many items.
+     *
+     * This function will retrieve all the items of a task card.
+     * See: Item's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_taskcard', 'taskcard_id', 'item_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
     }
 
     /**
@@ -96,6 +111,20 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many (self-join): A task card may have none or many other related task cards.
+     *
+     * This function will retrieve all the related-to task cards of a task card.
+     * See: TaskCard's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function related_to()
+    {
+        return $this->belongsToMany(TaskCard::class, 'taskcard_relations', 'taskcard_id', 'related_to')
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of an task card.
@@ -106,6 +135,20 @@ class TaskCard extends MemfisModel
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * Many-to-Many: A task card may have one or many workpackage.
+     *
+     * This function will retrieve all the work packages of a task card.
+     * See: WorkPackage's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workpackages()
+    {
+        return $this->belongsToMany(WorkPackage::class, 'taskcard_workpackage', 'taskcard_id', 'workpackage_id')
+                    ->withTimestamps();
     }
 
     /**

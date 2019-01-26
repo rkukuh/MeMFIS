@@ -74,6 +74,19 @@ class Customer extends MemfisModel
     }
 
     /**
+     * One-to-Many: A project must have a customer
+     *
+     * This function will retrieve all the projects of a customer.
+     * See: Project's customer() method for the inverse
+     *
+     * @return mixed
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    /**
      * Polymorphic: A customer can have zero or many websites.
      *
      * This function will get all of the customer's websites.

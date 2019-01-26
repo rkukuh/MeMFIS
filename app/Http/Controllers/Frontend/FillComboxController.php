@@ -423,7 +423,7 @@ class FillComboxController extends Controller
     public function taskcardTypeRoutine()
     {
         $taskcard_type_routines = Type::ofTaskCardTypeRoutine()
-                        ->pluck('code', 'id');
+                        ->pluck('name', 'id');
 
         return json_encode($taskcard_type_routines);
     }
@@ -526,6 +526,18 @@ class FillComboxController extends Controller
                     ->pluck('name', 'id');
 
         return json_encode($accesses);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function tool()
+    {
+        $tools = Item::with('categories')->where('categories->name','tool')->get();
+
+        return json_encode($tools);
     }
 
 

@@ -1,11 +1,13 @@
 <?php
 
 use App\Models\Type;
+use App\Models\Item;
 use App\Models\Access;
 use App\Models\Category;
 use App\Models\TaskCard;
 use App\Models\Aircraft;
 use App\Models\Description;
+use App\Models\EOInstruction;
 use Faker\Generator as Faker;
 
 $factory->define(TaskCard::class, function (Faker $faker) {
@@ -16,18 +18,44 @@ $factory->define(TaskCard::class, function (Faker $faker) {
     return [
         'number' => $number,
         'title' => 'TaskCard Dummy #' . $number,
-        'type_id' => $faker->randomElement([
-            Type::ofTaskCardTypeRoutine()->get()->random()->id,
-            Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
-        ]),
-        'task_type_id' => Type::ofTaskCardTask()->get()->random()->id,
-        'work_area' => Type::ofWorkArea()->get()->random()->id,
+        'type_id' => function () use ($faker) {
+            if (Type::ofTaskCardTypeRoutine()->count()
+                || Type::ofTaskCardTypeNonRoutine()->count())
+            {
+                return $faker->randomElement([
+                    Type::ofTaskCardTypeRoutine()->get()->random()->id,
+                    Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
+                ]);
+            }
+
+            return $faker->randomElement([
+                factory(Type::class)->states('taskcard-type-routine')->create()->id,
+                factory(Type::class)->states('taskcard-type-non-routine')->create()->id,
+            ]);
+        },
+        'task_type_id' => function () {
+            if (Type::ofTaskCardTask()->count()) {
+                Type::ofTaskCardTask()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('taskcard-task')->create()->id;
+        },
+        'work_area' => function () {
+            if (Type::ofWorkArea()->count()) {
+                return Type::ofWorkArea()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('work-area')->create()->id;
+        },
         'manhour' => $faker->randomFloat(2, 0, 9999),
-        'helper_quantity' => $faker->randomElement(null, rand(1, 10)),
+        'helper_quantity' => $faker->randomElement([null, rand(1, 10)]),
         'is_rii' => $faker->boolean,
         'source' => null,
         'effectivity' => null,
-        'performance_factor' => $faker->randomElement([null, rand(0, 10) / 10]), // min:0-max:1-step:0,1
+        'performance_factor' => $faker->randomElement([
+            null,
+            rand(0, 10) / 10 // min:0-max:1-step:0,1
+        ]),
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
         'version' => $faker->randomElement([null, $version]),
         'description' => $faker->paragraph(rand(10, 20)),
@@ -60,17 +88,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
     $manual_affected = Type::ofTaskCardEOManualAffected()->get()->random();
 
     return [
-        // These attributes are filled on 'taskcard_eo' table
-        'work_area' => null,
-        'manhour' => null,
-        'helper_quantity' => null,
-        'is_rii' => null,
-        'performance_factor' => null,
-        'sequence' => null,
-        'version' => null,
-        'description' => null,
-
-        // EO-only attributes
+        // EO Header attributes
         'number' => 'EO-' . $number,
         'title' => 'Engineering Order Dummy #' . $number,
         'type_id' => Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
@@ -115,6 +133,16 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
                 return null;
             }
         },
+
+        // These attributes are filled on 'taskcard_eo' table
+        'work_area' => null,
+        'manhour' => null,
+        'helper_quantity' => null,
+        'is_rii' => null,
+        'performance_factor' => null,
+        'sequence' => null,
+        'version' => null,
+        'description' => null,
     ];
 
 });
@@ -126,24 +154,38 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
     return [
         'number' => 'SI-' . $number,
         'title' => 'Special Instruction Dummy #' . $number,
-        'type_id' => Type::where('of', 'taskcard-type-non-routine')->where('code', 'si')->first()->id,
+        'type_id' => Type::where('of', 'taskcard-type-non-routine')
+                         ->where('code', 'si')
+                         ->first()->id,
         'performance_factor' => null,
         'version' => null,
     ];
 
 });
 
-/** CALLBACKS */
+/** CALLBACKS for General */
 
 $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
-    $aircraft = Aircraft::get()->random();
+    // Aircraft
+
+    $aircraft = null;
+
+    if (Aircraft::count()) {
+        $aircraft = Aircraft::get()->random();
+    } else {
+        $aircraft = factory(Aircraft::class)->create();
+    }
 
     $taskcard->aircrafts()->save($aircraft);
+
+    // A/C Access
 
     if ($faker->boolean) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
     }
+
+    // A/C Zone
 
     if ($faker->boolean) {
         $taskcard->zones()->saveMany($aircraft->zones);
@@ -151,22 +193,54 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
 });
 
+/** CALLBACKS for States */
+
 $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $faker) {
+
+    // Related-to
 
     if ($faker->boolean) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
+    }
+
+    // Item
+
+    for ($i = 1; $i <= rand(2, 5); $i++) {
+        $item = Item::get()->random();
+
+        $taskcard->items()->attach($item, [
+            'quantity' => rand(1, 10)
+        ]);
     }
 
 });
 
 $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker) {
 
-    //
+    $taskcard->eo_instructions()->saveMany(
+        factory(EOInstruction::class, rand(5, 10))->make()
+    );
+
+    foreach ($taskcard->eo_instructions as $eo_instruction) {
+        for ($i = 1; $i <= rand(2, 5); $i++) {
+            $item = Item::get()->random();
+
+            $eo_instruction->items()->attach($item, [
+                'quantity' => rand(1, 10)
+            ]);
+        }
+    }
 
 });
 
 $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
 
-    //
+    for ($i = 1; $i <= rand(2, 5); $i++) {
+        $item = Item::get()->random();
+
+        $taskcard->items()->attach($item, [
+            'quantity' => rand(1, 10)
+        ]);
+    }
 
 });

@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.storages.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.storage.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Storage
                             </span>
@@ -71,6 +71,7 @@
                                 </div>
                             </div>
                             @include('frontend.storage.modal')
+                            @include('frontend.common.account-code.modal')
                             <div class="m_datatable" id="scrolling_both"></div>
                         </div>
                     </div>

@@ -64,9 +64,10 @@ class DummyDataSeeder extends Seeder
 
         /** TRANSACTION (M-M) */
 
-        $this->call(ItemUnit::class);
-        $this->call(ItemStorage::class);
+        $this->call(ItemUnits::class);
+        $this->call(ItemStorages::class);
         $this->call(TaskCards::class);
+        $this->call(EOInstructions::class);
         $this->call(Quotations::class);
         $this->call(WorkPackages::class);
         $this->call(Projects::class);

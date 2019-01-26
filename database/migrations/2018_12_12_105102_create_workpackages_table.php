@@ -15,7 +15,22 @@ class CreateWorkpackagesTable extends Migration
     {
         Schema::create('workpackages', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('code')->nullable();
+            $table->string('title');
+            $table->boolean('is_template');
+            $table->unsignedInteger('aircraft_id');
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('aircraft_id')
+                    ->references('id')->on('aircrafts')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->index('code');
+            $table->index('title');
         });
     }
 

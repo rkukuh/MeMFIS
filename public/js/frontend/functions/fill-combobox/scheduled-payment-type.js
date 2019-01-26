@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="scheduled_payment_type"]').empty();
 
                 $('select[name="scheduled_payment_type"]').append(
-                    '<option> Select a Scheduled Payment Type</option>'
+                    '<option value=""> Select a Scheduled Payment Type</option>'
                 );
 
                 $.each(data, function (key, value) {

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\TaskCard;
 
+use App\Models\Type;
+use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardSIStore;
@@ -9,6 +11,16 @@ use App\Http\Requests\Frontend\TaskCardSIUpdate;
 
 class TaskCardSIController extends Controller
 {
+    protected $aircraft;
+    protected $skill;
+    protected $work_area;
+
+    public function __construct()
+    {
+        $this->aircraft = Aircraft::get();
+        $this->work_area = Type::ofWorkArea()->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +49,14 @@ class TaskCardSIController extends Controller
      */
     public function store(TaskCardSIStore $request)
     {
-        //
+        if ($taskcard = TaskCard::create($request->all())) {
+            $taskcard->aircrafts()->attach($request->applicability_airplane);
+
+            return response()->json($taskcard);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
@@ -57,9 +76,20 @@ class TaskCardSIController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(Taskcard $taskCard)
+    public function edit($taskCard)
     {
-        //
+        //TODO Data binding not work
+        $taskCard = TaskCard::where('uuid',$taskCard)->first();
+        $aircraft_taskcards = array();
+        foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
+            $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
+        }
+        return view('frontend.taskcard.nonroutine.si.edit', [
+            'taskcard' => $taskCard,
+            'work_areas' => $this->work_area,
+            'aircrafts' => $this->aircraft,
+            'aircraft_taskcards' => $aircraft_taskcards,
+        ]);
     }
 
     /**
@@ -69,9 +99,20 @@ class TaskCardSIController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardSIUpdate $request, Taskcard $taskCard)
+    public function update(TaskCardSIUpdate $request,$taskCard)
     {
-        //
+        //TODO Data binding not work
+
+        $taskCard = TaskCard::where('uuid',$taskCard)->first();
+
+        if ($taskCard->update($request->all())) {
+            $taskCard->aircrafts()->sync($request->applicability_airplane);
+
+            return response()->json($taskCard);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**

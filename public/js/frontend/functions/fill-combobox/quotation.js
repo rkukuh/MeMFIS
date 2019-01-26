@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="quotation"]').empty();
 
                 $('select[name="quotation"]').append(
-                    '<option> Select a Quotation</option>'
+                    '<option value=""> Select a Quotation</option>'
                 );
 
                 $.each(data, function (key, value) {

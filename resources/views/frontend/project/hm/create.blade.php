@@ -204,69 +204,167 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        File Work Order
+                                                        A/C Type @include('frontend.common.label.required')
                                                     </label>
-                                                    @component('frontend.common.input.upload')
-                                                        @slot('id', 'work-order-file')
-                                                        @slot('name', 'work-order-file')
-                                                        @slot('id_error', 'work-order-file')
+
+                                                    @component('frontend.common.input.select2')
+                                                        @slot('text', 'Applicability Airplane')
+                                                        @slot('id', 'applicability_airplane')
+                                                        @slot('name', 'applicability_airplane')
+                                                        @slot('id_error', 'applicability-airplane')
                                                     @endcomponent
-
                                                 </div>
-
                                             </div>
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Aircraft Type @include('frontend.common.label.required')
+                                                        A/C Reg @include('frontend.common.label.required')
                                                     </label>
 
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('text', 'Aircraft')
-                                                        @slot('id', 'aircraft')
-                                                        @slot('name', 'aircraft')
-                                                        @slot('id_error', 'aircraft')
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', 'Red')
+                                                        @slot('id', 'reg')
+                                                        @slot('name', 'reg')
+                                                        @slot('id_error', 'reg')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Template @include('frontend.common.label.required')
+                                                        A/C Serial Number @include('frontend.common.label.required')
                                                     </label>
 
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('id', 'template')
-                                                        @slot('text', 'Work Package')
-                                                        @slot('name', 'template')
-                                                        @slot('id_error', 'template')
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', 'Serial Number')
+                                                        @slot('id', 'serial-number')
+                                                        @slot('name', 'serial-number')
+                                                        @slot('id_error', 'serial-number')
+                                                    @endcomponent
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label class="form-control-label">
+                                                        Project Title @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    @component('frontend.common.input.textarea')
+                                                        @slot('rows', '8')
+                                                        @slot('id', 'project_title')
+                                                        @slot('name', 'project_title')
+                                                        @slot('text', 'Project Title')
                                                     @endcomponent
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <div class="taskcard_datatable" id="second"></div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="row align-items-center">
+                                                <div class="col-xl-8 order-2 order-xl-1">
+                                                    <div class="form-group m-form__group row align-items-center">
+                                                        <div class="col-md-4">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                    <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                        <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Workpackage</span>
+                                                            </span>
+                                                        </button>
+
+                                                        <div class="m-btn-group btn-group" role="group">
+                                                        <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Blank Workpackage</span>
+                                                            </span>
+                                                        </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.submit')
-                                                            @slot('type','button')
-                                                            @slot('id', 'add-taskcard')
-                                                            @slot('class', 'add-taskcard')
-                                                        @endcomponent
+                                    </div>
 
-                                                        @include('frontend.common.buttons.reset')
+                                    @include('frontend.project.hm.modal')
 
-                                                        @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.workpackage.index'))
-                                                        @endcomponent
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
+                                                <div class="m-accordion__item">
+                                                    <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
+                                                        <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
+                                                        <span class="m-accordion__item-title">C-Check</span>
+                                                        <span class="m-accordion__item-mode"></span>
+                                                    </div>
+                                                    <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1" style="">
+                                                        <div class="m-accordion__item-content">
+                                                            <ul class="nav nav-tabs" role="tablist">
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">General Tool and Material</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner">Engineer Team</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_manhour">Manhours Propotion</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility Used</a>
+                                                                </li>
+                                                            </ul>
+
+                                                            <div class="tab-content">
+                                                                <div class="tab-pane active show" id="m_tabs_taskcard" role="tabpanel">
+                                                                    @include('frontend.project.hm.taskcard.index')
+                                                                </div>
+                                                                <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
+                                                                    @include('frontend.project.hm.item.index')
+                                                                </div>
+                                                                <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
+                                                                    @include('frontend.project.hm.engineer.index')
+                                                                </div>
+                                                                <div class="tab-pane" id="m_tabs_manhour" role="tabpanel">
+                                                                    @include('frontend.project.hm.manhour.index')
+                                                                </div>
+                                                                <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
+                                                                    @include('frontend.project.hm.facility.index')
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-taskcard')
+                                                        @slot('class', 'add-taskcard')
+                                                    @endcomponent
+
+                                                    @include('frontend.common.buttons.reset')
+
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.workpackage.index'))
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -315,6 +413,9 @@
         }
     </script>
 
+    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
+
     {{-- <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
 
@@ -332,4 +433,8 @@
 
     <script src="{{ asset('js/frontend/project/create.js') }}"></script>
     <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+
 @endpush

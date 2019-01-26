@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="recurrence_id"]').empty();
 
                 $('select[name="recurrence_id"]').append(
-                    '<option> Select a Recurrence</option>'
+                    '<option value=""> Select a Recurrence</option>'
                 );
 
                 $.each(data, function (key, value) {
