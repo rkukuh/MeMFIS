@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Frontend\TaskCard;
 
 use App\Models\Type;
 use App\Models\Zone;
-use App\Models\Aircraft;
 use App\Models\Access;
+use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -15,24 +15,24 @@ class TaskCardRoutineController extends Controller
 {
 
     protected $type;
-    protected $aircraft;
     protected $task;
-    protected $taskcard;
     protected $skill;
-    protected $work_area;
-    protected $access;
     protected $zones;
+    protected $access;
+    protected $aircraft;
+    protected $taskcard;
+    protected $work_area;
     protected $relationship;
 
     public function __construct()
     {
-        $this->aircraft = Aircraft::get();
-        $this->access = Access::get();
         $this->zones = Zone::get();
+        $this->access = Access::get();
+        $this->aircraft = Aircraft::get();
         $this->taskcard = TaskCard::get();
-        $this->type = Type::ofTaskCardTypeRoutine()->get();
-        $this->work_area = Type::ofWorkArea()->get();
         $this->task = Type::ofTaskCardTask()->get();
+        $this->work_area = Type::ofWorkArea()->get();
+        $this->type = Type::ofTaskCardTypeRoutine()->get();
     }
 
     /**
@@ -93,25 +93,28 @@ class TaskCardRoutineController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function edit($taskCard)
+    public function edit(TaskCard $taskCard)
     {
+        $aircraft_taskcards = [];
 
-        //TODO Data binding not work
-        $taskCard = TaskCard::where('uuid',$taskCard)->first();
-        // dd($taskCard);
-        $aircraft_taskcards = array();
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
-        $access_taskcards = array();
+
+        $access_taskcards = [];
+
         foreach($taskCard->accesses as $i => $access_taskcard){
             $access_taskcards[$i] =  $access_taskcard->pivot->access_id;
         }
-        $zone_taskcards = array();
+
+        $zone_taskcards = [];
+
         foreach($taskCard->zones as $i => $zone_taskcard){
             $zone_taskcards[$i] =  $zone_taskcard->id;
         }
-        $relation_taskcards = array();
+
+        $relation_taskcards = [];
+
         foreach($taskCard->related_to as $i => $relation_taskcard){
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
@@ -140,13 +143,8 @@ class TaskCardRoutineController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardRoutineUpdate $request, $taskCard)
+    public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
-        //TODO Data binding not work
-
-        $taskCard = TaskCard::where('uuid',$taskCard)->first();
-
-        // dd($request->all());
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             $taskCard->accesses()->sync($request->access);
