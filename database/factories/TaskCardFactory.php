@@ -167,6 +167,8 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
 
 $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
+    // Aircraft
+
     $aircraft = null;
 
     if (Aircraft::count()) {
@@ -177,9 +179,13 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
     $taskcard->aircrafts()->save($aircraft);
 
+    // A/C Access
+
     if ($faker->boolean) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
     }
+
+    // A/C Zone
 
     if ($faker->boolean) {
         $taskcard->zones()->saveMany($aircraft->zones);
@@ -192,7 +198,7 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $faker) {
 
     // Related-to
-    
+
     if ($faker->boolean) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
