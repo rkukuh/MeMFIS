@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Item;
 use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Aircraft;
@@ -38,6 +39,36 @@ $factory->define(Project::class, function (Faker $faker) {
 
 $factory->afterCreating(Project::class, function ($project, $faker) {
 
-    $project->workpackages()->saveMany(factory(WorkPackage::class, rand(5, 10))->make());
+    // Item
+
+    if ($faker->boolean) {
+        $item = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            $project->items()->save($item, [
+                'quantity' => rand(1, 10)
+            ]);
+        }
+    }
+
+    // Work Package
+
+    $workpackage = null;
+
+    for ($i = 1; $i <= rand(5, 10); $i++) {
+        if (WorkPackage::count()) {
+            $workpackage = WorkPackage::get()->random();
+        } else {
+            $workpackage = factory(WorkPackage::class)->create();
+        }
+
+        $project->workpackages()->save($workpackage);
+    }
 
 });

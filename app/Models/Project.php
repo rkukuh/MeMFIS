@@ -45,6 +45,21 @@ class Project extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A project may have one or many item.
+     *
+     * This function will retrieve all the items of a project.
+     * See: Item's projects() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class)
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A project may have one or many workpackage.
      *
      * This function will retrieve all the work packages of a project.

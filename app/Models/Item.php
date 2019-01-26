@@ -121,6 +121,21 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: A project may have one or many item.
+     *
+     * This function will retrieve all the projects of an item.
+     * See: Project's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class)
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A task card may have zero or many items.
      *
      * This function will retrieve all the task cards of an item.
