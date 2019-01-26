@@ -138,6 +138,20 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A task card may have one or many workpackage.
+     *
+     * This function will retrieve all the work packages of a task card.
+     * See: WorkPackage's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workpackages()
+    {
+        return $this->belongsToMany(WorkPackage::class, 'taskcard_workpackage', 'taskcard_id', 'workpackage_id')
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A task card may have zero or many (aircraft) zone.
      *
      * This function will retrieve all the (aircraft) zones of a task card.

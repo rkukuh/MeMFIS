@@ -43,4 +43,18 @@ class WorkPackage extends MemfisModel
         return $this->belongsToMany(Project::class, 'project_workpackage', 'workpackage_id', 'project_id')
                     ->withTimestamps();
     }
+
+    /**
+     * Many-to-Many: A task card may have one or many workpackage.
+     *
+     * This function will retrieve all the task cards of a work package.
+     * See: TaskCard's workpackages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcards()
+    {
+        return $this->belongsToMany(TaskCard::class, 'taskcard_workpackage', 'workpackage_id', 'taskcard_id')
+                    ->withTimestamps();
+    }
 }
