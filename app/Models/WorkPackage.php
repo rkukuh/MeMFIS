@@ -29,4 +29,18 @@ class WorkPackage extends MemfisModel
     {
         return $this->belongsTo(Aircraft::class);
     }
+
+    /**
+     * Many-to-Many: A project may have one or many workpackage.
+     *
+     * This function will retrieve all the projects of a work package.
+     * See: Project's workpackages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_workpackage', 'workpackage_id', 'project_id')
+                    ->withTimestamps();
+    }
 }

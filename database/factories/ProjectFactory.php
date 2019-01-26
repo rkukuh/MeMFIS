@@ -3,6 +3,7 @@
 use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Aircraft;
+use App\Models\WorkPackage;
 use Faker\Generator as Faker;
 
 $factory->define(Project::class, function (Faker $faker) {
@@ -37,6 +38,6 @@ $factory->define(Project::class, function (Faker $faker) {
 
 $factory->afterCreating(Project::class, function ($project, $faker) {
 
-    // TODO: Create callback
+    $project->workpackages()->saveMany(factory(WorkPackage::class, rand(5, 10))->make());
 
 });
