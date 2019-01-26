@@ -1,5 +1,10 @@
 let Workpackage = {
     init: function () {
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
+
         $('.workpackage_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -42,35 +47,48 @@ let Workpackage = {
                     }
                 }
             },
-            columns: [
-                {
-                    field: 'id',
+            columns: [{
+                    field: 'code',
                     title: 'Workpakage Number',
                     sortable: !1,
                 },
                 {
-                    field: 'quotation',
+                    field: 'created_at',
                     title: 'Created Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'customer',
+                    field: 'title',
                     title: 'Workpakage Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'status',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                // {!!str_limit($scholarship->description, 355,' ...')!!};
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
                 },
                 {
-                    field: 'statu',
+                    field: 'aircraft_id',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return t.aircraft.name
+                    }
                 },
                 {
                     field: 'Actions',
