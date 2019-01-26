@@ -8,6 +8,30 @@ Route::name('testing.')->group(function () {
             return "Hello $name !";
         });
 
+        Route::get('/tools', function () {
+            // $tool = App\Models\Category::ofItem()->where('code', 'tool')->first()->code;
+            // return $tool;
+
+            $items = App\Models\Item::with('categories')
+                                    ->whereHas('categories', function ($query) {
+                                        $query->where('code', 'tool');
+                                    })->get();
+
+            return $items;
+        });
+
+        Route::get('/materials', function () {
+            // $material = App\Models\Category::ofItem()->where('code', 'rawmat')->first()->code;
+            // return $material;
+
+            $items = App\Models\Item::with('categories')
+                                    ->whereHas('categories', function ($query) {
+                                        $query->where('code', 'rawmat');
+                                    })->get();
+
+            return $items;
+        });
+
         // Route::resource('/testing', 'Frontend\TestingController');
         // Route::view('/maps', 'Frontend\testing\maps')->name('maps');
         // Route::get('/view', 'Frontend\TestingController@view')->name('view');
