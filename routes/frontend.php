@@ -173,14 +173,25 @@ Route::name('frontend.')->group(function () {
         Route::namespace('TaskCard')->group(function () {
 
             Route::resource('taskcard', 'TaskCardController');
-            Route::resource('taskcard-routine', 'TaskCardRoutineController');
-            Route::resource('taskcard-eo', 'TaskCardEOController');
-            Route::resource('taskcard-si', 'TaskCardSIController');
 
+            Route::resource('taskcard-routine', 'TaskCardRoutineController', [
+                'parameters' => ['taskcard-routine' => 'taskCard']
+            ]);
+
+            Route::resource('taskcard-eo', 'TaskCardEOController', [
+                'parameters' => ['taskcard-eo' => 'taskCard']
+            ]);
+
+            Route::resource('taskcard-si', 'TaskCardSIController', [
+                'parameters' => ['taskcard-si' => 'taskCard']
+            ]);
+
+            // Relationships
+            
             Route::name('taskcard-routine.')->group(function () {
                 Route::prefix('taskcard-routine')->group(function () {
-
-                    //
+                    
+                    // 
 
                 });
             });
