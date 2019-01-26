@@ -191,9 +191,13 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
 $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $faker) {
 
+    // Related-to
+    
     if ($faker->boolean) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
+
+    // Item
 
     for ($i = 1; $i <= rand(2, 5); $i++) {
         $item = Item::get()->random();
