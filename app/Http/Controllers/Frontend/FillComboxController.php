@@ -242,8 +242,8 @@ class FillComboxController extends Controller
      */
     public function repeatType()
     {
-        $repeat_types = Category::ofItem()
-                              ->pluck('name', 'id');
+        $repeat_types = Type::ofMaintenanceCycle()
+                            ->pluck('name', 'id');
 
         return json_encode($repeat_types);
 
