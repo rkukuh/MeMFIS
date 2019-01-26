@@ -73,7 +73,6 @@ let Workpackage = {
                         if (t.description) {
                             data = strtrunc(t.description, 50);
                             return (
-                                // {!!str_limit($scholarship->description, 355,' ...')!!};
                                 '<p>' + data + '</p>'
                             );
                         }
