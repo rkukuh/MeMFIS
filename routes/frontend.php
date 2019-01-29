@@ -187,11 +187,11 @@ Route::name('frontend.')->group(function () {
             ]);
 
             // Relationships
-            
+
             Route::name('taskcard-routine.')->group(function () {
                 Route::prefix('taskcard-routine')->group(function () {
-                    
-                    // 
+
+                    //
 
                 });
             });
@@ -221,11 +221,20 @@ Route::name('frontend.')->group(function () {
         Route::view('/summary/ad-sb', 'frontend.workpackage.nonroutine.adsb.ad-sb-summary')->name('summary.ad-sb');
         Route::view('/summary/cmr-awl', 'frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary')->name('summary.cmr-awl');
         Route::view('/summary/si', 'frontend.workpackage.nonroutine.si.si-summary')->name('summary.si');
+
+        /** VENDOR  */
         Route::view('/vendor', 'frontend.vendor.index')->name('vendor.index');
         Route::view('/vendor/create', 'frontend.vendor.create')->name('vendor.create');
+
+        /** PRICE LIST  */
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
+
+        /** PURCHASE ORDEr */
         Route::view('/purchase-order', 'frontend.purchase-order.index')->name('purchase-order.index');
         Route::view('/purchase-order/create', 'frontend.purchase-order.create')->name('purchase-order.create');
+
+        /** QUOTATION  */
+        Route::view('/quotation-view/workpackage', 'frontend.quotation.workpackage')->name('quotation.workpackage');
 
 
     });
