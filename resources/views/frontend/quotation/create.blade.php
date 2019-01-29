@@ -377,6 +377,116 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_workpackage">Workpackage</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_summary">Summary</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active show" id="m_tabs_workpackage" role="tabpanel">
+                                                    <table class="workpackage-datatable" id="html_table" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th title="Field #1" data-field="OrderID">Workpackage ID</th>
+                                                                <th title="Field #2" data-field="Owner">Workpackage Title</th>
+                                                                <th title="Field #2" data-field="Action"></th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
+                                                                <td>Sunny Garton</td>
+                                                                <td>
+                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
+                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
+                                                                <td>Sandor Engley</td>
+                                                                <td>
+                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
+                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><a href="/quotation-view/workpackage">68084-462</a></td>
+                                                                <td>Morgan Cradey</td>
+                                                                <td>
+                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
+                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><a href="/quotation-view/workpackage">44356-0001</a></td>
+                                                                <td>Tedd Alton</td>
+                                                                <td>
+                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
+                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    @include('frontend.quotation.modal-workpackage')
+                                                </div>
+                                                <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
+                                                    <table class="summary-datatable" id="html_table" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th title="Field #1" data-field="No">No</th>
+                                                                <th title="Field #2" data-field="Job_Request">Job Request Description</th>
+                                                                <th title="Field #2" data-field="Cost">Cost</th>
+                                                                <th title="Field #2" data-field="Disc">Disc %</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
+                                                                <td>Sunny Garton</td>
+                                                                <td>$100000</td>
+                                                                <td>0%</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
+                                                                <td>Sandor Engley</td>
+                                                                <td>$50</td>
+                                                                <td>10%</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td>Sub Total</td>
+                                                                <td>$100050</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td>Tax</td>
+                                                                <td>
+                                                                    <select name="" id="">
+                                                                        <option value="">5%</option>
+                                                                        <option value="">10%</option>
+                                                                        <option value="">15%</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td>Total in Rupiah</td>
+                                                                <td>Rp. 100000000</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
@@ -518,5 +628,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
+    <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
+
 
 @endpush
