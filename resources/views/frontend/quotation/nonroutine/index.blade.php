@@ -19,7 +19,7 @@
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'AD/SB Summary')
-                            @slot('href', route('frontend.summary.ad-sb') )
+                            @slot('href', route('frontend.quotation.summary.adsb') )
                         @endcomponent
 
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -51,7 +51,7 @@
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'CMR/AWL Summary')
-                            @slot('href', route('frontend.summary.cmr-awl') )
+                            @slot('href', route('frontend.quotation.summary.cmrawl') )
                         @endcomponent
 
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -83,7 +83,7 @@
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'SI Summary')
-                            @slot('href', route('frontend.summary.si') )
+                            @slot('href', route('frontend.quotation.summary.si') )
                         @endcomponent
 
 
