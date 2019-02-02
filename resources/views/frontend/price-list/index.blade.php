@@ -64,17 +64,12 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Add Price List')
-                                            @slot('data_target', '#modal_price_list')
-                                        @endcomponent
-
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
                             @include('frontend.price-list.modal')
-                            @include('frontend.price-list.modal-item')
+                            @include('frontend.price-list.modal-show')
                             <div class="price_list_datatable" id="price_list_datatable"></div>
                         </div>
                     </div>

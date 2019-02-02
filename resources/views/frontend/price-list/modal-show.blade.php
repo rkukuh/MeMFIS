@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal_price_list" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_price_list_show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TitleModalPriceList">Price List</h5>
+                @include('frontend.common.label.show') <h5 class="modal-title" id="TitleModalPriceList">Price List</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -36,7 +36,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Unit @include('frontend.common.label.required')
+                                    Unit
                                 </label>
 
                                 @component('frontend.common.label.data-info')
@@ -46,16 +46,48 @@
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Unit Price @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.number')
-                                    @slot('text', 'price')
-                                    @slot('id', 'price')
-                                    @slot('name', 'price')
-                                    @slot('id_error', 'price')
-                                @endcomponent
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Unit Price
+                                        </label>
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', '100000')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Unit Price
+                                        </label>
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', '200000')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Unit Price
+                                        </label>
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', '300000')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Unit Price
+                                        </label>
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', '400000')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Unit Price
+                                        </label>
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', '500000')
+                                        @endcomponent
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
