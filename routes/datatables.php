@@ -35,6 +35,7 @@ Route::name('datatables.')->group(function () {
         /** TRANSACTION */
 
         Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
+        Route::get('/price-list','PriceListDatatables@index')->name('price-list.index');
 
         /** AIRCRAFT */
 
