@@ -38,8 +38,11 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
-                                    Heavy Maintenance Project Datalist
+                                    Heavy Maintenance Project
                                 </h3>
                             </div>
                         </div>
