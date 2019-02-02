@@ -229,7 +229,7 @@ Route::name('frontend.')->group(function () {
         /** PRICE LIST  */
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
 
-        /** PURCHASE ORDEr */
+        /** PURCHASE ORDER */
         Route::view('/purchase-order', 'frontend.purchase-order.index')->name('purchase-order.index');
         Route::view('/purchase-order/create', 'frontend.purchase-order.create')->name('purchase-order.create');
 
@@ -241,6 +241,10 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/adsb', 'frontend.quotation.nonroutine.adsb.ad-sb-summary')->name('quotation.summary.adsb');
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
+
+        /** GOOD RECIEVED NOTES  */
+        Route::view('/good-recieved-note', 'frontend.good-recieved-note.index')->name('good-recieved-note.index');
+        Route::view('/good-recieved-note/create', 'frontend.good-recieved-note.create')->name('good-recieved-note.create');
 
 
     });
