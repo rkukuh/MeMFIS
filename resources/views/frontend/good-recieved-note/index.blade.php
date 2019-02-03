@@ -69,7 +69,7 @@
                                                     </div>
                                                     <div class="m-form__control">
                                                         @component('frontend.common.input.daterangepicker')
-                                                            @slot('id','daterange_purchase_order')
+                                                            @slot('id','daterange_good_recieved_note')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -79,8 +79,8 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
-                                            @slot('text', 'Purchase Order')
-                                            @slot('href', route('frontend.purchase-order.create') )
+                                            @slot('text', 'Good Recieved Note')
+                                            @slot('href', route('frontend.good-recieved-note.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
 
-                            <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
+                            <div class="good_recieved_note_datatable" id="good_recieved_note_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/purchase-order/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/daterange/purchase-order.js') }}" ></script>
+    <script src="{{ asset('js/frontend/good-recieved-note/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/daterange/good-recieved-note.js') }}" ></script>
 
 @endpush
