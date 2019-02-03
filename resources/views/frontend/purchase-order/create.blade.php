@@ -99,7 +99,7 @@
                                                         <label class="form-control-label">
                                                             Ref PR @include('frontend.common.label.required')
                                                         </label>
-                                                        @include('frontend.common.purchase-request.index') 
+                                                        @include('frontend.common.purchase-request.index')
 
                                                         @component('frontend.common.input.hidden')
                                                             @slot('id', 'ref-pr')
