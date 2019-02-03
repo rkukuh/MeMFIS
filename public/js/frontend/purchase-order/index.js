@@ -1,4 +1,4 @@
-let Quotation = {
+let PurchaseOrder = {
     init: function () {
         $('.purchase_order_datatable').mDatatable({
             data: {
@@ -167,5 +167,5 @@ let Quotation = {
 };
 
 jQuery(document).ready(function () {
-    Quotation.init();
+    PurchaseOrder.init();
 });
