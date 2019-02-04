@@ -302,6 +302,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** PURCHASE ORDER */
+
+        Route::name('purchase-order.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'purchase-order',
+                'namespace' => 'PurchaseOrder'
+
+            ], function () {
+
+                Route::get('/','PurchaseOrderDatatables@index')->name('all');
+
+            });
+
+        });
+
     });
 
 });
