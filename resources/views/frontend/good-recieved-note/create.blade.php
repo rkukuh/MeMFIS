@@ -258,5 +258,6 @@
 
     <script src="{{ asset('js/frontend/good-recieved-note/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/ref-date.js')}}"></script>
 
 @endpush
