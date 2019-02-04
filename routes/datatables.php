@@ -270,7 +270,7 @@ Route::name('datatables.')->group(function () {
 
         /** PROJECT */
 
-        Route::name('workpackage.')->group(function () {
+        Route::name('project.')->group(function () {
 
             Route::group([
 
@@ -284,8 +284,6 @@ Route::name('datatables.')->group(function () {
             });
 
         });
-
-
 
     });
 
