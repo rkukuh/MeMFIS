@@ -71,5 +71,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Quotations::class);
         $this->call(WorkPackages::class);
         $this->call(Projects::class);
+        $this->call(PurchaseRequests::class);
     }
 }
