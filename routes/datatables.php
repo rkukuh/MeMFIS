@@ -34,7 +34,6 @@ Route::name('datatables.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
         Route::get('/price-list','PriceListDatatables@index')->name('price-list.index');
 
         /** AIRCRAFT */
@@ -206,6 +205,23 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/','PurchaseRequestDatatables@index')->name('all');
+
+            });
+
+        });
+
+        /** QUOTATION */
+
+        Route::name('quotation.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'quotation',
+                'namespace' => 'Quotation'
+
+            ], function () {
+
+                Route::get('/','QuotationDatatables@index')->name('all');
 
             });
 
