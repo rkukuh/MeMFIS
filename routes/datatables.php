@@ -319,6 +319,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** GOODS RECEIVED NOTE */
+
+        Route::name('goods-received.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'goods-received',
+                'namespace' => 'GoodsReceived'
+
+            ], function () {
+
+                Route::get('/','GoodsReceivedDatatables@index')->name('all');
+
+            });
+
+        });
+
     });
 
 });
