@@ -285,6 +285,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** PURCHASE REQUEST */
+
+        Route::name('purchase-request.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'purchase-request',
+                'namespace' => 'PurchaseRequest'
+
+            ], function () {
+
+                Route::get('/','PurchaseRequestDatatables@index')->name('all');
+
+            });
+
+        });
+
     });
 
 });

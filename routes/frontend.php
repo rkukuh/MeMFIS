@@ -71,6 +71,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('project', 'ProjectController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('workpackage', 'WorkPackageController');
+        Route::resource('purchase-request', 'PurchaseRequestController');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
         /** AIRCRAFT  */

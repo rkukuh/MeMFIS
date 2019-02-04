@@ -51,6 +51,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\EOInstruction::class => Policies\EOInstructionPolicy::class,
         Models\GeneralLicense::class => Policies\GeneralLicensePolicy::class,
         Models\EmployeeLicense::class => Policies\EmployeeLicensePolicy::class,
+        Models\PurchaseRequest::class => Policies\PurchaseRequestPolicy::class,
         Models\OTRCertification::class => Policies\OTRCertificationPolicy::class,
         Models\MaintenanceCycle::class => Policies\MaintenanceCyclePolicy::class,
         Models\CertificationEmployee::class => Policies\CertificationEmployeePolicy::class,
