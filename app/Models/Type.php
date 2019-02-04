@@ -149,6 +149,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Purchase Request.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfPurchaseRequest(Builder $query)
+    {
+        return $query->where('of', 'purchase-request');
+    }
+
+    /**
      * Scope a query to only include type of Regulator.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
