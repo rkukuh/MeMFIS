@@ -66,16 +66,11 @@
                                             <i class="la la-bell-o"></i> OTR
                                         </a>
                                     </li>
-
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_7" role="tab">
-                                            <i class="la la-bell-o"></i> Languages
-                                        </a>
-                                    </li>
                                     <li class="nav-item dropdown m-tabs__item">
                                         <a class="nav-link m-tabs__link dropdown-toggle" data-toggle="dropdown" href="#"
                                         role="button" aria-haspopup="true" aria-expanded="true"><i class="la la-map-marker"></i>More</a>
                                         <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_7">Languages</a>
                                             <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_9">Emergency
                                                 Contacts</a>
                                             <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_10">Documents</a>
