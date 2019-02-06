@@ -32,16 +32,11 @@ let Grn = {
             ]
         })
 
-        $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
         $('.paging_simple_numbers').addClass('pull-left');
         $('.dataTables_length').addClass('pull-right');
         $('.dataTables_info').addClass('pull-left');
         $('.dataTables_info').addClass('margin-info');
         $('.paging_simple_numbers').addClass('padding-datatable');
-
-        $('.dataTables_filter').on('click', '.refresh', function () {
-            $('#m_datatable_journal').DataTable().ajax.reload();
-        });
 
         $('.dataTable').on('click', '.select-account_code', function () {
             let uuid = $(this).data('uuid');

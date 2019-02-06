@@ -40,7 +40,9 @@ let Warehouse = {
         $('.paging_simple_numbers').addClass('padding-datatable');
 
         $('.dataTables_filter').on('click', '.refresh', function () {
-            $('#m_datatable_journal').DataTable().ajax.reload();
+            $('#warehouse_datatable').DataTable().ajax.reload();
+            $('#purhcase_order_datatable').DataTable().ajax.reload();
+
         });
 
         $('.dataTable').on('click', '.select-account_code', function () {
