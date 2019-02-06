@@ -98,6 +98,13 @@ let PurchaseOrder = {
                     width: 150,
                 },
                 {
+                    field: 'status',
+                    title: 'Expired Date',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
                     field: 'Actions',
                     width: 110,
                     sortable: !1,
