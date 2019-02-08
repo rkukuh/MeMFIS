@@ -20,6 +20,7 @@ return [
         'licenses' => 10,
         'levels' => 10,
         'projects' => 20,
+        'purchase-requests' => 20,
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,

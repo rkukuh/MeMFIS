@@ -12,6 +12,6 @@ class PurchaseRequests extends Seeder
      */
     public function run()
     {
-        //
+        factory(PurchaseRequest::class, config('memfis.dummies.purchase-requests'))->create();
     }
 }
