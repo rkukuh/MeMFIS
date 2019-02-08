@@ -19,10 +19,23 @@ class PurchaseRequest extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: A purchase request must have one or more projects
+     *
+     * This function will retrieve all the projects of a purchase request.
+     * See: Project's purchase_request() method for the inverse
+     *
+     * @return mixed
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of an task card.
-     * See: Type's taskcards() method for the inverse
+     * See: Type's purchase_requests() method for the inverse
      *
      * @return mixed
      */
