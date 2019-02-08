@@ -387,6 +387,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A purchase request may have zero or many type.
+     *
+     * This function will retrieve all purchase requests of a type.
+     * See: PurchaseRequest's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_requests()
+    {
+        return $this->hasMany(PurchaseRequest::class);
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve all task cards of a type.
