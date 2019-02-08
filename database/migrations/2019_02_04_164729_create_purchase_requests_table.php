@@ -15,7 +15,21 @@ class CreatePurchaseRequestsTable extends Migration
     {
         Schema::create('purchase_requests', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('number');
+            $table->unsignedInteger('type_id');
+            $table->timestamp('requested_at')->nullable();
+            $table->timestamp('required_at')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('type_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->index('number');
         });
     }
 
