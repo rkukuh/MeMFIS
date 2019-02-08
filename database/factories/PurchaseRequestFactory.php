@@ -2,6 +2,8 @@
 
 use Carbon\Carbon;
 use App\Models\Type;
+use App\Models\Unit;
+use App\Models\Item;
 use App\Models\Project;
 use App\Models\Aircraft;
 use Faker\Generator as Faker;
@@ -54,6 +56,33 @@ $factory->afterCreating(PurchaseRequest::class, function ($purchase_request, $fa
         $purchase_request->projects()->saveMany(
             factory(Project::class, rand(2, 3))->make()
         );
+    }
+
+    // Item
+
+    if ($faker->boolean) {
+        $item = null;
+        $unit = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
+            $purchase_request->items()->save($item, [
+                'quantity' => rand(1, 10),
+                'unit_id' => $unit->id,
+                'note' => $faker->randomElement([null, $faker->sentence]),
+            ]);
+        }
     }
 
 });

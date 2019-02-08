@@ -33,6 +33,25 @@ class PurchaseRequest extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A purchase request may have zero or many item.
+     *
+     * This function will retrieve all the items of a purchase request.
+     * See: Item's purchase_requests() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class)
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: A purchase request must have one or more projects
      *
      * This function will retrieve all the projects of a purchase request.
