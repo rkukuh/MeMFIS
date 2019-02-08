@@ -9,6 +9,7 @@ class PurchaseRequest extends MemfisModel
     protected $fillable = [
         'number',
         'type_id',
+        'aircraft_id',
         'requested_at',
         'required_at',
         'description',
@@ -17,6 +18,19 @@ class PurchaseRequest extends MemfisModel
     protected $dates = ['requested_at', 'required_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A purchase request must have an aircraft
+     *
+     * This function will retrieve the aircraft of a purchase request.
+     * See: Aircraft's purchase_requests() method for the inverse
+     *
+     * @return mixed
+     */
+    public function aircraft()
+    {
+        return $this->belongsTo(Aircraft::class);
+    }
 
     /**
      * One-to-Many: A purchase request must have one or more projects
