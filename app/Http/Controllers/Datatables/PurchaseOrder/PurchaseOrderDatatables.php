@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\PurchaseOrder;
 
+use App\Models\PurchaseOrder;
 use App\Models\ListUtil;
-use App\Models\Quotation;
-use Illuminate\Http\Request;
+use Illuminate\Http\Order;
 use App\Http\Controllers\Controller;
 
-class QuotationDatatables extends Controller
+class PurchaseOrderDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class QuotationDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(Quotation::All());
+        $data = $alldata = json_decode(PurchaseOrder::get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -103,6 +103,7 @@ class QuotationDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+
     }
 
     /**

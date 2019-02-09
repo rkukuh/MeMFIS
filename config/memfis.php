@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'version' => '0.8.2',
+    'version' => '0.9.5',
 
     /**
      * Dummy data amount
@@ -20,6 +20,7 @@ return [
         'licenses' => 10,
         'levels' => 10,
         'projects' => 20,
+        'purchase-requests' => 20,
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,
