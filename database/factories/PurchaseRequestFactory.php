@@ -44,18 +44,14 @@ $factory->afterCreating(PurchaseRequest::class, function ($purchase_request, $fa
 
     // Project
 
-    if (Project::count()) {
-        for ($i = 1; $i <= rand(2, 3); $i++) {
+    for ($i = 1; $i <= rand(5, 10); $i++) {
+        if (Project::count()) {
             $project = Project::get()->random();
-
-            $project->purchase_request_id = $purchase_request->id;
-            
-            $project->save();
+        } else {
+            $project = factory(Project::class)->create();
         }
-    } else {
-        $purchase_request->projects()->saveMany(
-            factory(Project::class, rand(2, 3))->make()
-        );
+
+        $purchase_request->projects()->save($project);
     }
 
     // Item
