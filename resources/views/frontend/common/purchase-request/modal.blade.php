@@ -12,7 +12,7 @@
                     <thead>
                         <tr>
                             <th>Code</th>
-                            <th>Name</th>
+                            <th>Type</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

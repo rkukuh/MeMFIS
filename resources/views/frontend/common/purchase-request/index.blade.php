@@ -1,7 +1,7 @@
 <div style="background-color: {{ $background_color or 'beige' }};
             height:{{ $height or '50px' }};
             margin-top:{{ $height or '10px' }};">
-  <div class="search-journal" id="search-journal"
+  <div class="search-purchase_request" id="search-purchase_request"
        style="line-height:{{ $line_height or '50px' }};
               margin-left:{{ $margin_left or '9px' }};">
       {{ $text or 'Search Purchase Request' }}
