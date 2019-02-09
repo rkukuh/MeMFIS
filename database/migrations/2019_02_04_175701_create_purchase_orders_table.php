@@ -17,7 +17,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->unsignedInteger('supplier_id');
+            $table->unsignedInteger('vendor_id');
             $table->unsignedInteger('purchase_request_id');
             $table->timestamp('ordered_at')->nullable();
             $table->timestamp('valid_until')->nullable();
@@ -30,6 +30,11 @@ class CreatePurchaseOrdersTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('vendor_id')
+                    ->references('id')->on('vendors')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('purchase_request_id')
                     ->references('id')->on('purchase_requests')

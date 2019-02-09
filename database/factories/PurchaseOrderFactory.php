@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 use App\Models\Item;
-use App\Models\Supplier;
+use App\Models\Vendor;
 use App\Models\Currency;
 use App\Models\PurchaseOrder;
 use Faker\Generator as Faker;
@@ -14,12 +14,12 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
     return [
         'number' => 'PO-' . $number,
-        'supplier_id' => function () {
-            if (Supplier::count()) {
-                return Supplier::get()->random()->id;
+        'vendor_id' => function () {
+            if (Vendor::count()) {
+                return Vendor::get()->random()->id;
             }
 
-            return factory(Supplier::class)->create()->id;
+            return factory(Vendor::class)->create()->id;
         },
         'purchase_request_id' => function () {
             if (PurchaseRequest::count()) {

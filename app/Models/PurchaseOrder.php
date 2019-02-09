@@ -8,7 +8,7 @@ class PurchaseOrder extends MemfisModel
 {
     protected $fillable = [
         'number',
-        'supplier_id',
+        'vendor_id',
         'purchase_request_id',
         'ordered_at',
         'valid_until',
@@ -75,15 +75,15 @@ class PurchaseOrder extends MemfisModel
     }
 
     /**
-     * One-to-Many: A purchase order may have one supplier.
+     * One-to-Many: A purchase order may have one vendor.
      *
-     * This function will retrieve the supplier of a purchase order.
-     * See: Supplier's purchase_orders() method for the inverse
+     * This function will retrieve the vendor of a purchase order.
+     * See: Vendor's purchase_orders() method for the inverse
      *
      * @return mixed
      */
-    public function supplier()
+    public function vendor()
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Vendor::class);
     }
 }

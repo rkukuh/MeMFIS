@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Supplier;
+use App\Models\Vendor;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\SupplierStore;
-use App\Http\Requests\Admin\SupplierUpdate;
+use App\Http\Requests\Admin\VendorStore;
+use App\Http\Requests\Admin\VendorUpdate;
 
-class SupplierController extends Controller
+class VendorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class SupplierController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\SupplierStore  $request
+     * @param  \App\Http\Requests\Admin\VendorStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SupplierStore $request)
+    public function store(VendorStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Supplier  $supplier
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function show(Supplier $supplier)
+    public function show(Vendor $vendor)
     {
         //
     }
@@ -54,10 +54,10 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Supplier  $supplier
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Supplier $supplier)
+    public function edit(Vendor $vendor)
     {
         //
     }
@@ -65,11 +65,11 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\SupplierUpdate  $request
-     * @param  \App\Models\Supplier  $supplier
+     * @param  \App\Http\Requests\Admin\VendorUpdate  $request
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function update(SupplierUpdate $request, Supplier $supplier)
+    public function update(VendorUpdate $request, Vendor $vendor)
     {
         //
     }
@@ -77,10 +77,10 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Supplier  $supplier
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Supplier $supplier)
+    public function destroy(Vendor $vendor)
     {
         //
     }

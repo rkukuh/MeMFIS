@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\Supplier;
+use App\Models\Vendor;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SupplierDatatables extends Controller
+class VendorDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class SupplierDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(Supplier::all());
+        $data = $alldata = json_decode(Vendor::all());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

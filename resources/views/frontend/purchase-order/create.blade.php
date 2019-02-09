@@ -122,15 +122,15 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Supplier @include('frontend.common.label.required')
+                                                            Vendor @include('frontend.common.label.required')
                                                         </label>
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('id', 'supplier')
-                                                            @slot('text', 'supplier')
-                                                            @slot('name', 'supplier')
-                                                            @slot('id_error', 'supplier')
-                                                        @endcomponent
 
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('id', 'vendor')
+                                                            @slot('text', 'vendor')
+                                                            @slot('name', 'vendor')
+                                                            @slot('id_error', 'vendor')
+                                                        @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
@@ -324,7 +324,7 @@
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/supplier.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>

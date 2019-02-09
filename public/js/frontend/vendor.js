@@ -1,4 +1,4 @@
-let Supplier = {
+let Vendor = {
     init: function () {
         $('.m_datatable').mDatatable({
             data: {
@@ -6,7 +6,7 @@ let Supplier = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-suppliers',
+                        url: '/get-vendors',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -141,7 +141,7 @@ let Supplier = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/supplier',
+                url: '/vendor',
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name
@@ -183,7 +183,7 @@ let Supplier = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/supplier/' + triggerid + '/edit',
+                url: '/vendor/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('id').value = data.id;
                     document.getElementById('name').value = data.name;
@@ -215,7 +215,7 @@ let Supplier = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/supplier/' + triggerid,
+                url: '/vendor/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name
@@ -254,7 +254,7 @@ let Supplier = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/supplier/' + triggerid,
+                url: '/vendor/' + triggerid,
                 success: function (data) {
                     document.getElementById('TitleModalCustomer').innerHTML = 'Detail Customer #ID-' + triggerid;
                     document.getElementById('name').value = data.name;
@@ -290,7 +290,7 @@ let Supplier = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/supplier/' + triggerid + '',
+                        url: '/vendor/' + triggerid + '',
                         success: function (data) {
                             toastr.success(
                                 'Data berhasil dihapus.',
@@ -337,5 +337,5 @@ let Supplier = {
 };
 
 jQuery(document).ready(function () {
-    Supplier.init();
+    Vendor.init();
 });

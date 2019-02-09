@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\Supplier;
 use Illuminate\Database\Seeder;
 
-class Suppliers extends Seeder
+class VendorsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class Suppliers extends Seeder
      */
     public function run()
     {
-        factory(Supplier::class, config('memfis.dummies.suppliers'))->create();
+        //
     }
 }

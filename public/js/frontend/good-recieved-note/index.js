@@ -71,7 +71,7 @@ let Grn = {
                 },
                 {
                     field: 'status',
-                    title: 'Supplier',
+                    title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,

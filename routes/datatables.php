@@ -20,10 +20,10 @@ Route::name('datatables.')->group(function () {
 
         /** MASTER */
 
+        Route::get('/vendor','VendorDatatables@index')->name('vendor.index');
         Route::get('/storage','StorageDatatables@index')->name('storage.index');
         Route::get('/aircraft','AircraftDatatables@index')->name('aircraft.index');
         Route::get('/language','LanguageDatatables@index')->name('language.index');
-        Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
