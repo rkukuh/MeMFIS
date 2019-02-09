@@ -11,10 +11,16 @@ let Grn = {
             ajax: "/datatables/purchase-order/modal",
             columns: [
                 {
-                    data: "code"
+                    data: "ordered_at"
                 },
                 {
-                    data: "name"
+                    data: "number"
+                },
+                {
+                    data: "purchase_request.number"
+                },
+                {
+                    data: "vendor.code"
                 },
                 {
                     data: "Actions"
@@ -25,7 +31,7 @@ let Grn = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-purchase-order   " title="View" data-uuid="' + t.uuid + '" data-code="' + t.number + '" >\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -38,15 +44,14 @@ let Grn = {
         $('.dataTables_info').addClass('margin-info');
         $('.paging_simple_numbers').addClass('padding-datatable');
 
-        $('.dataTable').on('click', '.select-account_code', function () {
+        $('.dataTable').on('click', '.select-purchase-order', function () {
             let uuid = $(this).data('uuid');
             let code = $(this).data('code');
-            let name = $(this).data('name');
 
-            document.getElementById('account_code').value = uuid;
+            document.getElementById('ref-po').value = uuid;
 
-            $('.search-pr').html(code + " - " + name);
-            $('#modal_purchase_request').modal('hide');
+            $('.search-purchase-order').html(code);
+            $('#modal_purchase_order').modal('hide');
         });
     }
 };

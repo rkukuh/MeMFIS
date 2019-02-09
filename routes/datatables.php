@@ -189,6 +189,8 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/','PurchaseOrderDatatables@index')->name('all');
+                Route::get('/modal', 'PurchaseOrderDatatables@purchaseOrderModal')->name('modal.index');
+
 
             });
 

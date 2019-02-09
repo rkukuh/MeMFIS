@@ -11,8 +11,10 @@
                 <table class="table table-striped table-bordered table-hover table-checkable" id="purhcase_order_datatable">
                     <thead>
                         <tr>
-                            <th>Code</th>
-                            <th>Name</th>
+                            <th>Date</th>
+                            <th>PO No</th>
+                            <th>PR No</th>
+                            <th>Vendor</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

@@ -57,13 +57,13 @@ let PurchaseOrder = {
                 },
                 {
                     field: 'valid_until',
-                    title: 'Valied Until',
+                    title: 'Valid Until',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'supplier.code',
-                    title: 'Supplier',
+                    field: 'vendor.code',
+                    title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
                 },
