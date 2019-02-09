@@ -55,13 +55,14 @@ class PurchaseRequest extends MemfisModel
      * One-to-Many: A purchase request must have one or more projects
      *
      * This function will retrieve all the projects of a purchase request.
-     * See: Project's purchase_request() method for the inverse
+     * See: Project's purchase_requests() method for the inverse
      *
      * @return mixed
      */
     public function projects()
     {
-        return $this->hasMany(Project::class);
+        return $this->belongsToMany(Project::class)
+                    ->withTimestamps();
     }
 
     /**
