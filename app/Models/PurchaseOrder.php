@@ -39,6 +39,29 @@ class PurchaseOrder extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A purchase order may have zero or many item.
+     *
+     * This function will retrieve all the items of a purchase order.
+     * See: Item's purchase_orders() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class)
+                    ->withPivot(
+                        'quantity',
+                        'price',
+                        'subtotal_before_discount',
+                        'discount_percentage',
+                        'discount_amount',
+                        'subtotal_after_discount',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: A purchase order may have one purchase request.
      *
      * This function will retrieve the purchase request of a purchase order.
