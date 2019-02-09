@@ -17,6 +17,8 @@ class CreatePurchaseOrdersTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
+            $table->unsignedInteger('supplier_id');
+            $table->unsignedInteger('purchase_request_id');
             $table->timestamp('ordered_at')->nullable();
             $table->timestamp('valid_until')->nullable();
             $table->timestamp('ship_at')->nullable();
@@ -24,8 +26,6 @@ class CreatePurchaseOrdersTable extends Migration
             $table->double('total_before_tax');
             $table->double('tax_amount');
             $table->double('total_after_tax');
-            $table->unsignedInteger('supplier_id');
-            $table->unsignedInteger('purchase_request_id');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -8,6 +8,8 @@ class PurchaseOrder extends MemfisModel
 {
     protected $fillable = [
         'number',
+        'supplier_id',
+        'purchase_request_id',
         'ordered_at',
         'valid_until',
         'ship_at',
@@ -15,8 +17,6 @@ class PurchaseOrder extends MemfisModel
         'total_before_tax',
         'tax_amount',
         'total_after_tax',
-        'purchase_request_id',
-        'supplier_id',
         'description',
     ];
 
