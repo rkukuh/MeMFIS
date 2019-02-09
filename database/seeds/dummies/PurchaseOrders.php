@@ -12,6 +12,6 @@ class PurchaseOrders extends Seeder
      */
     public function run()
     {
-        //
+        factory(PurchaseOrder::class, config('memfis.dummies.purchase-orders'))->create();
     }
 }
