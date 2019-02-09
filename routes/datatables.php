@@ -21,6 +21,7 @@ Route::name('datatables.')->group(function () {
         /** MASTER */
 
         Route::get('/storage','StorageDatatables@index')->name('storage.index');
+        Route::get('/storage/modal','StorageDatatables@storageModal')->name('storage.modal');
         Route::get('/aircraft','AircraftDatatables@index')->name('aircraft.index');
         Route::get('/language','LanguageDatatables@index')->name('language.index');
         Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
