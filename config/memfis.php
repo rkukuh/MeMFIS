@@ -25,6 +25,7 @@ return [
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,
+        'suppliers' => 10,
         'taskcards' => [
             'basic' => 20,
             'eo' => 20,
