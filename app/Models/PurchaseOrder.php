@@ -25,7 +25,20 @@ class PurchaseOrder extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A purchase request may have one or many purchase order.
+     * One-to-Many: A purchase order may have one currency.
+     *
+     * This function will retrieve the currency of a purchase order.
+     * See: Currency's purchase_orders() method for the inverse
+     *
+     * @return mixed
+     */
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
+
+    /**
+     * One-to-Many: A purchase order may have one purchase request.
      *
      * This function will retrieve the purchase request of a purchase order.
      * See: PurchaseRequest's purchase_orders() method for the inverse

@@ -18,6 +18,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedInteger('supplier_id');
+            $table->unsignedInteger('currency_id');
             $table->unsignedInteger('purchase_request_id');
             $table->timestamp('ordered_at')->nullable();
             $table->timestamp('valid_until')->nullable();

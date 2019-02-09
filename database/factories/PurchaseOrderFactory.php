@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use App\Models\Supplier;
+use App\Models\Currency;
 use App\Models\PurchaseOrder;
 use Faker\Generator as Faker;
 use App\Models\PurchaseRequest;
@@ -25,6 +26,13 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
             }
 
             return factory(PurchaseRequest::class)->create()->id;
+        },
+        'currency_id' => function () {
+            if (Currency::count()) {
+                return Currency::get()->random()->id;
+            }
+
+            return factory(Currency::class)->create()->id;
         },
         'ordered_at' => $faker->randomElement([null, Carbon::now()]),
         'valid_until' => $faker->randomElement([null, Carbon::now()]),
