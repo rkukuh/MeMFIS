@@ -4,17 +4,17 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class Supplier extends MemfisModel
+class Vendor extends MemfisModel
 {
     protected $fillable = ['code'];
 
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A purchase order may have one supplier.
+     * One-to-Many: A purchase order may have one vendor.
      *
-     * This function will retrieve all the purchase orders of a supplier.
-     * See: PurchaseOrder's supplier() method for the inverse
+     * This function will retrieve all the purchase orders of a vendor.
+     * See: PurchaseOrder's vendor() method for the inverse
      *
      * @return mixed
      */

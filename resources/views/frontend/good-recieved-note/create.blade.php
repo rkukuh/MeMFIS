@@ -87,7 +87,7 @@
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Supplier @include('frontend.common.label.required')
+                                                            Vendor @include('frontend.common.label.required')
                                                         </label>
                                                         <div class="row">
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
@@ -97,7 +97,7 @@
                                                             </div>
                                                             <div class="col-sm-8 col-md-8 col-lg-8">
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', 'Supplier 1')
+                                                                    @slot('text', 'Vendor 1')
                                                                 @endcomponent
                                                             </div>
                                                         </div>

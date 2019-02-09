@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LicensesTableSeeder::class);
         $this->call(CertificationsTableSeeder::class);
         $this->call(CustomersTableSeeder::class);
-        $this->call(SuppliersTableSeeder::class);
+        $this->call(VendorsTableSeeder::class);
 
         /** POLYMORPH */
 

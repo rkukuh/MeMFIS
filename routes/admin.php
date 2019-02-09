@@ -37,12 +37,12 @@ Route::name('admin.')->group(function () {
 
         Route::resource('item', 'ItemController');
         Route::resource('school', 'SchoolController');
+        Route::resource('vendor', 'VendorController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
-        Route::resource('supplier', 'SupplierController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');

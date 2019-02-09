@@ -25,13 +25,13 @@ return [
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,
-        'suppliers' => 10,
         'taskcards' => [
             'basic' => 20,
             'eo' => 20,
             'si' => 20,
         ],
         'types' => 10,
+        'vendors' => 10,
         'workpackages' => 20,
     ],
 ];
