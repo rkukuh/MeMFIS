@@ -52,7 +52,17 @@
                                 <div class="m-portlet__body">
                                     <fieldset class="border p-2">
                                         <legend class="w-auto">Identifier</legend>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Purchase Request Number
+                                                </label>
 
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', 'PR-2121212')
+                                                @endcomponent
+                                            </div>
+                                        </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
