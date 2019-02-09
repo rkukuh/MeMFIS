@@ -66,6 +66,19 @@ class PurchaseRequest extends MemfisModel
     }
 
     /**
+     * One-to-Many: A purchase request may have one or many purchase order.
+     *
+     * This function will retrieve all the purchase orders of a purchase request.
+     * See: PurchaseOrder's purchase_request() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_orders()
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of an task card.

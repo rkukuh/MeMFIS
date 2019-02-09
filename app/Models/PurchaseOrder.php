@@ -15,8 +15,24 @@ class PurchaseOrder extends MemfisModel
         'total_before_tax',
         'tax_amount',
         'total_after_tax',
+        'purchase_request_id',
         'description',
     ];
 
     protected $dates = ['ordered_at', 'valid_until', 'ship_at'];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A purchase request may have one or many purchase order.
+     *
+     * This function will retrieve the purchase request of a purchase order.
+     * See: PurchaseRequest's purchase_orders() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_request()
+    {
+        return $this->belongsTo(PurchaseRequest::class);
+    }
 }
