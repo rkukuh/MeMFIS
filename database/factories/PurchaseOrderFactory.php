@@ -27,6 +27,9 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
             return factory(PurchaseRequest::class)->create()->id;
         },
+        'ordered_at' => $faker->randomElement([null, Carbon::now()]),
+        'valid_until' => $faker->randomElement([null, Carbon::now()]),
+        'ship_at' => $faker->randomElement([null, Carbon::now()]),
         'currency_id' => function () {
             if (Currency::count()) {
                 return Currency::get()->random()->id;
@@ -34,9 +37,6 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
             return factory(Currency::class)->create()->id;
         },
-        'ordered_at' => $faker->randomElement([null, Carbon::now()]),
-        'valid_until' => $faker->randomElement([null, Carbon::now()]),
-        'ship_at' => $faker->randomElement([null, Carbon::now()]),
         'exchange_rate' => rand(10, 15) * 1000,
         'total_before_tax' => rand(10, 100) * 1000000,
         'tax_amount' => rand(1, 10) * 10000,

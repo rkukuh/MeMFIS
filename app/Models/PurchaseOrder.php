@@ -13,6 +13,7 @@ class PurchaseOrder extends MemfisModel
         'ordered_at',
         'valid_until',
         'ship_at',
+        'currency_id',
         'exchange_rate',
         'total_before_tax',
         'tax_amount',
