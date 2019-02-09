@@ -6,7 +6,7 @@ let PurchaseOrder = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/purchase-order',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -42,49 +42,40 @@ let PurchaseOrder = {
                     }
                 }
             },
-            columns: [{
-                    field: 'id',
-                    title: '#',
-                    sortable: !1,
-                    width: 40
-                },
+            columns: [
                 {
-                    field: 'quotation_number',
+                    field: 'ordered_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
-                    field: 'customer',
+                    field: 'number',
                     title: 'PO Number',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'valid_until',
-                    title: 'Pr Number',
+                    title: 'Valied Until',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
-                    field: 'status',
-                    title: 'Vendor',
+                    field: 'supplier.code',
+                    title: 'Supplier',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
-                    field: 'status',
+                    field: 'total_after_tax',
                     title: 'Total',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
