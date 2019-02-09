@@ -69,6 +69,7 @@
                                 </div>
                             </div>
                             @include('frontend.price-list.modal')
+                            @include('frontend.price-list.modal-edit')
                             @include('frontend.price-list.modal-show')
                             <div class="price_list_datatable" id="price_list_datatable"></div>
                         </div>
