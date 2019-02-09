@@ -6,6 +6,8 @@ use App\MemfisModel;
 
 class Supplier extends MemfisModel
 {
+    protected $fillable = ['code'];
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
