@@ -80,6 +80,7 @@
 @endsection
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
 

@@ -50,12 +50,81 @@
                                     Unit Price @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.number')
-                                    @slot('text', 'price')
-                                    @slot('id', 'price')
-                                    @slot('name', 'price')
-                                    @slot('id_error', 'price')
-                                @endcomponent
+                                <div class='repeater'>
+                                    <div data-repeater-list="group-email">
+                                        <div data-repeater-item>
+                                            <div class=" row">
+                                                <div class="col-sm-5 col-md-8 col-lg-8">
+                                                    @component('frontend.common.input.number')
+                                                        @slot('text', 'price')
+                                                        @slot('id', 'price')
+                                                        @slot('name', 'price')
+                                                        @slot('id_error', 'price')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    @include('frontend.common.buttons.create_repeater')
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    @include('frontend.common.buttons.delete_repeater')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                    <label class="form-control-label">
+                                                        Email @include('frontend.common.label.optional')
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Type.
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                </div>
+
+                                            </div>
+                                            <div class='repeater'>
+                                                <div data-repeater-list="group-email">
+                                                    <div data-repeater-item>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.email')
+                                                                    @slot('name', 'email')
+                                                                    @slot('placeholder', 'Email')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                                                @component('frontend.common.input.radio')
+                                                                    @slot('text', 'Work')
+                                                                    @slot('name', 'type_email')
+                                                                    @slot('id', 'type_email')
+                                                                    @slot('value', 'work')
+                                                                @endcomponent
+                                                                @component('frontend.common.input.radio')
+                                                                    @slot('name', 'type_email')
+                                                                    @slot('id', 'type_email')
+                                                                    @slot('text', 'Personal')
+                                                                    @slot('value', 'personal')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @include('frontend.common.buttons.create_repeater')
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @include('frontend.common.buttons.delete_repeater')
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --}}
                             </div>
                         </div>
                     </div>
