@@ -14,6 +14,7 @@ return [
         'currencies' => 10,
         'customers' => 20,
         'employees' => 50,
+        'goods-received' => 20,
         'items' => 50,
         'journals' => 100,
         'languages' => 10,

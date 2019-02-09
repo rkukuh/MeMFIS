@@ -39,6 +39,19 @@ class PurchaseOrder extends MemfisModel
     }
 
     /**
+     * One-to-Many: A GRN may have one purchase order.
+     *
+     * This function will retrieve all the GRNs of a purchase order.
+     * See: GoodsReceived's purchase_order() method for the inverse
+     *
+     * @return mixed
+     */
+    public function goods_receiveds()
+    {
+        return $this->hasMany(GoodsReceived::class);
+    }
+
+    /**
      * Many-to-Many: A purchase order may have zero or many item.
      *
      * This function will retrieve all the items of a purchase order.

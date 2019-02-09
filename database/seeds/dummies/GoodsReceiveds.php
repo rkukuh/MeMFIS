@@ -12,6 +12,6 @@ class GoodsReceiveds extends Seeder
      */
     public function run()
     {
-        //
+        factory(GoodsReceived::class, config('memfis.dummies.goods-received'))->create();
     }
 }
