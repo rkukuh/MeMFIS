@@ -245,9 +245,9 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
 
-        /** GOOD RECIEVED NOTES  */
-        Route::view('/good-recieved-note', 'frontend.good-recieved-note.index')->name('good-recieved-note.index');
-        Route::view('/good-recieved-note/create', 'frontend.good-recieved-note.create')->name('good-recieved-note.create');
+        /** GOOD RECEIVED NOTES  */
+        Route::view('/good-received-note', 'frontend.good-received-note.index')->name('good-received-note.index');
+        Route::view('/good-received-note/create', 'frontend.good-received-note.create')->name('good-received-note.create');
 
 
     });

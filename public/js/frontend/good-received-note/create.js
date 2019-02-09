@@ -1,4 +1,4 @@
-let PurchaseOrder = {
+let Grn = {
     init: function () {
         $('.purchase_order_datatable').mDatatable({
             data: {
@@ -181,5 +181,5 @@ let PurchaseOrder = {
 };
 
 jQuery(document).ready(function () {
-    PurchaseOrder.init();
+    Grn.init();
 });
