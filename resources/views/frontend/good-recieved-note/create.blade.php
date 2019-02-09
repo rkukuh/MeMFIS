@@ -186,13 +186,13 @@
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row" style="margin-top:22px">
-                                                            <label for="example-text-input" class="col-2 col-form-label">Recieved By</label>
+                                                            <label for="example-text-input" class="col-2 col-form-label">Received By</label>
                                                             <div class="col-10">
                                                                 @component('frontend.common.input.text')
-                                                                    @slot('id', 'recieved-by')
-                                                                    @slot('text', 'recieved-by')
-                                                                    @slot('name', 'recieved-by')
-                                                                    @slot('id_error', 'recieved-by')
+                                                                    @slot('id', 'received-by')
+                                                                    @slot('text', 'received-by')
+                                                                    @slot('name', 'received-by')
+                                                                    @slot('id_error', 'received-by')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
