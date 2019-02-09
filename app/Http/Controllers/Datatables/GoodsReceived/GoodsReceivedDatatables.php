@@ -16,7 +16,7 @@ class GoodsReceivedDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(GoodsReceived::get());
+        $data = $alldata = json_decode(GoodsReceived::with('purchase_order')->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

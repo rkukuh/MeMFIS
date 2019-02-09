@@ -99,6 +99,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/good-received-note/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/daterange/good-received-note.js') }}" ></script>
+    <script src="{{ asset('js/frontend/functions/daterange/good-recieved-note.js') }}" ></script>
 
 @endpush
