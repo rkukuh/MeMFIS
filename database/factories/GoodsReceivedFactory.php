@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Storage;
 use App\Models\GoodsReceived;
 use App\Models\PurchaseOrder;
 use Faker\Generator as Faker;
@@ -21,6 +22,13 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
             }
 
             return factory(PurchaseOrder::class)->create()->id;
+        },
+        'storage_id' => function () {
+            if (Storage::count()) {
+                return Storage::get()->random()->id;
+            }
+
+            return factory(Storage::class)->create()->id;
         },
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];

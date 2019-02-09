@@ -14,6 +14,7 @@ class GoodsReceived extends MemfisModel
         'vehicle_no',
         'container_no',
         'purchase_order_id',
+        'storage_id',
         'description',
     ];
 
@@ -32,5 +33,18 @@ class GoodsReceived extends MemfisModel
     public function purchase_order()
     {
         return $this->belongsTo(PurchaseOrder::class);
+    }
+
+    /**
+     * One-to-Many: A GRN may have one storage.
+     *
+     * This function will retrieve the storage of a GRN.
+     * See: Storage's goods_receiveds() method for the inverse
+     *
+     * @return mixed
+     */
+    public function storage()
+    {
+        return $this->belongsTo(Storage::class);
     }
 }
