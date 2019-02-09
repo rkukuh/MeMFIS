@@ -48,7 +48,7 @@ class PurchaseRequestController extends Controller
      */
     public function show(PurchaseRequest $purchaseRequest)
     {
-        //
+        return view('frontend.purchase-request.show');
     }
 
     /**
@@ -59,7 +59,7 @@ class PurchaseRequestController extends Controller
      */
     public function edit(PurchaseRequest $purchaseRequest)
     {
-        //
+        return view('frontend.purchase-request.edit');
     }
 
     /**
