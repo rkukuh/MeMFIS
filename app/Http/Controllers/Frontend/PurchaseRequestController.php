@@ -16,7 +16,7 @@ class PurchaseRequestController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.purchase-request.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class PurchaseRequestController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.purchase-request.create');
     }
 
     /**
