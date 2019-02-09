@@ -20,10 +20,12 @@ return [
         'licenses' => 10,
         'levels' => 10,
         'projects' => 20,
+        'purchase-orders' => 20,
         'purchase-requests' => 20,
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,
+        'suppliers' => 10,
         'taskcards' => [
             'basic' => 20,
             'eo' => 20,

@@ -12,6 +12,6 @@ class Suppliers extends Seeder
      */
     public function run()
     {
-        //
+        factory(Supplier::class, config('memfis.dummies.suppliers'))->create();
     }
 }
