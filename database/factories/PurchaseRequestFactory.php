@@ -14,7 +14,7 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
     $number  = $faker->unixTime();
 
     return [
-        'number' => $number,
+        'number' => 'PR-' . $number,
         'type_id' => function () use ($faker) {
             if (Type::ofPurchaseRequest()->count()) {
                 Type::ofPurchaseRequest()->get()->random()->id;
