@@ -24,6 +24,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->double('total_before_tax');
             $table->double('tax_amount');
             $table->double('total_after_tax');
+            $table->unsignedInteger('supplier_id');
             $table->unsignedInteger('purchase_request_id');
             $table->text('description')->nullable();
             $table->timestamps();

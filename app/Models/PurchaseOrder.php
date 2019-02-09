@@ -16,6 +16,7 @@ class PurchaseOrder extends MemfisModel
         'tax_amount',
         'total_after_tax',
         'purchase_request_id',
+        'supplier_id',
         'description',
     ];
 
@@ -34,5 +35,18 @@ class PurchaseOrder extends MemfisModel
     public function purchase_request()
     {
         return $this->belongsTo(PurchaseRequest::class);
+    }
+
+    /**
+     * One-to-Many: A purchase order may have one supplier.
+     *
+     * This function will retrieve the supplier of a purchase order.
+     * See: Supplier's purchase_orders() method for the inverse
+     *
+     * @return mixed
+     */
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }
