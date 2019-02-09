@@ -46,48 +46,53 @@
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <label class="form-control-label">
-                                            Unit Price
-                                        </label>
-                                        @component('frontend.common.label.data-info')
-                                            @slot('text', '100000')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <label class="form-control-label">
-                                            Unit Price
-                                        </label>
-                                        @component('frontend.common.label.data-info')
-                                            @slot('text', '200000')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <label class="form-control-label">
-                                            Unit Price
-                                        </label>
-                                        @component('frontend.common.label.data-info')
-                                            @slot('text', '300000')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <label class="form-control-label">
-                                            Unit Price
-                                        </label>
-                                        @component('frontend.common.label.data-info')
-                                            @slot('text', '400000')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <label class="form-control-label">
-                                            Unit Price
-                                        </label>
-                                        @component('frontend.common.label.data-info')
-                                            @slot('text', '500000')
-                                        @endcomponent
-                                    </div>
-                                </div>
+                                <table  width="100%" >
+                                    <tr>
+                                        <td>Unit Price 1</td>
+                                        <td>
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', '200000')
+                                            @endcomponent
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Unit Price 2</td>
+                                        <td>
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', '200000')
+                                            @endcomponent
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Unit Price 3</td>
+                                        <td>
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', '200000')
+                                            @endcomponent
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Unit Price 4</td>
+                                        <td>
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', '200000')
+                                            @endcomponent
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Unit Price 5</td>
+                                        <td>
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', '200000')
+                                            @endcomponent
+
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
