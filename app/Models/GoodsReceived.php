@@ -13,6 +13,7 @@ class GoodsReceived extends MemfisModel
         'received_at',
         'vehicle_no',
         'container_no',
+        'purchase_order_id',
         'description',
     ];
 
