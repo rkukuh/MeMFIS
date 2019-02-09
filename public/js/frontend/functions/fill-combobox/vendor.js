@@ -1,19 +1,19 @@
 $(document).ready(function () {
-    customer = function () {
+    vendor = function () {
         $.ajax({
-            url: '/get-customers/',
+            url: '/get-vendors/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
 
-                $('select[name="customer"]').empty();
+                $('select[name="vendor"]').empty();
 
-                $('select[name="customer"]').append(
-                    '<option value=""> Select a Customer </option>'
+                $('select[name="vendor"]').append(
+                    '<option value=""> Select a Vendor </option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="customer"]').append(
+                    $('select[name="vendor"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
@@ -21,5 +21,5 @@ $(document).ready(function () {
         });
     };
 
-    customer();
+    vendor();
 });
