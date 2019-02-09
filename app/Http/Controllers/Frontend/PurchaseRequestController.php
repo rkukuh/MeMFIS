@@ -82,6 +82,8 @@ class PurchaseRequestController extends Controller
      */
     public function destroy(PurchaseRequest $purchaseRequest)
     {
-        //
+        $purchaseRequest->delete();
+
+        return response()->json($purchaseRequest);
     }
 }

@@ -1,4 +1,4 @@
-let Item = {
+let PurchaseRequest = {
     init: function () {
         function strtrunc(str, max, add) {
             add = add || '...';
@@ -114,7 +114,7 @@ let Item = {
         });
 
         $('.purchase_request_datatable').on('click', '.delete', function () {
-            let item_uuid = $(this).data('id');
+            let purchase_request_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to remove?',
@@ -133,7 +133,7 @@ let Item = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/purchase-request/' + item_uuid + '',
+                        url: '/purchase-request/' + purchase_request_uuid + '',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -160,5 +160,5 @@ let Item = {
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    PurchaseRequest.init();
 });
