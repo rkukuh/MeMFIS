@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use App\Models\GoodsReceived;
+use App\Models\PurchaseOrder;
 use Faker\Generator as Faker;
 
 $factory->define(GoodsReceived::class, function (Faker $faker) {
@@ -14,6 +15,13 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
         'received_at' => $faker->randomElement([null, Carbon::now()]),
         'vehicle_no' => $faker->randomElement([null, $plate_no]),
         'container_no' => $faker->randomElement([null, 'CON-' . $faker->numberBetween($min = 1000, $max = 9999)]),
+        'purchase_order_id' => function () {
+            if (PurchaseOrder::count()) {
+                return PurchaseOrder::get()->random()->id;
+            }
+
+            return factory(PurchaseOrder::class)->create()->id;
+        },
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
 

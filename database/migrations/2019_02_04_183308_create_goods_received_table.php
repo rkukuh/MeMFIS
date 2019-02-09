@@ -20,9 +20,15 @@ class CreateGoodsReceivedTable extends Migration
             $table->timestamp('received_at')->nullable();
             $table->string('vehicle_no')->nullable();
             $table->string('container_no')->nullable();
+            $table->unsignedInteger('purchase_order_id');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('purchase_order_id')
+                    ->references('id')->on('purchase_orders')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->index('number');
         });
