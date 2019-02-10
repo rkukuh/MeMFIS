@@ -24,16 +24,16 @@ class GoodsReceived extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A GRN may have one employee.
+     * One-to-Many: A GRN may have one employee (to receive the item).
      *
      * This function will retrieve the employee of a GRN.
      * See: Employee's goods_receiveds() method for the inverse
      *
      * @return mixed
      */
-    public function received_by()
+    public function receivedBy()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Employee::class, 'received_by');
     }
 
     /**
