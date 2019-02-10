@@ -17,6 +17,7 @@ class CreateGoodsReceivedTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
+            $table->unsignedInteger('received_by');
             $table->timestamp('received_at')->nullable();
             $table->string('vehicle_no')->nullable();
             $table->string('container_no')->nullable();
@@ -25,6 +26,11 @@ class CreateGoodsReceivedTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('received_by')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('purchase_order_id')
                     ->references('id')->on('purchase_orders')

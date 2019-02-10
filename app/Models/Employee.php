@@ -66,6 +66,19 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-Many: A GRN may have one storage.
+     *
+     * This function will retrieve all the GRNs of an employee.
+     * See: GoodsReceived's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function goods_receiveds()
+    {
+        return $this->hasMany(GoodsReceived::class);
+    }
+
+    /**
      * Polymorphic: An employee can have zero or many phones.
      *
      * This function will get all of the employee's phones.
