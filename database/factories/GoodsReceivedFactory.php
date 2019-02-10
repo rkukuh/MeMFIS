@@ -38,6 +38,14 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
 
             return factory(Storage::class)->create()->id;
         },
+        'approved_by' => function () {
+            if (Employee::count()) {
+                return Employee::get()->random()->id;
+            }
+
+            return factory(Employee::class)->create()->id;
+        },
+        'approved_at' => $faker->randomElement([null, Carbon::now()]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
 
