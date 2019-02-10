@@ -66,10 +66,10 @@ class Employee extends MemfisModel
     }
 
     /**
-     * One-to-Many: A GRN may have one storage.
+     * One-to-Many: A GRN may have one employee (to receive the item).
      *
      * This function will retrieve all the GRNs of an employee.
-     * See: GoodsReceived's employee() method for the inverse
+     * See: GoodsReceived's receivedBy() method for the inverse
      *
      * @return mixed
      */
