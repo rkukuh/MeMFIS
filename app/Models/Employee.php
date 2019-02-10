@@ -66,16 +66,29 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-Many: A GRN may have one employee (to approve the GRN).
+     *
+     * This function will retrieve all the GRNs of an approver.
+     * See: GoodsReceived's approvedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function grn_approved()
+    {
+        return $this->hasMany(GoodsReceived::class, 'approved_by');
+    }
+
+    /**
      * One-to-Many: A GRN may have one employee (to receive the item).
      *
-     * This function will retrieve all the GRNs of an employee.
+     * This function will retrieve all the GRNs of a receiver.
      * See: GoodsReceived's receivedBy() method for the inverse
      *
      * @return mixed
      */
-    public function goods_receiveds()
+    public function grn_received()
     {
-        return $this->hasMany(GoodsReceived::class);
+        return $this->hasMany(GoodsReceived::class, 'received_by');
     }
 
     /**
