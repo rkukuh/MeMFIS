@@ -73,7 +73,7 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function grn_receivers()
+    public function grn_received()
     {
         return $this->hasMany(GoodsReceived::class, 'received_by');
     }
