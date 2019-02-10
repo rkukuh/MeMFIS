@@ -10,6 +10,7 @@ class GoodsReceived extends MemfisModel
 
     protected $fillable = [
         'number',
+        'received_by',
         'received_at',
         'vehicle_no',
         'container_no',
@@ -21,6 +22,19 @@ class GoodsReceived extends MemfisModel
     protected $dates = ['received_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A GRN may have one employee.
+     *
+     * This function will retrieve the employee of a GRN.
+     * See: Employee's goods_receiveds() method for the inverse
+     *
+     * @return mixed
+     */
+    public function received_by()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 
     /**
      * One-to-Many: A GRN may have one purchase order.
