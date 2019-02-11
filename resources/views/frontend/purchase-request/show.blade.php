@@ -68,34 +68,17 @@
                                                 <label class="form-control-label">
                                                    Type @include('frontend.common.label.required')
                                                 </label>
-                                                <div class="form-group m-form__group row" >
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('text', 'Heavy Maintenance')
-                                                            @slot('name', 'type')
-                                                            @slot('id', 'type')
-                                                            @slot('value', 'hm')
-                                                        @endcomponent
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'type')
-                                                            @slot('id', 'type')
-                                                            @slot('text', 'General')
-                                                            @slot('value', 'general')
-                                                        @endcomponent
-
-                                                    </div>
-                                                </div>
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', 'General')
+                                                @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Ref Project No. @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'project')
-                                                    @slot('text', 'project')
-                                                    @slot('name', 'project')
-                                                    @slot('id_error', 'project')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', 'PR-2121212')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -105,11 +88,8 @@
                                                     Date @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.datepicker')
-                                                    @slot('id', 'date')
-                                                    @slot('text', 'Date')
-                                                    @slot('name', 'date')
-                                                    @slot('id_error', 'date')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', '10-10-2018')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -117,11 +97,8 @@
                                                     Date Required @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.datepicker')
-                                                    @slot('id', 'date-required')
-                                                    @slot('text', 'Date Required')
-                                                    @slot('name', 'date-required')
-                                                    @slot('id_error', 'date-required')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', '10-10-2018')
                                                 @endcomponent
                                             </div>
                                         </div>
