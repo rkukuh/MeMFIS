@@ -6,7 +6,7 @@ let Grn = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/goods-received',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -42,42 +42,37 @@ let Grn = {
                     }
                 }
             },
-            columns: [{
-                    field: 'id',
-                    title: '#',
-                    sortable: !1,
-                    width: 40
-                },
+            columns: [
                 {
-                    field: 'quotation_number',
+                    field: 'received_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'customer',
+                    field: 'purchase_order.number',
+                    title: 'PR Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'purchase_order.number',
                     title: 'PO Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'valid_until',
-                    title: 'Pr Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'status',
-                    title: 'Supplier',
+                    field: 'purchase_order.number',
+                    title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'status',
+                    field: 'received_by.first_name',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
