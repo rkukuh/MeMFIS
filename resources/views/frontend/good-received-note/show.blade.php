@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
                                     Good Received Note
@@ -60,11 +60,8 @@
                                                                     Date @include('frontend.common.label.required')
                                                                 </label>
 
-                                                                @component('frontend.common.input.datepicker')
-                                                                    @slot('id', 'date')
-                                                                    @slot('text', 'Date')
-                                                                    @slot('name', 'date')
-                                                                    @slot('id_error', 'date')
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '10-12-2018')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -78,11 +75,8 @@
                                                         <label class="form-control-label">
                                                             Ref PO @include('frontend.common.label.required')
                                                         </label>
-                                                        @include('frontend.common.purchase-order.index')
-
-                                                        @component('frontend.common.input.hidden')
-                                                            @slot('id', 'ref-po')
-                                                            @slot('name', 'ref-po')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'PO-1130549030')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -120,11 +114,8 @@
                                                                     Sup DO No.
                                                                 </label>
 
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('id', 'do-no')
-                                                                    @slot('text', 'do-no')
-                                                                    @slot('name', 'do-no')
-                                                                    @slot('id_error', 'do-no')
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '211232')
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -132,10 +123,8 @@
                                                                     Ref Date
                                                                 </label>
 
-                                                                @component('frontend.common.input.datepicker')
-                                                                    @slot('text', 'ref-date')
-                                                                    @slot('name', 'ref-date')
-                                                                    @slot('id', 'ref-date')
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '10-12-2018')
                                                                 @endcomponent
                                                             </div>
 
@@ -157,11 +146,8 @@
                                                             Warehouse @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @include('frontend.common.warehouse.index')
-
-                                                        @component('frontend.common.input.hidden')
-                                                            @slot('id', 'warehouse')
-                                                            @slot('name', 'warehouse')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'ST-DUM-1148160410 - Storage Dummy #1148160410')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -176,45 +162,32 @@
                                                             Description @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.textarea')
-                                                            @slot('id', 'description')
+                                                        @component('frontend.common.label.data-info')
                                                             @slot('text', 'Description')
-                                                            @slot('name', 'description')
-                                                            @slot('rows', '7')
-                                                            @slot('id_error', 'description')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row" style="margin-top:22px">
                                                             <label for="example-text-input" class="col-2 col-form-label">Received By</label>
                                                             <div class="col-10">
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('id', 'received-by')
-                                                                    @slot('text', 'received-by')
-                                                                    @slot('name', 'received-by')
-                                                                    @slot('id_error', 'received-by')
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '10-12-2018')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
                                                         <div class="form-group m-form__group row" >
                                                             <label for="example-text-input" class="col-2 col-form-label">Vehicle No</label>
                                                             <div class="col-10">
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('id', 'vehicle-no')
-                                                                    @slot('text', 'vehicle-no')
-                                                                    @slot('name', 'vehicle-no')
-                                                                    @slot('id_error', 'vehicle-no')
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '1231222')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
                                                         <div class="form-group m-form__group row" >
                                                             <label for="example-text-input" class="col-2 col-form-label">Container No</label>
                                                             <div class="col-10">
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('id', 'container-no')
-                                                                    @slot('text', 'container-no')
-                                                                    @slot('name', 'container-no')
-                                                                    @slot('id_error', 'container-no')
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '575673')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
