@@ -61,7 +61,7 @@
                                                                 </label>
 
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', 'PO-1130549030')
+                                                                    @slot('text', $purchaseOrder->number)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -72,7 +72,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Dollar')
+                                                            @slot('text', $purchaseOrder->currency->name)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -94,7 +94,7 @@
                                                                 </label>
 
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '2019-02-11')
+                                                                    @slot('text', $purchaseOrder->valid_until)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -105,7 +105,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', '13.500')
+                                                            @slot('text', $purchaseOrder->exchange_rate)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'PR-2121212')
+                                                            @slot('text', $purchaseOrder->purchase_request->number)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -125,7 +125,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', '10-10-2018')
+                                                            @slot('text', $purchaseOrder->ship_at)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -136,7 +136,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'SUP-745822449')
+                                                            @slot('text', $purchaseOrder->vendor->code)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -167,7 +167,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Description')
+                                                            @slot('text', $purchaseOrder->description)
                                                         @endcomponent
                                                     </div>
                                                 </div>

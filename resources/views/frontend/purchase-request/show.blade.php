@@ -59,7 +59,7 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'PR-2121212')
+                                                    @slot('text', $purchaseRequest->number)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                                    Type @include('frontend.common.label.required')
                                                 </label>
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'General')
+                                                    @slot('text', $purchaseRequest->type->name)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -98,7 +98,7 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', '10-10-2018')
+                                                    @slot('text', $purchaseRequest->required_at)
                                                 @endcomponent
                                             </div>
                                         </div>
