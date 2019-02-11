@@ -177,6 +177,7 @@
                                                 @slot('rows', '10')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
+                                                @slot('value', $purchaseRequest->description)
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>
