@@ -82,9 +82,8 @@ class TaskCardController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy($taskCard)
+    public function destroy(TaskCard $taskCard)
     {
-        $taskCard = TaskCard::where('uuid',$taskCard)->first();
         $taskCard->delete();
 
         return response()->json($taskCard);
