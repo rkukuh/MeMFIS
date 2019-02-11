@@ -83,6 +83,26 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: A GRN may have zero or many item.
+     *
+     * This function will retrieve all the GRNs of an item.
+     * See: GoodsReceived's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function goods_received()
+    {
+        return $this->belongsToMany(GoodsReceived::class)
+                    ->withPivot(
+                        'quantity',
+                        'already_received',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: An item may have zero or one account code (journal).
      *
      * This function will retrieve the account code (journal) of an item.
