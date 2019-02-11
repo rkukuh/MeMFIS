@@ -48,7 +48,9 @@ class PurchaseOrderController extends Controller
      */
     public function show(PurchaseOrder $purchaseOrder)
     {
-        return view('frontend.purchase-order.show');
+        return view('frontend.purchase-order.show', [
+            'purchaseOrder' => $purchaseOrder,
+        ]);
     }
 
     /**
@@ -59,7 +61,10 @@ class PurchaseOrderController extends Controller
      */
     public function edit(PurchaseOrder $purchaseOrder)
     {
-        return view('frontend.purchase-order.edit');
+        return view('frontend.purchase-order.edit', [
+            'purchaseOrder' => $purchaseOrder,
+        ]);
+
     }
 
     /**
