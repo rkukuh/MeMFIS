@@ -44,6 +44,15 @@ let Grn = {
             },
             columns: [
                 {
+                    field: 'number',
+                    title: 'GRN Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<a href="/goods-received/'+t.uuid+'">' + t.number + "</a>"
+                    }
+                },
+                {
                     field: 'received_at',
                     title: 'Date',
                     sortable: 'asc',
