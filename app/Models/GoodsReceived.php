@@ -39,6 +39,26 @@ class GoodsReceived extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A GRN may have zero or many item.
+     *
+     * This function will retrieve all the items of a GRN.
+     * See: Item's goods_received() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class)
+                    ->withPivot(
+                        'quantity',
+                        'already_received',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: A GRN may have one employee (to receive the item).
      *
      * This function will retrieve the receiver of a GRN.

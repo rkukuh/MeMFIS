@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Unit;
+use App\Models\Item;
 use App\Models\Storage;
 use App\Models\Employee;
 use App\Models\GoodsReceived;
@@ -48,5 +50,38 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
         'approved_at' => $faker->randomElement([null, Carbon::now()]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
+
+});
+
+/** CALLBACKS */
+
+$factory->afterCreating(GoodsReceived::class, function ($goods_received, $faker) {
+
+    // Item
+
+    if ($faker->boolean) {
+        $item = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
+            $goods_received->items()->save($item, [
+                'quantity' => rand(1, 10),
+                'already_received' => rand(2, 3),
+                'unit_id' => $unit->id,
+                'note' => $faker->randomElement([null, $faker->sentence]),
+            ]);
+        }
+    }
 
 });
