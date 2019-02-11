@@ -68,7 +68,7 @@ let Grn = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'approved_by.first_name',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
