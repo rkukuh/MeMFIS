@@ -71,7 +71,13 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return view('frontend.item.show', compact('item'));
+        return view('frontend.item.show', [
+            'item' => $item,
+            'units' => $this->units,
+            'categories' => $this->categories,
+            'manufacturers' => $this->manufacturers,
+        ]);
+
     }
 
     /**
