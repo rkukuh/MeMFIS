@@ -237,6 +237,7 @@
                                                             @slot('id', 'description')
                                                             @slot('text', 'Description')
                                                             @slot('name', 'description')
+                                                            @slot('value', $purchaseOrder->description)
                                                             @slot('rows', '3')
                                                             @slot('id_error', 'description')
                                                         @endcomponent
