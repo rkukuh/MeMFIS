@@ -49,7 +49,7 @@ class PurchaseRequestController extends Controller
     public function show(PurchaseRequest $purchaseRequest)
     {
         return view('frontend.purchase-request.show', [
-            'purchaseOrder' => $purchaseRequest,
+            'purchaseRequest' => $purchaseRequest,
         ]);
 
     }
