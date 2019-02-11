@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
                                     Purchase Order
@@ -61,7 +61,7 @@
                                                                 </label>
 
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', 'PR-2121212')
+                                                                    @slot('text', 'PO-1130549030')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -71,11 +71,8 @@
                                                             Currency @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('id', 'currency')
-                                                            @slot('text', 'Currency')
-                                                            @slot('name', 'currency')
-                                                            @slot('id_error', 'currency')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'Dollar')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -87,11 +84,8 @@
                                                                     Date @include('frontend.common.label.required')
                                                                 </label>
 
-                                                                @component('frontend.common.input.datepicker')
-                                                                    @slot('id', 'date')
-                                                                    @slot('text', 'Date')
-                                                                    @slot('name', 'date')
-                                                                    @slot('id_error', 'date')
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '10-10-2018')
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -99,11 +93,8 @@
                                                                     Valid Until @include('frontend.common.label.required')
                                                                 </label>
 
-                                                                @component('frontend.common.input.datepicker')
-                                                                    @slot('id', 'valid_until')
-                                                                    @slot('text', 'Valid Until')
-                                                                    @slot('name', 'valid_until')
-                                                                    @slot('id_error', 'valid_until')
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', '2019-02-11')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -113,11 +104,8 @@
                                                             Exchange Rate @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.number')
-                                                            @slot('text', 'exchange')
-                                                            @slot('input_prepend', 'Rp')
-                                                            @slot('name', 'exchange')
-                                                            @slot('id', 'exchange')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', '13.500')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -126,11 +114,9 @@
                                                         <label class="form-control-label">
                                                             Ref PR @include('frontend.common.label.required')
                                                         </label>
-                                                        @include('frontend.common.purchase-request.index')
 
-                                                        @component('frontend.common.input.hidden')
-                                                            @slot('id', 'ref-pr')
-                                                            @slot('name', 'ref-pr')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'PR-2121212')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -138,11 +124,8 @@
                                                             Date Shipping @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.datepicker')
-                                                            @slot('id', 'date_shipping')
-                                                            @slot('text', 'Date Shipping')
-                                                            @slot('name', 'date_shipping')
-                                                            @slot('id_error', 'date_shipping')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', '10-10-2018')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -152,11 +135,8 @@
                                                             Vendor @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('id', 'vendor')
-                                                            @slot('text', 'vendor')
-                                                            @slot('name', 'vendor')
-                                                            @slot('id_error', 'vendor')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'SUP-745822449')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -164,12 +144,8 @@
                                                             Shipping Address @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.textarea')
-                                                            @slot('id', 'shipping_address')
-                                                            @slot('text', 'Shipping Adddress')
-                                                            @slot('name', 'shipping_address')
-                                                            @slot('rows', '3')
-                                                            @slot('id_error', 'shipping_address')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'Jl RS Fatmawati 20 Rukan Fatmawati Mas Bl III/319,Cipete Utara')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -178,54 +154,11 @@
                                                         <label class="form-control-label">
                                                             Term of Payment @include('frontend.common.label.required')
                                                         </label>
-                                                        <div class="form-group m-form__group row" >
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <div class="form-group m-form__group row">
-                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                        <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                                @component('frontend.common.input.radio')
-                                                                                    @slot('name', 'top')
-                                                                                    @slot('id', 'top')
-                                                                                    @slot('value', 'cash')
-                                                                                @endcomponent
-                                                                            </div>
-                                                                            <div class="col-sm-11 col-md-11 col-lg-11">
-                                                                                Cash
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                        <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                                @component('frontend.common.input.radio')
-                                                                                    @slot('name', 'top')
-                                                                                    @slot('id', 'top')
-                                                                                    @slot('value', 'non-cash')
-                                                                                @endcomponent
-                                                                            </div>
-                                                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                                @component('frontend.common.input.number')
-                                                                                    @slot('text', 'Term of Payment')
-                                                                                    @slot('id', 'term_of_payment')
-                                                                                    @slot('input_append', 'Hari')
-                                                                                    @slot('name', 'term_of_payment')
-                                                                                    @slot('id_error', 'term_of_payment')
-                                                                                @endcomponent
-                                                                            </div>
-                                                                            <div class="col-sm-5 col-md-5 col-lg-5">
-                                                                                @component('frontend.common.input.datepicker')
-                                                                                    @slot('id', 'date')
-                                                                                    @slot('text', 'Date')
-                                                                                    @slot('name', 'date')
-                                                                                    @slot('id_error', 'date')
-                                                                                @endcomponent
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', 'cash')
+                                                        @endcomponent
+                                                        
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
 
@@ -233,12 +166,8 @@
                                                             Description @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.textarea')
-                                                            @slot('id', 'description')
+                                                        @component('frontend.common.label.data-info')
                                                             @slot('text', 'Description')
-                                                            @slot('name', 'description')
-                                                            @slot('rows', '3')
-                                                            @slot('id_error', 'description')
                                                         @endcomponent
                                                     </div>
                                                 </div>
