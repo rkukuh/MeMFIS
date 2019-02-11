@@ -101,6 +101,9 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
+                            '<a href="/purchase-request/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid +'">' +
+                                '<i class="la la-check-square-o"></i>' +
+                            '</a>' +
                             '<a href="/purchase-request/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +

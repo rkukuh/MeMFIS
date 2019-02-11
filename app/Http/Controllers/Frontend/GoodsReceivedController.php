@@ -16,7 +16,7 @@ class GoodsReceivedController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.good-received-note.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class GoodsReceivedController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.good-received-note.create');
     }
 
     /**
@@ -48,7 +48,10 @@ class GoodsReceivedController extends Controller
      */
     public function show(GoodsReceived $goodsReceived)
     {
-        //
+        return view('frontend.good-received-note.show', [
+            'goodsReceived' => $goodsReceived,
+        ]);
+
     }
 
     /**
@@ -59,7 +62,10 @@ class GoodsReceivedController extends Controller
      */
     public function edit(GoodsReceived $goodsReceived)
     {
-        //
+        return view('frontend.good-received-note.edit', [
+            'goodsReceived' => $goodsReceived,
+        ]);
+
     }
 
     /**
@@ -82,6 +88,8 @@ class GoodsReceivedController extends Controller
      */
     public function destroy(GoodsReceived $goodsReceived)
     {
-        //
+        $goodsreceived->delete();
+
+        return response()->json($goodsreceived);
     }
 }
