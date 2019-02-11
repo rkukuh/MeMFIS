@@ -48,7 +48,10 @@ class GoodsReceivedController extends Controller
      */
     public function show(GoodsReceived $goodsReceived)
     {
-        return view('frontend.good-received-note.show');
+        return view('frontend.good-received-note.show', [
+            'purchaseOrder' => $purchaseOrder,
+        ]);
+
     }
 
     /**
@@ -59,7 +62,10 @@ class GoodsReceivedController extends Controller
      */
     public function edit(GoodsReceived $goodsReceived)
     {
-        return view('frontend.good-received-note.edit');
+        return view('frontend.good-received-note.edit', [
+            'purchaseOrder' => $purchaseOrder,
+        ]);
+
     }
 
     /**
