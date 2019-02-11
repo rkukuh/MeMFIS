@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Price Datalist
+                                    Price List
                                 </h3>
                             </div>
                         </div>
@@ -64,17 +64,13 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Add Price List')
-                                            @slot('data_target', '#modal_price_list')
-                                        @endcomponent
-
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
                             @include('frontend.price-list.modal')
-                            @include('frontend.price-list.modal-item')
+                            @include('frontend.price-list.modal-edit')
+                            @include('frontend.price-list.modal-show')
                             <div class="price_list_datatable" id="price_list_datatable"></div>
                         </div>
                     </div>
@@ -85,6 +81,7 @@
 @endsection
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
 

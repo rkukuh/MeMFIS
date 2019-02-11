@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'version' => '0.8.2',
+    'version' => '0.9.5',
 
     /**
      * Dummy data amount
@@ -14,12 +14,15 @@ return [
         'currencies' => 10,
         'customers' => 20,
         'employees' => 50,
+        'goods-received' => 20,
         'items' => 50,
         'journals' => 100,
         'languages' => 10,
         'licenses' => 10,
         'levels' => 10,
         'projects' => 20,
+        'purchase-orders' => 20,
+        'purchase-requests' => 20,
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,
@@ -29,6 +32,7 @@ return [
             'si' => 20,
         ],
         'types' => 10,
+        'vendors' => 10,
         'workpackages' => 20,
     ],
 ];

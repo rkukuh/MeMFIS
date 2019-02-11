@@ -38,7 +38,7 @@
                                         <i class="la la-gear"></i>
                                     </span>
 
-                                    @include('frontend.common.label.create-new')
+                                    @include('frontend.common.label.edit')
 
                                     <h3 class="m-portlet__head-text">
                                         Engineering Order Task Card

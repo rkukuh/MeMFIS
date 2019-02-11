@@ -36,7 +36,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Licenses::class);
         $this->call(Certifications::class);
         $this->call(Customers::class);
-        $this->call(Suppliers::class);
+        $this->call(Vendors::class);
 
         /** POLYMORPH */
 
@@ -71,5 +71,8 @@ class DummyDataSeeder extends Seeder
         $this->call(Quotations::class);
         $this->call(WorkPackages::class);
         $this->call(Projects::class);
+        $this->call(PurchaseRequests::class);
+        $this->call(PurchaseOrders::class);
+        $this->call(GoodsReceiveds::class);
     }
 }

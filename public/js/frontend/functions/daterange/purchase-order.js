@@ -1,4 +1,4 @@
-var PurchaseRequestDaterangepicker = {
+var PurchaseOrderDaterangepicker = {
     init: function () {
         ! function () {
             $("#daterange_purchase_order").daterangepicker({
@@ -10,5 +10,5 @@ var PurchaseRequestDaterangepicker = {
     }
 };
 jQuery(document).ready(function () {
-    PurchaseRequestDaterangepicker.init()
+    PurchaseOrderDaterangepicker.init()
 });

@@ -12,6 +12,7 @@ use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
 use App\Models\Customer;
+use App\Models\Vendor;
 use App\Models\Aircraft;
 use App\Models\Category;
 use App\Models\Currency;
@@ -228,7 +229,7 @@ class FillComboxController extends Controller
      */
     public function thresholdType()
     {
-        $threshold_types = Category::ofItem()
+        $threshold_types = Type::ofMaintenanceCycle()
                               ->pluck('name', 'id');
 
         return json_encode($threshold_types);
@@ -242,8 +243,8 @@ class FillComboxController extends Controller
      */
     public function repeatType()
     {
-        $repeat_types = Category::ofItem()
-                              ->pluck('name', 'id');
+        $repeat_types = Type::ofMaintenanceCycle()
+                            ->pluck('name', 'id');
 
         return json_encode($repeat_types);
 
@@ -313,6 +314,19 @@ class FillComboxController extends Controller
         $customers = Customer::pluck('name', 'uuid');
 
         return json_encode($customers);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function vendor()
+    {
+        $vendors = Vendor::pluck('code', 'uuid');
+
+        return json_encode($vendors);
 
     }
 

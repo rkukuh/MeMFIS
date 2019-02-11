@@ -6,7 +6,7 @@ let Unit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/unit',
+                        url: '/datatables/price-list',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -44,32 +44,23 @@ let Unit = {
             },
             columns: [
                 {
-                    field: 'symbol',
+                    field: 'code',
                     title: 'P/N',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<a href="" data-toggle="modal" data-target="#modal_price_list_show">' + t.code + "</a>"
+                    }
                 },
                 {
                     field: 'name',
-                    title: 'Name',
+                    title: 'Item',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'type.name',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'type.name',
+                    field: 'unit.name',
                     title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'type.name',
-                    title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -79,12 +70,12 @@ let Unit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_unit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-unit" title="Edit" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-manufacturer" title="Edit" data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-list" title="Edit" data-uuid=' +
                             t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                            '>\t\t\t\t\t\t\t<i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
                 }

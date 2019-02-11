@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Manufacturer Datalist
+                                    Manufacturer
                                 </h3>
                             </div>
                         </div>

@@ -11,4 +11,19 @@ class Currency extends MemfisModel
         'name',
         'symbol',
     ];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A purchase order may have one currency.
+     *
+     * This function will retrieve all the purchase orders of a currency.
+     * See: PurchaseOrder's currency() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_orders()
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
 }

@@ -37,8 +37,11 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
+
+                                @include('frontend.common.label.datalist')
+
                                 <h3 class="m-portlet__head-text">
-                                    Storage Datalist
+                                    Storage
                                 </h3>
                             </div>
                         </div>
@@ -72,7 +75,7 @@
                             </div>
                             @include('frontend.storage.modal')
                             @include('frontend.common.account-code.modal')
-                            <div class="m_datatable" id="scrolling_both"></div>
+                            <div class="storage_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -83,7 +86,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
 
     <script src="{{ asset('js/frontend/storage.js')}}"></script>

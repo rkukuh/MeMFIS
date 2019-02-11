@@ -8,13 +8,13 @@ let PurchaseRequest = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/get-account-codes/",
+            ajax: "/datatables/purchase-request/modal",
             columns: [
                 {
-                    data: "code"
+                    data: "number"
                 },
                 {
-                    data: "name"
+                    data: "type.name"
                 },
                 {
                     data: "Actions"
@@ -25,7 +25,7 @@ let PurchaseRequest = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-number="' + t.number + '" >\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -45,12 +45,10 @@ let PurchaseRequest = {
 
         $('.dataTable').on('click', '.select-account_code', function () {
             let uuid = $(this).data('uuid');
-            let code = $(this).data('code');
-            let name = $(this).data('name');
+            let number = $(this).data('number');
 
-            document.getElementById('account_code').value = uuid;
-
-            $('.search-pr').html(code + " - " + name);
+            document.getElementById('ref-pr').value = uuid;
+            $('.search-purchase_request').html(number);
             $('#modal_purchase_request').modal('hide');
         });
     }

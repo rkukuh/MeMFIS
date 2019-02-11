@@ -47,10 +47,10 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('user', 'UserController');
         Route::resource('school', 'SchoolController');
+        Route::resource('vendor', 'VendorController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
         Route::resource('language', 'LanguageController');
-        Route::resource('supplier', 'SupplierController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
@@ -71,6 +71,9 @@ Route::name('frontend.')->group(function () {
         Route::resource('project', 'ProjectController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('workpackage', 'WorkPackageController');
+        Route::resource('purchase-order', 'PurchaseOrderController');
+        Route::resource('goods-received', 'GoodsReceivedController');
+        Route::resource('purchase-request', 'PurchaseRequestController');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
         /** AIRCRAFT  */
@@ -173,9 +176,20 @@ Route::name('frontend.')->group(function () {
         Route::namespace('TaskCard')->group(function () {
 
             Route::resource('taskcard', 'TaskCardController');
-            Route::resource('taskcard-routine', 'TaskCardRoutineController');
-            Route::resource('taskcard-eo', 'TaskCardEOController');
-            Route::resource('taskcard-si', 'TaskCardSIController');
+
+            Route::resource('taskcard-routine', 'TaskCardRoutineController', [
+                'parameters' => ['taskcard-routine' => 'taskCard']
+            ]);
+
+            Route::resource('taskcard-eo', 'TaskCardEOController', [
+                'parameters' => ['taskcard-eo' => 'taskCard']
+            ]);
+
+            Route::resource('taskcard-si', 'TaskCardSIController', [
+                'parameters' => ['taskcard-si' => 'taskCard']
+            ]);
+
+            // Relationships
 
             Route::name('taskcard-routine.')->group(function () {
                 Route::prefix('taskcard-routine')->group(function () {
@@ -210,11 +224,30 @@ Route::name('frontend.')->group(function () {
         Route::view('/summary/ad-sb', 'frontend.workpackage.nonroutine.adsb.ad-sb-summary')->name('summary.ad-sb');
         Route::view('/summary/cmr-awl', 'frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary')->name('summary.cmr-awl');
         Route::view('/summary/si', 'frontend.workpackage.nonroutine.si.si-summary')->name('summary.si');
+
+        /** VENDOR  */
         Route::view('/vendor', 'frontend.vendor.index')->name('vendor.index');
         Route::view('/vendor/create', 'frontend.vendor.create')->name('vendor.create');
+
+        /** PRICE LIST  */
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
+
+        /** PURCHASE ORDER */
         Route::view('/purchase-order', 'frontend.purchase-order.index')->name('purchase-order.index');
         Route::view('/purchase-order/create', 'frontend.purchase-order.create')->name('purchase-order.create');
+
+        /** QUOTATION  */
+        Route::view('/quotation-view/workpackage', 'frontend.quotation.workpackage')->name('quotation.workpackage');
+        Route::view('/quotation-view/summary/basic', 'frontend.quotation.routine.basic.basic-summary')->name('quotation.summary.basic');
+        Route::view('/quotation-view/summary/sip', 'frontend.quotation.routine.sip.sip-summary')->name('quotation.summary.sip');
+        Route::view('/quotation-view/summary/cpcp', 'frontend.quotation.routine.cpcp.cpcp-summary')->name('quotation.summary.cpcp');
+        Route::view('/quotation-view/summary/adsb', 'frontend.quotation.nonroutine.adsb.ad-sb-summary')->name('quotation.summary.adsb');
+        Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
+        Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
+
+        /** GOOD RECEIVED NOTES  */
+        Route::view('/good-received-note', 'frontend.good-received-note.index')->name('good-received-note.index');
+        Route::view('/good-received-note/create', 'frontend.good-received-note.create')->name('good-received-note.create');
 
 
     });

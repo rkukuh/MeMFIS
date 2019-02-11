@@ -20,10 +20,11 @@ Route::name('datatables.')->group(function () {
 
         /** MASTER */
 
+        Route::get('/vendor','VendorDatatables@index')->name('vendor.index');
         Route::get('/storage','StorageDatatables@index')->name('storage.index');
+        Route::get('/storage/modal','StorageDatatables@storageModal')->name('storage.modal');
         Route::get('/aircraft','AircraftDatatables@index')->name('aircraft.index');
         Route::get('/language','LanguageDatatables@index')->name('language.index');
-        Route::get('/supplier','SupplierDatatables@index')->name('supplier.index');
         Route::get('/currency','CurrencyDatatables@index')->name('currency.index');
         Route::get('/manufacturer','ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification','CertificationDatatables@index')->name('certification.index');
@@ -34,7 +35,7 @@ Route::name('datatables.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::get('/quotation','QuotationDatatables@index')->name('quotation.index');
+        Route::get('/price-list','PriceListDatatables@index')->name('price-list.index');
 
         /** AIRCRAFT */
 
@@ -53,30 +54,6 @@ Route::name('datatables.')->group(function () {
                 /** Polymorph */
                 Route::get('/{aircraft}/zones','AircraftZonesDatatables@index')->name('zones.index');
                 Route::get('/{aircraft}/accesses','AircraftAccessesDatatables@index')->name('accesses.index');
-
-            });
-
-        });
-
-        /** ITEM */
-
-        Route::name('item.')->group(function () {
-
-            Route::group([
-
-                'prefix'    => 'item',
-                'namespace' => 'Item'
-
-            ], function () {
-
-                /** Master Data */
-                Route::get('/','ItemDatatables@index')->name('all');
-                Route::get('/modal', 'ItemDatatables@indexModal')->name('modal.index');
-                Route::get('/categories','CategoryItemDatatables@index')->name('categories.index');
-
-                /** Transaction */
-                Route::get('/{item}/units','ItemUnitDatatables@index')->name('units.index');
-                Route::get('/{item}/storages','ItemStorageDatatables@index')->name('storages.index');
 
             });
 
@@ -137,6 +114,118 @@ Route::name('datatables.')->group(function () {
                 /** Transaction */
                 Route::get('/{employee}/histories','EmployeeHistoriesDatatables@index')->name('histories.index');
                 Route::get('/{employee}/travel-requests','EmployeeTravelRequestsDatatables@index')->name('travel-requests.index');
+
+            });
+
+        });
+
+        /** GOODS RECEIVED NOTE */
+
+        Route::name('goods-received.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'goods-received',
+                'namespace' => 'GoodsReceived'
+
+            ], function () {
+
+                Route::get('/','GoodsReceivedDatatables@index')->name('all');
+
+            });
+
+        });
+
+        /** ITEM */
+
+        Route::name('item.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'item',
+                'namespace' => 'Item'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/','ItemDatatables@index')->name('all');
+                Route::get('/modal', 'ItemDatatables@indexModal')->name('modal.index');
+                Route::get('/categories','CategoryItemDatatables@index')->name('categories.index');
+
+                /** Transaction */
+                Route::get('/{item}/units','ItemUnitDatatables@index')->name('units.index');
+                Route::get('/{item}/storages','ItemStorageDatatables@index')->name('storages.index');
+
+            });
+
+        });
+
+        /** PROJECT */
+
+        Route::name('project.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'project',
+                'namespace' => 'Project'
+
+            ], function () {
+
+                Route::get('/','ProjectDatatables@index')->name('all');
+
+            });
+
+        });
+
+        /** PURCHASE ORDER */
+
+        Route::name('purchase-order.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'purchase-order',
+                'namespace' => 'PurchaseOrder'
+
+            ], function () {
+
+                Route::get('/','PurchaseOrderDatatables@index')->name('all');
+                Route::get('/modal', 'PurchaseOrderDatatables@purchaseOrderModal')->name('modal.index');
+
+
+            });
+
+        });
+
+        /** PURCHASE REQUEST */
+
+        Route::name('purchase-request.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'purchase-request',
+                'namespace' => 'PurchaseRequest'
+
+            ], function () {
+
+                Route::get('/','PurchaseRequestDatatables@index')->name('all');
+                Route::get('/modal', 'PurchaseRequestDatatables@purchaseRequestModal')->name('modal.index');
+
+            });
+
+        });
+
+        /** QUOTATION */
+
+        Route::name('quotation.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'quotation',
+                'namespace' => 'Quotation'
+
+            ], function () {
+
+                Route::get('/','QuotationDatatables@index')->name('all');
 
             });
 
@@ -266,25 +355,6 @@ Route::name('datatables.')->group(function () {
             });
 
         });
-
-        /** PROJECT */
-
-        Route::name('workpackage.')->group(function () {
-
-            Route::group([
-
-                'prefix'    => 'project',
-                'namespace' => 'Project'
-
-            ], function () {
-
-                Route::get('/','ProjectDatatables@index')->name('all');
-
-            });
-
-        });
-
-
 
     });
 

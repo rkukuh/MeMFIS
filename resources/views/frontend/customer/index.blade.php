@@ -42,7 +42,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Customer Datalist
+                                    Customer
                                 </h3>
                             </div>
                         </div>

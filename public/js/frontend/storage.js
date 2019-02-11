@@ -1,12 +1,12 @@
 let Storage = {
     init: function () {
-        $('.m_datatable').mDatatable({
+        $('.storage_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/get-storages',
+                        url: '/datatables/storage',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -173,7 +173,7 @@ let Storage = {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
+                        let table = $('.storage_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -182,7 +182,7 @@ let Storage = {
             });
         });
 
-        let edit = $('.m_datatable').on('click', '.edit', function () {
+        let edit = $('.storage_datatable').on('click', '.edit', function () {
             $('#button').show();
             $('#simpan').text('Perbarui');
 
@@ -244,7 +244,7 @@ let Storage = {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
+                        let table = $('.storage_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -253,7 +253,7 @@ let Storage = {
             });
         });
 
-        let show = $('.m_datatable').on('click', '.show', function () {
+        let show = $('.storage_datatable').on('click', '.show', function () {
             $('#button').hide();
             $('#simpan').text('Perbarui');
 
@@ -281,7 +281,7 @@ let Storage = {
             });
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
+        let remove = $('.storage_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({
@@ -309,7 +309,7 @@ let Storage = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.storage_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

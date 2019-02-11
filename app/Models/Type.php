@@ -149,6 +149,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Purchase Request.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfPurchaseRequest(Builder $query)
+    {
+        return $query->where('of', 'purchase-request');
+    }
+
+    /**
      * Scope a query to only include type of Regulator.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -373,6 +384,19 @@ class Type extends MemfisModel
     public function phones()
     {
         return $this->hasMany(Phone::class);
+    }
+
+    /**
+     * One-to-Many: A purchase request may have zero or many type.
+     *
+     * This function will retrieve all purchase requests of a type.
+     * See: PurchaseRequest's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_requests()
+    {
+        return $this->hasMany(PurchaseRequest::class);
     }
 
     /**

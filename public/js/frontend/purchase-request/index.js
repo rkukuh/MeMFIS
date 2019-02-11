@@ -1,12 +1,17 @@
-let Item = {
+let PurchaseRequest = {
     init: function () {
-        $('.item_datatable').mDatatable({
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
+
+        $('.purchase_request_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/item/datatable',
+                        url: '/datatables/purchase-request',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -43,58 +48,52 @@ let Item = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'Date.',
+                    field: 'number',
+                    title: 'Number.',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
+                        return '<a href="/purchase-request/'+t.uuid+'">' + t.number + "</a>"
                     }
                 },
                 {
-                    field: 'name',
-                    title: 'PR Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit',
+                    field: 'type.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        return t.unit.name + ' (' + t.unit.symbol + ')'
-                    }
                 },
                 {
-                    field: "is_ppn",
+                    field: 'aircraft.name',
+                    title: 'Aircrat',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'requested_at',
+                    title: 'Requested At',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'required_at',
+                    title: 'Required At',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: "description",
                     title: "Description",
                     template: function (t) {
-                        if (t.is_ppn === 1) {
-                            return '<span class="m-badge m-badge--brand m-badge--wide">PPN: ' + t.ppn_amount + '%</span>'
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
                         }
-                        else {
-                            return '<span class="m-badge m-badge--warning m-badge--wide">No</span>'
-                        }
-                    }
-                },
-                {
-                    field: "is_stock",
-                    title: "Status",
-                    template: function (t) {
-                        var e = {
-                            1: {
-                                title: "Yes",
-                                class: "m-badge--brand"
-                            },
-                            0: {
-                                title: "No",
-                                class: " m-badge--warning"
-                            }
-                        };
 
-                        return '<span class="m-badge ' + e[t.is_stock].class + ' m-badge--wide">' + e[t.is_stock].title + "</span>"
+                        return ''
                     }
+
                 },
                 {
                     field: 'actions',
@@ -102,7 +101,7 @@ let Item = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/purchase-request/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
@@ -114,8 +113,8 @@ let Item = {
             ]
         });
 
-        $('.item_datatable').on('click', '.delete', function () {
-            let item_uuid = $(this).data('id');
+        $('.purchase_request_datatable').on('click', '.delete', function () {
+            let purchase_request_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to remove?',
@@ -134,14 +133,14 @@ let Item = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/item/' + item_uuid + '',
+                        url: '/purchase-request/' + purchase_request_uuid + '',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.item_datatable').mDatatable();
+                            let table = $('.purchase_request_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -161,5 +160,5 @@ let Item = {
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    PurchaseRequest.init();
 });

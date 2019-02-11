@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    category = function () {
+    customer = function () {
         $.ajax({
             url: '/get-customers/',
             type: 'GET',
@@ -21,5 +21,5 @@ $(document).ready(function () {
         });
     };
 
-    category();
+    customer();
 });

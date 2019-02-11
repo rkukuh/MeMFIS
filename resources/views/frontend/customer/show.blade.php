@@ -222,7 +222,6 @@
         </div>
     </div>
 </div>
-</div>
 @endsection
  @push('header-scripts')
 <style>

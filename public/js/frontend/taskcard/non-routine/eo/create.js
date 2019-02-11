@@ -19,18 +19,18 @@ let TaskCard = {
 
 
         $(document).ready(function () {
-            // $('select[name="recurrence_id"]').on('change', function () {
-            //     let recurrence = $(this).val();
-            //     if (recurrence == 67) {
-            //     $("#recurrence_div").removeClass("hidden");
-            //     $('#recurrence').removeAttr("disabled");
-            //     $('#recurrence-select').removeAttr("disabled");
-            //     } else {
-            //         $("#recurrence_div").addClass("hidden");
-            //         $('#recurrence').prop("disabled", true);
-            //         $('#recurrence-select').prop("disabled", true);
-            //     }
-            // });
+            $('select[name="recurrence_id"]').on('change', function () {
+                let recurrence = $(this).val();
+                if (recurrence == 67) {
+                $("#recurrence_div").removeClass("hidden");
+                $('#recurrence').removeAttr("disabled");
+                $('#recurrence-select').removeAttr("disabled");
+                } else {
+                    $("#recurrence_div").addClass("hidden");
+                    $('#recurrence').prop("disabled", true);
+                    $('#recurrence-select').prop("disabled", true);
+                }
+            });
         });
         $(document).ready(function () {
             $('select[name="scheduled_priority_id"]').on('change', function () {
@@ -72,14 +72,6 @@ let TaskCard = {
 
             $('.btn-success').removeClass('add');
 
-            document.getElementById('all').onchange = function () {
-                document.getElementById('ac-type').disabled = !this.unchecked;
-
-                if (document.getElementById("all").checked) {
-                } else {
-                    $('#ac-type').removeAttr("disabled");
-                }
-            };
         });
 
         $('.footer').on('click', '.reset', function () {

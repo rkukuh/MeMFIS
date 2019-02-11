@@ -13,15 +13,6 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                @component('frontend.common.buttons.create-new')
-                                    @slot('id', 'item')
-                                    @slot('text', 'item')
-                                    @slot('data_target', '#modal_item')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     P/N Item
                                 </label>
@@ -48,11 +39,10 @@
                                     Unit @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Unit')
-                                    @slot('id', 'unit_id')
-                                    @slot('name', 'unit_id')
-                                    @slot('id_error', 'unit')
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', 'unit')
+                                    @slot('name', 'unit')
+                                    @slot('id', 'unit')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -60,12 +50,28 @@
                                     Unit Price @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.number')
-                                    @slot('text', 'price')
-                                    @slot('id', 'price')
-                                    @slot('name', 'price')
-                                    @slot('id_error', 'price')
-                                @endcomponent
+                                <div class='repeater'>
+                                    <div data-repeater-list="group-email">
+                                        <div data-repeater-item>
+                                            <div class=" row">
+                                                <div class="col-sm-5 col-md-8 col-lg-8">
+                                                    @component('frontend.common.input.number')
+                                                        @slot('text', 'price')
+                                                        @slot('id', 'price')
+                                                        @slot('name', 'price')
+                                                        @slot('id_error', 'price')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    @include('frontend.common.buttons.create_repeater')
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    @include('frontend.common.buttons.delete_repeater')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

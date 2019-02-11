@@ -121,6 +121,48 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: A purchase order may have zero or many item.
+     *
+     * This function will retrieve all the purchase orders of an item.
+     * See: PurchaseOrder's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_orders()
+    {
+        return $this->belongsToMany(PurchaseOrder::class)
+                    ->withPivot(
+                        'quantity',
+                        'price',
+                        'subtotal_before_discount',
+                        'discount_amount',
+                        'discount_percentage',
+                        'subtotal_after_discount',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: A purchase request may have zero or many item.
+     *
+     * This function will retrieve all the purchase requests of an item.
+     * See: PurchaseRequest's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_requests()
+    {
+        return $this->belongsToMany(PurchaseRequest::class)
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: An item may have zero or many storage.
      *
      * This function will retrieve the storages of an item.

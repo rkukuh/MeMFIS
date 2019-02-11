@@ -1,4 +1,4 @@
-let Quotation = {
+let PurchaseOrder = {
     init: function () {
         $('.purchase_order_datatable').mDatatable({
             data: {
@@ -6,7 +6,7 @@ let Quotation = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/purchase-order',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -42,49 +42,40 @@ let Quotation = {
                     }
                 }
             },
-            columns: [{
-                    field: 'id',
-                    title: '#',
-                    sortable: !1,
-                    width: 40
-                },
+            columns: [
                 {
-                    field: 'quotation_number',
+                    field: 'ordered_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
-                    field: 'customer',
+                    field: 'number',
                     title: 'PO Number',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'valid_until',
-                    title: 'Pr Number',
+                    title: 'Valid Until',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
-                    field: 'status',
-                    title: 'Supplier',
+                    field: 'vendor.code',
+                    title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
-                    field: 'status',
+                    field: 'total_after_tax',
                     title: 'Total',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
@@ -167,5 +158,5 @@ let Quotation = {
 };
 
 jQuery(document).ready(function () {
-    Quotation.init();
+    PurchaseOrder.init();
 });
