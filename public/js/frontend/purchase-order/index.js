@@ -44,14 +44,17 @@ let PurchaseOrder = {
             },
             columns: [
                 {
-                    field: 'ordered_at',
-                    title: 'Date',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'number',
                     title: 'PO Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<a href="/purchase-order/'+t.uuid+'">' + t.number + "</a>"
+                    }
+                },
+                {
+                    field: 'ordered_at',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -72,18 +75,15 @@ let PurchaseOrder = {
                     title: 'Total',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'Actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {

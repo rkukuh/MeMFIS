@@ -16,7 +16,7 @@ class PurchaseOrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.purchase-order.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class PurchaseOrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.purchase-order.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class PurchaseOrderController extends Controller
      */
     public function show(PurchaseOrder $purchaseOrder)
     {
-        //
+        return view('frontend.purchase-order.show');
     }
 
     /**
@@ -59,7 +59,7 @@ class PurchaseOrderController extends Controller
      */
     public function edit(PurchaseOrder $purchaseOrder)
     {
-        //
+        return view('frontend.purchase-order.edit');
     }
 
     /**
@@ -82,6 +82,8 @@ class PurchaseOrderController extends Controller
      */
     public function destroy(PurchaseOrder $purchaseOrder)
     {
-        //
+        $purchaseOrder->delete();
+
+        return response()->json($purchaseOrder);
     }
 }
