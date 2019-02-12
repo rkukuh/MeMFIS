@@ -88,8 +88,19 @@ class GoodsReceivedController extends Controller
      */
     public function destroy(GoodsReceived $goodsReceived)
     {
-        $goodsreceived->delete();
+        $goodsReceived->delete();
 
-        return response()->json($goodsreceived);
+        return response()->json($goodsReceived);
+    }
+
+    /**
+     * Approve the specified resource from storage.
+     *
+     * @param  \App\Models\GoodsReceived  $goodsReceived
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(GoodsReceived $goodsReceived)
+    {
+        return response()->json($goodsReceived);
     }
 }

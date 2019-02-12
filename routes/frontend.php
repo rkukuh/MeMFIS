@@ -73,6 +73,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('workpackage', 'WorkPackageController');
         Route::resource('purchase-order', 'PurchaseOrderController');
         Route::resource('goods-received', 'GoodsReceivedController');
+        Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
         Route::resource('purchase-request', 'PurchaseRequestController');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
