@@ -13,19 +13,19 @@ class CreateScheduledpaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('scheduledpayments', function (Blueprint $table) {
+        Schema::create('scheduled_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('quotation_id');
+            // $table->unsignedInteger('quotation_id');
             $table->unsignedInteger('type_id');
             $table->integer('value');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('quotation_id')
-                    ->references('id')->on('quotations')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+            // $table->foreign('quotation_id')
+            //         ->references('id')->on('quotations')
+            //         ->onUpdate('cascade')
+            //         ->onDelete('restrict');
 
             $table->foreign('type_id')
                     ->references('id')->on('types')
@@ -41,6 +41,6 @@ class CreateScheduledpaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scheduledpayments');
+        Schema::dropIfExists('scheduled_payments');
     }
 }
