@@ -89,7 +89,7 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', '10-10-2018')
+                                                    @slot('text', $purchaseRequest->date)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -154,7 +154,8 @@
                                                 @slot('rows', '10')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                                @slot('disabled', 'disabled')
+                                                @slot('value', $purchaseRequest->description)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -162,16 +163,8 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
                                                     @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index'))
+                                                        @slot('href', route('frontend.purchase-request.index'))
                                                     @endcomponent
                                                 </div>
                                             </div>
