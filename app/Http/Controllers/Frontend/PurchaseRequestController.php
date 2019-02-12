@@ -63,7 +63,7 @@ class PurchaseRequestController extends Controller
     public function edit(PurchaseRequest $purchaseRequest)
     {
         return view('frontend.purchase-request.edit', [
-            'purchaseOrder' => $purchaseRequest,
+            'purchaseRequest' => $purchaseRequest,
         ]);
     }
 
