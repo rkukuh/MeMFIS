@@ -10,6 +10,7 @@ class Quotation extends MemfisModel
         'number',
         'requested_at',
         'valid_until',
+        'currency_id',
         'exchange_rate',
         // 'scheduled_payment_type',
         // 'scheduled_payment_amount',
@@ -21,6 +22,19 @@ class Quotation extends MemfisModel
     protected $dates = ['requested_at', 'valid_until'];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A quotation may have one currency.
+     *
+     * This function will retrieve the currency of a quotation.
+     * See: Currency's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
 
     /**
      * One-to-Many: A quotation may have one scheduled payment.
