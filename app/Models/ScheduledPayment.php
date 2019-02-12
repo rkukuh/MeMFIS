@@ -6,8 +6,6 @@ use App\MemfisModel;
 
 class ScheduledPayment extends MemfisModel
 {
-    protected $table = 'scheduledpayments';
-
     protected $fillable = [
         'quotation_id',
         'type_id',
@@ -30,10 +28,10 @@ class ScheduledPayment extends MemfisModel
     }
 
     /**
-     * One-to-Many: A quotation may have one or many scheduled payment.
+     * One-to-Many: A quotation may have one scheduled payment.
      *
      * This function will retrieve the type of an scheduled payment.
-     * See: Quotation's scheduledpayments() method for the inverse
+     * See: Quotation's scheduled_payments() method for the inverse
      *
      * @return mixed
      */
