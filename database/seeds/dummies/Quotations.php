@@ -12,6 +12,6 @@ class Quotations extends Seeder
      */
     public function run()
     {
-        //
+        factory(Quotation::class, config('memfis.dummies.quotations'))->create();
     }
 }
