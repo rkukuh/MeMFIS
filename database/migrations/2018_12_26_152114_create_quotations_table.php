@@ -20,18 +20,18 @@ class CreateQuotationsTable extends Migration
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('valid_until')->nullable();
             $table->double('exchange_rate');
-            $table->unsignedInteger('scheduled_payment_type');
-            $table->double('scheduled_payment_amount');
+            // $table->unsignedInteger('scheduled_payment_type')->nullable();
+            // $table->double('scheduled_payment_amount');
             $table->double('total');
             $table->text('term_of_condition')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('scheduled_payment_type')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+            // $table->foreign('scheduled_payment_type')
+            //         ->references('id')->on('scheduled_payments')
+            //         ->onUpdate('cascade')
+            //         ->onDelete('restrict');
 
             $table->index('number');
         });

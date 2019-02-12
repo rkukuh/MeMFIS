@@ -11,8 +11,8 @@ class Quotation extends MemfisModel
         'requested_at',
         'valid_until',
         'exchange_rate',
-        'scheduled_payment_type',
-        'scheduled_payment_amount',
+        // 'scheduled_payment_type',
+        // 'scheduled_payment_amount',
         'total',
         'term_of_condition',
         'description',
@@ -23,14 +23,14 @@ class Quotation extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A quotation may have one or many scheduled payment.
+     * One-to-Many: A quotation may have one scheduled payment.
      *
-     * This function will retrieve the scheduled payments of a quotation.
-     * See: Quotation's scheduledpayment() method for the inverse
+     * This function will retrieve the scheduled payment (type) of a quotation.
+     * See: ScheduledPayment's quotation() method for the inverse
      *
      * @return mixed
      */
-    public function scheduledpayments()
+    public function scheduled_payments()
     {
         return $this->hasMany(ScheduledPayment::class);
     }
