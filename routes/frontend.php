@@ -76,6 +76,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('goods-received', 'GoodsReceivedController');
         Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
         Route::resource('purchase-request', 'PurchaseRequestController');
+        Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
         /** AIRCRAFT  */

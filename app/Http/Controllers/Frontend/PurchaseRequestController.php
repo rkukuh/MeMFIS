@@ -91,4 +91,15 @@ class PurchaseRequestController extends Controller
 
         return response()->json($purchaseRequest);
     }
+
+    /**
+     * Approve the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseRequest  $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(PurchaseRequest $purchaseRequest)
+    {
+        return response()->json($purchaseRequest);
+    }
 }
