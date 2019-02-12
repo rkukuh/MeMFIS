@@ -93,7 +93,7 @@ class PurchaseOrderController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Approve the specified resource from storage.
      *
      * @param  \App\Models\PurchaseOrder  $purchaseOrder
      * @return \Illuminate\Http\Response
