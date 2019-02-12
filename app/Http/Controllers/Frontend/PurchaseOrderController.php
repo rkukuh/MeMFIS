@@ -91,4 +91,15 @@ class PurchaseOrderController extends Controller
 
         return response()->json($purchaseOrder);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseOrder  $purchaseOrder
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(PurchaseOrder $purchaseOrder)
+    {
+        return response()->json($purchaseOrder);
+    }
 }
