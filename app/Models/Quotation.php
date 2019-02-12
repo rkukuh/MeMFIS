@@ -6,7 +6,19 @@ use App\MemfisModel;
 
 class Quotation extends MemfisModel
 {
-    //
+    protected $fillable = [
+        'number',
+        'requested_at',
+        'valid_until',
+        'exchange_rate',
+        'scheduled_payment_type',
+        'scheduled_payment_amount',
+        'total',
+        'term_of_condition',
+        'description',
+    ];
+
+    protected $dates = ['requested_at', 'valid_until'];
 
     /*************************************** RELATIONSHIP ****************************************/
 
