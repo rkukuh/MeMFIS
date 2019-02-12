@@ -8,6 +8,7 @@ class Quotation extends MemfisModel
 {
     protected $fillable = [
         'number',
+        'project_id',
         'requested_at',
         'valid_until',
         'currency_id',
@@ -34,6 +35,19 @@ class Quotation extends MemfisModel
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    /**
+     * One-to-Many: A quotation may have one project.
+     *
+     * This function will retrieve the project of a quotation.
+     * See: Project's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 
     /**
