@@ -8,6 +8,7 @@
         style="{{$style or ''}}"
         placeholder="{{ $placeholder or '' }}"
         {{ $disabled or ''}}
+        value="{{ $value or ''}}"
         readonly
     >
     <div class="input-group-append">
