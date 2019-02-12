@@ -125,7 +125,7 @@ let PurchaseOrder = {
                         type: 'PUT',
                         url: '/purchase-order/' +  purchase_order_uuid +'/approve',
                         success: function (data) {
-                            toastr.success('Goods Received has been Approved.', 'Approved', {
+                            toastr.success('Purchase Order has been Approved.', 'Approved', {
                                 timeOut: 5000
                                 }
                             );
