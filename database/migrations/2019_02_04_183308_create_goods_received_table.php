@@ -34,6 +34,11 @@ class CreateGoodsReceivedTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
+            $table->foreign('approved_by')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
             $table->foreign('purchase_order_id')
                     ->references('id')->on('purchase_orders')
                     ->onUpdate('cascade')
