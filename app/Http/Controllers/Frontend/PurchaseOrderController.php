@@ -16,7 +16,7 @@ class PurchaseOrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.purchase-order.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class PurchaseOrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.purchase-order.create');
     }
 
     /**
@@ -48,7 +48,9 @@ class PurchaseOrderController extends Controller
      */
     public function show(PurchaseOrder $purchaseOrder)
     {
-        //
+        return view('frontend.purchase-order.show', [
+            'purchaseOrder' => $purchaseOrder,
+        ]);
     }
 
     /**
@@ -59,7 +61,10 @@ class PurchaseOrderController extends Controller
      */
     public function edit(PurchaseOrder $purchaseOrder)
     {
-        //
+        return view('frontend.purchase-order.edit', [
+            'purchaseOrder' => $purchaseOrder,
+        ]);
+
     }
 
     /**
@@ -82,6 +87,19 @@ class PurchaseOrderController extends Controller
      */
     public function destroy(PurchaseOrder $purchaseOrder)
     {
-        //
+        $purchaseOrder->delete();
+
+        return response()->json($purchaseOrder);
+    }
+
+    /**
+     * Approve the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseOrder  $purchaseOrder
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(PurchaseOrder $purchaseOrder)
+    {
+        return response()->json($purchaseOrder);
     }
 }

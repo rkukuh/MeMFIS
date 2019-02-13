@@ -59,7 +59,8 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'PR-2121212')
+                                                    @slot('text', $purchaseRequest->number)
+
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -109,6 +110,7 @@
                                                     @slot('id', 'date')
                                                     @slot('text', 'Date')
                                                     @slot('name', 'date')
+                                                    @slot('value', $purchaseRequest->date)
                                                     @slot('id_error', 'date')
                                                 @endcomponent
                                             </div>
@@ -121,6 +123,7 @@
                                                     @slot('id', 'date-required')
                                                     @slot('text', 'Date Required')
                                                     @slot('name', 'date-required')
+                                                    @slot('value', $purchaseRequest->required_at)
                                                     @slot('id_error', 'date-required')
                                                 @endcomponent
                                             </div>
@@ -177,7 +180,7 @@
                                                 @slot('rows', '10')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                                @slot('value', $purchaseRequest->description)
                                             @endcomponent
                                         </div>
                                     </div>

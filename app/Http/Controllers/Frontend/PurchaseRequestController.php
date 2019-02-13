@@ -48,7 +48,10 @@ class PurchaseRequestController extends Controller
      */
     public function show(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.show');
+        return view('frontend.purchase-request.show', [
+            'purchaseRequest' => $purchaseRequest,
+        ]);
+
     }
 
     /**
@@ -59,7 +62,9 @@ class PurchaseRequestController extends Controller
      */
     public function edit(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.edit');
+        return view('frontend.purchase-request.edit', [
+            'purchaseRequest' => $purchaseRequest,
+        ]);
     }
 
     /**
@@ -84,6 +89,17 @@ class PurchaseRequestController extends Controller
     {
         $purchaseRequest->delete();
 
+        return response()->json($purchaseRequest);
+    }
+
+    /**
+     * Approve the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseRequest  $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(PurchaseRequest $purchaseRequest)
+    {
         return response()->json($purchaseRequest);
     }
 }

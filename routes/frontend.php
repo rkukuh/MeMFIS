@@ -72,8 +72,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('quotation', 'QuotationController');
         Route::resource('workpackage', 'WorkPackageController');
         Route::resource('purchase-order', 'PurchaseOrderController');
+        Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
         Route::resource('goods-received', 'GoodsReceivedController');
+        Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
         Route::resource('purchase-request', 'PurchaseRequestController');
+        Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
         /** AIRCRAFT  */
@@ -232,10 +235,6 @@ Route::name('frontend.')->group(function () {
         /** PRICE LIST  */
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
 
-        /** PURCHASE ORDER */
-        Route::view('/purchase-order', 'frontend.purchase-order.index')->name('purchase-order.index');
-        Route::view('/purchase-order/create', 'frontend.purchase-order.create')->name('purchase-order.create');
-
         /** QUOTATION  */
         Route::view('/quotation-view/workpackage', 'frontend.quotation.workpackage')->name('quotation.workpackage');
         Route::view('/quotation-view/summary/basic', 'frontend.quotation.routine.basic.basic-summary')->name('quotation.summary.basic');
@@ -244,11 +243,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/adsb', 'frontend.quotation.nonroutine.adsb.ad-sb-summary')->name('quotation.summary.adsb');
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
-
-        /** GOOD RECEIVED NOTES  */
-        Route::view('/good-received-note', 'frontend.good-received-note.index')->name('good-received-note.index');
-        Route::view('/good-received-note/create', 'frontend.good-received-note.create')->name('good-received-note.create');
-
 
     });
 
