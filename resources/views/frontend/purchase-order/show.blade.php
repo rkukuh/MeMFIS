@@ -90,12 +90,16 @@
                                                             </div>
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <label class="form-control-label">
-                                                                    Valid Until @include('frontend.common.label.required')
+                                                                    Valid Until @include('frontend.common.label.optional')
                                                                 </label>
 
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('text', $purchaseOrder->valid_until)
-                                                                @endcomponent
+                                                                @if (empty($purchaseOrder->valid_until))
+                                                                    @include('frontend.common.label.data-info-nodata')
+                                                                @else
+                                                                    @component('frontend.common.label.data-info')
+                                                                        @slot('text', $purchaseOrder->valid_until)
+                                                                    @endcomponent
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -121,12 +125,16 @@
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Date Shipping @include('frontend.common.label.required')
+                                                            Date Shipping @include('frontend.common.label.optional')
                                                         </label>
 
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', $purchaseOrder->ship_at)
-                                                        @endcomponent
+                                                        @if (empty($purchaseOrder->ship_at))
+                                                            @include('frontend.common.label.data-info-nodata')
+                                                        @else
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text', $purchaseOrder->ship_at)
+                                                            @endcomponent
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -163,12 +171,16 @@
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
 
                                                         <label class="form-control-label">
-                                                            Description @include('frontend.common.label.required')
+                                                            Description @include('frontend.common.label.optional')
                                                         </label>
 
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', $purchaseOrder->description)
-                                                        @endcomponent
+                                                        @if (empty($purchaseOrder->description))
+                                                            @include('frontend.common.label.data-info-nodata')
+                                                        @else
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text', $purchaseOrder->description)
+                                                            @endcomponent
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

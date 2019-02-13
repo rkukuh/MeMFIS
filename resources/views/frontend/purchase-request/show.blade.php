@@ -94,12 +94,16 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Date Required @include('frontend.common.label.required')
+                                                    Date Required @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $purchaseRequest->required_at)
-                                                @endcomponent
+                                                @if (empty($purchaseRequest->required_at))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $purchaseRequest->required_at)
+                                                    @endcomponent
+                                                @endif
                                             </div>
                                         </div>
                                     </fieldset>
@@ -150,13 +154,13 @@
                                                 Description @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '10')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('disabled', 'disabled')
-                                                @slot('value', $purchaseRequest->description)
-                                            @endcomponent
+                                            @if (empty($purchaseRequest->description))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $purchaseRequest->description)
+                                                @endcomponent
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
