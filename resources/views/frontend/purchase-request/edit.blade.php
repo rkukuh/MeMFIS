@@ -110,7 +110,7 @@
                                                     @slot('id', 'date')
                                                     @slot('text', 'Date')
                                                     @slot('name', 'date')
-                                                    @slot('value', $purchaseRequest->date)
+                                                    @slot('value', $purchaseRequest->requested_at)
                                                     @slot('id_error', 'date')
                                                 @endcomponent
                                             </div>

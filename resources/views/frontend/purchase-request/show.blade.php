@@ -89,7 +89,7 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $purchaseRequest->date)
+                                                    @slot('text', $purchaseRequest->requested_at)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
