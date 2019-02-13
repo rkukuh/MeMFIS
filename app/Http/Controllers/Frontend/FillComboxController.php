@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
 use App\Models\Access;
+use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
@@ -552,6 +553,18 @@ class FillComboxController extends Controller
         $tools = Item::with('categories')->where('categories->name','tool')->get();
 
         return json_encode($tools);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function project()
+    {
+        $projects = Project::pluck('title','id');
+
+        return json_encode($projects);
     }
 
 
