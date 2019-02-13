@@ -9,6 +9,7 @@ class Quotation extends MemfisModel
     protected $fillable = [
         'number',
         'project_id',
+        'customer_id',
         'requested_at',
         'valid_until',
         'currency_id',
@@ -35,6 +36,19 @@ class Quotation extends MemfisModel
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    /**
+     * One-to-Many: A quotation may have one customer.
+     *
+     * This function will retrieve the customer of a quotation.
+     * See: Customer's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 
     /**

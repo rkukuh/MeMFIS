@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\Quotation;
 use Faker\Generator as Faker;
@@ -19,6 +20,13 @@ $factory->define(Quotation::class, function (Faker $faker) {
             }
 
             return factory(Project::class)->create()->id;
+        },
+        'customer_id' => function () {
+            if (Customer::count()) {
+                return Customer::get()->random()->id;
+            }
+
+            return factory(Customer::class)->create()->id;
         },
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'valid_until' => $faker->randomElement([null, Carbon::now()]),
