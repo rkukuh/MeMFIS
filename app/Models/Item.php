@@ -183,6 +183,27 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: A quotation may have zero or many item.
+     *
+     * This function will retrieve all the quotations of an item.
+     * See: Quotation's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotations()
+    {
+        return $this->belongsToMany(Quotation::class)
+                    ->withPivot(
+                        'taskcard_id',
+                        'pricelist_unit',
+                        'pricelist_price',
+                        'subtotal',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: An item may have zero or many storage.
      *
      * This function will retrieve the storages of an item.

@@ -41,6 +41,11 @@ class CreatePurchaseOrdersTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
+            $table->foreign('currency_id')
+                    ->references('id')->on('currencies')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
             $table->index('number');
         });
     }

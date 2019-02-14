@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScheduledpaymentsTable extends Migration
+class CreateQuotationWorkpackageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateScheduledpaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('scheduledpayments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->char('uuid', 36)->unique();
+        Schema::create('quotation_workpackage', function (Blueprint $table) {
             $table->unsignedInteger('quotation_id');
-            $table->unsignedInteger('type_id');
-            $table->integer('value');
+            $table->unsignedInteger('workpackage_id');
+            $table->double('manhour_total');
+            $table->double('manhour_rate');
+            $table->text('jobcard_description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -27,8 +27,8 @@ class CreateScheduledpaymentsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('type_id')
-                    ->references('id')->on('types')
+            $table->foreign('workpackage_id')
+                    ->references('id')->on('workpackages')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -41,6 +41,6 @@ class CreateScheduledpaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scheduledpayments');
+        Schema::dropIfExists('quotation_workpackage');
     }
 }
