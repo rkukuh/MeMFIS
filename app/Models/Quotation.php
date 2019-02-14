@@ -52,6 +52,27 @@ class Quotation extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A quotation may have zero or many item.
+     *
+     * This function will retrieve all the items of a quotation.
+     * See: Item's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class)
+                    ->withPivot(
+                        'taskcard_id',
+                        'pricelist_unit',
+                        'pricelist_price',
+                        'subtotal',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: A quotation may have one project.
      *
      * This function will retrieve the project of a quotation.

@@ -2,9 +2,12 @@
 
 use Carbon\Carbon;
 use App\Models\Type;
+use App\Models\Unit;
+use App\Models\Item;
 use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Currency;
+use App\Models\TaskCard;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Faker\Generator as Faker;
@@ -74,4 +77,38 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
         }
     }
 
+    // Item
+
+    if ($faker->boolean) {
+        $item = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (TaskCard::count()) {
+                $taskcard = TaskCard::get()->random();
+            } else {
+                $taskcard = factory(TaskCard::class)->create();
+            }
+
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
+            $quotation->items()->save($item, [
+                'taskcard_id' => $taskcard->id,
+                'pricelist_unit' => $unit->id,
+                'pricelist_price' => rand(1, 10) * 1000000,
+                'subtotal' => rand(10, 20) * 1000000,
+                'note' => $faker->randomElement([null, $faker->sentence]),
+            ]);
+        }
+    }
+    
 });
