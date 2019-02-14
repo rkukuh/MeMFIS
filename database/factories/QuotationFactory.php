@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\Quotation;
+use App\Models\WorkPackage;
 use Faker\Generator as Faker;
 
 $factory->define(Quotation::class, function (Faker $faker) {
@@ -46,5 +47,31 @@ $factory->define(Quotation::class, function (Faker $faker) {
         'term_of_condition' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
+
+});
+
+/** CALLBACKS */
+
+$factory->afterCreating(Quotation::class, function ($quotation, $faker) {
+
+    // WorkPackage
+
+    if ($faker->boolean) {
+        $workpackage = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (WorkPackage::count()) {
+                $workpackage = WorkPackage::get()->random();
+            } else {
+                $workpackage = factory(WorkPackage::class)->create();
+            }
+
+            $quotation->workpackages()->save($workpackage, [
+                'manhour_total' => rand(10, 20),
+                'manhour_rate' => rand(10, 20) * 1000000,
+                'jobcard_description' => $faker->randomElement([null, $faker->sentence]),
+            ]);
+        }
+    }
 
 });

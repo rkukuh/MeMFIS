@@ -60,6 +60,25 @@ class WorkPackage extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A quotation may have one or many workpackage.
+     *
+     * This function will retrieve all the quotations of a workpackage.
+     * See: Quotation's workpackages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotations()
+    {
+        return $this->belongsToMany(Quotation::class, 'quotation_workpackage', 'workpackage_id', 'quotation_id')
+                    ->withPivot(
+                        'manhour_total',
+                        'manhour_rate',
+                        'jobcard_description'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A task card may have one or many workpackage.
      *
      * This function will retrieve all the task cards of a work package.

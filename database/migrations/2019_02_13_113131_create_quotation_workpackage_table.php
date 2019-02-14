@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWorkpackageQuotationTable extends Migration
+class CreateQuotationWorkpackageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,22 @@ class CreateWorkpackageQuotationTable extends Migration
      */
     public function up()
     {
-        Schema::create('workpackage_quotation', function (Blueprint $table) {
-            $table->unsignedInteger('workpackage_id');
+        Schema::create('quotation_workpackage', function (Blueprint $table) {
             $table->unsignedInteger('quotation_id');
+            $table->unsignedInteger('workpackage_id');
             $table->double('manhour_total');
             $table->double('manhour_rate');
-            $table->text('jc_description')->nullable();
+            $table->text('jobcard_description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('workpackage_id')
-                    ->references('id')->on('workpackages')
+            $table->foreign('quotation_id')
+                    ->references('id')->on('quotations')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('quotation_id')
-                    ->references('id')->on('quotations')
+            $table->foreign('workpackage_id')
+                    ->references('id')->on('workpackages')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -41,6 +41,6 @@ class CreateWorkpackageQuotationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workpackage_quotation');
+        Schema::dropIfExists('quotation_workpackage');
     }
 }

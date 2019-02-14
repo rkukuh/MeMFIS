@@ -76,4 +76,23 @@ class Quotation extends MemfisModel
     {
         return $this->hasMany(ScheduledPayment::class);
     }
+
+    /**
+     * Many-to-Many: A quotation may have one or many workpackage.
+     *
+     * This function will retrieve all the workpackages of a quotation.
+     * See: WorkPackage's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workpackages()
+    {
+        return $this->belongsToMany(WorkPackage::class, 'quotation_workpackage', 'quotation_id', 'workpackage_id')
+                    ->withPivot(
+                        'manhour_total',
+                        'manhour_rate',
+                        'jobcard_description'
+                    )
+                    ->withTimestamps();
+    }
 }
