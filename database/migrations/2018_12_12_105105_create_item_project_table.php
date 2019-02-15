@@ -17,6 +17,8 @@ class CreateItemProjectTable extends Migration
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');
+            $table->unsignedInteger('unit_id');
+            $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -27,6 +29,11 @@ class CreateItemProjectTable extends Migration
 
             $table->foreign('item_id')
                     ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('unit_id')
+                    ->references('id')->on('units')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
