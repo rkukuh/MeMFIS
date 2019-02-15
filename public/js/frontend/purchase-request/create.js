@@ -101,18 +101,16 @@ let PurchaseRequest = {
                             };
 
                             units();
-
-                            // function myFunction(e) {
-                            //     alert('s');
-                            //     // document.getElementById("myText").value = e.target.value
-                            // }
-
                         });
-
-                        // return t.unit.name + ' (' + t.unit.symbol + ')'
                         return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
-                            // '<option value="">'+
-                            //     'Select Unit'+
+                            '<option value="">'+
+                                'Select Unit'+
+                            // '</option>'+
+                            // '<option value="2">'+
+                            //     'Select Unit2'+
+                            // '</option>'+
+                            // '<option value="3">'+
+                            //     'Select Unit3'+
                             // '</option>'+
 
                         '</select>'
@@ -120,35 +118,21 @@ let PurchaseRequest = {
                     }
                 },
                 {
-                    field: "available stock",
-                    title: "Stock Available",
+                    field: "description",
+                    title: "Description",
                     template: function (t) {
-                        return '1'
+                        return '<input type="text" id="qty" name="qty" class="form-control m-input">'
                     }
                 },
-                {
-                    field: 'actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="/item/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
+
             ]
         });
 
-        // $('select[name="unit_id"]').change(function(){
-        //     //set the visibility of the specify element based on the value of select
-        //     alert('change');
-        //     // $('#con-specify').toggle(this.value == 'other')
-        // });
+        $('.unit_id').on('change', function () {
+            //set the visibility of the specify element based on the value of select
+            alert('change');
+            // $('#con-specify').toggle(this.value == 'other')
+        });
         $(document).ready(function () {
         //     function myFunction(event) {
         //         alert('s');
