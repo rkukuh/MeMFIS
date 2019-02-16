@@ -128,18 +128,58 @@ let PurchaseRequest = {
             ]
         });
 
-        $('.unit_id').on('change', function () {
-            //set the visibility of the specify element based on the value of select
-            alert('change');
-            // $('#con-specify').toggle(this.value == 'other')
+        $(function(){
+            $('input[type="radio"]').click(function(){
+              if ($(this).is(':checked'))
+              {
+                // alert($(this).val());
+                if($(this).val() == 'general'){
+                    $('.project').addClass('hidden');
+                }
+                else if($(this).val() == 'hm'){
+                    $('.project').removeClass('hidden');
+                }
+              }
+            });
         });
-        $(document).ready(function () {
-        //     function myFunction(event) {
-        //         alert('s');
-        //         // document.getElementById("myText").value = e.target.value
-        //     }
 
-        });
+        // if (document.getElementById('general').checked) {
+        //     alert('e');
+        //     // $('.project').addClass('hidden');
+        //     // rate_value = document.getElementById('r1').value;
+        //   }
+
+        // $(document).ready(function(){
+        //     // document.getElementByName('type').onchange = function () {
+        //     //     alert('s');
+        //         // document.getElementById('ppn_amount').disabled = !this.checked;
+
+        //         // if (document.getElementById("is_ppn").checked) {
+        //         //     document.getElementById('ppn_amount').value = 10;
+        //         // } else {
+        //         //     document.getElementById('ppn_amount').value = '';
+        //         // }
+        //     // };
+
+        //     if ($('input[name=type]:checked').length > 0) {
+        //     //     // if($("input[name='type']:checked").val() === 'general'){
+        //             alert($("input[name='type']:checked").val());
+        //     //     // }
+        //     }
+        // });
+
+        // $('.unit_id').on('change', function () {
+        //     //set the visibility of the specify element based on the value of select
+        //     alert('change');
+        //     // $('#con-specify').toggle(this.value == 'other')
+        // });
+        // $(document).ready(function () {
+        // //     function myFunction(event) {
+        // //         alert('s');
+        // //         // document.getElementById("myText").value = e.target.value
+        // //     }
+
+        // });
 
 
     }

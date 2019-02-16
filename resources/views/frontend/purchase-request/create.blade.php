@@ -73,12 +73,12 @@
                                                         @component('frontend.common.input.radio')
                                                             @slot('text', 'Heavy Maintenance')
                                                             @slot('name', 'type')
-                                                            @slot('id', 'type')
+                                                            @slot('id', 'hm')
                                                             @slot('value', 'hm')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type')
-                                                            @slot('id', 'type')
+                                                            @slot('id', 'general')
                                                             @slot('text', 'General')
                                                             @slot('value', 'general')
                                                         @endcomponent
@@ -86,7 +86,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 project">
                                                 <label class="form-control-label">
                                                     Ref Project No. @include('frontend.common.label.required')
                                                 </label>
