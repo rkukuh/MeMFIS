@@ -32,6 +32,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->timestamp('top_start_at')->nullable();
             $table->unsignedInteger('approved_by')->nullable();
             $table->timestamp('approved_at')->nullable();
+            $table->text('shipping_address');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

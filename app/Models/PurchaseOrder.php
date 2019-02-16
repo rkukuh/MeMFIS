@@ -23,6 +23,7 @@ class PurchaseOrder extends MemfisModel
         'top_start_at',
         'approved_by',
         'approved_at',
+        'shipping_address',
         'description',
     ];
 

@@ -75,6 +75,7 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
                 return Carbon::now();
             }
         },
+        'shipping_address' => $faker->address,
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
 
