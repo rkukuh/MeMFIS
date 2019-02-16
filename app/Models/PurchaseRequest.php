@@ -16,7 +16,11 @@ class PurchaseRequest extends MemfisModel
         'description',
     ];
 
-    protected $dates = ['requested_at', 'required_at', 'approved_at'];
+    protected $dates = [
+        'requested_at', 
+        'required_at', 
+        'approved_at'
+    ];
 
     /*************************************** RELATIONSHIP ****************************************/
 

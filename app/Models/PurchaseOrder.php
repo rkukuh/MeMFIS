@@ -21,9 +21,27 @@ class PurchaseOrder extends MemfisModel
         'description',
     ];
 
-    protected $dates = ['ordered_at', 'valid_until', 'ship_at'];
+    protected $dates = [
+        'ordered_at', 
+        'valid_until', 
+        'ship_at', 
+        'approved_at'
+    ];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A purchase order may have approver.
+     *
+     * This function will retrieve the approver of a purchase order.
+     * See: Employee's purchase_order_approved() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvedBy()
+    {
+        return $this->belongsTo(Employee::class, 'approved_by');
+    }
 
     /**
      * One-to-Many: A purchase order may have one currency.
