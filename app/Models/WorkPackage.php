@@ -73,7 +73,7 @@ class WorkPackage extends MemfisModel
                     ->withPivot(
                         'manhour_total',
                         'manhour_rate',
-                        'jobcard_description'
+                        'description'
                     )
                     ->withTimestamps();
     }

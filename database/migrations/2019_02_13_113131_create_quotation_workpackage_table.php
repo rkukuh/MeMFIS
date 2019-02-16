@@ -18,7 +18,7 @@ class CreateQuotationWorkpackageTable extends Migration
             $table->unsignedInteger('workpackage_id');
             $table->double('manhour_total');
             $table->double('manhour_rate');
-            $table->text('jobcard_description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

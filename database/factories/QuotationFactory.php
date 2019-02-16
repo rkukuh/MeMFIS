@@ -72,7 +72,7 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
             $quotation->workpackages()->save($workpackage, [
                 'manhour_total' => rand(10, 20),
                 'manhour_rate' => rand(10, 20) * 1000000,
-                'jobcard_description' => $faker->randomElement([null, $faker->sentence]),
+                'description' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
     }
