@@ -21,6 +21,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->unsignedInteger('purchase_request_id');
             $table->timestamp('ordered_at')->nullable();
             $table->timestamp('valid_until')->nullable();
+            $table->text('shipping_address');
             $table->timestamp('ship_at')->nullable();
             $table->unsignedInteger('currency_id');
             $table->double('exchange_rate');
@@ -32,7 +33,6 @@ class CreatePurchaseOrdersTable extends Migration
             $table->timestamp('top_start_at')->nullable();
             $table->unsignedInteger('approved_by')->nullable();
             $table->timestamp('approved_at')->nullable();
-            $table->text('shipping_address');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
