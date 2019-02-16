@@ -26,7 +26,7 @@ class GoodsReceived extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A GRN may have one employee (to approve the GRN).
+     * One-to-Many: A GRN may have one approver.
      *
      * This function will retrieve the approver of a GRN.
      * See: Employee's grn_approved() method for the inverse
