@@ -27,6 +27,8 @@ class CreatePurchaseOrdersTable extends Migration
             $table->double('total_before_tax');
             $table->double('tax_amount');
             $table->double('total_after_tax');
+            $table->unsignedInteger('approved_by')->nullable();
+            $table->timestamp('approved_at')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
