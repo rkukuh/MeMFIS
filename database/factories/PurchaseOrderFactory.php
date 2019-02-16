@@ -38,6 +38,7 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
         },
         'ordered_at' => $faker->randomElement([null, Carbon::now()]),
         'valid_until' => $faker->randomElement([null, Carbon::now()]),
+        'shipping_address' => $faker->address,
         'ship_at' => $faker->randomElement([null, Carbon::now()]),
         'currency_id' => function () {
             if (Currency::count()) {
@@ -75,7 +76,6 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
                 return Carbon::now();
             }
         },
-        'shipping_address' => $faker->address,
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
 

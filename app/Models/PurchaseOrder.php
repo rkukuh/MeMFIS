@@ -12,6 +12,7 @@ class PurchaseOrder extends MemfisModel
         'purchase_request_id',
         'ordered_at',
         'valid_until',
+        'shipping_address',
         'ship_at',
         'currency_id',
         'exchange_rate',
@@ -23,7 +24,6 @@ class PurchaseOrder extends MemfisModel
         'top_start_at',
         'approved_by',
         'approved_at',
-        'shipping_address',
         'description',
     ];
 
