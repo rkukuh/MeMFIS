@@ -10,7 +10,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Project::class, function (Faker $faker) {
 
-    $code  = $faker->unixTime();
+    $code = $faker->unixTime();
 
     return [
         'code' => 'PRJ-' . $code,
