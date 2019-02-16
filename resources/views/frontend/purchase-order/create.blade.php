@@ -169,7 +169,9 @@
                                                             @slot('text', 'Shipping Adddress')
                                                             @slot('name', 'shipping_address')
                                                             @slot('rows', '3')
+                                                            @slot('value', 'Jl. Raya Bandara Juanda,Sudimoro, Betro, Sedati, Bali, Jawa Timur 61253')
                                                             @slot('id_error', 'shipping_address')
+
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -357,48 +359,6 @@
     </style>
 @endpush
 @push('footer-scripts')
-    <script>
-    function myFunction(object) {
-        // var numItems = $('.project').length
-
-        // var x = this.getElementById("type_website");
-        var x = object;
-        var y = x.name;
-
-        var numb = y.match(/\d/g);
-        var z = x.value;
-        var projectUuid = z;
-    }
-    </script>
-
-    <script type="text/javascript">
-        let simpan = $('.tes').on('click', '.save', function () {
-        var usertype=[];
-        $("select[name=project]").each(function(){
-            usertype.push($(this).val());
-            // alert($(this).val());
-        });
-        var ajaxdata={"UserType":usertype};
-
-        console.log(JSON.stringify(ajaxdata));
-        });
-    </script>
-    <script>
-        function initMap() {
-            var myLatLng = {lat: -7.265757, lng: 112.734146};
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom    : 10,
-                center  : myLatLng
-            });
-
-            var marker = new google.maps.Marker({
-                position    : myLatLng,
-                map         : map,
-                title       : 'Hello World!'
-            });
-        }
-    </script>
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
