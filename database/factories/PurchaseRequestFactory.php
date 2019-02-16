@@ -5,7 +5,6 @@ use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Project;
-use App\Models\Aircraft;
 use App\Models\Employee;
 use Faker\Generator as Faker;
 use App\Models\PurchaseRequest;
@@ -29,13 +28,6 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
             return $faker->randomElement([
                 factory(Type::class)->states('purchase-request')->create()->id,
             ]);
-        },
-        'aircraft_id' => function () {
-            if (Aircraft::count()) {
-                return Aircraft::get()->random()->id;
-            }
-
-            return factory(Aircraft::class)->create()->id;
         },
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'required_at' => $faker->randomElement([null, Carbon::now()]),

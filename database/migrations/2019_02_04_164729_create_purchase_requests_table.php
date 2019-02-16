@@ -18,7 +18,6 @@ class CreatePurchaseRequestsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedInteger('type_id');
-            $table->unsignedInteger('aircraft_id')->nullable();
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('required_at')->nullable();
             $table->unsignedInteger('approved_by')->nullable();
@@ -29,11 +28,6 @@ class CreatePurchaseRequestsTable extends Migration
 
             $table->foreign('type_id')
                     ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('aircraft_id')
-                    ->references('id')->on('aircrafts')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
