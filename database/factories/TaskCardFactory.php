@@ -12,7 +12,7 @@ use Faker\Generator as Faker;
 
 $factory->define(TaskCard::class, function (Faker $faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
     $version = rand(1, 9).'.'.rand(1, 9);
 
     return [
@@ -69,7 +69,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
 $factory->state(TaskCard::class, 'basic', function ($faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
         'number' => 'TC-' . $number,
@@ -81,7 +81,7 @@ $factory->state(TaskCard::class, 'basic', function ($faker) {
 
 $factory->state(TaskCard::class, 'eo', function ($faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     $scheduled_priority = Type::ofTaskCardEOScheduledPriority()->get()->random();
     $recurrence = Type::ofTaskCardEORecurrence()->get()->random();
@@ -149,7 +149,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
 
 $factory->state(TaskCard::class, 'si', function ($faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
         'number' => 'SI-' . $number,
