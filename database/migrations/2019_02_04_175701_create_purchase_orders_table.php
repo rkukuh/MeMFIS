@@ -27,6 +27,9 @@ class CreatePurchaseOrdersTable extends Migration
             $table->double('total_before_tax');
             $table->double('tax_amount');
             $table->double('total_after_tax');
+            $table->unsignedInteger('top_type');
+            $table->integer('top_day_amount')->nullable();
+            $table->timestamp('top_start_at')->nullable();
             $table->unsignedInteger('approved_by')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->text('description')->nullable();
@@ -45,6 +48,11 @@ class CreatePurchaseOrdersTable extends Migration
 
             $table->foreign('currency_id')
                     ->references('id')->on('currencies')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('top_type')
+                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
