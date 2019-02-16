@@ -117,7 +117,7 @@
                                                         <div class="row">
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <label class="form-control-label">
-                                                                    Sup DO No.
+                                                                    Vendor DO No.
                                                                 </label>
 
                                                                 @component('frontend.common.input.text')
@@ -129,7 +129,7 @@
                                                             </div>
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <label class="form-control-label">
-                                                                    Ref Date
+                                                                    DO Ref Date
                                                                 </label>
 
                                                                 @component('frontend.common.input.datepicker')
