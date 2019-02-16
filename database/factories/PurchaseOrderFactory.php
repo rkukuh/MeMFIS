@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Type;
 use App\Models\Item;
 use App\Models\Vendor;
 use App\Models\Currency;
@@ -13,6 +14,7 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
     $is_approved = false;
     $number = $faker->unixTime();
+    $top_type = Type::ofTermOfPayment()->get()->random()->id;
 
     if ($faker->boolean) {
         $is_approved = true;
@@ -48,6 +50,17 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
         'total_before_tax' => rand(10, 100) * 1000000,
         'tax_amount' => rand(1, 10) * 10000,
         'total_after_tax' => rand(10, 100) * 1000000,
+        'top_type' => $top_type,
+        'top_day_amount' => function () use ($top_type) {
+            if ($top_type == 95) {
+                return rand(5, 100);
+            }
+        },
+        'top_start_at' => function () use ($top_type) {
+            if ($top_type == 95) {
+                return Carbon::now();
+            }
+        },
         'approved_by' => function () use ($is_approved) {
             if ($is_approved) {
                 if (Employee::count()) {

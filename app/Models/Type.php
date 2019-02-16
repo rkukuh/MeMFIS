@@ -261,6 +261,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Term of Payment.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTermOfPayment(Builder $query)
+    {
+        return $query->where('of', 'term-of-payment');
+    }
+
+    /**
      * Scope a query to only include type of Unit.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

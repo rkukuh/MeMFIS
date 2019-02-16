@@ -18,6 +18,11 @@ class PurchaseOrder extends MemfisModel
         'total_before_tax',
         'tax_amount',
         'total_after_tax',
+        'top_type',
+        'top_day_amount',
+        'top_start_at',
+        'approved_by',
+        'approved_at',
         'description',
     ];
 
@@ -25,6 +30,7 @@ class PurchaseOrder extends MemfisModel
         'ordered_at', 
         'valid_until', 
         'ship_at', 
+        'top_start_at',
         'approved_at'
     ];
 
