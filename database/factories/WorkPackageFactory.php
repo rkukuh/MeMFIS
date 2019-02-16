@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(WorkPackage::class, function (Faker $faker) {
 
-    $code  = $faker->unixTime();
+    $code = $faker->unixTime();
 
     return [
         'code' => $faker->randomElement([null, 'WP-' . $code]),
