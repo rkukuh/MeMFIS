@@ -12,6 +12,8 @@ class PurchaseRequest extends MemfisModel
         'aircraft_id',
         'requested_at',
         'required_at',
+        'approved_by',
+        'approved_at',
         'description',
     ];
 
@@ -30,6 +32,19 @@ class PurchaseRequest extends MemfisModel
     public function aircraft()
     {
         return $this->belongsTo(Aircraft::class);
+    }
+
+    /**
+     * One-to-Many: A purchase request may have approver.
+     *
+     * This function will retrieve the approver of a purchase request.
+     * See: Employee's purchase_request_approved() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvedBy()
+    {
+        return $this->belongsTo(Employee::class, 'approved_by');
     }
 
     /**

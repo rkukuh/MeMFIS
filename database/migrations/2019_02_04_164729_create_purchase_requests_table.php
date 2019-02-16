@@ -21,6 +21,8 @@ class CreatePurchaseRequestsTable extends Migration
             $table->unsignedInteger('aircraft_id')->nullable();
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('required_at')->nullable();
+            $table->unsignedInteger('approved_by')->nullable();
+            $table->timestamp('approved_at')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

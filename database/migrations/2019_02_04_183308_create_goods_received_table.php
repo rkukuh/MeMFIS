@@ -23,7 +23,7 @@ class CreateGoodsReceivedTable extends Migration
             $table->string('container_no')->nullable();
             $table->unsignedInteger('purchase_order_id');
             $table->unsignedInteger('storage_id');
-            $table->unsignedInteger('approved_by');
+            $table->unsignedInteger('approved_by')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
