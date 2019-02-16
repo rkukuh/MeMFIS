@@ -56,7 +56,7 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
         },
         'approved_at' => function () use ($is_approved, $faker) {
             if ($is_approved) {
-                $faker->randomElement([null, Carbon::now()]);
+                return Carbon::now();
             }
         },
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
