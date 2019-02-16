@@ -10,7 +10,7 @@ use App\Models\PurchaseRequest;
 
 $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
         'number' => 'PO-' . $number,

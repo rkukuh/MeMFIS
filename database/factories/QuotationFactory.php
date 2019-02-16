@@ -14,7 +14,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Quotation::class, function (Faker $faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
         'number' => 'QTN-' . $number,
