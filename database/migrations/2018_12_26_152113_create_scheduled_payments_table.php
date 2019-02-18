@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePurchaseRequestsTable extends Migration
+class CreateScheduledpaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,24 @@ class CreatePurchaseRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_requests', function (Blueprint $table) {
+        Schema::create('scheduled_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('number');
+            // $table->unsignedInteger('quotation_id');
             $table->unsignedInteger('type_id');
-            $table->timestamp('requested_at')->nullable();
-            $table->timestamp('required_at')->nullable();
-            $table->unsignedInteger('approved_by')->nullable();
-            $table->timestamp('approved_at')->nullable();
-            $table->text('description')->nullable();
+            $table->integer('value');
             $table->timestamps();
             $table->softDeletes();
+
+            // $table->foreign('quotation_id')
+            //         ->references('id')->on('quotations')
+            //         ->onUpdate('cascade')
+            //         ->onDelete('restrict');
 
             $table->foreign('type_id')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
-
-            $table->index('number');
         });
     }
 
@@ -42,6 +41,6 @@ class CreatePurchaseRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_requests');
+        Schema::dropIfExists('scheduled_payments');
     }
 }

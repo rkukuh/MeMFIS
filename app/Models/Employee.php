@@ -66,7 +66,7 @@ class Employee extends MemfisModel
     }
 
     /**
-     * One-to-Many: A GRN may have one employee (to approve the GRN).
+     * One-to-Many: A GRN may have one approver.
      *
      * This function will retrieve all the GRNs of an approver.
      * See: GoodsReceived's approvedBy() method for the inverse
@@ -100,6 +100,32 @@ class Employee extends MemfisModel
     public function phones()
     {
         return $this->morphMany(Phone::class, 'phoneable');
+    }
+
+    /**
+     * One-to-Many: A purchase order may have approver.
+     *
+     * This function will retrieve all the purchase orders of an approver.
+     * See: GoodsReceived's approvedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_order_approved()
+    {
+        return $this->hasMany(PurchaseOrder::class, 'approved_by');
+    }
+
+    /**
+     * One-to-Many: A purchase request may have approver.
+     *
+     * This function will retrieve all the purchase requests of an approver.
+     * See: GoodsReceived's approvedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_request_approved()
+    {
+        return $this->hasMany(PurchaseRequest::class, 'approved_by');
     }
 
     /**

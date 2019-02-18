@@ -8,12 +8,13 @@ $factory->define(EOInstruction::class, function (Faker $faker) {
 
     return [
         'work_area' => Type::ofWorkArea()->get()->random()->id,
-        'manhour' => $faker->randomFloat(2, 0, 9999),
-        'helper_quantity' => $faker->randomElement([null, rand(1, 10)]),
+        'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
+        'engineer_quantity' => rand(1, 10),
+        'helper_quantity' => $faker->randomElement([null, rand(1, 5)]),
         'is_rii' => $faker->boolean,
         'performance_factor' => $faker->randomElement([
             null,
-            rand(0, 10) / 10 // min:0-max:1-step:0,1
+            (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
         ]),
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
         'description' => $faker->paragraph(rand(10, 20)),

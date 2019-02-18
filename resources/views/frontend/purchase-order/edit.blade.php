@@ -169,6 +169,7 @@
                                                             @slot('text', 'Shipping Adddress')
                                                             @slot('name', 'shipping_address')
                                                             @slot('rows', '3')
+                                                            @slot('value', 'Jl. Raya Bandara Juanda,Sudimoro, Betro, Sedati, Bali, Jawa Timur 61253')
                                                             @slot('id_error', 'shipping_address')
                                                         @endcomponent
                                                     </div>

@@ -23,6 +23,7 @@ return [
         'projects' => 20,
         'purchase-orders' => 20,
         'purchase-requests' => 20,
+        'quotations' => 20,
         'schools' => 20,
         'statuses' => 10,
         'storages' => 10,

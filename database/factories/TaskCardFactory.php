@@ -12,7 +12,7 @@ use Faker\Generator as Faker;
 
 $factory->define(TaskCard::class, function (Faker $faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
     $version = rand(1, 9).'.'.rand(1, 9);
 
     return [
@@ -47,14 +47,15 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
             return factory(Type::class)->states('work-area')->create()->id;
         },
-        'manhour' => $faker->randomFloat(2, 0, 9999),
-        'helper_quantity' => $faker->randomElement([null, rand(1, 10)]),
+        'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
+        'engineer_quantity' => rand(1, 10),
+        'helper_quantity' => $faker->randomElement([null, rand(1, 5)]),
         'is_rii' => $faker->boolean,
         'source' => null,
         'effectivity' => null,
         'performance_factor' => $faker->randomElement([
             null,
-            rand(0, 10) / 10 // min:0-max:1-step:0,1
+            (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
         ]),
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
         'version' => $faker->randomElement([null, $version]),
@@ -69,7 +70,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
 $factory->state(TaskCard::class, 'basic', function ($faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
         'number' => 'TC-' . $number,
@@ -81,7 +82,7 @@ $factory->state(TaskCard::class, 'basic', function ($faker) {
 
 $factory->state(TaskCard::class, 'eo', function ($faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     $scheduled_priority = Type::ofTaskCardEOScheduledPriority()->get()->random();
     $recurrence = Type::ofTaskCardEORecurrence()->get()->random();
@@ -136,7 +137,8 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
 
         // These attributes are filled on 'taskcard_eo' table
         'work_area' => null,
-        'manhour' => null,
+        'estimation_manhour' => null,
+        'engineer_quantity' => null,
         'helper_quantity' => null,
         'is_rii' => null,
         'performance_factor' => null,
@@ -149,7 +151,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
 
 $factory->state(TaskCard::class, 'si', function ($faker) {
 
-    $number  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
         'number' => 'SI-' . $number,

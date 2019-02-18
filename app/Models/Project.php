@@ -74,6 +74,19 @@ class Project extends MemfisModel
     }
 
     /**
+     * One-to-Many: A quotation may have one project.
+     *
+     * This function will retrieve all the quotations of a project.
+     * See: Quotation's project() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotations()
+    {
+        return $this->hasMany(Quotation::class);
+    }
+
+    /**
      * Many-to-Many: A project may have one or many workpackage.
      *
      * This function will retrieve all the work packages of a project.

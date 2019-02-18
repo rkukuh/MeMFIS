@@ -27,7 +27,7 @@ Route::name('testing.')->group(function () {
 
             return $items;
         });
-        
+
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
 
@@ -35,6 +35,13 @@ Route::name('testing.')->group(function () {
         Route::view('/select2-repeater2', 'frontend/testing/repeaterBlank')->name('select2-repeater2');
         Route::view('/datatable', 'frontend/testing/datatable')->name('datatable');
         Route::view('/welcome', 'frontend/testing/welcome')->name('welcome');
+        Route::view('/barcode', 'frontend/testing/barcode')->name('barcode');
+
+        Route::get('/barcode-print', function () {
+            $pdf = \PDF::loadView('frontend/form/barcode');
+            return $pdf->stream();
+        });
+
     });
 
 });

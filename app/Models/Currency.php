@@ -26,4 +26,17 @@ class Currency extends MemfisModel
     {
         return $this->hasMany(PurchaseOrder::class);
     }
+
+    /**
+     * One-to-Many: A quotation may have one currency.
+     *
+     * This function will retrieve all the quotations of a currency.
+     * See: Quotation's currency() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotations()
+    {
+        return $this->hasMany(Quotation::class);
+    }
 }
