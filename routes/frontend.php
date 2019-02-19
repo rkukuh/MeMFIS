@@ -71,15 +71,9 @@ Route::name('frontend.')->group(function () {
         Route::resource('project', 'ProjectController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('workpackage', 'WorkPackageController');
-        Route::resource('purchase-order', 'PurchaseOrderController');
-        Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
-        Route::resource('goods-received', 'GoodsReceivedController');
-        Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
-        Route::resource('purchase-request', 'PurchaseRequestController');
-        Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
-        /** AIRCRAFT  */
+        /** AIRCRAFT */
 
         Route::namespace('Aircraft')->group(function () {
 
@@ -120,7 +114,7 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** CUSTOMER  */
+        /** CUSTOMER */
 
         Route::namespace('Customer')->group(function () {
 
@@ -142,7 +136,7 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** EMPLOYEE  */
+        /** EMPLOYEE */
 
         Route::namespace('Employee')->group(function () {
 
@@ -174,7 +168,7 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** TASK CARD  */
+        /** TASK CARD */
 
         Route::namespace('TaskCard')->group(function () {
 
@@ -220,7 +214,7 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** JOB CARD  */
+        /** JOB CARD */
 
         Route::namespace('JobCard')->group(function () {
 
@@ -238,7 +232,23 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** WORK PACKAGE  */
+        /** PURCHASE REQUEST */
+
+        Route::resource('purchase-request', 'PurchaseRequestController');
+        Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
+
+        /** PURCHASE ORDER */
+        
+        Route::resource('purchase-order', 'PurchaseOrderController');
+        Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
+        
+        /** GOODS RECEIVED NOTE */
+
+        Route::resource('goods-received', 'GoodsReceivedController');
+        Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
+
+        /** WORK PACKAGE */
+        
         Route::view('/summary/basic', 'frontend.workpackage.routine.basic.basic-summary')->name('summary.basic');
         Route::view('/summary/sip', 'frontend.workpackage.routine.sip.sip-summary')->name('summary.sip');
         Route::view('/summary/cpcp', 'frontend.workpackage.routine.cpcp.cpcp-summary')->name('summary.cpcp');
@@ -246,14 +256,17 @@ Route::name('frontend.')->group(function () {
         Route::view('/summary/cmr-awl', 'frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary')->name('summary.cmr-awl');
         Route::view('/summary/si', 'frontend.workpackage.nonroutine.si.si-summary')->name('summary.si');
 
-        /** VENDOR  */
+        /** VENDOR */
+
         Route::view('/vendor', 'frontend.vendor.index')->name('vendor.index');
         Route::view('/vendor/create', 'frontend.vendor.create')->name('vendor.create');
 
-        /** PRICE LIST  */
+        /** PRICE LIST */
+
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
 
-        /** QUOTATION  */
+        /** QUOTATION */
+
         Route::view('/quotation-view/workpackage', 'frontend.quotation.workpackage')->name('quotation.workpackage');
         Route::view('/quotation-view/summary/basic', 'frontend.quotation.routine.basic.basic-summary')->name('quotation.summary.basic');
         Route::view('/quotation-view/summary/sip', 'frontend.quotation.routine.sip.sip-summary')->name('quotation.summary.sip');
