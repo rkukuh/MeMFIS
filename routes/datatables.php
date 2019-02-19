@@ -85,7 +85,7 @@ Route::name('datatables.')->group(function () {
 
         });
 
-        /** EMPLOYEE  */
+        /** EMPLOYEE */
 
         Route::name('employee.')->group(function () {
 
