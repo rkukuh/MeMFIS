@@ -123,7 +123,7 @@
     <table  width="100%">
         <tr>
             <td height="60">
-                <div style="margin-bottom:50px;">{!!DNS1D::getBarcodeHTML('JO-1151596', 'C39',1,33)!!}</div></br>
+                <div style="margin-bottom:50px;">{!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE')!!}</div></br>
                 {{-- <div style="margin-bottom:50px;">{!!DNS1D::getBarcodeHTML('JO-1151596', 'S25')!!}</div></br> --}}
                 {{-- <div style="margin-bottom:50px;">{!!DNS1D::getBarcodeHTML('JO-1151596', 'I25')!!}</div></br> --}}
                 {{-- <div style="margin-bottom:50px;">{!!DNS1D::getBarcodeHTML('JO-1151596', 'MSI+')!!}</div></br> --}}
