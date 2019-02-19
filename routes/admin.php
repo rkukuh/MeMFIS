@@ -63,6 +63,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('project', 'ProjectController');
         Route::resource('jobcard', 'JobCardController');
+        Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('workpackage', 'WorkPackageController');
         Route::resource('eo-instruction', 'EOInstructionController');
