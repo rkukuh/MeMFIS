@@ -13,14 +13,14 @@ class TypesOfScheduledPayment extends Seeder
     public function run()
     {
         Type::create([
-            'code' => 'persentage',
-            'name' => 'Persentage',
+            'code' => 'by-date',
+            'name' => 'By Date',
             'of'   => 'scheduled-payment',
         ]);
 
         Type::create([
-            'code' => 'amount',
-            'name' => 'Amount',
+            'code' => 'by-progress',
+            'name' => 'By Project Progress',
             'of'   => 'scheduled-payment',
         ]);
     }
