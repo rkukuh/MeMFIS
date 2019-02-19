@@ -220,7 +220,25 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** WORKPACKAGE  */
+        /** JOB CARD  */
+
+        Route::namespace('JobCard')->group(function () {
+
+            Route::resource('jobcard', 'JobCardController');
+
+            Route::name('jobcard.')->group(function () {
+                Route::prefix('jobcard')->group(function () {
+
+                    /** Transaction */
+                    Route::resource('/{jobcard}/progress', 'JobCardProgressController');
+                    Route::resource('/{jobcard}/inspect', 'JobCardInspectController');
+
+                });
+            });
+
+        });
+
+        /** WORK PACKAGE  */
         Route::view('/summary/basic', 'frontend.workpackage.routine.basic.basic-summary')->name('summary.basic');
         Route::view('/summary/sip', 'frontend.workpackage.routine.sip.sip-summary')->name('summary.sip');
         Route::view('/summary/cpcp', 'frontend.workpackage.routine.cpcp.cpcp-summary')->name('summary.cpcp');

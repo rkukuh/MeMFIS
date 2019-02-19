@@ -62,6 +62,7 @@ Route::name('admin.')->group(function () {
         /** TRANSACTION */
 
         Route::resource('project', 'ProjectController');
+        Route::resource('jobcard', 'JobCardController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('workpackage', 'WorkPackageController');
         Route::resource('eo-instruction', 'EOInstructionController');

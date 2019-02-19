@@ -339,7 +339,24 @@ Route::name('datatables.')->group(function () {
 
         });
 
-        /** WORKPACKAGE */
+        /** JOB CARD */
+
+        Route::name('jobcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'jobcard',
+                'namespace' => 'JobCard'
+
+            ], function () {
+
+                Route::get('/', 'JobCardDatatables@index')->name('all');
+
+            });
+
+        });
+
+        /** WORK PACKAGE */
 
         Route::name('workpackage.')->group(function () {
 
