@@ -86,19 +86,6 @@ class Quotation extends MemfisModel
     }
 
     /**
-     * One-to-Many: A quotation may have one scheduled payment.
-     *
-     * This function will retrieve the scheduled payment (type) of a quotation.
-     * See: ScheduledPayment's quotation() method for the inverse
-     *
-     * @return mixed
-     */
-    public function scheduled_payments()
-    {
-        return $this->hasMany(ScheduledPayment::class);
-    }
-
-    /**
      * Many-to-Many: A quotation may have one or many workpackage.
      *
      * This function will retrieve all the workpackages of a quotation.
