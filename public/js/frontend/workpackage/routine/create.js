@@ -91,12 +91,18 @@ let RoutineWorkpackage = {
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="predecessor" name="predecessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
                 },
                 {
                     field: 'stat4',
                     title: 'Sucessor',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
                 },
                 {
                     field: 'stat5',
@@ -209,12 +215,18 @@ let RoutineWorkpackage = {
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="predecessor" name="predecessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
                 },
                 {
                     field: 'stat4',
                     title: 'Sucessor',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
                 },
                 {
                     field: 'stat5',
@@ -327,12 +339,18 @@ let RoutineWorkpackage = {
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="predecessor" name="predecessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
                 },
                 {
-                    field: 'stat2',
+                    field: 'stat4',
                     title: 'Sucessor',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
                 },
                 {
                     field: 'stat1',
