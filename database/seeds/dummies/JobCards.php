@@ -12,6 +12,6 @@ class JobCards extends Seeder
      */
     public function run()
     {
-        //
+        factory(JobCard::class, config('memfis.dummies.jobcards'))->create();
     }
 }

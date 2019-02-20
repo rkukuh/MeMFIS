@@ -16,6 +16,7 @@ return [
         'employees' => 50,
         'goods-received' => 20,
         'items' => 50,
+        'jobcards' => 20,
         'journals' => 100,
         'languages' => 10,
         'licenses' => 10,
