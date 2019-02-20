@@ -211,7 +211,9 @@ class TaskCardRoutineDatatables extends Controller
         }
 
         // get all raw data
-        $taskcards = Taskcard::where('type_id',83)->get();
+        $taskcards = TaskCard::with('type')->where('type_id',83)->get();
+
+        // $taskcards = TaskCard::with('type')->where('type.name','Basic')->get();
 
         $alldata = json_decode( $taskcards, true);
 
