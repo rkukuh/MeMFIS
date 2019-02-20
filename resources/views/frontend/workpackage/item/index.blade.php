@@ -23,6 +23,8 @@
                     @slot('data_target', '#modal_item')
                 @endcomponent
 
+                @include('frontend.workpackage.item.modal')
+
                 <div class="m-separator m-separator--dashed d-xl-none"></div>
               </div>
           </div>
@@ -67,5 +69,5 @@
 
 
 @push('footer-scripts')
-  <script src="{{ asset('js/frontend/workpackage/item/create.js')}}"></script>
+    <script src="{{ asset('js/frontend/workpackage/item/create.js') }}"></script>
 @endpush
