@@ -63,7 +63,7 @@ let PurchaseRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<input type="text" id="qty" name="qty" class="form-control m-input">'
+                        return '<input type="number" id="qty" name="qty" class="form-control m-input">'
                     }
                 },
                 {

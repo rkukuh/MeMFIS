@@ -78,25 +78,28 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
+                    field: 'stat2',
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                    }
                 },
                 {
-                    field: 'stat',
+                    field: 'stat3',
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
+                    field: 'stat4',
                     title: 'Sucessor',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
+                    field: 'stat5',
                     title: 'Mandatory/Critical TC',
                     sortable: 'asc',
                     filterable: !1,
@@ -197,21 +200,24 @@ let NonRoutineWorkpackage = {
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                    }
                 },
                 {
-                    field: 'stat',
+                    field: 'stat2',
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
+                    field: 'stat3',
                     title: 'Sucessor',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
+                    field: 'stat4',
                     title: 'Mandatory/Critical TC',
                     sortable: 'asc',
                     filterable: !1,
@@ -308,25 +314,28 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
+                    field: 'stat2',
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                    }
                 },
                 {
-                    field: 'stat',
+                    field: 'stat3',
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
+                    field: 'stat4',
                     title: 'Sucessor',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
+                    field: 'stat5',
                     title: 'Mandatory/Critical TC',
                     sortable: 'asc',
                     filterable: !1,
