@@ -66,7 +66,7 @@ let RoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
-                    field: 'statu',
+                    field: 'status',
                     title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
