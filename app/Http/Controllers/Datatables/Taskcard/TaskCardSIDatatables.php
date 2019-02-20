@@ -200,7 +200,7 @@ class TaskCardSIDatatables extends Controller
                 'number'     => true,
                 'title'     => true,
                 'work_area'     => true,
-                'manhour'     => true,
+                'estimation_manhour'     => true,
                 'Actions'      => true,
                 ];
 

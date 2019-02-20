@@ -199,7 +199,7 @@ class TaskCardRoutineDatatables extends Controller
             'number'     => true,
             'title'     => true,
             'work_area'     => true,
-            'manhour'     => true,
+            'estimation_manhour'     => true,
             'Actions'      => true,
         ];
 
@@ -211,7 +211,7 @@ class TaskCardRoutineDatatables extends Controller
         }
 
         // get all raw data
-        $taskcards = Taskcard::where('type_id',81)->get();
+        $taskcards = Taskcard::where('type_id',83)->get();
 
         $alldata = json_decode( $taskcards, true);
 
@@ -370,7 +370,7 @@ class TaskCardRoutineDatatables extends Controller
                 'number'     => true,
                 'title'     => true,
                 'work_area'     => true,
-                'manhour'     => true,
+                'estimation_manhour'     => true,
                 'Actions'      => true,
                 ];
 
@@ -382,7 +382,7 @@ class TaskCardRoutineDatatables extends Controller
             }
 
             // get all raw data
-            $taskcards = Taskcard::where('type_id',82)->get();
+            $taskcards = Taskcard::where('type_id',84)->get();
 
             $alldata = json_decode( $taskcards, true);
 
@@ -541,7 +541,7 @@ class TaskCardRoutineDatatables extends Controller
                 'number'     => true,
                 'title'     => true,
                 'work_area'     => true,
-                'manhour'     => true,
+                'estimation_manhour'     => true,
                 'Actions'      => true,
                 ];
 
