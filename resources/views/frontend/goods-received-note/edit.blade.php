@@ -182,6 +182,7 @@
                                                             @slot('name', 'description')
                                                             @slot('rows', '7')
                                                             @slot('id_error', 'description')
+                                                            @slot('value', $goodsReceived->description)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -193,6 +194,7 @@
                                                                     @slot('text', 'received-by')
                                                                     @slot('name', 'received-by')
                                                                     @slot('id_error', 'received-by')
+                                                                    @slot('value', $goodsReceived->received_by)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -204,6 +206,7 @@
                                                                     @slot('text', 'vehicle-no')
                                                                     @slot('name', 'vehicle-no')
                                                                     @slot('id_error', 'vehicle-no')
+                                                                    @slot('value', $goodsReceived->vehicle_no)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -215,6 +218,7 @@
                                                                     @slot('text', 'container-no')
                                                                     @slot('name', 'container-no')
                                                                     @slot('id_error', 'container-no')
+                                                                    @slot('value', $goodsReceived->container_no)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
