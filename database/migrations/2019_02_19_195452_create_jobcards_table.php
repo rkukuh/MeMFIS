@@ -15,7 +15,20 @@ class CreateJobcardsTable extends Migration
     {
         Schema::create('jobcards', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('number');
+            $table->unsignedInteger('taskcard_id');
+            $table->json('data_taskcard');
+            $table->json('data_taskcard_items')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('taskcard_id')
+                    ->references('id')->on('taskcards')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->index('number');
         });
     }
 

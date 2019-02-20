@@ -98,6 +98,19 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * One-to-Many (with JSON data): A jobcard must have a taskcard
+     *
+     * This function will retrieve all the jobcards of a taskcard.
+     * See: JobCard's taskcard() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcards()
+    {
+        return $this->hasMany(JobCard::class);
+    }
+
+    /**
      * Many-to-Many (self-join): A task card may have none or many other related task cards.
      *
      * This function will retrieve the parent task cards of a (related-to) task cards.
