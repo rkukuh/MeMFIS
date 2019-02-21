@@ -276,6 +276,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
 
         /** JOB CARD */
+        Route::view('/job-card/mechanic', 'frontend.job-card.mechanic.index')->name('job-card.mechanic');
         Route::view('/job-card/mechanic/open', 'frontend.job-card.mechanic.open')->name('job-card.mechanic.open');
         Route::view('/job-card/mechanic/pregress-resume', 'frontend.job-card.mechanic.progress-resume')->name('job-card.mechanic.progress-resume');
         Route::view('/job-card/mechanic/pregress-pause', 'frontend.job-card.mechanic.progress-pause')->name('job-card.mechanic.progress-pause');
