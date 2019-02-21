@@ -32,4 +32,9 @@ Route::get('/purchase-request-doc', function () {
     return $pdf->stream();
 });
 
+Route::get('/jobcard-routine', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_routine');
+    return $pdf->stream();
+});
+
 
