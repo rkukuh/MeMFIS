@@ -49,14 +49,14 @@ let Quotation = {
                     width: 40
                 },
                 {
-                    field: 'quotation_number',
+                    field: 'number',
                     title: 'Quotation Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'customer',
+                    field: 'customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
