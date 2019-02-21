@@ -238,17 +238,17 @@ Route::name('frontend.')->group(function () {
         Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
 
         /** PURCHASE ORDER */
-        
+
         Route::resource('purchase-order', 'PurchaseOrderController');
         Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
-        
+
         /** GOODS RECEIVED NOTE */
 
         Route::resource('goods-received', 'GoodsReceivedController');
         Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
 
         /** WORK PACKAGE */
-        
+
         Route::view('/summary/basic', 'frontend.workpackage.routine.basic.basic-summary')->name('summary.basic');
         Route::view('/summary/sip', 'frontend.workpackage.routine.sip.sip-summary')->name('summary.sip');
         Route::view('/summary/cpcp', 'frontend.workpackage.routine.cpcp.cpcp-summary')->name('summary.cpcp');
@@ -274,6 +274,11 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/adsb', 'frontend.quotation.nonroutine.adsb.ad-sb-summary')->name('quotation.summary.adsb');
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
+
+        /** QUOTATION */
+        Route::view('/job-card/mechanic', 'frontend.job-card.mechanic.open')->name('job-card.open');
+        Route::view('/job-card/mechanic/pregress', 'frontend.job-card.mechanic.progress')->name('job-card.progress');
+
 
     });
 
