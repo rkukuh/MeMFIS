@@ -16,7 +16,7 @@ class TaskCardDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(TaskCard::all());
+        $data = $alldata = json_decode(TaskCard::with('type')->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

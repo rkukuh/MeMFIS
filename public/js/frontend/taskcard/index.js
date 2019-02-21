@@ -53,7 +53,7 @@ let TaskCard = {
                     }
                 },
                 {
-                    field: 'type_id',
+                    field: 'type.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
@@ -65,7 +65,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'manhour',
+                    field: 'estimation_manhour',
                     title: 'Manhour',
                     sortable: 'asc',
                     filterable: !1,
