@@ -223,7 +223,7 @@
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    Job Card Progress Time Line
+                                    Job Card Progress Timeline
                                 </h3>
                             </div>
                         </div>
@@ -318,7 +318,7 @@
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    Your Progress Time Line
+                                    Your Progress Timeline
                                 </h3>
                             </div>
                         </div>
