@@ -277,7 +277,8 @@ Route::name('frontend.')->group(function () {
 
         /** QUOTATION */
         Route::view('/job-card/mechanic', 'frontend.job-card.mechanic.open')->name('job-card.open');
-        Route::view('/job-card/mechanic/pregress', 'frontend.job-card.mechanic.progress')->name('job-card.progress');
+        Route::view('/job-card/mechanic/pregress-resume', 'frontend.job-card.mechanic.progress-resume')->name('job-card.progress-resume');
+        Route::view('/job-card/mechanic/pregress-pause', 'frontend.job-card.mechanic.progress-pause')->name('job-card.progress-pause');
 
 
     });
