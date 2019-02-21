@@ -37,4 +37,14 @@ Route::get('/jobcard-routine', function () {
     return $pdf->stream();
 });
 
+Route::get('/jobcard-eo', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_eo');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-si', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_si');
+    return $pdf->stream();
+});
+
 
