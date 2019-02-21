@@ -280,7 +280,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/job-card/mechanic/pregress-resume', 'frontend.job-card.mechanic.progress-resume')->name('job-card.mechanic.progress-resume');
         Route::view('/job-card/mechanic/pregress-pause', 'frontend.job-card.mechanic.progress-pause')->name('job-card.mechanic.progress-pause');
 
-        Route::view('/job-card/engineer', 'frontend.job-card.index')->name('job-card.engineer');
+        Route::view('/job-card/engineer', 'frontend.job-card.engineer.index')->name('job-card.engineer');
         Route::view('/job-card/engineer/open', 'frontend.job-card.engineer.open')->name('job-card.engineer.open');
         Route::view('/job-card/engineer/pregress-resume', 'frontend.job-card.engineer.progress-resume')->name('job-card.engineer.progress-resume');
         Route::view('/job-card/engineer/pregress-pause', 'frontend.job-card.engineer.progress-pause')->name('job-card.engineer.progress-pause');
