@@ -275,11 +275,18 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
 
-        /** QUOTATION */
-        Route::view('/job-card/mechanic', 'frontend.job-card.mechanic.open')->name('job-card.open');
-        Route::view('/job-card/mechanic/pregress-resume', 'frontend.job-card.mechanic.progress-resume')->name('job-card.progress-resume');
-        Route::view('/job-card/mechanic/pregress-pause', 'frontend.job-card.mechanic.progress-pause')->name('job-card.progress-pause');
+        /** JOB CARD */
+        Route::view('/job-card/mechanic/open', 'frontend.job-card.mechanic.open')->name('job-card.mechanic.open');
+        Route::view('/job-card/mechanic/pregress-resume', 'frontend.job-card.mechanic.progress-resume')->name('job-card.mechanic.progress-resume');
+        Route::view('/job-card/mechanic/pregress-pause', 'frontend.job-card.mechanic.progress-pause')->name('job-card.mechanic.progress-pause');
 
+        Route::view('/job-card/engineer', 'frontend.job-card.index')->name('job-card.engineer');
+        Route::view('/job-card/engineer/open', 'frontend.job-card.engineer.open')->name('job-card.engineer.open');
+        Route::view('/job-card/engineer/pregress-resume', 'frontend.job-card.engineer.progress-resume')->name('job-card.engineer.progress-resume');
+        Route::view('/job-card/engineer/pregress-pause', 'frontend.job-card.engineer.progress-pause')->name('job-card.engineer.progress-pause');
+
+        Route::view('/job-card/ppc', 'frontend.job-card.ppc.index')->name('job-card.ppc');
+        Route::view('/job-card/ppc/show', 'frontend.job-card.ppc.show')->name('job-card.ppc.show');
 
     });
 
