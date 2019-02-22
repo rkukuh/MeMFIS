@@ -15,31 +15,31 @@ class StatusesOfJobCard extends Seeder
         Status::create([
             'code' => 'open',
             'name' => 'OPEN',
-            'of'   => 'job-card',
+            'of'   => 'jobcard',
         ]);
 
         Status::create([
             'code' => 'progress',
             'name' => 'IN-PROGRESS',
-            'of'   => 'job-card',
+            'of'   => 'jobcard',
         ]);
 
         Status::create([
             'code' => 'pending',
             'name' => 'PENDING',
-            'of'   => 'job-card',
+            'of'   => 'jobcard',
         ]);
 
         Status::create([
             'code' => 'paused',
             'name' => 'PAUSED',
-            'of'   => 'job-card',
+            'of'   => 'jobcard',
         ]);
 
         Status::create([
             'code' => 'closed',
             'name' => 'CLOSED',
-            'of'   => 'job-card',
+            'of'   => 'jobcard',
         ]);
     }
 }
