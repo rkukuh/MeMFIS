@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Illuminate\Database\Eloquent\Builder;
 
 class Status extends MemfisModel
 {
@@ -38,6 +39,17 @@ class Status extends MemfisModel
     }
 
     /**
+     * Scope a query to only include category of job card.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfJobCard(Builder $query)
+    {
+        return $query->where('of', 'jobcard');
+    }
+
+    /**
      * Scope a query to only include category of marital.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -46,5 +58,16 @@ class Status extends MemfisModel
     public function scopeOfMarital(Builder $query)
     {
         return $query->where('of', 'marital');
+    }
+
+    /**
+     * Scope a query to only include category of quotation.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfQuotation(Builder $query)
+    {
+        return $query->where('of', 'quotation');
     }
 }
