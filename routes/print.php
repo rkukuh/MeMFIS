@@ -47,4 +47,9 @@ Route::get('/jobcard-si', function () {
     return $pdf->stream();
 });
 
+Route::get('/hard-time', function () {
+    $pdf = \PDF::loadView('frontend/form/hard_time');
+    return $pdf->stream();
+});
+
 
