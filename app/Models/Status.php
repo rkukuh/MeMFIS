@@ -70,4 +70,18 @@ class Status extends MemfisModel
     {
         return $query->where('of', 'quotation');
     }
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Polymorphic: An entity can have zero or many statuses.
+     *
+     * This function will get all of the owning statusable models.
+     * See:
+     * - JobCard's statuses() method for the inverse
+     */
+    public function statusable()
+    {
+        return $this->morphTo();
+    }
 }

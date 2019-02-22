@@ -18,6 +18,17 @@ class JobCard extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many statuses.
+     *
+     * This function will get all of the jobcard's statuses.
+     * See: Access's accessable() method for the inverse
+     */
+    public function statuses()
+    {
+        return $this->morphMany(Status::class, 'statusable');
+    }
+
+    /**
      * One-to-Many (with JSON data): A jobcard must have a taskcard
      *
      * This function will retrieve the taskcard of a jobcard.
