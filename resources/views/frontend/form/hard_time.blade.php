@@ -52,7 +52,7 @@
             <td width="40%">
                 <center>
                     <h1>
-                      JOB CARD
+                      JOB CARD <br>
                       <span style="font-weight: lighter; font-size: 25px;">(Hard Time)</span>
                     </h1>
                 </center>
