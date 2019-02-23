@@ -20,10 +20,10 @@
           border-bottom: 1px solid black;
 
         }
-        
+
         .date-footer{
-          position: absolute; 
-          top:95px; 
+          position: absolute;
+          top:95px;
           left:2px;
         }
 
@@ -84,40 +84,40 @@
     <table width="100%" style="margin-top:5px;">
       <tr>
           <td width="100%">
-            <b>Issued Date: Generated </b> 
+            <b>Issued Date: Generated </b>
           </td>
       </tr>
     </table>
     <table width="100%" style="margin-top:2px;">
       <tr>
           <td width="30%">
-              <b>CRI No : Generated </b> 
+              <b>CRI No : Generated </b>
           </td>
           <td width="40%"> </td>
           <td width="30%">
-            <b>A/C type : Generated</b> 
+            <b>A/C type : Generated</b>
           </td>
       </tr>
     </table>
     <table width="100%" style="margin-top:2px;">
       <tr>
           <td width="30%">
-              <b>Project No : Generated </b> 
+              <b>Project No : Generated </b>
           </td>
           <td width="40%"> </td>
           <td width="30%">
-            <b>A/C Reg : Generated</b> 
+            <b>A/C Reg : Generated</b>
           </td>
       </tr>
     </table>
     <table width="100%" style="margin-top:2px;">
       <tr>
           <td width="30%">
-              <b>Inspection Type &nbsp; : Generated </b> 
+              <b>Inspection Type &nbsp; : Generated </b>
           </td>
           <td width="40%"> </td>
           <td width="30%">
-            <b>A/C S/N : Generated</b> 
+            <b>A/C S/N : Generated</b>
           </td>
       </tr>
     </table>
@@ -127,29 +127,30 @@
             <div style="position: absolute;">
               Item Description :
             </div>
-          
+
             <br>
-            <center>Generate</center> 
+            <center>Generate</center>
           </td>
           <td style="position: relative;" width="20%" height="30">
             <div style="position: absolute;">
               Postition :
             </div>
-          
+
             <br>
-            <center>Generate</center> 
+            <center>Generate</center>
           </td>
           <td style="position: relative;" width="15%" height="30">
             <div style="position: absolute;">
               Est. Mhrs :
             </div>
-          
+
             <br>
-            <center>Generate</center> 
+            <center>Generate</center>
           </td>
           <td width="30%" rowspan="3">
             <center>
-              ini barcode masih belom 
+                Removal JC No : <br> JO-1151596 <br>
+                {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
             </center>
           </td>
       </tr>
@@ -158,25 +159,25 @@
               <div style="position: absolute;">
                 Part Number :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
             </td>
             <td style="position: relative;" width="20%" height="30">
               <div style="position: absolute;">
                 S/N Off :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
             </td>
             <td style="position: relative;" width="15%" height="30">
               <div style="position: absolute;">
                 Actual. Mhrs :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
           </td>
       </tr>
       <tr>
@@ -184,17 +185,17 @@
               <div style="position: absolute;">
                 Remark :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
             </td>
             <td style="position: relative;" width="35%" height="45" colspan="2">
               <div style="position: absolute;">
                 Accomplishment Notes :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
             </td>
       </tr>
     </table>
@@ -204,9 +205,9 @@
               <div style="position: absolute;">
                 Material(s) :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
             </td>
             <td width="50%" height="35">
               <div style="position: absolute;">
@@ -221,9 +222,9 @@
         <tr>
             <td style="position: relative;" width="30%" height="80">
               <div style="position: absolute;">
-                <b>Removed By :</b> 
+                <b>Removed By :</b>
               </div>
-              
+
               <div class="name-footer">Name</div>
 
               <div class="date-footer">
@@ -231,7 +232,7 @@
               </div>
             <td style="position: relative;" width="30%" height="80">
               <div style="position: absolute;">
-                <b>Engineeer Stamp :</b> 
+                <b>Engineeer Stamp :</b>
               </div>
 
               <div class="name-footer">Name</div>
@@ -244,13 +245,13 @@
               <div style="position: absolute;">
                 <b>Rill By :</b>
               </div>
-              
+
               <div class="name-footer">Name</div>
 
               <div class="date-footer">
                   Date : <span>(Date & Time)</span>
               </div>
-                
+
             </td>
         </tr>
     </table>
@@ -279,30 +280,31 @@
               <div style="position: absolute;">
                 Item Description :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
             </td>
             <td style="position: relative;" width="20%" height="30">
               <div style="position: absolute;">
                 Postition :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
             </td>
             <td style="position: relative;" width="15%" height="30">
               <div style="position: absolute;">
                 Est. Mhrs :
               </div>
-            
+
               <br>
-              <center>Generate</center> 
+              <center>Generate</center>
             </td>
             <td width="30%" rowspan="3">
               <center>
-                ini barcode masih belom 
-              </center>
+                Removal JC No : <br> JO-1151596 <br>
+                {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
+            </center>
             </td>
         </tr>
         <tr>
@@ -310,25 +312,25 @@
                 <div style="position: absolute;">
                   Part Number :
                 </div>
-              
+
                 <br>
-                <center>Generate</center> 
+                <center>Generate</center>
               </td>
               <td style="position: relative;" width="20%" height="30">
                 <div style="position: absolute;">
                   S/N On :
                 </div>
-              
+
                 <br>
-                <center>Generate</center> 
+                <center>Generate</center>
               </td>
               <td style="position: relative;" width="15%" height="30">
                 <div style="position: absolute;">
                   Actual. Mhrs :
                 </div>
-              
+
                 <br>
-                <center>Generate</center> 
+                <center>Generate</center>
             </td>
         </tr>
         <tr>
@@ -336,17 +338,17 @@
                 <div style="position: absolute;">
                   Remark :
                 </div>
-              
+
                 <br>
-                <center>Generate</center> 
+                <center>Generate</center>
               </td>
               <td style="position: relative;" width="35%" height="45" colspan="2">
                 <div style="position: absolute;">
                   Accomplishment Notes :
                 </div>
-              
+
                 <br>
-                <center>Generate</center> 
+                <center>Generate</center>
               </td>
         </tr>
       </table>
@@ -356,9 +358,9 @@
                 <div style="position: absolute;">
                   Material(s) :
                 </div>
-              
+
                 <br>
-                <center>Generate</center> 
+                <center>Generate</center>
               </td>
               <td width="50%" height="35">
                 <div style="position: absolute;">
@@ -373,21 +375,21 @@
           <tr>
               <td style="position: relative;" width="30%" height="80">
                 <div style="position: absolute;">
-                  <b>Removed By :</b> 
+                  <b>Removed By :</b>
                 </div>
-                
+
                 <div class="name-footer">Name</div>
-  
+
                 <div class="date-footer">
                     Date : <span>(Date & Time)</span>
                 </div>
               <td style="position: relative;" width="30%" height="80">
                 <div style="position: absolute;">
-                  <b>Engineeer Stamp :</b> 
+                  <b>Engineeer Stamp :</b>
                 </div>
-  
+
                 <div class="name-footer">Name</div>
-  
+
                 <div class="date-footer">
                     Date : <span>(Date & Time)</span>
                 </div>
@@ -396,13 +398,13 @@
                 <div style="position: absolute;">
                   <b>Rill By :</b>
                 </div>
-                
+
                 <div class="name-footer">Name</div>
-  
+
                 <div class="date-footer">
                     Date : <span>(Date & Time)</span>
                 </div>
-                  
+
               </td>
           </tr>
       </table>
