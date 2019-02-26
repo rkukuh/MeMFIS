@@ -550,9 +550,27 @@ class FillComboxController extends Controller
      */
     public function tool()
     {
-        $tools = Item::with('categories')->where('categories->name','tool')->get();
+        $items = Item::with('categories')
+                ->whereHas('categories', function ($query) {
+                    $query->where('code', 'tool');
+                })->pluck('name','id');
 
-        return json_encode($tools);
+        return $items;
+}
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function material()
+    {
+        $items = Item::with('categories')
+                ->whereHas('categories', function ($query) {
+                    $query->where('code', 'rawmat');
+                })->pluck('name','id');
+
+        return $items;
     }
 
     /**

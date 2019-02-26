@@ -1,7 +1,7 @@
 $(document).ready(function () {
     material = function () {
         $.ajax({
-            url: '/get-items/',
+            url: '/get-materials/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

@@ -53,6 +53,7 @@ Route::name('component.')->group(function () {
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
         Route::get('get-manual-affecteds', 'FillComboxController@manualAffected')->name('get-manual-affecteds');
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
+        Route::get('get-materials', 'FillComboxController@material')->name('get-material');
         Route::get('get-projects', 'FillComboxController@project')->name('get-project');
 
 
