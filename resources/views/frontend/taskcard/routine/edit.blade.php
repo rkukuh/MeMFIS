@@ -308,16 +308,16 @@
 
                                             <select id="relationship" name="relationship" class="form-control m-select2" multiple>
                                                 @if ($taskcard->related_to->isEmpty())
-                                                    @foreach ($taskcards as $taskcard)
-                                                        <option value="{{ $taskcard->id }}">
-                                                            {{ $taskcard->title }}
+                                                    @foreach ($taskcards as $taskCard)
+                                                        <option value="{{ $taskCard->id }}">
+                                                            {{ $taskCard->title }}
                                                         </option>
                                                     @endforeach
                                                 @else
-                                                    @foreach ($taskcards as $taskcard)
+                                                    @foreach ($taskcards as $taskCard)
                                                         <option value="{{ $taskcard->id }}"
-                                                            @if(in_array( $taskcard->id ,$relation_taskcards)) selected @endif>
-                                                            {{ $taskcard->title }}
+                                                            @if(in_array( $taskCard->id ,$relation_taskcards)) selected @endif>
+                                                            {{ $taskCard->title }}
                                                         </option>
                                                     @endforeach
                                                 @endif
@@ -598,6 +598,10 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let TaskCard_uuid = '{{ $taskcard->uuid }}';
+    </script>
+
     <script>
         var autoExpand = function (field) {
 
