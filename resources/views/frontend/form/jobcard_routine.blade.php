@@ -51,8 +51,7 @@
             <td width="40%">
                 <center>
                     <h1>
-                      JOB CARD
-                      <span style="font-weight: lighter; font-size: 25px;">(Routine)</span>
+                      JOB CARD<span style="font-weight: lighter; font-size: 25px;">(Routine)</span>
                     </h1>
                 </center>
             </td>
