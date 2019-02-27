@@ -424,6 +424,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A task card may have zero or many task type.
+     *
+     * This function will retrieve all task cards of a task type.
+     * See: Task Card's task_type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function task_type()
+    {
+        return $this->hasMany(TaskCard::class,'task_type_id','id');
+    }
+
+    /**
      * One-to-Many: A unit may have zero or many type.
      *
      * This function will retrieve all units of a type.
