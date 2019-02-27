@@ -6,7 +6,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard/item/',
+                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,43 +43,33 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'name',
-                    title: 'Item',
+                    title: 'Tool',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
-                    field: 'quantity',
+                    field: 'pivot.quantity',
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                            'data-item_id="' + t.uuid + '" ' +
-                            'data-unit_id="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool-delete" title="Delete" ' +
+                            'data-item_uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -87,13 +77,14 @@ let TaskCard = {
                 }
             ]
         });
+
         $('.item_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard/item/',
+                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -130,43 +121,33 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'name',
-                    title: 'Item',
+                    title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
-                    field: 'quantity',
+                    field: 'pivot.quantity',
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                            'data-item_id="' + t.uuid + '" ' +
-                            'data-unit_id="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material-delete" title="Delete" ' +
+                            'data-item_uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );

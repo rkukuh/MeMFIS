@@ -192,7 +192,6 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('taskcard-routine')->group(function () {
 
                     /** Transaction: Item */
-                    // Route::post('taskcard/{taskCard}/item', 'TaskCardRoutineItemsController@store')->name('taskcard.item.store');
                     Route::post('/{taskcard}/item', 'TaskCardRoutineItemsController@store')->name('item.store');
                     Route::delete('/{taskcard}/{item}/item', 'TaskCardRoutineItemsController@destroy')->name('item.destroy');
 
@@ -210,7 +209,9 @@ Route::name('frontend.')->group(function () {
             Route::name('taskcard-si.')->group(function () {
                 Route::prefix('taskcard-si')->group(function () {
 
-                    //
+                    /** Transaction: Item */
+                    Route::post('/{taskcard}/item', 'TaskCardSIItemController@store')->name('item.store');
+                    Route::delete('/{taskcard}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
 
                 });
             });
