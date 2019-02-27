@@ -36,15 +36,14 @@ class TaskCardRoutineItemsController extends Controller
      * @param  \App\Http\Requests\Frontend\TaskCardRoutineItemStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskCard $taskCard, TaskCardRoutineItemStore $request)
+    public function store(TaskCard $taskcard, TaskCardRoutineItemStore $request)
     {
-        // dd($taskCard);
-        $taskCard->items()->attach($request->taskcard_id, [
+        $taskcard->items()->attach($taskcard->id, [
             'item_id' => $request->item_id,
             'quantity' => $request->quantity
         ]);
 
-        return response()->json($taskCard);
+        return response()->json($taskcard);
     }
 
     /**

@@ -1,11 +1,6 @@
 <html>
 <head>
     <style>
-
-        th {
-            text-align: center;
-        }
-
         td{
           font-size: 12px;
         }
@@ -13,7 +8,9 @@
         h1{
           font-size: 40px;
         }
-
+        .table-style{
+            border-collapse: collapse;
+        }
         .table-style td{
           border-left: 1px solid black;
           border-right: 1px solid black;
@@ -38,6 +35,11 @@
           left: 50%;
         }
 
+        .sub-barcode{
+          margin-left: 25%;
+          margin-top: 12px;
+        }
+
     </style>
 </head>
 <body>
@@ -52,8 +54,7 @@
             <td width="40%">
                 <center>
                     <h1>
-                      JOB CARD <br>
-                      <span style="font-weight: lighter; font-size: 25px;">(Hard Time)</span>
+                      JOB CARD<br><span style="font-weight: lighter; font-size: 25px;">(Hard Time)</span>
                     </h1>
                 </center>
             </td>
@@ -83,45 +84,63 @@
     </table>
     <table width="100%" style="margin-top:5px;">
       <tr>
-          <td width="100%">
-            <b>Issued Date: Generated </b>
+          <td width="15%">
+            <b>Issued Date</b>
+          </td>
+          <td width="85%">
+            <b>: <span>Generate</span></b>
           </td>
       </tr>
     </table>
     <table width="100%" style="margin-top:2px;">
       <tr>
-          <td width="30%">
-              <b>CRI No : Generated </b>
+          <td width="15%">
+              <b>CRI No</b>
           </td>
-          <td width="40%"> </td>
-          <td width="30%">
-            <b>A/C type : Generated</b>
+          <td width="55%">
+            <b>: <span>Generate</span></b>
           </td>
-      </tr>
-    </table>
-    <table width="100%" style="margin-top:2px;">
-      <tr>
-          <td width="30%">
-              <b>Project No : Generated </b>
+          <td width="10%">
+            <b>A/C type</b>
           </td>
-          <td width="40%"> </td>
-          <td width="30%">
-            <b>A/C Reg : Generated</b>
+          <td width="20%">
+            <b>: <span>Generate</span></b>
           </td>
       </tr>
     </table>
     <table width="100%" style="margin-top:2px;">
       <tr>
-          <td width="30%">
-              <b>Inspection Type &nbsp; : Generated </b>
+          <td width="15%">
+              <b>Project No</b>
           </td>
-          <td width="40%"> </td>
-          <td width="30%">
-            <b>A/C S/N : Generated</b>
+          <td width="55%">
+            <b>: <span>Generate</span></b>
+          </td>
+          <td width="10%">
+            <b>A/C Reg</b>
+          </td>
+          <td width="20%">
+            <b>: <span>Generate</span></b>
           </td>
       </tr>
     </table>
-    <table style="border-collapse: collapse; margin-top: 7px;" border="1px;" width="100%">
+    <table width="100%" style="margin-top:2px;">
+      <tr>
+          <td width="15%">
+              <b>Inspection Type</b>
+          </td>
+          <td width="55%">
+            <b>: <span>Generate</span></b>
+          </td>
+          <td width="10%">
+            <b>A/C S/N</b>
+          </td>
+          <td width="20%">
+            <b>: <span>Generate</span></b>
+          </td>
+      </tr>
+    </table>
+    <table class="table-style" style="border-top:1px solid black;border-collapse: collapse; margin-top: 7px;" width="100%">
       <tr>
           <td style="position: relative;" width="35%" height="30">
             <div style="position: absolute;">
@@ -129,7 +148,7 @@
             </div>
 
             <br>
-            <center>Generate</center>
+            <span><center>Generate</center></span>
           </td>
           <td style="position: relative;" width="20%" height="30">
             <div style="position: absolute;">
@@ -137,7 +156,7 @@
             </div>
 
             <br>
-            <center>Generate</center>
+            <span><center>Generate</center></span>
           </td>
           <td style="position: relative;" width="15%" height="30">
             <div style="position: absolute;">
@@ -145,12 +164,14 @@
             </div>
 
             <br>
-            <center>Generate</center>
+            <span><center>Generate</center></span>
           </td>
           <td width="30%" rowspan="3">
             <center>
                 Removal JC No : <br> JO-1151596 <br>
-                {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
+                <div class="sub-barcode">
+                  {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
+                </div>
             </center>
           </td>
       </tr>
@@ -161,7 +182,7 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
             <td style="position: relative;" width="20%" height="30">
               <div style="position: absolute;">
@@ -169,7 +190,7 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
             <td style="position: relative;" width="15%" height="30">
               <div style="position: absolute;">
@@ -177,7 +198,7 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
           </td>
       </tr>
       <tr>
@@ -187,7 +208,7 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
             <td style="position: relative;" width="35%" height="45" colspan="2">
               <div style="position: absolute;">
@@ -195,11 +216,11 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
       </tr>
     </table>
-    <table style="border-collapse: collapse;margin: 0px;" class="table-style" width="100%">
+    <table class="table-style" width="100%">
         <tr>
             <td style="position: relative;" width="50%" height="35">
               <div style="position: absolute;">
@@ -207,18 +228,18 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
-            <td width="50%" height="35">
+            <td style="position: relative;" width="50%" height="35">
               <div style="position: absolute;">
                 Tool(s) :
               </div>
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
         </tr>
     </table>
-    <table style="border-collapse: collapse;margin: 0px;" class="table-style" width="100%">
+    <table class="table-style" width="100%">
         <tr>
             <td style="position: relative;" width="30%" height="80">
               <div style="position: absolute;">
@@ -264,7 +285,7 @@
 
     <table style="border-collapse: collapse;margin-top: 5px;" border="1px;" class="table-style" width="100%">
         <tr>
-          <td style="background-color: darkgrey;" height="20"></td>
+          <td style="background-color: darkgrey;" height="6"></td>
         </tr>
     </table>
 
@@ -274,7 +295,7 @@
 
 
 
-    <table style="border-collapse: collapse; margin-top: 4px;" border="1px;" width="100%">
+    <table class="table-style" style="border-top:1px solid black;border-collapse: collapse; margin-top: 4px;" width="100%">
         <tr>
             <td style="position: relative;" width="35%" height="30">
               <div style="position: absolute;">
@@ -282,7 +303,7 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
             <td style="position: relative;" width="20%" height="30">
               <div style="position: absolute;">
@@ -290,7 +311,7 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
             <td style="position: relative;" width="15%" height="30">
               <div style="position: absolute;">
@@ -298,13 +319,15 @@
               </div>
 
               <br>
-              <center>Generate</center>
+              <span><center>Generate</center></span>
             </td>
             <td width="30%" rowspan="3">
               <center>
                 Removal JC No : <br> JO-1151596 <br>
-                {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
-            </center>
+                <div class="sub-barcode">
+                    {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
+                </div>            
+              </center>
             </td>
         </tr>
         <tr>
@@ -314,7 +337,7 @@
                 </div>
 
                 <br>
-                <center>Generate</center>
+                <span><center>Generate</center></span>
               </td>
               <td style="position: relative;" width="20%" height="30">
                 <div style="position: absolute;">
@@ -322,7 +345,7 @@
                 </div>
 
                 <br>
-                <center>Generate</center>
+                <span><center>Generate</center></span>
               </td>
               <td style="position: relative;" width="15%" height="30">
                 <div style="position: absolute;">
@@ -330,7 +353,7 @@
                 </div>
 
                 <br>
-                <center>Generate</center>
+                <span><center>Generate</center></span>
             </td>
         </tr>
         <tr>
@@ -340,7 +363,7 @@
                 </div>
 
                 <br>
-                <center>Generate</center>
+                <span><center>Generate</center></span>
               </td>
               <td style="position: relative;" width="35%" height="45" colspan="2">
                 <div style="position: absolute;">
@@ -348,11 +371,11 @@
                 </div>
 
                 <br>
-                <center>Generate</center>
+               <span><center>Generate</center></span>
               </td>
         </tr>
       </table>
-      <table style="border-collapse: collapse;margin: 0px;" class="table-style" width="100%">
+      <table class="table-style" width="100%">
           <tr>
               <td style="position: relative;" width="50%" height="35">
                 <div style="position: absolute;">
@@ -360,18 +383,18 @@
                 </div>
 
                 <br>
-                <center>Generate</center>
+                <span><center>Generate</center></span>
               </td>
-              <td width="50%" height="35">
+              <td style="position: relative;" width="50%" height="35">
                 <div style="position: absolute;">
                   Tool(s) :
                 </div>
                 <br>
-                <center>Generate</center>
+                <span><center>Generate</center></span>
               </td>
           </tr>
       </table>
-      <table style="border-collapse: collapse;margin: 0px;" class="table-style" width="100%">
+      <table class="table-style" width="100%">
           <tr>
               <td style="position: relative;" width="30%" height="80">
                 <div style="position: absolute;">

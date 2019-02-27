@@ -339,7 +339,7 @@ let TaskCard = {
             ]
         });
 
-        $('.add-tool').on('click', function () {
+        $('.add-item').on('click', function () {
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
@@ -349,7 +349,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard/'+TaskCard_uuid+'/item',
+                url: '/taskcard-routine/'+TaskCard_uuid+'/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: tool,
@@ -384,13 +384,15 @@ let TaskCard = {
 
                         table.originalDataSet = [];
                         table.reload();
+                        $('#modal_uom').modal('hide');
+                        document.getElementById('uom_quantity').value = '';
+
+                        $('#item_unit_id').select2('val', 'All');
+
 
                     }
                 }
             });
-        });
-        $('.add-item').on('click', function () {
-            alert('tes');
         });
 
         $(document).ready(function () {
