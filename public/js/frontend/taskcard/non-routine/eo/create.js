@@ -127,77 +127,77 @@ let TaskCard = {
             //     is_rii = 0;
             // }
 
-            // $.ajax({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     type: 'post',
-            //     url: '/taskcard-eo',
-            //     data: {
-            //         _token: $('input[name=_token]').val(),
-            //         code: code,
-            //         name: name,
-            //         description: description,
-            //         unit_id: unit,
-            //         category: category,
-            //         is_stock: is_stock,
-            //         is_ppn: is_ppn,
-            //         ppn_amount: ppn_amount,
-            //         account_code: account_code,
-            //     },
-            //     success: function (data) {
-            //         if (data.errors) {
-            //             if (data.errors.title) {
-            //                 $('#title-error').html(data.errors.title[0]);
-            //             }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-eo',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    code: code,
+                    name: name,
+                    description: description,
+                    unit_id: unit,
+                    category: category,
+                    is_stock: is_stock,
+                    is_ppn: is_ppn,
+                    ppn_amount: ppn_amount,
+                    account_code: account_code,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.title) {
+                        //     $('#title-error').html(data.errors.title[0]);
+                        // }
 
-            //             if (data.errors.number) {
-            //                 $('#number-error').html(data.errors.number[0]);
-            //             }
+                        // if (data.errors.number) {
+                        //     $('#number-error').html(data.errors.number[0]);
+                        // }
 
-            //             if (data.errors.taskcard) {
-            //                 $('#taskcard-error').html(data.errors.taskcard[0]);
-            //             }
+                        // if (data.errors.taskcard) {
+                        //     $('#taskcard-error').html(data.errors.taskcard[0]);
+                        // }
 
-            //             if (data.errors.otr_certification) {
-            //                 $('#otr-certification-error').html(data.errors.otr_certification[0]);
-            //             }
+                        // if (data.errors.otr_certification) {
+                        //     $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                        // }
 
-            //             if (data.errors.threshold_type) {
-            //                 $('#threshold-type-error').html(data.errors.threshold_type[0]);
-            //             }
+                        // if (data.errors.threshold_type) {
+                        //     $('#threshold-type-error').html(data.errors.threshold_type[0]);
+                        // }
 
-            //             if (data.errors.threshold_amount) {
-            //                 $('#threshold-amount-error').html(data.errors.threshold_amount[0]);
-            //             }
+                        // if (data.errors.threshold_amount) {
+                        //     $('#threshold-amount-error').html(data.errors.threshold_amount[0]);
+                        // }
 
-            //             if (data.errors.repeat_type) {
-            //                 $('#repeat-type-error').html(data.errors.repeat_type[0]);
-            //             }
+                        // if (data.errors.repeat_type) {
+                        //     $('#repeat-type-error').html(data.errors.repeat_type[0]);
+                        // }
 
-            //             if (data.errors.repeat_amount) {
-            //                 $('#repeat-amount-error').html(data.errors.repeat_amount[0]);
-            //             }
+                        // if (data.errors.repeat_amount) {
+                        //     $('#repeat-amount-error').html(data.errors.repeat_amount[0]);
+                        // }
 
-            //             if (data.errors.zone) {
-            //                 $('#zone-error').html(data.errors.zone[0]);
-            //             }
+                        // if (data.errors.zone) {
+                        //     $('#zone-error').html(data.errors.zone[0]);
+                        // }
 
-            //             if (data.errors.access) {
-            //                 $('#access-error').html(data.errors.access[0]);
-            //             }
+                        // if (data.errors.access) {
+                        //     $('#access-error').html(data.errors.access[0]);
+                        // }
 
-            //             if (data.errors.applicability_airplane) {
-            //                 $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
-            //             }
+                        // if (data.errors.applicability_airplane) {
+                        //     $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                        // }
 
-            //             if (data.errors.applicability_engine) {
-            //                 $('#applicability-engine-error').html(data.errors.applicability_engine[0]);
-            //             }
+                        // if (data.errors.applicability_engine) {
+                        //     $('#applicability-engine-error').html(data.errors.applicability_engine[0]);
+                        // }
 
-            //             if (data.errors.work_area) {
-            //                 $('#work-area-error').html(data.errors.work_area[0]);
-            //             }
+                        // if (data.errors.work_area) {
+                        //     $('#work-area-error').html(data.errors.work_area[0]);
+                        // }
 
 
                         // document.getElementById('title').value = title;
@@ -211,7 +211,7 @@ let TaskCard = {
                         // document.getElementById('applicability_airplane').value = applicability_airplane;
                         // document.getElementById('description').value = description;
 
-            //         } else {
+                    } else {
                         //    taskcard_reset();
 
 
@@ -219,10 +219,10 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
-            //         }
-            //     }
-            // });
+                        // window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
+                    }
+                }
+            });
         });
 
         // Category
