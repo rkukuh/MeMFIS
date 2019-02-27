@@ -170,7 +170,7 @@
             <center>
                 Removal JC No : <br> JO-1151596 <br>
                 <div class="sub-barcode">
-                  {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
+                  {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',4.5,4.5)!!}
                 </div>
             </center>
           </td>
@@ -325,8 +325,8 @@
               <center>
                 Removal JC No : <br> JO-1151596 <br>
                 <div class="sub-barcode">
-                    {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
-                </div>            
+                    {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',4.5,4.5)!!}
+                </div>
               </center>
             </td>
         </tr>

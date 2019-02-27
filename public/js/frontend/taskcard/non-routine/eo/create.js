@@ -20,8 +20,7 @@ let TaskCard = {
 
         $(document).ready(function () {
             $('select[name="recurrence_id"]').on('change', function () {
-                let recurrence = $(this).val();
-                if (recurrence == 67) {
+                if (this.options[this.selectedIndex].text == "Repetitive") {
                 $("#recurrence_div").removeClass("hidden");
                 $('#recurrence').removeAttr("disabled");
                 $('#recurrence-select').removeAttr("disabled");
@@ -34,8 +33,7 @@ let TaskCard = {
         });
         $(document).ready(function () {
             $('select[name="scheduled_priority_id"]').on('change', function () {
-                let recurrence = $(this).val();
-                if (recurrence == 71) {
+                if (this.options[this.selectedIndex].text == "Prior to") {
                 $("#prior_to").removeClass("hidden");
                 $('#prior_to_date').removeAttr("disabled");
                 $('#prior_to_hours').removeAttr("disabled");
@@ -57,8 +55,7 @@ let TaskCard = {
         });
         $(document).ready(function () {
             $('select[name="manual_affected_id"]').on('change', function () {
-                let manual_affected = $(this).val();
-                if (manual_affected == 64) {
+                if (this.options[this.selectedIndex].text == "Other") {
                 $("#note_div").removeClass("hidden");
                 $('#note').removeAttr("disabled");
                 } else {
