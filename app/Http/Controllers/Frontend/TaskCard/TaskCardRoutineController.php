@@ -84,7 +84,44 @@ class TaskCardRoutineController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.routine.show');
+        $aircraft_taskcards = [];
+
+        foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
+            $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
+        }
+
+        $access_taskcards = [];
+
+        foreach($taskCard->accesses as $i => $access_taskcard){
+            $access_taskcards[$i] =  $access_taskcard->pivot->access_id;
+        }
+
+        $zone_taskcards = [];
+
+        foreach($taskCard->zones as $i => $zone_taskcard){
+            $zone_taskcards[$i] =  $zone_taskcard->id;
+        }
+
+        $relation_taskcards = [];
+
+        foreach($taskCard->related_to as $i => $relation_taskcard){
+            $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
+        }
+
+        return view('frontend.taskcard.routine.show', [
+            'taskcard' => $taskCard,
+            'types' => $this->type,
+            'work_areas' => $this->work_area,
+            'tasks' => $this->task,
+            'aircrafts' => $this->aircraft,
+            'aircraft_taskcards' => $aircraft_taskcards,
+            'accesses' => $this->access,
+            'access_taskcards' => $access_taskcards,
+            'zones' => $this->zones,
+            'zone_taskcards' => $zone_taskcards,
+            'taskcards' => $this->taskcard,
+            'relation_taskcards' => $relation_taskcards,
+        ]);
     }
 
     /**
@@ -121,16 +158,9 @@ class TaskCardRoutineController extends Controller
 
         return view('frontend.taskcard.routine.edit', [
             'taskcard' => $taskCard,
-            'types' => $this->type,
-            'work_areas' => $this->work_area,
-            'tasks' => $this->task,
-            'aircrafts' => $this->aircraft,
             'aircraft_taskcards' => $aircraft_taskcards,
-            'accesses' => $this->access,
             'access_taskcards' => $access_taskcards,
-            'zones' => $this->zones,
             'zone_taskcards' => $zone_taskcards,
-            'taskcards' => $this->taskcard,
             'relation_taskcards' => $relation_taskcards,
         ]);
 
