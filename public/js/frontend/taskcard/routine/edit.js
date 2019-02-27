@@ -69,8 +69,7 @@ let TaskCard = {
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool-delete" title="Delete" ' +
-                            'data-taskcard_id="' + t.pivot.taskcard_id + '" ' +
-                            'data-item_id="' + t.pivot.item_id + '">' +
+                            'data-item_uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -81,7 +80,7 @@ let TaskCard = {
 
         $('.tool_datatable').on('click', '.tool-delete', function () {
             let item_uuid = $(this).data('item_uuid');
-            let unit_id = $(this).data('unit_id');
+            // let taskcard_uuid = $(this).data('taskcard_uuid');
 
             swal({
                 title: 'Sure want to remove?',
@@ -99,14 +98,59 @@ let TaskCard = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard-routine/' + taskcard_id + '/' + item_id+'/item/',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + item_uuid+'/item/',
                         success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
+                            toastr.success('Takscard Tool has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.item_unit_datatable').mDatatable();
+                            let table = $('.tool_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.item_datatable').on('click', '.material-delete', function () {
+            let item_uuid = $(this).data('item_uuid');
+            // let taskcard_uuid = $(this).data('taskcard_uuid');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + item_uuid+'/item/',
+                        success: function (data) {
+                            toastr.success('Takscard Material has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.item_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -193,8 +237,7 @@ let TaskCard = {
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material-delete" title="Delete" ' +
-                            'data-item_id="' + t.uuid + '" ' +
-                            'data-unit_id="' + t.uuid + '">' +
+                            'data-item_uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -437,6 +480,51 @@ let TaskCard = {
                 }
             });
         });
+
+        // $('.tool_datatable').on('click', '.delete-tool', function () {
+        //     let item_id = $(this).data('item_id');
+        //     let taskcard_uuid = $(this).data('taskcard_uuid');
+
+        //     swal({
+        //         title: 'Sure want to remove?',
+        //         type: 'question',
+        //         confirmButtonText: 'Yes, REMOVE',
+        //         confirmButtonColor: '#d33',
+        //         cancelButtonText: 'Cancel',
+        //         showCancelButton: true,
+        //     }).then(result => {
+        //         if (result.value) {
+        //             $.ajax({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+        //                         'content'
+        //                     )
+        //                 },
+        //                 type: 'DELETE',
+        //                 url: '/taskcard-routine/' + taskcard_uuid + '/' + item_id+'/item/',
+        //                 success: function (data) {
+        //                     toastr.success('Takscard Tool has been deleted.', 'Deleted', {
+        //                             timeOut: 5000
+        //                         }
+        //                     );
+
+        //                     let table = $('.tool_datatable').mDatatable();
+
+        //                     table.originalDataSet = [];
+        //                     table.reload();
+        //                 },
+        //                 error: function (jqXhr, json, errorThrown) {
+        //                     let errorsHtml = '';
+        //                     let errors = jqXhr.responseJSON;
+
+        //                     $.each(errors.errors, function (index, value) {
+        //                         $('#delete-error').html(value);
+        //                     });
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
 
         $(document).ready(function () {
             $('.reset-item').removeClass('reset');

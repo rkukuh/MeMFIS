@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\TaskCard;
 
 use App\Models\TaskCard;
+use App\Models\Item;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineItemStore;
 use App\Http\Requests\Frontend\TaskCardRoutineItemUpdate;
@@ -86,8 +87,10 @@ class TaskCardRoutineItemsController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Taskcard $taskCard)
+    public function destroy(Taskcard $taskcard, Item $item)
     {
-        //
+        $taskcard->items()->detach($item);
+
+        return response()->json($taskcard);
     }
 }
