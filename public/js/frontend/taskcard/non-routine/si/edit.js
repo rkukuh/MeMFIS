@@ -6,7 +6,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/tools',
+                        url: '/datatables/taskcard-si/'+taskcard_uuid+'/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -84,7 +84,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/materials',
+                        url: '/datatables/taskcard-si/'+taskcard_uuid+'/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
