@@ -156,6 +156,106 @@ let TaskCard = {
             ]
         });
 
+        $('.add-item').on('click', function () {
+            let quantity = $('input[name=quantity_item]').val();
+            let material = $('#material').val();
+            let unit_material = $('#material').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine/'+taskcard_uuid+'/item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    item_id: material,
+                    quantity: quantity,
+                    // unit_item: unit_material,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.item_id) {
+                            $('#material-error').html(data.errors.item_id[0]);
+                        }
+
+                        if (data.errors.quantity) {
+                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                        }
+                        document.getElementById('material').value = material;
+                        document.getElementById('quantity').value = quantity;
+
+                    } else {
+
+                        toastr.success('Material has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.item_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                        $('#modal_item').modal('hide');
+                        // document.getElementById('uom_quantity').value = '';
+
+                        // $('#item_unit_id').select2('val', 'All');
+
+
+                    }
+                }
+            });
+        });
+        $('.add-tool').on('click', function () {
+            let quantity = $('input[name=quantity]').val();
+            let tool = $('#tool').val();
+            let unit_tool = $('#unit_tool').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine/'+taskcard_uuid+'/item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    item_id: tool,
+                    quantity: quantity,
+                    // unit_item: unit_tool,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.item_id) {
+                            $('#tool-error').html(data.errors.item_id[0]);
+                        }
+
+                        if (data.errors.quantity) {
+                            $('#quantity-error').html(data.errors.quantity[0]);
+                        }
+                        document.getElementById('tool').value = tool;
+                        document.getElementById('quantity').value = quantity;
+                    } else {
+
+                        toastr.success('Tool has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.tool_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        $('#modal_tool').modal('hide');
+                        // document.getElementById('uom_quantity').value = '';
+
+                        // $('#item_unit_id').select2('val', 'All');
+
+
+                    }
+                }
+            });
+        });
+
+
         $('.tool_datatable').on('click', '.tool-delete', function () {
             let item_uuid = $(this).data('item_uuid');
             // let taskcard_uuid = $(this).data('taskcard_uuid');
