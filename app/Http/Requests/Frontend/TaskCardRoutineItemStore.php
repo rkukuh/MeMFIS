@@ -27,12 +27,8 @@ class TaskCardRoutineItemStore extends FormRequest
     public function rules()
     {
         return [
-            // 'number' => 'required',
-            // 'title' => 'required',
-            // 'type_id' => 'required',
-            // 'task_type_id' => 'required',
-            // 'manhour' => 'required',
-            // 'performance_factor' => 'required',
+            'item_id' => 'required',
+            'quantity' => 'required',
         ];
     }
 

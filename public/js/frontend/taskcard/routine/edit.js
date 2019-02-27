@@ -359,20 +359,14 @@ let TaskCard = {
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.item_id) {
-                            $('#tool-error').html(data.errors.item_id[0]);
+                            $('#material-error').html(data.errors.item_id[0]);
                         }
 
                         if (data.errors.quantity) {
                             $('#quantity_item-error').html(data.errors.quantity[0]);
                         }
-
-                        // if (data.errors.taskcard_routine_type) {
-                        //     $('#unit_tool-error').html(data.errors.taskcard_routine_type[0]);
-                        // }
-
-                        document.getElementById('tool').value = tool;
+                        document.getElementById('material').value = material;
                         document.getElementById('quantity').value = quantity;
-                        // document.getElementById('unit_tool').value = unit_tool;
 
                     } else {
 
@@ -420,15 +414,8 @@ let TaskCard = {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
-
-                        // if (data.errors.taskcard_routine_type) {
-                        //     $('#unit_tool-error').html(data.errors.taskcard_routine_type[0]);
-                        // }
-
                         document.getElementById('tool').value = tool;
                         document.getElementById('quantity').value = quantity;
-                        // document.getElementById('unit_tool').value = unit_tool;
-
                     } else {
 
                         toastr.success('Tool has been created.', 'Success', {
