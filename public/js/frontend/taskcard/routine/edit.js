@@ -45,7 +45,7 @@ let TaskCard = {
             },
             columns: [
                 {
-                    field: 'pivot.item_id',
+                    field: 'name',
                     title: 'Tool',
                     sortable: 'asc',
                     filterable: !1,
@@ -169,7 +169,7 @@ let TaskCard = {
             },
             columns: [
                 {
-                    field: 'pivot.item_id',
+                    field: 'name',
                     title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
