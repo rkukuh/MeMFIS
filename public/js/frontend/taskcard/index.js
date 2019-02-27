@@ -75,7 +75,7 @@ let TaskCard = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if((t.type_id == 81) || (t.type_id == 82) || (t.type_id == 83)){
+                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
                             return (
                                 '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
@@ -85,7 +85,7 @@ let TaskCard = {
                                 '</a>'
                             );
                         }
-                        else if((t.type_id == 84) || (t.type_id == 85) || (t.type_id == 86) || (t.type_id == 87) || (t.type_id == 90) || (t.type_id == 91)){
+                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
                             return (
                                 '<a href="/taskcard-eo/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
@@ -95,7 +95,7 @@ let TaskCard = {
                                 '</a>'
                             );
                         }
-                        else if(t.type_id == 89){
+                        else if(t.type.code == "si"){
                             return (
                                 '<a href="/taskcard-si/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
@@ -103,6 +103,10 @@ let TaskCard = {
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'
+                            );
+                        } else {
+                            return (
+                                'dummy'
                             );
                         }
 
