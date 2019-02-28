@@ -41,7 +41,7 @@ let TaskCard = {
                 data: {
                     _token: $('input[name=_token]').val(),
                     title: title,
-                    type_id: '89',
+                    type_id: '89', //ganti dengan input hidden didalam form
                     number: number,
                     work_area: work_area,
                     estimation_manhour: manhour,
