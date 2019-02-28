@@ -577,7 +577,6 @@ let TaskCard = {
             var JsonVersion = JSON.stringify(version);
             let effectivity = $('input[name=effectivity]').val();
             let description = $('#description').val();
-
             if ($('#applicability_airplane :selected').length > 0) {
                 let applicability_airplanes = [];
 
@@ -644,7 +643,7 @@ let TaskCard = {
                     helper_quantity: helper_quantity,
                     is_rii: is_rii,
                     performance_factor: performa,
-                    manhour: manhour,
+                    estimation_manhour: manhour,
                     description: description,
                     version: JsonVersion,
                     effectivity: effectivity,

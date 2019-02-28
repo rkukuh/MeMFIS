@@ -371,7 +371,6 @@
                                             <label class="form-control-label">
                                                 Effectivity @include('frontend.common.label.optional')
                                             </label>
-
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Effectifity')
                                                 @slot('id', 'effectifity')

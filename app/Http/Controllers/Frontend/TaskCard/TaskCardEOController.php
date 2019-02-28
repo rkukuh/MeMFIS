@@ -58,7 +58,9 @@ class TaskCardEOController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.nonroutine.eo.show');
+        return view('frontend.taskcard.nonroutine.eo.show',[
+            'taskcard' => $taskCard
+        ]);
     }
 
     /**

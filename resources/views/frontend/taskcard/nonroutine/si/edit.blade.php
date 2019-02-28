@@ -142,7 +142,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Manhour @include('frontend.common.label.required')
+                                                Estimation Manhour @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.decimal')
@@ -150,7 +150,7 @@
                                                     @slot('text', 'Manhour')
                                                     @slot('name', 'manhour')
                                                     @slot('id_error', 'manhour')
-                                                    @slot('value', $taskcard->manhour)
+                                                    @slot('value', $taskcard->estimation_manhour)
                                                 @endcomponent
                                             </div>
 
@@ -159,15 +159,46 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Helper Quantity @include('frontend.common.label.optional')
+                                                    Performa Factor @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'helper_quantity')
-                                                    @slot('text', 'Helper Quantity')
-                                                    @slot('name', 'helper_quantity')
-                                                    @slot('value', $taskcard->helper_quantity)
+                                                @component('frontend.common.input.decimal')
+                                                    @slot('id', 'performa')
+                                                    @slot('text', 'Performa')
+                                                    @slot('name', 'performa')
+                                                    @slot('value', $taskcard->performance_factor)
+                                                    @slot('id_error', 'performa')
                                                 @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Engineer Quantity @include('frontend.common.label.optional')
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'engineer_quantity')
+                                                            @slot('text', 'Engineer Quantity')
+                                                            @slot('name', 'engineer_quantity')
+                                                            @slot('value', $taskcard->engineer_quantity)
+                                                            @slot('min',0)
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Helper Quantity @include('frontend.common.label.optional')
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'helper_quantity')
+                                                            @slot('text', 'Helper Quantity')
+                                                            @slot('name', 'helper_quantity')
+                                                            @slot('value', $taskcard->helper_quantity)
+                                                            @slot('min',0)
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
