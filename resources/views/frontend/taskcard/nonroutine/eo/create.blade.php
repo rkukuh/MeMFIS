@@ -65,14 +65,14 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Type @include('frontend.common.label.required')
+                                                Title @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Taskcard Type')
-                                                @slot('id', 'taskcard_non_routine_type')
-                                                @slot('name', 'taskcard_non_routine_type')
-                                                @slot('id_error', 'taskcard_non_routine_type')
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'title')
+                                                @slot('text', 'Title')
+                                                @slot('name', 'title')
+                                                @slot('id_error', 'title')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -107,15 +107,16 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Title @include('frontend.common.label.required')
+                                                Type @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'title')
-                                                @slot('text', 'Title')
-                                                @slot('name', 'title')
-                                                @slot('id_error', 'title')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Taskcard Type')
+                                                @slot('id', 'taskcard_non_routine_type')
+                                                @slot('name', 'taskcard_non_routine_type')
+                                                @slot('id_error', 'taskcard_non_routine_type')
                                             @endcomponent
+
 
                                         </div>
 
