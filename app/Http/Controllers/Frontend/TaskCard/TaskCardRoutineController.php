@@ -132,6 +132,7 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
+        // dd($taskCard);
         $aircraft_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
@@ -162,6 +163,14 @@ class TaskCardRoutineController extends Controller
             'access_taskcards' => $access_taskcards,
             'zone_taskcards' => $zone_taskcards,
             'relation_taskcards' => $relation_taskcards,
+            'types' => $this->type,
+            'work_areas' => $this->work_area,
+            'tasks' => $this->task,
+            'aircrafts' => $this->aircraft,
+            'accesses' => $this->access,
+            'zones' => $this->zones,
+            'taskcards' => $this->taskcard,
+
         ]);
 
     }

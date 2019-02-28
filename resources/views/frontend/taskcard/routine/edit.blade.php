@@ -170,7 +170,7 @@
                                                         @slot('id', 'manhour')
                                                         @slot('text', 'Manhour')
                                                         @slot('name', 'manhour')
-                                                        @slot('value', $taskcard->manhour)
+                                                        @slot('value', $taskcard->estimation_manhour)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
