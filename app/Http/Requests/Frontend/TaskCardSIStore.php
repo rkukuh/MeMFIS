@@ -29,7 +29,7 @@ class TaskCardSIStore extends FormRequest
         return [
             'number' => 'required',
             'title' => 'required',
-            'manhour' => 'required',
+            'estimation_manhour' => 'required',
             'description' => 'required',
         ];
     }
