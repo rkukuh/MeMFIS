@@ -67,7 +67,9 @@ class TaskCardSIController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.nonroutine.si.show');
+        return view('frontend.taskcard.nonroutine.si.show',[
+            'taskCard' => $taskCard
+        ]);
     }
 
     /**

@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
                                     Routine Task Card
