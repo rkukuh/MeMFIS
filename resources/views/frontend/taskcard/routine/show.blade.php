@@ -157,18 +157,26 @@
                                                 Helper Quantity @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->helper_quantity))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->helper_quantity)
                                             @endcomponent
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Work Area @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->work_area))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->work_area)
                                             @endcomponent
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -178,22 +186,30 @@
                                                 Access @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->accesses))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($taskcard->accesses  as $access)
                                                     {{ $access->name }}, 
                                                 @endforeach
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Zone @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->zones))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($taskcard->zones  as $zone)
                                                     {{ $zone->name }}, 
                                                 @endforeach
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -202,21 +218,28 @@
                                                 Source @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->source))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->source)
                                             @endcomponent
-                                            
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Related Card @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->related_to))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($taskcard->related_to  as $related)
                                                     {{ $related->number }}, 
                                                 @endforeach
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -228,20 +251,28 @@
                                                 $versions = json_decode($taskcard->version, TRUE);
                                             @endphp
 
+                                            @if (empty($taskcard->version))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             <div style="background-color:beige; padding:15px;" class="">
-                                                @foreach($versions  as $version)
+                                                @foreach($taskcard->versions  as $version)
                                                     {{ $version }}, 
                                                 @endforeach
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Effectivity @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->effectivity))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->effectivity)
                                             @endcomponent
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -250,9 +281,13 @@
                                                 Task Card Attachment @include('frontend.common.label.optional')
                                             </label>
 
+                                            <!-- @if (empty($taskcard->description))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else -->
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', "file modal?")
                                             @endcomponent
+                                            <!-- @endif -->
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -261,9 +296,13 @@
                                                 Description @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->description))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->description)
                                             @endcomponent
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
