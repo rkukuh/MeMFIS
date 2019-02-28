@@ -37,7 +37,6 @@ class TaskCardEOController extends Controller
      */
     public function store(TaskCardEOStore $request)
     {
-        dd($request->all());
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
             $taskcard->related_to()->attach($request->relationship);

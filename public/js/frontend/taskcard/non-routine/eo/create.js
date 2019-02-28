@@ -102,6 +102,10 @@ let TaskCard = {
 
             }
 
+            let recurrence = $('input[name=recurrence]').val();
+            let recurrence_select = $('#recurrence-select').val();
+            let note = $('#note').val();
+
 
             // let task_type_id = $('#task_type_id').val();
             // let otr_certification = $('#otr_certification').val();
@@ -155,10 +159,13 @@ let TaskCard = {
                     relationship: relationship,
                     description: description,
                     scheduled_priority_id: scheduled_priority_id,
-                    recurrence_id: recurrence_id,
-                    manual_affected_id: manual_affected_id,
                     scheduled_priority_type: prior_to,
                     scheduled_priority_amount: scheduled_priority_amount,
+                    recurrence_id: recurrence_id,
+                    recurrence_amount:recurrence,
+                    recurrence_type:recurrence_select,
+                    manual_affected_id: manual_affected_id,
+                    manual_affected: note,
                     // scheduled_priority_amount: prior_to_hour,
                     // scheduled_priority_amount: prior_to_cycle,
                 },

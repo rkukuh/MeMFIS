@@ -258,7 +258,7 @@
                                             </label>
 
                                             <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
                                                     @component('frontend.common.input.number')
                                                         @slot('id', 'recurrence')
                                                         @slot('text', 'Recurrence')
@@ -267,12 +267,10 @@
                                                         @slot('id_error', 'recurrence')
                                                     @endcomponent
                                                 </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-sm-8 col-md-8 col-lg-8">
                                                     <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
                                                         <option value="">
-                                                            Select a Recurrence
+                                                            Select Recurrence
                                                         </option>
                                                         <option value="cyrcle">
                                                             Cycle
