@@ -130,6 +130,8 @@
                                                     @slot('text', 'Manhour')
                                                     @slot('name', 'manhour')
                                                     @slot('id_error', 'manhour')
+                                                    @slot('min','1')
+                                                    @slot('value','1')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -145,6 +147,7 @@
                                                     @slot('name', 'performa')
                                                     @slot('value', '1')
                                                     @slot('id_error', 'performa')
+                                                    @slot('min','0')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -158,6 +161,8 @@
                                                             @slot('id', 'engineer_quantity')
                                                             @slot('text', 'Engineer Quantity')
                                                             @slot('name', 'engineer_quantity')
+                                                            @slot('min', '1')
+                                                            @slot('value', '1')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -169,6 +174,8 @@
                                                             @slot('id', 'helper_quantity')
                                                             @slot('text', 'Helper Quantity')
                                                             @slot('name', 'helper_quantity')
+                                                            @slot('min','0')
+                                                            @slot('value', '0')
                                                         @endcomponent
                                                     </div>
                                                 </div>
