@@ -87,7 +87,7 @@
 
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($taskcard->aircrafts  as $aircraft)
-                                                    {{ $aircraft->name }}, 
+                                                    {{ $aircraft->name }},
                                                 @endforeach
                                             </div>
                                         </div>
@@ -272,8 +272,12 @@
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                             <div style="background-color:beige; padding:15px;" class="">
-                                                @foreach($taskcard->versions  as $version)
-                                                    {{ $version }}, 
+                                                @php
+                                                    $versions = json_decode($taskcard->version, TRUE);
+                                                @endphp
+
+                                                @foreach($versions  as $version)
+                                                    {{ $version }},
                                                 @endforeach
                                             </div>
                                             @endif
