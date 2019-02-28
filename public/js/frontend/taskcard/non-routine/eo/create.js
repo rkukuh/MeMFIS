@@ -86,28 +86,42 @@ let TaskCard = {
             let description = $('#description').val();
             let scheduled_priority_id = $('#scheduled_priority_id').val();
             let recurrence_id = $('#recurrence_id').val();
+            let category = $('#category').val();
             let manual_affected_id = $('#manual_affected_id').val();
 
-
-            let task_type_id = $('#task_type_id').val();
-            let otr_certification = $('#otr_certification').val();
-            let manhour = $('input[name=manhour]').val();
-            let performa = $('input[name=performa]').val();
-            let helper_quantity = $('input[name=helper_quantity]').val();
-            let work_area = $('#work_area').val();
-            let access = $('#access').val();
-            let zone = $('#zone').val();
-            let source = $('input[name=source]').val();
-            let version = $('#version').val();
-            let effectivity = $('input[name=effectivity]').val();
-
-            if ($('#applicability_airplane :selected').length > 0) {
-                var applicability_airplanes = [];
-
-                $('#applicability_airplane :selected').each(function (i, selected) {
-                    applicability_airplanes[i] = $(selected).val();
-                });
+            var prior_to = $('input[name="prior_to"]:checked').val();
+            let scheduled_priority_amount = '';
+            if(prior_to == 'date'){
+                scheduled_priority_amount = $('#date').val();
             }
+            else if (prior_to == 'hour'){
+                scheduled_priority_amount = $('#hour').val();
+            }
+            else if(prior_to == 'cycle'){
+                scheduled_priority_amount = $('#cycle').val();
+
+            }
+
+
+            // let task_type_id = $('#task_type_id').val();
+            // let otr_certification = $('#otr_certification').val();
+            // let manhour = $('input[name=manhour]').val();
+            // let performa = $('input[name=performa]').val();
+            // let helper_quantity = $('input[name=helper_quantity]').val();
+            // let work_area = $('#work_area').val();
+            // let access = $('#access').val();
+            // let zone = $('#zone').val();
+            // let source = $('input[name=source]').val();
+            // let version = $('#version').val();
+            // let effectivity = $('input[name=effectivity]').val();
+
+            // if ($('#applicability_airplane :selected').length > 0) {
+            //     var applicability_airplanes = [];
+
+            //     $('#applicability_airplane :selected').each(function (i, selected) {
+            //         applicability_airplanes[i] = $(selected).val();
+            //     });
+            // }
 
 
 
@@ -132,15 +146,21 @@ let TaskCard = {
                 url: '/taskcard-eo',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    code: code,
-                    name: name,
+                    title: title,
+                    number: number,
+                    type_id: taskcard_non_routine_type,
+                    applicability_airplane: applicability_airplane,
+                    category_id: category,
+                    revision: revision,
+                    relationship: relationship,
                     description: description,
-                    unit_id: unit,
-                    category: category,
-                    is_stock: is_stock,
-                    is_ppn: is_ppn,
-                    ppn_amount: ppn_amount,
-                    account_code: account_code,
+                    scheduled_priority_id: scheduled_priority_id,
+                    recurrence_id: recurrence_id,
+                    manual_affected_id: manual_affected_id,
+                    scheduled_priority_type: prior_to,
+                    scheduled_priority_amount: scheduled_priority_amount,
+                    // scheduled_priority_amount: prior_to_hour,
+                    // scheduled_priority_amount: prior_to_cycle,
                 },
                 success: function (data) {
                     if (data.errors) {

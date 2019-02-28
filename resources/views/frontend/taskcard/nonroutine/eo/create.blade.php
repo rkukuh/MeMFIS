@@ -186,6 +186,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_date')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'date')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -203,6 +204,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_hours')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'hour')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -221,6 +223,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_cycle')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'cycle')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
