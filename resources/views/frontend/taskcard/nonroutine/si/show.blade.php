@@ -195,7 +195,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Tool Requireds
+                                    Required Tools
                                 </h3>
                             </div>
                         </div>
@@ -218,7 +218,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Requireds
+                                    Required Materials
                                 </h3>
                             </div>
                         </div>
