@@ -365,6 +365,7 @@ let TaskCard = {
             let applicability_airplane = $('#applicability_airplane').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
+            let performa = $('input[name=performa]').val();
             let helper_quantity = $('input[name=helper_quantity]').val();
             let instruction = $('#instruction').val();
 
@@ -388,7 +389,8 @@ let TaskCard = {
                     type_id: '89',
                     number: number,
                     work_area: work_area,
-                    manhour: manhour,
+                    estimation_manhour: manhour,
+                    performance_factor: performa,
                     helper_quantity: helper_quantity,
                     description: instruction,
 
