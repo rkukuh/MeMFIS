@@ -122,7 +122,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Manhour @include('frontend.common.label.required')
+                                                    Estimation Manhour @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.decimal')
@@ -132,20 +132,46 @@
                                                     @slot('id_error', 'manhour')
                                                 @endcomponent
                                             </div>
-
-
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Helper Quantity @include('frontend.common.label.optional')
+                                                    Performa Factor @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'helper_quantity')
-                                                    @slot('text', 'Helper Quantity')
-                                                    @slot('name', 'helper_quantity')
+                                                @component('frontend.common.input.decimal')
+                                                    @slot('id', 'performa')
+                                                    @slot('text', 'Performa')
+                                                    @slot('name', 'performa')
+                                                    @slot('value', '1')
+                                                    @slot('id_error', 'performa')
                                                 @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Engineer Quantity @include('frontend.common.label.optional')
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'engineer_quantity')
+                                                            @slot('text', 'Engineer Quantity')
+                                                            @slot('name', 'engineer_quantity')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Helper Quantity @include('frontend.common.label.optional')
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('id', 'helper_quantity')
+                                                            @slot('text', 'Helper Quantity')
+                                                            @slot('name', 'helper_quantity')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
