@@ -88,7 +88,7 @@
 
                                                 <div style="background-color:beige; padding:15px;" class="">
                                                     @foreach($taskCard->aircrafts  as $aircraft)
-                                                        {{ $aircraft->name }}, 
+                                                        {{ $aircraft->name }},
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -203,8 +203,6 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
 
-                            @include('frontend.taskcard.nonroutine.si.tool.modal')
-
                             <div class="tool_datatable" id="tool_datatable"></div>
                         </div>
                     </div>
@@ -227,8 +225,6 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-
-                            @include('frontend.taskcard.nonroutine.si.item.modal')
 
                             <div class="item_datatable" id="item_datatable"></div>
                         </div>
