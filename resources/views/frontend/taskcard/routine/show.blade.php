@@ -87,7 +87,7 @@
 
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($taskcard->aircrafts  as $aircraft)
-                                                    {{ $aircraft->name }}, 
+                                                    {{ $aircraft->name }},
                                                 @endforeach
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Estimation @include('frontend.common.label.required')
+                                                        Estimation Manhour @include('frontend.common.label.required')
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
@@ -153,13 +153,26 @@
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Helper Quantity @include('frontend.common.label.optional')
-                                            </label>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Engineer Quantity @include('frontend.common.label.optional')
+                                                    </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $taskcard->helper_quantity)
-                                            @endcomponent
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $taskcard->engineer_quantity)
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Helper Quantity @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $taskcard->helper_quantity)
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -180,7 +193,7 @@
 
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($taskcard->accesses  as $access)
-                                                    {{ $access->name }}, 
+                                                    {{ $access->name }},
                                                 @endforeach
                                             </div>
                                         </div>
@@ -191,7 +204,7 @@
 
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($taskcard->zones  as $zone)
-                                                    {{ $zone->name }}, 
+                                                    {{ $zone->name }},
                                                 @endforeach
                                             </div>
                                         </div>
@@ -205,7 +218,7 @@
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->source)
                                             @endcomponent
-                                            
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -214,7 +227,7 @@
 
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($taskcard->related_to  as $related)
-                                                    {{ $related->number }}, 
+                                                    {{ $related->number }},
                                                 @endforeach
                                             </div>
                                         </div>
@@ -230,7 +243,7 @@
 
                                             <div style="background-color:beige; padding:15px;" class="">
                                                 @foreach($versions  as $version)
-                                                    {{ $version }}, 
+                                                    {{ $version }},
                                                 @endforeach
                                             </div>
                                         </div>
@@ -313,7 +326,7 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-tools-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                       
+
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
@@ -370,7 +383,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Taskcard Thresholds 
+                                    Taskcard Thresholds
                                 </h3>
                             </div>
                         </div>
@@ -380,7 +393,7 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                       
+
 
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
@@ -414,7 +427,7 @@
                                     <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                         <div class="row align-items-center">
                                             <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                               
+
 
                                                 <div class="m-separator m-separator--dashed d-xl-none"></div>
                                             </div>
