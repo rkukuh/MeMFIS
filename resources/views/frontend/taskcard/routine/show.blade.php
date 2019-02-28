@@ -376,7 +376,6 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.routine.tool.modal')
 
                             <div class="tool_datatable" id="tool_datatable"></div>
                         </div>
@@ -409,7 +408,6 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.routine.item.modal')
 
                             <div class="item_datatable" id="item_datatable"></div>
                         </div>
@@ -443,7 +441,6 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.routine.threshold.modal')
 
                             <div class="threshold_datatable" id="item_datatable"></div>
                         </div>
@@ -477,7 +474,6 @@
                                         </div>
                                     </div>
 
-                                    @include('frontend.taskcard.routine.repeat.modal')
 
                                     <div class="repeat_datatable" id="item_datatable"></div>
                                 </div>
@@ -508,3 +504,11 @@
 
     </style>
 @endpush
+@push('footer-scripts')
+    <script>
+        let taskcard_uuid = '{{ $taskcard->uuid }}';
+    </script>
+
+    <script src="{{ asset('js/frontend/taskcard/routine/show.js') }}"></script>
+@endpush
+
