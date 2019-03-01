@@ -82,11 +82,11 @@ class TaskCardController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaskCard $taskCard)
+    public function destroy(TaskCard $taskcard)
     {
-        $taskCard->delete();
+        $taskcard->delete();
 
-        return response()->json($taskCard);
+        return response()->json($taskcard);
 
     }
 }

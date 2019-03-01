@@ -191,7 +191,9 @@ Route::name('frontend.')->group(function () {
             Route::name('taskcard-routine.')->group(function () {
                 Route::prefix('taskcard-routine')->group(function () {
 
-                    //
+                    /** Transaction: Item */
+                    Route::post('/{taskcard}/item', 'TaskCardRoutineItemsController@store')->name('item.store');
+                    Route::delete('/{taskcard}/{item}/item', 'TaskCardRoutineItemsController@destroy')->name('item.destroy');
 
                 });
             });
@@ -207,7 +209,9 @@ Route::name('frontend.')->group(function () {
             Route::name('taskcard-si.')->group(function () {
                 Route::prefix('taskcard-si')->group(function () {
 
-                    //
+                    /** Transaction: Item */
+                    Route::post('/{taskcard}/item', 'TaskCardSIItemController@store')->name('item.store');
+                    Route::delete('/{taskcard}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
 
                 });
             });
@@ -238,17 +242,17 @@ Route::name('frontend.')->group(function () {
         Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
 
         /** PURCHASE ORDER */
-        
+
         Route::resource('purchase-order', 'PurchaseOrderController');
         Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
-        
+
         /** GOODS RECEIVED NOTE */
 
         Route::resource('goods-received', 'GoodsReceivedController');
         Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
 
         /** WORK PACKAGE */
-        
+
         Route::view('/summary/basic', 'frontend.workpackage.routine.basic.basic-summary')->name('summary.basic');
         Route::view('/summary/sip', 'frontend.workpackage.routine.sip.sip-summary')->name('summary.sip');
         Route::view('/summary/cpcp', 'frontend.workpackage.routine.cpcp.cpcp-summary')->name('summary.cpcp');
@@ -274,6 +278,20 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/adsb', 'frontend.quotation.nonroutine.adsb.ad-sb-summary')->name('quotation.summary.adsb');
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
+
+        /** JOB CARD */
+        Route::view('/job-card/mechanic', 'frontend.job-card.mechanic.index')->name('job-card.mechanic');
+        Route::view('/job-card/mechanic/open', 'frontend.job-card.mechanic.open')->name('job-card.mechanic.open');
+        Route::view('/job-card/mechanic/pregress-resume', 'frontend.job-card.mechanic.progress-resume')->name('job-card.mechanic.progress-resume');
+        Route::view('/job-card/mechanic/pregress-pause', 'frontend.job-card.mechanic.progress-pause')->name('job-card.mechanic.progress-pause');
+
+        Route::view('/job-card/engineer', 'frontend.job-card.engineer.index')->name('job-card.engineer');
+        Route::view('/job-card/engineer/open', 'frontend.job-card.engineer.open')->name('job-card.engineer.open');
+        Route::view('/job-card/engineer/pregress-resume', 'frontend.job-card.engineer.progress-resume')->name('job-card.engineer.progress-resume');
+        Route::view('/job-card/engineer/pregress-pause', 'frontend.job-card.engineer.progress-pause')->name('job-card.engineer.progress-pause');
+
+        Route::view('/job-card/ppc', 'frontend.job-card.ppc.index')->name('job-card.ppc');
+        Route::view('/job-card/ppc/show', 'frontend.job-card.ppc.show')->name('job-card.ppc.show');
 
     });
 

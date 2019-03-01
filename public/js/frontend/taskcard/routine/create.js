@@ -40,6 +40,7 @@ let TaskCard = {
             let manhour = $('input[name=manhour]').val();
             let performa = $('input[name=performa]').val();
             let helper_quantity = $('input[name=helper_quantity]').val();
+            let engineer_quantity = $('input[name=engineer_quantity]').val();
             let work_area = $('#work_area').val();
             let access = $('#access').val();
             let zone = $('#zone').val();
@@ -70,9 +71,10 @@ let TaskCard = {
                     task_type_id: task_type_id,
                     work_area: work_area,
                     helper_quantity: helper_quantity,
+                    engineer_quantity: engineer_quantity,
                     is_rii: is_rii,
                     performance_factor: performa,
-                    manhour: manhour,
+                    estimation_manhour: manhour,
                     description: description,
                     version: JsonVersion,
                     effectivity: effectivity,

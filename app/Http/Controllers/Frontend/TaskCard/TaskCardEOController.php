@@ -37,7 +37,16 @@ class TaskCardEOController extends Controller
      */
     public function store(TaskCardEOStore $request)
     {
-        //
+        if ($taskcard = TaskCard::create($request->all())) {
+            $taskcard->aircrafts()->attach($request->applicability_airplane);
+            $taskcard->related_to()->attach($request->relationship);
+
+            return response()->json($taskcard);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
+
     }
 
     /**
@@ -48,7 +57,9 @@ class TaskCardEOController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        //
+        return view('frontend.taskcard.nonroutine.eo.show',[
+            'taskcard' => $taskCard
+        ]);
     }
 
     /**

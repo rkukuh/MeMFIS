@@ -71,10 +71,10 @@
                                                 <div class="form-group m-form__group row" >
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Heavy Maintenance')
+                                                            @slot('text', 'Project')
                                                             @slot('name', 'type')
                                                             @slot('id', 'hm')
-                                                            @slot('value', 'hm')
+                                                            @slot('value', 'project')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type')

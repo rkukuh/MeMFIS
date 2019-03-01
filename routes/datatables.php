@@ -331,8 +331,8 @@ Route::name('datatables.')->group(function () {
                 // TODO: with (aircraft) Zone
 
                 /** Transaction */
-                Route::get('/{taskcard}/tools', 'TaskCardSIItemsDatatables@index')->name('tools.index');
-                Route::get('/{taskcard}/materials', 'TaskCardSIItemsDatatables@index')->name('materials.index');
+                Route::get('/{taskcard}/tools', 'TaskCardSIItemsDatatables@tool')->name('tools.index');
+                Route::get('/{taskcard}/materials', 'TaskCardSIItemsDatatables@material')->name('materials.index');
                 Route::get('/{taskcard}/aircrafts', 'TaskCardSIAircraftsDatatables@index')->name('aircrafts.index');
 
             });

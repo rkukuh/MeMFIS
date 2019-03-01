@@ -48,12 +48,25 @@ let TaskCard = {
                     title: 'Tittle',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        return '<a href="/taskcard/'+t.uuid+'">' + t.title + "</a>"
+                    template: function (t, e, i) {
+                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
+                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if(t.type.code == "si"){
+                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
+                        } else {
+                            return (
+                                'dummy'
+                            );
+                        }
                     }
+
                 },
                 {
-                    field: 'type_id',
+                    field: 'type.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
@@ -65,7 +78,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'manhour',
+                    field: 'estimation_manhour',
                     title: 'Manhour',
                     sortable: 'asc',
                     filterable: !1,
@@ -75,45 +88,40 @@ let TaskCard = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if((t.type_id == 81) || (t.type_id == 82) || (t.type_id == 83)){
+                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
                             return (
                                 '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
                                 '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'
                             );
                         }
-                        else if((t.type_id == 84) || (t.type_id == 85) || (t.type_id == 86) || (t.type_id == 87) || (t.type_id == 90) || (t.type_id == 91)){
+                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
                             return (
                                 '<a href="/taskcard-eo/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
                                 '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'
                             );
                         }
-                        else if(t.type_id == 89){
+                        else if(t.type.code == "si"){
                             return (
                                 '<a href="/taskcard-si/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
                                 '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'
                             );
+                        } else {
+                            return (
+                                'dummy'
+                            );
                         }
-
-                        // return (
-                        //     '<a href="/customer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                        //         '<i class="la la-pencil"></i>' +
-                        //     '</a>' +
-                        //     '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                        //     t.uuid +
-                        //     ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                        // );
                     }
                 }
             ]

@@ -6,7 +6,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard/item/',
+                        url: '/datatables/taskcard-si/'+taskcard_uuid+'/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,43 +43,33 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'name',
-                    title: 'Item',
+                    title: 'Tool',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
-                    field: 'quantity',
+                    field: 'pivot.quantity',
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                            'data-item_id="' + t.uuid + '" ' +
-                            'data-unit_id="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool-delete" title="Delete" ' +
+                            'data-item_uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -87,13 +77,14 @@ let TaskCard = {
                 }
             ]
         });
+
         $('.item_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard/item/',
+                        url: '/datatables/taskcard-si/'+taskcard_uuid+'/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -130,49 +121,229 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'name',
-                    title: 'Item',
+                    title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
-                    field: 'quantity',
+                    field: 'pivot.quantity',
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.name + ' (' + t.symbol + ')'
-                    }
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                            'data-item_id="' + t.uuid + '" ' +
-                            'data-unit_id="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material-delete" title="Delete" ' +
+                            'data-item_uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );
                     }
                 }
             ]
+        });
+
+        $('.add-item').on('click', function () {
+            let quantity = $('input[name=quantity_item]').val();
+            let material = $('#material').val();
+            let unit_material = $('#material').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine/'+taskcard_uuid+'/item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    item_id: material,
+                    quantity: quantity,
+                    // unit_item: unit_material,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.item_id) {
+                            $('#material-error').html(data.errors.item_id[0]);
+                        }
+
+                        if (data.errors.quantity) {
+                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                        }
+                        document.getElementById('material').value = material;
+                        document.getElementById('quantity').value = quantity;
+
+                    } else {
+
+                        toastr.success('Material has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.item_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                        $('#modal_item').modal('hide');
+                        // document.getElementById('uom_quantity').value = '';
+
+                        // $('#item_unit_id').select2('val', 'All');
+
+
+                    }
+                }
+            });
+        });
+        $('.add-tool').on('click', function () {
+            let quantity = $('input[name=quantity]').val();
+            let tool = $('#tool').val();
+            let unit_tool = $('#unit_tool').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine/'+taskcard_uuid+'/item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    item_id: tool,
+                    quantity: quantity,
+                    // unit_item: unit_tool,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.item_id) {
+                            $('#tool-error').html(data.errors.item_id[0]);
+                        }
+
+                        if (data.errors.quantity) {
+                            $('#quantity-error').html(data.errors.quantity[0]);
+                        }
+                        document.getElementById('tool').value = tool;
+                        document.getElementById('quantity').value = quantity;
+                    } else {
+
+                        toastr.success('Tool has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.tool_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        $('#modal_tool').modal('hide');
+                        // document.getElementById('uom_quantity').value = '';
+
+                        // $('#item_unit_id').select2('val', 'All');
+
+
+                    }
+                }
+            });
+        });
+
+
+        $('.tool_datatable').on('click', '.tool-delete', function () {
+            let item_uuid = $(this).data('item_uuid');
+            // let taskcard_uuid = $(this).data('taskcard_uuid');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-si/' + taskcard_uuid + '/' + item_uuid+'/item/',
+                        success: function (data) {
+                            toastr.success('Takscard Tool has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.tool_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.item_datatable').on('click', '.material-delete', function () {
+            let item_uuid = $(this).data('item_uuid');
+            // let taskcard_uuid = $(this).data('taskcard_uuid');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-si/' + taskcard_uuid + '/' + item_uuid+'/item/',
+                        success: function (data) {
+                            toastr.success('Takscard Material has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.item_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
         });
 
 
@@ -194,6 +365,7 @@ let TaskCard = {
             let applicability_airplane = $('#applicability_airplane').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
+            let performa = $('input[name=performa]').val();
             let helper_quantity = $('input[name=helper_quantity]').val();
             let instruction = $('#instruction').val();
 
@@ -217,7 +389,8 @@ let TaskCard = {
                     type_id: '89',
                     number: number,
                     work_area: work_area,
-                    manhour: manhour,
+                    estimation_manhour: manhour,
+                    performance_factor: performa,
                     helper_quantity: helper_quantity,
                     description: instruction,
 

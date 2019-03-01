@@ -28,6 +28,21 @@ Route::name('testing.')->group(function () {
             return $items;
         });
 
+        Route::get('/taskcard-materials', function () {
+            // $material = App\Models\Category::ofItem()->where('code', 'rawmat')->first()->code;
+            // return $material;
+            $taskcard = App\Models\TaskCard::where('uuid','dfc40993-2d2e-4720-84d7-d4f3f3799fe4')->first();
+            dd($taskcard->items);
+
+
+            // $items = App\Models\Item::with('categories')
+            //                         ->whereHas('categories', function ($query) {
+            //                             $query->where('code', 'rawmat');
+            //                         })->get();
+
+            // return $items;
+        });
+
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
 

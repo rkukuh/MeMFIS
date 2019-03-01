@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Frontend;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class TaskCardEOUpdate extends FormRequest
 {
@@ -13,7 +16,7 @@ class TaskCardEOUpdate extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,4 +30,31 @@ class TaskCardEOUpdate extends FormRequest
             //
         ];
     }
+
+    /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+        ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        //
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
+    }
 }
+

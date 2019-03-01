@@ -19,6 +19,9 @@ let TaskCard = {
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
             let helper_quantity = $('input[name=helper_quantity]').val();
+            let engineer_quantity = $('input[name=engineer_quantity]').val();
+            let performa = $('input[name=performa]').val();
+
             let instruction = $('#instruction').val();
 
             if ($('#applicability_airplane :selected').length > 0) {
@@ -38,11 +41,13 @@ let TaskCard = {
                 data: {
                     _token: $('input[name=_token]').val(),
                     title: title,
-                    type_id: '89',
+                    type_id: '89', //ganti dengan input hidden didalam form
                     number: number,
                     work_area: work_area,
-                    manhour: manhour,
+                    estimation_manhour: manhour,
+                    performance_factor: performa,
                     helper_quantity: helper_quantity,
+                    engineer_quantity: engineer_quantity,
                     description: instruction,
 
                     otr_certification: otr_certification,

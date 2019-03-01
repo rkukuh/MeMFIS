@@ -65,14 +65,14 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Type @include('frontend.common.label.required')
+                                                Title @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Taskcard Type')
-                                                @slot('id', 'taskcard_non_routine_type')
-                                                @slot('name', 'taskcard_non_routine_type')
-                                                @slot('id_error', 'taskcard_non_routine_type')
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'title')
+                                                @slot('text', 'Title')
+                                                @slot('name', 'title')
+                                                @slot('id_error', 'title')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -107,15 +107,16 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Title @include('frontend.common.label.required')
+                                                Type @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'title')
-                                                @slot('text', 'Title')
-                                                @slot('name', 'title')
-                                                @slot('id_error', 'title')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Taskcard Type')
+                                                @slot('id', 'taskcard_non_routine_type')
+                                                @slot('name', 'taskcard_non_routine_type')
+                                                @slot('id_error', 'taskcard_non_routine_type')
                                             @endcomponent
+
 
                                         </div>
 
@@ -185,6 +186,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_date')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'date')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -202,6 +204,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_hours')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'hour')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -220,6 +223,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_cycle')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'cycle')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -254,7 +258,7 @@
                                             </label>
 
                                             <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
                                                     @component('frontend.common.input.number')
                                                         @slot('id', 'recurrence')
                                                         @slot('text', 'Recurrence')
@@ -263,12 +267,10 @@
                                                         @slot('id_error', 'recurrence')
                                                     @endcomponent
                                                 </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-sm-8 col-md-8 col-lg-8">
                                                     <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
                                                         <option value="">
-                                                            Select a Recurrence
+                                                            Select Recurrence
                                                         </option>
                                                         <option value="cyrcle">
                                                             Cycle

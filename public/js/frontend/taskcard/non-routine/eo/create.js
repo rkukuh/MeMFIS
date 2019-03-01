@@ -20,8 +20,7 @@ let TaskCard = {
 
         $(document).ready(function () {
             $('select[name="recurrence_id"]').on('change', function () {
-                let recurrence = $(this).val();
-                if (recurrence == 67) {
+                if (this.options[this.selectedIndex].text == "Repetitive") {
                 $("#recurrence_div").removeClass("hidden");
                 $('#recurrence').removeAttr("disabled");
                 $('#recurrence-select').removeAttr("disabled");
@@ -34,8 +33,7 @@ let TaskCard = {
         });
         $(document).ready(function () {
             $('select[name="scheduled_priority_id"]').on('change', function () {
-                let recurrence = $(this).val();
-                if (recurrence == 71) {
+                if (this.options[this.selectedIndex].text == "Prior to") {
                 $("#prior_to").removeClass("hidden");
                 $('#prior_to_date').removeAttr("disabled");
                 $('#prior_to_hours').removeAttr("disabled");
@@ -57,8 +55,7 @@ let TaskCard = {
         });
         $(document).ready(function () {
             $('select[name="manual_affected_id"]').on('change', function () {
-                let manual_affected = $(this).val();
-                if (manual_affected == 64) {
+                if (this.options[this.selectedIndex].text == "Other") {
                 $("#note_div").removeClass("hidden");
                 $('#note').removeAttr("disabled");
                 } else {
@@ -89,28 +86,46 @@ let TaskCard = {
             let description = $('#description').val();
             let scheduled_priority_id = $('#scheduled_priority_id').val();
             let recurrence_id = $('#recurrence_id').val();
+            let category = $('#category').val();
             let manual_affected_id = $('#manual_affected_id').val();
 
-
-            let task_type_id = $('#task_type_id').val();
-            let otr_certification = $('#otr_certification').val();
-            let manhour = $('input[name=manhour]').val();
-            let performa = $('input[name=performa]').val();
-            let helper_quantity = $('input[name=helper_quantity]').val();
-            let work_area = $('#work_area').val();
-            let access = $('#access').val();
-            let zone = $('#zone').val();
-            let source = $('input[name=source]').val();
-            let version = $('#version').val();
-            let effectivity = $('input[name=effectivity]').val();
-
-            if ($('#applicability_airplane :selected').length > 0) {
-                var applicability_airplanes = [];
-
-                $('#applicability_airplane :selected').each(function (i, selected) {
-                    applicability_airplanes[i] = $(selected).val();
-                });
+            var prior_to = $('input[name="prior_to"]:checked').val();
+            let scheduled_priority_amount = '';
+            if(prior_to == 'date'){
+                scheduled_priority_amount = $('#date').val();
             }
+            else if (prior_to == 'hour'){
+                scheduled_priority_amount = $('#hour').val();
+            }
+            else if(prior_to == 'cycle'){
+                scheduled_priority_amount = $('#cycle').val();
+
+            }
+
+            let recurrence = $('input[name=recurrence]').val();
+            let recurrence_select = $('#recurrence-select').val();
+            let note = $('#note').val();
+
+
+            // let task_type_id = $('#task_type_id').val();
+            // let otr_certification = $('#otr_certification').val();
+            // let manhour = $('input[name=manhour]').val();
+            // let performa = $('input[name=performa]').val();
+            // let helper_quantity = $('input[name=helper_quantity]').val();
+            // let work_area = $('#work_area').val();
+            // let access = $('#access').val();
+            // let zone = $('#zone').val();
+            // let source = $('input[name=source]').val();
+            // let version = $('#version').val();
+            // let effectivity = $('input[name=effectivity]').val();
+
+            // if ($('#applicability_airplane :selected').length > 0) {
+            //     var applicability_airplanes = [];
+
+            //     $('#applicability_airplane :selected').each(function (i, selected) {
+            //         applicability_airplanes[i] = $(selected).val();
+            //     });
+            // }
 
 
 
@@ -127,77 +142,86 @@ let TaskCard = {
             //     is_rii = 0;
             // }
 
-            // $.ajax({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     type: 'post',
-            //     url: '/taskcard-eo',
-            //     data: {
-            //         _token: $('input[name=_token]').val(),
-            //         code: code,
-            //         name: name,
-            //         description: description,
-            //         unit_id: unit,
-            //         category: category,
-            //         is_stock: is_stock,
-            //         is_ppn: is_ppn,
-            //         ppn_amount: ppn_amount,
-            //         account_code: account_code,
-            //     },
-            //     success: function (data) {
-            //         if (data.errors) {
-            //             if (data.errors.title) {
-            //                 $('#title-error').html(data.errors.title[0]);
-            //             }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-eo',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    title: title,
+                    number: number,
+                    type_id: taskcard_non_routine_type,
+                    applicability_airplane: applicability_airplane,
+                    category_id: category,
+                    revision: revision,
+                    relationship: relationship,
+                    description: description,
+                    scheduled_priority_id: scheduled_priority_id,
+                    scheduled_priority_type: prior_to,
+                    scheduled_priority_amount: scheduled_priority_amount,
+                    recurrence_id: recurrence_id,
+                    recurrence_amount:recurrence,
+                    recurrence_type:recurrence_select,
+                    manual_affected_id: manual_affected_id,
+                    manual_affected: note,
+                    // scheduled_priority_amount: prior_to_hour,
+                    // scheduled_priority_amount: prior_to_cycle,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.title) {
+                        //     $('#title-error').html(data.errors.title[0]);
+                        // }
 
-            //             if (data.errors.number) {
-            //                 $('#number-error').html(data.errors.number[0]);
-            //             }
+                        // if (data.errors.number) {
+                        //     $('#number-error').html(data.errors.number[0]);
+                        // }
 
-            //             if (data.errors.taskcard) {
-            //                 $('#taskcard-error').html(data.errors.taskcard[0]);
-            //             }
+                        // if (data.errors.taskcard) {
+                        //     $('#taskcard-error').html(data.errors.taskcard[0]);
+                        // }
 
-            //             if (data.errors.otr_certification) {
-            //                 $('#otr-certification-error').html(data.errors.otr_certification[0]);
-            //             }
+                        // if (data.errors.otr_certification) {
+                        //     $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                        // }
 
-            //             if (data.errors.threshold_type) {
-            //                 $('#threshold-type-error').html(data.errors.threshold_type[0]);
-            //             }
+                        // if (data.errors.threshold_type) {
+                        //     $('#threshold-type-error').html(data.errors.threshold_type[0]);
+                        // }
 
-            //             if (data.errors.threshold_amount) {
-            //                 $('#threshold-amount-error').html(data.errors.threshold_amount[0]);
-            //             }
+                        // if (data.errors.threshold_amount) {
+                        //     $('#threshold-amount-error').html(data.errors.threshold_amount[0]);
+                        // }
 
-            //             if (data.errors.repeat_type) {
-            //                 $('#repeat-type-error').html(data.errors.repeat_type[0]);
-            //             }
+                        // if (data.errors.repeat_type) {
+                        //     $('#repeat-type-error').html(data.errors.repeat_type[0]);
+                        // }
 
-            //             if (data.errors.repeat_amount) {
-            //                 $('#repeat-amount-error').html(data.errors.repeat_amount[0]);
-            //             }
+                        // if (data.errors.repeat_amount) {
+                        //     $('#repeat-amount-error').html(data.errors.repeat_amount[0]);
+                        // }
 
-            //             if (data.errors.zone) {
-            //                 $('#zone-error').html(data.errors.zone[0]);
-            //             }
+                        // if (data.errors.zone) {
+                        //     $('#zone-error').html(data.errors.zone[0]);
+                        // }
 
-            //             if (data.errors.access) {
-            //                 $('#access-error').html(data.errors.access[0]);
-            //             }
+                        // if (data.errors.access) {
+                        //     $('#access-error').html(data.errors.access[0]);
+                        // }
 
-            //             if (data.errors.applicability_airplane) {
-            //                 $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
-            //             }
+                        // if (data.errors.applicability_airplane) {
+                        //     $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                        // }
 
-            //             if (data.errors.applicability_engine) {
-            //                 $('#applicability-engine-error').html(data.errors.applicability_engine[0]);
-            //             }
+                        // if (data.errors.applicability_engine) {
+                        //     $('#applicability-engine-error').html(data.errors.applicability_engine[0]);
+                        // }
 
-            //             if (data.errors.work_area) {
-            //                 $('#work-area-error').html(data.errors.work_area[0]);
-            //             }
+                        // if (data.errors.work_area) {
+                        //     $('#work-area-error').html(data.errors.work_area[0]);
+                        // }
 
 
                         // document.getElementById('title').value = title;
@@ -211,7 +235,7 @@ let TaskCard = {
                         // document.getElementById('applicability_airplane').value = applicability_airplane;
                         // document.getElementById('description').value = description;
 
-            //         } else {
+                    } else {
                         //    taskcard_reset();
 
 
@@ -219,10 +243,10 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
-            //         }
-            //     }
-            // });
+                        // window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
+                    }
+                }
+            });
         });
 
         // Category

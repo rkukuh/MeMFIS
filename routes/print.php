@@ -32,4 +32,24 @@ Route::get('/purchase-request-doc', function () {
     return $pdf->stream();
 });
 
+Route::get('/jobcard-routine', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_routine');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-eo', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_eo');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-si', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_si');
+    return $pdf->stream();
+});
+
+Route::get('/hard-time', function () {
+    $pdf = \PDF::loadView('frontend/form/hard_time');
+    return $pdf->stream();
+});
+
 
