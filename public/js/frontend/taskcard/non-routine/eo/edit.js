@@ -107,6 +107,33 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
+                    field: '1',
+                    title: 'Material',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-manufacturer" title="Show" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
+
+                },
+                {
+                    field: '2',
+                    title: 'Tool',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-manufacturer" title="Show" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
