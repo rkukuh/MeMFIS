@@ -4,7 +4,6 @@ let Workpackage = {
             add = add || '...';
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
-
         $('.workpackage_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -25,7 +24,6 @@ let Workpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
                 serverSorting: !0
             },
             layout: {
