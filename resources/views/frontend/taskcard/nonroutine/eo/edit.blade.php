@@ -447,7 +447,7 @@
     </script>
 
     <script>
-        let taskcard_uuid = "$taskcard->uuid";
+        let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
