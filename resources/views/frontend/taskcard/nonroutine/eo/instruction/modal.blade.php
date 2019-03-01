@@ -48,29 +48,29 @@
                             <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="row ">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Manhour @include('frontend.common.label.required')
-                                                </label>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Estimation Manhour @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.decimal')
-                                                    @slot('id', 'manhour')
-                                                    @slot('text', 'Manhour')
-                                                    @slot('name', 'manhour')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Performa Factor @include('frontend.common.label.required')
-                                                </label>
+                                            @component('frontend.common.input.decimal')
+                                                @slot('id', 'manhour')
+                                                @slot('text', 'Manhour')
+                                                @slot('name', 'manhour')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Performa Factor @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.decimal')
-                                                    @slot('id', 'performa')
-                                                    @slot('text', 'Performa')
-                                                    @slot('name', 'performa')
-                                                    @slot('value', '1')
-                                                @endcomponent
-                                            </div>
+                                            @component('frontend.common.input.decimal')
+                                                @slot('id', 'performa')
+                                                @slot('text', 'Performa')
+                                                @slot('name', 'performa')
+                                                @slot('value', '1')
+                                            @endcomponent
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -84,6 +84,35 @@
                                                 @slot('id', 'helper_quantity')
                                                 @slot('text', 'Helper Quantity')
                                                 @slot('name', 'helper_quantity')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Engineer Quantity @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'engineer_quantity')
+                                                @slot('text', 'Engineer Quantity')
+                                                @slot('name', 'engineer_quantity')
+                                            @endcomponent
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row ">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="row ">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Sequence @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'sequence')
+                                                @slot('text', 'Sequence')
+                                                @slot('name', 'sequence')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -129,7 +158,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="tool_datatable" id="tool_datatable"></div>
+                                                {{-- <div class="tool_datatable" id="tool_datatable"></div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +192,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="item_datatable" id="item_datatable"></div>
+                                                {{-- <div class="item_datatable" id="item_datatable"></div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +204,7 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-instruction')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
