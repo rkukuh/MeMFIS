@@ -387,7 +387,9 @@
                             </div>
 
                             @include('frontend.taskcard.nonroutine.eo.instruction.modal')
+                            @include('frontend.taskcard.nonroutine.eo.tool.index')
                             @include('frontend.taskcard.nonroutine.eo.tool.modal')
+                            @include('frontend.taskcard.nonroutine.eo.item.index')
                             @include('frontend.taskcard.nonroutine.eo.item.modal')
 
                             <div class="instruction_datatable" id="instruction_datatable"></div>
