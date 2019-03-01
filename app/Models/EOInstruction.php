@@ -10,8 +10,9 @@ class EOInstruction extends MemfisModel
 
     protected $fillable = [
         'work_area',
-        'manhour',
+        'estimation_manhour',
         'helper_quantity',
+        'engineer_quantity',
         'is_rii',
         'performance_factor',
         'sequence',
