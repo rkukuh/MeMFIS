@@ -1,5 +1,10 @@
 let TaskCard = {
     init: function () {
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
+       
         $('.taskcard_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -13,14 +18,12 @@ let TaskCard = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-
                             return dataSet;
                         }
                     }
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
                 serverSorting: !0
             },
             layout: {
@@ -44,8 +47,14 @@ let TaskCard = {
             },
             columns: [
                 {
+                    field: 'number',
+                    title: 'Taskcard No',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'title',
-                    title: 'Tittle',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
@@ -72,16 +81,45 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'work_area',
-                    title: 'Area',
+                    field: 'task_type.name',
+                    title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'aircrafts',
+                    title: 'A/C',
+                    sortable: 'asc',
+                    filterable: !1,
+                    
+                },
+                {
+                    field: 'skill',
+                    title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'estimation_manhour',
-                    title: 'Manhour',
+                    title: 'Manhours',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
                 },
                 {
                     field: 'Actions',
