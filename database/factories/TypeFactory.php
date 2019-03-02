@@ -23,6 +23,7 @@ $factory->define(Type::class, function (Faker $faker) {
             'eligibility',
             'school-degree',
             'taskcard-task',
+            'taskcard-skill',
             'aviation-degree',
             'purchase-request',
             'scheduled-payment',
@@ -45,6 +46,7 @@ $factory->state(Type::class, 'capability', ['of' => 'capability']);
 $factory->state(Type::class, 'eligibility', ['of' => 'eligibility']);
 $factory->state(Type::class, 'school-degree', ['of' => 'school-degree']);
 $factory->state(Type::class, 'taskcard-task', ['of' => 'taskcard-task']);
+$factory->state(Type::class, 'taskcard-skill', ['of' => 'taskcard-skill']);
 $factory->state(Type::class, 'aviation-degree', ['of' => 'aviation-degree']);
 $factory->state(Type::class, 'purchase-request', ['of' => 'purchase-request']);
 $factory->state(Type::class, 'scheduled-payment', ['of' => 'scheduled-payment']);

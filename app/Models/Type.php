@@ -226,6 +226,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Task Card's skill.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardSkill(Builder $query)
+    {
+        return $query->where('of', 'taskcard-skill');
+    }
+
+    /**
      * Scope a query to only include type of Task Card's task.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
