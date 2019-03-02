@@ -12,7 +12,6 @@ use Faker\Generator as Faker;
 $factory->define(TaskCard::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
-    $version = rand(1, 9).'.'.rand(1, 9);
 
     return [
         'number' => $number,
@@ -57,7 +56,15 @@ $factory->define(TaskCard::class, function (Faker $faker) {
             (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
         ]),
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
-        'version' => $faker->randomElement([null, $version]),
+        'version' => function () use ($faker) {
+            $versions = [];
+            
+            for ($i = 0; $i < rand(2, 5); $i++) {
+                $versions[] = rand(1, 9) . '.' . rand(1, 9);
+            }
+
+            return $faker->randomElement([null, json_encode($versions)]);
+        },
         'description' => $faker->paragraph(rand(10, 20)),
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
