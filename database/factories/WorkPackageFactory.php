@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
@@ -56,8 +57,15 @@ $factory->afterCreating(WorkPackage::class, function ($workpackage, $faker) {
                 $item = factory(Item::class)->create();
             }
 
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
             $workpackage->items()->save($item, [
-                'quantity' => rand(1, 10)
+                'quantity' => rand(1, 10),
+                'unit_id' => $unit->id,
             ]);
         }
     }

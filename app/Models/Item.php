@@ -276,7 +276,10 @@ class Item extends MemfisModel implements HasMedia
     public function workpackages()
     {
         return $this->belongsToMany(WorkPackage::class, 'item_workpackage', 'item_id', 'workpackage_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
     }
 

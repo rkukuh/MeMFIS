@@ -41,7 +41,10 @@ class WorkPackage extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class, 'item_workpackage', 'workpackage_id', 'item_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
     }
 
