@@ -20,7 +20,6 @@ let Quotation = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
                 serverSorting: !0
             },
             layout: {
@@ -42,12 +41,7 @@ let Quotation = {
                     }
                 }
             },
-            columns: [{
-                    field: 'id',
-                    title: '#',
-                    sortable: !1,
-                    width: 40
-                },
+            columns: [
                 {
                     field: 'number',
                     title: 'Quotation Number',

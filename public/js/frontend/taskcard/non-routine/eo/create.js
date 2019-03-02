@@ -243,7 +243,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
+                        window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
                     }
                 }
             });

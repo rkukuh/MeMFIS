@@ -201,7 +201,7 @@ Route::name('frontend.')->group(function () {
             Route::name('taskcard-eo.')->group(function () {
                 Route::prefix('taskcard-eo')->group(function () {
 
-                    Route::resource('eo-instruction', 'EOInstructionController');
+                    Route::resource('/{taskcard}/eo-instruction', 'EOInstructionController');
 
                 });
             });

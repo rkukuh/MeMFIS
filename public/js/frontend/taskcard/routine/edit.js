@@ -568,6 +568,7 @@ let TaskCard = {
             let manhour = $('input[name=manhour]').val();
             let performa = $('input[name=performa]').val();
             let helper_quantity = $('input[name=helper_quantity]').val();
+            let engineer_quantity = $('input[name=engineer_quantity]').val();
             let work_area = $('#work_area').val();
             let access = $('#access').val();
             let zone = $('#zone').val();

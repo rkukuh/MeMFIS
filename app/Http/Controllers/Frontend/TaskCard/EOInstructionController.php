@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\TaskCard;
 
+use App\Models\TaskCard;
 use App\Models\EOInstruction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\EOInstructionStore;
@@ -35,9 +36,12 @@ class EOInstructionController extends Controller
      * @param  \App\Http\Requests\Frontend\EOInstructionStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EOInstructionStore $request)
+    public function store(TaskCard $taskcard, EOInstructionStore $request)
     {
-        //
+        $eo_instruction = new EOInstruction($request->all());
+        $taskcard->eo_instructions()->save($eo_instruction);
+        return response()->json($taskcard);
+
     }
 
     /**

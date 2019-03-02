@@ -387,7 +387,9 @@
                             </div>
 
                             @include('frontend.taskcard.nonroutine.eo.instruction.modal')
+                            @include('frontend.taskcard.nonroutine.eo.tool.index')
                             @include('frontend.taskcard.nonroutine.eo.tool.modal')
+                            @include('frontend.taskcard.nonroutine.eo.item.index')
                             @include('frontend.taskcard.nonroutine.eo.item.modal')
 
                             <div class="instruction_datatable" id="instruction_datatable"></div>
@@ -447,7 +449,7 @@
     </script>
 
     <script>
-        let taskcard_uuid = "$taskcard->uuid";
+        let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>

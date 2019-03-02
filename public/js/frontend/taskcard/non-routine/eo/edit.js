@@ -6,7 +6,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard',
+                        url: '/datatables/taskcard-eo/'+taskcard_uuid+'/eo-instructions',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -44,28 +44,31 @@ let TaskCard = {
             },
             columns: [
                 {
-                    field: 'title',
+                    field: 'work_area',
                     title: 'Work Area',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        return '<a href="/taskcard/'+t.uuid+'">' + t.title + "</a>"
-                    }
                 },
                 {
-                    field: 'type_id',
+                    field: '',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'work_area',
+                    field: 'estimation_manhour',
                     title: 'Manhour',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'manhour',
+                    field: 'engineer_quantity',
+                    title: 'Engineer Quantity',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'helper_quantity',
                     title: 'Helper Quantity',
                     sortable: 'asc',
                     filterable: !1,
@@ -92,14 +95,50 @@ let TaskCard = {
 
                 },
                 {
+                    field: 'performance_factor',
+                    title: 'Performance Factor',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'sequence',
+                    title: 'Sequence',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '1',
+                    title: 'Material',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-manufacturer" title="Show" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
+
+                },
+                {
+                    field: '2',
+                    title: 'Tool',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-manufacturer" title="Show" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/customer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
@@ -109,7 +148,69 @@ let TaskCard = {
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
+        $('.add-instruction').on('click', function () {
+            let work_area = $('#work_area').val();
+            let manhour = $('input[name=manhour]').val();
+            let performa = $('input[name=performa]').val();
+            let helper_quantity = $('input[name=helper_quantity]').val();
+            let engineer_quantity = $('input[name=engineer_quantity]').val();
+            let sequence = $('input[name=sequence]').val();
+            if (document.getElementById("is_rii").checked) {
+                is_rii = 1;
+            } else {
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    work_area: work_area,
+                    estimation_manhour: manhour,
+                    performance_factor: performa,
+                    helper_quantity: helper_quantity,
+                    engineer_quantity: engineer_quantity,
+                    sequence: sequence,
+                    is_rii: is_rii,
+                    // unit_item: unit_material,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#material-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
+                        // }
+                        // document.getElementById('material').value = material;
+                        // document.getElementById('quantity').value = quantity;
+
+                    } else {
+
+                        toastr.success('Instruction has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.instruction_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                        $('#modal_instruction').modal('hide');
+                        // document.getElementById('uom_quantity').value = '';
+
+                        // $('#item_unit_id').select2('val', 'All');
+
+
+                    }
+                }
+            });
+        });
+        let remove = $('.instruction_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({

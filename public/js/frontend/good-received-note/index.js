@@ -20,7 +20,6 @@ let Grn = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
                 serverSorting: !0
             },
             layout: {
