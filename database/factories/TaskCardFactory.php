@@ -1,12 +1,11 @@
 <?php
 
 use App\Models\Type;
+use App\Models\Unit;
 use App\Models\Item;
-use App\Models\Access;
 use App\Models\Category;
 use App\Models\TaskCard;
 use App\Models\Aircraft;
-use App\Models\Description;
 use App\Models\EOInstruction;
 use Faker\Generator as Faker;
 
@@ -208,10 +207,21 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
     // Item
 
     for ($i = 1; $i <= rand(2, 5); $i++) {
-        $item = Item::get()->random();
+        if (Item::count()) {
+            $item = Item::get()->random();
+        } else {
+            $item = factory(Item::class)->create();
+        }
+
+        if (Unit::count()) {
+            $unit = Unit::get()->random();
+        } else {
+            $unit = factory(Unit::class)->create();
+        }
 
         $taskcard->items()->attach($item, [
-            'quantity' => rand(1, 10)
+            'quantity' => rand(1, 10),
+            'unit_id' => $unit->id,
         ]);
     }
 
@@ -225,10 +235,21 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
 
     foreach ($taskcard->eo_instructions as $eo_instruction) {
         for ($i = 1; $i <= rand(2, 5); $i++) {
-            $item = Item::get()->random();
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
 
             $eo_instruction->items()->attach($item, [
-                'quantity' => rand(1, 10)
+                'quantity' => rand(1, 10),
+                'unit_id' => $unit->id,
             ]);
         }
     }
@@ -238,10 +259,21 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
 $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
 
     for ($i = 1; $i <= rand(2, 5); $i++) {
-        $item = Item::get()->random();
+        if (Item::count()) {
+            $item = Item::get()->random();
+        } else {
+            $item = factory(Item::class)->create();
+        }
+
+        if (Unit::count()) {
+            $unit = Unit::get()->random();
+        } else {
+            $unit = factory(Unit::class)->create();
+        }
 
         $taskcard->items()->attach($item, [
-            'quantity' => rand(1, 10)
+            'quantity' => rand(1, 10),
+            'unit_id' => $unit->id,
         ]);
     }
 

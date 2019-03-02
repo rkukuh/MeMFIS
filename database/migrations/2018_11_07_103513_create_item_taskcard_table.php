@@ -17,6 +17,7 @@ class CreateItemTaskcardTable extends Migration
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');
+            $table->unsignedInteger('unit_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -27,6 +28,11 @@ class CreateItemTaskcardTable extends Migration
 
             $table->foreign('taskcard_id')
                     ->references('id')->on('taskcards')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('unit_id')
+                    ->references('id')->on('units')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

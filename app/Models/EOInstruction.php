@@ -45,7 +45,10 @@ class EOInstruction extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class, 'eo_item', 'eo_id', 'item_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
     }
 }

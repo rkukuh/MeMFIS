@@ -78,7 +78,10 @@ class Item extends MemfisModel implements HasMedia
     public function eo_instructions()
     {
         return $this->belongsToMany(TaskCard::class, 'eo_item', 'item_id', 'eo_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
     }
 
@@ -229,7 +232,10 @@ class Item extends MemfisModel implements HasMedia
     public function taskcards()
     {
         return $this->belongsToMany(TaskCard::class, 'item_taskcard', 'item_id', 'taskcard_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
     }
 
