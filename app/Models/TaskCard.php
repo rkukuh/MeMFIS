@@ -144,7 +144,7 @@ class TaskCard extends MemfisModel
     /**
      * One-to-Many: A task card may have zero or many type.
      *
-     * This function will retrieve the type of an task card.
+     * This function will retrieve the type of a task card.
      * See: Type's taskcards() method for the inverse
      *
      * @return mixed
@@ -157,14 +157,14 @@ class TaskCard extends MemfisModel
     /**
      * One-to-Many: A task card may have zero or many task type.
      *
-     * This function will retrieve the type type of an task card.
-     * See: Type's task_type() method for the inverse
+     * This function will retrieve the task type of a task card.
+     * See: Type's taskcard_task_types() method for the inverse
      * 
      * @return mixed
      */
     public function task_type()
     {
-        return $this->belongsTo(Type::class,'task_type_id');
+        return $this->belongsTo(Type::class, 'task_type_id');
     }
 
     /**
