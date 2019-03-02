@@ -48,8 +48,8 @@ class CreateTaskcardsTable extends Migration
             $table->string('manual_affected')->nullable();
 
             /** SI */
-            // Fieldset #1 : SI No (r/1), Title (r/2), A/C Type (r/3), Skill (r/4), RII (r/5), Manhour (r/6), Helper Quantity (o/7)
-            // Fieldset #2 : Work Area (o/8), Instruction (r/9), File (o/10), Tools (panel), Materials (panel)
+            // Fieldset #1 : SI No (req/1), Title (req/2), A/C Type (req/3), Skill (req/4), RII (req/5), Manhour (req/6), Helper Quantity (opt/7)
+            // Fieldset #2 : Work Area (opt/8), Instruction (req/9), File (opt/10), Tools (panel), Materials (panel)
 
             $table->timestamps();
             $table->softDeletes();
