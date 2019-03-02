@@ -89,6 +89,7 @@ class PurchaseOrder extends MemfisModel
         return $this->belongsToMany(Item::class)
                     ->withPivot(
                         'quantity',
+                        'unit_id',
                         'price',
                         'subtotal_before_discount',
                         'discount_percentage',

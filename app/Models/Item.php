@@ -156,6 +156,7 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(PurchaseOrder::class)
                     ->withPivot(
                         'quantity',
+                        'unit_id',
                         'price',
                         'subtotal_before_discount',
                         'discount_amount',

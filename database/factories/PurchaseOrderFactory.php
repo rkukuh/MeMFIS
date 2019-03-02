@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use App\Models\Type;
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Vendor;
 use App\Models\Currency;
@@ -97,8 +98,15 @@ $factory->afterCreating(PurchaseOrder::class, function ($purchase_order, $faker)
                 $item = factory(Item::class)->create();
             }
 
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
             $purchase_order->items()->save($item, [
                 'quantity' => rand(1, 10),
+                'unit_id' => $unit->id,
                 'price' => rand(10, 100) * 1000000,
                 'subtotal_before_discount' => rand(100, 200) * 1000000,
                 'discount_percentage' => $faker->randomElement([5, 10, 15, 20]),
