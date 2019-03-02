@@ -226,7 +226,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Task Card's skill.
+     * Scope a query to only include type of TaskCard's skill.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -237,7 +237,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Task Card's task.
+     * Scope a query to only include type of TaskCard's task.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -248,7 +248,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Task Card's type.
+     * Scope a query to only include type of TaskCard's type.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -259,7 +259,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Task Card's type.
+     * Scope a query to only include type of TaskCard's type.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -425,7 +425,7 @@ class Type extends MemfisModel
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve all task cards of a type.
-     * See: Task Card's type() method for the inverse
+     * See: TaskCard's type() method for the inverse
      *
      * @return mixed
      */
@@ -435,16 +435,16 @@ class Type extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have zero or many task type.
+     * One-to-Many: A task card may have zero or many task.
      *
-     * This function will retrieve all task cards of a task type.
-     * See: Task Card's task_type() method for the inverse
+     * This function will retrieve all task cards of a task.
+     * See: TaskCard's task() method for the inverse
      *
      * @return mixed
      */
-    public function taskcard_task_types()
+    public function taskcard_tasks()
     {
-        return $this->hasMany(TaskCard::class, 'task_type_id', 'id');
+        return $this->hasMany(TaskCard::class, 'task_id', 'id');
     }
 
     /**

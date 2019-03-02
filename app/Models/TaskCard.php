@@ -12,7 +12,7 @@ class TaskCard extends MemfisModel
         'number',
         'title',
         'type_id',
-        'task_type_id',
+        'task_id',
         'work_area',
         'estimation_manhour',
         'engineer_quantity',
@@ -155,16 +155,16 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have zero or many task type.
+     * One-to-Many: A task card may have zero or many task.
      *
-     * This function will retrieve the task type of a task card.
-     * See: Type's taskcard_task_types() method for the inverse
+     * This function will retrieve the task of a task card.
+     * See: Type's taskcard_tasks() method for the inverse
      * 
      * @return mixed
      */
-    public function task_type()
+    public function task()
     {
-        return $this->belongsTo(Type::class, 'task_type_id');
+        return $this->belongsTo(Type::class);
     }
 
     /**

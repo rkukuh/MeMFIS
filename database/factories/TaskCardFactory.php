@@ -31,7 +31,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
                 factory(Type::class)->states('taskcard-type-non-routine')->create()->id,
             ]);
         },
-        'task_type_id' => function () {
+        'task_id' => function () {
             if (Type::ofTaskCardTask()->count()) {
                 Type::ofTaskCardTask()->get()->random()->id;
             }

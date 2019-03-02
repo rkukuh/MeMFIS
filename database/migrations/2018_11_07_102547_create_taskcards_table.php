@@ -21,7 +21,7 @@ class CreateTaskcardsTable extends Migration
             $table->string('number');
             $table->string('title');
             $table->unsignedInteger('type_id');
-            $table->unsignedInteger('task_type_id')->nullable();
+            $table->unsignedInteger('task_id')->nullable();
             $table->unsignedInteger('work_area')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->integer('engineer_quantity')->nullable();
@@ -59,7 +59,7 @@ class CreateTaskcardsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('task_type_id')
+            $table->foreign('task_id')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
