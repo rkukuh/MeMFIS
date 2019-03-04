@@ -81,13 +81,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'task_type.name',
-                    title: 'Task',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'aircrafts',
+                    field: 'pesawat',
                     title: 'A/C',
                     sortable: 'asc',
                     filterable: !1,
