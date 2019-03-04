@@ -103,7 +103,7 @@
                                                 Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="applicability_airplane" name="applicability_airplane" class="form-control m-select2" multiple>
+                                            <select id="applicability_airplane" name="applicability_airplane" class="form-control m-select2" multiple style="width:100%">
                                                 @if ($taskcard->aircrafts->isEmpty())
                                                     @foreach ($aircrafts as $aircraft)
                                                         <option value="{{ $aircraft->id }}">
@@ -257,7 +257,7 @@
                                                 Access @include('frontend.common.label.optional')
                                             </label>
 
-                                            <select id="access" name="access" class="form-control m-select2" multiple>
+                                            <select id="access" name="access" class="form-control m-select2" multiple style="width:100%">
                                                 @if ($taskcard->accesses->isEmpty())
                                                     @foreach ($accesses as $access)
                                                         <option value="{{ $access->id }}">
@@ -282,7 +282,7 @@
                                                 Zone @include('frontend.common.label.optional')
                                             </label>
 
-                                            <select id="zone" name="zone" class="form-control m-select2" multiple>
+                                            <select id="zone" name="zone" class="form-control m-select2" multiple style="width:100%">
                                                 @if ($taskcard->zones->isEmpty())
                                                     @foreach ($zones as $zone)
                                                         <option value="{{ $zone->id }}">
@@ -322,7 +322,7 @@
                                                 Related Card @include('frontend.common.label.optional')
                                             </label>
 
-                                            <select id="relationship" name="relationship" class="form-control m-select2" multiple>
+                                            <select id="relationship" name="relationship" class="form-control m-select2" multiple style="width:100%">
                                                 @if ($taskcard->related_to->isEmpty())
                                                     @foreach ($taskcards as $taskCard)
                                                         <option value="{{ $taskCard->id }}">
