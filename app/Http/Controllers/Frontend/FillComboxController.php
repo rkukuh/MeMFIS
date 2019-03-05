@@ -202,7 +202,7 @@ class FillComboxController extends Controller
      */
     public function otrCertification()
     {
-        $otr_certifications = Category::ofItem()
+        $otr_certifications = Type::ofTaskCardSkill()
                               ->pluck('name', 'id');
 
         return json_encode($otr_certifications);
