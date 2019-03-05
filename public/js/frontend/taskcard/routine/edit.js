@@ -57,7 +57,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'pivot.unit_id',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -225,7 +225,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'pivot.unit_id',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -385,7 +385,7 @@ let TaskCard = {
         $('.add-item').on('click', function () {
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
-            let unit_material = $('#material').val();
+            let unit_material = $('#unit_material').val();
 
             $.ajax({
                 headers: {
@@ -397,7 +397,7 @@ let TaskCard = {
                     _token: $('input[name=_token]').val(),
                     item_id: material,
                     quantity: quantity,
-                    // unit_item: unit_material,
+                    unit_id: unit_material,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -446,7 +446,7 @@ let TaskCard = {
                     _token: $('input[name=_token]').val(),
                     item_id: tool,
                     quantity: quantity,
-                    // unit_item: unit_tool,
+                    unit_id: unit_tool,
                 },
                 success: function (data) {
                     if (data.errors) {
