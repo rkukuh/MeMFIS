@@ -8,13 +8,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_journal">
+                <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_journalll">
                     <thead>
                         <tr>
                             <th>Material</th>
                             <th>Quantity</th>
                             <th>Unit</th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>
