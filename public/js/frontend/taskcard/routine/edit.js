@@ -57,7 +57,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -225,7 +225,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
