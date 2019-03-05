@@ -13,7 +13,7 @@ let TaskCard = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-
+                            
                             return dataSet;
                         }
                     }
@@ -57,7 +57,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -135,8 +135,8 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
+                    field: 'unit.name',
+                    title: 'Unit name',
                     sortable: 'asc',
                     filterable: !1,
                 },
