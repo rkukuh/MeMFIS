@@ -179,7 +179,6 @@ let TaskCard = {
                     engineer_quantity: engineer_quantity,
                     sequence: sequence,
                     is_rii: is_rii,
-                    // unit_item: unit_material,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -204,11 +203,6 @@ let TaskCard = {
                         table.originalDataSet = [];
                         table.reload();
                         $('#modal_instruction').modal('hide');
-                        // document.getElementById('uom_quantity').value = '';
-
-                        // $('#item_unit_id').select2('val', 'All');
-
-
                     }
                 }
             });
@@ -244,7 +238,6 @@ let TaskCard = {
         });
 
         $('.add-item').on('click', function () {
-            // alert(eo_uuid);
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
@@ -263,15 +256,15 @@ let TaskCard = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.item_id) {
-                            $('#material-error').html(data.errors.item_id[0]);
-                        }
+                        // if (data.errors.item_id) {
+                        //     $('#material-error').html(data.errors.item_id[0]);
+                        // }
 
-                        if (data.errors.quantity) {
-                            $('#quantity_item-error').html(data.errors.quantity[0]);
-                        }
-                        document.getElementById('material').value = material;
-                        document.getElementById('quantity').value = quantity;
+                        // if (data.errors.quantity) {
+                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
+                        // }
+                        // document.getElementById('material').value = material;
+                        // document.getElementById('quantity').value = quantity;
 
                     } else {
 
@@ -292,6 +285,54 @@ let TaskCard = {
             let triggeruuid = $(this).data('uuid');
             alert('tes');
 
+        });
+
+        $('.add-tool').on('click', function () {
+            let quantity = $('input[name=quantity]').val();
+            let tool = $('#tool').val();
+            let unit_tool = $('#unit_tool').val();
+            // alert(quantity+tool+unit_tool);
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-eo/eo-instruction/'+eo_uuid+'/item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    item_id: tool,
+                    quantity: quantity,
+                    unit_id: unit_tool,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.item_id) {
+                            $('#tool-error').html(data.errors.item_id[0]);
+                        }
+
+                        if (data.errors.quantity) {
+                            $('#quantity-error').html(data.errors.quantity[0]);
+                        }
+                        document.getElementById('tool').value = tool;
+                        document.getElementById('quantity').value = quantity;
+                    } else {
+
+                        toastr.success('Tool has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        $('#m_datatable_tool').DataTable().ajax.reload();
+
+                        $('#add_modal_tool').modal('hide');
+                        // document.getElementById('uom_quantity').value = '';
+
+                        // $('#item_unit_id').select2('val', 'All');
+
+
+                    }
+                }
+            });
         });
         let remove = $('.instruction_datatable').on('click', '.delete', function () {
             let triggeruuid = $(this).data('uuid');
@@ -405,55 +446,7 @@ $(document).ready(function () {
     // console.log(recurrence_id);
     // console.log(scheduled_priority_id);
 
-    $('.add-tool').on('click', function () {
-        let quantity = $('input[name=quantity]').val();
-        let tool = $('#tool').val();
-        let unit_tool = $('#unit_tool').val();
 
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: 'post',
-            url: '/taskcard-si/'+taskcard_uuid+'/item',
-            data: {
-                _token: $('input[name=_token]').val(),
-                item_id: tool,
-                quantity: quantity,
-                unit_id: unit_tool,
-            },
-            success: function (data) {
-                if (data.errors) {
-                    if (data.errors.item_id) {
-                        $('#tool-error').html(data.errors.item_id[0]);
-                    }
-
-                    if (data.errors.quantity) {
-                        $('#quantity-error').html(data.errors.quantity[0]);
-                    }
-                    document.getElementById('tool').value = tool;
-                    document.getElementById('quantity').value = quantity;
-                } else {
-
-                    toastr.success('Tool has been created.', 'Success', {
-                        timeOut: 5000
-                    });
-
-                    let table = $('.tool_datatable').mDatatable();
-
-                    table.originalDataSet = [];
-                    table.reload();
-
-                    $('#modal_tool').modal('hide');
-                    // document.getElementById('uom_quantity').value = '';
-
-                    // $('#item_unit_id').select2('val', 'All');
-
-
-                }
-            }
-        });
-    });
 
 });
 
