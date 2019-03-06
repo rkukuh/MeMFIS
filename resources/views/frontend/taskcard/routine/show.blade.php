@@ -99,7 +99,7 @@
                                             </label>
 
                                             <div style="background-color:beige; padding:15px;" class="">
-                                                {{ $taskcard->task_type->name }},
+                                                {{ $taskcard->task->name }},
                                             </div>
                                         </div>
 
