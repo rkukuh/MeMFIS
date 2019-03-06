@@ -213,22 +213,91 @@ let TaskCard = {
                 }
             });
         });
+
+        let eo_uuid = '';
         let material_datatables_init = true;
         let material = $('.instruction_datatable').on('click', '.material', function () {
+            eo_uuid = $(this).data('uuid');
             if(material_datatables_init == true){
                 material_datatables_init = false;
                 let triggeruuid = $(this).data('uuid');
                 EO_item.init(triggeruuid);
+                $('#m_datatable_item').DataTable().ajax.reload();
+            }
+            else{
+                $('#m_datatable_item').DataTable().ajax.reload();
             }
         });
+
         let tool_datatables_init = true;
         let tool = $('.instruction_datatable').on('click', '.tool', function () {
+            eo_uuid = $(this).data('uuid');
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
                 let triggeruuid = $(this).data('uuid');
                 EO_tool.init(triggeruuid);
+                $('#m_datatable_tool').DataTable().ajax.reload();
+            }
+            else{
+                $('#m_datatable_tool').DataTable().ajax.reload();
             }
         });
+
+        $('.add-item').on('click', function () {
+            // alert(eo_uuid);
+            let quantity = $('input[name=quantity_item]').val();
+            let material = $('#material').val();
+            let unit_material = $('#unit_material').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-eo/eo-instruction/'+eo_uuid+'/item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    item_id: material,
+                    quantity: quantity,
+                    unit_id: unit_material,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.item_id) {
+                            $('#material-error').html(data.errors.item_id[0]);
+                        }
+
+                        if (data.errors.quantity) {
+                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                        }
+                        document.getElementById('material').value = material;
+                        document.getElementById('quantity').value = quantity;
+
+                    } else {
+
+                        toastr.success('Material has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        $('#m_datatable_item').DataTable().ajax.reload();
+
+                        $('#add_modal_material').modal('hide');
+
+
+                        // let table = $('#m_datatable_item').mDatatable();
+
+                        // table.originalDataSet = [];
+                        // table.reload();
+                        // document.getElementById('uom_quantity').value = '';
+
+                        // $('#item_unit_id').select2('val', 'All');
+
+
+                    }
+                }
+            });
+        });
+
 
         let edit = $('.instruction_datatable').on('click', '.edit', function () {
             let triggeruuid = $(this).data('uuid');
@@ -295,7 +364,7 @@ $(document).ready(function () {
             $('#recurrence-select').prop("disabled", true);
         }
     });
-    
+
     $('select[name="scheduled_priority_id"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "Prior to") {
         $("#prior_to").removeClass("hidden");
@@ -343,10 +412,60 @@ $(document).ready(function () {
         $('#note').removeAttr("disabled");
     }
 
-    console.log(manual_affected_id);
-    console.log(recurrence_id);
-    console.log(scheduled_priority_id);
-    
+    // console.log(manual_affected_id);
+    // console.log(recurrence_id);
+    // console.log(scheduled_priority_id);
+
+    $('.add-tool').on('click', function () {
+        let quantity = $('input[name=quantity]').val();
+        let tool = $('#tool').val();
+        let unit_tool = $('#unit_tool').val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/taskcard-si/'+taskcard_uuid+'/item',
+            data: {
+                _token: $('input[name=_token]').val(),
+                item_id: tool,
+                quantity: quantity,
+                unit_id: unit_tool,
+            },
+            success: function (data) {
+                if (data.errors) {
+                    if (data.errors.item_id) {
+                        $('#tool-error').html(data.errors.item_id[0]);
+                    }
+
+                    if (data.errors.quantity) {
+                        $('#quantity-error').html(data.errors.quantity[0]);
+                    }
+                    document.getElementById('tool').value = tool;
+                    document.getElementById('quantity').value = quantity;
+                } else {
+
+                    toastr.success('Tool has been created.', 'Success', {
+                        timeOut: 5000
+                    });
+
+                    let table = $('.tool_datatable').mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+
+                    $('#modal_tool').modal('hide');
+                    // document.getElementById('uom_quantity').value = '';
+
+                    // $('#item_unit_id').select2('val', 'All');
+
+
+                }
+            }
+        });
+    });
+
 });
 
 jQuery(document).ready(function () {
