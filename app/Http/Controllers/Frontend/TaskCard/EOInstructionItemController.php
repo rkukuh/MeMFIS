@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\TaskCard;
 
+use App\Models\Item;
 use App\Models\TaskCard;
 use App\Models\EOInstruction;
 use App\Http\Controllers\Controller;
@@ -87,7 +88,7 @@ class EOInstructionItemController extends Controller
      * @param  \App\Models\EOInstruction  $eo_instruction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EOInstruction $eo_instruction)
+    public function destroy(EOInstruction $taskcard, Item $item)
     {
         $taskcard->items()->detach($item);
 

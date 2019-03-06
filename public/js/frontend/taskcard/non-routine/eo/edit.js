@@ -298,7 +298,6 @@ let TaskCard = {
             });
         });
 
-
         let edit = $('.instruction_datatable').on('click', '.edit', function () {
             let triggeruuid = $(this).data('uuid');
             alert('tes');

@@ -30,7 +30,7 @@ let EO_item = {
                   targets: -1,
                   orderable: !1,
                   render: function (a, e, t, n) {
-                    return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                    return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-item" data-uuid="' + t.uuid + '" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                   }
               },
 
@@ -45,19 +45,50 @@ let EO_item = {
       $('.dataTables_info').addClass('margin-info');
       $('.paging_simple_numbers').addClass('padding-datatable');
 
-      $('.dataTable').on('click', '.select-account_code', function () {
-          let uuid = $(this).data('uuid');
-          let code = $(this).data('code');
-          let name = $(this).data('name');
+      $('.dataTable').on('click', '.delete-item', function () {
+        let triggeruuiditem = $(this).data('uuid');
+        swal({
+            title: 'Sure want to remove?',
+            type: 'question',
+            confirmButtonText: 'Yes, REMOVE',
+            confirmButtonColor: '#d33',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+        })
+        .then(result => {
+            if (result.value) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                            'content'
+                        )
+                    },
+                    type: 'DELETE',
+                    url: '/taskcard-eo/eo-instruction/'+triggeruuid+'/'+triggeruuiditem + '/item',
+                    success: function (data) {
+                        toastr.success('Item has been deleted.', 'Deleted', {
+                            timeOut: 5000
+                        }
+                    );
 
-          document.getElementById('account_code').value = uuid;
+                    $('#m_datatable_item').DataTable().ajax.reload();
 
-          $('.search-journal').html(code + " - " + name);
-          $('#modal_account_code').modal('hide');
+                    },
+                    error: function (jqXhr, json, errorThrown) {
+                        let errorsHtml = '';
+                        let errors = jqXhr.responseJSON;
+
+                        $.each(errors.errors, function (index, value) {
+                            $('#delete-error').html(value);
+                        });
+                    }
+                });
+            }
+        });
       });
 
       $('.item-body').on('click', '.item_modal', function () {
-          $('#add_modal_material').modal('show'); 
+          $('#add_modal_material').modal('show');
       });
 
   }
