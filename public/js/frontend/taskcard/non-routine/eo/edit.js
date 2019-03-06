@@ -215,10 +215,13 @@ let TaskCard = {
             if(material_datatables_init == true){
                 material_datatables_init = false;
                 let triggeruuid = $(this).data('uuid');
-                EO_item.init(triggeruuid);
+                EO_item(triggeruuid);
                 $('#m_datatable_item').DataTable().ajax.reload();
             }
             else{
+                let table = $('#m_datatable_item').DataTable();
+                table.destroy();
+                EO_item(triggeruuid);
                 $('#m_datatable_item').DataTable().ajax.reload();
             }
         });
@@ -229,7 +232,7 @@ let TaskCard = {
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
                 let triggeruuid = $(this).data('uuid');
-                EO_tool.init(triggeruuid);
+                EO_tool(triggeruuid);
                 $('#m_datatable_tool').DataTable().ajax.reload();
             }
             else{

@@ -1,5 +1,5 @@
-let EO_tool = {
-  init: function (triggeruuid) {
+// let EO_tool = {
+  function EO_tool(triggeruuid) {
       $("#m_datatable_tool").DataTable({
           "dom": '<"top"f>rt<"bottom">pl',
           responsive: !0,
@@ -94,8 +94,8 @@ let EO_tool = {
     });
 
 
-  }
-};
+  };
+// };
 
 // jQuery(document).ready(function () {
 //   Eo_tool.init();
