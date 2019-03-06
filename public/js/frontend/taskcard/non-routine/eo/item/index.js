@@ -1,7 +1,5 @@
 // let  = {
   function EO_item(triggeruuid) {
-    // alert(triggeruuid);
-    // let triggeruuid = $(this).data('uuid');
       $("#m_datatable_item").DataTable({
           "dom": '<"top"f>rt<"bottom">pl',
           responsive: !0,
@@ -11,7 +9,6 @@
           lengthMenu: [5, 10, 25, 50 ],
           pageLength:5,
           ajax: "/datatables/taskcard-eo/"+triggeruuid+"/materials",
-        // data:[],
           columns: [
               {
                   data: "name"
@@ -31,10 +28,7 @@
                   targets: -1,
                   orderable: !1,
                   render: function (a, e, t, n) {
-                    // if (t.uuid) {
                         return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-item" data-uuid="' + t.uuid + '" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                    // }
-                    // return ''
                   }
               },
 

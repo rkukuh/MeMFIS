@@ -1,5 +1,5 @@
 // let EO_tool = {
-  function EO_tool(triggeruuid) {
+  function EO_tool(triggeruuid2) {
       $("#m_datatable_tool").DataTable({
           "dom": '<"top"f>rt<"bottom">pl',
           responsive: !0,
@@ -8,7 +8,7 @@
           serverSide: !0,
           lengthMenu: [5, 10, 25, 50 ],
           pageLength:5,
-          ajax: "/datatables/taskcard-eo/"+triggeruuid+"/tools",
+          ajax: "/datatables/taskcard-eo/"+triggeruuid2+"/tools",
           columns: [
               {
                   data: "name"

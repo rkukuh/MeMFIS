@@ -208,34 +208,38 @@ let TaskCard = {
             });
         });
 
-        let eo_uuid = '';
         let material_datatables_init = true;
+        let triggeruuid ="";
         let material = $('.instruction_datatable').on('click', '.material', function () {
-            eo_uuid = $(this).data('uuid');
             if(material_datatables_init == true){
                 material_datatables_init = false;
-                let triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data('uuid');
                 EO_item(triggeruuid);
                 $('#m_datatable_item').DataTable().ajax.reload();
             }
             else{
                 let table = $('#m_datatable_item').DataTable();
                 table.destroy();
+                triggeruuid = $(this).data('uuid');
                 EO_item(triggeruuid);
                 $('#m_datatable_item').DataTable().ajax.reload();
             }
         });
 
         let tool_datatables_init = true;
+        let triggeruuid2 ="";
         let tool = $('.instruction_datatable').on('click', '.tool', function () {
-            eo_uuid = $(this).data('uuid');
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
-                let triggeruuid = $(this).data('uuid');
-                EO_tool(triggeruuid);
+                triggeruuid2 = $(this).data('uuid');
+                EO_tool(triggeruuid2);
                 $('#m_datatable_tool').DataTable().ajax.reload();
             }
             else{
+                let table = $('#m_datatable_tool').DataTable();
+                table.destroy();
+                triggeruuid2 = $(this).data('uuid');
+                EO_tool(triggeruuid2);
                 $('#m_datatable_tool').DataTable().ajax.reload();
             }
         });
