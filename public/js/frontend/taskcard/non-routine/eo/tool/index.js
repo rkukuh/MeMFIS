@@ -8,7 +8,7 @@ let EO_tool = {
           serverSide: !0,
           lengthMenu: [5, 10, 25, 50 ],
           pageLength:5,
-          ajax: "/datatables/taskcard-eo/"+triggeruuid+"/materials",
+          ajax: "/datatables/taskcard-eo/"+triggeruuid+"/tools",
           columns: [
               {
                   data: "name"
@@ -47,7 +47,7 @@ let EO_tool = {
       // });
 
       $('.tool-body').on('click', '.item_modal', function () {
-        $('#add_modal_tool').modal('show'); 
+        $('#add_modal_tool').modal('show');
     });
 
 
