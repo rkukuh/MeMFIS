@@ -84,8 +84,10 @@ class EOInstructionController extends Controller
      * @param  \App\Models\EOInstruction  $eo_instruction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EOInstruction $eo_instruction)
+    public function destroy(TaskCard $taskcard, EOInstruction $eo_instruction)
     {
-        //
+        $eo_instruction->delete();
+
+        return response()->json($eo_instruction);
     }
 }

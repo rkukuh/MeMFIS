@@ -113,7 +113,7 @@ let TaskCard = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-manufacturer" title="Show" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
@@ -127,7 +127,7 @@ let TaskCard = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-manufacturer" title="Show" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
@@ -139,7 +139,10 @@ let TaskCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_instruction" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
@@ -210,17 +213,40 @@ let TaskCard = {
                 }
             });
         });
+        let material_datatables_init = true;
+        let material = $('.instruction_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                let triggeruuid = $(this).data('uuid');
+                EO_item.init(triggeruuid);
+            }
+        });
+        let tool_datatables_init = true;
+        let tool = $('.instruction_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                let triggeruuid = $(this).data('uuid');
+                EO_tool.init(triggeruuid);
+            }
+        });
+
+        let edit = $('.instruction_datatable').on('click', '.edit', function () {
+            let triggeruuid = $(this).data('uuid');
+            alert('tes');
+
+        });
         let remove = $('.instruction_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+            let triggeruuid = $(this).data('uuid');
 
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
+            })
+            .then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
@@ -229,16 +255,14 @@ let TaskCard = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard/' + triggerid + '',
+                        url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+ triggeruuid + '/',
                         success: function (data) {
-                            toastr.success(
-                                'Data berhasil dihapus.',
-                                'Sukses', {
-                                    timeOut: 5000
-                                }
-                            );
+                            toastr.success('Instruction has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                            }
+                        );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.instruction_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -252,17 +276,6 @@ let TaskCard = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });
