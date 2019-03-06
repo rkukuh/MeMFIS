@@ -26,10 +26,10 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('id', 'item')
-                                                @slot('text', 'Item')
-                                                @slot('name', 'item')
-                                                @slot('id_error', 'item')
+                                                @slot('id', 'material')
+                                                @slot('text', 'Material')
+                                                @slot('name', 'material')
+                                                @slot('id_error', 'material')
                                             @endcomponent
                                     </div>
                             </div>
@@ -42,9 +42,9 @@
 
                                     @component('frontend.common.input.number')
                                         @slot('text', 'Quantity')
-                                        @slot('name', 'quantity')
-                                        @slot('id', 'quantity')
-                                        @slot('id_error', 'quantity')
+                                        @slot('name', 'quantity_item')
+                                        @slot('id', 'quantity_item')
+                                        @slot('id_error', 'quantity_item')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -53,10 +53,10 @@
                                         </label>
 
                                         @component('frontend.common.input.select2')
-                                            @slot('id', 'item_unit_id')
+                                            @slot('id', 'unit_material')
                                             @slot('text', 'Unit')
-                                            @slot('name', 'item_unit_id')
-                                            @slot('id_error', 'unit')
+                                            @slot('name', 'unit_material')
+                                            @slot('id_error', 'unit_material')
                                         @endcomponent
                                     </div>
                             </div>
