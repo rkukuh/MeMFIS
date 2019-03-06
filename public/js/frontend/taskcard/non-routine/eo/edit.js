@@ -239,13 +239,14 @@ let TaskCard = {
             let triggeruuid = $(this).data('uuid');
 
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
+            })
+            .then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
@@ -254,16 +255,14 @@ let TaskCard = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard/' + triggerid + '',
+                        url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+ triggeruuid + '/',
                         success: function (data) {
-                            toastr.success(
-                                'Data berhasil dihapus.',
-                                'Sukses', {
-                                    timeOut: 5000
-                                }
-                            );
+                            toastr.success('Instruction has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                            }
+                        );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.instruction_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -277,17 +276,6 @@ let TaskCard = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });
