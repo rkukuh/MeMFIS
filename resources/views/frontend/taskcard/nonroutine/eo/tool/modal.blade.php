@@ -52,11 +52,11 @@
                                             Unit @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select')
-                                            @slot('id', 'item_unit_id')
+                                        @component('frontend.common.input.select2')
+                                            @slot('id', 'unit_tool')
                                             @slot('text', 'Unit')
-                                            @slot('name', 'item_unit_id')
-                                            @slot('id_error', 'unit')
+                                            @slot('name', 'unit_tool')
+                                            @slot('id_error', 'unit_tool')
                                         @endcomponent
                                     </div>
                             </div>
@@ -65,7 +65,7 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-tool')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
