@@ -269,6 +269,72 @@ let TaskCard = {
 
     }
 };
+$(document).ready(function () {
+
+    $('select[name="recurrence_id"]').on('change', function () {
+        if (this.options[this.selectedIndex].text == "Repetitive") {
+        $("#recurrence_div").removeClass("hidden");
+        $('#recurrence').removeAttr("disabled");
+        $('#recurrence-select').removeAttr("disabled");
+        } else {
+            $("#recurrence_div").addClass("hidden");
+            $('#recurrence').prop("disabled", true);
+            $('#recurrence-select').prop("disabled", true);
+        }
+    });
+    
+    $('select[name="scheduled_priority_id"]').on('change', function () {
+        if (this.options[this.selectedIndex].text == "Prior to") {
+        $("#prior_to").removeClass("hidden");
+        $('#prior_to_date').removeAttr("disabled");
+        $('#prior_to_hours').removeAttr("disabled");
+        $('#prior_to_cycle').removeAttr("disabled");
+        } else {
+            $("#prior_to").addClass("hidden");
+            $('#prior_to_date').prop('checked', false);
+            $('#prior_to_date').prop("disabled", true);
+            $('#prior_to_hours').prop('checked', false);
+            $('#prior_to_hours').prop("disabled", true);
+            $('#prior_to_cycle').prop('checked', false);
+            $('#prior_to_cycle').prop("disabled", true);
+            $('#date').prop("disabled", true);
+            $('#hour').prop("disabled", true);
+            $('#cycle').prop("disabled", true);
+        }
+    });
+
+    $('select[name="manual_affected_id"]').on('change', function () {
+        if (this.options[this.selectedIndex].text == "Other") {
+        $("#note_div").removeClass("hidden");
+        $('#note').removeAttr("disabled");
+        } else {
+            $('#note').prop("disabled", true);
+            $("#note_div").addClass("hidden");
+        }
+    });
+
+    var scheduled_priority_id = $('select[name="scheduled_priority_id"]').val();
+    var recurrence_id = $('select[name="recurrence_id"]').val();
+    var manual_affected_id = $('select[name="manual_affected_id"]').val();
+
+    if(manual_affected_id == 66){
+        $("#note_div").removeClass("hidden");
+        $('#note').removeAttr("disabled");
+    }
+    if(recurrence_id == 69){
+        $("#note_div").removeClass("hidden");
+        $('#note').removeAttr("disabled");
+    }
+    if(scheduled_priority_id == 77){
+        $("#note_div").removeClass("hidden");
+        $('#note').removeAttr("disabled");
+    }
+
+    console.log(manual_affected_id);
+    console.log(recurrence_id);
+    console.log(scheduled_priority_id);
+    
+});
 
 jQuery(document).ready(function () {
     TaskCard.init();

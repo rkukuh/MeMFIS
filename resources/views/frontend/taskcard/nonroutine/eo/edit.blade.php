@@ -61,6 +61,7 @@
                                                     @slot('text', 'Taskcard Number')
                                                     @slot('name', 'number')
                                                     @slot('id_error', 'number')
+                                                    @slot('value',$taskcard->number)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,12 +69,22 @@
                                                     Type @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Taskcard Type')
-                                                    @slot('id', 'taskcard_non_routine_type')
-                                                    @slot('name', 'taskcard_non_routine_type')
-                                                    @slot('id_error', 'taskcard_non_routine_type')
-                                                @endcomponent
+                                                <select id="taskcard_non_routine_type" name="taskcard_non_routine_type" class="form-control m-select2" multiple>
+                                                    @if ( empty($taskcard->type_id) )
+                                                        @foreach ($types as $type)
+                                                            <option value="{{ $type->id }}">
+                                                                {{ $type->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($types as $type)
+                                                            <option value="{{ $type->id }}"
+                                                                @if($type->id == $taskcard->type_id) selected @endif>
+                                                                {{ $type->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -87,6 +98,7 @@
                                                     @slot('text', 'Revision')
                                                     @slot('name', 'revision')
                                                     @slot('id_error', 'revision')
+                                                    @slot('value',$taskcard->revision)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -94,14 +106,22 @@
                                                     Reference @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'relationship')
-                                                    @slot('text', 'Taskcard Relationship')
-                                                    @slot('name', 'relationship')
-                                                    @slot('multiple','multiple')
-                                                    @slot('id_error', 'taskcard-relationship')
-                                                    @slot('help_text','You can chose multiple value')
-                                                @endcomponent
+                                                <select id="relationship" name="relationship" class="form-control m-select2" multiple>
+                                                @if ($taskcard->related_to->isEmpty())
+                                                    @foreach ($taskcards as $taskCard)
+                                                        <option value="{{ $taskCard->id }}">
+                                                            {{ $taskCard->number }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($taskcards as $taskCard)
+                                                        <option value="{{ $taskcard->id }}"
+                                                            @if(in_array( $taskCard->id ,$taskCard->parent )) selected @endif>
+                                                            {{ $taskCard->title }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -115,6 +135,7 @@
                                                     @slot('text', 'Title')
                                                     @slot('name', 'title')
                                                     @slot('id_error', 'title')
+                                                    @slot('value',$taskcard->title)
                                                 @endcomponent
 
                                             </div>
@@ -124,15 +145,22 @@
                                                     Effectivity (A/C Type) @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Applicability Airplane')
-                                                    @slot('id', 'applicability_airplane')
-                                                    @slot('name', 'applicability_airplane')
-                                                    @slot('multiple','multiple')
-                                                    @slot('id_error', 'applicability-airplane')
-                                                    @slot('help_text','You can chose multiple value')
-                                                @endcomponent
-
+                                                <select id="applicability_airplane" name="applicability_airplane" class="form-control m-select2" multiple style="width:100%">
+                                                    @if ($taskcard->aircrafts->isEmpty())
+                                                        @foreach ($aircrafts as $aircraft)
+                                                            <option value="{{ $aircraft->id }}">
+                                                                {{ $aircraft->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($aircrafts as $aircraft)
+                                                            <option value="{{ $aircraft->id }}"
+                                                                @if(in_array( $aircraft->id ,$aircraft_taskcards)) selected @endif>
+                                                                {{ $aircraft->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -141,13 +169,22 @@
                                                     Category @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'category')
-                                                    @slot('text', 'Category')
-                                                    @slot('name', 'category')
-                                                    @slot('id_error', 'category')
-                                                @endcomponent
-
+                                                <select id="category" name="category" class="form-control m-select2" style="width:100%">
+                                                    @if ( empty($taskcard->category_id))
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}">
+                                                                {{ $category->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}"
+                                                                @if($category->id == $taskCard->category_id) selected @endif>
+                                                                {{ $category->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -168,13 +205,22 @@
                                                     Scheduled Priority @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'scheduled_priority_id')
-                                                    @slot('text', 'Scheduled Priority')
-                                                    @slot('name', 'scheduled_priority_id')
-                                                    @slot('id_error', 'scheduled_priority_id')
-                                                @endcomponent
-
+                                                <select id="scheduled_priority_id" name="scheduled_priority_id" class="form-control m-select2" style="width:100%">
+                                                    @if ( empty($taskcard->scheduled_priority_id))
+                                                        @foreach ($scheduled_priorities as $scheduled_priority)
+                                                            <option value="{{ $scheduled_priority->id }}">
+                                                                {{ $scheduled_priority->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($scheduled_priorities as $scheduled_priority)
+                                                            <option value="{{ $scheduled_priority->id }}"
+                                                                @if($scheduled_priority->id == $taskCard->scheduled_priority_id) selected @endif>
+                                                                {{ $scheduled_priority->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="prior_to">
                                                 <label class="form-control-label" style="margin-top:13px">
@@ -185,7 +231,6 @@
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'prior_to_date')
                                                             @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
@@ -193,7 +238,6 @@
                                                             @slot('id', 'date')
                                                             @slot('text', 'date')
                                                             @slot('name', 'date')
-                                                            @slot('disabled', 'disabled')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -202,7 +246,6 @@
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'prior_to_hours')
                                                             @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
@@ -241,13 +284,22 @@
                                                     Recurrence @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'recurrence_id')
-                                                    @slot('text', 'Recurrence Id')
-                                                    @slot('name', 'recurrence_id')
-                                                    @slot('id_error', 'recurrence_id')
-                                                @endcomponent
-
+                                                <select id="recurrence_id" name="recurrence_id" class="form-control m-select2" style="width:100%">
+                                                    @if ( empty($taskcard->recurrence_id))
+                                                        @foreach ($recurrences as $recurrence)
+                                                            <option value="{{ $recurrence->id }}">
+                                                                {{ $recurrence->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($recurrences as $recurrence)
+                                                            <option value="{{ $recurrence->id }}"
+                                                                @if($recurrence->id == $taskCard->recurrence_id) selected @endif>
+                                                                {{ $recurrence->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6  hidden" id="recurrence_div">
                                                 <label class="form-control-label" style="margin-top:13px">
@@ -270,7 +322,7 @@
                                                             <option value="">
                                                                 Select a Recurrence
                                                             </option>
-                                                            <option value="cyrcle">
+                                                            <option value="cycle">
                                                                 Cycle
                                                             </option>
                                                             <option value="hourly">
@@ -292,14 +344,22 @@
                                                 <label class="form-control-label">
                                                     Manuals Affected @include('frontend.common.label.required')
                                                 </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'manual_affected_id')
-                                                    @slot('text', 'Manual Affected')
-                                                    @slot('name', 'manual_affected_id')
-                                                    @slot('id_error', 'manual_affected_id')
-                                                @endcomponent
-
+                                                <select id="manual_affected_id" name="manual_affected_id" class="form-control m-select2" style="width:100%">
+                                                    @if ( empty($taskcard->manual_affected_id) )
+                                                        @foreach ($affected_manuals as $affected_manual)
+                                                            <option value="{{ $affected_manual->id }}">
+                                                                {{ $affected_manual->name }} 
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($affected_manuals as $affected_manual)
+                                                            <option value="{{ $affected_manual->id }}"    
+                                                            @if($affected_manual->id == $taskcard->manual_affected_id) selected @endif>
+                                                                {{ $affected_manual->name }} 
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="note_div">
                                                 <label class="form-control-label" style="margin-top:13px">
@@ -311,6 +371,7 @@
                                                     @slot('name', 'note')
                                                     @slot('text', 'Note')
                                                     @slot('disabled', 'disabled')
+                                                    @slot('value',$taskcard->manual_affected)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -325,6 +386,7 @@
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')
+                                                    @slot('value',$taskcard->description)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -453,36 +515,17 @@
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-non-routine-type.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/category-taskcard.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/scheduled-priority.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-priority.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/recurrence.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/recurrence.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/manual-affected.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/manual-affected.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/scheduled-priority.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/recurrence.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-item-uom.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/edit.js') }}"></script>
