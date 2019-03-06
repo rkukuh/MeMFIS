@@ -528,9 +528,7 @@
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/item/index.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/tool/index.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
