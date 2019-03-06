@@ -203,6 +203,10 @@ Route::name('frontend.')->group(function () {
 
                     Route::resource('/{taskcard}/eo-instruction', 'EOInstructionController');
 
+                    /** Transaction: Item */
+                    Route::post('/eo-instruction/{taskcard}/item', 'EOInstructionItemController@store')->name('item.store');
+                    Route::delete('/eo-instruction/{taskcard}/{item}/item', 'EOInstructionItemController@destroy')->name('item.destroy');
+
                 });
             });
 
