@@ -348,14 +348,14 @@
                                                     @if ( empty($taskcard->manual_affected_id) )
                                                         @foreach ($affected_manuals as $affected_manual)
                                                             <option value="{{ $affected_manual->id }}">
-                                                                {{ $affected_manual->name }} 
+                                                                {{ $affected_manual->name }}
                                                             </option>
                                                         @endforeach
                                                     @else
                                                         @foreach ($affected_manuals as $affected_manual)
-                                                            <option value="{{ $affected_manual->id }}"    
+                                                            <option value="{{ $affected_manual->id }}"
                                                             @if($affected_manual->id == $taskcard->manual_affected_id) selected @endif>
-                                                                {{ $affected_manual->name }} 
+                                                                {{ $affected_manual->name }}
                                                             </option>
                                                         @endforeach
                                                     @endif
@@ -528,6 +528,12 @@
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
+    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/item/index.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/tool/index.js') }}"></script>
