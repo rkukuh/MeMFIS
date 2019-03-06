@@ -1,6 +1,8 @@
 let EO_item = {
-  init: function () {
-      $("#m_datatable_journall").DataTable({
+  init: function (triggeruuid) {
+    // alert(triggeruuid);
+    // let triggeruuid = $(this).data('uuid');
+      $("#m_datatable_item").DataTable({
           "dom": '<"top"f>rt<"bottom">pl',
           responsive: !0,
           searchDelay: 500,
@@ -8,19 +10,19 @@ let EO_item = {
           serverSide: !0,
           lengthMenu: [5, 10, 25, 50 ],
           pageLength:5,
-          ajax: "/get-account-codes/",
+          ajax: "/datatables/taskcard-eo/"+triggeruuid+"/materials",
           columns: [
               {
-                  data: "code"
+                  data: "name"
               },
               {
-                  data: "name"
+                  data: "pivot.quantity"
+              },
+              {
+                  data: "pivot.unit_id"
               },
               {
                   data: "Actions"
-              },
-              {
-                  data: "name"
               }
           ],
           columnDefs: [
@@ -35,15 +37,13 @@ let EO_item = {
           ]
       })
 
+      $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.item-body .dataTables_filter');
+
       $('.paging_simple_numbers').addClass('pull-left');
       $('.dataTables_length').addClass('pull-right');
       $('.dataTables_info').addClass('pull-left');
       $('.dataTables_info').addClass('margin-info');
       $('.paging_simple_numbers').addClass('padding-datatable');
-
-      // $('.dataTables_filter').on('click', '.refresh', function () {
-      //     $('#m_datatable_journall').DataTable().ajax.reload();
-      // });
 
       $('.dataTable').on('click', '.select-account_code', function () {
           let uuid = $(this).data('uuid');
@@ -55,9 +55,14 @@ let EO_item = {
           $('.search-journal').html(code + " - " + name);
           $('#modal_account_code').modal('hide');
       });
+
+      $('.item-body').on('click', '.item_modal', function () {
+          $('#add_modal_item').modal('show'); 
+      });
+
   }
 };
 
-jQuery(document).ready(function () {
-  EO_item.init();
-});
+// jQuery(document).ready(function () {
+//   EO_item.init();
+// });

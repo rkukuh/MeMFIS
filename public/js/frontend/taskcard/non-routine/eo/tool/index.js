@@ -1,6 +1,6 @@
-let Eo_tool = {
-  init: function () {
-      $("#m_datatable_journalll").DataTable({
+let EO_tool = {
+  init: function (triggeruuid) {
+      $("#m_datatable_tool").DataTable({
           "dom": '<"top"f>rt<"bottom">pl',
           responsive: !0,
           searchDelay: 500,
@@ -8,19 +8,19 @@ let Eo_tool = {
           serverSide: !0,
           lengthMenu: [5, 10, 25, 50 ],
           pageLength:5,
-          ajax: "/get-account-codes/",
+          ajax: "/datatables/taskcard-eo/"+triggeruuid+"/materials",
           columns: [
               {
-                  data: "code"
+                  data: "name"
               },
               {
-                  data: "name"
+                  data: "pivot.quantity"
+              },
+              {
+                  data: "pivot.unit_id"
               },
               {
                   data: "Actions"
-              },
-              {
-                  data: "name"
               }
           ],
           columnDefs: [
@@ -35,7 +35,7 @@ let Eo_tool = {
           ]
       })
 
-      $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span> </button>').appendTo('div.dataTables_filter');
+      $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.tool-body .dataTables_filter');
       $('.paging_simple_numbers').addClass('pull-left');
       $('.dataTables_length').addClass('pull-right');
       $('.dataTables_info').addClass('pull-left');
@@ -45,6 +45,11 @@ let Eo_tool = {
       // $('.dataTables_filter').on('click', '.refresh', function () {
       //     $('#m_datatable_journalll').DataTable().ajax.reload();
       // });
+
+      $('.tool-body').on('click', '.item_modal', function () {
+        $('#add_modal_tool').modal('show'); 
+    });
+
 
       $('.dataTable').on('click', '.select-account_code', function () {
           let uuid = $(this).data('uuid');
@@ -59,6 +64,6 @@ let Eo_tool = {
   }
 };
 
-jQuery(document).ready(function () {
-  Eo_tool.init();
-});
+// jQuery(document).ready(function () {
+//   Eo_tool.init();
+// });
