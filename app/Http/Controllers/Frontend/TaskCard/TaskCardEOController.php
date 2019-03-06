@@ -2,13 +2,42 @@
 
 namespace App\Http\Controllers\Frontend\TaskCard;
 
+use App\Models\Type;
+use App\Models\Zone;
+use App\Models\Aircraft;
 use App\Models\TaskCard;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardEOStore;
 use App\Http\Requests\Frontend\TaskCardEOUpdate;
 
 class TaskCardEOController extends Controller
 {
+    protected $type;
+    protected $task;
+    protected $skill;
+    protected $zones;
+    protected $aircraft;
+    protected $taskcard;
+    protected $work_area;
+    protected $relationship;
+    protected $categories;
+    protected $scheduled_priorities;
+    protected $affected_manuals;
+
+    public function __construct()
+    {
+        $this->zones = Zone::get();
+        $this->aircraft = Aircraft::get();
+        $this->taskcard = TaskCard::get();
+        $this->task = Type::ofTaskCardTask()->get();
+        $this->work_area = Type::ofWorkArea()->get();
+        $this->type = Type::ofTaskCardTypeNonRoutine()->get();
+        $this->categories = Category::ofTaskCardEO()->get();
+        $this->recurrences = Type::ofTaskCardEORecurrence()->get();
+        $this->scheduled_priorities = Type::ofTaskCardEOScheduledPriority()->get();
+        $this->affected_manuals = Type::ofTaskCardEOManualAffected()->get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -70,8 +99,30 @@ class TaskCardEOController extends Controller
      */
     public function edit(Taskcard $taskCard)
     {
+        $aircraft_taskcards = [];
+
+        foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
+            $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
+        }
+
+        $relation_taskcards = [];
+
+        foreach($taskCard->related_to as $i => $relation_taskcard){
+            $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
+        }
+        
         return view('frontend.taskcard.nonroutine.eo.edit',[
-            'taskcard' => $taskCard
+            'tasks' => $this->task,
+            'types' => $this->type,
+            'taskcard' => $taskCard,
+            'taskcards' => $this->taskcard,
+            'aircrafts' => $this->aircraft,
+            'categories' => $this->categories,
+            'recurrences' => $this->recurrences,
+            'aircraft_taskcards' => $aircraft_taskcards,
+            'relation_taskcards' => $relation_taskcards,
+            'scheduled_priorities' => $this->scheduled_priorities,
+            'affected_manuals' => $this->affected_manuals,
         ]);
     }
 
@@ -84,7 +135,15 @@ class TaskCardEOController extends Controller
      */
     public function update(TaskCardEOUpdate $request, Taskcard $taskCard)
     {
-        //
+        if ($taskCard->update($request->all())) {
+            $taskCard->aircrafts()->sync($request->applicability_airplane);
+            $taskCard->related_to()->sync($request->relationship);
+
+            return response()->json($taskCard);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
