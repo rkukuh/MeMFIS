@@ -278,7 +278,7 @@ class TaskCardEOItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool(TaskCard $taskcard)
+    public function tool(EOInstruction $taskcard)
     {
         $data = $alldata = json_decode($taskcard->items);
 
