@@ -57,7 +57,7 @@ let EO_item = {
       });
 
       $('.item-body').on('click', '.item_modal', function () {
-          $('#add_modal_item').modal('show'); 
+          $('#add_modal_material').modal('show'); 
       });
 
   }
