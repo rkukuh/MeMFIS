@@ -139,8 +139,10 @@ let TaskCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" href="#"title="Edit"><i class="la la-pencil"></i></a>\t\t\t\t\t\t\t'+
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_instruction" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
@@ -214,22 +216,27 @@ let TaskCard = {
         let material_datatables_init = true;
         let material = $('.instruction_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
-                material_datatables_init = false;    
+                material_datatables_init = false;
                 let triggeruuid = $(this).data('uuid');
                 EO_item.init(triggeruuid);
-            } 
+            }
         });
         let tool_datatables_init = true;
         let tool = $('.instruction_datatable').on('click', '.tool', function () {
             if(tool_datatables_init == true){
-                tool_datatables_init = false;    
+                tool_datatables_init = false;
                 let triggeruuid = $(this).data('uuid');
                 EO_tool.init(triggeruuid);
             }
         });
 
+        let edit = $('.instruction_datatable').on('click', '.edit', function () {
+            let triggeruuid = $(this).data('uuid');
+            alert('tes');
+
+        });
         let remove = $('.instruction_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+            let triggeruuid = $(this).data('uuid');
 
             swal({
                 title: 'Are you sure?',
