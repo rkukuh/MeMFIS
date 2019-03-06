@@ -283,16 +283,6 @@ let TaskCard = {
 
                         $('#add_modal_material').modal('hide');
 
-
-                        // let table = $('#m_datatable_item').mDatatable();
-
-                        // table.originalDataSet = [];
-                        // table.reload();
-                        // document.getElementById('uom_quantity').value = '';
-
-                        // $('#item_unit_id').select2('val', 'All');
-
-
                     }
                 }
             });
