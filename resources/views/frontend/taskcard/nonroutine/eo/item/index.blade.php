@@ -7,8 +7,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_journall">
+            <div class="modal-body item-body">
+                <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_item">
                     <thead>
                         <tr>
                             <th>Material</th>
