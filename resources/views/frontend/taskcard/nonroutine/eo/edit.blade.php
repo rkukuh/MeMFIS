@@ -524,18 +524,19 @@
     <script src="{{ asset('js/frontend/functions/select2/manual-affected.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-priority.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/recurrence.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit-item-uom.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/edit.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/item/index.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/tool/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/edit.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush
