@@ -65,11 +65,8 @@
                                                     Type @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Taskcard Type')
-                                                    @slot('id', 'taskcard_non_routine_type')
-                                                    @slot('name', 'taskcard_non_routine_type')
-                                                    @slot('id_error', 'taskcard_non_routine_type')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $taskcard->type->name)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -88,14 +85,16 @@
                                                     Reference @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'relationship')
-                                                    @slot('text', 'Taskcard Relationship')
-                                                    @slot('name', 'relationship')
-                                                    @slot('multiple','multiple')
-                                                    @slot('id_error', 'taskcard-relationship')
-                                                    @slot('help_text','You can chose multiple value')
-                                                @endcomponent
+                                                <div style="background-color:beige; padding:15px;" class="">
+                                                    
+                                                    @if (empty($taskcard->related_to->isEmpty()))
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                        @foreach($taskcard->related_to  as $related)
+                                                            {{ $related->number }},
+                                                        @endforeach
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -115,15 +114,11 @@
                                                     Effectivity (A/C Type) @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Applicability Airplane')
-                                                    @slot('id', 'applicability_airplane')
-                                                    @slot('name', 'applicability_airplane')
-                                                    @slot('multiple','multiple')
-                                                    @slot('id_error', 'applicability-airplane')
-                                                    @slot('help_text','You can chose multiple value')
-                                                @endcomponent
-
+                                                <div style="background-color:beige; padding:15px;" class="">
+                                                    @foreach($taskcard->aircrafts  as $aircraft)
+                                                        {{ $aircraft->name }},
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -132,10 +127,15 @@
                                                     Category @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskcard->category)
-                                                @endcomponent
-
+                                                @if (empty($taskcard->category_id))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    <div style="background-color:beige; padding:15px;" class="">
+                                                        @foreach($taskcard->related_to  as $related)
+                                                            {{ $related->number }},
+                                                        @endforeach
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -156,11 +156,8 @@
                                                     Scheduled Priority @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'scheduled_priority_id')
-                                                    @slot('text', 'Scheduled Priority')
-                                                    @slot('name', 'scheduled_priority_id')
-                                                    @slot('id_error', 'scheduled_priority_id')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $taskcard->scheduled_priority_id)
                                                 @endcomponent
 
                                             </div>
@@ -229,13 +226,9 @@
                                                     Recurrence @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'recurrence_id')
-                                                    @slot('text', 'Recurrence Id')
-                                                    @slot('name', 'recurrence_id')
-                                                    @slot('id_error', 'recurrence_id')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $taskcard->recurrence_id)
                                                 @endcomponent
-
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6  hidden" id="recurrence_div">
                                                 <label class="form-control-label" style="margin-top:13px">
@@ -281,13 +274,9 @@
                                                     Manuals Affected @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'manual_affected_id')
-                                                    @slot('text', 'Manual Affected')
-                                                    @slot('name', 'manual_affected_id')
-                                                    @slot('id_error', 'manual_affected_id')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $taskcard->manual_affected_id)
                                                 @endcomponent
-
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="note_div">
                                                 <label class="form-control-label" style="margin-top:13px">
