@@ -129,6 +129,17 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Polymorphic: An item can have zero or many prices.
+     *
+     * This function will get all of the item's prices.
+     * See: Price's priceable() method for the inverse
+     */
+    public function prices()
+    {
+        return $this->morphMany(Price::class, 'priceable');
+    }
+
+    /**
      * Many-to-Many: A project may have one or many item.
      *
      * This function will retrieve all the projects of an item.
