@@ -142,6 +142,17 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * Polymorphic: A task card can have zero or many repeats.
+     *
+     * This function will get all of the task card's repeats.
+     * See: Repeat's repeatable() method for the inverse
+     */
+    public function repeats()
+    {
+        return $this->morphMany(Repeat::class, 'repeatable');
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of a task card.
@@ -171,7 +182,7 @@ class TaskCard extends MemfisModel
      * Polymorphic: A task card can have zero or many thresholds.
      *
      * This function will get all of the task card's thresholds.
-     * See: Threshold's addressable() method for the inverse
+     * See: Threshold's thresholdable() method for the inverse
      */
     public function thresholds()
     {
