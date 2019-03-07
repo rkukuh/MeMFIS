@@ -435,6 +435,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A threshold may have zero or many type.
+     *
+     * This function will retrieve all thresholds of a type.
+     * See: Threshold's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function thresholds()
+    {
+        return $this->hasMany(Threshold::class);
+    }
+
+    /**
      * One-to-Many: A unit may have zero or many type.
      *
      * This function will retrieve all units of a type.
