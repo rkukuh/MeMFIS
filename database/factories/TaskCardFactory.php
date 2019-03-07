@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\TaskCard;
 use App\Models\Aircraft;
+use App\Models\Threshold;
 use App\Models\EOInstruction;
 use Faker\Generator as Faker;
 
@@ -209,6 +210,14 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
 
     if ($faker->boolean) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
+    }
+
+    // Threshold and Repeat
+
+    if ($faker->boolean) {
+        $taskcard->thresholds()->saveMany(
+            factory(Threshold::class, rand(1, 2))->make()
+        );
     }
 
     // Item
