@@ -4,43 +4,13 @@ Route::name('testing.')->group(function () {
 
     Route::group(['prefix' => '_test'], function () {
 
-        Route::get('/tools', function () {
-            // $tool = App\Models\Category::ofItem()->where('code', 'tool')->first()->code;
-            // return $tool;
-
-            $items = App\Models\Item::with('categories')
-                                    ->whereHas('categories', function ($query) {
-                                        $query->where('code', 'tool');
-                                    })->get();
-
-            return $items;
-        });
-
-        Route::get('/materials', function () {
-            // $material = App\Models\Category::ofItem()->where('code', 'rawmat')->first()->code;
-            // return $material;
-
-            $items = App\Models\Item::with('categories')
-                                    ->whereHas('categories', function ($query) {
-                                        $query->where('code', 'rawmat');
-                                    })->get();
-
-            return $items;
-        });
-
-        Route::get('/taskcard-materials', function () {
-            // $material = App\Models\Category::ofItem()->where('code', 'rawmat')->first()->code;
-            // return $material;
-            $taskcard = App\Models\TaskCard::where('uuid','dfc40993-2d2e-4720-84d7-d4f3f3799fe4')->first();
-            dd($taskcard->items);
-
-
-            // $items = App\Models\Item::with('categories')
-            //                         ->whereHas('categories', function ($query) {
-            //                             $query->where('code', 'rawmat');
-            //                         })->get();
-
-            // return $items;
+        Route::get('/taskcard/{taskcard}', function ($taskcard) {
+            $item_material = App\Models\TaskCard::with(['items', 
+                                                        'items.unit', 
+                                                        'items.categories'
+            ])->find($taskcard);
+            
+            return $item_material->items->where('categories.code', 'component')->first();
         });
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
