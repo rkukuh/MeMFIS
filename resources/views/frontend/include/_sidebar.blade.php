@@ -103,7 +103,7 @@
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.job-card.mechanic') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.jobcard-mechanic.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -113,7 +113,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.job-card.engineer') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.jobcard-engineer.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -123,7 +123,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.job-card.ppc') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.jobcard-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
