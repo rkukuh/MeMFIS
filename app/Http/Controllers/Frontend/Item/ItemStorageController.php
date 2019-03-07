@@ -81,6 +81,7 @@ class ItemStorageController extends Controller
     public function update(Item $item, ItemStorageUpdate $request)
     {
         $item->storages()->detach($request->storage);
+
         $item->storages()->attach($request->storage_id, [
             'min' => $request->min,
             'max' => $request->max
@@ -99,6 +100,7 @@ class ItemStorageController extends Controller
     public function destroy(Item $item,Storage $storage)
     {
         $item->storages()->detach($storage);
+        
         return response()->json($item);
     }
 }

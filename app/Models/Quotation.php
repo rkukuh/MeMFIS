@@ -14,9 +14,9 @@ class Quotation extends MemfisModel
         'valid_until',
         'currency_id',
         'exchange_rate',
-        // 'scheduled_payment_type',
-        // 'scheduled_payment_amount',
         'total',
+        'scheduled_payment_type',
+        'scheduled_payment_amount',
         'term_of_condition',
         'description',
     ];

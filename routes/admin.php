@@ -25,6 +25,7 @@ Route::name('admin.')->group(function () {
         Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+        Route::resource('price', 'PriceController');
         Route::resource('access', 'AccessController');
         Route::resource('repeat', 'RepeatController');
         Route::resource('address', 'AddressController');
