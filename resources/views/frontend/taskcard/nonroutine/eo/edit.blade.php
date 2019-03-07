@@ -107,7 +107,7 @@
                                                 </label>
 
                                                 <select id="relationship" name="relationship" class="form-control m-select2" multiple>
-                                                @if ($taskcard->related_to->isEmpty())
+                                                {{-- @if ($taskcard->related_to->isEmpty())
                                                     @foreach ($taskcards as $taskCard)
                                                         <option value="{{ $taskCard->id }}">
                                                             {{ $taskCard->number }}
@@ -120,7 +120,7 @@
                                                             {{ $taskCard->title }}
                                                         </option>
                                                     @endforeach
-                                                @endif
+                                                @endif --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@
                                                 </label>
 
                                                 <select id="category" name="category" class="form-control m-select2" style="width:100%">
-                                                    @if ( empty($taskcard->category_id))
+                                                    {{-- @if ( empty($taskcard->category_id))
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">
                                                                 {{ $category->name }}
@@ -183,7 +183,7 @@
                                                                 {{ $category->name }}
                                                             </option>
                                                         @endforeach
-                                                    @endif
+                                                    @endif --}}
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -206,7 +206,7 @@
                                                 </label>
 
                                                 <select id="scheduled_priority_id" name="scheduled_priority_id" class="form-control m-select2" style="width:100%">
-                                                    @if ( empty($taskcard->scheduled_priority_id))
+                                                    {{-- @if ( empty($taskcard->scheduled_priority_id))
                                                         @foreach ($scheduled_priorities as $scheduled_priority)
                                                             <option value="{{ $scheduled_priority->id }}">
                                                                 {{ $scheduled_priority->name }}
@@ -219,7 +219,7 @@
                                                                 {{ $scheduled_priority->name }}
                                                             </option>
                                                         @endforeach
-                                                    @endif
+                                                    @endif --}}
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="prior_to">
@@ -285,7 +285,7 @@
                                                 </label>
 
                                                 <select id="recurrence_id" name="recurrence_id" class="form-control m-select2" style="width:100%">
-                                                    @if ( empty($taskcard->recurrence_id))
+                                                    {{-- @if ( empty($taskcard->recurrence_id))
                                                         @foreach ($recurrences as $recurrence)
                                                             <option value="{{ $recurrence->id }}">
                                                                 {{ $recurrence->name }}
@@ -298,7 +298,7 @@
                                                                 {{ $recurrence->name }}
                                                             </option>
                                                         @endforeach
-                                                    @endif
+                                                    @endif --}}
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6  hidden" id="recurrence_div">
