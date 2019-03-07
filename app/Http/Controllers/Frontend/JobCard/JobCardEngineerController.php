@@ -16,7 +16,7 @@ class JobCardEngineerController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.job-card.engineer.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class JobCardEngineerController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.job-card.engineer.open');
     }
 
     /**
@@ -59,7 +59,8 @@ class JobCardEngineerController extends Controller
      */
     public function edit(JobCard $jobCard)
     {
-        //
+        return view('frontend.job-card.engineer.progress-resume');
+        // return view('frontend.job-card.engineer.progress-pause');
     }
 
     /**

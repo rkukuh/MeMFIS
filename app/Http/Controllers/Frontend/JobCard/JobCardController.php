@@ -16,7 +16,7 @@ class JobCardController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.job-card.ppc.index');
     }
 
     /**
@@ -48,7 +48,7 @@ class JobCardController extends Controller
      */
     public function show(JobCard $jobCard)
     {
-        //
+        return view('frontend.job-card.ppc.show');
     }
 
     /**
