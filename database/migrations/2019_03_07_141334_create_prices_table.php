@@ -15,7 +15,11 @@ class CreatePricesTable extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->morphs('priceable');
+            $table->double('amount');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
