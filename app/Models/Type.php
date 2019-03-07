@@ -409,6 +409,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A repeat may have zero or many type.
+     *
+     * This function will retrieve all repeats of a type.
+     * See: Repeat's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function repeats()
+    {
+        return $this->hasMany(Repeat::class);
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve all task cards of a type.
