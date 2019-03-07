@@ -44,6 +44,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Zones::class);
         $this->call(Emails::class);
         $this->call(Phones::class);
+        $this->call(Prices::class);
         $this->call(Repeats::class);
         $this->call(Websites::class);
         $this->call(Versions::class);
