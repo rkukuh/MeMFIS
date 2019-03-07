@@ -26,7 +26,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.vendor.create');
     }
 
     /**
