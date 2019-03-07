@@ -226,7 +226,17 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('JobCard')->group(function () {
 
-            Route::resource('jobcard', 'JobCardController');
+            Route::resource('jobcard-ppc', 'JobCardController', [
+                'parameters' => ['jobcard-ppc' => 'jobcard']
+            ]);
+            
+            Route::resource('jobcard-engineer', 'JobCardEngineerController', [
+                'parameters' => ['jobcard-engineer' => 'jobcard']
+            ]);
+
+            Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
+                'parameters' => ['jobcard-mechanic' => 'jobcard']
+            ]);
 
             Route::name('jobcard.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
