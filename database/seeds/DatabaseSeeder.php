@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ZonesTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
         $this->call(EmailsTableSeeder::class);
+        $this->call(RepeatsTableSeeder::class);
         $this->call(AccessesTableSeeder::class);
         $this->call(WebsitesTableSeeder::class);
         $this->call(VersionsTableSeeder::class);
