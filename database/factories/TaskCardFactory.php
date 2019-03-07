@@ -3,6 +3,7 @@
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Repeat;
 use App\Models\Category;
 use App\Models\TaskCard;
 use App\Models\Aircraft;
@@ -217,6 +218,10 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
     if ($faker->boolean) {
         $taskcard->thresholds()->saveMany(
             factory(Threshold::class, rand(1, 2))->make()
+        );
+
+        $taskcard->repeats()->saveMany(
+            factory(Repeat::class, rand(1, 2))->make()
         );
     }
 
