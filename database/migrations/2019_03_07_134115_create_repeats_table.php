@@ -15,7 +15,17 @@ class CreateRepeatsTable extends Migration
     {
         Schema::create('repeats', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->morphs('repeatable');
+            $table->unsignedInteger('type_id');
+            $table->integer('amount');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('type_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
