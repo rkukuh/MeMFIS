@@ -168,6 +168,17 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * Polymorphic: A task card can have zero or many thresholds.
+     *
+     * This function will get all of the task card's thresholds.
+     * See: Threshold's addressable() method for the inverse
+     */
+    public function thresholds()
+    {
+        return $this->morphMany(Threshold::class, 'thresholdable');
+    }
+
+    /**
      * Many-to-Many: A task card may have one or many workpackage.
      *
      * This function will retrieve all the work packages of a task card.
