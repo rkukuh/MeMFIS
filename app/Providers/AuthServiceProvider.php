@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models;
 use App\Policies;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -45,6 +44,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Document::class => Policies\DocumentPolicy::class,
         Models\Language::class => Policies\LanguagePolicy::class,
         Models\Quotation::class => Policies\QuotationPolicy::class,
+        Models\Threshold::class => Policies\ThresholdPolicy::class,
         Models\Department::class => Policies\DepartmentPolicy::class,
         Models\WorkPackage::class => Policies\WorkPackagePolicy::class,
         Models\Manufacturer::class => Policies\ManufacturerPolicy::class,

@@ -16,16 +16,16 @@ Route::name('datatables.')->group(function () {
         Route::get('/journal', 'JournalDatatables@index')->name('journal.index');
 
         /** POLYMORPH */
-        // INFO: For every polymorph cases, create a grouped route for them
+        // For every polymorph cases, create a grouped route for them
 
         /** MASTER */
 
         Route::get('/vendor', 'VendorDatatables@index')->name('vendor.index');
-        Route::get('/storage', 'StorageDatatables@index')->name('storage.index');
-        Route::get('/storage/modal', 'StorageDatatables@storageModal')->name('storage.modal');
         Route::get('/aircraft', 'AircraftDatatables@index')->name('aircraft.index');
         Route::get('/language', 'LanguageDatatables@index')->name('language.index');
         Route::get('/currency', 'CurrencyDatatables@index')->name('currency.index');
+        Route::get('/storage', 'StorageDatatables@index')->name('storage.index');
+        Route::get('/storage/modal', 'StorageDatatables@storageModal')->name('storage.modal');
         Route::get('/manufacturer', 'ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification', 'CertificationDatatables@index')->name('certification.index');
 

@@ -37,6 +37,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('website', 'WebsiteController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
+        Route::resource('threshold', 'ThresholdController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
