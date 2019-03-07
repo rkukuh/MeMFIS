@@ -31,7 +31,6 @@ Route::name('admin.')->group(function () {
         Route::resource('website', 'WebsiteController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
-        Route::resource('maintenance-cycle', 'MaintenanceCycleController');
 
         /** MASTER */
 

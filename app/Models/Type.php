@@ -383,19 +383,6 @@ class Type extends MemfisModel
     }
 
     /**
-     * One-to-Many: A maintenance cycle may have zero or many type.
-     *
-     * This function will retrieve all maintenance cycles of a type.
-     * See: Maintenance Cycle's type() method for the inverse
-     *
-     * @return mixed
-     */
-    public function maintenance_cycles()
-    {
-        return $this->hasMany(MaintenanceCycle::class);
-    }
-
-    /**
      * One-to-Many: A phone may have zero or many type.
      *
      * This function will retrieve all phones of a type.
