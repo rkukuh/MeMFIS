@@ -84,8 +84,8 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('aircraft')->group(function () {
 
                     /** Polymorph */
-                    Route::resource('/{aircraft}/zones','AircraftZonesController');
-                    Route::resource('/{aircraft}/accesses','AircraftAccessesController');
+                    Route::resource('/{aircraft}/zones', 'AircraftZonesController');
+                    Route::resource('/{aircraft}/accesses', 'AircraftAccessesController');
 
                 });
             });
@@ -125,12 +125,12 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('customer')->group(function () {
 
                     /** Polymorph */
-                    Route::resource('/{customer}/faxes','CustomerFaxesController');
-                    Route::resource('/{customer}/emails','CustomerEmailsController');
-                    Route::resource('/{customer}/phones','CustomerPhonesController');
-                    Route::resource('/{customer}/websites','CustomerWebsitesController');
-                    Route::resource('/{customer}/addresses','CustomerAddressesController');
-                    Route::resource('/{customer}/documents','CustomerDocumentsController');
+                    Route::resource('/{customer}/faxes', 'CustomerFaxesController');
+                    Route::resource('/{customer}/emails', 'CustomerEmailsController');
+                    Route::resource('/{customer}/phones', 'CustomerPhonesController');
+                    Route::resource('/{customer}/websites', 'CustomerWebsitesController');
+                    Route::resource('/{customer}/addresses', 'CustomerAddressesController');
+                    Route::resource('/{customer}/documents', 'CustomerDocumentsController');
 
                 });
             });
@@ -147,12 +147,12 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('employee')->group(function () {
 
                     /** Polymorph */
-                    Route::resource('/{employee}/faxes','EmployeeFaxesController');
-                    Route::resource('/{employee}/emails','EmployeeEmailsController');
-                    Route::resource('/{employee}/phones','EmployeePhonesController');
-                    Route::resource('/{employee}/websites','EmployeeWebsitesController');
-                    Route::resource('/{employee}/addresses','EmployeeAddressesController');
-                    Route::resource('/{employee}/documents','EmployeeDocumentsController');
+                    Route::resource('/{employee}/faxes', 'EmployeeFaxesController');
+                    Route::resource('/{employee}/emails', 'EmployeeEmailsController');
+                    Route::resource('/{employee}/phones', 'EmployeePhonesController');
+                    Route::resource('/{employee}/websites', 'EmployeeWebsitesController');
+                    Route::resource('/{employee}/addresses', 'EmployeeAddressesController');
+                    Route::resource('/{employee}/documents', 'EmployeeDocumentsController');
 
                     /** Certifications and Licenses */
                     Route::resource('/{employee}/otr', 'EmployeeOTRController');
