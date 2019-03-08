@@ -80,8 +80,6 @@ let TaskCard = {
 
         $('.tool_datatable').on('click', '.tool-delete', function () {
             let item_uuid = $(this).data('item_uuid');
-            // let taskcard_uuid = $(this).data('taskcard_uuid');
-
             swal({
                 title: 'Sure want to remove?',
                 type: 'question',
@@ -422,10 +420,6 @@ let TaskCard = {
                         table.originalDataSet = [];
                         table.reload();
                         $('#modal_item').modal('hide');
-                        // document.getElementById('uom_quantity').value = '';
-
-                        // $('#item_unit_id').select2('val', 'All');
-
 
                     }
                 }
@@ -471,60 +465,11 @@ let TaskCard = {
                         table.reload();
 
                         $('#modal_tool').modal('hide');
-                        // document.getElementById('uom_quantity').value = '';
-
-                        // $('#item_unit_id').select2('val', 'All');
-
 
                     }
                 }
             });
         });
-
-        // $('.tool_datatable').on('click', '.delete-tool', function () {
-        //     let item_id = $(this).data('item_id');
-        //     let taskcard_uuid = $(this).data('taskcard_uuid');
-
-        //     swal({
-        //         title: 'Sure want to remove?',
-        //         type: 'question',
-        //         confirmButtonText: 'Yes, REMOVE',
-        //         confirmButtonColor: '#d33',
-        //         cancelButtonText: 'Cancel',
-        //         showCancelButton: true,
-        //     }).then(result => {
-        //         if (result.value) {
-        //             $.ajax({
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-        //                         'content'
-        //                     )
-        //                 },
-        //                 type: 'DELETE',
-        //                 url: '/taskcard-routine/' + taskcard_uuid + '/' + item_id+'/item/',
-        //                 success: function (data) {
-        //                     toastr.success('Takscard Tool has been deleted.', 'Deleted', {
-        //                             timeOut: 5000
-        //                         }
-        //                     );
-
-        //                     let table = $('.tool_datatable').mDatatable();
-
-        //                     table.originalDataSet = [];
-        //                     table.reload();
-        //                 },
-        //                 error: function (jqXhr, json, errorThrown) {
-        //                     let errorsHtml = '';
-        //                     let errors = jqXhr.responseJSON;
-
-        //                     $.each(errors.errors, function (index, value) {
-        //                         $('#delete-error').html(value);
-        //                     });
-        //                 }
-        //             });
-        //         }
-        //     });
-        // });
 
         $(document).ready(function () {
             $('.reset-item').removeClass('reset');
@@ -710,9 +655,6 @@ let TaskCard = {
                         document.getElementById('description').value = description;
 
                     } else {
-                        //    taskcard_reset();
-
-
                         toastr.success('Taskcard has been updated.', 'Success', {
                             timeOut: 5000
                         });
