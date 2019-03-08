@@ -137,7 +137,7 @@
 
                                                 @foreach ($tasks as $task)
                                                     <option value="{{ $task->id }}"
-                                                        @if ($task->id == $taskcard->task_type_id) selected @endif>
+                                                        @if ($task->id == $taskcard->task_id) selected @endif>
                                                         {{ $task->name }}
                                                     </option>
                                                 @endforeach
