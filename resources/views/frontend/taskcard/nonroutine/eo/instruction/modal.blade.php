@@ -29,7 +29,7 @@
                                         @slot('text', 'Work Area')
                                         @slot('id', 'work_area')
                                         @slot('name', 'work_area')
-                                        @slot('id_error', 'work-area')
+                                        @slot('id_error', 'work_area')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -57,6 +57,7 @@
                                                 @slot('id', 'manhour')
                                                 @slot('text', 'Manhour')
                                                 @slot('name', 'manhour')
+                                                @slot('id_error', 'manhour')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,7 +69,7 @@
                                                 @slot('id', 'performa')
                                                 @slot('text', 'Performa')
                                                 @slot('name', 'performa')
-                                                @slot('value', '1')
+                                                @slot('id_error', 'performa')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -84,6 +85,7 @@
                                                 @slot('id', 'helper_quantity')
                                                 @slot('text', 'Helper Quantity')
                                                 @slot('name', 'helper_quantity')
+                                                @slot('id_error', 'helper_quantity')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -95,6 +97,7 @@
                                                 @slot('id', 'engineer_quantity')
                                                 @slot('text', 'Engineer Quantity')
                                                 @slot('name', 'engineer_quantity')
+                                                @slot('id_error', 'engineer_quantity')
                                             @endcomponent
                                         </div>
 
@@ -113,6 +116,7 @@
                                                 @slot('id', 'sequence')
                                                 @slot('text', 'Sequence')
                                                 @slot('name', 'sequence')
+                                                @slot('id_error', 'sequence')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
