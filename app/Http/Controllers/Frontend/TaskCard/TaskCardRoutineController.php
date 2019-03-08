@@ -52,7 +52,13 @@ class TaskCardRoutineController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.routine.create');
+        $maintenanceCycle = Type::ofMaintenanceCycle()->get();
+
+        return view('frontend.taskcard.routine.create', [
+            'MaintenanceCycles' => $maintenanceCycle,
+        ]);
+
+        // return view('frontend.taskcard.routine.create');
     }
 
     /**
