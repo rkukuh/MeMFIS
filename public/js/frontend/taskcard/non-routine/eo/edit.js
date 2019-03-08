@@ -158,6 +158,7 @@ let TaskCard = {
             let helper_quantity = $('input[name=helper_quantity]').val();
             let engineer_quantity = $('input[name=engineer_quantity]').val();
             let sequence = $('input[name=sequence]').val();
+            let otr_certification = $('input[name=otr_certification]').val();
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -178,6 +179,7 @@ let TaskCard = {
                     helper_quantity: helper_quantity,
                     engineer_quantity: engineer_quantity,
                     sequence: sequence,
+                    otr_certification: otr_certification,
                     is_rii: is_rii,
                 },
                 success: function (data) {
@@ -210,12 +212,12 @@ let TaskCard = {
                             $('#engineer_quantity-error').html(data.errors.engineer_quantity[0]);
                         }
 
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-                        }
-
                         if (data.errors.sequence) {
                             $('#sequence-error').html(data.errors.sequence[0]);
+                        }
+
+                        if (data.errors.otr_certification) {
+                            $('#otr_certification-error').html(data.errors.otr_certification[0]);
                         }
 
                         document.getElementById('work_area').value = work_area;
@@ -223,8 +225,8 @@ let TaskCard = {
                         document.getElementById('manhour').value = manhour;
                         document.getElementById('performa').value = performa;
                         document.getElementById('helper_quantity').value = helper_quantity;
-                        // document.getElementById('name ').value = name ;
-
+                        document.getElementById('otr_certification').value = otr_certification;
+                        document.getElementById('sequence').value = sequence;
                         // document.getElementById('material').value = material;
                         // document.getElementById('quantity').value = quantity;
 

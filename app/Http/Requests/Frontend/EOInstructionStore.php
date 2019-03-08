@@ -34,6 +34,7 @@ class EOInstructionStore extends FormRequest
             'helper_quantity' => 'required|numeric',
             'engineer_quantity' => 'required|numeric',
             'sequence' => 'required',
+            'otr_certification' => 'required',
         ];
     }
 

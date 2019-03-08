@@ -226,7 +226,7 @@ class TaskCard extends MemfisModel
      */
     public function getMaterialsAttribute()
     {
-        return collect($this->items->load('unit')->where('categories.0.code', 'rawmat')->all());
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'rawmat')->all()));
     }
 
     /**
@@ -236,6 +236,6 @@ class TaskCard extends MemfisModel
      */
     public function getToolsAttribute()
     {
-        return collect($this->items->load('unit')->where('categories.0.code', 'tool')->all());
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
     }
 }
