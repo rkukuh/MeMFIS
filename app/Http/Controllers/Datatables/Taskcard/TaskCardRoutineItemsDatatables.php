@@ -17,12 +17,9 @@ class TaskCardRoutineItemsDatatables extends Controller
      */
     public function material(TaskCard $taskcard)
     {
-        // $taskcard = TaskCard::with('items')->where('uuid',$taskcard)->first();
-        foreach($taskcard->items as $item){
-            $item->pivot->unit_name = $item->unit->name;
-        }
+        dd($taskcard);
 
-        $data = $alldata = json_decode($taskcard->items);
+        $data = $alldata = json_decode($taskcard->materials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -118,11 +115,8 @@ class TaskCardRoutineItemsDatatables extends Controller
      */
     public function tool(TaskCard $taskcard)
     {
-        foreach($taskcard->items as $item){
-            $item->pivot->unit_name = $item->unit->name;
-        }
-        
-        $data = $alldata = json_decode($taskcard->items);
+        dd($taskcard);
+        $data = $alldata = json_decode($taskcard->tools);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

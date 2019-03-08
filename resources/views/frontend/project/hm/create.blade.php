@@ -267,7 +267,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                <div class="col-xl-12 order-1 order-xl-2 m--align-right">
                                                     <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
                                                         <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
                                                             <span>
