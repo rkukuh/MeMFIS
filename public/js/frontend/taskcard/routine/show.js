@@ -62,19 +62,6 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool-delete" title="Delete" ' +
-                            'data-item_uuid="' + t.uuid + '">' +
-                            '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
             ]
         });
 
@@ -142,19 +129,6 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material-delete" title="Delete" ' +
-                            'data-item_uuid="' + t.uuid + '">' +
-                            '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
             ]
         });
 
