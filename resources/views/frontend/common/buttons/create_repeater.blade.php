@@ -1,4 +1,5 @@
-<div data-repeater-create=""
+<div id="{{ $id or '' }}"
+    data-repeater-create=""
     class= "btn
             btn-{{ $color or 'brand' }}
             btn-{{ $size or 'sm' }}
