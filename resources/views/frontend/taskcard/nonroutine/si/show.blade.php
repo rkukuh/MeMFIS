@@ -116,10 +116,21 @@
                                                     @slot('text', $taskCard->estimation_manhour)
                                                 @endcomponent
                                             </div>
-
-
                                         </div>
                                         <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Performa Factor @include('frontend.common.label.required')
+                                                </label>
+
+                                                @if (empty($taskCard->performance_factor))
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $taskCard->performance_factor)
+                                                    @endcomponent
+                                                @endif
+                                            </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">

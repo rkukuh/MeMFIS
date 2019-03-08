@@ -34,7 +34,7 @@
                         <td class="col-sm-1"><input type="text" required="required" class="form-control" placeholder="x Hari" name="lama_pengerjaan[]' + counter + '"/></td>
                         <td class="col-sm-2"><select name="team"  class="select form-control js-example-tags"><option >-</option>
                         @foreach ($websites as $website)
-                        <option value="{{$website->id}}">{{$website->name}}</option>
+                        <option value="{{$website->id}}">{{$website->url}}</option>
                         @endforeach
                         </select></td>
                         <td class="col-sm-3"><input id="tags_1" type="text" class="tags form-control col-sm-3" name="dokumen[]"/></td>
@@ -82,7 +82,7 @@
                 for (var i = 0; i < (teams.length - 1); i++) {
                     if(teams[i].id == 1){
                     }else{
-                    cols += '<option value="' + teams[i].uuid + '" >' + teams[i].name + ' </option>';
+                    cols += '<option value="' + teams[i].uuid + '" >' + teams[i].url + ' </option>';
                     }
                 }
                 ;

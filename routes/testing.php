@@ -18,6 +18,16 @@ Route::name('testing.')->group(function () {
             return $pdf->stream();
         });
 
+        Route::get('/repeater', function () {
+
+            $website = App\Models\Website::all();
+
+            return view('frontend.testing.repeaterBlankModif', [
+                'websites' => $website,
+
+            ]);
+            });
+
     });
 
 });

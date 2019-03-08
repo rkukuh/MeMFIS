@@ -308,6 +308,25 @@
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <table class="threshold">
+                                                <tr>
+                                                    <td width="50%"><select name="maintenanceCycle"  class="select form-control js-example-tags"><option value"">Select Threshold Type</option>
+                                                    @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                    <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                    @endforeach
+                                                    </select></td>
+                                                    <td width="45%"><input type="text" required="required" class="form-control" name="amount[]' + counter + '"/></td>
+                                                    <td width="5%">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('id', 'addrow')
+                                                        @endcomponent
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Task Card Attachment @include('frontend.common.label.optional')
                                             </label>
@@ -509,6 +528,7 @@
 @endpush
 
 @push('footer-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
@@ -550,4 +570,57 @@
     <script src="{{ asset('js/frontend/taskcard/routine/create.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/routine/form-reset.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+          $(".js-example-tags").select2();
+        });
+  </script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          var counter = 0;
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="50%"><select name="maintenanceCycle" class="select form-control ">';
+              cols += '<option value"">Select Threshold Type</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="amount[]' + counter + '"/></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.threshold").append(newRow);
+              $('.select').select2();
+              counter++;
+          });
+          $("table.threshold").on("click", ".ibtnDel", function (event) {
+              if (counter >= 1) {
+                  $(this).closest("tr").remove();
+                  counter -= 1
+              }
+          });
+      });
+  </script>
+  <script type="text/javascript">
+          let simpan = $('.save').on('click', function () {
+
+      var usertype=[];
+$("select[name=maintenanceCycle]").each(function(){
+  usertype.push($(this).val());
+});
+
+
+var ajaxdata={"UserType":usertype};
+
+console.log(JSON.stringify(ajaxdata));
+      });
+  </script>
 @endpush
