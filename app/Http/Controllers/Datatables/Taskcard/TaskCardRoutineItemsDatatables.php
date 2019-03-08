@@ -17,8 +17,6 @@ class TaskCardRoutineItemsDatatables extends Controller
      */
     public function material(TaskCard $taskcard)
     {
-        dd($taskcard);
-
         $data = $alldata = json_decode($taskcard->materials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -115,7 +113,6 @@ class TaskCardRoutineItemsDatatables extends Controller
      */
     public function tool(TaskCard $taskcard)
     {
-        dd($taskcard);
         $data = $alldata = json_decode($taskcard->tools);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
