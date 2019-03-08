@@ -61,9 +61,10 @@ class EOInstructionController extends Controller
      * @param  \App\Models\EOInstruction  $eo_instruction
      * @return \Illuminate\Http\Response
      */
-    public function edit(EOInstruction $eo_instruction)
+    public function edit(TaskCard $taskcard, EOInstruction $eo_instruction)
     {
-        //
+        dd($eo_instruction);
+        return response()->json($eo_instruction);
     }
 
     /**
