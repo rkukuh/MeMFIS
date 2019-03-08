@@ -108,7 +108,7 @@ class TaskCardEOController extends Controller
         $relation_taskcards = [];
 
         foreach($taskCard->related_to as $i => $relation_taskcard){
-            $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
+            $relation_taskcards[$i] =  $relation_taskcard->id;
         }
         
         return view('frontend.taskcard.nonroutine.eo.edit',[
