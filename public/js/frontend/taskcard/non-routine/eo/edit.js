@@ -163,7 +163,7 @@ let TaskCard = {
             } else {
                 is_rii = 0;
             }
-
+            console.log(performa);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -189,6 +189,42 @@ let TaskCard = {
                         // if (data.errors.quantity) {
                         //     $('#quantity_item-error').html(data.errors.quantity[0]);
                         // }
+
+                        if (data.errors.work_area) {
+                            $('#work_area-error').html(data.errors.work_area[0]);
+                        }
+                        
+                        if (data.errors.performance_factor) {
+                            $('#performa-error').html(data.errors.performance_factor[0]);
+                        }
+
+                        if (data.errors.estimation_manhour) {
+                            $('#manhour-error').html(data.errors.estimation_manhour[0]);
+                        }
+                        
+                        if (data.errors.helper_quantity) {
+                            $('#helper_quantity-error').html(data.errors.helper_quantity[0]);
+                        }
+
+                        if (data.errors.engineer_quantity) {
+                            $('#engineer_quantity-error').html(data.errors.engineer_quantity[0]);
+                        }
+
+                        if (data.errors.name) {
+                            $('#name-error').html(data.errors.name[0]);
+                        }
+
+                        if (data.errors.sequence) {
+                            $('#sequence-error').html(data.errors.sequence[0]);
+                        }
+
+                        document.getElementById('work_area').value = work_area;
+                        document.getElementById('engineer_quantity').value = engineer_quantity;
+                        document.getElementById('manhour').value = manhour;
+                        document.getElementById('performa').value = performa;
+                        document.getElementById('helper_quantity').value = helper_quantity;
+                        // document.getElementById('name ').value = name ;
+
                         // document.getElementById('material').value = material;
                         // document.getElementById('quantity').value = quantity;
 
