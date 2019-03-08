@@ -27,7 +27,15 @@ class TaskCardEOStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required',
+            'number' => 'required',
+            'revision' => 'required',
+            'category' => 'required',
+            'recurrence_id' => 'required',
+            'manual_affected_id' => 'required',
+            'scheduled_priority_id' => 'required',
+            'applicability_airplane' => 'required',
+            'taskcard_non_routine_type' => 'required',
         ];
     }
 
