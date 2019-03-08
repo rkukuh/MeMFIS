@@ -170,7 +170,7 @@ class TaskCard extends MemfisModel
      *
      * This function will retrieve the task of a task card.
      * See: Type's taskcard_tasks() method for the inverse
-     * 
+     *
      * @return mixed
      */
     public function task()
