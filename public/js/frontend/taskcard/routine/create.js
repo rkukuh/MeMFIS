@@ -68,7 +68,7 @@ let TaskCard = {
                     number: number,
                     title: title,
                     type_id: taskcard_routine_type,
-                    task_type_id: task_type_id,
+                    task_id: task_type_id,
                     work_area: work_area,
                     helper_quantity: helper_quantity,
                     engineer_quantity: engineer_quantity,

@@ -254,7 +254,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard-eo/eo-instruction/'+eo_uuid+'/item',
+                url: '/taskcard-eo/eo-instruction/'+triggeruuid+'/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: material,
@@ -298,14 +298,13 @@ let TaskCard = {
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
-            // alert(quantity+tool+unit_tool);
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard-eo/eo-instruction/'+eo_uuid+'/item',
+                url: '/taskcard-eo/eo-instruction/'+triggeruuid2+'/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: tool,
