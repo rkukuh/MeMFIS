@@ -250,7 +250,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard/threshold/',
+                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/thresholds',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -287,9 +287,17 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [{
-                    field: 'name',
-                    title: 'Item',
+            columns: [
+                {
+                    field: 'amount',
+                    title: 'Amount',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'type_id',
+                    title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -318,7 +326,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard/repeat',
+                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/repeats',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -355,9 +363,17 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [{
-                    field: 'name',
-                    title: 'Item',
+            columns: [
+                {
+                    field: 'Amount',
+                    title: 'amount',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'type_id',
+                    title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
