@@ -121,6 +121,91 @@ let TaskCard = {
             });
         });
 
+        $('.threshold_datatable').on('click', '.delete-threshold', function () {
+            let threshold_uuid = $(this).data('threshold_uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + threshold_uuid+'/threshold/',
+                        success: function (data) {
+                            toastr.success('Takscard Tool has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.threshold_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+        $('.repeat_datatable').on('click', '.repeat-delete', function () {
+            let repeat_uuid = $(this).data('repeat_uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + repeat_uuid+'/repeat/',
+                        success: function (data) {
+                            toastr.success('Takscard Tool has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.repeat_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
         $('.item_datatable').on('click', '.material-delete', function () {
             let item_uuid = $(this).data('item_uuid');
             // let taskcard_uuid = $(this).data('taskcard_uuid');
@@ -293,25 +378,21 @@ let TaskCard = {
                     title: 'Amount',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'type_id',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                            'data-item_id="' + t.uuid + '" ' +
-                            'data-unit_id="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-threshold" title="Delete" ' +
+                            'data-threshold_uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -365,29 +446,25 @@ let TaskCard = {
             },
             columns: [
                 {
-                    field: 'Amount',
-                    title: 'amount',
+                    field: 'amount',
+                    title: 'Amount',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'type_id',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
                 },
                 {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
-                    width: 50,
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" ' +
-                            'data-item_id="' + t.uuid + '" ' +
-                            'data-unit_id="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill repeat-delete" title="Delete" ' +
+                            'data-repeat_uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -481,6 +558,94 @@ let TaskCard = {
                         table.reload();
 
                         $('#modal_tool').modal('hide');
+
+                    }
+                }
+            });
+        });
+
+        $('.add-threshold').on('click', function () {
+            let amount = $('input[name=threshold_amount]').val();
+            let threshold_type = $('#threshold_type').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine/'+taskcard_uuid+'/threshold',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    amount: amount,
+                    type_id: threshold_type,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#tool-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity-error').html(data.errors.quantity[0]);
+                        // }
+                        // document.getElementById('tool').value = tool;
+                        // document.getElementById('quantity').value = quantity;
+                    } else {
+
+                        toastr.success('Threshold has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.threshold_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        $('#modal_threshold').modal('hide');
+
+                    }
+                }
+            });
+        });
+
+        $('.add-repeat').on('click', function () {
+            let amount = $('input[name=repeat_amount]').val();
+            let repeat_type = $('#repeat_type').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine/'+taskcard_uuid+'/repeat',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    amount: amount,
+                    type_id: repeat_type,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#tool-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity-error').html(data.errors.quantity[0]);
+                        // }
+                        // document.getElementById('tool').value = tool;
+                        // document.getElementById('quantity').value = quantity;
+                    } else {
+
+                        toastr.success('Repeat has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.repeat_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        $('#modal_repeat').modal('hide');
 
                     }
                 }
