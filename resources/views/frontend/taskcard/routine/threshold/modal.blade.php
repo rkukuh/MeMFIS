@@ -19,7 +19,7 @@
                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="ThresholdForm">
                         <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                         <div class="m-portlet__body">
-                                <div class="form-group m-form__group row">  
+                                <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Threshold Type @include('frontend.common.label.required')
@@ -40,9 +40,9 @@
                                                 @component('frontend.common.input.number')
                                                     @slot('text', 'Threshold Amount')
                                                     @slot('id', 'threshold_amount')
-                                                    @slot('name', 'threshold_mount')
+                                                    @slot('name', 'threshold_amount')
                                                     @slot('id_error', 'threshold-amount')
-                                                @endcomponent   
+                                                @endcomponent
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-threshold')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </form>
-    
+
                 </div>
         </div>
     </div>
