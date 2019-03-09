@@ -39,8 +39,8 @@ class TaskCardRoutineRepeatController extends Controller
      */
     public function store(TaskCard $taskcard, TaskCardRoutineMaintenanceCycleStore $request)
     {
-
-        $taskcard->repeats()->attach([$request->type_id,$request->amount]);
+        $repeat = new Repeat(['type_id' => $request->type_id, 'amount' => $request->amount]);
+        $taskcard = $taskcard->repeats()->save($repeat);
 
         return response()->json($taskcard);
     }
@@ -87,7 +87,7 @@ class TaskCardRoutineRepeatController extends Controller
      */
     public function destroy(Taskcard $taskcard, Repeat $repeat)
     {
-        $taskcard->repeats()->detach($repeat);
+        $taskcard->repeats()->delete($repeat);
 
         return response()->json($taskcard);
     }
