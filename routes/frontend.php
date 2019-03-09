@@ -198,6 +198,12 @@ Route::name('frontend.')->group(function () {
                     /** Transaction: Item */
                     Route::post('/{taskcard}/item', 'TaskCardRoutineItemsController@store')->name('item.store');
                     Route::delete('/{taskcard}/{item}/item', 'TaskCardRoutineItemsController@destroy')->name('item.destroy');
+                    /** Transaction: Threshold */
+                    Route::post('/{taskcard}/threshold', 'TaskCardRoutineThresholdController@store')->name('threshold.store');
+                    Route::delete('/{taskcard}/{threshold}/threshold', 'TaskCardRoutineThresholdController@destroy')->name('itthresholdem.destroy');
+                    /** Transaction: Repeat */
+                    Route::post('/{taskcard}/repeat', 'TaskCardRoutineRepeatController@store')->name('repeat.store');
+                    Route::delete('/{taskcard}/{repeat}/repeat', 'TaskCardRoutineRepeatController@destroy')->name('repeat.destroy');
 
                 });
             });
