@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\TaskCard;
 
+use App\Models\TaskCard;
 use App\Models\Item;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -14,11 +15,9 @@ class TaskCardRoutineMaintenanceCycleDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function repeat()
+    public function repeat(TaskCard $taskcard)
     {
-        $items = Item::with('unit', 'journal')->get();
-
-        $data = $alldata = json_decode($items);
+        $data = $alldata = json_decode($taskcard->repeats);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -112,11 +111,9 @@ class TaskCardRoutineMaintenanceCycleDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function threshold()
+    public function threshold(TaskCard $taskcard)
     {
-        $items = Item::with('unit', 'journal')->get();
-
-        $data = $alldata = json_decode($items);
+        $data = $alldata = json_decode($taskcard->thresholds);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
