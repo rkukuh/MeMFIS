@@ -39,8 +39,8 @@ class TaskCardRoutineThresholdController extends Controller
      */
     public function store(TaskCard $taskcard, TaskCardRoutineMaintenanceCycleStore $request)
     {
-
-        $taskcard->thresholds()->attach([$request->type_id,$request->amount]);
+        $threshold = new Threshold(['type_id' => $request->type_id, 'amount' => $request->amount]);
+        $taskcard = $taskcard->thresholds()->save($threshold);
 
         return response()->json($taskcard);
     }
@@ -87,7 +87,7 @@ class TaskCardRoutineThresholdController extends Controller
      */
     public function destroy(Taskcard $taskcard, Threshold $threshold)
     {
-        $taskcard->thresholds()->detach($threshold);
+        $taskcard->thresholds()->delete($threshold);
 
         return response()->json($taskcard);
     }
