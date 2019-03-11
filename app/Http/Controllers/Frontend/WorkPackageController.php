@@ -38,12 +38,11 @@ class WorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        $workPackage = WorkPackage::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
-        ]);
+        $workpackage = Workpackage::create($request->all()); 
+            
 
-        return response()->json($workPackage);
+            return response()->json($workpackage);
+        
     }
 
     /**
