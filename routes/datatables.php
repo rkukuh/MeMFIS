@@ -307,6 +307,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{taskcard}/materials', 'TaskCardEOItemsDatatables@material')->name('materials.index');
                 Route::get('/{taskcard}/aircrafts', 'TaskCardEOAircraftsDatatables@index')->name('aircrafts.index');
                 Route::get('/{taskcard}/eo-instructions', 'EOInstructionsDatatables@index')->name('eo-instructions.index');
+                Route::get('/{taskcard}/repeats', 'TaskCardEOMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeats');
+                Route::get('/{taskcard}/thresholds', 'TaskCardEOMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.thresholds');
 
             });
 
@@ -335,6 +337,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{taskcard}/tools', 'TaskCardSIItemsDatatables@tool')->name('tools.index');
                 Route::get('/{taskcard}/materials', 'TaskCardSIItemsDatatables@material')->name('materials.index');
                 Route::get('/{taskcard}/aircrafts', 'TaskCardSIAircraftsDatatables@index')->name('aircrafts.index');
+                Route::get('/{taskcard}/repeats', 'TaskCardSIMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeats');
+                Route::get('/{taskcard}/thresholds', 'TaskCardSIMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.thresholds');
 
             });
 
