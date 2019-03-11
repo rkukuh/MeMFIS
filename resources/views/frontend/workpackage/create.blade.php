@@ -50,104 +50,102 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Title @include('frontend.common.label.required')
-                                                </label>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('text', 'title')
-                                                    @slot('id', 'title')
-                                                    @slot('name', 'title')
-                                                    @slot('id_error', 'title')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    (A/C Type) @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Applicability Airplane')
-                                                    @slot('id', 'applicability_airplane')
-                                                    @slot('name', 'applicability_airplane')
-                                                    @slot('id_error', 'applicability-airplane')
-                                                @endcomponent
-
-                                            </div>
-
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'title')
+                                                @slot('id', 'title')
+                                                @slot('name', 'title')
+                                                @slot('id_error', 'title')
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label class="form-control-label">
-                                                    Description @include('frontend.common.label.optional')
-                                                </label>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                (A/C Type) @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('rows', '5')
-                                                    @slot('id', 'description')
-                                                    @slot('name', 'description')
-                                                    @slot('text', 'Description')
-                                                @endcomponent
-                                            </div>
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Applicability Airplane')
+                                                @slot('id', 'applicability_airplane')
+                                                @slot('name', 'applicability_airplane')
+                                                @slot('id_error', 'applicability-airplane')
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                {{-- <div class="taskcard_datatable" id="second"></div> --}}
-                                                <div class="m-portlet__body">
-                                                        <ul class="nav nav-tabs" role="tablist">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Routine</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
-                                                            </li>
-                                                        </ul>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
 
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
-                                                                @include('frontend.workpackage.routine.index')
-                                                                @include('frontend.workpackage.routine.basic.modal')
-                                                                @include('frontend.workpackage.routine.sip.modal')
-                                                                @include('frontend.workpackage.routine.cpcp.modal')
-                                                            </div>
-                                                            <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-                                                                @include('frontend.workpackage.nonroutine.index')
-                                                                @include('frontend.workpackage.nonroutine.adsb.modal')
-                                                                @include('frontend.workpackage.nonroutine.cmrawl.modal')
-                                                                @include('frontend.workpackage.nonroutine.si.modal')
-                                                            </div>
-                                                            <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
-                                                                @include('frontend.workpackage.item.index')
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            </div>
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.submit')
-                                                            @slot('type','button')
-                                                            @slot('id', 'add-taskcard')
-                                                            @slot('class', 'add-taskcard')
-                                                        @endcomponent
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-workpackage')
+                                                        @slot('class', 'add-workpackage')
+                                                    @endcomponent
 
-                                                        @include('frontend.common.buttons.reset')
+                                                    @include('frontend.common.buttons.reset')
 
-                                                        @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.workpackage.index'))
-                                                        @endcomponent
-                                                    </div>
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.workpackage.index'))
+                                                    @endcomponent
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        {{-- <div class="taskcard_datatable" id="second"></div> --}}
+                                        <div class="m-portlet__body">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Routine</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
+                                                </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
+                                                    @include('frontend.workpackage.routine.index')
+                                                    @include('frontend.workpackage.routine.basic.modal')
+                                                    @include('frontend.workpackage.routine.sip.modal')
+                                                    @include('frontend.workpackage.routine.cpcp.modal')
+                                                </div>
+                                                <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
+                                                    @include('frontend.workpackage.nonroutine.index')
+                                                    @include('frontend.workpackage.nonroutine.adsb.modal')
+                                                    @include('frontend.workpackage.nonroutine.cmrawl.modal')
+                                                    @include('frontend.workpackage.nonroutine.si.modal')
+                                                </div>
+                                                <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
+                                                    @include('frontend.workpackage.item.index')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>             
                             </form>
                         </div>
                     </div>
