@@ -1,4 +1,4 @@
-<div class="pl-2">
+<div class="px-4">
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Routine</a>
