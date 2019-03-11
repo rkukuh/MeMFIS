@@ -12,6 +12,7 @@ class WorkPackage extends MemfisModel
         'code',
         'title',
         'is_template',
+        'aircraft_id',
         'description',
     ];
 
