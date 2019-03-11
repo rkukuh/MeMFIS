@@ -76,7 +76,7 @@ let TaskCard = {
                 },
                 {
                     field: 'type.name',
-                    title: 'Type',
+                    title: 'TC Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -90,6 +90,12 @@ let TaskCard = {
                 {
                     field: 'skill',
                     title: 'Skill',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'task.name',
+                    title: 'Task Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
