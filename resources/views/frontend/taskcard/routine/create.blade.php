@@ -307,10 +307,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
                                             <table class="threshold">
                                                 <tr>
-                                                    <td width="50%"><select name="maintenanceCycle"  class="select form-control js-example-tags"><option value"">Select Threshold Type</option>
+                                                    <td width="50%"><select name="threshold"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
                                                     @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                     <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
                                                     @endforeach
@@ -319,6 +319,25 @@
                                                     <td width="5%">
                                                         @component('frontend.common.buttons.create_repeater')
                                                             @slot('id', 'addrow')
+                                                        @endcomponent
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <table class="repeat">
+                                                <tr>
+                                                    <td width="45%"><select name="repeat"  class="select form-control js-example-tags"><option value"">Select Repeat</option>
+                                                    @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                    <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                    @endforeach
+                                                    </select></td>
+                                                    <td width="50%"><input type="text" required="required" class="form-control" name="amount[]' + counter + '"/></td>
+                                                    <td width="5%">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('id', 'addrow2')
                                                         @endcomponent
                                                     </td>
                                                 </tr>
@@ -586,7 +605,7 @@
               var cols = "";
               x = x+1;
               cols += '<td width="50%"><select name="maintenanceCycle" class="select form-control ">';
-              cols += '<option value"">Select Threshold Type</option>';
+              cols += '<option value"">Select Threshold</option>';
               for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
                   if(maintenanceCycles[i].id == 1){
                   }else{
@@ -602,6 +621,39 @@
               counter++;
           });
           $("table.threshold").on("click", ".ibtnDel", function (event) {
+              if (counter >= 1) {
+                  $(this).closest("tr").remove();
+                  counter -= 1
+              }
+          });
+      });
+  </script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          var counter = 0;
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow2").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="50%"><select name="maintenanceCycle" class="select form-control ">';
+              cols += '<option value"">Select Threshold</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="amount[]' + counter + '"/></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.repeat").append(newRow);
+              $('.select').select2();
+              counter++;
+          });
+          $("table.repeat").on("click", ".ibtnDel", function (event) {
               if (counter >= 1) {
                   $(this).closest("tr").remove();
                   counter -= 1
