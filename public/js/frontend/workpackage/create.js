@@ -113,7 +113,7 @@ let Workpackage2 = {
                     title: title,
                     aircraft_id: applicability_airplane,
                     description: description,
-                    is_template:'0',
+                    is_template:'1',
                 },
                 success: function (data) {
                     if (data.errors) {
