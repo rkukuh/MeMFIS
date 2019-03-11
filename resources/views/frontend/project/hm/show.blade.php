@@ -12,10 +12,10 @@
                           <i class="la la-gear"></i>
                       </span>
 
-                      @include('frontend.common.label.create-new')
+                      @include('frontend.common.label.show')
 
                       <h3 class="m-portlet__head-text">
-                          Heavy Maintenance Project
+                          Project View
                       </h3>
                   </div>
               </div>
