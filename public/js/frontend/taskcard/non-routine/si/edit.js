@@ -627,7 +627,7 @@ let TaskCard = {
                     helper_quantity: helper_quantity,
                     description: instruction,
 
-                    otr_certification: otr_certification,
+                    skill_id: otr_certification,
                     applicability_airplane: applicability_airplane,
                 },
                 success: function (data) {
@@ -640,8 +640,8 @@ let TaskCard = {
                             $('#number-error').html(data.errors.number[0]);
                         }
 
-                        if (data.errors.otr_certification) {
-                            $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                        if (data.errors.skill_id) {
+                            $('#otr-certification-error').html(data.errors.skill_id[0]);
                         }
 
                         if (data.errors.applicability_airplane) {
