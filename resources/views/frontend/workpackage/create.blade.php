@@ -145,7 +145,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>             
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -175,8 +175,8 @@
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/quotation.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/quotation.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/select2/quotation.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/quotation.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
