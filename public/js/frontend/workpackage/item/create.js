@@ -1,5 +1,16 @@
-let Workpackage = {
+let Workpackage3 = {
     init: function () {
+        // function tes() {
+        //     add = add || '...';
+        //     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        // };
+
+        $('.unit_id').on('select2:select', function (e) {
+            alert('tes');
+          });
+
+
+
         $('.tools_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -136,6 +147,7 @@ let Workpackage = {
                 }
             ]
         });
+
 
         $('.materials_datatable').mDatatable({
             data: {
@@ -405,5 +417,5 @@ let Workpackage = {
 };
 
 jQuery(document).ready(function () {
-    Workpackage.init();
+    Workpackage3.init();
 });
