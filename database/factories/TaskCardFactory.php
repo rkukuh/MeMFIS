@@ -40,6 +40,13 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
             return factory(Type::class)->states('taskcard-task')->create()->id;
         },
+        'skill_id' => function () {
+            if (Type::ofTaskCardSkill()->count()) {
+                Type::ofTaskCardSkill()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('taskcard-skill')->create()->id;
+        },
         'work_area' => function () {
             if (Type::ofWorkArea()->count()) {
                 return Type::ofWorkArea()->get()->random()->id;
