@@ -212,7 +212,10 @@ class TaskCardEODatatables extends Controller
             }
 
             // get all raw data
-            $taskcards = Taskcard::where('type_id',84)->orWhere('type_id',85)->get();
+            $taskcards  = TaskCard::with('type')
+            ->whereHas('type', function ($query) {
+                $query->where('name', 'AD')->orWhere('name','SB');
+            })->get();
 
             $alldata = json_decode( $taskcards, true);
 
@@ -383,7 +386,10 @@ class TaskCardEODatatables extends Controller
             }
 
             // get all raw data
-            $taskcards = Taskcard::where('type_id',90)->orWhere('type_id',91)->get();
+            $taskcards  = TaskCard::with('type')
+            ->whereHas('type', function ($query) {
+                $query->where('name', 'CMR')->orWhere('name','AWL');
+            })->get();
 
             $alldata = json_decode( $taskcards, true);
 
