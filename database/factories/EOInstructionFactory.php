@@ -7,6 +7,13 @@ use Faker\Generator as Faker;
 $factory->define(EOInstruction::class, function (Faker $faker) {
 
     return [
+        'skill_id' => function () {
+            if (Type::ofTaskCardSkill()->count()) {
+                Type::ofTaskCardSkill()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('taskcard-skill')->create()->id;
+        },
         'work_area' => Type::ofWorkArea()->get()->random()->id,
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
         'engineer_quantity' => rand(1, 10),
