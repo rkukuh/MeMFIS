@@ -72,7 +72,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('project', 'ProjectController');
         Route::resource('quotation', 'QuotationController');
-        Route::resource('workpackage', 'WorkPackageController');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
         /** AIRCRAFT */
@@ -92,6 +91,21 @@ Route::name('frontend.')->group(function () {
             });
 
         });
+
+        /** WORKPACKAGE */
+
+        Route::namespace('WorkPackage')->group(function () {
+            Route::resource('workpackage', 'WorkPackageController', [
+                'parameters' => ['workpackage' => 'workPackage']
+            ]);
+
+            Route::prefix('WorkPackage')->group(function () {
+
+
+            });
+        });
+
+
 
         /** ITEM */
 
