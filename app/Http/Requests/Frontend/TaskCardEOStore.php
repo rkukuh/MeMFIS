@@ -30,12 +30,12 @@ class TaskCardEOStore extends FormRequest
             'title' => 'required',
             'number' => 'required',
             'revision' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
             'recurrence_id' => 'required',
             'manual_affected_id' => 'required',
             'scheduled_priority_id' => 'required',
             'applicability_airplane' => 'required',
-            'taskcard_non_routine_type' => 'required',
+            'type_id' => 'required',
         ];
     }
 

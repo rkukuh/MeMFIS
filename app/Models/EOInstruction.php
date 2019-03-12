@@ -14,6 +14,7 @@ class EOInstruction extends MemfisModel
         'helper_quantity',
         'engineer_quantity',
         'is_rii',
+        'skill_id',
         'performance_factor',
         'sequence',
         'description',

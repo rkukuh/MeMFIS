@@ -50,7 +50,7 @@ let TaskCard = {
                     engineer_quantity: engineer_quantity,
                     description: instruction,
 
-                    otr_certification: otr_certification,
+                    skill_id: otr_certification,
                     applicability_airplane: applicability_airplane,
 
                 },
@@ -64,8 +64,8 @@ let TaskCard = {
                             $('#number-error').html(data.errors.number[0]);
                         }
 
-                        if (data.errors.otr_certification) {
-                            $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                        if (data.errors.skill_id) {
+                            $('#otr-certification-skill_id').html(data.errors.skill_id[0]);
                         }
 
                         if (data.errors.applicability_airplane) {
@@ -83,7 +83,7 @@ let TaskCard = {
 
                         document.getElementById('title').value = title;
                         document.getElementById('number').value = number;
-                        document.getElementById('otr_certification').value = otr_certification;
+                        document.getElementById('skill_id').value = skill_id;
                         document.getElementById('applicability_airplane').value = applicability_airplane;
                         document.getElementById('work_area').value = work_area;
                         document.getElementById('manhour').value = manhour;

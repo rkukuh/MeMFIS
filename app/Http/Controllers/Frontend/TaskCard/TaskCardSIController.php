@@ -19,6 +19,7 @@ class TaskCardSIController extends Controller
     {
         $this->aircraft = Aircraft::get();
         $this->work_area = Type::ofWorkArea()->get();
+        $this->skill = Type::ofTaskCardSkill()->get();
     }
 
     /**
@@ -88,6 +89,7 @@ class TaskCardSIController extends Controller
         }
         return view('frontend.taskcard.nonroutine.si.edit', [
             'taskcard' => $taskCard,
+            'skills' => $this->skill,
             'work_areas' => $this->work_area,
             'aircrafts' => $this->aircraft,
             'aircraft_taskcards' => $aircraft_taskcards,

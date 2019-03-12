@@ -150,12 +150,18 @@
                                                 Skill @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Otr Certification')
-                                                @slot('id', 'otr_certification')
-                                                @slot('name', 'otr_certification')
-                                                @slot('id_error', 'otr-certification')
-                                            @endcomponent
+                                            <select id="otr_certification" name="otr_certification" class="form-control m-select2" style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Skill &mdash;
+                                                </option>
+
+                                                @foreach ($skills as $skill)
+                                                    <option value="{{ $skill->id }}"
+                                                        @if ($skill->id == $taskcard->skill_id) selected @endif>
+                                                        {{ $skill->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -667,7 +673,6 @@
     <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
 

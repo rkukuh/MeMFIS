@@ -86,12 +86,19 @@
                                                     Skill @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Otr Certification')
-                                                    @slot('id', 'otr_certification')
-                                                    @slot('name', 'otr_certification')
-                                                    @slot('id_error', 'otr-certification')
-                                                @endcomponent
+                                                <select id="otr_certification" name="otr_certification" class="form-control m-select2" style="width:100%">
+                                                    <option value="">
+                                                        &mdash; Select a Skill &mdash;
+                                                    </option>
+
+                                                    @foreach ($skills as $skill)
+                                                        <option value="{{ $skill->id }}"
+                                                            @if ($skill->id == $taskcard->skill_id) selected @endif>
+                                                            {{ $skill->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -463,13 +470,11 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category-taskcard.js') }}"></script>

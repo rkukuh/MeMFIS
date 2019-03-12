@@ -13,6 +13,7 @@ class TaskCard extends MemfisModel
         'title',
         'type_id',
         'task_id',
+        'skill_id',
         'work_area',
         'estimation_manhour',
         'engineer_quantity',
