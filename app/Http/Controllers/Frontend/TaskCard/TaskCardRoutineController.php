@@ -30,6 +30,7 @@ class TaskCardRoutineController extends Controller
         $this->access = Access::get();
         $this->aircraft = Aircraft::get();
         $this->taskcard = TaskCard::get();
+        $this->skill = Type::ofTaskCardSkill()->get();
         $this->task = Type::ofTaskCardTask()->get();
         $this->work_area = Type::ofWorkArea()->get();
         $this->type = Type::ofTaskCardTypeRoutine()->get();
@@ -138,7 +139,6 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
-        // dd($taskCard);
         $aircraft_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
@@ -175,6 +175,7 @@ class TaskCardRoutineController extends Controller
             'aircrafts' => $this->aircraft,
             'accesses' => $this->access,
             'zones' => $this->zones,
+            'skills' => $this->skill,
             'taskcards' => $this->taskcard,
 
         ]);

@@ -777,7 +777,7 @@ let TaskCard = {
                     source: source,
 
                     applicability_airplane: applicability_airplane,
-                    otr_certification: otr_certification,
+                    skill_id: otr_certification,
                     access: access,
                     zone: zone,
                     relationship: relationship,
@@ -796,8 +796,8 @@ let TaskCard = {
                             $('#taskcard_routine_type-error').html(data.errors.taskcard_routine_type[0]);
                         }
 
-                        if (data.errors.otr_certification) {
-                            $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                        if (data.errors.skill_id) {
+                            $('#otr-certification-error').html(data.errors.skill_id[0]);
                         }
 
                         if (data.errors.applicability_airplane) {
