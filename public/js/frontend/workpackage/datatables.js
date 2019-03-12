@@ -125,12 +125,6 @@ let Datatables = {
                     data: "title"
                 },
                 {
-                    data: "work_area"
-                },
-                {
-                    data: "estimation_manhour"
-                },
-                {
                     data: "Actions"
                 }
             ],
@@ -159,12 +153,6 @@ let Datatables = {
                 },
                 {
                     data: "title"
-                },
-                {
-                    data: "work_area"
-                },
-                {
-                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"
