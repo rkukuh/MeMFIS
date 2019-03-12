@@ -107,10 +107,22 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
         // EO Header attributes
         'number' => 'EO-' . $number,
         'title' => 'Engineering Order Dummy #' . $number,
-        'type_id' => Type::ofTaskCardTypeNonRoutine()->get()->random()->id,
+        'type_id' => function () {
+            if (Type::ofTaskCardTypeNonRoutine()->count()) {
+                Type::ofTaskCardTypeNonRoutine()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('taskcard-type-non-routine')->create()->id;
+        },
         'revision' => rand(1, 10),
         'reference' => 'REF-' . $number,
-        'category_id' => Category::ofTaskCardEO()->get()->random()->id,
+        'category_id' => function () {
+            if (Category::ofTaskCardEO()->count()) {
+                Category::ofTaskCardEO()->get()->random()->id;
+            }
+
+            return factory(Category::class)->states('taskcard-eo')->create()->id;
+        },
         'scheduled_priority_id' => $scheduled_priority->id,
         'scheduled_priority_amount' => function () use ($scheduled_priority) {
             if ($scheduled_priority->code == 'prior-to') {
@@ -171,9 +183,13 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
     return [
         'number' => 'SI-' . $number,
         'title' => 'Special Instruction Dummy #' . $number,
-        'type_id' => Type::where('of', 'taskcard-type-non-routine')
-                         ->where('code', 'si')
-                         ->first()->id,
+        'type_id' => function () {
+            if (Type::ofTaskCardTypeNonRoutine()->count()) {
+                Type::ofTaskCardTypeNonRoutine()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('taskcard-type-non-routine')->create()->id;
+        },
         'performance_factor' => null,
         'version' => null,
     ];

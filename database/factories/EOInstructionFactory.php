@@ -14,7 +14,13 @@ $factory->define(EOInstruction::class, function (Faker $faker) {
 
             return factory(Type::class)->states('taskcard-skill')->create()->id;
         },
-        'work_area' => Type::ofWorkArea()->get()->random()->id,
+        'work_area' => function () {
+            if (Type::ofWorkArea()->count()) {
+                return Type::ofWorkArea()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('work-area')->create()->id;
+        },
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
         'engineer_quantity' => rand(1, 10),
         'helper_quantity' => $faker->randomElement([null, rand(1, 5)]),
