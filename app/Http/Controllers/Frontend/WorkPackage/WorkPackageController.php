@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\WorkPackage;
 
+use App\Models\Aircraft;
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,14 @@ use App\Http\Requests\Frontend\WorkPackageUpdate;
 
 class WorkPackageController extends Controller
 {
+    protected $aircrafts;
+
+    public function __construct()
+    {
+        $this->aircrafts = Aircraft::all();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -38,11 +47,11 @@ class WorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        $workpackage = Workpackage::create($request->all()); 
-            
+        $workpackage = Workpackage::create($request->all());
+
 
             return response()->json($workpackage);
-        
+
     }
 
     /**
@@ -64,7 +73,10 @@ class WorkPackageController extends Controller
      */
     public function edit(WorkPackage $workPackage)
     {
-        return view('frontend.workpackage.edit');
+        return view('frontend.workpackage.edit',[
+            'workPackage' => $workPackage,
+            'aircrafts' => $this->aircrafts
+        ]);
     }
 
     /**
