@@ -5,10 +5,10 @@ use Faker\Generator as Faker;
 
 $factory->define(Vendor::class, function (Faker $faker) {
 
-    $name = 'Vendor Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => str_slug($name),
+        'code' => 'VEN-DUM-' . $number,
     ];
 
 });

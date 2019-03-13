@@ -5,11 +5,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Type::class, function (Faker $faker) {
 
-    $name = 'Type Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => str_slug($name),
-        'name' => $name,
+        'code' => 'TYP-DUM-' . $number,
+        'name' => 'Type Dummy #' . $number,
         'of'   => $faker->randomElement([
             'arc',
             'fax',

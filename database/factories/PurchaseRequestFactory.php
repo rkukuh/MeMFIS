@@ -19,7 +19,7 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
     }
 
     return [
-        'number' => 'PR-' . $number,
+        'number' => 'PR-DUM-' . $number,
         'type_id' => function () use ($faker) {
             if (Type::ofPurchaseRequest()->count()) {
                 return Type::ofPurchaseRequest()->get()->random()->id;

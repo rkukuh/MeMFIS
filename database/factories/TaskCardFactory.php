@@ -89,7 +89,7 @@ $factory->state(TaskCard::class, 'basic', function ($faker) {
     $number = $faker->unixTime();
 
     return [
-        'number' => 'TC-BSC-' . $number,
+        'number' => 'TC-BSC-DUM-' . $number,
         'title' => 'TaskCard Basic Dummy #' . $number,
         'type_id' => Type::ofTaskCardTypeRoutine()->get()->random()->id,
     ];
@@ -107,7 +107,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
 
     return [
         // EO Header attributes
-        'number' => 'TC-EO-' . $number,
+        'number' => 'TC-EO-DUM-' . $number,
         'title' => 'Engineering Order Dummy #' . $number,
         'type_id' => function () {
             if (Type::ofTaskCardTypeNonRoutine()->count()) {
@@ -187,7 +187,7 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
     $number = $faker->unixTime();
 
     return [
-        'number' => 'TC-SI-' . $number,
+        'number' => 'TC-SI-DUM-' . $number,
         'title' => 'Special Instruction Dummy #' . $number,
         'type_id' => function () {
             if (Type::ofTaskCardTypeNonRoutine()->count()) {

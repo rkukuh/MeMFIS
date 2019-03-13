@@ -17,7 +17,7 @@ $factory->define(JobCard::class, function (Faker $faker) {
     }
 
     return [
-        'number' => 'JC-' . $number,
+        'number' => 'JC-DUM-' . $number,
         'taskcard_id' => $taskcard->id,
         'data_taskcard' => $taskcard->toJson(),
         'data_taskcard_items' => $taskcard->items->toJson(),

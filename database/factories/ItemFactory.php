@@ -11,12 +11,12 @@ use Faker\Generator as Faker;
 
 $factory->define(Item::class, function (Faker $faker) {
 
-    $sequence = $faker->unixTime();
+    $number = $faker->unixTime();
     $is_ppn = $faker->boolean;
 
     return [
-        'code' => 'MT-DUM-' . $sequence,
-        'name' => 'Material Dummy #' . $sequence,
+        'code' => 'MT-DUM-' . $number,
+        'name' => 'Material Dummy #' . $number,
         'unit_id' => Unit::ofQuantity()->get()->random()->id,
         'unit_id' => function () {
             if (Unit::ofQuantity()->count()) {

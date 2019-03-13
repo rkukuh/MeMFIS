@@ -9,11 +9,11 @@ use Faker\Generator as Faker;
 
 $factory->define(WorkPackage::class, function (Faker $faker) {
 
-    $name = 'WorkPackage Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => $faker->randomElement([null, str_slug($name)]),
-        'title' => $name,
+        'code' => $faker->randomElement([null, 'WP-DUM-' . $number]),
+        'title' => 'WorkPackage Dummy #' . $number,
         'is_template' => $faker->boolean(),
         'aircraft_id' => function () {
             if (Aircraft::count()) {

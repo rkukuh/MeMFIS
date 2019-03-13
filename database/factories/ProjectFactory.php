@@ -10,11 +10,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Project::class, function (Faker $faker) {
 
-    $code = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => 'PRJ-' . $code,
-        'title' => 'Project Dummy #' . $code,
+        'code' => 'PRJ-DUM-' . $number,
+        'title' => 'Project Dummy #' . $number,
         'customer_id' => function () {
             if (Customer::count()) {
                 return Customer::get()->random()->id;
