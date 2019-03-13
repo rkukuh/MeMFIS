@@ -30,6 +30,10 @@ let TaskCard = {
             routine_reset();
         });
 
+        $('#zone').on('select2:select', function (e) {
+            var data = e.params.data;
+        });
+
         $('.footer').on('click', '.add-taskcard', function () {
             let title = $('input[name=title]').val();
             let number = $('input[name=number]').val();
@@ -50,6 +54,26 @@ let TaskCard = {
             var JsonVersion = JSON.stringify(version);
             let effectivity = $('input[name=effectivity]').val();
             let description = $('#description').val();
+
+            let threshold_type = [];
+            $('select[name^="threshold_type"]').each(function(i) {
+                threshold_type[i] = $(this).val();
+            });
+
+            let repeat_type = [];
+            $('select[name^="repeat_type"]').each(function(i) {
+                repeat_type[i] = $(this).val();
+            });
+
+            let threshold_amount = [];
+            $('input[name^="threshold_amount"]').each(function(i) {
+                threshold_amount[i] = $(this).val();
+            });
+
+            let repeat_amount = [];
+            $('input[name^="repeat_amount"]').each(function(i) {
+                repeat_amount[i] = $(this).val();
+            });
 
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
@@ -79,6 +103,11 @@ let TaskCard = {
                     version: JsonVersion,
                     effectivity: effectivity,
                     source: source,
+
+                    threshold_amount: threshold_amount,
+                    threshold_type: threshold_type,
+                    repeat_amount: repeat_amount,
+                    repeat_type: repeat_type,
 
                     applicability_airplane: applicability_airplane,
                     otr_certification: otr_certification,
@@ -145,7 +174,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard-routine/' + data.uuid + '/edit';
+                        // window.location.href = '/taskcard-routine/' + data.uuid + '/edit';
                     }
                 }
             });
