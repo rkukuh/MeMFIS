@@ -394,7 +394,7 @@
                                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                 <div class="flex">
                                                     <div class="action-buttons">
-                                                        @component('frontend.common.buttons.submit')
+                                                        @component('frontend.common.buttons.update')
                                                             @slot('type','button')
                                                             @slot('id', 'add-taskcard')
                                                             @slot('class', 'add-taskcard')
@@ -610,6 +610,8 @@
 
     <script src="{{ asset('js/frontend/functions/select2/repeat-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/repeat-type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/action-botton/eo-instruction.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/form-reset-instruction.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
