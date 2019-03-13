@@ -558,6 +558,23 @@ let TaskCard = {
         });
 
         let edit = $('.instruction_datatable').on('click', '.edit', function () {
+            $('#work_area').select2('val', 'All');
+            $('#otr_certification').select2('val', 'All');
+            document.getElementById('manhour').value = '';
+            document.getElementById('performa').value = '';
+            document.getElementById('helper_quantity').value = '';
+            document.getElementById('engineer_quantity').value = '';
+            document.getElementById('sequence').value = '';
+            $('#work_area-error').html('');
+            $('#otr-certification-error').html('');
+            $('#manhour-error').html('');
+            $('#performa-error').html('');
+            $('#helper_quantity-error').html('');
+            $('#engineer_quantity-error').html('');
+            $('#sequence-error').html('');
+            $('input[type=checkbox]').prop('checked', false);
+
+
             let triggeruuid3 = $(this).data('instruction_uuid');
             // alert(triggeruuid3);
 
@@ -566,9 +583,56 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+triggeruuid3+'/',
+                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+triggeruuid3+'/edit/',
                 success: function (data) {
-                    alert(data.uuid);
+                    document.getElementById('manhour').value = data.estimation_manhour;
+                    document.getElementById('performa').value = data.performance_factor;
+                    document.getElementById('helper_quantity').value = data.helper_quantity;
+                    document.getElementById('engineer_quantity').value = data.engineer_quantity;
+                    document.getElementById('sequence').value = data.sequence;
+                    $.ajax({
+                        url: '/get-work-areas/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data2) {
+                            $('select[name="work_area"]').empty();
+                            $.each(data2, function (key, value) {
+                                if(key == data.work_area){
+                                    $('select[name="work_area"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="work_area"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                    $.ajax({
+                        url: '/get-otr-certifications/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data3) {
+                            $('select[name="otr_certification"]').empty();
+                            $.each(data3, function (key2, value2) {
+                                if(key2 == data.skill_id){
+                                    $('select[name="otr_certification"]').append(
+                                        '<option value="' + key2 + '" selected>' + value2 + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="otr_certification"]').append(
+                                        '<option value="' + key2 + '">' + value2 + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+
+
+                    // alert(data.uuid);
                     // document.getElementById('uuid').value = data.uuid;
                     // document.getElementById('name').value = data.name;
                     // document.getElementById('symbol').value = data.symbol;
