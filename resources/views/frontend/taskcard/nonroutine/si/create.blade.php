@@ -122,7 +122,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Estimation Manhour @include('frontend.common.label.required')
+                                                    Manhour Estimation @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.decimal')
@@ -138,7 +138,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Performa Factor @include('frontend.common.label.required')
+                                                    Performance Factor @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.decimal')
@@ -231,7 +231,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Tools
+                                    Tools Requirement
                                 </h3>
                             </div>
                         </div>
@@ -262,7 +262,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Materials
+                                    Materials Requirement
                                 </h3>
                             </div>
                         </div>
@@ -293,7 +293,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Thresholds
+                                    Threshold
                                 </h3>
                             </div>
                         </div>
@@ -324,7 +324,7 @@
                                     </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Repeats
+                                    Repeat
                                 </h3>
                             </div>
                         </div>

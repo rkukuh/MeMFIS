@@ -149,7 +149,7 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                Estimation Manhour @include('frontend.common.label.required')
+                                                    Manhour Estimation @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.decimal')
@@ -166,7 +166,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Performa Factor @include('frontend.common.label.required')
+                                                    Performance Factor @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.decimal')
@@ -261,7 +261,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Tools
+                                    Tools Requirement
                                 </h3>
                             </div>
                         </div>
@@ -299,7 +299,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Materials
+                                    Materials Requirement
                                 </h3>
                             </div>
                         </div>
@@ -337,7 +337,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Threshold Taskcards
+                                    Threshold
                                 </h3>
                             </div>
                         </div>
@@ -375,7 +375,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Repeat Taskcards
+                                    Repeat
                                 </h3>
                             </div>
                         </div>
