@@ -22,12 +22,10 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
         'number' => 'PR-' . $number,
         'type_id' => function () use ($faker) {
             if (Type::ofPurchaseRequest()->count()) {
-                Type::ofPurchaseRequest()->get()->random()->id;
+                return Type::ofPurchaseRequest()->get()->random()->id;
             }
 
-            return $faker->randomElement([
-                factory(Type::class)->states('purchase-request')->create()->id,
-            ]);
+            return factory(Type::class)->states('purchase-request')->create()->id;
         },
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'required_at' => $faker->randomElement([null, Carbon::now()]),

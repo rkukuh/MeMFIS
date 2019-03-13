@@ -18,6 +18,13 @@ $factory->define(Item::class, function (Faker $faker) {
         'code' => 'MT-DUM-' . $sequence,
         'name' => 'Material Dummy #' . $sequence,
         'unit_id' => Unit::ofQuantity()->get()->random()->id,
+        'unit_id' => function () {
+            if (Unit::ofQuantity()->count()) {
+                return Unit::ofQuantity()->get()->random()->id;
+            }
+
+            return factory(Unit::class)->create()->id;
+        },
         'manufacturer_id' => $faker->randomElement([null, Manufacturer::get()->random()->id]),
         'is_ppn' => $is_ppn,
         'ppn_amount' => function() use ($is_ppn) {

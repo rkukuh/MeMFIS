@@ -20,7 +20,7 @@ $factory->define(Employee::class, function (Faker $faker) {
     $lastname = $faker->lastName();
 
     return [
-        'code' => 'EM-DUM-' . $faker->unixTime(),
+        'code' => str_slug('Employee Dummy #') . $faker->unixTime(),
         'first_name' => $faker->randomElement([$firstNameMale, $firstNameFemale]),
         'middle_name' => $faker->randomElement([null, $faker->lastName()]),
         'last_name' => $lastname,

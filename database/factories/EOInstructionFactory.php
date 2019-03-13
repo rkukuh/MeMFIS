@@ -9,7 +9,7 @@ $factory->define(EOInstruction::class, function (Faker $faker) {
     return [
         'skill_id' => function () {
             if (Type::ofTaskCardSkill()->count()) {
-                Type::ofTaskCardSkill()->get()->random()->id;
+                return Type::ofTaskCardSkill()->get()->random()->id;
             }
 
             return factory(Type::class)->states('taskcard-skill')->create()->id;

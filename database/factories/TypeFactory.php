@@ -17,6 +17,9 @@ $factory->define(Type::class, function (Faker $faker) {
             'phone',
             'email',
             'journal',
+            'address',
+            'website',
+            'document',
             'regulator',
             'work-area',
             'capability',
@@ -41,6 +44,9 @@ $factory->state(Type::class, 'unit', ['of' => 'unit']);
 $factory->state(Type::class, 'phone', ['of' => 'phone']);
 $factory->state(Type::class, 'email', ['of' => 'email']);
 $factory->state(Type::class, 'journal', ['of' => 'journal']);
+$factory->state(Type::class, 'address', ['of' => 'address']);
+$factory->state(Type::class, 'website', ['of' => 'website']);
+$factory->state(Type::class, 'document', ['of' => 'document']);
 $factory->state(Type::class, 'regulator', ['of' => 'regulator']);
 $factory->state(Type::class, 'work-area', ['of' => 'work-area']);
 $factory->state(Type::class, 'capability', ['of' => 'capability']);

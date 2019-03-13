@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(School::class, function (Faker $faker) {
 
-    $name;
+    $name = null;
     $degree = Type::ofSchoolDegree()->get()->random();
 
     switch($degree->code) {

@@ -11,7 +11,13 @@ $factory->define(License::class, function (Faker $faker) {
     return [
         'code' => 'LC-DUM-' . $sequence,
         'name' => 'License Dummy #' . $sequence,
-        'regulator' => Type::ofRegulator()->get()->random()->id
+        'regulator' => function () {
+            if (Type::ofRegulator()->count()) {
+                return Type::ofRegulator()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('regulator')->create()->id;
+        },
     ];
 
 });
