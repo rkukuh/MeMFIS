@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'version' => '0.10.1',
+    'version' => '0.10.2',
 
     /**
      * Dummy data amount
