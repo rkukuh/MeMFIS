@@ -86,7 +86,7 @@
                                                 </label>
 
                                                 <div style="background-color:beige; padding:15px;" class="">
-                                                    
+
                                                     @if (empty($taskcard->related_to->isEmpty()))
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
@@ -346,6 +346,50 @@
                         </div>
                     </div>
                 </div>
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Threshold
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="threshold_datatable" id="item_datatable"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Repeat
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="repeat_datatable" id="item_datatable"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -399,7 +443,7 @@
     </script>
 
     <script>
-        let taskcard_uuid = "$taskcard->uuid";
+        let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
@@ -434,8 +478,5 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/taskcard/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/show.js') }}"></script>
 @endpush

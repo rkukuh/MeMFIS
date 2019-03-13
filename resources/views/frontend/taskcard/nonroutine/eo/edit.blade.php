@@ -469,7 +469,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Threshold Taskcards
+                                    Threshold
                                 </h3>
                             </div>
                         </div>
@@ -507,7 +507,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Repeat Taskcards
+                                    Repeat
                                 </h3>
                             </div>
                         </div>

@@ -50,7 +50,7 @@
                                     <div class="row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Estimation Manhour @include('frontend.common.label.required')
+                                                Manhour Estimation @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.decimal')
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Performa Factor @include('frontend.common.label.required')
+                                                Performance Factor @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.decimal')

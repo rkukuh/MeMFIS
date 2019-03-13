@@ -6,7 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalItem">
-                    Item
+                    Materials
 
                     <small id="item-storage" class="m--font-focus"></small>
                 </h5>
