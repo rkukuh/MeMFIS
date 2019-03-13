@@ -151,100 +151,6 @@ let TaskCard = {
             ]
         });
 
-        $('.add-instruction').on('click', function () {
-            let work_area = $('#work_area').val();
-            let manhour = $('input[name=manhour]').val();
-            let performa = $('input[name=performa]').val();
-            let helper_quantity = $('input[name=helper_quantity]').val();
-            let engineer_quantity = $('input[name=engineer_quantity]').val();
-            let sequence = $('input[name=sequence]').val();
-            let otr_certification = $('#otr_certification').val();
-            if (document.getElementById("is_rii").checked) {
-                is_rii = 1;
-            } else {
-                is_rii = 0;
-            }
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    work_area: work_area,
-                    estimation_manhour: manhour,
-                    performance_factor: performa,
-                    helper_quantity: helper_quantity,
-                    engineer_quantity: engineer_quantity,
-                    sequence: sequence,
-                    skill_id: otr_certification,
-                    is_rii: is_rii,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#material-error').html(data.errors.item_id[0]);
-                        // }
-
-                        // if (data.errors.quantity) {
-                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
-                        // }
-
-                        if (data.errors.work_area) {
-                            $('#work_area-error').html(data.errors.work_area[0]);
-                        }
-
-                        if (data.errors.performance_factor) {
-                            $('#performa-error').html(data.errors.performance_factor[0]);
-                        }
-
-                        if (data.errors.estimation_manhour) {
-                            $('#manhour-error').html(data.errors.estimation_manhour[0]);
-                        }
-
-                        if (data.errors.helper_quantity) {
-                            $('#helper_quantity-error').html(data.errors.helper_quantity[0]);
-                        }
-
-                        if (data.errors.engineer_quantity) {
-                            $('#engineer_quantity-error').html(data.errors.engineer_quantity[0]);
-                        }
-
-                        if (data.errors.sequence) {
-                            $('#sequence-error').html(data.errors.sequence[0]);
-                        }
-
-                        if (data.errors.skill_id) {
-                            $('#otr_certification-error').html(data.errors.skill_id[0]);
-                        }
-
-                        document.getElementById('work_area').value = work_area;
-                        document.getElementById('engineer_quantity').value = engineer_quantity;
-                        document.getElementById('manhour').value = manhour;
-                        document.getElementById('performa').value = performa;
-                        document.getElementById('helper_quantity').value = helper_quantity;
-                        document.getElementById('skill_id').value = otr_certification;
-                        document.getElementById('sequence').value = sequence;
-                        // document.getElementById('material').value = material;
-                        // document.getElementById('quantity').value = quantity;
-
-                    } else {
-
-                        toastr.success('Instruction has been created.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        let table = $('.instruction_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                        $('#modal_instruction').modal('hide');
-                    }
-                }
-            });
-        });
-
         $('.threshold_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -556,24 +462,9 @@ let TaskCard = {
                 }
             });
         });
-
-        let edit = $('.instruction_datatable').on('click', '.edit', function () {
-            $('#work_area').select2('val', 'All');
-            $('#otr_certification').select2('val', 'All');
-            document.getElementById('manhour').value = '';
-            document.getElementById('performa').value = '';
-            document.getElementById('helper_quantity').value = '';
-            document.getElementById('engineer_quantity').value = '';
-            document.getElementById('sequence').value = '';
-            $('#work_area-error').html('');
-            $('#otr-certification-error').html('');
-            $('#manhour-error').html('');
-            $('#performa-error').html('');
-            $('#helper_quantity-error').html('');
-            $('#engineer_quantity-error').html('');
-            $('#sequence-error').html('');
-            $('input[type=checkbox]').prop('checked', false);
-
+        $('.instruction_datatable').on('click', '.edit', function () {
+            instruction_reset();
+            save_changes_button();
 
             let triggeruuid3 = $(this).data('instruction_uuid');
             // alert(triggeruuid3);
@@ -590,6 +481,14 @@ let TaskCard = {
                     document.getElementById('helper_quantity').value = data.helper_quantity;
                     document.getElementById('engineer_quantity').value = data.engineer_quantity;
                     document.getElementById('sequence').value = data.sequence;
+                    document.getElementById('uuid').value = data.uuid;
+                    if(data.is_rii == 1){
+                        $("#is_rii").prop("checked", true);
+                    }
+                    else if(data.is_rii == 0){
+                        $("#is_rii").prop("checked", false);
+                    }
+
                     $.ajax({
                         url: '/get-work-areas/',
                         type: 'GET',
@@ -630,15 +529,198 @@ let TaskCard = {
                             });
                         }
                     });
-
-
-                    // alert(data.uuid);
-                    // document.getElementById('uuid').value = data.uuid;
-                    // document.getElementById('name').value = data.name;
-                    // document.getElementById('symbol').value = data.symbol;
                 }
             });
 
+        });
+        $('.modal-footer').on('click', '.edit-instruction', function () {
+            let eo_uuid = $('input[name=uuid]').val();
+            let work_area = $('#work_area').val();
+            let manhour = $('input[name=manhour]').val();
+            let performa = $('input[name=performa]').val();
+            let helper_quantity = $('input[name=helper_quantity]').val();
+            let engineer_quantity = $('input[name=engineer_quantity]').val();
+            let sequence = $('input[name=sequence]').val();
+            let otr_certification = $('#otr_certification').val();
+            if (document.getElementById("is_rii").checked) {
+                is_rii = 1;
+            } else {
+                is_rii = 0;
+            }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+eo_uuid+'/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    work_area: work_area,
+                    estimation_manhour: manhour,
+                    performance_factor: performa,
+                    helper_quantity: helper_quantity,
+                    engineer_quantity: engineer_quantity,
+                    sequence: sequence,
+                    skill_id: otr_certification,
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#material-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
+                        // }
+
+                        if (data.errors.work_area) {
+                            $('#work_area-error').html(data.errors.work_area[0]);
+                        }
+
+                        if (data.errors.performance_factor) {
+                            $('#performa-error').html(data.errors.performance_factor[0]);
+                        }
+
+                        if (data.errors.estimation_manhour) {
+                            $('#manhour-error').html(data.errors.estimation_manhour[0]);
+                        }
+
+                        if (data.errors.helper_quantity) {
+                            $('#helper_quantity-error').html(data.errors.helper_quantity[0]);
+                        }
+
+                        if (data.errors.engineer_quantity) {
+                            $('#engineer_quantity-error').html(data.errors.engineer_quantity[0]);
+                        }
+
+                        if (data.errors.sequence) {
+                            $('#sequence-error').html(data.errors.sequence[0]);
+                        }
+
+                        if (data.errors.skill_id) {
+                            $('#otr_certification-error').html(data.errors.skill_id[0]);
+                        }
+
+                        document.getElementById('work_area').value = work_area;
+                        document.getElementById('engineer_quantity').value = engineer_quantity;
+                        document.getElementById('manhour').value = manhour;
+                        document.getElementById('performa').value = performa;
+                        document.getElementById('helper_quantity').value = helper_quantity;
+                        document.getElementById('skill_id').value = otr_certification;
+                        document.getElementById('sequence').value = sequence;
+                        // document.getElementById('material').value = material;
+                        // document.getElementById('quantity').value = quantity;
+
+                    } else {
+
+                        toastr.success('Instruction has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.instruction_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                        $('#modal_instruction').modal('hide');
+                    }
+                }
+            });
+
+        });
+
+        $('.modal-footer').on('click', '.add-instruction', function () {
+            let work_area = $('#work_area').val();
+            let manhour = $('input[name=manhour]').val();
+            let performa = $('input[name=performa]').val();
+            let helper_quantity = $('input[name=helper_quantity]').val();
+            let engineer_quantity = $('input[name=engineer_quantity]').val();
+            let sequence = $('input[name=sequence]').val();
+            let otr_certification = $('#otr_certification').val();
+            if (document.getElementById("is_rii").checked) {
+                is_rii = 1;
+            } else {
+                is_rii = 0;
+            }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    work_area: work_area,
+                    estimation_manhour: manhour,
+                    performance_factor: performa,
+                    helper_quantity: helper_quantity,
+                    engineer_quantity: engineer_quantity,
+                    sequence: sequence,
+                    skill_id: otr_certification,
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#material-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
+                        // }
+
+                        if (data.errors.work_area) {
+                            $('#work_area-error').html(data.errors.work_area[0]);
+                        }
+
+                        if (data.errors.performance_factor) {
+                            $('#performa-error').html(data.errors.performance_factor[0]);
+                        }
+
+                        if (data.errors.estimation_manhour) {
+                            $('#manhour-error').html(data.errors.estimation_manhour[0]);
+                        }
+
+                        if (data.errors.helper_quantity) {
+                            $('#helper_quantity-error').html(data.errors.helper_quantity[0]);
+                        }
+
+                        if (data.errors.engineer_quantity) {
+                            $('#engineer_quantity-error').html(data.errors.engineer_quantity[0]);
+                        }
+
+                        if (data.errors.sequence) {
+                            $('#sequence-error').html(data.errors.sequence[0]);
+                        }
+
+                        if (data.errors.skill_id) {
+                            $('#otr_certification-error').html(data.errors.skill_id[0]);
+                        }
+
+                        document.getElementById('work_area').value = work_area;
+                        document.getElementById('engineer_quantity').value = engineer_quantity;
+                        document.getElementById('manhour').value = manhour;
+                        document.getElementById('performa').value = performa;
+                        document.getElementById('helper_quantity').value = helper_quantity;
+                        document.getElementById('skill_id').value = otr_certification;
+                        document.getElementById('sequence').value = sequence;
+                        // document.getElementById('material').value = material;
+                        // document.getElementById('quantity').value = quantity;
+
+                    } else {
+
+                        toastr.success('Instruction has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.instruction_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                        $('#modal_instruction').modal('hide');
+                    }
+                }
+            });
         });
 
         $('.add-tool').on('click', function () {
