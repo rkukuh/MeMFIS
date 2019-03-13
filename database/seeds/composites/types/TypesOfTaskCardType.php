@@ -36,25 +36,25 @@ class TypesOfTaskCardType extends Seeder
 
         Type::create([
             'code' => 'ad',
-            'name' => 'AD',
+            'name' => 'Air Worthiness Directive',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'sb',
-            'name' => 'SB',
+            'name' => 'Service Bulletin',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'eo',
-            'name' => 'EO',
+            'name' => 'Engineering Order',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'ea',
-            'name' => 'EA',
+            'name' => 'Engineering Authorization',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
@@ -66,19 +66,19 @@ class TypesOfTaskCardType extends Seeder
 
         Type::create([
             'code' => 'si',
-            'name' => 'SI',
+            'name' => 'Special Instruction',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'cmr',
-            'name' => 'CMR',
+            'name' => 'Certification Maintenance Requirement',
             'of'  => 'taskcard-type-non-routine',
         ]);
 
         Type::create([
             'code' => 'awl',
-            'name' => 'AWL',
+            'name' => 'Airworthiness Limitations',
             'of'  => 'taskcard-type-non-routine',
         ]);
     }
