@@ -40,7 +40,7 @@ class CreateTaskcardsTable extends Migration
             $table->string('reference')->nullable();
             $table->unsignedInteger('category_id')->nullable();
             $table->unsignedInteger('scheduled_priority_id')->nullable();
-            $table->integer('scheduled_priority_amount')->nullable();
+            $table->string('scheduled_priority_amount')->nullable();
             $table->string('scheduled_priority_type')->nullable();
             $table->unsignedInteger('recurrence_id')->nullable();
             $table->integer('recurrence_amount')->nullable();

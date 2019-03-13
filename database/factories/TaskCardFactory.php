@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
@@ -100,6 +101,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
     $number = $faker->unixTime();
 
     $scheduled_priority = Type::ofTaskCardEOScheduledPriority()->get()->random();
+    $scheduled_priority_type = $faker->randomElement(['date', 'hours', 'cycle']);
     $recurrence = Type::ofTaskCardEORecurrence()->get()->random();
     $manual_affected = Type::ofTaskCardEOManualAffected()->get()->random();
 
@@ -124,16 +126,20 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
             return factory(Category::class)->states('taskcard-eo')->create()->id;
         },
         'scheduled_priority_id' => $scheduled_priority->id,
-        'scheduled_priority_amount' => function () use ($scheduled_priority) {
+        'scheduled_priority_amount' => function () use ($scheduled_priority, $scheduled_priority_type) {
             if ($scheduled_priority->code == 'prior-to') {
+                if ($scheduled_priority_type == 'date') {
+                    return Carbon::now();
+                }
+
                 return rand(1, 10);
             } else {
                 return null;
             }
         },
-        'scheduled_priority_type' => function () use ($scheduled_priority, $faker) {
+        'scheduled_priority_type' => function () use ($scheduled_priority, $scheduled_priority_type) {
             if ($scheduled_priority->code == 'prior-to') {
-                return $faker->randomElement(['days', 'weeks', 'months']);
+                return $scheduled_priority_type;
             } else {
                 return null;
             }
