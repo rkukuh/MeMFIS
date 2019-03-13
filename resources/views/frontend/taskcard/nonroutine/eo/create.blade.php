@@ -396,7 +396,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Threshold
+                                    Thresholds
                                 </h3>
                             </div>
                         </div>
@@ -427,7 +427,7 @@
                                     </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Repeat
+                                    Repeats
                                 </h3>
                             </div>
                         </div>

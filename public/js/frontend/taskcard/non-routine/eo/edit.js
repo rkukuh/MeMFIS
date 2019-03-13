@@ -383,6 +383,238 @@ let TaskCard = {
             });
         });
 
+        $('.threshold_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/thresholds',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                perpage: 5,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'amount',
+                    title: 'Amount',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'type_id',
+                    title: 'Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-threshold" title="Delete" ' +
+                            'data-threshold_uuid="' + t.uuid + '">' +
+                            '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
+                }
+            ]
+        });
+
+        $('.repeat_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/repeats',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                perpage: 5,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'amount',
+                    title: 'Amount',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'type_id',
+                    title: 'Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill repeat-delete" title="Delete" ' +
+                            'data-repeat_uuid="' + t.uuid + '">' +
+                            '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
+                }
+            ]
+        });
+
+        $('.add-threshold').on('click', function () {
+            let amount = $('input[name=threshold_amount]').val();
+            let threshold_type = $('#threshold_type').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine/'+taskcard_uuid+'/threshold',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    amount: amount,
+                    type_id: threshold_type,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#tool-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity-error').html(data.errors.quantity[0]);
+                        // }
+                        // document.getElementById('tool').value = tool;
+                        // document.getElementById('quantity').value = quantity;
+                    } else {
+
+                        toastr.success('Threshold has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.threshold_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        $('#modal_threshold').modal('hide');
+
+                    }
+                }
+            });
+        });
+
+        $('.add-repeat').on('click', function () {
+            let amount = $('input[name=repeat_amount]').val();
+            let repeat_type = $('#repeat_type').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/taskcard-routine/'+taskcard_uuid+'/repeat',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    amount: amount,
+                    type_id: repeat_type,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#tool-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity-error').html(data.errors.quantity[0]);
+                        // }
+                        // document.getElementById('tool').value = tool;
+                        // document.getElementById('quantity').value = quantity;
+                    } else {
+
+                        toastr.success('Repeat has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.repeat_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        $('#modal_repeat').modal('hide');
+
+                    }
+                }
+            });
+        });
+
         let material_datatables_init = true;
         let triggeruuid ="";
         let material = $('.instruction_datatable').on('click', '.material', function () {

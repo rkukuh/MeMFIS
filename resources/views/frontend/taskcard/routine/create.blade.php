@@ -307,22 +307,51 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <table class="threshold">
-                                                <tr>
-                                                    <td width="50%"><select name="maintenanceCycle"  class="select form-control js-example-tags"><option value"">Select Threshold Type</option>
-                                                    @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                    <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
-                                                    @endforeach
-                                                    </select></td>
-                                                    <td width="45%"><input type="text" required="required" class="form-control" name="amount[]' + counter + '"/></td>
-                                                    <td width="5%">
-                                                        @component('frontend.common.buttons.create_repeater')
-                                                            @slot('id', 'addrow')
-                                                        @endcomponent
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Threshold @include('frontend.common.label.optional')
+                                                </label>
+                                                <table class="threshold">
+                                                    <tr>
+                                                        <td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                        @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                        <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                        @endforeach
+                                                        </select></td>
+                                                        <td width="5%">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('id', 'addrow')
+                                                            @endcomponent
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Repeat @include('frontend.common.label.optional')
+                                                </label>
+                                                <table class="repeat">
+                                                    <tr>
+                                                        <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                        <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                        <option value"">Select Repeat</option>
+                                                        @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                        <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                        @endforeach
+                                                        </select></td>
+                                                        <td width="5%">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('id', 'addrow2')
+                                                            @endcomponent
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -537,9 +566,15 @@
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
-
+    
     <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script>
+    
+    <script src="{{ asset('js/frontend/functions/select2/aircraft-taskcard.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/aircraft-taskcard.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
@@ -556,14 +591,9 @@
     <script src="{{ asset('js/frontend/functions/select2/applicability-engine.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-engine.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/aircraft-taskcard.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/aircraft-taskcard.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
@@ -585,8 +615,9 @@
               var newRow = $("<tr>");
               var cols = "";
               x = x+1;
-              cols += '<td width="50%"><select name="maintenanceCycle" class="select form-control ">';
-              cols += '<option value"">Select Threshold Type</option>';
+              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+              cols += '<option value"">Select Threshold</option>';
               for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
                   if(maintenanceCycles[i].id == 1){
                   }else{
@@ -594,7 +625,6 @@
                   }
               };
               cols += '</select></td>';
-              cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="amount[]' + counter + '"/></td>';
               cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
               newRow.append(cols);
               $("table.threshold").append(newRow);
@@ -602,6 +632,39 @@
               counter++;
           });
           $("table.threshold").on("click", ".ibtnDel", function (event) {
+              if (counter >= 1) {
+                  $(this).closest("tr").remove();
+                  counter -= 1
+              }
+          });
+      });
+  </script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          var counter = 0;
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow2").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
+              cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
+              cols += '<option value"">Select Repeat</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.repeat").append(newRow);
+              $('.select').select2();
+              counter++;
+          });
+          $("table.repeat").on("click", ".ibtnDel", function (event) {
               if (counter >= 1) {
                   $(this).closest("tr").remove();
                   counter -= 1

@@ -16,7 +16,7 @@ class TaskCardDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = TaskCard::with('type','aircrafts')->get();
+        $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
         // $data = $alldata = json_decode(TaskCard::with('type','aircrafts')->get());
 
         foreach($alldata as $item){
