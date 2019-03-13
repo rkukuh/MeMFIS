@@ -53,4 +53,25 @@ class EOInstruction extends MemfisModel
                     )
                     ->withTimestamps();
     }
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the task card's item: material.
+     *
+     * @return string
+     */
+    public function getMaterialsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'rawmat')->all()));
+    }
+
+    /**
+     * Get the task card's item: tool.
+     *
+     * @return string
+     */
+    public function getToolsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+    }
 }

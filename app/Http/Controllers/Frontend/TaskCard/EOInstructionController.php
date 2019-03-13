@@ -63,7 +63,6 @@ class EOInstructionController extends Controller
      */
     public function edit(TaskCard $taskcard, EOInstruction $eo_instruction)
     {
-        dd($eo_instruction);
         return response()->json($eo_instruction);
     }
 

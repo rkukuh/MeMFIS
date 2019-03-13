@@ -17,7 +17,7 @@
                   data: "pivot.quantity"
               },
               {
-                  data: "pivot.unit_id"
+                  data: "unit.name"
               },
               {
                   data: "Actions"
@@ -65,7 +65,7 @@
                     )
                 },
                 type: 'DELETE',
-                url: '/taskcard-eo/eo-instruction/'+triggeruuid+'/'+triggeruuiditem + '/item',
+                url: '/taskcard-eo/eo-instruction/'+triggeruuid2+'/'+triggeruuiditem + '/item',
                 success: function (data) {
                     toastr.success('Item has been deleted.', 'Deleted', {
                         timeOut: 5000

@@ -6,8 +6,8 @@ use App\Models\Item;
 use App\Models\TaskCard;
 use App\Models\EOInstruction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\EOInstructionStore;
-use App\Http\Requests\Frontend\EOInstructionUpdate;
+use App\Http\Requests\Frontend\EOItemInstructionStore;
+use App\Http\Requests\Frontend\EOItemInstructionUpdate;
 
 class EOInstructionItemController extends Controller
 {
@@ -37,7 +37,7 @@ class EOInstructionItemController extends Controller
      * @param  \App\Http\Requests\Frontend\EOInstructionStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EOInstruction $taskcard, EOInstructionStore $request)
+    public function store(EOInstruction $taskcard, EOItemInstructionStore $request)
     {
         $taskcard->items()->attach($taskcard->id, [
             'item_id' => $request->item_id,
