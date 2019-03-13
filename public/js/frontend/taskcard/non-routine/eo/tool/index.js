@@ -17,7 +17,7 @@
                   data: "pivot.quantity"
               },
               {
-                  data: "pivot.unit_id"
+                  data: "unit.name"
               },
               {
                   data: "Actions"
