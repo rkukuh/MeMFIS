@@ -154,7 +154,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
         },
         'recurrence_type' => function () use ($recurrence, $faker) {
             if ($recurrence->code == 'repetitive') {
-                return $faker->randomElement(['days', 'weeks', 'months']);
+                return $faker->randomElement(['cycle', 'hourly', 'daily', 'monthly', 'yearly']);
             } else {
                 return null;
             }
