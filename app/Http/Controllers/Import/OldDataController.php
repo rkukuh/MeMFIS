@@ -7,6 +7,7 @@ use App\Imports\WorkAreasImport;
 use App\Imports\PersonnelsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use App\Imports\MaterialsAndToolsImport;
 
 class OldDataController extends Controller
 {
@@ -25,5 +26,10 @@ class OldDataController extends Controller
     public function workAreas()
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');
+    }
+
+    public function materialsAndTools()
+    {
+        Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'materials-tools.xlsx');
     }
 }
