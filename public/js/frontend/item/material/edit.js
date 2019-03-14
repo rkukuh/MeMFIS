@@ -58,6 +58,16 @@ let Item = {
                     }
                 },
                 {
+                    field: 'convension',
+                    title: 'Conversion Rate',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        let unit = $("#unit_id option:selected").text();
+                        return '1'+unit+' = '+t.uom.quantity+''+t.name
+                    }
+                },
+                {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
