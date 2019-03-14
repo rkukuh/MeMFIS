@@ -222,6 +222,15 @@ let Item = {
         $('.footer').on('click', '.edit-item', function () {
             errorMessage();
 
+            if ($('#tag :selected').length > 0) {
+                var selectedtags = [];
+
+                $('#tag :selected').each(function (i, selected) {
+                    selectedtags[i] = $(selected).val();
+                });
+            }
+
+
             if (document.getElementById("is_stock").checked) {
                 is_stock = 1;
             } else {
@@ -263,6 +272,7 @@ let Item = {
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
                     account_code: account_code,
+                    selectedtags: selectedtags,
                 },
                 success: function (data) {
                     if (data.errors) {
