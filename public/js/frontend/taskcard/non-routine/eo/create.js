@@ -106,7 +106,26 @@ let TaskCard = {
             let recurrence_select = $('#recurrence-select').val();
             let note = $('#note').val();
 
+            let threshold_type = [];
+            $('select[name^="threshold_type"]').each(function(i) {
+                threshold_type[i] = $(this).val();
+            });
 
+            let repeat_type = [];
+            $('select[name^="repeat_type"]').each(function(i) {
+                repeat_type[i] = $(this).val();
+            });
+
+            let threshold_amount = [];
+            $('input[name^="threshold_amount"]').each(function(i) {
+                threshold_amount[i] = $(this).val();
+            });
+
+            let repeat_amount = [];
+            $('input[name^="repeat_amount"]').each(function(i) {
+                repeat_amount[i] = $(this).val();
+            });
+            
             // let task_type_id = $('#task_type_id').val();
             // let otr_certification = $('#otr_certification').val();
             // let manhour = $('input[name=manhour]').val();
@@ -166,6 +185,12 @@ let TaskCard = {
                     recurrence_type:recurrence_select,
                     manual_affected_id: manual_affected_id,
                     manual_affected: note,
+
+                    threshold_amount: threshold_amount,
+                    threshold_type: threshold_type,
+                    repeat_amount: repeat_amount,
+                    repeat_type: repeat_type,
+
                     // scheduled_priority_amount: prior_to_hour,
                     // scheduled_priority_amount: prior_to_cycle,
                 },
