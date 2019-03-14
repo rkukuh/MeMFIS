@@ -336,6 +336,6 @@
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/material/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/material/form-reset.js') }}"></script>
 @endpush

@@ -297,5 +297,5 @@
         let item_uuid = '{{ $item->uuid }}';
     </script>
 
-    <script src="{{ asset('js/frontend/item/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/material/show.js') }}"></script>
 @endpush

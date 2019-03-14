@@ -83,5 +83,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/item/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/material/index.js') }}"></script>
 @endpush
