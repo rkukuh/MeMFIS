@@ -358,7 +358,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.item.uom.modal')
+                            @include('frontend.item.tool.uom.modal')
 
                             <div class="item_unit_datatable" id="item_unit_datatable"></div>
                         </div>
@@ -396,7 +396,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.item.storage.modal')
+                            @include('frontend.item.tool.storage.modal')
                             @include('frontend.storage.modal')
 
                             <div class="item_storage_datatable" id="item_storage_datatable"></div>
@@ -433,10 +433,10 @@
 
     <script src="{{ asset('js/frontend/functions/action-botton/item-storage.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/item/edit/form-reset.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/edit/item-unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/edit/item-storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/tool/edit/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/tool/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/tool/edit/item-unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/tool/edit/item-storage.js') }}"></script>
     <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
