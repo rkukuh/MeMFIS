@@ -337,7 +337,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; UoM (Unit of Measurement)
+                                    Unit Conversion Table
                                 </h3>
                             </div>
                         </div>
@@ -393,7 +393,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; Storage Stock
+                                    Warehouse Stock Management
                                 </h3>
                             </div>
                         </div>
