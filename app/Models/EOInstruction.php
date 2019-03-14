@@ -62,7 +62,7 @@ class EOInstruction extends MemfisModel
      */
     public function getMaterialsAttribute()
     {
-        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'rawmat')->all()));
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'raw')->all()));
     }
 
     /**
