@@ -188,6 +188,7 @@
                                                     @slot('id', 'is_stock')
                                                     @slot('name', 'is_stock')
                                                     @slot('text', 'Stockable?')
+                                                    @slot('checked', 'checked')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-12 col-md-12 col-lg-12">

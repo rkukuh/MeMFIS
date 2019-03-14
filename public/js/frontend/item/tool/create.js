@@ -122,7 +122,17 @@ let Item = {
             });
         });
 
-        // Category
+        $(document).ready(function () {
+            $('select[name="category"]').on('change', function () {
+                if (this.options[this.selectedIndex].text == "Service") {
+                $("#is_stock").prop("checked", false);
+                $("#is_stock").attr("disabled", true)
+                } else {
+                    $("#is_stock").prop("checked", true);
+                    $("#is_stock").attr("disabled", false)
+                }
+            });
+        });
 
         $('.modal-footer').on('click', '.add-category', function () {
             $('#name-error').html('');
