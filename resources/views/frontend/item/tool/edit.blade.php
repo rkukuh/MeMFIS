@@ -122,7 +122,7 @@
                                                 Unit @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="unit_id" name="unit_id" class="form-control m-select2">
+                                            <select id="unit_id" name="unit_id" class="form-control m-select2" disabled>
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}"
                                                         @if ($unit->id == $item->unit_id) selected @endif>
