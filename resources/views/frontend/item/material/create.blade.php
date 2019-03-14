@@ -147,6 +147,19 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
+                                                Tangging @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'tag')
+                                                @slot('text', 'Tag')
+                                                @slot('name', 'tag')
+                                                @slot('multiple', 'multiple')
+                                                @slot('id_error', 'tag')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
                                                 Manufactur @include('frontend.common.label.optional')
                                             </label>
 
@@ -338,6 +351,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js') }}"></script>
 
     <script src="{{ asset('js/frontend/item/material/create.js') }}"></script>
     <script src="{{ asset('js/frontend/item/material/form-reset.js') }}"></script>
