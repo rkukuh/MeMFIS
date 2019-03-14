@@ -198,6 +198,77 @@
                                                 @endcomponent
                                             </div>
                                         </div>
+                                        <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Threshold @include('frontend.common.label.optional')
+                                                    </label>
+                                                    <table class="threshold">
+                                                        @if($taskcard->thresholds->isEmpty())
+                                                            <tr>
+                                                                <td>{{ $MaintenanceCycles }}</td>
+                                                            </tr>
+                                                        @else
+                                                            @for($i = 0 ; $i < sizeof($taskcard->thresholds); $i++)
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
+                                                                </td>
+                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                                <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
+                                                                @endforeach
+                                                                </select></td>
+                                                                <td width="5%">
+                                                                    @if($i < 1)
+                                                                        @component('frontend.common.buttons.create_repeater')
+                                                                            @slot('id', 'addrow')
+                                                                        @endcomponent
+                                                                    @else
+                                                                    <div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                            @endfor
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Repeat @include('frontend.common.label.optional')
+                                                    </label>
+                                                    <table class="repeat">
+                                                        @if($taskcard->repeats->isEmpty())
+                                                            <tr>
+                                                                <td>{{ $MaintenanceCycles }}</td>
+                                                            </tr>
+                                                        @else
+                                                        @for($i = 0 ; $i < sizeof($taskcard->repeats); $i++)
+                                                        <tr>
+                                                            <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskcard->repeats[$i]->amount }}"/></td>
+                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                            <option value"">Select Repeat</option>
+                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                            <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
+                                                            @endforeach
+                                                            </select></td>
+                                                            <td width="5%">
+                                                                @if($i < 1)
+                                                                    @component('frontend.common.buttons.create_repeater')
+                                                                        @slot('id', 'addrow2')
+                                                                    @endcomponent
+                                                                @else
+                                                                    @component('frontend.common.buttons.delete_repeater')
+                                                                        @slot('id', 'addrow2')
+                                                                    @endcomponent
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        @endfor
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                        </div>
                                         <hr>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -231,6 +302,7 @@
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'prior_to_date')
                                                             @slot('name', 'prior_to')
+                                                            @slot('value', 'date')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
@@ -238,6 +310,7 @@
                                                             @slot('id', 'date')
                                                             @slot('text', 'date')
                                                             @slot('name', 'date')
+                                                            @slot('disabled', 'disabled')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -246,6 +319,7 @@
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'prior_to_hours')
                                                             @slot('name', 'prior_to')
+                                                            @slot('value', 'hour')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
@@ -263,7 +337,7 @@
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'prior_to_cycle')
                                                             @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
+                                                            @slot('value', 'cycle')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
@@ -306,38 +380,37 @@
                                                 </label>
 
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.number')
                                                             @slot('id', 'recurrence')
                                                             @slot('text', 'Recurrence')
                                                             @slot('name', 'recurrence')
                                                             @slot('disabled', 'disabled')
                                                             @slot('id_error', 'recurrence')
+                                                            @slot('value',$taskCard->recurrence_amount)
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
+                                                    <div class="col-sm-8 col-md-8 col-lg-8">
+                                                        <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control m-select2" disabled>
                                                             <option value="">
                                                                 Select a Recurrence
                                                             </option>
-                                                            <option value="cycle">
+                                                            <option value="cycle" @if($taskCard->recurrence_type === "cycle") selected @endif>
                                                                 Cycle
                                                             </option>
-                                                            <option value="hourly">
+                                                            <option value="hourly" @if($taskCard->recurrence_type === "hourly") selected @endif>
                                                                 Hourly
                                                             </option>
-                                                            <option value="daily">
+                                                            <option value="daily" @if($taskCard->recurrence_type === "daily") selected @endif>
                                                                 Daily
                                                             </option>
-                                                            <option value="yearly">
+                                                            <option value="yearly" @if($taskCard->recurrence_type === "yearly") selected @endif>
                                                                 Yearly
                                                             </option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -584,10 +657,116 @@
         if (event.target.tagName.toLowerCase() !== 'textarea') return;
         autoExpand(event.target);
         }, false);
+        $(document).ready(function () {
+          $(".js-example-tags").select2();
+          var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
+          var counterRepeats = {!! sizeof($taskcard->repeats) !!};
+          console.log(counterThresholds);
+          console.log(counterRepeats);
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+              cols += '<option value"">Select Threshold</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.threshold").append(newRow);
+              $('.select').select2();
+              counterThresholds++;
+          });
+          $("table.threshold").on("click", ".ibtnDel", function (event) {
+              if (counterThresholds >= 1) {
+                  $(this).closest("tr").remove();
+                  counterThresholds -= 1
+              }
+          });
+          $("#addrow2").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
+                cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
+                cols += '<option value"">Select Repeat</option>';
+                for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.repeat").append(newRow);
+                $('.select').select2();
+                counterRepeats++;
+            });
+            $("table.repeat").on("click", ".ibtnDel", function (event) {
+                if (counterRepeats >= 1) {
+                    $(this).closest("tr").remove();
+                    counterRepeats -= 1
+                }
+            });
+
+        var view_scheduled_priority_id = $('select[name="scheduled_priority_id"]').val();
+        var view_recurrence_id = $('select[name="recurrence_id"]').val();
+        var view_manual_affected_id = $('select[name="manual_affected_id"]').val();
+
+        let rdo_Scheduled = '{{$taskCard->scheduled_priority_type}}';
+        let amount_Scheduled = '{{$taskCard->scheduled_priority_amount}}';
+        
+        if(view_manual_affected_id == 66){
+            $("#prior_to").removeClass("hidden");
+            $('#prior_to_date').removeAttr("disabled");
+            $('#prior_to_hours').removeAttr("disabled");
+            $('#prior_to_cycle').removeAttr("disabled");
+        }
+        if(view_recurrence_id == 69){
+            $("#recurrence_div").removeClass("hidden");
+            $('#recurrence').removeAttr("disabled");
+            $('#recurrence-select').removeAttr("disabled");
+            $('#recurrence-select').select2();
+            switch(rdo_Scheduled){
+                case 'date':
+                    $("#prior_to_date").prop('checked', true);
+                    $("#date").val(amount_Scheduled);
+                    $("#date").removeAttr("disabled");
+                    break;
+                case 'cycle':
+                    $("#prior_to_cycle").prop('checked', true);
+                    $("#cycle").val(amount_Scheduled);
+                    $("#cycle").removeAttr("disabled");
+                    break;
+                case 'hour':
+                    $("#prior_to_hours").prop('checked', true);
+                    $("#hour").val(amount_Scheduled);
+                    $("#hour").removeAttr("disabled");
+                    break;
+                
+            }
+        }
+        if(view_scheduled_priority_id == 73){
+            $("#note_div").removeClass("hidden");
+            $('#note').removeAttr("disabled");
+        }
+        
+        
+        });
     </script>
 
     <script>
-        let taskcard_uuid = '{{$taskcard->uuid}}';
+        let taskcard_uuid = '{{$taskCard->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>

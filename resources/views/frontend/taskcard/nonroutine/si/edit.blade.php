@@ -453,6 +453,67 @@
         if (event.target.tagName.toLowerCase() !== 'textarea') return;
         autoExpand(event.target);
         }, false);
+
+        $(document).ready(function () {
+          $(".js-example-tags").select2();
+          var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
+          var counterRepeats = {!! sizeof($taskcard->repeats) !!};
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+              cols += '<option value"">Select Threshold</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.threshold").append(newRow);
+              $('.select').select2();
+              counterThresholds++;
+          });
+          $("table.threshold").on("click", ".ibtnDel", function (event) {
+              if (counterThresholds >= 1) {
+                  $(this).closest("tr").remove();
+                  counterThresholds -= 1
+              }
+          });
+          $("#addrow2").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
+                cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
+                cols += '<option value"">Select Repeat</option>';
+                for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.repeat").append(newRow);
+                $('.select').select2();
+                counterRepeats++;
+            });
+            $("table.repeat").on("click", ".ibtnDel", function (event) {
+                if (counterRepeats >= 1) {
+                    $(this).closest("tr").remove();
+                    counterRepeats -= 1
+                }
+            });
+        });
     </script>
     <script>
         let taskcard_uuid = '{{$taskcard->uuid}}';
