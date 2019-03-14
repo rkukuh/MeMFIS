@@ -122,7 +122,7 @@
                                                 Unit @include('frontend.common.label.required')
                                             </label>
 
-                                            <select id="unit_id" name="unit_id" class="form-control m-select2">
+                                            <select id="unit_id" name="unit_id" class="form-control m-select2" disabled>
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}"
                                                         @if ($unit->id == $item->unit_id) selected @endif>
@@ -346,7 +346,25 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                    <div class="col-xl-8 order-2 order-xl-1">
+                                        <div class="form-group m-form__group row align-items-center">
+                                            <div class="form-group m-form__group row item-info" style="margin-left:20px">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <h5 class="item-name">
+                                                        {{ $item->name }}
+
+                                                        <small class="text-muted"> {{ $item->code }}</small>
+                                                    </h5>
+
+                                                    <h6>
+                                                        Primary Unit:
+                                                        {{ $item->unit->name }} ({{ $item->unit->symbol }})
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'UoM')
                                             @slot('id', 'item-uom')

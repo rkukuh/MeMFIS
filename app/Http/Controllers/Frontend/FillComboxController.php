@@ -567,7 +567,7 @@ class FillComboxController extends Controller
     {
         $items = Item::with('categories')
                 ->whereHas('categories', function ($query) {
-                    $query->where('code', 'rawmat');
+                    $query->where('code', 'raw');
                 })->pluck('name','id');
 
         return $items;

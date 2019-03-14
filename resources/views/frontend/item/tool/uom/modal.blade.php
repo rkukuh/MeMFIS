@@ -27,7 +27,7 @@
                                 </h5>
 
                                 <h6>
-                                    Unit:
+                                    Primary Unit:
                                     {{ $item->unit->name }} ({{ $item->unit->symbol }})
                                 </h6>
                             </div>
