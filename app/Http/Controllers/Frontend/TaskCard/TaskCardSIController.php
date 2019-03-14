@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend\TaskCard;
 
 use App\Models\Type;
+use App\Models\Repeat;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
+use App\Models\Threshold;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardSIStore;
 use App\Http\Requests\Frontend\TaskCardSIUpdate;
@@ -39,7 +41,11 @@ class TaskCardSIController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.si.create');
+        $maintenanceCycle = Type::ofMaintenanceCycle()->get();
+
+        return view('frontend.taskcard.nonroutine.si.create', [
+            'MaintenanceCycles' => $maintenanceCycle,
+        ]);
     }
 
     /**
@@ -50,8 +56,23 @@ class TaskCardSIController extends Controller
      */
     public function store(TaskCardSIStore $request)
     {
+        $request->work_area = Type::firstOrCreate(
+            ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
+        );
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
+            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                $taskcard->thresholds()->save(new Threshold([
+                    'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                    'amount' => $request->threshold_amount[$i],
+                ]));
+            }
+            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                $taskcard->repeats()->save(new Repeat([
+                    'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                    'amount' => $request->repeat_amount[$i],
+                ]));
+            }
 
             return response()->json($taskcard);
         }

@@ -24,6 +24,26 @@ let TaskCard = {
 
             let instruction = $('#instruction').val();
 
+            let threshold_type = [];
+            $('select[name^="threshold_type"]').each(function(i) {
+                threshold_type[i] = $(this).val();
+            });
+
+            let repeat_type = [];
+            $('select[name^="repeat_type"]').each(function(i) {
+                repeat_type[i] = $(this).val();
+            });
+
+            let threshold_amount = [];
+            $('input[name^="threshold_amount"]').each(function(i) {
+                threshold_amount[i] = $(this).val();
+            });
+
+            let repeat_amount = [];
+            $('input[name^="repeat_amount"]').each(function(i) {
+                repeat_amount[i] = $(this).val();
+            });
+            
             if ($('#applicability_airplane :selected').length > 0) {
                 var applicability_airplanes = [];
 
@@ -53,6 +73,10 @@ let TaskCard = {
                     skill_id: otr_certification,
                     applicability_airplane: applicability_airplane,
 
+                    threshold_amount: threshold_amount,
+                    threshold_type: threshold_type,
+                    repeat_amount: repeat_amount,
+                    repeat_type: repeat_type,
                 },
                 success: function (data) {
                     if (data.errors) {
