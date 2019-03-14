@@ -195,6 +195,25 @@ let Item = {
 
         });
 
+        $(document).ready(function () {
+            let category = $("#category option:selected").text()
+            if(category.trim() == "Service".trim()){
+                $("#is_stock").prop("checked", false);
+                $("#is_stock").attr("disabled", true)
+            }
+        });
+
+        $(document).ready(function () {
+            $('select[name="category"]').on('change', function () {
+                if (this.options[this.selectedIndex].text == "Service") {
+                $("#is_stock").prop("checked", false);
+                $("#is_stock").attr("disabled", true)
+                } else {
+                    $("#is_stock").attr("disabled", false)
+                }
+            });
+        });
+
         $('.reset-uom').on('click', function () {
             document.getElementById('uom_quantity').value = '';
 
