@@ -8,7 +8,7 @@ $factory->define(Vendor::class, function (Faker $faker) {
     $number = $faker->unixTime();
 
     return [
-        'code' => 'SUP-' . $number,
+        'code' => 'VEN-DUM-' . $number,
     ];
 
 });

@@ -20,7 +20,7 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
     }
 
     return [
-        'number' => 'GRN-' . $number,
+        'number' => 'GRN-DUM-' . $number,
         'received_by' => function () {
             if (Employee::count()) {
                 return Employee::get()->random()->id;

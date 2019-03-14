@@ -11,7 +11,13 @@ $factory->define(Journal::class, function (Faker $faker) {
     return [
         'code' => 'JR-DUM-' . $sequence,
         'name' => 'Journal Dummy #' . $sequence,
-        'type_id' => Type::ofJournal()->get()->random()->id,
+        'type_id' => function () {
+            if (Type::ofJournal()->count()) {
+                return Type::ofJournal()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('journal')->create()->id;
+        },
         'level' => 1,
     ];
 

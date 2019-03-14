@@ -1,13 +1,14 @@
 <?php
 
 return [
-    'version' => '0.10.1',
+    'version' => '0.10.2',
 
     /**
      * Dummy data amount
      *
      */
     'dummies' => [
+        'aircrafts' => 10,
         'aircraft_accesses' => 10,
         'aircraft_zones' => 10,
         'categories' => 10,

@@ -6,11 +6,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Aircraft::class, function (Faker $faker) {
 
-    $name = 'Aircraft Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => str_slug($name),
-        'name' => $name,
+        'code' => 'AC-DUM-' . $number,
+        'name' => 'Aircraft Dummy #' . $number,
         'manufacturer_id' => function () {
             if (Manufacturer::count()) {
                 return Manufacturer::get()->random()->id;

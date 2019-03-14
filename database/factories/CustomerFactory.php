@@ -14,11 +14,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Customer::class, function (Faker $faker) {
 
-    $name = 'Customer Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => str_slug($name),
-        'name' => $name,
+        'code' => 'CUS-DUM-' . $number,
+        'name' => 'Customer Dummy #' . $number,
         'payment_term' => rand(1, 10) * 10,
         'banned_at' => $faker->randomElement([
             null,

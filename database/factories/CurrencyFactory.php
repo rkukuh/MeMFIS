@@ -5,11 +5,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Currency::class, function (Faker $faker) {
 
-    $name = 'Currency Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code'   => str_slug($name),
-        'name'   => $name,
+        'code' => 'CUR-DUM-' . $number,
+        'name' => 'Currency Dummy #' . $number,
         'symbol' => 'CUD',
     ];
 

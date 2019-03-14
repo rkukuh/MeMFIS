@@ -7,8 +7,14 @@ use Faker\Generator as Faker;
 $factory->define(Document::class, function (Faker $faker) {
 
     return [
-        'number'  => 'DOC-' . $faker->unixTime(),
-        'type_id' => Type::ofDocument()->get()->random()->id,
+        'number'  => 'DOC-DUM-' . $faker->unixTime(),
+        'type_id' => function () {
+            if (Type::ofDocument()->count()) {
+                return Type::ofDocument()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('document')->create()->id;
+        },
     ];
 
 });

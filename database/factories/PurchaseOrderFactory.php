@@ -22,7 +22,7 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
     }
 
     return [
-        'number' => 'PO-' . $number,
+        'number' => 'PO-DUM-' . $number,
         'vendor_id' => function () {
             if (Vendor::count()) {
                 return Vendor::get()->random()->id;

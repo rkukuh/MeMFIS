@@ -9,7 +9,7 @@ $factory->define(Threshold::class, function (Faker $faker) {
     return [
         'type_id' => function () {
             if (Type::ofMaintenanceCycle()->count()) {
-                Type::ofMaintenanceCycle()->get()->random()->id;
+                return Type::ofMaintenanceCycle()->get()->random()->id;
             }
 
             return factory(Type::class)->states('maintenance-cycle')->create()->id;

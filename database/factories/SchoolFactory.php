@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(School::class, function (Faker $faker) {
 
-    $name;
+    $name = null;
     $degree = Type::ofSchoolDegree()->get()->random();
 
     switch($degree->code) {
@@ -33,11 +33,11 @@ $factory->define(School::class, function (Faker $faker) {
             break;
     }
 
-    $name .= ' Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => str_slug($name),
-        'name' => $name,
+        'code' => 'SCH-DUM-' . $number,
+        'name' => 'School Dummy #' . $number,
         'degree' => $degree->id,
     ];
 

@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Material
+                    Tool
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Material
+                                Tool
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material
+                                    Tool
                                 </h3>
                             </div>
                         </div>
@@ -246,7 +246,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; UoM (Unit of Measurement)
+                                    Tool &harr; UoM (Unit of Measurement)
                                 </h3>
                             </div>
                         </div>
@@ -281,7 +281,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; Storage Stock
+                                    Tool &harr; Storage Stock
                                 </h3>
                             </div>
                         </div>
@@ -336,6 +336,6 @@
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/tool/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/item/tool/form-reset.js') }}"></script>
 @endpush

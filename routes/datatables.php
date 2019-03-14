@@ -161,6 +161,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        Route::name('tool.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'tool',
+                'namespace' => 'Item'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'ToolDatatables@index')->name('all');
+                Route::get('/modal', 'ToolDatatables@indexModal')->name('modal.index');
+
+            });
+
+        });
+
         /** PROJECT */
 
         Route::name('project.')->group(function () {

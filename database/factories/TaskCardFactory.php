@@ -36,14 +36,14 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         },
         'task_id' => function () {
             if (Type::ofTaskCardTask()->count()) {
-                Type::ofTaskCardTask()->get()->random()->id;
+                return Type::ofTaskCardTask()->get()->random()->id;
             }
 
             return factory(Type::class)->states('taskcard-task')->create()->id;
         },
         'skill_id' => function () {
             if (Type::ofTaskCardSkill()->count()) {
-                Type::ofTaskCardSkill()->get()->random()->id;
+                return Type::ofTaskCardSkill()->get()->random()->id;
             }
 
             return factory(Type::class)->states('taskcard-skill')->create()->id;
@@ -89,7 +89,7 @@ $factory->state(TaskCard::class, 'basic', function ($faker) {
     $number = $faker->unixTime();
 
     return [
-        'number' => 'TC-' . $number,
+        'number' => 'TC-BSC-DUM-' . $number,
         'title' => 'TaskCard Basic Dummy #' . $number,
         'type_id' => Type::ofTaskCardTypeRoutine()->get()->random()->id,
     ];
@@ -107,11 +107,11 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
 
     return [
         // EO Header attributes
-        'number' => 'EO-' . $number,
+        'number' => 'TC-EO-DUM-' . $number,
         'title' => 'Engineering Order Dummy #' . $number,
         'type_id' => function () {
             if (Type::ofTaskCardTypeNonRoutine()->count()) {
-                Type::ofTaskCardTypeNonRoutine()->get()->random()->id;
+                return Type::ofTaskCardTypeNonRoutine()->get()->random()->id;
             }
 
             return factory(Type::class)->states('taskcard-type-non-routine')->create()->id;
@@ -120,7 +120,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
         'reference' => 'REF-' . $number,
         'category_id' => function () {
             if (Category::ofTaskCardEO()->count()) {
-                Category::ofTaskCardEO()->get()->random()->id;
+                return Category::ofTaskCardEO()->get()->random()->id;
             }
 
             return factory(Category::class)->states('taskcard-eo')->create()->id;
@@ -187,11 +187,11 @@ $factory->state(TaskCard::class, 'si', function ($faker) {
     $number = $faker->unixTime();
 
     return [
-        'number' => 'SI-' . $number,
+        'number' => 'TC-SI-DUM-' . $number,
         'title' => 'Special Instruction Dummy #' . $number,
         'type_id' => function () {
             if (Type::ofTaskCardTypeNonRoutine()->count()) {
-                Type::ofTaskCardTypeNonRoutine()->get()->random()->id;
+                return Type::ofTaskCardTypeNonRoutine()->get()->random()->id;
             }
 
             return factory(Type::class)->states('taskcard-type-non-routine')->create()->id;

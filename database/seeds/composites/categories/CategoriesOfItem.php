@@ -13,19 +13,19 @@ class CategoriesOfItem extends Seeder
     public function run()
     {
         Category::create([
-            'code' => 'rawmat',
+            'code' => 'raw',
             'name' => 'Raw Material',
             'of' => 'item',
         ]);
 
         Category::create([
-            'code' => 'comsumable',
+            'code' => 'cons',
             'name' => 'Comsumable',
             'of' => 'item',
         ]);
 
         Category::create([
-            'code' => 'component',
+            'code' => 'comp',
             'name' => 'Component',
             'of' => 'item',
         ]);
@@ -33,6 +33,12 @@ class CategoriesOfItem extends Seeder
         Category::create([
             'code' => 'tool',
             'name' => 'Tool',
+            'of' => 'item',
+        ]);
+
+        Category::create([
+            'code' => 'bdp',
+            'name' => 'Breakdown Part',
             'of' => 'item',
         ]);
     }

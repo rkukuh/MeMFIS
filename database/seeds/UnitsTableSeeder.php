@@ -33,6 +33,24 @@ class UnitsTableSeeder extends Seeder
             'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
         ]);
 
+        Unit::create([
+            'name' => 'Milimeter',
+            'symbol' => 'mm',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Square Meter',
+            'symbol' => 'm2',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Foot',
+            'symbol' => 'ft',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
         /** QUANTITY */
 
         Unit::create([
@@ -71,7 +89,61 @@ class UnitsTableSeeder extends Seeder
             'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
         ]);
 
-        /** WEIGHT */
+        Unit::create([
+            'name' => 'Set',
+            'symbol' => 'set',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Assembly',
+            'symbol' => 'asy',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Kit',
+            'symbol' => 'kit',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Pack',
+            'symbol' => 'pac',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Can',
+            'symbol' => 'can',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Tube',
+            'symbol' => 'tub',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Bottle',
+            'symbol' => 'btl',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Roll',
+            'symbol' => 'rol',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Sheet',
+            'symbol' => 'sht',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        /** WEIGHT / VOLUME */
 
         Unit::create([
             'name' => 'Kilogram',
@@ -88,6 +160,36 @@ class UnitsTableSeeder extends Seeder
         Unit::create([
             'name' => 'Liter',
             'symbol' => 'lt',
+            'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Quart',
+            'symbol' => 'qt',
+            'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Gallon',
+            'symbol' => 'gal',
+            'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Pound',
+            'symbol' => 'lb',
+            'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Pail',
+            'symbol' => 'pai',
+            'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Ounce',
+            'symbol' => 'ons',
             'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
         ]);
     }

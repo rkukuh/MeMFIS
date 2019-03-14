@@ -17,7 +17,7 @@ $factory->define(Quotation::class, function (Faker $faker) {
     $number = $faker->unixTime();
 
     return [
-        'number' => 'QTN-' . $number,
+        'number' => 'QTN-DUM-' . $number,
         'project_id' => function () {
             if (Project::count()) {
                 return Project::get()->random()->id;
@@ -45,7 +45,7 @@ $factory->define(Quotation::class, function (Faker $faker) {
         'total' => rand(10, 100) * 1000000,
         'scheduled_payment_type' => function () {
             if (Type::ofScheduledPayment()->count()) {
-                Type::ofScheduledPayment()->get()->random()->id;
+                return Type::ofScheduledPayment()->get()->random()->id;
             }
 
             return factory(Type::class)->states('scheduled-payment')->create()->id;

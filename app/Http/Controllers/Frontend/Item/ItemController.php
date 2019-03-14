@@ -30,7 +30,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('frontend.item.index');
+        return view('frontend.item.material.index');
     }
 
     /**
@@ -40,7 +40,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('frontend.item.create');
+        return view('frontend.item.material.create');
     }
 
     /**
@@ -69,7 +69,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return view('frontend.item.show', [
+        return view('frontend.item.material.show', [
             'item' => $item,
             'units' => $this->units,
             'categories' => $this->categories,
@@ -86,7 +86,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        return view('frontend.item.edit', [
+        return view('frontend.item.material.edit', [
             'item' => $item,
             'units' => $this->units,
             'categories' => $this->categories,

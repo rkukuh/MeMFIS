@@ -133,6 +133,13 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        Route::namespace('Item')->group(function () {
+
+            Route::resource('tool', 'ToolController');
+
+
+        });
+
         /** CUSTOMER */
 
         Route::namespace('Customer')->group(function () {
