@@ -169,7 +169,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Tangging @include('frontend.common.label.optional')
+                                                Tagging @include('frontend.common.label.optional')
                                             </label>
 
                                             <select id="tag" name="tag" class="form-control m-select2" multiple>
