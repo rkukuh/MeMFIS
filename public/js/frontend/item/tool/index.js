@@ -67,6 +67,15 @@ let Item = {
                     }
                 },
                 {
+                    field: 'caterory',
+                    title: 'Category',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return t.categories[0].name
+                    }
+                },
+                {
                     field: "is_ppn",
                     title: "Taxable?",
                     template: function (t) {
