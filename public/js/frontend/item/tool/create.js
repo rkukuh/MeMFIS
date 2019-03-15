@@ -32,7 +32,7 @@ let Item = {
             let name = $('input[name=name]').val();
             let description = $('#description').val();
             let unit = $('#unit_id').val();
-            let category = $('#category').val();
+            // let category = $('#category').val();
             let manufacturer_id = $('#manufacturer_id').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
             let account_code = $('#account_code').val();
@@ -58,66 +58,80 @@ let Item = {
             }
 
             $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/tool',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    code: code,
-                    name: name,
-                    description: description,
-                    unit_id: unit,
-                    category: category,
-                    is_stock: is_stock,
-                    manufacturer_id: manufacturer_id,
-                    is_ppn: is_ppn,
-                    ppn_amount: ppn_amount,
-                    account_code: account_code,
-                    selectedtags: selectedtags,
-                },
+                url: '/get-categories-item/',
+                type: 'GET',
+                dataType: 'json',
                 success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.code) {
-                            $('#code-error').html(data.errors.code[0]);
+
+                    $.each(data, function (key, value) {
+                        if(value.trim() == 'Tool'.trim()){
+                            category = key;
                         }
+                    });
 
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'post',
+                        url: '/tool',
+                        data: {
+                            _token: $('input[name=_token]').val(),
+                            code: code,
+                            name: name,
+                            description: description,
+                            unit_id: unit,
+                            category: category,
+                            is_stock: is_stock,
+                            manufacturer_id: manufacturer_id,
+                            is_ppn: is_ppn,
+                            ppn_amount: ppn_amount,
+                            account_code: account_code,
+                            selectedtags: selectedtags,
+                        },
+                        success: function (data) {
+                            if (data.errors) {
+                                if (data.errors.code) {
+                                    $('#code-error').html(data.errors.code[0]);
+                                }
+
+                                if (data.errors.name) {
+                                    $('#name-error').html(data.errors.name[0]);
+                                }
+
+                                if (data.errors.unit_id) {
+                                    $('#unit-error').html(data.errors.unit_id[0]);
+                                }
+
+                                if (data.errors.category) {
+                                    $('#category-error').html(data.errors.category[0]);
+                                }
+
+                                if (data.errors.ppn_amount) {
+                                    $('#ppn_amount-error').html(data.errors.ppn_amount[0]);
+                                }
+
+                                document.getElementById('code').value = code;
+                                document.getElementById('name').value = name;
+                                document.getElementById('description').value = description;
+                                document.getElementById('account_code').value = account_code;
+
+                            } else {
+                                errorMessage();
+                                document.getElementById('item-uom').removeAttribute('disabled');
+                                document.getElementById('item-storage_stock').removeAttribute('disabled');
+
+                                $('#item-storage').html(code);
+                                $('#item-unit').html(code);
+
+                                toastr.success('Material has been created.', 'Success', {
+                                    timeOut: 5000
+                                });
+
+                                window.location.href = '/tool/' + data.uuid + '/edit';
+                            }
                         }
-
-                        if (data.errors.unit_id) {
-                            $('#unit-error').html(data.errors.unit_id[0]);
-                        }
-
-                        if (data.errors.category) {
-                            $('#category-error').html(data.errors.category[0]);
-                        }
-
-                        if (data.errors.ppn_amount) {
-                            $('#ppn_amount-error').html(data.errors.ppn_amount[0]);
-                        }
-
-                        document.getElementById('code').value = code;
-                        document.getElementById('name').value = name;
-                        document.getElementById('description').value = description;
-                        document.getElementById('account_code').value = account_code;
-
-                    } else {
-                        errorMessage();
-                        document.getElementById('item-uom').removeAttribute('disabled');
-                        document.getElementById('item-storage_stock').removeAttribute('disabled');
-
-                        $('#item-storage').html(code);
-                        $('#item-unit').html(code);
-
-                        toastr.success('Material has been created.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        window.location.href = '/tool/' + data.uuid + '/edit';
-                    }
+                    });
                 }
             });
         });
