@@ -23,7 +23,7 @@ class ItemController extends Controller
         $this->tags = Tag::getWithType('item');
         $this->units = Unit::ofQuantity()->get();
         $this->manufacturers = Manufacturer::all();
-        $this->categories = Category::ofItem()->get();
+        $this->categories = Category::ofItem()->where('code','<>','tool')->get();
     }
 
     /**
