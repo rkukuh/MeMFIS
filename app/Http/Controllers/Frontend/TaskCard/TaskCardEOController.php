@@ -132,7 +132,7 @@ class TaskCardEOController extends Controller
         return view('frontend.taskcard.nonroutine.eo.edit',[
             'tasks' => $this->task,
             'types' => $this->type,
-            'taskcard' => $taskCard,
+            'taskCard' => $taskCard,
             'taskcards' => $this->taskcard,
             'aircrafts' => $this->aircraft,
             'categories' => $this->categories,

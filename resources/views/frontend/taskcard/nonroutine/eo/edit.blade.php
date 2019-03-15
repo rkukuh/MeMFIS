@@ -61,7 +61,7 @@
                                                     @slot('text', 'Taskcard Number')
                                                     @slot('name', 'number')
                                                     @slot('id_error', 'number')
-                                                    @slot('value',$taskcard->number)
+                                                    @slot('value',$taskCard->number)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -70,7 +70,7 @@
                                                 </label>
 
                                                 <select id="taskcard_non_routine_type" name="taskcard_non_routine_type" class="form-control m-select2" multiple style="width:100%">
-                                                    @if ( empty($taskcard->type_id) )
+                                                    @if ( empty($taskCard->type_id) )
                                                         @foreach ($types as $type)
                                                             <option value="{{ $type->id }}">
                                                                 {{ $type->name }}
@@ -79,7 +79,7 @@
                                                     @else
                                                         @foreach ($types as $type)
                                                             <option value="{{ $type->id }}"
-                                                                @if($type->id == $taskcard->type_id) selected @endif>
+                                                                @if($type->id == $taskCard->type_id) selected @endif>
                                                                 {{ $type->name }}
                                                             </option>
                                                         @endforeach
@@ -98,7 +98,7 @@
                                                     @slot('text', 'Revision')
                                                     @slot('name', 'revision')
                                                     @slot('id_error', 'revision')
-                                                    @slot('value',$taskcard->revision)
+                                                    @slot('value',$taskCard->revision)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -107,7 +107,7 @@
                                                 </label>
 
                                                 <select id="relationship" name="relationship" class="form-control m-select2" multiple style="width:100%">
-                                                @if ($taskcard->related_to->isEmpty())
+                                                @if ($taskCard->related_to->isEmpty())
                                                     @foreach ($taskcards as $taskCard)
                                                         <option value="{{ $taskCard->id }}">
                                                             {{ $taskCard->number }}
@@ -115,7 +115,7 @@
                                                     @endforeach
                                                 @else
                                                     @foreach ($taskcards as $taskCard)
-                                                        <option value="{{ $taskcard->id }}"
+                                                        <option value="{{ $taskCard->id }}"
                                                             @if(in_array( $taskCard->id ,$relation_taskcards)) selected @endif>
                                                             {{ $taskCard->title }}
                                                         </option>
@@ -135,7 +135,7 @@
                                                     @slot('text', 'Title')
                                                     @slot('name', 'title')
                                                     @slot('id_error', 'title')
-                                                    @slot('value',$taskcard->title)
+                                                    @slot('value',$taskCard->title)
                                                 @endcomponent
 
                                             </div>
@@ -146,7 +146,7 @@
                                                 </label>
 
                                                 <select id="applicability_airplane" name="applicability_airplane" class="form-control m-select2" multiple style="width:100%">
-                                                    @if ($taskcard->aircrafts->isEmpty())
+                                                    @if ($taskCard->aircrafts->isEmpty())
                                                         @foreach ($aircrafts as $aircraft)
                                                             <option value="{{ $aircraft->id }}">
                                                                 {{ $aircraft->name }}
@@ -170,7 +170,7 @@
                                                 </label>
 
                                                 <select id="category" name="category" class="form-control m-select2" style="width:100%">
-                                                    @if ( empty($taskcard->category_id))
+                                                    @if ( empty($taskCard->category_id))
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">
                                                                 {{ $category->name }}
@@ -204,12 +204,12 @@
                                                         Threshold @include('frontend.common.label.optional')
                                                     </label>
                                                     <table class="threshold">
-                                                        @if($taskcard->thresholds->isEmpty())
+                                                        @if($taskCard->thresholds->isEmpty())
                                                             <tr>
                                                                 <td width="45%">
                                                                     <input type="text" required="required" class="form-control" name="threshold_amount[]" value=""/>
                                                                 </td>
-                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control select"><option value"">Select Threshold</option>
+                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
                                                                 @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                                 <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
                                                                 @endforeach
@@ -221,14 +221,14 @@
                                                                 </td>
                                                             </tr>
                                                         @else
-                                                            @for($i = 0 ; $i < sizeof($taskcard->thresholds); $i++)
+                                                            @for($i = 0 ; $i < sizeof($taskCard->thresholds); $i++)
                                                             <tr>
                                                                 <td width="45%">
-                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
+                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskCard->thresholds[$i]->amount }}"/>
                                                                 </td>
-                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control select"><option value"">Select Threshold</option>
+                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
                                                                 @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                                <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
+                                                                <option value="{{$maintenanceCycle->uuid}}" @if($taskCard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
                                                                 @endforeach
                                                                 </select></td>
                                                                 <td width="5%">
@@ -253,10 +253,10 @@
                                                         Repeat @include('frontend.common.label.optional')
                                                     </label>
                                                     <table class="repeat">
-                                                        @if($taskcard->repeats->isEmpty())
+                                                        @if($taskCard->repeats->isEmpty())
                                                             <tr>
                                                                 <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value=""/></td>
-                                                                <td width="50%"><select name="repeat_type[]"  class="select form-control select">
+                                                                <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
                                                                 <option value"">Select Repeat</option>
                                                                 @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                                 <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
@@ -269,13 +269,13 @@
                                                                 </td>
                                                             </tr>
                                                         @else
-                                                        @for($i = 0 ; $i < sizeof($taskcard->repeats); $i++)
+                                                        @for($i = 0 ; $i < sizeof($taskCard->repeats); $i++)
                                                         <tr>
-                                                            <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskcard->repeats[$i]->amount }}"/></td>
-                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control select">
+                                                            <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskCard->repeats[$i]->amount }}"/></td>
+                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
                                                             <option value"">Select Repeat</option>
                                                             @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                            <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
+                                                            <option value="{{$maintenanceCycle->uuid}}" @if($taskCard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
                                                             @endforeach
                                                             </select></td>
                                                             <td width="5%">
@@ -304,7 +304,7 @@
                                                 </label>
 
                                                 <select id="scheduled_priority_id" name="scheduled_priority_id" class="form-control m-select2" style="width:100%">
-                                                    @if ( empty($taskcard->scheduled_priority_id))
+                                                    @if ( empty($taskCard->scheduled_priority_id))
                                                         @foreach ($scheduled_priorities as $scheduled_priority)
                                                             <option value="{{ $scheduled_priority->id }}">
                                                                 {{ $scheduled_priority->name }}
@@ -386,7 +386,7 @@
                                                 </label>
 
                                                 <select id="recurrence_id" name="recurrence_id" class="form-control m-select2" style="width:100%">
-                                                     @if ( empty($taskcard->recurrence_id))
+                                                     @if ( empty($taskCard->recurrence_id))
                                                         @foreach ($recurrences as $recurrence)
                                                             <option value="{{ $recurrence->id }}">
                                                                 {{ $recurrence->name }}
@@ -445,7 +445,7 @@
                                                     Manuals Affected @include('frontend.common.label.required')
                                                 </label>
                                                 <select id="manual_affected_id" name="manual_affected_id" class="form-control m-select2" style="width:100%">
-                                                    @if ( empty($taskcard->manual_affected_id) )
+                                                    @if ( empty($taskCard->manual_affected_id) )
                                                         @foreach ($affected_manuals as $affected_manual)
                                                             <option value="{{ $affected_manual->id }}">
                                                                 {{ $affected_manual->name }}
@@ -454,7 +454,7 @@
                                                     @else
                                                         @foreach ($affected_manuals as $affected_manual)
                                                             <option value="{{ $affected_manual->id }}"
-                                                            @if($affected_manual->id == $taskcard->manual_affected_id) selected @endif>
+                                                            @if($affected_manual->id == $taskCard->manual_affected_id) selected @endif>
                                                                 {{ $affected_manual->name }}
                                                             </option>
                                                         @endforeach
@@ -471,7 +471,7 @@
                                                     @slot('name', 'note')
                                                     @slot('text', 'Note')
                                                     @slot('disabled', 'disabled')
-                                                    @slot('value',$taskcard->manual_affected)
+                                                    @slot('value',$taskCard->manual_affected)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -486,7 +486,7 @@
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
                                                     @slot('text', 'Description')
-                                                    @slot('value',$taskcard->description)
+                                                    @slot('value',$taskCard->description)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -686,8 +686,11 @@
         }, false);
         $(document).ready(function () {
           $(".js-example-tags").select2();
-          var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
-          var counterRepeats = {!! sizeof($taskcard->repeats) !!};
+          var counterThresholds = {!! sizeof($taskCard->thresholds) !!};
+          var counterRepeats = {!! sizeof($taskCard->repeats) !!};
+          console.log(counterThresholds);
+          console.log(counterRepeats);
+
           var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
           $("#addrow").on("click", function () {
               var x = 1;
