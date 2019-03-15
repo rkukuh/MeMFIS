@@ -1,24 +1,23 @@
 let TaskCard = {
     init: function () {
-
-        $('#prior_to_date').on('click', function () {
-            $('#date').removeAttr("disabled");
-            $('#hour').prop("disabled", true);
-            $('#cycle').prop("disabled", true);
-        });
-        $('#prior_to_hours').on('click', function () {
-            $('#hour').removeAttr("disabled");
-            $('#date').prop("disabled", true);
-            $('#cycle').prop("disabled", true);
-        });
-        $('#prior_to_cycle').on('click', function () {
-            $('#cycle').removeAttr("disabled");
-            $('#date').prop("disabled", true);
-            $('#hour').prop("disabled", true);
-        });
-
-
         $(document).ready(function () {
+
+            $('#prior_to_date').on('click', function () {
+                $('#date').removeAttr("disabled");
+                $('#hour').prop("disabled", true);
+                $('#cycle').prop("disabled", true);
+            });
+            $('#prior_to_hours').on('click', function () {
+                $('#hour').removeAttr("disabled");
+                $('#date').prop("disabled", true);
+                $('#cycle').prop("disabled", true);
+            });
+            $('#prior_to_cycle').on('click', function () {
+                $('#cycle').removeAttr("disabled");
+                $('#date').prop("disabled", true);
+                $('#hour').prop("disabled", true);
+            });
+
             $('select[name="recurrence_id"]').on('change', function () {
                 if (this.options[this.selectedIndex].text == "Repetitive") {
                 $("#recurrence_div").removeClass("hidden");
@@ -66,7 +65,6 @@ let TaskCard = {
         });
 
         $(document).ready(function () {
-
             $('.btn-success').removeClass('add');
 
         });
@@ -125,41 +123,6 @@ let TaskCard = {
             $('input[name^="repeat_amount"]').each(function(i) {
                 repeat_amount[i] = $(this).val();
             });
-            
-            // let task_type_id = $('#task_type_id').val();
-            // let otr_certification = $('#otr_certification').val();
-            // let manhour = $('input[name=manhour]').val();
-            // let performa = $('input[name=performa]').val();
-            // let helper_quantity = $('input[name=helper_quantity]').val();
-            // let work_area = $('#work_area').val();
-            // let access = $('#access').val();
-            // let zone = $('#zone').val();
-            // let source = $('input[name=source]').val();
-            // let version = $('#version').val();
-            // let effectivity = $('input[name=effectivity]').val();
-
-            // if ($('#applicability_airplane :selected').length > 0) {
-            //     var applicability_airplanes = [];
-
-            //     $('#applicability_airplane :selected').each(function (i, selected) {
-            //         applicability_airplanes[i] = $(selected).val();
-            //     });
-            // }
-
-
-
-
-            // if (document.getElementById("is_applicability_engine_all").checked) {
-            //     is_applicability_engine_all = 1;
-            // } else {
-            //     is_applicability_engine_all = 0;
-            // }
-
-            // if (document.getElementById("is_rii").checked) {
-            //     is_rii = 1;
-            // } else {
-            //     is_rii = 0;
-            // }
 
             $.ajax({
                 headers: {

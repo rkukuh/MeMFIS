@@ -40,6 +40,7 @@ class TaskCardEOController extends Controller
         $this->recurrences = Type::ofTaskCardEORecurrence()->get();
         $this->scheduled_priorities = Type::ofTaskCardEOScheduledPriority()->get();
         $this->affected_manuals = Type::ofTaskCardEOManualAffected()->get();
+        $this->maintenanceCycle = Type::ofMaintenanceCycle()->get();
     }
     /**
      * Display a listing of the resource.
@@ -58,10 +59,8 @@ class TaskCardEOController extends Controller
      */
     public function create()
     {
-        $maintenanceCycle = Type::ofMaintenanceCycle()->get();
-
         return view('frontend.taskcard.nonroutine.eo.create', [
-            'MaintenanceCycles' => $maintenanceCycle,
+            'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
     }
 
@@ -142,6 +141,7 @@ class TaskCardEOController extends Controller
             'relation_taskcards' => $relation_taskcards,
             'scheduled_priorities' => $this->scheduled_priorities,
             'affected_manuals' => $this->affected_manuals,
+            'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
     }
 
@@ -157,6 +157,20 @@ class TaskCardEOController extends Controller
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             $taskCard->related_to()->sync($request->relationship);
+            $taskCard->thresholds()->delete();
+            $taskCard->repeats()->delete();
+            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                $taskCard->thresholds()->save(new Threshold([
+                    'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                    'amount' => $request->threshold_amount[$i],
+                ]));
+            }
+            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                $taskCard->repeats()->save(new Repeat([
+                    'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                    'amount' => $request->repeat_amount[$i],
+                ]));
+            }
 
             return response()->json($taskCard);
         }
