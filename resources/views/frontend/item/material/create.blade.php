@@ -352,7 +352,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/category-material.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js') }}"></script>

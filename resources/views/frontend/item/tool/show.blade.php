@@ -108,7 +108,7 @@
                                                 @slot('text', $item->unit->name)
                                             @endcomponent
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">
                                                 Category
                                             </label>
@@ -121,9 +121,6 @@
                                                 @endcomponent
                                             @endif
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Tagging
@@ -141,6 +138,9 @@
                                                 @endif
                                             </div>
                                         </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Manufactur
@@ -154,9 +154,6 @@
                                                 @endcomponent
                                             @endif
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
