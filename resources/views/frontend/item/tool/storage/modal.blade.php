@@ -41,12 +41,14 @@
                                     @slot('name', 'item_storage_id')
                                 @endcomponent
 
-                                @component('frontend.common.buttons.create-new')
-                                    @slot('size', 'sm')
-                                    @slot('text', 'add storage')
-                                    @slot('style', 'margin-top: 10px;')
-                                    @slot('data_target', '#modal_storage')
-                                @endcomponent
+                                <div class="hidden">
+                                    @component('frontend.common.buttons.create-new')
+                                        @slot('size', 'sm')
+                                        @slot('text', 'add storage')
+                                        @slot('style', 'margin-top: 10px;')
+                                        @slot('data_target', '#modal_storage')
+                                    @endcomponent
+                                </div>
                             </div>
 
                         </div>

@@ -126,6 +126,23 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
+                                                Tagging
+                                            </label>
+
+                                            <div>
+                                                @if ($item->tags->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($item->tags as $tag)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $tag->name)
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
                                                 Manufactur
                                             </label>
 
@@ -137,6 +154,9 @@
                                                 @endcomponent
                                             @endif
                                         </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
@@ -173,7 +193,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="form-group m-form__group row">
+                                    <div class="form-group m-form__group row hidden">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Account Code
@@ -190,23 +210,6 @@
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row" style="display: none">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Tag
-                                            </label>
-
-                                            <div>
-                                                @if ($item->tags->isEmpty())
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @else
-                                                    @foreach ($item->tags as $tag)
-                                                        @component('frontend.common.label.badge')
-                                                            @slot('text', $tag->name)
-                                                        @endcomponent
-                                                    @endforeach
-                                                @endif
-                                            </div>
-                                        </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Photos
@@ -246,7 +249,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; UoM (Unit of Measurement)
+                                    Unit Conversion Table
                                 </h3>
                             </div>
                         </div>
@@ -268,7 +271,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; Storage Stock
+                                    Warehouse Stock Management
                                 </h3>
                             </div>
                         </div>

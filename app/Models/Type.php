@@ -272,6 +272,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of TaskCard's type.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardTypeSI(Builder $query)
+    {
+        return $query->where('of', 'taskcard-type-non-routine')
+                     ->where('code', 'si')
+                     ->where('code', '<>', 'htcrr');
+    }
+
+    /**
      * Scope a query to only include type of Term of Payment.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
