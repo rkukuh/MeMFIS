@@ -32,9 +32,9 @@ class TaskCardRoutineStore extends FormRequest
             'type_id' => 'required',
             'task_id' => 'required',
             'estimation_manhour' => 'required',
-            'performance_factor' => 'required',
+            'performance_factor' => 'required|gte:estimation_manhour',
             'otr_certification' => 'required',
-            'applicability_airplane.*' => 'required',
+            'applicability_airplane' => 'required',
         ];
     }
 
