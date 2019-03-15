@@ -58,6 +58,21 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function categoriesMaterial()
+    {
+        $categories = Category::ofItem()
+                              ->where('code','<>','tool')
+                              ->pluck('name', 'id');
+
+        return json_encode($categories);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function categorieTakcard()
     {
         $categories = Category::ofTaskCardEO()
