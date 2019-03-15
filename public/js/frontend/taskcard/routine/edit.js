@@ -704,6 +704,32 @@ let TaskCard = {
             var JsonVersion = JSON.stringify(version);
             let effectivity = $('input[name=effectivity]').val();
             let description = $('#description').val();
+
+            let threshold_type = [];
+            $('select[name^="threshold_type"]').each(function(i) {
+                if( $(this).val()){
+                threshold_type[i] = $(this).val();
+                }
+            });
+            let repeat_type = [];
+            $('select[name^="repeat_type"]').each(function(i) {
+                if( $(this).val()){
+                repeat_type[i] = $(this).val();
+                }
+            });
+            let threshold_amount = [];
+            $('input[name^="threshold_amount"]').each(function(i) {
+                if( $(this).val()){
+                threshold_amount[i] = $(this).val();
+                }
+            });
+            let repeat_amount = [];
+            $('input[name^="repeat_amount"]').each(function(i) {
+                if( $(this).val()){
+                repeat_amount[i] = $(this).val();
+                }
+            });
+            
             if ($('#applicability_airplane :selected').length > 0) {
                 let applicability_airplanes = [];
 
@@ -781,6 +807,11 @@ let TaskCard = {
                     access: access,
                     zone: zone,
                     relationship: relationship,
+
+                    threshold_amount: threshold_amount,
+                    threshold_type: threshold_type,
+                    repeat_amount: repeat_amount,
+                    repeat_type: repeat_type,
                 },
                 success: function (data) {
                     if (data.errors) {

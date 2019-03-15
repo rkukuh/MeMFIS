@@ -206,7 +206,19 @@
                                                     <table class="threshold">
                                                         @if($taskcard->thresholds->isEmpty())
                                                             <tr>
-                                                                <td>{{ $MaintenanceCycles }}</td>
+                                                                <td width="45%">
+                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]" value=""/>
+                                                                </td>
+                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control select"><option value"">Select Threshold</option>
+                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                                <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                                @endforeach
+                                                                </select></td>
+                                                                <td width="5%">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('id', 'addrow')
+                                                                @endcomponent
+                                                                </td>
                                                             </tr>
                                                         @else
                                                             @for($i = 0 ; $i < sizeof($taskcard->thresholds); $i++)
@@ -214,7 +226,7 @@
                                                                 <td width="45%">
                                                                     <input type="text" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
                                                                 </td>
-                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control select"><option value"">Select Threshold</option>
                                                                 @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                                 <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
                                                                 @endforeach
@@ -225,7 +237,10 @@
                                                                             @slot('id', 'addrow')
                                                                         @endcomponent
                                                                     @else
-                                                                    <div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div>
+                                                                        @component('frontend.common.buttons.delete_repeater')
+                                                                            @slot('id', 'addrow')
+                                                                            @slot('class', 'ibtnDel')
+                                                                        @endcomponent
                                                                     @endif
                                                                 </td>
                                                             </tr>
@@ -240,13 +255,24 @@
                                                     <table class="repeat">
                                                         @if($taskcard->repeats->isEmpty())
                                                             <tr>
-                                                                <td>{{ $MaintenanceCycles }}</td>
+                                                                <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value=""/></td>
+                                                                <td width="50%"><select name="repeat_type[]"  class="select form-control select">
+                                                                <option value"">Select Repeat</option>
+                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                                <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                                @endforeach
+                                                                </select></td>
+                                                                <td width="5%">
+                                                                    @component('frontend.common.buttons.create_repeater')
+                                                                        @slot('id', 'addrow2')
+                                                                    @endcomponent
+                                                                </td>
                                                             </tr>
                                                         @else
                                                         @for($i = 0 ; $i < sizeof($taskcard->repeats); $i++)
                                                         <tr>
                                                             <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskcard->repeats[$i]->amount }}"/></td>
-                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control select">
                                                             <option value"">Select Repeat</option>
                                                             @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                             <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
@@ -260,6 +286,7 @@
                                                                 @else
                                                                     @component('frontend.common.buttons.delete_repeater')
                                                                         @slot('id', 'addrow2')
+                                                                        @slot('class', 'ibtnDel')
                                                                     @endcomponent
                                                                 @endif
                                                             </td>
@@ -661,8 +688,6 @@
           $(".js-example-tags").select2();
           var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
           var counterRepeats = {!! sizeof($taskcard->repeats) !!};
-          console.log(counterThresholds);
-          console.log(counterRepeats);
           var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
           $("#addrow").on("click", function () {
               var x = 1;
@@ -691,6 +716,7 @@
                   counterThresholds -= 1
               }
           });
+
           $("#addrow2").on("click", function () {
                 var x = 1;
                 var newRow = $("<tr>");
@@ -717,7 +743,7 @@
                     $(this).closest("tr").remove();
                     counterRepeats -= 1
                 }
-            });
+        });
 
         var view_scheduled_priority_id = $('select[name="scheduled_priority_id"]').val();
         var view_recurrence_id = $('select[name="recurrence_id"]').val();
