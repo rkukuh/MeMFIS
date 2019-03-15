@@ -33,6 +33,8 @@ class TaskCardRoutineUpdate extends FormRequest
             'task_id' => 'required',
             'estimation_manhour' => 'required',
             'performance_factor' => 'required',
+            'otr_certification' => 'required',
+            'applicability_airplane.*' => 'required',
         ];
     }
 

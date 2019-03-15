@@ -823,8 +823,8 @@ let TaskCard = {
                             $('#number-error').html(data.errors.number[0]);
                         }
 
-                        if (data.errors.taskcard_routine_type) {
-                            $('#taskcard_routine_type-error').html(data.errors.taskcard_routine_type[0]);
+                        if (data.errors.type_id) {
+                            $('#taskcard_routine_type-error').html(data.errors.type_id[0]);
                         }
 
                         if (data.errors.skill_id) {
@@ -835,8 +835,8 @@ let TaskCard = {
                             $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
                         }
 
-                        if (data.errors.task_type_id) {
-                            $('#task_type_id-error').html(data.errors.task_type_id[0]);
+                        if (data.errors.task_id) {
+                            $('#task_type_id-error').html(data.errors.task_id[0]);
                         }
 
                         if (data.errors.manhour) {

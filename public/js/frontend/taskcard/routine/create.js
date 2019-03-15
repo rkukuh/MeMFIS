@@ -80,7 +80,6 @@ let TaskCard = {
             } else {
                 is_rii = 0;
             }
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -125,20 +124,20 @@ let TaskCard = {
                             $('#number-error').html(data.errors.number[0]);
                         }
 
-                        if (data.errors.taskcard_routine_type) {
-                            $('#taskcard_routine_type-error').html(data.errors.taskcard_routine_type[0]);
+                        if (data.errors.type_id) {
+                            $('#taskcard_routine_type-error').html(data.errors.type_id[0]);
                         }
 
-                        if (data.errors.skill_id) {
-                            $('#otr-certification-error').html(data.errors.skill_id[0]);
+                        if (data.errors.otr_certification) {
+                            $('#otr-certification-error').html(data.errors.otr_certification[0]);
                         }
 
                         if (data.errors.applicability_airplane) {
                             $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
                         }
 
-                        if (data.errors.task_type_id) {
-                            $('#task_type_id-error').html(data.errors.task_type_id[0]);
+                        if (data.errors.task_id) {
+                            $('#task_type_id-error').html(data.errors.task_id[0]);
                         }
 
                         if (data.errors.manhour) {
