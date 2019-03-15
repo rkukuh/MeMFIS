@@ -134,7 +134,7 @@
                                             <div class="form-control-feedback text-danger" id="unit-error"></div>
 
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                                             <label class="form-control-label">
                                                 Category @include('frontend.common.label.required')
                                             </label>
@@ -164,9 +164,6 @@
                                                 @include('frontend.category.modal')
                                             </div>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Tangging @include('frontend.common.label.optional')
@@ -192,6 +189,9 @@
                                                 @endif
                                             </select>
                                         </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Manufacturer @include('frontend.common.label.optional')
@@ -221,9 +221,6 @@
 
                                             @include('frontend.manufacturer.modal')
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
@@ -266,6 +263,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row hidden">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
