@@ -402,7 +402,7 @@
                                                     @endif
                                                 </select>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6  hidden" id="recurrence_div">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="recurrence_div">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
@@ -417,9 +417,9 @@
                                                             @slot('value',$taskCard->recurrence_amount)
                                                         @endcomponent
                                                     </div>
-                                                </div>
+                                                
                                                     <div class="col-sm-8 col-md-8 col-lg-8">
-                                                        <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control m-select2" disabled>
+                                                        <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
                                                             <option value="">
                                                                 Select a Recurrence
                                                             </option>
@@ -438,6 +438,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -688,8 +689,6 @@
           $(".js-example-tags").select2();
           var counterThresholds = {!! sizeof($taskCard->thresholds) !!};
           var counterRepeats = {!! sizeof($taskCard->repeats) !!};
-          console.log(counterThresholds);
-          console.log(counterRepeats);
 
           var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
           $("#addrow").on("click", function () {
