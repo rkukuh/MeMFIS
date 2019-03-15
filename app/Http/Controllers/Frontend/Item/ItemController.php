@@ -54,9 +54,11 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
+        $tags = [];
+        foreach($request->selectedtags as $selectedtags ){ array_push($tmp,Tag::findOrCreate($selectedtags)->id);}
         if ($item = Item::create($request->all())) {
             $item->categories()->attach($request->category);
-            $item->tags()->sync($request->selectedtags);
+            $item->syncTags($tags);
 
             return response()->json($item);
         }
@@ -121,9 +123,11 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
+        $tags = [];
+        foreach($request->selectedtags as $selectedtags ){ array_push($tmp,Tag::findOrCreate($selectedtags)->id);}
         if ($item->update($request->all())) {
             $item->categories()->sync($request->category);
-            $item->tags()->sync($request->selectedtags);
+            $item->syncTags($tags);
 
             return response()->json($item);
         }

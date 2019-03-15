@@ -54,9 +54,11 @@ class ToolController extends Controller
      */
     public function store(ItemStore $request)
     {
+        $tags = [];
+        foreach($request->selectedtags as $selectedtags ){ array_push($tmp,Tag::findOrCreate($selectedtags)->id);}
         if ($tool = Item::create($request->all())) {
             $tool->categories()->attach($request->category);
-            $tool->tags()->sync($request->selectedtags);
+            $tool->syncTags($tags);
 
             return response()->json($tool);
         }
@@ -114,9 +116,11 @@ class ToolController extends Controller
      */
     public function update(ItemUpdate $request, Item $tool)
     {
+        $tags = [];
+        foreach($request->selectedtags as $selectedtags ){ array_push($tmp,Tag::findOrCreate($selectedtags)->id);}
         if ($tool->update($request->all())) {
             $tool->categories()->sync($request->category);
-            $tool->tags()->sync($request->selectedtags);
+            $tool->syncTags($tags);
 
             return response()->json($tool);
         }
