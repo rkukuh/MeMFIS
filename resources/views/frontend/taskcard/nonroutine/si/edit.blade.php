@@ -209,6 +209,104 @@
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Threshold @include('frontend.common.label.optional')
+                                                    </label>
+                                                    <table class="threshold">
+                                                        @if($taskcard->thresholds->isEmpty())
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]" value=""/>
+                                                                </td>
+                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                                <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                                @endforeach
+                                                                </select></td>
+                                                                <td width="5%">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('id', 'addrow')
+                                                                @endcomponent
+                                                                </td>
+                                                            </tr>
+                                                        @else
+                                                            @for($i = 0 ; $i < sizeof($taskcard->thresholds); $i++)
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
+                                                                </td>
+                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                                <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
+                                                                @endforeach
+                                                                </select></td>
+                                                                <td width="5%">
+                                                                    @if($i < 1)
+                                                                        @component('frontend.common.buttons.create_repeater')
+                                                                            @slot('id', 'addrow')
+                                                                        @endcomponent
+                                                                    @else
+                                                                        @component('frontend.common.buttons.delete_repeater')
+                                                                            @slot('id', 'addrow')
+                                                                            @slot('class', 'ibtnDel')
+                                                                        @endcomponent
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                            @endfor
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Repeat @include('frontend.common.label.optional')
+                                                    </label>
+                                                    <table class="repeat">
+                                                        @if($taskcard->repeats->isEmpty())
+                                                            <tr>
+                                                                <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value=""/></td>
+                                                                <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                                <option value"">Select Repeat</option>
+                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                                <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                                @endforeach
+                                                                </select></td>
+                                                                <td width="5%">
+                                                                    @component('frontend.common.buttons.create_repeater')
+                                                                        @slot('id', 'addrow2')
+                                                                    @endcomponent
+                                                                </td>
+                                                            </tr>
+                                                        @else
+                                                        @for($i = 0 ; $i < sizeof($taskcard->repeats); $i++)
+                                                        <tr>
+                                                            <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskcard->repeats[$i]->amount }}"/></td>
+                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                            <option value"">Select Repeat</option>
+                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                            <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
+                                                            @endforeach
+                                                            </select></td>
+                                                            <td width="5%">
+                                                                @if($i < 1)
+                                                                    @component('frontend.common.buttons.create_repeater')
+                                                                        @slot('id', 'addrow2')
+                                                                    @endcomponent
+                                                                @else
+                                                                    @component('frontend.common.buttons.delete_repeater')
+                                                                        @slot('id', 'addrow2')
+                                                                        @slot('class', 'ibtnDel')
+                                                                    @endcomponent
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        @endfor
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
                                                     Instruction @include('frontend.common.label.required')

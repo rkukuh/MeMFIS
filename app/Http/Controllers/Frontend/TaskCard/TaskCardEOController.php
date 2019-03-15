@@ -157,8 +157,8 @@ class TaskCardEOController extends Controller
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             $taskCard->related_to()->sync($request->relationship);
-            $taskCard->thresholds()->delete();
-            $taskCard->repeats()->delete();
+            if($taskCard->thresholds)$taskCard->thresholds()->delete();
+            if($taskCard->repeats)$taskCard->repeats()->delete();
             for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
                 $taskCard->thresholds()->save(new Threshold([
                     'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
