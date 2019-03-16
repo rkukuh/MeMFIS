@@ -1,4 +1,4 @@
-@extends('frontend.master') 
+@extends('frontend.master')
 @section('content')
 <div id="content-div">
     {{--
@@ -28,10 +28,10 @@
                             <div class="col-md-6">
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.numeric') 
-                                            @slot('id', 'numeric') 
-                                            @slot('text', 'numeric') 
-                                            @slot('name', 'numeric') 
+                                        @component('frontend.common.input.numeric')
+                                            @slot('id', 'numeric')
+                                            @slot('text', 'numeric')
+                                            @slot('name', 'numeric')
                                         @endcomponent
 
                                         <div class="form-group m-form__group row ">
@@ -40,13 +40,15 @@
                                                                         Email
     @include('frontend.common.label.required')
                                                                     </label>
-                                                <div id="m_repeater_1a">
+                                                                    <input type="file" id="largeImage" name="name">
+                                                {{-- <div id="m_repeater_1a">
                                                     <div class="" id="m_repeater_1a">
                                                         <div data-repeater-list="">
                                                             <div data-repeater-item class="row">
                                                                 <div class="form-group m-form__group row align-items-center">
                                                                     <div class="col-md-6">
-                                                                        {{-- <input type="file" id="largeImage" name="name">                                                                        --}} @component('frontend.common.input.upload') @slot('id',
+                                                                        <input type="file" id="largeImage" name="name">
+                                                                                                                                               @component('frontend.common.input.upload') @slot('id',
                                                                         'largeImage') @slot('name', 'name') @endcomponent
 
                                                                     </div>
@@ -72,7 +74,7 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
 
@@ -101,7 +103,7 @@
 
 
                                         <label class="form-control-label">
-                                                        Email 
+                                                        Email
                                                     </label> {{-- @component('frontend.common.input.email')
                                         @slot('id', 'email') @slot('text', 'Email') @slot('name', 'email') @endcomponent
                                         --}}
@@ -110,7 +112,7 @@
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
-                                                        Message 
+                                                        Message
                                                     </label> {{-- @component('frontend.common.input.textarea')
                                         @slot('rows', '3') @slot('id', 'message') @slot('name', 'message') @slot('text',
                                         'Message') @slot('description', 'text') @endcomponent --}}
@@ -134,7 +136,7 @@
 </div> --}}
 @endsection
  @push('footer-scripts')
- 
+
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
 
 {{--
