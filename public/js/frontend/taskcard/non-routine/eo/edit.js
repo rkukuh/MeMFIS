@@ -298,6 +298,7 @@ let TaskCard = {
         });
 
         $('.add-threshold').on('click', function () {
+            let taskcard_uuid = $('#uuid').val();
             let amount = $('input[name=threshold_amount]').val();
             let threshold_type = $('#threshold_type').val();
 
@@ -342,6 +343,7 @@ let TaskCard = {
         });
 
         $('.add-repeat').on('click', function () {
+            let taskcard_uuid = $('#uuid').val();
             let amount = $('input[name=repeat_amount]').val();
             let repeat_type = $('#repeat_type').val();
 
@@ -699,6 +701,7 @@ let TaskCard = {
         $('.instruction_datatable').on('click', '.edit', function () {
             instruction_reset();
             save_changes_button();
+            let taskcard_uuid = $('#uuid').val();
 
             let triggeruuid3 = $(this).data('instruction_uuid');
             // alert(triggeruuid3);
@@ -768,6 +771,7 @@ let TaskCard = {
 
         });
         $('.modal-footer').on('click', '.edit-instruction', function () {
+            let taskcard_uuid = $('#uuid').val();
             let eo_uuid = $('input[name=uuid]').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
@@ -864,6 +868,7 @@ let TaskCard = {
         });
 
         $('.modal-footer-instruction').on('click', '.add-instruction', function () {
+            let taskcard_uuid = $('#uuid').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
             let performa = $('input[name=performa]').val();
@@ -1004,6 +1009,7 @@ let TaskCard = {
             });
         });
         let remove = $('.instruction_datatable').on('click', '.delete', function () {
+            let taskcard_uuid = $('#uuid').val();
             let triggeruuid = $(this).data('uuid');
 
             swal({
@@ -1118,6 +1124,7 @@ $(document).ready(function () {
 
 
 $('.footer').on('click', '.add-taskcard', function () {
+    let taskcard_uuid = $('#uuid').val();
     // taskcard_reset();
     let title = $('input[name=title]').val();
     let number = $('input[name=number]').val();
