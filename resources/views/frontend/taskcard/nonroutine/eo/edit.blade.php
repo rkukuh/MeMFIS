@@ -52,6 +52,8 @@
                                     <div class="m-portlet__body">
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid" value ="{{$taskCard->uuid}}">
+
                                                 <label class="form-control-label">
                                                     EO Number  @include('frontend.common.label.required')
                                                 </label>
@@ -417,7 +419,7 @@
                                                             @slot('value',$taskCard->recurrence_amount)
                                                         @endcomponent
                                                     </div>
-                                                
+
                                                     <div class="col-sm-8 col-md-8 col-lg-8">
                                                         <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
                                                             <option value="">
@@ -528,48 +530,6 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Instructions
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-tools-center">
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Instructions')
-                                            @slot('id', 'instructions')
-                                            @slot('data_target', '#modal_instruction')
-                                        @endcomponent
-
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @include('frontend.taskcard.nonroutine.eo.instruction.modal')
-                            @include('frontend.taskcard.nonroutine.eo.tool.index')
-                            @include('frontend.taskcard.nonroutine.eo.tool.modal')
-                            @include('frontend.taskcard.nonroutine.eo.item.index')
-                            @include('frontend.taskcard.nonroutine.eo.item.modal')
-
-                            <div class="instruction_datatable" id="instruction_datatable"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                @include('frontend.common.label.datalist')
-
-                                <h3 class="m-portlet__head-text">
                                     Threshold
                                 </h3>
                             </div>
@@ -632,6 +592,52 @@
                             @include('frontend.taskcard.routine.repeat.modal')
 
                             <div class="repeat_datatable" id="item_datatable"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Instructions
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-tools-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('text', 'Instructions')
+                                            @slot('id', 'instructions')
+                                            @slot('data_target', '#modal_instruction')
+                                        @endcomponent
+
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @include('frontend.taskcard.nonroutine.eo.instruction.modal')
+                            @include('frontend.taskcard.nonroutine.eo.tool.index')
+                            @include('frontend.taskcard.nonroutine.eo.tool.modal')
+                            @include('frontend.taskcard.nonroutine.eo.item.index')
+                            @include('frontend.taskcard.nonroutine.eo.item.modal')
+
+                            <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -753,7 +759,7 @@
 
         let rdo_Scheduled = '{{$taskCard->scheduled_priority_type}}';
         let amount_Scheduled = '{{$taskCard->scheduled_priority_amount}}';
-        
+
         if(view_manual_affected_id == 66){
             $("#prior_to").removeClass("hidden");
             $('#prior_to_date').removeAttr("disabled");
@@ -781,21 +787,18 @@
                     $("#hour").val(amount_Scheduled);
                     $("#hour").removeAttr("disabled");
                     break;
-                
+
             }
         }
         if(view_scheduled_priority_id == 73){
             $("#note_div").removeClass("hidden");
             $('#note').removeAttr("disabled");
         }
-        
-        
+
+
         });
     </script>
 
-    <script>
-        let taskcard_uuid = '{{$taskCard->uuid}}';
-    </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
