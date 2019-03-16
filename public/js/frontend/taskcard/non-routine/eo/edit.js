@@ -1,6 +1,7 @@
 
 let TaskCard = {
     init: function () {
+        let taskcard_uuid = $('#uuid').val();
         $('.instruction_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -1264,7 +1265,7 @@ $('.footer').on('click', '.add-taskcard', function () {
                 if (data.errors.taskcard_non_routine_type) {
                     $('#taskcard_non_routine_type-error').html(data.errors.taskcard_non_routine_type[0]);
                 }
-                
+
                 if (data.errors.category) {
                     $('#category-error').html(data.errors.category[0]);
                 }
