@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class TaskCard extends MemfisModel
+class TaskCard extends MemfisModel implements HasMedia
 {
+    use HasMediaTrait;
+
     protected $table = 'taskcards';
 
     protected $fillable = [
@@ -39,6 +44,21 @@ class TaskCard extends MemfisModel
         'manual_affected_id',
         'manual_affected',
     ];
+
+    /***************************************** OVERRIDE *******************************************/
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('taskcard')
+             ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+             ->width(45)
+             ->height(45);
+    }
 
     /*************************************** RELATIONSHIP ****************************************/
 
