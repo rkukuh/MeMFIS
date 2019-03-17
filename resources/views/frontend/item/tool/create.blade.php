@@ -144,7 +144,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Tangging @include('frontend.common.label.optional')
+                                                Tagging @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.select2')

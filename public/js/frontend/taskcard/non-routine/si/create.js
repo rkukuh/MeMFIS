@@ -99,20 +99,20 @@ let TaskCard = {
                                     $('#number-error').html(data.errors.number[0]);
                                 }
 
-                                if (data.errors.skill_id) {
-                                    $('#otr-certification-skill_id').html(data.errors.skill_id[0]);
+                                if (data.errors.otr_certification) {
+                                    $('#otr-certification-error').html(data.errors.otr_certification[0]);
                                 }
 
                                 if (data.errors.applicability_airplane) {
-                                    $('#applicability_airplane-error').html(data.errors.applicability_airplane[0]);
+                                    $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
                                 }
 
                                 if (data.errors.manhour) {
                                     $('#manhour-error').html(data.errors.manhour[0]);
                                 }
 
-                                if (data.errors.description) {
-                                    $('#instruction-error').html(data.errors.description[0]);
+                                if (data.errors.instruction) {
+                                    $('#instruction-error').html(data.errors.instruction[0]);
                                 }
 
 

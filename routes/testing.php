@@ -30,12 +30,28 @@ Route::name('testing.')->group(function () {
 
         Route::post('/post',function (Illuminate\Http\Request $request)
         {
-                        $taskcards  = App\Models\TaskCard::find(1);
-                        // dd($taskcards);
-                        $taskcards->addMediaFromRequest('fileInput')
-                        ->toMediaCollection('taskcard');
+                        // $taskcards  = App\Models\TaskCard::find(1);
+                        // // dd($taskcards);
+                        // $taskcards->addMediaFromRequest('fileInput')
+                        // ->toMediaCollection('taskcard');
 
-            // dd($request->all());
+                        if ($request->hasFile('fileInput')) {
+                            // your code here
+                            $data = $request->input('image');
+$photo = $request->file('fileInput')->getClientOriginalName();
+$destination = base_path() . '/public/uploads';
+// $request->file('fileInput')->move($destination, $photo);
+Storage::disk('local')->put('images/1/smalls'.'/tes', $request->file('fileInput'), 'public');
+                        }
+                        else{
+                            dd('not');
+                        }
+
+                        // $uniqueFileName = uniqid() . $request->get('fileInput')->getClientOriginalName() . '.' . $request->get('fileInput')->getClientOriginalExtension();
+
+                        // $request->get('fileInput')->move(public_path('files') . $uniqueFileName);
+
+                        // dd($request->all());
             // $length_request=count($request->all())-1;
             // if($length_request==0){
             //     //
