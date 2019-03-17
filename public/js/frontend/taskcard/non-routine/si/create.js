@@ -118,7 +118,7 @@ let TaskCard = {
 
                                 document.getElementById('title').value = title;
                                 document.getElementById('number').value = number;
-                                document.getElementById('skill_id').value = skill_id;
+                                document.getElementById('otr_certification').value = otr_certification;
                                 document.getElementById('applicability_airplane').value = applicability_airplane;
                                 document.getElementById('work_area').value = work_area;
                                 document.getElementById('manhour').value = manhour;
