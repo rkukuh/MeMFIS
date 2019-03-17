@@ -52,7 +52,7 @@
                                     <div class="m-portlet__body">
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid" value ="{{$taskCard->uuid}}">
+                                                <input type="hidden" class="form-control form-control-danger m-input" name="uuid_taskcard" id="uuid_taskcard" value ="{{$taskCard->uuid}}">
 
                                                 <label class="form-control-label">
                                                     EO Number  @include('frontend.common.label.required')
