@@ -32,7 +32,7 @@ class TaskCardSIStore extends FormRequest
             'estimation_manhour' => 'required',
             'performance_factor' => 'required|gte:estimation_manhour',
             'description' => 'required',
-            'otr_certification' => 'required',
+            'skill_id' => 'required',
             'applicability_airplane' => 'required',
         ];
     }
