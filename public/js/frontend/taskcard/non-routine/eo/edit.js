@@ -1,7 +1,7 @@
 
 let TaskCard = {
     init: function () {
-        let taskcard_uuid = $('#uuid').val();
+        let taskcard_uuid = $('#uuid_taskcard').val();
         $('.instruction_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -298,7 +298,7 @@ let TaskCard = {
         });
 
         $('.add-threshold').on('click', function () {
-            let taskcard_uuid = $('#uuid').val();
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let amount = $('input[name=threshold_amount]').val();
             let threshold_type = $('#threshold_type').val();
 
@@ -343,7 +343,7 @@ let TaskCard = {
         });
 
         $('.add-repeat').on('click', function () {
-            let taskcard_uuid = $('#uuid').val();
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let amount = $('input[name=repeat_amount]').val();
             let repeat_type = $('#repeat_type').val();
 
@@ -701,7 +701,7 @@ let TaskCard = {
         $('.instruction_datatable').on('click', '.edit', function () {
             instruction_reset();
             save_changes_button();
-            let taskcard_uuid = $('#uuid').val();
+            let taskcard_uuid = $('#uuid_taskcard').val();
 
             let triggeruuid3 = $(this).data('instruction_uuid');
             // alert(triggeruuid3);
@@ -771,7 +771,7 @@ let TaskCard = {
 
         });
         $('.modal-footer').on('click', '.edit-instruction', function () {
-            let taskcard_uuid = $('#uuid').val();
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let eo_uuid = $('input[name=uuid]').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
@@ -868,7 +868,7 @@ let TaskCard = {
         });
 
         $('.modal-footer-instruction').on('click', '.add-instruction', function () {
-            let taskcard_uuid = $('#uuid').val();
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
             let performa = $('input[name=performa]').val();
@@ -1008,8 +1008,94 @@ let TaskCard = {
                 }
             });
         });
+        $('.threshold_datatable').on('click', '.delete-threshold', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
+            let threshold_uuid = $(this).data('threshold_uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + threshold_uuid+'/threshold/',
+                        success: function (data) {
+                            toastr.success('Takscard Tool has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.threshold_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+        $('.repeat_datatable').on('click', '.repeat-delete', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
+            let repeat_uuid = $(this).data('repeat_uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + repeat_uuid+'/repeat/',
+                        success: function (data) {
+                            toastr.success('Takscard Tool has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.repeat_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
         let remove = $('.instruction_datatable').on('click', '.delete', function () {
-            let taskcard_uuid = $('#uuid').val();
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let triggeruuid = $(this).data('uuid');
 
             swal({
@@ -1124,7 +1210,7 @@ $(document).ready(function () {
 
 
 $('.footer').on('click', '.add-taskcard', function () {
-    let taskcard_uuid = $('#uuid').val();
+    let taskcard_uuid = $('#uuid_taskcard').val();
     // taskcard_reset();
     let title = $('input[name=title]').val();
     let number = $('input[name=number]').val();
