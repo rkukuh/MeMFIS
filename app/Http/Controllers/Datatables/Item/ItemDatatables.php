@@ -18,7 +18,7 @@ class ItemDatatables extends Controller
     {
         $items = Item::with('unit', 'journal','categories')
         ->whereHas('categories', function ($query) {
-            $query->where('code', 'raw');
+            $query->where('code','<>','tool');
         })->get();
 
         $data = $alldata = json_decode($items);
