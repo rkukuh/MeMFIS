@@ -79,9 +79,9 @@ class TaskCardRoutineController extends Controller
         $request->work_area = Type::firstOrCreate(
             ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
         );
-        $request->access = json_decode($request->access, TRUE);
+        // $request->access = json_decode($request->access, TRUE);
         foreach ($request->access as $access_name ) {
-            $request->applicability_airplane = json_decode($request->applicability_airplane, TRUE);
+            // $request->applicability_airplane = json_decode($request->applicability_airplane, TRUE);
             // dd($request->applicability_airplane);
             foreach ($request->applicability_airplane as $airplane) {
                 $access = Access::firstOrCreate(
@@ -90,7 +90,7 @@ class TaskCardRoutineController extends Controller
                 array_push($accesses, $access->id);
             }
         }
-        $request->zone = json_decode($request->zone, TRUE);
+        // $request->zone = json_decode($request->zone, TRUE);
         foreach ($request->zone as $zone_name ) {
             foreach ($request->applicability_airplane as $airplane) {
                 $zone = Zone::firstOrCreate(
@@ -104,18 +104,18 @@ class TaskCardRoutineController extends Controller
             $taskcard->accesses()->attach($accesses);
             $taskcard->zones()->attach($zones);
             $taskcard->related_to()->attach($request->relationship);
-            // for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
-            //     $taskcard->thresholds()->save(new Threshold([
-            //         'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
-            //         'amount' => $request->threshold_amount[$i],
-            //     ]));
-            // }
-            // for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
-            //     $taskcard->repeats()->save(new Repeat([
-            //         'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
-            //         'amount' => $request->repeat_amount[$i],
-            //     ]));
-            // }
+            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
+                $taskcard->thresholds()->save(new Threshold([
+                    'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                    'amount' => $request->threshold_amount[$i],
+                ]));
+            }
+            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
+                $taskcard->repeats()->save(new Repeat([
+                    'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                    'amount' => $request->repeat_amount[$i],
+                ]));
+            }
 
             return response()->json($taskcard);
         }
