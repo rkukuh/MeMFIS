@@ -331,32 +331,6 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Instructions
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            @include('frontend.taskcard.nonroutine.eo.instruction.modal')
-                            @include('frontend.taskcard.nonroutine.eo.tool.modal')
-                            @include('frontend.taskcard.nonroutine.eo.item.modal')
-
-                            <div class="instruction_datatable" id="instruction_datatable"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                @include('frontend.common.label.datalist')
-
-                                <h3 class="m-portlet__head-text">
                                     Threshold
                                 </h3>
                             </div>
@@ -387,6 +361,36 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             <div class="repeat_datatable" id="item_datatable"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Instructions
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            @include('frontend.taskcard.nonroutine.eo.instruction.modal')
+                            @include('frontend.taskcard.nonroutine.eo.tool.modal')
+                            @include('frontend.taskcard.nonroutine.eo.item.modal')
+
+                            <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>
                     </div>
                 </div>

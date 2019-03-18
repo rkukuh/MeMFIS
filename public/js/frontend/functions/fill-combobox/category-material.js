@@ -1,18 +1,20 @@
 $(document).ready(function () {
-    tag = function () {
+    category = function () {
         $.ajax({
-            url: '/get-tags/',
+            url: '/get-categories-material/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $('select[name="tag"]').empty();
 
-                $('select[name="tag"]').append(
-                    '<option value=""> Select a Tag</option>'
+                $('select[name="category"]').empty();
+
+                $('select[name="category"]').append(
+                    '<option value=""> Select a Category</option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="tag"]').append(
+
+                    $('select[name="category"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
@@ -20,5 +22,5 @@ $(document).ready(function () {
         });
     };
 
-    tag();
+    category();
 });

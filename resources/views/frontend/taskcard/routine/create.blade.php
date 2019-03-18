@@ -101,7 +101,6 @@
                                                 @slot('multiple','multiple')
                                                 @slot('help_text','You can chose multiple value')
                                                 @slot('id_error', 'applicability-airplane')
-                                                @slot('class','form-control m-select2')
                                             @endcomponent
                                         </div>
                                     </div>

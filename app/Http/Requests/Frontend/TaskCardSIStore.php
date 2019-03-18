@@ -30,7 +30,10 @@ class TaskCardSIStore extends FormRequest
             'number' => 'required',
             'title' => 'required',
             'estimation_manhour' => 'required',
+            'performance_factor' => 'required|gte:estimation_manhour',
             'description' => 'required',
+            'skill_id' => 'required',
+            'applicability_airplane' => 'required',
         ];
     }
 
@@ -42,6 +45,7 @@ class TaskCardSIStore extends FormRequest
     public function messages()
     {
         return [
+            'description.required' => 'The instruction field is required.',
         ];
     }
 

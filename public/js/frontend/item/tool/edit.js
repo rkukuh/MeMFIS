@@ -58,6 +58,16 @@ let Item = {
                     }
                 },
                 {
+                    field: 'convension',
+                    title: 'Conversion Rate',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        let unit = $("#unit_id option:selected").text();
+                        return '1'+unit+' = '+t.uom.quantity+''+t.name
+                    }
+                },
+                {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
@@ -184,6 +194,23 @@ let Item = {
             $('.reset-storage').removeClass('reset');
 
         });
+        $(document).ready(function () {
+            let category = $("#category option:selected").text()
+            if(category.trim() == "Service".trim()){
+                $("#is_stock").prop("checked", false);
+                $("#is_stock").attr("disabled", true)
+            }
+        });
+        $(document).ready(function () {
+            $('select[name="category"]').on('change', function () {
+                if (this.options[this.selectedIndex].text == "Service") {
+                $("#is_stock").prop("checked", false);
+                $("#is_stock").attr("disabled", true)
+                } else {
+                    $("#is_stock").attr("disabled", false)
+                }
+            });
+        });
 
         $('.reset-uom').on('click', function () {
             document.getElementById('uom_quantity').value = '';
@@ -212,6 +239,14 @@ let Item = {
         $('.footer').on('click', '.edit-item', function () {
             errorMessage();
 
+            if ($('#tag :selected').length > 0) {
+                var selectedtags = [];
+
+                $('#tag :selected').each(function (i, selected) {
+                    selectedtags[i] = $(selected).val();
+                });
+            }
+
             if (document.getElementById("is_stock").checked) {
                 is_stock = 1;
             } else {
@@ -236,62 +271,76 @@ let Item = {
             let account_code = $('#account_code').val();
 
             $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'PUT',
-                url: '/tool/' + item_uuid + '/',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    code: code,
-                    name: name,
-                    description: description,
-                    unit_id: unit_id,
-                    category: category,
-                    manufacturer_id: manufacturer_id,
-                    is_stock: is_stock,
-                    is_ppn: is_ppn,
-                    ppn_amount: ppn_amount,
-                    account_code: account_code,
-                },
+                url: '/get-categories-item/',
+                type: 'GET',
+                dataType: 'json',
                 success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.code) {
-                            $('#code-error').html(data.errors.code[0]);
+
+                    $.each(data, function (key, value) {
+                        if(value.trim() == 'Tool'.trim()){
+                            category = key;
                         }
+                    });
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'PUT',
+                        url: '/tool/' + item_uuid + '/',
+                        data: {
+                            _token: $('input[name=_token]').val(),
+                            code: code,
+                            name: name,
+                            description: description,
+                            unit_id: unit_id,
+                            category: category,
+                            manufacturer_id: manufacturer_id,
+                            is_stock: is_stock,
+                            is_ppn: is_ppn,
+                            ppn_amount: ppn_amount,
+                            account_code: account_code,
+                            selectedtags: selectedtags,
+                        },
+                        success: function (data) {
+                            if (data.errors) {
+                                if (data.errors.code) {
+                                    $('#code-error').html(data.errors.code[0]);
+                                }
 
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                                if (data.errors.name) {
+                                    $('#name-error').html(data.errors.name[0]);
+                                }
+
+                                if (data.errors.unit_id) {
+                                    $('#unit-error').html(data.errors.unit_id[0]);
+                                }
+
+                                if (data.errors.category) {
+                                    $('#category-error').html(data.errors.category[0]);
+                                }
+
+                                if (data.errors.ppn_amount) {
+                                    $('#ppn_amount-error').html(data.errors.ppn_amount[0]);
+                                }
+
+                                document.getElementById('code').value = code;
+                                document.getElementById('name').value = name;
+                                document.getElementById('description').value = description;
+                                document.getElementById('barcode').value = barcode;
+                                document.getElementById('account_code').value = account_code;
+
+                            } else {
+                                toastr.success('Material has been updated.', 'Success', {
+                                    timeOut: 5000
+                                });
+                                errorMessage();
+                                $('#item-unit').html();
+                                $('#item-storage').html(code);
+                                $('input[type=file]').val('');
+
+                            }
                         }
-
-                        if (data.errors.unit_id) {
-                            $('#unit-error').html(data.errors.unit_id[0]);
-                        }
-
-                        if (data.errors.category) {
-                            $('#category-error').html(data.errors.category[0]);
-                        }
-
-                        if (data.errors.ppn_amount) {
-                            $('#ppn_amount-error').html(data.errors.ppn_amount[0]);
-                        }
-
-                        document.getElementById('code').value = code;
-                        document.getElementById('name').value = name;
-                        document.getElementById('description').value = description;
-                        document.getElementById('barcode').value = barcode;
-                        document.getElementById('account_code').value = account_code;
-
-                    } else {
-                        toastr.success('Material has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
-                        errorMessage();
-                        $('#item-unit').html();
-                        $('#item-storage').html(code);
-                        $('input[type=file]').val('');
-
-                    }
+                    });
                 }
             });
         });

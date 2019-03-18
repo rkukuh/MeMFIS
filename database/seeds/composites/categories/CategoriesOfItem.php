@@ -41,5 +41,17 @@ class CategoriesOfItem extends Seeder
             'name' => 'Breakdown Part',
             'of' => 'item',
         ]);
+
+        Category::create([
+            'code' => 'service',
+            'name' => 'Service',
+            'of' => 'item',
+        ]);
+
+        Category::create([
+            'code' => 'facility',
+            'name' => 'Facility',
+            'of' => 'item',
+        ]);
     }
 }

@@ -60,6 +60,16 @@ let Item = {
                         return t.name + ' (' + t.symbol + ')'
                     }
                 },
+                {
+                    field: 'convension',
+                    title: 'Conversion Rate',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        let unit = $("#unit_id option:selected").text();
+                        return '1'+unit+' = '+t.uom.quantity+''+t.name
+                    }
+                },
             ]
         });
 

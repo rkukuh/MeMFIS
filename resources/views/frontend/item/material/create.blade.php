@@ -131,13 +131,14 @@
                                                 @slot('name', 'category')
                                                 @slot('id_error', 'category')
                                             @endcomponent
-
-                                            @component('frontend.common.buttons.create-new')
-                                                @slot('size', 'sm')
-                                                @slot('text', 'category')
-                                                @slot('style', 'margin-top: 10px;')
-                                                @slot('data_target', '#modal_category')
-                                            @endcomponent
+                                            <div class="hidden">
+                                                @component('frontend.common.buttons.create-new')
+                                                    @slot('size', 'sm')
+                                                    @slot('text', 'category')
+                                                    @slot('style', 'margin-top: 10px;')
+                                                    @slot('data_target', '#modal_category')
+                                                @endcomponent
+                                            </div>
 
                                             @include('frontend.category.modal')
                                         </div>
@@ -145,32 +146,49 @@
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Manufactur @include('frontend.common.label.optional')
-                                                </label>
+                                            <label class="form-control-label">
+                                                Tagging @include('frontend.common.label.optional')
+                                            </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'manufacturer_id')
-                                                    @slot('text', 'Manufactur')
-                                                    @slot('name', 'manufacturer_id')
-                                                    @slot('id_error', 'manufactur')
-                                                @endcomponent
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'tag')
+                                                @slot('text', 'Tag')
+                                                @slot('name', 'tag')
+                                                @slot('multiple', 'multiple')
+                                                @slot('id_error', 'tag')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Manufactur @include('frontend.common.label.optional')
+                                            </label>
 
-                                                @component('frontend.common.buttons.create-new')
-                                                    @slot('size', 'sm')
-                                                    @slot('text', 'Manufactur')
-                                                    @slot('style', 'margin-top: 10px;')
-                                                    @slot('data_target', '#modal_manufacturer')
-                                                @endcomponent
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'manufacturer_id')
+                                                @slot('text', 'Manufactur')
+                                                @slot('name', 'manufacturer_id')
+                                                @slot('id_error', 'manufactur')
+                                            @endcomponent
 
-                                                @include('frontend.manufacturer.modal')
-                                            </div>
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('size', 'sm')
+                                                @slot('text', 'Manufactur')
+                                                @slot('style', 'margin-top: 10px;')
+                                                @slot('data_target', '#modal_manufacturer')
+                                            @endcomponent
+
+                                            @include('frontend.manufacturer.modal')
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_stock')
                                                     @slot('name', 'is_stock')
                                                     @slot('text', 'Stockable?')
+                                                    @slot('checked', 'checked')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -195,7 +213,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
+                                    <div class="form-group m-form__group row hidden">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Account Code @include('frontend.common.label.optional')
@@ -246,7 +264,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; UoM (Unit of Measurement)
+                                    Unit Conversion Table
                                 </h3>
                             </div>
                         </div>
@@ -281,7 +299,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; Storage Stock
+                                    Warehouse Stock Management
                                 </h3>
                             </div>
                         </div>
@@ -334,7 +352,10 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/category-material.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js') }}"></script>
 
     <script src="{{ asset('js/frontend/item/material/create.js') }}"></script>
     <script src="{{ asset('js/frontend/item/material/form-reset.js') }}"></script>

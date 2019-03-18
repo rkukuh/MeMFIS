@@ -153,48 +153,77 @@
                                             </select>
 
                                             <div class="form-control-feedback text-danger" id="category-error"></div>
+                                            <div class="hidden" >
+                                                @component('frontend.common.buttons.create-new')
+                                                    @slot('size', 'sm')
+                                                    @slot('text', 'category')
+                                                    @slot('style', 'margin-top: 10px;')
+                                                    @slot('data_target', '#modal_category')
+                                                @endcomponent
 
-                                            @component('frontend.common.buttons.create-new')
-                                                @slot('size', 'sm')
-                                                @slot('text', 'category')
-                                                @slot('style', 'margin-top: 10px;')
-                                                @slot('data_target', '#modal_category')
-                                            @endcomponent
-
-                                            @include('frontend.category.modal')
+                                                @include('frontend.category.modal')
+                                            </div>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Manufacturer @include('frontend.common.label.required')
-                                                </label>
+                                            <label class="form-control-label">
+                                                Tagging @include('frontend.common.label.optional')
+                                            </label>
 
-                                                <select id="manufacturer_id" name="manufacturer_id" class="form-control m-select2">
-                                                    <option value="">
-                                                        &mdash; Select a Manufacturer &mdash;
-                                                    </option>
-
-                                                    @foreach ($manufacturers as $manufacturer)
-                                                        <option value="{{ $manufacturer->id }}"
-                                                            @if ($manufacturer->id == $item->manufacturer_id) selected @endif>
-                                                            {{ $manufacturer->name }}
+                                            <select id="tag" name="tag" class="form-control m-select2" multiple>
+                                                @if ($item->tags->isEmpty())
+                                                    @foreach ($tags as $tag)
+                                                        <option value="{{ $tag->id }}">
+                                                            {{ $tag->name }}
                                                         </option>
                                                     @endforeach
-                                                </select>
+                                                @else
+                                                @foreach ($tags as $tag)
+                                                    <option value="{{ $tag->id }}"
+                                                        @if (in_array($tag->name, $item_tags))
+                                                            selected
+                                                        @endif
+                                                        >
+                                                        {{ $tag->name }}
+                                                    </option>
+                                            @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Manufacturer @include('frontend.common.label.optional')
+                                            </label>
 
-                                                <div class="form-control-feedback text-danger" id="category-error"></div>
+                                            <select id="manufacturer_id" name="manufacturer_id" class="form-control m-select2">
+                                                <option value="">
+                                                    &mdash; Select a Manufacturer &mdash;
+                                                </option>
 
-                                                @component('frontend.common.buttons.create-new')
-                                                    @slot('size', 'sm')
-                                                    @slot('text', 'manufacturer')
-                                                    @slot('style', 'margin-top: 10px;')
-                                                    @slot('data_target', '#modal_manufacturer')
-                                                @endcomponent
+                                                @foreach ($manufacturers as $manufacturer)
+                                                    <option value="{{ $manufacturer->id }}"
+                                                        @if ($manufacturer->id == $item->manufacturer_id) selected @endif>
+                                                        {{ $manufacturer->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
 
-                                                @include('frontend.manufacturer.modal')
-                                            </div>
+                                            <div class="form-control-feedback text-danger" id="category-error"></div>
+
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('size', 'sm')
+                                                @slot('text', 'manufacturer')
+                                                @slot('style', 'margin-top: 10px;')
+                                                @slot('data_target', '#modal_manufacturer')
+                                            @endcomponent
+
+                                            @include('frontend.manufacturer.modal')
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 @component('frontend.common.input.checkbox')
@@ -237,7 +266,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
+                                    <div class="form-group m-form__group row hidden">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Account Code @include('frontend.common.label.optional')
@@ -337,7 +366,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; UoM (Unit of Measurement)
+                                    Unit Conversion Table
                                 </h3>
                             </div>
                         </div>
@@ -353,7 +382,7 @@
                                                     <h5 class="item-name">
                                                         {{ $item->name }}
 
-                                                        <small class="text-muted"> {{ $item->code }}</small>
+                                                        {{-- <small class="text-muted hidden"> {{ $item->code }}</small> --}}
                                                     </h5>
 
                                                     <h6>
@@ -393,7 +422,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material &harr; Storage Stock
+                                    Warehouse Stock Management
                                 </h3>
                             </div>
                         </div>
@@ -450,6 +479,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/action-botton/item-storage.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
 
     <script src="{{ asset('js/frontend/item/material/edit/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/item/material/edit.js') }}"></script>

@@ -7,26 +7,65 @@ Route::name('testing.')->group(function () {
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
 
-        Route::get('/basic', function () {
-            // $tool = App\Models\Category::ofItem()->where('code', 'tool')->first()->code;
-            // return $tool;
-        // $taskcards = App\Models\TaskCard::with('type', function($query){
-        //     $query->where('name', 'Basic');
-        // })->get();
+        // Route::get('/basic', function () {
+        //     // $tool = App\Models\Category::ofItem()->where('code', 'tool')->first()->code;
+        //     // return $tool;
+        // // $taskcards = App\Models\TaskCard::with('type', function($query){
+        // //     $query->where('name', 'Basic');
+        // // })->get();
 
-            $taskcards  = App\Models\TaskCard::with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'Basic');
-                                    })->get();
+        //     $taskcards  = App\Models\TaskCard::with('type')
+        //                             ->whereHas('type', function ($query) {
+        //                                 $query->where('name', 'Basic');
+        //                             })->get();
 
-        dd($taskcards);
-            // $items = App\Models\Item::with('categories')
-            //                         ->whereHas('categories', function ($query) {
-            //                             $query->where('code', 'tool');
-            //                         })->get();
+        // dd($taskcards);
+        //     // $items = App\Models\Item::with('categories')
+        //     //                         ->whereHas('categories', function ($query) {
+        //     //                             $query->where('code', 'tool');
+        //     //                         })->get();
 
-            // return $items;
+        //     // return $items;
+        // });
+
+        Route::post('/post',function (Illuminate\Http\Request $request)
+        {
+                        // $taskcards  = App\Models\TaskCard::find(1);
+                        // // dd($taskcards);
+                        // $taskcards->addMediaFromRequest('fileInput')
+                        // ->toMediaCollection('taskcard');
+
+                        if ($request->hasFile('fileInput')) {
+                            // your code here
+                            $data = $request->input('image');
+$photo = $request->file('fileInput')->getClientOriginalName();
+$destination = base_path() . '/public/uploads';
+// $request->file('fileInput')->move($destination, $photo);
+Storage::disk('local')->put('images/1/smalls'.'/tes', $request->file('fileInput'), 'public');
+                        }
+                        else{
+                            dd('not');
+                        }
+
+                        // $uniqueFileName = uniqid() . $request->get('fileInput')->getClientOriginalName() . '.' . $request->get('fileInput')->getClientOriginalExtension();
+
+                        // $request->get('fileInput')->move(public_path('files') . $uniqueFileName);
+
+                        // dd($request->all());
+            // $length_request=count($request->all())-1;
+            // if($length_request==0){
+            //     //
+            // }
+            // elseif($length_request>=1){
+            //     for ($i = 0; $i < $length_request; $i++) {
+            //         $item = Item::where('code',$request->code)->first();
+            //         $item->addMediaFromRequest('file'.$i)
+            //          ->toMediaCollection('item');
+            //     }
+                dd('done');
+            // }
         });
+
 
 
         Route::view('/select2-repeater', 'frontend/testing/select2Repeater')->name('select2-repeater');
@@ -34,6 +73,7 @@ Route::name('testing.')->group(function () {
         Route::view('/datatable', 'frontend/testing/datatable')->name('datatable');
         Route::view('/welcome', 'frontend/testing/welcome')->name('welcome');
         Route::view('/barcode', 'frontend/testing/barcode')->name('barcode');
+        Route::view('/metronic', 'frontend/testing/metronic')->name('metronic');
 
         Route::get('/barcode-print', function () {
             $pdf = \PDF::loadView('frontend/form/barcode');

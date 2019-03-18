@@ -1,5 +1,7 @@
+
 let TaskCard = {
     init: function () {
+        let taskcard_uuid = $('#uuid_taskcard').val();
         $('.instruction_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -296,6 +298,7 @@ let TaskCard = {
         });
 
         $('.add-threshold').on('click', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let amount = $('input[name=threshold_amount]').val();
             let threshold_type = $('#threshold_type').val();
 
@@ -340,6 +343,7 @@ let TaskCard = {
         });
 
         $('.add-repeat').on('click', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let amount = $('input[name=repeat_amount]').val();
             let repeat_type = $('#repeat_type').val();
 
@@ -383,237 +387,237 @@ let TaskCard = {
             });
         });
 
-        $('.threshold_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/thresholds',
-                        map: function (raw) {
-                            let dataSet = raw;
+        // $('.threshold_datatable').mDatatable({
+        //     data: {
+        //         type: 'remote',
+        //         source: {
+        //             read: {
+        //                 method: 'GET',
+        //                 url: '/datatables/taskcard-routine/'+taskcard_uuid+'/thresholds',
+        //                 map: function (raw) {
+        //                     let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
+        //                     if (typeof raw.data !== 'undefined') {
+        //                         dataSet = raw.data;
+        //                     }
 
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                perpage: 5,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'amount',
-                    title: 'Amount',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'type_id',
-                    title: 'Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-threshold" title="Delete" ' +
-                            'data-threshold_uuid="' + t.uuid + '">' +
-                            '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
-            ]
-        });
+        //                     return dataSet;
+        //                 }
+        //             }
+        //         },
+        //         pageSize: 10,
+        //         perpage: 5,
+        //         serverPaging: !0,
+        //         serverFiltering: !0,
+        //         serverSorting: !0
+        //     },
+        //     layout: {
+        //         theme: 'default',
+        //         class: '',
+        //         scroll: false,
+        //         footer: !1
+        //     },
+        //     sortable: !0,
+        //     filterable: !1,
+        //     pagination: !0,
+        //     search: {
+        //         input: $('#generalSearch')
+        //     },
+        //     toolbar: {
+        //         items: {
+        //             pagination: {
+        //                 pageSizeSelect: [5, 10, 20, 30, 50, 100]
+        //             }
+        //         }
+        //     },
+        //     columns: [
+        //         {
+        //             field: 'amount',
+        //             title: 'Amount',
+        //             sortable: 'asc',
+        //             filterable: !1,
+        //         },
+        //         {
+        //             field: 'type_id',
+        //             title: 'Type',
+        //             sortable: 'asc',
+        //             filterable: !1,
+        //         },
+        //         {
+        //             field: 'actions',
+        //             sortable: !1,
+        //             overflow: 'visible',
+        //             template: function (t, e, i) {
+        //                 return (
+        //                     '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-threshold" title="Delete" ' +
+        //                     'data-threshold_uuid="' + t.uuid + '">' +
+        //                     '<i class="la la-trash"></i>' +
+        //                     '</a>'
+        //                 );
+        //             }
+        //         }
+        //     ]
+        // });
 
-        $('.repeat_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/repeats',
-                        map: function (raw) {
-                            let dataSet = raw;
+        // $('.repeat_datatable').mDatatable({
+        //     data: {
+        //         type: 'remote',
+        //         source: {
+        //             read: {
+        //                 method: 'GET',
+        //                 url: '/datatables/taskcard-routine/'+taskcard_uuid+'/repeats',
+        //                 map: function (raw) {
+        //                     let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
+        //                     if (typeof raw.data !== 'undefined') {
+        //                         dataSet = raw.data;
+        //                     }
 
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                perpage: 5,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'amount',
-                    title: 'Amount',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'type_id',
-                    title: 'Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill repeat-delete" title="Delete" ' +
-                            'data-repeat_uuid="' + t.uuid + '">' +
-                            '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
-            ]
-        });
+        //                     return dataSet;
+        //                 }
+        //             }
+        //         },
+        //         pageSize: 10,
+        //         perpage: 5,
+        //         serverPaging: !0,
+        //         serverFiltering: !0,
+        //         serverSorting: !0
+        //     },
+        //     layout: {
+        //         theme: 'default',
+        //         class: '',
+        //         scroll: false,
+        //         footer: !1
+        //     },
+        //     sortable: !0,
+        //     filterable: !1,
+        //     pagination: !0,
+        //     search: {
+        //         input: $('#generalSearch')
+        //     },
+        //     toolbar: {
+        //         items: {
+        //             pagination: {
+        //                 pageSizeSelect: [5, 10, 20, 30, 50, 100]
+        //             }
+        //         }
+        //     },
+        //     columns: [
+        //         {
+        //             field: 'amount',
+        //             title: 'Amount',
+        //             sortable: 'asc',
+        //             filterable: !1,
+        //         },
+        //         {
+        //             field: 'type_id',
+        //             title: 'Type',
+        //             sortable: 'asc',
+        //             filterable: !1,
+        //         },
+        //         {
+        //             field: 'actions',
+        //             sortable: !1,
+        //             overflow: 'visible',
+        //             template: function (t, e, i) {
+        //                 return (
+        //                     '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill repeat-delete" title="Delete" ' +
+        //                     'data-repeat_uuid="' + t.uuid + '">' +
+        //                     '<i class="la la-trash"></i>' +
+        //                     '</a>'
+        //                 );
+        //             }
+        //         }
+        //     ]
+        // });
 
-        $('.add-threshold').on('click', function () {
-            let amount = $('input[name=threshold_amount]').val();
-            let threshold_type = $('#threshold_type').val();
+        // $('.add-threshold').on('click', function () {
+        //     let amount = $('input[name=threshold_amount]').val();
+        //     let threshold_type = $('#threshold_type').val();
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/taskcard-routine/'+taskcard_uuid+'/threshold',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    amount: amount,
-                    type_id: threshold_type,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#tool-error').html(data.errors.item_id[0]);
-                        // }
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         type: 'post',
+        //         url: '/taskcard-routine/'+taskcard_uuid+'/threshold',
+        //         data: {
+        //             _token: $('input[name=_token]').val(),
+        //             amount: amount,
+        //             type_id: threshold_type,
+        //         },
+        //         success: function (data) {
+        //             if (data.errors) {
+        //                 // if (data.errors.item_id) {
+        //                 //     $('#tool-error').html(data.errors.item_id[0]);
+        //                 // }
 
-                        // if (data.errors.quantity) {
-                        //     $('#quantity-error').html(data.errors.quantity[0]);
-                        // }
-                        // document.getElementById('tool').value = tool;
-                        // document.getElementById('quantity').value = quantity;
-                    } else {
+        //                 // if (data.errors.quantity) {
+        //                 //     $('#quantity-error').html(data.errors.quantity[0]);
+        //                 // }
+        //                 // document.getElementById('tool').value = tool;
+        //                 // document.getElementById('quantity').value = quantity;
+        //             } else {
 
-                        toastr.success('Threshold has been created.', 'Success', {
-                            timeOut: 5000
-                        });
+        //                 toastr.success('Threshold has been created.', 'Success', {
+        //                     timeOut: 5000
+        //                 });
 
-                        let table = $('.threshold_datatable').mDatatable();
+        //                 let table = $('.threshold_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+        //                 table.originalDataSet = [];
+        //                 table.reload();
 
-                        $('#modal_threshold').modal('hide');
+        //                 $('#modal_threshold').modal('hide');
 
-                    }
-                }
-            });
-        });
+        //             }
+        //         }
+        //     });
+        // });
 
-        $('.add-repeat').on('click', function () {
-            let amount = $('input[name=repeat_amount]').val();
-            let repeat_type = $('#repeat_type').val();
+        // $('.add-repeat').on('click', function () {
+        //     let amount = $('input[name=repeat_amount]').val();
+        //     let repeat_type = $('#repeat_type').val();
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/taskcard-routine/'+taskcard_uuid+'/repeat',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    amount: amount,
-                    type_id: repeat_type,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#tool-error').html(data.errors.item_id[0]);
-                        // }
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         type: 'post',
+        //         url: '/taskcard-routine/'+taskcard_uuid+'/repeat',
+        //         data: {
+        //             _token: $('input[name=_token]').val(),
+        //             amount: amount,
+        //             type_id: repeat_type,
+        //         },
+        //         success: function (data) {
+        //             if (data.errors) {
+        //                 // if (data.errors.item_id) {
+        //                 //     $('#tool-error').html(data.errors.item_id[0]);
+        //                 // }
 
-                        // if (data.errors.quantity) {
-                        //     $('#quantity-error').html(data.errors.quantity[0]);
-                        // }
-                        // document.getElementById('tool').value = tool;
-                        // document.getElementById('quantity').value = quantity;
-                    } else {
+        //                 // if (data.errors.quantity) {
+        //                 //     $('#quantity-error').html(data.errors.quantity[0]);
+        //                 // }
+        //                 // document.getElementById('tool').value = tool;
+        //                 // document.getElementById('quantity').value = quantity;
+        //             } else {
 
-                        toastr.success('Repeat has been created.', 'Success', {
-                            timeOut: 5000
-                        });
+        //                 toastr.success('Repeat has been created.', 'Success', {
+        //                     timeOut: 5000
+        //                 });
 
-                        let table = $('.repeat_datatable').mDatatable();
+        //                 let table = $('.repeat_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+        //                 table.originalDataSet = [];
+        //                 table.reload();
 
-                        $('#modal_repeat').modal('hide');
+        //                 $('#modal_repeat').modal('hide');
 
-                    }
-                }
-            });
-        });
+        //             }
+        //         }
+        //     });
+        // });
 
         let material_datatables_init = true;
         let triggeruuid ="";
@@ -697,6 +701,7 @@ let TaskCard = {
         $('.instruction_datatable').on('click', '.edit', function () {
             instruction_reset();
             save_changes_button();
+            let taskcard_uuid = $('#uuid_taskcard').val();
 
             let triggeruuid3 = $(this).data('instruction_uuid');
             // alert(triggeruuid3);
@@ -766,6 +771,7 @@ let TaskCard = {
 
         });
         $('.modal-footer').on('click', '.edit-instruction', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let eo_uuid = $('input[name=uuid]').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
@@ -861,7 +867,8 @@ let TaskCard = {
 
         });
 
-        $('.modal-footer').on('click', '.add-instruction', function () {
+        $('.modal-footer-instruction').on('click', '.add-instruction', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
             let performa = $('input[name=performa]').val();
@@ -1001,7 +1008,94 @@ let TaskCard = {
                 }
             });
         });
+        $('.threshold_datatable').on('click', '.delete-threshold', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
+            let threshold_uuid = $(this).data('threshold_uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + threshold_uuid+'/threshold/',
+                        success: function (data) {
+                            toastr.success('Takscard Tool has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.threshold_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+        $('.repeat_datatable').on('click', '.repeat-delete', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
+            let repeat_uuid = $(this).data('repeat_uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + repeat_uuid+'/repeat/',
+                        success: function (data) {
+                            toastr.success('Takscard Tool has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.repeat_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
         let remove = $('.instruction_datatable').on('click', '.delete', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
             let triggeruuid = $(this).data('uuid');
 
             swal({
@@ -1048,7 +1142,28 @@ let TaskCard = {
 
     }
 };
+
+jQuery(document).ready(function () {
+    TaskCard.init();
+});
+
 $(document).ready(function () {
+
+    $('#prior_to_date').on('click', function () {
+        $('#date').removeAttr("disabled");
+        $('#hour').prop("disabled", true);
+        $('#cycle').prop("disabled", true);
+    });
+    $('#prior_to_hours').on('click', function () {
+        $('#hour').removeAttr("disabled");
+        $('#date').prop("disabled", true);
+        $('#cycle').prop("disabled", true);
+    });
+    $('#prior_to_cycle').on('click', function () {
+        $('#cycle').removeAttr("disabled");
+        $('#date').prop("disabled", true);
+        $('#hour').prop("disabled", true);
+    });
 
     $('select[name="recurrence_id"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "Repetitive") {
@@ -1061,7 +1176,6 @@ $(document).ready(function () {
             $('#recurrence-select').prop("disabled", true);
         }
     });
-
     $('select[name="scheduled_priority_id"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "Prior to") {
         $("#prior_to").removeClass("hidden");
@@ -1079,9 +1193,9 @@ $(document).ready(function () {
             $('#date').prop("disabled", true);
             $('#hour').prop("disabled", true);
             $('#cycle').prop("disabled", true);
+
         }
     });
-
     $('select[name="manual_affected_id"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "Other") {
         $("#note_div").removeClass("hidden");
@@ -1091,32 +1205,203 @@ $(document).ready(function () {
             $("#note_div").addClass("hidden");
         }
     });
-
-    var scheduled_priority_id = $('select[name="scheduled_priority_id"]').val();
-    var recurrence_id = $('select[name="recurrence_id"]').val();
-    var manual_affected_id = $('select[name="manual_affected_id"]').val();
-
-    if(manual_affected_id == 66){
-        $("#note_div").removeClass("hidden");
-        $('#note').removeAttr("disabled");
-    }
-    if(recurrence_id == 69){
-        $("#note_div").removeClass("hidden");
-        $('#note').removeAttr("disabled");
-    }
-    if(scheduled_priority_id == 77){
-        $("#note_div").removeClass("hidden");
-        $('#note').removeAttr("disabled");
-    }
-
-    // console.log(manual_affected_id);
-    // console.log(recurrence_id);
-    // console.log(scheduled_priority_id);
-
-
-
 });
 
-jQuery(document).ready(function () {
-    TaskCard.init();
+
+
+$('.footer').on('click', '.add-taskcard', function () {
+    let taskcard_uuid = $('#uuid_taskcard').val();
+    // taskcard_reset();
+    let title = $('input[name=title]').val();
+    let number = $('input[name=number]').val();
+    let taskcard_non_routine_type = $('#taskcard_non_routine_type').val();
+    taskcard_non_routine_type = taskcard_non_routine_type[0];
+    let applicability_airplane = $('#applicability_airplane').val();
+    let revision = $('input[name=revision]').val();
+    let relationship = $('#relationship').val();
+    let description = $('#description').val();
+    let scheduled_priority_id = $('#scheduled_priority_id').val();
+    let recurrence_id = $('#recurrence_id').val();
+    let category = $('#category').val();
+    let manual_affected_id = $('#manual_affected_id').val();
+
+    var prior_to = $('input[name="prior_to"]:checked').val();
+    let scheduled_priority_amount = '';
+    if(prior_to == 'date'){
+        scheduled_priority_amount = $('#date').val();
+    }
+    else if (prior_to == 'hour'){
+        scheduled_priority_amount = $('#hour').val();
+    }
+    else if(prior_to == 'cycle'){
+        scheduled_priority_amount = $('#cycle').val();
+    }
+
+    let recurrence = $('input[name=recurrence]').val();
+    let recurrence_select = $('#recurrence-select').val();
+    let note = $('#note').val();
+
+    let threshold_type = [];
+    $('select[name^="threshold_type"]').each(function(i) {
+        if( $(this).val()){
+        threshold_type[i] = $(this).val();
+        }
+    });
+    let repeat_type = [];
+    $('select[name^="repeat_type"]').each(function(i) {
+        if( $(this).val()){
+        repeat_type[i] = $(this).val();
+        }
+    });
+    let threshold_amount = [];
+    $('input[name^="threshold_amount"]').each(function(i) {
+        if( $(this).val()){
+        threshold_amount[i] = $(this).val();
+        }
+    });
+    let repeat_amount = [];
+    $('input[name^="repeat_amount"]').each(function(i) {
+        if( $(this).val()){
+        repeat_amount[i] = $(this).val();
+        }
+    });
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'put',
+        url: '/taskcard-eo/' + taskcard_uuid + '/',
+        data: {
+            _token: $('input[name=_token]').val(),
+            title: title,
+            number: number,
+            type_id: taskcard_non_routine_type,
+            applicability_airplane: applicability_airplane,
+            category_id: category,
+            revision: revision,
+            relationship: relationship,
+            description: description,
+            scheduled_priority_id: scheduled_priority_id,
+            scheduled_priority_type: prior_to,
+            scheduled_priority_amount: scheduled_priority_amount,
+            recurrence_id: recurrence_id,
+            recurrence_amount:recurrence,
+            recurrence_type:recurrence_select,
+            manual_affected_id: manual_affected_id,
+            manual_affected: note,
+
+            threshold_amount: threshold_amount,
+            threshold_type: threshold_type,
+            repeat_amount: repeat_amount,
+            repeat_type: repeat_type,
+
+        },
+        success: function (data) {
+            if (data.errors) {
+                if (data.errors.title) {
+                    $('#title-error').html(data.errors.title[0]);
+                }
+
+                if (data.errors.number) {
+                    $('#number-error').html(data.errors.number[0]);
+                }
+
+                if (data.errors.taskcard) {
+                    $('#taskcard-error').html(data.errors.taskcard[0]);
+                }
+
+                if (data.errors.otr_certification) {
+                    $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                }
+
+                if (data.errors.threshold_type) {
+                    $('#threshold-type-error').html(data.errors.threshold_type[0]);
+                }
+
+                if (data.errors.threshold_amount) {
+                    $('#threshold-amount-error').html(data.errors.threshold_amount[0]);
+                }
+
+                if (data.errors.repeat_type) {
+                    $('#repeat-type-error').html(data.errors.repeat_type[0]);
+                }
+
+                if (data.errors.repeat_amount) {
+                    $('#repeat-amount-error').html(data.errors.repeat_amount[0]);
+                }
+
+                if (data.errors.zone) {
+                    $('#zone-error').html(data.errors.zone[0]);
+                }
+
+                if (data.errors.access) {
+                    $('#access-error').html(data.errors.access[0]);
+                }
+
+                if (data.errors.applicability_airplane) {
+                    $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                }
+
+                if (data.errors.applicability_engine) {
+                    $('#applicability-engine-error').html(data.errors.applicability_engine[0]);
+                }
+
+                if (data.errors.work_area) {
+                    $('#work-area-error').html(data.errors.work_area[0]);
+                }
+
+                if (data.errors.revision) {
+                    $('#revision-error').html(data.errors.revision[0]);
+                }
+
+                if (data.errors.taskcard_non_routine_type) {
+                    $('#taskcard_non_routine_type-error').html(data.errors.taskcard_non_routine_type[0]);
+                }
+
+                if (data.errors.category) {
+                    $('#category-error').html(data.errors.category[0]);
+                }
+
+                if (data.errors.scheduled_priority_id) {
+                    $('#scheduled_priority_id-error').html(data.errors.scheduled_priority_id[0]);
+                }
+
+                if (data.errors.recurrence_id) {
+                    $('#recurrence_id-error').html(data.errors.recurrence_id[0]);
+                }
+
+                if (data.errors.manual_affected_id) {
+                    $('#manual_affected_id-error').html(data.errors.manual_affected_id[0]);
+                }
+
+                document.getElementById('title').value = title;
+                document.getElementById('number').value = number;
+                document.getElementById('threshold_amount').value = threshold_amount;
+                document.getElementById('repeat_amount').value = repeat_amount;
+                document.getElementById('source').value = source;
+                document.getElementById('effectifity').value = effectifity;
+                document.getElementById('zone').value = zone;
+                document.getElementById('access').value = access;
+                document.getElementById('applicability_airplane').value = applicability_airplane;
+                document.getElementById('revision').value = revision;
+                document.getElementById('taskcard_non_routine_type').value = taskcard_non_routine_type;
+                document.getElementById('category').value = category;
+                document.getElementById('scheduled_priority_id').value = scheduled_priority_id;
+                document.getElementById('recurrence_id').value = recurrence_id;
+                document.getElementById('manual_affected_id').value = manual_affected_id;
+
+            } else {
+                //    taskcard_reset();
+
+
+                toastr.success('Taskcard has been created.', 'Success', {
+                    timeOut: 5000
+                });
+
+                // window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
+            }
+        }
+    });
 });
+

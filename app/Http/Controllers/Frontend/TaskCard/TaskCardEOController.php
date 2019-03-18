@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Frontend\TaskCard;
 
 use App\Models\Type;
 use App\Models\Zone;
+use App\Models\Repeat;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Category;
+use App\Models\Threshold;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardEOStore;
 use App\Http\Requests\Frontend\TaskCardEOUpdate;
@@ -37,6 +40,7 @@ class TaskCardEOController extends Controller
         $this->recurrences = Type::ofTaskCardEORecurrence()->get();
         $this->scheduled_priorities = Type::ofTaskCardEOScheduledPriority()->get();
         $this->affected_manuals = Type::ofTaskCardEOManualAffected()->get();
+        $this->maintenanceCycle = Type::ofMaintenanceCycle()->get();
     }
     /**
      * Display a listing of the resource.
@@ -55,7 +59,9 @@ class TaskCardEOController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.eo.create');
+        return view('frontend.taskcard.nonroutine.eo.create', [
+            'MaintenanceCycles' => $this->maintenanceCycle,
+        ]);
     }
 
     /**
@@ -69,6 +75,18 @@ class TaskCardEOController extends Controller
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
             $taskcard->related_to()->attach($request->relationship);
+            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                $taskcard->thresholds()->save(new Threshold([
+                    'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                    'amount' => $request->threshold_amount[$i],
+                ]));
+            }
+            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                $taskcard->repeats()->save(new Repeat([
+                    'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                    'amount' => $request->repeat_amount[$i],
+                ]));
+            }
 
             return response()->json($taskcard);
         }
@@ -114,7 +132,7 @@ class TaskCardEOController extends Controller
         return view('frontend.taskcard.nonroutine.eo.edit',[
             'tasks' => $this->task,
             'types' => $this->type,
-            'taskcard' => $taskCard,
+            'taskCard' => $taskCard,
             'taskcards' => $this->taskcard,
             'aircrafts' => $this->aircraft,
             'categories' => $this->categories,
@@ -123,6 +141,7 @@ class TaskCardEOController extends Controller
             'relation_taskcards' => $relation_taskcards,
             'scheduled_priorities' => $this->scheduled_priorities,
             'affected_manuals' => $this->affected_manuals,
+            'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
     }
 
@@ -138,6 +157,20 @@ class TaskCardEOController extends Controller
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             $taskCard->related_to()->sync($request->relationship);
+            if($taskCard->thresholds)$taskCard->thresholds()->delete();
+            if($taskCard->repeats)$taskCard->repeats()->delete();
+            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                $taskCard->thresholds()->save(new Threshold([
+                    'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                    'amount' => $request->threshold_amount[$i],
+                ]));
+            }
+            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                $taskCard->repeats()->save(new Repeat([
+                    'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                    'amount' => $request->repeat_amount[$i],
+                ]));
+            }
 
             return response()->json($taskCard);
         }

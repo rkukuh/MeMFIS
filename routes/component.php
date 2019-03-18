@@ -34,6 +34,7 @@ Route::name('component.')->group(function () {
         Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
         Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
+        Route::get('get-categories-material', 'FillComboxController@categoriesMaterial')->name('get-categoriesMaterial');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
         Route::get('get-accountcodes', 'FillComboxController@accountCodes')->name('get-accountcodes');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
@@ -55,6 +56,7 @@ Route::name('component.')->group(function () {
         Route::get('get-taskcard-relationships', 'FillComboxController@taskcardRelationship')->name('get-taskcard-relationships');
         Route::get('get-scheduled-payment-types', 'FillComboxController@scheduledPaymentType')->name('get-scheduled-payment-types');
         Route::get('get-takcard-non-routine-types', 'FillComboxController@taskcardTypeNonRoutine')->name('get-takcard-non-routine-types');
+        Route::get('get-takcard-si-types', 'FillComboxController@taskcardTypeSI')->name('get-takcard-si-types');
 
     });
 });

@@ -182,6 +182,49 @@
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Threshold @include('frontend.common.label.optional')
+                                                    </label>
+                                                    <table class="threshold">
+                                                        <tr>
+                                                            <td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>
+                                                            <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                            <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                            @endforeach
+                                                            </select></td>
+                                                            <td width="5%">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('id', 'addrow')
+                                                                @endcomponent
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Repeat @include('frontend.common.label.optional')
+                                                    </label>
+                                                    <table class="repeat">
+                                                        <tr>
+                                                            <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                            <option value"">Select Repeat</option>
+                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                            <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                            @endforeach
+                                                            </select></td>
+                                                            <td width="5%">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('id', 'addrow2')
+                                                                @endcomponent
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
                                                     Instruction @include('frontend.common.label.required')
@@ -263,68 +306,6 @@
 
                                 <h3 class="m-portlet__head-text">
                                     Materials Requirement
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('attribute', 'disabled')
-                                        @endcomponent
-
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-
-                                <h3 class="m-portlet__head-text">
-                                    Threshold
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('attribute', 'disabled')
-                                        @endcomponent
-
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                    </span>
-
-                                <h3 class="m-portlet__head-text">
-                                    Repeat
                                 </h3>
                             </div>
                         </div>
@@ -459,6 +440,65 @@
         if (event.target.tagName.toLowerCase() !== 'textarea') return;
         autoExpand(event.target);
         }, false);
+        $(document).ready(function () {
+          $(".js-example-tags").select2();
+          var counter = 0;
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+              cols += '<option value"">Select Threshold</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.threshold").append(newRow);
+              $('.select').select2();
+              counter++;
+          });
+          $("table.threshold").on("click", ".ibtnDel", function (event) {
+              if (counter >= 1) {
+                  $(this).closest("tr").remove();
+                  counter -= 1
+              }
+          });
+          $("#addrow2").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
+              cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
+              cols += '<option value"">Select Repeat</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.repeat").append(newRow);
+              $('.select').select2();
+              counter++;
+          });
+          $("table.repeat").on("click", ".ibtnDel", function (event) {
+              if (counter >= 1) {
+                  $(this).closest("tr").remove();
+                  counter -= 1
+              }
+          });
+      });
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>

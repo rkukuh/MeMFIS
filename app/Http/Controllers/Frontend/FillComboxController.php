@@ -58,6 +58,21 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function categoriesMaterial()
+    {
+        $categories = Category::ofItem()
+                              ->where('code','<>','tool')
+                              ->pluck('name', 'id');
+
+        return json_encode($categories);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function categorieTakcard()
     {
         $categories = Category::ofTaskCardEO()
@@ -451,9 +466,21 @@ class FillComboxController extends Controller
     public function taskcardTypeNonRoutine()
     {
         $taskcard_type_non_routines = Type::ofTaskCardTypeNonRoutine()
-                        ->pluck('name', 'id');
+                                    ->pluck('name', 'id');
 
         return json_encode($taskcard_type_non_routines);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taskcardTypeSI()
+    {
+        $taskcard_type_si = Type::ofTaskCardTypeSI()->pluck('name', 'id');
+
+        return json_encode($taskcard_type_si);
     }
 
     /**

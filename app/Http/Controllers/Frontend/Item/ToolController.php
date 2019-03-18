@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Item;
 
 use App\Models\Item;
 use App\Models\Unit;
+use Spatie\Tags\Tag;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Http\Controllers\Controller;
@@ -12,12 +13,14 @@ use App\Http\Requests\Frontend\ItemUpdate;
 
 class ToolController extends Controller
 {
+    protected $tags;
     protected $units;
     protected $categories;
     protected $manufacturers;
 
     public function __construct()
     {
+        $this->tags = Tag::getWithType('item');
         $this->units = Unit::ofQuantity()->get();
         $this->manufacturers = Manufacturer::all();
         $this->categories = Category::ofItem()->get();
@@ -51,8 +54,11 @@ class ToolController extends Controller
      */
     public function store(ItemStore $request)
     {
+        $tags = [];
+        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags)->id);}
         if ($tool = Item::create($request->all())) {
             $tool->categories()->attach($request->category);
+            $tool->syncTags($tags);
 
             return response()->json($tool);
         }
@@ -86,8 +92,15 @@ class ToolController extends Controller
      */
     public function edit(Item $tool)
     {
+        $tags = array();
+        foreach($tool->tags as $i => $item_tag){
+            $tags[$i] =  $item_tag->name;
+        }
+
         return view('frontend.item.tool.edit', [
             'item' => $tool,
+            'item_tags' => $tags,
+            'tags' => $this->tags,
             'units' => $this->units,
             'categories' => $this->categories,
             'manufacturers' => $this->manufacturers,
@@ -103,8 +116,11 @@ class ToolController extends Controller
      */
     public function update(ItemUpdate $request, Item $tool)
     {
+        $tags = [];
+        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags)->id);}
         if ($tool->update($request->all())) {
             $tool->categories()->sync($request->category);
+            $tool->syncTags($tags);
 
             return response()->json($tool);
         }

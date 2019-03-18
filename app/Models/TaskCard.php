@@ -6,6 +6,7 @@ use App\MemfisModel;
 
 class TaskCard extends MemfisModel
 {
+
     protected $table = 'taskcards';
 
     protected $fillable = [
