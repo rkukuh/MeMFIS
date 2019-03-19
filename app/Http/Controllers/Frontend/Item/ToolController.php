@@ -55,7 +55,9 @@ class ToolController extends Controller
     public function store(ItemStore $request)
     {
         $tags = [];
+        if($request->selectedtags){
         foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
+        }
         if ($tool = Item::create($request->all())) {
             $tool->categories()->attach($request->category);
             $tool->syncTags($tags);

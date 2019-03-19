@@ -55,7 +55,9 @@ class ItemController extends Controller
     public function store(ItemStore $request)
     {
         $tags = [];
+        if($request->selectedtags){
         foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
+        }
         if ($item = Item::create($request->all())) {
             $item->categories()->attach($request->category);
             $item->syncTags($tags);
