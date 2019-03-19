@@ -350,7 +350,7 @@
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
-                                            
+
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -468,7 +468,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-portlet">
+                <div class="m-portlet hidden">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
@@ -499,7 +499,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-portlet">
+                <div class="m-portlet hidden">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
@@ -565,10 +565,10 @@
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
-    
+
     <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script>
-    
+
     <script src="{{ asset('js/frontend/functions/select2/aircraft-taskcard.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/aircraft-taskcard.js') }}"></script>
 
