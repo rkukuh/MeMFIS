@@ -20,7 +20,7 @@ class CreateTaskcardsTable extends Migration
             /** BASIC / GENERAL */
             $table->string('number');
             $table->string('title');
-            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('type_id')->nullable();
             $table->unsignedInteger('task_id')->nullable();
             $table->unsignedInteger('skill_id')->nullable();
             $table->unsignedInteger('work_area')->nullable();
