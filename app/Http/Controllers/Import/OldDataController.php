@@ -7,8 +7,8 @@ use App\Imports\WorkAreasImport;
 use App\Imports\PersonnelsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use App\Imports\MaterialsAndToolsImport;
 use App\Imports\TaskCardsBoeingImport;
+use App\Imports\MaterialsAndToolsImport;
 
 class OldDataController extends Controller
 {
@@ -36,6 +36,6 @@ class OldDataController extends Controller
     
     public function taskCardsBoeingImport()
     {
-        Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'tc-boeing-737.xlsx');
+        Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
     }
 }
