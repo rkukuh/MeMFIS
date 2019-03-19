@@ -20,7 +20,7 @@ class CategoriesOfItem extends Seeder
 
         Category::create([
             'code' => 'cons',
-            'name' => 'Comsumable',
+            'name' => 'Consumable',
             'of' => 'item',
         ]);
 
@@ -51,6 +51,12 @@ class CategoriesOfItem extends Seeder
         Category::create([
             'code' => 'facility',
             'name' => 'Facility',
+            'of' => 'item',
+        ]);
+
+        Category::create([
+            'code' => 'oil',
+            'name' => 'Oil',
             'of' => 'item',
         ]);
     }
