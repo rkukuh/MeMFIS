@@ -91,18 +91,21 @@ let Item = {
                     field: "is_stock",
                     title: "Stockable?",
                     template: function (t) {
-                        var e = {
-                            1: {
-                                title: "Yes",
-                                class: "m-badge--brand"
-                            },
-                            0: {
-                                title: "No",
-                                class: " m-badge--warning"
-                            }
-                        };
+                        if (t.is_stock) {
+                            var e = {
+                                1: {
+                                    title: "Yes",
+                                    class: "m-badge--brand"
+                                },
+                                0: {
+                                    title: "No",
+                                    class: " m-badge--warning"
+                                }
+                            };
 
-                        return '<span class="m-badge ' + e[t.is_stock].class + ' m-badge--wide">' + e[t.is_stock].title + "</span>"
+                            return '<span class="m-badge ' + e[t.is_stock].class + ' m-badge--wide">' + e[t.is_stock].title + "</span>"
+                            }
+                        return ''
                     }
                 },
                 {
