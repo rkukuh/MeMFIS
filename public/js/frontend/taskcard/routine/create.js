@@ -128,8 +128,8 @@ let TaskCard = {
                             $('#taskcard_routine_type-error').html(data.errors.type_id[0]);
                         }
 
-                        if (data.errors.otr_certification) {
-                            $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                        if (data.errors.skill_id) {
+                            $('#otr-certification-error').html(data.errors.skill_id[0]);
                         }
 
                         if (data.errors.applicability_airplane) {
@@ -153,17 +153,23 @@ let TaskCard = {
                         document.getElementById('number').value = number;
                         document.getElementById('taskcard_routine_type').value = taskcard_routine_type;
                         document.getElementById('applicability_airplane').value = applicability_airplane;
+                        $('#applicability_airplane').select2('val', 'All');
                         document.getElementById('task_type_id').value = task_type_id;
                         document.getElementById('otr_certification').value = otr_certification;
                         document.getElementById('manhour').value = manhour;
                         document.getElementById('performa').value = performa;
                         document.getElementById('helper_quantity').value = helper_quantity;
                         document.getElementById('work_area').value = work_area;
+                        $('#work_area').select2('val', 'All');
                         document.getElementById('access').value = access;
+                        $('#access').select2('val', 'All');
                         document.getElementById('zone').value = zone;
+                        $('#zone').select2('val', 'All');
                         document.getElementById('source').value = source;
                         document.getElementById('relationship').value = relationship;
+                        $('#relationship').select2('val', 'All');
                         document.getElementById('version').value = version;
+                        $('#version').select2('val', 'All');
                         document.getElementById('effectivity').value = effectivity;
                         document.getElementById('description').value = description;
 
