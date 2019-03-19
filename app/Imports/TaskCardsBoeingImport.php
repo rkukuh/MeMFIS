@@ -16,10 +16,28 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        dump($row);
-
         return new TaskCard([
             'number' => $row['number'],
+            'title' => $row['title'],
+            'type_id' => null, // TODO: Import appropriate value
+            'task_id' => null, // TODO: Import appropriate value
+            'skill_id' => null, // TODO: Import appropriate value
+            'work_area' => null, // TODO: Import appropriate value
+            'estimation_manhour' => $row['manhours'],
+            'is_rii' => $row['is_rii'],
+            'source' => $row['source'],
+            'effectivity' => $row['effectivity'],
+            'version' => json_encode($row['version']),
+            'description' => $row['description'],
         ]);
+
+        // TODO: M-M values:
+        // - Table: aircraft_taskcard
+        // - Table: taskcard_zone
+
+        // TODO: Polymorph values:
+        // - Table: accesses
+        // - Table: thresholds
+        // - Table: repeats
     }
 }
