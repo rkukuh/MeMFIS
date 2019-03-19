@@ -241,7 +241,7 @@
                 <a href="{{ route('frontend.goods-received.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Good Received Notes
+                        Goods Received Note
                     </span>
                 </a>
             </li>
