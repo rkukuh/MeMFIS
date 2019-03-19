@@ -850,23 +850,28 @@ let TaskCard = {
                             $('#performa-error').html(data.errors.performance_factor[0]);
                         }
 
-
                         document.getElementById('title').value = title;
                         document.getElementById('number').value = number;
                         document.getElementById('taskcard_routine_type').value = taskcard_routine_type;
                         document.getElementById('applicability_airplane').value = applicability_airplane;
+                        $('#applicability_airplane').select2('val', 'All');
                         document.getElementById('task_type_id').value = task_type_id;
                         document.getElementById('otr_certification').value = otr_certification;
                         document.getElementById('manhour').value = manhour;
                         document.getElementById('performa').value = performa;
                         document.getElementById('helper_quantity').value = helper_quantity;
                         document.getElementById('work_area').value = work_area;
+                        $('#work_area').select2('val', 'All');
                         document.getElementById('access').value = access;
+                        $('#access').select2('val', 'All');
                         document.getElementById('zone').value = zone;
+                        $('#zone').select2('val', 'All');
                         document.getElementById('source').value = source;
                         document.getElementById('relationship').value = relationship;
+                        $('#relationship').select2('val', 'All');
                         document.getElementById('version').value = version;
-                        document.getElementById('effectifity').value = effectifity;
+                        $('#version').select2('val', 'All');
+                        document.getElementById('effectivity').value = effectivity;
                         document.getElementById('description').value = description;
 
                     } else {

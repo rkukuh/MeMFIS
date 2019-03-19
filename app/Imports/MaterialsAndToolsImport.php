@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Category;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -160,10 +161,52 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
                 $unit = null;
         }
 
-        return new Item([
+        switch ($row['categories']) {
+            case 'CONS':
+                $Category = Category::ofItem()
+                            ->where('name', 'Consumable')
+                            ->first()
+                            ->id;
+                break;
+            case 'RAWMAT':
+                $Category = Category::ofItem()
+                            ->where('name', 'Raw Material')
+                            ->first()
+                            ->id;
+                break;
+            case 'TOOLS':
+                $Category = Category::ofItem()
+                            ->where('name', 'Tool')
+                            ->first()
+                            ->id;
+                break;
+            case 'COMP':
+                $Category = Category::ofItem()
+                            ->where('name', 'Component')
+                            ->first()
+                            ->id;
+                break;            
+            case 'BDP':
+                $Category = Category::ofItem()
+                            ->where('name', 'Breakdown Part')
+                            ->first()
+                            ->id;
+                break;
+            default: 
+                $Category = Category::ofItem()
+                            ->where('name', 'Consumable')
+                            ->first()
+                            ->id;
+        }
+
+        $item = new Item([
             'code'      => $row['material'],
             'name'      => $row['material_description'],
             'unit_id'   => $unit,
         ]);
+
+        $item->save();
+
+        $item->categories()->sync($Category);
     }
 }
