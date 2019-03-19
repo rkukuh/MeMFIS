@@ -393,7 +393,19 @@
                                                     <table class="threshold">
                                                         @if($taskcard->thresholds->isEmpty())
                                                             <tr>
-                                                                <td>{{ $MaintenanceCycles }}</td>
+                                                                <td width="45%">
+                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]"/>
+                                                                </td>
+                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                                <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                                @endforeach
+                                                                </select></td>
+                                                                <td width="5%">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('id', 'addrow')
+                                                                @endcomponent
+                                                                </td>
                                                             </tr>
                                                         @else
                                                             @for($i = 0 ; $i < sizeof($taskcard->thresholds); $i++)
@@ -408,7 +420,6 @@
                                                                 </select></td>
                                                                 <td width="5%">
                                                                 @if($i < 1)
-                                                               
                                                                     @component('frontend.common.buttons.create_repeater')
                                                                         @slot('id', 'addrow')
                                                                     @endcomponent
@@ -431,7 +442,18 @@
                                                     <table class="repeat">
                                                         @if($taskcard->repeats->isEmpty())
                                                             <tr>
-                                                                <td>{{ $MaintenanceCycles }}</td>
+                                                                <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                                <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                                <option value"">Select Repeat</option>
+                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                                <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                                @endforeach
+                                                                </select></td>
+                                                                <td width="5%">
+                                                                    @component('frontend.common.buttons.create_repeater')
+                                                                        @slot('id', 'addrow2')
+                                                                    @endcomponent
+                                                                </td>
                                                             </tr>
                                                         @else
                                                         @for($i = 0 ; $i < sizeof($taskcard->repeats); $i++)

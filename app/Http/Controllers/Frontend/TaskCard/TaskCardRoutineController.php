@@ -72,49 +72,66 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
-        // dd($request->all());
-        // dd(Type::where('uuid',$request->threshold_type[1])->first()->id );
         $accesses = [];
         $zones = [];
-        $request->work_area = Type::firstOrCreate(
-            ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
-        );
-        // $request->access = json_decode($request->access, TRUE);
-        foreach ($request->access as $access_name ) {
-            // $request->applicability_airplane = json_decode($request->applicability_airplane, TRUE);
-            // dd($request->applicability_airplane);
-            foreach ($request->applicability_airplane as $airplane) {
-                $access = Access::firstOrCreate(
-                    ['name' => $access_name, 'accessable_id' => $airplane, 'accessable_type' => 'App\Models\Aircraft']
-                );
-                array_push($accesses, $access->id);
-            }
-        }
-        // $request->zone = json_decode($request->zone, TRUE);
-        foreach ($request->zone as $zone_name ) {
-            foreach ($request->applicability_airplane as $airplane) {
-                $zone = Zone::firstOrCreate(
-                    ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
-                );
-                array_push($zones, $zone->id);
-            }
+        if($request->work_area){
+            $request->work_area = Type::firstOrCreate(
+                ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
+            );
         }
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
-            $taskcard->accesses()->attach($accesses);
-            $taskcard->zones()->attach($zones);
-            $taskcard->related_to()->attach($request->relationship);
-            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
-                $taskcard->thresholds()->save(new Threshold([
-                    'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
-                    'amount' => $request->threshold_amount[$i],
-                ]));
+            
+            if($request->access){
+                foreach ($request->access as $access_name ) {
+                    foreach ($request->applicability_airplane as $airplane) {
+                        if(isset($access_name)){
+                            $access = Access::firstOrCreate(
+                                ['name' => $access_name, 'accessable_id' => $airplane, 'accessable_type' => 'App\Models\Aircraft']
+                            );
+                            array_push($accesses, $access->id);
+                        }
+                    }
+                }
+
+                $taskcard->accesses()->attach($accesses);
+
             }
-            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
-                $taskcard->repeats()->save(new Repeat([
-                    'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
-                    'amount' => $request->repeat_amount[$i],
-                ]));
+
+            if($request->zone){
+                foreach ($request->zone as $zone_name ) {
+                    foreach ($request->applicability_airplane as $airplane) {
+                        if(isset($zone_name)){
+                            $zone = Zone::firstOrCreate(
+                                ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
+                            );
+                            array_push($zones, $zone->id);
+                        }
+                    }
+                }
+
+                $taskcard->zones()->attach($zones);
+
+            }
+
+            if(!$taskcard->related_to->isEmpty())$taskcard->related_to()->attach($request->relationship);
+            
+            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                if($request->threshold_type[$i] !== "Select Threshold"){
+                    $taskcard->thresholds()->save(new Threshold([
+                        'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                        'amount' => $request->threshold_amount[$i],
+                    ]));
+                }
+            }
+            
+            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                if($request->repeat_type[$i] !== "Select Repeat"){
+                    $taskcard->repeats()->save(new Repeat([
+                        'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                        'amount' => $request->repeat_amount[$i],
+                    ]));
+                }
             }
 
             return response()->json($taskcard);
@@ -234,23 +251,66 @@ class TaskCardRoutineController extends Controller
     {
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
-            $taskCard->accesses()->sync($request->access);
-            $taskCard->zones()->sync($request->zone);
+            
+            if($request->access){
+                foreach ($request->access as $access_name ) {
+                    foreach ($request->applicability_airplane as $airplane) {
+                        if(isset($access_name)){
+                            $access = Access::firstOrCreate(
+                                ['name' => $access_name, 'accessable_id' => $airplane, 'accessable_type' => 'App\Models\Aircraft']
+                            );
+                            array_push($accesses, $access->id);
+                        }
+                    }
+                }
+
+                $taskcard->accesses()->attach($accesses);
+
+            }
+
+            if($request->zone){
+                foreach ($request->zone as $zone_name ) {
+                    foreach ($request->applicability_airplane as $airplane) {
+                        if(isset($zone_name)){
+                            $zone = Zone::firstOrCreate(
+                                ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
+                            );
+                            array_push($zones, $zone->id);
+                        }
+                    }
+                }
+
+                $taskCard->zones()->attach($zones);
+
+            }
+
+            if(!$taskCard->related_to->isEmpty())$taskCard->related_to()->attach($request->relationship);
+
             $taskCard->related_to()->sync($request->relationship);
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats) $taskCard->repeats()->delete();
-            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
-                $taskCard->thresholds()->save(new Threshold([
-                    'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
-                    'amount' => $request->threshold_amount[$i],
-                ]));
-            }
-            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
-                $taskCard->repeats()->save(new Repeat([
-                    'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
-                    'amount' => $request->repeat_amount[$i],
-                ]));
-            }
+            if(is_array($request->threshold_amount)){
+                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                    if($request->threshold_type[$i] !== "Select Threshold"){
+                        $taskCard->thresholds()->save(new Threshold([
+                            'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                            'amount' => $request->threshold_amount[$i],
+                            ]));
+                        }
+                    }
+                }
+
+            if(is_array($request->repeat_amount)){
+                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                    if($request->repeat_type[$i] !== "Select Repeat"){
+                        $taskCard->repeats()->save(new Repeat([
+                            'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                            'amount' => $request->repeat_amount[$i],
+                            ]));
+                        }
+                    }
+                }
+
 
             return response()->json($taskCard);
         }

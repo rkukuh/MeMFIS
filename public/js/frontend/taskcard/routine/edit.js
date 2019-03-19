@@ -705,25 +705,28 @@ let TaskCard = {
             let effectivity = $('input[name=effectivity]').val();
             let description = $('#description').val();
 
-            let threshold_type = [];
+            let threshold_type =new Array();
             $('select[name^="threshold_type"]').each(function(i) {
                 if( $(this).val()){
                 threshold_type[i] = $(this).val();
                 }
             });
-            let repeat_type = [];
+
+            let repeat_type =new Array();
             $('select[name^="repeat_type"]').each(function(i) {
                 if( $(this).val()){
                 repeat_type[i] = $(this).val();
                 }
             });
-            let threshold_amount = [];
+
+            let threshold_amount =new Array();
             $('input[name^="threshold_amount"]').each(function(i) {
                 if( $(this).val()){
                 threshold_amount[i] = $(this).val();
                 }
             });
-            let repeat_amount = [];
+
+            let repeat_amount =new Array();
             $('input[name^="repeat_amount"]').each(function(i) {
                 if( $(this).val()){
                 repeat_amount[i] = $(this).val();
