@@ -44,13 +44,13 @@ let TaskCard = {
                 repeat_amount[i] = $(this).val();
             });
 
-            if ($('#applicability_airplane :selected').length > 0) {
-                var applicability_airplanes = [];
+            // if ($('#applicability_airplane :selected').length > 0) {
+            //     var applicability_airplanes = [];
 
-                $('#applicability_airplane :selected').each(function (i, selected) {
-                    applicability_airplanes[i] = $(selected).val();
-                });
-            }
+            //     $('#applicability_airplane :selected').each(function (i, selected) {
+            //         applicability_airplanes[i] = $(selected).val();
+            //     });
+            // }
 
             $.ajax({
                 url: '/get-takcard-si-types',
@@ -99,8 +99,8 @@ let TaskCard = {
                                     $('#number-error').html(data.errors.number[0]);
                                 }
 
-                                if (data.errors.otr_certification) {
-                                    $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                                if (data.errors.skill_id) {
+                                    $('#otr-certification-error').html(data.errors.skill_id[0]);
                                 }
 
                                 if (data.errors.applicability_airplane) {
@@ -111,8 +111,8 @@ let TaskCard = {
                                     $('#manhour-error').html(data.errors.manhour[0]);
                                 }
 
-                                if (data.errors.instruction) {
-                                    $('#instruction-error').html(data.errors.instruction[0]);
+                                if (data.errors.description) {
+                                    $('#instruction-error').html(data.errors.description[0]);
                                 }
 
 
@@ -120,7 +120,9 @@ let TaskCard = {
                                 document.getElementById('number').value = number;
                                 document.getElementById('otr_certification').value = otr_certification;
                                 document.getElementById('applicability_airplane').value = applicability_airplane;
+                                $('#applicability_airplane').select2('val', 'All');
                                 document.getElementById('work_area').value = work_area;
+                                $('#work_area').select2('val', 'All');
                                 document.getElementById('manhour').value = manhour;
                                 document.getElementById('helper_quantity').value = helper_quantity;
                                 document.getElementById('instruction').value = instruction;
