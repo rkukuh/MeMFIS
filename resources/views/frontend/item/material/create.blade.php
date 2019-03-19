@@ -160,7 +160,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Manufactur @include('frontend.common.label.optional')
+                                                Manufacturer @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -172,7 +172,7 @@
 
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('size', 'sm')
-                                                @slot('text', 'Manufactur')
+                                                @slot('text', 'Manufacturer')
                                                 @slot('style', 'margin-top: 10px;')
                                                 @slot('data_target', '#modal_manufacturer')
                                             @endcomponent

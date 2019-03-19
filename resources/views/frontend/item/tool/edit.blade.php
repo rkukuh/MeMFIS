@@ -214,7 +214,7 @@
 
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('size', 'sm')
-                                                @slot('text', 'manufacturer')
+                                                @slot('text', 'Manufacturer')
                                                 @slot('style', 'margin-top: 10px;')
                                                 @slot('data_target', '#modal_manufacturer')
                                             @endcomponent
