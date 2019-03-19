@@ -711,13 +711,13 @@ let TaskCard = {
                 }
             });
 
-            if ($('#applicability_airplane :selected').length > 0) {
-                var applicability_airplanes = [];
+            // if ($('#applicability_airplane :selected').length > 0) {
+            //     var applicability_airplanes = [];
 
-                $('#applicability_airplane :selected').each(function (i, selected) {
-                    applicability_airplanes[i] = $(selected).val();
-                });
-            }
+            //     $('#applicability_airplane :selected').each(function (i, selected) {
+            //         applicability_airplanes[i] = $(selected).val();
+            //     });
+            // }
 
             $.ajax({
                 headers: {
