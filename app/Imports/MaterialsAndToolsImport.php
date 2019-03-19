@@ -203,6 +203,7 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
             'code'      => $row['material'],
             'name'      => $row['material_description'],
             'unit_id'   => $unit,
+            'is_stock'  => true,
         ]);
 
         $item->save();
