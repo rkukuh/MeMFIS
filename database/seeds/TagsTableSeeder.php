@@ -12,6 +12,13 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        Tag::findOrCreate('Engine', 'item');
+        Tag::findOrCreate('Fluid', 'item');
+        Tag::findOrCreate('Grease', 'item');
+        Tag::findOrCreate('Tire', 'item');
+        Tag::findOrCreate('Rubber', 'item');
+        Tag::findOrCreate('Glass', 'item');
+        Tag::findOrCreate('Plastic', 'item');
+        Tag::findOrCreate('Soil', 'item');
+        Tag::findOrCreate('Brick', 'item');
     }
 }
