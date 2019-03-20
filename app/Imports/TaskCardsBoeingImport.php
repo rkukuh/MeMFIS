@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Type;
 use App\Models\Threshold;
 use App\Models\TaskCard;
+use App\Models\Aircraft;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -215,6 +216,12 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
 
         // TODO: M-M values:
         // - Table: aircraft_taskcard
+        $airplanes = Aircraft::where('name','B737-300')->orwhere('name','B737-400')->orwhere('name','B737-500')->get();
+
+        foreach($airplanes as $airplane){
+            $taskcard->aircrafts()->attach($airplane->id);
+        }
+
         // - Table: taskcard_zone
 
         // TODO: Polymorph values:
