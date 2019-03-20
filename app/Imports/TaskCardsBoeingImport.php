@@ -19,6 +19,54 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
 
         /** Set the workarea */
 
+        switch ($row['task_type']) {
+            case 'RESTORE':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Restore')->first()->id;
+            case 'INSPECTION - DETAILED':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Inspection')->first()->id;
+            case 'INSPECTION - GEN VISUAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Inspection')->first()->id;
+            case 'SERVICE':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Service')->first()->id;
+            case 'LUBRICATE':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Lubrication')->first()->id;
+            case 'VISUAL CHECK':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Visual Check')->first()->id;
+            case 'DISCARD':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Restore')->first()->id;
+            case 'OPERATIONAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Restore')->first()->id;
+            case 'FUNCTIONAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Restore')->first()->id;
+            case 'GENERAL VISUAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Restore')->first()->id;
+            case 'ZONAL (GV)':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Restore')->first()->id;
+            case 'DETAILED':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Restore')->first()->id;
+            case 'SPECIAL DETAILED':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Restore')->first()->id;
+            break;
+                default:
+                $task_type = null;
+
+        }
+
+        /** Set the workarea */
+
         switch ($row['work_area']) {
             case 'PASS CABIN':
                 $work_area = Type::ofWorkArea()
@@ -129,11 +177,14 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
 
         }
 
+
+
+
         $taskcard =  new TaskCard([
             'number' => $row['number'],
             'title' => $row['title'],
             'type_id' => null, // TODO: Import appropriate value
-            'task_id' => null, // TODO: Import appropriate value
+            'task_id' => $task_type, // TODO: Import appropriate value
             'skill_id' => null, // TODO: Import appropriate value
             'work_area' => $work_area, // TODO: Import appropriate value
             'estimation_manhour' => $row['manhours'],
