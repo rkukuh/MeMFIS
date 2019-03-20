@@ -205,7 +205,7 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
             'is_rii' => $row['is_rii'],
             'source' => $row['source'],
             'effectivity' => $row['effectivity'],
-            'version' => json_encode($row['version']),
+            'version' => json_encode(explode(';',$row['version'])),
             'description' => $row['description'],
         ]);
 
