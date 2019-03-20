@@ -36,32 +36,32 @@ let TaskCard = {
 
         $('.footer').on('click', '.add-taskcard', function () {
 
-            // let access = [];
-            // let i = 0;
-            // $("#access").val().forEach(function(entry) {
-            //     access[i] = entry;
-            //     i++;
-            // });
+            let access = [];
+            let i = 0;
+            $("#access").val().forEach(function(entry) {
+                access[i] = entry;
+                i++;
+            });
 
-            // let applicability_airplane = [];
-            // i = 0;
-            // $("#applicability_airplane").val().forEach(function(entry) {
-            //     applicability_airplane[i] = entry;
-            //     i++;
-            // });
-            // let zone = [];
-            // i = 0;
-            // $("#zone").val().forEach(function(entry) {
-            //     zone[i] = entry;
-            //     i++;
-            // });
+            let applicability_airplane = [];
+            i = 0;
+            $("#applicability_airplane").val().forEach(function(entry) {
+                applicability_airplane[i] = entry;
+                i++;
+            });
+            let zone = [];
+            i = 0;
+            $("#zone").val().forEach(function(entry) {
+                zone[i] = entry;
+                i++;
+            });
 
-            // let relationship = [];
-            // i = 0;
-            // $("#relationship").val().forEach(function(entry) {
-            //     relationship[i] = entry;
-            //     i++;
-            // });
+            let relationship = [];
+            i = 0;
+            $("#relationship").val().forEach(function(entry) {
+                relationship[i] = entry;
+                i++;
+            });
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
@@ -89,51 +89,51 @@ let TaskCard = {
                 is_rii = 0;
             }
 
-            // var data = new FormData();
-            // data.append( "title", $('input[name=title]').val());
-            // data.append( "number", $('input[name=number]').val());
-            // data.append( "type_id", $('#taskcard_routine_type').val());
-            // data.append( "applicability_airplane", JSON.stringify(applicability_airplane));
-            // data.append( "task_id", $('#task_type_id').val());
-            // data.append( "skill_id", $('#otr_certification').val());
-            // data.append( "estimation_manhour", $('#manhour').val());
-            // data.append( "performance_factor", $('input[name=performa]').val());
-            // data.append( "helper_quantity", $('input[name=helper_quantity]').val());
-            // data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
-            // data.append( "work_area", $('#work_area').val());
-            // data.append( "access", JSON.stringify(access));
-            // data.append( "zone", JSON.stringify(zone));
-            // data.append( "source", $('input[name=source]').val());
-            // data.append( "relationship", JSON.stringify(relationship));
-            // data.append( "version", JSON.stringify($('#version').val()));
-            // data.append( "effectivity", $('input[name=effectivity]').val());
-            // data.append( "description", $('#description').val());
-            // data.append( "threshold_type", JSON.stringify(threshold_type));
-            // data.append( "repeat_type", JSON.stringify(repeat_type));
-            // data.append( "threshold_amount", JSON.stringify(threshold_amount));
-            // data.append( "repeat_amount", JSON.stringify(repeat_amount));
-            // data.append( "is_rii", is_rii);
-            // // data.append( "fileInput", document.getElementById('largeImage').files[0]);
+            var data = new FormData();
+            data.append( "title", $('input[name=title]').val());
+            data.append( "number", $('input[name=number]').val());
+            data.append( "type_id", $('#taskcard_routine_type').val());
+            data.append( "applicability_airplane", JSON.stringify(applicability_airplane));
+            data.append( "task_id", $('#task_type_id').val());
+            data.append( "skill_id", $('#otr_certification').val());
+            data.append( "estimation_manhour", $('#manhour').val());
+            data.append( "performance_factor", $('input[name=performa]').val());
+            data.append( "helper_quantity", $('input[name=helper_quantity]').val());
+            data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
+            data.append( "work_area", $('#work_area').val());
+            data.append( "access", JSON.stringify(access));
+            data.append( "zone", JSON.stringify(zone));
+            data.append( "source", $('input[name=source]').val());
+            data.append( "relationship", JSON.stringify(relationship));
+            data.append( "version", JSON.stringify($('#version').val()));
+            data.append( "effectivity", $('input[name=effectivity]').val());
+            data.append( "description", $('#description').val());
+            data.append( "threshold_type", JSON.stringify(threshold_type));
+            data.append( "repeat_type", JSON.stringify(repeat_type));
+            data.append( "threshold_amount", JSON.stringify(threshold_amount));
+            data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "is_rii", is_rii);
+            // data.append( "fileInput", document.getElementById('largeImage').files[0]);
 
 
-            let title = $('input[name=title]').val();
-            let number = $('input[name=number]').val();
-            let taskcard_routine_type = $('#taskcard_routine_type').val();
-            let applicability_airplane = $('#applicability_airplane').val();
-            let task_type_id = $('#task_type_id').val();
-            let otr_certification = $('#otr_certification').val();
-            let manhour = $('input[name=manhour]').val();
-            let performa = $('input[name=performa]').val();
-            let helper_quantity = $('input[name=helper_quantity]').val();
-            let engineer_quantity = $('input[name=engineer_quantity]').val();
-            let work_area = $('#work_area').val();
-            let access = $('#access').val();
-            let zone = $('#zone').val();
-            let source = $('input[name=source]').val();
-            let relationship = $('#relationship').val();
-            let version = JSON.stringify($('#version').val());
-            let effectivity = $('input[name=effectivity]').val();
-            let description = $('#description').val();
+            // let title = $('input[name=title]').val();
+            // let number = $('input[name=number]').val();
+            // let taskcard_routine_type = $('#taskcard_routine_type').val();
+            // let applicability_airplane = $('#applicability_airplane').val();
+            // let task_type_id = $('#task_type_id').val();
+            // let otr_certification = $('#otr_certification').val();
+            // let manhour = $('input[name=manhour]').val();
+            // let performa = $('input[name=performa]').val();
+            // let helper_quantity = $('input[name=helper_quantity]').val();
+            // let engineer_quantity = $('input[name=engineer_quantity]').val();
+            // let work_area = $('#work_area').val();
+            // let access = $('#access').val();
+            // let zone = $('#zone').val();
+            // let source = $('input[name=source]').val();
+            // let relationship = $('#relationship').val();
+            // let version = JSON.stringify($('#version').val());
+            // let effectivity = $('input[name=effectivity]').val();
+            // let description = $('#description').val();
 
 
             $.ajax({
@@ -141,38 +141,38 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                // processData: false,
-                // contentType: false,
+                processData: false,
+                contentType: false,
                 url: '/taskcard-routine',
-                // data: data,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    number: number,
-                    title: title,
-                    type_id: taskcard_routine_type,
-                    task_id: task_type_id,
-                    work_area: work_area,
-                    helper_quantity: helper_quantity,
-                    engineer_quantity: engineer_quantity,
-                    is_rii: is_rii,
-                    performance_factor: performa,
-                    estimation_manhour: manhour,
-                    description: description,
-                    version: version,
-                    effectivity: effectivity,
-                    source: source,
+                data: data,
+                // data: {
+                //     _token: $('input[name=_token]').val(),
+                //     number: number,
+                //     title: title,
+                //     type_id: taskcard_routine_type,
+                //     task_id: task_type_id,
+                //     work_area: work_area,
+                //     helper_quantity: helper_quantity,
+                //     engineer_quantity: engineer_quantity,
+                //     is_rii: is_rii,
+                //     performance_factor: performa,
+                //     estimation_manhour: manhour,
+                //     description: description,
+                //     version: version,
+                //     effectivity: effectivity,
+                //     source: source,
 
-                    threshold_amount: threshold_amount,
-                    threshold_type: threshold_type,
-                    repeat_amount: repeat_amount,
-                    repeat_type: repeat_type,
+                //     threshold_amount: threshold_amount,
+                //     threshold_type: threshold_type,
+                //     repeat_amount: repeat_amount,
+                //     repeat_type: repeat_type,
 
-                    applicability_airplane: applicability_airplane,
-                    skill_id: otr_certification,
-                    access: access,
-                    zone: zone,
-                    relationship: relationship,
-                },
+                //     applicability_airplane: applicability_airplane,
+                //     skill_id: otr_certification,
+                //     access: access,
+                //     zone: zone,
+                //     relationship: relationship,
+                // },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.title) {
@@ -238,7 +238,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard-routine/' + data.uuid + '/edit';
+                        // window.location.href = '/taskcard-routine/' + data.uuid + '/edit';
                     }
                 }
             });
