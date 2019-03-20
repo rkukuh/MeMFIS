@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Type;
+use App\Models\Threshold;
 use App\Models\TaskCard;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -219,6 +220,16 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
         // TODO: Polymorph values:
         // - Table: accesses
         // - Table: thresholds
+        $thresholds = explode(';',$row['threshold']);
+        for ($i=0; $i < sizeof($thresholds) ; $i++) {
+                $threshold = explode(" ", $thresholds[$i]);
+                // echo $threshold[1];
+                // $taskcard->thresholds()->save(new Threshold([
+                //     'amount' => $threshold[0],
+                //     'type_id' => Type::where('name',$threshold[1])->first()->id,
+                // ]));
+        }
+
         // - Table: repeats
     }
 }
