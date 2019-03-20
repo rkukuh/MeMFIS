@@ -16,13 +16,126 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return new TaskCard([
+
+        /** Set the workarea */
+
+        switch ($row['work_area']) {
+            case 'PASS CABIN':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'PASS CABIN')->first()->id;
+                break;
+            case 'NOSE COMP T':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'LWR NOSE COMPARTMENT')->first()->id;
+                break;
+            case 'MAIN W/W':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'MAIN WHEEL WELL')->first()->id;
+                break;
+            case 'APU COMPARTMENT':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'APU COMPARTMENT')->first()->id;
+                break;
+            case 'LT WING INBD LE':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'L WING LEADING EDGE')->first()->id;
+                break;
+            case 'STRUTS':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'ENGINE/STRUT')->first()->id;
+                break;
+            case 'TAIL COMPT':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'TAIL COMPARTMENT')->first()->id;
+                break;
+            case 'A/C BAY':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'FUSELAGE':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'FUSELAGE')->first()->id;
+                break;
+            case 'LEFT ENGINE':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'LEFT ENGINE')->first()->id;
+                break;
+            case 'RIGHT ENGINE':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'RIGHT ENGINE')->first()->id;
+                break;
+            case 'CREW CABIN':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'MAIN EE CTR':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'FWD AIRSTAIR':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'FWD CARGO':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'FT CARGO':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'ENGINE #1':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'ENGINE #2':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'ENGINE #1':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'MULTIPLE':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'L WING LE':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'R WING LE':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'TAIL CONE':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'LEFT CARGO':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'EMERG DOORS':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            case 'DOORS':
+                $work_area = Type::ofWorkArea()
+                                    ->where('name', 'AC DIST BAY')->first()->id;
+                break;
+            default:
+                $work_area = null;
+
+        }
+
+        $taskcard =  new TaskCard([
             'number' => $row['number'],
             'title' => $row['title'],
             'type_id' => null, // TODO: Import appropriate value
             'task_id' => null, // TODO: Import appropriate value
             'skill_id' => null, // TODO: Import appropriate value
-            'work_area' => null, // TODO: Import appropriate value
+            'work_area' => $work_area, // TODO: Import appropriate value
             'estimation_manhour' => $row['manhours'],
             'is_rii' => $row['is_rii'],
             'source' => $row['source'],
@@ -30,6 +143,9 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
             'version' => json_encode($row['version']),
             'description' => $row['description'],
         ]);
+
+        $taskcard->save();
+
 
         // TODO: M-M values:
         // - Table: aircraft_taskcard
