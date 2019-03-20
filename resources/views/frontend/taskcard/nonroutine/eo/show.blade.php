@@ -84,17 +84,15 @@
                                                 <label class="form-control-label">
                                                     Reference @include('frontend.common.label.optional')
                                                 </label>
-
-                                                <div style="background-color:beige; padding:15px;" class="">
-
                                                     @if (empty($taskcard->related_to->isEmpty()))
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
+                                                    <div style="background-color:beige; padding:15px;" class="">
                                                         @foreach($taskcard->related_to  as $related)
                                                             {{ $related->number }},
                                                         @endforeach
+                                                    </div>
                                                     @endif
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -147,6 +145,38 @@
                                                     @slot('id', 'taskcard')
                                                     @slot('name', 'taskcard')
                                                 @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Thresholds @include('frontend.common.label.optional')
+                                                </label>
+
+                                                @if ($taskcard->thresholds->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                <div style="background-color:beige; padding:15px;" class="">
+                                                    @foreach($taskcard->thresholds as $threshold)
+                                                        {{ $threshold->amount }} {{ $threshold->type->name }},
+                                                    @endforeach
+                                                </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Repeats @include('frontend.common.label.optional')
+                                                </label>
+
+                                                @if ($taskcard->repeats->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                <div style="background-color:beige; padding:15px;" class="">
+                                                    @foreach($taskcard->repeats as $repeat)
+                                                        {{ $repeat->amount }} {{ $repeat->type->name }},
+                                                    @endforeach
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <hr>

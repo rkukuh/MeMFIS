@@ -299,6 +299,38 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
+                                                Thresholds @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @if ($taskcard->thresholds->isEmpty())
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                            <div style="background-color:beige; padding:15px;" class="">
+                                                @foreach($taskcard->thresholds as $threshold)
+                                                    {{ $threshold->amount }} {{ $threshold->type->name }},
+                                                @endforeach
+                                            </div>
+                                            @endif
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Repeats @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @if ($taskcard->repeats->isEmpty())
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                            <div style="background-color:beige; padding:15px;" class="">
+                                                @foreach($taskcard->repeats as $repeat)
+                                                    {{ $repeat->amount }} {{ $repeat->type->name }},
+                                                @endforeach
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
                                                 Task Card Attachment @include('frontend.common.label.optional')
                                             </label>
 

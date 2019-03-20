@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li class="m-nav__separator">
-                        -
+                        -   
                     </li>
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.taskcard.index') }}" class="m-nav__link">
@@ -160,6 +160,38 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Thresholds @include('frontend.common.label.optional')
+                                                </label>
+
+                                                @if ($taskCard->thresholds->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                <div style="background-color:beige; padding:15px;" class="">
+                                                    @foreach($taskCard->thresholds as $threshold)
+                                                        {{ $threshold->amount }} {{ $threshold->type->name }},
+                                                    @endforeach
+                                                </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Repeats @include('frontend.common.label.optional')
+                                                </label>
+
+                                                @if ($taskCard->repeats->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                <div style="background-color:beige; padding:15px;" class="">
+                                                    @foreach($taskCard->repeats as $repeat)
+                                                        {{ $repeat->amount }} {{ $repeat->type->name }},
+                                                    @endforeach
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
