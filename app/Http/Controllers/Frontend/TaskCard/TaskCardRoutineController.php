@@ -72,6 +72,7 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
+        $this->decoder($request);
         $accesses = [];
         $zones = [];
         if($request->work_area){
@@ -115,24 +116,29 @@ class TaskCardRoutineController extends Controller
             }
 
             if(!$taskcard->related_to->isEmpty())$taskcard->related_to()->attach($request->relationship);
-            
+           
+            if(is_array($request->threshold_amount)){
             for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
                 if($request->threshold_type[$i] !== "Select Threshold"){
                     $taskcard->thresholds()->save(new Threshold([
                         'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
                         'amount' => $request->threshold_amount[$i],
-                    ]));
+                        ]));
+                    }
                 }
             }
-            
+
+            if(is_array($request->repeat_amount)){
             for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
                 if($request->repeat_type[$i] !== "Select Repeat"){
                     $taskcard->repeats()->save(new Repeat([
                         'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
                         'amount' => $request->repeat_amount[$i],
-                    ]));
+                        ]));
+                    }
                 }
             }
+                        
 
             return response()->json($taskcard);
         }
@@ -249,6 +255,8 @@ class TaskCardRoutineController extends Controller
      */
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
+        $this->decoder($request);
+
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             
@@ -328,5 +336,19 @@ class TaskCardRoutineController extends Controller
     public function destroy(Taskcard $taskCard)
     {
         //
+    }
+
+    public function decoder($req){
+
+        $req->applicability_airplane = json_decode($req->applicability_airplane);
+        $req->access = json_decode($req->access);
+        $req->zone = json_decode($req->zone);
+        $req->relationship = json_decode($req->relationship);
+        $req->threshold_type = json_decode($req->threshold_type);
+        $req->repeat_type = json_decode($req->repeat_type);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->repeat_amount = json_decode($req->repeat_amount);
+
+        return $req;
     }
 }
