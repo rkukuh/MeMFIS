@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Type;
+use App\Models\Zone;
 use App\Models\Threshold;
 use App\Models\TaskCard;
 use App\Models\Aircraft;
@@ -223,6 +224,20 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
         }
 
         // - Table: taskcard_zone
+        $zones = [];
+        if($row['zone']){
+            foreach (explode(' ',$row['zone']) as $zone_name ) {
+                foreach ($airplanes as $airplane) {
+                    if(isset($zone_name)){
+                        $zone = Zone::firstOrCreate(
+                            ['name' => $zone_name, 'zoneable_id' => $airplane->id, 'zoneable_type' => 'App\Models\Aircraft']
+                        );
+                        array_push($zones, $zone->id);
+                    }
+                }
+            }
+            $taskcard->zones()->attach($zones);
+        }
 
         // TODO: Polymorph values:
         // - Table: accesses
