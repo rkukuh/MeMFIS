@@ -3,7 +3,10 @@
 namespace App\Imports;
 
 use App\Models\Type;
+use App\Models\Zone;
+use App\Models\Threshold;
 use App\Models\TaskCard;
+use App\Models\Aircraft;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -214,11 +217,41 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
 
         // TODO: M-M values:
         // - Table: aircraft_taskcard
+        $airplanes = Aircraft::where('name','B737-300')->orwhere('name','B737-400')->orwhere('name','B737-500')->get();
+
+        foreach($airplanes as $airplane){
+            $taskcard->aircrafts()->attach($airplane->id);
+        }
+
         // - Table: taskcard_zone
+        $zones = [];
+        if($row['zone']){
+            foreach (explode(' ',$row['zone']) as $zone_name ) {
+                foreach ($airplanes as $airplane) {
+                    if(isset($zone_name)){
+                        $zone = Zone::firstOrCreate(
+                            ['name' => $zone_name, 'zoneable_id' => $airplane->id, 'zoneable_type' => 'App\Models\Aircraft']
+                        );
+                        array_push($zones, $zone->id);
+                    }
+                }
+            }
+            $taskcard->zones()->attach($zones);
+        }
 
         // TODO: Polymorph values:
         // - Table: accesses
         // - Table: thresholds
+        $thresholds = explode(';',$row['threshold']);
+        for ($i=0; $i < sizeof($thresholds) ; $i++) {
+                $threshold = explode(" ", $thresholds[$i]);
+                // echo $threshold[1];
+                // $taskcard->thresholds()->save(new Threshold([
+                //     'amount' => $threshold[0],
+                //     'type_id' => Type::where('name',$threshold[1])->first()->id,
+                // ]));
+        }
+
         // - Table: repeats
     }
 }
