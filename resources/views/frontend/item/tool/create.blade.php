@@ -274,7 +274,7 @@
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'item-uom')
-                                            @slot('text', 'UoM')
+                                            @slot('text', 'Unit Conversion')
                                             @slot('attribute', 'disabled')
                                             @slot('data_target', '#modal_uom')
                                         @endcomponent
