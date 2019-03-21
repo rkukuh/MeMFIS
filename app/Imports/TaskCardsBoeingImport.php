@@ -262,7 +262,7 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
         // - Table: thresholds
         if($row['threshold']){
             foreach (explode(';',$row['threshold']) as $threshold ) {
-                var_dump($threshold);
+                // var_dump($threshold);
                 // foreach (explode(' ',$threshold) as $threshold_amount_type ) {
                 //     $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $threshold_amount_type[1] . '%')->first()->id;
                 //     $taskcard->thresholds()->save(new Threshold([
