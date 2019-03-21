@@ -37,12 +37,6 @@ class CategoriesOfItem extends Seeder
         ]);
 
         Category::create([
-            'code' => 'bdp',
-            'name' => 'Breakdown Part',
-            'of' => 'item',
-        ]);
-
-        Category::create([
             'code' => 'service',
             'name' => 'Service',
             'of' => 'item',
@@ -54,10 +48,5 @@ class CategoriesOfItem extends Seeder
             'of' => 'item',
         ]);
 
-        Category::create([
-            'code' => 'oil',
-            'name' => 'Oil',
-            'of' => 'item',
-        ]);
     }
 }

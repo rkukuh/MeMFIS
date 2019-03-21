@@ -25,6 +25,24 @@ class TypesOfMaintenanceCycle extends Seeder
         ]);
 
         Type::create([
+            'code' => 'hour',
+            'name' => 'HR (Hour)',
+            'of'  => 'maintenance-cycle',
+        ]);
+
+        Type::create([
+            'code' => 'month',
+            'name' => 'MO (Month)',
+            'of'  => 'maintenance-cycle',
+        ]);
+
+        Type::create([
+            'code' => 'year',
+            'name' => 'YR (Year)',
+            'of'  => 'maintenance-cycle',
+        ]);
+
+        Type::create([
             'code' => 'a',
             'name' => 'A',
             'of'  => 'maintenance-cycle',
@@ -43,16 +61,6 @@ class TypesOfMaintenanceCycle extends Seeder
             'of'  => 'maintenance-cycle',
         ]);
 
-        Type::create([
-            'code' => 'month',
-            'name' => 'Month',
-            'of'  => 'maintenance-cycle',
-        ]);
 
-        Type::create([
-            'code' => 'year',
-            'name' => 'Year',
-            'of'  => 'maintenance-cycle',
-        ]);
     }
 }

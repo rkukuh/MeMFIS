@@ -111,7 +111,7 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Sheet')->first()->id;
                 break;
-            default: 
+            default:
                 $unit = null;
         }
 
@@ -133,12 +133,12 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
             case 'COMP':
                 $category = Category::ofItem()
                                     ->where('name', 'Component')->first()->id;
-                break;            
+                break;
             case 'BDP':
                 $category = Category::ofItem()
-                                    ->where('name', 'Breakdown Part')->first()->id;
+                                    ->where('name', 'Consumable')->first()->id;
                 break;
-            default: 
+            default:
                 $category = Category::ofItem()
                                     ->where('name', 'Consumable')->first()->id;
         }

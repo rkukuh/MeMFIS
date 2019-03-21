@@ -13,8 +13,8 @@ class StoragesTableSeeder extends Seeder
     public function run()
     {
         Storage::create([
-            'code' => 'central',
-            'name' => 'Central Store/CSS',
+            'code' => 'part',
+            'name' => 'Part',
             'description' => 'Central storage',
         ]);
 
