@@ -68,7 +68,7 @@ class TaskCardSIController extends Controller
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 
             if(is_array($request->threshold_amount)){
-                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
                     if($request->threshold_type[$i] !== "Select Threshold"){
                         $taskcard->thresholds()->save(new Threshold([
                             'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
@@ -79,7 +79,7 @@ class TaskCardSIController extends Controller
                 }
 
             if(is_array($request->repeat_amount)){
-                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
                     if($request->repeat_type[$i] !== "Select Repeat"){
                         $taskcard->repeats()->save(new Repeat([
                             'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
@@ -89,15 +89,15 @@ class TaskCardSIController extends Controller
                     }
                 }
 
-            if ($request->hasFile('fileInput')) {
-                $data = $request->input('image');
-                $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/routine/';
-                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
-            }
-            else{
-                return response()->json('Sorry, File is not detected by system');
-            }
+            // if ($request->hasFile('fileInput')) {
+            //     $data = $request->input('image');
+            //     $photo = $request->file('fileInput')->getClientOriginalName();
+            //     $destination = 'master/taskcard/routine/';
+            //     $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            // }
+            // else{
+            //     return response()->json('Sorry, File is not detected by system');
+            // }
 
             return response()->json($taskcard);
         }
@@ -167,7 +167,7 @@ class TaskCardSIController extends Controller
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats)$taskCard->repeats()->delete();
             if(is_array($request->threshold_amount)){
-                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
                     if($request->threshold_type[$i] !== "Select Threshold"){
                         $taskCard->thresholds()->save(new Threshold([
                             'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
@@ -178,7 +178,7 @@ class TaskCardSIController extends Controller
                 }
 
             if(is_array($request->repeat_amount)){
-                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
                     if($request->repeat_type[$i] !== "Select Repeat"){
                         $taskCard->repeats()->save(new Repeat([
                             'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
@@ -196,7 +196,7 @@ class TaskCardSIController extends Controller
             }
             else{
                 return response()->json('Sorry, File is not detected by system');
-            }    
+            }
 
             return response()->json($taskCard);
         }
