@@ -100,7 +100,7 @@ class TaskCardEOController extends Controller
             if ($request->hasFile('fileInput')) {
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/routine/'.$taskcard->type->name;
+                $destination = 'master/taskcard/routine/';
                 $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
             }
             else{
@@ -198,6 +198,16 @@ class TaskCardEOController extends Controller
                         ]));
                     }
                 }
+
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+            else{
+                return response()->json('Sorry, File is not detected by system');
+            }
 
             return response()->json($taskCard);
         }

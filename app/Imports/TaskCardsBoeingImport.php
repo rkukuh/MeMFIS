@@ -243,15 +243,19 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
         // - Table: accesses
         // - Table: thresholds
         $thresholds = explode(';',$row['threshold']);
-        for ($i=0; $i < sizeof($thresholds) ; $i++) {
-                $threshold = explode(" ", $thresholds[$i]);
-                // echo $threshold[1];
-                // $taskcard->thresholds()->save(new Threshold([
-                //     'amount' => $threshold[0],
-                //     'type_id' => Type::where('name',$threshold[1])->first()->id,
-                // ]));
+        if(is_array($thresholds) && !empty($thresholds) ){
+            for ($i=0; $i < sizeof($thresholds) ; $i++) {
+                    $threshold = explode(" ", $thresholds[$i]);
+                    $taskcard->thresholds()->save(new Threshold([
+                        'amount' => $threshold[0],
+                        'type_id' => Type::where('name',$threshold[1])->first()->id,
+                        ]));
+                    // $taskcard->thresholds()->save(new Threshold([
+                    //     'amount' => $threshold[0],
+                    //     'type_id' => Type::where('name',$threshold[1])->first()->id,
+                    // ]));
+            }
         }
-
         // - Table: repeats
     }
 }
