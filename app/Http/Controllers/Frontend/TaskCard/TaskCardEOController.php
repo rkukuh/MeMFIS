@@ -9,6 +9,7 @@ use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Category;
 use App\Models\Threshold;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardEOStore;
@@ -72,6 +73,8 @@ class TaskCardEOController extends Controller
      */
     public function store(TaskCardEOStore $request)
     {
+        // $this->decoder($request);
+
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
             $taskcard->related_to()->attach($request->relationship);
@@ -92,6 +95,16 @@ class TaskCardEOController extends Controller
                         'amount' => $request->repeat_amount[$i],
                     ]));
                 }
+            }
+
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/routine/'.$taskcard->type->name;
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+            else{
+                return response()->json('Sorry, File is not detected by system');
             }
 
             return response()->json($taskcard);
@@ -160,6 +173,8 @@ class TaskCardEOController extends Controller
      */
     public function update(TaskCardEOUpdate $request, Taskcard $taskCard)
     {
+        // $this->decoder($request);
+
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             $taskCard->related_to()->sync($request->relationship);
@@ -200,5 +215,19 @@ class TaskCardEOController extends Controller
     public function destroy(Taskcard $taskCard)
     {
         //
+    }
+
+    public function decoder($req){
+
+        $req->applicability_airplane = json_decode($req->applicability_airplane);
+        $req->access = json_decode($req->access);
+        $req->zone = json_decode($req->zone);
+        $req->relationship = json_decode($req->relationship);
+        $req->threshold_type = json_decode($req->threshold_type);
+        $req->repeat_type = json_decode($req->repeat_type);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->repeat_amount = json_decode($req->repeat_amount);
+
+        return $req;
     }
 }
