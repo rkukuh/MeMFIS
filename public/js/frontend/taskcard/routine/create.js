@@ -88,7 +88,7 @@ let TaskCard = {
             } else {
                 is_rii = 0;
             }
-
+            console.log(document.getElementById('taskcard').files[0]);
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
@@ -113,7 +113,8 @@ let TaskCard = {
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
             data.append( "is_rii", is_rii);
-            // data.append( "fileInput", document.getElementById('largeImage').files[0]);
+            data.append( "fileInput", document.getElementById('taskcard').files[0]);
+       
 
 
             // let title = $('input[name=title]').val();
@@ -145,6 +146,9 @@ let TaskCard = {
                 contentType: false,
                 url: '/taskcard-routine',
                 data: data,
+                contentType: false,
+                cache: false,
+                processData:false,
                 // data: {
                 //     _token: $('input[name=_token]').val(),
                 //     number: number,

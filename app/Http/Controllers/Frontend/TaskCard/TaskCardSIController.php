@@ -7,6 +7,8 @@ use App\Models\Repeat;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardSIStore;
 use App\Http\Requests\Frontend\TaskCardSIUpdate;
@@ -55,6 +57,8 @@ class TaskCardSIController extends Controller
      */
     public function store(TaskCardSIStore $request)
     {
+        // $this->decoder($request);
+
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
@@ -66,7 +70,7 @@ class TaskCardSIController extends Controller
             if(is_array($request->threshold_amount)){
                 for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
                     if($request->threshold_type[$i] !== "Select Threshold"){
-                        $taskCard->thresholds()->save(new Threshold([
+                        $taskcard->thresholds()->save(new Threshold([
                             'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
                             'amount' => $request->threshold_amount[$i],
                             ]));
@@ -77,13 +81,23 @@ class TaskCardSIController extends Controller
             if(is_array($request->repeat_amount)){
                 for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
                     if($request->repeat_type[$i] !== "Select Repeat"){
-                        $taskCard->repeats()->save(new Repeat([
+                        $taskcard->repeats()->save(new Repeat([
                             'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
                             'amount' => $request->repeat_amount[$i],
                             ]));
                         }
                     }
                 }
+
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+            else{
+                return response()->json('Sorry, File is not detected by system');
+            }
 
             return response()->json($taskcard);
         }
@@ -136,9 +150,11 @@ class TaskCardSIController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardSIUpdate $request,$taskCard)
+    public function update(TaskCardSIUpdate $request, $taskCard)
     {
         //TODO Data binding not work
+
+        // $this->decoder($request);
 
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
         if($request->work_area){
@@ -172,6 +188,16 @@ class TaskCardSIController extends Controller
                     }
                 }
 
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+            else{
+                return response()->json('Sorry, File is not detected by system');
+            }    
+
             return response()->json($taskCard);
         }
 
@@ -188,5 +214,16 @@ class TaskCardSIController extends Controller
     public function destroy(Taskcard $taskCard)
     {
         //
+    }
+
+    public function decoder($req){
+
+        $req->applicability_airplane = json_decode($req->applicability_airplane);
+        $req->threshold_type = json_decode($req->threshold_type);
+        $req->repeat_type = json_decode($req->repeat_type);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->repeat_amount = json_decode($req->repeat_amount);
+
+        return $req;
     }
 }

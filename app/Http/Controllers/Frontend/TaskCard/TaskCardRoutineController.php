@@ -9,6 +9,7 @@ use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
 use App\Models\Repeat;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -72,6 +73,7 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
+
         $this->decoder($request);
         $accesses = [];
         $zones = [];
@@ -139,6 +141,15 @@ class TaskCardRoutineController extends Controller
                 }
             }
                         
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+            else{
+                return response()->json('Sorry, File is not detected by system');
+            }
 
             return response()->json($taskcard);
         }
@@ -319,6 +330,15 @@ class TaskCardRoutineController extends Controller
                     }
                 }
 
+                if ($request->hasFile('fileInput')) {
+                    $data = $request->input('image');
+                    $photo = $request->file('fileInput')->getClientOriginalName();
+                    $destination = 'master/taskcard/routine/';
+                    $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+                }
+                else{
+                    return response()->json('Sorry, File is not detected by system');
+                }
 
             return response()->json($taskCard);
         }
