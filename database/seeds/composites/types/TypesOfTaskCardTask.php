@@ -65,5 +65,30 @@ class TypesOfTaskCardTask extends Seeder
             'name' => 'Restore',
             'of'  => 'taskcard-task',
         ]);
+
+        Type::create([
+            'code' => 'operational',
+            'name' => 'Operational',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'functional',
+            'name' => 'Functional',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'borescope',
+            'name' => 'Borescope',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'detailed-instruction',
+            'name' => 'Detailed Instruction',
+            'of'  => 'taskcard-task',
+        ]);
+
     }
 }
