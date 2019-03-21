@@ -4,9 +4,10 @@ namespace App\Imports;
 
 use App\Models\Type;
 use App\Models\Zone;
-use App\Models\Threshold;
-use App\Models\TaskCard;
+use App\Models\Access;
 use App\Models\Aircraft;
+use App\Models\TaskCard;
+use App\Models\Threshold;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -241,16 +242,69 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
 
         // TODO: Polymorph values:
         // - Table: accesses
-        // - Table: thresholds
-        $thresholds = explode(';',$row['threshold']);
-        for ($i=0; $i < sizeof($thresholds) ; $i++) {
-                $threshold = explode(" ", $thresholds[$i]);
-                // echo $threshold[1];
-                // $taskcard->thresholds()->save(new Threshold([
-                //     'amount' => $threshold[0],
-                //     'type_id' => Type::where('name',$threshold[1])->first()->id,
-                // ]));
+        $accesses = [];
+        if($row['access']){
+            foreach (explode(' ',$row['access']) as $access_name ) {
+                foreach ($airplanes as $airplane) {
+                    // echo $access_name;
+                    if(isset($access_name)){
+                        $access = Access::firstOrCreate(
+                            ['name' => $access_name, 'accessable_id' => $airplane->id, 'accessable_type' => 'App\Models\Aircraft']
+                        );
+                        array_push($accesses, $access->id);
+                    }
+                }
+            }
+            $taskcard->accesses()->attach($accesses);
         }
+
+
+        // - Table: thresholds
+        if($row['threshold']){
+            foreach (explode(';',$row['threshold']) as $threshold ) {
+                var_dump($threshold);
+                // foreach (explode(' ',$threshold) as $threshold_amount_type ) {
+                //     $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $threshold_amount_type[1] . '%')->first()->id;
+                //     $taskcard->thresholds()->save(new Threshold([
+                //         'amount' => $threshold_amount_type[0],
+                //         'type_id' => $threshold_type,
+                //     ]));
+                // }
+                // foreach ($airplanes as $airplane) {
+                //     // echo $access_name;
+                //     if(isset($access_name)){
+                //         $access = Access::firstOrCreate(
+                //             ['name' => $access_name, 'accessable_id' => $airplane->id, 'accessable_type' => 'App\Models\Aircraft']
+                //         );
+                //         array_push($accesses, $access->id);
+                //     }
+                // }
+            }
+            // $taskcard->accesses()->attach($accesses);
+        }
+
+        // $thresholds = explode(';',$row['threshold']);
+        // var_dump($thresholds);
+        // for ($i=0; $i < sizeof($row['threshold']) ; $i++) {
+        //         $threshold = explode(" ", $thresholds[$i]);
+                // $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $threshold[0] . '%')->first()->id;
+                // if ( ! isset($threshold[1])) {
+                    // $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $threshold[1] . '%')->first();
+                    // if($threshold_type !== null){
+                    //     // echo $threshold[0];
+                    //     $taskcard->thresholds()->save(new Threshold([
+                    //         'amount' => $threshold[0],
+                    //         'type_id' => $threshold_type->id,
+                    //     ]));
+                    // }
+                // }
+
+                // echo $threshold_type;
+                // ->orWhere('name', 'like', '%' . Input::get('name') . '%')->get();esholds[$i]);
+                // echo $threshold[1];
+
+                // echo $threshold[1];
+        // }
 
         // - Table: repeats
     }
