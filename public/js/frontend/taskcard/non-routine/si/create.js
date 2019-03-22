@@ -32,44 +32,40 @@ let TaskCard = {
                 repeat_amount[i] = $(this).val();
             });
 
+            let applicability_airplane = [];
+            let i = 0;
+            $("#applicability_airplane").val().forEach(function(entry) {
+                applicability_airplane[i] = entry;
+                i++;
+            });
 
+            // let title = $('input[name=title]').val();
+            // let number = $('input[name=number]').val();
+            // let otr_certification = $('#otr_certification').val();
+            // let applicability_airplane = $('#applicability_airplane').val();
+            // let work_area = $('#work_area').val();
+            // let manhour = $('input[name=manhour]').val();
+            // let helper_quantity = $('input[name=helper_quantity]').val();
+            // let engineer_quantity = $('input[name=engineer_quantity]').val();
+            // let performa = $('input[name=performa]').val();
+            // let instruction = $('#instruction').val();
 
-            let title = $('input[name=title]').val();
-            let number = $('input[name=number]').val();
-            let otr_certification = $('#otr_certification').val();
-            let applicability_airplane = $('#applicability_airplane').val();
-            let work_area = $('#work_area').val();
-            let manhour = $('input[name=manhour]').val();
-            let helper_quantity = $('input[name=helper_quantity]').val();
-            let engineer_quantity = $('input[name=engineer_quantity]').val();
-            let performa = $('input[name=performa]').val();
-            let instruction = $('#instruction').val();
-            // var data = new FormData();
-            // data.append( "title", $('input[name=title]').val());
-            // data.append( "number", $('input[name=number]').val());
-            // data.append( "estimation_manhour", $('input[name=manhour]').val());
-            // data.append( "performance_factor", $('input[name=performa]').val());
-            // data.append( "helper_quantity", $('input[name=helper_quantity]').val());
-            // data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
-            // data.append( "description", $('#instruction').val());
-            // data.append( "work_area", $('#work_area').val());
-            // data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
-            // data.append( "skill_id", $('#otr_certification').val());
-            // data.append( "threshold_type", JSON.stringify(threshold_type));
-            // data.append( "repeat_type", JSON.stringify(repeat_type));
-            // data.append( "threshold_amount", JSON.stringify(threshold_amount));
-            // data.append( "repeat_amount", JSON.stringify(repeat_amount));
-
-
-
-
-            if ($('#applicability_airplane :selected').length > 0) {
-                var applicability_airplanes = [];
-
-                $('#applicability_airplane :selected').each(function (i, selected) {
-                    applicability_airplanes[i] = $(selected).val();
-                });
-            }
+            var data = new FormData();
+            data.append( "title", $('input[name=title]').val());
+            data.append( "number", $('input[name=number]').val());
+            data.append( "estimation_manhour", $('input[name=manhour]').val());
+            data.append( "performance_factor", $('input[name=performa]').val());
+            data.append( "helper_quantity", $('input[name=helper_quantity]').val());
+            data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
+            data.append( "description", $('#instruction').val());
+            data.append( "work_area", $('#work_area').val());
+            data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
+            data.append( "skill_id", $('#otr_certification').val());
+            data.append( "threshold_type", JSON.stringify(threshold_type));
+            data.append( "repeat_type", JSON.stringify(repeat_type));
+            data.append( "threshold_amount", JSON.stringify(threshold_amount));
+            data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "fileInput", document.getElementById('taskcard').files[0]);
 
             $.ajax({
                 url: '/get-takcard-si-types',
@@ -79,8 +75,8 @@ let TaskCard = {
 
                     $.each(type, function (key, value) {
                         if(value.trim() == 'Special Instruction'.trim()){
-                            // data.append( "type_id", key);
-                            type_id = key;
+                            data.append( "type_id", key);
+                            // type_id = key;
                         }
                     });
                     $.ajax({
@@ -88,30 +84,30 @@ let TaskCard = {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         type: 'post',
-                        // processData: false,
-                        // contentType: false,
+                        processData: false,
+                        contentType: false,
                         url: '/taskcard-si',
-                        // data: data,
-                        data: {
-                            _token: $('input[name=_token]').val(),
-                            title: title,
-                            type_id: type_id,
-                            number: number,
-                            work_area: work_area,
-                            estimation_manhour: manhour,
-                            performance_factor: performa,
-                            helper_quantity: helper_quantity,
-                            engineer_quantity: engineer_quantity,
-                            description: instruction,
+                        data: data,
+                        // data: {
+                        //     _token: $('input[name=_token]').val(),
+                        //     title: title,
+                        //     type_id: type_id,
+                        //     number: number,
+                        //     work_area: work_area,
+                        //     estimation_manhour: manhour,
+                        //     performance_factor: performa,
+                        //     helper_quantity: helper_quantity,
+                        //     engineer_quantity: engineer_quantity,
+                        //     description: instruction,
 
-                            skill_id: otr_certification,
-                            applicability_airplane: applicability_airplane,
+                        //     skill_id: otr_certification,
+                        //     applicability_airplane: applicability_airplane,
 
-                            threshold_amount: threshold_amount,
-                            threshold_type: threshold_type,
-                            repeat_amount: repeat_amount,
-                            repeat_type: repeat_type,
-                        },
+                        //     threshold_amount: threshold_amount,
+                        //     threshold_type: threshold_type,
+                        //     repeat_amount: repeat_amount,
+                        //     repeat_type: repeat_type,
+                        // },
                         success: function (data) {
                             if (data.errors) {
                                 if (data.errors.title) {

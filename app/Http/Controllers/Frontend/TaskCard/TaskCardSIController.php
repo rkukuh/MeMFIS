@@ -57,7 +57,7 @@ class TaskCardSIController extends Controller
      */
     public function store(TaskCardSIStore $request)
     {
-        // $this->decoder($request);
+        $this->decoder($request);
 
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(
@@ -89,15 +89,12 @@ class TaskCardSIController extends Controller
                     }
                 }
 
-            // if ($request->hasFile('fileInput')) {
-            //     $data = $request->input('image');
-            //     $photo = $request->file('fileInput')->getClientOriginalName();
-            //     $destination = 'master/taskcard/routine/';
-            //     $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
-            // }
-            // else{
-            //     return response()->json('Sorry, File is not detected by system');
-            // }
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/non-routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
 
             return response()->json($taskcard);
         }
@@ -154,7 +151,7 @@ class TaskCardSIController extends Controller
     {
         //TODO Data binding not work
 
-        // $this->decoder($request);
+        $this->decoder($request);
 
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
         if($request->work_area){
@@ -191,11 +188,8 @@ class TaskCardSIController extends Controller
             if ($request->hasFile('fileInput')) {
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/routine/';
+                $destination = 'master/taskcard/non-routine/';
                 $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
-            }
-            else{
-                return response()->json('Sorry, File is not detected by system');
             }
 
             return response()->json($taskCard);
