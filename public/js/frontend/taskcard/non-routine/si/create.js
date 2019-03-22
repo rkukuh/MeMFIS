@@ -39,17 +39,6 @@ let TaskCard = {
                 i++;
             });
 
-            // let title = $('input[name=title]').val();
-            // let number = $('input[name=number]').val();
-            // let otr_certification = $('#otr_certification').val();
-            // let applicability_airplane = $('#applicability_airplane').val();
-            // let work_area = $('#work_area').val();
-            // let manhour = $('input[name=manhour]').val();
-            // let helper_quantity = $('input[name=helper_quantity]').val();
-            // let engineer_quantity = $('input[name=engineer_quantity]').val();
-            // let performa = $('input[name=performa]').val();
-            // let instruction = $('#instruction').val();
-
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
@@ -88,26 +77,6 @@ let TaskCard = {
                         contentType: false,
                         url: '/taskcard-si',
                         data: data,
-                        // data: {
-                        //     _token: $('input[name=_token]').val(),
-                        //     title: title,
-                        //     type_id: type_id,
-                        //     number: number,
-                        //     work_area: work_area,
-                        //     estimation_manhour: manhour,
-                        //     performance_factor: performa,
-                        //     helper_quantity: helper_quantity,
-                        //     engineer_quantity: engineer_quantity,
-                        //     description: instruction,
-
-                        //     skill_id: otr_certification,
-                        //     applicability_airplane: applicability_airplane,
-
-                        //     threshold_amount: threshold_amount,
-                        //     threshold_type: threshold_type,
-                        //     repeat_amount: repeat_amount,
-                        //     repeat_type: repeat_type,
-                        // },
                         success: function (data) {
                             if (data.errors) {
                                 if (data.errors.title) {

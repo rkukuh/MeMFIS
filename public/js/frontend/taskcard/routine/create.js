@@ -114,27 +114,6 @@ let TaskCard = {
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
             data.append( "is_rii", is_rii);
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
-       
-
-
-            // let title = $('input[name=title]').val();
-            // let number = $('input[name=number]').val();
-            // let taskcard_routine_type = $('#taskcard_routine_type').val();
-            // let applicability_airplane = $('#applicability_airplane').val();
-            // let task_type_id = $('#task_type_id').val();
-            // let otr_certification = $('#otr_certification').val();
-            // let manhour = $('input[name=manhour]').val();
-            // let performa = $('input[name=performa]').val();
-            // let helper_quantity = $('input[name=helper_quantity]').val();
-            // let engineer_quantity = $('input[name=engineer_quantity]').val();
-            // let work_area = $('#work_area').val();
-            // let access = $('#access').val();
-            // let zone = $('#zone').val();
-            // let source = $('input[name=source]').val();
-            // let relationship = $('#relationship').val();
-            // let version = JSON.stringify($('#version').val());
-            // let effectivity = $('input[name=effectivity]').val();
-            // let description = $('#description').val();
 
 
             $.ajax({
@@ -149,34 +128,7 @@ let TaskCard = {
                 contentType: false,
                 cache: false,
                 processData:false,
-                // data: {
-                //     _token: $('input[name=_token]').val(),
-                //     number: number,
-                //     title: title,
-                //     type_id: taskcard_routine_type,
-                //     task_id: task_type_id,
-                //     work_area: work_area,
-                //     helper_quantity: helper_quantity,
-                //     engineer_quantity: engineer_quantity,
-                //     is_rii: is_rii,
-                //     performance_factor: performa,
-                //     estimation_manhour: manhour,
-                //     description: description,
-                //     version: version,
-                //     effectivity: effectivity,
-                //     source: source,
-
-                //     threshold_amount: threshold_amount,
-                //     threshold_type: threshold_type,
-                //     repeat_amount: repeat_amount,
-                //     repeat_type: repeat_type,
-
-                //     applicability_airplane: applicability_airplane,
-                //     skill_id: otr_certification,
-                //     access: access,
-                //     zone: zone,
-                //     relationship: relationship,
-                // },
+                
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.title) {
