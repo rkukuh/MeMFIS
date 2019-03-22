@@ -264,11 +264,15 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
             foreach (explode(';',$row['threshold']) as $threshold ) {
                 // var_dump($threshold);
                 // foreach (explode(' ',$threshold) as $threshold_amount_type ) {
-                //     $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $threshold_amount_type[1] . '%')->first()->id;
-                //     $taskcard->thresholds()->save(new Threshold([
-                //         'amount' => $threshold_amount_type[0],
-                //         'type_id' => $threshold_type,
-                //     ]));
+                    $e = explode(' ',$threshold);
+                for ($i=0; $i < sizeof($e) ; $i++) {
+
+                // var_dump($e[1]);
+                    $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $e[1] . '%')->first()->id;
+                    $taskcard->thresholds()->save(new Threshold([
+                        'amount' => $e[0],
+                        'type_id' => $threshold_type,
+                    ]));
                 // }
                 // foreach ($airplanes as $airplane) {
                 //     // echo $access_name;
@@ -278,7 +282,7 @@ class TaskCardsBoeingImport implements ToModel, WithHeadingRow
                 //         );
                 //         array_push($accesses, $access->id);
                 //     }
-                // }
+                }
             }
             // $taskcard->accesses()->attach($accesses);
         }
