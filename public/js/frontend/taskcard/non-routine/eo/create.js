@@ -75,34 +75,42 @@ let TaskCard = {
 
         $('.footer').on('click', '.add-taskcard', function () {
             // taskcard_reset();
-            let title = $('input[name=title]').val();
-            let number = $('input[name=number]').val();
-            let taskcard_non_routine_type = $('#taskcard_non_routine_type').val();
-            let applicability_airplane = $('#applicability_airplane').val();
-            let revision = $('input[name=revision]').val();
-            let relationship = $('#relationship').val();
-            let description = $('#description').val();
-            let scheduled_priority_id = $('#scheduled_priority_id').val();
-            let recurrence_id = $('#recurrence_id').val();
-            let category = $('#category').val();
-            let manual_affected_id = $('#manual_affected_id').val();
+            // let title = $('input[name=title]').val();
+            // let number = $('input[name=number]').val();
+            // let taskcard_non_routine_type = $('#taskcard_non_routine_type').val();
+            // let applicability_airplane = $('#applicability_airplane').val();
+            // let revision = $('input[name=revision]').val();
+            // let relationship = $('#relationship').val();
+            // let description = $('#description').val();
+            // let scheduled_priority_id = $('#scheduled_priority_id').val();
+            // let recurrence_id = $('#recurrence_id').val();
+            // let category = $('#category').val();
+            // let manual_affected_id = $('#manual_affected_id').val();
 
-            var prior_to = $('input[name="prior_to"]:checked').val();
-            let scheduled_priority_amount = '';
-            if(prior_to == 'date'){
-                scheduled_priority_amount = $('#date').val();
-            }
-            else if (prior_to == 'hour'){
-                scheduled_priority_amount = $('#hour').val();
-            }
-            else if(prior_to == 'cycle'){
-                scheduled_priority_amount = $('#cycle').val();
+            // let prior_to = $('input[name="prior_to"]:checked').val();
+            // let scheduled_priority_amount = '';
+            // if(prior_to == 'date'){
+            //     scheduled_priority_amount = $('#date').val();
+            // }
+            // else if (prior_to == 'hour'){
+            //     scheduled_priority_amount = $('#hour').val();
+            // }
+            // else if(prior_to == 'cycle'){
+            //     scheduled_priority_amount = $('#cycle').val();
 
-            }
+            // }
 
-            let recurrence = $('input[name=recurrence]').val();
-            let recurrence_select = $('#recurrence-select').val();
-            let note = $('#note').val();
+            // let recurrence = $('input[name=recurrence]').val();
+            // let recurrence_select = $('#recurrence-select').val();
+            
+            // let note = $('#note').val();
+
+            let applicability_airplane = [];
+            let i = 0;
+            $("#applicability_airplane").val().forEach(function(entry) {
+                applicability_airplane[i] = entry;
+                i++;
+            });
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
@@ -124,39 +132,77 @@ let TaskCard = {
                 repeat_amount[i] = $(this).val();
             });
 
+            let data = new FormData();
+            data.append( "title", $('input[name=title]').val());
+            data.append( "number", $('input[name=number]').val());
+            data.append( "type_id", $('#taskcard_non_routine_type').val());
+            data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
+            data.append( "revision", $('input[name=revision]').val());
+            data.append( "threshold_amount", JSON.stringify(threshold_amount));
+            data.append( "relationship", $('input[name=relationship]').val());
+            data.append( "description", $('input[name=description]').val());
+            data.append( "scheduled_priority_id", $('#scheduled_priority_id').val());
+            data.append( "scheduled_priority_type", $('input[name=prior_to]:checked').val());
+            if($('input[name=prior_to]:checked').val() == 'date'){
+                data.append( "scheduled_priority_amount", $('#date').val());
+            }
+            else if ($('input[name=prior_to]:checked').val() == 'hour'){
+                data.append( "scheduled_priority_amount", $('#hour').val());
+            }
+            else if($('input[name=prior_to]:checked').val() == 'cycle'){
+                data.append( "scheduled_priority_amount", $('#cycle').val());
+            }
+            data.append( "recurrence_id", $('#recurrence_id').val());
+            data.append( "recurrence_amount", $('input[name=recurrence]').val());
+            data.append( "recurrence_type", $('#recurrence-select').val());
+            data.append( "manual_affected_id", $('#manual_affected_id').val());
+            data.append( "manual_affected", $('#note').val());
+            data.append( "threshold_type", JSON.stringify(threshold_type));
+            data.append( "repeat_type", JSON.stringify(repeat_type));
+            data.append( "threshold_amount", JSON.stringify(threshold_amount));
+            data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "category_id", $('#category').val());
+
+            data.append( "fileInput", document.getElementById('taskcard').files[0]);
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
+                processData: false,
+                contentType: false,
+                data: data,
+                contentType: false,
+                cache: false,
                 url: '/taskcard-eo',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    title: title,
-                    number: number,
-                    type_id: taskcard_non_routine_type,
-                    applicability_airplane: applicability_airplane,
-                    category_id: category,
-                    revision: revision,
-                    relationship: relationship,
-                    description: description,
-                    scheduled_priority_id: scheduled_priority_id,
-                    scheduled_priority_type: prior_to,
-                    scheduled_priority_amount: scheduled_priority_amount,
-                    recurrence_id: recurrence_id,
-                    recurrence_amount:recurrence,
-                    recurrence_type:recurrence_select,
-                    manual_affected_id: manual_affected_id,
-                    manual_affected: note,
+                // data: {
+                //     _token: $('input[name=_token]').val(),
+                //     title: title,
+                //     number: number,
+                //     type_id: taskcard_non_routine_type,
+                //     applicability_airplane: applicability_airplane,
+                //     category_id: category,
+                //     revision: revision,
+                //     relationship: relationship,
+                //     description: description,
+                //     scheduled_priority_id: scheduled_priority_id,
+                //     scheduled_priority_type: prior_to,
+                //     scheduled_priority_amount: scheduled_priority_amount,
+                //     recurrence_id: recurrence_id,
+                //     recurrence_amount:recurrence,
+                //     recurrence_type:recurrence_select,
+                //     manual_affected_id: manual_affected_id,
+                //     manual_affected: note,
 
-                    threshold_amount: threshold_amount,
-                    threshold_type: threshold_type,
-                    repeat_amount: repeat_amount,
-                    repeat_type: repeat_type,
+                //     threshold_amount: threshold_amount,
+                //     threshold_type: threshold_type,
+                //     repeat_amount: repeat_amount,
+                //     repeat_type: repeat_type,
 
-                    // scheduled_priority_amount: prior_to_hour,
-                    // scheduled_priority_amount: prior_to_cycle,
-                },
+                //     // scheduled_priority_amount: prior_to_hour,
+                //     // scheduled_priority_amount: prior_to_cycle,
+                // },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.title) {
@@ -250,6 +296,8 @@ let TaskCard = {
                         document.getElementById('scheduled_priority_id').value = scheduled_priority_id;
                         document.getElementById('recurrence_id').value = recurrence_id;
                         document.getElementById('manual_affected_id').value = manual_affected_id;
+
+                        
 
                     } else {
                         //    taskcard_reset();

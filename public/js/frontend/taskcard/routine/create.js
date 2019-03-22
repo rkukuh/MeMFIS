@@ -88,8 +88,8 @@ let TaskCard = {
             } else {
                 is_rii = 0;
             }
-            console.log(document.getElementById('taskcard').files[0]);
-            var data = new FormData();
+
+            let data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
             data.append( "type_id", $('#taskcard_routine_type').val());
@@ -148,7 +148,6 @@ let TaskCard = {
                 data: data,
                 contentType: false,
                 cache: false,
-                processData:false,
                 // data: {
                 //     _token: $('input[name=_token]').val(),
                 //     number: number,
@@ -179,6 +178,7 @@ let TaskCard = {
                 // },
                 success: function (data) {
                     if (data.errors) {
+                        alert(data.title);
                         if (data.errors.title) {
                             $('#title-error').html(data.errors.title[0]);
                         }
@@ -210,7 +210,7 @@ let TaskCard = {
                         if (data.errors.performance_factor) {
                             $('#performa-error').html(data.errors.performance_factor[0]);
                         }
-
+                       
 
                         document.getElementById('title').value = title;
                         document.getElementById('number').value = number;

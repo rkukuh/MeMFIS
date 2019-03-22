@@ -73,7 +73,7 @@ class TaskCardEOController extends Controller
      */
     public function store(TaskCardEOStore $request)
     {
-        // $this->decoder($request);
+        $this->decoder($request);
 
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
@@ -100,11 +100,8 @@ class TaskCardEOController extends Controller
             if ($request->hasFile('fileInput')) {
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/routine/';
+                $destination = 'master/taskcard/non-routine/';
                 $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
-            }
-            else{
-                return response()->json('Sorry, File is not detected by system');
             }
 
             return response()->json($taskcard);
@@ -173,7 +170,7 @@ class TaskCardEOController extends Controller
      */
     public function update(TaskCardEOUpdate $request, Taskcard $taskCard)
     {
-        // $this->decoder($request);
+        $this->decoder($request);
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
@@ -202,11 +199,8 @@ class TaskCardEOController extends Controller
             if ($request->hasFile('fileInput')) {
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/routine/';
+                $destination = 'master/taskcard/non-routine/';
                 $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
-            }
-            else{
-                return response()->json('Sorry, File is not detected by system');
             }
 
             return response()->json($taskCard);
@@ -230,8 +224,6 @@ class TaskCardEOController extends Controller
     public function decoder($req){
 
         $req->applicability_airplane = json_decode($req->applicability_airplane);
-        $req->access = json_decode($req->access);
-        $req->zone = json_decode($req->zone);
         $req->relationship = json_decode($req->relationship);
         $req->threshold_type = json_decode($req->threshold_type);
         $req->repeat_type = json_decode($req->repeat_type);

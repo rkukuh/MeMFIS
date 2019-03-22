@@ -147,9 +147,6 @@ class TaskCardRoutineController extends Controller
                 $destination = 'master/taskcard/routine/';
                 $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
             }
-            else{
-                return response()->json('Sorry, File is not detected by system');
-            }
 
             return response()->json($taskcard);
         }
@@ -336,10 +333,7 @@ class TaskCardRoutineController extends Controller
                     $destination = 'master/taskcard/routine/';
                     $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
                 }
-                else{
-                    return response()->json('Sorry, File is not detected by system');
-                }
-
+                
             return response()->json($taskCard);
         }
 
@@ -361,9 +355,6 @@ class TaskCardRoutineController extends Controller
     public function decoder($req){
 
         $req->applicability_airplane = json_decode($req->applicability_airplane);
-        $req->access = json_decode($req->access);
-        $req->zone = json_decode($req->zone);
-        $req->relationship = json_decode($req->relationship);
         $req->threshold_type = json_decode($req->threshold_type);
         $req->repeat_type = json_decode($req->repeat_type);
         $req->threshold_amount = json_decode($req->threshold_amount);
