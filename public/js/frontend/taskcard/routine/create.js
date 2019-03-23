@@ -114,8 +114,6 @@ let TaskCard = {
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
             data.append( "is_rii", is_rii);
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
-       
-
 
             // let title = $('input[name=title]').val();
             // let number = $('input[name=number]').val();
@@ -148,6 +146,7 @@ let TaskCard = {
                 data: data,
                 contentType: false,
                 cache: false,
+                processData:false,
                 // data: {
                 //     _token: $('input[name=_token]').val(),
                 //     number: number,
@@ -178,7 +177,6 @@ let TaskCard = {
                 // },
                 success: function (data) {
                     if (data.errors) {
-                        alert(data.title);
                         if (data.errors.title) {
                             $('#title-error').html(data.errors.title[0]);
                         }
@@ -212,8 +210,8 @@ let TaskCard = {
                         }
                        
 
-                        document.getElementById('title').value = title;
-                        document.getElementById('number').value = number;
+                        document.getElementById('title').value = data.getAll('title');
+                        document.getElementById('number').value = data.getAll('number');
                         document.getElementById('taskcard_routine_type').value = taskcard_routine_type;
                         document.getElementById('applicability_airplane').value = applicability_airplane;
                         $('#applicability_airplane').select2('val', 'All');
