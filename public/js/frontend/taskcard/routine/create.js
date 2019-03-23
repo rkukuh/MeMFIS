@@ -89,7 +89,7 @@ let TaskCard = {
                 is_rii = 0;
             }
             console.log(document.getElementById('taskcard').files[0]);
-            var data = new FormData();
+            let data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
             data.append( "type_id", $('#taskcard_routine_type').val());
@@ -114,8 +114,6 @@ let TaskCard = {
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
             data.append( "is_rii", is_rii);
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
-       
-
 
             // let title = $('input[name=title]').val();
             // let number = $('input[name=number]').val();
@@ -212,8 +210,8 @@ let TaskCard = {
                         }
 
 
-                        document.getElementById('title').value = title;
-                        document.getElementById('number').value = number;
+                        document.getElementById('title').value = data.getAll('title');
+                        document.getElementById('number').value = data.getAll('number');
                         document.getElementById('taskcard_routine_type').value = taskcard_routine_type;
                         document.getElementById('applicability_airplane').value = applicability_airplane;
                         $('#applicability_airplane').select2('val', 'All');
