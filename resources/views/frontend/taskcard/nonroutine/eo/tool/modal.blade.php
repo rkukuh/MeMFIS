@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_tool"  role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="add_modal_tool"  role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -6,7 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalTool">
-                    Tool
+                    Tools
 
                     <small id="tool-storage" class="m--font-focus"></small>
                 </h5>
@@ -52,11 +52,11 @@
                                             Unit @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select')
-                                            @slot('id', 'item_unit_id')
+                                        @component('frontend.common.input.select2')
+                                            @slot('id', 'unit_tool')
                                             @slot('text', 'Unit')
-                                            @slot('name', 'item_unit_id')
-                                            @slot('id_error', 'unit')
+                                            @slot('name', 'unit_tool')
+                                            @slot('id_error', 'unit_tool')
                                         @endcomponent
                                     </div>
                             </div>
@@ -65,7 +65,7 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-tool')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')

@@ -1,4 +1,4 @@
-let Workpackage = {
+let Workpackage2 = {
     init: function () {
         $('.taskcard_datatable').mDatatable({
             data: {
@@ -93,42 +93,51 @@ let Workpackage = {
             ]
         });
 
-        let simpan = $('.modal-footer').on('click', '.add', function () {
+        let simpan = $('.action-buttons').on('click', '.add-workpackage', function () {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
-            let registerForm = $('#CustomerForm');
-            let name = $('input[name=name]').val();
-            let formData = registerForm.serialize();
+            
+            let title = $('input[name=title]').val();
+            let applicability_airplane = $('#applicability_airplane').val();
+            let description = $('#description').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/category',
+                url: '/workpackage',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name
+                    title: title,
+                    aircraft_id: applicability_airplane,
+                    description: description,
+                    is_template:'1',
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                        // if (data.errors.applicability-airplane) {
+                        //     $('#applicability-airplane').html(data.errors.applicability-airplane[0]);
+                        // }
+                        // if (data.errors.title) {
+                        //     $('#title').html(data.errors.title[0]);
+                        // }
 
-                            document.getElementById('name').value = name;
-                        }
+                        // document.getElementById('applicability-airplane').value = applicability-airplane;
+                        // document.getElementById('title').value = title;
+
                     } else {
                         $('#modal_customer').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Workpackage has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
+                        // let table = $('.m_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                        // table.originalDataSet = [];
+                        // table.reload();
                     }
                 }
             });
@@ -137,5 +146,5 @@ let Workpackage = {
 };
 
 jQuery(document).ready(function () {
-    Workpackage.init();
+    Workpackage2.init();
 });

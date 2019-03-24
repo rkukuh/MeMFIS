@@ -121,7 +121,13 @@ let Project = {
         });
     }
 };
-
+$('select[name="customer"]').on('change', function () {
+    let customer_uuid = this.options[this.selectedIndex];
+    txt_name = $("#name");
+    console.log(customer_uuid.value);
+    txt_name.html(customer_uuid.text);
+    
+});
 jQuery(document).ready(function () {
     Project.init();
 });

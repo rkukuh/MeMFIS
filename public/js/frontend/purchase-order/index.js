@@ -20,7 +20,6 @@ let PurchaseOrder = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
                 serverSorting: !0
             },
             layout: {
@@ -44,14 +43,17 @@ let PurchaseOrder = {
             },
             columns: [
                 {
-                    field: 'ordered_at',
-                    title: 'Date',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'number',
                     title: 'PO Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<a href="/purchase-order/'+t.uuid+'">' + t.number + "</a>"
+                    }
+                },
+                {
+                    field: 'ordered_at',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -72,42 +74,89 @@ let PurchaseOrder = {
                     title: 'Total',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'Actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
+                                '<i class="la la-check-square-o"></i>' +
+                            '</a>' +
+                            '<a href="/purchase-order/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
                         );
                     }
                 }
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        $('.purchase_order_datatable').on('click', '.approve', function () {
+            let purchase_order_uuid = $(this).data('uuid');
 
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to approve?',
+                type: 'question',
+                confirmButtonText: 'Yes, Approve',
+                confirmButtonColor: '#34bfa3',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'PUT',
+                        url: '/purchase-order/' +  purchase_order_uuid +'/approve',
+                        success: function (data) {
+                            toastr.success('Purchase Order has been Approved.', 'Approved', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.purchase_order_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+        $('.purchase_order_datatable').on('click', '.delete', function () {
+            let purchase_order_uuid = $(this).data('uuid');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
@@ -116,22 +165,19 @@ let PurchaseOrder = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/category/' + triggerid + '',
+                        url: '/purchase-order/' + purchase_order_uuid + '',
                         success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
+                            toastr.success('Purchase Order has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.purchase_order_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
 
                             $.each(errors.errors, function (index, value) {
@@ -139,17 +185,6 @@ let PurchaseOrder = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });

@@ -17,6 +17,7 @@ class CreateItemPurchaseOrderTable extends Migration
             $table->unsignedInteger('purchase_order_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');
+            $table->unsignedInteger('unit_id');
             $table->double('price');
             $table->double('subtotal_before_discount');
             $table->double('discount_percentage');
@@ -33,6 +34,11 @@ class CreateItemPurchaseOrderTable extends Migration
 
             $table->foreign('item_id')
                     ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('unit_id')
+                    ->references('id')->on('units')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

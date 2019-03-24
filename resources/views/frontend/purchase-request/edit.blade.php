@@ -59,7 +59,8 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'PR-2121212')
+                                                    @slot('text', $purchaseRequest->number)
+
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -71,10 +72,10 @@
                                                 <div class="form-group m-form__group row" >
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Heavy Maintenance')
+                                                            @slot('text', 'Project)
                                                             @slot('name', 'type')
                                                             @slot('id', 'type')
-                                                            @slot('value', 'hm')
+                                                            @slot('value', 'project')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type')
@@ -109,6 +110,7 @@
                                                     @slot('id', 'date')
                                                     @slot('text', 'Date')
                                                     @slot('name', 'date')
+                                                    @slot('value', $purchaseRequest->requested_at)
                                                     @slot('id_error', 'date')
                                                 @endcomponent
                                             </div>
@@ -121,6 +123,7 @@
                                                     @slot('id', 'date-required')
                                                     @slot('text', 'Date Required')
                                                     @slot('name', 'date-required')
+                                                    @slot('value', $purchaseRequest->required_at)
                                                     @slot('id_error', 'date-required')
                                                 @endcomponent
                                             </div>
@@ -177,7 +180,7 @@
                                                 @slot('rows', '10')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                                @slot('value', $purchaseRequest->description)
                                             @endcomponent
                                         </div>
                                     </div>

@@ -54,6 +54,12 @@ let RoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
+                    field: 'task',
+                    title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'customer',
                     title: 'Description',
                     sortable: 'asc',
@@ -61,34 +67,61 @@ let RoutineWorkpackage = {
                 },
                 {
                     field: 'status',
-                    title: 'Mhrs (Included Performance Factor)',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'statu',
                     title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'stat',
-                    title: 'Tool',
+                    title: 'Tools',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'stat2',
+                    title: 'Sequence',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                    }
+                },
+                {
+                    field: 'stat3',
+                    title: 'Predecessor',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="predecessor" name="predecessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
+                },
+                {
+                    field: 'stat4',
+                    title: 'Sucessor',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
+                },
+                {
+                    field: 'stat5',
+                    title: 'Mandatory/Critical TC',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                        template: function (t, e, i) {
+                            return (
+                                '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                                t.id +
+                                'title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                }
             ]
         });
         $('.sip_datatable').mDatatable({
@@ -145,14 +178,14 @@ let RoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
-                    field: 'customer',
-                    title: 'Description',
+                    field: 'task',
+                    title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'status',
-                    title: 'Mhrs (Included Performance Factor)',
+                    field: 'customer',
+                    title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -164,22 +197,55 @@ let RoutineWorkpackage = {
                 },
                 {
                     field: 'stat',
-                    title: 'Tool',
+                    title: 'Tools',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'stat2',
+                    title: 'Sequence',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                    }
+                },
+                {
+                    field: 'stat3',
+                    title: 'Predecessor',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="predecessor" name="predecessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
+                },
+                {
+                    field: 'stat4',
+                    title: 'Sucessor',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
+                },
+                {
+                    field: 'stat5',
+                    title: 'Mandatory/Critical TC',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            'title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
         $('.cpcp_datatable').mDatatable({
@@ -236,14 +302,14 @@ let RoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
-                    field: 'customer',
-                    title: 'Description',
+                    field: 'task',
+                    title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'status',
-                    title: 'Mhrs (Included Performance Factor)',
+                    field: 'customer',
+                    title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -254,23 +320,56 @@ let RoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
-                    field: 'stat',
-                    title: 'Tool',
+                    field: 'stat2',
+                    title: 'Tools',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'stat',
+                    title: 'Sequence',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                    }
+                },
+                {
+                    field: 'stat3',
+                    title: 'Predecessor',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="predecessor" name="predecessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
+                },
+                {
+                    field: 'stat4',
+                    title: 'Sucessor',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
+                    }
+                },
+                {
+                    field: 'stat1',
+                    title: 'Mandatory/Critical TC',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            'title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
     }

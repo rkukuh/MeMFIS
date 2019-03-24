@@ -169,7 +169,9 @@
                                                             @slot('text', 'Shipping Adddress')
                                                             @slot('name', 'shipping_address')
                                                             @slot('rows', '3')
+                                                            @slot('value', 'Jl. Raya Bandara Juanda,Sudimoro, Betro, Sedati, Bali, Jawa Timur 61253')
                                                             @slot('id_error', 'shipping_address')
+
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -227,7 +229,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    {{-- <div class="col-sm-6 col-md-6 col-lg-6">
 
                                                         <label class="form-control-label">
                                                             Description @include('frontend.common.label.required')
@@ -240,8 +242,73 @@
                                                             @slot('rows', '3')
                                                             @slot('id_error', 'description')
                                                         @endcomponent
+                                                    </div> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="m-portlet">
+                                                    <div class="m-portlet__head">
+                                                        <div class="m-portlet__head-caption">
+                                                            <div class="m-portlet__head-title">
+                                                                <span class="m-portlet__head-icon m--hide">
+                                                                    <i class="la la-gear"></i>
+                                                                </span>
+
+                                                                @include('frontend.common.label.datalist')
+
+                                                                <h3 class="m-portlet__head-text">
+                                                                    Item
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-portlet m-portlet--mobile">
+                                                        <div class="m-portlet__body">
+                                                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                                <div class="row align-items-center">
+                                                                    <div class="col-xl-8 order-2 order-xl-1">
+                                                                        <div class="form-group m-form__group row align-items-center">
+                                                                            <div class="col-md-4">
+                                                                                <div class="m-input-icon m-input-icon--left">
+                                                                                    <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                                        id="generalSearch">
+                                                                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                                        <span><i class="la la-search"></i></span>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="item_datatable" id="scrolling_both"></div>
+
+                                                            @include('frontend.purchase-order.modal-check')
+
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+
+                                                <label class="form-control-label">
+                                                    Description @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.textarea')
+                                                    @slot('id', 'description')
+                                                    @slot('text', 'Description')
+                                                    @slot('name', 'description')
+                                                    @slot('rows', '5')
+                                                    @slot('id_error', 'description')
+                                                @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -292,53 +359,12 @@
     </style>
 @endpush
 @push('footer-scripts')
-    <script>
-    function myFunction(object) {
-        // var numItems = $('.project').length
-
-        // var x = this.getElementById("type_website");
-        var x = object;
-        var y = x.name;
-
-        var numb = y.match(/\d/g);
-        var z = x.value;
-        var projectUuid = z;
-    }
-    </script>
-
-    <script type="text/javascript">
-        let simpan = $('.tes').on('click', '.save', function () {
-        var usertype=[];
-        $("select[name=project]").each(function(){
-            usertype.push($(this).val());
-            // alert($(this).val());
-        });
-        var ajaxdata={"UserType":usertype};
-
-        console.log(JSON.stringify(ajaxdata));
-        });
-    </script>
-    <script>
-        function initMap() {
-            var myLatLng = {lat: -7.265757, lng: 112.734146};
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom    : 10,
-                center  : myLatLng
-            });
-
-            var marker = new google.maps.Marker({
-                position    : myLatLng,
-                map         : map,
-                title       : 'Hello World!'
-            });
-        }
-    </script>
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/vendor.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
@@ -358,8 +384,8 @@
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-order/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-order/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-shipping.js')}}"></script>

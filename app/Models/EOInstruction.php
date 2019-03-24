@@ -10,9 +10,11 @@ class EOInstruction extends MemfisModel
 
     protected $fillable = [
         'work_area',
-        'manhour',
+        'estimation_manhour',
         'helper_quantity',
+        'engineer_quantity',
         'is_rii',
+        'skill_id',
         'performance_factor',
         'sequence',
         'description',
@@ -45,7 +47,31 @@ class EOInstruction extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class, 'eo_item', 'eo_id', 'item_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
+    }
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the task card's item: material.
+     *
+     * @return string
+     */
+    public function getMaterialsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'raw')->all()));
+    }
+
+    /**
+     * Get the task card's item: tool.
+     *
+     * @return string
+     */
+    public function getToolsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
     }
 }

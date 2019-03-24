@@ -78,7 +78,30 @@ class Item extends MemfisModel implements HasMedia
     public function eo_instructions()
     {
         return $this->belongsToMany(TaskCard::class, 'eo_item', 'item_id', 'eo_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: A GRN may have zero or many item.
+     *
+     * This function will retrieve all the GRNs of an item.
+     * See: GoodsReceived's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function goods_received()
+    {
+        return $this->belongsToMany(GoodsReceived::class)
+                    ->withPivot(
+                        'quantity',
+                        'already_received',
+                        'unit_id',
+                        'note'
+                    )
                     ->withTimestamps();
     }
 
@@ -103,6 +126,17 @@ class Item extends MemfisModel implements HasMedia
     public function manufacturer()
     {
         return $this->belongsTo(Manufacturer::class);
+    }
+
+    /**
+     * Polymorphic: An item can have zero or many prices.
+     *
+     * This function will get all of the item's prices.
+     * See: Price's priceable() method for the inverse
+     */
+    public function prices()
+    {
+        return $this->morphMany(Price::class, 'priceable');
     }
 
     /**
@@ -133,6 +167,7 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(PurchaseOrder::class)
                     ->withPivot(
                         'quantity',
+                        'unit_id',
                         'price',
                         'subtotal_before_discount',
                         'discount_amount',
@@ -157,6 +192,27 @@ class Item extends MemfisModel implements HasMedia
                     ->withPivot(
                         'quantity',
                         'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: A quotation may have zero or many item.
+     *
+     * This function will retrieve all the quotations of an item.
+     * See: Quotation's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotations()
+    {
+        return $this->belongsToMany(Quotation::class)
+                    ->withPivot(
+                        'taskcard_id',
+                        'pricelist_unit',
+                        'pricelist_price',
+                        'subtotal',
                         'note'
                     )
                     ->withTimestamps();
@@ -188,7 +244,10 @@ class Item extends MemfisModel implements HasMedia
     public function taskcards()
     {
         return $this->belongsToMany(TaskCard::class, 'item_taskcard', 'item_id', 'taskcard_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
     }
 
@@ -229,7 +288,10 @@ class Item extends MemfisModel implements HasMedia
     public function workpackages()
     {
         return $this->belongsToMany(WorkPackage::class, 'item_workpackage', 'item_id', 'workpackage_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
     }
 

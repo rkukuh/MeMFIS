@@ -50,98 +50,116 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Quotation @include('frontend.common.label.required')
-                                                </label>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Quotation')
-                                                    @slot('id', 'quotation')
-                                                    @slot('name', 'quotation')
-                                                    @slot('id_error', 'quotation')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Customer @include('frontend.common.label.required')
-                                                </label>
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'title')
+                                                @slot('id', 'title')
+                                                @slot('name', 'title')
+                                                @slot('value', $workPackage->title)
+                                                @slot('id_error', 'title')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                (A/C Type) @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Customer')
-                                                    @slot('id', 'customer')
-                                                    @slot('name', 'customer')
-                                                    @slot('id_error', 'customer')
-                                                @endcomponent
-                                            </div>
+                                            {{-- @component('frontend.common.input.select2')
+                                                @slot('text', 'Applicability Airplane')
+                                                @slot('id', 'applicability_airplane')
+                                                @slot('name', 'applicability_airplane')
+                                                @slot('id_error', 'applicability-airplane')
+                                            @endcomponent --}}
+                                            <select id="applicability_airplane" name="applicability_airplane" class="form-control m-select2">
+                                                <option value="">
+                                                    &mdash; Select a Aircraft Applicability &mdash;
+                                                </option>
+
+                                                @foreach ($aircrafts as $aircraft)
+                                                    <option value="{{ $aircraft->id }}"
+                                                        @if ($aircraft->id == $workPackage->aircraft_id) selected @endif>
+                                                        {{ $aircraft->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
 
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Template @include('frontend.common.label.required')
-                                                </label>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Template')
-                                                    @slot('id', 'template')
-                                                    @slot('name', 'template')
-                                                    @slot('id_error', 'template')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Aircraft @include('frontend.common.label.required')
-                                                </label>
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                                @slot('value', $workPackage->description)
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.update')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-workpackage')
+                                                        @slot('class', 'add-workpackage')
+                                                    @endcomponent
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Aircraft')
-                                                    @slot('id', 'aircraft')
-                                                    @slot('name', 'aircraft')
-                                                    @slot('id_error', 'aircraft')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Series @include('frontend.common.label.required')
-                                                </label>
-    
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'series')
-                                                    @slot('text', 'Series')
-                                                    @slot('name', 'series')
-                                                    @slot('id_error', 'series')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <div class="taskcard_datatable" id="second"></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.update')
-                                                            @slot('type', 'button')
-                                                            @slot('id', 'edit-workpackage')
-                                                            @slot('class', 'edit-workpackage')
-                                                        @endcomponent
-    
-                                                        @include('frontend.common.buttons.reset')
+                                                    @include('frontend.common.buttons.reset')
 
-                                                        @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.workpackage.index'))
-                                                        @endcomponent
-                                                    </div>
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.workpackage.index'))
+                                                    @endcomponent
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        {{-- <div class="taskcard_datatable" id="second"></div> --}}
+                                        <div class="m-portlet__body">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Routine</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
+                                                </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
+                                                    @include('frontend.workpackage.routine.index')
+                                                    @include('frontend.workpackage.routine.basic.modal')
+                                                    @include('frontend.workpackage.routine.sip.modal')
+                                                    @include('frontend.workpackage.routine.cpcp.modal')
+                                                </div>
+                                                <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
+                                                    @include('frontend.workpackage.nonroutine.index')
+                                                    @include('frontend.workpackage.nonroutine.adsb.modal')
+                                                    @include('frontend.workpackage.nonroutine.cmrawl.modal')
+                                                    @include('frontend.workpackage.nonroutine.si.modal')
+                                                </div>
+                                                <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
+                                                    @include('frontend.workpackage.item.index')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -169,15 +187,20 @@
 @endpush
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/quotation.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/quotation.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/aircraft.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/series.js') }}"></script>
 
     <script src="{{ asset('js/frontend/workpackage/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/datatables.js')}}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

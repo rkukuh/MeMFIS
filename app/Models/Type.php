@@ -226,7 +226,18 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Task Card's task.
+     * Scope a query to only include type of TaskCard's skill.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardSkill(Builder $query)
+    {
+        return $query->where('of', 'taskcard-skill');
+    }
+
+    /**
+     * Scope a query to only include type of TaskCard's task.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -237,7 +248,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Task Card's type.
+     * Scope a query to only include type of TaskCard's type.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -248,7 +259,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Task Card's type.
+     * Scope a query to only include type of TaskCard's type.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -258,6 +269,30 @@ class Type extends MemfisModel
         return $query->where('of', 'taskcard-type-non-routine')
                      ->where('code', '<>', 'si')
                      ->where('code', '<>', 'htcrr');
+    }
+
+    /**
+     * Scope a query to only include type of TaskCard's type.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardTypeSI(Builder $query)
+    {
+        return $query->where('of', 'taskcard-type-non-routine')
+                     ->where('code', 'si')
+                     ->where('code', '<>', 'htcrr');
+    }
+
+    /**
+     * Scope a query to only include type of Term of Payment.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTermOfPayment(Builder $query)
+    {
+        return $query->where('of', 'term-of-payment');
     }
 
     /**
@@ -361,19 +396,6 @@ class Type extends MemfisModel
     }
 
     /**
-     * One-to-Many: A maintenance cycle may have zero or many type.
-     *
-     * This function will retrieve all maintenance cycles of a type.
-     * See: Maintenance Cycle's type() method for the inverse
-     *
-     * @return mixed
-     */
-    public function maintenance_cycles()
-    {
-        return $this->hasMany(MaintenanceCycle::class);
-    }
-
-    /**
      * One-to-Many: A phone may have zero or many type.
      *
      * This function will retrieve all phones of a type.
@@ -400,10 +422,23 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A repeat may have zero or many type.
+     *
+     * This function will retrieve all repeats of a type.
+     * See: Repeat's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function repeats()
+    {
+        return $this->hasMany(Repeat::class);
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve all task cards of a type.
-     * See: Task Card's type() method for the inverse
+     * See: TaskCard's type() method for the inverse
      *
      * @return mixed
      */
@@ -413,16 +448,29 @@ class Type extends MemfisModel
     }
 
     /**
-     * One-to-Many: A scheduled payment may have zero or many type.
+     * One-to-Many: A task card may have zero or many task.
      *
-     * This function will retrieve all scheduled payments of a type.
-     * See: Scheduled Payment's type() method for the inverse
+     * This function will retrieve all task cards of a task.
+     * See: TaskCard's task() method for the inverse
      *
      * @return mixed
      */
-    public function scheduledpayments()
+    public function taskcard_tasks()
     {
-        return $this->hasMany(ScheduledPayment::class);
+        return $this->hasMany(TaskCard::class, 'task_id', 'id');
+    }
+
+    /**
+     * One-to-Many: A threshold may have zero or many type.
+     *
+     * This function will retrieve all thresholds of a type.
+     * See: Threshold's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function thresholds()
+    {
+        return $this->hasMany(Threshold::class);
     }
 
     /**

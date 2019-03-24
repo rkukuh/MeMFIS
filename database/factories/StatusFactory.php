@@ -5,11 +5,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Status::class, function (Faker $faker) {
 
-    $name = 'Status Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => str_slug($name),
-        'name' => $name,
+        'code' => 'STS-DUM-' . $number,
+        'name' => 'Status Dummy #' . $number,
         'of'   => $faker->randomElement([
             'marital',
             'employment',

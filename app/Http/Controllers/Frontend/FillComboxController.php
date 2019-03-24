@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
 use App\Models\Access;
+use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
@@ -46,6 +47,21 @@ class FillComboxController extends Controller
     public function categories()
     {
         $categories = Category::ofItem()
+                              ->pluck('name', 'id');
+
+        return json_encode($categories);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function categoriesMaterial()
+    {
+        $categories = Category::ofItem()
+                              ->where('code','<>','tool')
                               ->pluck('name', 'id');
 
         return json_encode($categories);
@@ -201,7 +217,7 @@ class FillComboxController extends Controller
      */
     public function otrCertification()
     {
-        $otr_certifications = Category::ofItem()
+        $otr_certifications = Type::ofTaskCardSkill()
                               ->pluck('name', 'id');
 
         return json_encode($otr_certifications);
@@ -450,9 +466,21 @@ class FillComboxController extends Controller
     public function taskcardTypeNonRoutine()
     {
         $taskcard_type_non_routines = Type::ofTaskCardTypeNonRoutine()
-                        ->pluck('name', 'id');
+                                    ->pluck('name', 'id');
 
         return json_encode($taskcard_type_non_routines);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taskcardTypeSI()
+    {
+        $taskcard_type_si = Type::ofTaskCardTypeSI()->pluck('name', 'id');
+
+        return json_encode($taskcard_type_si);
     }
 
     /**
@@ -549,9 +577,39 @@ class FillComboxController extends Controller
      */
     public function tool()
     {
-        $tools = Item::with('categories')->where('categories->name','tool')->get();
+        $items = Item::with('categories')
+                ->whereHas('categories', function ($query) {
+                    $query->where('code', 'tool');
+                })->pluck('name','id');
 
-        return json_encode($tools);
+        return $items;
+}
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function material()
+    {
+        $items = Item::with('categories')
+                ->whereHas('categories', function ($query) {
+                    $query->where('code', 'raw');
+                })->pluck('name','id');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function project()
+    {
+        $projects = Project::pluck('title','id');
+
+        return json_encode($projects);
     }
 
 

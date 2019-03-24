@@ -29,7 +29,7 @@
     </div>
     <div class="m-content">
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-12">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -65,14 +65,14 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Type @include('frontend.common.label.required')
+                                                Title @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Taskcard Type')
-                                                @slot('id', 'taskcard_non_routine_type')
-                                                @slot('name', 'taskcard_non_routine_type')
-                                                @slot('id_error', 'taskcard_non_routine_type')
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'title')
+                                                @slot('text', 'Title')
+                                                @slot('name', 'title')
+                                                @slot('id_error', 'title')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -107,15 +107,16 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Title @include('frontend.common.label.required')
+                                                Type @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'title')
-                                                @slot('text', 'Title')
-                                                @slot('name', 'title')
-                                                @slot('id_error', 'title')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Taskcard Type')
+                                                @slot('id', 'taskcard_non_routine_type')
+                                                @slot('name', 'taskcard_non_routine_type')
+                                                @slot('id_error', 'taskcard_non_routine_type')
                                             @endcomponent
+
 
                                         </div>
 
@@ -161,6 +162,49 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Threshold @include('frontend.common.label.optional')
+                                                    </label>
+                                                    <table class="threshold">
+                                                        <tr>
+                                                            <td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>
+                                                            <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                            <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                            @endforeach
+                                                            </select></td>
+                                                            <td width="5%">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('id', 'addrow')
+                                                                @endcomponent
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Repeat @include('frontend.common.label.optional')
+                                                    </label>
+                                                    <table class="repeat">
+                                                        <tr>
+                                                            <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                            <option value"">Select Repeat</option>
+                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                            <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                            @endforeach
+                                                            </select></td>
+                                                            <td width="5%">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('id', 'addrow2')
+                                                                @endcomponent
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                        </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -185,6 +229,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_date')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'date')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -202,6 +247,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_hours')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'hour')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -220,6 +266,7 @@
                                                     @component('frontend.common.input.radio')
                                                         @slot('id', 'prior_to_cycle')
                                                         @slot('name', 'prior_to')
+                                                        @slot('value', 'cycle')
                                                         @slot('disabled', 'disabled')
                                                     @endcomponent
                                                 </div>
@@ -254,7 +301,7 @@
                                             </label>
 
                                             <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
                                                     @component('frontend.common.input.number')
                                                         @slot('id', 'recurrence')
                                                         @slot('text', 'Recurrence')
@@ -263,12 +310,10 @@
                                                         @slot('id_error', 'recurrence')
                                                     @endcomponent
                                                 </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-sm-8 col-md-8 col-lg-8">
                                                     <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
                                                         <option value="">
-                                                            Select a Recurrence
+                                                            Select Recurrence
                                                         </option>
                                                         <option value="cyrcle">
                                                             Cycle
@@ -353,7 +398,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-12">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -364,6 +409,68 @@
 
                                 <h3 class="m-portlet__head-text">
                                     Instructions
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('attribute', 'disabled')
+                                        @endcomponent
+
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet hidden">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                <h3 class="m-portlet__head-text">
+                                    Thresholds
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('attribute', 'disabled')
+                                        @endcomponent
+
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet hidden">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                    </span>
+
+                                <h3 class="m-portlet__head-text">
+                                    Repeats
                                 </h3>
                             </div>
                         </div>
@@ -436,6 +543,65 @@
         if (event.target.tagName.toLowerCase() !== 'textarea') return;
         autoExpand(event.target);
         }, false);
+        $(document).ready(function () {
+          $(".js-example-tags").select2();
+          var counter = 0;
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+              cols += '<option value"">Select Threshold</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.threshold").append(newRow);
+              $('.select').select2();
+              counter++;
+          });
+          $("table.threshold").on("click", ".ibtnDel", function (event) {
+              if (counter >= 1) {
+                  $(this).closest("tr").remove();
+                  counter -= 1
+              }
+          });
+          $("#addrow2").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
+                cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
+                cols += '<option value"">Select Repeat</option>';
+                for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.repeat").append(newRow);
+                $('.select').select2();
+                counter++;
+            });
+            $("table.repeat").on("click", ".ibtnDel", function (event) {
+                if (counter >= 1) {
+                    $(this).closest("tr").remove();
+                    counter -= 1
+                }
+            });
+        });
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>

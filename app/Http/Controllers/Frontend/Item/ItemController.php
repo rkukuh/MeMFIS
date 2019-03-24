@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers\Frontend\Item;
 
-use App\Models\Manufacturer;
 use App\Models\Item;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
-use App\Models\Journal;
 use App\Models\Category;
+use App\Models\Manufacturer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemStore;
 use App\Http\Requests\Frontend\ItemUpdate;
 
 class ItemController extends Controller
 {
+    protected $tags;
     protected $units;
     protected $categories;
     protected $manufacturers;
 
     public function __construct()
     {
+        $this->tags = Tag::getWithType('item');
         $this->units = Unit::ofQuantity()->get();
         $this->manufacturers = Manufacturer::all();
-        $this->categories = Category::ofItem()->get();
+        $this->categories = Category::ofItem()->where('code','<>','tool')->get();
     }
 
     /**
@@ -32,7 +33,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('frontend.item.index');
+        return view('frontend.item.material.index');
     }
 
     /**
@@ -42,7 +43,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('frontend.item.create');
+        return view('frontend.item.material.create');
     }
 
     /**
@@ -53,8 +54,13 @@ class ItemController extends Controller
      */
     public function store(ItemStore $request)
     {
+        $tags = [];
+        if($request->selectedtags){
+        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
+        }
         if ($item = Item::create($request->all())) {
             $item->categories()->attach($request->category);
+            $item->syncTags($tags);
 
             return response()->json($item);
         }
@@ -71,7 +77,20 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return view('frontend.item.show', compact('item'));
+        $tags = array();
+        foreach($item->tags as $i => $item_tag){
+            $tags[$i] =  $item_tag->name;
+        }
+
+        return view('frontend.item.material.show', [
+            'item' => $item,
+            'item_tags' => $tags,
+            'tags' => $this->tags,
+            'units' => $this->units,
+            'categories' => $this->categories,
+            'manufacturers' => $this->manufacturers,
+        ]);
+
     }
 
     /**
@@ -82,8 +101,15 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        return view('frontend.item.edit', [
+        $tags = array();
+        foreach($item->tags as $i => $item_tag){
+            $tags[$i] =  $item_tag->name;
+        }
+
+        return view('frontend.item.material.edit', [
             'item' => $item,
+            'item_tags' => $tags,
+            'tags' => $this->tags,
             'units' => $this->units,
             'categories' => $this->categories,
             'manufacturers' => $this->manufacturers,
@@ -99,8 +125,11 @@ class ItemController extends Controller
      */
     public function update(ItemUpdate $request, Item $item)
     {
+        $tags = [];
+        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
         if ($item->update($request->all())) {
             $item->categories()->sync($request->category);
+            $item->syncTags($tags);
 
             return response()->json($item);
         }

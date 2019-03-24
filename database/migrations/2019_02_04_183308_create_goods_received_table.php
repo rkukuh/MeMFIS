@@ -23,13 +23,18 @@ class CreateGoodsReceivedTable extends Migration
             $table->string('container_no')->nullable();
             $table->unsignedInteger('purchase_order_id');
             $table->unsignedInteger('storage_id');
-            $table->unsignedInteger('approved_by');
+            $table->unsignedInteger('approved_by')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('received_by')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('approved_by')
                     ->references('id')->on('employees')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');

@@ -25,13 +25,15 @@ Route::name('admin.')->group(function () {
         Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
+        Route::resource('price', 'PriceController');
         Route::resource('access', 'AccessController');
+        Route::resource('repeat', 'RepeatController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
-        Route::resource('maintenance-cycle', 'MaintenanceCycleController');
+        Route::resource('threshold', 'ThresholdController');
 
         /** MASTER */
 
@@ -62,6 +64,8 @@ Route::name('admin.')->group(function () {
         /** TRANSACTION */
 
         Route::resource('project', 'ProjectController');
+        Route::resource('jobcard', 'JobCardController');
+        Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('workpackage', 'WorkPackageController');
         Route::resource('eo-instruction', 'EOInstructionController');

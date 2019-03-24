@@ -5,11 +5,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Storage::class, function (Faker $faker) {
 
-    $sequence = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => 'ST-DUM-' . $sequence,
-        'name' => 'Storage Dummy #' . $sequence,
+        'code' => 'STR-DUM-' . $number,
+        'name' => 'Storage Dummy #' . $number,
     ];
 
 });

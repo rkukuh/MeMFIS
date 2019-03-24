@@ -267,7 +267,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                <div class="col-xl-12 order-1 order-xl-2 m--align-right">
                                                     <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
                                                         <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
                                                             <span>
@@ -294,58 +294,55 @@
 
                                     @include('frontend.project.hm.modal')
 
+                                    {{-- datatables --}}
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
-                                                <div class="m-accordion__item">
-                                                    <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
-                                                        <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
-                                                        <span class="m-accordion__item-title">C-Check</span>
-                                                        <span class="m-accordion__item-mode"></span>
-                                                    </div>
-                                                    <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1" style="">
-                                                        <div class="m-accordion__item-content">
-                                                            <ul class="nav nav-tabs" role="tablist">
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">General Tool and Material</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner">Engineer Team</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_manhour">Manhours Propotion</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility Used</a>
-                                                                </li>
-                                                            </ul>
-
-                                                            <div class="tab-content">
-                                                                <div class="tab-pane active show" id="m_tabs_taskcard" role="tabpanel">
-                                                                    @include('frontend.project.hm.taskcard.index')
-                                                                </div>
-                                                                <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
-                                                                    @include('frontend.project.hm.item.index')
-                                                                </div>
-                                                                <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
-                                                                    @include('frontend.project.hm.engineer.index')
-                                                                </div>
-                                                                <div class="tab-pane" id="m_tabs_manhour" role="tabpanel">
-                                                                    @include('frontend.project.hm.manhour.index')
-                                                                </div>
-                                                                <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
-                                                                    @include('frontend.project.hm.facility.index')
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <table class="project-hm-datatable" id="html_table" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th title="Field #1" data-field="OrderID">Workpackage ID</th>
+                                                        <th title="Field #2" data-field="Owner">Workpackage Title</th>
+                                                        <th title="Field #2" data-field="Action"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td><a href="/project/hm/show">57520-0405</a> </td>
+                                                        <td>Sunny Garton</td>
+                                                        <td>
+                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
+                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="/project/hm/show">43269-858</a></td>
+                                                        <td>Sandor Engley</td>
+                                                        <td>
+                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
+                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="/project/hm/show">68084-462</a></td>
+                                                        <td>Morgan Cradey</td>
+                                                        <td>
+                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
+                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="/project/hm/show">44356-0001</a></td>
+                                                        <td>Tedd Alton</td>
+                                                        <td>
+                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
+                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
@@ -436,5 +433,6 @@
     <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/create.js') }}"></script>
 
 @endpush

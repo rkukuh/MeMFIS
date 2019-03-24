@@ -16,11 +16,42 @@ class CreateQuotationsTable extends Migration
         Schema::create('quotations', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('no');
+            $table->string('number');
+            $table->unsignedInteger('project_id');
+            $table->unsignedInteger('customer_id');
+            $table->timestamp('requested_at')->nullable();
+            $table->timestamp('valid_until')->nullable();
+            $table->unsignedInteger('currency_id');
+            $table->double('exchange_rate');
+            $table->double('total');
+            $table->unsignedInteger('scheduled_payment_type');
+            $table->json('scheduled_payment_amount');
+            $table->text('term_of_condition')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index('no');
+            $table->foreign('customer_id')
+                    ->references('id')->on('customers')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('project_id')
+                    ->references('id')->on('projects')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('currency_id')
+                    ->references('id')->on('currencies')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('scheduled_payment_type')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->index('number');
         });
     }
 

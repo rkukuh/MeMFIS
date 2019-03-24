@@ -65,19 +65,6 @@ class Aircraft extends MemfisModel
     }
 
     /**
-     * One-to-Many: A purchase request must have an aircraft
-     *
-     * This function will retrieve all the purchase requests of an aircraft.
-     * See: PurchaseRequest's aircraft() method for the inverse
-     *
-     * @return mixed
-     */
-    public function purchase_requests()
-    {
-        return $this->hasMany(PurchaseRequest::class);
-    }
-
-    /**
      * Many-to-Many: A task card may have zero or many aircraft.
      *
      * This function will retrieve all the task cards of an aircraft.

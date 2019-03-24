@@ -9,27 +9,32 @@ class PurchaseRequest extends MemfisModel
     protected $fillable = [
         'number',
         'type_id',
-        'aircraft_id',
         'requested_at',
         'required_at',
+        'approved_by',
+        'approved_at',
         'description',
     ];
 
-    protected $dates = ['requested_at', 'required_at'];
+    protected $dates = [
+        'requested_at', 
+        'required_at', 
+        'approved_at'
+    ];
 
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A purchase request must have an aircraft
+     * One-to-Many: A purchase request may have approver.
      *
-     * This function will retrieve the aircraft of a purchase request.
-     * See: Aircraft's purchase_requests() method for the inverse
+     * This function will retrieve the approver of a purchase request.
+     * See: Employee's purchase_request_approved() method for the inverse
      *
      * @return mixed
      */
-    public function aircraft()
+    public function approvedBy()
     {
-        return $this->belongsTo(Aircraft::class);
+        return $this->belongsTo(Employee::class, 'approved_by');
     }
 
     /**

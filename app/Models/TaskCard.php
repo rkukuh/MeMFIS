@@ -6,15 +6,18 @@ use App\MemfisModel;
 
 class TaskCard extends MemfisModel
 {
+
     protected $table = 'taskcards';
 
     protected $fillable = [
         'number',
         'title',
         'type_id',
-        'task_type_id',
+        'task_id',
+        'skill_id',
         'work_area',
-        'manhour',
+        'estimation_manhour',
+        'engineer_quantity',
         'helper_quantity',
         'is_rii',
         'source',
@@ -92,8 +95,24 @@ class TaskCard extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class, 'item_taskcard', 'taskcard_id', 'item_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
+    }
+
+    /**
+     * One-to-Many (with JSON data): A jobcard must have a taskcard
+     *
+     * This function will retrieve all the jobcards of a taskcard.
+     * See: JobCard's taskcard() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcards()
+    {
+        return $this->hasMany(JobCard::class);
     }
 
     /**
@@ -125,9 +144,20 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * Polymorphic: A task card can have zero or many repeats.
+     *
+     * This function will get all of the task card's repeats.
+     * See: Repeat's repeatable() method for the inverse
+     */
+    public function repeats()
+    {
+        return $this->morphMany(Repeat::class, 'repeatable');
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
-     * This function will retrieve the type of an task card.
+     * This function will retrieve the type of a task card.
      * See: Type's taskcards() method for the inverse
      *
      * @return mixed
@@ -135,6 +165,30 @@ class TaskCard extends MemfisModel
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * One-to-Many: A task card may have zero or many task.
+     *
+     * This function will retrieve the task of a task card.
+     * See: Type's taskcard_tasks() method for the inverse
+     *
+     * @return mixed
+     */
+    public function task()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
+     * Polymorphic: A task card can have zero or many thresholds.
+     *
+     * This function will get all of the task card's thresholds.
+     * See: Threshold's thresholdable() method for the inverse
+     */
+    public function thresholds()
+    {
+        return $this->morphMany(Threshold::class, 'thresholdable');
     }
 
     /**
@@ -163,5 +217,27 @@ class TaskCard extends MemfisModel
     {
         return $this->belongsToMany(Access::class, 'taskcard_zone', 'taskcard_id', 'zone_id')
                     ->withTimestamps();
+    }
+
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the task card's item: material.
+     *
+     * @return string
+     */
+    public function getMaterialsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'raw')->all()));
+    }
+
+    /**
+     * Get the task card's item: tool.
+     *
+     * @return string
+     */
+    public function getToolsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
     }
 }

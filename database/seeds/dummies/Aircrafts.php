@@ -12,6 +12,6 @@ class Aircrafts extends Seeder
      */
     public function run()
     {
-        //
+        factory(Aircraft::class, config('memfis.dummies.aircrafts'))->create();
     }
 }

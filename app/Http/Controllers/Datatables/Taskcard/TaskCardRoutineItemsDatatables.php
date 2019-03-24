@@ -15,9 +15,9 @@ class TaskCardRoutineItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function material()
+    public function material(TaskCard $taskcard)
     {
-        $data = $alldata = json_decode(Item::with('taskcards')->get());
+        $data = $alldata = json_decode($taskcard->materials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -111,10 +111,9 @@ class TaskCardRoutineItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool($taskcard)
+    public function tool(TaskCard $taskcard)
     {
-        // $data = $alldata = json_decode(TaskCard::with('items')->where('uuid',$taskcard)->get());
-        $data = $alldata = json_decode(Item::with('taskcards')->get());
+        $data = $alldata = json_decode($taskcard->tools);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

@@ -42,9 +42,10 @@
 
                                     @component('frontend.common.input.number')
                                         @slot('text', 'Quantity')
-                                        @slot('name', 'quantity')
-                                        @slot('id', 'quantity')
-                                        @slot('id_error', 'quantity')
+                                        @slot('name', 'quantity_item')
+                                        @slot('id', 'quantity_item')
+                                        @slot('id_error', 'quantity_item')
+                                        @slot('min',0)
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">

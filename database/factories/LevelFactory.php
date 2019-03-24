@@ -5,11 +5,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Level::class, function (Faker $faker) {
 
-    $name = 'Level Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => str_slug($name),
-        'name' => $name,
+        'code' => 'LVL-DUM-' . $number,
+        'name' => 'Level Dummy #' . $number,
         'of'   => $faker->randomElement([
             'language',
         ]),

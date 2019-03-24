@@ -12,6 +12,7 @@ class WorkPackage extends MemfisModel
         'code',
         'title',
         'is_template',
+        'aircraft_id',
         'description',
     ];
 
@@ -41,7 +42,10 @@ class WorkPackage extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class, 'item_workpackage', 'workpackage_id', 'item_id')
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
                     ->withTimestamps();
     }
 
@@ -56,6 +60,25 @@ class WorkPackage extends MemfisModel
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_workpackage', 'workpackage_id', 'project_id')
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: A quotation may have one or many workpackage.
+     *
+     * This function will retrieve all the quotations of a workpackage.
+     * See: Quotation's workpackages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotations()
+    {
+        return $this->belongsToMany(Quotation::class, 'quotation_workpackage', 'workpackage_id', 'quotation_id')
+                    ->withPivot(
+                        'manhour_total',
+                        'manhour_rate',
+                        'description'
+                    )
                     ->withTimestamps();
     }
 

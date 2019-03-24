@@ -45,6 +45,7 @@
                                         @slot('name', 'quantity')
                                         @slot('id', 'quantity')
                                         @slot('id_error', 'quantity')
+                                        @slot('min',0)
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -65,11 +66,11 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-tool')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
-                                            @slot('class', 'reset-item')
+                                            @slot('class', 'reset-tool')
                                         @endcomponent
                                     @include('frontend.common.buttons.close')
                                 </div>

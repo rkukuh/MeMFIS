@@ -12,6 +12,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
         Route::view('/project/hm', 'frontend.project.hm.index')->name('hm');
         Route::view('/project/hm/create', 'frontend.project.hm.create')->name('hm.create');
+        Route::view('/project/hm/show', 'frontend.project.hm.show')->name('hm.show');
         Route::view('/project/workshop', 'frontend.project.workshop.index')->name('workshop');
         Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('workshop.create');
         Route::view('/purchase-request', 'frontend.purchase-request.index')->name('purchase-request.index');
@@ -32,12 +33,13 @@ Route::name('frontend.')->group(function () {
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
         Route::resource('access', 'AccessController');
+        Route::resource('repeat', 'RepeatController');
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
-        Route::resource('maintenance-cycle', 'MaintenanceCycleController');
+        Route::resource('threshold', 'ThresholdController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
@@ -70,13 +72,9 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('project', 'ProjectController');
         Route::resource('quotation', 'QuotationController');
-        Route::resource('workpackage', 'WorkPackageController');
-        Route::resource('purchase-order', 'PurchaseOrderController');
-        Route::resource('goods-received', 'GoodsReceivedController');
-        Route::resource('purchase-request', 'PurchaseRequestController');
         Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
-        /** AIRCRAFT  */
+        /** AIRCRAFT */
 
         Route::namespace('Aircraft')->group(function () {
 
@@ -86,13 +84,28 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('aircraft')->group(function () {
 
                     /** Polymorph */
-                    Route::resource('/{aircraft}/zones','AircraftZonesController');
-                    Route::resource('/{aircraft}/accesses','AircraftAccessesController');
+                    Route::resource('/{aircraft}/zones', 'AircraftZonesController');
+                    Route::resource('/{aircraft}/accesses', 'AircraftAccessesController');
 
                 });
             });
 
         });
+
+        /** WORKPACKAGE */
+
+        Route::namespace('WorkPackage')->group(function () {
+            Route::resource('workpackage', 'WorkPackageController', [
+                'parameters' => ['workpackage' => 'workPackage']
+            ]);
+
+            Route::prefix('WorkPackage')->group(function () {
+
+
+            });
+        });
+
+
 
         /** ITEM */
 
@@ -102,6 +115,9 @@ Route::name('frontend.')->group(function () {
 
             Route::name('item.')->group(function () {
                 Route::prefix('item')->group(function () {
+
+                    /** Price List */
+                    Route::resource('/{item}/prices', 'ItemPriceController');
 
                     /** Transaction: Unit */
                     Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
@@ -117,7 +133,14 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** CUSTOMER  */
+        Route::namespace('Item')->group(function () {
+
+            Route::resource('tool', 'ToolController');
+
+
+        });
+
+        /** CUSTOMER */
 
         Route::namespace('Customer')->group(function () {
 
@@ -127,19 +150,19 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('customer')->group(function () {
 
                     /** Polymorph */
-                    Route::resource('/{customer}/faxes','CustomerFaxesController');
-                    Route::resource('/{customer}/emails','CustomerEmailsController');
-                    Route::resource('/{customer}/phones','CustomerPhonesController');
-                    Route::resource('/{customer}/websites','CustomerWebsitesController');
-                    Route::resource('/{customer}/addresses','CustomerAddressesController');
-                    Route::resource('/{customer}/documents','CustomerDocumentsController');
+                    Route::resource('/{customer}/faxes', 'CustomerFaxesController');
+                    Route::resource('/{customer}/emails', 'CustomerEmailsController');
+                    Route::resource('/{customer}/phones', 'CustomerPhonesController');
+                    Route::resource('/{customer}/websites', 'CustomerWebsitesController');
+                    Route::resource('/{customer}/addresses', 'CustomerAddressesController');
+                    Route::resource('/{customer}/documents', 'CustomerDocumentsController');
 
                 });
             });
 
         });
 
-        /** EMPLOYEE  */
+        /** EMPLOYEE */
 
         Route::namespace('Employee')->group(function () {
 
@@ -149,12 +172,12 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('employee')->group(function () {
 
                     /** Polymorph */
-                    Route::resource('/{employee}/faxes','EmployeeFaxesController');
-                    Route::resource('/{employee}/emails','EmployeeEmailsController');
-                    Route::resource('/{employee}/phones','EmployeePhonesController');
-                    Route::resource('/{employee}/websites','EmployeeWebsitesController');
-                    Route::resource('/{employee}/addresses','EmployeeAddressesController');
-                    Route::resource('/{employee}/documents','EmployeeDocumentsController');
+                    Route::resource('/{employee}/faxes', 'EmployeeFaxesController');
+                    Route::resource('/{employee}/emails', 'EmployeeEmailsController');
+                    Route::resource('/{employee}/phones', 'EmployeePhonesController');
+                    Route::resource('/{employee}/websites', 'EmployeeWebsitesController');
+                    Route::resource('/{employee}/addresses', 'EmployeeAddressesController');
+                    Route::resource('/{employee}/documents', 'EmployeeDocumentsController');
 
                     /** Certifications and Licenses */
                     Route::resource('/{employee}/otr', 'EmployeeOTRController');
@@ -171,7 +194,7 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** TASK CARD  */
+        /** TASK CARD */
 
         Route::namespace('TaskCard')->group(function () {
 
@@ -194,7 +217,15 @@ Route::name('frontend.')->group(function () {
             Route::name('taskcard-routine.')->group(function () {
                 Route::prefix('taskcard-routine')->group(function () {
 
-                    //
+                    /** Transaction: Item */
+                    Route::post('/{taskcard}/item', 'TaskCardRoutineItemsController@store')->name('item.store');
+                    Route::delete('/{taskcard}/{item}/item', 'TaskCardRoutineItemsController@destroy')->name('item.destroy');
+                    /** Transaction: Threshold */
+                    Route::post('/{taskcard}/threshold', 'TaskCardRoutineThresholdController@store')->name('threshold.store');
+                    Route::delete('/{taskcard}/{threshold}/threshold', 'TaskCardRoutineThresholdController@destroy')->name('itthresholdem.destroy');
+                    /** Transaction: Repeat */
+                    Route::post('/{taskcard}/repeat', 'TaskCardRoutineRepeatController@store')->name('repeat.store');
+                    Route::delete('/{taskcard}/{repeat}/repeat', 'TaskCardRoutineRepeatController@destroy')->name('repeat.destroy');
 
                 });
             });
@@ -202,7 +233,11 @@ Route::name('frontend.')->group(function () {
             Route::name('taskcard-eo.')->group(function () {
                 Route::prefix('taskcard-eo')->group(function () {
 
-                    Route::resource('eo-instruction', 'EOInstructionController');
+                    Route::resource('/{taskcard}/eo-instruction', 'EOInstructionController');
+
+                    /** Transaction: Item */
+                    Route::post('/eo-instruction/{taskcard}/item', 'EOInstructionItemController@store')->name('item.store');
+                    Route::delete('/eo-instruction/{taskcard}/{item}/item', 'EOInstructionItemController@destroy')->name('item.destroy');
 
                 });
             });
@@ -210,14 +245,60 @@ Route::name('frontend.')->group(function () {
             Route::name('taskcard-si.')->group(function () {
                 Route::prefix('taskcard-si')->group(function () {
 
-                    //
+                    /** Transaction: Item */
+                    Route::post('/{taskcard}/item', 'TaskCardSIItemController@store')->name('item.store');
+                    Route::delete('/{taskcard}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
 
                 });
             });
 
         });
 
-        /** WORKPACKAGE  */
+        /** JOB CARD */
+
+        Route::namespace('JobCard')->group(function () {
+
+            Route::resource('jobcard-ppc', 'JobCardController', [
+                'parameters' => ['jobcard-ppc' => 'jobcard']
+            ]);
+
+            Route::resource('jobcard-engineer', 'JobCardEngineerController', [
+                'parameters' => ['jobcard-engineer' => 'jobcard']
+            ]);
+
+            Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
+                'parameters' => ['jobcard-mechanic' => 'jobcard']
+            ]);
+
+            Route::name('jobcard.')->group(function () {
+                Route::prefix('jobcard')->group(function () {
+
+                    /** Transaction */
+                    Route::resource('/{jobcard}/progress', 'JobCardProgressController');
+                    Route::resource('/{jobcard}/inspect', 'JobCardInspectController');
+
+                });
+            });
+
+        });
+
+        /** PURCHASE REQUEST */
+
+        Route::resource('purchase-request', 'PurchaseRequestController');
+        Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
+
+        /** PURCHASE ORDER */
+
+        Route::resource('purchase-order', 'PurchaseOrderController');
+        Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
+
+        /** GOODS RECEIVED NOTE */
+
+        Route::resource('goods-received', 'GoodsReceivedController');
+        Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
+
+        /** WORK PACKAGE */
+
         Route::view('/summary/basic', 'frontend.workpackage.routine.basic.basic-summary')->name('summary.basic');
         Route::view('/summary/sip', 'frontend.workpackage.routine.sip.sip-summary')->name('summary.sip');
         Route::view('/summary/cpcp', 'frontend.workpackage.routine.cpcp.cpcp-summary')->name('summary.cpcp');
@@ -225,18 +306,12 @@ Route::name('frontend.')->group(function () {
         Route::view('/summary/cmr-awl', 'frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary')->name('summary.cmr-awl');
         Route::view('/summary/si', 'frontend.workpackage.nonroutine.si.si-summary')->name('summary.si');
 
-        /** VENDOR  */
-        Route::view('/vendor', 'frontend.vendor.index')->name('vendor.index');
-        Route::view('/vendor/create', 'frontend.vendor.create')->name('vendor.create');
+        /** PRICE LIST */
 
-        /** PRICE LIST  */
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
 
-        /** PURCHASE ORDER */
-        Route::view('/purchase-order', 'frontend.purchase-order.index')->name('purchase-order.index');
-        Route::view('/purchase-order/create', 'frontend.purchase-order.create')->name('purchase-order.create');
+        /** QUOTATION */
 
-        /** QUOTATION  */
         Route::view('/quotation-view/workpackage', 'frontend.quotation.workpackage')->name('quotation.workpackage');
         Route::view('/quotation-view/summary/basic', 'frontend.quotation.routine.basic.basic-summary')->name('quotation.summary.basic');
         Route::view('/quotation-view/summary/sip', 'frontend.quotation.routine.sip.sip-summary')->name('quotation.summary.sip');
@@ -244,11 +319,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/adsb', 'frontend.quotation.nonroutine.adsb.ad-sb-summary')->name('quotation.summary.adsb');
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
-
-        /** GOOD RECEIVED NOTES  */
-        Route::view('/good-received-note', 'frontend.good-received-note.index')->name('good-received-note.index');
-        Route::view('/good-received-note/create', 'frontend.good-received-note.create')->name('good-received-note.create');
-
 
     });
 

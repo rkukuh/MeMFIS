@@ -17,7 +17,7 @@
             <div class="modal-body">
 
                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id=InstructionForm">
-                        <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                        <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                         <div class="m-portlet__body">
                             <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -29,7 +29,7 @@
                                         @slot('text', 'Work Area')
                                         @slot('id', 'work_area')
                                         @slot('name', 'work_area')
-                                        @slot('id_error', 'work-area')
+                                        @slot('id_error', 'work_area')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -48,29 +48,30 @@
                             <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="row ">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Manhour @include('frontend.common.label.required')
-                                                </label>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Manhour Estimation @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.decimal')
-                                                    @slot('id', 'manhour')
-                                                    @slot('text', 'Manhour')
-                                                    @slot('name', 'manhour')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Performa Factor @include('frontend.common.label.required')
-                                                </label>
+                                            @component('frontend.common.input.decimal')
+                                                @slot('id', 'manhour')
+                                                @slot('text', 'Manhour')
+                                                @slot('name', 'manhour')
+                                                @slot('id_error', 'manhour')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Performance Factor @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.input.decimal')
-                                                    @slot('id', 'performa')
-                                                    @slot('text', 'Performa')
-                                                    @slot('name', 'performa')
-                                                    @slot('value', '1')
-                                                @endcomponent
-                                            </div>
+                                            @component('frontend.common.input.decimal')
+                                                @slot('id', 'performa')
+                                                @slot('text', 'Performa')
+                                                @slot('name', 'performa')
+                                                @slot('id_error', 'performa')
+                                            @endcomponent
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -84,6 +85,38 @@
                                                 @slot('id', 'helper_quantity')
                                                 @slot('text', 'Helper Quantity')
                                                 @slot('name', 'helper_quantity')
+                                                @slot('id_error', 'helper_quantity')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Engineer Quantity @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'engineer_quantity')
+                                                @slot('text', 'Engineer Quantity')
+                                                @slot('name', 'engineer_quantity')
+                                                @slot('id_error', 'engineer_quantity')
+                                            @endcomponent
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row ">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="row ">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Sequence @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'sequence')
+                                                @slot('text', 'Sequence')
+                                                @slot('name', 'sequence')
+                                                @slot('id_error', 'sequence')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -97,85 +130,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group m-form__group row ">
-                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                    <div class="m-portlet">
-                                        <div class="m-portlet__head">
-                                            <div class="m-portlet__head-caption">
-                                                <div class="m-portlet__head-title">
-                                                    <span class="m-portlet__head-icon m--hide">
-                                                        <i class="la la-gear"></i>
-                                                    </span>
-
-                                                    @include('frontend.common.label.datalist')
-
-                                                    <h3 class="m-portlet__head-text">
-                                                        Tool Required
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="m-portlet m-portlet--mobile">
-                                            <div class="m-portlet__body">
-                                                <div class="row align-tools-center" style="margin-top:20px">
-                                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                                        @component('frontend.common.buttons.create-new')
-                                                            @slot('text', 'Tool Taskcard')
-                                                            @slot('id', 'tool_taskcard')
-                                                            @slot('data_target', '#modal_tool')
-                                                        @endcomponent
-
-                                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="tool_datatable" id="tool_datatable"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="m-portlet">
-                                        <div class="m-portlet__head">
-                                            <div class="m-portlet__head-caption">
-                                                <div class="m-portlet__head-title">
-                                                    <span class="m-portlet__head-icon m--hide">
-                                                        <i class="la la-gear"></i>
-                                                    </span>
-
-                                                    @include('frontend.common.label.datalist')
-
-                                                    <h3 class="m-portlet__head-text">
-                                                        Material Required
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="m-portlet m-portlet--mobile">
-                                            <div class="m-portlet__body">
-                                                <div class="row align-items-center" style="margin-top:20px">
-                                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                                        @component('frontend.common.buttons.create-new')
-                                                            @slot('text', 'Item Taskcard')
-                                                            @slot('id', 'item_taskcard')
-                                                            @slot('data_target', '#modal_item')
-                                                        @endcomponent
-
-                                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="item_datatable" id="item_datatable"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer modal-footer-instruction">
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-instruction')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')

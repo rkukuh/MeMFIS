@@ -4,7 +4,6 @@ let Workpackage = {
             add = add || '...';
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
-
         $('.workpackage_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -25,7 +24,6 @@ let Workpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
                 serverSorting: !0
             },
             layout: {
@@ -51,6 +49,9 @@ let Workpackage = {
                     field: 'code',
                     title: 'Workpakage Number',
                     sortable: !1,
+                    template: function (t) {
+                        return '<a href="/workpackage/'+t.uuid+'">' + t.code + "</a>"
+                    }
                 },
                 {
                     field: 'created_at',
@@ -95,15 +96,63 @@ let Workpackage = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            '<a href="/workpackage/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<i class="la la-pencil"></i>' +
+                        '</a>' +
+                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                            '<i class="la la-trash"></i>' +
+                        '</a>'
                         );
                     }
                 }
             ]
         });
+
+        $('.workpackage_datatable').on('click', '.delete', function () {
+            let workpackage_uuid = $(this).data('id');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/workpackage/' + workpackage_uuid + '',
+                        success: function (data) {
+                            toastr.success('Workpackage has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.workpackage_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
     }
+
 };
 
 jQuery(document).ready(function () {

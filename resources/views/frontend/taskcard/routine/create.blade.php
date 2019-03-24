@@ -137,7 +137,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Manhour @include('frontend.common.label.required')
+                                                        Manhour Estimation @include('frontend.common.label.required')
                                                     </label>
 
                                                     @component('frontend.common.input.decimal')
@@ -145,11 +145,13 @@
                                                         @slot('text', 'Manhour')
                                                         @slot('name', 'manhour')
                                                         @slot('id_error', 'manhour')
+                                                        @slot('min', '0')
+                                                        @slot('value', '1')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Performa Factor @include('frontend.common.label.required')
+                                                        Performance Factor @include('frontend.common.label.required')
                                                     </label>
 
                                                     @component('frontend.common.input.decimal')
@@ -158,6 +160,7 @@
                                                         @slot('name', 'performa')
                                                         @slot('value', '1')
                                                         @slot('id_error', 'performa')
+                                                        @slot('min', '0')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -174,15 +177,32 @@
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Helper Quantity @include('frontend.common.label.optional')
-                                            </label>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Engineer Quantity @include('frontend.common.label.optional')
+                                                    </label>
 
-                                            @component('frontend.common.input.number')
-                                                @slot('id', 'helper_quantity')
-                                                @slot('text', 'Helper Quantity')
-                                                @slot('name', 'helper_quantity')
-                                            @endcomponent
+                                                    @component('frontend.common.input.number')
+                                                        @slot('id', 'engineer_quantity')
+                                                        @slot('text', 'Engineer Quantity')
+                                                        @slot('name', 'engineer_quantity')
+                                                        @slot('value', '1')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Helper Quantity @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    @component('frontend.common.input.number')
+                                                        @slot('id', 'helper_quantity')
+                                                        @slot('text', 'Helper Quantity')
+                                                        @slot('name', 'helper_quantity')
+                                                        @slot('value', '0')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -286,6 +306,54 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Threshold @include('frontend.common.label.optional')
+                                                </label>
+                                                <table class="threshold">
+                                                    <tr>
+                                                        <td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                        @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                        <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                        @endforeach
+                                                        </select></td>
+                                                        <td width="5%">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('id', 'addrow')
+                                                            @endcomponent
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Repeat @include('frontend.common.label.optional')
+                                                </label>
+                                                <table class="repeat">
+                                                    <tr>
+                                                        <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                        <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                        <option value"">Select Repeat</option>
+                                                        @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                        <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                        @endforeach
+                                                        </select></td>
+                                                        <td width="5%">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('id', 'addrow2')
+                                                            @endcomponent
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Task Card Attachment @include('frontend.common.label.optional')
@@ -301,7 +369,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Description @include('frontend.common.label.optional')
+                                                Instruction @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -347,7 +415,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Tools
+                                    Tools Requirement
                                 </h3>
                             </div>
                         </div>
@@ -378,7 +446,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Required Materials
+                                    Materials Requirement
                                 </h3>
                             </div>
                         </div>
@@ -400,7 +468,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-portlet">
+                <div class="m-portlet hidden">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
@@ -409,7 +477,7 @@
                                 </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Thresholds
+                                    Threshold
                                 </h3>
                             </div>
                         </div>
@@ -431,7 +499,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-portlet">
+                <div class="m-portlet hidden">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
@@ -440,7 +508,7 @@
                                     </span>
 
                                 <h3 class="m-portlet__head-text">
-                                    Repeats
+                                    Repeat
                                 </h3>
                             </div>
                         </div>
@@ -488,6 +556,7 @@
 @endpush
 
 @push('footer-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
@@ -499,6 +568,12 @@
 
     <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/aircraft-taskcard.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/aircraft-taskcard.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
@@ -515,18 +590,99 @@
     <script src="{{ asset('js/frontend/functions/select2/applicability-engine.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-engine.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/aircraft-taskcard.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/aircraft-taskcard.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/routine/create.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/routine/form-reset.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+          $(".js-example-tags").select2();
+        });
+  </script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          var counter = 0;
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+              cols += '<option value"">Select Threshold</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.threshold").append(newRow);
+              $('.select').select2();
+              counter++;
+          });
+          $("table.threshold").on("click", ".ibtnDel", function (event) {
+              if (counter >= 1) {
+                  $(this).closest("tr").remove();
+                  counter -= 1
+              }
+          });
+      });
+  </script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          var counter = 0;
+          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $("#addrow2").on("click", function () {
+              var x = 1;
+              var newRow = $("<tr>");
+              var cols = "";
+              x = x+1;
+              cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
+              cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
+              cols += '<option value"">Select Repeat</option>';
+              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                  if(maintenanceCycles[i].id == 1){
+                  }else{
+                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                  }
+              };
+              cols += '</select></td>';
+              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+              newRow.append(cols);
+              $("table.repeat").append(newRow);
+              $('.select').select2();
+              counter++;
+          });
+          $("table.repeat").on("click", ".ibtnDel", function (event) {
+              if (counter >= 1) {
+                  $(this).closest("tr").remove();
+                  counter -= 1
+              }
+          });
+      });
+  </script>
+  <script type="text/javascript">
+          let simpan = $('.save').on('click', function () {
+
+      var usertype=[];
+$("select[name=maintenanceCycle]").each(function(){
+  usertype.push($(this).val());
+});
+
+
+var ajaxdata={"UserType":usertype};
+
+console.log(JSON.stringify(ajaxdata));
+      });
+  </script>
 @endpush

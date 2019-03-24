@@ -1,16 +1,15 @@
 <?php
 
 use App\Models\Category;
-use App\Models\Description;
 use Faker\Generator as Faker;
 
 $factory->define(Category::class, function (Faker $faker) {
 
-    $name = 'Category Dummy #' . $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => str_slug($name),
-        'name' => $name,
+        'code' => 'CAT-DUM-' . $number,
+        'name' => 'Category Dummy #' . $number,
         'of'   => $faker->randomElement([
             'item',
             'taskcard-eo',

@@ -20,7 +20,7 @@ let Datatables = {
                     data: "work_area"
                 },
                 {
-                    data: "manhour"
+                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"
@@ -56,7 +56,7 @@ let Datatables = {
                     data: "work_area"
                 },
                 {
-                    data: "manhour"
+                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"
@@ -92,7 +92,7 @@ let Datatables = {
                     data: "work_area"
                 },
                 {
-                    data: "manhour"
+                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"
@@ -125,12 +125,6 @@ let Datatables = {
                     data: "title"
                 },
                 {
-                    data: "work_area"
-                },
-                {
-                    data: "manhour"
-                },
-                {
                     data: "Actions"
                 }
             ],
@@ -159,12 +153,6 @@ let Datatables = {
                 },
                 {
                     data: "title"
-                },
-                {
-                    data: "work_area"
-                },
-                {
-                    data: "manhour"
                 },
                 {
                     data: "Actions"
@@ -200,7 +188,7 @@ let Datatables = {
                     data: "work_area"
                 },
                 {
-                    data: "manhour"
+                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"

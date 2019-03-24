@@ -1,7 +1,7 @@
 $(document).ready(function () {
     tool = function () {
         $.ajax({
-            url: '/get-items/',
+            url: '/get-tools/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

@@ -50,12 +50,14 @@ class DatabaseSeeder extends Seeder
         $this->call(ZonesTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
         $this->call(EmailsTableSeeder::class);
+        $this->call(PricesTableSeeder::class);
+        $this->call(RepeatsTableSeeder::class);
         $this->call(AccessesTableSeeder::class);
         $this->call(WebsitesTableSeeder::class);
         $this->call(VersionsTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
         $this->call(DocumentsTableSeeder::class);
-        $this->call(MaintenanceCyclesTableSeeder::class);
+        $this->call(ThresholdsTableSeeder::class);
 
         /** LICENSE */
 
@@ -75,6 +77,7 @@ class DatabaseSeeder extends Seeder
         $this->call(QuotationsTableSeeder::class);
         $this->call(WorkPackagesTableSeeder::class);
         $this->call(ProjectsTableSeeder::class);
+        $this->call(JobCardsTableSeeder::class);
         $this->call(PurchaseRequestsTableSeeder::class);
         $this->call(PurchaseOrdersTableSeeder::class);
         $this->call(GoodsReceivedTableSeeder::class);

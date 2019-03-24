@@ -14,7 +14,13 @@ $factory->define(Address::class, function (Faker $faker) {
     }
 
     return [
-        'type_id' => Type::ofAddress()->get()->random()->id,
+        'type_id' => function () {
+            if (Type::ofAddress()->count()) {
+                return Type::ofAddress()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('address')->create()->id;
+        },
         'address' => $faker->address,
         'latitude' => $latitude,
         'longitude' => $longitude,

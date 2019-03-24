@@ -44,12 +44,14 @@ class DummyDataSeeder extends Seeder
         $this->call(Zones::class);
         $this->call(Emails::class);
         $this->call(Phones::class);
+        $this->call(Prices::class);
+        $this->call(Repeats::class);
         $this->call(Websites::class);
         $this->call(Versions::class);
         $this->call(Accesses::class);
         $this->call(Addresses::class);
         $this->call(Documents::class);
-        $this->call(MaintenanceCycles::class);
+        $this->call(Thresholds::class);
 
         /** LICENSE */
 
@@ -68,9 +70,10 @@ class DummyDataSeeder extends Seeder
         $this->call(ItemStorages::class);
         $this->call(TaskCards::class);
         $this->call(EOInstructions::class);
+        $this->call(Projects::class);
+        $this->call(JobCards::class);
         $this->call(Quotations::class);
         $this->call(WorkPackages::class);
-        $this->call(Projects::class);
         $this->call(PurchaseRequests::class);
         $this->call(PurchaseOrders::class);
         $this->call(GoodsReceiveds::class);

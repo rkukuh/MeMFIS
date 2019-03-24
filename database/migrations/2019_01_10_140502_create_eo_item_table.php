@@ -17,6 +17,7 @@ class CreateEoItemTable extends Migration
             $table->unsignedInteger('eo_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');
+            $table->unsignedInteger('unit_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -27,6 +28,11 @@ class CreateEoItemTable extends Migration
 
             $table->foreign('eo_id')
                     ->references('id')->on('eo_instructions')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('unit_id')
+                    ->references('id')->on('units')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

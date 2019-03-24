@@ -8,7 +8,13 @@ $factory->define(Website::class, function (Faker $faker) {
 
     return [
         'url' => $faker->url,
-        'type_id' => Type::ofWebsite()->get()->random()->id,
+        'type_id' => function () {
+            if (Type::ofWebsite()->count()) {
+                return Type::ofWebsite()->get()->random()->id;
+            }
+
+            return factory(Type::class)->states('website')->create()->id;
+        },
     ];
 
 });

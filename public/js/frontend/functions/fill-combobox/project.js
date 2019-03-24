@@ -1,7 +1,7 @@
 $(document).ready(function () {
     projects = function () {
         $.ajax({
-            url: '/get-units/',
+            url: '/get-projects/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {

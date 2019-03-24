@@ -1,7 +1,7 @@
 let ManufacturerSelect2 = {
     init: function () {
         $('#manufacturer_id, #manufacturer_id_validate').select2({
-            placeholder: 'Select a menafacturer'
+            placeholder: 'Select a Manufacturer'
         });
     }
 };

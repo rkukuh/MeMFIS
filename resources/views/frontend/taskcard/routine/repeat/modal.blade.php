@@ -51,7 +51,7 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-repeat')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </form>
-    
+
                 </div>
         </div>
     </div>

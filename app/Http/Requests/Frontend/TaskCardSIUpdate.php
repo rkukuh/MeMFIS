@@ -29,8 +29,11 @@ class TaskCardSIUpdate extends FormRequest
         return [
             'number' => 'required',
             'title' => 'required',
-            'manhour' => 'required',
+            'estimation_manhour' => 'required',
+            'performance_factor' => 'required',
             'description' => 'required',
+            'skill_id' => 'required',
+            'applicability_airplane' => 'required',
         ];
     }
 
@@ -42,6 +45,7 @@ class TaskCardSIUpdate extends FormRequest
     public function messages()
     {
         return [
+            'description.required' => 'The instruction field is required.',
         ];
     }
 

@@ -3,6 +3,7 @@
 use App\Models\Unit;
 use App\Models\Item;
 use Spatie\Tags\Tag;
+use App\Models\Price;
 use App\Models\Journal;
 use App\Models\Category;
 use App\Models\Manufacturer;
@@ -10,13 +11,20 @@ use Faker\Generator as Faker;
 
 $factory->define(Item::class, function (Faker $faker) {
 
-    $sequence = $faker->unixTime();
+    $number = $faker->unixTime();
     $is_ppn = $faker->boolean;
 
     return [
-        'code' => 'MT-DUM-' . $sequence,
-        'name' => 'Material Dummy #' . $sequence,
+        'code' => 'MT-DUM-' . $number,
+        'name' => 'Material Dummy #' . $number,
         'unit_id' => Unit::ofQuantity()->get()->random()->id,
+        'unit_id' => function () {
+            if (Unit::ofQuantity()->count()) {
+                return Unit::ofQuantity()->get()->random()->id;
+            }
+
+            return factory(Unit::class)->create()->id;
+        },
         'manufacturer_id' => $faker->randomElement([null, Manufacturer::get()->random()->id]),
         'is_ppn' => $is_ppn,
         'ppn_amount' => function() use ($is_ppn) {
@@ -30,11 +38,18 @@ $factory->define(Item::class, function (Faker $faker) {
 
 });
 
-/** Callbacks */
+/** CALLBACKS */
 
 $factory->afterCreating(Item::class, function ($item, $faker) {
-    // The business said that an item has only 0 or 1 category
-    $item->categories()->attach(Category::ofItem()->get()->random());
+
+    // Category
+    
+    if ($faker->boolean) {
+        // The business said that an item has only 0 or 1 category
+        $item->categories()->attach(Category::ofItem()->get()->random());
+    }
+
+    // Tags
 
     $tags = Tag::getWithType('item');
 
@@ -42,7 +57,16 @@ $factory->afterCreating(Item::class, function ($item, $faker) {
         $item->tags()->attach($tags->find($i));
     }
 
+    // Journal
+
     if ($faker->boolean) {
         $item->journal()->associate(Journal::get()->random())->save();
     }
+
+    // Price
+
+    $item->prices()->saveMany(
+        factory(Price::class, rand(3, 6))->make()
+    );
+
 });

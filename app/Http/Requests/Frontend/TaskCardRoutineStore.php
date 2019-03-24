@@ -30,9 +30,11 @@ class TaskCardRoutineStore extends FormRequest
             'number' => 'required',
             'title' => 'required',
             'type_id' => 'required',
-            'task_type_id' => 'required',
-            'manhour' => 'required',
+            'task_id' => 'required',
+            'estimation_manhour' => 'required',
             'performance_factor' => 'required',
+            'skill_id' => 'required',
+            'applicability_airplane' => 'required',
         ];
     }
 

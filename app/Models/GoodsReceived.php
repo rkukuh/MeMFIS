@@ -26,7 +26,7 @@ class GoodsReceived extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A GRN may have one employee (to approve the GRN).
+     * One-to-Many: A GRN may have one approver.
      *
      * This function will retrieve the approver of a GRN.
      * See: Employee's grn_approved() method for the inverse
@@ -36,6 +36,26 @@ class GoodsReceived extends MemfisModel
     public function approvedBy()
     {
         return $this->belongsTo(Employee::class, 'approved_by');
+    }
+
+    /**
+     * Many-to-Many: A GRN may have zero or many item.
+     *
+     * This function will retrieve all the items of a GRN.
+     * See: Item's goods_received() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class)
+                    ->withPivot(
+                        'quantity',
+                        'already_received',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
     }
 
     /**

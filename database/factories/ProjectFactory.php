@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Project;
 use App\Models\Customer;
@@ -9,11 +10,11 @@ use Faker\Generator as Faker;
 
 $factory->define(Project::class, function (Faker $faker) {
 
-    $code  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => 'PRJ-' . $code,
-        'title' => 'Project Dummy #' . $code,
+        'code' => 'PRJ-DUM-' . $number,
+        'title' => 'Project Dummy #' . $number,
         'customer_id' => function () {
             if (Customer::count()) {
                 return Customer::get()->random()->id;
@@ -51,8 +52,16 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
                 $item = factory(Item::class)->create();
             }
 
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
             $project->items()->save($item, [
-                'quantity' => rand(1, 10)
+                'quantity' => rand(1, 10),
+                'unit_id' => $unit->id,
+                'note' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
     }

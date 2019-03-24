@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
@@ -8,11 +9,11 @@ use Faker\Generator as Faker;
 
 $factory->define(WorkPackage::class, function (Faker $faker) {
 
-    $code  = $faker->unixTime();
+    $number = $faker->unixTime();
 
     return [
-        'code' => $faker->randomElement([null, 'WP-' . $code]),
-        'title' => 'WorkPackage Dummy #' . $code,
+        'code' => $faker->randomElement([null, 'WP-DUM-' . $number]),
+        'title' => 'WorkPackage Dummy #' . $number,
         'is_template' => $faker->boolean(),
         'aircraft_id' => function () {
             if (Aircraft::count()) {
@@ -56,8 +57,15 @@ $factory->afterCreating(WorkPackage::class, function ($workpackage, $faker) {
                 $item = factory(Item::class)->create();
             }
 
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
             $workpackage->items()->save($item, [
-                'quantity' => rand(1, 10)
+                'quantity' => rand(1, 10),
+                'unit_id' => $unit->id,
             ]);
         }
     }
