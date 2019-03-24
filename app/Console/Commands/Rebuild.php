@@ -42,11 +42,23 @@ class Rebuild extends Command
 
         if (App::environment(['prod', 'production'])) {
             if ($this->confirm('You are in PRODUCTION environment. Continue?')) {
+                if ($this->confirm('AGAIN. You are in PRODUCTION environment. Rebuild everything?')) {
+                    $this->commandOperations();
+                }
+            }
+
+            return;
+        }
+
+        if (App::environment(['staging'])) {
+            if ($this->confirm('You are in STAGING environment. Continue?')) {
                 $this->commandOperations();
             }
-        } else {
-            $this->commandOperations();
+
+            return;
         }
+
+        $this->commandOperations();
     }
 
     /**
@@ -118,6 +130,6 @@ class Rebuild extends Command
     {
         $this->line('');
         $this->line('"MeMFIS: Rebuild" artisan command');
-        $this->line('version 1.0 by @rkukuh');
+        $this->line('version 1.5 by @rkukuh');
     }
 }
