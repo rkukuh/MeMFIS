@@ -41,6 +41,11 @@
                     <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver">
                         <div class="m-grid__item m-grid__item--middle">
                             <span class="m-login__title">MeMFIS v{{ config('memfis.version', 'x.y.z') }}</span>
+                            <span class="m-login__title" style="margin-top: -20px;">
+                                <small>
+                                    Server: {{ strtoupper(env('APP_ENV', 'unknown')) }}
+                                </small>
+                            </span>
                             <span class="m-login__subtitle">Merpati Maintenance Fascility Information System</span>
                         </div>
                     </div>
