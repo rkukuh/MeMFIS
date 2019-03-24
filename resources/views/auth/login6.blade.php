@@ -46,7 +46,7 @@
                                     Server: {{ strtoupper(env('APP_ENV', 'unknown')) }}
                                 </small>
                             </span>
-                            <span class="m-login__subtitle">Merpati Maintenance Fascility Information System</span>
+                            <span class="m-login__subtitle">Merpati Maintenance Facility Information System</span>
                         </div>
                     </div>
 
