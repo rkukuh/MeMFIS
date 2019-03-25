@@ -162,7 +162,6 @@ let TaskCard = {
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
             data.append( "category_id", $('#category').val());
-
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
 
             $.ajax({
@@ -172,37 +171,9 @@ let TaskCard = {
                 type: 'post',
                 processData: false,
                 contentType: false,
-                data: data,
-                contentType: false,
                 cache: false,
+                data: data,
                 url: '/taskcard-eo',
-                // data: {
-                //     _token: $('input[name=_token]').val(),
-                //     title: title,
-                //     number: number,
-                //     type_id: taskcard_non_routine_type,
-                //     applicability_airplane: applicability_airplane,
-                //     category_id: category,
-                //     revision: revision,
-                //     relationship: relationship,
-                //     description: description,
-                //     scheduled_priority_id: scheduled_priority_id,
-                //     scheduled_priority_type: prior_to,
-                //     scheduled_priority_amount: scheduled_priority_amount,
-                //     recurrence_id: recurrence_id,
-                //     recurrence_amount:recurrence,
-                //     recurrence_type:recurrence_select,
-                //     manual_affected_id: manual_affected_id,
-                //     manual_affected: note,
-
-                //     threshold_amount: threshold_amount,
-                //     threshold_type: threshold_type,
-                //     repeat_amount: repeat_amount,
-                //     repeat_type: repeat_type,
-
-                //     // scheduled_priority_amount: prior_to_hour,
-                //     // scheduled_priority_amount: prior_to_cycle,
-                // },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.title) {
