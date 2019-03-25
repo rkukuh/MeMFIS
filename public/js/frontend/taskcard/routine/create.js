@@ -127,38 +127,38 @@ let TaskCard = {
                 data: data,
                 cache: false,
 
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.title) {
-                            $('#title-error').html(data.errors.title[0]);
+                success: function (response) {
+                    if (response.errors) {
+                        if (response.errors.title) {
+                            $('#title-error').html(response.errors.title[0]);
                         }
 
-                        if (data.errors.number) {
-                            $('#number-error').html(data.errors.number[0]);
+                        if (response.errors.number) {
+                            $('#number-error').html(response.errors.number[0]);
                         }
 
-                        if (data.errors.type_id) {
-                            $('#taskcard_routine_type-error').html(data.errors.type_id[0]);
+                        if (response.errors.type_id) {
+                            $('#taskcard_routine_type-error').html(response.errors.type_id[0]);
                         }
 
-                        if (data.errors.skill_id) {
-                            $('#otr-certification-error').html(data.errors.skill_id[0]);
+                        if (response.errors.skill_id) { 
+                            $('#otr-certification-error').html(response.errors.skill_id[0]);
                         }
 
-                        if (data.errors.applicability_airplane) {
-                            $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                        if (response.errors.applicability_airplane) {
+                            $('#applicability-airplane-error').html(response.errors.applicability_airplane[0]);
                         }
 
-                        if (data.errors.task_id) {
-                            $('#task_type_id-error').html(data.errors.task_id[0]);
+                        if (response.errors.task_id) {
+                            $('#task_type_id-error').html(response.errors.task_id[0]);
                         }
 
-                        if (data.errors.manhour) {
-                            $('#manhour-error').html(data.errors.manhour[0]);
+                        if (response.errors.manhour) {
+                            $('#manhour-error').html(response.errors.manhour[0]);
                         }
 
-                        if (data.errors.performance_factor) {
-                            $('#performa-error').html(data.errors.performance_factor[0]);
+                        if (response.errors.performance_factor) {
+                            $('#performa-error').html(response.errors.performance_factor[0]);
                         }
 
 
@@ -169,22 +169,23 @@ let TaskCard = {
                         $('#applicability_airplane').select2('val', 'All');
                         document.getElementById('task_type_id').value = task_type_id;
                         document.getElementById('otr_certification').value = otr_certification;
-                        document.getElementById('manhour').value = manhour;
-                        document.getElementById('performa').value = performa;
-                        document.getElementById('helper_quantity').value = helper_quantity;
+                        document.getElementById('manhour').value =  data.getAll('manhour');
+                        document.getElementById('performa').value = data.getAll('performa');
+                        document.getElementById('helper_quantity').value = data.getAll('helper_quantity');
+                        document.getElementById('engineer_quantity').value = data.getAll('engineer_quantity');
                         document.getElementById('work_area').value = work_area;
                         $('#work_area').select2('val', 'All');
                         document.getElementById('access').value = access;
                         $('#access').select2('val', 'All');
                         document.getElementById('zone').value = zone;
                         $('#zone').select2('val', 'All');
-                        document.getElementById('source').value = source;
+                        document.getElementById('source').value = data.getAll('source');
                         document.getElementById('relationship').value = relationship;
                         $('#relationship').select2('val', 'All');
                         document.getElementById('version').value = version;
                         $('#version').select2('val', 'All');
-                        document.getElementById('effectivity').value = effectivity;
-                        document.getElementById('description').value = description;
+                        document.getElementById('effectivity').value = data.getAll('effectivity');
+                        document.getElementById('description').value = data.getAll('description');
 
                     } else {
 
