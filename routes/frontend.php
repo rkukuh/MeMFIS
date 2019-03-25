@@ -101,6 +101,7 @@ Route::name('frontend.')->group(function () {
 
             Route::prefix('WorkPackage')->group(function () {
 
+                Route::post('/{workPackage}/taskcard', 'WorkPackageController@addTaskCard')->name('taskcard.workpackage');
 
             });
         });
