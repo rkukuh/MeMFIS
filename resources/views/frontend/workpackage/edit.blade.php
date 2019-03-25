@@ -187,6 +187,10 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let workPackage_uuid = '{{ $workPackage->uuid }}';
+    </script>
+
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}
 
