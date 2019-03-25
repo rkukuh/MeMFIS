@@ -176,113 +176,90 @@ let TaskCard = {
                 contentType: false,
                 cache: false,
                 url: '/taskcard-eo',
-                // data: {
-                //     _token: $('input[name=_token]').val(),
-                //     title: title,
-                //     number: number,
-                //     type_id: taskcard_non_routine_type,
-                //     applicability_airplane: applicability_airplane,
-                //     category_id: category,
-                //     revision: revision,
-                //     relationship: relationship,
-                //     description: description,
-                //     scheduled_priority_id: scheduled_priority_id,
-                //     scheduled_priority_type: prior_to,
-                //     scheduled_priority_amount: scheduled_priority_amount,
-                //     recurrence_id: recurrence_id,
-                //     recurrence_amount:recurrence,
-                //     recurrence_type:recurrence_select,
-                //     manual_affected_id: manual_affected_id,
-                //     manual_affected: note,
-
-                //     threshold_amount: threshold_amount,
-                //     threshold_type: threshold_type,
-                //     repeat_amount: repeat_amount,
-                //     repeat_type: repeat_type,
 
                 //     // scheduled_priority_amount: prior_to_hour,
                 //     // scheduled_priority_amount: prior_to_cycle,
                 // },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.title) {
-                            $('#title-error').html(data.errors.title[0]);
+                success: function (response) {
+                    if (response.errors) {
+                        if (response.errors.title) {
+                            $('#title-error').html(response.errors.title[0]);
                         }
 
-                        if (data.errors.number) {
-                            $('#number-error').html(data.errors.number[0]);
+                        if (response.errors.number) {
+                            $('#number-error').html(response.errors.number[0]);
                         }
 
-                        if (data.errors.taskcard) {
-                            $('#taskcard-error').html(data.errors.taskcard[0]);
+                        if (response.errors.taskcard) {
+                            $('#taskcard-error').html(response.errors.taskcard[0]);
                         }
 
-                        if (data.errors.otr_certification) {
-                            $('#otr-certification-error').html(data.errors.otr_certification[0]);
+                        if (response.errors.otr_certification) {
+                            $('#otr-certification-error').html(response.errors.otr_certification[0]);
                         }
 
-                        if (data.errors.threshold_type) {
-                            $('#threshold-type-error').html(data.errors.threshold_type[0]);
+                        if (response.errors.threshold_type) {
+                            $('#threshold-type-error').html(response.errors.threshold_type[0]);
                         }
 
-                        if (data.errors.threshold_amount) {
-                            $('#threshold-amount-error').html(data.errors.threshold_amount[0]);
+                        if (response.errors.threshold_amount) {
+                            $('#threshold-amount-error').html(response.errors.threshold_amount[0]);
                         }
 
-                        if (data.errors.repeat_type) {
-                            $('#repeat-type-error').html(data.errors.repeat_type[0]);
+                        if (response.errors.repeat_type) {
+                            $('#repeat-type-error').html(response.errors.repeat_type[0]);
                         }
 
-                        if (data.errors.repeat_amount) {
-                            $('#repeat-amount-error').html(data.errors.repeat_amount[0]);
+                        if (response.errors.repeat_amount) {
+                            $('#repeat-amount-error').html(response.errors.repeat_amount[0]);
                         }
 
-                        if (data.errors.zone) {
-                            $('#zone-error').html(data.errors.zone[0]);
+                        if (response.errors.zone) {
+                            $('#zone-error').html(response.errors.zone[0]);
                         }
 
-                        if (data.errors.access) {
-                            $('#access-error').html(data.errors.access[0]);
+                        if (response.errors.access) {
+                            $('#access-error').html(response.errors.access[0]);
                         }
 
-                        if (data.errors.applicability_airplane) {
-                            $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                        if (response.errors.applicability_airplane) {
+                            $('#applicability-airplane-error').html(response.errors.applicability_airplane[0]);
                         }
 
-                        if (data.errors.applicability_engine) {
-                            $('#applicability-engine-error').html(data.errors.applicability_engine[0]);
+                        if (response.errors.applicability_engine) {
+                            $('#applicability-engine-error').html(response.errors.applicability_engine[0]);
                         }
 
-                        if (data.errors.work_area) {
-                            $('#work-area-error').html(data.errors.work_area[0]);
+                        if (response.errors.work_area) {
+                            $('#work-area-error').html(response.errors.work_area[0]);
                         }
 
-                        if (data.errors.revision) {
-                            $('#revision-error').html(data.errors.revision[0]);
+                        if (response.errors.revision) {
+                            $('#revision-error').html(response.errors.revision[0]);
                         }
 
-                        if (data.errors.taskcard_non_routine_type) {
-                            $('#taskcard_non_routine_type-error').html(data.errors.taskcard_non_routine_type[0]);
+                        if (response.errors.taskcard_non_routine_type) {
+                            $('#taskcard_non_routine_type-error').html(response.errors.taskcard_non_routine_type[0]);
                         }
                         
-                        if (data.errors.category) {
-                            $('#category-error').html(data.errors.category[0]);
+                        if (response.errors.category) {
+                            $('#category-error').html(response.errors.category[0]);
                         }
 
-                        if (data.errors.scheduled_priority_id) {
-                            $('#scheduled_priority_id-error').html(data.errors.scheduled_priority_id[0]);
+                        if (response.errors.scheduled_priority_id) {
+                            $('#scheduled_priority_id-error').html(response.errors.scheduled_priority_id[0]);
                         }
 
-                        if (data.errors.recurrence_id) {
-                            $('#recurrence_id-error').html(data.errors.recurrence_id[0]);
+                        if (response.errors.recurrence_id) {
+                            $('#recurrence_id-error').html(response.errors.recurrence_id[0]);
                         }
 
-                        if (data.errors.manual_affected_id) {
-                            $('#manual_affected_id-error').html(data.errors.manual_affected_id[0]);
+                        if (response.errors.manual_affected_id) {
+                            $('#manual_affected_id-error').html(response.errors.manual_affected_id[0]);
                         }
 
-                        document.getElementById('title').value = title;
-                        document.getElementById('number').value = number;
+                        document.getElementById('title').value = data.getAll('title');
+                        document.getElementById('number').value = data.getAll('number');
                         document.getElementById('threshold_amount').value = threshold_amount;
                         document.getElementById('repeat_amount').value = repeat_amount;
                         document.getElementById('source').value = source;
@@ -290,12 +267,13 @@ let TaskCard = {
                         document.getElementById('zone').value = zone;
                         document.getElementById('access').value = access;
                         document.getElementById('applicability_airplane').value = applicability_airplane;
-                        document.getElementById('revision').value = revision;
+                        document.getElementById('revision').value = data.getAll('revision');
                         document.getElementById('taskcard_non_routine_type').value = taskcard_non_routine_type;
                         document.getElementById('category').value = category;
                         document.getElementById('scheduled_priority_id').value = scheduled_priority_id;
                         document.getElementById('recurrence_id').value = recurrence_id;
                         document.getElementById('manual_affected_id').value = manual_affected_id;
+                        document.getElementById('description').value = data.getAll('description');
 
                         
 
