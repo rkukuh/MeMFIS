@@ -200,6 +200,7 @@ class TaskCardRoutineDatatables extends Controller
             'title'     => true,
             'work_area'     => true,
             'estimation_manhour'     => true,
+            'uuid'     => true,
             'Actions'      => true,
         ];
 
@@ -374,6 +375,7 @@ class TaskCardRoutineDatatables extends Controller
                 'title'     => true,
                 'work_area'     => true,
                 'estimation_manhour'     => true,
+                'uuid'     => true,
                 'Actions'      => true,
                 ];
 
@@ -548,6 +550,7 @@ class TaskCardRoutineDatatables extends Controller
                 'title'     => true,
                 'work_area'     => true,
                 'estimation_manhour'     => true,
+                'uuid'     => true,
                 'Actions'      => true,
                 ];
 

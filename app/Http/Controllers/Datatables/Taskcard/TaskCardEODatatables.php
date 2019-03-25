@@ -201,6 +201,7 @@ class TaskCardEODatatables extends Controller
                 'title'     => true,
                 'work_area'     => true,
                 'estimation_manhour'     => true,
+                'uuid'     => true,
                 'Actions'      => true,
                 ];
 
@@ -375,6 +376,7 @@ class TaskCardEODatatables extends Controller
                 'title'     => true,
                 'work_area'     => true,
                 'estimation_manhour'     => true,
+                'uuid'     => true,
                 'Actions'      => true,
                 ];
 
