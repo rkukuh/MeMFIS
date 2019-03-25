@@ -676,67 +676,58 @@ let TaskCard = {
 
         $('.footer').on('click', '.edit-taskcard', function () {
             // taskcard_reset();
-            let title = $('input[name=title]').val();
-            let number = $('input[name=number]').val();
-            let otr_certification = $('#otr_certification').val();
-            let applicability_airplane = $('#applicability_airplane').val();
-            let work_area = $('#work_area').val();
-            let manhour = $('input[name=manhour]').val();
-            let performa = $('input[name=performa]').val();
-            let helper_quantity = $('input[name=helper_quantity]').val();
-            let instruction = $('#instruction').val();
-
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
-                if( $(this).val()){
                 threshold_type[i] = $(this).val();
-                }
             });
+            threshold_type = threshold_type.filter(Boolean);
+
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
-                if( $(this).val()){
                 repeat_type[i] = $(this).val();
-                }
             });
+            repeat_type = repeat_type.filter(Boolean);
+
             let threshold_amount = [];
             $('input[name^="threshold_amount"]').each(function(i) {
-                if( $(this).val()){
                 threshold_amount[i] = $(this).val();
-                }
             });
+            threshold_amount = threshold_amount.filter(Boolean);
+
             let repeat_amount = [];
             $('input[name^="repeat_amount"]').each(function(i) {
-                if( $(this).val()){
                 repeat_amount[i] = $(this).val();
-                }
             });
+            repeat_amount = repeat_amount.filter(Boolean);
 
+            var data = new FormData();
+            data.append( "title", $('input[name=title]').val());
+            data.append( "number", $('input[name=number]').val());
+            data.append( "estimation_manhour", $('input[name=manhour]').val());
+            data.append( "performance_factor", $('input[name=performa]').val());
+            data.append( "helper_quantity", $('input[name=helper_quantity]').val());
+            data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
+            data.append( "description", $('#instruction').val());
+            data.append( "work_area", $('#work_area').val());
+            data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
+            data.append( "skill_id", $('#otr_certification').val());
+            data.append( "threshold_type", JSON.stringify(threshold_type));
+            data.append( "repeat_type", JSON.stringify(repeat_type));
+            data.append( "threshold_amount", JSON.stringify(threshold_amount));
+            data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "fileInput", document.getElementById('taskcard').files[0]);
+            data.append('_method', 'PUT');
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'put',
+                type: 'POST',
                 url: '/taskcard-si/' + taskcard_uuid + '/',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    title: title,
-                    type_id: '89',
-                    number: number,
-                    work_area: work_area,
-                    estimation_manhour: manhour,
-                    performance_factor: performa,
-                    helper_quantity: helper_quantity,
-                    description: instruction,
-
-                    skill_id: otr_certification,
-                    applicability_airplane: applicability_airplane,
-
-                    threshold_amount: threshold_amount,
-                    threshold_type: threshold_type,
-                    repeat_amount: repeat_amount,
-                    repeat_type: repeat_type,
-                },
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.title) {
