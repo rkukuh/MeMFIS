@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend\WorkPackage;
 use App\Models\Aircraft;
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
+use App\Models\TaskCard;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkPackageStore;
 use App\Http\Requests\Frontend\WorkPackageUpdate;
@@ -49,9 +51,22 @@ class WorkPackageController extends Controller
     {
         $workpackage = Workpackage::create($request->all());
 
+        return response()->json($workpackage);
+    }
 
-            return response()->json($workpackage);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addTaskCard(Request $request, WorkPackage $workPackage)
+    {
+        // dd((TaskCard::where('uuid', $request->taskcard)->first())->id);
+        // $taskcard = TaskCard::where('uuid', $request->taskcard)->first();
+        $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
 
+        return response()->json($workPackage);
     }
 
     /**
