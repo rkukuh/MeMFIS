@@ -53,5 +53,24 @@ class TypesOfTaskCardSkill extends Seeder
             'name' => 'Run-Up',
             'of'   => 'taskcard-skill',
         ]);
+
+        Type::create([
+            'code' => 'repair',
+            'name' => 'Repair',
+            'of'   => 'taskcard-skill',
+        ]);
+
+        Type::create([
+            'code' => 'repainting',
+            'name' => 'Repainting',
+            'of'   => 'taskcard-skill',
+        ]);
+
+        //Non Destructive Test / Non Destructive Inspection
+        Type::create([
+            'code' => 'ndi/ndt',
+            'name' => 'NDI/NDT',
+            'of'   => 'taskcard-skill',
+        ]);
     }
 }
