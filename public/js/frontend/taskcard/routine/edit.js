@@ -716,21 +716,25 @@ let TaskCard = {
             $('select[name^="threshold_type"]').each(function(i) {
                 threshold_type[i] = $(this).val();
             });
+            threshold_type = threshold_type.filter(Boolean);
 
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
                 repeat_type[i] = $(this).val();
             });
+            repeat_type = repeat_type.filter(Boolean);
 
             let threshold_amount = [];
             $('input[name^="threshold_amount"]').each(function(i) {
                 threshold_amount[i] = $(this).val();
             });
+            threshold_amount = threshold_amount.filter(Boolean);
 
             let repeat_amount = [];
             $('input[name^="repeat_amount"]').each(function(i) {
                 repeat_amount[i] = $(this).val();
             });
+            repeat_amount = repeat_amount.filter(Boolean);
 
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;

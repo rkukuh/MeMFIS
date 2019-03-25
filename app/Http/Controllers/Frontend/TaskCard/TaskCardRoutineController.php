@@ -264,11 +264,19 @@ class TaskCardRoutineController extends Controller
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
         $this->decoder($request);
-
+        $request->threshold_type = array_filter($request->threshold_type);
+        $request->repeat_type = array_filter($request->repeat_type);
+        $request->threshold_type = array_values($request->threshold_type);
+        $request->repeat_type = array_values($request->repeat_type);
+        // $temp = "";
+        // foreach ($request->threshold_type as $key => $value) {
+        //     $temp .= " test ".$value;
+        // }
+        // dd($request->threshold_type);
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             
-            if($request->access){
+            if(is_array($request->access)){
                 foreach ($request->access as $access_name ) {
                     foreach ($request->applicability_airplane as $airplane) {
                         if(isset($access_name)){
@@ -284,7 +292,7 @@ class TaskCardRoutineController extends Controller
 
             }
 
-            if($request->zone){
+            if(is_array($request->zone)){
                 foreach ($request->zone as $zone_name ) {
                     foreach ($request->applicability_airplane as $airplane) {
                         if(isset($zone_name)){
@@ -300,11 +308,13 @@ class TaskCardRoutineController extends Controller
 
             }
 
-            if(!$taskCard->related_to->isEmpty())$taskCard->related_to()->attach($request->relationship);
-
-            $taskCard->related_to()->sync($request->relationship);
+            if(is_array($taskCard->related_to) ) {
+                $taskCard->related_to()->sync($request->relationship);
+            }
+            
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats) $taskCard->repeats()->delete();
+
             if(is_array($request->threshold_amount)){
                 for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
                     if($request->threshold_type[$i] !== "Select Threshold"){
