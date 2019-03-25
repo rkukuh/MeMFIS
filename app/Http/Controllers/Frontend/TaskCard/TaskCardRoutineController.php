@@ -264,15 +264,6 @@ class TaskCardRoutineController extends Controller
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
         $this->decoder($request);
-        $request->threshold_type = array_filter($request->threshold_type);
-        $request->repeat_type = array_filter($request->repeat_type);
-        $request->threshold_type = array_values($request->threshold_type);
-        $request->repeat_type = array_values($request->repeat_type);
-        // $temp = "";
-        // foreach ($request->threshold_type as $key => $value) {
-        //     $temp .= " test ".$value;
-        // }
-        // dd($request->threshold_type);
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             
