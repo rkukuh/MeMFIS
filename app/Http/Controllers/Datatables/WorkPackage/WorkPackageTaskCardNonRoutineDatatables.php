@@ -16,7 +16,11 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function ad_sb(WorkPackage $workPackage)
     {
-        $data = $alldata = json_decode($workPackage->taskcards()->get());
+        $workPackages = $workPackage->taskcards()->with('type')
+                                    ->whereHas('type', function ($query) {
+                                        $query->where('code', 'ad')->orWhere('code','sb');
+                                    })->get();
+        $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -113,7 +117,11 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function cmr_awl(WorkPackage $workPackage)
     {
-        $data = $alldata = json_decode($workPackage->taskcards()->get());
+        $workPackages = $workPackage->taskcards()->with('type')
+                                    ->whereHas('type', function ($query) {
+                                        $query->where('code', 'cmr')->orWhere('code','awl');
+                                    })->get();
+        $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -210,7 +218,11 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function si(WorkPackage $workPackage)
     {
-        $data = $alldata = json_decode($workPackage->taskcards()->get());
+        $workPackages = $workPackage->taskcards()->with('type')
+                                    ->whereHas('type', function ($query) {
+                                        $query->where('code', 'si');
+                                    })->get();
+        $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

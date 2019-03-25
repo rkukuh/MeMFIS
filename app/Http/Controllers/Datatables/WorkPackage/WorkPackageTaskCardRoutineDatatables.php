@@ -16,7 +16,11 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function basic(WorkPackage $workPackage)
     {
-        $data = $alldata = json_decode($workPackage->taskcards()->get());
+        $workPackages = $workPackage->taskcards()->with('type')
+                                    ->whereHas('type', function ($query) {
+                                        $query->where('name', 'Basic');
+                                    })->get();
+        $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -113,7 +117,11 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function sip(WorkPackage $workPackage)
     {
-        $data = $alldata = json_decode($workPackage->taskcards()->get());
+        $workPackages = $workPackage->taskcards()->with('type')
+                                    ->whereHas('type', function ($query) {
+                                        $query->where('name', 'SIP');
+                                    })->get();
+        $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -210,7 +218,11 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function cpcp(WorkPackage $workPackage)
     {
-        $data = $alldata = json_decode($workPackage->taskcards()->get());
+        $workPackages = $workPackage->taskcards()->with('type')
+                                    ->whereHas('type', function ($query) {
+                                        $query->where('name', 'CPCP');
+                                    })->get();
+        $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
