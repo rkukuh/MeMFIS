@@ -125,10 +125,8 @@ let TaskCard = {
                 contentType: false,
                 url: '/taskcard-routine',
                 data: data,
-                contentType: false,
                 cache: false,
-                processData:false,
-                
+
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.title) {
@@ -162,7 +160,7 @@ let TaskCard = {
                         if (data.errors.performance_factor) {
                             $('#performa-error').html(data.errors.performance_factor[0]);
                         }
-                       
+
 
                         document.getElementById('title').value = data.getAll('title');
                         document.getElementById('number').value = data.getAll('number');
@@ -194,7 +192,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/taskcard-routine/' + data.uuid + '/edit';
+                        window.location.href = '/taskcard-routine/' + data.uuid + '/edit';
                     }
                 }
             });
