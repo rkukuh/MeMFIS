@@ -6,7 +6,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/ad-sb/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,49 +43,49 @@ let NonRoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'id',
+                    field: 'number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'quotation',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'task',
-                    title: 'Task',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'customer',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'statu',
-                    title: 'Material',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'stat',
-                    title: 'Tools',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'stat2',
-                    title: 'Sequence',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
-                    }
-                },
+                // {
+                //     field: 'task',
+                //     title: 'Task',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'customer',
+                //     title: 'Description',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'statu',
+                //     title: 'Material',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'stat',
+                //     title: 'Tools',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'stat2',
+                //     title: 'Sequence',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                //     template: function (t) {
+                //         return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                //     }
+                // },
                 {
                     field: 'stat3',
                     title: 'Predecessor',
@@ -104,12 +104,12 @@ let NonRoutineWorkpackage = {
                         return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
                     }
                 },
-                {
-                    field: 'stat5',
-                    title: 'Mandatory/Critical TC',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
+                // {
+                //     field: 'stat5',
+                //     title: 'Mandatory/Critical TC',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
                 {
                     field: 'Actions',
                     sortable: !1,
@@ -130,7 +130,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/cmr-awl/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -167,49 +167,49 @@ let NonRoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'id',
+                    field: 'number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'quotation',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'task',
-                    title: 'Task',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'customer',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'statu',
-                    title: 'Material',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'stat',
-                    title: 'Tools',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'stat',
-                    title: 'Sequence',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
-                    }
-                },
+                // {
+                //     field: 'task',
+                //     title: 'Task',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'customer',
+                //     title: 'Description',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'statu',
+                //     title: 'Material',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'stat',
+                //     title: 'Tools',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'stat',
+                //     title: 'Sequence',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                //     template: function (t) {
+                //         return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                //     }
+                // },
                 {
                     field: 'stat2',
                     title: 'Predecessor',
@@ -228,12 +228,12 @@ let NonRoutineWorkpackage = {
                         return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
                     }
                 },
-                {
-                    field: 'stat4',
-                    title: 'Mandatory/Critical TC',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
+                // {
+                //     field: 'stat4',
+                //     title: 'Mandatory/Critical TC',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
                 {
                     field: 'Actions',
                     sortable: !1,
@@ -254,7 +254,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/si/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -291,49 +291,49 @@ let NonRoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'id',
+                    field: 'number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'quotation',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'task',
-                    title: 'Task',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'customer',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'statu',
-                    title: 'Material',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'stat',
-                    title: 'Tools',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'stat2',
-                    title: 'Sequence',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
-                    }
-                },
+                // {
+                //     field: 'task',
+                //     title: 'Task',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'customer',
+                //     title: 'Description',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'statu',
+                //     title: 'Material',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'stat',
+                //     title: 'Tools',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
+                // {
+                //     field: 'stat2',
+                //     title: 'Sequence',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                //     template: function (t) {
+                //         return '<input type="number" id="sequence" name="sequence" class="form-control m-input">'
+                //     }
+                // },
                 {
                     field: 'stat3',
                     title: 'Predecessor',
@@ -352,12 +352,12 @@ let NonRoutineWorkpackage = {
                         return '<button type="button" id="sucessor" name="sucessor" class="form-control m-input" data-toggle="modal" data-target="#modal_basic">Add</button>'
                     }
                 },
-                {
-                    field: 'stat5',
-                    title: 'Mandatory/Critical TC',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
+                // {
+                //     field: 'stat5',
+                //     title: 'Mandatory/Critical TC',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
                 {
                     field: 'Actions',
                     sortable: !1,
