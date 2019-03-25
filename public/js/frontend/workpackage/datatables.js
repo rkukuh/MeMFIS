@@ -30,7 +30,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-basic" title="View" data-uuid="' + t.uuid + '"  data-name="' + t.title + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -221,15 +221,49 @@ let Datatables = {
             $('#si_datatable').DataTable().ajax.reload();
         });
 
-        $('.dataTable').on('click', '.select-account_code', function () {
-            let uuid = $(this).data('uuid');
-            let code = $(this).data('code');
-            let name = $(this).data('name');
+        $('#basic_datatable').on('click', '.select-basic', function () {
+            // alert($(this).data('uuid'));
+            // alert($(this).data('name'));
 
-            document.getElementById('account_code').value = uuid;
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
 
-            $('.search-journal').html(code + " - " + name);
-            $('#modal_account_code').modal('hide');
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_basic').modal('hide');
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('#basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+            // let uuid = $(this).data('uuid');
+            // let code = $(this).data('code');
+            // let name = $(this).data('name');
+
+            // document.getElementById('account_code').value = uuid;
+
+            // $('.search-journal').html(code + " - " + name);
+            // $('#modal_account_code').modal('hide');
         });
     }
 };
