@@ -263,7 +263,6 @@ class TaskCardRoutineController extends Controller
      */
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
-        // dd($request->all());
         // $this->decoder($request);
         $accesses = [];
         $zones = [];
