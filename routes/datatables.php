@@ -390,6 +390,13 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'WorkPackageDatatables@index')->name('all');
+                Route::get('/{workPackage}/basic', 'WorkPackageTaskCardRoutineDatatables@basic')->name('basic.index');
+                Route::get('/{workPackage}/sip', 'WorkPackageTaskCardRoutineDatatables@sip')->name('sip.index');
+                Route::get('/{workPackage}/cpcp', 'WorkPackageTaskCardRoutineDatatables@cpcp')->name('cpcp.index');
+                Route::get('/{workPackage}/ad-sb', 'WorkPackageTaskCardNonRoutineDatatables@ad_sb')->name('ad-sb.index');
+                Route::get('/{workPackage}/cmr-awl', 'WorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
+                Route::get('/{workPackage}/si', 'WorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
+
 
             });
 
