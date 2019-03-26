@@ -222,9 +222,6 @@ let Datatables = {
         });
 
         $('#basic_datatable').on('click', '.select-basic', function () {
-            // alert($(this).data('uuid'));
-            // alert($(this).data('name'));
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -249,21 +246,115 @@ let Datatables = {
                             timeOut: 5000
                         });
 
-                        let table = $('#basic_datatable').mDatatable();
+                        let table = $('.basic_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-            // let uuid = $(this).data('uuid');
-            // let code = $(this).data('code');
-            // let name = $(this).data('name');
+        });
 
-            // document.getElementById('account_code').value = uuid;
+        $('#sip_datatable').on('click', '.select-sip', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
 
-            // $('.search-journal').html(code + " - " + name);
-            // $('#modal_account_code').modal('hide');
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_sip').modal('hide');
+
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.sip_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#adsb_datatable').on('click', '.select-adsb', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_adsb').modal('hide');
+
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.adsb_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#cpcp_datatable').on('click', '.select-cpcp', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_cpcp').modal('hide');
+
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cpcp_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
         });
     }
 };
