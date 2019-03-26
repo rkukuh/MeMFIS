@@ -158,6 +158,13 @@
                                                     @include('frontend.workpackage.item.index')
                                                 </div>
                                             </div>
+
+                                            @include('frontend.workpackage.modal.material.eo')
+                                            @include('frontend.workpackage.modal.tool.eo')
+                                            @include('frontend.workpackage.modal.material.routine-si')
+                                            @include('frontend.workpackage.modal.tool.routine-si')
+                                            @include('frontend.workpackage.modal.sequence')
+                                            
                                         </div>
                                     </div>
                                 </div>
