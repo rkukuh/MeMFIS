@@ -81,7 +81,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: '1',
+                    field: 'material',
                     title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
@@ -95,7 +95,7 @@ let NonRoutineWorkpackage = {
 
                 },
                 {
-                    field: '2',
+                    field: 'tool',
                     title: 'Tool',
                     sortable: 'asc',
                     filterable: !1,
@@ -108,7 +108,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: '3',
+                    field: 'sequence',
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
@@ -121,7 +121,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat3',
+                    field: 'predecessor',
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
@@ -130,7 +130,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat4',
+                    field: 'successor',
                     title: 'Successor',
                     sortable: 'asc',
                     filterable: !1,
@@ -139,7 +139,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat5',
+                    field: 'mandatory',
                     title: 'Mandatory',
                     sortable: 'asc',
                     filterable: !1,
@@ -154,12 +154,6 @@ let NonRoutineWorkpackage = {
                         );
                     }
                 },
-                // {
-                //     field: 'stat5',
-                //     title: 'Mandatory/Critical TC',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                // },
                 {
                     field: 'Actions',
                     sortable: !1,
@@ -250,7 +244,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: '1',
+                    field: 'material',
                     title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
@@ -264,7 +258,7 @@ let NonRoutineWorkpackage = {
 
                 },
                 {
-                    field: '2',
+                    field: 'tool',
                     title: 'Tool',
                     sortable: 'asc',
                     filterable: !1,
@@ -277,7 +271,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: '3',
+                    field: 'sequence',
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
@@ -290,7 +284,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat3',
+                    field: 'predecessor',
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
@@ -299,7 +293,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat4',
+                    field: 'successor',
                     title: 'Successor',
                     sortable: 'asc',
                     filterable: !1,
@@ -308,7 +302,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat5',
+                    field: 'mandatory',
                     title: 'Mandatory',
                     sortable: 'asc',
                     filterable: !1,
@@ -323,12 +317,6 @@ let NonRoutineWorkpackage = {
                         );
                     }
                 },
-                // {
-                //     field: 'stat4',
-                //     title: 'Mandatory/Critical TC',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                // },
                 {
                     field: 'Actions',
                     sortable: !1,
@@ -419,7 +407,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: '1',
+                    field: 'material',
                     title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
@@ -433,7 +421,7 @@ let NonRoutineWorkpackage = {
 
                 },
                 {
-                    field: '2',
+                    field: 'tool',
                     title: 'Tool',
                     sortable: 'asc',
                     filterable: !1,
@@ -446,7 +434,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: '3',
+                    field: 'sequence',
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
@@ -459,7 +447,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat3',
+                    field: 'predecessor',
                     title: 'Predecessor',
                     sortable: 'asc',
                     filterable: !1,
@@ -468,7 +456,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat4',
+                    field: 'successor',
                     title: 'Successor',
                     sortable: 'asc',
                     filterable: !1,
@@ -477,7 +465,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'stat5',
+                    field: 'mandatory',
                     title: 'Mandatory',
                     sortable: 'asc',
                     filterable: !1,
@@ -492,12 +480,6 @@ let NonRoutineWorkpackage = {
                         );
                     }
                 },
-                // {
-                //     field: 'stat5',
-                //     title: 'Mandatory/Critical TC',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                // },
                 {
                     field: 'Actions',
                     sortable: !1,
