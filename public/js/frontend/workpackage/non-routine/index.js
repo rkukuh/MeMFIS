@@ -131,11 +131,11 @@ let NonRoutineWorkpackage = {
                 },
                 {
                     field: 'stat4',
-                    title: 'Sucessor',
+                    title: 'Successor',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="sucessor" name="sucessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_basic"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_basic"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -300,11 +300,11 @@ let NonRoutineWorkpackage = {
                 },
                 {
                     field: 'stat4',
-                    title: 'Sucessor',
+                    title: 'Successor',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="sucessor" name="sucessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_basic"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_basic"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -469,11 +469,11 @@ let NonRoutineWorkpackage = {
                 },
                 {
                     field: 'stat4',
-                    title: 'Sucessor',
+                    title: 'Successor',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="sucessor" name="sucessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_basic"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_basic"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
