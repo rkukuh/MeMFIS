@@ -16,10 +16,11 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function basic(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
+        $workPackages = $workPackage->taskcards()->with('type','task')
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'Basic');
-                                    })->get();
+                                    })
+                                    ->get();
         $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
