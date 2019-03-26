@@ -5,9 +5,9 @@ let Workpackage3 = {
         //     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         // };
 
-        $('.unit_id').on('select2:select', function (e) {
-            alert('tes');
-          });
+        // $('.unit_id').on('select2:select', function (e) {
+        //     alert('tes');
+        //   });
 
 
 
@@ -81,51 +81,51 @@ let Workpackage3 = {
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        $(document).ready(function () {
-                            units = function () {
-                                $.ajax({
-                                    url: '/get-units/',
-                                    type: 'GET',
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        $('select[name="unit_id"]').empty();
+                    // template: function (t) {
+                    //     $(document).ready(function () {
+                    //         units = function () {
+                    //             $.ajax({
+                    //                 url: '/get-units/',
+                    //                 type: 'GET',
+                    //                 dataType: 'json',
+                    //                 success: function (data) {
+                    //                     $('select[name="unit_id"]').empty();
 
-                                        $('select[name="unit_id"]').append(
-                                            '<option value=""> Select a Unit</option>'
-                                        );
+                    //                     $('select[name="unit_id"]').append(
+                    //                         '<option value=""> Select a Unit</option>'
+                    //                     );
 
-                                        $.each(data, function (key, value) {
-                                            if(key == 4){
-                                                $('select[name="unit_id"]').append(
-                                                    '<option value="' + key + '" selected>' + value + '</option>'
-                                                );
-                                            }else{
-                                                $('select[name="unit_id"]').append(
-                                                    '<option value="' + key + '" >' + value + '</option>'
-                                                );
-                                            }
-                                        });
-                                    }
-                                });
-                            };
+                    //                     $.each(data, function (key, value) {
+                    //                         if(key == 4){
+                    //                             $('select[name="unit_id"]').append(
+                    //                                 '<option value="' + key + '" selected>' + value + '</option>'
+                    //                             );
+                    //                         }else{
+                    //                             $('select[name="unit_id"]').append(
+                    //                                 '<option value="' + key + '" >' + value + '</option>'
+                    //                             );
+                    //                         }
+                    //                     });
+                    //                 }
+                    //             });
+                    //         };
 
-                            units();
-                        });
-                        return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
-                            '<option value="">'+
-                                'Select Unit'+
-                            // '</option>'+
-                            // '<option value="2">'+
-                            //     'Select Unit2'+
-                            // '</option>'+
-                            // '<option value="3">'+
-                            //     'Select Unit3'+
-                            // '</option>'+
+                    //         units();
+                    //     });
+                    //     return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
+                    //         '<option value="">'+
+                    //             'Select Unit'+
+                    //         // '</option>'+
+                    //         // '<option value="2">'+
+                    //         //     'Select Unit2'+
+                    //         // '</option>'+
+                    //         // '<option value="3">'+
+                    //         //     'Select Unit3'+
+                    //         // '</option>'+
 
-                        '</select>'
+                    //     '</select>'
 
-                    }
+                    // }
                 },
                 {
                     field: 'stat',
@@ -219,51 +219,51 @@ let Workpackage3 = {
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        $(document).ready(function () {
-                            units = function () {
-                                $.ajax({
-                                    url: '/get-units/',
-                                    type: 'GET',
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        $('select[name="unit_id"]').empty();
+                    // template: function (t) {
+                    //     $(document).ready(function () {
+                    //         units = function () {
+                    //             $.ajax({
+                    //                 url: '/get-units/',
+                    //                 type: 'GET',
+                    //                 dataType: 'json',
+                    //                 success: function (data) {
+                    //                     $('select[name="unit_id"]').empty();
 
-                                        $('select[name="unit_id"]').append(
-                                            '<option value=""> Select a Unit</option>'
-                                        );
+                    //                     $('select[name="unit_id"]').append(
+                    //                         '<option value=""> Select a Unit</option>'
+                    //                     );
 
-                                        $.each(data, function (key, value) {
-                                            if(key == 4){
-                                                $('select[name="unit_id"]').append(
-                                                    '<option value="' + key + '" selected>' + value + '</option>'
-                                                );
-                                            }else{
-                                                $('select[name="unit_id"]').append(
-                                                    '<option value="' + key + '" >' + value + '</option>'
-                                                );
-                                            }
-                                        });
-                                    }
-                                });
-                            };
+                    //                     $.each(data, function (key, value) {
+                    //                         if(key == 4){
+                    //                             $('select[name="unit_id"]').append(
+                    //                                 '<option value="' + key + '" selected>' + value + '</option>'
+                    //                             );
+                    //                         }else{
+                    //                             $('select[name="unit_id"]').append(
+                    //                                 '<option value="' + key + '" >' + value + '</option>'
+                    //                             );
+                    //                         }
+                    //                     });
+                    //                 }
+                    //             });
+                    //         };
 
-                            units();
-                        });
-                        return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
-                            '<option value="">'+
-                                'Select Unit'+
-                            // '</option>'+
-                            // '<option value="2">'+
-                            //     'Select Unit2'+
-                            // '</option>'+
-                            // '<option value="3">'+
-                            //     'Select Unit3'+
-                            // '</option>'+
+                    //         units();
+                    //     });
+                    //     return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
+                    //         '<option value="">'+
+                    //             'Select Unit'+
+                    //         // '</option>'+
+                    //         // '<option value="2">'+
+                    //         //     'Select Unit2'+
+                    //         // '</option>'+
+                    //         // '<option value="3">'+
+                    //         //     'Select Unit3'+
+                    //         // '</option>'+
 
-                        '</select>'
+                    //     '</select>'
 
-                    }
+                    // }
                 },
                 {
                     field: 'stat',
