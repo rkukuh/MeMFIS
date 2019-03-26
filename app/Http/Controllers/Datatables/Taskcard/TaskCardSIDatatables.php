@@ -215,7 +215,7 @@ class TaskCardSIDatatables extends Controller
             // get all raw data
             $taskcards  = TaskCard::with('type')
             ->whereHas('type', function ($query) {
-                $query->where('name', 'SI');
+                $query->where('code', 'si');
             })->get();
 
             $alldata = json_decode( $taskcards, true);
