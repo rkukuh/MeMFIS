@@ -162,7 +162,6 @@ let TaskCard = {
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
             data.append( "category_id", $('#category').val());
-
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
 
             $.ajax({
@@ -172,9 +171,8 @@ let TaskCard = {
                 type: 'post',
                 processData: false,
                 contentType: false,
-                data: data,
-                contentType: false,
                 cache: false,
+                data: data,
                 url: '/taskcard-eo',
 
                 //     // scheduled_priority_amount: prior_to_hour,

@@ -121,11 +121,11 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                processData: false,
-                contentType: false,
                 url: '/taskcard-routine',
                 data: data,
                 cache: false,
+                processData: false,
+                contentType: false,
 
                 success: function (response) {
                     if (response.errors) {

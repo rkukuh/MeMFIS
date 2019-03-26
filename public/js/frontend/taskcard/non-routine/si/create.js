@@ -75,6 +75,7 @@ let TaskCard = {
                         type: 'post',
                         processData: false,
                         contentType: false,
+                        cache: false,
                         url: '/taskcard-si',
                         data: data,
                         success: function (response) {

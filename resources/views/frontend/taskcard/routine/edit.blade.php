@@ -751,7 +751,6 @@
         $(document).ready(function () {
           var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
           var counterRepeats = {!! sizeof($taskcard->repeats) !!};
-          console.log("Repeats count : "+counterRepeats);
           var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
           $("#addrow").on("click", function () {
               var x = 1;
@@ -781,7 +780,6 @@
               }
           });
           $("#addrow2").on("click", function () {
-                console.log("Repeats count : "+counterRepeats);
                 var x = 1;
                 var newRow = $("<tr>");
                 var cols = "";
@@ -801,7 +799,6 @@
                 $("table.repeat").append(newRow);
                 $('.select').select2();
                 counterRepeats++;
-                console.log("Repeats count : "+counterRepeats);
             });
             $("table.repeat").on("click", ".ibtnDel", function (event) {
                 console.log("Repeats count : "+counterRepeats);
@@ -809,7 +806,6 @@
                     $(this).closest("tr").remove();
                     counterRepeats -= 1
                 }
-                console.log("Repeats count : "+counterRepeats);
             });
         });
     </script>
