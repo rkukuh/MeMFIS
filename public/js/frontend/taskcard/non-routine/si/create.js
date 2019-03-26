@@ -123,7 +123,7 @@ let TaskCard = {
                                     timeOut: 5000
                                 });
 
-                                window.location.href = '/taskcard-si/'+data.uuid+'/edit';
+                                window.location.href = '/taskcard-si/'+response.uuid+'/edit';
                             }
                         }
                     });

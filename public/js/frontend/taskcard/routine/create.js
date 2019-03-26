@@ -141,7 +141,7 @@ let TaskCard = {
                             $('#taskcard_routine_type-error').html(response.errors.type_id[0]);
                         }
 
-                        if (response.errors.skill_id) { 
+                        if (response.errors.skill_id) {
                             $('#otr-certification-error').html(response.errors.skill_id[0]);
                         }
 
@@ -193,7 +193,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard-routine/' + data.uuid + '/edit';
+                        window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
                     }
                 }
             });

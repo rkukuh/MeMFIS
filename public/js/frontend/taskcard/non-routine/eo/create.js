@@ -102,7 +102,7 @@ let TaskCard = {
 
             // let recurrence = $('input[name=recurrence]').val();
             // let recurrence_select = $('#recurrence-select').val();
-            
+
             // let note = $('#note').val();
 
             let applicability_airplane = [];
@@ -239,7 +239,7 @@ let TaskCard = {
                         if (response.errors.taskcard_non_routine_type) {
                             $('#taskcard_non_routine_type-error').html(response.errors.taskcard_non_routine_type[0]);
                         }
-                        
+
                         if (response.errors.category) {
                             $('#category-error').html(response.errors.category[0]);
                         }
@@ -273,7 +273,7 @@ let TaskCard = {
                         document.getElementById('manual_affected_id').value = manual_affected_id;
                         document.getElementById('description').value = data.getAll('description');
 
-                        
+
 
                     } else {
                         //    taskcard_reset();
@@ -283,7 +283,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/taskcard-eo/'+data.uuid+'/edit';
+                        window.location.href = '/taskcard-eo/'+response.uuid+'/edit';
                     }
                 }
             });
