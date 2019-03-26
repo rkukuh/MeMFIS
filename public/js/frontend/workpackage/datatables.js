@@ -30,7 +30,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-basic" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -66,7 +66,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-sip" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -102,7 +102,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cpcp" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -132,7 +132,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-adsb" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -162,7 +162,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cmrawl" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -198,7 +198,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-si" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -221,15 +221,208 @@ let Datatables = {
             $('#si_datatable').DataTable().ajax.reload();
         });
 
-        $('.dataTable').on('click', '.select-account_code', function () {
-            let uuid = $(this).data('uuid');
-            let code = $(this).data('code');
-            let name = $(this).data('name');
+        $('#basic_datatable').on('click', '.select-basic', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
 
-            document.getElementById('account_code').value = uuid;
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_basic').modal('hide');
 
-            $('.search-journal').html(code + " - " + name);
-            $('#modal_account_code').modal('hide');
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#sip_datatable').on('click', '.select-sip', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_sip').modal('hide');
+
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.sip_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#cpcp_datatable').on('click', '.select-cpcp', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_cpcp').modal('hide');
+
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cpcp_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#adsb_datatable').on('click', '.select-adsb', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_ad_sb').modal('hide');
+
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.ad-sb_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#si_datatable').on('click', '.select-si', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_si').modal('hide');
+
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.si_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#cmrawl_datatable').on('click', '.select-cmrawl', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/' + workPackage_uuid +'/taskcard/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_cmr_awl').modal('hide');
+
+                        toastr.success('Workpackage has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cmr-awl_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
         });
     }
 };

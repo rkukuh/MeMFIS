@@ -172,6 +172,13 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+    $(document).ready(function () {
+        $(':input[type="button"]').prop('disabled', true);
+        $('#add-workpackage').prop('disabled', false);
+    });
+
+    </script>
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 

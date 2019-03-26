@@ -75,52 +75,55 @@ let TaskCard = {
                         type: 'post',
                         processData: false,
                         contentType: false,
+                        cache: false,
                         url: '/taskcard-si',
                         data: data,
-                        success: function (data) {
-                            if (data.errors) {
-                                if (data.errors.title) {
-                                    $('#title-error').html(data.errors.title[0]);
+                        success: function (response) {
+                            if (response.errors) {
+                                if (response.errors.title) {
+                                    $('#title-error').html(response.errors.title[0]);
                                 }
 
-                                if (data.errors.number) {
-                                    $('#number-error').html(data.errors.number[0]);
+                                if (response.errors.number) {
+                                    $('#number-error').html(response.errors.number[0]);
                                 }
 
-                                if (data.errors.skill_id) {
-                                    $('#otr-certification-error').html(data.errors.skill_id[0]);
+                                if (response.errors.skill_id) {
+                                    $('#otr-certification-error').html(response.errors.skill_id[0]);
                                 }
 
-                                if (data.errors.applicability_airplane) {
-                                    $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                                if (response.errors.applicability_airplane) {
+                                    $('#applicability-airplane-error').html(response.errors.applicability_airplane[0]);
                                 }
 
-                                if (data.errors.manhour) {
-                                    $('#manhour-error').html(data.errors.manhour[0]);
+                                if (response.errors.manhour) {
+                                    $('#manhour-error').html(response.errors.manhour[0]);
                                 }
 
-                                if (data.errors.description) {
-                                    $('#instruction-error').html(data.errors.description[0]);
+                                if (response.errors.description) {
+                                    $('#instruction-error').html(response.errors.description[0]);
                                 }
 
 
-                                document.getElementById('title').value = title;
-                                document.getElementById('number').value = number;
+                                document.getElementById('title').value = data.getAll('title');
+                                document.getElementById('number').value = data.getAll('number');
                                 document.getElementById('otr_certification').value = otr_certification;
                                 document.getElementById('applicability_airplane').value = applicability_airplane;
                                 $('#applicability_airplane').select2('val', 'All');
                                 document.getElementById('work_area').value = work_area;
                                 $('#work_area').select2('val', 'All');
-                                document.getElementById('manhour').value = manhour;
-                                document.getElementById('helper_quantity').value = helper_quantity;
-                                document.getElementById('instruction').value = instruction;
+                                document.getElementById('manhour').value = data.getAll('manhour');
+                                document.getElementById('performa').value = data.getAll('performa');
+                                document.getElementById('helper_quantity').value = data.getAll('helper_quantity');
+                                document.getElementById('engineer_quantity').value = data.getAll('engineer_quantity');
+                                document.getElementById('instruction').value = data.getAll('instruction');
 
                             } else {
                                 toastr.success('Taskcard has been created.', 'Success', {
                                     timeOut: 5000
                                 });
 
-                                window.location.href = '/taskcard-si/'+data.uuid+'/edit';
+                                window.location.href = '/taskcard-si/'+response.uuid+'/edit';
                             }
                         }
                     });

@@ -89,7 +89,7 @@ let Workpackage2 = {
                         class: 'm-checkbox--solid m-checkbox--brand'
                     }
                 },
-              
+
             ]
         });
 
@@ -97,7 +97,7 @@ let Workpackage2 = {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
-            
+
             let title = $('input[name=title]').val();
             let applicability_airplane = $('#applicability_airplane').val();
             let description = $('#description').val();
@@ -134,6 +134,7 @@ let Workpackage2 = {
                             timeOut: 5000
                         });
 
+                        window.location.href = '/workpackage/'+data.uuid+'/edit';
                         // let table = $('.m_datatable').mDatatable();
 
                         // table.originalDataSet = [];

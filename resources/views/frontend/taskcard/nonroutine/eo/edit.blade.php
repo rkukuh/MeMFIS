@@ -668,16 +668,18 @@
 
 @push('footer-scripts')
     <script>
-        var autoExpand = function (field) {
+        let taskcard_uuid = '{{$taskCard->uuid}}';
+
+        let autoExpand = function (field) {
 
         // Reset field height
         field.style.height = 'inherit';
 
         // Get the computed styles for the element
-        var computed = window.getComputedStyle(field);
+        let computed = window.getComputedStyle(field);
 
         // Calculate the height
-        var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+        let height = parseInt(computed.getPropertyValue('border-top-width'), 10)
                     + parseInt(computed.getPropertyValue('padding-top'), 10)
                     + field.scrollHeight
                     + parseInt(computed.getPropertyValue('padding-bottom'), 10)
@@ -692,20 +694,21 @@
         autoExpand(event.target);
         }, false);
         $(document).ready(function () {
-          $(".js-example-tags").select2();
-          var counterThresholds = {!! sizeof($taskCard->thresholds) !!};
-          var counterRepeats = {!! sizeof($taskCard->repeats) !!};
 
-          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+          $(".js-example-tags").select2();
+          let counterThresholds = {!! sizeof($taskCard->thresholds) !!};
+          let counterRepeats = {!! sizeof($taskCard->repeats) !!};
+
+          let maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
           $("#addrow").on("click", function () {
-              var x = 1;
-              var newRow = $("<tr>");
-              var cols = "";
+              let x = 1;
+              let newRow = $("<tr>");
+              let cols = "";
               x = x+1;
               cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
               cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
               cols += '<option value"">Select Threshold</option>';
-              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+              for (let i = 0; i < (maintenanceCycles.length - 1); i++) {
                   if(maintenanceCycles[i].id == 1){
                   }else{
                   cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
@@ -726,14 +729,14 @@
           });
 
           $("#addrow2").on("click", function () {
-                var x = 1;
-                var newRow = $("<tr>");
-                var cols = "";
+                let x = 1;
+                let newRow = $("<tr>");
+                let cols = "";
                 x = x+1;
                 cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
                 cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
                 cols += '<option value"">Select Repeat</option>';
-                for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                for (let i = 0; i < (maintenanceCycles.length - 1); i++) {
                     if(maintenanceCycles[i].id == 1){
                     }else{
                     cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
@@ -753,20 +756,21 @@
                 }
         });
 
-        var view_scheduled_priority_id = $('select[name="scheduled_priority_id"]').val();
-        var view_recurrence_id = $('select[name="recurrence_id"]').val();
-        var view_manual_affected_id = $('select[name="manual_affected_id"]').val();
+        let view_scheduled_priority_id = $('select[name="scheduled_priority_id"]').val();
+        let view_recurrence_id = $('select[name="recurrence_id"]').val();
+        let view_manual_affected_id = $('select[name="manual_affected_id"]').val();
 
         let rdo_Scheduled = '{{$taskCard->scheduled_priority_type}}';
         let amount_Scheduled = '{{$taskCard->scheduled_priority_amount}}';
 
-        if(view_manual_affected_id == 66){
-            $("#prior_to").removeClass("hidden");
-            $('#prior_to_date').removeAttr("disabled");
-            $('#prior_to_hours').removeAttr("disabled");
-            $('#prior_to_cycle').removeAttr("disabled");
+        // Manuals Affected
+        if(view_manual_affected_id == 67){
+            $("#note_div").removeClass("hidden");
+            $('#note').removeAttr("disabled");
         }
-        if(view_recurrence_id == 69){
+
+        // Recurrence 
+        if(view_recurrence_id == 70){
             $("#recurrence_div").removeClass("hidden");
             $('#recurrence').removeAttr("disabled");
             $('#recurrence-select').removeAttr("disabled");
@@ -790,9 +794,13 @@
 
             }
         }
-        if(view_scheduled_priority_id == 73){
-            $("#note_div").removeClass("hidden");
-            $('#note').removeAttr("disabled");
+
+        // Scheduled Priority * 
+        if(view_scheduled_priority_id == 74){
+            $("#prior_to").removeClass("hidden");
+            $('#prior_to_date').removeAttr("disabled");
+            $('#prior_to_hours').removeAttr("disabled");
+            $('#prior_to_cycle').removeAttr("disabled");
         }
 
 

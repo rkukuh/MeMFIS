@@ -89,9 +89,47 @@ let Workpackage = {
                         class: 'm-checkbox--solid m-checkbox--brand'
                     }
                 },
-              
+
             ]
         });
+        $('.nav-tabs').on('click', '.routine', function () {
+
+            let basic = $('.basic_datatable').mDatatable();
+
+            basic.originalDataSet = [];
+            basic.reload();
+
+            let sip = $('.sip_datatable').mDatatable();
+
+            sip.originalDataSet = [];
+            sip.reload();
+
+            let cpcp = $('.cpcp_datatable').mDatatable();
+
+            cpcp.originalDataSet = [];
+            cpcp.reload();
+        });
+
+        $('.nav-tabs').on('click', '.non-routine', function () {
+
+            let AdSb = $('.ad-sb_datatable').mDatatable();
+
+            AdSb.originalDataSet = [];
+            AdSb.reload();
+
+            let CmrAwl = $('.cmr-awl_datatable').mDatatable();
+
+            CmrAwl.originalDataSet = [];
+            CmrAwl.reload();
+
+            let SI = $('.si_datatable').mDatatable();
+
+            SI.originalDataSet = [];
+            SI.reload();
+
+
+        });
+
         let update = $('.modal-footer').on('click', '.update', function () {
             $('#button').show();
             $('#name-error').html('');

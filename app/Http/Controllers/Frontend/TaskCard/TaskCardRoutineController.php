@@ -264,11 +264,10 @@ class TaskCardRoutineController extends Controller
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
         $this->decoder($request);
-
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             
-            if($request->access){
+            if(is_array($request->access)){
                 foreach ($request->access as $access_name ) {
                     foreach ($request->applicability_airplane as $airplane) {
                         if(isset($access_name)){
@@ -280,11 +279,11 @@ class TaskCardRoutineController extends Controller
                     }
                 }
 
-                $taskcard->accesses()->attach($accesses);
+                $taskCard->accesses()->attach($accesses);
 
             }
 
-            if($request->zone){
+            if(is_array($request->zone)){
                 foreach ($request->zone as $zone_name ) {
                     foreach ($request->applicability_airplane as $airplane) {
                         if(isset($zone_name)){
@@ -300,11 +299,13 @@ class TaskCardRoutineController extends Controller
 
             }
 
-            if(!$taskCard->related_to->isEmpty())$taskCard->related_to()->attach($request->relationship);
-
-            $taskCard->related_to()->sync($request->relationship);
+            if(is_array($taskCard->related_to) ) {
+                $taskCard->related_to()->sync($request->relationship);
+            }
+            
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats) $taskCard->repeats()->delete();
+
             if(is_array($request->threshold_amount)){
                 for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
                     if($request->threshold_type[$i] !== "Select Threshold"){
@@ -359,6 +360,8 @@ class TaskCardRoutineController extends Controller
         $req->repeat_type = json_decode($req->repeat_type);
         $req->threshold_amount = json_decode($req->threshold_amount);
         $req->repeat_amount = json_decode($req->repeat_amount);
+        $req->access = json_decode($req->access);
+        $req->zone = json_decode($req->zone);
 
         return $req;
     }

@@ -375,15 +375,15 @@
                         <div class="m-portlet__body">
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
-                                    <div class="col-xl-8 order-2 order-xl-1">
+                                    <div class="col-xl-5 order-2 order-xl-1">
                                         <div class="form-group m-form__group row align-items-center">
                                             <div class="form-group m-form__group row item-info" style="margin-left:20px">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <h5 class="item-name">
-                                                        {{ $item->name }}
+                                                    <h6 class="item-name">
+                                                        <b>{{ $item->name }}</b>
 
                                                         {{-- <small class="text-muted hidden"> {{ $item->code }}</small> --}}
-                                                    </h5>
+                                                    </h6>
 
                                                     <h6>
                                                         Primary Unit:
@@ -393,7 +393,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                    <div class="col-xl-7 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Unit Conversion')
                                             @slot('id', 'item-uom')
