@@ -36,8 +36,8 @@ let PredecessorDatatables = {
 
             ]
         })
-        $(".refresh").empty();
-        $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload2</span></span> </button>').appendTo('div.dataTables_filter');
+        // $(".refresh").empty();
+        // $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload2</span></span> </button>').appendTo('div.dataTables_filter');
 
     }
 };
