@@ -105,6 +105,7 @@ Route::name('frontend.')->group(function () {
 
                 /** Transaction: Item */
                 Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
+                Route::delete('/{workPackage}/{item}/item/', 'WorkPackageItemsController@destroy')->name('item.workpackage.delete');
 
 
             });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\WorkPackage;
 
 use App\Models\Aircraft;
 use App\Models\ListUtil;
+use App\Models\Item;
 use App\Models\WorkPackage;
 use App\Models\TaskCard;
 use Illuminate\Http\Request;
@@ -102,9 +103,11 @@ class WorkPackageItemsController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WorkPackage $workPackage)
+    public function destroy(WorkPackage $workPackage, Item $item)
     {
-        //
+        $workPackage->items()->detach($item);
+
+        return response()->json($workPackage);
     }
 
 }
