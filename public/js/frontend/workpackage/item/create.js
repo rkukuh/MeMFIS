@@ -1,23 +1,12 @@
 let Workpackage3 = {
     init: function () {
-        // function tes() {
-        //     add = add || '...';
-        //     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
-        // };
-
-        // $('.unit_id').on('select2:select', function (e) {
-        //     alert('tes');
-        //   });
-
-
-
         $('.tools_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -54,81 +43,36 @@ let Workpackage3 = {
                 }
             },
             columns: [{
-                    field: 'id',
+                    field: 'code',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'quotation',
+                    field: 'name',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'customer',
+                    field: 'description',
                     title: 'Tool Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'status',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'pivot.unit_id',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t) {
-                    //     $(document).ready(function () {
-                    //         units = function () {
-                    //             $.ajax({
-                    //                 url: '/get-units/',
-                    //                 type: 'GET',
-                    //                 dataType: 'json',
-                    //                 success: function (data) {
-                    //                     $('select[name="unit_id"]').empty();
-
-                    //                     $('select[name="unit_id"]').append(
-                    //                         '<option value=""> Select a Unit</option>'
-                    //                     );
-
-                    //                     $.each(data, function (key, value) {
-                    //                         if(key == 4){
-                    //                             $('select[name="unit_id"]').append(
-                    //                                 '<option value="' + key + '" selected>' + value + '</option>'
-                    //                             );
-                    //                         }else{
-                    //                             $('select[name="unit_id"]').append(
-                    //                                 '<option value="' + key + '" >' + value + '</option>'
-                    //                             );
-                    //                         }
-                    //                     });
-                    //                 }
-                    //             });
-                    //         };
-
-                    //         units();
-                    //     });
-                    //     return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
-                    //         '<option value="">'+
-                    //             'Select Unit'+
-                    //         // '</option>'+
-                    //         // '<option value="2">'+
-                    //         //     'Select Unit2'+
-                    //         // '</option>'+
-                    //         // '<option value="3">'+
-                    //         //     'Select Unit3'+
-                    //         // '</option>'+
-
-                    //     '</select>'
-
-                    // }
                 },
                 {
-                    field: 'stat',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -155,7 +99,7 @@ let Workpackage3 = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -192,81 +136,37 @@ let Workpackage3 = {
                 }
             },
             columns: [{
-                    field: 'id',
+                    field: 'code',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'quotation',
+                    field: 'name',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'customer',
+                    field: 'description',
                     title: 'Tool Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'status',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'pivot.unit_id',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t) {
-                    //     $(document).ready(function () {
-                    //         units = function () {
-                    //             $.ajax({
-                    //                 url: '/get-units/',
-                    //                 type: 'GET',
-                    //                 dataType: 'json',
-                    //                 success: function (data) {
-                    //                     $('select[name="unit_id"]').empty();
 
-                    //                     $('select[name="unit_id"]').append(
-                    //                         '<option value=""> Select a Unit</option>'
-                    //                     );
-
-                    //                     $.each(data, function (key, value) {
-                    //                         if(key == 4){
-                    //                             $('select[name="unit_id"]').append(
-                    //                                 '<option value="' + key + '" selected>' + value + '</option>'
-                    //                             );
-                    //                         }else{
-                    //                             $('select[name="unit_id"]').append(
-                    //                                 '<option value="' + key + '" >' + value + '</option>'
-                    //                             );
-                    //                         }
-                    //                     });
-                    //                 }
-                    //             });
-                    //         };
-
-                    //         units();
-                    //     });
-                    //     return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
-                    //         '<option value="">'+
-                    //             'Select Unit'+
-                    //         // '</option>'+
-                    //         // '<option value="2">'+
-                    //         //     'Select Unit2'+
-                    //         // '</option>'+
-                    //         // '<option value="3">'+
-                    //         //     'Select Unit3'+
-                    //         // '</option>'+
-
-                    //     '</select>'
-
-                    // }
                 },
                 {
-                    field: 'stat',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -286,133 +186,111 @@ let Workpackage3 = {
             ]
         });
 
-        $('.item_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/item',
+        $('.add-item').on('click', function () {
+            let quantity = $('input[name=quantity_item]').val();
+            let material = $('#material').val();
+            let unit_material = $('#unit_material').val();
+            let material_description = $('#item_description').val();
 
-                        map: function (raw) {
-                            let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                pageSize: 10,
-                serverPaging: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                type: 'post',
+                url: '/WorkPackage/'+workPackage_uuid+'/item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    item_id: material,
+                    quantity: quantity,
+                    unit_id: unit_material,
+                    // description: material_description,
+
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#material-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
+                        // }
+                        // document.getElementById('material').value = material;
+                        // document.getElementById('quantity').value = quantity;
+
+                    } else {
+
+                        toastr.success('Material has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+                        $('#modal_material').modal('hide');
+
+                        let table = $('.materials_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+
                     }
                 }
-            },
-            columns: [{
-                    field: 'code',
-                    title: 'Part No.',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
-                    }
-                },
-                {
-                    field: 'name',
-                    title: 'Material Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'qty',
-                    title: 'Quantity',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<input type="number" id="qty" name="qty" class="form-control m-input">'
-                    }
-                },
-                {
-                    field: 'unit',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        $(document).ready(function () {
-                            units = function () {
-                                $.ajax({
-                                    url: '/get-units/',
-                                    type: 'GET',
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        $('select[name="unit_id"]').empty();
-
-                                        $('select[name="unit_id"]').append(
-                                            '<option value=""> Select a Unit</option>'
-                                        );
-
-                                        $.each(data, function (key, value) {
-                                            if(key == 4){
-                                                $('select[name="unit_id"]').append(
-                                                    '<option value="' + key + '" selected>' + value + '</option>'
-                                                );
-                                            }else{
-                                                $('select[name="unit_id"]').append(
-                                                    '<option value="' + key + '" >' + value + '</option>'
-                                                );
-                                            }
-                                        });
-                                    }
-                                });
-                            };
-
-                            units();
-                        });
-                        return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
-                            '<option value="">'+
-                                'Select Unit'+
-                            // '</option>'+
-                            // '<option value="2">'+
-                            //     'Select Unit2'+
-                            // '</option>'+
-                            // '<option value="3">'+
-                            //     'Select Unit3'+
-                            // '</option>'+
-
-                        '</select>'
-
-                    }
-                },
-                {
-                    field: "description",
-                    title: "Description",
-                    template: function (t) {
-                        return '<input type="text" id="qty" name="qty" class="form-control m-input">'
-                    }
-                },
-
-            ]
+            });
         });
+
+        $('.add-tool').on('click', function () {
+            let quantity = $('input[name=quantity]').val();
+            let tool = $('#tool').val();
+            let tool_description = $('#tool_description').val();
+            let unit_tool = $('#unit_tool').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/WorkPackage/'+workPackage_uuid+'/item',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    item_id: tool,
+                    quantity: quantity,
+                    unit_id: unit_tool,
+                    // description: tool_description,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.item_id) {
+                            $('#tool-error').html(data.errors.item_id[0]);
+                        }
+
+                        if (data.errors.quantity) {
+                            $('#quantity-error').html(data.errors.quantity[0]);
+                        }
+                        document.getElementById('tool').value = tool;
+                        document.getElementById('quantity').value = quantity;
+                    } else {
+
+                        toastr.success('Tool has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // $('.tools_datatable').DataTable().ajax.reload();
+                        $('#modal_tool').modal('hide');
+
+                        let table = $('.tools_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        // document.getElementById('uom_quantity').value = '';
+
+                        // $('#item_unit_id').select2('val', 'All');
+
+
+                    }
+                }
+            });
+        });
+
     }
 };
 
