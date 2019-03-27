@@ -103,6 +103,10 @@ Route::name('frontend.')->group(function () {
 
                 Route::post('/{workPackage}/taskcard', 'WorkPackageController@addTaskCard')->name('taskcard.workpackage');
 
+                /** Transaction: Item */
+                Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
+
+
             });
         });
 
