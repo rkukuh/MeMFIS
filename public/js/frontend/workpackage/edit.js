@@ -374,7 +374,10 @@ let Workpackage = {
             }
         });
 
-        let remove = $('.wp-datatable').on('click', '.delete', function () {
+        //basic
+        $('.basic_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
             triggeruuid = $(this).data('uuid');
             swal({
                 title: 'Sure want to remove?',
@@ -400,7 +403,242 @@ let Workpackage = {
                                 }
                             );
 
-                            let table = $('.taskcard_datatable').mDatatable();
+                            let table = $('.basic_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //sip
+        $('.sip_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.sip_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //cpcp
+        $('.cpcp_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.cpcp_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //ad-sb
+        $('.ad-sb_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.ad-sb_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //cmr-awl
+        $('.cmr-awl_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.cmr-awl_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //si
+        $('.si_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.si_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
