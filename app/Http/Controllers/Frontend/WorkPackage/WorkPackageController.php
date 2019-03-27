@@ -123,4 +123,16 @@ class WorkPackageController extends Controller
         return response()->json($workPackage);
     }
 
+    /**
+     * Remove the taskcard from workpackage .
+     *
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteTaskCard(WorkPackage $workPackage,TaskCard $taskcard)
+    {
+        $workPackage->taskcards()->detach($taskcard);
+
+        return response()->json($workPackage);
+    }
 }

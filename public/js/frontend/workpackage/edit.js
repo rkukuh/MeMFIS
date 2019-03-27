@@ -346,14 +346,14 @@ let Workpackage = {
             if(material_datatables_init == true){
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
-                material_tc(triggeruuid);
+                material_tc_si(triggeruuid);
                 $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
             }
             else{
                 let table = $('#m_datatable_material_routine_si_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
-                material_tc(triggeruuid);
+                material_tc_si(triggeruuid);
                 $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
             }
         });
@@ -362,19 +362,65 @@ let Workpackage = {
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
-                tool_tc(triggeruuid);
+                tool_tc_si(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
             else{
                 let table = $('#m_datatable_tool_routine_si_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
-                tool_tc(triggeruuid);
+                tool_tc_si(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
         });
 
+        let remove = $('.wp-datatable').on('click', '.delete', function () {
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.taskcard_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
     }
+
+
 };
 
 jQuery(document).ready(function () {
