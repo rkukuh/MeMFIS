@@ -346,14 +346,14 @@ let Workpackage = {
             if(material_datatables_init == true){
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
-                material_tc(triggeruuid);
+                material_tc_si(triggeruuid);
                 $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
             }
             else{
                 let table = $('#m_datatable_material_routine_si_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
-                material_tc(triggeruuid);
+                material_tc_si(triggeruuid);
                 $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
             }
         });
@@ -362,14 +362,14 @@ let Workpackage = {
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
-                tool_tc(triggeruuid);
+                tool_tc_si(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
             else{
                 let table = $('#m_datatable_tool_routine_si_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
-                tool_tc(triggeruuid);
+                tool_tc_si(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
         });
