@@ -195,14 +195,14 @@ let Workpackage = {
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
-                material_tc(triggeruuid);
+                tool_tc(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
             else{
                 let table = $('#m_datatable_tool_routine_si_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
-                material_tc(triggeruuid);
+                tool_tc(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
         });
@@ -307,7 +307,7 @@ let Workpackage = {
                 $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
             }
         });
-        
+
         //cmr-awl_datatable taskcard Datatable
         $('.cmr-awl_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
