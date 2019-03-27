@@ -171,6 +171,40 @@ let Workpackage = {
             });
         });
 
+        let triggeruuid ="";
+        let material_datatables_init = true;
+        $('.basic_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        let tool_datatables_init = true;
+        $('.basic_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
     }
 };
 
