@@ -374,7 +374,53 @@ let Workpackage = {
             }
         });
 
+        let remove = $('.wp-datatable').on('click', '.delete', function () {
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.taskcard_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
     }
+
+
 };
 
 jQuery(document).ready(function () {
