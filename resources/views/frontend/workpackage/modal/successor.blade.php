@@ -1,19 +1,21 @@
-<div class="modal fade" id="modal_tool_eo" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_successor" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TitleModalJournal">Required Tools</h5>
+                <h5 class="modal-title" id="TitleModalBasic">Successor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body item-body">
-                <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_tool_eo_wp">
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover table-checkable" id="successor_datatable">
                     <thead>
                         <tr>
-                            <th>Tool</th>
-                            <th>Quantity</th>
-                            <th>Unit</th>
+                            <th>Number</th>
+                            <th>Title</th>
+                            <th>WorkArea</th>
+                            <th>Manhour</th>
+                            <th></th>
                         </tr>
                     </thead>
                 </table>

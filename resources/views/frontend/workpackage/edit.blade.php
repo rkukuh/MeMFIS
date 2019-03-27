@@ -164,7 +164,9 @@
                                             @include('frontend.workpackage.modal.material.routine-si')
                                             @include('frontend.workpackage.modal.tool.routine-si')
                                             @include('frontend.workpackage.modal.sequence')
-                                            
+                                            @include('frontend.workpackage.modal.predecessor')
+                                            @include('frontend.workpackage.modal.successor')
+
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +213,12 @@
     <script src="{{ asset('js/frontend/functions/select2/series.js') }}"></script>
 
     <script src="{{ asset('js/frontend/workpackage/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/modal/successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/modal/predecessor.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/datatables.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/workpackage/modal/datatables.js')}}"></script>
+
 @endpush

@@ -95,4 +95,28 @@ class WorkPackage extends MemfisModel
         return $this->belongsToMany(TaskCard::class, 'taskcard_workpackage', 'workpackage_id', 'taskcard_id')
                     ->withTimestamps();
     }
+
+
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the task card's item: material.
+     *
+     * @return string
+     */
+    public function getMaterialsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'raw')->all()));
+    }
+
+    /**
+     * Get the task card's item: tool.
+     *
+     * @return string
+     */
+    public function getToolsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+    }
+
 }

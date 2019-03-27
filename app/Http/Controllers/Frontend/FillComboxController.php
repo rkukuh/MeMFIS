@@ -580,7 +580,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
                 ->whereHas('categories', function ($query) {
                     $query->where('code', 'tool');
-                })->pluck('name','id');
+                })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
 
         return $items;
 }

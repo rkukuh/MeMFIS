@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\WorkPackage;
 
 use App\Models\Aircraft;
 use App\Models\ListUtil;
+use App\Models\Item;
 use App\Models\WorkPackage;
 use App\Models\TaskCard;
 use Illuminate\Http\Request;
@@ -11,15 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkPackageStore;
 use App\Http\Requests\Frontend\WorkPackageUpdate;
 
-class WorkPackageController extends Controller
+class WorkPackageItemsController extends Controller
 {
-    protected $aircrafts;
-
-    public function __construct()
-    {
-        $this->aircrafts = Aircraft::all();
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -28,7 +22,7 @@ class WorkPackageController extends Controller
      */
     public function index()
     {
-        return view('frontend.workpackage.index');
+        //
     }
 
     /**
@@ -38,7 +32,7 @@ class WorkPackageController extends Controller
      */
     public function create()
     {
-        return view('frontend.workpackage.create');
+        //
     }
 
     /**
@@ -47,11 +41,15 @@ class WorkPackageController extends Controller
      * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WorkPackageStore $request)
+    public function store(WorkPackageStore $request, WorkPackage $workPackage)
     {
-        $workpackage = Workpackage::create($request->all());
+        $workPackage->items()->attach($workPackage->id, [
+            'item_id' => $request->item_id,
+            'unit_id' => $request->unit_id,
+            'quantity' => $request->quantity
+        ]);
 
-        return response()->json($workpackage);
+        return response()->json($workPackage);
     }
 
     /**
@@ -62,11 +60,7 @@ class WorkPackageController extends Controller
      */
     public function addTaskCard(Request $request, WorkPackage $workPackage)
     {
-        // dd((TaskCard::where('uuid', $request->taskcard)->first())->id);
-        // $taskcard = TaskCard::where('uuid', $request->taskcard)->first();
-        $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
-
-        return response()->json($workPackage);
+        //
     }
 
     /**
@@ -77,7 +71,7 @@ class WorkPackageController extends Controller
      */
     public function show(WorkPackage $workPackage)
     {
-        return view('frontend.workpackage.show');
+        //
     }
 
     /**
@@ -88,10 +82,7 @@ class WorkPackageController extends Controller
      */
     public function edit(WorkPackage $workPackage)
     {
-        return view('frontend.workpackage.edit',[
-            'workPackage' => $workPackage,
-            'aircrafts' => $this->aircrafts
-        ]);
+        //
     }
 
     /**
@@ -103,11 +94,7 @@ class WorkPackageController extends Controller
      */
     public function update(WorkPackageUpdate $request, WorkPackage $workPackage)
     {
-        $workPackage = WorkPackage::find($workPackage);
-        // $workPackage->name = $request->name;
-        // $workPackage->save();
-
-        return response()->json($workPackage);
+        //
     }
 
     /**
@@ -116,23 +103,11 @@ class WorkPackageController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WorkPackage $workPackage)
+    public function destroy(WorkPackage $workPackage, Item $item)
     {
-        $workPackage->delete();
+        $workPackage->items()->detach($item);
 
         return response()->json($workPackage);
     }
 
-    /**
-     * Remove the taskcard from workpackage .
-     *
-     * @param  \App\Models\WorkPackage  $workPackage
-     * @return \Illuminate\Http\Response
-     */
-    public function deleteTaskCard(WorkPackage $workPackage,TaskCard $taskcard)
-    {
-        $workPackage->taskcards()->detach($taskcard);
-
-        return response()->json($workPackage);
-    }
 }
