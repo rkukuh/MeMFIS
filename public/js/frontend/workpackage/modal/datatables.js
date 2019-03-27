@@ -7,7 +7,7 @@ function material_tc(triggeruuid) {
         serverSide: !0,
         lengthMenu: [5, 10, 25, 50 ],
         pageLength:5,
-        ajax: "/datatables/taskcard-eo/"+triggeruuid+"/materials",
+        ajax: "/datatables/taskcard-routine/"+triggeruuid+"/materials",
         columns: [
             {
                 data: "name"
@@ -45,7 +45,7 @@ function tool_tc(triggeruuid) {
         serverSide: !0,
         lengthMenu: [5, 10, 25, 50 ],
         pageLength:5,
-        ajax: "/datatables/taskcard-eo/"+triggeruuid+"/tools",
+        ajax: "/datatables/taskcard-routine/"+triggeruuid+"/tools",
         columns: [
             {
                 data: "name"
@@ -83,7 +83,7 @@ function material_tc_eo(triggeruuid) {
         serverSide: !0,
         lengthMenu: [5, 10, 25, 50 ],
         pageLength:5,
-        ajax: "/datatables/taskcard-routine/"+triggeruuid+"/materials",
+        ajax: "/datatables/taskcard-eo/"+triggeruuid+"/materials",
         columns: [
             {
                 data: "name"
@@ -121,7 +121,7 @@ function tool_tc_eo(triggeruuid) {
         serverSide: !0,
         lengthMenu: [5, 10, 25, 50 ],
         pageLength:5,
-        ajax: "/datatables/taskcard-routine/"+triggeruuid+"/tools",
+        ajax: "/datatables/taskcard-eo/"+triggeruuid+"/tools",
         columns: [
             {
                 data: "name"
