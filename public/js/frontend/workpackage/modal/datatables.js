@@ -36,7 +36,7 @@ function material_tc(triggeruuid) {
 
 };
 
-function material_tc(triggeruuid) {
+function tool_tc(triggeruuid) {
     $("#m_datatable_tool_routine_si_wp").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
@@ -73,3 +73,4 @@ function material_tc(triggeruuid) {
     });
 
 };
+
