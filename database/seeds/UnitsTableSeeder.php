@@ -143,6 +143,18 @@ class UnitsTableSeeder extends Seeder
             'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
         ]);
 
+        Unit::create([
+            'name' => 'Bar',
+            'symbol' => 'bar',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Paa',
+            'symbol' => 'Pair',
+            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
+        ]);
+
         /** WEIGHT / VOLUME */
 
         Unit::create([
