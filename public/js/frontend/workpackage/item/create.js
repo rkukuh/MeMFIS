@@ -209,15 +209,19 @@ let Workpackage3 = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#material-error').html(data.errors.item_id[0]);
-                        // }
+                        if (data.errors.item_id) {
+                            $('#material-error').html(data.errors.item_id[0]);
+                        }
 
-                        // if (data.errors.quantity) {
-                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
-                        // }
-                        // document.getElementById('material').value = material;
-                        // document.getElementById('quantity').value = quantity;
+                        if (data.errors.quantity) {
+                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                        }
+
+                        if (data.errors.unit_id) {
+                            $('#unit_material-error').html(data.errors.unit_id[0]);
+                        }
+
+                        document.getElementById('quantity').value = quantity;
 
                     } else {
 
@@ -309,7 +313,11 @@ let Workpackage3 = {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
-                        document.getElementById('tool').value = tool;
+
+                        if (data.errors.unit_id) {
+                            $('#unit_tool-error').html(data.errors.unit_id[0]);
+                        }
+
                         document.getElementById('quantity').value = quantity;
                     } else {
 
