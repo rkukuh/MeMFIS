@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group m-form__group row">
+                                <!-- <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         {{-- <div class="taskcard_datatable" id="second"></div> --}}
                                         <div class="m-portlet__body">
@@ -145,7 +145,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </form>
                         </div>
                     </div>
