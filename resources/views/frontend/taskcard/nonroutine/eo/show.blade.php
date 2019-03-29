@@ -139,12 +139,15 @@
                                                 <label class="form-control-label">
                                                     Task Card Attachment @include('frontend.common.label.required')
                                                 </label>
-
-                                                @component('frontend.common.input.upload')
-                                                    @slot('text', 'Taskcard')
-                                                    @slot('id', 'taskcard')
-                                                    @slot('name', 'taskcard')
+                                            @if (empty($taskcard->description))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else 
+                                                @component('frontend.common.buttons.show-file')
+                                                    @slot('text', 'show task card')
+                                                    @slot('data_target', '#modal_showtaskcard')
                                                 @endcomponent
+                                            @include('frontend.taskcard.modal')
+                                            @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">

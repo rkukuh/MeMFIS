@@ -195,6 +195,23 @@
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Task Card Attachment @include('frontend.common.label.optional')
+                                                </label>
+    
+                                                 @if (empty($taskcard->description))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else 
+                                                    @component('frontend.common.buttons.show-file')
+                                                        @slot('text', 'show task card')
+                                                        @slot('data_target', '#modal_showtaskcard')
+                                                    @endcomponent
+                                                    @include('frontend.taskcard.modal')
+                                                 @endif     
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
                                                     Instruction @include('frontend.common.label.required')
