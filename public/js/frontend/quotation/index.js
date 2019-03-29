@@ -19,8 +19,8 @@ let Quotation = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !0,
-                serverSorting: !0
+                serverPaging: !1,
+                serverSorting: !1
             },
             layout: {
                 theme: 'default',
