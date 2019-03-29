@@ -23,8 +23,8 @@ let TaskCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !0,
-                serverSorting: !0
+                serverPaging: !1,
+                serverSorting: !1
             },
             layout: {
                 theme: 'default',
@@ -34,7 +34,7 @@ let TaskCard = {
             },
             sortable: !0,
             filterable: !1,
-            pagination: !0,
+            pagination: !1,
             search: {
                 input: $('#generalSearch')
             },
