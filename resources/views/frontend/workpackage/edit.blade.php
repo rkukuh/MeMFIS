@@ -105,25 +105,6 @@
                                             @endcomponent
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                            <div class="flex">
-                                                <div class="action-buttons">
-                                                    @component('frontend.common.buttons.update')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.workpackage.index'))
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -147,12 +128,40 @@
                                                     @include('frontend.workpackage.routine.basic.modal')
                                                     @include('frontend.workpackage.routine.sip.modal')
                                                     @include('frontend.workpackage.routine.cpcp.modal')
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="action-buttons m--align-center">
+                                                            @component('frontend.common.buttons.summary')
+                                                                @slot('text', 'Workpackage Summary')
+                                                                @slot('href', route('frontend.summary.basic') )
+                                                            @endcomponent
+                                                            @component('frontend.common.buttons.summary')
+                                                                @slot('text', 'Routine Summary')
+                                                                @slot('href', route('frontend.summary.basic') )
+                                                            @endcomponent
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
                                                     @include('frontend.workpackage.nonroutine.index')
                                                     @include('frontend.workpackage.nonroutine.adsb.modal')
                                                     @include('frontend.workpackage.nonroutine.cmrawl.modal')
                                                     @include('frontend.workpackage.nonroutine.si.modal')
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="action-buttons m--align-center">
+                                                            @component('frontend.common.buttons.summary')
+                                                                @slot('text', 'Workpackage Summary')
+                                                                @slot('href', route('frontend.summary.basic') )
+                                                            @endcomponent
+                                                            @component('frontend.common.buttons.summary')
+                                                                @slot('text', 'Non-routine Summary')
+                                                                @slot('href', route('frontend.summary.basic') )
+                                                            @endcomponent
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
                                                     @include('frontend.workpackage.item.index')
@@ -167,6 +176,26 @@
                                             @include('frontend.workpackage.modal.predecessor')
                                             @include('frontend.workpackage.modal.successor')
 
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                        <div class="flex">
+                                            <div class="action-buttons">
+                                                @component('frontend.common.buttons.update')
+                                                    @slot('type','button')
+                                                    @slot('id', 'add-workpackage')
+                                                    @slot('class', 'add-workpackage')
+                                                @endcomponent
+
+                                                @include('frontend.common.buttons.reset')
+
+                                                @component('frontend.common.buttons.back')
+                                                    @slot('href', route('frontend.workpackage.index'))
+                                                @endcomponent
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
