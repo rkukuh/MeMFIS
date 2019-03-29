@@ -78,8 +78,8 @@ class TaskCardEOController extends Controller
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
             $taskcard->related_to()->attach($request->relationship);
-            
-            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+
+            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
                 if($request->threshold_type[$i] !== "Select Threshold"){
                     $taskcard->thresholds()->save(new Threshold([
                         'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
@@ -87,8 +87,8 @@ class TaskCardEOController extends Controller
                     ]));
                 }
             }
-            
-            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+
+            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
                 if($request->repeat_type[$i] !== "Select Repeat"){
                     $taskcard->repeats()->save(new Repeat([
                         'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
@@ -144,7 +144,7 @@ class TaskCardEOController extends Controller
         foreach($taskCard->related_to as $i => $relation_taskcard){
             $relation_taskcards[$i] =  $relation_taskcard->id;
         }
-        
+
         return view('frontend.taskcard.nonroutine.eo.edit',[
             'tasks' => $this->task,
             'types' => $this->type,
@@ -170,7 +170,7 @@ class TaskCardEOController extends Controller
      */
     public function update(TaskCardEOUpdate $request, Taskcard $taskCard)
     {
-        $this->decoder($request);
+        // $this->decoder($request);
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
@@ -179,7 +179,7 @@ class TaskCardEOController extends Controller
             if($taskCard->repeats)$taskCard->repeats()->delete();
 
             if(is_array($request->threshold_amount)){
-                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) { 
+                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
                     $taskCard->thresholds()->save(new Threshold([
                         'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
                         'amount' => $request->threshold_amount[$i],
@@ -188,7 +188,7 @@ class TaskCardEOController extends Controller
                 }
 
             if(is_array($request->repeat_amount)){
-                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) { 
+                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
                     $taskCard->repeats()->save(new Repeat([
                         'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
                         'amount' => $request->repeat_amount[$i],

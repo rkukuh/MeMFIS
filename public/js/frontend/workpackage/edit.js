@@ -89,9 +89,47 @@ let Workpackage = {
                         class: 'm-checkbox--solid m-checkbox--brand'
                     }
                 },
-              
+
             ]
         });
+        $('.nav-tabs').on('click', '.routine', function () {
+
+            let basic = $('.basic_datatable').mDatatable();
+
+            basic.originalDataSet = [];
+            basic.reload();
+
+            let sip = $('.sip_datatable').mDatatable();
+
+            sip.originalDataSet = [];
+            sip.reload();
+
+            let cpcp = $('.cpcp_datatable').mDatatable();
+
+            cpcp.originalDataSet = [];
+            cpcp.reload();
+        });
+
+        $('.nav-tabs').on('click', '.non-routine', function () {
+
+            let AdSb = $('.ad-sb_datatable').mDatatable();
+
+            AdSb.originalDataSet = [];
+            AdSb.reload();
+
+            let CmrAwl = $('.cmr-awl_datatable').mDatatable();
+
+            CmrAwl.originalDataSet = [];
+            CmrAwl.reload();
+
+            let SI = $('.si_datatable').mDatatable();
+
+            SI.originalDataSet = [];
+            SI.reload();
+
+
+        });
+
         let update = $('.modal-footer').on('click', '.update', function () {
             $('#button').show();
             $('#name-error').html('');
@@ -133,7 +171,494 @@ let Workpackage = {
             });
         });
 
+        let triggeruuid ="";
+        let material_datatables_init = true;
+        let tool_datatables_init = true;
+        //Basic taskcard Datatable
+        $('.basic_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.basic_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        //SIP taskcard Datatable
+        $('.sip_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.sip_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        //CPCP taskcard Datatable
+        $('.cpcp_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.cpcp_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        //ad-sb_datatable taskcard Datatable
+        $('.ad-sb_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                alert(triggeruuid);
+                material_tc_eo(triggeruuid);
+                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_eo_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc_eo(triggeruuid);
+                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.ad-sb_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                alert(triggeruuid);
+                tool_tc_eo(triggeruuid);
+                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_eo_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc_eo(triggeruuid);
+                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+            }
+        });
+
+        //cmr-awl_datatable taskcard Datatable
+        $('.cmr-awl_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc_eo(triggeruuid);
+                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_eo_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc_eo(triggeruuid);
+                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.cmr-awl_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc_eo(triggeruuid);
+                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_eo_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc_eo(triggeruuid);
+                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+            }
+        });
+
+        //SI taskcard Datatable
+        $('.si_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc_si(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc_si(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.si_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc_si(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc_si(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        //basic
+        $('.basic_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.basic_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //sip
+        $('.sip_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.sip_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //cpcp
+        $('.cpcp_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.cpcp_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //ad-sb
+        $('.ad-sb_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.ad-sb_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //cmr-awl
+        $('.cmr-awl_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.cmr-awl_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //si
+        $('.si_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.si_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
     }
+
+
 };
 
 jQuery(document).ready(function () {

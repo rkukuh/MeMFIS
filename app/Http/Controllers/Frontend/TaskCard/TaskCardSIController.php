@@ -151,7 +151,7 @@ class TaskCardSIController extends Controller
     {
         //TODO Data binding not work
 
-        $this->decoder($request);
+        // $this->decoder($request);
 
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
         if($request->work_area){

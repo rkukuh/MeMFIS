@@ -131,10 +131,10 @@
                                         <div class="m-portlet__body">
                                             <ul class="nav nav-tabs" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Routine</a>
+                                                    <a class="nav-link active show routine" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Routine</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
+                                                    <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
@@ -158,6 +158,15 @@
                                                     @include('frontend.workpackage.item.index')
                                                 </div>
                                             </div>
+
+                                            @include('frontend.workpackage.modal.material.eo')
+                                            @include('frontend.workpackage.modal.tool.eo')
+                                            @include('frontend.workpackage.modal.material.routine-si')
+                                            @include('frontend.workpackage.modal.tool.routine-si')
+                                            @include('frontend.workpackage.modal.sequence')
+                                            @include('frontend.workpackage.modal.predecessor')
+                                            @include('frontend.workpackage.modal.successor')
+
                                         </div>
                                     </div>
                                 </div>
@@ -187,6 +196,10 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let workPackage_uuid = '{{ $workPackage->uuid }}';
+    </script>
+
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}
 
@@ -200,7 +213,12 @@
     <script src="{{ asset('js/frontend/functions/select2/series.js') }}"></script>
 
     <script src="{{ asset('js/frontend/workpackage/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/modal/successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/modal/predecessor.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/datatables.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/workpackage/modal/datatables.js')}}"></script>
+
 @endpush

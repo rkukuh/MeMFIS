@@ -201,6 +201,7 @@ class TaskCardSIDatatables extends Controller
                 'title'     => true,
                 'work_area'     => true,
                 'estimation_manhour'     => true,
+                'uuid'     => true,
                 'Actions'      => true,
                 ];
 
@@ -214,7 +215,7 @@ class TaskCardSIDatatables extends Controller
             // get all raw data
             $taskcards  = TaskCard::with('type')
             ->whereHas('type', function ($query) {
-                $query->where('name', 'SI');
+                $query->where('code', 'si');
             })->get();
 
             $alldata = json_decode( $taskcards, true);

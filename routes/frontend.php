@@ -101,6 +101,13 @@ Route::name('frontend.')->group(function () {
 
             Route::prefix('WorkPackage')->group(function () {
 
+                Route::post('/{workPackage}/taskcard', 'WorkPackageController@addTaskCard')->name('taskcard.workpackage');
+                Route::delete('/{workPackage}/taskcard/{taskcard}', 'WorkPackageController@deleteTaskCard')->name('delete_taskcard.workpackage');
+
+                /** Transaction: Item */
+                Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
+                Route::delete('/{workPackage}/{item}/item/', 'WorkPackageItemsController@destroy')->name('item.workpackage.delete');
+
 
             });
         });

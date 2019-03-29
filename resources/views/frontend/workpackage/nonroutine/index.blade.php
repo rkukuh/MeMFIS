@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <div class="ad-sb_datatable" id="scrolling_both"></div>
+            <div class="ad-sb_datatable wp-datatable" id="scrolling_both"></div>
         </div>
     </div>
     <div class="m-portlet m-portlet--mobile">
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="cmr-awl_datatable" id="scrolling_both"></div>
+            <div class="cmr-awl_datatable wp-datatable" id="scrolling_both"></div>
         </div>
     </div>
     <div class="m-portlet m-portlet--mobile">
@@ -105,10 +105,10 @@
                 </div>
             </div>
 
-            <div class="si_datatable" id="scrolling_both"></div>
+            <div class="si_datatable wp-datatable" id="scrolling_both"></div>
         </div>
     </div>
 
     @push('footer-scripts')
-        <script src="{{ asset('js/frontend/workpackage/non-routine/create.js')}}"></script>
+        <script src="{{ asset('js/frontend/workpackage/non-routine/index.js')}}"></script>
     @endpush
