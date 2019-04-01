@@ -62,22 +62,6 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Performance Factor @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.decimal')
-                                                @slot('id', 'performa')
-                                                @slot('text', 'Performa')
-                                                @slot('name', 'performa')
-                                                @slot('id_error', 'performa')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <div class="row ">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Helper Quantity @include('frontend.common.label.required')
                                             </label>
 
@@ -88,6 +72,10 @@
                                                 @slot('id_error', 'helper_quantity')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Engineer Quantity @include('frontend.common.label.required')
@@ -100,13 +88,6 @@
                                                 @slot('id_error', 'engineer_quantity')
                                             @endcomponent
                                         </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group m-form__group row ">
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <div class="row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Sequence @include('frontend.common.label.required')
@@ -119,6 +100,12 @@
                                                 @slot('id_error', 'sequence')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row ">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="row ">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             @component('frontend.common.input.checkbox')
                                                 @slot('id', 'is_rii')

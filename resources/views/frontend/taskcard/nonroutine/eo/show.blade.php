@@ -135,19 +135,26 @@
                                                     </div>
                                                 @endif
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Task Card Attachment @include('frontend.common.label.required')
-                                                </label>
-                                            @if (empty($taskcard->description))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else 
-                                                @component('frontend.common.buttons.show-file')
-                                                    @slot('text', 'show task card')
-                                                    @slot('data_target', '#modal_showtaskcard')
-                                                @endcomponent
-                                            @include('frontend.taskcard.modal')
-                                            @endif
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Task Card Attachment @include('frontend.common.label.required')
+                                                    </label>
+                                                    @if (empty($taskcard->description))
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                        @component('frontend.common.buttons.show-file')
+                                                            @slot('text', 'show task card')
+                                                            @slot('data_target', '#modal_showtaskcard')
+                                                        @endcomponent
+                                                    @include('frontend.taskcard.modal')
+                                                    @endif
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Documents library @include('frontend.common.label.optional')
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">

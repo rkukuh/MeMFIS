@@ -97,12 +97,6 @@ let TaskCard = {
 
                 },
                 {
-                    field: 'performance_factor',
-                    title: 'Performance Factor',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'sequence',
                     title: 'Sequence',
                     sortable: 'asc',
@@ -714,7 +708,6 @@ let TaskCard = {
                 url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+triggeruuid3+'/edit/',
                 success: function (data) {
                     document.getElementById('manhour').value = data.estimation_manhour;
-                    document.getElementById('performa').value = data.performance_factor;
                     document.getElementById('helper_quantity').value = data.helper_quantity;
                     document.getElementById('engineer_quantity').value = data.engineer_quantity;
                     document.getElementById('sequence').value = data.sequence;
@@ -775,7 +768,6 @@ let TaskCard = {
             let eo_uuid = $('input[name=uuid]').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
-            let performa = $('input[name=performa]').val();
             let helper_quantity = $('input[name=helper_quantity]').val();
             let engineer_quantity = $('input[name=engineer_quantity]').val();
             let sequence = $('input[name=sequence]').val();
@@ -795,7 +787,6 @@ let TaskCard = {
                     _token: $('input[name=_token]').val(),
                     work_area: work_area,
                     estimation_manhour: manhour,
-                    performance_factor: performa,
                     helper_quantity: helper_quantity,
                     engineer_quantity: engineer_quantity,
                     sequence: sequence,
@@ -814,10 +805,6 @@ let TaskCard = {
 
                         if (data.errors.work_area) {
                             $('#work_area-error').html(data.errors.work_area[0]);
-                        }
-
-                        if (data.errors.performance_factor) {
-                            $('#performa-error').html(data.errors.performance_factor[0]);
                         }
 
                         if (data.errors.estimation_manhour) {
@@ -843,7 +830,6 @@ let TaskCard = {
                         document.getElementById('work_area').value = work_area;
                         document.getElementById('engineer_quantity').value = engineer_quantity;
                         document.getElementById('manhour').value = manhour;
-                        document.getElementById('performa').value = performa;
                         document.getElementById('helper_quantity').value = helper_quantity;
                         document.getElementById('skill_id').value = otr_certification;
                         document.getElementById('sequence').value = sequence;
@@ -871,7 +857,6 @@ let TaskCard = {
             let taskcard_uuid = $('#uuid_taskcard').val();
             let work_area = $('#work_area').val();
             let manhour = $('input[name=manhour]').val();
-            let performa = $('input[name=performa]').val();
             let helper_quantity = $('input[name=helper_quantity]').val();
             let engineer_quantity = $('input[name=engineer_quantity]').val();
             let sequence = $('input[name=sequence]').val();
@@ -891,7 +876,6 @@ let TaskCard = {
                     _token: $('input[name=_token]').val(),
                     work_area: work_area,
                     estimation_manhour: manhour,
-                    performance_factor: performa,
                     helper_quantity: helper_quantity,
                     engineer_quantity: engineer_quantity,
                     sequence: sequence,
@@ -910,10 +894,6 @@ let TaskCard = {
 
                         if (data.errors.work_area) {
                             $('#work_area-error').html(data.errors.work_area[0]);
-                        }
-
-                        if (data.errors.performance_factor) {
-                            $('#performa-error').html(data.errors.performance_factor[0]);
                         }
 
                         if (data.errors.estimation_manhour) {
@@ -939,7 +919,6 @@ let TaskCard = {
                         document.getElementById('work_area').value = work_area;
                         document.getElementById('engineer_quantity').value = engineer_quantity;
                         document.getElementById('manhour').value = manhour;
-                        document.getElementById('performa').value = performa;
                         document.getElementById('helper_quantity').value = helper_quantity;
                         document.getElementById('skill_id').value = otr_certification;
                         document.getElementById('sequence').value = sequence;
