@@ -334,13 +334,15 @@
                                                 Task Card Attachment @include('frontend.common.label.optional')
                                             </label>
 
-                                            <!-- @if (empty($taskcard->description))
+                                            @if (empty($taskcard->description))
                                                 @include('frontend.common.label.data-info-nodata')
-                                            @else -->
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', "file modal?")
-                                            @endcomponent
-                                            <!-- @endif -->
+                                            @else
+                                                @component('frontend.common.buttons.show-file')
+                                                    @slot('text', 'show task card')
+                                                    @slot('data_target', '#modal_showtaskcard')
+                                                @endcomponent
+                                                @include('frontend.taskcard.modal')
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
