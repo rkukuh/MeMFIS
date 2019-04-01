@@ -97,7 +97,6 @@ let TaskCard = {
             data.append( "task_id", $('#task_type_id').val());
             data.append( "skill_id", $('#otr_certification').val());
             data.append( "estimation_manhour", $('#manhour').val());
-            data.append( "performance_factor", $('input[name=performa]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append( "work_area", $('#work_area').val());
@@ -157,10 +156,6 @@ let TaskCard = {
                             $('#manhour-error').html(response.errors.manhour[0]);
                         }
 
-                        if (response.errors.performance_factor) {
-                            $('#performa-error').html(response.errors.performance_factor[0]);
-                        }
-
 
                         document.getElementById('title').value = data.getAll('title');
                         document.getElementById('number').value = data.getAll('number');
@@ -170,7 +165,6 @@ let TaskCard = {
                         document.getElementById('task_type_id').value = task_type_id;
                         document.getElementById('otr_certification').value = otr_certification;
                         document.getElementById('manhour').value =  data.getAll('manhour');
-                        document.getElementById('performa').value = data.getAll('performa');
                         document.getElementById('helper_quantity').value = data.getAll('helper_quantity');
                         document.getElementById('engineer_quantity').value = data.getAll('engineer_quantity');
                         document.getElementById('work_area').value = work_area;
