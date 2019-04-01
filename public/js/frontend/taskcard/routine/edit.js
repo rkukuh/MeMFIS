@@ -750,6 +750,7 @@ let TaskCard = {
             data.append("task_id", $('#task_type_id').val());
             data.append("skill_id", $('#otr_certification').val());
             data.append("estimation_manhour", $('#manhour').val());
+            data.append("performance_factor", $('input[name=performa]').val());
             data.append("helper_quantity", $('input[name=helper_quantity]').val());
             data.append("engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append("work_area", $('#work_area').val());
@@ -813,6 +814,9 @@ let TaskCard = {
                             $('#manhour-error').html(response.errors.manhour[0]);
                         }
 
+                        if (response.errors.performance_factor) {
+                            $('#performa-error').html(response.errors.performance_factor[0]);
+                        }
 
                         // document.getElementById('title').value = "";
                         // document.getElementById('number').value = "";
@@ -822,6 +826,7 @@ let TaskCard = {
                         // document.getElementById('task_type_id').value = task_type_id;
                         // document.getElementById('otr_certification').value = otr_certification;
                         // document.getElementById('manhour').value = manhour;
+                        // document.getElementById('performa').value = performa;
                         // document.getElementById('helper_quantity').value = helper_quantity;
                         // document.getElementById('work_area').value = work_area;
                         // $('#work_area').select2('val', 'All');
