@@ -110,7 +110,7 @@ let TaskCard = {
                                     timeOut: 5000
                                 });
 
-                                // window.location.href = '/preliminary/'+response.uuid+'/edit';
+                                window.location.href = '/preliminary/'+response.uuid+'/edit';
                             }
                         }
                     });
