@@ -34,7 +34,7 @@ let TaskCard = {
             },
             sortable: !0,
             filterable: !1,
-            pagination: !1,
+            pagination: !0,
             search: {
                 input: $('#generalSearch')
             },
