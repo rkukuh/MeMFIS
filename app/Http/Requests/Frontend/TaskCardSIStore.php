@@ -30,7 +30,6 @@ class TaskCardSIStore extends FormRequest
             'number' => 'required',
             'title' => 'required',
             'estimation_manhour' => 'required',
-            'performance_factor' => 'required',
             'description' => 'required',
             'skill_id' => 'required',
             'applicability_airplane' => 'required',

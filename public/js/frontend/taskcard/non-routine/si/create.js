@@ -43,7 +43,6 @@ let TaskCard = {
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
             data.append( "estimation_manhour", $('input[name=manhour]').val());
-            data.append( "performance_factor", $('input[name=performa]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append( "description", $('#instruction').val());
@@ -113,7 +112,6 @@ let TaskCard = {
                                 document.getElementById('work_area').value = work_area;
                                 $('#work_area').select2('val', 'All');
                                 document.getElementById('manhour').value = data.getAll('manhour');
-                                document.getElementById('performa').value = data.getAll('performa');
                                 document.getElementById('helper_quantity').value = data.getAll('helper_quantity');
                                 document.getElementById('engineer_quantity').value = data.getAll('engineer_quantity');
                                 document.getElementById('instruction').value = data.getAll('instruction');
