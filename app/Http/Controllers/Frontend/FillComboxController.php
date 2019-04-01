@@ -488,6 +488,18 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function taskcardTypePreliminary()
+    {
+        $taskcard_type_si = Type::ofTaskCardTypePreliminary()->pluck('name', 'id');
+
+        return json_encode($taskcard_type_si);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function aircraft()
     {
         $aircrafts = Aircraft::pluck('name', 'id');

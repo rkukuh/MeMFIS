@@ -46,17 +46,17 @@ let TaskCard = {
             data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
             data.append( "estimation_manhour", $('input[name=manhour]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
-            data.append( "helper_quantity", $('input[name=helper_quantity]').val());  
+            data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "description", $('#instruction').val());
-            
+
             $.ajax({
-                url: '/get-takcard-si-types',
+                url: '/get-takcard-preliminary-types',
                 type: 'GET',
                 dataType: 'json',
                 success: function (type) {
 
                     $.each(type, function (key, value) {
-                        if(value.trim() == 'Special Instruction'.trim()){
+                        if(value.trim() == 'Preliminary'.trim()){
                             data.append( "type_id", key);
                             // type_id = key;
                         }
