@@ -81,5 +81,11 @@ class TypesOfTaskCardType extends Seeder
             'name' => 'Airworthiness Limitations',
             'of'  => 'taskcard-type-non-routine',
         ]);
+
+        Type::create([
+            'code' => 'preliminary',
+            'name' => 'Preliminary',
+            'of'  => 'taskcard-type-non-routine',
+        ]);
     }
 }
