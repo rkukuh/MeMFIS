@@ -189,15 +189,34 @@
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Task Card Attachment @include('frontend.common.label.required')
-                                                </label>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Task Card Attachment @include('frontend.common.label.required')
+                                                        </label>
 
-                                                @component('frontend.common.input.upload')
-                                                    @slot('text', 'Taskcard')
-                                                    @slot('id', 'taskcard')
-                                                    @slot('name', 'taskcard')
-                                                @endcomponent
+                                                        @component('frontend.common.input.upload')
+                                                            @slot('text', 'Taskcard')
+                                                            @slot('id', 'taskcard')
+                                                            @slot('name', 'taskcard')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Documents library @include('frontend.common.label.optional')
+                                                        </label>
+
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('text', 'Document')
+                                                            @slot('id', 'document')
+                                                            @slot('name', 'document')
+                                                            @slot('multiple','multiple')
+                                                            @slot('help_text','You can chose multiple value')
+                                                            @slot('id_error', 'document')
+                                                        @endcomponent
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -769,7 +788,7 @@
             $('#note').removeAttr("disabled");
         }
 
-        // Recurrence 
+        // Recurrence
         if(view_recurrence_id == 70){
             $("#recurrence_div").removeClass("hidden");
             $('#recurrence').removeAttr("disabled");
@@ -795,7 +814,7 @@
             }
         }
 
-        // Scheduled Priority * 
+        // Scheduled Priority *
         if(view_scheduled_priority_id == 74){
             $("#prior_to").removeClass("hidden");
             $('#prior_to_date').removeAttr("disabled");
@@ -807,6 +826,7 @@
         });
     </script>
 
+    <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
