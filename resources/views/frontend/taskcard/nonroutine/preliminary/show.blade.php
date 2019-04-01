@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Special Instruction Task Card
+                                    Preliminary Task Card
                                 </h3>
                             </div>
                         </div>
@@ -50,94 +50,70 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Special Instruction Number @include('frontend.common.label.required')
-                                                </label>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Preliminary Number @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskCard->number)
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Title @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskCard->title)
-                                                @endcomponent
-                                            </div>
-
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $taskCard->number)
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Skill @include('frontend.common.label.required')
-                                                </label>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Skills needed')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    A/C Type @include('frontend.common.label.required')
-                                                </label>
-
-                                                <div style="background-color:beige; padding:15px;" class="">
-                                                    @foreach($taskCard->aircrafts  as $aircraft)
-                                                        {{ $aircraft->name }},
-                                                    @endforeach
-                                                </div>
-                                            </div>
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $taskCard->title)
+                                            @endcomponent
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Work Area @include('frontend.common.label.optional')
-                                                </label>
 
-                                                @if (empty($taskCard->work_area))
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @else
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskCard->work_area)
-                                                @endcomponent
-                                                @endif
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Manhour Estimation @include('frontend.common.label.required')
-                                                </label>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Work Area @include('frontend.common.label.optional')
+                                            </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskCard->estimation_manhour)
-                                                @endcomponent
+                                            @if (empty($taskCard->work_area))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $taskCard->work_area)
+                                            @endcomponent
+                                            @endif
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                A/C Type @include('frontend.common.label.required')
+                                            </label>
+
+                                            <div style="background-color:beige; padding:15px;" class="">
+                                                @foreach($taskCard->aircrafts  as $aircraft)
+                                                    {{ $aircraft->name }},
+                                                @endforeach
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Performance Factor @include('frontend.common.label.required')
-                                                </label>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Manhour Estimation @include('frontend.common.label.required')
+                                            </label>
 
-                                                @if (empty($taskCard->performance_factor))
-                                                        @include('frontend.common.label.data-info-nodata')
-                                                    @else
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', $taskCard->performance_factor)
-                                                    @endcomponent
-                                                @endif
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $taskCard->estimation_manhour)
+                                            @endcomponent 
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Engineer Quantity @include('frontend.common.label.optional')
                                                     </label>
-
+    
                                                     @if (empty($taskCard->engineer_quantity))
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
@@ -150,7 +126,7 @@
                                                     <label class="form-control-label">
                                                         Helper Quantity @include('frontend.common.label.optional')
                                                     </label>
-
+    
                                                     @if (empty($taskCard->helper_quantity))
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
@@ -160,83 +136,34 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            </div>
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Thresholds @include('frontend.common.label.optional')
-                                                </label>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Instruction @include('frontend.common.label.required')
+                                            </label>
 
-                                                @if ($taskCard->thresholds->isEmpty())
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @else
-                                                <div style="background-color:beige; padding:15px;" class="">
-                                                    @foreach($taskCard->thresholds as $threshold)
-                                                        {{ $threshold->amount }} {{ $threshold->type->name }},
-                                                    @endforeach
-                                                </div>
-                                                @endif
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Repeats @include('frontend.common.label.optional')
-                                                </label>
-
-                                                @if ($taskCard->repeats->isEmpty())
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @else
-                                                <div style="background-color:beige; padding:15px;" class="">
-                                                    @foreach($taskCard->repeats as $repeat)
-                                                        {{ $repeat->amount }} {{ $repeat->type->name }},
-                                                    @endforeach
-                                                </div>
-                                                @endif
-                                            </div>
+                                            @if (empty($taskCard->description))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $taskCard->description)
+                                            @endcomponent
+                                            @endif
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Task Card Attachment @include('frontend.common.label.optional')
-                                                </label>
-    
-                                                 @if (empty($taskcard->description))
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @else 
-                                                    @component('frontend.common.buttons.show-file')
-                                                        @slot('text', 'show task card')
-                                                        @slot('data_target', '#modal_showtaskcard')
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.taskcard.index'))
                                                     @endcomponent
-                                                    @include('frontend.taskcard.modal')
-                                                 @endif     
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label class="form-control-label">
-                                                    Instruction @include('frontend.common.label.required')
-                                                </label>
-
-                                                @if (empty($taskCard->description))
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @else
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskCard->description)
-                                                @endcomponent
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.taskcard.index'))
-                                                        @endcomponent
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>

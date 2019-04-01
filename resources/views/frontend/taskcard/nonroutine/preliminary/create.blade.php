@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Special Instruction Task Card
+                                    Preliminary Task Card
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Special Instruction Number @include('frontend.common.label.required')
+                                                    Preliminary Number @include('frontend.common.label.required')
                                                 </label>
 
                                                 @component('frontend.common.input.text')
@@ -81,14 +81,14 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Skill @include('frontend.common.label.required')
+                                                    Work Area @include('frontend.common.label.optional')
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
-                                                    @slot('text', 'Otr Certification')
-                                                    @slot('id', 'otr_certification')
-                                                    @slot('name', 'otr_certification')
-                                                    @slot('id_error', 'otr-certification')
+                                                    @slot('text', 'Work Area')
+                                                    @slot('id', 'work_area')
+                                                    @slot('name', 'work_area')
+                                                    @slot('id_error', 'work-area')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -110,18 +110,6 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Work Area @include('frontend.common.label.optional')
-                                                </label>
-
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Work Area')
-                                                    @slot('id', 'work_area')
-                                                    @slot('name', 'work_area')
-                                                    @slot('id_error', 'work-area')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
                                                     Manhour Estimation @include('frontend.common.label.required')
                                                 </label>
 
@@ -132,22 +120,6 @@
                                                     @slot('id_error', 'manhour')
                                                     @slot('min','1')
                                                     @slot('value','1')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Performance Factor @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.decimal')
-                                                    @slot('id', 'performa')
-                                                    @slot('text', 'Performa')
-                                                    @slot('name', 'performa')
-                                                    @slot('value', '1')
-                                                    @slot('id_error', 'performa')
-                                                    @slot('min','0')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -179,62 +151,6 @@
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Threshold @include('frontend.common.label.optional')
-                                                    </label>
-                                                    <table class="threshold">
-                                                        <tr>
-                                                            <td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>
-                                                            <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
-                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                            <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
-                                                            @endforeach
-                                                            </select></td>
-                                                            <td width="5%">
-                                                                @component('frontend.common.buttons.create_repeater')
-                                                                    @slot('id', 'addrow')
-                                                                @endcomponent
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Repeat @include('frontend.common.label.optional')
-                                                    </label>
-                                                    <table class="repeat">
-                                                        <tr>
-                                                            <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
-                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
-                                                            <option value"">Select Repeat</option>
-                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                            <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
-                                                            @endforeach
-                                                            </select></td>
-                                                            <td width="5%">
-                                                                @component('frontend.common.buttons.create_repeater')
-                                                                    @slot('id', 'addrow2')
-                                                                @endcomponent
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Task Card Attachment @include('frontend.common.label.optional')
-                                                </label>
-
-                                                @component('frontend.common.input.upload')
-                                                    @slot('text', 'Taskcard')
-                                                    @slot('id', 'taskcard')
-                                                    @slot('name', 'taskcard')
-                                                @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -540,7 +456,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/taskcard/non-routine/si/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/preliminary/create.js') }}"></script>
 
     {{-- <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script> --}}
 @endpush

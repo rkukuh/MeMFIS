@@ -42,20 +42,13 @@ let TaskCard = {
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
-            data.append( "estimation_manhour", $('input[name=manhour]').val());
-            data.append( "performance_factor", $('input[name=performa]').val());
-            data.append( "helper_quantity", $('input[name=helper_quantity]').val());
-            data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
-            data.append( "description", $('#instruction').val());
             data.append( "work_area", $('#work_area').val());
             data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
-            data.append( "skill_id", $('#otr_certification').val());
-            data.append( "threshold_type", JSON.stringify(threshold_type));
-            data.append( "repeat_type", JSON.stringify(repeat_type));
-            data.append( "threshold_amount", JSON.stringify(threshold_amount));
-            data.append( "repeat_amount", JSON.stringify(repeat_amount));
-            data.append( "fileInput", document.getElementById('taskcard').files[0]);
-
+            data.append( "estimation_manhour", $('input[name=manhour]').val());
+            data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
+            data.append( "helper_quantity", $('input[name=helper_quantity]').val());  
+            data.append( "description", $('#instruction').val());
+            
             $.ajax({
                 url: '/get-takcard-si-types',
                 type: 'GET',
@@ -76,7 +69,7 @@ let TaskCard = {
                         processData: false,
                         contentType: false,
                         cache: false,
-                        url: '/taskcard-si',
+                        url: '/preliminary',
                         data: data,
                         success: function (response) {
                             if (response.errors) {
@@ -86,10 +79,6 @@ let TaskCard = {
 
                                 if (response.errors.number) {
                                     $('#number-error').html(response.errors.number[0]);
-                                }
-
-                                if (response.errors.skill_id) {
-                                    $('#otr-certification-error').html(response.errors.skill_id[0]);
                                 }
 
                                 if (response.errors.applicability_airplane) {
@@ -107,13 +96,11 @@ let TaskCard = {
 
                                 document.getElementById('title').value = data.getAll('title');
                                 document.getElementById('number').value = data.getAll('number');
-                                document.getElementById('otr_certification').value = otr_certification;
                                 document.getElementById('applicability_airplane').value = applicability_airplane;
                                 $('#applicability_airplane').select2('val', 'All');
                                 document.getElementById('work_area').value = work_area;
                                 $('#work_area').select2('val', 'All');
                                 document.getElementById('manhour').value = data.getAll('manhour');
-                                document.getElementById('performa').value = data.getAll('performa');
                                 document.getElementById('helper_quantity').value = data.getAll('helper_quantity');
                                 document.getElementById('engineer_quantity').value = data.getAll('engineer_quantity');
                                 document.getElementById('instruction').value = data.getAll('instruction');
@@ -123,7 +110,7 @@ let TaskCard = {
                                     timeOut: 5000
                                 });
 
-                                window.location.href = '/taskcard-si/'+response.uuid+'/edit';
+                                window.location.href = '/preliminary/'+response.uuid+'/edit';
                             }
                         }
                     });
