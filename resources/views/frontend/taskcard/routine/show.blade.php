@@ -51,6 +51,17 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $taskcard->title)
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Task Card Number @include('frontend.common.label.required')
@@ -73,15 +84,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $taskcard->title)
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
@@ -90,6 +92,19 @@
                                                     {{ $aircraft->name }},
                                                 @endforeach
                                             </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                RII @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @if($taskcard->is_rii == true)
+                                                    @slot('text','RII Needed')
+                                                @else
+                                                    @slot('text', 'RII Uneeded')
+                                                @endif
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -127,15 +142,11 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        RII @include('frontend.common.label.required')
+                                                        Performance Factor
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @if($taskcard->is_rii == true)
-                                                            @slot('text','RII Needed')
-                                                        @else
-                                                            @slot('text', 'RII Uneeded')
-                                                        @endif
+                                                        @slot('text', $taskcard->performance_factor)
                                                     @endcomponent
                                                 </div>
                                             </div>
