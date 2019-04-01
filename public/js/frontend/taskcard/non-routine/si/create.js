@@ -38,11 +38,12 @@ let TaskCard = {
                 applicability_airplane[i] = entry;
                 i++;
             });
-
+            console.log(JSON.stringify(applicability_airplane));
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
             data.append( "estimation_manhour", $('input[name=manhour]').val());
+            data.append( "performance_factor", $('input[name=performa]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append( "description", $('#instruction').val());
@@ -95,8 +96,12 @@ let TaskCard = {
                                     $('#applicability-airplane-error').html(response.errors.applicability_airplane[0]);
                                 }
 
-                                if (response.errors.manhour) {
-                                    $('#manhour-error').html(response.errors.manhour[0]);
+                                if (response.errors.estimation_manhour) {
+                                    $('#manhour-error').html(response.errors.estimation_manhour[0]);
+                                }
+
+                                if (response.errors.performance_factor) {
+                                    $('#performa-error').html(response.errors.performance_factor[0]);
                                 }
 
                                 if (response.errors.description) {
@@ -111,7 +116,8 @@ let TaskCard = {
                                 $('#applicability_airplane').select2('val', 'All');
                                 document.getElementById('work_area').value = work_area;
                                 $('#work_area').select2('val', 'All');
-                                document.getElementById('manhour').value = data.getAll('manhour');
+                                document.getElementById('manhour').value = data.getAll('estimation_manhour');
+                                document.getElementById('performa').value = data.getAll('performace_factor');
                                 document.getElementById('helper_quantity').value = data.getAll('helper_quantity');
                                 document.getElementById('engineer_quantity').value = data.getAll('engineer_quantity');
                                 document.getElementById('instruction').value = data.getAll('instruction');
