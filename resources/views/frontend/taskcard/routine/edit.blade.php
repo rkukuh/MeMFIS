@@ -51,6 +51,21 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'title')
+                                                @slot('text', 'Title')
+                                                @slot('name', 'title')
+                                                @slot('value', $taskcard->title)
+                                                @slot('id_error', 'title')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Task Card Number @include('frontend.common.label.required')
@@ -87,19 +102,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'title')
-                                                @slot('text', 'Title')
-                                                @slot('name', 'title')
-                                                @slot('value', $taskcard->title)
-                                                @slot('id_error', 'title')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
@@ -123,6 +125,18 @@
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                @component('frontend.common.input.checkbox')
+                                                @slot('id', 'is_rii')
+                                                @slot('name', 'is_rii')
+                                                @slot('text', 'RII?')
+                                                @if ($taskcard->is_rii == 1)
+                                                    @slot('checked', 'checked')
+                                                @endif
+                                                @slot('style_div','margin-top:30px')
+                                            @endcomponent
+                                        </div>
+
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -180,14 +194,15 @@
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        @component('frontend.common.input.checkbox')
-                                                        @slot('id', 'is_rii')
-                                                        @slot('name', 'is_rii')
-                                                        @slot('text', 'RII?')
-                                                        @if ($taskcard->is_rii == 1)
-                                                            @slot('checked', 'checked')
-                                                        @endif
-                                                        @slot('style_div','margin-top:30px')
+                                                    <label class="form-control-label">
+                                                        Performance Factor @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.decimal')
+                                                        @slot('id', 'performa')
+                                                        @slot('text', 'Performa')
+                                                        @slot('name', 'performa')
+                                                        @slot('value', $taskcard->performance_factor)
                                                     @endcomponent
                                                 </div>
                                             </div>
