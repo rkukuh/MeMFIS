@@ -219,6 +219,10 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['taskcard-si' => 'taskCard']
             ]);
 
+            Route::resource('preliminary', 'PreliminaryController', [
+                'parameters' => ['preliminary' => 'taskCard']
+            ]);
+
             // Relationships
 
             Route::name('taskcard-routine.')->group(function () {
@@ -255,6 +259,16 @@ Route::name('frontend.')->group(function () {
                     /** Transaction: Item */
                     Route::post('/{taskcard}/item', 'TaskCardSIItemController@store')->name('item.store');
                     Route::delete('/{taskcard}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
+
+                });
+            });
+
+            Route::name('preliminary.')->group(function () {
+                Route::prefix('preliminary')->group(function () {
+
+                    /** Transaction: Item */
+                    // Route::post('/{preliminary}/item', 'TaskCardSIItemController@store')->name('item.store');
+                    // Route::delete('/{preliminary}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
 
                 });
             });
