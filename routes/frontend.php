@@ -326,7 +326,10 @@ Route::name('frontend.')->group(function () {
         Route::view('/summary/ad-sb', 'frontend.workpackage.nonroutine.adsb.ad-sb-summary')->name('summary.ad-sb');
         Route::view('/summary/cmr-awl', 'frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary')->name('summary.cmr-awl');
         Route::view('/summary/si', 'frontend.workpackage.nonroutine.si.si-summary')->name('summary.si');
-
+        Route::view('/summary/workpackage-summary', 'frontend.workpackage.summary')->name('summary.workpackage-summary');
+        Route::view('/summary/routine-summary', 'frontend.workpackage.routine.summary')->name('summary.routine-summary');
+        Route::view('/summary/nonroutine-summary', 'frontend.workpackage.nonroutine.summary')->name('summary.nonroutine-summary');
+        
         /** PRICE LIST */
 
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
