@@ -703,19 +703,12 @@ let TaskCard = {
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
-            data.append( "estimation_manhour", $('input[name=manhour]').val());
-            data.append( "performance_factor", $('input[name=performa]').val());
-            data.append( "helper_quantity", $('input[name=helper_quantity]').val());
-            data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
-            data.append( "description", $('#instruction').val());
             data.append( "work_area", $('#work_area').val());
             data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
-            data.append( "skill_id", $('#otr_certification').val());
-            data.append( "threshold_type", JSON.stringify(threshold_type));
-            data.append( "repeat_type", JSON.stringify(repeat_type));
-            data.append( "threshold_amount", JSON.stringify(threshold_amount));
-            data.append( "repeat_amount", JSON.stringify(repeat_amount));
-            data.append( "fileInput", document.getElementById('taskcard').files[0]);
+            data.append( "estimation_manhour", $('input[name=manhour]').val());
+            data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
+            data.append( "helper_quantity", $('input[name=helper_quantity]').val());  
+            data.append( "description", $('#instruction').val());
             data.append('_method', 'PUT');
 
             $.ajax({
@@ -723,46 +716,44 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'POST',
-                url: '/taskcard-si/' + taskcard_uuid + '/',
+                url: '/preliminary/' + taskcard_uuid + '/',
                 data: data,
                 processData: false,
                 contentType: false,
                 cache: false,
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.title) {
-                            $('#title-error').html(data.errors.title[0]);
+                        if (response.errors.title) {
+                            $('#title-error').html(response.errors.title[0]);
                         }
 
-                        if (data.errors.number) {
-                            $('#number-error').html(data.errors.number[0]);
+                        if (response.errors.number) {
+                            $('#number-error').html(response.errors.number[0]);
                         }
 
-                        if (data.errors.skill_id) {
-                            $('#otr-certification-error').html(data.errors.skill_id[0]);
+                        if (response.errors.applicability_airplane) {
+                            $('#applicability-airplane-error').html(response.errors.applicability_airplane[0]);
                         }
 
-                        if (data.errors.applicability_airplane) {
-                            $('#applicability_airplane-error').html(data.errors.applicability_airplane[0]);
+                        if (response.errors.manhour) {
+                            $('#manhour-error').html(response.errors.manhour[0]);
                         }
 
-                        if (data.errors.manhour) {
-                            $('#manhour-error').html(data.errors.manhour[0]);
-                        }
-
-                        if (data.errors.description) {
-                            $('#description-error').html(data.errors.description[0]);
+                        if (response.errors.description) {
+                            $('#instruction-error').html(response.errors.description[0]);
                         }
 
 
-                        document.getElementById('title').value = title;
-                        document.getElementById('number').value = number;
-                        document.getElementById('otr_certification').value = otr_certification;
+                        document.getElementById('title').value = data.getAll('title');
+                        document.getElementById('number').value = data.getAll('number');
                         document.getElementById('applicability_airplane').value = applicability_airplane;
+                        $('#applicability_airplane').select2('val', 'All');
                         document.getElementById('work_area').value = work_area;
-                        document.getElementById('manhour').value = manhour;
-                        document.getElementById('helper_quantity').value = helper_quantity;
-                        document.getElementById('instruction').value = instruction;
+                        $('#work_area').select2('val', 'All');
+                        document.getElementById('manhour').value = data.getAll('manhour');
+                        document.getElementById('helper_quantity').value = data.getAll('helper_quantity');
+                        document.getElementById('engineer_quantity').value = data.getAll('engineer_quantity');
+                        document.getElementById('instruction').value = data.getAll('instruction');
 
                     } else {
                         //    taskcard_reset();
