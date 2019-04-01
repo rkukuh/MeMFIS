@@ -4,7 +4,7 @@ let TaskCard = {
             add = add || '...';
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
-       
+
         $('.taskcard_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -66,6 +66,9 @@ let TaskCard = {
                         }
                         else if(t.type.code == "si"){
                             return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if(t.type.code == "preliminary"){
+                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
                         } else {
                             return (
                                 'dummy'
@@ -85,7 +88,7 @@ let TaskCard = {
                     title: 'A/C',
                     sortable: 'asc',
                     filterable: !1,
-                    
+
                 },
                 {
                     field: 'skill',
@@ -149,6 +152,16 @@ let TaskCard = {
                         else if(t.type.code == "si"){
                             return (
                                 '<a href="/taskcard-si/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'
+                            );
+                        }
+                        else if(t.type.code == "preliminary"){
+                            return (
+                                '<a href="/preliminary/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
                                 '</a>' +
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
