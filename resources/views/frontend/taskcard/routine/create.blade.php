@@ -340,7 +340,7 @@
                                                 </label>
                                                 <table class="threshold">
                                                     <tr>
-                                                        <td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>
+                                                        <td width="45%"><input type="number" required="required" class="form-control" name="threshold_amount[]"/></td>
                                                         <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
@@ -360,7 +360,7 @@
                                                 </label>
                                                 <table class="repeat">
                                                     <tr>
-                                                        <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                        <td width="45%"><input type="number" required="required" class="form-control" name="repeat_amount[]"/></td>
                                                         <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
                                                         <option value"">Select Repeat</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)

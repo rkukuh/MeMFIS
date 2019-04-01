@@ -424,7 +424,7 @@
                                                 @if($taskcard->thresholds->isEmpty())
                                                     <tr>
                                                         <td width="45%">
-                                                            <input type="text" required="required" class="form-control" name="threshold_amount[]"/>
+                                                            <input type="number" required="required" class="form-control" name="threshold_amount[]"/>
                                                         </td>
                                                         <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
@@ -441,7 +441,7 @@
                                                     @for($i = 0 ; $i < sizeof($taskcard->thresholds); $i++)
                                                     <tr>
                                                         <td width="45%">
-                                                            <input type="text" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
+                                                            <input type="number" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
                                                         </td>
                                                         <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
@@ -472,7 +472,7 @@
                                             <table class="repeat">
                                                 @if($taskcard->repeats->isEmpty())
                                                     <tr>
-                                                        <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                        <td width="45%"><input type="number" required="required" class="form-control" name="repeat_amount[]"/></td>
                                                         <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
                                                         <option value"">Select Repeat</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
