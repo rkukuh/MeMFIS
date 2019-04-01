@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class TaskCardRoutineUpdate extends FormRequest
+class PreliminaryUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,10 +29,8 @@ class TaskCardRoutineUpdate extends FormRequest
         return [
             'number' => 'required',
             'title' => 'required',
-            'type_id' => 'required',
-            'task_id' => 'required',
             'estimation_manhour' => 'required',
-            'skill_id' => 'required',
+            'description' => 'required',
             'applicability_airplane' => 'required',
         ];
     }
@@ -45,6 +43,7 @@ class TaskCardRoutineUpdate extends FormRequest
     public function messages()
     {
         return [
+            'description.required' => 'The instruction field is required.',
         ];
     }
 

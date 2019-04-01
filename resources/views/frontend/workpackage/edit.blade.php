@@ -133,11 +133,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Workpackage Summary')
-                                                                @slot('href', route('frontend.summary.basic') )
+                                                                @slot('href', route('frontend.summary.workpackage-summary') )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Routine Summary')
-                                                                @slot('href', route('frontend.summary.basic') )
+                                                                @slot('href', route('frontend.summary.routine-summary') )
                                                             @endcomponent
                                                             </div>
                                                         </div>
@@ -153,11 +153,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Workpackage Summary')
-                                                                @slot('href', route('frontend.summary.basic') )
+                                                                @slot('href', route('frontend.summary.workpackage-summary') )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Non-routine Summary')
-                                                                @slot('href', route('frontend.summary.basic') )
+                                                                @slot('href', route('frontend.summary.nonroutine-summary') )
                                                             @endcomponent
                                                             </div>
                                                         </div>

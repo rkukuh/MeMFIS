@@ -19,9 +19,9 @@ let Customer = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !0,
+                serverPaging: !1,
                 serverFiltering: !0,
-                serverSorting: !0
+                serverSorting: !1
             },
             layout: {
                 theme: 'default',

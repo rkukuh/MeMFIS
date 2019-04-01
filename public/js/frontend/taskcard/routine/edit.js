@@ -684,7 +684,7 @@ let TaskCard = {
 
 
         $('.footer').on('click', '.edit-taskcard', function () {
-            
+
             let access = [];
             let i = 0;
             $("#access").val().forEach(function(entry) {
@@ -770,7 +770,7 @@ let TaskCard = {
             data.append('_method', 'PUT');
 
             for(let pair of data.entries()) {
-                console.log(pair[0]+ ', '+ pair[1]); 
+                console.log(pair[0]+ ', '+ pair[1]);
             }
 
             $.ajax({

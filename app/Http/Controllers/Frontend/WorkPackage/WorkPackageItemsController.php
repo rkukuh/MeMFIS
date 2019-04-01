@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Frontend\WorkPackage;
 
 use App\Models\Aircraft;
 use App\Models\ListUtil;
+use App\Models\Item;
 use App\Models\WorkPackage;
 use App\Models\TaskCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\WorkPackageStore;
-use App\Http\Requests\Frontend\WorkPackageUpdate;
+use App\Http\Requests\Frontend\WorkPackageItemStore;
+use App\Http\Requests\Frontend\WorkPackageItemUpdate;
 
 class WorkPackageItemsController extends Controller
 {
@@ -40,7 +41,7 @@ class WorkPackageItemsController extends Controller
      * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WorkPackageStore $request, WorkPackage $workPackage)
+    public function store(WorkPackageItemStore $request, WorkPackage $workPackage)
     {
         $workPackage->items()->attach($workPackage->id, [
             'item_id' => $request->item_id,
@@ -91,7 +92,7 @@ class WorkPackageItemsController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function update(WorkPackageUpdate $request, WorkPackage $workPackage)
+    public function update(WorkPackageItemUpdate $request, WorkPackage $workPackage)
     {
         //
     }
@@ -102,9 +103,11 @@ class WorkPackageItemsController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WorkPackage $workPackage)
+    public function destroy(WorkPackage $workPackage, Item $item)
     {
-        //
+        $workPackage->items()->detach($item);
+
+        return response()->json($workPackage);
     }
 
 }

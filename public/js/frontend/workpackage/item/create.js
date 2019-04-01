@@ -83,9 +83,9 @@ let Workpackage3 = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
                         );
                     }
                 }
@@ -177,9 +177,9 @@ let Workpackage3 = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
                         );
                     }
                 }
@@ -209,15 +209,19 @@ let Workpackage3 = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#material-error').html(data.errors.item_id[0]);
-                        // }
+                        if (data.errors.item_id) {
+                            $('#material-error').html(data.errors.item_id[0]);
+                        }
 
-                        // if (data.errors.quantity) {
-                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
-                        // }
-                        // document.getElementById('material').value = material;
-                        // document.getElementById('quantity').value = quantity;
+                        if (data.errors.quantity) {
+                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                        }
+
+                        if (data.errors.unit_id) {
+                            $('#unit_material-error').html(data.errors.unit_id[0]);
+                        }
+
+                        document.getElementById('quantity').value = quantity;
 
                     } else {
 
@@ -233,6 +237,50 @@ let Workpackage3 = {
 
 
                     }
+                }
+            });
+        });
+
+        $('.materials_datatable').on('click', '.delete', function () {
+            let material_uuid = $(this).data('uuid');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/'+material_uuid+'/item',
+                        success: function (data) {
+                            toastr.success('Material has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.materials_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
                 }
             });
         });
@@ -265,7 +313,11 @@ let Workpackage3 = {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
-                        document.getElementById('tool').value = tool;
+
+                        if (data.errors.unit_id) {
+                            $('#unit_tool-error').html(data.errors.unit_id[0]);
+                        }
+
                         document.getElementById('quantity').value = quantity;
                     } else {
 
@@ -287,6 +339,50 @@ let Workpackage3 = {
 
 
                     }
+                }
+            });
+        });
+
+        $('.tools_datatable').on('click', '.delete', function () {
+            let tool_uuid = $(this).data('uuid');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/'+tool_uuid+'/item',
+                        success: function (data) {
+                            toastr.success('Tool has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.tools_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
                 }
             });
         });

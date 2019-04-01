@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\Frontend;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class EOInstructionUpdate extends FormRequest
+class WorkPackageItemStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,11 +26,13 @@ class EOInstructionUpdate extends FormRequest
     public function rules()
     {
         return [
-            'estimation_manhour' => 'required|numeric',
-            'work_area' => 'required|exists:types,id',
-            'helper_quantity' => 'required|numeric',
-            'engineer_quantity' => 'required|numeric',
-            'skill_id' => 'required',
+            'item_id' => 'required',
+            'unit_id' => 'required',
+            'quantity' => 'required',
         ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }
