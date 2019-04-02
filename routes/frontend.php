@@ -344,6 +344,10 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
 
+        /** PRICE LIST */
+
+        Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
+
     });
 
 });
