@@ -853,7 +853,31 @@ let TaskCard = {
 
     }
 };
+$(document).ready(function () {
+    let taskcard_routine_type = $('select[name="taskcard_routine_type"]').val();
+    if(taskcard_routine_type == 100 ){
+        $("#station_div").removeClass("hidden");
+        $("#stringer_div").removeClass("hidden");
+        $("#service_bulletin_div").removeClass("hidden");
+        $("#section_div").removeClass("hidden");
+    }
 
+
+    $('select[name="taskcard_routine_type"]').on('change', function () {
+        if (this.options[this.selectedIndex].text == "CPCP") {
+        $("#station_div").removeClass("hidden");
+        $("#stringer_div").removeClass("hidden");
+        $("#service_bulletin_div").removeClass("hidden");
+        $("#section_div").removeClass("hidden");
+        
+        } else {
+            $("#station_div").addClass("hidden");
+            $("#stringer_div").addClass("hidden");
+            $("#service_bulletin_div").addClass("hidden");
+            $("#section_div").addClass("hidden");
+        }
+    });
+});
 jQuery(document).ready(function () {
     TaskCard.init();
 });

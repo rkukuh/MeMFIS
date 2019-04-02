@@ -334,6 +334,61 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="stringer_div">
+                                            <label class="form-control-label">
+                                                Stringer @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'stringer')
+                                                @slot('text', 'Stringer')
+                                                @slot('name', 'stringer')
+                                                @slot('id_error', 'stringer')
+                                            @endcomponent
+                                        </div>
+                                        
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="station_div">
+                                            <label class="form-control-label">
+                                                Station @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'station')
+                                                @slot('text', 'Station')
+                                                @slot('name', 'station')
+                                                @slot('id_error', 'station')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="service_bulletin_div">
+                                            <label class="form-control-label">
+                                                Ref. Service Bulletins @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'service_bulletin')
+                                                @slot('text', 'Service Bulletins')
+                                                @slot('name', 'service_bulletin')
+                                            @endcomponent
+
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="section_div">
+                                            <label class="form-control-label">
+                                                Section(s) @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'section')
+                                                @slot('text', 'Section')
+                                                @slot('name', 'section')
+                                                @slot('id_error', 'section')
+                                                @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Threshold @include('frontend.common.label.optional')
@@ -605,6 +660,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/section.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/section.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/routine/create.js') }}"></script>
@@ -695,5 +753,7 @@ var ajaxdata={"UserType":usertype};
 
 console.log(JSON.stringify(ajaxdata));
       });
+
+      
   </script>
 @endpush
