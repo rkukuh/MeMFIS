@@ -75,7 +75,7 @@ let Project = {
                         class: 'm-checkbox--solid m-checkbox--brand'
                     }
                 },
-              
+
             ]
         });
 
@@ -126,7 +126,7 @@ $('select[name="customer"]').on('change', function () {
     txt_name = $("#name");
     console.log(customer_uuid.value);
     txt_name.html(customer_uuid.text);
-    
+
 });
 jQuery(document).ready(function () {
     Project.init();
