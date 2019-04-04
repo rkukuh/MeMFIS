@@ -128,7 +128,7 @@ let Workpackage2 = {
                         // document.getElementById('title').value = title;
 
                     } else {
-                        $('#modal_customer').modal('hide');
+                        // $('#modal_customer').modal('hide');
 
                         toastr.success('Workpackage has been created.', 'Success', {
                             timeOut: 5000
