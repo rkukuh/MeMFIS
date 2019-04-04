@@ -268,6 +268,7 @@ class Type extends MemfisModel
     {
         return $query->where('of', 'taskcard-type-non-routine')
                      ->where('code', '<>', 'si')
+                     ->where('code', '<>', 'preliminary')
                      ->where('code', '<>', 'htcrr');
     }
 
