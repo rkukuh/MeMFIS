@@ -264,8 +264,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-taskcard')
-                                                        @slot('class', 'add-taskcard')
+                                                        @slot('id', 'add-project')
+                                                        @slot('class', 'add-project')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -308,27 +308,9 @@
 @endpush
 
 @push('footer-scripts')
-    <script>
-        function initMap() {
-            var myLatLng = {lat: -7.265757, lng: 112.734146};
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom    : 10,
-                center  : myLatLng
-            });
-
-            var marker = new google.maps.Marker({
-                position    : myLatLng,
-                map         : map,
-                title       : 'Hello World!'
-            });
-        }
-    </script>
-
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
-    {{-- <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
@@ -343,11 +325,7 @@
     <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/project/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script> --}}
-    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
 
 @endpush
