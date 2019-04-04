@@ -314,12 +314,10 @@
                                                         </button>
 
                                                         <div class="m-btn-group btn-group" role="group">
-                                                        <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
-                                                            <span>
-                                                                <i class="la la-plus-circle"></i>
-                                                            <span>Blank Workpackage</span>
-                                                            </span>
-                                                        </button>
+                                                        @component('frontend.common.buttons.create')
+                                                            @slot('text', 'Work Package')
+                                                            @slot('href', route('frontend.project-workpackage.create',['project' => $project->uuid]) )
+                                                        @endcomponent
                                                         </div>
                                                     </div>
 

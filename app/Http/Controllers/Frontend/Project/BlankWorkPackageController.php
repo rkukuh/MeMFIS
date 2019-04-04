@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\WorkPackage;
+namespace App\Http\Controllers\Frontend\Project;
 
+use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\ListUtil;
-use App\Models\WorkPackage;
 use App\Models\TaskCard;
+use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkPackageStore;
 use App\Http\Requests\Frontend\WorkPackageUpdate;
 
-class WorkPackageController extends Controller
+class BlankWorkPackageController extends Controller
 {
     protected $aircrafts;
 
@@ -36,9 +37,11 @@ class WorkPackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        return view('frontend.workpackage.create');
+        return view('frontend.workpackage.blank.create',[
+            'project' => $project
+        ]);
     }
 
     /**
@@ -86,11 +89,12 @@ class WorkPackageController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function edit(WorkPackage $workPackage)
+    public function edit(Project $project, WorkPackage $workPackage)
     {
-        return view('frontend.workpackage.edit',[
+        return view('frontend.workpackage.blank.edit',[
             'workPackage' => $workPackage,
             'aircrafts' => $this->aircrafts,
+            'project' => $project,
         ]);
     }
 
@@ -135,4 +139,5 @@ class WorkPackageController extends Controller
 
         return response()->json($workPackage);
     }
+    
 }
