@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\WorkPackage;
+namespace App\Http\Controllers\Frontend\Project;
 
+use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\ListUtil;
-use App\Models\WorkPackage;
 use App\Models\TaskCard;
+use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkPackageStore;
 use App\Http\Requests\Frontend\WorkPackageUpdate;
 
-class WorkPackageController extends Controller
+class BlankWorkPackageController extends Controller
 {
     protected $aircrafts;
 
@@ -28,7 +29,7 @@ class WorkPackageController extends Controller
      */
     public function index()
     {
-        return view('frontend.workpackage.index');
+       
     }
 
     /**
@@ -36,9 +37,11 @@ class WorkPackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        return view('frontend.workpackage.create');
+        return view('frontend.workpackage.blank.create',[
+            'project' => $project
+        ]);
     }
 
     /**
@@ -49,9 +52,7 @@ class WorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        $workpackage = Workpackage::create($request->all());
-
-        return response()->json($workpackage);
+        
     }
 
     /**
@@ -62,9 +63,7 @@ class WorkPackageController extends Controller
      */
     public function addTaskCard(Request $request, WorkPackage $workPackage)
     {
-        $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
-
-        return response()->json($workPackage);
+        
     }
 
     /**
@@ -75,7 +74,7 @@ class WorkPackageController extends Controller
      */
     public function show(WorkPackage $workPackage)
     {
-        return view('frontend.workpackage.show');
+        
     }
 
     /**
@@ -84,11 +83,12 @@ class WorkPackageController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function edit(WorkPackage $workPackage)
+    public function edit(Project $project, WorkPackage $workPackage)
     {
-        return view('frontend.workpackage.edit',[
+        return view('frontend.workpackage.blank.edit',[
             'workPackage' => $workPackage,
             'aircrafts' => $this->aircrafts,
+            'project' => $project,
         ]);
     }
 
@@ -101,11 +101,7 @@ class WorkPackageController extends Controller
      */
     public function update(WorkPackageUpdate $request, WorkPackage $workPackage)
     {
-        $workPackage = WorkPackage::find($workPackage);
-        // $workPackage->name = $request->name;
-        // $workPackage->save();
-
-        return response()->json($workPackage);
+        
     }
 
     /**
@@ -116,9 +112,7 @@ class WorkPackageController extends Controller
      */
     public function destroy(WorkPackage $workPackage)
     {
-        $workPackage->delete();
-
-        return response()->json($workPackage);
+        
     }
 
     /**
@@ -129,8 +123,7 @@ class WorkPackageController extends Controller
      */
     public function deleteTaskCard(WorkPackage $workPackage,TaskCard $taskcard)
     {
-        $workPackage->taskcards()->detach($taskcard);
-
-        return response()->json($workPackage);
+        
     }
+    
 }

@@ -1,11 +1,11 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader hidden" >
+    <div class="m-subheader hidden">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Support Documents
+                    Support Document
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.taskcard.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.aircraft.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Support Documents
+                                Support Document
                             </span>
                         </a>
                     </li>
@@ -27,7 +27,6 @@
             </div>
         </div>
     </div>
-
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -42,7 +41,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Support Documents
+                                    Support Document
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +52,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-8 order-2 order-xl-1">
                                         <div class="form-group m-form__group row align-items-center">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
                                                     <input type="text" class="form-control m-input" placeholder="Search..."
                                                         id="generalSearch">
@@ -65,9 +64,9 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create')
-                                            @slot('text', 'Support Documents')                                            @slot('data_target', '#modal_aircraft')
-                                            @slot('data_target', '#modal_support_documents')
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('text', 'Add Support Document')
+                                            @slot('data_target', '#modal_add_document')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -75,7 +74,7 @@
                                 </div>
                             </div>
                             @include('frontend.support-documents.modal')
-                            <div class="taskcard_datatable" id="scrolling_both"></div>
+                            <div class="aircraft_datatable" id="aircraft_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -85,6 +84,9 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/taskcard/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/manufacturer.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/manufacturer.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/action-botton/aircraft.js')}}"></script>
+    <script src="{{ asset('js/frontend/aircraft/index.js')}}"></script>
 @endpush
