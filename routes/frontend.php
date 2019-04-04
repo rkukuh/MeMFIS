@@ -72,6 +72,7 @@ Route::name('frontend.')->group(function () {
         Route::namespace('Project')->group(function () {
 
             Route::view('/project', 'frontend.project.index')->name('project.index');
+            Route::view('/project/datatable', 'frontend.project.datatable')->name('project.datatable');
 
             Route::resource('project-hm', 'ProjectHMController', [
                 'parameters' => ['project-hm' => 'project']
