@@ -29,7 +29,7 @@ class BlankWorkPackageController extends Controller
      */
     public function index()
     {
-        return view('frontend.workpackage.index');
+       
     }
 
     /**
@@ -52,9 +52,7 @@ class BlankWorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        $workpackage = Workpackage::create($request->all());
-
-        return response()->json($workpackage);
+        
     }
 
     /**
@@ -65,11 +63,7 @@ class BlankWorkPackageController extends Controller
      */
     public function addTaskCard(Request $request, WorkPackage $workPackage)
     {
-        // dd((TaskCard::where('uuid', $request->taskcard)->first())->id);
-        // $taskcard = TaskCard::where('uuid', $request->taskcard)->first();
-        $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
-
-        return response()->json($workPackage);
+        
     }
 
     /**
@@ -80,7 +74,7 @@ class BlankWorkPackageController extends Controller
      */
     public function show(WorkPackage $workPackage)
     {
-        return view('frontend.workpackage.show');
+        
     }
 
     /**
@@ -107,11 +101,7 @@ class BlankWorkPackageController extends Controller
      */
     public function update(WorkPackageUpdate $request, WorkPackage $workPackage)
     {
-        $workPackage = WorkPackage::find($workPackage);
-        // $workPackage->name = $request->name;
-        // $workPackage->save();
-
-        return response()->json($workPackage);
+        
     }
 
     /**
@@ -122,9 +112,7 @@ class BlankWorkPackageController extends Controller
      */
     public function destroy(WorkPackage $workPackage)
     {
-        $workPackage->delete();
-
-        return response()->json($workPackage);
+        
     }
 
     /**
@@ -135,9 +123,7 @@ class BlankWorkPackageController extends Controller
      */
     public function deleteTaskCard(WorkPackage $workPackage,TaskCard $taskcard)
     {
-        $workPackage->taskcards()->detach($taskcard);
-
-        return response()->json($workPackage);
+        
     }
     
 }
