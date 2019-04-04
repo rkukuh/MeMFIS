@@ -400,6 +400,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/tools', 'WorkPackageItemsDatatables@tool')->name('tools.index');
                 Route::get('/{workPackage}/materials', 'WorkPackageItemsDatatables@material')->name('materials.index');
 
+                Route::get('/modal', 'ProjectDatatables@workpackageModal')->name('workpackage.modal');
 
             });
 
