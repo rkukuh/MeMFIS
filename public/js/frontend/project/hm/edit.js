@@ -47,7 +47,8 @@ let Project = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'code',
                     title: 'Workpackage Number',
                     sortable: !1,
@@ -57,6 +58,9 @@ let Project = {
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<a href="/project/'+project_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                    }
                 },
                 {
                     field: 'aircraft.name',
