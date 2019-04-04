@@ -750,6 +750,10 @@ let TaskCard = {
                             $('#manhour-error').html(data.errors.manhour[0]);
                         }
 
+                        if (response.errors.performance_factor) {
+                            $('#performa-error').html(response.errors.performance_factor[0]);
+                        }
+
                         if (data.errors.description) {
                             $('#description-error').html(data.errors.description[0]);
                         }
@@ -760,7 +764,8 @@ let TaskCard = {
                         document.getElementById('otr_certification').value = otr_certification;
                         document.getElementById('applicability_airplane').value = applicability_airplane;
                         document.getElementById('work_area').value = work_area;
-                        document.getElementById('manhour').value = manhour;
+                        document.getElementById('manhour').value = data.getAll('estimation_manhour');
+                        document.getElementById('performa').value = data.getAll('performace_factor');
                         document.getElementById('helper_quantity').value = helper_quantity;
                         document.getElementById('instruction').value = instruction;
 

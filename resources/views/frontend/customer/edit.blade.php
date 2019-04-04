@@ -459,7 +459,7 @@
                                             <div class="m-portlet__head-tools">
                                                 <ul class="nav nav-pills" role="tablist">
                                                     <li class="nav-item ">
-                                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1"> 
+                                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1">
                                                             <i class="la la-bell-o"></i> Address
                                                         </a>
                                                     </li>
@@ -472,7 +472,7 @@
                                                             <a class="dropdown-item" data-toggle="tab" href="#m_tabs_6_3">Contact</a>
                                                         </div>
                                                     </li>
-                                                </ul>  
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

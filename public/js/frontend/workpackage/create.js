@@ -117,18 +117,18 @@ let Workpackage2 = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.applicability-airplane) {
-                        //     $('#applicability-airplane').html(data.errors.applicability-airplane[0]);
-                        // }
-                        // if (data.errors.title) {
-                        //     $('#title').html(data.errors.title[0]);
-                        // }
+                        if (data.errors.applicability_airplane) {
+                            $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                        }
+                        if (data.errors.title) {
+                            $('#title-error').html(data.errors.title[0]);
+                        }
 
                         // document.getElementById('applicability-airplane').value = applicability-airplane;
                         // document.getElementById('title').value = title;
 
                     } else {
-                        $('#modal_customer').modal('hide');
+                        // $('#modal_customer').modal('hide');
 
                         toastr.success('Workpackage has been created.', 'Success', {
                             timeOut: 5000

@@ -1,4 +1,4 @@
-let Project = {
+let Workpackage2 = {
     init: function () {
         $('.taskcard_datatable').mDatatable({
             data: {
@@ -58,8 +58,22 @@ let Project = {
                     width: 150,
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
+                    field: 'work_area',
+                    title: 'Area',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
+                    field: 'zone',
+                    title: 'Zone',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
+                    field: 'rii',
+                    title: 'Rii',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
@@ -75,59 +89,63 @@ let Project = {
                         class: 'm-checkbox--solid m-checkbox--brand'
                     }
                 },
-              
+
             ]
         });
 
-        let simpan = $('.modal-footer').on('click', '.add', function () {
+        let simpan = $('.action-buttons').on('click', '.add-workpackage', function () {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
-            let registerForm = $('#CustomerForm');
-            let name = $('input[name=name]').val();
-            let formData = registerForm.serialize();
+
+            let title = $('input[name=title]').val();
+            let applicability_airplane = $('#applicability_airplane').val();
+            let description = $('#description').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/category',
+                url: '/project-workpackage/'+projectUUID,
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name
+                    title: title,
+                    aircraft_id: applicability_airplane,
+                    description: description,
+                    is_template:'0',
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-
-                            document.getElementById('name').value = name;
+                        if (data.errors.applicability_airplane) {
+                            $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
                         }
+                        if (data.errors.title) {
+                            $('#title-error').html(data.errors.title[0]);
+                        }
+
+                        // document.getElementById('applicability-airplane').value = applicability-airplane;
+                        // document.getElementById('title').value = title;
+
                     } else {
                         $('#modal_customer').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Workpackage has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable').mDatatable();
+                        window.location.href = '/project/'+projectUUID+'/workpackage/'+data.uuid+'/edit';
+                        // let table = $('.m_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                        // table.originalDataSet = [];
+                        // table.reload();
                     }
                 }
             });
         });
     }
 };
-$('select[name="customer"]').on('change', function () {
-    let customer_uuid = this.options[this.selectedIndex];
-    txt_name = $("#name");
-    console.log(customer_uuid.value);
-    txt_name.html(customer_uuid.text);
-    
-});
+
 jQuery(document).ready(function () {
-    Project.init();
+    Workpackage2.init();
 });

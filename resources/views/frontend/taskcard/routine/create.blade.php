@@ -51,6 +51,20 @@
                             <form id="taskcardform" name="taskcardform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'title')
+                                                @slot('text', 'Title')
+                                                @slot('name', 'title')
+                                                @slot('id_error', 'title')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Task Card Number @include('frontend.common.label.required')
@@ -79,18 +93,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'title')
-                                                @slot('text', 'Title')
-                                                @slot('name', 'title')
-                                                @slot('id_error', 'title')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
@@ -102,6 +104,15 @@
                                                 @slot('help_text','You can chose multiple value')
                                                 @slot('id_error', 'applicability-airplane')
                                             @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('id', 'is_rii')
+                                                @slot('name', 'is_rii')
+                                                @slot('text', 'RII?')
+                                                @slot('style_div','margin-top:30px')
+                                            @endcomponent
+
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -151,7 +162,7 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Performance Factor @include('frontend.common.label.required')
+                                                        Performance Factor
                                                     </label>
 
                                                     @component('frontend.common.input.decimal')
@@ -165,17 +176,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('id', 'is_rii')
-                                                @slot('name', 'is_rii')
-                                                @slot('text', 'RII?')
-                                                @slot('style_div','margin-top:30px')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -204,6 +204,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Work Area @include('frontend.common.label.optional')
@@ -216,9 +218,6 @@
                                                 @slot('id_error', 'work-area')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Access @include('frontend.common.label.optional')
@@ -232,8 +231,9 @@
                                                 @slot('multiple','multiple')
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
-
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Zone @include('frontend.common.label.optional')
@@ -247,10 +247,7 @@
                                                 @slot('multiple','multiple')
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
-
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Source @include('frontend.common.label.optional')
@@ -261,8 +258,9 @@
                                                 @slot('text', 'Source')
                                                 @slot('name', 'source')
                                             @endcomponent
-
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Related Card @include('frontend.common.label.optional')
@@ -277,31 +275,116 @@
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Version @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    @component('frontend.common.input.select2')
+                                                        @slot('id', 'version')
+                                                        @slot('text', 'Version')
+                                                        @slot('name', 'version')
+                                                        @slot('multiple','multiple')
+                                                        @slot('id_error', 'version')
+                                                        @slot('help_text','You can chose multiple value')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Effectivity @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', 'Effectivity')
+                                                        @slot('id', 'effectivity')
+                                                        @slot('name', 'effectivity')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Version @include('frontend.common.label.optional')
+                                                Task Card Attachment @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'version')
-                                                @slot('text', 'Version')
-                                                @slot('name', 'version')
-                                                @slot('multiple','multiple')
-                                                @slot('id_error', 'version')
-                                                @slot('help_text','You can chose multiple value')
+                                            @component('frontend.common.input.upload')
+                                                @slot('text', 'Taskcard')
+                                                @slot('id', 'taskcard')
+                                                @slot('name', 'taskcard')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Effectivity @include('frontend.common.label.optional')
+                                                Documents library @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Document')
+                                                @slot('id', 'document')
+                                                @slot('name', 'document')
+                                                @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
+                                                @slot('id_error', 'document')
+                                            @endcomponent
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="stringer_div">
+                                            <label class="form-control-label">
+                                                Stringer @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Effectivity')
-                                                @slot('id', 'effectivity')
-                                                @slot('name', 'effectivity')
+                                                @slot('id', 'stringer')
+                                                @slot('text', 'Stringer')
+                                                @slot('name', 'stringer')
+                                                @slot('id_error', 'stringer')
+                                            @endcomponent
+                                        </div>
+                                        
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="station_div">
+                                            <label class="form-control-label">
+                                                Station @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'station')
+                                                @slot('text', 'Station')
+                                                @slot('name', 'station')
+                                                @slot('id_error', 'station')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="service_bulletin_div">
+                                            <label class="form-control-label">
+                                                Ref. Service Bulletins @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'service_bulletin')
+                                                @slot('text', 'Service Bulletins')
+                                                @slot('name', 'service_bulletin')
+                                            @endcomponent
+
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="section_div">
+                                            <label class="form-control-label">
+                                                Section(s) @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'section')
+                                                @slot('text', 'Section')
+                                                @slot('name', 'section')
+                                                @slot('id_error', 'section')
+                                                @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -312,7 +395,7 @@
                                                 </label>
                                                 <table class="threshold">
                                                     <tr>
-                                                        <td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>
+                                                        <td width="45%"><input type="number" required="required" class="form-control" name="threshold_amount[]"/></td>
                                                         <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
@@ -332,7 +415,7 @@
                                                 </label>
                                                 <table class="repeat">
                                                     <tr>
-                                                        <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                        <td width="45%"><input type="number" required="required" class="form-control" name="repeat_amount[]"/></td>
                                                         <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
                                                         <option value"">Select Repeat</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
@@ -347,24 +430,6 @@
                                                     </tr>
                                                 </table>
                                             </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Task Card Attachment @include('frontend.common.label.optional')
-                                            </label>
-
-                                            @component('frontend.common.input.upload')
-                                                @slot('text', 'Taskcard')
-                                                @slot('id', 'taskcard')
-                                                @slot('name', 'taskcard')
-                                            @endcomponent
-                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -593,6 +658,10 @@
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/section.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/section.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
@@ -684,5 +753,7 @@ var ajaxdata={"UserType":usertype};
 
 console.log(JSON.stringify(ajaxdata));
       });
+
+      
   </script>
 @endpush

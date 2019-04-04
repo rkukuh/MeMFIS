@@ -51,6 +51,17 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $taskcard->title)
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Task Card Number @include('frontend.common.label.required')
@@ -73,15 +84,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $taskcard->title)
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
@@ -90,6 +92,19 @@
                                                     {{ $aircraft->name }},
                                                 @endforeach
                                             </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                RII @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @if($taskcard->is_rii == true)
+                                                    @slot('text','RII Needed')
+                                                @else
+                                                    @slot('text', 'RII Uneeded')
+                                                @endif
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -127,7 +142,7 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Performance Factor @include('frontend.common.label.required')
+                                                        Performance Factor
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
@@ -136,22 +151,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                RII @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @if($taskcard->is_rii == true)
-                                                    @slot('text','RII Needed')
-                                                @else
-                                                    @slot('text', 'RII Uneeded')
-                                                @endif
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -182,6 +181,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Work Area @include('frontend.common.label.optional')
@@ -195,9 +197,6 @@
                                             @endcomponent
                                             @endif
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Access @include('frontend.common.label.optional')
@@ -213,6 +212,8 @@
                                             </div>
                                             @endif
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Zone @include('frontend.common.label.optional')
@@ -228,8 +229,6 @@
                                             </div>
                                             @endif
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Source @include('frontend.common.label.optional')
@@ -243,6 +242,8 @@
                                             @endcomponent
                                             @endif
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Related Card @include('frontend.common.label.optional')
@@ -258,44 +259,69 @@
                                             </div>
                                             @endif
                                         </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Version @include('frontend.common.label.optional')
+                                                    </label>
+                                                    @php
+                                                        $versions = json_decode($taskcard->version, TRUE);
+                                                    @endphp
+
+                                                    @if (empty($taskcard->version))
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                    <div style="background-color:beige; padding:15px;" class="">
+                                                        @php
+                                                            $versions = json_decode($taskcard->version, TRUE);
+                                                        @endphp
+
+                                                        @foreach($versions  as $version)
+                                                            {{ $version }},
+                                                        @endforeach
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Effectivity @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    @if (empty($taskcard->effectivity))
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $taskcard->effectivity)
+                                                    @endcomponent
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Version @include('frontend.common.label.optional')
+                                                Task Card Attachment @include('frontend.common.label.optional')
                                             </label>
-                                            @php
-                                                $versions = json_decode($taskcard->version, TRUE);
-                                            @endphp
 
-                                            @if (empty($taskcard->version))
+                                            @if (empty($taskcard->description))
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
-                                            <div style="background-color:beige; padding:15px;" class="">
-                                                @php
-                                                    $versions = json_decode($taskcard->version, TRUE);
-                                                @endphp
-
-                                                @foreach($versions  as $version)
-                                                    {{ $version }},
-                                                @endforeach
-                                            </div>
+                                                @component('frontend.common.buttons.show-file')
+                                                    @slot('text', 'show task card')
+                                                    @slot('data_target', '#modal_showtaskcard')
+                                                @endcomponent
+                                                @include('frontend.taskcard.modal')
                                             @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Effectivity @include('frontend.common.label.optional')
+                                                Documents library @include('frontend.common.label.optional')
                                             </label>
 
-                                            @if (empty($taskcard->effectivity))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $taskcard->effectivity)
-                                            @endcomponent
-                                            @endif
                                         </div>
-                                    </div>
+                                   </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -326,21 +352,6 @@
                                                 @endforeach
                                             </div>
                                             @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Task Card Attachment @include('frontend.common.label.optional')
-                                            </label>
-
-                                            <!-- @if (empty($taskcard->description))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else -->
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', "file modal?")
-                                            @endcomponent
-                                            <!-- @endif -->
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

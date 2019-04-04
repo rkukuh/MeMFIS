@@ -327,7 +327,7 @@ class FillComboxController extends Controller
      */
     public function customer()
     {
-        $customers = Customer::pluck('name', 'uuid');
+        $customers = Customer::pluck('name', 'id');
 
         return json_encode($customers);
 
@@ -488,6 +488,18 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function taskcardTypePreliminary()
+    {
+        $taskcard_type_si = Type::ofTaskCardTypePreliminary()->pluck('name', 'id');
+
+        return json_encode($taskcard_type_si);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function aircraft()
     {
         $aircrafts = Aircraft::pluck('name', 'id');
@@ -595,7 +607,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
                 ->whereHas('categories', function ($query) {
                     $query->where('code', 'raw');
-                })->pluck('name','id');
+                })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
 
         return $items;
     }

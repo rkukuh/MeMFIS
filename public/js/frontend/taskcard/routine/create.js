@@ -2,6 +2,23 @@ let TaskCard = {
     init: function () {
 
         $(document).ready(function () {
+            $('select[name="taskcard_routine_type"]').on('change', function () {
+                if (this.options[this.selectedIndex].text == "CPCP") {
+                $("#station_div").removeClass("hidden");
+                $("#stringer_div").removeClass("hidden");
+                $("#service_bulletin_div").removeClass("hidden");
+                $("#section_div").removeClass("hidden");
+                
+                } else {
+                    $("#station_div").addClass("hidden");
+                    $("#stringer_div").addClass("hidden");
+                    $("#service_bulletin_div").addClass("hidden");
+                    $("#section_div").addClass("hidden");
+                }
+            });
+        });
+
+        $(document).ready(function () {
             var autoExpand = function (field) {
 
                 field.style.height = 'inherit';

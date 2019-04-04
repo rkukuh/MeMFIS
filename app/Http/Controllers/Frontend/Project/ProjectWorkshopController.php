@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Project;
 
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectStore;
 use App\Http\Requests\Frontend\ProjectUpdate;
 
-class ProjectController extends Controller
+class ProjectWorkshopController extends Controller
 {
     /**
      * Display a listing of the resource.

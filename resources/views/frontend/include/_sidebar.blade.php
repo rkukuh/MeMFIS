@@ -68,6 +68,9 @@
                                                 class="m-menu__link-text">Non Routine</span><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                                         <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
                                             <ul class="m-menu__subnav">
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.preliminary.create') }}"
+                                                    class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                        class="m-menu__link-text">Preliminary</span></a></li>
                                                 <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.taskcard-eo.create') }}"
                                                         class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
                                                             class="m-menu__link-text">Enginering Order</span></a></li>

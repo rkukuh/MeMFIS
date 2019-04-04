@@ -28,7 +28,6 @@ class EOInstructionUpdate extends FormRequest
     {
         return [
             'estimation_manhour' => 'required|numeric',
-            'performance_factor' => 'required|numeric',
             'work_area' => 'required|exists:types,id',
             'helper_quantity' => 'required|numeric',
             'engineer_quantity' => 'required|numeric',

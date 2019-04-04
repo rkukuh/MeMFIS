@@ -190,6 +190,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'ProjectDatatables@index')->name('all');
+                Route::get('/{project}/workpackage', 'ProjectDatatables@workpackage')->name('workpackage.project');
 
             });
 
@@ -400,6 +401,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/tools', 'WorkPackageItemsDatatables@tool')->name('tools.index');
                 Route::get('/{workPackage}/materials', 'WorkPackageItemsDatatables@material')->name('materials.index');
 
+                Route::get('/modal', 'WorkPackageDatatables@workpackageModal')->name('workpackage.modal');
 
             });
 

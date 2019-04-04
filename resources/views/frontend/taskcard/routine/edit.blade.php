@@ -51,6 +51,21 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Title @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'title')
+                                                @slot('text', 'Title')
+                                                @slot('name', 'title')
+                                                @slot('value', $taskcard->title)
+                                                @slot('id_error', 'title')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Task Card Number @include('frontend.common.label.required')
@@ -87,19 +102,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'title')
-                                                @slot('text', 'Title')
-                                                @slot('name', 'title')
-                                                @slot('value', $taskcard->title)
-                                                @slot('id_error', 'title')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
@@ -123,6 +125,18 @@
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                @component('frontend.common.input.checkbox')
+                                                @slot('id', 'is_rii')
+                                                @slot('name', 'is_rii')
+                                                @slot('text', 'RII?')
+                                                @if ($taskcard->is_rii == 1)
+                                                    @slot('checked', 'checked')
+                                                @endif
+                                                @slot('style_div','margin-top:30px')
+                                            @endcomponent
+                                        </div>
+
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -181,33 +195,18 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Performance Factor @include('frontend.common.label.required')
+                                                        Performance Factor 
                                                     </label>
 
                                                     @component('frontend.common.input.decimal')
                                                         @slot('id', 'performa')
                                                         @slot('text', 'Performa')
                                                         @slot('name', 'performa')
-                                                        @slot('value', '1')
                                                         @slot('value', $taskcard->performance_factor)
                                                     @endcomponent
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('id', 'is_rii')
-                                                @slot('name', 'is_rii')
-                                                @slot('text', 'RII?')
-                                                @if ($taskcard->is_rii == 1)
-                                                    @slot('checked', 'checked')
-                                                @endif
-                                                @slot('style_div','margin-top:30px')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -236,6 +235,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Work Area @include('frontend.common.label.optional')
@@ -253,11 +255,7 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Access @include('frontend.common.label.optional')
@@ -283,6 +281,8 @@
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Zone @include('frontend.common.label.optional')
@@ -308,8 +308,6 @@
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Source @include('frontend.common.label.optional')
@@ -323,6 +321,8 @@
                                             @endcomponent
 
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Related Card @include('frontend.common.label.optional')
@@ -348,141 +348,45 @@
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Version @include('frontend.common.label.optional')
-                                            </label>
-                                            @php
-                                                $versions = json_decode($taskcard->version, TRUE);
-                                            @endphp
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Version @include('frontend.common.label.optional')
+                                                    </label>
+                                                    @php
+                                                        $versions = json_decode($taskcard->version, TRUE);
+                                                    @endphp
 
-                                            <select id="version" name="version" class="form-control m-select2" multiple style="width:100%">
-                                                <option value="">
-                                                    &mdash; Select a Version &mdash;
-                                                </option>
-
-                                                @if (isset($versions))
-                                                    @foreach ($versions as $version)
-                                                        <option selected>
-                                                            {{ $version }}
+                                                    <select id="version" name="version" class="form-control m-select2" multiple style="width:100%">
+                                                        <option value="">
+                                                            &mdash; Select a Version &mdash;
                                                         </option>
-                                                    @endforeach
-                                                @endif
 
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Effectivity @include('frontend.common.label.optional')
-                                            </label>
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Effectifity')
-                                                @slot('id', 'effectifity')
-                                                @slot('name', 'effectifity')
-                                                @slot('value', $taskcard->effectivity)
-                                            @endcomponent
+                                                        @if (isset($versions))
+                                                            @foreach ($versions as $version)
+                                                                <option selected>
+                                                                    {{ $version }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Effectivity @include('frontend.common.label.optional')
+                                                    </label>
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', 'Effectifity')
+                                                        @slot('id', 'effectifity')
+                                                        @slot('name', 'effectifity')
+                                                        @slot('value', $taskcard->effectivity)
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Threshold @include('frontend.common.label.optional')
-                                                    </label>
-                                                    <table class="threshold">
-                                                        @if($taskcard->thresholds->isEmpty())
-                                                            <tr>
-                                                                <td width="45%">
-                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]"/>
-                                                                </td>
-                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
-                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                                <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
-                                                                @endforeach
-                                                                </select></td>
-                                                                <td width="5%">
-                                                                @component('frontend.common.buttons.create_repeater')
-                                                                    @slot('id', 'addrow')
-                                                                @endcomponent
-                                                                </td>
-                                                            </tr>
-                                                        @else
-                                                            @for($i = 0 ; $i < sizeof($taskcard->thresholds); $i++)
-                                                            <tr>
-                                                                <td width="45%">
-                                                                    <input type="text" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
-                                                                </td>
-                                                                <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
-                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                                <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
-                                                                @endforeach
-                                                                </select></td>
-                                                                <td width="5%">
-                                                                @if($i < 1)
-                                                                    @component('frontend.common.buttons.create_repeater')
-                                                                        @slot('id', 'addrow')
-                                                                    @endcomponent
-                                                                @else
-                                                                    @component('frontend.common.buttons.delete_repeater')
-                                                                        @slot('id', 'addrow')
-                                                                        @slot('class', 'ibtnDel')
-                                                                    @endcomponent
-                                                                @endif
-                                                                </td>
-                                                            </tr>
-                                                            @endfor
-                                                        @endif
-                                                    </table>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Repeat @include('frontend.common.label.optional')
-                                                    </label>
-                                                    <table class="repeat">
-                                                        @if($taskcard->repeats->isEmpty())
-                                                            <tr>
-                                                                <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]"/></td>
-                                                                <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
-                                                                <option value"">Select Repeat</option>
-                                                                @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                                <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
-                                                                @endforeach
-                                                                </select></td>
-                                                                <td width="5%">
-                                                                    @component('frontend.common.buttons.create_repeater')
-                                                                        @slot('id', 'addrow2')
-                                                                    @endcomponent
-                                                                </td>
-                                                            </tr>
-                                                        @else
-                                                        @for($i = 0 ; $i < sizeof($taskcard->repeats); $i++)
-                                                        <tr>
-                                                            <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskcard->repeats[$i]->amount }}"/></td>
-                                                            <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
-                                                            <option value"">Select Repeat</option>
-                                                            @foreach ($MaintenanceCycles as $maintenanceCycle)
-                                                            <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
-                                                            @endforeach
-                                                            </select></td>
-                                                            <td width="5%">
-                                                                @if($i < 1)
-                                                                    @component('frontend.common.buttons.create_repeater')
-                                                                        @slot('id', 'addrow2')
-                                                                    @endcomponent
-                                                                @else
-                                                                    @component('frontend.common.buttons.delete_repeater')
-                                                                        @slot('id', 'addrow2')
-                                                                        @slot('class', 'ibtnDel')
-                                                                    @endcomponent
-                                                                @endif
-                                                            </td>
-                                                        </tr>
-                                                        @endfor
-                                                        @endif
-                                                    </table>
-                                                </div>
-                                        </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -494,6 +398,174 @@
                                                 @slot('id', 'taskcard')
                                                 @slot('name', 'taskcard')
                                             @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Documents library @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Document')
+                                                @slot('id', 'document')
+                                                @slot('name', 'document')
+                                                @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
+                                                @slot('id_error', 'document')
+                                            @endcomponent
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="stringer_div">
+                                            <label class="form-control-label">
+                                                Stringer @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'stringer')
+                                                @slot('text', 'Stringer')
+                                                @slot('name', 'stringer')
+                                                @slot('id_error', 'stringer')
+                                            @endcomponent
+                                        </div>
+                                        
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="station_div">
+                                            <label class="form-control-label">
+                                                Station @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'station')
+                                                @slot('text', 'Station')
+                                                @slot('name', 'station')
+                                                @slot('id_error', 'station')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="service_bulletin_div">
+                                            <label class="form-control-label">
+                                                Ref. Service Bulletins @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'service_bulletin')
+                                                @slot('text', 'Service Bulletins')
+                                                @slot('name', 'service_bulletin')
+                                            @endcomponent
+
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="section_div">
+                                            <label class="form-control-label">
+                                                Section(s) @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'section')
+                                                @slot('text', 'Section')
+                                                @slot('name', 'section')
+                                                @slot('id_error', 'section')
+                                                @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Threshold @include('frontend.common.label.optional')
+                                            </label>
+                                            <table class="threshold">
+                                                @if($taskcard->thresholds->isEmpty())
+                                                    <tr>
+                                                        <td width="45%">
+                                                            <input type="number" required="required" class="form-control" name="threshold_amount[]"/>
+                                                        </td>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                        @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                        <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                        @endforeach
+                                                        </select></td>
+                                                        <td width="5%">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('id', 'addrow')
+                                                        @endcomponent
+                                                        </td>
+                                                    </tr>
+                                                @else
+                                                    @for($i = 0 ; $i < sizeof($taskcard->thresholds); $i++)
+                                                    <tr>
+                                                        <td width="45%">
+                                                            <input type="number" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
+                                                        </td>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                        @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                        <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
+                                                        @endforeach
+                                                        </select></td>
+                                                        <td width="5%">
+                                                        @if($i < 1)
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('id', 'addrow')
+                                                            @endcomponent
+                                                        @else
+                                                            @component('frontend.common.buttons.delete_repeater')
+                                                                @slot('id', 'addrow')
+                                                                @slot('class', 'ibtnDel')
+                                                            @endcomponent
+                                                        @endif
+                                                        </td>
+                                                    </tr>
+                                                    @endfor
+                                                @endif
+                                            </table>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Repeat @include('frontend.common.label.optional')
+                                            </label>
+                                            <table class="repeat">
+                                                @if($taskcard->repeats->isEmpty())
+                                                    <tr>
+                                                        <td width="45%"><input type="number" required="required" class="form-control" name="repeat_amount[]"/></td>
+                                                        <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                        <option value"">Select Repeat</option>
+                                                        @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                        <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
+                                                        @endforeach
+                                                        </select></td>
+                                                        <td width="5%">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('id', 'addrow2')
+                                                            @endcomponent
+                                                        </td>
+                                                    </tr>
+                                                @else
+                                                @for($i = 0 ; $i < sizeof($taskcard->repeats); $i++)
+                                                <tr>
+                                                    <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskcard->repeats[$i]->amount }}"/></td>
+                                                    <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
+                                                    <option value"">Select Repeat</option>
+                                                    @foreach ($MaintenanceCycles as $maintenanceCycle)
+                                                    <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
+                                                    @endforeach
+                                                    </select></td>
+                                                    <td width="5%">
+                                                        @if($i < 1)
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('id', 'addrow2')
+                                                            @endcomponent
+                                                        @else
+                                                            @component('frontend.common.buttons.delete_repeater')
+                                                                @slot('id', 'addrow2')
+                                                                @slot('class', 'ibtnDel')
+                                                            @endcomponent
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                @endfor
+                                                @endif
+                                            </table>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -844,10 +916,14 @@
     <script src="{{ asset('js/frontend/functions/select2/applicability-engine.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-engine.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/section.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/section.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}
+
+    <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
