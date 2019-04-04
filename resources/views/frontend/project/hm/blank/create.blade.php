@@ -152,6 +152,6 @@
     <script src="{{ asset('js/frontend/functions/select2/aircraft.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/series.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/workpackage/blank/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/workpackage/blank/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/blank/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/blank/form-reset.js') }}"></script>
 @endpush

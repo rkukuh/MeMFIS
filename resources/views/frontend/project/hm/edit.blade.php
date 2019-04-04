@@ -314,10 +314,12 @@
                                                         </button>
 
                                                         <div class="m-btn-group btn-group" role="group">
-                                                        @component('frontend.common.buttons.create')
-                                                            @slot('text', 'Work Package')
-                                                            @slot('href', route('frontend.project-workpackage.create',['project' => $project->uuid]) )
-                                                        @endcomponent
+                                                            <a href="{{route('frontend.project-workpackage.create',['project' => $project->uuid])}}" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md">
+                                                                <span style="margin-top:2px">
+                                                                    <i class="la la-plus-circle"></i>
+                                                                <span>Blank Workpackage</span>
+                                                                </span>
+                                                            </a>
                                                         </div>
                                                     </div>
 
@@ -358,49 +360,7 @@
                                                     <div class="workpackage_datatable" id="scrolling_both"></div>
                                                 </div>
                                             </div>
-                                            {{-- <table class="project-hm-datatable" id="html_table" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th title="Field #1" data-field="OrderID">Workpackage ID</th>
-                                                        <th title="Field #2" data-field="Owner">Workpackage Title</th>
-                                                        <th title="Field #2" data-field="Action"></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td><a href="/project/hm/show">57520-0405</a> </td>
-                                                        <td>Sunny Garton</td>
-                                                        <td>
-                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="/project/hm/show">43269-858</a></td>
-                                                        <td>Sandor Engley</td>
-                                                        <td>
-                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="/project/hm/show">68084-462</a></td>
-                                                        <td>Morgan Cradey</td>
-                                                        <td>
-                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="/project/hm/show">44356-0001</a></td>
-                                                        <td>Tedd Alton</td>
-                                                        <td>
-                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table> --}}
+
                                         </div>
                                     </div>
                                 </div>
