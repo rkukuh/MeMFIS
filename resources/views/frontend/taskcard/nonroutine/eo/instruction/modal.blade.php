@@ -78,13 +78,14 @@
                                 <div class="row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Helper Quantity @include('frontend.common.label.required')
+                                            Helper Quantity @include('frontend.common.label.optional')
                                         </label>
 
                                         @component('frontend.common.input.number')
                                             @slot('id', 'helper_quantity')
                                             @slot('text', 'Helper Quantity')
                                             @slot('name', 'helper_quantity')
+                                            @slot('value', '0')
                                             @slot('id_error', 'helper_quantity')
                                         @endcomponent
                                     </div>
@@ -97,6 +98,8 @@
                                             @slot('id', 'engineer_quantity')
                                             @slot('text', 'Engineer Quantity')
                                             @slot('name', 'engineer_quantity')
+                                            @slot('min', '1')
+                                            @slot('value', '1')
                                             @slot('id_error', 'engineer_quantity')
                                         @endcomponent
                                     </div>
@@ -109,7 +112,7 @@
                                 <div class="row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Sequence @include('frontend.common.label.required')
+                                            Sequence @include('frontend.common.label.optional')
                                         </label>
 
                                         @component('frontend.common.input.number')
