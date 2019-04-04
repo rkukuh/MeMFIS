@@ -52,7 +52,10 @@ class BlankWorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        
+        $workpackage = Workpackage::create($request->all());
+        $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
+
+        return response()->json($workpackage);
     }
 
     /**

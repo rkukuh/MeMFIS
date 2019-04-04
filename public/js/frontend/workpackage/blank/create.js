@@ -107,7 +107,7 @@ let Workpackage2 = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage',
+                url: '/project-workpackage',
                 data: {
                     _token: $('input[name=_token]').val(),
                     title: title,
