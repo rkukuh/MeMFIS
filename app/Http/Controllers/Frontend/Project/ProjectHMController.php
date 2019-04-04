@@ -3,12 +3,23 @@
 namespace App\Http\Controllers\Frontend\Project;
 
 use App\Models\Project;
+use App\Models\Aircraft;
+use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
 
 class ProjectHMController extends Controller
 {
+    protected $aircrafts;
+    protected $customers;
+
+    public function __construct()
+    {
+        $this->aircrafts = Aircraft::all();
+        $this->customers = Customer::all();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +72,12 @@ class ProjectHMController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('frontend.project.hm.edit');
+        return view('frontend.project.hm.edit',[
+            'project' => $project,
+            'aircrafts' => $this->aircrafts,
+            'customers' => $this->customers
+        ]);
+
     }
 
     /**
