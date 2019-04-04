@@ -61,13 +61,14 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Performance Factor @include('frontend.common.label.required')
+                                            Performance Factor @include('frontend.common.label.optional')
                                         </label>
 
                                         @component('frontend.common.input.decimal')
                                             @slot('id', 'performa')
                                             @slot('text', 'Performa')
                                             @slot('name', 'performa')
+                                            @slot('value', '1')
                                             @slot('id_error', 'performa')
                                         @endcomponent
                                     </div>
