@@ -80,6 +80,12 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['project-workshop' => 'project']
             ]);
 
+            Route::prefix('project')->group(function () {
+                Route::post('/{project}/workPackage', 'ProjectHMController@addWorkPackage')->name('workpackage.project');
+                Route::delete('/{project}/workPackage/{workPackage}', 'ProjectHMController@deleteWorkPackage')->name('delete.workpackage.project');
+            });
+
+
         });
 
 

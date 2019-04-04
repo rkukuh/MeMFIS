@@ -197,9 +197,9 @@ class WorkPackageDatatables extends Controller
         }
 
         $columnsDefault = [
-            'number'     => true,
+            'code'     => true,
             'title'     => true,
-            'work_area'     => true,
+            'aircraft_id'     => true,
             'uuid'     => true,
             'Actions'      => true,
         ];
@@ -212,7 +212,7 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $workpackage = json_decode(WorkPackage::with('aircraft')->get());
+        $workpackage = WorkPackage::with('aircraft')->get();
 
         $alldata = json_decode( $workpackage, true);
 
