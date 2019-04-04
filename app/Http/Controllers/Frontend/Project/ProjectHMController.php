@@ -6,7 +6,6 @@ use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\WorkPackage;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
@@ -51,19 +50,6 @@ class ProjectHMController extends Controller
     public function store(ProjectHMStore $request)
     {
         $project = Project::create($request->all());
-
-        return response()->json($project);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function addWorkPackage(Request $request, Project $project)
-    {
-        $project->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
 
         return response()->json($project);
     }
@@ -116,19 +102,6 @@ class ProjectHMController extends Controller
     public function destroy(Project $project)
     {
         //
-    }
-
-    /**
-     * Remove the taskcard from workpackage .
-     *
-     * @param  \App\Models\WorkPackage  $workPackage
-     * @return \Illuminate\Http\Response
-     */
-    public function deleteWorkPackage(Project $project,WorkPackage $workPackage)
-    {
-        $project->workpackages()->detach($workPackage);
-
-        return response()->json($project);
     }
 
 }
