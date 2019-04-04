@@ -67,3 +67,9 @@
 
 
 @endsection
+
+@push('footer-scripts')
+    <script>
+        let workPackage_uuid = '{{ $workPackage->uuid }}';
+    </script>
+@endpush

@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="basic_datatable" id="scrolling_both"></div>
+        <div class="basic_datatable wp-datatable" id="scrolling_both"></div>
     </div>
 </div>
 <div class="m-portlet m-portlet--mobile">
@@ -68,7 +68,7 @@
             </div>
         </div>
 
-        <div class="sip_datatable" id="scrolling_both"></div>
+        <div class="sip_datatable wp-datatable" id="scrolling_both"></div>
     </div>
 </div>
 <div class="m-portlet m-portlet--mobile">
@@ -105,10 +105,12 @@
             </div>
         </div>
 
-        <div class="cpcp_datatable" id="scrolling_both"></div>
+        <div class="cpcp_datatable wp-datatable" id="scrolling_both"></div>
     </div>
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/project/routine/create.js')}}"></script>
+    <script src="{{ asset('js/frontend/workpackage/routine/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/workpackage/datatables.js')}}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

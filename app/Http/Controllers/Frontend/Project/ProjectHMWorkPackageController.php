@@ -63,7 +63,9 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, Workpackage $workpackage)
     {
-        return view('frontend.project.hm.show');
+        return view('frontend.project.hm.show',[
+            'workPackage' => $workpackage,
+        ]);
     }
 
     /**

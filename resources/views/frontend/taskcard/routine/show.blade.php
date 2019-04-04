@@ -116,7 +116,7 @@
                                             <label class="form-control-label">
                                                 Task @include('frontend.common.label.required')
                                             </label>
-                                            @if (empty($taskcard->task->name))
+                                            @if (isset($taskcard->task->name))
                                                 <div style="background-color:beige; padding:15px;" class="">
                                                     {{ $taskcard->task->name }},
                                                 </div>
