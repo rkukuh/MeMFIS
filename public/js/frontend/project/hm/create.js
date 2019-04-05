@@ -45,6 +45,13 @@ let Project = {
                         if (data.errors.no_wo) {
                             $('#work-order-error').html(data.errors.no_wo[0]);
                         }
+
+                        document.getElementById('customer').value = data.getAll('customer_id');
+                        document.getElementById('work-order').value = data.getAll('no_wo');
+                        document.getElementById('applicability_airplane').value = data.getAll('aircraft_id');
+                        document.getElementById('reg').value = data.getAll('aircraft_register');
+                        document.getElementById('serial-number').value = data.getAll('aircraft_sn');
+
                     } else {
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
