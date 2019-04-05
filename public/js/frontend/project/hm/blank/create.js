@@ -134,7 +134,7 @@ let Workpackage2 = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/project/'+projectUUID+'/workpackage/'+data.uuid+'/edit';
+                        window.location.href = '/project/'+projectUUID+'/blank-workpackage/'+data.uuid+'/edit';
                         // let table = $('.m_datatable').mDatatable();
 
                         // table.originalDataSet = [];

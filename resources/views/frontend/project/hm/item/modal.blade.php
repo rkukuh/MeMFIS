@@ -1,19 +1,19 @@
-<div class="modal fade" id="modal_ad_sb" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_item" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TitleModalADSB">AD/SB</h5>
+                    <h5 class="modal-title" id="TitleModalItem">Item</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-bordered table-hover table-checkable" id="adsb_datatable">
+                    <table class="table table-striped table-bordered table-hover table-checkable" id="item_datatable">
                         <thead>
                             <tr>
-                                <th>Number</th>
-                                <th>Title</th>
-                                <th></th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                     </table>

@@ -314,7 +314,7 @@
                                                         </button>
 
                                                         <div class="m-btn-group btn-group" role="group">
-                                                            <a href="{{route('frontend.project-workpackage.create',['project' => $project->uuid])}}" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md">
+                                                            <a href="{{route('frontend.project-blank-workpackage.create',['project' => $project->uuid])}}" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md">
                                                                 <span style="margin-top:2px">
                                                                     <i class="la la-plus-circle"></i>
                                                                 <span>Blank Workpackage</span>

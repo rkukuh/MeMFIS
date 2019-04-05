@@ -41,6 +41,20 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="form-group m-form__group row">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label class="form-control-label">
+                        Total Mhrs (Included Performance Factor)
+                    </label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    @component('frontend.common.input.text')
+                        @slot('id', 'mhrs')
+                        @slot('name', 'mhrs')
+                    @endcomponent
+                </div>
+        </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-12">
         <table>
@@ -127,6 +141,23 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 footer">
+        <div class="flex">
+            <div class="action-buttons">
+                @component('frontend.common.buttons.submit')
+                    @slot('type','button')
+                    @slot('id', 'add-project')
+                    @slot('class', 'add-project')
+                @endcomponent
+
+                @include('frontend.common.buttons.reset')
+
+                @component('frontend.common.buttons.back')
+                    @slot('href', route('frontend.workpackage.index'))
+                @endcomponent
+            </div>
+        </div>
     </div>
 </div>
 

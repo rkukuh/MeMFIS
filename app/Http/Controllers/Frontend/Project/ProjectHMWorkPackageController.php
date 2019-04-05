@@ -6,11 +6,12 @@ use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\WorkPackage;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
 
-class ProjectHMController extends Controller
+class ProjectHMWorkPackageController extends Controller
 {
     protected $aircrafts;
     protected $customers;
@@ -47,9 +48,9 @@ class ProjectHMController extends Controller
      * @param  \App\Http\Requests\Frontend\ProjectStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectHMStore $request)
+    public function store(Request $request, Project $project)
     {
-        $project = Project::create($request->all());
+        $project->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
 
         return response()->json($project);
     }
@@ -60,9 +61,11 @@ class ProjectHMController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Project $project, Workpackage $workpackage)
     {
-        //
+        return view('frontend.project.hm.show',[
+            'workPackage' => $workpackage,
+        ]);
     }
 
     /**
@@ -99,9 +102,11 @@ class ProjectHMController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Project $project,WorkPackage $workPackage)
     {
-        //
+        $project->workpackages()->detach($workPackage);
+
+        return response()->json($project);
     }
 
 }

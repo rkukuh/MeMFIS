@@ -188,6 +188,7 @@
                                                         @slot('text', 'Engineer Quantity')
                                                         @slot('name', 'engineer_quantity')
                                                         @slot('value', '1')
+                                                        @slot('min', '1')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -346,7 +347,7 @@
                                                 @slot('id_error', 'stringer')
                                             @endcomponent
                                         </div>
-                                        
+
                                         <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="station_div">
                                             <label class="form-control-label">
                                                 Station @include('frontend.common.label.optional')
@@ -754,6 +755,6 @@ var ajaxdata={"UserType":usertype};
 console.log(JSON.stringify(ajaxdata));
       });
 
-      
+
   </script>
 @endpush

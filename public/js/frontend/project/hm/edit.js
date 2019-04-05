@@ -47,7 +47,8 @@ let Project = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'code',
                     title: 'Workpackage Number',
                     sortable: !1,
@@ -57,6 +58,9 @@ let Project = {
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<a href="/project/'+project_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                    }
                 },
                 {
                     field: 'aircraft.name',
@@ -86,7 +90,7 @@ let Project = {
                     overflow: 'visible',
                         template: function (t, e, i) {
                             return (
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-workpackage" title="Delete" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'
                             );
@@ -135,7 +139,7 @@ let Project = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/project/' + project_uuid +'/workPackage',
+                url: '/project/' + project_uuid +'/workpackage',
                 data: {
                     _token: $('input[name=_token]').val(),
                     workpackage: $(this).data('uuid'),
@@ -159,6 +163,50 @@ let Project = {
                         table.originalDataSet = [];
                         table.reload();
                     }
+                }
+            });
+        });
+
+        $('.workpackage_datatable').on('click', '.delete-workpackage', function () {
+            let workpackage_uuid = $(this).data('uuid');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/project/' + project_uuid +'/workpackage/'+workpackage_uuid,
+                        success: function (data) {
+                            toastr.success('Unit has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.workpackage_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
                 }
             });
         });
@@ -209,13 +257,7 @@ let Project = {
         });
     }
 };
-$('select[name="customer"]').on('change', function () {
-    let customer_uuid = this.options[this.selectedIndex];
-    txt_name = $("#name");
-    console.log(customer_uuid.value);
-    txt_name.html(customer_uuid.text);
 
-});
 jQuery(document).ready(function () {
     Project.init();
 });

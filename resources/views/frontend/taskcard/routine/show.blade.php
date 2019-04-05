@@ -75,10 +75,14 @@
                                             <label class="form-control-label">
                                                 Type @include('frontend.common.label.required')
                                             </label>
+                                            @if (empty($taskcard->type->name))
+                                                <div style="background-color:beige; padding:15px;" class="">
+                                                    {{ $taskcard->type->name }},
+                                                </div>
+                                            @else
+                                                @include('frontend.common.label.data-info')
+                                            @endif
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text',$taskcard->type->name)
-                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -112,10 +116,13 @@
                                             <label class="form-control-label">
                                                 Task @include('frontend.common.label.required')
                                             </label>
-
-                                            <div style="background-color:beige; padding:15px;" class="">
-                                                {{ $taskcard->task->name }},
-                                            </div>
+                                            @if (isset($taskcard->task->name))
+                                                <div style="background-color:beige; padding:15px;" class="">
+                                                    {{ $taskcard->task->name }},
+                                                </div>
+                                            @else
+                                                @include('frontend.common.label.data-info')
+                                            @endif
                                         </div>
 
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -123,9 +130,13 @@
                                                 Skill @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $taskcard->title)
-                                            @endcomponent
+                                            @if (empty($taskcard->skill_id))
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $taskcard->skill_id)
+                                                @endcomponent
+                                            @else
+                                                @include('frontend.common.label.data-info')
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
