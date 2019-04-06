@@ -16,7 +16,7 @@ let Project = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'post',
+                type: 'POST',
                 url: '/project-hm',
                 data: {
                     _token: $('input[name=_token]').val(),
@@ -30,11 +30,28 @@ let Project = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
+                        if (data.errors.customer_id) {
+                            $('#customer-error').html(data.errors.customer_id[0]);
+                        }
+                        if (data.errors.aircraft_register) {
+                            $('#reg-error').html(data.errors.aircraft_register[0]);
+                        }
+                        if (data.errors.aircraft_sn) {
+                            $('#serial-number-error').html(data.errors.aircraft_sn[0]);
+                        }
+                        if (data.errors.aircraft_id) {
+                            $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
+                        }
+                        if (data.errors.no_wo) {
+                            $('#work-order-error').html(data.errors.no_wo[0]);
+                        }
 
-                        //     document.getElementById('name').value = name;
-                        // }
+                        document.getElementById('customer').value = data.getAll('customer_id');
+                        document.getElementById('work-order').value = data.getAll('no_wo');
+                        document.getElementById('applicability_airplane').value = data.getAll('aircraft_id');
+                        document.getElementById('reg').value = data.getAll('aircraft_register');
+                        document.getElementById('serial-number').value = data.getAll('aircraft_sn');
+
                     } else {
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
