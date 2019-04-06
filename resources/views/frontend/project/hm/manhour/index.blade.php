@@ -21,8 +21,9 @@
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
-                    @slot('id', 'mhrs')
-                    @slot('name', 'mhrs')
+                    @slot('id', 'perfoma')
+                    @slot('name', 'perfoma')
+                    @slot('value', '1.6')
                 @endcomponent
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
