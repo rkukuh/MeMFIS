@@ -149,6 +149,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Project.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfProject(Builder $query)
+    {
+        return $query->where('of', 'project');
+    }
+
+    /**
      * Scope a query to only include type of Purchase Request.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
