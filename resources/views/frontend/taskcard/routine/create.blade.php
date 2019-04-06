@@ -391,13 +391,13 @@
                                     </div>
                                     <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
+                                                <label class="form-control-label" id="threshold">
                                                     Threshold @include('frontend.common.label.optional')
                                                 </label>
                                                 <table class="threshold">
                                                     <tr>
                                                         <td width="45%"><input type="number" required="required" class="form-control" name="threshold_amount[]"/></td>
-                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select Threshold</option>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
                                                         @endforeach
@@ -418,7 +418,7 @@
                                                     <tr>
                                                         <td width="45%"><input type="number" required="required" class="form-control" name="repeat_amount[]"/></td>
                                                         <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
-                                                        <option value"">Select Repeat</option>
+                                                        <option value"">Select</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
                                                         @endforeach
@@ -686,7 +686,7 @@
               x = x+1;
               cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
               cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
-              cols += '<option value"">Select Threshold</option>';
+              cols += '<option value"">Select </option>';
               for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
                   if(maintenanceCycles[i].id == 1){
                   }else{
@@ -719,7 +719,7 @@
               x = x+1;
               cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
               cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
-              cols += '<option value"">Select Repeat</option>';
+              cols += '<option value"">Select</option>';
               for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
                   if(maintenanceCycles[i].id == 1){
                   }else{
