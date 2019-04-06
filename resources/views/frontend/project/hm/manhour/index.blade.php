@@ -171,7 +171,7 @@
         $(document).ready(function () {
             let project_prfm_factor = $('#perfoma').val();
             let total  = project_prfm_factor*total_mhrs;
-            document.getElementById('total').innerHTML = total;
+            document.getElementById('total').innerHTML = total.toFixed(2);
 
         });
         $("#default").change(function() {
@@ -179,13 +179,13 @@
                 let total  = ($('#default').val()*total_mhrs);
                 document.getElementById('perfoma').value = $('#default').val();
                 $("#perfoma").prop('disabled', true);
-                document.getElementById('total').innerHTML = total;
+                document.getElementById('total').innerHTML = total.toFixed(2);
             }
             else{
                 let total  = (1.6*total_mhrs);
                 document.getElementById('perfoma').value = 1.6;
                 $("#perfoma").prop('disabled', false);
-                document.getElementById('total').innerHTML = total;
+                document.getElementById('total').innerHTML = total.toFixed(2);
             }
         });
 
