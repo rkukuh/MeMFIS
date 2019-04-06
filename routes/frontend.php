@@ -71,8 +71,7 @@ Route::name('frontend.')->group(function () {
         /** TRANSACTION */
         Route::namespace('Project')->group(function () {
 
-            Route::view('/project', 'frontend.project.index')->name('project.index');
-            Route::view('/project/datatable', 'frontend.project.datatable')->name('project.datatable');
+            Route::resource('project', 'ProjectController');
 
             Route::resource('project-hm', 'ProjectHMController', [
                 'parameters' => ['project-hm' => 'project']
@@ -85,12 +84,8 @@ Route::name('frontend.')->group(function () {
             Route::get('project/{project}/blank-workpackage','BlankWorkPackageController@create')->name('project-blank-workpackage.create');
             Route::get('project/{project}/blank-workpackage/{workPackage}/edit','BlankWorkPackageController@edit')->name('project-blank-workpackage.edit');
 
-
             Route::prefix('project')->group(function () {
                 Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController');
-
-                // Route::post('/{project}/workPackage', 'ProjectHMWorkPackageController@store')->name('workpackage.project');
-                // Route::delete('/{project}/workPackage/{workPackage}', 'ProjectHMWorkPackageController@destroy')->name('delete.workpackage.project');
             });
 
 
