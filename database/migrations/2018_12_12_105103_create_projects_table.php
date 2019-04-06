@@ -23,7 +23,6 @@ class CreateProjectsTable extends Migration
             $table->unsignedInteger('aircraft_id')->nullable();
             $table->string('aircraft_register');
             $table->string('aircraft_sn');
-            $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -32,10 +32,6 @@ $factory->define(Project::class, function (Faker $faker) {
         'no_wo' => 'WO-' . $faker->randomNumber(),
         'aircraft_register' => 'AC-REG-' . $faker->randomNumber(),
         'aircraft_sn' => 'AC-SN-' . $faker->randomNumber(),
-        'performance_factor' => $faker->randomElement([
-            null,
-            (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
-        ]),
     ];
 
 });
@@ -81,7 +77,12 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
             $workpackage = factory(WorkPackage::class)->create();
         }
 
-        $project->workpackages()->save($workpackage);
+        $project->workpackages()->save($workpackage, [
+            'performance_factor' => $faker->randomElement([
+                null,
+                (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
+            ]),
+        ]);
     }
 
 });
