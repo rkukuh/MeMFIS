@@ -190,7 +190,6 @@ let Workpackage3 = {
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
-            let material_description = $('#item_description').val();
 
 
             $.ajax({
@@ -204,7 +203,6 @@ let Workpackage3 = {
                     item_id: material,
                     quantity: quantity,
                     unit_id: unit_material,
-                    // description: material_description,
 
                 },
                 success: function (data) {
@@ -288,7 +286,6 @@ let Workpackage3 = {
         $('.add-tool').on('click', function () {
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
-            let tool_description = $('#tool_description').val();
             let unit_tool = $('#unit_tool').val();
 
             $.ajax({
@@ -302,7 +299,6 @@ let Workpackage3 = {
                     item_id: tool,
                     quantity: quantity,
                     unit_id: unit_tool,
-                    // description: tool_description,
                 },
                 success: function (data) {
                     if (data.errors) {

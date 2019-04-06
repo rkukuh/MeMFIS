@@ -869,12 +869,16 @@ $(document).ready(function () {
         $("#stringer_div").removeClass("hidden");
         $("#service_bulletin_div").removeClass("hidden");
         $("#section_div").removeClass("hidden");
-        
+        document.getElementById('threshold').innerHTML = 'Implementation Age';
+
+
         } else {
             $("#station_div").addClass("hidden");
             $("#stringer_div").addClass("hidden");
             $("#service_bulletin_div").addClass("hidden");
             $("#section_div").addClass("hidden");
+            document.getElementById('threshold').innerHTML = 'Threshold';
+
         }
     });
 });
