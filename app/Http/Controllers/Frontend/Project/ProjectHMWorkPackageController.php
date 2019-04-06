@@ -63,8 +63,12 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, Workpackage $workpackage)
     {
+        $total_mhrs = $workpackage->taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $workpackage->taskcards->sum('performance_factor');
         return view('frontend.project.hm.show',[
             'workPackage' => $workpackage,
+            'total_mhrs' => $total_mhrs,
+            'total_pfrm_factor' => $total_pfrm_factor,
         ]);
     }
 

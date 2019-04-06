@@ -7,9 +7,8 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.text')
-                    @slot('id', 'mhrs')
-                    @slot('name', 'mhrs')
+                @component('frontend.common.label.data-info')
+                    @slot('text', $total_mhrs)
                 @endcomponent
             </div>
         </div>
@@ -32,6 +31,7 @@
                         @component('frontend.common.input.checkbox')
                             @slot('id', 'default')
                             @slot('name', 'default')
+                            @slot('value', $total_pfrm_factor)
                             @slot('text', 'TaskCard Performance Factor')
                             {{-- @slot('checked', 'checked') --}}
                         @endcomponent
@@ -50,10 +50,10 @@
                     </label>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
-                    @component('frontend.common.input.text')
-                        @slot('id', 'mhrs')
-                        @slot('name', 'mhrs')
+                    @component('frontend.common.label.data-info')
+                        @slot('id', 'total')
                     @endcomponent
+
                 </div>
         </div>
     </div>
@@ -162,3 +162,32 @@
     </div>
 </div>
 
+@push('footer-scripts')
+    <script>
+        let total_mhrs = '{{ $total_mhrs }}';
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            let project_prfm_factor = $('#perfoma').val();
+            let total  = project_prfm_factor*total_mhrs;
+            document.getElementById('total').innerHTML = total;
+
+        });
+        $("#default").change(function() {
+            if(this.checked) {
+                let total  = ($('#default').val()*total_mhrs);
+                document.getElementById('perfoma').value = $('#default').val();
+                $("#perfoma").prop('disabled', true);
+                document.getElementById('total').innerHTML = total;
+            }
+            else{
+                let total  = (1.6*total_mhrs);
+                document.getElementById('perfoma').value = 1.6;
+                $("#perfoma").prop('disabled', false);
+                document.getElementById('total').innerHTML = total;
+            }
+        });
+
+    </script>
+@endpush
