@@ -42,7 +42,10 @@ $factory->afterCreating(WorkPackage::class, function ($workpackage, $faker) {
             $taskcard = factory(TaskCard::class)->create();
         }
 
-        $workpackage->taskcards()->save($taskcard);
+        $workpackage->taskcards()->save($taskcard, [
+            'sequence' => $i,
+            'is_mandatory' => $faker->boolean,
+        ]);
     }
 
     // Item

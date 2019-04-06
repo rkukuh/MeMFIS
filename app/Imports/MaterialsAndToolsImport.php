@@ -111,6 +111,14 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Sheet')->first()->id;
                 break;
+            case 'PAA':
+                $unit = Unit::ofQuantity()
+                            ->where('name', 'Paa')->first()->id;
+                break;
+            case 'BAR':
+                $unit = Unit::ofQuantity()
+                            ->where('name', 'Bar')->first()->id;
+                break;
             default:
                 $unit = null;
         }

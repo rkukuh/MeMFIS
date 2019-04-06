@@ -104,7 +104,6 @@
                                                     @slot('help_text','You can chose multiple value')
                                                     @slot('id_error', 'applicability-airplane')
                                                 @endcomponent
-
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -120,7 +119,7 @@
                                                     @slot('id_error', 'work-area')
                                                 @endcomponent
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
                                                     Manhour Estimation @include('frontend.common.label.required')
                                                 </label>
@@ -134,51 +133,47 @@
                                                     @slot('value','1')
                                                 @endcomponent
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
-                                                    Performance Factor @include('frontend.common.label.required')
+                                                    Performa Factor @include('frontend.common.label.optional')
                                                 </label>
 
                                                 @component('frontend.common.input.decimal')
                                                     @slot('id', 'performa')
                                                     @slot('text', 'Performa')
                                                     @slot('name', 'performa')
-                                                    @slot('value', '1')
                                                     @slot('id_error', 'performa')
-                                                    @slot('min','0')
+                                                    @slot('min','1')
+                                                    @slot('value','1')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Engineer Quantity @include('frontend.common.label.optional')
+                                                </label>
+
+                                                @component('frontend.common.input.number')
+                                                    @slot('id', 'engineer_quantity')
+                                                    @slot('text', 'Engineer Quantity')
+                                                    @slot('name', 'engineer_quantity')
+                                                    @slot('min', '1')
+                                                    @slot('value', '1')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Engineer Quantity @include('frontend.common.label.optional')
-                                                        </label>
+                                                <label class="form-control-label">
+                                                    Helper Quantity @include('frontend.common.label.optional')
+                                                </label>
 
-                                                        @component('frontend.common.input.number')
-                                                            @slot('id', 'engineer_quantity')
-                                                            @slot('text', 'Engineer Quantity')
-                                                            @slot('name', 'engineer_quantity')
-                                                            @slot('min', '1')
-                                                            @slot('value', '1')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Helper Quantity @include('frontend.common.label.optional')
-                                                        </label>
-
-                                                        @component('frontend.common.input.number')
-                                                            @slot('id', 'helper_quantity')
-                                                            @slot('text', 'Helper Quantity')
-                                                            @slot('name', 'helper_quantity')
-                                                            @slot('min','0')
-                                                            @slot('value', '0')
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
+                                                @component('frontend.common.input.number')
+                                                    @slot('id', 'helper_quantity')
+                                                    @slot('text', 'Helper Quantity')
+                                                    @slot('name', 'helper_quantity')
+                                                    @slot('min','0')
+                                                    @slot('value', '0')
+                                                @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">

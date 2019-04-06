@@ -202,6 +202,10 @@ class TaskCard extends MemfisModel
     public function workpackages()
     {
         return $this->belongsToMany(WorkPackage::class, 'taskcard_workpackage', 'taskcard_id', 'workpackage_id')
+                    ->withPivot(
+                        'sequence',
+                        'is_mandatory'
+                    )
                     ->withTimestamps();
     }
 

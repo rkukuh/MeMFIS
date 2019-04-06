@@ -149,6 +149,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Project.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfProject(Builder $query)
+    {
+        return $query->where('of', 'project');
+    }
+
+    /**
      * Scope a query to only include type of Purchase Request.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -268,6 +279,7 @@ class Type extends MemfisModel
     {
         return $query->where('of', 'taskcard-type-non-routine')
                      ->where('code', '<>', 'si')
+                     ->where('code', '<>', 'preliminary')
                      ->where('code', '<>', 'htcrr');
     }
 
@@ -280,8 +292,19 @@ class Type extends MemfisModel
     public function scopeOfTaskCardTypeSI(Builder $query)
     {
         return $query->where('of', 'taskcard-type-non-routine')
-                     ->where('code', 'si')
-                     ->where('code', '<>', 'htcrr');
+                     ->where('code', 'si');
+    }
+
+    /**
+     * Scope a query to only include type of TaskCard's type.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaskCardTypePreliminary(Builder $query)
+    {
+        return $query->where('of', 'taskcard-type-non-routine')
+                     ->where('code', 'preliminary');
     }
 
     /**

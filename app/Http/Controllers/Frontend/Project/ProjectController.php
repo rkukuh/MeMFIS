@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Project;
 
 use App\Models\Project;
+use App\Models\Aircraft;
+use App\Models\Customer;
+use App\Models\WorkPackage;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\ProjectStore;
-use App\Http\Requests\Frontend\ProjectUpdate;
+use App\Http\Requests\Frontend\ProjectHMStore;
+use App\Http\Requests\Frontend\ProjectHMUpdate;
 
 class ProjectController extends Controller
 {
@@ -26,7 +29,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.project.create');
     }
 
     /**
@@ -35,7 +38,7 @@ class ProjectController extends Controller
      * @param  \App\Http\Requests\Frontend\ProjectStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectStore $request)
+    public function store(ProjectHMStore $request)
     {
         //
     }
@@ -69,7 +72,7 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectUpdate $request, Project $project)
+    public function update(ProjecHMtUpdate $request, Project $project)
     {
         //
     }
@@ -84,4 +87,5 @@ class ProjectController extends Controller
     {
         //
     }
+
 }

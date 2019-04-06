@@ -190,7 +190,6 @@ let Workpackage3 = {
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
-            let material_description = $('#item_description').val();
 
 
             $.ajax({
@@ -204,20 +203,23 @@ let Workpackage3 = {
                     item_id: material,
                     quantity: quantity,
                     unit_id: unit_material,
-                    // description: material_description,
 
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#material-error').html(data.errors.item_id[0]);
-                        // }
+                        if (data.errors.item_id) {
+                            $('#material-error').html(data.errors.item_id[0]);
+                        }
 
-                        // if (data.errors.quantity) {
-                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
-                        // }
-                        // document.getElementById('material').value = material;
-                        // document.getElementById('quantity').value = quantity;
+                        if (data.errors.quantity) {
+                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                        }
+
+                        if (data.errors.unit_id) {
+                            $('#unit_material-error').html(data.errors.unit_id[0]);
+                        }
+
+                        document.getElementById('quantity').value = quantity;
 
                     } else {
 
@@ -284,7 +286,6 @@ let Workpackage3 = {
         $('.add-tool').on('click', function () {
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
-            let tool_description = $('#tool_description').val();
             let unit_tool = $('#unit_tool').val();
 
             $.ajax({
@@ -298,7 +299,6 @@ let Workpackage3 = {
                     item_id: tool,
                     quantity: quantity,
                     unit_id: unit_tool,
-                    // description: tool_description,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -309,7 +309,11 @@ let Workpackage3 = {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
-                        document.getElementById('tool').value = tool;
+
+                        if (data.errors.unit_id) {
+                            $('#unit_tool-error').html(data.errors.unit_id[0]);
+                        }
+
                         document.getElementById('quantity').value = quantity;
                     } else {
 

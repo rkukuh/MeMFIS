@@ -147,7 +147,7 @@
                                                 </select>
 
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
                                                     Manhour Estimation @include('frontend.common.label.required')
                                                 </label>
@@ -161,22 +161,22 @@
                                                 @endcomponent
                                             </div>
 
-
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
-                                                    Performance Factor @include('frontend.common.label.required')
+                                                    Performa Factor @include('frontend.common.label.optional')
                                                 </label>
 
                                                 @component('frontend.common.input.decimal')
                                                     @slot('id', 'performa')
                                                     @slot('text', 'Performa')
                                                     @slot('name', 'performa')
-                                                    @slot('value', $taskcard->performance_factor)
                                                     @slot('id_error', 'performa')
+                                                    @slot('min','1')
+                                                    @slot('value','1')
                                                 @endcomponent
                                             </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">

@@ -14,6 +14,7 @@ class Project extends MemfisModel
         'no_wo',
         'aircraft_register',
         'aircraft_sn',
+        'performance_factor',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

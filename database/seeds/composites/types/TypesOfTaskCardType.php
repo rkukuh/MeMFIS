@@ -24,12 +24,14 @@ class TypesOfTaskCardType extends Seeder
             'code' => 'sip',
             'name' => 'SIP',
             'of'  => 'taskcard-type-routine',
+            'description' => 'Structure Inspection Program'
         ]);
 
         Type::create([
             'code' => 'cpcp',
             'name' => 'CPCP',
             'of'  => 'taskcard-type-routine',
+            'description' => 'Corrotion Prevention and Control Program'
         ]);
 
         /** Non-Routine */
@@ -79,6 +81,12 @@ class TypesOfTaskCardType extends Seeder
         Type::create([
             'code' => 'awl',
             'name' => 'Airworthiness Limitations',
+            'of'  => 'taskcard-type-non-routine',
+        ]);
+
+        Type::create([
+            'code' => 'preliminary',
+            'name' => 'Preliminary',
             'of'  => 'taskcard-type-non-routine',
         ]);
     }

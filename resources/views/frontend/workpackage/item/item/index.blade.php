@@ -59,18 +59,6 @@
                                         @slot('id_error', 'unit_material')
                                     @endcomponent
                                 </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label class="form-control-label">
-                                        Description @include('frontend.common.label.optional')
-                                    </label>
-
-                                    @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'item_description')
-                                        @slot('name', 'item_description')
-                                        @slot('text', 'Description')
-                                    @endcomponent
-                                </div>
                            </div>
                        </div>
                        <div class="modal-footer">

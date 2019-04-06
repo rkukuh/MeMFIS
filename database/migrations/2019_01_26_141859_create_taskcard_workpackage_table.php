@@ -16,6 +16,8 @@ class CreateTaskcardWorkpackageTable extends Migration
         Schema::create('taskcard_workpackage', function (Blueprint $table) {
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('workpackage_id');
+            $table->integer('sequence')->nullable();
+            $table->boolean('is_mandatory')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

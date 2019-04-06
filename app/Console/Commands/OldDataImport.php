@@ -38,6 +38,8 @@ class OldDataImport extends Command
      */
     public function handle()
     {
+        ini_set('memory_limit', '-1');
+        
         $this->line('Importing: Engine');
         app()->make(OldDataController::class)->engines();
 

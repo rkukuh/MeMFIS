@@ -259,98 +259,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <div class="row align-items-center">
-                                                <div class="col-xl-8 order-2 order-xl-1">
-                                                    <div class="form-group m-form__group row align-items-center">
-                                                        <div class="col-md-4">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12 order-1 order-xl-2 m--align-right">
-                                                    <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                                        <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
-                                                            <span>
-                                                                <i class="la la-plus-circle"></i>
-                                                            <span>Workpackage</span>
-                                                            </span>
-                                                        </button>
-
-                                                        <div class="m-btn-group btn-group" role="group">
-                                                        <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
-                                                            <span>
-                                                                <i class="la la-plus-circle"></i>
-                                                            <span>Blank Workpackage</span>
-                                                            </span>
-                                                        </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @include('frontend.project.hm.modal')
-
-                                    {{-- datatables --}}
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <table class="project-hm-datatable" id="html_table" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th title="Field #1" data-field="OrderID">Workpackage ID</th>
-                                                        <th title="Field #2" data-field="Owner">Workpackage Title</th>
-                                                        <th title="Field #2" data-field="Action"></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td><a href="/project/hm/show">57520-0405</a> </td>
-                                                        <td>Sunny Garton</td>
-                                                        <td>
-                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="/project/hm/show">43269-858</a></td>
-                                                        <td>Sandor Engley</td>
-                                                        <td>
-                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="/project/hm/show">68084-462</a></td>
-                                                        <td>Morgan Cradey</td>
-                                                        <td>
-                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="/project/hm/show">44356-0001</a></td>
-                                                        <td>Tedd Alton</td>
-                                                        <td>
-                                                            <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                            data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-taskcard')
-                                                        @slot('class', 'add-taskcard')
+                                                        @slot('id', 'add-project')
+                                                        @slot('class', 'add-project')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -393,27 +308,9 @@
 @endpush
 
 @push('footer-scripts')
-    <script>
-        function initMap() {
-            var myLatLng = {lat: -7.265757, lng: 112.734146};
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom    : 10,
-                center  : myLatLng
-            });
-
-            var marker = new google.maps.Marker({
-                position    : myLatLng,
-                map         : map,
-                title       : 'Hello World!'
-            });
-        }
-    </script>
-
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
 
-    {{-- <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
@@ -428,11 +325,7 @@
     <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/project/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
-    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
 
 @endpush

@@ -62,8 +62,6 @@ class WorkPackageController extends Controller
      */
     public function addTaskCard(Request $request, WorkPackage $workPackage)
     {
-        // dd((TaskCard::where('uuid', $request->taskcard)->first())->id);
-        // $taskcard = TaskCard::where('uuid', $request->taskcard)->first();
         $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
 
         return response()->json($workPackage);
@@ -90,7 +88,7 @@ class WorkPackageController extends Controller
     {
         return view('frontend.workpackage.edit',[
             'workPackage' => $workPackage,
-            'aircrafts' => $this->aircrafts
+            'aircrafts' => $this->aircrafts,
         ]);
     }
 
