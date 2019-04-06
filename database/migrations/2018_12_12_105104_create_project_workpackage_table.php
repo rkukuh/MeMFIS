@@ -16,6 +16,7 @@ class CreateProjectWorkpackageTable extends Migration
         Schema::create('project_workpackage', function (Blueprint $table) {
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('workpackage_id');
+            $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
 

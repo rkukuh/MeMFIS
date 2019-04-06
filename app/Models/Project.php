@@ -14,7 +14,6 @@ class Project extends MemfisModel
         'no_wo',
         'aircraft_register',
         'aircraft_sn',
-        'performance_factor',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -98,6 +97,7 @@ class Project extends MemfisModel
     public function workpackages()
     {
         return $this->belongsToMany(WorkPackage::class, 'project_workpackage', 'project_id', 'workpackage_id')
+                    ->withPivot('performance_factor')
                     ->withTimestamps();
     }
 }
