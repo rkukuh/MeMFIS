@@ -189,5 +189,15 @@
             }
         });
 
+        const $source = document.querySelector('#perfoma');
+        const $result = document.querySelector('#total');
+
+        const typeHandler = function(e) {
+        $result.innerHTML = (e.target.value*total_mhrs).toFixed(2);
+        }
+
+        $source.addEventListener('input', typeHandler) // register for oninput
+        $source.addEventListener('propertychange', typeHandler) // for IE8
+
     </script>
 @endpush
