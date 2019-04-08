@@ -29,7 +29,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function index()
     {
-        return view('frontend.project.index');
+        //
     }
 
     /**
@@ -39,7 +39,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function create()
     {
-        return view('frontend.project.hm.create');
+        //
     }
 
     /**
@@ -65,7 +65,7 @@ class ProjectHMWorkPackageController extends Controller
     {
         $total_mhrs = $workpackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workpackage->taskcards->sum('performance_factor');
-        return view('frontend.project.hm.show',[
+        return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workpackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
@@ -80,12 +80,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('frontend.project.hm.edit',[
-            'project' => $project,
-            'aircrafts' => $this->aircrafts,
-            'customers' => $this->customers
-        ]);
-
+        //
     }
 
     /**
