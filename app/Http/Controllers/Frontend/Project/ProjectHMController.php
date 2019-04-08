@@ -62,7 +62,7 @@ class ProjectHMController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('frontend.project.show');
     }
 
     /**
