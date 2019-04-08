@@ -855,7 +855,7 @@ let TaskCard = {
 };
 $(document).ready(function () {
     let taskcard_routine_type = $('select[name="taskcard_routine_type"]').val();
-    if(taskcard_routine_type == 100 ){
+    if (this.options[this.selectedIndex].text == "CPCP") {
         $("#station_div").removeClass("hidden");
         $("#stringer_div").removeClass("hidden");
         $("#service_bulletin_div").removeClass("hidden");
