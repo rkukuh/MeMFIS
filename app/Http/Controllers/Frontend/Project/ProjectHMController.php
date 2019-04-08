@@ -62,7 +62,11 @@ class ProjectHMController extends Controller
      */
     public function show(Project $project)
     {
-        return view('frontend.project.show');
+        return view('frontend.project.hm.show',[
+            'project' => $project,
+            'aircrafts' => $this->aircrafts,
+            'customers' => $this->customers
+        ]);
     }
 
     /**

@@ -47,6 +47,9 @@ let Aircraft = {
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<a href="/project-hm/'+t.uuid+'">' + t.code + "</a>"
+                    }
                 },
                 {
                     field: 'title',
