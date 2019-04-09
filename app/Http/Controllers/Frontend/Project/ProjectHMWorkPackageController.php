@@ -107,9 +107,8 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project,$workPackage)
+    public function destroy(Project $project,WorkPackage $workPackage)
     {
-        $workPackage = WorkPackage::where('uuid',$workPackage)->first();
         $project->workpackages()->detach($workPackage);
 
         return response()->json($project);
