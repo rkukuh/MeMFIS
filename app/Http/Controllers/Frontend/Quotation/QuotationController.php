@@ -44,10 +44,7 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
-        $quotation = Quotation::create([
-            // 'abbr' => $request->abbr,
-            // 'name' => $request->name,
-        ]);
+        $quotation = Quotation::create($request->all());
 
         return response()->json($quotation);
     }

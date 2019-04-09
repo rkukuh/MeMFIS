@@ -57,19 +57,18 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Project @include('frontend.common.label.required')
+                                                            Work Order @include('frontend.common.label.required')
                                                         </label>
-                                                        <select id="project" name="project" class="form-control project"  onchange="myFunction(this)">
-                                                            <option value="">
-                                                                Select a Project
-                                                            </option>
-                                                            <option value="1">Project A</option>
-                                                            <option value="2">Project B</option>
-                                                            <option value="3">Project C</option>
-                                                            <option value="4">Project D</option>
-                                                            <option value="5">Project E</option>
-                                                            <option value="6">Project F</option>
-                                                        </select>
+
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('text', 'Work Order')
+                                                            @slot('id', 'work-order')
+                                                            @slot('name', 'work-order')
+                                                            @slot('id_error', 'work-order')
+                                                        @endcomponent
+
+                                                        <input type="hidden" id="customer_id" name="customer_id">
+
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
@@ -371,9 +370,9 @@
 
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
-                                                @slot('id', 'top_description')
-                                                @slot('name', 'top_description')
-                                                @slot('text', 'Top Description')
+                                                @slot('id', 'term_and_condition')
+                                                @slot('name', 'term_and_condition')
+                                                @slot('text', 'Term and Condition')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -612,9 +611,9 @@ $.ajax({
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
-   <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
+   <script src="{{ asset('js/frontend/functions/fill-combobox/work-order.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>

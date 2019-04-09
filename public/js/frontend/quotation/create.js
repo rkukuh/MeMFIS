@@ -30,44 +30,71 @@ let Quotation = {
             $("#project_number").html(yeah);
         });
 
-        $(".footer").on("click", ".add-quotation", function() {
+        $(".action-buttons").on("click", ".add-quotation", function() {
             $("#name-error").html("");
             $("#simpan").text("Simpan");
+            // alert('tes');
 
-            let term_of_payment = $('#term_of_payment').val();
+            let work_order = $('#work-order').val();
+            let date = $('#date').val();
+            let valid_until = $('#valid_until').val();
+            let currency = $('#currency').val();
+            let exchange = $("input[name=exchange]").val();
+            let term_of_payment = $("input[name=term_of_payment]").val();
+            let scheduled_payment_type = $('#scheduled_payment_type').val();
+            let scheduled_payment = $("input[name=scheduled_payment]").val();
+            let title = $('#title').val();
+            let description = $('#description').val();
+            let top_description = $('#top_description').val();
+            let customer_id = $('#customer_id').val();
 
-            let registerForm = $("#CustomerForm");
-            let name = $("input[name=name]").val();
-            let formData = registerForm.serialize();
+            // let term_of_payment = $('#term_of_payment').val();
+            // let ppn_amount = $('input[name=ppn_amount]').val();
+            // let account_code = $('#account_code').val();
+
+            // let registerForm = $("#CustomerForm");
+            // let name = $("input[name=name]").val();
+            // let formData = registerForm.serialize();
 
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: "post",
-                url: "/category",
+                url: "/quotation",
                 data: {
                     _token: $("input[name=_token]").val(),
-                    name: name
+                    project_id: work_order,
+                    // customer_id: customer_id,
+                    requested_at: date,
+                    valid_until: valid_until,
+                    currency_id: currency,
+                    exchange_rate: exchange,
+                    // name: term_of_payment,
+                    scheduled_payment_type: scheduled_payment_type,
+                    // scheduled_payment_amount: scheduled_payment,
+                    // title: title,
+                    description: description,
+                    term_of_condition: term_and_condition,
                 },
                 success: function(data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $("#name-error").html(data.errors.name[0]);
+                        // if (data.errors.name) {
+                        //     $("#name-error").html(data.errors.name[0]);
 
-                            document.getElementById("name").value = name;
-                        }
+                        //     document.getElementById("name").value = name;
+                        // }
                     } else {
-                        $("#modal_customer").modal("hide");
+                        // $("#modal_customer").modal("hide");
 
-                        toastr.success("Data berhasil disimpan.", "Sukses", {
+                        toastr.success('Quotation has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $(".m_datatable").mDatatable();
+                        // let table = $(".m_datatable").mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                        // table.originalDataSet = [];
+                        // table.reload();
                     }
                 }
             });
