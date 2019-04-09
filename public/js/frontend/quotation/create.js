@@ -27,6 +27,15 @@ let Quotation = {
 
         $('select[name="project"]').on('change', function() {
             $("#project_number").html(this.options[this.selectedIndex].text);
+            let project_id = this.options[this.selectedIndex].value;
+            $.ajax({
+                url: '/project/'+project_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
         });
 
         $(".footer").on("click", ".add-quotation", function() {
