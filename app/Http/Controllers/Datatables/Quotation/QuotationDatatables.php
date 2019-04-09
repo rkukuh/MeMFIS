@@ -16,7 +16,7 @@ class QuotationDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(Quotation::with('customer')->get());
+        $data = $alldata = json_decode(Quotation::with('customer','project')->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

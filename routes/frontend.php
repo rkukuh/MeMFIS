@@ -91,9 +91,19 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        /** AIRCRAFT */
 
-        Route::resource('quotation', 'QuotationController');
-        Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
+        Route::namespace('Quotation')->group(function () {
+            Route::resource('quotation', 'QuotationController');
+            Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
+
+            Route::prefix('Quotation')->group(function () {
+
+            });
+        });
+
+
+
 
         /** AIRCRAFT */
 

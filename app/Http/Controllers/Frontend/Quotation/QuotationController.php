@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Quotation;
 
 use App\Models\Type;
 use App\Models\Quotation;

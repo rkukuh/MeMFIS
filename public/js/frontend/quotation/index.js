@@ -1,5 +1,9 @@
 let Quotation = {
     init: function () {
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
         $('.m_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -43,8 +47,8 @@ let Quotation = {
             },
             columns: [
                 {
-                    field: 'number',
-                    title: 'Quotation Number',
+                    field: 'requested_at',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -57,11 +61,43 @@ let Quotation = {
                     width: 150
                 },
                 {
-                    field: 'valid_until',
-                    title: 'Valid Until',
+                    field: 'number',
+                    title: 'Quotation No',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
+                },
+                {
+                    field: 'project.no_wo',
+                    title: 'Work Order No',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'project.code',
+                    title: 'Project',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
+
                 },
                 {
                     field: 'status',
