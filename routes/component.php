@@ -28,6 +28,7 @@ Route::name('component.')->group(function () {
         Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
         Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');
         Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
+        Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
         Route::get('get-licenses/{id}', 'FillComboxController@licenses')->name('get-licenses');
         Route::get('get-currencies', 'FillComboxController@currencies')->name('get-currencies');
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
