@@ -25,20 +25,19 @@ let Quotation = {
             });
         });
 
-        $('select[name="project"]').on('change', function() {
-            let yeah = this.options[this.selectedIndex].text;
-            $("#project_number").html(yeah);
-        });
-
         $(".footer").on("click", ".add-quotation", function() {
-            $("#name-error").html("");
-            $("#simpan").text("Simpan");
-
-            let term_of_payment = $('#term_of_payment').val();
-
-            let registerForm = $("#CustomerForm");
-            let name = $("input[name=name]").val();
-            let formData = registerForm.serialize();
+            let data = new FormData();
+            data.append("project_id", JSON.stringify($('#project').val()));
+            data.append("date", $('input[name=date]').val());
+            data.append("valid_until", $('input[name=valid_until]').val());
+            data.append("currency_id", JSON.stringify($('#currency').val()));
+            data.append("exchange_rate", $('input[name=exchange]').val());
+            data.append("term_of_payment", $('input[name=term_of_payment]').val());
+            data.append("scheduled_payment_type", JSON.stringify($('#scheduled_payment_type').val()));
+            data.append("scheduled_payment_amount", $('input[name=scheduled_payment]').val());
+            data.append("title", $('input[name=title]').val());
+            data.append("description", $('input[name=description]').val());
+            data.append("top_description", $('input[name=top_description]').val());
 
             $.ajax({
                 headers: {
@@ -46,10 +45,10 @@ let Quotation = {
                 },
                 type: "post",
                 url: "/category",
-                data: {
-                    _token: $("input[name=_token]").val(),
-                    name: name
-                },
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: data,
                 success: function(data) {
                     if (data.errors) {
                         if (data.errors.name) {
