@@ -624,5 +624,17 @@ class FillComboxController extends Controller
         return json_encode($projects);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function workOrder()
+    {
+        $work_order = Project::pluck('no_wo','id');
+
+        return json_encode($work_order);
+    }
+
 
 }
