@@ -85,7 +85,9 @@ Route::name('frontend.')->group(function () {
             Route::get('project/{project}/blank-workpackage/{workPackage}/edit','BlankWorkPackageController@edit')->name('project-blank-workpackage.edit');
 
             Route::prefix('project')->group(function () {
-                Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController');
+                Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController',[
+                    'parameters' => ['workpackage' => 'workPackage']
+                ]);
             });
 
 
