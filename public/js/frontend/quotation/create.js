@@ -25,6 +25,10 @@ let Quotation = {
             });
         });
 
+        $('select[name="project"]').on('change', function() {
+            $("#project_number").html(this.options[this.selectedIndex].text);
+        });
+
         $(".footer").on("click", ".add-quotation", function() {
             let data = new FormData();
             data.append("project_id", JSON.stringify($('#project').val()));
