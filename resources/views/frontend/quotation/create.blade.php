@@ -59,7 +59,7 @@
                                                         <label class="form-control-label">
                                                             Project @include('frontend.common.label.required')
                                                         </label>
-                                                        <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
+                                                        <select id="project" name="project" class="form-control project"  onchange="myFunction(this)">
                                                             <option value="">
                                                                 Select a Project
                                                             </option>
@@ -78,6 +78,7 @@
                                                                     Project Number
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'project_number')
                                                                     @slot('text', 'P-01/HMxxxxx')
                                                                 @endcomponent
                                                             </div>
