@@ -61,12 +61,12 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, Workpackage $workpackage)
+    public function show(Project $project, Workpackage $workPackage)
     {
-        $total_mhrs = $workpackage->taskcards->sum('estimation_manhour');
-        $total_pfrm_factor = $workpackage->taskcards->sum('performance_factor');
+        $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         return view('frontend.project.hm.workpackage.index',[
-            'workPackage' => $workpackage,
+            'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
         ]);
@@ -78,9 +78,15 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Project $project, Workpackage $workPackage)
     {
-        //
+        $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
+        return view('frontend.project.hm.workpackage.index',[
+            'workPackage' => $workPackage,
+            'total_mhrs' => $total_mhrs,
+            'total_pfrm_factor' => $total_pfrm_factor,
+        ]);
     }
 
     /**
