@@ -80,10 +80,6 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['project-workshop' => 'project']
             ]);
 
-            Route::post('project-workpackage/{project}', 'BlankWorkPackageController@store')->name('project-workpackage.store');
-            Route::get('project/{project}/blank-workpackage','BlankWorkPackageController@create')->name('project-blank-workpackage.create');
-            Route::get('project/{project}/blank-workpackage/{workPackage}/edit','BlankWorkPackageController@edit')->name('project-blank-workpackage.edit');
-
             Route::prefix('project')->group(function () {
                 Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController');
             });

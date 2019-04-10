@@ -245,6 +245,7 @@ let Project = {
                     title: title,
                     aircraft_id: applicability_airplane,
                     is_template: is_template,
+                    project_uuid: project_uuid,
                 },
                 success: function (data) {
                     if (data.errors) {
