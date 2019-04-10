@@ -116,6 +116,9 @@ let Workpackage = {
                     overflow: 'visible',
                         template: function (t, e, i) {
                             return (
+                                '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " title="Create Workshop Task" data-uuid=' +
+                                t.uuid +
+                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'
