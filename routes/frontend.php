@@ -84,7 +84,13 @@ Route::name('frontend.')->group(function () {
             Route::get('project/{project}/blank-workpackage','BlankWorkPackageController@create')->name('project-blank-workpackage.create');
             Route::get('project/{project}/blank-workpackage/{workPackage}/edit','BlankWorkPackageController@edit')->name('project-blank-workpackage.edit');
 
-            Route::prefix('project')->group(function () {
+            Route::prefix('project-hm')->group(function () {
+                Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
+                    'parameters' => ['workpackage' => 'workPackage']
+                ]);
+            });
+
+            Route::prefix('project-workshop')->group(function () {
                 Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
