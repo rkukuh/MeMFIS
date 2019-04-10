@@ -550,7 +550,7 @@ $.ajax({
     type: 'GET',
     dataType: 'json',
     success: function (data) {
-        document.getElementsByName('group-website['+numb+'][]')[0].setAttribute("value", "my value is high");
+        // document.getElementsByName('group-website['+numb+'][]')[0].setAttribute("value", "my value is high");
         // alert('masuk');
         // document.getElementByName('group-website['+numb+'][]').innerHTML = 'tes';
         // document.getElementById('telp').innerHTML = 'telp/fax';

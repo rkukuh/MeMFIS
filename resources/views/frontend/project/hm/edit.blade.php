@@ -1,4 +1,4 @@
-@extends('frontend.master')
+    @extends('frontend.master')
 
 @section('content')
     <div class="m-subheader hidden">
@@ -313,14 +313,12 @@
                                                             </span>
                                                         </button>
 
-                                                        <div class="m-btn-group btn-group" role="group">
-                                                            <a href="{{route('frontend.project-blank-workpackage.create',['project' => $project->uuid])}}" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md">
-                                                                <span style="margin-top:2px">
-                                                                    <i class="la la-plus-circle"></i>
-                                                                <span>Blank Workpackage</span>
-                                                                </span>
-                                                            </a>
-                                                        </div>
+                                                        <button data-target="#modal_blank_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Blank Workpackage</span>
+                                                            </span>
+                                                        </button>
                                                     </div>
 
                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -329,7 +327,8 @@
                                         </div>
                                     </div>
 
-                                    @include('frontend.project.hm.modal')
+                                    @include('frontend.project.hm..modal.modal')
+                                    @include('frontend.project.hm.modal.blank')
 
                                     {{-- datatables --}}
                                     <div class="form-group m-form__group row">

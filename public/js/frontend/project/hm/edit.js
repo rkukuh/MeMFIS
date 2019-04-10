@@ -229,6 +229,45 @@ let Project = {
                 }
             });
         });
+
+        $('.add-blank-workpackage').on('click', function () {
+            let registerForm = $('#BlankWorkpackageForm');
+            let applicability_airplane = $('#applicability_airplane').val();
+            let title = $('#title').val();
+            let is_template = 0;
+            console.log(applicability_airplane);
+            console.log(title);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    title: title,
+                    aircraft_id: applicability_airplane,
+                    is_template: is_template,
+                    project_uuid: project_uuid,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.title) {
+                            $('#title-error').html(data.errors.title[0]);
+
+                            document.getElementById('title').value = title;
+                        }
+                    } else {
+                        toastr.success('Project has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+                        window.location.href = '/project/'+project_uuid+'/workpackage/'+data.uuid+'';
+
+                    }
+                }
+            });
+        });
+
         $('.add-project').on('click', function () {
             // $('#name-error').html('');
             // $('#simpan').text('Simpan');
