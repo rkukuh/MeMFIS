@@ -261,7 +261,7 @@ let Project = {
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });
-                        window.location.href = '/project/'+project_uuid+'/workpackage/'+data.uuid+'';
+                        window.location.href = '/project-hm/'+project_uuid+'/workpackage/'+data.uuid+'/edit';
 
                     }
                 }
