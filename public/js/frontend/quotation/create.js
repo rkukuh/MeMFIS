@@ -43,8 +43,8 @@ let Quotation = {
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
-            data.append("requested_at", $('#date').val());
-            data.append("valid_until", $('#valid_until').val());
+            data.append("requested_at", new Date($('#date').val()));
+            data.append("valid_until", new Date($('#valid_until').val()));
             data.append("currency_id", $('#currency').val());
             data.append("term_and_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
@@ -53,7 +53,7 @@ let Quotation = {
             data.append("total",0.000000);
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
-            data.append("top_description", $('#top_description').val());
+            data.append("top_description", $('#term_and_condition').val());
          
 
             $.ajax({

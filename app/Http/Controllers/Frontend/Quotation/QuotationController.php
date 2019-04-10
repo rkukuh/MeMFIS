@@ -47,6 +47,7 @@ class QuotationController extends Controller
     {
         // $request->project_id = Project::where('uuid',$request->project_uuid)->first()->id;
         // dd($request->project_id);
+        dd($request->all());
         $quotation = Quotation::create($request->all());
 
         return response()->json($quotation);
