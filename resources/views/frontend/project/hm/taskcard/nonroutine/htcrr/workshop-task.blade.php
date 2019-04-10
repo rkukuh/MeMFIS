@@ -96,7 +96,6 @@
                         @endcomponent
                     </div>
                 </div>
-                {{-- </div> --}}
             </div>
             <div class="modal-footer">
                 <div class="flex">
@@ -111,6 +110,6 @@
                     </div>
                 </div>
             </div>
-        {{-- </div> --}}
+        </div>
     </div>
-{{-- </div> --}}
+</div>
