@@ -26,6 +26,8 @@ class QuotationStore extends FormRequest
     public function rules()
     {
         return [
+            'customer_id' => 'required', 
+            'project_id' => 'required', 
             // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
     }

@@ -49,9 +49,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($project)
     {
-        $project = Project::where('uuid',$project->uuid)->with('customer')->first();
+        $project = Project::find($project)->with('customer')->first();
         return response()->json($project);
     }
 
