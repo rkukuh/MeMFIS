@@ -619,7 +619,7 @@ class FillComboxController extends Controller
      */
     public function project()
     {
-        $projects = Project::pluck('title','uuid');
+        $projects = Project::pluck('title','id');
 
         return json_encode($projects);
     }

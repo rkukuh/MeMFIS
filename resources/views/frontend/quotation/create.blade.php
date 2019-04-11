@@ -229,7 +229,6 @@
                                                                 @slot('id', 'date')
                                                                 @slot('text', 'Date')
                                                                 @slot('name', 'date')
-                                                                @slot('id_error', 'date')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -241,7 +240,6 @@
                                                                 @slot('id', 'valid_until')
                                                                 @slot('text', 'Valid Until')
                                                                 @slot('name', 'valid_until')
-                                                                @slot('id_error', 'valid_until')
                                                             @endcomponent
                                                         </div>
                                                     </div>

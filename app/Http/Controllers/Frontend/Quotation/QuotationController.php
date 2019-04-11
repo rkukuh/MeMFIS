@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Quotation;
 
 use App\Models\Type;
 use App\Models\Quotation;
+use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
@@ -44,6 +45,9 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
+        // $request->project_id = Project::where('uuid',$request->project_uuid)->first()->id;
+        // dd($request->project_id);
+        dd($request->all());
         $quotation = Quotation::create($request->all());
 
         return response()->json($quotation);
