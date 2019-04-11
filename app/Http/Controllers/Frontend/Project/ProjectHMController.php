@@ -7,6 +7,7 @@ use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\WorkPackage;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
 
@@ -50,6 +51,11 @@ class ProjectHMController extends Controller
     public function store(ProjectHMStore $request)
     {
         $project = Project::create($request->all());
+        if ($request->hasFile('fileInput')) {
+            $destination = 'project/hm/workOrder';
+            $fileName = $request->file('fileInput')->getClientOriginalName();
+            $fileUpload = Storage::putFileAs($destination,$request->file('fileInput'), $fileName);
+        }
 
         return response()->json($project);
     }

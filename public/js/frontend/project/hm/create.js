@@ -1,16 +1,18 @@
 let Project = {
     init: function () {
         $('.add-project').on('click', function () {
-            // $('#name-error').html('');
-            // $('#simpan').text('Simpan');
-            let registerForm = $('#CustomerForm');
-            let customer =$('#customer').val();
-            let project_title =$('#project_title').val();
-            let work_order = $('input[name=work-order]').val();
-            let applicability_airplane = $('#applicability_airplane').val();
-            let reg = $('input[name=reg]').val();
-            let serial_number = $('input[name=serial-number]').val();
-            let formData = registerForm.serialize();
+            console.log( $('#project_title').val());
+            console.log( $('#customer').val());
+            console.log( $('#applicability_airplane').val());
+            let data = new FormData();
+            data.append("title", $('#project_title').val());
+            data.append("customer_id", $('#customer').val());
+            data.append("no_wo", $('input[name=work-order]').val());
+            data.append("aircraft_id", $('#applicability_airplane').val());
+            data.append("aircraft_register", $('input[name=reg]').val());
+            data.append("aircraft_sn", $('input[name=serial-number]').val());
+            data.append("code", 'Dummy COde');
+            data.append("fileInput", document.getElementById('work-order-attachment').files[0]);
 
             $.ajax({
                 headers: {
@@ -18,16 +20,10 @@ let Project = {
                 },
                 type: 'POST',
                 url: '/project-hm',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    code: '1122',
-                    customer_id: customer,
-                    title: project_title,
-                    no_wo: work_order,
-                    aircraft_id: applicability_airplane,
-                    aircraft_register: reg,
-                    aircraft_sn: serial_number,
-                },
+                processData: false,
+                contentType: false,
+                cache: false,
+                data:data,
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.customer_id) {
@@ -56,7 +52,7 @@ let Project = {
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });
-                        window.location.href = '/project-hm/'+data.uuid+'/edit';
+                        // window.location.href = '/project-hm/'+data.uuid+'/edit';
 
                     }
                 }
