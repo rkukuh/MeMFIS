@@ -397,7 +397,7 @@ let Workpackage = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        url: '/workpackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
                         success: function (data) {
                             toastr.success('Taskcard has been deleted.', 'Deleted', {
                                 timeOut: 5000

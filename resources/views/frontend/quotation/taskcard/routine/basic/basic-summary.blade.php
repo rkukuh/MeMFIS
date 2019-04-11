@@ -15,7 +15,7 @@
                             @include('frontend.common.label.summary')
 
                             <h3 class="m-portlet__head-text">
-                                SIP Taskcard
+                                Basic Taskcard
                             </h3>
                         </div>
                     </div>
@@ -331,12 +331,13 @@
                                         <td style="text-align:center" height="20px" width="30%"></td>
                                     </tr>
                                 </table>
+
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.quotation.workpackage'))
+                                                    @slot('href', route('frontend.workpackage.create'))
                                                 @endcomponent
                                             </div>
                                         </div>

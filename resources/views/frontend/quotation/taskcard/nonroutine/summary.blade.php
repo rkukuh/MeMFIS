@@ -15,7 +15,7 @@
                             @include('frontend.common.label.summary')
 
                             <h3 class="m-portlet__head-text">
-                                Basic Taskcard
+                                Non-Routine Summary
                             </h3>
                         </div>
                     </div>
@@ -26,19 +26,48 @@
                             <div class="m-portlet__body">
                                 <table border="1px" width="100%">
                                     <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Task Card(s)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            1000 Item (s)
+                                        <td width="100%" colspan="2" style="background-color:beige;padding:10px;font-weight:bold">
+                                            Non-Routine Taskcard
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Manhour(s) (included performance factor)
+                                        <td width="30%" style="background-color:beige;padding:10px;">
+                                            AD/SB
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            500 mhrs
+                                            5 Taskcard(s)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" style="background-color:beige;padding:10px;">
+                                            CMR/AWL
+                                        </td>
+                                        <td width="70%" style="text-align:center">
+                                            5 Taskcard(s)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" style="background-color:beige;padding:10px;">
+                                            Special Intruction (SI)
+                                        </td>
+                                        <td width="70%" style="text-align:center">
+                                            5 Taskcard(s)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="30%" style="background-color:beige;padding:10px;">
+                                          HT/CRR
+                                      </td>
+                                      <td width="70%" style="text-align:center">
+                                          5 Taskcard(s)
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
+                                            Total Manhour(s)
+                                        </td>
+                                        <td width="70%" style="text-align:center">
+                                            5 Taskcard(s)
                                         </td>
                                     </tr>
                                     <tr>
@@ -337,7 +366,7 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.quotation.workpackage'))
+                                                    @slot('href', route('frontend.workpackage.create'))
                                                 @endcomponent
                                             </div>
                                         </div>

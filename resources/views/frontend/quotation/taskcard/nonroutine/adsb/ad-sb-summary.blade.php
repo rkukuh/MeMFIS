@@ -15,7 +15,7 @@
                             @include('frontend.common.label.summary')
 
                             <h3 class="m-portlet__head-text">
-                                CPCP Taskcard
+                                AD/SB Taskcard
                             </h3>
                         </div>
                     </div>
@@ -336,13 +336,12 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.quotation.workpackage'))
+                                                    @slot('href', route('frontend.workpackage.create'))
                                                 @endcomponent
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </form>
                     </div>

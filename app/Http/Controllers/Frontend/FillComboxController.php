@@ -631,10 +631,8 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $work_order = Project::pluck('no_wo','id');
+        $work_order = Project::pluck('no_wo','uuid');
 
         return json_encode($work_order);
     }
-
-
 }
