@@ -83,7 +83,7 @@ let Workpackage3 = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -177,7 +177,7 @@ let Workpackage3 = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -197,7 +197,7 @@ let Workpackage3 = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/'+workPackage_uuid+'/item',
+                url: '/workpackage/'+workPackage_uuid+'/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: material,
@@ -239,7 +239,7 @@ let Workpackage3 = {
             });
         });
 
-        $('.materials_datatable').on('click', '.delete', function () {
+        $('.materials_datatable').on('click', '.delete-material', function () {
             let material_uuid = $(this).data('uuid');
 
             swal({
@@ -259,7 +259,7 @@ let Workpackage3 = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/'+material_uuid+'/item',
+                        url: '/workpackage/'+workPackage_uuid+'/'+material_uuid+'/item',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -293,7 +293,7 @@ let Workpackage3 = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/'+workPackage_uuid+'/item',
+                url: '/workpackage/'+workPackage_uuid+'/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: tool,
@@ -339,7 +339,7 @@ let Workpackage3 = {
             });
         });
 
-        $('.tools_datatable').on('click', '.delete', function () {
+        $('.tools_datatable').on('click', '.delete-tool', function () {
             let tool_uuid = $(this).data('uuid');
 
             swal({
@@ -359,7 +359,7 @@ let Workpackage3 = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/'+tool_uuid+'/item',
+                        url: '/workpackage/'+workPackage_uuid+'/'+tool_uuid+'/item',
                         success: function (data) {
                             toastr.success('Tool has been deleted.', 'Deleted', {
                                     timeOut: 5000
