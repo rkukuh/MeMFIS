@@ -1,6 +1,6 @@
 <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__body">
-            <h2>AD/SB</h2>
+            <h1>AD/SB</h1>
             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                 <div class="row align-items-center">
                     <div class="col-xl-6 order-2 order-xl-1">
@@ -17,9 +17,13 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                        @component('frontend.common.buttons.create-new')
+                            @slot('text', 'AD/SB')
+                            @slot('data_target', '#modal_ad_sb')
+                            @endcomponent
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'AD/SB Summary')
-                            @slot('href', route('frontend.quotation.summary.adsb') )
+                            @slot('href', route('frontend.summary.ad-sb') )
                         @endcomponent
 
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -27,12 +31,12 @@
                 </div>
             </div>
 
-            <div class="ad-sb_datatable" id="scrolling_both"></div>
+            <div class="ad-sb_datatable wp-datatable" id="scrolling_both"></div>
         </div>
     </div>
     <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__body">
-            <h2>CMR/AWL</h2>
+            <h1>CMR/AWL</h1>
             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                 <div class="row align-items-center">
                     <div class="col-xl-6 order-2 order-xl-1">
@@ -49,22 +53,27 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                        @component('frontend.common.buttons.create-new')
+                            @slot('text', 'CMR/AWL')
+                            @slot('data_target', '#modal_cmr_awl')
+                            @endcomponent
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'CMR/AWL Summary')
-                            @slot('href', route('frontend.quotation.summary.cmrawl') )
+                            @slot('href', route('frontend.summary.cmr-awl') )
                         @endcomponent
+
 
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="cmr-awl_datatable" id="scrolling_both"></div>
+            <div class="cmr-awl_datatable wp-datatable" id="scrolling_both"></div>
         </div>
     </div>
     <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__body">
-            <h2>Special Instruction</h2>
+            <h1>Special Instruction</h1>
             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                 <div class="row align-items-center">
                     <div class="col-xl-6 order-2 order-xl-1">
@@ -81,9 +90,13 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                        @component('frontend.common.buttons.create-new')
+                            @slot('text', 'Special Instruction')
+                            @slot('data_target', '#modal_si')
+                            @endcomponent
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'SI Summary')
-                            @slot('href', route('frontend.quotation.summary.si') )
+                            @slot('href', route('frontend.summary.si') )
                         @endcomponent
 
 
@@ -92,10 +105,44 @@
                 </div>
             </div>
 
-            <div class="si_datatable" id="scrolling_both"></div>
+            <div class="si_datatable wp-datatable" id="scrolling_both"></div>
+        </div>
+    </div>
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+            <h1>HT/CRR</h1>
+            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 order-2 order-xl-1">
+                        <div class="form-group m-form__group row align-items-center">
+                            <div class="col-md-6">
+                                <div class="m-input-icon m-input-icon--left">
+                                    <input type="text" class="form-control m-input" placeholder="Search..."
+                                        id="generalSearch">
+                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span><i class="la la-search"></i></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                        @component('frontend.common.buttons.create-new')
+                            @slot('text', 'HT/CRR')
+                            @slot('data_target', '#modal_ht_crr')
+                        @endcomponent
+
+
+                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ht_crr_datatable wp-datatable" id="scrolling_both"></div>
         </div>
     </div>
 
     @push('footer-scripts')
-        <script src="{{ asset('js/frontend/workpackage/non-routine/create.js')}}"></script>
+        <script src="{{ asset('js/frontend/workpackage/non-routine/index.js')}}"></script>
+        <script src="{{ asset('js/frontend/project/hm/workpackage.js')}}"></script>
     @endpush
