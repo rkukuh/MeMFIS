@@ -34,10 +34,10 @@
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane active show" id="m_tabs_taskcard" role="tabpanel">
-                        @include('frontend.project.hm.taskcard.index')
+                        @include('frontend.quotation.taskcard.index')
                     </div>
                     <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
-                        @include('frontend.project.hm.item.index')
+                        @include('frontend.quotation.item.index')
                     </div>
                 </div>
               </div>
