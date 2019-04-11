@@ -25,6 +25,8 @@ let Quotation = {
             });
         });
 
+        let workpackage_datatables_init = true;
+
         $('select[name="work-order"]').on('change', function() {
             let project_id = this.options[this.selectedIndex].value;
             $.ajax({
@@ -35,8 +37,23 @@ let Quotation = {
                     $('#project_number').html(data.title);
                     $('#name').html(data.customer.name);
                     $('#customer_id').val(data.customer_id);
+
+
+                    if(workpackage_datatables_init == true){
+                        workpackage_datatables_init = false;
+                        workpackage(data.uuid);
+                    }
+                    else{
+                        let table = $('.workpackage_datatable').mDatatable();
+                        table.destroy();
+                        workpackage(data.uuid);
+                        table = $('.workpackage_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
                 }
             });
+
         });
 
         $('.action-buttons').on('click', '.add-quotation', function() {
@@ -54,7 +71,7 @@ let Quotation = {
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
-         
+
 
             $.ajax({
                 headers: {

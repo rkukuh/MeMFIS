@@ -386,7 +386,7 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_workpackage" role="tabpanel">
-                                                    <table class="workpackage-datatable" id="html_table" width="100%">
+                                                    {{-- <table class="workpackage-datatable" id="html_table" width="100%">
                                                         <thead>
                                                             <tr>
                                                                 <th title="Field #1" data-field="OrderID">Workpackage ID</th>
@@ -428,8 +428,10 @@
                                                                 </td>
                                                             </tr>
                                                         </tbody>
-                                                    </table>
-                                                    @include('frontend.quotation.modal-workpackage')
+                                                    </table> --}}
+                                                    {{-- @include('frontend.quotation.modal-workpackage') --}}
+                                                    <div class="workpackage_datatable" id="scrolling_both"></div>
+
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
                                                     <table class="summary-datatable" id="html_table" width="100%">
@@ -622,11 +624,11 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
 
 
 @endpush
