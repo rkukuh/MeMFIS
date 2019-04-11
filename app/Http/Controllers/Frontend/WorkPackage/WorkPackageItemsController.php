@@ -53,17 +53,6 @@ class WorkPackageItemsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function addTaskCard(Request $request, WorkPackage $workPackage)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\WorkPackage  $workPackage

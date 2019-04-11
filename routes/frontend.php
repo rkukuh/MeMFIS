@@ -105,8 +105,10 @@ Route::name('frontend.')->group(function () {
             Route::resource('quotation', 'QuotationController');
             Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
-            Route::prefix('Quotation')->group(function () {
-
+            Route::prefix('quotation')->group(function () {
+                Route::resource('/{project}/workpackage', 'QuotationWorkPackageController', [
+                    'parameters' => ['workpackage' => 'workPackage']
+                ]);
             });
         });
 
@@ -138,7 +140,7 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['workpackage' => 'workPackage']
             ]);
 
-            Route::prefix('WorkPackage')->group(function () {
+            Route::prefix('workpackage')->group(function () {
 
                 Route::post('/{workPackage}/taskcard', 'WorkPackageController@addTaskCard')->name('taskcard.workpackage');
                 Route::delete('/{workPackage}/taskcard/{taskcard}', 'WorkPackageController@deleteTaskCard')->name('delete_taskcard.workpackage');
