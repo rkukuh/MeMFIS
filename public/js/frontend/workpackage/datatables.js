@@ -227,7 +227,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -261,7 +261,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -295,7 +295,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -329,7 +329,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -363,7 +363,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -397,7 +397,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
