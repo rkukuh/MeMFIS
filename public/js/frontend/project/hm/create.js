@@ -52,7 +52,7 @@ let Project = {
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });
-                        // window.location.href = '/project-hm/'+data.uuid+'/edit';
+                        window.location.href = '/project-hm/'+data.uuid+'/edit';
 
                     }
                 }
