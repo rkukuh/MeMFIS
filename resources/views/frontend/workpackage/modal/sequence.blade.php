@@ -17,7 +17,7 @@
             <div class="modal-body">
 
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="ItemForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -37,12 +37,12 @@
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                    @component('frontend.common.buttons.submit')
-                                        @slot('class', 'add-item')
+                                    @component('frontend.common.buttons.update')
+                                        @slot('class', 'sequence')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')
-                                        @slot('class', 'reset-item')
+                                        @slot('class', 'reset-sequance')
                                     @endcomponent
                                 @include('frontend.common.buttons.close')
                             </div>

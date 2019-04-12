@@ -114,6 +114,42 @@ class WorkPackageController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function sequence(Request $request, WorkPackage $workPackage,TaskCard $taskcard)
+    {
+        $workPackage->taskcards()->detach($taskcard);
+
+        $workPackage->taskcards()->attach($taskcard, [
+            'sequence' => $request->sequence
+        ]);
+
+        return response()->json($workPackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function mandatory(Request $request, WorkPackage $workPackage, TaskCard $taskcard)
+    {
+        $workPackage->taskcards()->detach($taskcard);
+
+        $workPackage->taskcards()->attach($taskcard, [
+            'is_mandatory' => $request->is_mandatory
+        ]);
+
+        return response()->json($workPackage);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\WorkPackage  $workPackage
