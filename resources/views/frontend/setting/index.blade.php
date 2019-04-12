@@ -63,19 +63,6 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="m-form__group m-form__group--inline">
-                                                <div class="m-form__label">
-                                                    <label>Date:</label>
-                                                </div>
-                                                <div class="m-form__control">
-                                                    @component('frontend.common.input.daterangepicker')
-                                                        @slot('id','daterange_good_received_note')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                            <div class="d-md-none m--margin-bottom-10"></div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
@@ -90,7 +77,7 @@
                             </div>
                         </div>
 
-                        <div class="good_recieved_note_datatable" id="good_recieved_note_datatable"></div>
+                        <div class="setting_datatable" id="setting_datatable"></div>
 
                         @include('frontend.setting.modal')
                     </div>
@@ -103,6 +90,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/good-received-note/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/daterange/good-recieved-note.js') }}" ></script>
+    <script src="{{ asset('js/frontend/setting/index.js')}}"></script>
 @endpush
