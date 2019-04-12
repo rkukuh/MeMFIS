@@ -17,10 +17,6 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                        @component('frontend.common.buttons.create-new')
-                            @slot('text', 'AD/SB')
-                            @slot('data_target', '#modal_ad_sb')
-                            @endcomponent
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'AD/SB Summary')
                             @slot('href', route('frontend.summary.ad-sb') )
@@ -53,15 +49,10 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                        @component('frontend.common.buttons.create-new')
-                            @slot('text', 'CMR/AWL')
-                            @slot('data_target', '#modal_cmr_awl')
-                            @endcomponent
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'CMR/AWL Summary')
                             @slot('href', route('frontend.summary.cmr-awl') )
                         @endcomponent
-
 
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                     </div>
@@ -90,15 +81,10 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                        @component('frontend.common.buttons.create-new')
-                            @slot('text', 'Special Instruction')
-                            @slot('data_target', '#modal_si')
-                            @endcomponent
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'SI Summary')
                             @slot('href', route('frontend.summary.si') )
                         @endcomponent
-
 
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                     </div>
@@ -127,11 +113,6 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                        @component('frontend.common.buttons.create-new')
-                            @slot('text', 'HT/CRR')
-                            @slot('data_target', '#modal_ht_crr')
-                        @endcomponent
-
 
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                     </div>

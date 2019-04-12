@@ -253,9 +253,7 @@
                                         </div>
                                     </div>
 
-
-
-                                    @include('frontend.project.hm.modal')
+                                    @include('frontend.project.hm.modal.modal')
 
                                     {{-- datatables --}}
                                     <div class="form-group m-form__group row">
