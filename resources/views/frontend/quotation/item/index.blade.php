@@ -17,13 +17,6 @@
                   </div>
               </div>
               <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                @component('frontend.common.buttons.create-new')
-                    {{-- @slot('id', 'tool') --}}
-                    @slot('text', 'Tools')
-                    @slot('data_target', '#modal_tool')
-                @endcomponent
-
-
                 <div class="m-separator m-separator--dashed d-xl-none"></div>
               </div>
               @include('frontend.workpackage.item.tool.index')
@@ -53,12 +46,6 @@
                   </div>
               </div>
               <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                @component('frontend.common.buttons.create-new')
-                    {{-- @slot('id', 'material') --}}
-                    @slot('text', 'Materials')
-                    @slot('data_target', '#modal_material')
-                @endcomponent
-
                 <div class="m-separator m-separator--dashed d-xl-none"></div>
               </div>
               @include('frontend.workpackage.item.item.index')

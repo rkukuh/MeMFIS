@@ -17,10 +17,6 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create-new')
-                        @slot('text', 'Basic')
-                        @slot('data_target', '#modal_basic')
-                    @endcomponent
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'Basic Summary')
                         @slot('href', route('frontend.summary.basic') )
@@ -53,10 +49,6 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create-new')
-                        @slot('text', 'SIP')
-                        @slot('data_target', '#modal_sip')
-                        @endcomponent
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'SIP Summary')
                         @slot('href', route('frontend.summary.sip') )
@@ -90,10 +82,6 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                    @component('frontend.common.buttons.create-new')
-                        @slot('text', 'CPCP')
-                        @slot('data_target', '#modal_cpcp')
-                        @endcomponent
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'CPCP Summary')
                         @slot('href', route('frontend.summary.cpcp') )
