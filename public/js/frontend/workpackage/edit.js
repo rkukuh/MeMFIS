@@ -130,46 +130,46 @@ let Workpackage = {
 
         });
 
-        let update = $('.modal-footer').on('click', '.update', function () {
-            $('#button').show();
-            $('#name-error').html('');
-            $('#simpan').text('Perbarui');
+        // let update = $('.modal-footer').on('click', '.update', function () {
+        //     $('#button').show();
+        //     $('#name-error').html('');
+        //     $('#simpan').text('Perbarui');
 
-            let name = $('input[name=name]').val();
-            let triggerid = $('input[name=id]').val();
+        //     let name = $('input[name=name]').val();
+        //     let triggerid = $('input[name=id]').val();
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'put',
-                url: '/category/' + triggerid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    name: name
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         type: 'put',
+        //         url: '/category/' + triggerid,
+        //         data: {
+        //             _token: $('input[name=_token]').val(),
+        //             name: name
+        //         },
+        //         success: function (data) {
+        //             if (data.errors) {
+        //                 if (data.errors.name) {
+        //                     $('#name-error').html(data.errors.name[0]);
 
-                            document.getElementById('name').value = name;
-                        }
-                    } else {
-                        $('#modal_customer').modal('hide');
+        //                     document.getElementById('name').value = name;
+        //                 }
+        //             } else {
+        //                 $('#modal_customer').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
+        //                 toastr.success('Data berhasil disimpan.', 'Sukses', {
+        //                     timeOut: 5000
+        //                 });
 
-                        let table = $('.m_datatable').mDatatable();
+        //                 let table = $('.m_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
+        //                 table.originalDataSet = [];
+        //                 table.reload();
+        //             }
+        //         }
+        //     });
+        // });
 
         let triggeruuid ="";
         let material_datatables_init = true;
@@ -189,6 +189,80 @@ let Workpackage = {
                 material_tc(triggeruuid);
                 $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
             }
+        });
+
+        $('.modal-footer').on('click', '.sequence', function () {
+            triggeruuid = $('input[name=uuid]').val();
+            sequence = $('input[name=sequence]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/sequence/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    sequence: sequence,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Sequence has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+                        $('#taskcard_sequence').modal('hide');
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });        });
+        $('.basic_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.basic_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
         });
 
         $('.basic_datatable').on('click', '.tool', function () {
