@@ -13,6 +13,7 @@ Route::name('testing.')->group(function () {
         Route::view('/welcome', 'frontend/testing/welcome')->name('welcome');
         Route::view('/barcode', 'frontend/testing/barcode')->name('barcode');
         Route::view('/metronic', 'frontend/testing/metronic')->name('metronic');
+        Route::view('/setting', 'frontend.setting.index')->name('setting.index');
 
         Route::get('/barcode-print', function () {
             $pdf = \PDF::loadView('frontend/form/barcode');
