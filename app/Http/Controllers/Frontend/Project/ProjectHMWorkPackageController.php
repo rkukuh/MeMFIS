@@ -80,14 +80,12 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function edit(Project $project, Workpackage $workPackage)
     {
-        $add_button_show = false;
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
-            'add_button_show,' => $add_button_show,
         ]);
     }
 
