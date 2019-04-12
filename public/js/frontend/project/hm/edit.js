@@ -142,7 +142,7 @@ let Project = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/project/' + project_uuid +'/workpackage',
+                url: '/project-hm/' + project_uuid +'/workpackage',
                 data: {
                     _token: $('input[name=_token]').val(),
                     workpackage: $(this).data('uuid'),
