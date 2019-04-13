@@ -155,6 +155,20 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A task card may have zero or many (aircraft) station.
+     *
+     * This function will retrieve all the (aircraft) stationes of a task card.
+     * See: Station's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function stations()
+    {
+        return $this->belongsToMany(Station::class, 'station_taskcard', 'taskcard_id', 'station_id')
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of a task card.

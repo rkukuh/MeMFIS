@@ -218,16 +218,22 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
     $taskcard->aircrafts()->save($aircraft);
 
-    // A/C Access
+    // Aircraft's Access
 
     if ($faker->boolean) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
     }
 
-    // A/C Zone
+    // Aircraft's Zone
 
     if ($faker->boolean) {
         $taskcard->zones()->saveMany($aircraft->zones);
+    }
+
+    // Aircraft's Station
+
+    if ($faker->boolean) {
+        $taskcard->stations()->saveMany($aircraft->stations);
     }
 
 });
