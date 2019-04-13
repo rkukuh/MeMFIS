@@ -22,14 +22,15 @@ class TaskCard extends MemfisModel
         'is_rii',
         'source',
         'effectivity',
-        'description',
-        'version',
         'performance_factor',
         'sequence',
+        'stringer',
+        'version',
+        'description',
 
         /** EO Header */
         'revision',
-        'ref_no',
+        'reference',
         'category_id',
         'scheduled_priority_id',
         'scheduled_priority_amount',
