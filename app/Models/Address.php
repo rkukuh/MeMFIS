@@ -11,8 +11,8 @@ class Address extends MemfisModel
         'latitude',
         'longitude',
         'type_id',
-        'addressable_id',
         'addressable_type',
+        'addressable_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

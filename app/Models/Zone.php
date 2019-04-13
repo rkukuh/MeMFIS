@@ -8,8 +8,8 @@ class Zone extends MemfisModel
 {
     protected $fillable = [
         'name',
-        'zoneable_id',
         'zoneable_type',
+        'zoneable_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
