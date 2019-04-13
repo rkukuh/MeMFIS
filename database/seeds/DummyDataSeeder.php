@@ -49,6 +49,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Websites::class);
         $this->call(Versions::class);
         $this->call(Accesses::class);
+        $this->call(Stations::class);
         $this->call(Addresses::class);
         $this->call(Documents::class);
         $this->call(Thresholds::class);

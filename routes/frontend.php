@@ -37,6 +37,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
+        Route::resource('station', 'StationController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
         Route::resource('threshold', 'ThresholdController');
@@ -127,6 +128,7 @@ Route::name('frontend.')->group(function () {
                     /** Polymorph */
                     Route::resource('/{aircraft}/zones', 'AircraftZonesController');
                     Route::resource('/{aircraft}/accesses', 'AircraftAccessesController');
+                    Route::resource('/{aircraft}/stations', 'AircraftStationsController');
 
                 });
             });

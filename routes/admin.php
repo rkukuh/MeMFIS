@@ -31,6 +31,7 @@ Route::name('admin.')->group(function () {
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
+        Route::resource('station', 'StationController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
         Route::resource('threshold', 'ThresholdController');

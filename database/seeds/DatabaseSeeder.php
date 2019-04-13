@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AccessesTableSeeder::class);
         $this->call(WebsitesTableSeeder::class);
         $this->call(VersionsTableSeeder::class);
+        $this->call(StationsTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
         $this->call(DocumentsTableSeeder::class);
         $this->call(ThresholdsTableSeeder::class);
