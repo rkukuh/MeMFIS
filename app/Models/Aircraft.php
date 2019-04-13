@@ -65,6 +65,17 @@ class Aircraft extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many stations.
+     *
+     * This function will get all of the aircraft's stations.
+     * See: Station's stationable() method for the inverse
+     */
+    public function stations()
+    {
+        return $this->morphMany(Station::class, 'stationable');
+    }
+
+    /**
      * Many-to-Many: A task card may have zero or many aircraft.
      *
      * This function will retrieve all the task cards of an aircraft.
