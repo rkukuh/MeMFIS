@@ -24,7 +24,36 @@ class PurchaseRequestUpdate extends FormRequest
     public function rules()
     {
         return [
+            'requested_at' => 'required|date',
+            'required_at' => 'required|date',
+        ];
+    }
+
+    /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
             //
         ];
     }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        //
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
+    }
+    
 }
