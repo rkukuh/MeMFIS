@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-
+use Carbon\Carbon;
+use App\Models\Item;
+use App\Models\Type;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
@@ -37,7 +39,19 @@ class PurchaseRequestController extends Controller
      */
     public function store(PurchaseRequestStore $request)
     {
-        //
+        $request->type_id = Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id;
+        $request->requested_at = Carbon::parse($request->requested_at);
+        $request->required_at = Carbon::parse($request->required_at);
+
+        $purchaseRequest = PurchaseRequest::create([
+            'number' => $request->number,
+            'type_id' => $request->type_id,
+            'requested_at' => $request->requested_at,
+            'required_at' => $request->required_at,
+            'description' => $request->description,
+            ]);
+            
+            return response()->json($purchaseRequest);
     }
 
     /**
@@ -76,7 +90,16 @@ class PurchaseRequestController extends Controller
      */
     public function update(PurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest)
     {
-        //
+        $purchaseRequest = PurchaseRequest::update([
+            'number' => $request->number,
+            'type_id' => $request->type_id,
+            'requested_at' => $request->date,
+            'required_at' => $request->date_required,
+            'description' => $request->description,
+        ]);
+
+        return response()->json($purchaseRequest);
+
     }
 
     /**
@@ -102,4 +125,15 @@ class PurchaseRequestController extends Controller
     {
         return response()->json($purchaseRequest);
     }
+
+    /**
+     * Adding item into purchase request.
+     *
+     * @param  \App\Models\PurchaseRequest  $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function add_item(PurchaseRequest $purchaseRequest,Item $item){
+        return response()->json('uye');
+    }
+    
 }
