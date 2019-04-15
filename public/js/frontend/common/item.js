@@ -25,7 +25,7 @@ let ItemDatatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-item" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
