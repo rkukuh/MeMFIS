@@ -13,6 +13,7 @@
         value="{{ $value or '' }}"
         onclick="{{ $onclick or '' }}"
         {{ $disabled or ''}}
+        {{ $checked or ''}}
     >
 
     {{ $text or '' }}
