@@ -133,7 +133,12 @@ class PurchaseRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_item(PurchaseRequest $purchaseRequest,Item $item){
-        return response()->json('uye');
+        $purchaseRequest->items()->attach($item->id, [
+            'quantity' => 0,
+            'unit_id' => $item->unit_id
+        ]);
+
+        return response()->json($purchaseRequest);
     }
     
 }

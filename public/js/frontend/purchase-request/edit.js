@@ -6,7 +6,7 @@ let PurchaseRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item',
+                        url: '/datatables/purchase-request/item/'+pr_uuid,
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -58,7 +58,7 @@ let PurchaseRequest = {
                     filterable: !1,
                 },
                 {
-                    field: 'qty',
+                    field: 'quantity',
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
@@ -112,7 +112,6 @@ let PurchaseRequest = {
                             // '<option value="3">'+
                             //     'Select Unit3'+
                             // '</option>'+
-
                         '</select>'
 
                     }
@@ -187,6 +186,8 @@ let PurchaseRequest = {
                 }
             });
         });
+
+        
 
     }
 };
