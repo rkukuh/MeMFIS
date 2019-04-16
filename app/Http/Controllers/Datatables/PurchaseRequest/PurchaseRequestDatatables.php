@@ -17,7 +17,7 @@ class PurchaseRequestDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(PurchaseRequest::with('type','aircraft')->get());
+        $data = $alldata = json_decode(PurchaseRequest::with('type')->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
