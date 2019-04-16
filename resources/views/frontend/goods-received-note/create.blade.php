@@ -229,14 +229,14 @@
                                                     <div class="action-buttons">
                                                         @component('frontend.common.buttons.submit')
                                                             @slot('type','button')
-                                                            @slot('id', 'add-quotation')
-                                                            @slot('class', 'add-quotation')
+                                                            @slot('id', 'add-goods-received')
+                                                            @slot('class', 'add-goods-received')
                                                         @endcomponent
 
                                                         @include('frontend.common.buttons.reset')
 
                                                         @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.quotation.index'))
+                                                            @slot('href', route('frontend.goods-received.index'))
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -253,8 +253,6 @@
 @endsection
 
 @push('footer-scripts')
-
-
 
     <script src="{{ asset('js/frontend/good-received-note/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

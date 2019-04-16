@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Carbon\Carbon;
 use App\Models\GoodsReceived;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GoodsReceivedStore;
@@ -37,7 +38,20 @@ class GoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedStore $request)
     {
-        //
+        $request->received_at = Carbon::parse($request->received_at);
+        // $goodsReceived = GoodsReceived::create($request->all());
+
+        $goodsReceived = GoodsReceived::create([
+            'received_at' => $request->received_at,
+            'received_by' => $request->received_by,
+            'vehicle_no' => $request->vehicle_no,
+            'container_no' => $request->container_no,
+            'purchase_order_id' => $request->purchase_order_id,
+            'storage_id' => $request->storage_id,
+        ]);
+
+
+        return response()->json($goodsReceived);
     }
 
     /**
