@@ -157,6 +157,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{item}/units', 'ItemUnitDatatables@index')->name('units.index');
                 Route::get('/{item}/prices', 'ItemPriceDatatables@index')->name('prices.index');
                 Route::get('/{item}/storages', 'ItemStorageDatatables@index')->name('storages.index');
+                Route::get('/{purchase_request}/purchase-request', 'ItemDatatables@purchaseRequest')->name('purchase-request');
+
 
             });
 

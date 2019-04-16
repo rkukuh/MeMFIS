@@ -243,6 +243,39 @@
                                                             @slot('id_error', 'description')
                                                         @endcomponent
                                                     </div> --}}
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+
+                                                        <label class="form-control-label">
+                                                            Description @include('frontend.common.label.required')
+                                                        </label>
+
+                                                        @component('frontend.common.input.textarea')
+                                                            @slot('id', 'description')
+                                                            @slot('text', 'Description')
+                                                            @slot('name', 'description')
+                                                            @slot('rows', '5')
+                                                            @slot('id_error', 'description')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                                <div class="flex">
+                                                    <div class="action-buttons">
+                                                        @component('frontend.common.buttons.submit')
+                                                            @slot('type','button')
+                                                            @slot('id', 'add-quotation')
+                                                            @slot('class', 'add-quotation')
+                                                        @endcomponent
+
+                                                        @include('frontend.common.buttons.reset')
+
+                                                        @component('frontend.common.buttons.back')
+                                                            @slot('href', route('frontend.quotation.index'))
+                                                        @endcomponent
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -291,41 +324,6 @@
                                                             @include('frontend.purchase-order.modal-check')
 
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-
-                                                <label class="form-control-label">
-                                                    Description @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('id', 'description')
-                                                    @slot('text', 'Description')
-                                                    @slot('name', 'description')
-                                                    @slot('rows', '5')
-                                                    @slot('id_error', 'description')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.submit')
-                                                            @slot('type','button')
-                                                            @slot('id', 'add-quotation')
-                                                            @slot('class', 'add-quotation')
-                                                        @endcomponent
-
-                                                        @include('frontend.common.buttons.reset')
-
-                                                        @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.quotation.index'))
-                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </div>
@@ -384,6 +382,7 @@
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/purchase-order/item.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-order/create.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-order/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

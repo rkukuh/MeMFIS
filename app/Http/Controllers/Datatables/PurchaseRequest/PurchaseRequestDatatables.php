@@ -184,6 +184,7 @@ class PurchaseRequestDatatables extends Controller
             $columnsDefault = [
                 'number'     => true,
                 'type'     => true,
+                'uuid'     => true,
                 'Actions'      => true,
                 ];
 
