@@ -182,7 +182,7 @@ let PurchaseRequest = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/purchase-request/'+response.uuid+'/edit';
+                        window.location.href = '/purchase-request/'+response.uuid+'/edit';
                     }
                 }
             });
