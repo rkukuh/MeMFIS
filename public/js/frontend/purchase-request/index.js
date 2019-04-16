@@ -64,7 +64,7 @@ let PurchaseRequest = {
                 },
                 {
                     field: 'aircraft.name',
-                    title: 'Aircrat',
+                    title: 'Aircraft',
                     sortable: 'asc',
                     filterable: !1,
                 },
