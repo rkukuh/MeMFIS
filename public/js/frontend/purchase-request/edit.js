@@ -127,6 +127,29 @@ let PurchaseRequest = {
             ]
         });
 
+        $('#item_datatable').on('click','.select-item', function () {
+            let item_uuid = $(this).attr('data-uuid');
+            $.ajax({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 },
+                 url: '/purchase-request/'+pr_uuid+'/item/'+item_uuid,
+                 type: 'post',
+                 success: function (response) {
+                     
+                         toastr.success('Item has been added.', 'Success', {
+                             timeOut: 5000
+                         });
+ 
+                         let table = $('.item_datatable').mDatatable();
+ 
+                         table.originalDataSet = [];
+                         table.reload();
+                     }
+                 
+             });
+         });
+
         $(function(){
             $('input[type="radio"]').click(function(){
               if ($(this).is(':checked'))
