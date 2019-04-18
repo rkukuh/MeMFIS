@@ -1,7 +1,7 @@
 let UnitSelect2 = {
     init: function () {
         $('.unit, ._validate').select2({
-            placeholder: 'Select a Unit'
+            placeholder: 'Select an Unit'
         })
     }
 };

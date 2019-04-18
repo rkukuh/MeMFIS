@@ -1,7 +1,7 @@
 let AccessSelect2 = {
     init: function () {
         $('#access, #access_validate').select2({
-            placeholder: 'Select a Access',
+            placeholder: 'Select an Access',
             tags: true
         });
     }

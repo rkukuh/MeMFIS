@@ -1,7 +1,7 @@
 let UnitMaterialSelect2 = {
     init: function () {
         $('#unit_material, #unit_material_validate').select2({
-            placeholder: 'Select a Unit'
+            placeholder: 'Select an Unit'
         });
     }
 };

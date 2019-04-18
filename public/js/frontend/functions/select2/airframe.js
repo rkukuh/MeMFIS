@@ -1,7 +1,7 @@
 let airframe = {
   init: function () {
       $('#airframe, #airframe_validate').select2({
-          placeholder: 'Select a Airframe',
+          placeholder: 'Select an Airframe',
       });
   }
 };

@@ -12,6 +12,7 @@
                     @slot('text', 'Airframe')
                     @slot('name', 'Airframe')
                     @slot('id_error', 'airframe')
+                    @slot('multiple','multiple')
                 @endcomponent
             </div>
         </div>
