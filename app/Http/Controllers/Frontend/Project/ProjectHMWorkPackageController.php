@@ -65,10 +65,12 @@ class ProjectHMWorkPackageController extends Controller
     {
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
+        $edit = false;
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
+            'edit' => $edit,
         ]);
     }
 
@@ -82,10 +84,12 @@ class ProjectHMWorkPackageController extends Controller
     {
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
+        $edit = true;
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
+            'edit' => $edit,
         ]);
     }
 
