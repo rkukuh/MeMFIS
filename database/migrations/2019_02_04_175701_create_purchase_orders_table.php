@@ -16,7 +16,7 @@ class CreatePurchaseOrdersTable extends Migration
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('number');
+            $table->string('number')->nullable();
             $table->unsignedInteger('vendor_id');
             $table->unsignedInteger('purchase_request_id');
             $table->timestamp('ordered_at')->nullable();
@@ -24,10 +24,10 @@ class CreatePurchaseOrdersTable extends Migration
             $table->text('shipping_address');
             $table->timestamp('ship_at')->nullable();
             $table->unsignedInteger('currency_id');
-            $table->double('exchange_rate');
-            $table->double('total_before_tax');
-            $table->double('tax_amount');
-            $table->double('total_after_tax');
+            $table->double('exchange_rate')->nullable();
+            $table->double('total_before_tax')->nullable();
+            $table->double('tax_amount')->nullable();
+            $table->double('total_after_tax')->nullable();
             $table->unsignedInteger('top_type');
             $table->integer('top_day_amount')->nullable();
             $table->timestamp('top_start_at')->nullable();
