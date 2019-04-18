@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use Carbon\Carbon;
+
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\PurchaseRequest;
@@ -40,9 +40,6 @@ class PurchaseRequestController extends Controller
     public function store(PurchaseRequestStore $request)
     {
         $request->type_id = Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id;
-        $request->requested_at = Carbon::parse($request->requested_at);
-        $request->required_at = Carbon::parse($request->required_at);
-
         $purchaseRequest = PurchaseRequest::create([
             'number' => $request->number,
             'type_id' => $request->type_id,
@@ -91,8 +88,6 @@ class PurchaseRequestController extends Controller
     public function update(PurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest)
     {
         $request->type_id = Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id;
-        $request->requested_at = Carbon::parse($request->requested_at);
-        $request->required_at = Carbon::parse($request->required_at);
         
         $purchaseRequest = PurchaseRequest::update([
             'number' => $request->number,
