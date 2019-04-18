@@ -50,7 +50,7 @@ class PurchaseRequestController extends Controller
             'required_at' => $request->required_at,
             'description' => $request->description,
             ]);
-            
+
         return response()->json($purchaseRequest);
     }
 
@@ -93,7 +93,7 @@ class PurchaseRequestController extends Controller
         $request->type_id = Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id;
         $request->requested_at = Carbon::parse($request->requested_at);
         $request->required_at = Carbon::parse($request->required_at);
-        
+
         $purchaseRequest = PurchaseRequest::update([
             'number' => $request->number,
             'type_id' => $request->type_id,
@@ -101,7 +101,7 @@ class PurchaseRequestController extends Controller
             'required_at' => $request->required_at,
             'description' => $request->description,
             ]);
-            
+
         return response()->json($purchaseRequest);
 
     }
@@ -144,5 +144,5 @@ class PurchaseRequestController extends Controller
 
         return response()->json($purchaseRequest);
     }
-    
+
 }
