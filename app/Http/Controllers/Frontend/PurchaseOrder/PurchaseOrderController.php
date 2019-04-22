@@ -40,30 +40,21 @@ class PurchaseOrderController extends Controller
      */
     public function store(PurchaseOrderStore $request)
     {
-        $request->purchase_request_id = PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id;
-        $request->ordered_at = Carbon::parse($request->ordered_at);
-        $request->valid_until = Carbon::parse($request->valid_until);
-        $request->ship_at = Carbon::parse($request->ship_at);
-        $request->top_start_at = Carbon::parse($request->top_start_at);
-        $request->top_type = Type::where('code',$request->top_type)->first()->id;
+        $purchase_request_id = PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id;
+        $ordered_at = Carbon::parse($request->ordered_at);
+        $valid_until = Carbon::parse($request->valid_until);
+        $ship_at = Carbon::parse($request->ship_at);
+        $top_start_at = Carbon::parse($request->top_start_at);
+        $top_type = Type::where('code',$request->top_type)->first()->id;
 
+        $request->merge(['purchase_request_id' => $purchase_request_id]);
+        $request->merge(['ordered_at' => $ordered_at]);
+        $request->merge(['valid_until' => $valid_until]);
+        $request->merge(['ship_at' => $ship_at]);
+        $request->merge(['top_start_at' => $top_start_at]);
+        $request->merge(['top_type' => $top_type]);
 
-        $purchaseOrder = PurchaseOrder::create([
-            'number' => $request->purchase_request_id,
-            'purchase_request_id' => $request->purchase_request_id,
-            'currency_id' => $request->currency_id,
-            'exchange_rate' => $request->exchange_rate,
-            'vendor_id' => $request->vendor_id,
-            'top_type' =>$request->top_type,
-            'shipping_address' => $request->shipping_address,
-            'description' => $request->description,
-            'top_day_amount'=> $request->top_day_amount,
-            'top_start_at'=> $request->top_start_at,
-
-            'ordered_at' => $request->ordered_at,
-            'valid_until' => $request->valid_until,
-            'ship_at' => $request->ship_at,
-            ]);
+        $purchaseOrder = PurchaseOrder::create($request->all());
 
         return response()->json($purchaseOrder);
     }
