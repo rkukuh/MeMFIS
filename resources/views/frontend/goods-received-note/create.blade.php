@@ -92,11 +92,13 @@
                                                         <div class="row">
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'vendor-code')
                                                                     @slot('text', '21111')
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-8 col-md-8 col-lg-8">
                                                                 @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'vendor-name')
                                                                     @slot('text', 'Vendor 1')
                                                                 @endcomponent
                                                             </div>
@@ -109,6 +111,7 @@
                                                             Purchase Request Number @include('frontend.common.label.required')
                                                         </label>
                                                         @component('frontend.common.label.data-info')
+                                                            @slot('id', 'pr-number')
                                                             @slot('text', '21111122')
                                                         @endcomponent
 
@@ -148,6 +151,7 @@
                                                             Project Number @include('frontend.common.label.required')
                                                         </label>
                                                         @component('frontend.common.label.data-info')
+                                                            @slot('id', 'project-number')
                                                             @slot('text', '211114444')
                                                         @endcomponent
 

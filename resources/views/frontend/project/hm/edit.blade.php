@@ -327,7 +327,7 @@
                                         </div>
                                     </div>
 
-                                    @include('frontend.project.hm..modal.modal')
+                                    @include('frontend.project.hm.modal.modal')
                                     @include('frontend.project.hm.modal.blank')
 
                                     {{-- datatables --}}

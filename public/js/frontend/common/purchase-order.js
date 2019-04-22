@@ -50,6 +50,27 @@ let Grn = {
 
             document.getElementById('ref-po').value = uuid;
 
+            $.ajax({
+                url: '/label/get-vendors/'+uuid+'/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#vendor-code').html(data.vendor.code);
+                    $('#vendor-name').html(data.vendor.code);
+                }
+            });
+
+            $.ajax({
+                url: '/label/get-purchase-request/'+uuid+'/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#pr-number').html(data.purchase_request.number);
+                }
+            });
+
+            $('#project-number').html('323331');
+
             $('.search-purchase-order').html(code);
             $('#modal_purchase_order').modal('hide');
         });

@@ -423,15 +423,6 @@ class FillComboxController extends Controller
         return json_encode($manufacturer);
     }
 
-    public function test()
-    {
-        $websites = Type::ofWebsite()->get();
-
-        return view('frontend.testing.repeaterBlank', [
-            'websites' => $websites
-        ]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -635,4 +626,21 @@ class FillComboxController extends Controller
 
         return json_encode($work_order);
     }
+
+
+    /**
+     * Display a listing of testing resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function test()
+    {
+        $websites = Type::ofWebsite()->get();
+
+        return view('frontend.testing.repeaterBlank', [
+            'websites' => $websites
+        ]);
+    }
+
+
 }

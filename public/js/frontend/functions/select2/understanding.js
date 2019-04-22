@@ -1,7 +1,7 @@
 let UderstandingSelect2 = {
     init: function () {
         $('#understanding, #understanding_validate').select2({
-            placeholder: 'Select a Understanding Level'
+            placeholder: 'Select an Understanding Level'
         });
     }
 };

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Quotation;
 
-use Carbon\Carbon;
+
 use App\Models\Type;
 use App\Models\Quotation;
 use App\Models\Project;
@@ -48,8 +48,7 @@ class QuotationController extends Controller
     public function store(QuotationStore $request)
     {
         $request->project_id = Project::where('uuid',$request->project_id)->first()->id;
-        $request->requested_at = Carbon::parse($request->requested_at);
-        $request->valid_until = Carbon::parse($request->valid_until);
+
         // $quotation = Quotation::create($request->all());
 
         $quotation = Quotation::create([

@@ -1,7 +1,7 @@
 let electrical = {
   init: function () {
       $('#electrical, #electrical_validate').select2({
-          placeholder: 'Select a Electrical',
+          placeholder: 'Select an Electrical',
       });
   }
 };

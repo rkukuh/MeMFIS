@@ -1,7 +1,7 @@
 let instrument = {
   init: function () {
       $('#instrument, #instrument_validate').select2({
-          placeholder: 'Select a Instrument',
+          placeholder: 'Select an Instrument',
       });
   }
 };

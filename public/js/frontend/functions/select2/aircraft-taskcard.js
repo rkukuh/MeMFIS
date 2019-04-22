@@ -1,7 +1,7 @@
 let AircraftTaskcardSelect2 = {
     init: function () {
         $('#aircraft_taskcard, #aircraft_taskcard_validate').select2({
-            placeholder: 'Select a Aicraft'
+            placeholder: 'Select an Aicraft'
         });
     }
 };

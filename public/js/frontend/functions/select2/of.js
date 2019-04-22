@@ -1,7 +1,7 @@
 let OfSelect2 = {
   init: function () {
       $('#of, #of_validate').select2({
-          placeholder: 'Select a Of'
+          placeholder: 'Select an Of'
       });
   }
 };
