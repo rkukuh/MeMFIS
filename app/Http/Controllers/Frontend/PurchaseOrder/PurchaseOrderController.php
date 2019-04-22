@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\PurchaseOrder;
 
 use Carbon\Carbon;
 use App\Models\Type;
