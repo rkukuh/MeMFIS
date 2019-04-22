@@ -180,6 +180,7 @@ class StorageDatatables extends Controller
             }
 
             $columnsDefault = [
+                'uuid'     => true,
                 'code'     => true,
                 'name'     => true,
                 'Actions'      => true,
