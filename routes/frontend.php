@@ -350,19 +350,38 @@ Route::name('frontend.')->group(function () {
 
         /** PURCHASE REQUEST */
 
-        Route::resource('purchase-request', 'PurchaseRequestController');
-        Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
-        Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
+        Route::namespace('PurchaseRequest')->group(function () {
+            Route::resource('purchase-request', 'PurchaseRequestController');
+
+                Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
+                Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
+
+            Route::name('purchase-request.')->group(function () {
+
+            });
+        });
 
         /** PURCHASE ORDER */
 
-        Route::resource('purchase-order', 'PurchaseOrderController');
-        Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
+        Route::namespace('PurchaseOrder')->group(function () {
+
+            Route::resource('purchase-order', 'PurchaseOrderController');
+            Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
+
+            Route::name('purchase-order.')->group(function () {
+            });
+        });
+
 
         /** GOODS RECEIVED NOTE */
+        Route::namespace('GoodsReceived')->group(function () {
 
-        Route::resource('goods-received', 'GoodsReceivedController');
-        Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
+            Route::resource('goods-received', 'GoodsReceivedController');
+            Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
+
+            Route::name('goods-received.')->group(function () {
+            });
+        });
 
         /** WORK PACKAGE */
 
