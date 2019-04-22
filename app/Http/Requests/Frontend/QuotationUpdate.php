@@ -41,6 +41,19 @@ class QuotationUpdate extends FormRequest
         ];
     }
 
+    /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'project_id.required' => 'The work order field is required.',
+            'requested_at.required' => 'The request date field is required.',
+        ];
+    }
+
     protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }

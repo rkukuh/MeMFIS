@@ -97,7 +97,7 @@ let Quotation = {
                             $("#exchange-error").html(data.errors.exchange_rate[0]);
                         }
                         if (data.errors.project_id) {
-                            $("#project_id-error").html(data.errors.project_id[0]);
+                            $("#work-order-error").html(data.errors.project_id[0]);
                         }
                         if (data.errors.requested_at) {
                             $("#requested_at-error").html(data.errors.requested_at[0]);
