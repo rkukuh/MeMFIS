@@ -16,7 +16,7 @@ class CreateGoodsReceivedTable extends Migration
         Schema::create('goods_received', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('number');
+            $table->string('number')->nullable();
             $table->unsignedInteger('received_by');
             $table->timestamp('received_at')->nullable();
             $table->string('vehicle_no')->nullable();
