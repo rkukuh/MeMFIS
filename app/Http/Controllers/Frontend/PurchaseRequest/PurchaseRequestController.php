@@ -39,17 +39,15 @@ class PurchaseRequestController extends Controller
      */
     public function store(PurchaseRequestStore $request)
     {
-        $request->type_id = Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id;
-        $request->requested_at = Carbon::parse($request->requested_at);
-        $request->required_at = Carbon::parse($request->required_at);
+        $type_id = Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id;
+        $requested_at = Carbon::parse($request->requested_at);
+        $required_at = Carbon::parse($request->required_at);
 
-        $purchaseRequest = PurchaseRequest::create([
-            'number' => $request->number,
-            'type_id' => $request->type_id,
-            'requested_at' => $request->requested_at,
-            'required_at' => $request->required_at,
-            'description' => $request->description,
-            ]);
+        $request->merge(['type_id' => $type_id]);
+        $request->merge(['requested_at' => $requested_at]);
+        $request->merge(['required_at' => $required_at]);
+
+        $purchaseRequest = PurchaseRequest::create($request->all());
 
         return response()->json($purchaseRequest);
     }
