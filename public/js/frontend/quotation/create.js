@@ -119,6 +119,9 @@ let Quotation = {
                             timeOut: 5000
                         });
 
+                        window.location.href = '/quotation/' + response.uuid + '/edit';
+
+
                     }
                 }
             });
