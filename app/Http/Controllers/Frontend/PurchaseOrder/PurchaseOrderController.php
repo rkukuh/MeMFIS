@@ -40,19 +40,12 @@ class PurchaseOrderController extends Controller
      */
     public function store(PurchaseOrderStore $request)
     {
-        $purchase_request_id = PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id;
-        $ordered_at = Carbon::parse($request->ordered_at);
-        $valid_until = Carbon::parse($request->valid_until);
-        $ship_at = Carbon::parse($request->ship_at);
-        $top_start_at = Carbon::parse($request->top_start_at);
-        $top_type = Type::where('code',$request->top_type)->first()->id;
-
-        $request->merge(['purchase_request_id' => $purchase_request_id]);
-        $request->merge(['ordered_at' => $ordered_at]);
-        $request->merge(['valid_until' => $valid_until]);
-        $request->merge(['ship_at' => $ship_at]);
-        $request->merge(['top_start_at' => $top_start_at]);
-        $request->merge(['top_type' => $top_type]);
+        $request->merge(['purchase_request_id' => PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id]);
+        $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
+        $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
+        $request->merge(['ship_at' => Carbon::parse($request->ship_at)]);
+        $request->merge(['top_start_at' => Carbon::parse($request->top_start_at)]);
+        $request->merge(['top_type' => Type::where('code',$request->top_type)->first()->id]);
 
         $purchaseOrder = PurchaseOrder::create($request->all());
 
