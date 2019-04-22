@@ -187,7 +187,7 @@
                                                     <div class="form-group m-form__group row" style="margin-top:22px">
                                                         <label for="example-text-input" class="col-2 col-form-label">Received By</label>
                                                         <div class="col-10">
-                                                            @component('frontend.common.input.text')
+                                                            @component('frontend.common.input.select2')
                                                                 @slot('id', 'received-by')
                                                                 @slot('text', 'received-by')
                                                                 @slot('name', 'received-by')
@@ -258,6 +258,8 @@
 @push('footer-scripts')
 
     <script src="{{ asset('js/frontend/good-received-note/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/received-by.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/ref-date.js')}}"></script>
 

@@ -179,12 +179,12 @@ let goods_received_note = {
 
         $('.footer').on('click', '.add-goods-received', function () {
             let received_at = $('input[name=date]').val();
-            let received_by = $('input[name=received-by]').val();
+            let received_by = $('#received-by').val();
             let ref_po = $('input[name=ref-po]').val();
             let do_no = $('input[name=do-no]').val();
             let ref_date = $('input[name=date-ref-date]').val();
             let warehouse = $('input[name=warehouse]').val();
-            let description = $('input[name=description]').val();
+            let description = $('#description').val();
             let vehicle_no = $('input[name=vehicle-no]').val();
             let container_no = $('input[name=container-no]').val();
 
@@ -201,7 +201,6 @@ let goods_received_note = {
                     container_no:container_no,
                     purchase_order_id:ref_po,
                     storage_id:warehouse,
-                    container_no:container_no,
                     description:description,
                 },
                 success: function (response) {
