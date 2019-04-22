@@ -30,15 +30,15 @@
                                             Total Task Card(s)
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            1000 Item (s)
+                                            {{$total_taskcard}} Item (s)
                                         </td>
                                     </tr>
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Manhour(s) (included performance factor)
+                                            Total MPD's Manhour(s)
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            500 mhrs
+                                            {{$total_manhor_taskcard}} mhrs
                                         </td>
                                     </tr>
                                     <tr>
