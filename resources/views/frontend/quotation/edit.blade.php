@@ -60,14 +60,17 @@
                                                             Work Order @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'Work Order')
-                                                            @slot('id', 'work-order')
-                                                            @slot('name', 'work-order')
-                                                            @slot('id_error', 'work-order')
-                                                        @endcomponent
-
-                                                  
+                                                        <select id="work-order" name="work-order" class="form-control m-select2">
+                                                            <option value="">
+                                                                &mdash; Select a Work Order &mdash;
+                                                            </option>
+                                                            @foreach ($projects as $project)
+                                                                <option value="{{ $project->uuid }}"
+                                                                    @if ($project->no_wo === $quotation->project->no_wo) selected @endif>
+                                                                    {{ $project->no_wo }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                         <input type="hidden" id="customer_id" name="customer_id">
 
                                                     </div>
