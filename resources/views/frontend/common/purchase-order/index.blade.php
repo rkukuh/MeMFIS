@@ -16,7 +16,7 @@
                 @slot('size', 'sm')
                 @slot('icon', 'search')
                 @slot('data_target', '#modal_purchase_order')
-                @slot('style','float:right;margin-top:10px;margin-right:6px;')
+                @slot('style','float:right;margin-top:10px;margin-right:-40px;')
             @endcomponent
         </div>
     </div>
