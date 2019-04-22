@@ -64,7 +64,6 @@ class QuotationController extends Controller
             'scheduled_payment_amount' => $request->scheduled_payment_amount,
             'term_of_condition' => $request->term_and_condition,
             'description' => $request->description,
-
         ]);
 
         return response()->json($quotation);
@@ -89,7 +88,12 @@ class QuotationController extends Controller
      */
     public function edit(Quotation $quotation)
     {
-        return view('frontend.quotation.edit');
+        $websites = Type::ofWebsite()->get();
+        
+        return view('frontend.quotation.edit',[
+            'quotation' => $quotation,
+            'websites' => $websites
+        ]);
     }
 
     /**
