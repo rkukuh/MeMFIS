@@ -26,8 +26,17 @@ class QuotationStore extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => 'required', 
-            'project_id' => 'required', 
+            'customer_id' => 'required|exists:customers,id', 
+            'project_id' => 'required|exists:projects,id', 
+            'requested_at' => 'required|date', 
+            'valid_until' => 'required|date', 
+            'currency_id' => 'required|exists:currencies,id', 
+            'exchange_rate' => 'required', 
+            'scheduled_payment_amount' => 'required', 
+            'scheduled_payment_type' => 'required', 
+            'description' => 'required', 
+            // 'title' => 'required', 
+            // 'term_of_payment' => 'required', 
             // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
     }
