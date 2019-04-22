@@ -1,9 +1,6 @@
 let Project = {
     init: function () {
         $('.add-project').on('click', function () {
-            console.log( $('#project_title').val());
-            console.log( $('#customer').val());
-            console.log( $('#applicability_airplane').val());
             let data = new FormData();
             data.append("title", $('#project_title').val());
             data.append("customer_id", $('#customer').val());
