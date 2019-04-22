@@ -40,13 +40,9 @@ class GoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedStore $request)
     {
-        $purchase_order_id = PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id;
-        $storage_id = Storage::where('uuid',$request->storage_id)->first()->id;
-        $received_at = Carbon::parse($request->received_at);
-
-        $request->merge(['purchase_order_id' => $purchase_order_id]);
-        $request->merge(['storage_id' => $storage_id]);
-        $request->merge(['received_at' => $received_at]);
+        $request->merge(['purchase_order_id' => PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id]);
+        $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
+        $request->merge(['received_at' => Carbon::parse($request->received_at)]);
 
         $goodsReceived = GoodsReceived::create($request->all());
 
