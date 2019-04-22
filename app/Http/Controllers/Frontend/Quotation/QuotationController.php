@@ -88,11 +88,11 @@ class QuotationController extends Controller
      */
     public function edit(Quotation $quotation)
     {
-        $websites = Type::ofWebsite()->get();
-        
+        $work_orders = Project::pluck('no_wo','uuid');
+
         return view('frontend.quotation.edit',[
             'quotation' => $quotation,
-            'websites' => $websites
+            'work_orders' => $work_orders
         ]);
     }
 
