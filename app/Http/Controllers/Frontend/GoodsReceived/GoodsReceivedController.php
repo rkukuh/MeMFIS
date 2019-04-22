@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Frontend\GoodsReceived;
 
-
+use Carbon\Carbon;
+use App\Models\Storage;
+use App\Models\PurchaseOrder;
 use App\Models\GoodsReceived;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GoodsReceivedStore;
@@ -39,6 +41,9 @@ class GoodsReceivedController extends Controller
     public function store(GoodsReceivedStore $request)
     {
         // $goodsReceived = GoodsReceived::create($request->all());
+        $request->purchase_order_id = PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id;
+        $request->storage_id = Storage::where('uuid',$request->storage_id)->first()->id;
+        $request->received_at = Carbon::parse($request->received_at);
 
         $goodsReceived = GoodsReceived::create([
             'received_at' => $request->received_at,
@@ -47,6 +52,7 @@ class GoodsReceivedController extends Controller
             'container_no' => $request->container_no,
             'purchase_order_id' => $request->purchase_order_id,
             'storage_id' => $request->storage_id,
+            'description' => $request->description,
         ]);
 
 
