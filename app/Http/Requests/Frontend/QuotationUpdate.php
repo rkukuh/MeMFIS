@@ -27,7 +27,7 @@ class QuotationUpdate extends FormRequest
     {
         return [
             'customer_id' => 'required|exists:customers,id', 
-            'project_id' => 'required|exists:projects,id', 
+            'project_id' => 'required|exists:projects,uuid', 
             'requested_at' => 'required|date', 
             'valid_until' => 'required|date', 
             'currency_id' => 'required|exists:currencies,id', 

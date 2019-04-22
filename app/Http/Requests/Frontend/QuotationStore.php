@@ -27,7 +27,7 @@ class QuotationStore extends FormRequest
     {
         return [
             'customer_id' => 'required|exists:customers,id', 
-            'project_id' => 'required|exists:projects,id', 
+            'project_id' => 'required|exists:projects,uuid', 
             'requested_at' => 'required|date', 
             'valid_until' => 'required|date', 
             'currency_id' => 'required|exists:currencies,id', 
@@ -40,7 +40,7 @@ class QuotationStore extends FormRequest
             // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
     }
-    
+
      /**
      * Set custom validation error message
      *
