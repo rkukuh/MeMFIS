@@ -98,9 +98,16 @@ class ProjectHMController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjecHMtUpdate $request, Project $project)
+    public function update(ProjectHMUpdate $request, Project $project)
     {
-        //
+        $project->update($request->all());
+        if ($request->hasFile('fileInput')) {
+            $destination = 'project/hm/workOrder';
+            $fileName = $request->file('fileInput')->getClientOriginalName();
+            $fileUpload = Storage::putFileAs($destination,$request->file('fileInput'), $fileName);
+        }
+
+        return response()->json($project);
     }
 
     /**
