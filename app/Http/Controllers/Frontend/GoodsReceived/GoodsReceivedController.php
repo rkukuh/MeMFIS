@@ -40,20 +40,15 @@ class GoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedStore $request)
     {
-        // $goodsReceived = GoodsReceived::create($request->all());
-        $request->purchase_order_id = PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id;
-        $request->storage_id = Storage::where('uuid',$request->storage_id)->first()->id;
-        $request->received_at = Carbon::parse($request->received_at);
+        $purchase_order_id = PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id;
+        $storage_id = Storage::where('uuid',$request->storage_id)->first()->id;
+        $received_at = Carbon::parse($request->received_at);
 
-        $goodsReceived = GoodsReceived::create([
-            'received_at' => $request->received_at,
-            'received_by' => $request->received_by,
-            'vehicle_no' => $request->vehicle_no,
-            'container_no' => $request->container_no,
-            'purchase_order_id' => $request->purchase_order_id,
-            'storage_id' => $request->storage_id,
-            'description' => $request->description,
-        ]);
+        $request->merge(['purchase_order_id' => $purchase_order_id]);
+        $request->merge(['storage_id' => $storage_id]);
+        $request->merge(['received_at' => $received_at]);
+
+        $goodsReceived = GoodsReceived::create($request->all());
 
 
         return response()->json($goodsReceived);
