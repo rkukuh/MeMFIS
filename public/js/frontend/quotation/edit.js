@@ -30,7 +30,37 @@ let Quotation = {
             });
         });
 
-        $('.update-quotation').on('click', '.add-quotation', function() {
+        let workpackage_datatables_init = true;
+
+        $('select[name="work-order"]').on('change', function() {
+            let project_id = this.options[this.selectedIndex].value;
+            $.ajax({
+                url: '/project/'+project_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#project_number').html(data.title);
+                    $('#name').html(data.customer.name);
+                    $('#customer_id').val(data.customer_id);
+
+
+                    if(workpackage_datatables_init == true){
+                        workpackage_datatables_init = false;
+                        workpackage(data.uuid);
+                    }
+                    else{
+                        let table = $('.workpackage_datatable').mDatatable();
+                        table.destroy();
+                        workpackage(data.uuid);
+                        table = $('.workpackage_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('.footer').on('click', '.update-quotation', function() {
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -47,13 +77,12 @@ let Quotation = {
             data.append("top_description", $('#term_and_condition').val());
             data.append('_method', 'PUT');
 
-
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: 'post',
-                url: '/quotation',
+                url: '/quotation/'+quotation_uuid,
                 processData: false,
                 contentType: false,
                 data:data,
