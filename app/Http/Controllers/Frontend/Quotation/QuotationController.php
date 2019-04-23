@@ -77,7 +77,9 @@ class QuotationController extends Controller
      */
     public function show(Quotation $quotation)
     {
-        return view('frontend.quotation.show');
+        return view('frontend.quotation.show',[
+            'quotation' => $quotation,
+        ]);
     }
 
     /**
