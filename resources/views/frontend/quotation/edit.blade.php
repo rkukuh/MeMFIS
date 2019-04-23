@@ -82,7 +82,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_number')
-                                                                    @slot('text', 'P-01/HMxxxxx')
+                                                                    @slot('text', $quotation->project->code)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -548,6 +548,7 @@
 @endpush
 @push('footer-scripts')
     <script>
+        let project_id = '{{  $quotation->project->uuid }}';
     function myFunction(object) {
         // var numItems = $('.project').length
 
@@ -641,7 +642,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
-    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/edit.js') }}"></script>
 
 
 @endpush

@@ -1,3 +1,5 @@
+
+
 let Quotation = {
     init: function() {
         let edit = $(".m_datatable").on("click", ".edit", function() {
@@ -29,11 +31,32 @@ let Quotation = {
                 }
             });
         });
-
+        
         let workpackage_datatables_init = true;
+        $( document ).ready(function() {
+            $.ajax({
+                url: '/project/'+project_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if(workpackage_datatables_init == true){
+                        workpackage_datatables_init = false;
+                        workpackage(data.uuid);
+                    }
+                    else{
+                        let table = $('.workpackage_datatable').mDatatable();
+                        table.destroy();
+                        workpackage(data.uuid);
+                        table = $('.workpackage_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
 
         $('select[name="work-order"]').on('change', function() {
-            let project_id = this.options[this.selectedIndex].value;
+            project_id = this.options[this.selectedIndex].value;
             $.ajax({
                 url: '/project/'+project_id,
                 type: 'GET',
