@@ -28,6 +28,28 @@ let Quotation = {
             });
         });
 
+        let workpackage_datatables_init = true;
+        $( document ).ready(function() {
+            $.ajax({
+                url: '/project/'+project_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if(workpackage_datatables_init == true){
+                        workpackage_datatables_init = false;
+                        workpackage(data.uuid);
+                    }
+                    else{
+                        let table = $('.workpackage_datatable').mDatatable();
+                        table.destroy();
+                        workpackage(data.uuid);
+                        table = $('.workpackage_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
     }
 };
 

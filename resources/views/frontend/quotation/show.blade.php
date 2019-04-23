@@ -492,7 +492,12 @@
 @endpush
 
 @push('footer-scripts')
+<script>
+        let project_id = '{{  $quotation->project->uuid }}';
+</script>
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/workpackage/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/show.js') }}"></script>
 
 @endpush
