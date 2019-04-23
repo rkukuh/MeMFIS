@@ -229,6 +229,7 @@
                                                                 @slot('id', 'date')
                                                                 @slot('text', 'Date')
                                                                 @slot('name', 'date')
+                                                                @slot('id_error','requested_at')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -240,6 +241,7 @@
                                                                 @slot('id', 'valid_until')
                                                                 @slot('text', 'Valid Until')
                                                                 @slot('name', 'valid_until')
+                                                                @slot('id_error','valid_until')
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -268,6 +270,7 @@
                                                             @component('frontend.common.input.number')
                                                                 @slot('text', 'exchange')
                                                                 @slot('name', 'exchange')
+                                                                @slot('id_error', 'exchange')
                                                                 @slot('id', 'exchange')
                                                             @endcomponent
                                                         </div>
@@ -316,6 +319,7 @@
                                                                         @slot('name', 'scheduled_payment')
                                                                         @slot('id', 'scheduled_payment')
                                                                         @slot('text', 'Phone')
+                                                                        @slot('id_error', 'scheduled_payment_amount')
                                                                     @endcomponent
                                                                     </div>
                                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -343,6 +347,7 @@
                                                 @slot('id', 'title')
                                                 @slot('name', 'title')
                                                 @slot('text', 'title')
+                                                @slot('id_error', 'title')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -357,6 +362,7 @@
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
+                                                @slot('id_error', 'description')
                                             @endcomponent
                                         </div>
                                     </div>

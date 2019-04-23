@@ -1,3 +1,5 @@
+
+
 let Quotation = {
     init: function() {
         let edit = $(".m_datatable").on("click", ".edit", function() {
@@ -29,43 +31,123 @@ let Quotation = {
                 }
             });
         });
+        
+        let workpackage_datatables_init = true;
+        $( document ).ready(function() {
+            $.ajax({
+                url: '/project/'+project_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if(workpackage_datatables_init == true){
+                        workpackage_datatables_init = false;
+                        workpackage(data.uuid);
+                    }
+                    else{
+                        let table = $('.workpackage_datatable').mDatatable();
+                        table.destroy();
+                        workpackage(data.uuid);
+                        table = $('.workpackage_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
 
-        let update = $(".modal-footer").on("click", ".update", function() {
-            $("#button").show();
-            $("#name-error").html("");
-            $("#simpan").text("Perbarui");
+        $('select[name="work-order"]').on('change', function() {
+            project_id = this.options[this.selectedIndex].value;
+            $.ajax({
+                url: '/project/'+project_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#project_number').html(data.title);
+                    $('#name').html(data.customer.name);
+                    $('#customer_id').val(data.customer_id);
 
-            let name = $("input[name=name]").val();
-            let triggerid = $("input[name=id]").val();
+
+                    if(workpackage_datatables_init == true){
+                        workpackage_datatables_init = false;
+                        workpackage(data.uuid);
+                    }
+                    else{
+                        let table = $('.workpackage_datatable').mDatatable();
+                        table.destroy();
+                        workpackage(data.uuid);
+                        table = $('.workpackage_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('.footer').on('click', '.update-quotation', function() {
+            let data = new FormData();
+            data.append("project_id", $('#work-order').val());
+            data.append("customer_id", $('#customer_id').val());
+            data.append("requested_at", $('#date').val());
+            data.append("valid_until", $('#valid_until').val());
+            data.append("currency_id", $('#currency').val());
+            data.append("term_and_condition", $('#term_and_condition').val());
+            data.append("exchange_rate", $('#exchange').val());
+            data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
+            data.append("scheduled_payment_amount", $('#scheduled_payment').val());
+            data.append("total",0.000000);
+            data.append("title", $('#title').val());
+            data.append("description", $('#description').val());
+            data.append("top_description", $('#term_and_condition').val());
+            data.append('_method', 'PUT');
 
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: "put",
-                url: "/category/" + triggerid,
-                data: {
-                    _token: $("input[name=_token]").val(),
-                    name: name
-                },
+                type: 'post',
+                url: '/quotation/'+quotation_uuid,
+                processData: false,
+                contentType: false,
+                data:data,
                 success: function(data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $("#name-error").html(data.errors.name[0]);
-
-                            document.getElementById("name").value = name;
+                        if (data.errors.currency_id) {
+                            $("#currency-error").html(data.errors.currency_id[0]);
                         }
-                    } else {
-                        $("#modal_customer").modal("hide");
+                        if (data.errors.customer_id) {
+                            $("#customer_id-error").html(data.errors.customer_id[0]);
+                        }
+                        if (data.errors.description) {
+                            $("#description-error").html(data.errors.description[0]);
+                        }
+                        if (data.errors.exchange_rate) {
+                            $("#exchange-error").html(data.errors.exchange_rate[0]);
+                        }
+                        if (data.errors.project_id) {
+                            $("#work-order-error").html(data.errors.project_id[0]);
+                        }
+                        if (data.errors.requested_at) {
+                            $("#requested_at-error").html(data.errors.requested_at[0]);
+                        }
+                        if (data.errors.scheduled_payment_amount) {
+                            $("#scheduled_payment_amount-error").html(data.errors.scheduled_payment_amount[0]);
+                        }
+                        if (data.errors.scheduled_payment_type) {
+                            $("#scheduled_payment_type-error").html(data.errors.scheduled_payment_type[0]);
+                        }
+                        if (data.errors.valid_until) {
+                            $("#valid_until-error").html(data.errors.valid_until[0]);
+                        }
 
-                        toastr.success("Data berhasil disimpan.", "Sukses", {
+                        document.getElementById("name").value = name;
+                    } else {
+
+                        toastr.success('Quotation has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $(".m_datatable").mDatatable();
+                        // window.location.href = '/quotation/' + response.uuid + '/edit';
 
-                        table.originalDataSet = [];
-                        table.reload();
                     }
                 }
             });

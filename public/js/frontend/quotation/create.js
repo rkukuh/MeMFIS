@@ -84,16 +84,43 @@ let Quotation = {
                 data:data,
                 success: function(data) {
                     if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $("#name-error").html(data.errors.name[0]);
+                        if (data.errors.currency_id) {
+                            $("#currency-error").html(data.errors.currency_id[0]);
+                        }
+                        if (data.errors.customer_id) {
+                            $("#customer_id-error").html(data.errors.customer_id[0]);
+                        }
+                        if (data.errors.description) {
+                            $("#description-error").html(data.errors.description[0]);
+                        }
+                        if (data.errors.exchange_rate) {
+                            $("#exchange-error").html(data.errors.exchange_rate[0]);
+                        }
+                        if (data.errors.project_id) {
+                            $("#work-order-error").html(data.errors.project_id[0]);
+                        }
+                        if (data.errors.requested_at) {
+                            $("#requested_at-error").html(data.errors.requested_at[0]);
+                        }
+                        if (data.errors.scheduled_payment_amount) {
+                            $("#scheduled_payment_amount-error").html(data.errors.scheduled_payment_amount[0]);
+                        }
+                        if (data.errors.scheduled_payment_type) {
+                            $("#scheduled_payment_type-error").html(data.errors.scheduled_payment_type[0]);
+                        }
+                        if (data.errors.valid_until) {
+                            $("#valid_until-error").html(data.errors.valid_until[0]);
+                        }
 
-                        //     document.getElementById("name").value = name;
-                        // }
+                        document.getElementById("name").value = name;
                     } else {
 
                         toastr.success('Quotation has been created.', 'Success', {
                             timeOut: 5000
                         });
+
+                        window.location.href = '/quotation/' + response.uuid + '/edit';
+
 
                     }
                 }
