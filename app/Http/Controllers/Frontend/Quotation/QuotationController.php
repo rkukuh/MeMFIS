@@ -47,24 +47,9 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
-        $request->project_id = Project::where('uuid',$request->project_id)->first()->id;
+        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
-        // $quotation = Quotation::create($request->all());
-
-        $quotation = Quotation::create([
-            'project_id' => $request->project_id,
-            'customer_id' => $request->customer_id,
-            'requested_at' => $request->requested_at,
-            'valid_until' => $request->valid_until,
-            'currency_id' => $request->currency_id,
-            'exchange_rate' => $request->exchange_rate,
-            'number' => $request->title,
-            'total' => $request->total,
-            'scheduled_payment_type' => $request->scheduled_payment_type,
-            'scheduled_payment_amount' => $request->scheduled_payment_amount,
-            'term_of_condition' => $request->term_and_condition,
-            'description' => $request->description,
-        ]);
+        $quotation = Quotation::create($request->all());
 
         return response()->json($quotation);
     }
