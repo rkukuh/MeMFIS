@@ -641,7 +641,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
-    <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/workpackage-edit.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/edit.js') }}"></script>
 
 
