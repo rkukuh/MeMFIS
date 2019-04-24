@@ -63,6 +63,7 @@ Route::name('component.')->group(function () {
         Route::prefix('label')->group(function () {
             Route::get('get-vendors/{vendor}', 'FillLabelController@vendor')->name('get-vendor');
             Route::get('get-purchase-request/{purchaseRequest}', 'FillLabelController@purchaseRequest')->name('get-purchase-request');
+            Route::get('get-customer/{customer}', 'FillLabelController@customer')->name('get-customer');
         });
     });
 });

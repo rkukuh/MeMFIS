@@ -67,4 +67,17 @@ class FillLabelController extends Controller
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function customer($customer)
+    {
+        $customer = Customer::where('uuid',$customer)->with('phones','faxes','emails','addresses')->first();
+
+        return json_encode($customer);
+
+    }
+
 }
