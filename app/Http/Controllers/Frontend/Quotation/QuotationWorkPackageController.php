@@ -64,6 +64,7 @@ class QuotationWorkPackageController extends Controller
      */
     public function show(Project $project, Workpackage $workPackage)
     {
+        // dd('test');
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         return view('frontend.quotation.workpackage.index',[
