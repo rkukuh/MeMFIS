@@ -51,9 +51,9 @@ class QuotationWorkPackageController extends Controller
      */
     public function store(Request $request, Quotation $quotation)
     {
-        $quotation->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
+        // $quotation->project()->attach();
 
-        return response()->json($quotation);
+        // return response()->json($quotation);
     }
 
     /**
