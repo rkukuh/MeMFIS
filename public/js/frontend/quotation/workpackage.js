@@ -58,9 +58,6 @@ $('.workpackage_datatable').mDatatable({
             title: 'Title',
             sortable: 'asc',
             filterable: !1,
-            template: function (t) {
-                return '<a href="/quotation/'+triggeruuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
-            }
         },
         {
             field: 'aircraft.name',
