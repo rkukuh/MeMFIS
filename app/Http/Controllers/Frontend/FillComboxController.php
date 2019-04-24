@@ -327,7 +327,7 @@ class FillComboxController extends Controller
      */
     public function customer()
     {
-        $customers = Customer::pluck('name', 'id');
+        $customers = Customer::pluck('name', 'uuid');
 
         return json_encode($customers);
 
