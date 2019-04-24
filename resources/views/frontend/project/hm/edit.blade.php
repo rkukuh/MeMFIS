@@ -64,7 +64,7 @@
                                                         </option>
 
                                                         @foreach ($customers as $customer)
-                                                            <option value="{{ $customer->id }}"
+                                                            <option value="{{ $customer->uuid }}"
                                                                 @if ($customer->id == $project->aircraft_id) selected @endif>
                                                                 {{ $customer->name }}
                                                             </option>
@@ -169,7 +169,7 @@
                                                                                 </div>
                                                                         </div>
                                                                         <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                            <div class="col-sm-12 col-md-12 col-lg-12">
                                                                                 <label class="form-control-label">
                                                                                     Email
                                                                                 </label>

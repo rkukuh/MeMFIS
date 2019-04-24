@@ -268,7 +268,150 @@ let Project = {
             });
         });
 
+        $(document).ready(function() {
+            let customer_uuid = $('#customer')[0];
+            let phone = $('#phone');
+            let fax = $('#fax');
+            let addresses = $('#address');
+            let emails = $('#email');
+            phone.empty();
+            fax.empty();
+            addresses.empty();
+            emails.empty();
+            let phoneNumber = "";
+            $("#name").html(customer_uuid.text);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'GET',
+                dataType: "json",
+                url: '/label/get-customer/'+customer_uuid.value,
+                success: function (data) {
+                    // adding customer phones  option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.phones)){
+                        console.log('empty phones');
+                    }else{
+                        console.log('get the phones data');
+                        $.each( data.phones, function( key, value ) {
+                            if(value.ext === null){
+                                phoneNumber = value.number;
+                            }else{
+                                phoneNumber = value.number+' Ext. '+value.ext;
+                            }
+                            let phoneNumberOption = new Option(phoneNumber,value.uuid);
+                            phone.append(phoneNumberOption);
+                        });
+                    }
         
+                    // adding customer faxes  option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.faxes)){
+                        console.log('empty faxes');
+                    }else{
+                        console.log('get the faxes data');
+                        $.each( data.faxes, function( key, value ) {
+                            let faxNumberOption = new Option( value.number,value.uuid);
+                            fax.append(faxNumberOption);
+                        });
+                    }
+        
+                    // Adding customer addresses option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.addresses)){
+                        console.log('empty addresses');
+                    }else{
+                        console.log('get the addresses data');
+                        $.each( data.addresses, function( key, value ) {
+                            let addressesOption = new Option( value.address,value.uuid);
+                            addresses.append(addressesOption);
+                        });
+                    }
+        
+                    // Adding customer emails option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.emails)){
+                        console.log('empty emails');
+                    }else{
+                        console.log('get the emails data');
+                        $.each( data.emails, function( key, value ) {
+                            let emailsOption = new Option( value.address,value.uuid);
+                            emails.append(emailsOption);
+                        });
+                    }
+                }
+            });
+        });
+        
+        $('select[name="customer"]').on('change', function () {
+            let customer_uuid = this.options[this.selectedIndex];
+            let phone = $('#phone');
+            let fax = $('#fax');
+            let addresses = $('#address');
+            let emails = $('#email');
+            phone.empty();
+            fax.empty();
+            addresses.empty();
+            emails.empty();
+            let phoneNumber = "";
+            console.log(phone);
+            $("#name").html(customer_uuid.text);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'GET',
+                dataType: "json",
+                url: '/label/get-customer/'+customer_uuid.value,
+                success: function (data) {
+                    // adding customer phones  option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.phones)){
+                        console.log('empty phones');
+                    }else{
+                        console.log('get the phones data');
+                        $.each( data.phones, function( key, value ) {
+                            if(value.ext === null){
+                                phoneNumber = value.number;
+                            }else{
+                                phoneNumber = value.number+' Ext. '+value.ext;
+                            }
+                            let phoneNumberOption = new Option(phoneNumber,value.uuid);
+                            phone.append(phoneNumberOption);
+                        });
+                    }
+        
+                    // adding customer faxes  option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.faxes)){
+                        console.log('empty faxes');
+                    }else{
+                        console.log('get the faxes data');
+                        $.each( data.faxes, function( key, value ) {
+                            let faxNumberOption = new Option( value.number,value.uuid);
+                            fax.append(faxNumberOption);
+                        });
+                    }
+        
+                    // Adding customer addresses option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.addresses)){
+                        console.log('empty addresses');
+                    }else{
+                        console.log('get the addresses data');
+                        $.each( data.addresses, function( key, value ) {
+                            let addressesOption = new Option( value.address,value.uuid);
+                            addresses.append(addressesOption);
+                        });
+                    }
+        
+                    // Adding customer emails option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.emails)){
+                        console.log('empty emails');
+                    }else{
+                        console.log('get the emails data');
+                        $.each( data.emails, function( key, value ) {
+                            let emailsOption = new Option( value.address,value.uuid);
+                            emails.append(emailsOption);
+                        });
+                    }
+                }
+            });
+        });
 
         $('.update-project').on('click', function () {
             let data = new FormData();
@@ -325,6 +468,8 @@ let Project = {
                 }
             });
         });
+
+        
     }
 };
 
