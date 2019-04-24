@@ -21,6 +21,8 @@
                 </label>
                 @component('frontend.common.label.data-info')
                     @slot('text', $total_mhrs)
+                    @slot('id', 'total_mhrs')
+                    @slot('name', 'total_mhrs')
                 @endcomponent
 
             </div>
@@ -34,6 +36,25 @@
                     @slot('id', 'rate')
                     @slot('id_error', 'rate')
                 @endcomponent
+            </div>
+        </div>
+        <div class="form-group m-form__group row">
+            <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                <div class="flex">
+                    <div class="action-buttons">
+                        @component('frontend.common.buttons.submit')
+                            @slot('type','button')
+                            @slot('id', 'add-job-request')
+                            @slot('class', 'add-job-request')
+                        @endcomponent
+
+                        @include('frontend.common.buttons.reset')
+
+                        @component('frontend.common.buttons.back')
+                            @slot('href', ''))
+                        @endcomponent
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -55,7 +76,7 @@
         @include('frontend.quotation.taskcard.routine.cpcp.modal')
     </div>
     <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-        {{-- @include('frontend.quotation.taskcard.nonroutine.index') --}}
+        @include('frontend.quotation.taskcard.nonroutine.index')
         @include('frontend.quotation.taskcard.nonroutine.adsb.modal')
         @include('frontend.quotation.taskcard.nonroutine.cmrawl.modal')
         @include('frontend.quotation.taskcard.nonroutine.si.modal')
