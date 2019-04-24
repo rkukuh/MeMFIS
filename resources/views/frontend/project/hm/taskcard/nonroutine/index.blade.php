@@ -25,7 +25,7 @@
                         @endif
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'AD/SB Summary')
-                            @slot('href', route('frontend.summary.ad-sb') )
+                            @slot('href', route('frontend.summary.ad-sb', $workPackage->uuid ) )
                         @endcomponent
 
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -63,7 +63,7 @@
                         @endif
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'CMR/AWL Summary')
-                            @slot('href', route('frontend.summary.cmr-awl') )
+                            @slot('href', route('frontend.summary.cmr-awl', $workPackage->uuid ) )
                         @endcomponent
 
 
@@ -102,7 +102,7 @@
                         @endif
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'SI Summary')
-                            @slot('href', route('frontend.summary.si') )
+                            @slot('href', route('frontend.summary.si', $workPackage->uuid ) )
                         @endcomponent
 
 
