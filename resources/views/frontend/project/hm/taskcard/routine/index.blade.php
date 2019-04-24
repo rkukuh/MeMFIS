@@ -25,7 +25,7 @@
                     @endif
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'Basic Summary')
-                        @slot('href', route('frontend.summary.basic') )
+                        @slot('href', route('frontend.summary.basic', $workPackage->uuid ) )
                     @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -63,7 +63,7 @@
                     @endif
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'SIP Summary')
-                        @slot('href', route('frontend.summary.sip') )
+                        @slot('href', route('frontend.summary.sip', $workPackage->uuid ) )
                     @endcomponent
 
 
@@ -102,7 +102,7 @@
                     @endif
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'CPCP Summary')
-                        @slot('href', route('frontend.summary.cpcp') )
+                        @slot('href', route('frontend.summary.cpcp', $workPackage->uuid ) )
                     @endcomponent
 
 
