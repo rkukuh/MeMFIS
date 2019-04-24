@@ -288,7 +288,7 @@ let Project = {
                 dataType: "json",
                 url: '/label/get-customer/'+customer_uuid.value,
                 success: function (data) {
-                    // adding customer phones  option on selectBox inside identifier
+                    // adding customer phones option on selectBox inside identifier
                     if(jQuery.isEmptyObject(data.phones)){
                         console.log('empty phones');
                     }else{
@@ -304,7 +304,7 @@ let Project = {
                         });
                     }
         
-                    // adding customer faxes  option on selectBox inside identifier
+                    // adding customer faxes option on selectBox inside identifier
                     if(jQuery.isEmptyObject(data.faxes)){
                         console.log('empty faxes');
                     }else{
@@ -336,6 +336,7 @@ let Project = {
                             emails.append(emailsOption);
                         });
                     }
+
                 }
             });
         });
