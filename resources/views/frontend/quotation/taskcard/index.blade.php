@@ -55,7 +55,7 @@
         @include('frontend.quotation.taskcard.routine.cpcp.modal')
     </div>
     <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-        @include('frontend.quotation.taskcard.nonroutine.index')
+        {{-- @include('frontend.quotation.taskcard.nonroutine.index') --}}
         @include('frontend.quotation.taskcard.nonroutine.adsb.modal')
         @include('frontend.quotation.taskcard.nonroutine.cmrawl.modal')
         @include('frontend.quotation.taskcard.nonroutine.si.modal')
