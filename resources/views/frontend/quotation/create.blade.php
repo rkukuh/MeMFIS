@@ -437,6 +437,7 @@
                                                     </table> --}}
                                                     {{-- @include('frontend.quotation.modal-workpackage') --}}
                                                     <div class="workpackage_datatable" id="scrolling_both"></div>
+                                                    <div class="facility_datatable" id="scrolling_both"></div>
 
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
