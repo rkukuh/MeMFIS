@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Frontend\Quotation;
 
 
 use App\Models\Type;
-use App\Models\Quotation;
 use App\Models\Project;
+use App\Models\Quotation;
+use App\Models\WorkPackage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;
@@ -50,6 +51,11 @@ class QuotationController extends Controller
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
+        $project = Project::where('id',$request->project_id)->first();
+
+        foreach ($project->workpackages as $workpackage){
+            $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id);
+        }
 
         return response()->json($quotation);
     }
