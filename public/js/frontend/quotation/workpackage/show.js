@@ -3,6 +3,8 @@ function strtrunc(str, max, add) {
     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
 };
 
+
+
 function workpackage(triggeruuid) {
 
 $('.workpackage_datatable').mDatatable({

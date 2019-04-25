@@ -13,7 +13,6 @@
                     @slot('name', 'description')
                     @slot('id', 'description')
                     @slot('rows', '5')
-                    @slot('value', $job_request->pivot->description)
                     @slot('id_error', 'description')
                 @endcomponent
             </div>
@@ -38,7 +37,6 @@
                     @slot('text', 'rate')
                     @slot('name', 'rate')
                     @slot('id', 'rate')
-                    @slot('value', $job_request->pivot->manhour_rate)
                     @slot('id_error', 'rate')
                 @endcomponent
             </div>
@@ -71,6 +69,12 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool and Material</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#m_tabs_1_4">Facility</a>
+        </li>
     </ul>
 </div>
 <div class="tab-content">
@@ -88,4 +92,11 @@
         @include('frontend.quotation.taskcard.nonroutine.htcrr.modal')
         @include('frontend.quotation.taskcard.nonroutine.htcrr.workshop-task')
     </div>
+    <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
+        @include('frontend.quotation.item.index')
+    </div>
+    <div class="tab-pane" id="m_tabs_1_4" role="tabpanel">
+        @include('frontend.quotation.facility.index')
+    </div>
 </div>
+
