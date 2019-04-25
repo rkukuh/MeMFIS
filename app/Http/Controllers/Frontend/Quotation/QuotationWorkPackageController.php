@@ -54,7 +54,10 @@ class QuotationWorkPackageController extends Controller
      */
     public function show(Project $project, Workpackage $workPackage)
     {
-        // dd($project);
+        $quotation  = Quotation::where('project_id',$project->id)->first();
+        // $job_request = $quotation->workpackages->wherePivot('workpackage_id',$workPackage->id);
+        // dd($job_request);
+
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         return view('frontend.quotation.workpackage.index',[
@@ -62,6 +65,7 @@ class QuotationWorkPackageController extends Controller
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project' => $project,
+            'quotation' => $quotation,
         ]);
     }
 
@@ -73,13 +77,17 @@ class QuotationWorkPackageController extends Controller
      */
     public function edit(Project $project, Workpackage $workPackage)
     {
+        $quotation  = Quotation::where('project_id',$project->id)->first();
+        $job_request = $quotation->workpackages()->wherePivot('workpackage_id', $workPackage->id)->first();
+
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         return view('frontend.quotation.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
-           'project' => $project,
+            'project' => $project,
+           'job_request' => $job_request,
          ]);
     }
 

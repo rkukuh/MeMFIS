@@ -13,6 +13,7 @@
                     @slot('name', 'description')
                     @slot('id', 'description')
                     @slot('rows', '5')
+                    @slot('value', $job_request->pivot->description)
                     @slot('id_error', 'description')
                 @endcomponent
             </div>
@@ -37,6 +38,7 @@
                     @slot('text', 'rate')
                     @slot('name', 'rate')
                     @slot('id', 'rate')
+                    @slot('value', $job_request->pivot->manhour_rate)
                     @slot('id_error', 'rate')
                 @endcomponent
             </div>
