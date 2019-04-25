@@ -94,7 +94,7 @@ class QuotationWorkPackageController extends Controller
     {
         $quotation  = Quotation::where('project_id',$project->id)->first();
 
-        $quotation->workpackages()->save($workPackage, ['manhour_total'=>$request->manhour_total,'manhour_rate'=>$request->manhour_rate,'description'=>$request->description]);
+        $quotation->workpackages()->updateExistingPivot($workPackage, ['manhour_total'=>$request->manhour_total,'manhour_rate'=>$request->manhour_rate,'description'=>$request->description]);
 
         return response()->json($quotation->workpackages);
     }
