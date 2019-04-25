@@ -30,7 +30,9 @@
                       <li class="nav-item">
                           <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">General Tool and Material</a>
                       </li>
-                      
+                      <li class="nav-item">
+                          <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility</a>
+                      </li>
                   </ul>
                 </div>
                 <div class="tab-content">
@@ -39,6 +41,9 @@
                     </div>
                     <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
                         @include('frontend.quotation.item.index')
+                    </div>
+                    <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
+                        @include('frontend.quotation.facility.index')
                     </div>
                 </div>
               </div>
