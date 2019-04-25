@@ -1,6 +1,9 @@
 <div class="px-4">
     <div class="m-portlet__body">
         <div class="form-group m-form__group row ">
+
+            <input type="hidden" id="uuid" name="uuid" value="{{$project->uuid}}">
+
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <label class="form-control-label">
                     Job Request Description @include('frontend.common.label.required')

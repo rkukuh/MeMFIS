@@ -2,6 +2,7 @@ let JobRequest = {
     init: function() {
         $('.action-buttons').on('click', '.add-job-request', function() {
 
+            let project_uuid  = $('#uuid').val();
             let total_mhrs  = $('#total_mhrs').html();
             let description = $('#description').val();
             let rate = $('#rate').val();
@@ -10,13 +11,13 @@ let JobRequest = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'post',
-                url: '/quotation/{project}/workpackage',
+                type: 'put',
+                url: '/quotation/'+project_uuid+'/workpackage/'+workPackage_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    total_mhrs: total_mhrs,
+                    manhour_total: total_mhrs,
                     description: description,
-                    rate:rate,
+                    manhour_rate:rate,
                 },
                 success: function (data) {
                     if (data.errors) {
