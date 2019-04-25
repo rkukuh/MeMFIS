@@ -3,7 +3,7 @@ function strtrunc(str, max, add) {
     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
 };
 
-function workpackage(triggeruuid) {
+function workpackage(projectuuid) {
 
 $('.workpackage_datatable').mDatatable({
     data: {
@@ -11,7 +11,7 @@ $('.workpackage_datatable').mDatatable({
         source: {
             read: {
                 method: 'GET',
-                url: '/datatables/project/'+triggeruuid+'/workpackage/',
+                url: '/datatables/project/'+projectuuid+'/workpackage/',
                 map: function (raw) {
                     let dataSet = raw;
 
@@ -59,7 +59,7 @@ $('.workpackage_datatable').mDatatable({
             sortable: 'asc',
             filterable: !1,
             template: function (t) {
-                return '<a href="/quotation/'+triggeruuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                return '<a href="/quotation/'+projectuuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
             }
         },
         {
@@ -90,7 +90,7 @@ $('.workpackage_datatable').mDatatable({
             overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '<a href="/quotation/' + triggeruuid + '/workpackage/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                        '<a href="/quotation/' + projectuuid + '/workpackage/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                             '<i class="la la-pencil"></i>' +
                         '</a>' +
                         '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-workpackage" title="Delete" data-uuid="' + t.uuid + '">' +
