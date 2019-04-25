@@ -69,12 +69,6 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool and Material</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#m_tabs_1_4">Facility</a>
-        </li>
     </ul>
 </div>
 <div class="tab-content">
@@ -91,12 +85,6 @@
         @include('frontend.quotation.taskcard.nonroutine.si.modal')
         @include('frontend.quotation.taskcard.nonroutine.htcrr.modal')
         @include('frontend.quotation.taskcard.nonroutine.htcrr.workshop-task')
-    </div>
-    <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
-        @include('frontend.quotation.item.index')
-    </div>
-    <div class="tab-pane" id="m_tabs_1_4" role="tabpanel">
-        @include('frontend.quotation.facility.index')
     </div>
 </div>
 
