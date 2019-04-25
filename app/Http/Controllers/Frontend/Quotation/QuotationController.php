@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Frontend\Quotation;
 
 
 use App\Models\Type;
-use App\Models\Quotation;
 use App\Models\Project;
+use App\Models\Quotation;
+use App\Models\WorkPackage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;
@@ -47,24 +48,14 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
-        $request->project_id = Project::where('uuid',$request->project_id)->first()->id;
+        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
-        // $quotation = Quotation::create($request->all());
+        $quotation = Quotation::create($request->all());
+        $project = Project::where('id',$request->project_id)->first();
 
-        $quotation = Quotation::create([
-            'project_id' => $request->project_id,
-            'customer_id' => $request->customer_id,
-            'requested_at' => $request->requested_at,
-            'valid_until' => $request->valid_until,
-            'currency_id' => $request->currency_id,
-            'exchange_rate' => $request->exchange_rate,
-            'number' => $request->title,
-            'total' => $request->total,
-            'scheduled_payment_type' => $request->scheduled_payment_type,
-            'scheduled_payment_amount' => $request->scheduled_payment_amount,
-            'term_of_condition' => $request->term_and_condition,
-            'description' => $request->description,
-        ]);
+        foreach ($project->workpackages as $workpackage){
+            $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id);
+        }
 
         return response()->json($quotation);
     }

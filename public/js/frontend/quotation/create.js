@@ -167,7 +167,7 @@ let Quotation = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/quotation/' + response.uuid + '/edit';
+                        window.location.href = '/quotation/' + data.uuid + '/edit';
 
 
                     }

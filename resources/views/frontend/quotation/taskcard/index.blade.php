@@ -1,6 +1,9 @@
 <div class="px-4">
     <div class="m-portlet__body">
         <div class="form-group m-form__group row ">
+
+            <input type="hidden" id="uuid" name="uuid" value="{{$project->uuid}}">
+
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <label class="form-control-label">
                     Job Request Description @include('frontend.common.label.required')
@@ -10,6 +13,7 @@
                     @slot('name', 'description')
                     @slot('id', 'description')
                     @slot('rows', '5')
+                    @slot('value', $job_request->pivot->description)
                     @slot('id_error', 'description')
                 @endcomponent
             </div>
@@ -21,6 +25,8 @@
                 </label>
                 @component('frontend.common.label.data-info')
                     @slot('text', $total_mhrs)
+                    @slot('id', 'total_mhrs')
+                    @slot('name', 'total_mhrs')
                 @endcomponent
 
             </div>
@@ -32,8 +38,28 @@
                     @slot('text', 'rate')
                     @slot('name', 'rate')
                     @slot('id', 'rate')
+                    @slot('value', $job_request->pivot->manhour_rate)
                     @slot('id_error', 'rate')
                 @endcomponent
+            </div>
+        </div>
+        <div class="form-group m-form__group row">
+            <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                <div class="flex">
+                    <div class="action-buttons">
+                        @component('frontend.common.buttons.submit')
+                            @slot('type','button')
+                            @slot('id', 'add-job-request')
+                            @slot('class', 'add-job-request')
+                        @endcomponent
+
+                        @include('frontend.common.buttons.reset')
+
+                        @component('frontend.common.buttons.back')
+                            @slot('href', ''))
+                        @endcomponent
+                    </div>
+                </div>
             </div>
         </div>
     </div>

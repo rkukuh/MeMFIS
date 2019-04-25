@@ -50,6 +50,8 @@ class ProjectHMController extends Controller
      */
     public function store(ProjectHMStore $request)
     {
+        $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
+
         $project = Project::create($request->all());
         if ($request->hasFile('fileInput')) {
             $destination = 'project/hm/workOrder';
