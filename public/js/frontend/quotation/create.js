@@ -38,7 +38,6 @@ let Quotation = {
                     $('#name').html(data.customer.name);
                     $('#customer_id').val(data.customer_id);
 
-
                     if(workpackage_datatables_init == true){
                         workpackage_datatables_init = false;
                         workpackage(data.uuid);
@@ -119,7 +118,7 @@ let Quotation = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/quotation/' + response.uuid + '/edit';
+                        window.location.href = '/quotation/' + data.uuid + '/edit';
 
 
                     }
