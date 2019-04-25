@@ -1,4 +1,4 @@
-<div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" id="m_accordion_5" role="tablist">                      
+<div id="m_accordion_5" class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" role="tablist">                      
 
     <!--begin::Item-->              
     <div class="m-accordion__item ">
