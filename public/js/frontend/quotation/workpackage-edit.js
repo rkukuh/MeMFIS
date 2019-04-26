@@ -84,21 +84,7 @@ $('.workpackage_datatable').mDatatable({
                 return ''
             }
         },
-        {
-            field: 'Actions',
-            sortable: !1,
-            overflow: 'visible',
-                template: function (t, e, i) {
-                    return (
-                        '<a href="/quotation/' + projectuuid + '/workpackage/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                            '<i class="la la-pencil"></i>' +
-                        '</a>' +
-                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-workpackage" title="Delete" data-uuid="' + t.uuid + '">' +
-                            '<i class="la la-trash"></i>' +
-                        '</a>'
-                    );
-                }
-        }
+
     ]
 });
 };
