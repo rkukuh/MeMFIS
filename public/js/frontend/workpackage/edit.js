@@ -457,6 +457,43 @@ let Workpackage = {
             }
         });
 
+        $('.ad-sb_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.ad-sb_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
         //cmr-awl_datatable taskcard Datatable
         $('.cmr-awl_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
@@ -490,6 +527,43 @@ let Workpackage = {
             }
         });
 
+        $('.cmr-awl_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cmr-awl_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
         //SI taskcard Datatable
         $('.si_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
@@ -521,6 +595,43 @@ let Workpackage = {
                 tool_tc_si(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
+        });
+
+        $('.si_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.si_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
         });
 
         //basic
