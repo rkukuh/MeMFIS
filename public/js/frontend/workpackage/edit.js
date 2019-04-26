@@ -314,6 +314,44 @@ let Workpackage = {
             }
         });
 
+        $('.sip_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.sip_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+        
+
         //CPCP taskcard Datatable
         $('.cpcp_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
@@ -345,6 +383,43 @@ let Workpackage = {
                 tool_tc(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
+        });
+
+        $('.cpcp_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cpcp_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
         });
 
         //ad-sb_datatable taskcard Datatable
