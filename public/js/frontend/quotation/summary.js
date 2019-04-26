@@ -62,7 +62,7 @@ var DatatableAutoColumnHideDemo = function() {
 
         rows: {
           // auto hide columns, if rows overflow
-          autoHide: true,
+        //   autoHide: true,
         },
 
         // columns definition
@@ -74,6 +74,8 @@ var DatatableAutoColumnHideDemo = function() {
           }, {
             field: 'pivot.description',
             title: 'Job Request Description',
+            width: '700px',
+
             template: function (t) {
                 return (t.pivot.description+'<br>'+
                         '- Manhours Price : '+t.pivot.manhour_total+' x '+t.pivot.manhour_rate+'<br>'+
