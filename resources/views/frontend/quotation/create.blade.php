@@ -392,104 +392,14 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_workpackage" role="tabpanel">
-                                                    {{-- <table class="workpackage-datatable" id="html_table" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th title="Field #1" data-field="OrderID">Workpackage ID</th>
-                                                                <th title="Field #2" data-field="Owner">Workpackage Title</th>
-                                                                <th title="Field #2" data-field="Action"></th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
-                                                                <td>Sunny Garton</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
-                                                                <td>Sandor Engley</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">68084-462</a></td>
-                                                                <td>Morgan Cradey</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">44356-0001</a></td>
-                                                                <td>Tedd Alton</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table> --}}
-                                                    {{-- @include('frontend.quotation.modal-workpackage') --}}
+
                                                     <div class="workpackage_datatable" id="scrolling_both"></div>
 
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
-                                                    
+
                                                     <div class="long_datatable" id="scrolling_both"></div>
-                                                    <table class="summary-datatable" id="html_table" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th title="Field #1" data-field="No">No</th>
-                                                                <th title="Field #2" data-field="Job_Request">Job Request Description</th>
-                                                                <th title="Field #2" data-field="Cost">Cost</th>
-                                                                <th title="Field #2" data-field="Disc">Disc %</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
-                                                                <td>Sunny Garton</td>
-                                                                <td>$100000</td>
-                                                                <td>0%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
-                                                                <td>Sandor Engley</td>
-                                                                <td>$50</td>
-                                                                <td>10%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Sub Total</td>
-                                                                <td>$100050</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Tax</td>
-                                                                <td>
-                                                                    <select name="" id="">
-                                                                        <option value="">5%</option>
-                                                                        <option value="">10%</option>
-                                                                        <option value="">15%</option>
-                                                                    </select>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Total in Rupiah</td>
-                                                                <td>Rp. 100000000</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -542,46 +452,9 @@
     </style>
 @endpush
 @push('footer-scripts')
-    <script>
-    function myFunction(object) {
-        // var numItems = $('.project').length
-
-        // var x = this.getElementById("type_website");
-var x = object;
-var y = x.name;
-
-var numb = y.match(/\d/g);
-var z = x.value;
-var projectUuid = z;
-$.ajax({
-    url: '/quotation/'+projectUuid+'/project',
-    type: 'GET',
-    dataType: 'json',
-    success: function (data) {
-        // document.getElementsByName('group-website['+numb+'][]')[0].setAttribute("value", "my value is high");
-        // alert('masuk');
-        // document.getElementByName('group-website['+numb+'][]').innerHTML = 'tes';
-        // document.getElementById('telp').innerHTML = 'telp/fax';
-        // document.getElementById('attn').innerHTML = 'attn';
-        // document.getElementById('address').innerHTML = 'address';
-    }
-});
-
-// var thenum = x.replace( /^\D+/g, '');
-// alert(z);
-        // console.log(x.name);
-    }
-    </script>
 
     <script type="text/javascript">
         $("#type_website").on('change', function() {
-            // var numItems = $('.project').length
-            // alert(numItems);
-            // if ($(this).val() == 'selectionKey'){
-            //     DoSomething();
-            // } else {
-            //     DoSomethingElse();
-            // }
         });
         let simpan = $('.tes').on('click', '.save', function () {
         var usertype=[];
@@ -621,7 +494,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
-   <script src="{{ asset('js/frontend/functions/fill-combobox/work-order.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/work-order.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
