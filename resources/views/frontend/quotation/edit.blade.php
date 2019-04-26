@@ -55,6 +55,7 @@
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Project</legend>
                                                 <div class="form-group m-form__group row">
+                                                    <input type="hidden" id="quotation_uuid" name="quotation_uuid" value="{{ $quotation->uuid }}">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
                                                             Work Order @include('frontend.common.label.required')
@@ -387,6 +388,12 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    {{-- <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="long_datatable" id="scrolling_both"></div>
+
+                                        </div>
+                                    </div> --}}
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <ul class="nav nav-tabs" role="tablist">
@@ -447,6 +454,9 @@
 
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
+
+                                                    <div class="long_datatable" id="scrolling_both"></div>
+
                                                     <table class="summary-datatable" id="html_table" width="100%">
                                                         <thead>
                                                             <tr>
@@ -627,7 +637,6 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
-    <!-- <script src="{{ asset('js/frontend/functions/fill-combobox/work-order.js') }}"></script> -->
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
@@ -638,6 +647,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/quotation/summary.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
