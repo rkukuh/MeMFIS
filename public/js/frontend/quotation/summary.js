@@ -70,33 +70,29 @@ var DatatableAutoColumnHideDemo = function() {
           {
             field: 'code',
             title: 'No',
+            width: '100px',
           }, {
             field: 'pivot.description',
             title: 'Job Request Description',
             template: function (t) {
-                // if (t.description) {
-                //     data = strtrunc(t.description, 50);
-                //     return (
-                //         '<p>' + data + '</p>'
-                //     );
-                // }
-
-                return '+'
+                return (t.pivot.description+'<br>'+
+                        '- Manhours Price : '+t.pivot.manhour_total+' x '+t.pivot.manhour_rate+'<br>'+
+                        '- Material Price'
+                );
             }
           }, {
             field: 'ShipCity',
             title: 'Cost',
+            template: function (a) {
+                return ('Cost<br>'+
+                        '$ '+a.pivot.manhour_total*a.pivot.manhour_rate+'<br>'+
+                        '$ 138'
+                );
+            }
           }, {
             field: 'Currency',
             title: 'Disc %',
           },
-        //    {
-        //     field: 'Manhour',
-        //     title: 'Manhours Price',
-        //   }, {
-        //     field: 'Currency2',
-        //     title: 'Material Price',
-        //   },
         ],
       });
 
