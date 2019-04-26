@@ -31,7 +31,7 @@ let Quotation = {
                 }
             });
         });
-        
+
         let workpackage_datatables_init = true;
         $( document ).ready(function() {
             $.ajax({
@@ -88,7 +88,7 @@ let Quotation = {
                             phone.append(phoneNumberOption);
                         });
                     }
-        
+
                     // adding customer faxes  option on selectBox inside identifier
                     if(jQuery.isEmptyObject(data.faxes)){
                         console.log('empty faxes');
@@ -99,7 +99,7 @@ let Quotation = {
                             fax.append(faxNumberOption);
                         });
                     }
-        
+
                     // Adding customer addresses option on selectBox inside identifier
                     if(jQuery.isEmptyObject(data.addresses)){
                         console.log('empty addresses');
@@ -110,7 +110,7 @@ let Quotation = {
                             addresses.append(addressesOption);
                         });
                     }
-        
+
                     // Adding customer emails option on selectBox inside identifier
                     if(jQuery.isEmptyObject(data.emails)){
                         console.log('empty emails');
@@ -125,6 +125,22 @@ let Quotation = {
             });
         });
 
+        $('.nav-tabs').on('click', '.workpackage', function () {
+            let workpackage = $('.workpackage_datatable').mDatatable();
+
+            workpackage.originalDataSet = [];
+            workpackage.reload();
+        });
+
+        $('.nav-tabs').on('click', '.summary', function () {
+
+            let summary = $('.summary_datatable').mDatatable();
+
+            summary.originalDataSet = [];
+            summary.reload();
+
+        });
+
         $('select[name="work-order"]').on('change', function() {
             let project_id = this.options[this.selectedIndex].value;
             $.ajax({
@@ -135,7 +151,7 @@ let Quotation = {
                     $('#project_number').html(data.title);
                     $('#name').html(data.customer.name);
                     $('#customer_id').val(data.customer.uuid);
-                    
+
                     if(workpackage_datatables_init == true){
                         workpackage_datatables_init = false;
                         workpackage(data.uuid);
@@ -185,7 +201,7 @@ let Quotation = {
                             phone.append(phoneNumberOption);
                         });
                     }
-        
+
                     // adding customer faxes  option on selectBox inside identifier
                     if(jQuery.isEmptyObject(data.faxes)){
                         console.log('empty faxes');
@@ -196,7 +212,7 @@ let Quotation = {
                             fax.append(faxNumberOption);
                         });
                     }
-        
+
                     // Adding customer addresses option on selectBox inside identifier
                     if(jQuery.isEmptyObject(data.addresses)){
                         console.log('empty addresses');
@@ -207,7 +223,7 @@ let Quotation = {
                             addresses.append(addressesOption);
                         });
                     }
-        
+
                     // Adding customer emails option on selectBox inside identifier
                     if(jQuery.isEmptyObject(data.emails)){
                         console.log('empty emails');
