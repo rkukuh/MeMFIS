@@ -392,10 +392,10 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <ul class="nav nav-tabs" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_workpackage">Workpackage</a>
+                                                    <a class="nav-link active show workpackage" data-toggle="tab" href="#" data-target="#m_tabs_workpackage">Workpackage</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_summary">Summary</a>
+                                                    <a class="nav-link summary" data-toggle="tab" href="#m_tabs_summary">Summary</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -404,30 +404,8 @@
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
 
-                                                    <div class="long_datatable" id="scrolling_both"></div>
+                                                    <div class="summary_datatable" id="scrolling_both"></div>
 
-                                                    {{-- <table class="summary-datatable" id="html_table" width="100%">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Tax</td>
-                                                                <td>
-                                                                    <select name="" id="">
-                                                                        <option value="">5%</option>
-                                                                        <option value="">10%</option>
-                                                                        <option value="">15%</option>
-                                                                    </select>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Total in Rupiah</td>
-                                                                <td>Rp. 100000000</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table> --}}
                                                 </div>
                                             </div>
                                         </div>
