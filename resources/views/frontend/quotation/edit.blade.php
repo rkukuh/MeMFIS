@@ -55,6 +55,7 @@
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Project</legend>
                                                 <div class="form-group m-form__group row">
+                                                    <input type="hidden" id="quotation_uuid" name="quotation_uuid" value="{{ $quotation->uuid }}">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
                                                             Work Order @include('frontend.common.label.required')
@@ -399,82 +400,14 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_workpackage" role="tabpanel">
-                                                    {{-- <table class="workpackage-datatable" id="html_table" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th title="Field #1" data-field="OrderID">Workpackage ID</th>
-                                                                <th title="Field #2" data-field="Owner">Workpackage Title</th>
-                                                                <th title="Field #2" data-field="Action"></th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
-                                                                <td>Sunny Garton</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
-                                                                <td>Sandor Engley</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">68084-462</a></td>
-                                                                <td>Morgan Cradey</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">44356-0001</a></td>
-                                                                <td>Tedd Alton</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table> --}}
-                                                    {{-- @include('frontend.quotation.modal-workpackage') --}}
                                                     <div class="workpackage_datatable" id="scrolling_both"></div>
-
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
-                                                    <table class="summary-datatable" id="html_table" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th title="Field #1" data-field="No">No</th>
-                                                                <th title="Field #2" data-field="Job_Request">Job Request Description</th>
-                                                                <th title="Field #2" data-field="Cost">Cost</th>
-                                                                <th title="Field #2" data-field="Disc">Disc %</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
-                                                                <td>Sunny Garton</td>
-                                                                <td>$100000</td>
-                                                                <td>0%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
-                                                                <td>Sandor Engley</td>
-                                                                <td>$50</td>
-                                                                <td>10%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Sub Total</td>
-                                                                <td>$100050</td>
-                                                            </tr>
+
+                                                    <div class="long_datatable" id="scrolling_both"></div>
+
+                                                    {{-- <table class="summary-datatable" id="html_table" width="100%">
+                                                        <tbody>
                                                             <tr>
                                                                 <td></td>
                                                                 <td></td>
@@ -494,7 +427,7 @@
                                                                 <td>Rp. 100000000</td>
                                                             </tr>
                                                         </tbody>
-                                                    </table>
+                                                    </table> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -627,7 +560,6 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
-    <!-- <script src="{{ asset('js/frontend/functions/fill-combobox/work-order.js') }}"></script> -->
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
@@ -638,6 +570,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/quotation/summary.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
