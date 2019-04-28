@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Quotation;
 
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Customer;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 
@@ -49,6 +50,7 @@ class QuotationController extends Controller
     public function store(QuotationStore $request)
     {
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
         $project = Project::where('id',$request->project_id)->first();
