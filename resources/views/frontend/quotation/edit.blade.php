@@ -57,21 +57,36 @@
                                                 <div class="form-group m-form__group row">
                                                     <input type="hidden" id="quotation_uuid" name="quotation_uuid" value="{{ $quotation->uuid }}">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Work Order @include('frontend.common.label.required')
-                                                        </label>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                <label class="form-control-label">
+                                                                    Work Order @include('frontend.common.label.required')
+                                                                </label>
 
-                                                        <select id="work-order" name="work-order" class="form-control m-select2">
-                                                            <option value="">
-                                                                &mdash; Select a Work Order &mdash;
-                                                            </option>
-                                                            @foreach ($projects as $project)
-                                                                <option value="{{ $project->uuid }}"
-                                                                    @if ($project->no_wo === $quotation->project->no_wo) selected @endif>
-                                                                    {{ $project->no_wo }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                                <select id="work-order" name="work-order" class="form-control m-select2">
+                                                                    <option value="">
+                                                                        &mdash; Select a Work Order &mdash;
+                                                                    </option>
+                                                                    @foreach ($projects as $project)
+                                                                        <option value="{{ $project->uuid }}"
+                                                                            @if ($project->no_wo === $quotation->project->no_wo) selected @endif>
+                                                                            {{ $project->no_wo }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                <label class="form-control-label">
+                                                                    Project Title
+                                                                </label>
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'project_number')
+                                                                    @slot('text', $quotation->project->title)
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
                                                         <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->customer->uuid }}">
 
                                                     </div>
@@ -292,6 +307,7 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('text', 'Term of Payment')
                                                         @slot('id', 'term_of_payment')
+                                                        @slot('value', $quotation->term_of_payment)
                                                         @slot('input_append', 'Hari')
                                                         @slot('name', 'term_of_payment')
                                                         @slot('id_error', 'term_of_payment')
@@ -346,21 +362,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Project Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '3')
-                                                @slot('id', 'title')
-                                                @slot('name', 'title')
-                                                @slot('text', 'title')
-                                                @slot('id_error', 'title')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
                                                 Description @include('frontend.common.label.required')
                                             </label>
 
@@ -385,6 +386,7 @@
                                                 @slot('id', 'term_and_condition')
                                                 @slot('name', 'term_and_condition')
                                                 @slot('text', 'Term and Condition')
+                                                @slot('value', $quotation->term_of_condition)
                                             @endcomponent
                                         </div>
                                     </div>
