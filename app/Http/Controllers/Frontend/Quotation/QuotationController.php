@@ -100,9 +100,10 @@ class QuotationController extends Controller
      */
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
-        $quotation = Quotation::find($quotation);
-        // $quotation->name = $request->name;
-        // $quotation->save();
+        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
+
+        $quotation->update($request->all());
 
         return response()->json($quotation);
     }
