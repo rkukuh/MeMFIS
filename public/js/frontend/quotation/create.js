@@ -10,7 +10,8 @@ let Quotation = {
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('#project_number').html(data.title);
+                    $('#project_number').html(data.code);
+                    $('#project_title').html(data.title);
                     $('#name').html(data.customer.name);
                     $('#customer_id').val(data.customer.uuid);
 
@@ -107,7 +108,8 @@ let Quotation = {
             data.append("requested_at", $('#date').val());
             data.append("valid_until", $('#valid_until').val());
             data.append("currency_id", $('#currency').val());
-            data.append("term_and_condition", $('#term_and_condition').val());
+            data.append("term_of_payment", $('#term_of_payment').val());
+            data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
             data.append("scheduled_payment_amount", $('#scheduled_payment').val());
