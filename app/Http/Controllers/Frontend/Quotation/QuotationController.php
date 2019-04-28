@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Frontend\Quotation;
 use App\Models\Type;
 use App\Models\Project;
 use App\Models\Customer;
+use App\Models\Currency;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 
@@ -15,6 +16,13 @@ use App\Http\Requests\Frontend\QuotationUpdate;
 
 class QuotationController extends Controller
 {
+    protected $currencies;
+
+    public function __construct()
+    {
+        $this->currencies = Currency::all();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -70,8 +78,12 @@ class QuotationController extends Controller
      */
     public function show(Quotation $quotation)
     {
+        $projects = Project::get();
+
         return view('frontend.quotation.show',[
+            'currencies' => $this->currencies,
             'quotation' => $quotation,
+            'projects' => $projects
         ]);
     }
 
@@ -86,6 +98,7 @@ class QuotationController extends Controller
         $projects = Project::get();
 
         return view('frontend.quotation.edit',[
+            'currencies' => $this->currencies,
             'quotation' => $quotation,
             'projects' => $projects
         ]);
