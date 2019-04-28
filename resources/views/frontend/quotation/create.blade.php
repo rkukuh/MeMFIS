@@ -286,6 +286,7 @@
                                                                 @slot('name', 'exchange')
                                                                 @slot('id_error', 'exchange')
                                                                 @slot('id', 'exchange')
+                                                                @slot('value','1')
                                                             @endcomponent
                                                         </div>
                                                     </div>

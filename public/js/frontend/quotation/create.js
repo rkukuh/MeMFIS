@@ -2,6 +2,16 @@ let Quotation = {
     init: function() {
 
         let workpackage_datatables_init = true;
+        $('select[name="currency"]').on('change', function() {
+            let exchange_id = this.options[this.selectedIndex].innerHTML;
+            let exchange_rate = $('input[name=exchange]');
+            if(exchange_id === "Rupiah (Rp)"){
+                exchange_rate.val(1);
+                exchange_rate.attr("disabled",true);
+            }else{
+                exchange_rate.attr("disabled",false);
+            }
+        });
 
         $('select[name="work-order"]').on('change', function() {
             let project_id = this.options[this.selectedIndex].value;
