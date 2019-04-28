@@ -276,12 +276,15 @@
                                                                 Currency @include('frontend.common.label.required')
                                                             </label>
 
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('id', 'currency')
-                                                                @slot('text', 'Currency')
-                                                                @slot('name', 'currency')
-                                                                @slot('id_error', 'currency')
-                                                            @endcomponent
+                                                            <select id="currency" name="currency" class="form-control m-select2">
+                                                                @foreach ($currencies as $currency)
+                                                                    <option value="{{ $currency->id }}"
+                                                                        @if ($currency->id == $quotation->currency_id) selected @endif>
+                                                                        {{ $currency->name }} ({{ $currency->symbol }})
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
@@ -620,7 +623,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
 
