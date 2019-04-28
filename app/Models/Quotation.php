@@ -13,6 +13,8 @@ class Quotation extends MemfisModel
         'requested_at',
         'valid_until',
         'currency_id',
+        'term_and_condition',
+        'term_of_payment',
         'exchange_rate',
         'total',
         'scheduled_payment_type',
