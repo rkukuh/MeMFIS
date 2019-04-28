@@ -7,9 +7,10 @@ let Quotation = {
             let exchange_rate = $('input[name=exchange]');
             if(exchange_id === "Rupiah (Rp)"){
                 exchange_rate.val(1);
-                exchange_rate.attr("disabled",true);
+                exchange_rate.attr("readonly",true);
             }else{
-                exchange_rate.attr("disabled",false);
+                exchange_rate.val('');
+                exchange_rate.attr("readonly",false);
             }
         });
 
