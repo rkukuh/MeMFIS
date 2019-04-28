@@ -2,7 +2,23 @@
 
 let Quotation = {
     init: function() {
-        let edit = $(".m_datatable").on("click", ".edit", function() {
+            let exchange_rate_value = $('input[name=exchange]').val();
+
+            $('select[name="currency"]').on('change', function() {
+                let exchange_id = this.options[this.selectedIndex].innerHTML;
+                let exchange_rate = $('input[name=exchange]');
+                if(exchange_id === "Rupiah (Rp)"){
+                    exchange_rate.val(1);
+                    exchange_rate.attr("disabled",true);
+                }else{
+                    exchange_rate.attr("disabled",false);
+                    if(exchange_rate_value){
+                        exchange_rate.val(exchange_rate_value);
+                    }
+                }
+            });
+
+            let edit = $(".m_datatable").on("click", ".edit", function() {
             $("#button").show();
             $("#simpan").text("Perbarui");
 
