@@ -71,6 +71,7 @@ class ProjectHMWorkPackageController extends Controller
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
+            'project' => $project
         ]);
     }
 
@@ -90,6 +91,7 @@ class ProjectHMWorkPackageController extends Controller
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
+            'project' => $project
         ]);
     }
 
