@@ -100,7 +100,7 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** AIRCRAFT */
+        /** Quotation */
 
         Route::namespace('Quotation')->group(function () {
             Route::resource('quotation', 'QuotationController');
@@ -112,9 +112,6 @@ Route::name('frontend.')->group(function () {
                 ]);
             });
         });
-
-
-
 
         /** AIRCRAFT */
 
