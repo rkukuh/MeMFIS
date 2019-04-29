@@ -438,7 +438,7 @@
                                                                     Sub Total
                                                                 </div>
                                                                 <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                    Rp. 100000000
+                                                                    Rp. {{ number_format(1000000000.50,2,',','.') }}
                                                                 </div>
                                                                 <div class="col-sm-1 col-md-1 col-lg-1">
                                                                 </div>
@@ -481,7 +481,7 @@
                                                                             Total in Rupiah
                                                                         </div>
                                                                         <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                            Rp. 100000000
+                                                                            Rp. {{ number_format(100000000) }}
                                                                         </div>
                                                                         <div class="col-sm-1 col-md-1 col-lg-1">
                                                                         </div>
