@@ -1,14 +1,14 @@
-<div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" id="m_accordion_3" role="tablist">                      
-    <!--begin::Item-->              
+<div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" id="m_accordion_3" role="tablist">
+    <!--begin::Item-->
     <div class="m-accordion__item ">
         <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_3_item_1_head" data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="  false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">General Tool(S) List</span>
-                    
-            <span class="m-accordion__item-mode"></span>     
+
+            <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_3_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_3_item_1_head" data-parent="#m_accordion_3"> 
+        <div class="m-accordion__item-body collapse" id="m_accordion_3_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_3_item_1_head" data-parent="#m_accordion_3">
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
@@ -42,18 +42,18 @@
             </div>
         </div>
     </div>
-    <!--end::Item--> 
-    
-<!--begin::Item-->              
+    <!--end::Item-->
+
+<!--begin::Item-->
 <div class="m-accordion__item ">
         <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_3_item_2_head" data-toggle="collapse" href="#m_accordion_3_item_2_body" aria-expanded="  false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">General Material(S) List</span>
-                    
-            <span class="m-accordion__item-mode"></span>     
+
+            <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_3_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_3_item_2_head" data-parent="#m_accordion_3"> 
+        <div class="m-accordion__item-body collapse" id="m_accordion_3_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_3_item_2_head" data-parent="#m_accordion_3">
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
@@ -87,20 +87,6 @@
             </div>
         </div>
     </div>
-    <!--end::Item--> 
-    
+    <!--end::Item-->
+
 </div>
-
-
-@push('footer-scripts')
-    <script src="{{ asset('js/frontend/workpackage/item/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
-
-@endpush
