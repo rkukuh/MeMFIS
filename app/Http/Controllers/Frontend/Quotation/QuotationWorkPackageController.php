@@ -87,7 +87,8 @@ class QuotationWorkPackageController extends Controller
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project' => $project,
-           'job_request' => $job_request,
+            'job_request' => $job_request,
+            'quotation' => $quotation
          ]);
     }
 
