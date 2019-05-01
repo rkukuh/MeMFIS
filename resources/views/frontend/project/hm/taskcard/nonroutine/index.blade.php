@@ -182,7 +182,10 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-
+                                        @component('frontend.common.buttons.create-new')
+                                            @slot('text', 'HT/CRR')
+                                            @slot('data_target', '#modal_ht_crr')
+                                        @endcomponent
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
