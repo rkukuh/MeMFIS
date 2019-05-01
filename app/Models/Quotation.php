@@ -19,6 +19,7 @@ class Quotation extends MemfisModel
         'total',
         'scheduled_payment_type',
         'scheduled_payment_amount',
+        'term_of_payment',
         'term_of_condition',
         'description',
     ];
