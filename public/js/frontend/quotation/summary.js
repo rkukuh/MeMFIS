@@ -1,3 +1,8 @@
+// untuk formatting angka pada kolom cost
+var locale = 'id';
+var options = {style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2};
+var formatter = new Intl.NumberFormat(locale, options);
+
 // untuk datatable dengan accordion pada row tersebut
 var DatatableAutoColumnHideDemo = function() {
     //== Private functions
@@ -87,7 +92,7 @@ var DatatableAutoColumnHideDemo = function() {
             title: 'Cost',
             template: function (a) {
                 return ('Cost<br>'+
-                        '$ '+a.pivot.manhour_total*a.pivot.manhour_rate+'<br>'+
+                        '$ '+formatter.format(a.pivot.manhour_total*a.pivot.manhour_rate)+'<br>'+
                         '$ 138'
                 );
             }
