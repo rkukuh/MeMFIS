@@ -191,7 +191,6 @@ let Workpackage3 = {
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
 
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -227,12 +226,11 @@ let Workpackage3 = {
                             timeOut: 5000
                         });
                         $('#modal_material').modal('hide');
-
                         let table = $('.materials_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
-
+                        material_reset();
 
                     }
                 }
@@ -328,7 +326,7 @@ let Workpackage3 = {
 
                         table.originalDataSet = [];
                         table.reload();
-
+                        tool_reset();
                         // document.getElementById('uom_quantity').value = '';
 
                         // $('#item_unit_id').select2('val', 'All');

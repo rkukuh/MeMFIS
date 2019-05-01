@@ -72,7 +72,8 @@
 
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/workpackage/item/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/item/create.js') }}"></script>    
+    <script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
