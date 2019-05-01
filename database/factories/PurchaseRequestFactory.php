@@ -38,7 +38,7 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
                 return factory(Employee::class)->create()->id;
             }
         },
-        'approved_at' => function () use ($is_approved, $faker) {
+        'approved_at' => function () use ($is_approved) {
             if ($is_approved) {
                 return Carbon::now();
             }
