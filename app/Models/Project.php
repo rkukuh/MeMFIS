@@ -60,10 +60,10 @@ class Project extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A purchase request must have one or more projects
+     * One-to-Many: A purchase request may have zero or one project
      *
      * This function will retrieve all the purchase requests of a project.
-     * See: PurchaseRequest's projects() method for the inverse
+     * See: PurchaseRequest's project() method for the inverse
      *
      * @return mixed
      */

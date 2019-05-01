@@ -22,12 +22,18 @@ class CreatePurchaseRequestsTable extends Migration
             $table->timestamp('required_at')->nullable();
             $table->unsignedInteger('approved_by')->nullable();
             $table->timestamp('approved_at')->nullable();
+            $table->unsignedInteger('project_id')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('type_id')
                     ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('project_id')
+                    ->references('id')->on('projects')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
