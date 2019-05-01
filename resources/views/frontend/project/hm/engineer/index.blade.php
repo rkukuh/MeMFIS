@@ -144,6 +144,22 @@
                 @endcomponent
             </div>
         </div>
+        <div class="form-group m-form__group row">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label class="form-control-label">
+                    TAT
+                </label>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                @component('frontend.common.input.number')
+                    @slot('text', 'tat')
+                    @slot('id', 'tat')
+                    @slot('input_append', 'Workdays')
+                    @slot('name', 'tat')
+                    @slot('id_error', 'tat')
+                @endcomponent
+            </div>
+        </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-12 footer">
         <div class="flex">
