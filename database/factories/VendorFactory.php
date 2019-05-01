@@ -9,6 +9,7 @@ $factory->define(Vendor::class, function (Faker $faker) {
 
     return [
         'code' => 'VEN-DUM-' . $number,
+        'name' => 'Vendor Dummy #' . $number,
     ];
 
 });

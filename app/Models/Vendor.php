@@ -6,7 +6,10 @@ use App\MemfisModel;
 
 class Vendor extends MemfisModel
 {
-    protected $fillable = ['code'];
+    protected $fillable = [
+        'code',
+        'name'
+    ];
 
     /*************************************** RELATIONSHIP ****************************************/
 

@@ -17,6 +17,7 @@ class CreateVendorsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
+            $table->string('name');
             $table->timestamps();
             $table->softDeletes();
 
