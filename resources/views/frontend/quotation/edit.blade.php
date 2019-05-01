@@ -311,7 +311,7 @@
                                                         @slot('text', 'Term of Payment')
                                                         @slot('id', 'term_of_payment')
                                                         @slot('value', $quotation->term_of_payment)
-                                                        @slot('input_append', 'Hari')
+                                                        @slot('input_append', 'Days')
                                                         @slot('name', 'term_of_payment')
                                                         @slot('id_error', 'term_of_payment')
                                                     @endcomponent

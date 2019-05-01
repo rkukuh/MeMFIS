@@ -299,7 +299,7 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('text', 'Term of Payment')
                                                         @slot('id', 'term_of_payment')
-                                                        @slot('input_append', 'Hari')
+                                                        @slot('input_append', 'Days')
                                                         @slot('name', 'term_of_payment')
                                                         @slot('id_error', 'term_of_payment')
                                                     @endcomponent
@@ -334,7 +334,7 @@
                                                                     @slot('id_error', 'scheduled_payment_amount')
                                                                 @endcomponent
                                                                 </div>
-                                                                
+
                                                                 <div class="col-sm-1 col-md-1 col-lg-1">
                                                                     @include('frontend.common.buttons.delete_repeater')
                                                                 </div>
