@@ -25,7 +25,53 @@ let Quotation = {
                     $('#project_title').html(data.title);
                     $('#name').html(data.customer.name);
                     $('#customer_id').val(data.customer.uuid);
+                    // alert(data.customer.uuid);
+                    $.ajax({
+                        url: '/label/get-customer/'+data.customer.uuid,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (respone) {
+                            // $('select[name="attention"]').empty();
 
+                            // $('select[name="attention"]').append(
+                            //     '<option value=""> Select a Attention </option>'
+                            // );
+
+                            // $.each(JSON.parse(respone), function (value) {
+                                // $('select[name="attention"]').append(
+                                //     '<option value="' + value + '">' + value + '</option>'
+                                // );
+                                console.log(JSON.parse(respone));
+
+                            // });
+
+                            // for (var i = 0, len = respone.length; i < len; ++i) {
+                                // var value = respone[0];
+                                console.log(JSON.parse(respone.name));
+
+                                // $("<div id=\"" + student.id + "\">" + student.full_name + " (" + student.user_id + " - " + student.stin + ")</div>")...
+                            // }
+
+
+                            // $('#project_number').html(data.code);
+                            // $('#project_title').html(data.title);
+                            // $('#name').html(data.customer.name);
+                            // $('#customer_id').val(data.customer.uuid);
+
+                            // if(workpackage_datatables_init == true){
+                            //     workpackage_datatables_init = false;
+                            //     workpackage(data.uuid);
+                            // }
+                            // else{
+                            //     let table = $('.workpackage_datatable').mDatatable();
+                            //     table.destroy();
+                            //     workpackage(data.uuid);
+                            //     table = $('.workpackage_datatable').mDatatable();
+                            //     table.originalDataSet = [];
+                            //     table.reload();
+                            // }
+                        }
+                    });
                     if(workpackage_datatables_init == true){
                         workpackage_datatables_init = false;
                         workpackage(data.uuid);
@@ -52,64 +98,65 @@ let Quotation = {
             addresses.empty();
             emails.empty();
             let phoneNumber = "";
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'GET',
-                dataType: "json",
-                url: '/label/get-customer/'+customer_uuid,
-                success: function (data) {
-                    // adding customer phones  option on selectBox inside identifier
-                    if(jQuery.isEmptyObject(data.phones)){
-                        console.log('empty phones');
-                    }else{
-                        console.log('get the phones data');
-                        $.each( data.phones, function( key, value ) {
-                            if(value.ext === null){
-                                phoneNumber = value.number;
-                            }else{
-                                phoneNumber = value.number+' Ext. '+value.ext;
-                            }
-                            let phoneNumberOption = new Option(phoneNumber,value.uuid);
-                            phone.append(phoneNumberOption);
-                        });
-                    }
 
-                    // adding customer faxes  option on selectBox inside identifier
-                    if(jQuery.isEmptyObject(data.faxes)){
-                        console.log('empty faxes');
-                    }else{
-                        console.log('get the faxes data');
-                        $.each( data.faxes, function( key, value ) {
-                            let faxNumberOption = new Option( value.number,value.uuid);
-                            fax.append(faxNumberOption);
-                        });
-                    }
+            // $.ajax({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     type: 'GET',
+            //     dataType: "json",
+            //     url: '/label/get-customer/'+customer_uuid,
+            //     success: function (data) {
+            //         // adding customer phones  option on selectBox inside identifier
+            //         if(jQuery.isEmptyObject(data.phones)){
+            //             console.log('empty phones');
+            //         }else{
+            //             console.log('get the phones data');
+            //             $.each( data.phones, function( key, value ) {
+            //                 if(value.ext === null){
+            //                     phoneNumber = value.number;
+            //                 }else{
+            //                     phoneNumber = value.number+' Ext. '+value.ext;
+            //                 }
+            //                 let phoneNumberOption = new Option(phoneNumber,value.uuid);
+            //                 phone.append(phoneNumberOption);
+            //             });
+            //         }
 
-                    // Adding customer addresses option on selectBox inside identifier
-                    if(jQuery.isEmptyObject(data.addresses)){
-                        console.log('empty addresses');
-                    }else{
-                        console.log('get the addresses data');
-                        $.each( data.addresses, function( key, value ) {
-                            let addressesOption = new Option( value.address,value.uuid);
-                            addresses.append(addressesOption);
-                        });
-                    }
+            //         // adding customer faxes  option on selectBox inside identifier
+            //         if(jQuery.isEmptyObject(data.faxes)){
+            //             console.log('empty faxes');
+            //         }else{
+            //             console.log('get the faxes data');
+            //             $.each( data.faxes, function( key, value ) {
+            //                 let faxNumberOption = new Option( value.number,value.uuid);
+            //                 fax.append(faxNumberOption);
+            //             });
+            //         }
 
-                    // Adding customer emails option on selectBox inside identifier
-                    if(jQuery.isEmptyObject(data.emails)){
-                        console.log('empty emails');
-                    }else{
-                        console.log('get the emails data');
-                        $.each( data.emails, function( key, value ) {
-                            let emailsOption = new Option( value.address,value.uuid);
-                            emails.append(emailsOption);
-                        });
-                    }
-                }
-            });
+            //         // Adding customer addresses option on selectBox inside identifier
+            //         if(jQuery.isEmptyObject(data.addresses)){
+            //             console.log('empty addresses');
+            //         }else{
+            //             console.log('get the addresses data');
+            //             $.each( data.addresses, function( key, value ) {
+            //                 let addressesOption = new Option( value.address,value.uuid);
+            //                 addresses.append(addressesOption);
+            //             });
+            //         }
+
+            //         // Adding customer emails option on selectBox inside identifier
+            //         if(jQuery.isEmptyObject(data.emails)){
+            //             console.log('empty emails');
+            //         }else{
+            //             console.log('get the emails data');
+            //             $.each( data.emails, function( key, value ) {
+            //                 let emailsOption = new Option( value.address,value.uuid);
+            //                 emails.append(emailsOption);
+            //             });
+            //         }
+            //     }
+            // });
         });
 
         $('.action-buttons').on('click', '.add-quotation', function() {

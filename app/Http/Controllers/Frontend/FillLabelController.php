@@ -72,12 +72,11 @@ class FillLabelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function customer($customer)
+    public function customer(Customer $customer)
     {
-        $customer = Customer::where('uuid',$customer)->with('phones','faxes','emails','addresses')->first();
+        $customer->load('phones','faxes','emails','addresses')->get();
 
-        return json_encode($customer);
-
+        return json_encode($customer->attention);
     }
 
 }
