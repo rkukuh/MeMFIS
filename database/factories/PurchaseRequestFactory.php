@@ -38,10 +38,17 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
                 return factory(Employee::class)->create()->id;
             }
         },
-        'approved_at' => function () use ($is_approved, $faker) {
+        'approved_at' => function () use ($is_approved) {
             if ($is_approved) {
                 return Carbon::now();
             }
+        },
+        'project_id' => function () use ($faker) {
+            if (Project::count()) {
+                return Project::get()->random()->id;
+            }
+
+            return $faker->randomElement([null, factory(Project::class)->create()->id]);
         },
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
@@ -51,18 +58,6 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
 /** CALLBACKS */
 
 $factory->afterCreating(PurchaseRequest::class, function ($purchase_request, $faker) {
-
-    // Project
-
-    for ($i = 1; $i <= rand(5, 10); $i++) {
-        if (Project::count()) {
-            $project = Project::get()->random();
-        } else {
-            $project = factory(Project::class)->create();
-        }
-
-        $purchase_request->projects()->save($project);
-    }
 
     // Item
 

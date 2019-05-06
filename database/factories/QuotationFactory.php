@@ -59,6 +59,9 @@ $factory->define(Quotation::class, function (Faker $faker) {
 
             return json_encode($amounts);
         },
+        'term_of_payment' => function () use ($faker) {
+            return $faker->randomElement([null, $faker->randomDigitNotNull]);
+        },
         'term_of_condition' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];

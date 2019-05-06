@@ -25,7 +25,13 @@ $factory->define(Item::class, function (Faker $faker) {
 
             return factory(Unit::class)->create()->id;
         },
-        'manufacturer_id' => $faker->randomElement([null, Manufacturer::get()->random()->id]),
+        'manufacturer_id' => function () use ($faker) {
+            if (Manufacturer::count()) {
+                return Manufacturer::get()->random()->id;
+            }
+
+            return $faker->randomElement([null, factory(Manufacturer::class)->create()->id]);
+        },
         'is_ppn' => $is_ppn,
         'ppn_amount' => function() use ($is_ppn) {
             if ($is_ppn) {

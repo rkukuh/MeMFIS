@@ -65,4 +65,4 @@
         let workPackage_uuid = '{{ $workPackage->uuid }}';
     </script>
     <script src="{{ asset('js/frontend/quotation/workpackage/job-request.js') }}"></script>
-    @endpush
+@endpush

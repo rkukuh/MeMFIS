@@ -9,12 +9,10 @@ let Quotation = {
                 let exchange_rate = $('input[name=exchange]');
                 if(exchange_id === "Rupiah (Rp)"){
                     exchange_rate.val(1);
-                    exchange_rate.attr("disabled",true);
+                    exchange_rate.attr("readonly",true);
                 }else{
-                    exchange_rate.attr("disabled",false);
-                    if(exchange_rate_value){
-                        exchange_rate.val(exchange_rate_value);
-                    }
+                    exchange_rate.val('');
+                    exchange_rate.attr("readonly",false);
                 }
             });
 
@@ -261,7 +259,8 @@ let Quotation = {
             data.append("requested_at", $('#date').val());
             data.append("valid_until", $('#valid_until').val());
             data.append("currency_id", $('#currency').val());
-            data.append("term_and_condition", $('#term_and_condition').val());
+            data.append("term_of_payment", $('#term_of_payment').val());
+            data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
             data.append("scheduled_payment_amount", $('#scheduled_payment').val());

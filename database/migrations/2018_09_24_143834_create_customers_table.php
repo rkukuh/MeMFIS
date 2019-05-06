@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
+            $table->json('attention')->nullable();
             $table->integer('payment_term')->nullable();
             $table->unsignedInteger('account_code')->nullable();
             $table->timestamp('banned_at')->nullable();

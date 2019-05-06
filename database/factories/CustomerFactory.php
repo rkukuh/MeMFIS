@@ -19,11 +19,17 @@ $factory->define(Customer::class, function (Faker $faker) {
     return [
         'code' => 'CUS-DUM-' . $number,
         'name' => 'Customer Dummy #' . $number,
+        'attention' => function () use ($faker) {
+            $attentions = [];
+
+            for ($i = 1; $i <= rand(2, 4); $i++) {
+                $attentions[]['name'] = $faker->name;
+            }
+
+            return $faker->randomElement([null, json_encode($attentions)]);
+        },
         'payment_term' => rand(1, 10) * 10,
-        'banned_at' => $faker->randomElement([
-            null,
-            Carbon::now()
-        ]),
+        'banned_at' => $faker->randomElement([null, Carbon::now()]),
     ];
 
 });

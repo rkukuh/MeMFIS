@@ -56,13 +56,29 @@
                                                 <legend class="w-auto">Project</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Work Order @include('frontend.common.label.required')
-                                                        </label>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                <label class="form-control-label">
+                                                                    Work Order @include('frontend.common.label.required')
+                                                                </label>
 
-                                                        @component('frontend.common.label.data-info')
+                                                                @component('frontend.common.label.data-info')
                                                                     @slot('text', $quotation->project->no_wo)
                                                                 @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                <label class="form-control-label">
+                                                                    Project Title
+                                                                </label>
+
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('text', $quotation->project->title)
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+
                                                         <input type="hidden" id="customer_id" name="customer_id">
 
                                                     </div>
@@ -244,10 +260,15 @@
                                                             <label class="form-control-label">
                                                                 Currency @include('frontend.common.label.required')
                                                             </label>
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('id', 'Currency')
-                                                                @slot('text', 'Currency')
-                                                            @endcomponent
+                                                            @foreach ($currencies as $currency)
+                                                                @if ($currency->id == $quotation->currency_id)
+                                                                    @component('frontend.common.label.data-info')
+                                                                        @slot('id', 'Currency')
+                                                                        @slot('text', $currency->name.'('.$currency->symbol.')')
+                                                                    @endcomponent
+                                                                @endif
+                                                            @endforeach
+
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
@@ -270,6 +291,7 @@
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'top')
                                                         @slot('text','term of payment')
+                                                        @slot('text',$quotation->term_of_payment)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -301,18 +323,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Project Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
-                                                @slot('id', 'project_title')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
                                                 Description @include('frontend.common.label.required')
                                             </label>
 
@@ -330,7 +340,8 @@
 
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', 'term and condition')
-                                                @slot('id', 'project_title')
+                                                @slot('text',$quotation->term_of_condition)
+
                                             @endcomponent
                                         </div>
                                     </div>
@@ -346,102 +357,70 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_workpackage" role="tabpanel">
-                                                    {{-- <table class="workpackage-datatable" id="html_table" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th title="Field #1" data-field="OrderID">Workpackage ID</th>
-                                                                <th title="Field #2" data-field="Owner">Workpackage Title</th>
-                                                                <th title="Field #2" data-field="Action"></th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
-                                                                <td>Sunny Garton</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
-                                                                <td>Sandor Engley</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">68084-462</a></td>
-                                                                <td>Morgan Cradey</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">44356-0001</a></td>
-                                                                <td>Tedd Alton</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table> --}}
-                                                    {{-- @include('frontend.quotation.modal-workpackage') --}}
                                                     <div class="workpackage_datatable" id="scrolling_both"></div>
 
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
-                                                    <table class="summary-datatable" id="html_table" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th title="Field #1" data-field="No">No</th>
-                                                                <th title="Field #2" data-field="Job_Request">Job Request Description</th>
-                                                                <th title="Field #2" data-field="Cost">Cost</th>
-                                                                <th title="Field #2" data-field="Disc">Disc %</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
-                                                                <td>Sunny Garton</td>
-                                                                <td>$100000</td>
-                                                                <td>0%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
-                                                                <td>Sandor Engley</td>
-                                                                <td>$50</td>
-                                                                <td>10%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Sub Total</td>
-                                                                <td>$100050</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Tax</td>
-                                                                <td>
-                                                                    <select name="" id="">
-                                                                        <option value="">5%</option>
-                                                                        <option value="">10%</option>
-                                                                        <option value="">15%</option>
-                                                                    </select>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Total in Rupiah</td>
-                                                                <td>Rp. 100000000</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+
+                                                    <div class="summary_datatable" id="scrolling_both"></div>
+                                                    <br><hr>
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            Sub Total
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            Rp. 100000000
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        </div>
+                                                    </div>
+                                                    <div class='repeater'>
+                                                        <div data-repeater-list="group-document">
+                                                            <div data-repeater-item>
+                                                                <div class="form-group m-form__group row">
+                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                    </div>
+                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                        <select id="type_website" name="type_website" class="form-control">
+                                                                            <option value="">
+                                                                                Select a Type
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                            @component('frontend.common.input.text')
+                                                                            @slot('id', 'document')
+                                                                            @slot('name', 'document')
+                                                                        @endcomponent
+                                                                    </div>
+                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                        @include('frontend.common.buttons.create_repeater')
+                                                                    </div>
+                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                        @include('frontend.common.buttons.delete_repeater')
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            Total in Rupiah
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            Rp. 100000000
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -499,5 +478,6 @@
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage/show.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/show.js') }}"></script>
-
+    <script src="{{ asset('js/frontend/quotation/summary.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 @endpush

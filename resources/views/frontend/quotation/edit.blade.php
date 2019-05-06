@@ -57,21 +57,36 @@
                                                 <div class="form-group m-form__group row">
                                                     <input type="hidden" id="quotation_uuid" name="quotation_uuid" value="{{ $quotation->uuid }}">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Work Order @include('frontend.common.label.required')
-                                                        </label>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                <label class="form-control-label">
+                                                                    Work Order @include('frontend.common.label.required')
+                                                                </label>
 
-                                                        <select id="work-order" name="work-order" class="form-control m-select2">
-                                                            <option value="">
-                                                                &mdash; Select a Work Order &mdash;
-                                                            </option>
-                                                            @foreach ($projects as $project)
-                                                                <option value="{{ $project->uuid }}"
-                                                                    @if ($project->no_wo === $quotation->project->no_wo) selected @endif>
-                                                                    {{ $project->no_wo }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                                <select id="work-order" name="work-order" class="form-control m-select2">
+                                                                    <option value="">
+                                                                        &mdash; Select a Work Order &mdash;
+                                                                    </option>
+                                                                    @foreach ($projects as $project)
+                                                                        <option value="{{ $project->uuid }}"
+                                                                            @if ($project->no_wo === $quotation->project->no_wo) selected @endif>
+                                                                            {{ $project->no_wo }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                <label class="form-control-label">
+                                                                    Project Title
+                                                                </label>
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'project_number')
+                                                                    @slot('text', $quotation->project->title)
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
                                                         <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->customer->uuid }}">
 
                                                     </div>
@@ -261,12 +276,15 @@
                                                                 Currency @include('frontend.common.label.required')
                                                             </label>
 
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('id', 'currency')
-                                                                @slot('text', 'Currency')
-                                                                @slot('name', 'currency')
-                                                                @slot('id_error', 'currency')
-                                                            @endcomponent
+                                                            <select id="currency" name="currency" class="form-control m-select2">
+                                                                @foreach ($currencies as $currency)
+                                                                    <option value="{{ $currency->id }}"
+                                                                        @if ($currency->id == $quotation->currency_id) selected @endif>
+                                                                        {{ $currency->name }} ({{ $currency->symbol }})
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
@@ -292,7 +310,8 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('text', 'Term of Payment')
                                                         @slot('id', 'term_of_payment')
-                                                        @slot('input_append', 'Hari')
+                                                        @slot('value', $quotation->term_of_payment)
+                                                        @slot('input_append', 'Days')
                                                         @slot('name', 'term_of_payment')
                                                         @slot('id_error', 'term_of_payment')
                                                     @endcomponent
@@ -346,21 +365,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Project Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '3')
-                                                @slot('id', 'title')
-                                                @slot('name', 'title')
-                                                @slot('text', 'title')
-                                                @slot('id_error', 'title')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
                                                 Description @include('frontend.common.label.required')
                                             </label>
 
@@ -385,6 +389,7 @@
                                                 @slot('id', 'term_and_condition')
                                                 @slot('name', 'term_and_condition')
                                                 @slot('text', 'Term and Condition')
+                                                @slot('value', $quotation->term_of_condition)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -405,90 +410,64 @@
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
 
                                                     <div class="summary_datatable" id="scrolling_both"></div>
-
-                                                    {{-- <table class="summary-datatable" id="html_table" width="100%">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td width=60%></td>
-                                                                <td width=20%>Sub Total</td>
-                                                                <td width=20%>
-                                                                    <select name="" id="">
-                                                                        <option value="">5%</option>
-                                                                        <option value="">10%</option>
-                                                                        <option value="">15%</option>
-                                                                    </select>
-                                                                </td>
-                                                            </tr> --}}
-                                                            {{-- <tr>
-                                                                <td width=60%></td>
-                                                                <td width=20%>Tax</td>
-                                                                <td width=20%>
-                                                                    <select name="" id="">
-                                                                        <option value="">5%</option>
-                                                                        <option value="">10%</option>
-                                                                        <option value="">15%</option>
-                                                                    </select>
-                                                                </td>
-                                                            </tr> --}}
-                                                            <br><hr>
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                    Sub Total
-                                                                </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                    Rp. {{ number_format(1000000000.50,2,',','.') }}
-                                                                </div>
-                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                </div>
-                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                    <br><hr>
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            Sub Total
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            Rp. 100000000
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        </div>
+                                                    </div>
+                                                    <div class='repeater'>
+                                                        <div data-repeater-list="group-document">
+                                                            <div data-repeater-item>
+                                                                <div class="form-group m-form__group row">
+                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                    </div>
+                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                        <select id="type_website" name="type_website" class="form-control">
+                                                                            <option value="">
+                                                                                Select a Type
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                            @component('frontend.common.input.text')
+                                                                            @slot('id', 'document')
+                                                                            @slot('name', 'document')
+                                                                        @endcomponent
+                                                                    </div>
+                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                        @include('frontend.common.buttons.create_repeater')
+                                                                    </div>
+                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                        @include('frontend.common.buttons.delete_repeater')
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class='repeater'>
-                                                                    <div data-repeater-list="group-document">
-                                                                        <div data-repeater-item>
-                                                                            <div class="form-group m-form__group row">
-                                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                                </div>
-                                                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                                    <select id="type_website" name="type_website" class="form-control">
-                                                                                        <option value="">
-                                                                                            Select a Type
-                                                                                        </option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                                        @component('frontend.common.input.text')
-                                                                                        @slot('id', 'document')
-                                                                                        @slot('name', 'document')
-                                                                                    @endcomponent
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                                    @include('frontend.common.buttons.create_repeater')
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                                    @include('frontend.common.buttons.delete_repeater')
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                            Total in Rupiah
-                                                                        </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                            Rp. {{ number_format(100000000) }}
-                                                                        </div>
-                                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                        </div>
-                                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                        </div>
-                                                                    </div>
-
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            Total in Rupiah
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            Rp. 100000000
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -618,7 +597,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
 

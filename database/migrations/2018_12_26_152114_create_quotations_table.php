@@ -17,6 +17,7 @@ class CreateQuotationsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('number')->nullable();
+            $table->string('title')->nullable();
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('customer_id');
             $table->timestamp('requested_at')->nullable();

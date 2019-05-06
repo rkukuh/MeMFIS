@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Frontend\Quotation;
 use App\Models\Type;
 use App\Models\Project;
 use App\Models\Customer;
+use App\Models\Currency;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 
@@ -15,6 +16,13 @@ use App\Http\Requests\Frontend\QuotationUpdate;
 
 class QuotationController extends Controller
 {
+    protected $currencies;
+
+    public function __construct()
+    {
+        $this->currencies = Currency::all();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -70,8 +78,12 @@ class QuotationController extends Controller
      */
     public function show(Quotation $quotation)
     {
+        $projects = Project::get();
+
         return view('frontend.quotation.show',[
+            'currencies' => $this->currencies,
             'quotation' => $quotation,
+            'projects' => $projects
         ]);
     }
 
@@ -86,6 +98,7 @@ class QuotationController extends Controller
         $projects = Project::get();
 
         return view('frontend.quotation.edit',[
+            'currencies' => $this->currencies,
             'quotation' => $quotation,
             'projects' => $projects
         ]);
@@ -100,9 +113,10 @@ class QuotationController extends Controller
      */
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
-        $quotation = Quotation::find($quotation);
-        // $quotation->name = $request->name;
-        // $quotation->save();
+        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
+
+        $quotation->update($request->all());
 
         return response()->json($quotation);
     }
