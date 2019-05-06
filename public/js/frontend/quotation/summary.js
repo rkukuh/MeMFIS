@@ -2,6 +2,7 @@
 var locale = 'id';
 var options = {style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2};
 var formatter = new Intl.NumberFormat(locale, options);
+let total = 0;
 
 // untuk datatable dengan accordion pada row tersebut
 var DatatableAutoColumnHideDemo = function() {
@@ -91,9 +92,11 @@ var DatatableAutoColumnHideDemo = function() {
             field: 'ShipCity',
             title: 'Cost',
             template: function (a) {
+                total = total+a.pivot.manhour_total*a.pivot.manhour_rate+138;
+                document.getElementById("sub_total").innerHTML = formatter.format(total);
                 return ('Cost<br>'+
-                        '$ '+formatter.format(a.pivot.manhour_total*a.pivot.manhour_rate)+'<br>'+
-                        '$ 138'
+                        formatter.format(a.pivot.manhour_total*a.pivot.manhour_rate)+'<br>'+
+                        ' 138'
                 );
             }
           }, {
