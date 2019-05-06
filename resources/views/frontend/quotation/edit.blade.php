@@ -637,6 +637,11 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage-edit.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/edit.js') }}"></script>
+    <script>
+        $('.action-buttons').on('click', '.add-quotation', function() {
+            alert('tes');
+        });
+    </script>
 
 
 @endpush
