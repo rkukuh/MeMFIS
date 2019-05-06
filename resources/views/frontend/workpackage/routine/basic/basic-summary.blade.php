@@ -24,313 +24,131 @@
                     <div class="m-portlet__body">
                         <form id="itemform" name="itemform">
                             <div class="m-portlet__body">
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
                                             Total Task Card(s)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$total_taskcard}} Item (s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
+                                        </label>
+
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $total_taskcard .' Item (s)')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
                                             Total MPD's Manhour(s)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$total_manhor_taskcard}} mhrs
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="100%" colspan="2" style="background-color:beige;padding:10px;font-weight:bold">
+                                        </label>
+
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $total_manhor_taskcard.' mhrs')
+                                        @endcomponent
+                                    </div>
+
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
                                             Skill Needed
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Airframe
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Powerplant
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Radio
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Electrical
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Instrument
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Cabin Maintenance
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Tool(s) List (from taskcard)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Tool Description
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Remarks
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Obeng
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            2
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Material(s) List (from taskcard)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Material  Description
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Remarks
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Obeng
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            3
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            General Tool(s) List
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Tool Description
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Remarks
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Obeng
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            2
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            General Material(s) List
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Material Decription
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Remarks
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Radiator
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            3
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
+                                        </label>
+
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', 'choosed template')
+                                        @endcomponent
+                                    </div>
+                                </div>
+
+                                <div class="m-portlet m-portlet--mobile">
+                                    <div class="m-portlet__body">
+                                        <h1>Tool(S) List (from taskcard)</h1>
+                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                            <div class="row align-items-center">
+                                                <div class="col-xl-6 order-2 order-xl-1">
+                                                    <div class="form-group m-form__group row align-items-center">
+                                                        <div class="col-md-6">
+                                                            <div class="m-input-icon m-input-icon--left">
+                                                                <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                    id="generalSearch">
+                                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                    <span><i class="la la-search"></i></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="general_tools_datatable" id="scrolling_both"></div>
+                                    </div>
+                                </div>
+                                <div class="m-portlet m-portlet--mobile">
+                                    <div class="m-portlet__body">
+                                        <h1>Item(S) List (from taskcard)</h1>
+                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                            <div class="row align-items-center">
+                                                <div class="col-xl-6 order-2 order-xl-1">
+                                                    <div class="form-group m-form__group row align-items-center">
+                                                        <div class="col-md-6">
+                                                            <div class="m-input-icon m-input-icon--left">
+                                                                <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                    id="generalSearch">
+                                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                    <span><i class="la la-search"></i></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="general_items_datatable" id="scrolling_both"></div>
+                                    </div>
+                                </div>
+                                <div class="m-portlet m-portlet--mobile">
+                                        <div class="m-portlet__body">
+                                            <h1>General Material(S) List</h1>
+                                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                <div class="row align-items-center">
+                                                    <div class="col-xl-6 order-2 order-xl-1">
+                                                        <div class="form-group m-form__group row align-items-center">
+                                                            <div class="col-md-6">
+                                                                <div class="m-input-icon m-input-icon--left">
+                                                                    <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                        id="generalSearch">
+                                                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                        <span><i class="la la-search"></i></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="general_materials_datatable" id="scrolling_both"></div>
+                                        </div>
+                                    </div>
+                                    <div class="m-portlet m-portlet--mobile">
+                                        <div class="m-portlet__body">
+                                            <h1>General Tools(S) List</h1>
+                                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                <div class="row align-items-center">
+                                                    <div class="col-xl-6 order-2 order-xl-1">
+                                                        <div class="form-group m-form__group row align-items-center">
+                                                            <div class="col-md-6">
+                                                                <div class="m-input-icon m-input-icon--left">
+                                                                    <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                        id="generalSearch">
+                                                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                        <span><i class="la la-search"></i></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="general_tools_datatable" id="scrolling_both"></div>
+                                        </div>
+                                    </div>
 
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
@@ -351,4 +169,9 @@
         </div>
     </div>
 </div>
+@push('footer-scripts')
+    <script>let workPackage_uuid = '{{ $workPackage->uuid }}';  </script>
+    <script src="{{ asset('js/frontend/workpackage/item/summary.js') }}"></script>    
+    <script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
+@endpush
 @endsection
