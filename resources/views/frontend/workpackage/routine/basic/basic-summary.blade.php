@@ -80,32 +80,32 @@
                                 <span>Total</span>
                                 <span class="m--font-accent">{{$total_taskcard}}</span>
                             </div>
-                            <div class="m-widget_content-item">
+                            <!-- <div class="m-widget_content-item">
                                 <span>Change</span>
                                 <span class="m--font-brand">+15%</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Licenses</span>
                                 <span>29</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-widget_content">
-                        <h3 class="m-widget_content-title">MPD Manhour</h3>
+                        <h3 class="m-widget_content-title">Manhour</h3>
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
-                                <span>Total</span>
+                                <span>Total MPD</span>
                                 <span class="m--font-accent">{{ number_format($total_manhor_taskcard) }}</span>
                             </div>
                             <div class="m-widget_content-item">
-                                <span>Change</span>
+                                <span>Performance Factor</span>
                                 <span class="m--font-brand">+15%</span>
                             </div>
                             <div class="m-widget_content-item">
-                                <span>Count</span>
-                                <span>701</span>
+                                <span>Total</span>
+                                <span>{{ number_format($total_manhor_taskcard) }}</span>
                             </div>
                         </div>
                     </div>
@@ -317,6 +317,7 @@
 
         </div>
     </div>
+
 </div>
 @push('footer-scripts')
 <script>
