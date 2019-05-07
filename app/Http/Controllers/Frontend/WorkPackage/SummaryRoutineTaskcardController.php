@@ -27,7 +27,8 @@ class SummaryRoutineTaskcardController extends Controller
 
         return view('frontend.workpackage.routine.basic.basic-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard
+            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'workPackage' => $workPackage
         ]);
     }
 
@@ -44,7 +45,8 @@ class SummaryRoutineTaskcardController extends Controller
 
         return view('frontend.workpackage.routine.cpcp.cpcp-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard
+            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'workPackage' => $workPackage
         ]);
     }
 
@@ -61,7 +63,8 @@ class SummaryRoutineTaskcardController extends Controller
 
         return view('frontend.workpackage.routine.sip.sip-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard
+            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'workPackage' => $workPackage
         ]);
     }
 

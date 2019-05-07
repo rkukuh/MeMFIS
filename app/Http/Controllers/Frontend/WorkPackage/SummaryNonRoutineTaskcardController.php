@@ -27,7 +27,8 @@ class SummaryNonRoutineTaskcardController extends Controller
 
         return view('frontend.workpackage.nonroutine.adsb.ad-sb-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard
+            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'workPackage' => $workPackage
         ]);
     }
 
@@ -44,7 +45,8 @@ class SummaryNonRoutineTaskcardController extends Controller
 
         return view('frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard
+            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'workPackage' => $workPackage
         ]);
     }
 
@@ -61,7 +63,8 @@ class SummaryNonRoutineTaskcardController extends Controller
 
         return view('frontend.workpackage.nonroutine.si.si-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard
+            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'workPackage' => $workPackage
         ]);
     }
 
