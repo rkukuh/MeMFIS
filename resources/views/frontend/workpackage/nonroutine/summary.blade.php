@@ -20,368 +20,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-portlet m-portlet--mobile">
-                    <div class="m-portlet__body">
-                        <form id="itemform" name="itemform">
-                            <div class="m-portlet__body">
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td width="100%" colspan="2" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Non-Routine Taskcard
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            AD/SB
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            CMR/AWL
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Special Intruction (SI)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                      <td width="30%" style="background-color:beige;padding:10px;">
-                                          HT/CRR
-                                      </td>
-                                      <td width="70%" style="text-align:center">
-                                          5 Taskcard(s)
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Manhour(s)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="100%" colspan="2" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Skill Needed
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Airframe
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Powerplant
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Radio
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Electrical
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Instrument
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Cabin Maintenance
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            5 Taskcard(s)
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Tool(s) List (from taskcard)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Tool Description
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Remarks
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Obeng
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            2
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Material(s) List (from taskcard)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Material  Description
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Remarks
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Obeng
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            3
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            General Tool(s) List
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Tool Description
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Remarks
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Obeng
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            2
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            General Material(s) List
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Material Decription
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Remarks
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Radiator
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            3
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
-
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                        <div class="flex">
-                                            <div class="action-buttons">
-                                                @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.workpackage.create'))
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        
+
         <div class="col-xl-6">
             <div class="m-portlet m-portlet--mobile ">
                 <div class="m-portlet__head">
@@ -427,6 +71,29 @@
         <div class="col-xl-6">
             <div class="m-widget29">
                 <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-widget_content">
+                            <h3 class="m-widget_content-title">Routine Taskcard</h3>
+                            <div class="m-widget_content-items">
+                                <div class="m-widget_content-item">
+                                    <span>Basic</span>
+                                    <span class="m--font-accent">0</span>
+                                </div>
+                                <div class="m-widget_content-item">
+                                    <span>SIP</span>
+                                    <span class="m--font-brand">14</span>
+                                </div>
+                                <div class="m-widget_content-item">
+                                    <span>CPCP</span>
+                                    <span class="m--font-focus">15</span>
+                                </div>
+                                <div class="m-widget_content-item">
+                                    <span>Total</span>
+                                    <span>29</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="m-widget_content">
                         <h3 class="m-widget_content-title">Non Routine Taskcard</h3>
                         <div class="m-widget_content-items">
@@ -451,7 +118,7 @@
                                 <span>633</span>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="m-portlet m-portlet--mobile">
@@ -489,7 +156,9 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>Tool(S) List (from taskcard)</h1></span>
+                                <span class="m-accordion__item-title">
+                                    <h1>Tool(S) List (from taskcard)</h1>
+                                </span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -535,7 +204,9 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_1_head" data-toggle="collapse" href="#m_accordion_2_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>Item(S) List (from taskcard)</h1></span>
+                                <span class="m-accordion__item-title">
+                                    <h1>Item(S) List (from taskcard)</h1>
+                                </span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -580,7 +251,9 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_4_item_1_head" data-toggle="collapse" href="#m_accordion_4_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>General Tools(S) List</h1></span>
+                                <span class="m-accordion__item-title">
+                                    <h1>General Tools(S) List</h1>
+                                </span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -626,7 +299,9 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_3_item_1_head" data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>General Material(S) List</h1></span>
+                                <span class="m-accordion__item-title">
+                                    <h1>General Material(S) List</h1>
+                                </span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
