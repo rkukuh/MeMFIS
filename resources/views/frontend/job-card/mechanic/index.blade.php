@@ -63,6 +63,7 @@
                                                 @component('frontend.common.buttons.create')
                                                     @slot('text', 'Search')
                                                     @slot('icon','search')
+                                                    @slot('href',route('frontend.jobcard-engineer.create'))
                                                 @endcomponent
                                             </div>
                                         </div>
