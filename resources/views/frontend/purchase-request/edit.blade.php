@@ -136,6 +136,21 @@
                                                 @endcomponent
                                             </div>
                                         </div>
+                                        <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '10')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                                @slot('value', $purchaseRequest->description)
+                                            @endcomponent
+                                        </div>
+                                    </div>
                                     </fieldset>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -191,21 +206,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
-                                                Description @include('frontend.common.label.optional')
-                                            </label>
-
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '10')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
-                                                @slot('value', $purchaseRequest->description)
-                                            @endcomponent
-                                        </div>
-                                    </div>
+                                    
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
