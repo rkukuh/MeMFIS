@@ -124,9 +124,7 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title">
-                                    <h1>Tool(S) List (from taskcard)</h1>
-                                </span>
+                                <span class="m-accordion__item-title"> <h1>Tool(S) List (from taskcard)</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -153,8 +151,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="general_tools_datatable" id="scrolling_both"></div>
-
+                                            <div class="tools_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -172,9 +169,7 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_1_head" data-toggle="collapse" href="#m_accordion_2_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title">
-                                    <h1>Item(S) List (from taskcard)</h1>
-                                </span>
+                                <span class="m-accordion__item-title"> <h1>Item(S) List (from taskcard)</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -201,7 +196,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="general_items_datatable" id="scrolling_both"></div>
+                                            <div class="materials_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -219,9 +214,7 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_4_item_1_head" data-toggle="collapse" href="#m_accordion_4_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title">
-                                    <h1>General Tools(S) List</h1>
-                                </span>
+                                <span class="m-accordion__item-title"> <h1>General Tools(S) List</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -267,9 +260,7 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_3_item_1_head" data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title">
-                                    <h1>General Material(S) List</h1>
-                                </span>
+                                <span class="m-accordion__item-title"> <h1>General Material(S) List</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>

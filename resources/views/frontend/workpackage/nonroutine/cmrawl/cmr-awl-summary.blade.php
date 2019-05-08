@@ -152,8 +152,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="general_tools_datatable" id="scrolling_both"></div>
-
+                                            <div class="tools_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +197,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="general_items_datatable" id="scrolling_both"></div>
+                                            <div class="materials_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
