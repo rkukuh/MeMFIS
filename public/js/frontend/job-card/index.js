@@ -48,7 +48,7 @@ let Item = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/job-card/ppc/show">' + t.code + "</a>"
+                        return '<a href="/jobcard-ppc/1">' + t.code + "</a>"
                     }
                 },
                 {
