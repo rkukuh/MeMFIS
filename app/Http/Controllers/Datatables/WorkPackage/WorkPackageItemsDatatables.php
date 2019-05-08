@@ -15,7 +15,7 @@ class WorkPackageItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function material(WorkPackage $workPackage)
+    public function generalMaterial(WorkPackage $workPackage)
     {
         $data = $alldata = json_decode($workPackage->materials);
 
@@ -111,7 +111,7 @@ class WorkPackageItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool(WorkPackage $workPackage)
+    public function generalTool(WorkPackage $workPackage)
     {
         $data = $alldata = json_decode($workPackage->tools);
 

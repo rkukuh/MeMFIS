@@ -403,8 +403,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/cmr-awl', 'WorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
                 Route::get('/{workPackage}/si', 'WorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
 
-                Route::get('/{workPackage}/tools', 'WorkPackageItemsDatatables@tool')->name('tools.index');
-                Route::get('/{workPackage}/materials', 'WorkPackageItemsDatatables@material')->name('materials.index');
+                Route::get('/{workPackage}/general-tools', 'WorkPackageItemsDatatables@generalTool')->name('tools.index');
+                Route::get('/{workPackage}/general-materials', 'WorkPackageItemsDatatables@generalMaterial')->name('materials.index');
 
                 Route::get('/modal', 'WorkPackageDatatables@workpackageModal')->name('workpackage.modal');
 

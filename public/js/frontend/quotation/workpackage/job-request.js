@@ -9,7 +9,7 @@ let JobRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -141,7 +141,7 @@ let JobRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-materials',
                         map: function (raw) {
                             let dataSet = raw;
 
