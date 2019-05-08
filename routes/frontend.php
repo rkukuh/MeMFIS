@@ -342,6 +342,9 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
 
+            Route::view('/dicrepancy','/frontend/job-card/engineer/discrepancy/create');
+            Route::view('/dicrepancy/{dicrepancy}/edit','/frontend/job-card/engineer/discrepancy/edit');
+
             Route::name('jobcard.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
 
