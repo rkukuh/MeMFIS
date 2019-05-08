@@ -208,7 +208,7 @@
                                                 @slot('type','button')
                                                 @slot('id', 'add-item')
                                                 @slot('class', 'add-item')
-                                                @slot('href',route('frontend.jobcard-engineer.edit',[
+                                                @slot('href',route('frontend.jobcard-mechanic.edit',[
                                                     'id' => 1]))
                                             @endcomponent
                                         </div>
