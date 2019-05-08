@@ -405,8 +405,8 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/{workPackage}/general-tools', 'WorkPackageItemsDatatables@generalTool')->name('gen-tools.index');
                 Route::get('/{workPackage}/general-materials', 'WorkPackageItemsDatatables@generalMaterial')->name('gen-materials.index');
-                Route::get('/{workPackage}/tools', 'WorkPackageItemsDatatables@Tool')->name('tools.index');
-                Route::get('/{workPackage}/materials', 'WorkPackageItemsDatatables@Material')->name('materials.index');
+                Route::get('/{workPackage}/tools', 'WorkPackageItemsDatatables@tool')->name('tools.index');
+                Route::get('/{workPackage}/materials', 'WorkPackageItemsDatatables@material')->name('materials.index');
 
                 Route::get('/modal', 'WorkPackageDatatables@workpackageModal')->name('workpackage.modal');
 

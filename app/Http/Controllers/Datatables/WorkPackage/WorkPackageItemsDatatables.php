@@ -211,7 +211,7 @@ class WorkPackageItemsDatatables extends Controller
     {
         $workPackage = WorkPackage::with('taskcards.items')->where('uuid',$workPackage)->first();
         
-        $data = $alldata = json_decode($workPackage->materials);
+        $data = $alldata = json_decode($workPackage->taskcards);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -309,8 +309,9 @@ class WorkPackageItemsDatatables extends Controller
     {
         $workPackage = WorkPackage::with('taskcards.items')->where('uuid',$workPackage)->first();
         
-        $data = $alldata = json_decode($workPackage->tools);
+        $data = $alldata = json_decode($workPackage);
 
+        dd($data);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

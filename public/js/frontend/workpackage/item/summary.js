@@ -92,7 +92,6 @@ let Workpackage3 = {
             ]
         });
 
-
         $('.general_materials_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -277,7 +276,6 @@ let Workpackage3 = {
                 }
             ]
         });
-
 
         $('.materials_datatable').mDatatable({
             data: {
