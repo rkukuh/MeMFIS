@@ -1,6 +1,6 @@
 <div style="background-color: {{ $background_color or 'beige' }};
             height:{{ $height or '50px' }};
-            margin-top:{{ $height or '10px' }};">
+            margin-top:{{ $margintop or '10px' }};">
 
     <div class="form-group m-form__group row">
         <div class="col-sm-8 col-md-8 col-lg-8">
