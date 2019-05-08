@@ -206,7 +206,9 @@
                                         <div class="action-buttons">
                                             @include('frontend.common.buttons.pause')
                                             @include('frontend.common.buttons.close')
-                                            @include('frontend.common.buttons.found')
+                                            @component('frontend.common.buttons.found')
+                                                @slot('href','/dicrepancy')
+                                            @endcomponent()
                                         </div>
                                     </div>
                                 </div>
