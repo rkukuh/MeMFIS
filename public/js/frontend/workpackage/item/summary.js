@@ -6,7 +6,7 @@ let Workpackage3 = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -92,14 +92,13 @@ let Workpackage3 = {
             ]
         });
 
-
         $('.general_materials_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -277,7 +276,6 @@ let Workpackage3 = {
                 }
             ]
         });
-
 
         $('.materials_datatable').mDatatable({
             data: {
