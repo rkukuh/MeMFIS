@@ -372,13 +372,18 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('id', 'tool')
                                             @slot('text', 'Tool')
-                                            @slot('data_target', '#modal_uom')
+                                            @slot('data_target', '#modal_tool')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
+
+                            @include('frontend.job-card.engineer.discrepancy.item.tool.index')
+
+                            <div class="item_storage_datatable" id="item_storage_datatable"></div>
+
                         </div>
                     </div>
                 </div>
@@ -406,13 +411,17 @@
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Material')
                                             @slot('id', 'material')
-                                            @slot('data_target', '#modal_storage_stock')
+                                            @slot('data_target', '#modal_material')
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
+
+                            @include('frontend.job-card.engineer.discrepancy.item.item.index')
+
+                            <div class="item_storage_datatable" id="item_storage_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -440,4 +449,13 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/job-card/discrepancy/create.js') }}"></script>
     <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+
 @endpush
