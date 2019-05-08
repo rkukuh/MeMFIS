@@ -326,7 +326,7 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
+                                                    @component('frontend.common.buttons.update')
                                                         @slot('type','button')
                                                         @slot('id', 'add-item')
                                                         @slot('class', 'add-item')
@@ -382,7 +382,7 @@
 
                             @include('frontend.job-card.engineer.discrepancy.item.tool.index')
 
-                            <div class="item_storage_datatable" id="item_storage_datatable"></div>
+                            <div class="tools_datatable" id="scrolling_both"></div>
 
                         </div>
                     </div>
@@ -421,7 +421,7 @@
 
                             @include('frontend.job-card.engineer.discrepancy.item.item.index')
 
-                            <div class="item_storage_datatable" id="item_storage_datatable"></div>
+                            <div class="materials_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -447,7 +447,7 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/job-card/discrepancy/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
