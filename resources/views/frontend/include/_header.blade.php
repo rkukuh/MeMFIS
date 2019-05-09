@@ -21,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/vendors/base/vendors.bundle.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/metronic/demo/default/base/style.bundle.css') }}">
 
-<link rel="shortcut icon" href="{{ asset('assets/metronic/demo/default/media/img/logo/favicon.ico') }}">
+<link rel="shortcut icon" href="{{ asset('img/logo.ico') }}">
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
