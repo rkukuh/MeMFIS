@@ -8,8 +8,11 @@
            btn-{{ $size or 'md' }}
            {{ $class or '' }} clse"
     style="{{ $style or '' }}"
+    target="{{ $target or '' }}"
+    data-toggle="{{ $data_toggle or 'modal' }}"
+    data-target="{{ $data_target or '#' }}"
+    {{ $attribute or '' }}
     data-dismiss="{{ $data_dismiss or 'modal' }}">
-
     <span>
         <i class="fa {{ $icon or 'fa-times' }}"></i>
         <span>{{ $text or 'Close' }}</span>
