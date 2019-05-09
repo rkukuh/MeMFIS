@@ -18,8 +18,14 @@ Route::name('testing.')->group(function () {
         Route::view('/test3', 'frontend/testing/khusnul/create_RIR');
         Route::view('/test4', 'frontend/testing/khusnul/checkbox-inline');
         Route::view('/test5', 'frontend/testing/khusnul/add_rir');
+        // Route::view('/jcprint', 'frontend/job-card/print');
+        Route::view('/jcprintraw', 'frontend/form/jobcard');
         Route::resource('setting', 'Frontend\SettingController');
 
+        Route::get('/jcprint', function () {
+            $pdf = \PDF::loadView('frontend/form/jobcard');
+            return $pdf->stream();
+        });        
         Route::get('/barcode-print', function () {
             $pdf = \PDF::loadView('frontend/form/barcode');
             return $pdf->stream();
