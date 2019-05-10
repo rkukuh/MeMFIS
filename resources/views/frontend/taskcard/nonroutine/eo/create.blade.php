@@ -94,13 +94,10 @@
                                                 Reference @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'relationship')
-                                                @slot('text', 'Taskcard Relationship')
-                                                @slot('name', 'relationship')
-                                                @slot('multiple','multiple')
-                                                @slot('id_error', 'taskcard-relationship')
-                                                @slot('help_text','You can chose multiple value')
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'reference')
+                                                @slot('text', 'Reference')
+                                                @slot('name', 'reference')
                                             @endcomponent
                                         </div>
                                     </div>

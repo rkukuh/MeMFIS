@@ -108,22 +108,13 @@
                                                     Reference @include('frontend.common.label.optional')
                                                 </label>
 
-                                                <select id="relationship" name="relationship" class="form-control m-select2" multiple style="width:100%">
-                                                @if ($taskCard->related_to->isEmpty())
-                                                    @foreach ($taskcards as $taskCard)
-                                                        <option value="{{ $taskCard->id }}">
-                                                            {{ $taskCard->number }}
-                                                        </option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach ($taskcards as $taskCard)
-                                                        <option value="{{ $taskCard->id }}"
-                                                            @if(in_array( $taskCard->id ,$relation_taskcards)) selected @endif>
-                                                            {{ $taskCard->title }}
-                                                        </option>
-                                                    @endforeach
-                                                @endif
-                                                </select>
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'reference')
+                                                    @slot('text', 'Reference')
+                                                    @slot('name', 'reference')
+                                                    @slot('value',$taskCard->reference)
+                                                @endcomponent
+
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
