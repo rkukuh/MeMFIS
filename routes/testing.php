@@ -18,6 +18,8 @@ Route::name('testing.')->group(function () {
         Route::view('/test3', 'frontend/testing/khusnul/create_RIR');
         Route::view('/test4', 'frontend/testing/khusnul/checkbox-inline');
         Route::view('/test5', 'frontend/testing/khusnul/add_rir');
+        Route::view('/test11', 'frontend/testing/ibnu/mi');
+        Route::view('/test31', 'frontend/testing/ibnu/rir');
         Route::resource('setting', 'Frontend\SettingController');
 
         Route::get('/barcode-print', function () {
