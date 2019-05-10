@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li class="m-nav__separator">
-                        -   
+                        -
                     </li>
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.taskcard.index') }}" class="m-nav__link">
@@ -74,19 +74,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Work Area @include('frontend.common.label.optional')
-                                            </label>
-
-                                            @if (empty($taskCard->work_area))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $taskCard->work_area)
-                                            @endcomponent
-                                            @endif
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 A/C Type @include('frontend.common.label.required')
                                             </label>
 
@@ -96,8 +83,6 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Manhour Estimation @include('frontend.common.label.required')
@@ -105,15 +90,17 @@
 
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskCard->estimation_manhour)
-                                            @endcomponent 
+                                            @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Engineer Quantity @include('frontend.common.label.optional')
                                                     </label>
-    
+
                                                     @if (empty($taskCard->engineer_quantity))
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
@@ -126,7 +113,7 @@
                                                     <label class="form-control-label">
                                                         Helper Quantity @include('frontend.common.label.optional')
                                                     </label>
-    
+
                                                     @if (empty($taskCard->helper_quantity))
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
