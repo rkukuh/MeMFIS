@@ -9,9 +9,18 @@
 
     <head>
         <style>
-            body{
-                /* background-image: url("img/form/bg-jo.png"); */
+            @page {
+                margin: 0px;
             }
+
+            body {
+                margin: 0px;
+            }
+
+            .m-content {
+                margin: 22px;
+            }
+
             td {
                 font-size: 14px;
                 margin-bottom: 5px;
@@ -24,47 +33,36 @@
                 color: white !important;
             }
 
-            .nmtb {
-                margin-top: 0px;
-                margin-bottom: 0px;
-            }
-
-            .grid-container {
-                display: grid;
-                grid-row-gap: 50px;
-                grid-template-columns: auto auto auto;
-                background-color: #2196F3;
-                padding: 10px;
-            }
-
-            .grid-item {
-                background-color: rgba(255, 255, 255, 0.8);
-                border: 1px solid rgba(0, 0, 0, 0.8);
-                padding: 20px;
-                font-size: 30px;
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 70;
                 text-align: center;
+            }
+
+            .header {
+                left: 0;
+                top: 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            tr.border {
+                outline: thin solid;
             }
         </style>
     </head>
 
 <body>
+    <img src="img/form/header.jpg" class="header" width="100%" alt="">
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
-                <img src="img/form/bg-jo.png" height="50px" alt="">
-                <table width="100%" height="50px" style="margin: 0px;" bordercolor="#17acbf">
-                    <tr bgcolor="#17acbf">
-                        <td width="20%"></td>
-                        <td width="20%"></td>
-                        <td width="20%"></td>
-                        <td width="20%" style="background-color:white; text-align:center; ">
-                            <h1 class="nmtb">Job Card <br></h1>
-                            <h3 class="nmtb">( Routine )</h3>
-                        </td>
-                        <td width="20%"></td>
-                    </tr>
-                </table>
-                <fieldset class="grid-item">
+                <fieldset style="width:60%;">
                     <legend>JC NO : #######</legend>
                     <table width="100%">
                         <tr>
@@ -94,66 +92,130 @@
                         </tr>
                     </table>
                 </fieldset>
-                <center class="grid-item">{!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5 ,5)!!}</center>
+                <div>{!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5 ,5)!!}</div>
 
-
-                </table>
-
-                <br>
-
-                <p>REMARKS :</p>
                 <table width="100%">
                     <tr>
-                        <td height="60">
-                        </td>
+                        <td width="20%">Issues Date</td>
+                        <td width="80%">: Generated</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Issues Date</td>
+                        <td width="80%">: Generated</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Issues Date</td>
+                        <td width="80%">: Generated</td>
                     </tr>
                 </table>
+
                 <br>
-                <br>
+
+                <table width="100%" class="center">
+                    <thead>
+                        <tr>
+                            <th>Skill</th>
+                            <th>Work Area</th>
+                            <th>Est. Mhrs</th>
+                            <th>Actual Mhrs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border">
+                            <td>ucing</td>
+                            <td>ucing</td>
+                            <td>ucing</td>
+                            <td>ucing</td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <table width="100%">
-                    <tr>
-                        <td width="10%"></td>
-                        <td width="30%">
-                            <center><b>Prepared By</b></center>
-                        </td>
-                        <td width="20%"></td>
-                        <td width="30%">
-                            <center><b>Approved By</b></center>
-                        </td>
-                        <td width="10%"></td>
-                    </tr>
-                    <tr>
-                        <td width="100%" colspan="5" height="60"></td>
-                    </tr>
-                    <tr>
-                        <td width="10%"></td>
-                        <td width="30%">
-                            <center>(Name)</center>
-                        </td>
-                        <td width="20%"></td>
-                        <td width="30%">
-                            <center>(Name)</center>
-                        </td>
-                        <td width="10%"></td>
-                    </tr>
-                    <tr>
-                        <td width="10%"></td>
-                        <td width="30%">
-                            <center>@php
-                                echo date("d/m/Y");
-                                @endphp</center>
-                        </td>
-                        <td width="20%"></td>
-                        <td width="30%">
-                            <center>@php
-                                echo date("d/m/Y");
-                                @endphp</center>
-                        </td>
-                        <td width="10%"></td>
-                    </tr>
+                    <tbody>
+                        <tr class="border center">
+                            <td colspan="2">ucing</td>
+                            <td colspan="2">ucing</td>
+                        </tr>
+                        <tr class="border center">
+                            <td colspan="2">ucing</td>
+                            <td colspan="2">ucing</td>
+                        </tr>
+                        <tr class="border center">
+                            <td colspan="2">ucing</td>
+                            <td colspan="2">ucing</td>
+                        </tr>
+                        <tr class="border center">
+                            <td colspan="2">ucing</td>
+                            <td colspan="2">ucing</td>
+                        </tr>
+                        <tr class="border center">
+                            <td colspan="2">ucing</td>
+                            <td colspan="2">ucing</td>
+                        </tr>
+                        <tr class="border">
+                            <td>Accoplishment record:</td>
+                            <td colspan="3"> record</td>
+                        </tr>
+                        <tr class="border">
+                            <td colspan="2">Discrepancy found : </td>
+                            <td colspan="2">Transfer to Defect Card No :</td>
+                        </tr>
+                        <tr class="border">
+                            <td width="20%"></td>
+                            <td>
+                                <form action="#">
+                                    <input type="checkbox"> YES
+                                    <input type="checkbox"> NO
+                                </form>
+                            </td>
+                            <td colspan="2">697-769-9</td>
+                        </tr>
+                        </tr>
+                        <tr class="border">
+                            <td colspan="2">ucing</td>
+                            <td>ucing</td>
+                            <td>ucing</td>
+                        </tr>
+                    </tbody>
                 </table>
+
+                <table>
+                    <thead>
+                        <tr class="center">
+                            <th width="30%">Accomplished by</th>
+                            <th width="30%">Inspected by</th>
+                            <th width="30%">RII by</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="30%"></td>
+                            <td width="30%"></td>
+                            <td width="30%"></td>
+                        </tr>
+                        <tr>
+                            <td width="30%"></td>
+                            <td width="30%"></td>
+                            <td width="30%"></td>
+                        </tr>
+                        <tr class="center">
+                            <td width="30%">Ye</td>
+                            <td width="30%">Mi</td>
+                            <td width="30%">Ma</td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Date : </td>
+                            <td width="30%">Date : </td>
+                            <td width="30%">Date : </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
+    </div>
+    <div class="footer">
+        <img src="img/form/footerJO.png" alt="footer heere" width="100%">
     </div>
 </body>
 
