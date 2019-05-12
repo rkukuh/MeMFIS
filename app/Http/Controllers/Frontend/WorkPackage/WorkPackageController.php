@@ -122,11 +122,8 @@ class WorkPackageController extends Controller
      */
     public function sequence(Request $request, WorkPackage $workPackage,TaskCard $taskcard)
     {
-        $workPackage->taskcards()->detach($taskcard);
 
-        $workPackage->taskcards()->attach($taskcard, [
-            'sequence' => $request->sequence
-        ]);
+        $workPackage->taskcards()->updateExistingPivot($taskcard, ['sequence'=>$request->sequence]);
 
         return response()->json($workPackage);
     }
@@ -140,11 +137,8 @@ class WorkPackageController extends Controller
      */
     public function mandatory(Request $request, WorkPackage $workPackage, TaskCard $taskcard)
     {
-        $workPackage->taskcards()->detach($taskcard);
 
-        $workPackage->taskcards()->attach($taskcard, [
-            'is_mandatory' => $request->is_mandatory
-        ]);
+        $workPackage->taskcards()->updateExistingPivot($taskcard, ['is_mandatory'=>$request->is_mandatory]);
 
         return response()->json($workPackage);
     }
