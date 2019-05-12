@@ -416,6 +416,14 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
 
+        /** Interchange */
+
+        Route::resource('interchange', 'InterchangeController');
+
+        /** Receiving Inspection Report */
+
+        Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
+
     });
 
 });

@@ -52,4 +52,13 @@ Route::get('/hard-time', function () {
     return $pdf->stream();
 });
 
+Route::get('/receiving-inspection-report-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/receiving_inspection_report');
+    return $pdf->stream();
+});
+
+Route::get('/rts-certificate', function () {
+    $pdf = \PDF::loadView('frontend/form/rts-certificate');
+    return $pdf->stream();
+});
 
