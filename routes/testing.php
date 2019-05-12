@@ -6,6 +6,7 @@ Route::name('testing.')->group(function () {
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
+        Route::view('/taskcard', 'frontend/testing/taskcard')->name('taskcard');
 
         Route::view('/select2-repeater', 'frontend/testing/select2Repeater')->name('select2-repeater');
         Route::view('/select2-repeater2', 'frontend/testing/repeaterBlank')->name('select2-repeater2');
@@ -25,7 +26,7 @@ Route::name('testing.')->group(function () {
         Route::get('/jcprint', function () {
             $pdf = \PDF::loadView('frontend/form/jobcard');
             return $pdf->stream();
-        });        
+        });
         Route::get('/barcode-print', function () {
             $pdf = \PDF::loadView('frontend/form/barcode');
             return $pdf->stream();

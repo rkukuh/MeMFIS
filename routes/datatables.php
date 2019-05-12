@@ -268,6 +268,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskCardDatatables@index')->name('all');
+                Route::get('/filter/{filter}', 'TaskCardDatatables@filter')->name('filter');
 
             });
 
