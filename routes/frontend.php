@@ -424,6 +424,10 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
 
+        /** Discrepancy */
+
+        Route::resource('discrepancy', 'DiscrepancyController');
+
     });
 
 });
