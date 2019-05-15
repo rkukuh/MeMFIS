@@ -369,6 +369,18 @@ Route::name('frontend.')->group(function () {
             });
         });
 
+         /** RII RELEASE */
+
+         Route::namespace('RIIRelease')->group(function () {
+            Route::resource('rii-release', 'RIIReleaseController', [
+                'parameters' => ['rii-release' => 'taskrelease']
+            ]);
+
+            Route::name('riirelease.')->group(function () {
+
+            });
+        });
+
         /** PURCHASE REQUEST */
 
         Route::namespace('PurchaseRequest')->group(function () {
