@@ -102,10 +102,10 @@
                                         </label>
 
                                         @component('frontend.common.input.text')
-                                        @slot('id', 'discrepancy_form')
-                                        @slot('text', 'Discrepancy Form')
-                                        @slot('name', 'discrepancy_form')
-                                        @slot('id_error', 'discrepancy_form')
+                                        @slot('id', 'jc_no')
+                                        @slot('text', 'Job Card Ref')
+                                        @slot('name', 'jc_no')
+                                        @slot('id_error', 'jc_no')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -129,9 +129,9 @@
                                         </label>
 
                                         @component('frontend.common.input.number')
-                                        @slot('id', 'engineer_quantity')
-                                        @slot('text', 'Engineer Quantity')
-                                        @slot('name', 'engineer_quantity')
+                                        @slot('id', 'sequence')
+                                        @slot('text', 'Sequence')
+                                        @slot('name', 'sequence')
                                         @slot('value', '1')
                                         @slot('min', '1')
                                         @endcomponent
@@ -269,24 +269,27 @@
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'remove')
-                                                @slot('name', 'remove')
+                                                @slot('name', 'Propose[]')
                                                 @slot('text', 'Remove')
+                                                @slot('value', 'Remove')
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'repair')
-                                                @slot('name', 'repair')
+                                                @slot('name', 'Propose[]')
                                                 @slot('text', 'Repair')
+                                                @slot('value', 'Repair')
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'test')
-                                                @slot('name', 'test')
+                                                @slot('name', 'Propose[]')
                                                 @slot('text', 'Test')
+                                                @slot('value', 'Test')
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
@@ -295,24 +298,27 @@
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'install')
-                                                @slot('name', 'install')
+                                                @slot('name', 'Propose[]')
                                                 @slot('text', 'install')
+                                                @slot('value', 'install')
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'replace')
-                                                @slot('name', 'replace')
+                                                @slot('name', 'Propose[]')
                                                 @slot('text', 'replace')
+                                                @slot('value', 'replace')
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'shop_visit')
-                                                @slot('name', 'shop_visit')
+                                                @slot('name', 'Propose[]')
                                                 @slot('text', 'Shop Visit')
+                                                @slot('value', 'Shop Visit')
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
@@ -321,24 +327,18 @@
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'recticification')
-                                                @slot('name', 'recticification')
+                                                @slot('name', 'Propose[]')
                                                 @slot('text', 'recticification')
+                                                @slot('value', 'recticification')
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'NDT')
-                                                @slot('name', 'NDT')
+                                                @slot('name', 'Propose[]')
                                                 @slot('text', 'NDT')
-                                                @slot('style_div','margin-top:30px')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-3 col-md-3 col-lg-3">
-                                                @component('frontend.common.input.checkbox')
-                                                @slot('id', 'onokabe')
-                                                @slot('name', 'onokabe')
-                                                @slot('text', 'onokabe')
+                                                @slot('value', 'NDT')
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
@@ -387,14 +387,14 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
                                                 @slot('type','button')
-                                                @slot('id', 'add-taskcard')
-                                                @slot('class', 'add-taskcard')
+                                                @slot('id', 'add-discrepancy')
+                                                @slot('class', 'add-discrepancy')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
 
                                                 @component('frontend.common.buttons.back')
-                                                @slot('href', route('frontend.taskcard.index'))
+                                                @slot('href', route('frontend.discrepancy.index'))
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -415,6 +415,8 @@
 @endpush
 
 @push('footer-scripts')
+<script src="{{ asset('js/frontend/discrepancy/create.js') }}"></script>
+<script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
@@ -427,8 +429,6 @@
 <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
 
-<script src="{{ asset('js/frontend/discrepancy/create.js') }}"></script>
-<script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
