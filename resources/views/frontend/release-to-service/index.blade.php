@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Discrepancy
+                    Release To Service
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.discrepancy.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Discrepancy
+                                Release To Service
                             </span>
                         </a>
                     </li>
@@ -42,7 +42,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Discrepancy
+                                Release To Service
                                 </h3>
                             </div>
                         </div>
@@ -66,8 +66,8 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
-                                            @slot('text', 'Discrepancy')
-                                            @slot('href', route('frontend.discrepancy.create') )
+                                            @slot('text', 'Release To Service')
+                                            @slot('href', route('frontend.RTS.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
 
-                            <div class="Discrepancy_datatable" id="scrolling_both"></div>
+                            <div class="rts_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -86,5 +86,5 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/Discrepancy/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/release-to-service/index.js')}}"></script>
 @endpush

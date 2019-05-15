@@ -452,6 +452,10 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('discrepancy', 'DiscrepancyController');
 
+        /** Discrepancy */
+
+        Route::resource('RTS', 'ReleaseToServiceController');
+
     });
 
 });
