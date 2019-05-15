@@ -329,14 +329,6 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.submit')
-                                                @slot('type','button')
-                                                @slot('id', 'add-taskcard')
-                                                @slot('class', 'add-taskcard')
-                                                @endcomponent
-
-                                                @include('frontend.common.buttons.reset')
-
                                                 @component('frontend.common.buttons.back')
                                                 @slot('href', route('frontend.taskcard.index'))
                                                 @endcomponent
