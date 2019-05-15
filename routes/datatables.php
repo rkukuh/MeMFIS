@@ -268,7 +268,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskCardDatatables@index')->name('all');
-                Route::get('/filter/{filter}', 'TaskCardDatatables@filter')->name('filter');
+                Route::post('/filter/', 'TaskCardDatatables@filter')->name('filter');
 
             });
 
@@ -363,6 +363,24 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{taskcard}/aircrafts', 'TaskCardSIAircraftsDatatables@index')->name('aircrafts.index');
                 Route::get('/{taskcard}/repeats', 'TaskCardSIMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeats');
                 Route::get('/{taskcard}/thresholds', 'TaskCardSIMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.thresholds');
+
+            });
+
+        });
+
+        /** TASK RELEASE */
+
+        Route::name('task-release.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'task-release',
+                'namespace' => 'TaskRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'TaskReleaseDatatables@index')->name('all');
 
             });
 
