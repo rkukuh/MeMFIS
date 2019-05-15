@@ -26,11 +26,8 @@ let Discrepancy = {
 
             let propose = [];
             $.each($("input[name='Propose[]']:checked"), function() {
-                console.log($(this));
                 propose.push($(this).val());
               });
-          
-              console.log(propose);
 
             $.ajax({
                 headers: {
