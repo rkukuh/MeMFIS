@@ -79,7 +79,7 @@ class DiscrepancyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json($request);
     }
 
     /**
