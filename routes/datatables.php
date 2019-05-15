@@ -386,6 +386,24 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** RII RELEASE */
+
+        Route::name('rii-release.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'rii-release',
+                'namespace' => 'RIIRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'RIIReleaseDatatables@index')->name('all');
+
+            });
+
+        });
+
         /** JOB CARD */
 
         Route::name('jobcard.')->group(function () {
