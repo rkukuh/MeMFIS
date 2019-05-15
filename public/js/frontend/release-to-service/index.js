@@ -5,7 +5,7 @@ let TaskCard = {
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
 
-        $('.taskcard_datatable').mDatatable({
+        $('.rts_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -48,13 +48,13 @@ let TaskCard = {
             columns: [
                 {
                     field: 'number',
-                    title: 'Taskcard No',
+                    title: 'No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'title',
-                    title: 'Title',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
@@ -79,51 +79,23 @@ let TaskCard = {
                 },
                 {
                     field: 'type.name',
-                    title: 'TC Type',
+                    title: 'Project Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'pesawat',
-                    title: 'A/C',
+                    title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
                     field: 'skill',
-                    title: 'Skill',
+                    title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'task.name',
-                    title: 'Task Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
-                    title: 'Manhours',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
-                },
+                },                
                 {
                     field: 'Actions',
                     sortable: !1,
@@ -178,7 +150,7 @@ let TaskCard = {
             ]
         });
 
-        let remove = $('.taskcard_datatable').on('click', '.delete', function () {
+        let remove = $('.rts_datatable').on('click', '.delete', function () {
             let tascard_uuid = $(this).data('uuid');
 
             swal({
