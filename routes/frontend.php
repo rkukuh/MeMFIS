@@ -357,6 +357,18 @@ Route::name('frontend.')->group(function () {
 
         });
 
+         /** TASK RELEASE */
+
+         Route::namespace('TaskRelease')->group(function () {
+            Route::resource('task-release', 'TaskReleaseController', [
+                'parameters' => ['task-release' => 'taskrelease']
+            ]);
+
+            Route::name('taskrelease.')->group(function () {
+
+            });
+        });
+
         /** PURCHASE REQUEST */
 
         Route::namespace('PurchaseRequest')->group(function () {
