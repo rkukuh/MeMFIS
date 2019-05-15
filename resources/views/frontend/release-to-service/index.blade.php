@@ -75,7 +75,7 @@
                                 </div>
                             </div>
 
-                            <div class="Discrepancy_datatable" id="scrolling_both"></div>
+                            <div class="rts_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -86,5 +86,5 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-    <script src="{{ asset('js/frontend/Discrepancy/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/release-to-service/index.js')}}"></script>
 @endpush
