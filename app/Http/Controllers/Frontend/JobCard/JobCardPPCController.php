@@ -85,15 +85,4 @@ class JobCardPPCController extends Controller
         //
     }
 
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  \App\Models\JobCard  $jobCard
-     * @return \Illuminate\Http\Response
-     */
-    public function search(JobCard $jobCard)
-    {
-        //
-    }
-
 }

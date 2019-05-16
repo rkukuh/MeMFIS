@@ -333,8 +333,6 @@ Route::name('frontend.')->group(function () {
             Route::resource('jobcard-ppc', 'JobCardPPCController', [
                 'parameters' => ['jobcard-ppc' => 'jobcard']
             ]);
-            Route::get('jobcard-ppc/{jobcard}', 'JobCardPPCController@search')->name('ppc.jobcard.seacrh');
-
 
             Route::resource('jobcard-engineer', 'JobCardEngineerController', [
                 'parameters' => ['jobcard-engineer' => 'jobcard']
