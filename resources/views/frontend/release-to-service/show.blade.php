@@ -49,23 +49,18 @@
                                             Discrepancy Form @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'project_no')
-                                        @slot('text', 'Project Number')
-                                        @slot('name', 'project_no')
-                                        @slot('id_error', 'project_no')
+                                        @component('frontend.common.label.data-info')
+                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
+
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                             A/C Type @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                        @slot('text', 'Applicability Airplane')
-                                        @slot('id', 'applicability_airplane')
-                                        @slot('name', 'applicability_airplane')
-                                        @slot('id_error', 'applicability-airplane')
+                                        @component('frontend.common.label.data-info')
+                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -75,11 +70,8 @@
                                             Date @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.datepicker')
-                                        @slot('id', 'date')
-                                        @slot('text', 'Date')
-                                        @slot('name', 'date')
-                                        @slot('id_error', 'date')
+                                        @component('frontend.common.label.data-info')
+                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
 
@@ -88,11 +80,8 @@
                                             A/C Reg @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.text')
-                                        @slot('text', 'Aircraft Register')
-                                        @slot('id', 'aircraft_register')
-                                        @slot('name', 'aircraft_register')
-                                        @slot('id_error', 'aircraft_register')
+                                        @component('frontend.common.label.data-info')
+                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -105,33 +94,22 @@
                                             Work Performed @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed[]')
-                                        @slot('id_error', 'work_performed')
+                                        @component('frontend.common.label.data-info')
+                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed[]')
-                                        @slot('id_error', 'work_performed')
-                                        @slot('placeholder','Optional')
+                                        @component('frontend.common.label.data-info')
+                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed[]')
-                                        @slot('id_error', 'work_performed')
-                                        @slot('placeholder','Optional')
+                                        @component('frontend.common.label.data-info')
+                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -142,45 +120,38 @@
                                             Work Data / CAMP Reference @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'work_data')
-                                        @slot('name', 'work_data')
-                                        @slot('text', 'Work Data')
+                                        @component('frontend.common.label.data-info')
+                                        @slot('text', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni quis modi veniam nemo sint natus debitis quod tempora repellendus officia cumque tenetur aut, maxime deserunt laudantium perferendis eius aperiam repudiandae veritatis a! Ipsa, vitae nihil? Aliquam, modi nemo. Sunt quod optio architecto quam similique corrupti vitae reiciendis praesentium ea molestias. Molestias voluptatum error impedit magnam laboriosam corrupti tempora exercitationem, repudiandae optio laudantium, beatae illum accusantium provident fugit porro dolorem. Quibusdam maiores asperiores animi fugit aliquam, atque voluptatem molestias quidem, eaque ex assumenda quam labore deserunt illo minima? Deleniti beatae exercitationem maiores voluptatibus vitae molestias? Commodi inventore laborum, deleniti aliquam est amet voluptates. Molestiae vel veritatis modi repudiandae inventore non nihil libero et veniam excepturi in accusantium reprehenderit nulla eum voluptate quasi rem nostrum fugit ex, illo voluptas deserunt obcaecati officia dolor. Vitae aliquid necessitatibus repudiandae suscipit aliquam? Dolor rem nisi, aliquid tempore, suscipit sapiente nulla adipisci quis repellendus temporibus pariatur.')
                                         @endcomponent
                                     </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <label class="form-control-label">
-                                            Exception(s) @include('frontend.common.label.optional')
-                                        </label>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Exception(s) @include('frontend.common.label.optional')
+                                            </label>
 
-                                        @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'exceptions')
-                                        @slot('name', 'exceptions')
-                                        @slot('text', 'xceptions')
-                                        @endcomponent
+                                            @component('frontend.common.label.data-info')
+                                            @slot('text', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni quis modi veniam nemo sint natus debitis quod tempora repellendus officia cumque tenetur aut, maxime deserunt laudantium perferendis eius aperiam repudiandae veritatis a! Ipsa, vitae nihil? Aliquam, modi nemo. Sunt quod optio architecto quam similique corrupti vitae reiciendis praesentium ea molestias. Molestias voluptatum error impedit magnam laboriosam corrupti tempora exercitationem, repudiandae optio laudantium, beatae illum accusantium provident fugit porro dolorem. Quibusdam maiores asperiores animi fugit aliquam, atque voluptatem molestias quidem, eaque ex assumenda quam labore deserunt illo minima? Deleniti beatae exercitationem maiores voluptatibus vitae molestias? Commodi inventore laborum, deleniti aliquam est amet voluptates. Molestiae vel veritatis modi repudiandae inventore non nihil libero et veniam excepturi in accusantium reprehenderit nulla eum voluptate quasi rem nostrum fugit ex, illo voluptas deserunt obcaecati officia dolor. Vitae aliquid necessitatibus repudiandae suscipit aliquam? Dolor rem nisi, aliquid tempore, suscipit sapiente nulla adipisci quis repellendus temporibus pariatur.')
+                                            @endcomponent
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <label class="form-control-label">
-                                            Approval @include('frontend.common.label.optional')
-                                        </label>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Approval @include('frontend.common.label.optional')
+                                            </label>
 
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                @slot('id', 'DGCA')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'Indonesia DGCA No : 145D-093')
-                                                @slot('value', 'Indonesia DGCA No : 145D-093')
-                                                @slot('style_div','margin-top:30px')
-                                                @endcomponent
-                                            </div>
-                                            <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    @component('frontend.common.input.checkbox')
+                                                    @slot('id', 'DGCA')
+                                                    @slot('name', 'approval[]')
+                                                    @slot('text', 'Indonesia DGCA No : 145D-093')
+                                                    @slot('value', 'Indonesia DGCA No : 145D-093')
+                                                    @slot('style_div','margin-top:30px')
+                                                    @endcomponent
+                                                </div>
+                                                <!-- <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'FAA')
                                                 @slot('name', 'approval[]')
@@ -198,30 +169,30 @@
                                                 @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div> -->
+                                            </div>
+
                                         </div>
-
                                     </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                        <div class="flex">
-                                            <div class="action-buttons">
-                                                @component('frontend.common.buttons.submit')
-                                                @slot('type','button')
-                                                @slot('id', 'add-RTS')
-                                                @slot('class', 'add-RTS')
-                                                @endcomponent
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                    @slot('type','button')
+                                                    @slot('id', 'add-RTS')
+                                                    @slot('class', 'add-RTS')
+                                                    @endcomponent
 
-                                                @include('frontend.common.buttons.reset')
+                                                    @include('frontend.common.buttons.reset')
 
-                                                @component('frontend.common.buttons.back')
-                                                @slot('href', route('frontend.RTS.index'))
-                                                @endcomponent
+                                                    @component('frontend.common.buttons.back')
+                                                    @slot('href', route('frontend.RTS.index'))
+                                                    @endcomponent
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </form>
                     </div>
                 </div>
