@@ -35,8 +35,8 @@ class ReleaseToServiceController extends Controller
      */
     public function store(Request $request)
     {
-         return view('frontend.release-to-service.index');
-    }
+         return response()->json('sukses');
+     }
 
     /**
      * Display the specified resource.
@@ -69,7 +69,7 @@ class ReleaseToServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-         return view('frontend.release-to-service.index');
+          return response()->json('sukses');
     }
 
     /**
@@ -80,6 +80,6 @@ class ReleaseToServiceController extends Controller
      */
     public function destroy($id)
     {
-         return view('frontend.release-to-service.index');
+          return response()->json('sukses');
     }
 }
