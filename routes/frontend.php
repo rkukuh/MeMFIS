@@ -330,17 +330,21 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('JobCard')->group(function () {
 
-            Route::resource('jobcard-ppc', 'JobCardController', [
+            Route::resource('jobcard-ppc', 'JobCardPPCController', [
                 'parameters' => ['jobcard-ppc' => 'jobcard']
             ]);
+            Route::get('jobcard-ppc/{jobcard}', 'JobCardPPCController@search')->name('ppc.jobcard.seacrh');
+
 
             Route::resource('jobcard-engineer', 'JobCardEngineerController', [
                 'parameters' => ['jobcard-engineer' => 'jobcard']
             ]);
+            Route::get('jobcard-engineer/{jobcard}', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
 
             Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
+            Route::get('jobcard-mechanic/{jobcard}', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
 
             Route::view('/dicrepancy','/frontend/job-card/engineer/discrepancy/create');
             Route::view('/dicrepancy/{dicrepancy}/edit','/frontend/job-card/engineer/discrepancy/edit');
