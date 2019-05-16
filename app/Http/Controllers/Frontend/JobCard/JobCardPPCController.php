@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
 
-class JobCardController extends Controller
+class JobCardPPCController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -84,4 +84,16 @@ class JobCardController extends Controller
     {
         //
     }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function search(JobCard $jobCard)
+    {
+        //
+    }
+
 }
