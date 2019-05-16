@@ -1,59 +1,41 @@
 
-let Discrepancy = {
+let ReleaseToService = {
     init: function () {
-        let simpan = $('.footer').on('click', '.add-discrepancy', function () {
+        let simpan = $('.footer').on('click', '.add-release-to-service', function () {
 
-            let date = $('input[name=date]').val();
-            let applicability_airplane =  $('input[name=applicability_airplane]').val();
-            let discrepancy_form = $('#discrepancy_form').val();
+            let project_no = $('#project_no').val();
+            let applicability_airplane = $('#applicability_airplane').val();
+            let date = $('#date').val();
             let aircraft_register = $('#aircraft_register').val();
-            let jc_no = $('#jc_no').val();
-            let aircraft_serial_number = $('#aircraft_serial_number').val();
-            let sequence = $('#sequence').val();
-            let engineer_quantity = $('#engineer_quantity').val();
-            let mechanic_quantity = $('#mechanic_quantity').val();
-            let otr_certification = $('#otr_certification').val();
-            let zone = $('#zone').val();
-            let ATA = $('#ATA').val();
-            let manhour = $('#manhour').val();
-            let remark = $('#remark').val();
-            let is_rii;
-            if (document.getElementById("is_rii").checked) {
-                is_rii = 1;
-            } else {
-                is_rii = 0;
-            }
+            let work_performed = [];
+            $.each($("input[name='work_performed[]']:checked"), function () {
+                work_performed.push($(this).val());
+            });
+            let work_data = $('#work_data').val();
+            let exceptions = $('#exceptions').val();
 
-            let propose = [];
-            $.each($("input[name='Propose[]']:checked"), function() {
-                propose.push($(this).val());
-              });
+
+            let approval = [];
+            $.each($("input[name='approval[]']:checked"), function () {
+                approval.push($(this).val());
+            });
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/discrepancy',
+                url: '/release-to-service',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    date: date,
+                    project_no: project_no,
                     applicability_airplane: applicability_airplane,
-                    discrepancy_form: discrepancy_form,
+                    date: date,
                     aircraft_register: aircraft_register,
-                    jc_no: jc_no,
-                    aircraft_serial_number: aircraft_serial_number,
-                    sequence: sequence,
-                    engineer_quantity: engineer_quantity,
-                    mechanic_quantity: mechanic_quantity,
-                    otr_certification: otr_certification,
-                    zone: zone,
-                    ATA: ATA,
-                    manhour: manhour,
-                    remark: remark,
-                    complaint: complaint,
-                    propose: propose,
-                    is_rii:is_rii,
+                    work_performed:work_performed,
+                    work_data: work_data,
+                    exceptions:exceptions,
+                    approval:approval,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -80,92 +62,9 @@ let Discrepancy = {
         });
     }
 };
-let Item = {
-    init: function() {
-        $(".tools_datatable").mDatatable({
-            data: {
-                type: "remote",
-                source: {
-                    read: {
-                        method: "GET",
-                        url: "/datatables/tool",
 
-                        map: function(raw) {
-                            let dataSet = raw;
 
-                            if (typeof raw.data !== "undefined") {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !1,
-                serverSorting: !1
-            },
-            layout: {
-                theme: "default",
-                class: "",
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $("#generalSearch")
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: "code",
-                    title: "Part No.",
-                    sortable: "asc",
-                    filterable: !1,
-                    template: function(t) {
-                        return (
-                            '<a href="/item/' + t.uuid + '">' + t.code + "</a>"
-                        );
-                    }
-                },
-                {
-                    field: "name",
-                    title: "Material Name",
-                    sortable: "asc",
-                    filterable: !1
-                },
-                {
-                    field: "unit",
-                    title: "Unit",
-                    sortable: "asc",
-                    filterable: !1,
-                    template: function(t) {
-                        return t.unit.name + " (" + t.unit.symbol + ")";
-                    }
-                },
-                {
-                    field: "caterory",
-                    title: "Category",
-                    sortable: "asc",
-                    filterable: !1,
-                    template: function(t) {
-                        return t.categories[0].name;
-                    }
-                }
-            ]
-        });
-    }
-};
-
-jQuery(document).ready(function() {
-    Item.init();
-    Discrepancy.init();
+jQuery(document).ready(function () {
+    console.log('ready');
+    ReleaseToService.init();
 });

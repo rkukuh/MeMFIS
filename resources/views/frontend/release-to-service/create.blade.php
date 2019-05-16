@@ -46,7 +46,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Discrepancy Form @include('frontend.common.label.required')
+                                            Project No @include('frontend.common.label.required')
                                         </label>
 
                                         @component('frontend.common.input.text')
@@ -208,14 +208,14 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
                                                 @slot('type','button')
-                                                @slot('id', 'add-RTS')
-                                                @slot('class', 'add-RTS')
+                                                @slot('id', 'add-release-to-service')
+                                                @slot('class', 'add-release-to-service')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
 
                                                 @component('frontend.common.buttons.back')
-                                                @slot('href', route('frontend.RTS.index'))
+                                                @slot('href', route('frontend.release-to-service.index'))
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -236,8 +236,8 @@
 @endpush
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/discrepancy/create.js') }}"></script>
-<script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
+<script src="{{ asset('js/frontend/release-to-service/create.js') }}"></script>
+<script src="{{ asset('js/frontend/release-to-service/form-reset.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
