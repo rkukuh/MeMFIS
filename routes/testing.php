@@ -6,7 +6,9 @@ Route::name('testing.')->group(function () {
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
+        Route::view('/taskcard-wip', 'frontend/testing/taskcard-wip')->name('taskcard');
         Route::view('/taskcard', 'frontend/testing/taskcard')->name('taskcard');
+        // Route::post('/taskcard/filer', 'Datatables\Taskcard\TaskCardDatatables@filter')->name('taskcard.filter');
 
         Route::view('/select2-repeater', 'frontend/testing/select2Repeater')->name('select2-repeater');
         Route::view('/select2-repeater2', 'frontend/testing/repeaterBlank')->name('select2-repeater2');

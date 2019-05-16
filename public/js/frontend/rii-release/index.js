@@ -1,25 +1,19 @@
-let Item = {
+let RiiRelease = {
     init: function () {
-        function strtrunc(str, max, add) {
-            add = add || '...';
-            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
-        };
 
-        $('.job_card_datatable').mDatatable({
+        $('.riirelease_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/jobcard',
-
+                        url: '/datatables/task-release',
                         map: function (raw) {
                             let dataSet = raw;
 
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-
                             return dataSet;
                         }
                     }
@@ -47,99 +41,95 @@ let Item = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
                     field: 'number',
-                    title: 'JO No.',
+                    title: 'No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.number',
-                    title: 'TC No',
+                    field: 'title',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
-                    title: 'Title',
+                    field: 'type.name',
+                    title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
-                    title: 'Task',
+                    field: 'pesawat',
+                    title: 'Company Task No',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'taskcard.description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
 
-                        return ''
-                    }
                 },
                 {
-                    field: 'unit',
+                    field: 'skill',
+                    title: 'Customer',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'task.name',
+                    title: 'A/C Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'A/C Reg',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'A/C Serial No',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
-                    title: 'Material(s)',
+                    field: 'description',
+                    title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
-                    title: 'Tool(s)',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit',
+                    field: 'description',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
-                    title: 'Est. Mhrs',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit',
-                    title: 'Actual. Mhrs',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'actions',
+                    field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-print"></i>' +
-                            '</a>'
-                        );
+
+                            return (
+                                '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'
+                            );
                     }
                 }
             ]
         });
 
-        $('.job_card_datatable').on('click', '.delete', function () {
-            let item_uuid = $(this).data('id');
+        let remove = $('.taskcard_datatable').on('click', '.delete', function () {
+            let tascard_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to remove?',
@@ -158,14 +148,14 @@ let Item = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/item/' + item_uuid + '',
+                        url: '/taskcard/' + tascard_uuid + '',
                         success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
-                                    timeOut: 5000
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
                                 }
                             );
 
-                            let table = $('.job_card_datatable').mDatatable();
+                            let table = $('.taskcard_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -179,11 +169,13 @@ let Item = {
                         }
                     });
                 }
+
             });
         });
+
     }
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    RiiRelease.init();
 });
