@@ -1,12 +1,17 @@
 let Item = {
     init: function () {
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
+
         $('.job_card_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item',
+                        url: '/datatables/jobcard',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -43,22 +48,19 @@ let Item = {
                 }
             },
             columns: [{
-                    field: 'code',
+                    field: 'number',
                     title: 'JO No.',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        return '<a href="/jobcard-ppc/1">' + t.code + "</a>"
-                    }
                 },
                 {
-                    field: 'name',
+                    field: 'taskcard.number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'taskcard.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
@@ -70,10 +72,20 @@ let Item = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'taskcard.description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        if (t.taskcard.description) {
+                            data = strtrunc(t.taskcard.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
                 },
                 {
                     field: 'unit',
@@ -100,7 +112,7 @@ let Item = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'taskcard.estimation_manhour',
                     title: 'Est. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
