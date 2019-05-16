@@ -430,7 +430,7 @@ Route::name('frontend.')->group(function () {
 
         /** Discrepancy */
 
-        Route::resource('RTS', 'ReleaseToServiceController');
+        Route::resource('release-to-service', 'ReleaseToServiceController');
 
     });
 
