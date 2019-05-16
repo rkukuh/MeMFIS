@@ -81,18 +81,6 @@
             let search = $('input[name=search]').val();
 
             window.location.href = '/jobcard-mechanic/' + search ;
-
-            // $.ajax({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     type: 'get',
-            //     url: '/jobcard-mechanic/' + search,
-            //     success: function (data) {
-            //     },
-            //     error: function (jqXhr, json, errorThrown) {
-            //     }
-            // });
         });
     </script>
 @endpush
