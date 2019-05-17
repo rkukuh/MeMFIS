@@ -102,10 +102,8 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                    <div class="m-btn-group m-btn-group--pill btn-group" role="group"
-                                        aria-label="Button group with nested dropdown">
-                                        <a href="{{route('frontend.taskcard-routine.create')}}"
-                                            class="m-btn btn btn-primary">
+                                    <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
+                                        <a href="{{route('frontend.taskcard-routine.create')}}" class="m-btn btn btn-primary">
                                             <span>
                                                 <i class="la la-plus-circle"></i>
                                                 <span>Routine</span>
@@ -113,24 +111,20 @@
                                         </a>
 
                                         <div class="m-btn-group btn-group" role="group">
-                                            <button id="btnGroupDrop1" type="button"
-                                                class="btn btn-primary m-btn m-btn--pill-last dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button id="btnGroupDrop1" type="button" class="btn btn-primary m-btn m-btn--pill-last dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <span>
                                                     <i class="la la-plus-circle"></i>
                                                     <span>Non - Routine</span>
                                                 </span>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                <a class="dropdown-item"
-                                                    href="{{route('frontend.taskcard-eo.create')}}">
+                                                <a class="dropdown-item" href="{{route('frontend.taskcard-eo.create')}}">
                                                     <span>
                                                         <i class="la la-plus-circle"></i>
                                                         <span>Engineering Order</span>
                                                     </span>
                                                 </a>
-                                                <a class="dropdown-item"
-                                                    href="{{route('frontend.taskcard-si.create')}}">
+                                                <a class="dropdown-item" href="{{route('frontend.taskcard-si.create')}}">
                                                     <span>
                                                         <i class="la la-plus-circle"></i>
                                                         <span>Special Instruction</span>
@@ -162,718 +156,426 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/filter.js') }}"></script>
 
 <script>
-    $('.footer').on('click', '.filter', function () {
-        alert('tes');
+    $('.footer').on('click', '.filter', function() {
 
-           let table = $('.taskcard_datatable').mDatatable();
+        let table = $('.taskcard_datatable').mDatatable();
 
-
-                    table.destroy();
-
-                    function strtrunc(str, max, add) {
+        function strtrunc(str, max, add) {
             add = add || '...';
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
 
         let taskcard_routine_type = $('#taskcard_routine_type').val();
 
-        $('.taskcard_datatable').mDatatable({
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/datatables/taskcard/filter',
             data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        method: 'POST',
-                        url: '/datatables/taskcard/filter',
-                        // data: {
-                        //     _token: $('input[name=_token]').val(),
-                        //     taskcard_routine_type: taskcard_routine_type,
-                        // },
-                        map: function (raw) {
-                            let dataSet = raw;
+                _token: $('input[name=_token]').val(),
+                taskcard_routine_type: taskcard_routine_type,
+            },
+            success: function(response) {
+                let table = $('.taskcard_datatable').mDatatable();
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
+
+                table.destroy();
+                table = $('.taskcard_datatable').mDatatable({
+                    data: {
+                        type: "local",
+                        source: response,
+                        pageSize: 10,
+                        serverPaging: !1,
+                        serverSorting: !1
+                    },
+                    layout: {
+                        theme: 'default',
+                        class: '',
+                        scroll: false,
+                        footer: !1
+                    },
+                    sortable: !0,
+                    filterable: !1,
+                    pagination: !0,
+                    search: {
+                        input: $('#generalSearch')
+                    },
+                    toolbar: {
+                        items: {
+                            pagination: {
+                                pageSizeSelect: [5, 10, 20, 30, 50, 100]
                             }
-                            return dataSet;
                         }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !1,
-                serverSorting: !1
-                // ajax: {
-                //     headers: {
-                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                //     },
-                //     type: 'post',
-                //     url: '/item',
-                //     data: {
-                //         _token: $('input[name=_token]').val(),
-                //         taskcard_routine_type: taskcard_routine_type,
-                //     },
-                //     success: function (raw) {
-                //         let dataSet = raw;
+                    },
+                    columns: [{
+                            field: 'number',
+                            title: 'Taskcard No',
+                            sortable: 'asc',
+                            filterable: !1,
+                        },
+                        {
+                            field: 'title',
+                            title: 'Title',
+                            sortable: 'asc',
+                            filterable: !1,
+                            template: function(t, e, i) {
+                                if ((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")) {
+                                    return '<a href="/taskcard-routine/' + t.uuid + '">' + t.title + "</a>"
+                                } else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")) {
+                                    return '<a href="/taskcard-eo/' + t.uuid + '">' + t.title + "</a>"
+                                } else if (t.type.code == "si") {
+                                    return '<a href="/taskcard-si/' + t.uuid + '">' + t.title + "</a>"
+                                } else if (t.type.code == "preliminary") {
+                                    return '<a href="/preliminary/' + t.uuid + '">' + t.title + "</a>"
+                                } else {
+                                    return (
+                                        'dummy'
+                                    );
+                                }
+                            }
 
-                //         if (typeof raw.data !== 'undefined') {
-                //             dataSet = raw.data;
-                //         }
-                //         return dataSet;
-                //     },
-                //     pageSize: 10,
-                //     serverPaging: !1,
-                //     serverSorting: !1
-                // }
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'number',
-                    title: 'Taskcard No',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'title',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
+                        },
+                        {
+                            field: 'type.name',
+                            title: 'TC Type',
+                            sortable: 'asc',
+                            filterable: !1,
+                        },
+                        {
+                            field: 'pesawat',
+                            title: 'A/C',
+                            sortable: 'asc',
+                            filterable: !1,
+
+                        },
+                        {
+                            field: 'skill',
+                            title: 'Skill',
+                            sortable: 'asc',
+                            filterable: !1,
+                        },
+                        {
+                            field: 'task.name',
+                            title: 'Task Type',
+                            sortable: 'asc',
+                            filterable: !1,
+                        },
+                        {
+                            field: 'estimation_manhour',
+                            title: 'Manhours',
+                            sortable: 'asc',
+                            filterable: !1,
+                        },
+                        {
+                            field: 'description',
+                            title: 'Description',
+                            sortable: 'asc',
+                            filterable: !1,
+                            template: function(t) {
+                                if (t.description) {
+                                    data = strtrunc(t.description, 50);
+                                    return (
+                                        '<p>' + data + '</p>'
+                                    );
+                                }
+
+                                return ''
+                            }
+                        },
+                        {
+                            field: 'Actions',
+                            sortable: !1,
+                            overflow: 'visible',
+                            template: function(t, e, i) {
+                                if ((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")) {
+                                    return (
+                                        '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid + '">' +
+                                        '<i class="la la-pencil"></i>' +
+                                        '</a>' +
+                                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-trash"></i>' +
+                                        '</a>'
+                                    );
+                                } else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")) {
+                                    return (
+                                        '<a href="/taskcard-eo/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid + '">' +
+                                        '<i class="la la-pencil"></i>' +
+                                        '</a>' +
+                                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-trash"></i>' +
+                                        '</a>'
+                                    );
+                                } else if (t.type.code == "si") {
+                                    return (
+                                        '<a href="/taskcard-si/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid + '">' +
+                                        '<i class="la la-pencil"></i>' +
+                                        '</a>' +
+                                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-trash"></i>' +
+                                        '</a>'
+                                    );
+                                } else if (t.type.code == "preliminary") {
+                                    return (
+                                        '<a href="/preliminary/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid + '">' +
+                                        '<i class="la la-pencil"></i>' +
+                                        '</a>' +
+                                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-trash"></i>' +
+                                        '</a>'
+                                    );
+                                } else {
+                                    return (
+                                        'dummy'
+                                    );
+                                }
+                            }
                         }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
-
-                },
-                {
-                    field: 'type.name',
-                    title: 'TC Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pesawat',
-                    title: 'A/C',
-                    sortable: 'asc',
-                    filterable: !1,
-
-                },
-                {
-                    field: 'skill',
-                    title: 'Skill',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'task.name',
-                    title: 'Task Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
-                    title: 'Manhours',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return (
-                                '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return (
-                                '<a href="/taskcard-eo/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if(t.type.code == "si"){
-                            return (
-                                '<a href="/taskcard-si/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return (
-                                '<a href="/preliminary/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
-                }
-            ]
-        });
-        // // let tes = [];
-
-
-        //     //         $.ajax({
-        //     //     headers: {
-        //     //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     //     },
-        //     //     type: 'post',
-        //     //     url: '/datatables/taskcard/filter',
-        //     //     data: {
-        //     //         _token: $('input[name=_token]').val(),
-        //     //         taskcard_routine_type: taskcard_routine_type,
-
-        //     //     },
-        //     //     success: function (data) {
-
-        //     //         tes = data;
-
-        //     //         let table = $('.taskcard_datatable').mDatatable();
-
-
-        //     //         table.destroy();
-        //     //     }
-        //     // });
-        //     // console.log(tes);
-
-
-
-        //     function strtrunc(str, max, add) {
-        //     add = add || '...';
-        //     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
-        // };
-
-        // $('.taskcard_datatable').mDatatable({
-        //     data: {
-        //         type: 'remote',
-        //         source: $.ajax({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         type: 'post',
-        //         url: '/datatables/taskcard/filter',
-        //         data: {
-        //             _token: $('input[name=_token]').val(),
-        //             taskcard_routine_type:$('#taskcard_routine_type').val();,
-
-        //         },
-        //         // success: function (raw) {
-        //             map: function (raw) {
-        //                 let dataSet = raw;
-
-        //     if (typeof raw.data !== 'undefined') {
-        //         dataSet = raw.data;
-        //     }
-        //     return dataSet;
-        //         //             let dataSet = raw;
-
-        //         //             if (typeof raw.data !== 'undefined') {
-        //         //                 dataSet = raw.data;
-        //         //             }
-        //         //             return dataSet;
-        //         //         }
-
-        //             // tes = data;
-
-        //             // let table = $('.taskcard_datatable').mDatatable();
-
-
-        //             // table.destroy();
-        //         }
-        //     });
-        //         // source: {
-        //         //     read: {
-        //         //         method: 'GET',
-        //         //         url: '/datatables/taskcard',
-        //         //         map: function (raw) {
-        //         //             let dataSet = raw;
-
-        //         //             if (typeof raw.data !== 'undefined') {
-        //         //                 dataSet = raw.data;
-        //         //             }
-        //         //             return dataSet;
-        //         //         }
-        //         //     }
-        //         // },
-        //         pageSize: 10,
-        //         serverPaging: !1,
-        //         serverSorting: !1
-        //     },
-        //     layout: {
-        //         theme: 'default',
-        //         class: '',
-        //         scroll: false,
-        //         footer: !1
-        //     },
-        //     sortable: !0,
-        //     filterable: !1,
-        //     pagination: !0,
-        //     search: {
-        //         input: $('#generalSearch')
-        //     },
-        //     toolbar: {
-        //         items: {
-        //             pagination: {
-        //                 pageSizeSelect: [5, 10, 20, 30, 50, 100]
-        //             }
-        //         }
-        //     },
-        //     columns: [
-        //         {
-        //             field: 'number',
-        //             title: 'Taskcard No',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //         },
-        //         {
-        //             field: 'title',
-        //             title: 'Title',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //             template: function (t, e, i) {
-        //                 if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-        //                     return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-        //                 }
-        //                 else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-        //                     return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-        //                 }
-        //                 else if(t.type.code == "si"){
-        //                     return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-        //                 }
-        //                 else if(t.type.code == "preliminary"){
-        //                     return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-        //                 } else {
-        //                     return (
-        //                         'dummy'
-        //                     );
-        //                 }
-        //             }
-
-        //         },
-        //         {
-        //             field: 'type.name',
-        //             title: 'TC Type',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //         },
-        //         {
-        //             field: 'pesawat',
-        //             title: 'A/C',
-        //             sortable: 'asc',
-        //             filterable: !1,
-
-        //         },
-        //         {
-        //             field: 'skill',
-        //             title: 'Skill',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //         },
-        //         {
-        //             field: 'task.name',
-        //             title: 'Task Type',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //         },
-        //         {
-        //             field: 'estimation_manhour',
-        //             title: 'Manhours',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //         },
-        //         {
-        //             field: 'description',
-        //             title: 'Description',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //             template: function (t) {
-        //                 if (t.description) {
-        //                     data = strtrunc(t.description, 50);
-        //                     return (
-        //                         '<p>' + data + '</p>'
-        //                     );
-        //                 }
-
-        //                 return ''
-        //             }
-        //         },
-        //         {
-        //             field: 'Actions',
-        //             sortable: !1,
-        //             overflow: 'visible',
-        //             template: function (t, e, i) {
-        //                 if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-        //                     return (
-        //                         '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-        //                             '<i class="la la-pencil"></i>' +
-        //                         '</a>' +
-        //                         '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-        //                             '<i class="la la-trash"></i>' +
-        //                         '</a>'
-        //                     );
-        //                 }
-        //                 else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-        //                     return (
-        //                         '<a href="/taskcard-eo/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-        //                             '<i class="la la-pencil"></i>' +
-        //                         '</a>' +
-        //                         '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-        //                             '<i class="la la-trash"></i>' +
-        //                         '</a>'
-        //                     );
-        //                 }
-        //                 else if(t.type.code == "si"){
-        //                     return (
-        //                         '<a href="/taskcard-si/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-        //                             '<i class="la la-pencil"></i>' +
-        //                         '</a>' +
-        //                         '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-        //                             '<i class="la la-trash"></i>' +
-        //                         '</a>'
-        //                     );
-        //                 }
-        //                 else if(t.type.code == "preliminary"){
-        //                     return (
-        //                         '<a href="/preliminary/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-        //                             '<i class="la la-pencil"></i>' +
-        //                         '</a>' +
-        //                         '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-        //                             '<i class="la la-trash"></i>' +
-        //                         '</a>'
-        //                     );
-        //                 } else {
-        //                     return (
-        //                         'dummy'
-        //                     );
-        //                 }
-        //             }
-        //         }
-        //     ]
-        // });
-
-
+                    ]
                 });
+
+                table.reload();
+
+            }
+        });
+
+    });
 </script>
 
 <script>
-    $("#filter").on("change", function () {
-            // alert('tes');
-            let table = $('.taskcard_datatable').mDatatable();
+    $("#filter").on("change", function() {
 
-            // var datatable = $(.taskcard_datatable).mDatatable();
 
-            table.destroy();
 
-            url= '/datatables/taskcard/filter/1';
 
-            table = $('.taskcard_datatable').mDatatable();
-            table.originalDataSet = [];
-            table.reload();
-
-            // $(.m_datatable).mDatatable(url);
-         });
+        // $(.m_datatable).mDatatable(url);
+    });
 </script>
 
 <script>
     let TaskCard = {
-    init: function () {
-        function strtrunc(str, max, add) {
-            add = add || '...';
-            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
-        };
+        init: function() {
+            function strtrunc(str, max, add) {
+                add = add || '...';
+                return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+            };
 
-        $('.taskcard_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/taskcard',
-                        map: function (raw) {
-                            let dataSet = raw;
+            $('.taskcard_datatable').mDatatable({
+                data: {
+                    type: 'remote',
+                    source: {
+                        read: {
+                            method: 'GET',
+                            url: '/datatables/taskcard',
+                            map: function(raw) {
+                                let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !1,
-                serverSorting: !1
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'number',
-                    title: 'Taskcard No',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'title',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
-
-                },
-                {
-                    field: 'type.name',
-                    title: 'TC Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pesawat',
-                    title: 'A/C',
-                    sortable: 'asc',
-                    filterable: !1,
-
-                },
-                {
-                    field: 'skill',
-                    title: 'Skill',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'task.name',
-                    title: 'Task Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
-                    title: 'Manhours',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return (
-                                '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return (
-                                '<a href="/taskcard-eo/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if(t.type.code == "si"){
-                            return (
-                                '<a href="/taskcard-si/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return (
-                                '<a href="/preliminary/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
-                }
-            ]
-        });
-
-        let remove = $('.taskcard_datatable').on('click', '.delete', function () {
-            let tascard_uuid = $(this).data('uuid');
-
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/taskcard/' + tascard_uuid + '',
-                        success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
-                                timeOut: 5000
+                                if (typeof raw.data !== 'undefined') {
+                                    dataSet = raw.data;
                                 }
-                            );
+                                return dataSet;
+                            }
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: !1,
+                    serverSorting: !1
+                },
+                layout: {
+                    theme: 'default',
+                    class: '',
+                    scroll: false,
+                    footer: !1
+                },
+                sortable: !0,
+                filterable: !1,
+                pagination: !0,
+                search: {
+                    input: $('#generalSearch')
+                },
+                toolbar: {
+                    items: {
+                        pagination: {
+                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                        }
+                    }
+                },
+                columns: [{
+                        field: 'number',
+                        title: 'Taskcard No',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: 'title',
+                        title: 'Title',
+                        sortable: 'asc',
+                        filterable: !1,
+                        template: function(t, e, i) {
+                            if ((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")) {
+                                return '<a href="/taskcard-routine/' + t.uuid + '">' + t.title + "</a>"
+                            } else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")) {
+                                return '<a href="/taskcard-eo/' + t.uuid + '">' + t.title + "</a>"
+                            } else if (t.type.code == "si") {
+                                return '<a href="/taskcard-si/' + t.uuid + '">' + t.title + "</a>"
+                            } else if (t.type.code == "preliminary") {
+                                return '<a href="/preliminary/' + t.uuid + '">' + t.title + "</a>"
+                            } else {
+                                return (
+                                    'dummy'
+                                );
+                            }
+                        }
 
-                            let table = $('.taskcard_datatable').mDatatable();
+                    },
+                    {
+                        field: 'type.name',
+                        title: 'TC Type',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: 'pesawat',
+                        title: 'A/C',
+                        sortable: 'asc',
+                        filterable: !1,
 
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
+                    },
+                    {
+                        field: 'skill',
+                        title: 'Skill',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: 'task.name',
+                        title: 'Task Type',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: 'estimation_manhour',
+                        title: 'Manhours',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: 'description',
+                        title: 'Description',
+                        sortable: 'asc',
+                        filterable: !1,
+                        template: function(t) {
+                            if (t.description) {
+                                data = strtrunc(t.description, 50);
+                                return (
+                                    '<p>' + data + '</p>'
+                                );
+                            }
 
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
+                            return ''
+                        }
+                    },
+                    {
+                        field: 'Actions',
+                        sortable: !1,
+                        overflow: 'visible',
+                        template: function(t, e, i) {
+                            if ((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")) {
+                                return (
+                                    '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid + '">' +
+                                    '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                    '</a>'
+                                );
+                            } else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")) {
+                                return (
+                                    '<a href="/taskcard-eo/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid + '">' +
+                                    '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                    '</a>'
+                                );
+                            } else if (t.type.code == "si") {
+                                return (
+                                    '<a href="/taskcard-si/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid + '">' +
+                                    '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                    '</a>'
+                                );
+                            } else if (t.type.code == "preliminary") {
+                                return (
+                                    '<a href="/preliminary/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid + '">' +
+                                    '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                    '</a>'
+                                );
+                            } else {
+                                return (
+                                    'dummy'
+                                );
+                            }
+                        }
+                    }
+                ]
+            });
+
+            let remove = $('.taskcard_datatable').on('click', '.delete', function() {
+                let tascard_uuid = $(this).data('uuid');
+
+                swal({
+                        title: 'Sure want to remove?',
+                        type: 'question',
+                        confirmButtonText: 'Yes, REMOVE',
+                        confirmButtonColor: '#d33',
+                        cancelButtonText: 'Cancel',
+                        showCancelButton: true,
+                    })
+                    .then(result => {
+                        if (result.value) {
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content'
+                                    )
+                                },
+                                type: 'DELETE',
+                                url: '/taskcard/' + tascard_uuid + '',
+                                success: function(data) {
+                                    toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                        timeOut: 5000
+                                    });
+
+                                    let table = $('.taskcard_datatable').mDatatable();
+
+                                    table.originalDataSet = [];
+                                    table.reload();
+                                },
+                                error: function(jqXhr, json, errorThrown) {
+                                    let errors = jqXhr.responseJSON;
+
+                                    $.each(errors.errors, function(index, value) {
+                                        $('#delete-error').html(value);
+                                    });
+                                }
                             });
                         }
+
                     });
-                }
-
             });
-        });
 
-    }
-};
+        }
+    };
 
-jQuery(document).ready(function () {
-    TaskCard.init();
-});
-
+    jQuery(document).ready(function() {
+        TaskCard.init();
+    });
 </script>
 @endpush

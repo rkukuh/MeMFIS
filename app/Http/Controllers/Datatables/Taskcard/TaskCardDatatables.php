@@ -126,7 +126,7 @@ class TaskCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        // dd($request->all());
+        // dd($request->taskcard_routine_type);
 
         if(empty($request->taskcard_routine_type) ){
             dd('empty');
@@ -147,25 +147,26 @@ class TaskCardDatatables extends Controller
             }
         }
         else{
-            dd('non empty');
+            // dd('non empty');
 
-            $data = $alldata = TaskCard::with('type','aircrafts','task')->whereHas('type', function ($query) {
-                $query->wherein('code', 'basic');
-            })->get();
-            // $data = $alldata = json_decode(TaskCard::with('type','aircrafts')->get());
+            // $data = $alldata = TaskCard::with('type','aircrafts','task')->whereHas('type', function ($query) {
+            //     $query->wherein('code', 'basic');
+            // })->get();
+            $data = $alldata = TaskCard::with('type','aircrafts')->get();
+            // dd($data);
 
-            foreach($alldata as $item){
-                if(isset($item->aircrafts) ){
-                    for($index = 0; sizeof($item->aircrafts) > $index; $index++){
-                        if(sizeof($item->aircrafts)-1 == $index){
-                        $item->pesawat .= $item->aircrafts[$index]->name;
-                        }
-                        else{
-                        $item->pesawat .= $item->aircrafts[$index]->name.", ";
-                        }
-                    }
-                }
-            }
+            // foreach($alldata as $item){
+            //     if(isset($item->aircrafts) ){
+            //         for($index = 0; sizeof($item->aircrafts) > $index; $index++){
+            //             if(sizeof($item->aircrafts)-1 == $index){
+            //             $item->pesawat .= $item->aircrafts[$index]->name;
+            //             }
+            //             else{
+            //             $item->pesawat .= $item->aircrafts[$index]->name.", ";
+            //             }
+            //         }
+            //     }
+            // }
         }
 
         // $data = $alldata = TaskCard::with('type','aircrafts','task')->where('title','TaskCard Basic Dummy #1052128240')->tget();
