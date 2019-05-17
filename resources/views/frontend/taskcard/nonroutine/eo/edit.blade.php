@@ -318,13 +318,13 @@
                                                 <select id="scheduled_priority_id" name="scheduled_priority_id" class="form-control m-select2" style="width:100%">
                                                     @if ( empty($taskCard->scheduled_priority_id))
                                                         @foreach ($scheduled_priorities as $scheduled_priority)
-                                                            <option value="{{ $scheduled_priority->id }}">
+                                                            <option value="{{ $scheduled_priority->id }}" name-value="{{ $scheduled_priority->name }}">
                                                                 {{ $scheduled_priority->name }}
                                                             </option>
                                                         @endforeach
                                                     @else
                                                         @foreach ($scheduled_priorities as $scheduled_priority)
-                                                            <option value="{{ $scheduled_priority->id }}"
+                                                            <option value="{{ $scheduled_priority->id }}" name-value="{{ $scheduled_priority->name }}"
                                                                 @if($scheduled_priority->id == $taskCard->scheduled_priority_id) selected @endif>
                                                                 {{ $scheduled_priority->name }}
                                                             </option>
@@ -400,13 +400,13 @@
                                                 <select id="recurrence_id" name="recurrence_id" class="form-control m-select2" style="width:100%">
                                                      @if ( empty($taskCard->recurrence_id))
                                                         @foreach ($recurrences as $recurrence)
-                                                            <option value="{{ $recurrence->id }}">
+                                                            <option value="{{ $recurrence->id }}" name-value="{{ $recurrence->name }}">
                                                                 {{ $recurrence->name }}
                                                             </option>
                                                         @endforeach
                                                     @else
                                                         @foreach ($recurrences as $recurrence)
-                                                            <option value="{{ $recurrence->id }}"
+                                                            <option value="{{ $recurrence->id }}" name-value="{{ $recurrence->name }}"
                                                                 @if($recurrence->id == $taskCard->recurrence_id) selected @endif>
                                                                 {{ $recurrence->name }}
                                                             </option>
@@ -460,13 +460,13 @@
                                                 <select id="manual_affected_id" name="manual_affected_id" class="form-control m-select2" style="width:100%">
                                                     @if ( empty($taskCard->manual_affected_id) )
                                                         @foreach ($affected_manuals as $affected_manual)
-                                                            <option value="{{ $affected_manual->id }}">
+                                                            <option value="{{ $affected_manual->id }}" name-value="{{ $affected_manual->name }}">
                                                                 {{ $affected_manual->name }}
                                                             </option>
                                                         @endforeach
                                                     @else
                                                         @foreach ($affected_manuals as $affected_manual)
-                                                            <option value="{{ $affected_manual->id }}"
+                                                            <option value="{{ $affected_manual->id }}" name-value="{{ $affected_manual->name }}"
                                                             @if($affected_manual->id == $taskCard->manual_affected_id) selected @endif>
                                                                 {{ $affected_manual->name }}
                                                             </option>
@@ -766,21 +766,24 @@
                 }
         });
 
-        let view_scheduled_priority_id = $('select[name="scheduled_priority_id"]').val();
-        let view_recurrence_id = $('select[name="recurrence_id"]').val();
-        let view_manual_affected_id = $('select[name="manual_affected_id"]').val();
+        let view_scheduled_priority_id = $('#scheduled_priority_id').children("option:selected").attr("name-value");
+        let view_recurrence_id = $('#recurrence_id').children("option:selected").attr("name-value");
+        let view_manual_affected_id = $('#manual_affected_id').children("option:selected").attr("name-value");
 
         let rdo_Scheduled = '{{$taskCard->scheduled_priority_type}}';
         let amount_Scheduled = '{{$taskCard->scheduled_priority_amount}}';
 
+        console.log(view_scheduled_priority_id);
+        console.log(view_recurrence_id);
+        console.log(view_manual_affected_id);
         // Manuals Affected
-        if(view_manual_affected_id == 67){
+        if(view_manual_affected_id == "Other"){
             $("#note_div").removeClass("hidden");
             $('#note').removeAttr("disabled");
         }
 
         // Recurrence
-        if(view_recurrence_id == 70){
+        if(view_recurrence_id == "Repetitive"){
             $("#recurrence_div").removeClass("hidden");
             $('#recurrence').removeAttr("disabled");
             $('#recurrence-select').removeAttr("disabled");
@@ -806,7 +809,7 @@
         }
 
         // Scheduled Priority *
-        if(view_scheduled_priority_id == 74){
+        if(view_scheduled_priority_id == "Prior to"){
             $("#prior_to").removeClass("hidden");
             $('#prior_to_date').removeAttr("disabled");
             $('#prior_to_hours').removeAttr("disabled");
