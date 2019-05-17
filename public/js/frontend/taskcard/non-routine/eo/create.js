@@ -140,7 +140,7 @@ let TaskCard = {
             data.append( "revision", $('input[name=revision]').val());
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "reference", $('input[name=reference]').val());
-            data.append( "description", $('input[name=description]').val());
+            data.append( "description", $('#description').val());
             data.append( "scheduled_priority_id", $('#scheduled_priority_id').val());
             data.append( "scheduled_priority_type", $('input[name=prior_to]:checked').val());
             if($('input[name=prior_to]:checked').val() == 'date'){

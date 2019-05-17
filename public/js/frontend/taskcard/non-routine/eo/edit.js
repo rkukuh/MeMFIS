@@ -8,7 +8,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard-eo/'+taskcard_uuid+'/eo-instructions',
+                        url: '/datatables/taskcard-eo/' + taskcard_uuid + '/eo-instructions',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -159,7 +159,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/thresholds',
+                        url: '/datatables/taskcard-routine/' + taskcard_uuid + '/thresholds',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -231,7 +231,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard-routine/'+taskcard_uuid+'/repeats',
+                        url: '/datatables/taskcard-routine/' + taskcard_uuid + '/repeats',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -307,7 +307,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard-routine/'+taskcard_uuid+'/threshold',
+                url: '/taskcard-routine/' + taskcard_uuid + '/threshold',
                 data: {
                     _token: $('input[name=_token]').val(),
                     amount: amount,
@@ -352,7 +352,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard-routine/'+taskcard_uuid+'/repeat',
+                url: '/taskcard-routine/' + taskcard_uuid + '/repeat',
                 data: {
                     _token: $('input[name=_token]').val(),
                     amount: amount,
@@ -620,15 +620,15 @@ let TaskCard = {
         // });
 
         let material_datatables_init = true;
-        let triggeruuid ="";
+        let triggeruuid = "";
         let material = $('.instruction_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
+            if (material_datatables_init == true) {
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 EO_item(triggeruuid);
                 $('#m_datatable_item').DataTable().ajax.reload();
             }
-            else{
+            else {
                 let table = $('#m_datatable_item').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
@@ -638,15 +638,15 @@ let TaskCard = {
         });
 
         let tool_datatables_init = true;
-        let triggeruuid2 ="";
+        let triggeruuid2 = "";
         let tool = $('.instruction_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
+            if (tool_datatables_init == true) {
                 tool_datatables_init = false;
                 triggeruuid2 = $(this).data('uuid');
                 EO_tool(triggeruuid2);
                 $('#m_datatable_tool').DataTable().ajax.reload();
             }
-            else{
+            else {
                 let table = $('#m_datatable_tool').DataTable();
                 table.destroy();
                 triggeruuid2 = $(this).data('uuid');
@@ -665,7 +665,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard-eo/eo-instruction/'+triggeruuid+'/item',
+                url: '/taskcard-eo/eo-instruction/' + triggeruuid + '/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: material,
@@ -711,7 +711,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+triggeruuid3+'/edit/',
+                url: '/taskcard-eo/' + taskcard_uuid + '/eo-instruction/' + triggeruuid3 + '/edit/',
                 success: function (data) {
                     document.getElementById('manhour').value = data.estimation_manhour;
                     document.getElementById('performa').value = data.performance_factor;
@@ -719,10 +719,10 @@ let TaskCard = {
                     document.getElementById('engineer_quantity').value = data.engineer_quantity;
                     document.getElementById('sequence').value = data.sequence;
                     document.getElementById('uuid').value = data.uuid;
-                    if(data.is_rii == 1){
+                    if (data.is_rii == 1) {
                         $("#is_rii").prop("checked", true);
                     }
-                    else if(data.is_rii == 0){
+                    else if (data.is_rii == 0) {
                         $("#is_rii").prop("checked", false);
                     }
 
@@ -733,12 +733,12 @@ let TaskCard = {
                         success: function (data2) {
                             $('select[name="work_area"]').empty();
                             $.each(data2, function (key, value) {
-                                if(key == data.work_area){
+                                if (key == data.work_area) {
                                     $('select[name="work_area"]').append(
                                         '<option value="' + key + '" selected>' + value + '</option>'
                                     );
                                 }
-                                else{
+                                else {
                                     $('select[name="work_area"]').append(
                                         '<option value="' + key + '">' + value + '</option>'
                                     );
@@ -753,12 +753,12 @@ let TaskCard = {
                         success: function (data3) {
                             $('select[name="otr_certification"]').empty();
                             $.each(data3, function (key2, value2) {
-                                if(key2 == data.skill_id){
+                                if (key2 == data.skill_id) {
                                     $('select[name="otr_certification"]').append(
                                         '<option value="' + key2 + '" selected>' + value2 + '</option>'
                                     );
                                 }
-                                else{
+                                else {
                                     $('select[name="otr_certification"]').append(
                                         '<option value="' + key2 + '">' + value2 + '</option>'
                                     );
@@ -790,7 +790,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+eo_uuid+'/',
+                url: '/taskcard-eo/' + taskcard_uuid + '/eo-instruction/' + eo_uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     work_area: work_area,
@@ -886,7 +886,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction',
+                url: '/taskcard-eo/' + taskcard_uuid + '/eo-instruction',
                 data: {
                     _token: $('input[name=_token]').val(),
                     work_area: work_area,
@@ -972,7 +972,7 @@ let TaskCard = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard-eo/eo-instruction/'+triggeruuid2+'/item',
+                url: '/taskcard-eo/eo-instruction/' + triggeruuid2 + '/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: tool,
@@ -1027,11 +1027,11 @@ let TaskCard = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard-routine/' + taskcard_uuid + '/' + threshold_uuid+'/threshold/',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + threshold_uuid + '/threshold/',
                         success: function (data) {
                             toastr.success('Takscard Tool has been deleted.', 'Deleted', {
-                                    timeOut: 5000
-                                }
+                                timeOut: 5000
+                            }
                             );
 
                             let table = $('.threshold_datatable').mDatatable();
@@ -1070,11 +1070,11 @@ let TaskCard = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard-routine/' + taskcard_uuid + '/' + repeat_uuid+'/repeat/',
+                        url: '/taskcard-routine/' + taskcard_uuid + '/' + repeat_uuid + '/repeat/',
                         success: function (data) {
                             toastr.success('Takscard Tool has been deleted.', 'Deleted', {
-                                    timeOut: 5000
-                                }
+                                timeOut: 5000
+                            }
                             );
 
                             let table = $('.repeat_datatable').mDatatable();
@@ -1106,38 +1106,38 @@ let TaskCard = {
                 cancelButtonText: 'Cancel',
                 showCancelButton: true,
             })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/taskcard-eo/'+taskcard_uuid+'/eo-instruction/'+ triggeruuid + '/',
-                        success: function (data) {
-                            toastr.success('Instruction has been deleted.', 'Deleted', {
-                                timeOut: 5000
+                .then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content'
+                                )
+                            },
+                            type: 'DELETE',
+                            url: '/taskcard-eo/' + taskcard_uuid + '/eo-instruction/' + triggeruuid + '/',
+                            success: function (data) {
+                                toastr.success('Instruction has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                                );
+
+                                let table = $('.instruction_datatable').mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+                            },
+                            error: function (jqXhr, json, errorThrown) {
+                                let errorsHtml = '';
+                                let errors = jqXhr.responseJSON;
+
+                                $.each(errors.errors, function (index, value) {
+                                    $('#delete-error').html(value);
+                                });
                             }
-                        );
-
-                            let table = $('.instruction_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
         });
 
     }
@@ -1167,9 +1167,9 @@ $(document).ready(function () {
 
     $('select[name="recurrence_id"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "Repetitive") {
-        $("#recurrence_div").removeClass("hidden");
-        $('#recurrence').removeAttr("disabled");
-        $('#recurrence-select').removeAttr("disabled");
+            $("#recurrence_div").removeClass("hidden");
+            $('#recurrence').removeAttr("disabled");
+            $('#recurrence-select').removeAttr("disabled");
         } else {
             $("#recurrence_div").addClass("hidden");
             $('#recurrence').prop("disabled", true);
@@ -1178,10 +1178,10 @@ $(document).ready(function () {
     });
     $('select[name="scheduled_priority_id"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "Prior to") {
-        $("#prior_to").removeClass("hidden");
-        $('#prior_to_date').removeAttr("disabled");
-        $('#prior_to_hours').removeAttr("disabled");
-        $('#prior_to_cycle').removeAttr("disabled");
+            $("#prior_to").removeClass("hidden");
+            $('#prior_to_date').removeAttr("disabled");
+            $('#prior_to_hours').removeAttr("disabled");
+            $('#prior_to_cycle').removeAttr("disabled");
         } else {
             $("#prior_to").addClass("hidden");
             $('#prior_to_date').prop('checked', false);
@@ -1198,8 +1198,8 @@ $(document).ready(function () {
     });
     $('select[name="manual_affected_id"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "Other") {
-        $("#note_div").removeClass("hidden");
-        $('#note').removeAttr("disabled");
+            $("#note_div").removeClass("hidden");
+            $('#note').removeAttr("disabled");
         } else {
             $('#note').prop("disabled", true);
             $("#note_div").addClass("hidden");
@@ -1212,66 +1212,66 @@ $(document).ready(function () {
 $('.footer').on('click', '.add-taskcard', function () {
     let applicability_airplane = [];
     let i = 0;
-    $("#applicability_airplane").val().forEach(function(entry) {
+    $("#applicability_airplane").val().forEach(function (entry) {
         applicability_airplane[i] = entry;
         i++;
     });
 
     let threshold_type = [];
-    $('select[name^="threshold_type"]').each(function(i) {
+    $('select[name^="threshold_type"]').each(function (i) {
         threshold_type[i] = $(this).val();
     });
     threshold_type = threshold_type.filter(Boolean);
 
     let repeat_type = [];
-    $('select[name^="repeat_type"]').each(function(i) {
+    $('select[name^="repeat_type"]').each(function (i) {
         repeat_type[i] = $(this).val();
     });
     repeat_type = repeat_type.filter(Boolean);
 
     let threshold_amount = [];
-    $('input[name^="threshold_amount"]').each(function(i) {
+    $('input[name^="threshold_amount"]').each(function (i) {
         threshold_amount[i] = $(this).val();
     });
     threshold_amount = threshold_amount.filter(Boolean);
 
     let repeat_amount = [];
-    $('input[name^="repeat_amount"]').each(function(i) {
+    $('input[name^="repeat_amount"]').each(function (i) {
         repeat_amount[i] = $(this).val();
     });
     repeat_amount = repeat_amount.filter(Boolean);
 
     let data = new FormData();
-    data.append( "title", $('input[name=title]').val());
-    data.append( "number", $('input[name=number]').val());
-    data.append( "type_id", $('#taskcard_non_routine_type').val());
-    data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
-    data.append( "revision", $('input[name=revision]').val());
-    data.append( "threshold_amount", JSON.stringify(threshold_amount));
-    data.append( "reference", $('input[name=reference]').val());
-    data.append( "description", $('input[name=description]').val());
-    data.append( "scheduled_priority_id", $('#scheduled_priority_id').val());
-    data.append( "scheduled_priority_type", $('input[name=prior_to]:checked').val());
-    if($('input[name=prior_to]:checked').val() == 'date'){
-        data.append( "scheduled_priority_amount", $('#date').val());
+    data.append("title", $('input[name=title]').val());
+    data.append("number", $('input[name=number]').val());
+    data.append("type_id", $('#taskcard_non_routine_type').val());
+    data.append("applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
+    data.append("revision", $('input[name=revision]').val());
+    data.append("threshold_amount", JSON.stringify(threshold_amount));
+    data.append("reference", $('input[name=reference]').val());
+    data.append("description", $('#description').val());
+    data.append("scheduled_priority_id", $('#scheduled_priority_id').val());
+    data.append("scheduled_priority_type", $('input[name=prior_to]:checked').val());
+    if ($('input[name=prior_to]:checked').val() == 'date') {
+        data.append("scheduled_priority_amount", $('#date').val());
     }
-    else if ($('input[name=prior_to]:checked').val() == 'hour'){
-        data.append( "scheduled_priority_amount", $('#hour').val());
+    else if ($('input[name=prior_to]:checked').val() == 'hour') {
+        data.append("scheduled_priority_amount", $('#hour').val());
     }
-    else if($('input[name=prior_to]:checked').val() == 'cycle'){
-        data.append( "scheduled_priority_amount", $('#cycle').val());
+    else if ($('input[name=prior_to]:checked').val() == 'cycle') {
+        data.append("scheduled_priority_amount", $('#cycle').val());
     }
-    data.append( "recurrence_id", $('#recurrence_id').val());
-    data.append( "recurrence_amount", $('input[name=recurrence]').val());
-    data.append( "recurrence_type", $('#recurrence-select').val());
-    data.append( "manual_affected_id", $('#manual_affected_id').val());
-    data.append( "manual_affected", $('#note').val());
-    data.append( "threshold_type", JSON.stringify(threshold_type));
-    data.append( "repeat_type", JSON.stringify(repeat_type));
-    data.append( "threshold_amount", JSON.stringify(threshold_amount));
-    data.append( "repeat_amount", JSON.stringify(repeat_amount));
-    data.append( "category_id", $('#category').val());
-    data.append( "fileInput", document.getElementById('taskcard').files[0]);
+    data.append("recurrence_id", $('#recurrence_id').val());
+    data.append("recurrence_amount", $('input[name=recurrence]').val());
+    data.append("recurrence_type", $('#recurrence-select').val());
+    data.append("manual_affected_id", $('#manual_affected_id').val());
+    data.append("manual_affected", $('#note').val());
+    data.append("threshold_type", JSON.stringify(threshold_type));
+    data.append("repeat_type", JSON.stringify(repeat_type));
+    data.append("threshold_amount", JSON.stringify(threshold_amount));
+    data.append("repeat_amount", JSON.stringify(repeat_amount));
+    data.append("category_id", $('#category').val());
+    data.append("fileInput", document.getElementById('taskcard').files[0]);
     data.append('_method', 'PUT');
 
     $.ajax({
