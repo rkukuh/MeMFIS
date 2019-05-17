@@ -162,7 +162,7 @@ class TaskCardEOController extends Controller
      */
     public function update(TaskCardEOUpdate $request, Taskcard $taskCard)
     {
-        // $this->decoder($request);
+        $this->decoder($request);
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
