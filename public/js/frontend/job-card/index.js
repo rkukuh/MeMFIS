@@ -94,16 +94,31 @@ let Item = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
-                    title: 'Material(s)',
+                    field: '1',
+                    title: 'Material',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
+
                 },
                 {
-                    field: 'unit',
-                    title: 'Tool(s)',
+                    field: '2',
+                    title: 'Tool',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
                 },
                 {
                     field: 'unit',
@@ -137,6 +152,44 @@ let Item = {
                 }
             ]
         });
+
+
+        let material_datatables_init = true;
+        let triggeruuid ="";
+        let material = $('.job_card_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                jobcard_item(triggeruuid);
+                $('#m_datatable_item').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_item').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                jobcard_item(triggeruuid);
+                $('#m_datatable_item').DataTable().ajax.reload();
+            }
+        });
+
+        let tool_datatables_init = true;
+        let triggeruuid2 ="";
+        let tool = $('.job_card_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid2 = $(this).data('uuid');
+                jobcard_tool(triggeruuid2);
+                $('#m_datatable_tool').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool').DataTable();
+                table.destroy();
+                triggeruuid2 = $(this).data('uuid');
+                jobcard_tool(triggeruuid2);
+                $('#m_datatable_tool').DataTable().ajax.reload();
+            }
+        });
+
 
         $('.job_card_datatable').on('click', '.delete', function () {
             let item_uuid = $(this).data('id');
