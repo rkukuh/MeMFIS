@@ -99,7 +99,7 @@
         $('.search').on('click', '.search', function () {
             let search = $('input[name=search]').val();
 
-            window.location.href = '/jobcard-mechanic/' + search ;
+            window.location.href = '/jobcard-engineer/' + search ;
         });
     </script>
 
