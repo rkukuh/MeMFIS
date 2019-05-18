@@ -292,15 +292,16 @@
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'other')
                                                             @slot('name', 'other')
-                                                            @slot('text', '7. Other')
+                                                            @slot('text', '9. Other')
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        @component('frontend.common.input.text')
+                                                        @component('frontend.common.input.textarea')
                                                             @slot('id', 'code')
                                                             @slot('text', 'Code')
                                                             @slot('name', 'code')
+                                                            @slot('rows', '3')
                                                             @slot('id_error', 'code')
                                                         @endcomponent
                                                     </div>

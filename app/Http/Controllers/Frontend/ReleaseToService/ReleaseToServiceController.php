@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\frontend\ReleaseToService;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class InterchangeController extends Controller
+class ReleaseToServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class InterchangeController extends Controller
      */
     public function index()
     {
-        return view('frontend.interchange.index');
+        return view('frontend.release-to-service.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class InterchangeController extends Controller
      */
     public function create()
     {
-        return view('frontend.interchange.create');
+         return view('frontend.release-to-service.create');
     }
 
     /**
@@ -35,8 +35,8 @@ class InterchangeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+         return response()->json('sukses');
+     }
 
     /**
      * Display the specified resource.
@@ -46,7 +46,7 @@ class InterchangeController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.interchange.show');
+         return view('frontend.release-to-service.show');
     }
 
     /**
@@ -57,7 +57,7 @@ class InterchangeController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.interchange.edit');
+        //
     }
 
     /**
@@ -69,7 +69,7 @@ class InterchangeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          return response()->json('sukses');
     }
 
     /**
@@ -80,6 +80,6 @@ class InterchangeController extends Controller
      */
     public function destroy($id)
     {
-        //
+          return response()->json('sukses');
     }
 }

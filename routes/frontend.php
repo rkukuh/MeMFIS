@@ -344,9 +344,6 @@ Route::name('frontend.')->group(function () {
             ]);
             Route::get('jobcard-mechanic/{jobcard}', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
 
-            Route::view('/dicrepancy','/frontend/job-card/engineer/discrepancy/create');
-            Route::view('/dicrepancy/{dicrepancy}/edit','/frontend/job-card/engineer/discrepancy/edit');
-
             Route::name('jobcard.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
 
@@ -381,6 +378,30 @@ Route::name('frontend.')->group(function () {
             Route::name('riirelease.')->group(function () {
 
             });
+        });
+
+        /** Interchange */
+
+        Route::namespace('Interchange')->group(function () {
+            Route::resource('interchange', 'InterchangeController');
+        });
+
+        /** Receiving Inspection Report */
+
+        Route::namespace('ReceivingInspectionReport')->group(function () {
+            Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
+        });
+
+        /** Discrepancy */
+
+        Route::namespace('Discrepancy')->group(function () {
+            Route::resource('discrepancy', 'DiscrepancyController');
+        });
+
+        /** Release to Service */
+
+        Route::namespace('ReleaseToService')->group(function () {
+            Route::resource('release-to-service', 'ReleaseToServiceController');
         });
 
         /** PURCHASE REQUEST */
@@ -442,21 +463,8 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
 
-        /** Interchange */
-
-        Route::resource('interchange', 'InterchangeController');
-
-        /** Receiving Inspection Report */
-
-        Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
-
-        /** Discrepancy */
-
-        Route::resource('discrepancy', 'DiscrepancyController');
-
-        /** Discrepancy */
-
-        Route::resource('release-to-service', 'ReleaseToServiceController');
+        Route::view('/ui-discrepancy','/frontend/job-card/engineer/discrepancy/create');
+        Route::view('/ui-discrepancy/{dicrepancy}/edit','/frontend/job-card/engineer/discrepancy/edit');
 
     });
 
