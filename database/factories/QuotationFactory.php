@@ -43,6 +43,19 @@ $factory->define(Quotation::class, function (Faker $faker) {
         },
         'exchange_rate' => rand(10, 15) * 1000,
         'subtotal' => rand(10, 100) * 1000000,
+        'charge' => function () use ($faker) {
+            $charges = [];
+
+            for ($i = 1; $i <= rand(1, 4); $i++) {
+                
+                $charge['type'] = 'Biaya ' . $i;
+                $charge['amount'] = rand(1, 10) * 100000;
+
+                array_push($charges, $charge);
+            }
+
+            return $faker->randomElement([null, json_encode($charges)]);
+        },
         'grandtotal' => rand(101, 200) * 1000000,
         'scheduled_payment_type' => function () {
             if (Type::ofScheduledPayment()->count()) {
