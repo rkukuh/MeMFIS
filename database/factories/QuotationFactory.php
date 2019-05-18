@@ -98,9 +98,25 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
                 $workpackage = factory(WorkPackage::class)->create();
             }
 
+            $disc_type = null;
+            $disc_value = null;
+
+            if ($faker->boolean) {
+                $disc_type = $faker->randomElement(['percentage', 'amount']);
+                
+                if ($disc_type == 'percentage') {
+                    $disc_value = $faker->randomElement([5, 10, 15, 20, 25]);
+                } 
+                else if ($disc_type == 'amount') {
+                    $disc_value = rand(1, 10) * 100000;
+                }
+            }
+
             $quotation->workpackages()->save($workpackage, [
                 'manhour_total' => rand(10, 20),
                 'manhour_rate' => rand(10, 20) * 1000000,
+                'discount_type' => $disc_type,
+                'discount_value' => $disc_value,
                 'description' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
