@@ -60,7 +60,6 @@ class JobCardEngineerController extends Controller
     public function edit(JobCard $jobCard)
     {
         return view('frontend.job-card.engineer.progress-resume');
-        // return view('frontend.job-card.engineer.progress-pause');
     }
 
     /**
