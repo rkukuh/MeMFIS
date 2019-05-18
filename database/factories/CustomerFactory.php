@@ -22,8 +22,22 @@ $factory->define(Customer::class, function (Faker $faker) {
         'attention' => function () use ($faker) {
             $attentions = [];
 
-            for ($i = 1; $i <= rand(2, 4); $i++) {
-                $attentions[]['name'] = $faker->name;
+            for ($person = 0; $person <= rand(0, 5); $person++) {
+                
+                $contact['name']     = $faker->name;
+                $contact['position'] = $faker->randomElement(['CEO', 'CTO', 'CFO', 'CMO', 'Director']);
+
+                unset($contact['phones']);
+                for ($phone = 0; $phone <= rand(0, 3); $phone++) {
+                    $contact['phones'][] = $faker->phoneNumber;
+                }
+
+                unset($contact['emails']);
+                for ($email = 0; $email <= rand(0, 3); $email++) {
+                    $contact['emails'][] = $faker->freeEmail;
+                }
+
+                array_push($attentions, $contact);
             }
 
             return $faker->randomElement([null, json_encode($attentions)]);
