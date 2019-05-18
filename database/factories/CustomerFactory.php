@@ -22,7 +22,7 @@ $factory->define(Customer::class, function (Faker $faker) {
         'attention' => function () use ($faker) {
             $attentions = [];
 
-            for ($person = 0; $person <= rand(0, 5); $person++) {
+            for ($person = 1; $person <= rand(1, 5); $person++) {
                 
                 $contact['name']     = $faker->name;
                 $contact['position'] = $faker->randomElement(['CEO', 'CTO', 'CFO', 'CMO', 'Director']);
