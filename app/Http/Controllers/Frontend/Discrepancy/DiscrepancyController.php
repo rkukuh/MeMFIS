@@ -1,12 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\frontend\Discrepancy;
 
+use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ReceivingInspectionController extends Controller
+class DiscrepancyController extends Controller
 {
+    protected $skill;
+
+    public function __construct()
+    {
+        $this->skill = Type::ofTaskCardSkill()->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class ReceivingInspectionController extends Controller
      */
     public function index()
     {
-        return view('frontend.receiving-inspection-report.index');
+        return view('frontend.discrepancy.index');
     }
 
     /**
@@ -24,7 +32,7 @@ class ReceivingInspectionController extends Controller
      */
     public function create()
     {
-        return view('frontend.receiving-inspection-report.create');
+        return view('frontend.discrepancy.create');
     }
 
     /**
@@ -35,7 +43,7 @@ class ReceivingInspectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json($request);
     }
 
     /**
@@ -46,7 +54,7 @@ class ReceivingInspectionController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.receiving-inspection-report.show');
+        return view('frontend.discrepancy.show');
     }
 
     /**
@@ -57,7 +65,9 @@ class ReceivingInspectionController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.receiving-inspection-report.edit');
+        return view('frontend.discrepancy.edit', [
+            'skills' => $this->skill,
+        ]);
     }
 
     /**
@@ -69,7 +79,7 @@ class ReceivingInspectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json($request);
     }
 
     /**

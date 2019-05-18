@@ -1,20 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\frontend\ReleaseToService;
 
-use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DiscrepancyController extends Controller
+class ReleaseToServiceController extends Controller
 {
-    protected $skill;
-
-    public function __construct()
-    {
-        $this->skill = Type::ofTaskCardSkill()->get();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +14,7 @@ class DiscrepancyController extends Controller
      */
     public function index()
     {
-        return view('frontend.discrepancy.index');
+        return view('frontend.release-to-service.index');
     }
 
     /**
@@ -32,7 +24,7 @@ class DiscrepancyController extends Controller
      */
     public function create()
     {
-        return view('frontend.discrepancy.create');
+         return view('frontend.release-to-service.create');
     }
 
     /**
@@ -43,8 +35,8 @@ class DiscrepancyController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request);
-    }
+         return response()->json('sukses');
+     }
 
     /**
      * Display the specified resource.
@@ -54,7 +46,7 @@ class DiscrepancyController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.discrepancy.show');
+         return view('frontend.release-to-service.show');
     }
 
     /**
@@ -65,9 +57,7 @@ class DiscrepancyController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.discrepancy.edit', [
-            'skills' => $this->skill,
-        ]);
+         return view('frontend.release-to-service.index');
     }
 
     /**
@@ -79,7 +69,7 @@ class DiscrepancyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json($request);
+          return response()->json('sukses');
     }
 
     /**
@@ -90,6 +80,6 @@ class DiscrepancyController extends Controller
      */
     public function destroy($id)
     {
-        //
+          return response()->json('sukses');
     }
 }
