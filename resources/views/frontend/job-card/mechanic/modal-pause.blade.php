@@ -13,35 +13,36 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                @component('frontend.common.input.checkbox')
+                                @component('frontend.common.input.radio')
                                     @slot('id', 'break')
-                                    @slot('name', 'break')
+                                    @slot('name', 'pause')
                                     @slot('text', 'Rest Time/ Beak Time')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                @component('frontend.common.input.checkbox')
+                                @component('frontend.common.input.radio')
                                     @slot('id', 'waiting')
-                                    @slot('name', 'waiting')
+                                    @slot('name', 'pause')
                                     @slot('text', 'Waiting for Material')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                @component('frontend.common.input.checkbox')
+                                @component('frontend.common.input.radio')
                                     @slot('id', 'other')
-                                    @slot('name', 'other')
+                                    @slot('name', 'pause')
                                     @slot('text', 'Other')
                                 @endcomponent
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                @component('frontend.common.input.text')
+                                @component('frontend.common.input.textarea')
                                     @slot('id', 'reason')
                                     @slot('name', 'reason')
                                     @slot('text', 'reason')
+                                    @slot('rows', '3')
                                 @endcomponent
                             </div>
                         </div>
