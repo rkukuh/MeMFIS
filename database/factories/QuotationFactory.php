@@ -42,7 +42,8 @@ $factory->define(Quotation::class, function (Faker $faker) {
             return factory(Currency::class)->create()->id;
         },
         'exchange_rate' => rand(10, 15) * 1000,
-        'total' => rand(10, 100) * 1000000,
+        'subtotal' => rand(10, 100) * 1000000,
+        'grandtotal' => rand(101, 200) * 1000000,
         'scheduled_payment_type' => function () {
             if (Type::ofScheduledPayment()->count()) {
                 return Type::ofScheduledPayment()->get()->random()->id;
