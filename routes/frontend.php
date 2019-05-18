@@ -463,6 +463,8 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
 
+        Route::view('/ui-discrepancy','/frontend/job-card/engineer/discrepancy/create');
+        Route::view('/ui-discrepancy/{dicrepancy}/edit','/frontend/job-card/engineer/discrepancy/edit');
 
     });
 
