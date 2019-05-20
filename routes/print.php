@@ -62,3 +62,7 @@ Route::get('/rts-certificate', function () {
     return $pdf->stream();
 });
 
+Route::get('/jobcard-routine2', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_routine2');
+    return $pdf->stream();
+});
