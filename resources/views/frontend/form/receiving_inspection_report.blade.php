@@ -408,7 +408,7 @@
       </div>
     </div>
     <div class="accept">
-        <table width="90%" border="2">
+        <table width="93%" border="2">
             <tr>
                 <td style="position: relative;" width="50%" height="70">
                   <div style="position: absolute; top:10px; left:10px">
