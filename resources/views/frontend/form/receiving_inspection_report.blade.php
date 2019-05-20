@@ -336,7 +336,7 @@
         </table>
       </div>
     </div>
-    <div class="mc">
+    <div class="mc" style="position:relative;">
       <h3>4.MATERIAL CHECK</h3>
       <div class="mc-content">
         <table width="100%">
@@ -380,6 +380,24 @@
               <td width="80%">Lorem ipsum dolor sit amet consectetur.</td>
             </tr>
         </table>
+        <div style="width:200px;position:absolute;top:44px;right:41px;">
+          <table width="100%">
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Conform</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Not Conform</span>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
     <div class="dcs">
