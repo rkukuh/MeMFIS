@@ -66,6 +66,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-12">
+                                @include('frontend.discrepancy.filter')
+                            </div>
                         </div>
                     </div>
                 </div>
