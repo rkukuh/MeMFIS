@@ -55,6 +55,7 @@
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Project</legend>
                                                 <div class="form-group m-form__group row">
+                                                <input type="hidden" id="quotation_uuid" name="quotation_uuid" value="{{ $quotation->uuid }}">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -349,16 +350,15 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <ul class="nav nav-tabs" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_workpackage">Workpackage</a>
+                                                    <a class="nav-link active show workpackage" data-toggle="tab" href="#" data-target="#m_tabs_workpackage">Workpackage</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_summary">Summary</a>
+                                                    <a class="nav-link summary" data-toggle="tab" href="#m_tabs_summary">Summary</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_workpackage" role="tabpanel">
                                                     <div class="workpackage_datatable" id="scrolling_both"></div>
-
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
 
@@ -371,7 +371,7 @@
                                                             Sub Total
                                                         </div>
                                                         <div class="col-sm-2 col-md-2 col-lg-2">
-                                                            Rp. 100000000
+                                                            Rp. {{ number_format($quotation->subtotal) }}
                                                         </div>
                                                         <div class="col-sm-1 col-md-1 col-lg-1">
                                                         </div>
@@ -414,7 +414,7 @@
                                                             Total in Rupiah
                                                         </div>
                                                         <div class="col-sm-2 col-md-2 col-lg-2">
-                                                            Rp. 100000000
+                                                            Rp. {{ number_format($quotation->grandtotal) }}
                                                         </div>
                                                         <div class="col-sm-1 col-md-1 col-lg-1">
                                                         </div>
@@ -473,11 +473,13 @@
 @push('footer-scripts')
 <script>
         let project_id = '{{  $quotation->project->uuid }}';
+        // let quotation = '{{  $quotation->uuid }}';
+        console.log(quotation);
 </script>
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage/show.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/show.js') }}"></script>
-    <script src="{{ asset('js/frontend/quotation/summary.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+    
 @endpush
