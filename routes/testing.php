@@ -20,6 +20,7 @@ Route::name('testing.')->group(function () {
         Route::view('/test5', 'frontend/testing/khusnul/add_rir');
         Route::view('/test11', 'frontend/testing/ibnu/mi');
         Route::view('/test31', 'frontend/testing/ibnu/rir');
+        Route::view('/testing', 'frontend/testing/ibnu/testing');
         Route::resource('setting', 'Frontend\SettingController');
 
         Route::get('/barcode-print', function () {
