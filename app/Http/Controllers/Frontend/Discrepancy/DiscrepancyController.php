@@ -32,7 +32,7 @@ class DiscrepancyController extends Controller
      */
     public function create()
     {
-        return view('frontend.discrepancy.create');
+        return view('frontend.job-card.engineer.discrepancy.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class DiscrepancyController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.discrepancy.edit', [
+        return view('frontend.job-card.engineer.discrepancy.edit', [
             'skills' => $this->skill,
         ]);
     }
