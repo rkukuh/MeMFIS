@@ -213,7 +213,7 @@
                                                     @slot('data_target', '#modal_close')
                                                 @endcomponent
                                                 @component('frontend.common.buttons.found')
-                                                @slot('href','/discrepancy')
+                                                @slot('href','/discrepancy/create')
                                             @endcomponent()
                                         </div>
                                     </div>
