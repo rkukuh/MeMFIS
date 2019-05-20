@@ -23,7 +23,8 @@ Route::name('testing.')->group(function () {
         Route::view('/test5', 'frontend/testing/khusnul/add_rir');
         Route::view('/test11', 'frontend/testing/ibnu/mi');
         Route::view('/test31', 'frontend/testing/ibnu/rir');
-        // Route::view('/jcprint', 'frontend/job-card/print');
+        Route::view('/testing', 'frontend/testing/ibnu/testing');
+                // Route::view('/jcprint', 'frontend/job-card/print');
         Route::view('/jcprintraw', 'frontend/form/jobcard');
         Route::resource('setting', 'Frontend\SettingController');
 
