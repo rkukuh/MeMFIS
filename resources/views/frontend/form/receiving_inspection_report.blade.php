@@ -77,17 +77,6 @@
     #content3 .pc-content .pc-checkbox{
       margin-left: 16px;
     }
-    
-    #footer{
-      position: absolute;
-      bottom:6px;
-      font-size: 15px;
-    }
-
-    #footer .line{
-      height: 10px;
-      background:dodgerblue;
-    }
 
   </style>
 </head>
@@ -432,19 +421,5 @@
         </table>
     </div>
   </div>
-
-  <div id="footer">
-    <table width="100%">
-      <tr>
-        <td width="65%"><div class="line"></div></td>
-        <td width="17%"><span><b>FR No : F02-0764RO</b></span></td>
-        <td width="18%"><div class="line"></div></td>
-      </tr>
-    </table>
-  </div>
-
-
- 
-
 </body>
 </html>
