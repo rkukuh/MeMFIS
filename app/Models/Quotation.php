@@ -16,7 +16,9 @@ class Quotation extends MemfisModel
         'term_and_condition',
         'term_of_payment',
         'exchange_rate',
-        'total',
+        'subtotal',
+        'charge',
+        'grandtotal',
         'scheduled_payment_type',
         'scheduled_payment_amount',
         'term_of_payment',
@@ -102,6 +104,8 @@ class Quotation extends MemfisModel
                     ->withPivot(
                         'manhour_total',
                         'manhour_rate',
+                        'discount_type',
+                        'discount_value',
                         'description'
                     )
                     ->withTimestamps();

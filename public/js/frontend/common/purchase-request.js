@@ -63,9 +63,9 @@ let PurchaseRequest = {
                 let table = $('.item_datatable').mDatatable();
                 table.destroy();
                 item(uuid);
-                table = $('.item_datatable').mDatatable();
-                table.originalDataSet = [];
-                table.reload();
+                // table = $('.item_datatable').mDatatable();
+                // table.originalDataSet = [];
+                // table.reload();
             }
         });
     }

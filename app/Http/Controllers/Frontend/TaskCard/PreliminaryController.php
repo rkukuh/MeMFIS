@@ -17,12 +17,10 @@ class PreliminaryController extends Controller
 {
     protected $aircraft;
     protected $skill;
-    protected $work_area;
 
     public function __construct()
     {
         $this->aircraft = Aircraft::get();
-        $this->work_area = Type::ofWorkArea()->get();
         $this->skill = Type::ofTaskCardSkill()->get();
         $this->maintenanceCycle = Type::ofMaintenanceCycle()->get();
     }
@@ -59,11 +57,6 @@ class PreliminaryController extends Controller
     {
         $this->decoder($request);
 
-        if($request->work_area){
-            $request->work_area = Type::firstOrCreate(
-                ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
-            );
-        }
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 
@@ -104,7 +97,6 @@ class PreliminaryController extends Controller
         return view('frontend.taskcard.nonroutine.preliminary.edit', [
             'taskcard' => $taskCard,
             'skills' => $this->skill,
-            'work_areas' => $this->work_area,
             'aircrafts' => $this->aircraft,
             'aircraft_taskcards' => $aircraft_taskcards,
             'MaintenanceCycles' => $this->maintenanceCycle,
@@ -125,14 +117,9 @@ class PreliminaryController extends Controller
         $this->decoder($request);
 
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
-        if($request->work_area){
-            $request->work_area = Type::firstOrCreate(
-                ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
-            );
-        }
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
-            
+
             return response()->json($taskCard);
         }
 

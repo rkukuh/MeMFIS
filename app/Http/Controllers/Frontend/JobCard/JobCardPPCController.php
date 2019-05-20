@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\JobCard;
 
-use Illuminate\Http\Request;
+use App\Models\JobCard;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\JobCardStore;
+use App\Http\Requests\Frontend\JobCardUpdate;
 
-class InterchangeController extends Controller
+class JobCardPPCController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class InterchangeController extends Controller
      */
     public function index()
     {
-        return view('frontend.interchange.index');
+        return view('frontend.job-card.ppc.index');
     }
 
     /**
@@ -24,16 +26,16 @@ class InterchangeController extends Controller
      */
     public function create()
     {
-        return view('frontend.interchange.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\JobCardStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobCardStore $request)
     {
         //
     }
@@ -41,33 +43,33 @@ class InterchangeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(JobCard $jobCard)
     {
-        return view('frontend.interchange.show');
+        return view('frontend.job-card.ppc.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(JobCard $jobCard)
     {
-        return view('frontend.interchange.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Frontend\JobCardUpdate  $request
+     * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(JobCardUpdate $request, JobCard $jobCard)
     {
         //
     }
@@ -75,11 +77,12 @@ class InterchangeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(JobCard $jobCard)
     {
         //
     }
+
 }

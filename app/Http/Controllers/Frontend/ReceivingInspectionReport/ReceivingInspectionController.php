@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\JobCard;
+namespace App\Http\Controllers\Frontend\ReceivingInspectionReport;
 
-use App\Models\JobCard;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\JobCardStore;
-use App\Http\Requests\Frontend\JobCardUpdate;
 
-class JobCardController extends Controller
+class ReceivingInspectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class JobCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.job-card.ppc.index');
+        return view('frontend.receiving-inspection-report.index');
     }
 
     /**
@@ -26,16 +24,16 @@ class JobCardController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.receiving-inspection-report.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\JobCardStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JobCardStore $request)
+    public function store(Request $request)
     {
         //
     }
@@ -43,33 +41,33 @@ class JobCardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(JobCard $jobCard)
+    public function show($id)
     {
-        return view('frontend.job-card.ppc.show');
+        return view('frontend.receiving-inspection-report.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobCard)
+    public function edit($id)
     {
-        //
+        return view('frontend.receiving-inspection-report.edit');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\JobCardUpdate  $request
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $jobCard)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -77,10 +75,10 @@ class JobCardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobCard $jobCard)
+    public function destroy($id)
     {
         //
     }

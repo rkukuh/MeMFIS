@@ -204,9 +204,17 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                            @include('frontend.common.buttons.pause')
-                                            @include('frontend.common.buttons.close')
-                                            @include('frontend.common.buttons.found')
+                                            @include('frontend.job-card.mechanic.modal-pause')
+                                            @component('frontend.common.buttons.pause')
+                                                @slot('data_target', '#modal_pause')
+                                            @endcomponent
+                                            @include('frontend.job-card.mechanic.modal-close')
+                                            @component('frontend.common.buttons.close')
+                                                @slot('data_target', '#modal_close')
+                                            @endcomponent
+                                            @component('frontend.common.buttons.found')
+                                                @slot('href','/discrepancy/create')
+                                            @endcomponent()
                                         </div>
                                     </div>
                                 </div>

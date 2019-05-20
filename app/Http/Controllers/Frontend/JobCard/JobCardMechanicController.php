@@ -85,4 +85,20 @@ class JobCardMechanicController extends Controller
     {
         //
     }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function search($jobCard)
+    {
+        $search = JobCard::where('number',$jobCard)->first();
+
+        return view('frontend.job-card.mechanic.progress-resume', [
+            'search' => $search,
+        ]);
+    }
+
 }

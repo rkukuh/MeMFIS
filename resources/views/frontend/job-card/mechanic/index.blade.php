@@ -53,17 +53,14 @@
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
                                             <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" placeholder="Search..."
+                                                <input type="text" class="form-control m-input" id="search" name="search" placeholder="Search..."
                                                     id="generalSearch">
                                                 <span class="m-input-icon__icon m-input-icon__icon--left">
                                                     <span><i class="la la-search"></i></span>
                                                 </span>
                                             </div>
-                                            <div class="d-flex justify-content-end mt-4">
-                                                @component('frontend.common.buttons.create')
-                                                    @slot('text', 'Search')
-                                                    @slot('icon','search')
-                                                @endcomponent
+                                            <div class="d-flex justify-content-end mt-4 search">
+                                                @include('frontend.common.buttons.search')
                                             </div>
                                         </div>
                                     </div>
@@ -79,4 +76,11 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
+    <script>
+        $('.search').on('click', '.search', function () {
+            let search = $('input[name=search]').val();
+
+            window.location.href = '/jobcard-mechanic/' + search ;
+        });
+    </script>
 @endpush

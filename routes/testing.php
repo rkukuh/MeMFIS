@@ -6,6 +6,9 @@ Route::name('testing.')->group(function () {
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
+        Route::view('/taskcard-wip', 'frontend/testing/taskcard-wip')->name('taskcard');
+        Route::view('/taskcard', 'frontend/testing/taskcard')->name('taskcard');
+        // Route::post('/taskcard/filer', 'Datatables\Taskcard\TaskCardDatatables@filter')->name('taskcard.filter');
 
         Route::view('/select2-repeater', 'frontend/testing/select2Repeater')->name('select2-repeater');
         Route::view('/select2-repeater2', 'frontend/testing/repeaterBlank')->name('select2-repeater2');
@@ -21,8 +24,14 @@ Route::name('testing.')->group(function () {
         Route::view('/test11', 'frontend/testing/ibnu/mi');
         Route::view('/test31', 'frontend/testing/ibnu/rir');
         Route::view('/testing', 'frontend/testing/ibnu/testing');
+                // Route::view('/jcprint', 'frontend/job-card/print');
+        Route::view('/jcprintraw', 'frontend/form/jobcard');
         Route::resource('setting', 'Frontend\SettingController');
 
+        Route::get('/jcprint', function () {
+            $pdf = \PDF::loadView('frontend/form/jobcard');
+            return $pdf->stream();
+        });
         Route::get('/barcode-print', function () {
             $pdf = \PDF::loadView('frontend/form/barcode');
             return $pdf->stream();

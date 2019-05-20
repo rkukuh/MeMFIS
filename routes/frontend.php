@@ -330,17 +330,19 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('JobCard')->group(function () {
 
-            Route::resource('jobcard-ppc', 'JobCardController', [
+            Route::resource('jobcard-ppc', 'JobCardPPCController', [
                 'parameters' => ['jobcard-ppc' => 'jobcard']
             ]);
 
             Route::resource('jobcard-engineer', 'JobCardEngineerController', [
                 'parameters' => ['jobcard-engineer' => 'jobcard']
             ]);
+            Route::get('jobcard-engineer/{jobcard}', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
 
             Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
+            Route::get('jobcard-mechanic/{jobcard}', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
 
             Route::name('jobcard.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
@@ -352,6 +354,54 @@ Route::name('frontend.')->group(function () {
                 });
             });
 
+        });
+
+         /** TASK RELEASE */
+
+         Route::namespace('TaskRelease')->group(function () {
+            Route::resource('task-release', 'TaskReleaseController', [
+                'parameters' => ['task-release' => 'taskrelease']
+            ]);
+
+            Route::name('taskrelease.')->group(function () {
+
+            });
+        });
+
+         /** RII RELEASE */
+
+         Route::namespace('RIIRelease')->group(function () {
+            Route::resource('rii-release', 'RIIReleaseController', [
+                'parameters' => ['rii-release' => 'taskrelease']
+            ]);
+
+            Route::name('riirelease.')->group(function () {
+
+            });
+        });
+
+        /** Interchange */
+
+        Route::namespace('Interchange')->group(function () {
+            Route::resource('interchange', 'InterchangeController');
+        });
+
+        /** Receiving Inspection Report */
+
+        Route::namespace('ReceivingInspectionReport')->group(function () {
+            Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
+        });
+
+        /** Discrepancy */
+
+        Route::namespace('Discrepancy')->group(function () {
+            Route::resource('discrepancy', 'DiscrepancyController');
+        });
+
+        /** Release to Service */
+
+        Route::namespace('ReleaseToService')->group(function () {
+            Route::resource('release-to-service', 'ReleaseToServiceController');
         });
 
         /** PURCHASE REQUEST */
@@ -412,14 +462,6 @@ Route::name('frontend.')->group(function () {
         /** PRICE LIST */
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
-
-        /** Interchange */
-
-        Route::resource('interchange', 'InterchangeController');
-
-        /** Receiving Inspection Report */
-
-        Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
 
     });
 
