@@ -463,6 +463,19 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
 
+        /** DEFECT CARD */
+
+        Route::view('/defectcard', 'frontend.defectcard.index')->name('defectcard.index');
+        Route::view('/defectcard-engineer-open', 'frontend.defectcard.engineer.open')->name('defectcard.engineer.open');
+        Route::view('/defectcard-engineer-pending', 'frontend.defectcard.engineer.pending')->name('defectcard.engineer.pending');
+        Route::view('/defectcard-engineer-progress', 'frontend.defectcard.engineer.progress')->name('defectcard.engineer.progress');
+
+        Route::view('/defectcard-mechanic-open', 'frontend.defectcard.mechanic.open')->name('defectcard.mechanic.open');
+        Route::view('/defectcard-mechanic-pending', 'frontend.defectcard.mechanic.pending')->name('defectcard.mechanic.pending');
+        Route::view('/defectcard-mechanic-progress', 'frontend.defectcard.mechanic.progress')->name('defectcard.mechanic.progress');
+
+        Route::view('/defectcard-project', 'frontend.defectcard.project')->name('defectcard.project');
+
     });
 
 });
