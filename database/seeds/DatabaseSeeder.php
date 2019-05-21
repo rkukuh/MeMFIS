@@ -82,5 +82,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PurchaseRequestsTableSeeder::class);
         $this->call(PurchaseOrdersTableSeeder::class);
         $this->call(GoodsReceivedTableSeeder::class);
+        
+        /** PROJECT'S WORKPACKAGES */
+
+        $this->call(ProjectWorkpackagesTableSeeder::class);
     }
 }

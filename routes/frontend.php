@@ -100,6 +100,10 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        /** PROJECT'S WORKPACKAGE */
+
+        Route::resource('project-workpackage', 'ProjectWorkpackageController');
+
         /** QUOTATION */
 
         Route::namespace('Quotation')->group(function () {

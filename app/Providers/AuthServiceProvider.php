@@ -60,6 +60,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\PurchaseRequest::class => Policies\PurchaseRequestPolicy::class,
         Models\OTRCertification::class => Policies\OTRCertificationPolicy::class,
         Models\CertificationEmployee::class => Policies\CertificationEmployeePolicy::class,
+        Models\Pivots\ProjectWorkpackage::class => Policies\Pivots\ProjectWorkpackagePolicy::class,
     ];
 
     /**
