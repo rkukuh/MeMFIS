@@ -69,7 +69,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
 
-        /** TRANSACTION */
+        /** PROJECT */
+
         Route::namespace('Project')->group(function () {
 
             Route::resource('project', 'ProjectController');
@@ -97,10 +98,9 @@ Route::name('frontend.')->group(function () {
                 ]);
             });
 
-
         });
 
-        /** Quotation */
+        /** QUOTATION */
 
         Route::namespace('Quotation')->group(function () {
             Route::resource('quotation', 'QuotationController');
@@ -159,7 +159,6 @@ Route::name('frontend.')->group(function () {
                 Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
                 Route::delete('/{workPackage}/{item}/item/', 'WorkPackageItemsController@destroy')->name('item.workpackage.delete');
 
-
             });
         });
 
@@ -194,7 +193,6 @@ Route::name('frontend.')->group(function () {
         Route::namespace('Item')->group(function () {
 
             Route::resource('tool', 'ToolController');
-
 
         });
 
@@ -337,11 +335,13 @@ Route::name('frontend.')->group(function () {
             Route::resource('jobcard-engineer', 'JobCardEngineerController', [
                 'parameters' => ['jobcard-engineer' => 'jobcard']
             ]);
+
             Route::get('jobcard-engineer/{jobcard}', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
 
             Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
+
             Route::get('jobcard-mechanic/{jobcard}', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
 
             Route::name('jobcard.')->group(function () {
@@ -380,7 +380,7 @@ Route::name('frontend.')->group(function () {
             });
         });
 
-        /** Interchange */
+        /** INTERCHANGE */
 
         Route::namespace('Interchange')->group(function () {
             Route::resource('interchange', 'InterchangeController');
@@ -459,7 +459,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
 
-        /** PRICE LIST */
+        /** DOCUMENTS */
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
 
