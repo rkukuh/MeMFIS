@@ -14,6 +14,7 @@ class CreateProjectWorkpackageTable extends Migration
     public function up()
     {
         Schema::create('project_workpackage', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('workpackage_id');
             $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
