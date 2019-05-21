@@ -89,11 +89,4 @@
             }
         });
     </script>
-    <script>
-        $('.search').on('click', '.search', function () {
-            let search = $('input[name=search]').val();
-
-            window.location.href = '/jobcard-mechanic/' + search ;
-        });
-    </script>
 @endpush

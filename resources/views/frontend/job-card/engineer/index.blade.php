@@ -52,17 +52,21 @@
                             <div class="col-xl-12 order-2 order-xl-1">
                                 <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                     <div class="col-md-4">
-                                        <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" id="search" name="search" placeholder="Search..." autofocus>
-                                            <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                <span><i class="la la-search"></i></span>
-                                            </span>
-                                        </div>
-                                        <div class="d-flex justify-content-end mt-4 search">
-                                            @component('frontend.common.buttons.search')
-                                                @slot('id','btn-search')
-                                            @endcomponent()
-                                        </div>
+                                        <form method="POST" action="{{route('frontend.engineer.jobcard.seacrh')}}">
+                                            {!! csrf_field() !!}
+
+                                            <div class="m-input-icon m-input-icon--left">
+                                                    <input type="text" class="form-control m-input" id="search" name="search" placeholder="Search..." autofocus>
+                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                    <span><i class="la la-search"></i></span>
+                                                </span>
+                                            </div>
+                                            <div class="d-flex justify-content-end mt-4 search">
+                                                @component('frontend.common.buttons.search')
+                                                    @slot('id','btn-search')
+                                                @endcomponent()
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -110,13 +114,5 @@
             }
         });
     </script>
-    <script>
-        $('.search').on('click', '.search', function () {
-            let search = $('input[name=search]').val();
-
- 
-        window.location.href = '/jobcard-engineer/' + search;
-    });
-</script>
 
 @endpush
