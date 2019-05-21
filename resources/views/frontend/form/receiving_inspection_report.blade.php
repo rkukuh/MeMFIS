@@ -439,5 +439,8 @@
         </table>
     </div>
   </div>
+  <div style="margin-top:35px;">
+    <img src="./img/FooterRIR.jpg" width="100%" alt="" srcset="">
+  </div>
 </body>
 </html>
