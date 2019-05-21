@@ -49,12 +49,12 @@
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
                         <div class="row align-items-center">
-                        
+
                             <div class="col-xl-8 order-2 order-xl-1">
                                 <div class="form-group m-form__group row align-items-center">
                                     <div class="col-md-2">
                                         @include('frontend.common.buttons.filter')
-                                    </div>    
+                                    </div>
                                     <div class="col-md-4">
                                         <div class="m-input-icon m-input-icon--left">
                                             <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
@@ -88,10 +88,8 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
-
-<script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
 @endpush
