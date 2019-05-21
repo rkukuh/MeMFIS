@@ -1,3 +1,4 @@
+
 $('.btn-filter').on('click', function () {
     $('.advanceFilter').slideToggle('slow', function () {
         $('#advanceFilter').removeClass('hidden');
@@ -5,25 +6,13 @@ $('.btn-filter').on('click', function () {
 });
 
 $('.filter').on('change', function () {
-    let taskcard_routine_type = $('#taskcard_routine_type').val();
-    let task_type_id = $('#task_type_id').val();
-    let applicability_airplane = $('#applicability_airplane').val();
-    let otr_certification = $('#otr_certification').val();
-    let project_no = $('#project_no').val();
-    let date_issued = $('#date_issued').val();
+    let date = $('#date').val();
     let jc_no = $('#jc_no').val();
     let customer = $('#customer').val();
-    let status_jobcard = $('#status_jobcard').val();
+    let applicability_airplane = $('#applicability_airplane').val();
+    let otr_certification = $('#otr_certification').val();
+    let status = $('#status').val();
 
-    console.log(taskcard_routine_type);
-    console.log(task_type_id);
-    console.log(applicability_airplane);
-    console.log(otr_certification);
-    console.log(project_no);
-    console.log(date_issued);
-    console.log(jc_no);
-    console.log(customer);
-    console.log(status_jobcard);
     // $.ajax({
     //     headers: {
     //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -32,15 +21,12 @@ $('.filter').on('change', function () {
     //     url: '/datatables/taskcard/filter',
     //     data: {
     //         _token: $('input[name=_token]').val(),
-    //         taskcard_routine_type: taskcard_routine_type,
-    //         task_type_id: task_type_id,
-    //         applicability_airplane: applicability_airplane,
-    //         otr_certification: otr_certification,
-    //         project_no: project_no,
-    //         date_issued: date_issued,
+    //         date: date,
     //         jc_no: jc_no,
     //         customer: customer,
-    //         status_jobcard: status_jobcard,
+    //         applicability_airplane: applicability_airplane,
+    //         otr_certification: otr_certification,
+    //         status: status,
     //     },
     //     success: function(response) {
     //         let table = $('.taskcard_datatable').mDatatable();
@@ -206,7 +192,7 @@ $('.filter').on('change', function () {
 
 let dateIssued = {
     init: function () {
-        $('#date_issued').select2({
+        $('#date').select2({
             placeholder: 'Select a date issued '
         });
     }
@@ -220,38 +206,27 @@ let jcNo = {
     }
 };
 
-let projectNo = {
-    init: function () {
-        $('#project_no').select2({
-            placeholder: 'Select a Project Number '
-        });
-    }
-};
-
 let jobcardStatus = {
     init: function () {
-        $('#status_jobcard').select2({
-            placeholder: 'Select a Job Card Status '
+        $('#status').select2({
+            placeholder: 'Select a Task Release Status '
         });
     }
 };
 
-$('select[name="date_issued"]').append('<option value="Ascending">Ascending</option>');
+$('select[name="date"]').append('<option value="Ascending">Ascending</option>');
 $('select[name="jc_no"]').append('<option value="Ascending">Ascending</option>');
-$('select[name="project_no"]').append('<option value="Ascending">Ascending</option>');
 
-$('select[name="date_issued"]').append('<option value="Descending">Descending</option>');
+$('select[name="date"]').append('<option value="Descending">Descending</option>');
 $('select[name="jc_no"]').append('<option value="Descending">Descending</option>');
-$('select[name="project_no"]').append('<option value="Descending">Descending</option>');
 
-$('select[name="status_jobcard"]').append('<option value="Open">Open</option>');
-$('select[name="status_jobcard"]').append('<option value="On Progress">On Progress</option>');
-$('select[name="status_jobcard"]').append('<option value="Pending/Pause">Pending/Pause</option>');
-$('select[name="status_jobcard"]').append('<option value="Closed">Closed</option>');
+$('select[name="status"]').append('<option value="Open">Open</option>');
+$('select[name="status"]').append('<option value="On Progress">On Progress</option>');
+$('select[name="status"]').append('<option value="Pending/Pause">Pending/Pause</option>');
+$('select[name="status"]').append('<option value="Closed">Closed</option>');
 
 $(document).ready(function () {
     dateIssued.init();
     jcNo.init();
-    projectNo.init();
     jobcardStatus.init();
 });

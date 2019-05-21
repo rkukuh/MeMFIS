@@ -71,13 +71,16 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="m-portlet m-portlet--mobile">
-                    <div class="m-portlet__body">
-                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="col-xl-4 order-1 order-xl-2 m--align-right">
 
-                            <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                <div class="m-separator m-separator--dashed d-xl-none"></div>
+                            </div>
+                            <div class="col-lg-12">
+                                @include('frontend.job-card.filter')
+                            </div>
                         </div>
                         <div class="job_card_datatable" id="scrolling_both"></div>
 
@@ -111,8 +114,9 @@
         $('.search').on('click', '.search', function () {
             let search = $('input[name=search]').val();
 
-            window.location.href = '/jobcard-engineer/' + search ;
-        });
-    </script>
+ 
+        window.location.href = '/jobcard-engineer/' + search;
+    });
+</script>
 
 @endpush
