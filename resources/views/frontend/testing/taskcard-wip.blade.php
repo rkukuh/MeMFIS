@@ -51,7 +51,13 @@
                     <div class="m-portlet__body">
                         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                             <div class="row align-items-center">
-                                <div class="col-xl-8 order-2 order-xl-1">
+                                <button class="btn btn-filter">
+                                    Advance Filter
+                                </button>
+                                <div class="advanceFilter">
+    weewwew
+                                </div>
+                                <div class="col-xl-8 order-2 order-xl-1 advanceFilter">
                                     <div class="form-group m-form__group row align-items-center">
                                         {{-- <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
@@ -156,6 +162,9 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/filter.js') }}"></script>
 
 <script>
+    $('.btn-filter').on('click', function() {
+        $('.advanceFilter').slideToggle();
+    });
     $('.footer').on('click', '.filter', function() {
 
         let table = $('.taskcard_datatable').mDatatable();
