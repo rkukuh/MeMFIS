@@ -1,4 +1,4 @@
-let Item = {
+let JobCard = {
     init: function () {
         function strtrunc(str, max, add) {
             add = add || '...';
@@ -238,5 +238,5 @@ let Item = {
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    JobCard.init();
 });
