@@ -337,12 +337,12 @@ Route::name('frontend.')->group(function () {
             Route::resource('jobcard-engineer', 'JobCardEngineerController', [
                 'parameters' => ['jobcard-engineer' => 'jobcard']
             ]);
-            Route::get('jobcard-engineer/{jobcard}', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
+            Route::post('jobcard-engineer', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
 
             Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
-            Route::get('jobcard-mechanic/{jobcard}', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
+            Route::post('jobcard-mechanic/', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
 
             Route::name('jobcard.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
