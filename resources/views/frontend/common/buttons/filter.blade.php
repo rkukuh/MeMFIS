@@ -2,10 +2,3 @@
     Advance Filter
 </button>
 
-<script>
-$('.btn-filter').on('click', function () {
-    $('.advanceFilter').slideToggle('slow', function () {
-        $('#advanceFilter').removeClass('hidden');
-    });
-});
-</script>
