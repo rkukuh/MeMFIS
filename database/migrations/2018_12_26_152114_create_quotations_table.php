@@ -24,9 +24,9 @@ class CreateQuotationsTable extends Migration
             $table->timestamp('valid_until')->nullable();
             $table->unsignedInteger('currency_id');
             $table->double('exchange_rate');
-            $table->double('subtotal');
+            $table->double('subtotal')->nullable();
             $table->json('charge')->nullable();
-            $table->double('grandtotal');
+            $table->double('grandtotal')->nullable();
             $table->unsignedInteger('scheduled_payment_type')->nullable();
             $table->json('scheduled_payment_amount')->nullable();
             $table->string('term_of_payment')->nullable();
