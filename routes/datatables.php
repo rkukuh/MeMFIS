@@ -381,6 +381,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskReleaseDatatables@index')->name('all');
+                Route::post('/filter/', 'TaskReleaseDatatables@filter')->name('filter');
 
             });
 
@@ -399,6 +400,8 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'RIIReleaseDatatables@index')->name('all');
+                Route::post('/filter/', 'RIIReleaseDatatables@filter')->name('filter');
+
 
             });
 
@@ -416,6 +419,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'JobCardDatatables@index')->name('all');
+                Route::post('/filter/', 'JobCardDatatables@filter')->name('filter');
 
             });
 
