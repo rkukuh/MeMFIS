@@ -66,7 +66,7 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'taskcard.task',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
