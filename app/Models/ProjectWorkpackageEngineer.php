@@ -7,6 +7,8 @@ use App\Models\Pivots\ProjectWorkPackage;
 
 class ProjectWorkPackageEngineer extends MemfisModel
 {
+    protected $table = 'project_workpackage_engineers';
+    
     protected $fillable = [
         'skill_id',
         'engineer_id',

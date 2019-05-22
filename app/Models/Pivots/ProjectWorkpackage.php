@@ -12,6 +12,8 @@ class ProjectWorkPackage extends Pivot
 {
     use SoftDeletes;
 
+    protected $table = 'project_workpackage';
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
