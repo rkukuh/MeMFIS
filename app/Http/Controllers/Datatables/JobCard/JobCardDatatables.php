@@ -115,19 +115,44 @@ class JobCardDatatables extends Controller
     {
         $JobCard=JobCard::with('taskcard');
 
-        if ($request->has('age_more_than')) {
+        if ($request->has('task_type_id')) {
             $JobCard->where('age', '>', $request->age_more_than);
         }
-        if ($request->has('gender')) {
+        if ($request->has('applicability_airplane')) {
             $JobCard->where('gender', $request->gender);
         }
-        if ($request->has('has_published_post')) {
+        if ($request->has('otr_certification')) {
+            $JobCard->where('gender', $request->gender);
+        }
+        if ($request->has('project_no')) {
+            $JobCard->where('gender', $request->gender);
+        }
+        if ($request->has('taskcard_routine_type')) {
+            $JobCard->where('gender', $request->gender);
+        }
+        if ($request->has('date_issued')) {
+            $JobCard->where('gender', $request->gender);
+        }
+        if ($request->has('jc_no')) {
+            $JobCard->where('gender', $request->gender);
+        }
+        if ($request->has('customer')) {
             $JobCard->where(function ($query) use ($request) {
                 $query->whereHas('posts', function ($query) use ($request) {
                     $query->where('is_published', $request->has_published_post);
                 });
             });
         }
+        if ($request->has('status_jobcard')) {
+            $JobCard->where('gender', $request->gender);
+        }
+        // if ($request->has('has_published_post')) {
+        //     $JobCard->where(function ($query) use ($request) {
+        //         $query->whereHas('posts', function ($query) use ($request) {
+        //             $query->where('is_published', $request->has_published_post);
+        //         });
+        //     });
+        // }
 
         $data = $alldata = json_decode($JobCard->get());
 
