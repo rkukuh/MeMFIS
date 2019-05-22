@@ -8,10 +8,22 @@ use App\Models\Pivots\ProjectWorkpackage;
 class ProjectWorkpackageEngineer extends MemfisModel
 {
     protected $fillable = [
-        '',
+        'skill_id',
+        'engineer_id',
+        'tat',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-Way: A Project Workpackage Engineer must have an engineer assigned to.
+     *
+     * @return mixed
+     */
+    public function engineer()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 
     /**
      * One-to-Many: A project's workpackage may have one or many engineer.
@@ -24,5 +36,15 @@ class ProjectWorkpackageEngineer extends MemfisModel
     public function header()
     {
         return $this->belongsTo(ProjectWorkpackage::class, 'project_workpackage_id');
+    }
+
+    /**
+     * One-Way: A Project Workpackage Engineer must have a skill assigned to.
+     *
+     * @return mixed
+     */
+    public function skill()
+    {
+        return $this->belongsTo(Type::class);
     }
 }
