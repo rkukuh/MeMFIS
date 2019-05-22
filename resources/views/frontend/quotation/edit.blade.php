@@ -535,7 +535,7 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script> --}}
+    <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
 
