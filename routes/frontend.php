@@ -69,7 +69,8 @@ Route::name('frontend.')->group(function () {
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
 
-        /** TRANSACTION */
+        /** PROJECT */
+
         Route::namespace('Project')->group(function () {
 
             Route::resource('project', 'ProjectController');
@@ -97,10 +98,14 @@ Route::name('frontend.')->group(function () {
                 ]);
             });
 
-
         });
 
-        /** Quotation */
+        /** PROJECT'S WORKPACKAGE */
+
+        Route::resource('project-workpackage', 'ProjectWorkPackageController');
+        Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
+
+        /** QUOTATION */
 
         Route::namespace('Quotation')->group(function () {
             Route::resource('quotation', 'QuotationController');
@@ -159,7 +164,6 @@ Route::name('frontend.')->group(function () {
                 Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
                 Route::delete('/{workPackage}/{item}/item/', 'WorkPackageItemsController@destroy')->name('item.workpackage.delete');
 
-
             });
         });
 
@@ -194,7 +198,6 @@ Route::name('frontend.')->group(function () {
         Route::namespace('Item')->group(function () {
 
             Route::resource('tool', 'ToolController');
-
 
         });
 
@@ -282,9 +285,11 @@ Route::name('frontend.')->group(function () {
                     /** Transaction: Item */
                     Route::post('/{taskcard}/item', 'TaskCardRoutineItemsController@store')->name('item.store');
                     Route::delete('/{taskcard}/{item}/item', 'TaskCardRoutineItemsController@destroy')->name('item.destroy');
+
                     /** Transaction: Threshold */
                     Route::post('/{taskcard}/threshold', 'TaskCardRoutineThresholdController@store')->name('threshold.store');
                     Route::delete('/{taskcard}/{threshold}/threshold', 'TaskCardRoutineThresholdController@destroy')->name('itthresholdem.destroy');
+                    
                     /** Transaction: Repeat */
                     Route::post('/{taskcard}/repeat', 'TaskCardRoutineRepeatController@store')->name('repeat.store');
                     Route::delete('/{taskcard}/{repeat}/repeat', 'TaskCardRoutineRepeatController@destroy')->name('repeat.destroy');
@@ -337,11 +342,13 @@ Route::name('frontend.')->group(function () {
             Route::resource('jobcard-engineer', 'JobCardEngineerController', [
                 'parameters' => ['jobcard-engineer' => 'jobcard']
             ]);
+
             Route::post('jobcard-engineer', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
 
             Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
+
             Route::post('jobcard-mechanic/', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
 
             Route::name('jobcard.')->group(function () {
@@ -380,7 +387,7 @@ Route::name('frontend.')->group(function () {
             });
         });
 
-        /** Interchange */
+        /** INTERCHANGE */
 
         Route::namespace('Interchange')->group(function () {
             Route::resource('interchange', 'InterchangeController');
@@ -409,11 +416,11 @@ Route::name('frontend.')->group(function () {
         Route::namespace('PurchaseRequest')->group(function () {
             Route::resource('purchase-request', 'PurchaseRequestController');
 
-                Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
-                Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
+            Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
+            Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
 
             Route::name('purchase-request.')->group(function () {
-
+                // 
             });
         });
 
@@ -425,6 +432,7 @@ Route::name('frontend.')->group(function () {
             Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
 
             Route::name('purchase-order.')->group(function () {
+                // 
             });
         });
 
@@ -436,6 +444,7 @@ Route::name('frontend.')->group(function () {
             Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
 
             Route::name('goods-received.')->group(function () {
+                // 
             });
         });
 
@@ -459,7 +468,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
         Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
 
-        /** PRICE LIST */
+        /** DOCUMENTS */
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
 

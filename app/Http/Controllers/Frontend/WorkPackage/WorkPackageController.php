@@ -50,8 +50,9 @@ class WorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        $workpackage = Workpackage::create($request->all());
-        if($workpackage->is_template == 0 && $request->project_uuid){
+        $workpackage = WorkPackage::create($request->all());
+
+        if ($workpackage->is_template == 0 && $request->project_uuid) {
             $project = Project::where('uuid',$request->project_uuid)->first();
             $project->workpackages()->attach($workpackage);
         }

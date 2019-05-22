@@ -71,11 +71,7 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
     $workpackage = null;
 
     for ($i = 1; $i <= rand(5, 10); $i++) {
-        if (WorkPackage::count()) {
-            $workpackage = WorkPackage::get()->random();
-        } else {
-            $workpackage = factory(WorkPackage::class)->create();
-        }
+        $workpackage = factory(WorkPackage::class)->create();
 
         $project->workpackages()->save($workpackage, [
             'performance_factor' => $faker->randomElement([

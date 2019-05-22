@@ -31,11 +31,11 @@ class OldDataController extends Controller
 
     public function materialsAndTools()
     {
-        Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'materials-tools.xlsx');
+        // Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'materials-tools.xlsx');
     }
     
     public function taskCardsBoeingImport()
     {
-        Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
+        // Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
     }
 }
