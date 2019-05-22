@@ -52,7 +52,7 @@ class QuotationWorkPackageController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, Workpackage $workPackage)
+    public function show(Project $project, WorkPackage $workPackage)
     {
         $quotation  = Quotation::where('project_id',$project->id)->first();
         // $job_request = $quotation->workpackages->wherePivot('workpackage_id',$workPackage->id);
@@ -75,7 +75,7 @@ class QuotationWorkPackageController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project, Workpackage $workPackage)
+    public function edit(Project $project, WorkPackage $workPackage)
     {
         $quotation  = Quotation::where('project_id',$project->id)->first();
         $job_request = $quotation->workpackages()->wherePivot('workpackage_id', $workPackage->id)->first();
@@ -99,7 +99,7 @@ class QuotationWorkPackageController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project, Workpackage $workPackage)
+    public function update(Request $request, Project $project, WorkPackage $workPackage)
     {
         $quotation  = Quotation::where('project_id',$project->id)->first();
 
@@ -114,7 +114,7 @@ class QuotationWorkPackageController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quotation $quotation,WorkPackage $workPackage)
+    public function destroy(Quotation $quotation, WorkPackage $workPackage)
     {
         $quotation->workpackages()->detach($workPackage);
 

@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-use App\Models\ProjectWorkpackage;
+use App\Models\ProjectWorkPackage;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProjectWorkpackagePolicy
+class ProjectWorkPackagePolicy
 {
     use HandlesAuthorization;
 
@@ -14,10 +14,10 @@ class ProjectWorkpackagePolicy
      * Determine whether the user can view the project workpackage.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return mixed
      */
-    public function view(User $user, ProjectWorkpackage $projectWorkpackage)
+    public function view(User $user, ProjectWorkPackage $projectWorkPackage)
     {
         //
     }
@@ -37,10 +37,10 @@ class ProjectWorkpackagePolicy
      * Determine whether the user can update the project workpackage.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return mixed
      */
-    public function update(User $user, ProjectWorkpackage $projectWorkpackage)
+    public function update(User $user, ProjectWorkPackage $projectWorkPackage)
     {
         //
     }
@@ -49,10 +49,10 @@ class ProjectWorkpackagePolicy
      * Determine whether the user can delete the project workpackage.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return mixed
      */
-    public function delete(User $user, ProjectWorkpackage $projectWorkpackage)
+    public function delete(User $user, ProjectWorkPackage $projectWorkPackage)
     {
         //
     }
@@ -61,10 +61,10 @@ class ProjectWorkpackagePolicy
      * Determine whether the user can restore the project workpackage.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return mixed
      */
-    public function restore(User $user, ProjectWorkpackage $projectWorkpackage)
+    public function restore(User $user, ProjectWorkPackage $projectWorkPackage)
     {
         //
     }
@@ -73,10 +73,10 @@ class ProjectWorkpackagePolicy
      * Determine whether the user can permanently delete the project workpackage.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return mixed
      */
-    public function forceDelete(User $user, ProjectWorkpackage $projectWorkpackage)
+    public function forceDelete(User $user, ProjectWorkPackage $projectWorkPackage)
     {
         //
     }

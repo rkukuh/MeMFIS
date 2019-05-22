@@ -321,14 +321,14 @@
                                                         <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
                                                             <span>
                                                                 <i class="la la-plus-circle"></i>
-                                                            <span>Workpackage</span>
+                                                            <span>Work Package</span>
                                                             </span>
                                                         </button>
 
                                                         <button data-target="#modal_blank_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
                                                             <span>
                                                                 <i class="la la-plus-circle"></i>
-                                                            <span>Blank Workpackage</span>
+                                                            <span>Blank Work Package</span>
                                                             </span>
                                                         </button>
                                                     </div>

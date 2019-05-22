@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ProjectWorkpackage;
+use App\Models\ProjectWorkPackage;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ProjectWorkpackageStore;
-use App\Http\Requests\Admin\ProjectWorkpackageUpdate;
+use App\Http\Requests\Admin\ProjectWorkPackageStore;
+use App\Http\Requests\Admin\ProjectWorkPackageUpdate;
 
-class ProjectWorkpackageController extends Controller
+class ProjectWorkPackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class ProjectWorkpackageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\ProjectWorkpackageStore  $request
+     * @param  \App\Http\Requests\Admin\ProjectWorkPackageStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectWorkpackageStore $request)
+    public function store(ProjectWorkPackageStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class ProjectWorkpackageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return \Illuminate\Http\Response
      */
-    public function show(ProjectWorkpackage $projectWorkpackage)
+    public function show(ProjectWorkPackage $projectWorkPackage)
     {
         //
     }
@@ -54,10 +54,10 @@ class ProjectWorkpackageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProjectWorkpackage $projectWorkpackage)
+    public function edit(ProjectWorkPackage $projectWorkPackage)
     {
         //
     }
@@ -65,11 +65,11 @@ class ProjectWorkpackageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\ProjectWorkpackageUpdate  $request
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Http\Requests\Admin\ProjectWorkPackageUpdate  $request
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectWorkpackageUpdate $request, ProjectWorkpackage $projectWorkpackage)
+    public function update(ProjectWorkPackageUpdate $request, ProjectWorkPackage $projectWorkPackage)
     {
         //
     }
@@ -77,10 +77,10 @@ class ProjectWorkpackageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProjectWorkpackage  $projectWorkpackage
+     * @param  \App\Models\ProjectWorkPackage  $projectWorkPackage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProjectWorkpackage $projectWorkpackage)
+    public function destroy(ProjectWorkPackage $projectWorkPackage)
     {
         //
     }

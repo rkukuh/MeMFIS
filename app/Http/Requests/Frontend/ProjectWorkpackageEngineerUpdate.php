@@ -4,7 +4,7 @@ namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProjectWorkpackageEngineerUpdate extends FormRequest
+class ProjectWorkPackageEngineerUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

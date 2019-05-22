@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\MemfisModel;
-use App\Models\Pivots\ProjectWorkpackage;
+use App\Models\Pivots\ProjectWorkPackage;
 
-class ProjectWorkpackageEngineer extends MemfisModel
+class ProjectWorkPackageEngineer extends MemfisModel
 {
     protected $fillable = [
         'skill_id',
@@ -16,7 +16,7 @@ class ProjectWorkpackageEngineer extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-Way: A Project Workpackage Engineer must have an engineer assigned to.
+     * One-Way: A Project WorkPackage Engineer must have an engineer assigned to.
      *
      * @return mixed
      */
@@ -29,17 +29,17 @@ class ProjectWorkpackageEngineer extends MemfisModel
      * One-to-Many: A project's workpackage may have one or many engineer.
      *
      * This function will retrieve the header of a project's workpackage.
-     * See: Project Workpackage's engineers() method for the inverse
+     * See: Project WorkPackage's engineers() method for the inverse
      *
      * @return mixed
      */
     public function header()
     {
-        return $this->belongsTo(ProjectWorkpackage::class, 'project_workpackage_id');
+        return $this->belongsTo(ProjectWorkPackage::class, 'project_workpackage_id');
     }
 
     /**
-     * One-Way: A Project Workpackage Engineer must have a skill assigned to.
+     * One-Way: A Project WorkPackage Engineer must have a skill assigned to.
      *
      * @return mixed
      */

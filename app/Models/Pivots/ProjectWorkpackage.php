@@ -4,11 +4,11 @@ namespace App\Models\Pivots;
 
 use App\Models\Project;
 use App\Models\WorkPackage;
-use App\Models\ProjectWorkpackageEngineer;
+use App\Models\ProjectWorkPackageEngineer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ProjectWorkpackage extends Pivot
+class ProjectWorkPackage extends Pivot
 {
     use SoftDeletes;
 
@@ -18,7 +18,7 @@ class ProjectWorkpackage extends Pivot
      * One-to-Many: A project's workpackages may have one or many engineer.
      *
      * This function will retrieve all the engineer of a project's workpackages.
-     * See: Project Workpackage Engineer's header() method for the inverse
+     * See: Project WorkPackage Engineer's header() method for the inverse
      *
      * @return mixed
      */
@@ -28,7 +28,7 @@ class ProjectWorkpackage extends Pivot
         // so these following error will not thrown:
         // "Too few arguments to function Illuminate\Database\Eloquent\Model::setAttribute()"
 
-        return $this->hasMany(ProjectWorkpackageEngineer::class, 'project_workpackage_id');
+        return $this->hasMany(ProjectWorkPackageEngineer::class, 'project_workpackage_id');
     }
 
     /**

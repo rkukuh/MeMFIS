@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\ProjectWorkpackageEngineer;
+use App\Models\ProjectWorkPackageEngineer;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\ProjectWorkpackageEngineerStore;
-use App\Http\Requests\Frontend\ProjectWorkpackageEngineerUpdate;
+use App\Http\Requests\Frontend\ProjectWorkPackageEngineerStore;
+use App\Http\Requests\Frontend\ProjectWorkPackageEngineerUpdate;
 
-class ProjectWorkpackageEngineerController extends Controller
+class ProjectWorkPackageEngineerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class ProjectWorkpackageEngineerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ProjectWorkpackageEngineerStore  $request
+     * @param  \App\Http\Requests\Frontend\ProjectWorkPackageEngineerStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectWorkpackageEngineerStore $request)
+    public function store(ProjectWorkPackageEngineerStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class ProjectWorkpackageEngineerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return \Illuminate\Http\Response
      */
-    public function show(ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function show(ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }
@@ -54,10 +54,10 @@ class ProjectWorkpackageEngineerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function edit(ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }
@@ -65,11 +65,11 @@ class ProjectWorkpackageEngineerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ProjectWorkpackageEngineerUpdate  $request
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Http\Requests\Frontend\ProjectWorkPackageEngineerUpdate  $request
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectWorkpackageEngineerUpdate $request, ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function update(ProjectWorkPackageEngineerUpdate $request, ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }
@@ -77,10 +77,10 @@ class ProjectWorkpackageEngineerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function destroy(ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }

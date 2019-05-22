@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-use App\Models\ProjectWorkpackageEngineer;
+use App\Models\ProjectWorkPackageEngineer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProjectWorkpackageEngineerPolicy
+class ProjectWorkPackageEngineerPolicy
 {
     use HandlesAuthorization;
 
@@ -14,10 +14,10 @@ class ProjectWorkpackageEngineerPolicy
      * Determine whether the user can view the project workpackage engineer.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return mixed
      */
-    public function view(User $user, ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function view(User $user, ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }
@@ -37,10 +37,10 @@ class ProjectWorkpackageEngineerPolicy
      * Determine whether the user can update the project workpackage engineer.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return mixed
      */
-    public function update(User $user, ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function update(User $user, ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }
@@ -49,10 +49,10 @@ class ProjectWorkpackageEngineerPolicy
      * Determine whether the user can delete the project workpackage engineer.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return mixed
      */
-    public function delete(User $user, ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function delete(User $user, ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }
@@ -61,10 +61,10 @@ class ProjectWorkpackageEngineerPolicy
      * Determine whether the user can restore the project workpackage engineer.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return mixed
      */
-    public function restore(User $user, ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function restore(User $user, ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }
@@ -73,10 +73,10 @@ class ProjectWorkpackageEngineerPolicy
      * Determine whether the user can permanently delete the project workpackage engineer.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\ProjectWorkpackageEngineer  $projectWorkpackageEngineer
+     * @param  \App\Models\ProjectWorkPackageEngineer  $projectWorkPackageEngineer
      * @return mixed
      */
-    public function forceDelete(User $user, ProjectWorkpackageEngineer $projectWorkpackageEngineer)
+    public function forceDelete(User $user, ProjectWorkPackageEngineer $projectWorkPackageEngineer)
     {
         //
     }

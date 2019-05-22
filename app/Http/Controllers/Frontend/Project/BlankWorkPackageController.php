@@ -41,7 +41,7 @@ class BlankWorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request,Project $project)
     {
-        $workpackage = Workpackage::create($request->all());
+        $workpackage = WorkPackage::create($request->all());
         $project->workpackages()->attach($workpackage);
 
         return response()->json($workpackage);

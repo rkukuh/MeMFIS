@@ -125,7 +125,7 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
-                                                                @slot('text', 'Workpackage Summary')
+                                                                @slot('text', 'Work Package Summary')
                                                                 @slot('href', route('frontend.summary.workpackage-summary') )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
@@ -145,7 +145,7 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
-                                                                @slot('text', 'Workpackage Summary')
+                                                                @slot('text', 'Work Package Summary')
                                                                 @slot('href', route('frontend.summary.workpackage-summary') )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')

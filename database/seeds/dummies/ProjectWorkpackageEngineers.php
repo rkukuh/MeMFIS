@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\ProjectWorkpackageEngineer;
+use App\Models\ProjectWorkPackageEngineer;
 
-class ProjectWorkpackageEngineers extends Seeder
+class ProjectWorkPackageEngineers extends Seeder
 {
     /**
      * Run the database seeds.

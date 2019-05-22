@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\ProjectWorkpackage;
 use Faker\Generator as Faker;
+use App\Models\ProjectWorkPackage;
 
-$factory->define(ProjectWorkpackage::class, function (Faker $faker) {
+$factory->define(ProjectWorkPackage::class, function (Faker $faker) {
 
     return [
         //

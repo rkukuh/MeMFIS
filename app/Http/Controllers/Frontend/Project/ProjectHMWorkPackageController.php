@@ -61,7 +61,7 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, Workpackage $workPackage)
+    public function show(Project $project, WorkPackage $workPackage)
     {
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
@@ -81,7 +81,7 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project, Workpackage $workPackage)
+    public function edit(Project $project, WorkPackage $workPackage)
     {
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
@@ -113,7 +113,7 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project,WorkPackage $workPackage)
+    public function destroy(Project $project, WorkPackage $workPackage)
     {
         $project->workpackages()->detach($workPackage);
 
