@@ -34,12 +34,13 @@
                             @slot('value', $total_pfrm_factor)
                             @slot('text', 'TaskCard Performance Factor')
                             @slot('style_div','margin-top:10px')
+                            @slot('help_text','If Checked, Project will use TaskCard Performance Factor')
                             {{-- @slot('checked', 'checked') --}}
                         @endcomponent
                     </div>
-                    <div class="col-sm-1 col-md-1 col-lg-1"  style="margin-left:-350px;margin-top:10px">
+                    <!-- <div class="col-sm-1 col-md-1 col-lg-1"  style="margin-left:-350px;margin-top:10px">
                         <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="" data-original-title="If Checked, Project will use TaskCard Performance Factor"></i>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
