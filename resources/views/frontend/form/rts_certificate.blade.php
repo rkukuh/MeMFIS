@@ -32,7 +32,7 @@
     font-size: 16px;
   }
   #content .image img{
-    height: 1050px;
+    height: 1058px;
     width: 100%;
     position: absolute;
     top:0;

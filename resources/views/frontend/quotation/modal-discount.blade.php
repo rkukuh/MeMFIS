@@ -22,6 +22,20 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
+                                    Type @include('frontend.common.label.required')
+                                </label>
+
+                                @component('frontend.common.input.select2')
+                                    @slot('text', 'Discount')
+                                    @slot('name', 'discount-type')
+                                    @slot('id', 'discount-type')
+                                    @slot('id_error', 'discount-type')
+                                @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <label class="form-control-label">
                                     Discount @include('frontend.common.label.required')
                                 </label>
 

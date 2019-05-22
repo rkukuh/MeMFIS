@@ -347,6 +347,8 @@
       </table>
     </div>
   </div>
-
+  <div style="margin-top:14px;">
+    <img src="./img/FooterJobCardRoutine.jpg" width="100%" alt="" srcset="">
+  </div>
 </body>
 </html>
