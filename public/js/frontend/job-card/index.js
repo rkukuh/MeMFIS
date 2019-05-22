@@ -1,4 +1,4 @@
-let Item = {
+let JobCard = {
     init: function () {
         function strtrunc(str, max, add) {
             add = add || '...';
@@ -66,7 +66,7 @@ let Item = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'taskcard.task',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
@@ -238,5 +238,5 @@ let Item = {
 };
 
 jQuery(document).ready(function () {
-    Item.init();
+    JobCard.init();
 });

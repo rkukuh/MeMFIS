@@ -285,9 +285,11 @@ Route::name('frontend.')->group(function () {
                     /** Transaction: Item */
                     Route::post('/{taskcard}/item', 'TaskCardRoutineItemsController@store')->name('item.store');
                     Route::delete('/{taskcard}/{item}/item', 'TaskCardRoutineItemsController@destroy')->name('item.destroy');
+
                     /** Transaction: Threshold */
                     Route::post('/{taskcard}/threshold', 'TaskCardRoutineThresholdController@store')->name('threshold.store');
                     Route::delete('/{taskcard}/{threshold}/threshold', 'TaskCardRoutineThresholdController@destroy')->name('itthresholdem.destroy');
+                    
                     /** Transaction: Repeat */
                     Route::post('/{taskcard}/repeat', 'TaskCardRoutineRepeatController@store')->name('repeat.store');
                     Route::delete('/{taskcard}/{repeat}/repeat', 'TaskCardRoutineRepeatController@destroy')->name('repeat.destroy');
@@ -341,13 +343,13 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['jobcard-engineer' => 'jobcard']
             ]);
 
-            Route::get('jobcard-engineer/{jobcard}', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
+            Route::post('jobcard-engineer', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
 
             Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
 
-            Route::get('jobcard-mechanic/{jobcard}', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
+            Route::post('jobcard-mechanic/', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
 
             Route::name('jobcard.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
@@ -414,11 +416,11 @@ Route::name('frontend.')->group(function () {
         Route::namespace('PurchaseRequest')->group(function () {
             Route::resource('purchase-request', 'PurchaseRequestController');
 
-                Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
-                Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
+            Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
+            Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
 
             Route::name('purchase-request.')->group(function () {
-
+                // 
             });
         });
 
@@ -430,6 +432,7 @@ Route::name('frontend.')->group(function () {
             Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
 
             Route::name('purchase-order.')->group(function () {
+                // 
             });
         });
 
@@ -441,6 +444,7 @@ Route::name('frontend.')->group(function () {
             Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
 
             Route::name('goods-received.')->group(function () {
+                // 
             });
         });
 

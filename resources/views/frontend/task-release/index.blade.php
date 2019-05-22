@@ -53,6 +53,9 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-8 order-2 order-xl-1">
                                         <div class="form-group m-form__group row align-items-center">
+                                            <div class="col-md-2">
+                                                @include('frontend.common.buttons.filter')
+                                            </div>   
                                             <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
                                                     <input type="text" class="form-control m-input" placeholder="Search..."
@@ -74,6 +77,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @include('frontend.task-release.filter')
 
                             <div class="taskrelease_datatable" id="scrolling_both"></div>
                         </div>

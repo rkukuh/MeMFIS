@@ -53,7 +53,7 @@
                                 <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                     <div class="col-md-4">
                                         <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" id="search" name="search" placeholder="Search...">
+                                            <input type="text" class="form-control m-input" id="search" name="search" placeholder="Search...">
 
                                             {{-- <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch"> --}}
                                             <span class="m-input-icon__icon m-input-icon__icon--left">
@@ -61,22 +61,28 @@
                                             </span>
                                         </div>
                                         <div class="d-flex justify-content-end mt-4 search">
+                                            @include('frontend.common.buttons.filter')
+
                                             @include('frontend.common.buttons.search')
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                </div>
 
-                <div class="m-portlet m-portlet--mobile">
-                    <div class="m-portlet__body">
-                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="col-xl-4 order-1 order-xl-2 m--align-right">
 
-                            <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                <div class="m-separator m-separator--dashed d-xl-none"></div>
+                            </div>
+                            <div class="col-lg-12">
+                                @include('frontend.job-card.filter')
+                            </div>
+                            <div class="job_card_datatable" id="scrolling_both"></div>
                         </div>
-                        <div class="job_card_datatable" id="scrolling_both"></div>
 
                         @include('frontend.job-card.engineer.tool.index')
                         @include('frontend.job-card.engineer.item.index')
@@ -91,16 +97,16 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
-    <script>
-        $('.search').on('click', '.search', function () {
-            let search = $('input[name=search]').val();
+<script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
+<script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
+<script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
+<script>
+    $('.search').on('click', '.search', function() {
+        let search = $('input[name=search]').val();
 
-            window.location.href = '/jobcard-engineer/' + search ;
-        });
-    </script>
+        window.location.href = '/jobcard-engineer/' + search;
+    });
+</script>
 
 @endpush

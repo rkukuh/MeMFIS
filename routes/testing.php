@@ -46,6 +46,26 @@ Route::name('testing.')->group(function () {
             ]);
         });
 
+        Route::get('/jobcard', function () {
+
+            $project = App\Models\Project::first();
+            foreach($project->workpackages as $wp){
+                foreach($wp->taskcards as $tc){
+                    App\Models\JobCard::create([
+                        'number' => 'JC-DUM-TES',
+                        'taskcard_id' => $tc->id,
+                        'data_taskcard' => $tc->toJson(),
+                        'data_taskcard_items' => $tc->items->toJson(),
+                    ]);                    // // echo $tc->title.'<br>';
+                    // foreach($tc->items as $item){
+                    //     echo $item->name.'<br>';
+                    // }
+                    // dump($tc->materials->toJson());
+                }
+            }
+
+        });
+
     });
 
 });
