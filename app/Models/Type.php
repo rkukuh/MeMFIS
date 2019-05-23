@@ -160,6 +160,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Project WorkPackage Manhour proportion.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfProjectWorkPackageManhour(Builder $query)
+    {
+        return $query->where('of', 'project-workpackage-manhour');
+    }
+
+    /**
      * Scope a query to only include type of Purchase Request.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
