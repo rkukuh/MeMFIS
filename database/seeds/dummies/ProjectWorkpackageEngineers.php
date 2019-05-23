@@ -24,7 +24,6 @@ class ProjectWorkPackageEngineers extends Seeder
                 $project_workpackage->engineers()->create([
                     'skill_id' => Type::ofTaskCardSkill()->get()->random()->id,
                     'engineer_id' => Employee::get()->random()->id,
-                    'tat' => $faker->randomDigitNotNull,
                 ]);
             }
         }

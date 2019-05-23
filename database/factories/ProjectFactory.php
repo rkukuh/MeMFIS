@@ -78,6 +78,7 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
                 null,
                 (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
             ]),
+            'tat' => $faker->randomDigitNotNull,
         ]);
     }
 

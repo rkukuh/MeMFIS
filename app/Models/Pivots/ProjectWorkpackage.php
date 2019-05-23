@@ -26,10 +26,6 @@ class ProjectWorkPackage extends Pivot
      */
     public function engineers()
     {
-        // This method must have a second parameter as FK column (project_workpackage_id),
-        // so these following error will not thrown:
-        // "Too few arguments to function Illuminate\Database\Eloquent\Model::setAttribute()"
-
         return $this->hasMany(ProjectWorkPackageEngineer::class, 'project_workpackage_id');
     }
 
