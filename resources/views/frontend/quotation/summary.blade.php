@@ -4,17 +4,22 @@
 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
 
     <div class="summary_datatable" id="scrolling_both"></div>
-    <br><hr>
+    <br>
+    <hr>
     <div class="form-group m-form__group row">
         <div class="col-sm-6 col-md-6 col-lg-6">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-            Sub Total
+           <div class="m--align-left" style="padding-top:15px">
+                Sub Total
+           </div> 
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
             @component('frontend.common.label.data-info')
                 @slot('id', 'sub_total')
+                @slot('class', 'sub_total')
                 @slot('text', $quotation->subtotal)
+                @slot('value', $quotation->subtotal)
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
@@ -36,7 +41,7 @@
                         </select>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                            @component('frontend.common.input.text')
+                        @component('frontend.common.input.text')
                             @slot('id', 'document')
                             @slot('name', 'document')
                         @endcomponent
@@ -55,12 +60,16 @@
         <div class="col-sm-6 col-md-6 col-lg-6">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-            Total in Rupiah
+            <div class="m--align-left" style="padding-top:15px">
+                Total in Rupiah
+            </div>
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
             @component('frontend.common.label.data-info')
-                @slot('id', 'sub_total')
-                @slot('text', 'Rp '.$quotation->grandtotal)
+                @slot('id', 'grand_total')
+                @slot('class', 'grand_total')
+                @slot('text', $quotation->grandtotal)
+                @slot('value', $quotation->grandtotal)
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">

@@ -3,6 +3,12 @@
 let Quotation = {
     init: function() {
             let exchange_rate_value = $('input[name=exchange]').val();
+            $( document ).ready(function() {
+               let GTotal = formatter.format(document.getElementById("grand_total").innerHTML);
+               document.getElementById("grand_total").innerHTML = GTotal;
+                console.log($('#grand_total'));
+
+            });
 
             $('select[name="currency"]').on('change', function() {
                 let exchange_id = this.options[this.selectedIndex].innerHTML;
@@ -350,6 +356,7 @@ let Quotation = {
         });
 
         $('.footer').on('click', '.update-quotation', function() {
+            console.log($('#sub_total').val());
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
