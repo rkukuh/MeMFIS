@@ -1,21 +1,15 @@
-// untuk formatting angka pada kolom cost
 var locale = 'id';
 var options = { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 };
 var formatter = new Intl.NumberFormat(locale, options);
 let total = 0;
 let quotation = $('#quotation_uuid').val();
 
-// untuk datatable dengan accordion pada row tersebut
 var DatatableAutoColumnHideDemo = function () {
-  //== Private functions
 
-  // basic demo
   var demo = function () {
     console.log(quotation);
-    // var dataJSONArrayLong = JSON.parse('[{ "OrderID" : "OrderID","ShipCountry" : "ShipCountry","ShipCity" : "ShipCity","Currency" : "Currency","ShipDate" : "ShipDate", "Latitude" : "Latitude","Longitude" : "Longitude","Notes" : "Notes","Department" : "Department","Website" : "Website", "TotalPayment" : "TotalPayment","Status" : 1,"Type" : 1},{ "OrderID" : "OrderID","ShipCountry" : "ShipCountry","ShipCity" : "ShipCity","Currency" : "Currency","ShipDate" : "ShipDate", "Latitude" : "Latitude","Longitude" : "Longitude","Notes" : "Notes","Department" : "Department","Website" : "Website", "TotalPayment" : "TotalPayment","Status" : 1,"Type" : 1}]');
 
     $('.summary_datatable').mDatatable({
-      // datasource definition
       data: {
         type: 'remote',
         source: {
@@ -37,23 +31,19 @@ var DatatableAutoColumnHideDemo = function () {
         serverPaging: !1,
         serverSorting: !1
 
-        //   saveState: false,
-        //   serverPaging: true,
-        //   serverFiltering: true,
-        //   serverSorting: true,
-      },
+    },
       responsive: true,
-      // column sorting
+
       sortable: true,
 
       pagination: true,
 
       toolbar: {
-        // toolbar items
+
         items: {
-          // pagination
-          pagination: {
-            // page size select
+
+            pagination: {
+
             pageSizeSelect: [10, 20, 30, 50, 100],
           },
         },
@@ -64,11 +54,11 @@ var DatatableAutoColumnHideDemo = function () {
       },
 
       rows: {
-        // auto hide columns, if rows overflow
-        //   autoHide: true,
+
+
       },
 
-      // columns definition
+
       columns: [
         {
           field: 'code',
@@ -116,7 +106,6 @@ var DatatableAutoColumnHideDemo = function () {
   };
 
   return {
-    // public functions
     init: function () {
       demo();
     },
