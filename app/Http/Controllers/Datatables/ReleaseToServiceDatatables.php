@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\TaskRelease;
+namespace App\Http\Controllers\Datatables;
 
 use App\Models\TaskCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TaskReleaseDatatables extends Controller
+class ReleaseToServiceDatatables extends Controller
 {
     /**
      * Display a listing of the resource.

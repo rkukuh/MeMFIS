@@ -60,7 +60,7 @@
         <div class="col-sm-2 col-md-2 col-lg-2">
             @component('frontend.common.label.data-info')
                 @slot('id', 'sub_total')
-                @slot('text', $quotation->grandtotal)
+                @slot('text', 'Rp '.$quotation->grandtotal)
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">

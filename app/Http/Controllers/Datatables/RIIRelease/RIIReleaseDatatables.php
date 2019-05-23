@@ -124,47 +124,48 @@ class RIIReleaseDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function filter()
+    public function filter(Request $request)
     {
         $JobCard=JobCard::with('taskcard');
 
-        if ($request->has('task_type_id')) {
-            $JobCard->where('age', '>', $request->age_more_than);
-        }
-        if ($request->has('applicability_airplane')) {
-            $JobCard->where('gender', $request->gender);
-        }
-        if ($request->has('otr_certification')) {
-            $JobCard->where('gender', $request->gender);
-        }
-        if ($request->has('project_no')) {
-            $JobCard->where('gender', $request->gender);
-        }
-        if ($request->has('taskcard_routine_type')) {
-            $JobCard->where('gender', $request->gender);
-        }
-        if ($request->has('date_issued')) {
-            $JobCard->where('gender', $request->gender);
-        }
-        if ($request->has('jc_no')) {
-            $JobCard->where('gender', $request->gender);
-        }
-        if ($request->has('customer')) {
-            $JobCard->where(function ($query) use ($request) {
-                $query->whereHas('posts', function ($query) use ($request) {
-                    $query->where('is_published', $request->has_published_post);
-                });
+        if (!empty($request->task_type_id)) {
+            $JobCard->whereHas('taskcard', function ($query) use ($request) {
+                $query->where('task_id', $request->task_type_id);
             });
         }
-        if ($request->has('status_jobcard')) {
-            $JobCard->where('gender', $request->gender);
+        if (!empty($request->applicability_airplane)) {
+            $JobCard->whereHas('applicability_airplane', function ($query) use ($request) {
+                $query->whereIn('id', $request->applicability_airplane);
+            });
         }
-        // if ($request->has('has_published_post')) {
-        //     $JobCard->where(function ($query) use ($request) {
-        //         $query->whereHas('posts', function ($query) use ($request) {
-        //             $query->where('is_published', $request->has_published_post);
-        //         });
+        // if (!empty($request->otr_certification)) {
+        //     $JobCard->whereHas('otr_certification', function ($query) use ($request) {
+        //         $query->where('id', $request->otr_certification);
         //     });
+        // }
+        if (!empty($request->project_no)) {
+            $JobCard->orderBy('project_no', $request->project_no);
+        }
+        // if (!empty($request->taskcard_routine_type)) {
+        //     $JobCard->whereHas('taskcard_routine_type', function ($query) use ($request) {
+        //     $query->where('task_id', $request->task_type_id);
+        // });
+        // }
+        if (!empty($request->date_issued)) {
+            $JobCard->orderBy('created_at', $request->date_issued);
+        }
+        if (!empty($request->jc_no)) {
+            $JobCard->orderBy('number', $request->jc_no);
+        }
+        if (!empty($request->customer)) {
+            $request->whereHas('otr_certification', function ($query) use ($request) {
+                $query->where('id', $request->otr_certification);
+            });
+        }
+        // if (!empty($request->status_jobcard)) {
+        //      $request->whereHas('statuses', function ($query) use ($request) {
+        //     $query->where('id', $request->status_jobcard);
+        // });
         // }
 
         $data = $alldata = json_decode($JobCard->get());

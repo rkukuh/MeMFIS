@@ -407,6 +407,26 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** Release To Service */
+
+        Route::name('rii-release.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'release-to-service',
+                // 'namespace' => 'ReleaseToServices'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'ReleaseToServiceDatatables@index')->name('all');
+                Route::post('/filter/', 'ReleaseToServiceDatatables@filter')->name('filter');
+
+
+            });
+
+        });
+
         /** JOB CARD */
 
         Route::name('jobcard.')->group(function () {
