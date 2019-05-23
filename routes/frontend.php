@@ -103,6 +103,7 @@ Route::name('frontend.')->group(function () {
         /** PROJECT'S WORKPACKAGE */
 
         Route::resource('project-workpackage', 'ProjectWorkPackageController');
+        Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
 
         /** QUOTATION */
