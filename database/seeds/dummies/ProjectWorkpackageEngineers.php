@@ -15,8 +15,6 @@ class ProjectWorkPackageEngineers extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-
         for ($i = 1; $i <= ProjectWorkPackage::count(); $i++) {
             $project_workpackage = ProjectWorkPackage::find($i);
 
