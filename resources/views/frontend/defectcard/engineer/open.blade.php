@@ -187,10 +187,10 @@
                                   </label>
 
                                   @component('frontend.common.input.select2')
-                                      @slot('id', 'skill')
+                                      @slot('id', 'otr_certification')
                                       @slot('text', 'Skill')
-                                      @slot('name', 'skill')
-                                      @slot('id_error', 'skill')
+                                      @slot('name', 'otr_certification')
+                                      @slot('id_error', 'otr_certification')
                                   @endcomponent
                               </div>
                           </div>
@@ -475,5 +475,6 @@
   <script src="{{ asset('js/frontend/functions/select2/zone.js')}}"></script>
   <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js')}}"></script>
 
-  <script src="{{ asset('js/frontend/functions/select2/skill.js')}}"></script>
+  <script src="{{ asset('js/frontend/functions/select2/otr-certification.js')}}"></script>
+  <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js')}}"></script>
 @endpush
