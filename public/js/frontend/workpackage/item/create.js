@@ -684,6 +684,22 @@ let Workpackage3 = {
                     title: 'Marketing Note',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        // if(t.pivot.discount_value == null && t.pivot.discount_type == null){
+                            return (
+                                '<button data-toggle="modal" data-target="#non_routine_tool_note" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                                t.uuid +
+                                '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                              );
+                        // }
+                        // else{
+                        //     return (
+                        //         formatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                        //         t.uuid +
+                        //         '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        //     );
+                        // }
+                      }
                 },
                 {
                     field: 'Actions',
