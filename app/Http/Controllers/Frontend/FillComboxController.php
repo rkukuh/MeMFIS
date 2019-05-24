@@ -620,6 +620,18 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function employee()
+    {
+        $employees = Employee::pluck('first_name','code','id');
+
+        return json_encode($employees);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function workOrder()
     {
         $work_order = Project::pluck('no_wo','uuid');
