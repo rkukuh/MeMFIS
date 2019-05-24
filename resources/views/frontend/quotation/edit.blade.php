@@ -402,7 +402,7 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            @include('frontend.quotation.summary')
+                                            @include('frontend.quotation.summaryEdit')
                                             @include('frontend.quotation.modal-discount')
                                         </div>
                                     </div>

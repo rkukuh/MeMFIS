@@ -80,6 +80,7 @@ var DatatableAutoColumnHideDemo = function () {
           title: 'Cost',
           template: function (a) {
             document.getElementById("sub_total").innerHTML = formatter.format(total);
+            $("#sub_total").attr("value", total);
             return ('Cost<br>' +
               formatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
               ' 138'
