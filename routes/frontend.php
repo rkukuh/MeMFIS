@@ -115,6 +115,7 @@ Route::name('frontend.')->group(function () {
             Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
             Route::prefix('quotation')->group(function () {
+                Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
                 Route::resource('/{project}/workpackage', 'QuotationWorkPackageController', [
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
@@ -292,7 +293,7 @@ Route::name('frontend.')->group(function () {
                     /** Transaction: Threshold */
                     Route::post('/{taskcard}/threshold', 'TaskCardRoutineThresholdController@store')->name('threshold.store');
                     Route::delete('/{taskcard}/{threshold}/threshold', 'TaskCardRoutineThresholdController@destroy')->name('itthresholdem.destroy');
-                    
+
                     /** Transaction: Repeat */
                     Route::post('/{taskcard}/repeat', 'TaskCardRoutineRepeatController@store')->name('repeat.store');
                     Route::delete('/{taskcard}/{repeat}/repeat', 'TaskCardRoutineRepeatController@destroy')->name('repeat.destroy');
@@ -423,7 +424,7 @@ Route::name('frontend.')->group(function () {
             Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
 
             Route::name('purchase-request.')->group(function () {
-                // 
+                //
             });
         });
 
@@ -435,7 +436,7 @@ Route::name('frontend.')->group(function () {
             Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
 
             Route::name('purchase-order.')->group(function () {
-                // 
+                //
             });
         });
 
@@ -447,7 +448,7 @@ Route::name('frontend.')->group(function () {
             Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
 
             Route::name('goods-received.')->group(function () {
-                // 
+                //
             });
         });
 

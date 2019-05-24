@@ -10,9 +10,9 @@
         <div class="col-sm-6 col-md-6 col-lg-6">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-           <div class="m--align-left" style="padding-top:15px">
+            <div class="m--align-left" style="padding-top:15px">
                 Sub Total
-           </div> 
+            </div>
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
             @component('frontend.common.label.data-info')
@@ -41,10 +41,10 @@
                         </select>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        @component('frontend.common.input.text')
-                            @slot('id', 'document')
-                            @slot('name', 'document')
-                            @slot('class', 'document')
+                        @component('frontend.common.input.number')
+                            @slot('id', 'extra')
+                            @slot('name', 'extra')
+                            @slot('class', 'extra')
                         @endcomponent
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1">
@@ -69,11 +69,15 @@
             @component('frontend.common.label.data-info')
                 @slot('id', 'grand_total')
                 @slot('class', 'grand_total')
-                @slot('text', $quotation->grandtotal)
-                @slot('value', $quotation->grandtotal)
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
+            <div class="btn btn-default calculate" id="calculate">
+                <span>
+                    <i class="fa fa-calculator"></i>
+                    Calculate
+                </span>
+            </div>
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
         </div>

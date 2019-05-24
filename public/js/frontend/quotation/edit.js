@@ -3,6 +3,12 @@
 let Quotation = {
     init: function() {
             let exchange_rate_value = $('input[name=exchange]').val();
+            $( document ).ready(function() {
+               let GTotal = formatter.format(document.getElementById("grand_total").innerHTML);
+               document.getElementById("grand_total").innerHTML = GTotal;
+                console.log($('#grand_total'));
+
+            });
 
             $('select[name="currency"]').on('change', function() {
                 let exchange_id = this.options[this.selectedIndex].innerHTML;
@@ -139,6 +145,69 @@ let Quotation = {
             });
         });
 
+        $('.summary_datatable').on('click', '.discount', function edit () {
+            document.getElementById("workpackage_uuid").value = $(this).data('uuid');
+        });
+
+        $('.calculate').on('click', function edit () {
+            var nilai = [];
+            var inputs = $(".extra");
+            //get all values
+            for(var i = 0; i < inputs.length; i++){
+                nilai[i] = parseInt($(inputs[i]).val());
+            }
+            //sum semua nilai pada array
+            const arrSum = arr => arr.reduce((a,b) => a + b, 0);
+            let subTotal = $('#sub_total').attr("value");
+            let grandTotal = subTotal + arrSum(nilai);
+            $('#grand_total').attr("value",grandTotal);
+            $('#grand_total').html(formatter.format(grandTotal));
+        });
+
+        $('.action-buttons').on('click', '.discount', function () {
+            let type = $('#discount-type').val();
+            let discount = $('input[name=discount]').val();
+            let quotation = $('#quotation_uuid').val();
+            let workpackage = $('#workpackage_uuid').val();
+
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/quotation/'+quotation+'/workpackage/'+workpackage+'/discount',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    discount_type: type,
+                    discount_value: discount,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#discount').modal('hide');
+
+
+                        toastr.success('Discount has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+
+                        let table = $('.summary_datatable').mDatatable();
+
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
         $('.nav-tabs').on('click', '.workpackage', function () {
             let workpackage = $('.workpackage_datatable').mDatatable();
 
@@ -252,7 +321,7 @@ let Quotation = {
             });
         });
 
-        $('.footer').on('click', '.update-quotation', function() {
+        $('.footer').on('click', '.add-quotation', function() {
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -268,6 +337,16 @@ let Quotation = {
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
+            data.append("subtotal", $('#sub_total').attr("value"));
+            data.append("grandtotal", $('#grand_total').attr("value"));
+            
+            var charge = [];
+            var chargeInputs = $(".extra");
+            //get all values
+            for(var i = 0; i < chargeInputs.length; i++){
+                charge[i] = parseInt($(chargeInputs[i]).val());
+            }
+            data.append("charge", JSON.stringify(charge));
             data.append('_method', 'PUT');
 
             $.ajax({

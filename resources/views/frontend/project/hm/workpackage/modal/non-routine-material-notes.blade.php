@@ -1,4 +1,4 @@
-<div class="modal fade" id="discount"  role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="non_routine_material_note"  role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
@@ -6,7 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalItem">
-                    Discount
+                    Marketing Note
 
                     <small id="item-storage" class="m--font-focus"></small>
                 </h5>
@@ -22,28 +22,15 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Type @include('frontend.common.label.required')
+                                    Marketing Notes @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Discount')
-                                    @slot('name', 'discount-type')
-                                    @slot('id', 'discount-type')
-                                    @slot('id_error', 'discount-type')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label class="form-control-label">
-                                    Discount @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.number')
-                                    @slot('text', 'Discount')
-                                    @slot('name', 'discount')
-                                    @slot('id', 'discount')
-                                    @slot('id_error', 'discount')
+                                @component('frontend.common.input.textarea')
+                                    @slot('text', 'Note')
+                                    @slot('name', 'note')
+                                    @slot('id', 'note')
+                                    @slot('rows', '3')
+                                    @slot('id_error', 'note')
                                 @endcomponent
                             </div>
                         </div>

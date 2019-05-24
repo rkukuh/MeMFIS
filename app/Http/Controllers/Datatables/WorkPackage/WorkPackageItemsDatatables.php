@@ -17,7 +17,8 @@ class WorkPackageItemsDatatables extends Controller
      */
     public function generalMaterial(WorkPackage $workPackage)
     {
-        $data = $alldata = json_decode($workPackage->materials);
+        // dd($workPackage);
+        $data = $alldata = json_decode($workPackage->items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -210,7 +211,7 @@ class WorkPackageItemsDatatables extends Controller
     public function material($workPackage)
     {
         $workPackage = WorkPackage::with('taskcards.items')->where('uuid',$workPackage)->first();
-        
+
         $data = $alldata = json_decode($workPackage->taskcards);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -308,7 +309,7 @@ class WorkPackageItemsDatatables extends Controller
     public function tool($workPackage)
     {
         $workPackage = WorkPackage::with('taskcards.items')->where('uuid',$workPackage)->first();
-        
+
         $data = $alldata = json_decode($workPackage);
 
         dd($data);

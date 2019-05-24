@@ -1,6 +1,6 @@
-var locale = 'id';
-var options = { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 };
-var formatter = new Intl.NumberFormat(locale, options);
+let locale = 'id';
+let options = { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+let formatter = new Intl.NumberFormat(locale, options);
 let total = 0;
 let quotation = $('#quotation_uuid').val();
 
@@ -79,8 +79,8 @@ var DatatableAutoColumnHideDemo = function () {
           field: 'ShipCity',
           title: 'Cost',
           template: function (a) {
-            total = total + a.pivot.manhour_total * a.pivot.manhour_rate + 138;
             document.getElementById("sub_total").innerHTML = formatter.format(total);
+            $("#sub_total").attr("value", total);
             return ('Cost<br>' +
               formatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
               ' 138'
@@ -88,16 +88,62 @@ var DatatableAutoColumnHideDemo = function () {
           }
         },
         {
-          field: 'Currency',
-          title: 'Disc %',
+          field: 'discount',
+          title: 'Discount',
           sortable: 'asc',
           filterable: !1,
           template: function (t, e, i) {
-            return (
-              '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-              t.uuid +
-              '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-            );
+            if(t.pivot.discount_value == null && t.pivot.discount_type == null){
+                return (
+                    '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                    t.uuid +
+                    '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                  );
+            }
+            else{
+                if(t.pivot.discount_type ==  'amount'){
+                    return (
+                        formatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                        t.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                }
+                else if(t.pivot.discount_type == 'percentage'){
+                    return (
+                        t.pivot.discount_value+'%'+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                        t.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                }
+            }
+          }
+        },
+        {
+          field: 'total',
+          title: 'Total',
+          sortable: 'asc',
+          filterable: !1,
+          template: function (t, e, i) {
+            if(t.pivot.discount_value == null && t.pivot.discount_type == null){
+                total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138;
+                return (
+                    formatter.format(total)
+                  );
+            }
+            else{
+                if(t.pivot.discount_type ==  'amount'){
+                    total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
+                    return (
+                        formatter.format(total)
+                    );
+                }
+                else if(t.pivot.discount_type == 'percentage'){
+                    total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
+                    return (
+                        formatter.format(total)
+                    );
+                }
+            }
           }
         },
       ],

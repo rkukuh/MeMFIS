@@ -26,7 +26,7 @@ class QuotationUpdate extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => 'required|exists:customers,id', 
+            'customer_id' => 'required|exists:customers,uuid', 
             'project_id' => 'required|exists:projects,uuid', 
             'requested_at' => 'required|date', 
             'valid_until' => 'required|date', 
