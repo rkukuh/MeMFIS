@@ -9,7 +9,7 @@ use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
@@ -143,6 +143,22 @@ class QuotationController extends Controller
     public function project($project)
     {
         return response()->json($project);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function discount( Request $request, Quotation $quotation, WorkPackage $workpackage)
+    {
+        // dd($workpackage);
+        // $Quotation->workpackages()->updateExistingPivot($WorkPackage, ['discount_value'=>$request->discount_value]);
+        $quotation->workpackages()->updateExistingPivot($workpackage, ['discount_type'=>$request->discount_type,'discount_value'=>$request->discount_value]);
+
+        return response()->json($quotation);
+
     }
 
 }

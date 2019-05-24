@@ -145,6 +145,53 @@ let Quotation = {
             });
         });
 
+        $('.summary_datatable').on('click', '.discount', function edit () {
+            document.getElementById("workpackage_uuid").value = $(this).data('uuid');
+        });
+        $('.action-buttons').on('click', '.discount', function () {
+            let type = $('#discount-type').val();
+            let discount = $('input[name=discount]').val();
+            let quotation = $('#quotation_uuid').val();
+            let workpackage = $('#workpackage_uuid').val();
+
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/quotation/'+quotation+'/workpackage/'+workpackage+'/discount',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    discount_type: type,
+                    discount_value: discount,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#discount').modal('hide');
+
+
+                        toastr.success('Discount has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+
+                        let table = $('.summary_datatable').mDatatable();
+
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
         $('.nav-tabs').on('click', '.workpackage', function () {
             let workpackage = $('.workpackage_datatable').mDatatable();
 
