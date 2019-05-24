@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\WorkPackage;
 
 use App\Models\Aircraft;
+use App\Models\Project;
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
 use App\Models\TaskCard;
@@ -49,7 +50,12 @@ class WorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        $workpackage = Workpackage::create($request->all());
+        $workpackage = WorkPackage::create($request->all());
+
+        if ($workpackage->is_template == 0 && $request->project_uuid) {
+            $project = Project::where('uuid',$request->project_uuid)->first();
+            $project->workpackages()->attach($workpackage);
+        }
 
         return response()->json($workpackage);
     }
@@ -104,6 +110,36 @@ class WorkPackageController extends Controller
         $workPackage = WorkPackage::find($workPackage);
         // $workPackage->name = $request->name;
         // $workPackage->save();
+
+        return response()->json($workPackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function sequence(Request $request, WorkPackage $workPackage,TaskCard $taskcard)
+    {
+
+        $workPackage->taskcards()->updateExistingPivot($taskcard, ['sequence'=>$request->sequence]);
+
+        return response()->json($workPackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function mandatory(Request $request, WorkPackage $workPackage, TaskCard $taskcard)
+    {
+
+        $workPackage->taskcards()->updateExistingPivot($taskcard, ['is_mandatory'=>$request->is_mandatory]);
 
         return response()->json($workPackage);
     }

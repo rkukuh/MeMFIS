@@ -181,6 +181,7 @@ class PurchaseOrderDatatables extends Controller
             }
 
             $columnsDefault = [
+                'uuid'     => true,
                 'ordered_at'     => true,
                 'number'     => true,
                 'purchase_request'     => true,

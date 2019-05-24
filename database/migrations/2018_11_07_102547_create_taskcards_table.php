@@ -32,6 +32,7 @@ class CreateTaskcardsTable extends Migration
             $table->string('effectivity')->nullable();
             $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
             $table->unsignedInteger('sequence')->nullable();
+            $table->json('stringer')->nullable(); // for CPCP only
             $table->json('version')->nullable();
             $table->longText('description')->nullable();
 

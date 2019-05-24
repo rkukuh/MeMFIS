@@ -32,6 +32,7 @@
     style="padding-left: {{ $padding_left or '0' }}"
 >
     <span class="m-form__help">
+    <i class="fa fa-info-circle m--font-info"></i>
         {{ $help_text or '' }}
     </span>
 </div>

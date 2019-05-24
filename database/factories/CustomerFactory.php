@@ -19,11 +19,31 @@ $factory->define(Customer::class, function (Faker $faker) {
     return [
         'code' => 'CUS-DUM-' . $number,
         'name' => 'Customer Dummy #' . $number,
+        'attention' => function () use ($faker) {
+            $attentions = [];
+
+            for ($person = 1; $person <= rand(1, 5); $person++) {
+                
+                $contact['name']     = $faker->name;
+                $contact['position'] = $faker->randomElement(['CEO', 'CTO', 'CFO', 'CMO', 'Director']);
+
+                unset($contact['phones']);
+                for ($phone = 0; $phone <= rand(0, 3); $phone++) {
+                    $contact['phones'][] = $faker->phoneNumber;
+                }
+
+                unset($contact['emails']);
+                for ($email = 0; $email <= rand(0, 3); $email++) {
+                    $contact['emails'][] = $faker->freeEmail;
+                }
+
+                array_push($attentions, $contact);
+            }
+
+            return $faker->randomElement([null, json_encode($attentions)]);
+        },
         'payment_term' => rand(1, 10) * 10,
-        'banned_at' => $faker->randomElement([
-            null,
-            Carbon::now()
-        ]),
+        'banned_at' => $faker->randomElement([null, Carbon::now()]),
     ];
 
 });

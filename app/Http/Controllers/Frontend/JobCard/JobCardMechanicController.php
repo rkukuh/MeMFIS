@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\JobCard;
 
 use App\Models\JobCard;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
@@ -59,7 +60,9 @@ class JobCardMechanicController extends Controller
      */
     public function edit(JobCard $jobCard)
     {
-        return view('frontend.job-card.mechanic.progress-resume');
+        return view('frontend.job-card.mechanic.progress-resume', [
+            'jobCard' => $jobCard,
+        ]);
         // return view('frontend.job-card.mechanic.progress-pause');
     }
 
@@ -85,4 +88,18 @@ class JobCardMechanicController extends Controller
     {
         //
     }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $search = JobCard::where('number',$request->search)->first();
+
+        return redirect()->route('frontend.jobcard-mechanic.edit',$search->uuid);
+    }
+
 }

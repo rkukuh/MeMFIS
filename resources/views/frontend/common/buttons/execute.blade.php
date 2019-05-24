@@ -1,4 +1,4 @@
-<button
+<a
     id="{{ $id or '' }}"
     type="{{ $type or 'submit' }}"
     name="{{ $name or 'submit' }}"
@@ -9,6 +9,7 @@
                {{ $class or '' }} add"
     style="{{ $style or '' }}"
     target="{{ $target or '' }}"
+    href="{{ $href or '' }}"
 >
 
     <span>
@@ -16,4 +17,4 @@
 
         <span>{{ $text or 'Execute' }}</span>
     </span>
-</button>
+</a>

@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
                                     Purchase Request
@@ -58,9 +58,12 @@
                                                     Purchase Request Number
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $purchaseRequest->number)
-
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'number')
+                                                    @slot('name', 'number')
+                                                    @slot('value', $purchaseRequest->number)
+                                                    @slot('id_error','number')
+                                                    @slot('editable','disabled')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -72,22 +75,27 @@
                                                 <div class="form-group m-form__group row" >
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Project)
+                                                            @slot('text', 'Project')
                                                             @slot('name', 'type')
-                                                            @slot('id', 'type')
+                                                            @slot('id', 'project')
                                                             @slot('value', 'project')
+                                                            @if($purchaseRequest->type->name == 'Project')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type')
-                                                            @slot('id', 'type')
+                                                            @slot('id', 'general')
                                                             @slot('text', 'General')
                                                             @slot('value', 'general')
+                                                            @if($purchaseRequest->type->name == 'General')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                         @endcomponent
-
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 project">
                                                 <label class="form-control-label">
                                                     Ref Project No. @include('frontend.common.label.required')
                                                 </label>
@@ -128,6 +136,21 @@
                                                 @endcomponent
                                             </div>
                                         </div>
+                                        <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '10')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                                @slot('value', $purchaseRequest->description)
+                                            @endcomponent
+                                        </div>
+                                    </div>
                                     </fieldset>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -151,18 +174,31 @@
                                                     <div class="m-portlet__body">
                                                         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                                             <div class="row align-items-center">
-                                                                <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                                                <div class="col-xl-8 order-2 order-xl-1">
+                                                                    <div class="form-group m-form__group row align-items-center">
+                                                                        <div class="col-md-4">
+                                                                            <div class="m-input-icon m-input-icon--left">
+                                                                                <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                                    id="generalSearch">
+                                                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                                    <span><i class="la la-search"></i></span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                     @component('frontend.common.buttons.create-new')
                                                                         @slot('id', 'item')
                                                                         @slot('text', 'item')
                                                                         @slot('data_target', '#modal_item')
                                                                     @endcomponent
-
-
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="item_datatable" id="scrolling_both"></div>
+
                                                         @include('frontend.purchase-request.modal')
 
                                                     </div>
@@ -170,28 +206,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
-                                                Description @include('frontend.common.label.optional')
-                                            </label>
-
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '10')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('value', $purchaseRequest->description)
-                                            @endcomponent
-                                        </div>
-                                    </div>
+                                    
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
+                                                        @slot('id', 'add-pr')
+                                                        @slot('class', 'add-pr')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -236,6 +259,8 @@
 
 @push('footer-scripts')
     <script>
+        let pr_uuid = '{{ $purchaseRequest->uuid }}';
+
         var autoExpand = function (field) {
 
         // Reset field height
@@ -262,7 +287,9 @@
     </script>
 
 
+    <script src="{{ asset('js/frontend/common/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/manufacturer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/manufacturer.js') }}"></script>
@@ -273,11 +300,10 @@
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/item/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/item/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
-    <script src="{{ asset('js/frontend/common/item.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
 @endpush

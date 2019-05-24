@@ -130,46 +130,46 @@ let Workpackage = {
 
         });
 
-        let update = $('.modal-footer').on('click', '.update', function () {
-            $('#button').show();
-            $('#name-error').html('');
-            $('#simpan').text('Perbarui');
+        // let update = $('.modal-footer').on('click', '.update', function () {
+        //     $('#button').show();
+        //     $('#name-error').html('');
+        //     $('#simpan').text('Perbarui');
 
-            let name = $('input[name=name]').val();
-            let triggerid = $('input[name=id]').val();
+        //     let name = $('input[name=name]').val();
+        //     let triggerid = $('input[name=id]').val();
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'put',
-                url: '/category/' + triggerid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    name: name
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         type: 'put',
+        //         url: '/category/' + triggerid,
+        //         data: {
+        //             _token: $('input[name=_token]').val(),
+        //             name: name
+        //         },
+        //         success: function (data) {
+        //             if (data.errors) {
+        //                 if (data.errors.name) {
+        //                     $('#name-error').html(data.errors.name[0]);
 
-                            document.getElementById('name').value = name;
-                        }
-                    } else {
-                        $('#modal_customer').modal('hide');
+        //                     document.getElementById('name').value = name;
+        //                 }
+        //             } else {
+        //                 $('#modal_customer').modal('hide');
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
+        //                 toastr.success('Data berhasil disimpan.', 'Sukses', {
+        //                     timeOut: 5000
+        //                 });
 
-                        let table = $('.m_datatable').mDatatable();
+        //                 let table = $('.m_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
+        //                 table.originalDataSet = [];
+        //                 table.reload();
+        //             }
+        //         }
+        //     });
+        // });
 
         let triggeruuid ="";
         let material_datatables_init = true;
@@ -189,6 +189,80 @@ let Workpackage = {
                 material_tc(triggeruuid);
                 $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
             }
+        });
+
+        $('.modal-footer').on('click', '.sequence', function () {
+            triggeruuid = $('input[name=uuid]').val();
+            sequence = $('input[name=sequence]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/sequence/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    sequence: sequence,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Sequence has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+                        $('#taskcard_sequence').modal('hide');
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });        });
+        $('.basic_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.basic_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
         });
 
         $('.basic_datatable').on('click', '.tool', function () {
@@ -240,6 +314,44 @@ let Workpackage = {
             }
         });
 
+        $('.sip_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.sip_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+        
+
         //CPCP taskcard Datatable
         $('.cpcp_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
@@ -271,6 +383,43 @@ let Workpackage = {
                 tool_tc(triggeruuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
+        });
+
+        $('.cpcp_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cpcp_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
         });
 
         //ad-sb_datatable taskcard Datatable
@@ -308,6 +457,43 @@ let Workpackage = {
             }
         });
 
+        $('.ad-sb_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.ad-sb_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
         //cmr-awl_datatable taskcard Datatable
         $('.cmr-awl_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
@@ -339,6 +525,43 @@ let Workpackage = {
                 tool_tc_eo(triggeruuid);
                 $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
             }
+        });
+
+        $('.cmr-awl_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cmr-awl_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
         });
 
         //SI taskcard Datatable
@@ -374,10 +597,48 @@ let Workpackage = {
             }
         });
 
+        $('.si_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.si_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
         //basic
-        $('.basic_datatable').on('click', '.delete', function () {
-            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
-            // console.log(parent_id);
+        $('.m-datatable').on('click', '.delete', function () {
+            let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            let datatableClassName = parent_id.className.split(' ');
+            // alert(datatableClassName[0]);
             triggeruuid = $(this).data('uuid');
             swal({
                 title: 'Sure want to remove?',
@@ -396,249 +657,14 @@ let Workpackage = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        url: '/workpackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
                         success: function (data) {
                             toastr.success('Taskcard has been deleted.', 'Deleted', {
                                 timeOut: 5000
                                 }
                             );
 
-                            let table = $('.basic_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-
-            });
-        });
-
-        //sip
-        $('.sip_datatable').on('click', '.delete', function () {
-            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
-            // console.log(parent_id);
-            triggeruuid = $(this).data('uuid');
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
-                        success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
-                                timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.sip_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-
-            });
-        });
-
-        //cpcp
-        $('.cpcp_datatable').on('click', '.delete', function () {
-            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
-            // console.log(parent_id);
-            triggeruuid = $(this).data('uuid');
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
-                        success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
-                                timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.cpcp_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-
-            });
-        });
-
-        //ad-sb
-        $('.ad-sb_datatable').on('click', '.delete', function () {
-            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
-            // console.log(parent_id);
-            triggeruuid = $(this).data('uuid');
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
-                        success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
-                                timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.ad-sb_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-
-            });
-        });
-
-        //cmr-awl
-        $('.cmr-awl_datatable').on('click', '.delete', function () {
-            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
-            // console.log(parent_id);
-            triggeruuid = $(this).data('uuid');
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
-                        success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
-                                timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.cmr-awl_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-
-            });
-        });
-
-        //si
-        $('.si_datatable').on('click', '.delete', function () {
-            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
-            // console.log(parent_id);
-            triggeruuid = $(this).data('uuid');
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
-                        success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
-                                timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.si_datatable').mDatatable();
+                            let table = $('.'+datatableClassName).mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

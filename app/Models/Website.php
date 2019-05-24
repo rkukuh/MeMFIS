@@ -9,8 +9,8 @@ class Website extends MemfisModel
     protected $fillable = [
         'url',
         'type_id',
-        'websiteable_id',
         'websiteable_type',
+        'websiteable_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

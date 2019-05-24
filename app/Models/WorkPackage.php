@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\ProjectWorkPackage;
 
 class WorkPackage extends MemfisModel
 {
@@ -60,7 +61,11 @@ class WorkPackage extends MemfisModel
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_workpackage', 'workpackage_id', 'project_id')
-                    ->withPivot('performance_factor')
+                    ->using(ProjectWorkPackage::class)
+                    ->withPivot(
+                        'performance_factor',
+                        'tat'
+                    )
                     ->withTimestamps();
     }
 
@@ -78,6 +83,8 @@ class WorkPackage extends MemfisModel
                     ->withPivot(
                         'manhour_total',
                         'manhour_rate',
+                        'discount_type',
+                        'discount_value',
                         'description'
                     )
                     ->withTimestamps();

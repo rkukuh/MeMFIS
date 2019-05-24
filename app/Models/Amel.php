@@ -43,7 +43,7 @@ class Amel extends MemfisModel
      * M-M Polymorph: An AMEL content could be an item.
      *
      * This function will get all of the items that are assigned this AMEL.
-     * See: Aircraft's amels() method for the inverse
+     * See: Item's amels() method for the inverse
      *
      * @return mixed
      */

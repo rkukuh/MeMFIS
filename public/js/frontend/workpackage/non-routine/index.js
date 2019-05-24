@@ -144,14 +144,19 @@ let NonRoutineWorkpackage = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'+
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
-                        );
+                            if(t.pivot.is_mandatory == 1){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
+                                ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+                            else if(t.pivot.is_mandatory == 0){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
+                                ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+
                     }
                 },
                 {
@@ -307,14 +312,19 @@ let NonRoutineWorkpackage = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'+
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
-                        );
+                            if(t.pivot.is_mandatory == 1){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
+                                ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+                            else if(t.pivot.is_mandatory == 0){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
+                                ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+
                     }
                 },
                 {
@@ -470,14 +480,19 @@ let NonRoutineWorkpackage = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'+
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
-                        );
+                            if(t.pivot.is_mandatory == 1){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
+                                ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+                            else if(t.pivot.is_mandatory == 0){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
+                                ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+
                     }
                 },
                 {

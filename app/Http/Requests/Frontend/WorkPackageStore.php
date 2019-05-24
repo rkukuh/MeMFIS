@@ -27,7 +27,7 @@ class WorkPackageStore extends FormRequest
     {
         return [
             'title' => 'required',
-            'aircraft_id' => 'required',
+            'aircraft_id' => 'required|exists:aircrafts,id',
         ];
     }
 

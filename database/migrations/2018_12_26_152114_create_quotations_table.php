@@ -16,16 +16,20 @@ class CreateQuotationsTable extends Migration
         Schema::create('quotations', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('number');
+            $table->string('number')->nullable();
+            $table->string('title')->nullable();
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('customer_id');
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('valid_until')->nullable();
             $table->unsignedInteger('currency_id');
             $table->double('exchange_rate');
-            $table->double('total');
-            $table->unsignedInteger('scheduled_payment_type');
-            $table->json('scheduled_payment_amount');
+            $table->double('subtotal')->nullable();
+            $table->json('charge')->nullable();
+            $table->double('grandtotal')->nullable();
+            $table->unsignedInteger('scheduled_payment_type')->nullable();
+            $table->json('scheduled_payment_amount')->nullable();
+            $table->string('term_of_payment')->nullable();
             $table->text('term_of_condition')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

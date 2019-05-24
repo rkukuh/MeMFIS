@@ -83,24 +83,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Work Area @include('frontend.common.label.optional')
-                                            </label>
-
-                                            <select id="work_area" name="work_area" class="form-control m-select2">
-                                                <option value="">
-                                                    &mdash; Select a Work Area &mdash;
-                                                </option>
-
-                                                @foreach ($work_areas as $work_area)
-                                                    <option value="{{ $work_area->id }}"
-                                                        @if ($work_area->id == $taskcard->work_area) selected @endif>
-                                                        {{ $work_area->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 A/C Type @include('frontend.common.label.required')
                                             </label>
 
@@ -125,8 +107,6 @@
                                         @endcomponent
 
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Manhour Estimation @include('frontend.common.label.required')
@@ -140,6 +120,8 @@
                                                 @slot('value', $taskcard->estimation_manhour)
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">

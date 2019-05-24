@@ -8,8 +8,8 @@ class Access extends MemfisModel
 {
     protected $fillable = [
         'name',
-        'accessable_id',
         'accessable_type',
+        'accessable_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

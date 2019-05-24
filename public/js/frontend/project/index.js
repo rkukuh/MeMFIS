@@ -47,6 +47,9 @@ let Aircraft = {
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return '<a href="/project-hm/'+t.uuid+'">' + t.code + "</a>"
+                    }
                 },
                 {
                     field: 'title',
@@ -102,6 +105,50 @@ let Aircraft = {
 
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
+        });
+
+        $('.project_datatable').on('click', '.delete', function () {
+            let project_uuid = $(this).data('uuid');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/project/' + project_uuid + '',
+                        success: function (data) {
+                            toastr.success('Project has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.project_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
         });
 
 

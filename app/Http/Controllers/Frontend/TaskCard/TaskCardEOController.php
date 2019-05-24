@@ -24,7 +24,6 @@ class TaskCardEOController extends Controller
     protected $aircraft;
     protected $taskcard;
     protected $work_area;
-    protected $relationship;
     protected $categories;
     protected $scheduled_priorities;
     protected $affected_manuals;
@@ -77,7 +76,6 @@ class TaskCardEOController extends Controller
 
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
-            $taskcard->related_to()->attach($request->relationship);
 
             for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
                 if($request->threshold_type[$i] !== "Select Threshold"){
@@ -139,11 +137,6 @@ class TaskCardEOController extends Controller
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
 
-        $relation_taskcards = [];
-
-        foreach($taskCard->related_to as $i => $relation_taskcard){
-            $relation_taskcards[$i] =  $relation_taskcard->id;
-        }
 
         return view('frontend.taskcard.nonroutine.eo.edit',[
             'tasks' => $this->task,
@@ -154,7 +147,6 @@ class TaskCardEOController extends Controller
             'categories' => $this->categories,
             'recurrences' => $this->recurrences,
             'aircraft_taskcards' => $aircraft_taskcards,
-            'relation_taskcards' => $relation_taskcards,
             'scheduled_priorities' => $this->scheduled_priorities,
             'affected_manuals' => $this->affected_manuals,
             'MaintenanceCycles' => $this->maintenanceCycle,
@@ -170,11 +162,10 @@ class TaskCardEOController extends Controller
      */
     public function update(TaskCardEOUpdate $request, Taskcard $taskCard)
     {
-        // $this->decoder($request);
+        $this->decoder($request);
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
-            $taskCard->related_to()->sync($request->relationship);
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats)$taskCard->repeats()->delete();
 
@@ -224,7 +215,6 @@ class TaskCardEOController extends Controller
     public function decoder($req){
 
         $req->applicability_airplane = json_decode($req->applicability_airplane);
-        $req->relationship = json_decode($req->relationship);
         $req->threshold_type = json_decode($req->threshold_type);
         $req->repeat_type = json_decode($req->repeat_type);
         $req->threshold_amount = json_decode($req->threshold_amount);

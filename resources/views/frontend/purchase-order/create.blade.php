@@ -188,7 +188,7 @@
                                                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                                                 @component('frontend.common.input.radio')
                                                                                     @slot('name', 'top')
-                                                                                    @slot('id', 'top')
+                                                                                    @slot('id', 'cash')
                                                                                     @slot('value', 'cash')
                                                                                 @endcomponent
                                                                             </div>
@@ -202,25 +202,25 @@
                                                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                                                 @component('frontend.common.input.radio')
                                                                                     @slot('name', 'top')
-                                                                                    @slot('id', 'top')
-                                                                                    @slot('value', 'non-cash')
+                                                                                    @slot('id', 'by-date')
+                                                                                    @slot('value', 'by-date')
                                                                                 @endcomponent
                                                                             </div>
                                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                                 @component('frontend.common.input.number')
                                                                                     @slot('text', 'Term of Payment')
-                                                                                    @slot('id', 'term_of_payment')
+                                                                                    @slot('id', 'top_day_amount')
                                                                                     @slot('input_append', 'Hari')
-                                                                                    @slot('name', 'term_of_payment')
-                                                                                    @slot('id_error', 'term_of_payment')
+                                                                                    @slot('name', 'top_day_amount')
+                                                                                    @slot('id_error', 'top_day_amount')
                                                                                 @endcomponent
                                                                             </div>
                                                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                                                 @component('frontend.common.input.datepicker')
-                                                                                    @slot('id', 'date')
+                                                                                    @slot('id', 'top_start_at')
                                                                                     @slot('text', 'Date')
-                                                                                    @slot('name', 'date')
-                                                                                    @slot('id_error', 'date')
+                                                                                    @slot('name', 'top_start_at')
+                                                                                    @slot('id_error', 'top_start_at')
                                                                                 @endcomponent
                                                                             </div>
                                                                         </div>
@@ -243,6 +243,39 @@
                                                             @slot('id_error', 'description')
                                                         @endcomponent
                                                     </div> --}}
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+
+                                                        <label class="form-control-label">
+                                                            Description @include('frontend.common.label.required')
+                                                        </label>
+
+                                                        @component('frontend.common.input.textarea')
+                                                            @slot('id', 'description')
+                                                            @slot('text', 'Description')
+                                                            @slot('name', 'description')
+                                                            @slot('rows', '5')
+                                                            @slot('id_error', 'description')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                                <div class="flex">
+                                                    <div class="action-buttons">
+                                                        @component('frontend.common.buttons.submit')
+                                                            @slot('type','button')
+                                                            @slot('id', 'add-po')
+                                                            @slot('class', 'add-po')
+                                                        @endcomponent
+
+                                                        @include('frontend.common.buttons.reset')
+
+                                                        @component('frontend.common.buttons.back')
+                                                            @slot('href', route('frontend.quotation.index'))
+                                                        @endcomponent
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -291,41 +324,6 @@
                                                             @include('frontend.purchase-order.modal-check')
 
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-
-                                                <label class="form-control-label">
-                                                    Description @include('frontend.common.label.required')
-                                                </label>
-
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('id', 'description')
-                                                    @slot('text', 'Description')
-                                                    @slot('name', 'description')
-                                                    @slot('rows', '5')
-                                                    @slot('id_error', 'description')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.submit')
-                                                            @slot('type','button')
-                                                            @slot('id', 'add-quotation')
-                                                            @slot('class', 'add-quotation')
-                                                        @endcomponent
-
-                                                        @include('frontend.common.buttons.reset')
-
-                                                        @component('frontend.common.buttons.back')
-                                                            @slot('href', route('frontend.quotation.index'))
-                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </div>
@@ -384,10 +382,12 @@
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/purchase-order/item.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-order/create.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-order/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-shipping.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/by-date.js')}}"></script>
 
 @endpush

@@ -117,8 +117,8 @@ let Workpackage2 = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.applicability_airplane) {
-                            $('#applicability-airplane-error').html(data.errors.applicability_airplane[0]);
+                        if (data.errors.aircraft_id) {
+                            $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
                         }
                         if (data.errors.title) {
                             $('#title-error').html(data.errors.title[0]);
@@ -130,7 +130,7 @@ let Workpackage2 = {
                     } else {
                         // $('#modal_customer').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success', {
+                        toastr.success('Work Package has been created.', 'Success', {
                             timeOut: 5000
                         });
 

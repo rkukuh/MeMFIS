@@ -28,7 +28,7 @@ class ProjectHMStore extends FormRequest
         return [
             'customer_id' => 'required',
             'no_wo' => 'required',
-            'aircraft_id' => 'required',
+            'aircraft_id' => 'required|exists:aircrafts,id',
             'aircraft_register' => 'required',
             'aircraft_sn' => 'required',
         ];

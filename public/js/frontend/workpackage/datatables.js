@@ -227,7 +227,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -242,7 +242,7 @@ let Datatables = {
                     } else {
                         $('#modal_basic').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success',  {
+                        toastr.success('Work Package has been created.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -261,7 +261,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -276,7 +276,7 @@ let Datatables = {
                     } else {
                         $('#modal_sip').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success',  {
+                        toastr.success('Work Package has been created.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -295,7 +295,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -310,7 +310,7 @@ let Datatables = {
                     } else {
                         $('#modal_cpcp').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success',  {
+                        toastr.success('Work Package has been created.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -329,7 +329,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -344,7 +344,7 @@ let Datatables = {
                     } else {
                         $('#modal_ad_sb').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success',  {
+                        toastr.success('Work Package has been created.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -363,7 +363,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -378,7 +378,7 @@ let Datatables = {
                     } else {
                         $('#modal_si').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success',  {
+                        toastr.success('Work Package has been created.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -397,7 +397,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/' + workPackage_uuid +'/taskcard',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -412,7 +412,7 @@ let Datatables = {
                     } else {
                         $('#modal_cmr_awl').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success',  {
+                        toastr.success('Work Package has been created.', 'Success',  {
                             timeOut: 5000
                         });
 

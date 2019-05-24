@@ -7,6 +7,7 @@ use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\WorkPackage;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
 
@@ -49,7 +50,14 @@ class ProjectHMController extends Controller
      */
     public function store(ProjectHMStore $request)
     {
+        $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
+
         $project = Project::create($request->all());
+        if ($request->hasFile('fileInput')) {
+            $destination = 'project/hm/workOrder';
+            $fileName = $request->file('fileInput')->getClientOriginalName();
+            $fileUpload = Storage::putFileAs($destination,$request->file('fileInput'), $fileName);
+        }
 
         return response()->json($project);
     }
@@ -62,7 +70,11 @@ class ProjectHMController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('frontend.project.hm.show',[
+            'project' => $project,
+            'aircrafts' => $this->aircrafts,
+            'customers' => $this->customers
+        ]);
     }
 
     /**
@@ -88,9 +100,16 @@ class ProjectHMController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjecHMtUpdate $request, Project $project)
+    public function update(ProjectHMUpdate $request, Project $project)
     {
-        //
+        $project->update($request->all());
+        if ($request->hasFile('fileInput')) {
+            $destination = 'project/hm/workOrder';
+            $fileName = $request->file('fileInput')->getClientOriginalName();
+            $fileUpload = Storage::putFileAs($destination,$request->file('fileInput'), $fileName);
+        }
+
+        return response()->json($project);
     }
 
     /**

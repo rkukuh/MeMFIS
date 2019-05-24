@@ -20,5 +20,7 @@
         @include('frontend.project.hm.taskcard.nonroutine.adsb.modal')
         @include('frontend.project.hm.taskcard.nonroutine.cmrawl.modal')
         @include('frontend.project.hm.taskcard.nonroutine.si.modal')
+        @include('frontend.project.hm.taskcard.nonroutine.htcrr.modal')
+        @include('frontend.project.hm.taskcard.nonroutine.htcrr.workshop-task')
     </div>
 </div>

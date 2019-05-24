@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\ProjectWorkPackage;
 
 class Project extends MemfisModel
 {
@@ -60,10 +61,10 @@ class Project extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A purchase request must have one or more projects
+     * One-to-Many: A purchase request may have zero or one project
      *
      * This function will retrieve all the purchase requests of a project.
-     * See: PurchaseRequest's projects() method for the inverse
+     * See: PurchaseRequest's project() method for the inverse
      *
      * @return mixed
      */
@@ -97,7 +98,11 @@ class Project extends MemfisModel
     public function workpackages()
     {
         return $this->belongsToMany(WorkPackage::class, 'project_workpackage', 'project_id', 'workpackage_id')
-                    ->withPivot('performance_factor')
+                    ->using(ProjectWorkPackage::class)
+                    ->withPivot(
+                        'performance_factor',
+                        'tat'
+                    )
                     ->withTimestamps();
     }
 }

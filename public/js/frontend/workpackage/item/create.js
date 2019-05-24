@@ -1,12 +1,12 @@
 let Workpackage3 = {
     init: function () {
-        $('.tools_datatable').mDatatable({
+        $('.general_tools_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -78,12 +78,36 @@ let Workpackage3 = {
                     filterable: !1,
                 },
                 {
+                    field: 'unit_price',
+                    title: 'Unit Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'selling_price',
+                    title: 'Selling Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'total',
+                    title: 'Sub Total',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'note',
+                    title: 'Marketing Note',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -93,13 +117,13 @@ let Workpackage3 = {
         });
 
 
-        $('.materials_datatable').mDatatable({
+        $('.general_materials_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -172,12 +196,518 @@ let Workpackage3 = {
                     filterable: !1,
                 },
                 {
+                    field: 'unit_price',
+                    title: 'Unit Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'selling_price',
+                    title: 'Selling Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'total',
+                    title: 'Sub Total',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'note',
+                    title: 'Marketing Note',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
+                }
+            ]
+        });
+        $('.routine_tools_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-tools',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [{
+                    field: 'code',
+                    title: 'P/N',
+                    sortable: !1,
+                },
+                {
+                    field: 'name',
+                    title: 'Title',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Tool Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.quantity',
+                    title: 'Qty',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.unit_id',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'unit_price',
+                    title: 'Unit Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'selling_price',
+                    title: 'Selling Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'total',
+                    title: 'Sub Total',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'note',
+                    title: 'Marketing Note',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
+                }
+            ]
+        });
+
+
+        $('.routine_materials_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-materials',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [{
+                    field: 'code',
+                    title: 'P/N',
+                    sortable: !1,
+                },
+                {
+                    field: 'name',
+                    title: 'Title',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Tool Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.quantity',
+                    title: 'Qty',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.unit_id',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'unit_price',
+                    title: 'Unit Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'selling_price',
+                    title: 'Selling Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'total',
+                    title: 'Sub Total',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'note',
+                    title: 'Marketing Note',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
+                }
+            ]
+        });
+        $('.non_routine_tools_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-tools',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [{
+                    field: 'code',
+                    title: 'P/N',
+                    sortable: !1,
+                },
+                {
+                    field: 'name',
+                    title: 'Title',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Tool Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.quantity',
+                    title: 'Qty',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.unit_id',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'unit_price',
+                    title: 'Unit Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'selling_price',
+                    title: 'Selling Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'total',
+                    title: 'Sub Total',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'note',
+                    title: 'Marketing Note',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
+                }
+            ]
+        });
+
+
+        $('.non_routine_materials_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/general-materials',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [{
+                    field: 'code',
+                    title: 'P/N',
+                    sortable: !1,
+                },
+                {
+                    field: 'name',
+                    title: 'Title',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Tool Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.quantity',
+                    title: 'Qty',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.unit_id',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'unit_price',
+                    title: 'Unit Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'selling_price',
+                    title: 'Selling Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'total',
+                    title: 'Sub Total',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'note',
+                    title: 'Marketing Note',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        // if(t.pivot.discount_value == null && t.pivot.discount_type == null){
+                            return (
+                                '<button data-toggle="modal" data-target="#non_routine_tool_note" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                                t.uuid +
+                                '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                              );
+                        // }
+                        // else{
+                        //     return (
+                        //         formatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                        //         t.uuid +
+                        //         '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        //     );
+                        // }
+                      }
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -191,13 +721,12 @@ let Workpackage3 = {
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
 
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/'+workPackage_uuid+'/item',
+                url: '/workpackage/'+workPackage_uuid+'/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: material,
@@ -227,19 +756,18 @@ let Workpackage3 = {
                             timeOut: 5000
                         });
                         $('#modal_material').modal('hide');
-
                         let table = $('.materials_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
-
+                        material_reset();
 
                     }
                 }
             });
         });
 
-        $('.materials_datatable').on('click', '.delete', function () {
+        $('.materials_datatable').on('click', '.delete-material', function () {
             let material_uuid = $(this).data('uuid');
 
             swal({
@@ -259,7 +787,7 @@ let Workpackage3 = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/'+material_uuid+'/item',
+                        url: '/workpackage/'+workPackage_uuid+'/'+material_uuid+'/item',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -293,7 +821,7 @@ let Workpackage3 = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/WorkPackage/'+workPackage_uuid+'/item',
+                url: '/workpackage/'+workPackage_uuid+'/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: tool,
@@ -328,7 +856,7 @@ let Workpackage3 = {
 
                         table.originalDataSet = [];
                         table.reload();
-
+                        tool_reset();
                         // document.getElementById('uom_quantity').value = '';
 
                         // $('#item_unit_id').select2('val', 'All');
@@ -339,7 +867,7 @@ let Workpackage3 = {
             });
         });
 
-        $('.tools_datatable').on('click', '.delete', function () {
+        $('.tools_datatable').on('click', '.delete-tool', function () {
             let tool_uuid = $(this).data('uuid');
 
             swal({
@@ -359,7 +887,7 @@ let Workpackage3 = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/WorkPackage/'+workPackage_uuid+'/'+tool_uuid+'/item',
+                        url: '/workpackage/'+workPackage_uuid+'/'+tool_uuid+'/item',
                         success: function (data) {
                             toastr.success('Tool has been deleted.', 'Deleted', {
                                     timeOut: 5000

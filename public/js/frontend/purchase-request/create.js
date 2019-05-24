@@ -136,51 +136,57 @@ let PurchaseRequest = {
                 if($(this).val() == 'general'){
                     $('.project').addClass('hidden');
                 }
-                else if($(this).val() == 'hm'){
+                else if($(this).val() == 'project'){
                     $('.project').removeClass('hidden');
                 }
               }
             });
         });
 
-        // if (document.getElementById('general').checked) {
-        //     alert('e');
-        //     // $('.project').addClass('hidden');
-        //     // rate_value = document.getElementById('r1').value;
-        //   }
+        $('.footer').on('click', '.add-pr', function () {
+            let number = $('input[name=number]').val();
+            let type_id = $('input[name=type]').val();
+            // let project_id = $('input[name=project]').val();
+            let date = $('input[name=date]').val();
+            let date_required = $('input[name=date-required]').val();
+            let description = $('#description').val();
 
-        // $(document).ready(function(){
-        //     // document.getElementByName('type').onchange = function () {
-        //     //     alert('s');
-        //         // document.getElementById('ppn_amount').disabled = !this.checked;
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/purchase-request',
+                type: 'POST',
+                data: {
+                    number:number,
+                    type_id:type_id,
+                    requested_at:date,
+                    required_at:date_required,
+                    description:description,
+                },
+                success: function (response) {
+                    if (response.errors) {
+                        console.log(errors);
+                        // if (response.errors.title) {
+                        //     $('#title-error').html(response.errors.title[0]);
+                        // }
 
-        //         // if (document.getElementById("is_ppn").checked) {
-        //         //     document.getElementById('ppn_amount').value = 10;
-        //         // } else {
-        //         //     document.getElementById('ppn_amount').value = '';
-        //         // }
-        //     // };
+                        // document.getElementById('manual_affected_id').value = manual_affected_id;
 
-        //     if ($('input[name=type]:checked').length > 0) {
-        //     //     // if($("input[name='type']:checked").val() === 'general'){
-        //             alert($("input[name='type']:checked").val());
-        //     //     // }
-        //     }
-        // });
 
-        // $('.unit_id').on('change', function () {
-        //     //set the visibility of the specify element based on the value of select
-        //     alert('change');
-        //     // $('#con-specify').toggle(this.value == 'other')
-        // });
-        // $(document).ready(function () {
-        // //     function myFunction(event) {
-        // //         alert('s');
-        // //         // document.getElementById("myText").value = e.target.value
-        // //     }
+                    } else {
+                        //    taskcard_reset();
 
-        // });
 
+                        toastr.success('Taskcard has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        window.location.href = '/purchase-request/'+response.uuid+'/edit';
+                    }
+                }
+            });
+        });
 
     }
 };

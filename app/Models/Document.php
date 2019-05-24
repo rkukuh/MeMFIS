@@ -9,8 +9,8 @@ class Document extends MemfisModel
     protected $fillable = [
         'number',
         'type_id',
-        'documentable_id',
         'documentable_type',
+        'documentable_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

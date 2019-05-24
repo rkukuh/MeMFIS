@@ -56,20 +56,33 @@
                                                 <legend class="w-auto">Project</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Project @include('frontend.common.label.required')
-                                                        </label>
-                                                        <select id="type_website" name="type_website" class="form-control project"  onchange="myFunction(this)">
-                                                            <option value="">
-                                                                Select a Project
-                                                            </option>
-                                                            <option value="1">Project A</option>
-                                                            <option value="2">Project B</option>
-                                                            <option value="3">Project C</option>
-                                                            <option value="4">Project D</option>
-                                                            <option value="5">Project E</option>
-                                                            <option value="6">Project F</option>
-                                                        </select>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                <label class="form-control-label">
+                                                                    Work Order @include('frontend.common.label.required')
+                                                                </label>
+
+                                                                @component('frontend.common.input.select2')
+                                                                    @slot('text', 'Work Order')
+                                                                    @slot('id', 'work-order')
+                                                                    @slot('name', 'work-order')
+                                                                    @slot('id_error', 'work-order')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" id="customer_id" name="customer_id">
+
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                <label class="form-control-label">
+                                                                    Project title
+                                                                </label>
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'project_title')
+                                                                    @slot('text', '..........')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
@@ -78,6 +91,7 @@
                                                                     Project Number
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'project_number')
                                                                     @slot('text', 'P-01/HMxxxxx')
                                                                 @endcomponent
                                                             </div>
@@ -229,7 +243,7 @@
                                                                 @slot('id', 'date')
                                                                 @slot('text', 'Date')
                                                                 @slot('name', 'date')
-                                                                @slot('id_error', 'date')
+                                                                @slot('id_error','requested_at')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -241,7 +255,7 @@
                                                                 @slot('id', 'valid_until')
                                                                 @slot('text', 'Valid Until')
                                                                 @slot('name', 'valid_until')
-                                                                @slot('id_error', 'valid_until')
+                                                                @slot('id_error','valid_until')
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -270,6 +284,7 @@
                                                             @component('frontend.common.input.number')
                                                                 @slot('text', 'exchange')
                                                                 @slot('name', 'exchange')
+                                                                @slot('id_error', 'exchange')
                                                                 @slot('id', 'exchange')
                                                             @endcomponent
                                                         </div>
@@ -284,7 +299,7 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('text', 'Term of Payment')
                                                         @slot('id', 'term_of_payment')
-                                                        @slot('input_append', 'Hari')
+                                                        @slot('input_append', 'Days')
                                                         @slot('name', 'term_of_payment')
                                                         @slot('id_error', 'term_of_payment')
                                                     @endcomponent
@@ -293,59 +308,44 @@
 
                                                 </div>
                                             </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Scheduled Payment Type @include('frontend.common.label.required')
-                                                    </label>
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('id', 'scheduled_payment_type')
-                                                        @slot('text', 'Scheduled Payment Type')
-                                                        @slot('name', 'scheduled_payment_type')
-                                                        @slot('id_error', 'scheduled_payment_type')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
+                                            <div class='repeater'>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Scheduled Payment Type @include('frontend.common.label.required')
+                                                        </label>
+                                                        <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
+                                                            <option value="">
+                                                                Select a schedule payment
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
                                                             Scheduled Payment @include('frontend.common.label.required')
-                                                    </label>
-                                                    <div class='repeater'>
-                                                        <div data-repeater-list="group-phone">
+                                                        </label>
+                                                        <div data-repeater-list="group-scheduled_payment">
                                                             <div data-repeater-item>
-                                                                <div class="form-group m-form__group row">
-                                                                    <div class="col-sm-8 col-md-8 col-lg-8">
-                                                                    @component('frontend.common.input.text')
-                                                                        @slot('name', 'scheduled_payment')
-                                                                        @slot('id', 'scheduled_payment')
-                                                                        @slot('text', 'Phone')
-                                                                    @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                        @include('frontend.common.buttons.create_repeater')
-                                                                    </div>
-                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                        @include('frontend.common.buttons.delete_repeater')
-                                                                    </div>
+                                                                <div class="col-sm-10 col-md-10 col-lg-10 m-0">
+                                                                @component('frontend.common.input.text')
+                                                                    @slot('name', 'scheduled_payment')
+                                                                    @slot('id', 'scheduled_payment')
+                                                                    @slot('text', 'Scheduled Payment')
+                                                                    @slot('id_error', 'scheduled_payment_amount')
+                                                                @endcomponent
+                                                                </div>
+
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @include('frontend.common.buttons.delete_repeater')
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @include('frontend.common.buttons.create_repeater')
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
-                                                Project Title @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '3')
-                                                @slot('id', 'title')
-                                                @slot('name', 'title')
-                                                @slot('text', 'title')
-                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -359,6 +359,7 @@
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
+                                                @slot('id_error', 'description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -370,9 +371,9 @@
 
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
-                                                @slot('id', 'top_description')
-                                                @slot('name', 'top_description')
-                                                @slot('text', 'Top Description')
+                                                @slot('id', 'term_and_condition')
+                                                @slot('name', 'term_and_condition')
+                                                @slot('text', 'Term and Condition')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -388,100 +389,14 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_workpackage" role="tabpanel">
-                                                    <table class="workpackage-datatable" id="html_table" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th title="Field #1" data-field="OrderID">Workpackage ID</th>
-                                                                <th title="Field #2" data-field="Owner">Workpackage Title</th>
-                                                                <th title="Field #2" data-field="Action"></th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
-                                                                <td>Sunny Garton</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
-                                                                <td>Sandor Engley</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">68084-462</a></td>
-                                                                <td>Morgan Cradey</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">44356-0001</a></td>
-                                                                <td>Tedd Alton</td>
-                                                                <td>
-                                                                    <button data-toggle="modal" data-target="#modal_workpackage" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-aircraft" title="Edit"
-                                                                    data-uuid='uuid'><i class="la la-pencil"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    @include('frontend.quotation.modal-workpackage')
+
+                                                    <div class="workpackage_datatable" id="scrolling_both"></div>
+
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_summary" role="tabpanel">
-                                                    <table class="summary-datatable" id="html_table" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th title="Field #1" data-field="No">No</th>
-                                                                <th title="Field #2" data-field="Job_Request">Job Request Description</th>
-                                                                <th title="Field #2" data-field="Cost">Cost</th>
-                                                                <th title="Field #2" data-field="Disc">Disc %</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">57520-0405</a> </td>
-                                                                <td>Sunny Garton</td>
-                                                                <td>$100000</td>
-                                                                <td>0%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="/quotation-view/workpackage">43269-858</a></td>
-                                                                <td>Sandor Engley</td>
-                                                                <td>$50</td>
-                                                                <td>10%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Sub Total</td>
-                                                                <td>$100050</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Tax</td>
-                                                                <td>
-                                                                    <select name="" id="">
-                                                                        <option value="">5%</option>
-                                                                        <option value="">10%</option>
-                                                                        <option value="">15%</option>
-                                                                    </select>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>Total in Rupiah</td>
-                                                                <td>Rp. 100000000</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+
+                                                    <div class="long_datatable" id="scrolling_both"></div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -534,46 +449,9 @@
     </style>
 @endpush
 @push('footer-scripts')
-    <script>
-    function myFunction(object) {
-        // var numItems = $('.project').length
-
-        // var x = this.getElementById("type_website");
-var x = object;
-var y = x.name;
-
-var numb = y.match(/\d/g);
-var z = x.value;
-var projectUuid = z;
-$.ajax({
-    url: '/quotation/'+projectUuid+'/project',
-    type: 'GET',
-    dataType: 'json',
-    success: function (data) {
-        document.getElementsByName('group-website['+numb+'][]')[0].setAttribute("value", "my value is high");
-        // alert('masuk');
-        // document.getElementByName('group-website['+numb+'][]').innerHTML = 'tes';
-        // document.getElementById('telp').innerHTML = 'telp/fax';
-        // document.getElementById('attn').innerHTML = 'attn';
-        // document.getElementById('address').innerHTML = 'address';
-    }
-});
-
-// var thenum = x.replace( /^\D+/g, '');
-// alert(z);
-        // console.log(x.name);
-    }
-    </script>
 
     <script type="text/javascript">
         $("#type_website").on('change', function() {
-            // var numItems = $('.project').length
-            // alert(numItems);
-            // if ($(this).val() == 'selectionKey'){
-            //     DoSomething();
-            // } else {
-            //     DoSomethingElse();
-            // }
         });
         let simpan = $('.tes').on('click', '.save', function () {
         var usertype=[];
@@ -607,13 +485,13 @@ $.ajax({
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
-   <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/work-order.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
@@ -624,11 +502,11 @@ $.ajax({
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
 
 
 @endpush

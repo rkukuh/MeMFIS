@@ -66,6 +66,15 @@ $factory->define(TaskCard::class, function (Faker $faker) {
             (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
         ]),
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
+        'stringer' => function () use ($faker) {
+            $stringers = [];
+            
+            for ($i = 0; $i < rand(2, 5); $i++) {
+                $stringers[] = $faker->numberBetween(100, 999);
+            }
+
+            return $faker->randomElement([null, json_encode($stringers)]);
+        },
         'version' => function () use ($faker) {
             $versions = [];
             
@@ -218,16 +227,22 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
     $taskcard->aircrafts()->save($aircraft);
 
-    // A/C Access
+    // Aircraft's Access
 
     if ($faker->boolean) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
     }
 
-    // A/C Zone
+    // Aircraft's Zone
 
     if ($faker->boolean) {
         $taskcard->zones()->saveMany($aircraft->zones);
+    }
+
+    // Aircraft's Station
+
+    if ($faker->boolean) {
+        $taskcard->stations()->saveMany($aircraft->stations);
     }
 
 });

@@ -54,6 +54,7 @@ Route::name('datatables.')->group(function () {
                 /** Polymorph */
                 Route::get('/{aircraft}/zones', 'AircraftZonesDatatables@index')->name('zones.index');
                 Route::get('/{aircraft}/accesses', 'AircraftAccessesDatatables@index')->name('accesses.index');
+                Route::get('/{aircraft}/stations', 'AircraftStationsDatatables@index')->name('stations.index');
 
             });
 
@@ -156,6 +157,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{item}/units', 'ItemUnitDatatables@index')->name('units.index');
                 Route::get('/{item}/prices', 'ItemPriceDatatables@index')->name('prices.index');
                 Route::get('/{item}/storages', 'ItemStorageDatatables@index')->name('storages.index');
+                Route::get('/{purchase_request}/purchase-request', 'ItemDatatables@purchaseRequest')->name('purchase-request');
+
 
             });
 
@@ -228,6 +231,7 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/', 'PurchaseRequestDatatables@index')->name('all');
                 Route::get('/modal', 'PurchaseRequestDatatables@purchaseRequestModal')->name('modal.index');
+                Route::get('/item/{purchaseRequest}', 'PurchaseRequestDatatables@pr_item')->name('pr.item');
 
             });
 
@@ -245,6 +249,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'QuotationDatatables@index')->name('all');
+                Route::get('/{quotation}/job-request', 'QuotationDatatables@jobRequest')->name('job-request');
 
             });
 
@@ -263,6 +268,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskCardDatatables@index')->name('all');
+                Route::post('/filter/', 'TaskCardDatatables@filter')->name('filter');
 
             });
 
@@ -362,6 +368,65 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** TASK RELEASE */
+
+        Route::name('task-release.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'task-release',
+                'namespace' => 'TaskRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'TaskReleaseDatatables@index')->name('all');
+                Route::post('/filter/', 'TaskReleaseDatatables@filter')->name('filter');
+
+            });
+
+        });
+
+        /** RII RELEASE */
+
+        Route::name('rii-release.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'rii-release',
+                'namespace' => 'RIIRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'RIIReleaseDatatables@index')->name('all');
+                Route::post('/filter/', 'RIIReleaseDatatables@filter')->name('filter');
+
+
+            });
+
+        });
+
+        /** Release To Service */
+
+        Route::name('rii-release.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'release-to-service',
+                // 'namespace' => 'ReleaseToServices'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'ReleaseToServiceDatatables@index')->name('all');
+                Route::post('/filter/', 'ReleaseToServiceDatatables@filter')->name('filter');
+
+
+            });
+
+        });
+
         /** JOB CARD */
 
         Route::name('jobcard.')->group(function () {
@@ -374,6 +439,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'JobCardDatatables@index')->name('all');
+                Route::post('/filter/', 'JobCardDatatables@filter')->name('filter');
 
             });
 
@@ -398,6 +464,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/cmr-awl', 'WorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
                 Route::get('/{workPackage}/si', 'WorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
 
+                Route::get('/{workPackage}/general-tools', 'WorkPackageItemsDatatables@generalTool')->name('gen-tools.index');
+                Route::get('/{workPackage}/general-materials', 'WorkPackageItemsDatatables@generalMaterial')->name('gen-materials.index');
                 Route::get('/{workPackage}/tools', 'WorkPackageItemsDatatables@tool')->name('tools.index');
                 Route::get('/{workPackage}/materials', 'WorkPackageItemsDatatables@material')->name('materials.index');
 

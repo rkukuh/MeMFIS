@@ -1,4 +1,4 @@
-@extends('frontend.master')
+    @extends('frontend.master')
 
 @section('content')
     <div class="m-subheader hidden">
@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Customer @include('frontend.common.label.required')
                                                     </label>
@@ -64,13 +64,26 @@
                                                         </option>
 
                                                         @foreach ($customers as $customer)
-                                                            <option value="{{ $customer->id }}"
+                                                            <option value="{{ $customer->uuid }}"
                                                                 @if ($customer->id == $project->aircraft_id) selected @endif>
                                                                 {{ $customer->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
 
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Work Order Number @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', 'Work Order')
+                                                        @slot('id', 'work-order')
+                                                        @slot('name', 'work-order')
+                                                        @slot('value', $project->no_wo)
+                                                        @slot('id_error', 'work-order')
+                                                    @endcomponent
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -156,7 +169,7 @@
                                                                                 </div>
                                                                         </div>
                                                                         <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                            <div class="col-sm-12 col-md-12 col-lg-12">
                                                                                 <label class="form-control-label">
                                                                                     Email
                                                                                 </label>
@@ -197,17 +210,16 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
+
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Work Order Number @include('frontend.common.label.required')
+                                                        Work Order Attachment @include('frontend.common.label.optional')
                                                     </label>
 
-                                                    @component('frontend.common.input.text')
+                                                    @component('frontend.common.input.upload')
                                                         @slot('text', 'Work Order')
-                                                        @slot('id', 'work-order')
-                                                        @slot('name', 'work-order')
-                                                        @slot('value', $project->no_wo)
-                                                        @slot('id_error', 'work-order')
+                                                        @slot('id', 'work-order-attachment')
+                                                        @slot('name', 'work-order-attachment')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -309,18 +321,16 @@
                                                         <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
                                                             <span>
                                                                 <i class="la la-plus-circle"></i>
-                                                            <span>Workpackage</span>
+                                                            <span>Work Package</span>
                                                             </span>
                                                         </button>
 
-                                                        <div class="m-btn-group btn-group" role="group">
-                                                            <a href="{{route('frontend.project-blank-workpackage.create',['project' => $project->uuid])}}" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md">
-                                                                <span style="margin-top:2px">
-                                                                    <i class="la la-plus-circle"></i>
-                                                                <span>Blank Workpackage</span>
-                                                                </span>
-                                                            </a>
-                                                        </div>
+                                                        <button data-target="#modal_blank_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Blank Work Package</span>
+                                                            </span>
+                                                        </button>
                                                     </div>
 
                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -329,7 +339,8 @@
                                         </div>
                                     </div>
 
-                                    @include('frontend.project.hm.modal')
+                                    @include('frontend.project.hm.modal.modal')
+                                    @include('frontend.project.hm.modal.blank')
 
                                     {{-- datatables --}}
                                     <div class="form-group m-form__group row">

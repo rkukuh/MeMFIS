@@ -1,7 +1,7 @@
 let AddressSelect2 = {
     init: function () {
         $('#address, #address_validate').select2({
-            placeholder: 'Select a Addrress'
+            placeholder: 'Select an Addrress'
         });
     }
 };

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectWorkpackageTable extends Migration
+class CreateProjectWorkPackageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,11 @@ class CreateProjectWorkpackageTable extends Migration
     public function up()
     {
         Schema::create('project_workpackage', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('workpackage_id');
             $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
+            $table->integer('tat');
             $table->timestamps();
             $table->softDeletes();
 

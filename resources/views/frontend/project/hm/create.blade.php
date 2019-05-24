@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Customer @include('frontend.common.label.required')
                                                     </label>
@@ -63,6 +63,18 @@
                                                         @slot('text', 'Customer')
                                                         @slot('name', 'customer')
                                                         @slot('id_error', 'customer')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Work Order Number @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', 'Work Order')
+                                                        @slot('id', 'work-order')
+                                                        @slot('name', 'work-order')
+                                                        @slot('id_error', 'work-order')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -149,7 +161,7 @@
                                                                                 </div>
                                                                         </div>
                                                                         <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                            <div class="col-sm-12 col-md-12 col-lg-12">
                                                                                 <label class="form-control-label">
                                                                                     Email
                                                                                 </label>
@@ -192,16 +204,16 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Work Order Number @include('frontend.common.label.required')
+                                                        Work Order Attachment @include('frontend.common.label.optional')
                                                     </label>
 
-                                                    @component('frontend.common.input.text')
+                                                    @component('frontend.common.input.upload')
                                                         @slot('text', 'Work Order')
-                                                        @slot('id', 'work-order')
-                                                        @slot('name', 'work-order')
-                                                        @slot('id_error', 'work-order')
+                                                        @slot('id', 'work-order-attachment')
+                                                        @slot('name', 'work-order-attachment')
                                                     @endcomponent
                                                 </div>
+
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         A/C Type @include('frontend.common.label.required')
@@ -271,7 +283,7 @@
                                                     @include('frontend.common.buttons.reset')
 
                                                     @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.workpackage.index'))
+                                                        @slot('href', route('frontend.project.index'))
                                                     @endcomponent
                                                 </div>
                                             </div>

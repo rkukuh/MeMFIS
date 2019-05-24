@@ -8,12 +8,10 @@
                             <option value="">
                                 Select a Facility
                             </option>
-                            <option value="1">Facility A</option>
-                            <option value="2">Facility B</option>
-                            <option value="3">Facility C</option>
-                            <option value="4">Facility D</option>
-                            <option value="5">Facility E</option>
-                            <option value="6">Facility F</option>
+                            <option value="1">Hangar Line 1</option>
+                            <option value="2">Hangar Line 2</option>
+                            <option value="3">Hangar Line 3</option>
+                            <option value="4">Hangar Line 4</option>
                         </select>
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1">

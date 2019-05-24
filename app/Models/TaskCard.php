@@ -22,14 +22,15 @@ class TaskCard extends MemfisModel
         'is_rii',
         'source',
         'effectivity',
-        'description',
-        'version',
         'performance_factor',
         'sequence',
+        'stringer',
+        'version',
+        'description',
 
         /** EO Header */
         'revision',
-        'ref_no',
+        'reference',
         'category_id',
         'scheduled_priority_id',
         'scheduled_priority_amount',
@@ -44,20 +45,6 @@ class TaskCard extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * Many-to-Many: A task card may have zero or many aircraft.
-     *
-     * This function will retrieve all the aircrafts of a task card.
-     * See: Aircraft's taskcards() method for the inverse
-     *
-     * @return mixed
-     */
-    public function aircrafts()
-    {
-        return $this->belongsToMany(Aircraft::class, 'aircraft_taskcard', 'taskcard_id', 'aircraft_id')
-                    ->withTimestamps();
-    }
-
-    /**
      * Many-to-Many: A task card may have zero or many (aircraft) access.
      *
      * This function will retrieve all the (aircraft) accesses of a task card.
@@ -68,6 +55,20 @@ class TaskCard extends MemfisModel
     public function accesses()
     {
         return $this->belongsToMany(Access::class, 'access_taskcard', 'taskcard_id', 'access_id')
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: A task card may have zero or many aircraft.
+     *
+     * This function will retrieve all the aircrafts of a task card.
+     * See: Aircraft's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function aircrafts()
+    {
+        return $this->belongsToMany(Aircraft::class, 'aircraft_taskcard', 'taskcard_id', 'aircraft_id')
                     ->withTimestamps();
     }
 
@@ -152,6 +153,20 @@ class TaskCard extends MemfisModel
     public function repeats()
     {
         return $this->morphMany(Repeat::class, 'repeatable');
+    }
+
+    /**
+     * Many-to-Many: A task card may have zero or many (aircraft) station.
+     *
+     * This function will retrieve all the (aircraft) stationes of a task card.
+     * See: Station's taskcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function stations()
+    {
+        return $this->belongsToMany(Station::class, 'station_taskcard', 'taskcard_id', 'station_id')
+                    ->withTimestamps();
     }
 
     /**

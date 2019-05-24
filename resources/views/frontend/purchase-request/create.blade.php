@@ -58,8 +58,13 @@
                                                     Purchase Request Number
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'PR-2121212')
+
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'number')
+                                                    @slot('name', 'number')
+                                                    @slot('value', 'PR-2121212')
+                                                    @slot('id_error','number')
+                                                    @slot('editable','disabled')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -73,8 +78,9 @@
                                                         @component('frontend.common.input.radio')
                                                             @slot('text', 'Project')
                                                             @slot('name', 'type')
-                                                            @slot('id', 'hm')
+                                                            @slot('id', 'project')
                                                             @slot('value', 'project')
+                                                            @slot('checked','checked')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type')
@@ -125,7 +131,40 @@
                                                 @endcomponent
                                             </div>
                                         </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Description @include('frontend.common.label.optional')
+                                                        </label>
+            
+                                                        @component('frontend.common.input.textarea')
+                                                            @slot('rows', '10')
+                                                            @slot('id', 'description')
+                                                            @slot('name', 'description')
+                                                            @slot('text', 'Description')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
                                     </fieldset>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-pr')
+                                                        @slot('class', 'add-pr')
+                                                    @endcomponent
+
+                                                    @include('frontend.common.buttons.reset')
+
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.item.index'))
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <div class="m-portlet">
@@ -161,15 +200,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                    @component('frontend.common.buttons.create-new')
-                                                                        @slot('id', 'item')
-                                                                        @slot('text', 'item')
-                                                                        @slot('data_target', '#modal_item')
-                                                                    @endcomponent
 
-                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="item_datatable" id="scrolling_both"></div>
@@ -177,39 +208,6 @@
                                                         @include('frontend.purchase-request.modal')
 
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
-                                                Description @include('frontend.common.label.optional')
-                                            </label>
-
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '10')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                            <div class="flex">
-                                                <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index'))
-                                                    @endcomponent
                                                 </div>
                                             </div>
                                         </div>
@@ -273,6 +271,7 @@
     </script>
 
 
+    <script src="{{ asset('js/frontend/common/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
@@ -289,7 +288,6 @@
     <script src="{{ asset('js/frontend/purchase-request/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
-    <script src="{{ asset('js/frontend/common/item.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
 @endpush

@@ -1,6 +1,28 @@
+
+
 let Quotation = {
     init: function() {
-        let edit = $(".m_datatable").on("click", ".edit", function() {
+            let exchange_rate_value = $('input[name=exchange]').val();
+            $( document ).ready(function() {
+               let GTotal = formatter.format(document.getElementById("grand_total").innerHTML);
+               document.getElementById("grand_total").innerHTML = GTotal;
+                console.log($('#grand_total'));
+
+            });
+
+            $('select[name="currency"]').on('change', function() {
+                let exchange_id = this.options[this.selectedIndex].innerHTML;
+                let exchange_rate = $('input[name=exchange]');
+                if(exchange_id === "Rupiah (Rp)"){
+                    exchange_rate.val(1);
+                    exchange_rate.attr("readonly",true);
+                }else{
+                    exchange_rate.val('');
+                    exchange_rate.attr("readonly",false);
+                }
+            });
+
+            let edit = $(".m_datatable").on("click", ".edit", function() {
             $("#button").show();
             $("#simpan").text("Perbarui");
 
@@ -30,42 +52,351 @@ let Quotation = {
             });
         });
 
-        let update = $(".modal-footer").on("click", ".update", function() {
-            $("#button").show();
-            $("#name-error").html("");
-            $("#simpan").text("Perbarui");
+        let workpackage_datatables_init = true;
+        $( document ).ready(function() {
+            $.ajax({
+                url: '/project/'+project_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if(workpackage_datatables_init == true){
+                        workpackage_datatables_init = false;
+                        workpackage(data.uuid);
+                    }
+                    else{
+                        let table = $('.workpackage_datatable').mDatatable();
+                        table.destroy();
+                        workpackage(data.uuid);
+                        table = $('.workpackage_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
 
-            let name = $("input[name=name]").val();
-            let triggerid = $("input[name=id]").val();
+            let customer_uuid = $('#customer_id')[0].value;
+            let phone = $('#phone');
+            let fax = $('#fax');
+            let addresses = $('#address');
+            let emails = $('#email');
+            // emptying options
+            phone.empty();
+            fax.empty();
+            addresses.empty();
+            emails.empty();
+            let phoneNumber = "";
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'GET',
+                dataType: "json",
+                url: '/label/get-customer/'+customer_uuid,
+                success: function (data) {
+                    // adding customer phones  option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.phones)){
+                        console.log('empty phones');
+                    }else{
+                        console.log('get the phones data');
+                        $.each( data.phones, function( key, value ) {
+                            if(value.ext === null){
+                                phoneNumber = value.number;
+                            }else{
+                                phoneNumber = value.number+' Ext. '+value.ext;
+                            }
+                            let phoneNumberOption = new Option(phoneNumber,value.uuid);
+                            phone.append(phoneNumberOption);
+                        });
+                    }
+
+                    // adding customer faxes  option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.faxes)){
+                        console.log('empty faxes');
+                    }else{
+                        console.log('get the faxes data');
+                        $.each( data.faxes, function( key, value ) {
+                            let faxNumberOption = new Option( value.number,value.uuid);
+                            fax.append(faxNumberOption);
+                        });
+                    }
+
+                    // Adding customer addresses option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.addresses)){
+                        console.log('empty addresses');
+                    }else{
+                        console.log('get the addresses data');
+                        $.each( data.addresses, function( key, value ) {
+                            let addressesOption = new Option( value.address,value.uuid);
+                            addresses.append(addressesOption);
+                        });
+                    }
+
+                    // Adding customer emails option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.emails)){
+                        console.log('empty emails');
+                    }else{
+                        console.log('get the emails data');
+                        $.each( data.emails, function( key, value ) {
+                            let emailsOption = new Option( value.address,value.uuid);
+                            emails.append(emailsOption);
+                        });
+                    }
+                }
+            });
+        });
+
+        $('.summary_datatable').on('click', '.discount', function edit () {
+            document.getElementById("workpackage_uuid").value = $(this).data('uuid');
+        });
+
+        $('.calculate').on('click', function edit () {
+            var nilai = [];
+            var inputs = $(".extra");
+            //get all values
+            for(var i = 0; i < inputs.length; i++){
+                nilai[i] = parseInt($(inputs[i]).val());
+            }
+            //sum semua nilai pada array
+            const arrSum = arr => arr.reduce((a,b) => a + b, 0);
+            let subTotal = $('#sub_total').attr("value");
+            let grandTotal = subTotal + arrSum(nilai);
+            $('#grand_total').attr("value",grandTotal);
+            $('#grand_total').html(formatter.format(grandTotal));
+        });
+
+        $('.action-buttons').on('click', '.discount', function () {
+            let type = $('#discount-type').val();
+            let discount = $('input[name=discount]').val();
+            let quotation = $('#quotation_uuid').val();
+            let workpackage = $('#workpackage_uuid').val();
+
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/quotation/'+quotation+'/workpackage/'+workpackage+'/discount',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    discount_type: type,
+                    discount_value: discount,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#discount').modal('hide');
+
+
+                        toastr.success('Discount has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+
+                        let table = $('.summary_datatable').mDatatable();
+
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('.nav-tabs').on('click', '.workpackage', function () {
+            let workpackage = $('.workpackage_datatable').mDatatable();
+
+            workpackage.originalDataSet = [];
+            workpackage.reload();
+        });
+
+        $('.nav-tabs').on('click', '.summary', function () {
+
+            let summary = $('.summary_datatable').mDatatable();
+
+            summary.originalDataSet = [];
+            summary.reload();
+
+        });
+
+        $('select[name="work-order"]').on('change', function() {
+            let project_id = this.options[this.selectedIndex].value;
+            $.ajax({
+                url: '/project/'+project_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#project_number').html(data.title);
+                    $('#name').html(data.customer.name);
+                    $('#customer_id').val(data.customer.uuid);
+
+                    if(workpackage_datatables_init == true){
+                        workpackage_datatables_init = false;
+                        workpackage(data.uuid);
+                    }
+                    else{
+                        let table = $('.workpackage_datatable').mDatatable();
+                        table.destroy();
+                        workpackage(data.uuid);
+                        table = $('.workpackage_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+            let customer_uuid = $('#customer_id')[0].value;
+            let phone = $('#phone');
+            let fax = $('#fax');
+            let addresses = $('#address');
+            let emails = $('#email');
+            // emptying options
+            phone.empty();
+            fax.empty();
+            addresses.empty();
+            emails.empty();
+            let phoneNumber = "";
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'GET',
+                dataType: "json",
+                url: '/label/get-customer/'+customer_uuid,
+                success: function (data) {
+                    // adding customer phones  option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.phones)){
+                        console.log('empty phones');
+                    }else{
+                        console.log('get the phones data');
+                        $.each( data.phones, function( key, value ) {
+                            if(value.ext === null){
+                                phoneNumber = value.number;
+                            }else{
+                                phoneNumber = value.number+' Ext. '+value.ext;
+                            }
+                            let phoneNumberOption = new Option(phoneNumber,value.uuid);
+                            phone.append(phoneNumberOption);
+                        });
+                    }
+
+                    // adding customer faxes  option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.faxes)){
+                        console.log('empty faxes');
+                    }else{
+                        console.log('get the faxes data');
+                        $.each( data.faxes, function( key, value ) {
+                            let faxNumberOption = new Option( value.number,value.uuid);
+                            fax.append(faxNumberOption);
+                        });
+                    }
+
+                    // Adding customer addresses option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.addresses)){
+                        console.log('empty addresses');
+                    }else{
+                        console.log('get the addresses data');
+                        $.each( data.addresses, function( key, value ) {
+                            let addressesOption = new Option( value.address,value.uuid);
+                            addresses.append(addressesOption);
+                        });
+                    }
+
+                    // Adding customer emails option on selectBox inside identifier
+                    if(jQuery.isEmptyObject(data.emails)){
+                        console.log('empty emails');
+                    }else{
+                        console.log('get the emails data');
+                        $.each( data.emails, function( key, value ) {
+                            let emailsOption = new Option( value.address,value.uuid);
+                            emails.append(emailsOption);
+                        });
+                    }
+                }
+            });
+        });
+
+        $('.footer').on('click', '.add-quotation', function() {
+            let data = new FormData();
+            data.append("project_id", $('#work-order').val());
+            data.append("customer_id", $('#customer_id').val());
+            data.append("requested_at", $('#date').val());
+            data.append("valid_until", $('#valid_until').val());
+            data.append("currency_id", $('#currency').val());
+            data.append("term_of_payment", $('#term_of_payment').val());
+            data.append("term_of_condition", $('#term_and_condition').val());
+            data.append("exchange_rate", $('#exchange').val());
+            data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
+            data.append("scheduled_payment_amount", $('#scheduled_payment').val());
+            data.append("total",0.000000);
+            data.append("title", $('#title').val());
+            data.append("description", $('#description').val());
+            data.append("top_description", $('#term_and_condition').val());
+            data.append("subtotal", $('#sub_total').attr("value"));
+            data.append("grandtotal", $('#grand_total').attr("value"));
+            
+            var charge = [];
+            var chargeInputs = $(".extra");
+            //get all values
+            for(var i = 0; i < chargeInputs.length; i++){
+                charge[i] = parseInt($(chargeInputs[i]).val());
+            }
+            data.append("charge", JSON.stringify(charge));
+            data.append('_method', 'PUT');
 
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: "put",
-                url: "/category/" + triggerid,
-                data: {
-                    _token: $("input[name=_token]").val(),
-                    name: name
-                },
+                type: 'post',
+                url: '/quotation/'+quotation_uuid,
+                processData: false,
+                contentType: false,
+                data:data,
                 success: function(data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $("#name-error").html(data.errors.name[0]);
-
-                            document.getElementById("name").value = name;
+                        if (data.errors.currency_id) {
+                            $("#currency-error").html(data.errors.currency_id[0]);
                         }
-                    } else {
-                        $("#modal_customer").modal("hide");
+                        if (data.errors.customer_id) {
+                            $("#customer_id-error").html(data.errors.customer_id[0]);
+                        }
+                        if (data.errors.description) {
+                            $("#description-error").html(data.errors.description[0]);
+                        }
+                        if (data.errors.exchange_rate) {
+                            $("#exchange-error").html(data.errors.exchange_rate[0]);
+                        }
+                        if (data.errors.project_id) {
+                            $("#work-order-error").html(data.errors.project_id[0]);
+                        }
+                        if (data.errors.requested_at) {
+                            $("#requested_at-error").html(data.errors.requested_at[0]);
+                        }
+                        if (data.errors.scheduled_payment_amount) {
+                            $("#scheduled_payment_amount-error").html(data.errors.scheduled_payment_amount[0]);
+                        }
+                        if (data.errors.scheduled_payment_type) {
+                            $("#scheduled_payment_type-error").html(data.errors.scheduled_payment_type[0]);
+                        }
+                        if (data.errors.valid_until) {
+                            $("#valid_until-error").html(data.errors.valid_until[0]);
+                        }
 
-                        toastr.success("Data berhasil disimpan.", "Sukses", {
+                        document.getElementById("name").value = name;
+                    } else {
+
+                        toastr.success('Quotation has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $(".m_datatable").mDatatable();
+                        // window.location.href = '/quotation/' + response.uuid + '/edit';
 
-                        table.originalDataSet = [];
-                        table.reload();
                     }
                 }
             });

@@ -42,7 +42,21 @@ $factory->define(Quotation::class, function (Faker $faker) {
             return factory(Currency::class)->create()->id;
         },
         'exchange_rate' => rand(10, 15) * 1000,
-        'total' => rand(10, 100) * 1000000,
+        'subtotal' => rand(10, 100) * 1000000,
+        'charge' => function () use ($faker) {
+            $charges = [];
+
+            for ($i = 1; $i <= rand(1, 4); $i++) {
+                
+                $charge['type'] = 'Biaya ' . $i;
+                $charge['amount'] = rand(1, 10) * 100000;
+
+                array_push($charges, $charge);
+            }
+
+            return $faker->randomElement([null, json_encode($charges)]);
+        },
+        'grandtotal' => rand(101, 200) * 1000000,
         'scheduled_payment_type' => function () {
             if (Type::ofScheduledPayment()->count()) {
                 return Type::ofScheduledPayment()->get()->random()->id;
@@ -58,6 +72,9 @@ $factory->define(Quotation::class, function (Faker $faker) {
             }
 
             return json_encode($amounts);
+        },
+        'term_of_payment' => function () use ($faker) {
+            return $faker->randomElement([null, $faker->randomDigitNotNull]);
         },
         'term_of_condition' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
@@ -81,9 +98,25 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
                 $workpackage = factory(WorkPackage::class)->create();
             }
 
+            $disc_type = null;
+            $disc_value = null;
+
+            if ($faker->boolean) {
+                $disc_type = $faker->randomElement(['percentage', 'amount']);
+                
+                if ($disc_type == 'percentage') {
+                    $disc_value = $faker->randomElement([5, 10, 15, 20, 25]);
+                } 
+                else if ($disc_type == 'amount') {
+                    $disc_value = rand(1, 10) * 100000;
+                }
+            }
+
             $quotation->workpackages()->save($workpackage, [
                 'manhour_total' => rand(10, 20),
                 'manhour_rate' => rand(10, 20) * 1000000,
+                'discount_type' => $disc_type,
+                'discount_value' => $disc_value,
                 'description' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }

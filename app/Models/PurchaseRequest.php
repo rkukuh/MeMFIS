@@ -13,6 +13,7 @@ class PurchaseRequest extends MemfisModel
         'required_at',
         'approved_by',
         'approved_at',
+        'project_id',
         'description',
     ];
 
@@ -57,16 +58,16 @@ class PurchaseRequest extends MemfisModel
     }
 
     /**
-     * One-to-Many: A purchase request must have one or more projects
+     * One-to-Many: A purchase request may have zero or one project
      *
-     * This function will retrieve all the projects of a purchase request.
+     * This function will retrieve the project of a purchase request.
      * See: Project's purchase_requests() method for the inverse
      *
      * @return mixed
      */
-    public function projects()
+    public function project()
     {
-        return $this->belongsToMany(Project::class)
+        return $this->belongsTo(Project::class)
                     ->withTimestamps();
     }
 

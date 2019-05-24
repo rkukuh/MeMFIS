@@ -1,5 +1,9 @@
 let Quotation = {
     init: function () {
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
         $('.m_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -43,8 +47,8 @@ let Quotation = {
             },
             columns: [
                 {
-                    field: 'number',
-                    title: 'Quotation Number',
+                    field: 'requested_at',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -57,11 +61,46 @@ let Quotation = {
                     width: 150
                 },
                 {
-                    field: 'valid_until',
-                    title: 'Valid Until',
+                    field: 'number',
+                    title: 'Quotation No',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
+                    }
+                },
+                {
+                    field: 'project.no_wo',
+                    title: 'Work Order No',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
+                },
+                {
+                    field: 'project.code',
+                    title: 'Project',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
+
                 },
                 {
                     field: 'status',
@@ -77,26 +116,30 @@ let Quotation = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            '<a href="/quotation/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
                         );
                     }
                 }
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        $('.m_datatable').on('click', '.delete', function () {
+            let quotation_uuid = $(this).data('id');
 
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
+            })
+            .then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
@@ -105,11 +148,9 @@ let Quotation = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/category/' + triggerid + '',
+                        url: '/quotation/' + quotation_uuid + '',
                         success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
+                            toastr.success('Quotation has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
@@ -120,7 +161,6 @@ let Quotation = {
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
 
                             $.each(errors.errors, function (index, value) {
@@ -128,17 +168,6 @@ let Quotation = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });

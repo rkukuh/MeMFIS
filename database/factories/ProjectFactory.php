@@ -71,17 +71,14 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
     $workpackage = null;
 
     for ($i = 1; $i <= rand(5, 10); $i++) {
-        if (WorkPackage::count()) {
-            $workpackage = WorkPackage::get()->random();
-        } else {
-            $workpackage = factory(WorkPackage::class)->create();
-        }
+        $workpackage = factory(WorkPackage::class)->create();
 
         $project->workpackages()->save($workpackage, [
             'performance_factor' => $faker->randomElement([
                 null,
                 (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
             ]),
+            'tat' => $faker->randomDigitNotNull,
         ]);
     }
 

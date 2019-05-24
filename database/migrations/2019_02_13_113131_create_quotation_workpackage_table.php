@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuotationWorkpackageTable extends Migration
+class CreateQuotationWorkPackageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,10 @@ class CreateQuotationWorkpackageTable extends Migration
         Schema::create('quotation_workpackage', function (Blueprint $table) {
             $table->unsignedInteger('quotation_id');
             $table->unsignedInteger('workpackage_id');
-            $table->double('manhour_total');
-            $table->double('manhour_rate');
+            $table->double('manhour_total')->nullable();
+            $table->double('manhour_rate')->nullable();
+            $table->string('discount_type')->nullable();
+            $table->double('discount_value')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

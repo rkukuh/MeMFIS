@@ -49,9 +49,11 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($project)
     {
-        //
+        $project = Project::with('customer')->where('uuid',$project)->first();
+
+        return response()->json($project);
     }
 
     /**
@@ -85,7 +87,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return response()->json($project);
+
     }
 
 }

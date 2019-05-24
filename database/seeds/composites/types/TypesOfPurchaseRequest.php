@@ -19,8 +19,8 @@ class TypesOfPurchaseRequest extends Seeder
         ]);
 
         Type::create([
-            'code' => 'hm',
-            'name' => 'Heavy Maintenance',
+            'code' => 'project',
+            'name' => 'Project',
             'of'   => 'purchase-request',
         ]);
     }

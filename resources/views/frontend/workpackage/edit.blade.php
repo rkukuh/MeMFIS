@@ -69,12 +69,6 @@
                                                 (A/C Type) @include('frontend.common.label.required')
                                             </label>
 
-                                            {{-- @component('frontend.common.input.select2')
-                                                @slot('text', 'Applicability Airplane')
-                                                @slot('id', 'applicability_airplane')
-                                                @slot('name', 'applicability_airplane')
-                                                @slot('id_error', 'applicability-airplane')
-                                            @endcomponent --}}
                                             <select id="applicability_airplane" name="applicability_airplane" class="form-control m-select2">
                                                 <option value="">
                                                     &mdash; Select a Aircraft Applicability &mdash;
@@ -87,7 +81,6 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -132,7 +125,7 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
-                                                                @slot('text', 'Workpackage Summary')
+                                                                @slot('text', 'Work Package Summary')
                                                                 @slot('href', route('frontend.summary.workpackage-summary') )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
@@ -152,7 +145,7 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
-                                                                @slot('text', 'Workpackage Summary')
+                                                                @slot('text', 'Work Package Summary')
                                                                 @slot('href', route('frontend.summary.workpackage-summary') )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
@@ -179,7 +172,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">

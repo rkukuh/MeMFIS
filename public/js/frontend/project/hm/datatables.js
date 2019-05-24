@@ -1,41 +1,5 @@
 let Datatables = {
     init: function () {
-        $("#project_datatable").DataTable({
-            "dom": '<"top"f>rt<"bottom">pl',
-            responsive: !0,
-            searchDelay: 500,
-            processing: !0,
-            serverSide: !0,
-            lengthMenu: [5, 10, 25, 50],
-            pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
-            columns: [
-                {
-                    data: "number"
-                },
-                {
-                    data: "title"
-                },
-                {
-                    data: "work_area"
-                },
-                {
-                    data: "manhour"
-                },
-                {
-                    data: "Actions"
-                }
-            ],
-            columnDefs: [{
-                    targets: -1,
-                    orderable: !1,
-                    render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
-                    }
-                },
-
-            ]
-        })
         $("#basic_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -56,7 +20,7 @@ let Datatables = {
                     data: "work_area"
                 },
                 {
-                    data: "manhour"
+                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"
@@ -66,7 +30,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-basic" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -92,7 +56,7 @@ let Datatables = {
                     data: "work_area"
                 },
                 {
-                    data: "manhour"
+                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"
@@ -102,7 +66,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-sip" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -128,7 +92,7 @@ let Datatables = {
                     data: "work_area"
                 },
                 {
-                    data: "manhour"
+                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"
@@ -138,7 +102,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cpcp" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -161,12 +125,6 @@ let Datatables = {
                     data: "title"
                 },
                 {
-                    data: "work_area"
-                },
-                {
-                    data: "manhour"
-                },
-                {
                     data: "Actions"
                 }
             ],
@@ -174,7 +132,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-adsb" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -197,12 +155,6 @@ let Datatables = {
                     data: "title"
                 },
                 {
-                    data: "work_area"
-                },
-                {
-                    data: "manhour"
-                },
-                {
                     data: "Actions"
                 }
             ],
@@ -210,7 +162,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cmrawl" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -236,7 +188,7 @@ let Datatables = {
                     data: "work_area"
                 },
                 {
-                    data: "manhour"
+                    data: "estimation_manhour"
                 },
                 {
                     data: "Actions"
@@ -246,7 +198,7 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-si" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -269,15 +221,716 @@ let Datatables = {
             $('#si_datatable').DataTable().ajax.reload();
         });
 
-        $('.dataTable').on('click', '.select-account_code', function () {
-            let uuid = $(this).data('uuid');
-            let code = $(this).data('code');
-            let name = $(this).data('name');
+        $('#basic_datatable').on('click', '.select-basic', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
 
-            document.getElementById('account_code').value = uuid;
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_basic').modal('hide');
 
-            $('.search-journal').html(code + " - " + name);
-            $('#modal_account_code').modal('hide');
+                        toastr.success('Work Package has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#sip_datatable').on('click', '.select-sip', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_sip').modal('hide');
+
+                        toastr.success('Work Package has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.sip_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#cpcp_datatable').on('click', '.select-cpcp', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_cpcp').modal('hide');
+
+                        toastr.success('Work Package has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cpcp_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#adsb_datatable').on('click', '.select-adsb', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_ad_sb').modal('hide');
+
+                        toastr.success('Work Package has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.ad-sb_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#si_datatable').on('click', '.select-si', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_si').modal('hide');
+
+                        toastr.success('Work Package has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.si_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('#cmrawl_datatable').on('click', '.select-cmrawl', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    taskcard: $(this).data('uuid'),
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#modal_cmr_awl').modal('hide');
+
+                        toastr.success('Work Package has been created.', 'Success',  {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cmr-awl_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+          //Basic taskcard Datatable
+          $('.basic_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.modal-footer').on('click', '.sequence', function () {
+            triggeruuid = $('input[name=uuid]').val();
+            sequence = $('input[name=sequence]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/sequence/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    sequence: sequence,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Sequence has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+                        $('#taskcard_sequence').modal('hide');
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });        });
+        $('.basic_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.basic_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
+        $('.basic_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        //SIP taskcard Datatable
+        $('.sip_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.sip_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.sip_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.sip_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
+
+        //CPCP taskcard Datatable
+        $('.cpcp_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.cpcp_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.cpcp_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cpcp_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
+        //ad-sb_datatable taskcard Datatable
+        $('.ad-sb_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                alert(triggeruuid);
+                material_tc_eo(triggeruuid);
+                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_eo_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc_eo(triggeruuid);
+                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.ad-sb_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                alert(triggeruuid);
+                tool_tc_eo(triggeruuid);
+                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_eo_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc_eo(triggeruuid);
+                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.ad-sb_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.ad-sb_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
+        //cmr-awl_datatable taskcard Datatable
+        $('.cmr-awl_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc_eo(triggeruuid);
+                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_eo_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc_eo(triggeruuid);
+                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.cmr-awl_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc_eo(triggeruuid);
+                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_eo_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc_eo(triggeruuid);
+                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.cmr-awl_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cmr-awl_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
+        //SI taskcard Datatable
+        $('.si_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                material_tc_si(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                material_tc_si(triggeruuid);
+                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.si_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc_si(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                tool_tc_si(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+
+        $('.si_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.si_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
+        //basic
+        $('.m-datatable').on('click', '.delete', function () {
+            let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            let datatableClassName = parent_id.className.split(' ');
+            // alert(datatableClassName[0]);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/workpackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.'+datatableClassName).mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
         });
     }
 };

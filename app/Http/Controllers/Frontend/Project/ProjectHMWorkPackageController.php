@@ -29,7 +29,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function index()
     {
-        return view('frontend.project.index');
+        //
     }
 
     /**
@@ -39,7 +39,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function create()
     {
-        return view('frontend.project.hm.create');
+        //
     }
 
     /**
@@ -61,10 +61,17 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, Workpackage $workpackage)
+    public function show(Project $project, WorkPackage $workPackage)
     {
-        return view('frontend.project.hm.show',[
-            'workPackage' => $workpackage,
+        $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
+        $edit = false;
+        return view('frontend.project.hm.workpackage.index',[
+            'workPackage' => $workPackage,
+            'total_mhrs' => $total_mhrs,
+            'total_pfrm_factor' => $total_pfrm_factor,
+            'edit' => $edit,
+            'project' => $project
         ]);
     }
 
@@ -74,14 +81,18 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Project $project, WorkPackage $workPackage)
     {
-        return view('frontend.project.hm.edit',[
-            'project' => $project,
-            'aircrafts' => $this->aircrafts,
-            'customers' => $this->customers
+        $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
+        $edit = true;
+        return view('frontend.project.hm.workpackage.index',[
+            'workPackage' => $workPackage,
+            'total_mhrs' => $total_mhrs,
+            'total_pfrm_factor' => $total_pfrm_factor,
+            'edit' => $edit,
+            'project' => $project
         ]);
-
     }
 
     /**
@@ -102,7 +113,7 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project,WorkPackage $workPackage)
+    public function destroy(Project $project, WorkPackage $workPackage)
     {
         $project->workpackages()->detach($workPackage);
 

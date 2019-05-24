@@ -10,8 +10,8 @@ class Version extends MemfisModel
         'number',
         'change_log',
         'versioned_at',
-        'versionable_id',
         'versionable_type',
+        'versionable_id',
     ];
 
     protected $dates = ['versioned_at'];

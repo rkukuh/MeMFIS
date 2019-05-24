@@ -10,8 +10,8 @@ class Email extends MemfisModel
         'address',
         'type_id',
         'is_active',
-        'emailable_id',
         'emailable_type',
+        'emailable_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

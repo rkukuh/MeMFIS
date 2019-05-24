@@ -10,8 +10,8 @@ class Fax extends MemfisModel
         'number',
         'type_id',
         'is_active',
-        'faxable_id',
         'faxable_type',
+        'faxable_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

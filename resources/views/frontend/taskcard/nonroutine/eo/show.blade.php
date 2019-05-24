@@ -84,15 +84,10 @@
                                                 <label class="form-control-label">
                                                     Reference @include('frontend.common.label.optional')
                                                 </label>
-                                                    @if (empty($taskcard->related_to->isEmpty()))
-                                                        @include('frontend.common.label.data-info-nodata')
-                                                    @else
-                                                    <div style="background-color:beige; padding:15px;" class="">
-                                                        @foreach($taskcard->related_to  as $related)
-                                                            {{ $related->number }},
-                                                        @endforeach
-                                                    </div>
-                                                    @endif
+
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $taskcard->reference)
+                                                @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">

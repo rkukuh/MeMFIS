@@ -327,7 +327,7 @@ class FillComboxController extends Controller
      */
     public function customer()
     {
-        $customers = Customer::pluck('name', 'id');
+        $customers = Customer::pluck('name', 'uuid');
 
         return json_encode($customers);
 
@@ -340,7 +340,7 @@ class FillComboxController extends Controller
      */
     public function vendor()
     {
-        $vendors = Vendor::pluck('code', 'uuid');
+        $vendors = Vendor::pluck('code', 'id');
 
         return json_encode($vendors);
 
@@ -421,15 +421,6 @@ class FillComboxController extends Controller
         $manufacturer = Manufacturer::pluck('name', 'id');
 
         return json_encode($manufacturer);
-    }
-
-    public function test()
-    {
-        $websites = Type::ofWebsite()->get();
-
-        return view('frontend.testing.repeaterBlank', [
-            'websites' => $websites
-        ]);
     }
 
     /**
@@ -622,6 +613,45 @@ class FillComboxController extends Controller
         $projects = Project::pluck('title','id');
 
         return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employee()
+    {
+        $employees = Employee::pluck('first_name','code','id');
+
+        return json_encode($employees);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function workOrder()
+    {
+        $work_order = Project::pluck('no_wo','uuid');
+
+        return json_encode($work_order);
+    }
+
+
+    /**
+     * Display a listing of testing resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function test()
+    {
+        $websites = Type::ofWebsite()->get();
+
+        return view('frontend.testing.repeaterBlank', [
+            'websites' => $websites
+        ]);
     }
 
 

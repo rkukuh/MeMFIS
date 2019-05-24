@@ -2,7 +2,7 @@ let refDate = {
   init: function () {
 
       $("#ref-date").datetimepicker({
-          format: "yyyy/mm/dd",
+          format: "yyyy-mm-dd",
           todayHighlight: !0,
           autoclose: !0,
           startView: 2,

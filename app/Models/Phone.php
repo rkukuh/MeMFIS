@@ -11,8 +11,8 @@ class Phone extends MemfisModel
         'ext',
         'type_id',
         'is_active',
-        'phoneable_id',
         'phoneable_type',
+        'phoneable_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

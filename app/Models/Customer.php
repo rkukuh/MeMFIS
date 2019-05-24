@@ -9,6 +9,7 @@ class Customer extends MemfisModel
     protected $fillable = [
         'code',
         'name',
+        'attention',
         'payment_term',
         'banned_at',
         'account_code',

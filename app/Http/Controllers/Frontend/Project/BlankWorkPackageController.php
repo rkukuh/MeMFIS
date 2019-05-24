@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Frontend\Project;
 
 use App\Models\Project;
-use App\Models\Aircraft;
 use App\Models\ListUtil;
-use App\Models\TaskCard;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,13 +12,6 @@ use App\Http\Requests\Frontend\WorkPackageUpdate;
 
 class BlankWorkPackageController extends Controller
 {
-    protected $aircrafts;
-
-    public function __construct()
-    {
-        $this->aircrafts = Aircraft::all();
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -39,9 +30,7 @@ class BlankWorkPackageController extends Controller
      */
     public function create(Project $project)
     {
-        return view('frontend.project.hm.blank.create',[
-            'project' => $project
-        ]);
+        //
     }
 
     /**
@@ -52,21 +41,10 @@ class BlankWorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request,Project $project)
     {
-        $workpackage = Workpackage::create($request->all());
+        $workpackage = WorkPackage::create($request->all());
         $project->workpackages()->attach($workpackage);
 
         return response()->json($workpackage);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function addTaskCard(Request $request, WorkPackage $workPackage)
-    {
-
     }
 
     /**
@@ -88,11 +66,7 @@ class BlankWorkPackageController extends Controller
      */
     public function edit(Project $project, WorkPackage $workPackage)
     {
-        return view('frontend.project.hm.blank.edit',[
-            'workPackage' => $workPackage,
-            'aircrafts' => $this->aircrafts,
-            'project' => $project,
-        ]);
+        //
     }
 
     /**
@@ -104,7 +78,7 @@ class BlankWorkPackageController extends Controller
      */
     public function update(WorkPackageUpdate $request, WorkPackage $workPackage)
     {
-
+        //
     }
 
     /**
@@ -115,7 +89,7 @@ class BlankWorkPackageController extends Controller
      */
     public function destroy(WorkPackage $workPackage)
     {
-
+        //
     }
 
     /**
@@ -126,7 +100,7 @@ class BlankWorkPackageController extends Controller
      */
     public function deleteTaskCard(WorkPackage $workPackage,TaskCard $taskcard)
     {
-
+        //
     }
 
 }

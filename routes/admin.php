@@ -31,6 +31,7 @@ Route::name('admin.')->group(function () {
         Route::resource('address', 'AddressController');
         Route::resource('version', 'VersionController');
         Route::resource('website', 'WebsiteController');
+        Route::resource('station', 'StationController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
         Route::resource('threshold', 'ThresholdController');
@@ -46,6 +47,7 @@ Route::name('admin.')->group(function () {
         Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
+        Route::resource('facility', 'FacilityController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -72,6 +74,13 @@ Route::name('admin.')->group(function () {
         Route::resource('goods-received', 'GoodsReceivedController');
         Route::resource('purchase-order', 'PurchaseRequestController');
         Route::resource('purchase-request', 'PurchaseOrderController');
+
+        /** PROJECT'S WORKPACKAGE */
+
+        Route::resource('project-workpackage', 'ProjectWorkPackageController');
+        Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
+        Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
+        Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
 
     });
 

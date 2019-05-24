@@ -14,6 +14,7 @@ Route::name('component.')->group(function () {
     ], function () {
 
         Route::get('get-tags', 'FillComboxController@tags')->name('get-tags');
+        Route::get('get-employees', 'FillComboxController@employee')->name('get-employee');
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
@@ -28,6 +29,7 @@ Route::name('component.')->group(function () {
         Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
         Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');
         Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
+        Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
         Route::get('get-licenses/{id}', 'FillComboxController@licenses')->name('get-licenses');
         Route::get('get-currencies', 'FillComboxController@currencies')->name('get-currencies');
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
@@ -59,6 +61,11 @@ Route::name('component.')->group(function () {
         Route::get('get-takcard-si-types', 'FillComboxController@taskcardTypeSI')->name('get-takcard-si-types');
         Route::get('get-takcard-preliminary-types', 'FillComboxController@taskcardTypePreliminary')->name('get-takcard-preliminary-types');
 
+        Route::prefix('label')->group(function () {
+            Route::get('get-vendors/{vendor}', 'FillLabelController@vendor')->name('get-vendor');
+            Route::get('get-purchase-request/{purchaseRequest}', 'FillLabelController@purchaseRequest')->name('get-purchase-request');
+            Route::get('get-customer/{customer}', 'FillLabelController@customer')->name('get-customer');
+        });
     });
 });
 

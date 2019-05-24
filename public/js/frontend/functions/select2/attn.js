@@ -1,7 +1,7 @@
 let AttnSelect2 = {
     init: function () {
         $('#attention, #attention_validate').select2({
-            placeholder: 'Select a Attention'
+            placeholder: 'Select an Attention'
         });
     }
 };
