@@ -34,6 +34,7 @@ $factory->define(Type::class, function (Faker $faker) {
             'maintenance-cycle',
             'taskcard-type-routine',
             'taskcard-type-non-routine',
+            'project-workpackage-manhour',
         ]),
     ];
 
@@ -62,3 +63,4 @@ $factory->state(Type::class, 'scheduled-payment', ['of' => 'scheduled-payment'])
 $factory->state(Type::class, 'maintenance-cycle', ['of' => 'maintenance-cycle']);
 $factory->state(Type::class, 'taskcard-type-routine', ['of' => 'taskcard-type-routine']);
 $factory->state(Type::class, 'taskcard-type-non-routine', ['of' => 'taskcard-type-non-routine']);
+$factory->state(Type::class, 'project-workpackage-manhour', ['of' => 'project-workpackage-manhour']);
