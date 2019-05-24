@@ -85,5 +85,6 @@ class DummyDataSeeder extends Seeder
         $this->call(ProjectWorkPackages::class);
         $this->call(ProjectWorkPackageEngineers::class);
         $this->call(ProjectWorkPackageManhours::class);
+        $this->call(ProjectWorkPackageFacilities::class);
     }
 }

@@ -80,6 +80,7 @@ Route::name('admin.')->group(function () {
         Route::resource('project-workpackage', 'ProjectWorkPackageController');
         Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
+        Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
 
     });
 
