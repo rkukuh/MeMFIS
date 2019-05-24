@@ -160,7 +160,7 @@ let Quotation = {
             const arrSum = arr => arr.reduce((a,b) => a + b, 0);
             let subTotal = $('#sub_total').attr("value");
             let grandTotal = subTotal + arrSum(nilai);
-
+            $('#grand_total').attr("value",grandTotal);
             $('#grand_total').html(formatter.format(grandTotal));
         });
 
@@ -321,8 +321,7 @@ let Quotation = {
             });
         });
 
-        $('.footer').on('click', '.update-quotation', function() {
-            console.log($('#sub_total').val());
+        $('.footer').on('click', '.add-quotation', function() {
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -338,6 +337,16 @@ let Quotation = {
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
+            data.append("subtotal", $('#sub_total').attr("value"));
+            data.append("grandtotal", $('#grand_total').attr("value"));
+            
+            var charge = [];
+            var chargeInputs = $(".extra");
+            //get all values
+            for(var i = 0; i < chargeInputs.length; i++){
+                charge[i] = parseInt($(chargeInputs[i]).val());
+            }
+            data.append("charge", JSON.stringify(charge));
             data.append('_method', 'PUT');
 
             $.ajax({

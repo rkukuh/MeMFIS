@@ -460,7 +460,7 @@
 @push('footer-scripts')
 <script>
     let project_id = '{{  $quotation->project->uuid }}';
-
+    let quotation_uuid = '{{  $quotation->uuid }}';
     function myFunction(object) {
         // var numItems = $('.project').length
 
@@ -560,11 +560,5 @@
 <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
 <script src="{{ asset('js/frontend/quotation/workpackage-edit.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/edit.js') }}"></script>
-<script>
-    $('.action-buttons').on('click', '.add-quotation', function() {
-        alert('tes');
-    });
-</script>
-
 
 @endpush
