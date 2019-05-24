@@ -99,7 +99,10 @@ class Project extends MemfisModel
     {
         return $this->belongsToMany(WorkPackage::class, 'project_workpackage', 'project_id', 'workpackage_id')
                     ->using(ProjectWorkPackage::class)
-                    ->withPivot('performance_factor')
+                    ->withPivot(
+                        'performance_factor',
+                        'tat'
+                    )
                     ->withTimestamps();
     }
 }

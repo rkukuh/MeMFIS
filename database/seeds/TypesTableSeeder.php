@@ -24,6 +24,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfMaintenanceCycle::class);
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfProject::class);
+        $this->call(TypesOfProjectWorkPackageManhour::class);
         $this->call(TypesOfPurchaseRequest::class);
         $this->call(TypesOfRegulator::class);
         $this->call(TypesOfScheduledPayment::class);
