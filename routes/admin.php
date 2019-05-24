@@ -47,6 +47,7 @@ Route::name('admin.')->group(function () {
         Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
+        Route::resource('facility', 'FacilityController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
