@@ -50,7 +50,7 @@ let Project = {
             columns: [
                 {
                     field: 'code',
-                    title: 'Workpackage Number',
+                    title: 'Work Package Number',
                     sortable: !1,
                 },
                 {
@@ -173,7 +173,7 @@ let Project = {
                     } else {
                         $('#modal_project').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success',  {
+                        toastr.success('Work Package has been created.', 'Success',  {
                             timeOut: 5000
                         });
 
