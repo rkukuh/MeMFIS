@@ -30,7 +30,7 @@
                                             <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">General Tool and Material</a>
+                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">Tool and Material</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner">Engineer Team</a>
