@@ -15,7 +15,21 @@ class CreateProjectWorkPackageFacilitiesTable extends Migration
     {
         Schema::create('project_workpackage_facilities', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->unsignedInteger('project_workpackage_id');
+            $table->unsignedInteger('facility_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('project_workpackage_id')
+                    ->references('id')->on('project_workpackage')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('facility_id')
+                    ->references('id')->on('facilities')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
