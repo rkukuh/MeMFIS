@@ -485,7 +485,8 @@ Route::name('frontend.')->group(function () {
         Route::view('/defectcard-mechanic-pending', 'frontend.defectcard.mechanic.pending')->name('defectcard.mechanic.pending');
         Route::view('/defectcard-mechanic-progress', 'frontend.defectcard.mechanic.progress')->name('defectcard.mechanic.progress');
 
-        Route::view('/defectcard-project', 'frontend.defectcard.project')->name('defectcard.project');
+        Route::view('/defectcard-project', 'frontend.defectcard.project.index')->name('defectcard.project.index');
+        Route::view('/defectcard-project/show', 'frontend.defectcard.project.show')->name('defectcard.project.show');
 
     });
 
