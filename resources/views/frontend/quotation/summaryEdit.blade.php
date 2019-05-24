@@ -41,10 +41,10 @@
                         </select>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        @component('frontend.common.input.text')
-                            @slot('id', 'document')
-                            @slot('name', 'document')
-                            @slot('class', 'document')
+                        @component('frontend.common.input.number')
+                            @slot('id', 'extra')
+                            @slot('name', 'extra')
+                            @slot('class', 'extra')
                         @endcomponent
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1">
@@ -72,12 +72,12 @@
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
-            <button type="reset" class="btn btn-default calculate" id="calculate">
+            <div class="btn btn-default calculate" id="calculate">
                 <span>
                     <i class="fa fa-calculator"></i>
                     Calculate
                 </span>
-            </button>
+            </div>
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
         </div>

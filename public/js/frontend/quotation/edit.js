@@ -148,6 +148,22 @@ let Quotation = {
         $('.summary_datatable').on('click', '.discount', function edit () {
             document.getElementById("workpackage_uuid").value = $(this).data('uuid');
         });
+
+        $('.calculate').on('click', function edit () {
+            var nilai = [];
+            var inputs = $(".extra");
+            //get all values
+            for(var i = 0; i < inputs.length; i++){
+                nilai[i] = parseInt($(inputs[i]).val());
+            }
+            //sum semua nilai pada array
+            const arrSum = arr => arr.reduce((a,b) => a + b, 0);
+            let subTotal = $('#sub_total').attr("value");
+            let grandTotal = subTotal + arrSum(nilai);
+
+            $('#grand_total').html(formatter.format(grandTotal));
+        });
+
         $('.action-buttons').on('click', '.discount', function () {
             let type = $('#discount-type').val();
             let discount = $('input[name=discount]').val();
