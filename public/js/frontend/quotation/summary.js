@@ -1,6 +1,6 @@
-var locale = 'id';
-var options = { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 };
-var formatter = new Intl.NumberFormat(locale, options);
+let locale = 'id';
+let options = { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+let formatter = new Intl.NumberFormat(locale, options);
 let total = 0;
 let quotation = $('#quotation_uuid').val();
 
@@ -94,7 +94,7 @@ var DatatableAutoColumnHideDemo = function () {
           filterable: !1,
           template: function (t, e, i) {
             return (
-              '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+              '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
               t.uuid +
               '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
             );
