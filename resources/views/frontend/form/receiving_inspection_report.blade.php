@@ -159,36 +159,36 @@
 
   <div id="content2">
     <table width="93%" border="1" cellpadding="3">
-        <tr style="background:#eaeaea">
-            <th>No</th>
-            <th>Part Number</th>
-            <th>Serial Number</th>
-            <th>Item Description</th>
-            <th>Qty</th>
+        <tr width="100%"style="background:#eaeaea">
+            <th width="7%">No</th>
+            <th width="14%">Part Number</th>
+            <th width="14%">Serial Number</th>
+            <th width="62%">Item Description</th>
+            <th width="7%">Qty</th>
         </tr>
         <tr>
-            <td>January</td>
-            <td>$100</td>
-            <td>January</td>
-            <td>$100</td>
-            <td>January</td>
-        </tr>
-        <tr>
-            <td>January</td>
+            <td>1</td>
             <td>$100</td>
             <td>January</td>
             <td>$100</td>
             <td>January</td>
         </tr>
         <tr>
-            <td>January</td>
+            <td>2</td>
             <td>$100</td>
             <td>January</td>
             <td>$100</td>
             <td>January</td>
         </tr>
         <tr>
+            <td>3</td>
+            <td>$100</td>
             <td>January</td>
+            <td>$100</td>
+            <td>January</td>
+        </tr>
+        <tr>
+            <td>4</td>
             <td>$100</td>
             <td>January</td>
             <td>$100</td>
@@ -439,7 +439,7 @@
         </table>
     </div>
   </div>
-  <div style="margin-top:35px;">
+  <div style="position:absolute;top:1040px;">
     <img src="./img/FooterRIR.jpg" width="100%" alt="" srcset="">
   </div>
 </body>
