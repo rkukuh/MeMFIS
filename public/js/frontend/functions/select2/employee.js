@@ -1,7 +1,8 @@
 let EmployeeSelect2 = {
     init: function () {
-        $('#employee, #employee_validate').select2({
-            placeholder: 'Select an Employee'
+        $('select[name^=employee], #employee_validate').select2({
+            placeholder: 'Select an Employee',
+            allowClear: true
         });
     }
 };
