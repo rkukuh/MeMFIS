@@ -65,9 +65,9 @@ class DiscrepancyController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.discrepancy.edit', [
-            'skills' => $this->skill,
-        ]);
+        // return view('frontend.discrepancy.edit', [
+        //     'skills' => $this->skill,
+        // ]);
     }
 
     /**

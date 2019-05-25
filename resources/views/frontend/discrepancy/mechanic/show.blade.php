@@ -381,7 +381,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.job-card.engineer.discrepancy.item.tool.index')
+                            {{-- @include('frontend.job-card.engineer.discrepancy.item.tool.index') --}}
 
                             <div class="tools_datatable" id="scrolling_both"></div>
 
@@ -420,7 +420,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.job-card.engineer.discrepancy.item.item.index')
+                            {{-- @include('frontend.job-card.engineer.discrepancy.item.item.index') --}}
 
                             <div class="materials_datatable" id="scrolling_both"></div>
                         </div>
