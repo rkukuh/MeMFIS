@@ -18,6 +18,7 @@ class CreatePricesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->morphs('priceable');
             $table->double('amount');
+            $table->integer('level');
             $table->timestamps();
             $table->softDeletes();
         });
