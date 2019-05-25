@@ -33,6 +33,17 @@ class Level extends MemfisModel
     /******************************************* SCOPE *******************************************/
 
     /**
+     * Scope a query to only include level of customer.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCustomer(Builder $query)
+    {
+        return $query->where('of', 'customer');
+    }
+
+    /**
      * Scope a query to only include level of Language proficiency.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
