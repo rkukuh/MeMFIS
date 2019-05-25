@@ -64,4 +64,20 @@ class Level extends MemfisModel
     {
         return $query->where('of', 'otr');
     }
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Many-to-Many: A customer can have many levels.
+     *
+     * This function will retrieve all the customers of a given level.
+     * See: Customer's levels() method for the inverse
+     *
+     * @return mixed
+     */
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class)
+                    ->withTimestamps();
+    }
 }
