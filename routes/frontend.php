@@ -406,20 +406,20 @@ Route::name('frontend.')->group(function () {
         /** Discrepancy */
 
         Route::namespace('Discrepancy')->group(function () {
-            Route::resource('discrepancy', 'DiscrepancyController');
+            // Route::resource('discrepancy', 'DiscrepancyController');
         });
 
         Route::view('/discrepancy/engineer/create', 'frontend.discrepancy.engineer.create')->name('discrepancy.engineer.create');
-        // Route::view('/discrepancy/engineer/edit', 'frontend.discrepancy.engineer.edit')->name('discrepancy.engineer.edit');
-        // Route::view('/discrepancy/engineer/show', 'frontend.discrepancy.engineer.show')->name('discrepancy.engineer.show');
+        Route::view('/discrepancy/engineer/edit', 'frontend.discrepancy.engineer.edit')->name('discrepancy.engineer.edit');
+        Route::view('/discrepancy/engineer/show', 'frontend.discrepancy.engineer.show')->name('discrepancy.engineer.show');
         
-        // Route::view('/discrepancy/mechanic/create', 'frontend.discrepancy.mechanic.create')->name('discrepancy.mechanic.create');
-        // Route::view('/discrepancy/mechanic/edit', 'frontend.discrepancy.mechanic.edit')->name('discrepancy.mechanic.edit');
-        // Route::view('/discrepancy/mechanic/show', 'frontend.discrepancy.mechanic.show')->name('discrepancy.mechanic.show');
+        Route::view('/discrepancy/mechanic/create', 'frontend.discrepancy.mechanic.create')->name('discrepancy.mechanic.create');
+        Route::view('/discrepancy/mechanic/edit', 'frontend.discrepancy.mechanic.edit')->name('discrepancy.mechanic.edit');
+        Route::view('/discrepancy/mechanic/show', 'frontend.discrepancy.mechanic.show')->name('discrepancy.mechanic.show');
 
-        // Route::view('/discrepancy/ppc/create', 'frontend.discrepancy.ppc.create')->name('discrepancy.ppc.create');
-        // Route::view('/discrepancy/ppc/edit', 'frontend.discrepancy.ppc.edit')->name('discrepancy.ppc.edit');
-        // Route::view('/discrepancy/ppc/show', 'frontend.discrepancy.ppc.show')->name('discrepancy.ppc.show');
+        Route::view('/discrepancy/ppc/create', 'frontend.discrepancy.ppc.create')->name('discrepancy.ppc.create');
+        Route::view('/discrepancy/ppc/edit', 'frontend.discrepancy.ppc.edit')->name('discrepancy.ppc.edit');
+        Route::view('/discrepancy/ppc/show', 'frontend.discrepancy.ppc.show')->name('discrepancy.ppc.show');
 
         /** Release to Service */
 
