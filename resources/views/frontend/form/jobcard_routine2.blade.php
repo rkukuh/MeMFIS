@@ -274,10 +274,10 @@
               <div style="margin-left:100px;margin-top:12px;">
                 <ul>
                   <li>
-                    <img src="./img/check-box-empty.png" alt="" width="13"> <span style="margin-left:6px;font-weight: bold;font-size:18px">YES</span>
+                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                   </li>
                   <li style="margin-left:12px;">
-                    <img src="./img/check.png" alt="" width="14"> <span style="margin-left:6px;font-weight: bold;font-size:18px">NO</span>
+                    <img src="./img/check.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                   </li>
                 </ul>
               </div>
