@@ -30,7 +30,7 @@
 </div>
 <div class="m-content">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-7">
       <div class="m-portlet">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
@@ -279,65 +279,90 @@
                       </div>
                     </div>
                     <div class="form-group m-form__group row">
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group m-form__group row">
-                          <div class="col-sm-12 col-md-12 col-lg-12">
-                            <label class="form-control-label">
-                                Propose Correction
-                            </label>
-                          </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <fieldset class="border p-2">
+                                <legend class="w-auto">Propose Correction</legend>
+
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'remove')
+                                            @slot('name', 'remove')
+                                            @slot('text', '1. REMOVE')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'repair')
+                                            @slot('name', 'repair')
+                                            @slot('text', '4. REPAIR')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'test')
+                                            @slot('name', 'test')
+                                            @slot('text', '7. TEST')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'install')
+                                            @slot('name', 'install')
+                                            @slot('text', '2. INSTALL')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'replace')
+                                            @slot('name', 'replace')
+                                            @slot('text', '5. REPLACE')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'shop_visit')
+                                            @slot('name', 'shop_visit')
+                                            @slot('text', '8. SHOP VISIT')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'recrification')
+                                            @slot('name', 'recrification')
+                                            @slot('text', '3. RECRIFICATION')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'ndt')
+                                            @slot('name', 'ndt')
+                                            @slot('text', '6. NDT')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'other')
+                                            @slot('name', 'other')
+                                            @slot('text', '9. Other')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                        <div class="form-group m-form__group row">
-                          <div class="col-sm-4 col-md-4 col-lg-4">
-                            <div class="m-checkbox-inline">
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                    @slot('name', '1')
-                                    @slot('text','1. Remove')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '2')
-                                        @slot('text','2. Install')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '3')
-                                        @slot('text','3. Rectification')
-                                @endcomponent
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-4 col-lg-4">
-                            <div class="m-checkbox-inline">
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                    @slot('name', '4')
-                                    @slot('text','4. Repair')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '5')
-                                        @slot('text','5. Replace')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '6')
-                                        @slot('text','6. Not')
-                                @endcomponent
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-4 col-lg-4">
-                            <div class="m-checkbox-inline">
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                    @slot('name', '7')
-                                    @slot('text','7. Test')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '8')
-                                        @slot('text','8. Shop Visit')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '9')
-                                        @slot('text','9. Other')
-                                @endcomponent
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                     <div class="form-group m-form__group row">
                       <div class="col-sm-12 col-md-12 col-lg-12">
