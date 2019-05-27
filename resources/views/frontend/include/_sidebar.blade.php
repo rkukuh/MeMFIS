@@ -404,8 +404,6 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__section">
-            </li>
             <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
                 <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
