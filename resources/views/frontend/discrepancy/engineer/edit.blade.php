@@ -335,6 +335,7 @@
                                                         @slot('type','button')
                                                         @slot('id', 'add-item')
                                                         @slot('class', 'add-item')
+                                                        @slot('text','Save & Approved')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -385,7 +386,7 @@
                                 </div>
                             </div>
 
-                            {{-- @include('frontend.job-card.engineer.discrepancy.item.tool.index') --}}
+                            @include('frontend.discrepancy.engineer.tool.modal')
 
                             <div class="tools_datatable" id="scrolling_both"></div>
 
@@ -415,7 +416,6 @@
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Material')
-                                            @slot('id', 'material')
                                             @slot('data_target', '#modal_material')
                                         @endcomponent
 
@@ -424,7 +424,7 @@
                                 </div>
                             </div>
 
-                            {{-- @include('frontend.job-card.engineer.discrepancy.item.item.index') --}}
+                            @include('frontend.discrepancy.engineer.material.modal')
 
                             <div class="materials_datatable" id="scrolling_both"></div>
                         </div>
@@ -452,15 +452,15 @@
 @endpush
 
 @push('footer-scripts')
-    {{-- <script src="{{ asset('js/frontend/job-card/discrepancy/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
- --}}
 @endpush

@@ -331,6 +331,7 @@
                                                         @slot('type','button')
                                                         @slot('id', 'add-item')
                                                         @slot('class', 'add-item')
+                                                        @slot('text','Save & Approved')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
