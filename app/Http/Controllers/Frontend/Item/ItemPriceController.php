@@ -36,9 +36,13 @@ class ItemPriceController extends Controller
      * @param  \App\Http\Requests\Frontend\PriceStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PriceStore $request)
+    public function store(PriceStore $request, Item $item)
     {
-        //
+        foreach ($request->price as $amount) {
+            $item->prices()->save(new Price (['amount' => $amount]));
+        }
+
+        return response()->json($item);
     }
 
     /**
@@ -58,9 +62,9 @@ class ItemPriceController extends Controller
      * @param  \App\Models\Price  $price
      * @return \Illuminate\Http\Response
      */
-    public function edit(Price $price)
+    public function edit(Item $item, $price)
     {
-        //
+        return response()->json($item->prices);
     }
 
     /**

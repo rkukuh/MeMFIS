@@ -51,7 +51,7 @@
                                 </label>
 
                                 <div class='repeater'>
-                                    <div data-repeater-list="group-email">
+                                    <div data-repeater-list="group-price">
                                         <div data-repeater-item>
                                             <div class=" row">
                                                 <div class="col-sm-5 col-md-8 col-lg-8">
@@ -79,7 +79,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-unit')
+                                    @slot('class', 'add-price')
                                     @slot('type', 'button')
                                 @endcomponent
 
