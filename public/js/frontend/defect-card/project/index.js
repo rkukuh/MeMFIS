@@ -1,6 +1,6 @@
 let DcProject = {
   init: function () {
-      $('.customer_datatable').mDatatable({
+      $('.defectcard_datatable').mDatatable({
           data: {
               type: 'remote',
               source: {
@@ -41,9 +41,25 @@ let DcProject = {
                   }
               }
           },
-          columns: [{
+          columns: [
+              {
+                  field: 'date',
+                  title: 'Date',
+                  sortable: 'asc',
+                  filterable: !1,
+              },
+              {
                   field: 'code',
-                  title: 'Code',
+                  title: 'Project No',
+                  sortable: 'asc',
+                  filterable: !1,
+                  template: function (t) {
+                      return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
+                  }
+              },
+              {
+                  field: 'code',
+                  title: 'Work Order No',
                   sortable: 'asc',
                   filterable: !1,
                   template: function (t) {
@@ -52,18 +68,39 @@ let DcProject = {
               },
               {
                   field: 'name',
-                  title: 'Name',
+                  title: 'Project Title',
+                  sortable: 'asc',
+                  filterable: !1,
+              },
+              {
+                  field: 'name',
+                  title: 'Customer',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
                   field: 'payment_term',
-                  title: 'Term of Payment',
+                  title: 'A/C Type',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
+              },
+              {
+                  field: 'payment_term',
+                  title: 'A/C Reg',
+                  sortable: 'asc',
+                  filterable: !1,
+              },
+              {
+                  field: 'payment_term',
+                  title: 'A/C Serial No',
+                  sortable: 'asc',
+                  filterable: !1,
+              },
+              {
+                  field: 'payment_term',
+                  title: 'Created By',
+                  sortable: 'asc',
+                  filterable: !1,
               },
               {
                   field: 'Actions',
@@ -71,12 +108,9 @@ let DcProject = {
                   overflow: 'visible',
                   template: function (t, e, i) {
                       return (
-                          '<a href="/customer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                          '<a href="defectcard-project/1" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                               '<i class="la la-pencil"></i>' +
-                          '</a>' +
-                          '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                          t.uuid +
-                          ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                          '</a>'
                       );
                   }
               }

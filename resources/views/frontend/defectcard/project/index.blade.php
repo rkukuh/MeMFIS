@@ -69,7 +69,7 @@
                               </div>
                           </div>
                       </div>
-                      <div class="customer_datatable" id="scrolling_both"></div>
+                      <div class="defectcard_datatable" id="scrolling_both"></div>
                   </div>
               </div>
           </div>
