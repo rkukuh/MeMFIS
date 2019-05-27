@@ -65,11 +65,6 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                    @component('frontend.common.buttons.create')
-                                        @slot('text', 'Defect Card')
-                                        @slot('href', '#') )
-                                    @endcomponent
-
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
