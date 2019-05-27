@@ -54,5 +54,8 @@ class OldDataImport extends Command
         
         $this->line('Importing: Task Card for Boeing');
         app()->make(OldDataController::class)->taskCardsBoeingImport();
+
+        $this->line('Importing: User');
+        app()->make(OldDataController::class)->userImport();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Import;
 
+use App\Imports\UsersImport;
 use App\Imports\EnginesImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\PersonnelsImport;
@@ -37,5 +38,10 @@ class OldDataController extends Controller
     public function taskCardsBoeingImport()
     {
         // Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
+    }
+
+    public function userImport()
+    {
+        Excel::import(new UsersImport, $this->import_directory . 'users.xlsx');
     }
 }

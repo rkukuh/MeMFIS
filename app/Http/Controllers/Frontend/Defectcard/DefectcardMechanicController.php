@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\frontend\Discrepancy;
+namespace App\Http\Controllers\frontend\Defectcard;
 
 use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DiscrepancyController extends Controller
+class DefectcardMechanicController extends Controller
 {
 
     /**
@@ -16,7 +16,7 @@ class DiscrepancyController extends Controller
      */
     public function index()
     {
-        return view('frontend.discrepancy.index');
+        //
     }
 
     /**
@@ -26,7 +26,7 @@ class DiscrepancyController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.defectcard.mechanic.open');
     }
 
     /**
@@ -48,7 +48,7 @@ class DiscrepancyController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('frontend.defectcard.mechanic.pogress');
     }
 
     /**
@@ -59,7 +59,7 @@ class DiscrepancyController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('frontend.defectcard.mechanic.pending');
     }
 
     /**

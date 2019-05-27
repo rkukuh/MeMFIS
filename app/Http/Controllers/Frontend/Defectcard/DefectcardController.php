@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\frontend\Discrepancy;
+namespace App\Http\Controllers\frontend\Defectcard;
 
 use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DiscrepancyController extends Controller
+class DefectcardController extends Controller
 {
 
     /**
@@ -16,7 +16,7 @@ class DiscrepancyController extends Controller
      */
     public function index()
     {
-        return view('frontend.discrepancy.index');
+        return view('frontend.Defectcard.index');
     }
 
     /**

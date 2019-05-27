@@ -64,17 +64,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                    @component('frontend.common.buttons.create')
-                                    @slot('text', 'Discrepancy Found')
-                                    @slot('href', route('frontend.discrepancy.create') )
-                                    @endcomponent
-
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="Discrepancy_datatable" id="scrolling_both"></div>
+                        <div class="Discrepancy_datatable" id="Discrepancy_datatable"></div>
                     </div>
                 </div>
             </div>
@@ -85,5 +80,5 @@
 
 @push('footer-scripts')
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-<script src="{{ asset('js/frontend/Discrepancy/index.js')}}"></script>
+<script src="{{ asset('js/frontend/discrepancy/index.js')}}"></script>
 @endpush

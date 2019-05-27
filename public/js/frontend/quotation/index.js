@@ -121,6 +121,9 @@ let Quotation = {
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
+                            '</a>'+
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Delete" data-id="' + t.uuid + '">' +
+                                '<i class="la la-check"></i>' +
                             '</a>'
                         );
                     }
@@ -149,6 +152,50 @@ let Quotation = {
                         },
                         type: 'DELETE',
                         url: '/quotation/' + quotation_uuid + '',
+                        success: function (data) {
+                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.m_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.m_datatable').on('click', '.approve', function () {
+            let quotation_uuid = $(this).data('id');
+
+            swal({
+                title: 'Sure want to Approve?',
+                type: 'question',
+                confirmButtonText: 'Yes, Approve',
+                confirmButtonColor: '#34bfa3',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        // url: '/quotation/' + quotation_uuid + '',
                         success: function (data) {
                             toastr.success('Quotation has been deleted.', 'Deleted', {
                                     timeOut: 5000

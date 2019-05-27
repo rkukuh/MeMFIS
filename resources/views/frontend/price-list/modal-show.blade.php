@@ -19,7 +19,7 @@
                                 @component('frontend.common.label.data-info')
                                     @slot('text', 'pn')
                                     @slot('name', 'pn')
-                                    @slot('id', 'pn')
+                                    @slot('id', 'pn-show')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -29,7 +29,7 @@
                                 @component('frontend.common.label.data-info')
                                     @slot('text', 'name')
                                     @slot('name', 'name')
-                                    @slot('id', 'name')
+                                    @slot('id', 'name-show')
                                 @endcomponent
                             </div>
                         </div>
@@ -42,56 +42,12 @@
                                 @component('frontend.common.label.data-info')
                                     @slot('text', 'unit')
                                     @slot('name', 'unit')
-                                    @slot('id', 'unit')
+                                    @slot('id', 'unit-show')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                <table  width="100%" >
-                                    <tr>
-                                        <td>Unit Price 1</td>
-                                        <td>
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', '200000')
-                                            @endcomponent
+                                <table  width="100%" id="price-list-show">
 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Unit Price 2</td>
-                                        <td>
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', '200000')
-                                            @endcomponent
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Unit Price 3</td>
-                                        <td>
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', '200000')
-                                            @endcomponent
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Unit Price 4</td>
-                                        <td>
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', '200000')
-                                            @endcomponent
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Unit Price 5</td>
-                                        <td>
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', '200000')
-                                            @endcomponent
-
-                                        </td>
-                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -99,13 +55,6 @@
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-unit')
-                                    @slot('type', 'button')
-                                @endcomponent
-
-                                @include('frontend.common.buttons.reset')
-
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>

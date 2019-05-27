@@ -48,7 +48,10 @@ let Unit = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="" data-toggle="modal" data-target="#modal_price_list_show">' + t.code + "</a>"
+                        return '<a href="" class="show-price" data-toggle="modal" data-target="#modal_price_list_show"'+
+                        'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                        t.uuid +
+                        '>' + t.code + "</a>"
                     }
                 },
                 {
@@ -69,10 +72,12 @@ let Unit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-manufacturer" title="Edit" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
+                            'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-list" title="Edit" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill add-price" title="Edit"' +
+                            'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
@@ -81,60 +86,49 @@ let Unit = {
             ]
         });
 
-        let unit_reset = function () {
-            document.getElementById('name').value = '';
-            document.getElementById('symbol').value = '';
-            $('#type_id').select2('val', 'All');
 
-            $('#symbol-error').html('');
-            $('#name-error').html('');
-            $('#type-error').html('');
-        }
 
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
         });
 
-        let simpan = $('.modal-footer').on('click', '.add-unit', function () {
-            let name = $('input[name=name]').val();
-            let symbol = $('input[name=symbol]').val();
-            let type_id =$('#type_id').val();
+        let simpan = $('.modal-footer').on('click', '.add-price', function () {
+            let price_array = [];
+            $('#price ').each(function (i) {
+                price_array[i] = document.getElementsByName('group-price[' + i + '][price]')[0].value;
+            });
+            let level_array = [];
+            $('#level ').each(function (i) {
+                level_array[i] = document.getElementsByName('group-price[' + i + '][level]')[0].value;
+            });
+
+            let item = $('#uuid').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/unit',
+                url: '/item/'+item+'/prices',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    name: name,
-                    symbol: symbol,
-                    type_id: type_id,
+                    price: price_array,
+                    level: level_array,
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
 
-                        }
-                        if (data.errors.symbol) {
-                            $('#symbol-error').html(data.errors.symbol[0]);
-
-                        }
-                        if (data.errors.type) {
-                            $('#type-error').html(data.errors.type[0]);
-
-                        }
-
+                        // }
                     } else {
-                        $('#modal_unit').modal('hide');
+                        $('#modal_price_list').modal('hide');
 
-                        toastr.success('Unit has been created.', 'Success', {
+                        toastr.success('Price List has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $('.unit_datatable').mDatatable();
+                        let table = $('.price_list_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -143,42 +137,90 @@ let Unit = {
             });
         });
 
-        let edit = $('.unit_datatable').on('click', '.edit-unit', function edit () {
+         $('.price_list_datatable').on('click', '.add-price', function () {
+            document.getElementById("uuid").value = $(this).data('uuid');
+            document.getElementById("pn").innerHTML = $(this).data('pn');
+            document.getElementById("name").innerHTML = $(this).data('name');
+            document.getElementById("unit").innerHTML = $(this).data('unit');
+
+
+        });
+        let edit = $('.price_list_datatable').on('click', '.edit-price', function edit () {
             save_changes_button();
 
-            let triggerid = $(this).data('uuid');
-            // alert(triggerid);
+            let item = $(this).data('uuid');
+            document.getElementById("pn-edit").innerHTML = $(this).data('pn');
+            document.getElementById("name-edit").innerHTML = $(this).data('name');
+            document.getElementById("unit-edit").innerHTML = $(this).data('unit');
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/unit/' + triggerid + '/edit',
+                url: '/item/'+item+'/prices/'+item+'/edit',
                 success: function (data) {
-                    document.getElementById('uuid').value = data.uuid;
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('symbol').value = data.symbol;
-                    $.ajax({
-                        url: '/get-unit-types/',
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (unit) {
-                            $('select[name="type_id"]').empty();
+                    $('#price-list').empty();
+                    for (let i = 0; i < data.length; i++) {
+                        $('#price-list').append(
+                            //                     '<option value="' + key + '" selected>' + value + '</option>'
+                            '<tr>'+
+                            '<td>Unit Price '+(i+1)+'</td>'+
+                            '<td>'+
+                            '<div id="unit-edit" name="unit" style="background-color: beige;'+
+                            'padding: 15px;" >'+
+                                data[i].amount+
+                            '</div>'+
+                            '</td>'+
+                            '</tr>'
+                        );
+                    }
 
-                            $.each(unit, function (key, value) {
-                                if(key == data.type_id){
-                                    $('select[name="type_id"]').append(
-                                        '<option value="' + key + '" selected>' + value + '</option>'
-                                    );
-                                }
-                                else{
-                                    $('select[name="type_id"]').append(
-                                        '<option value="' + key + '">' + value + '</option>'
-                                    );
-                                }
-                            });
-                        }
+                    $('.btn-success').addClass('update');
+                    $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
                     });
+                }
+            });
+        });
+
+        let show = $('.price_list_datatable').on('click', '.show-price', function edit () {
+
+            let item = $(this).data('uuid');
+            document.getElementById("pn-show").innerHTML = $(this).data('pn');
+            document.getElementById("name-show").innerHTML = $(this).data('name');
+            document.getElementById("unit-show").innerHTML = $(this).data('unit');
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/item/'+item+'/prices/'+item+'/edit',
+                success: function (data) {
+                    $('#price-list').empty();
+
+                    for (let i = 0; i < data.length; i++) {
+                        $('#price-list-show').append(
+                            //                     '<option value="' + key + '" selected>' + value + '</option>'
+                            '<tr>'+
+                            '<td>Unit Price '+(i+1)+'</td>'+
+                            '<td>'+
+                            '<div id="unit-edit" name="unit" style="background-color: beige;'+
+                            'padding: 15px;" >'+
+                                data[i].amount+
+                            '</div>'+
+                            '</td>'+
+                            '</tr>'
+                        );
+                    }
 
                     $('.btn-success').addClass('update');
                     $('.btn-success').removeClass('add');
@@ -230,7 +272,6 @@ let Unit = {
 
                     } else {
                         save_changes_button();
-                        unit_reset();
                         $('#modal_unit').modal('hide');
 
                         toastr.success('Unit has been updated.', 'Success', {
@@ -248,7 +289,6 @@ let Unit = {
 
         let close = $('.modal-footer').on('click', '.clse', function () {
             save_button();
-            unit_reset();
         });
 
         $('.unit_datatable').on('click', '.delete', function () {
