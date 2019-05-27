@@ -460,8 +460,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        Route::view('/defectcard', 'frontend.defectcard.index')->name('defectcard.index');
-
         /** Release to Service */
 
         Route::namespace('ReleaseToService')->group(function () {
