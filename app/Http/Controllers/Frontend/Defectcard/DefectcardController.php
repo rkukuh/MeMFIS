@@ -16,7 +16,7 @@ class DefectcardController extends Controller
      */
     public function index()
     {
-        return view('frontend.Defectcard.index');
+        return view('frontend.defectcard.index');
     }
 
     /**
