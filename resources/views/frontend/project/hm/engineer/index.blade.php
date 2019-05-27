@@ -299,9 +299,9 @@
 <script src="{{ asset('js/frontend/functions/select2/employee.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/Employee.js')}}"></script>
 <script>
-    $('.footer').on('.click', 'add-engineer', function() {
+    $('#add-engineer').on('click', function() {
 
-
+    alert('save');
         // $.ajax({
         //     headers: {
         //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
