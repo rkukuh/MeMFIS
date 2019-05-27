@@ -18,7 +18,7 @@ class WorkPackageItemsDatatables extends Controller
     public function generalMaterial(WorkPackage $workPackage)
     {
         // dd($workPackage);
-        $data = $alldata = json_decode($workPackage->materials);
+        $data = $alldata = json_decode($workPackage->items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
