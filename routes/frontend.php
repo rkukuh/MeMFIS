@@ -410,7 +410,7 @@ Route::name('frontend.')->group(function () {
             Route::resource('discrepancy', 'DiscrepancyController');
 
             Route::resource('discrepancy-ppc', 'DiscrepancyPPCController', [
-                'parameters' => ['jobcard-ppc' => 'discrepancy']
+                'parameters' => ['discrepancy-ppc' => 'discrepancy']
             ]);
 
 
@@ -434,18 +434,33 @@ Route::name('frontend.')->group(function () {
 
         /** DEFECT CARD */
 
+        Route::namespace('Defectcard')->group(function () {
+
+            Route::resource('defectcard', 'DefectcardController');
+
+            Route::resource('defectcard-ppc', 'DefectcardPPCController', [
+                'parameters' => ['defectcard-ppc' => 'defectcard']
+            ]);
+
+            Route::resource('defectcard-engineer', 'DefectcardEngineerController', [
+                'parameters' => ['defectcard-engineer' => 'defectcard']
+            ]);
+
+            Route::resource('defectcard-mechanic', 'DefectcardMechanicController', [
+                'parameters' => ['defectcard-mechanic' => 'defectcard']
+            ]);
+
+            Route::name('defectcard.')->group(function () {
+                Route::prefix('defectcard')->group(function () {
+
+                    /** Transaction */
+
+                });
+            });
+
+        });
+
         Route::view('/defectcard', 'frontend.defectcard.index')->name('defectcard.index');
-        Route::view('/defectcard-engineer-open', 'frontend.defectcard.engineer.open')->name('defectcard.engineer.open');
-        Route::view('/defectcard-engineer-pending', 'frontend.defectcard.engineer.pending')->name('defectcard.engineer.pending');
-        Route::view('/defectcard-engineer-progress', 'frontend.defectcard.engineer.progress')->name('defectcard.engineer.progress');
-
-        Route::view('/defectcard-mechanic-open', 'frontend.defectcard.mechanic.open')->name('defectcard.mechanic.open');
-        Route::view('/defectcard-mechanic-pending', 'frontend.defectcard.mechanic.pending')->name('defectcard.mechanic.pending');
-        Route::view('/defectcard-mechanic-progress', 'frontend.defectcard.mechanic.progress')->name('defectcard.mechanic.progress');
-
-        Route::view('/defectcard-project', 'frontend.defectcard.project.index')->name('defectcard.project.index');
-        Route::view('/defectcard-project/show', 'frontend.defectcard.project.show')->name('defectcard.project.show');
-
 
         /** Release to Service */
 
