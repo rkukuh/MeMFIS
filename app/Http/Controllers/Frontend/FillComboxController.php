@@ -7,13 +7,14 @@ use App\Models\Item;
 use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
+use App\Models\Level;
+use App\Models\Vendor;
 use App\Models\Access;
 use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
 use App\Models\Customer;
-use App\Models\Vendor;
 use App\Models\Aircraft;
 use App\Models\Category;
 use App\Models\Currency;
@@ -654,5 +655,17 @@ class FillComboxController extends Controller
         ]);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function customerLevel()
+    {
+        $customerLevel = Level::ofCustomer()
+                              ->pluck('name', 'id');
 
+        return json_encode($customerLevel);
+
+    }
 }
