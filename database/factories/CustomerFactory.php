@@ -5,6 +5,7 @@ use App\Models\Fax;
 use App\Models\Type;
 use App\Models\Phone;
 use App\Models\Email;
+use App\Models\Level;
 use App\Models\Address;
 use App\Models\Website;
 use App\Models\Journal;
@@ -77,5 +78,11 @@ $factory->afterCreating(Customer::class, function ($customer, $faker) {
 
     if ($faker->boolean) {
         $customer->websites()->saveMany(factory(Website::class, rand(2, 4))->make());
+    }
+
+    // Level
+
+    for ($i = 1; $i < rand(1, Level::ofCustomer()->count()); $i++) {
+        $customer->levels()->save(Level::ofCustomer()->get()->random());
     }
 });

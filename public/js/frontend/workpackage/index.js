@@ -130,7 +130,7 @@ let Workpackage = {
                         type: 'DELETE',
                         url: '/workpackage/' + workpackage_uuid + '',
                         success: function (data) {
-                            toastr.success('Workpackage has been deleted.', 'Deleted', {
+                            toastr.success('Work Package has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );

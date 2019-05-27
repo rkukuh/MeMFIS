@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
         $this->call(JournalsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
-
+        
         /** MASTER */
-
+        
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AircraftsTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CertificationsTableSeeder::class);
         $this->call(CustomersTableSeeder::class);
         $this->call(VendorsTableSeeder::class);
+        $this->call(FacilitiesTableSeeder::class);
 
         /** POLYMORPH */
 
@@ -88,5 +89,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectWorkPackagesTableSeeder::class);
         $this->call(ProjectWorkPackageEngineersTableSeeder::class);
         $this->call(ProjectWorkPackageManhoursTableSeeder::class);
+        $this->call(ProjectWorkPackageFacilitiesTableSeeder::class);
     }
 }

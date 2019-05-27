@@ -47,6 +47,7 @@ Route::name('admin.')->group(function () {
         Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
+        Route::resource('facility', 'FacilityController');
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
@@ -79,6 +80,7 @@ Route::name('admin.')->group(function () {
         Route::resource('project-workpackage', 'ProjectWorkPackageController');
         Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
+        Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
 
     });
 

@@ -21,6 +21,7 @@
                     @slot('text', 'Airframe Quantity')
                     @slot('name', 'airframe_qty')
                     @slot('id_error', 'airframe_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -46,6 +47,7 @@
                     @slot('text', 'Powerplant Quantity')
                     @slot('name', 'powerplant_qty')
                     @slot('id_error', 'powerplant_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -71,6 +73,7 @@
                     @slot('text', 'Electrical Quantity')
                     @slot('name', 'electrical_qty')
                     @slot('id_error', 'electrical_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -96,11 +99,12 @@
                     @slot('text', 'Radio Quantity')
                     @slot('name', 'radio_qty')
                     @slot('id_error', 'radio_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
         </div>
-        
+
         @elseif(in_array(85,$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -122,6 +126,7 @@
                     @slot('text', 'Instrument Quantity')
                     @slot('name', 'instrument_qty')
                     @slot('id_error', 'instrument_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -147,6 +152,7 @@
                     @slot('text', 'Cabin Quantity')
                     @slot('name', 'cabin_qty')
                     @slot('id_error', 'cabin_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -172,6 +178,7 @@
                     @slot('text', 'Run Up Quantity')
                     @slot('name', 'runup_qty')
                     @slot('id_error', 'runup_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -197,6 +204,7 @@
                     @slot('text', 'Repair Quantity')
                     @slot('name', 'repair_qty')
                     @slot('id_error', 'repair_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -222,6 +230,7 @@
                     @slot('text', 'Repainting Quantity')
                     @slot('name', 'repainting_qty')
                     @slot('id_error', 'repainting_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -247,6 +256,7 @@
                     @slot('text', 'NDI/NDT Quantity')
                     @slot('name', 'ndi_ndt_qty')
                     @slot('id_error', 'ndi_ndt_qty')
+                    @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
             </div>

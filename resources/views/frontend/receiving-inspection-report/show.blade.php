@@ -125,33 +125,37 @@
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                  <label class="form-control-label">
-                                                      Status 
-                                                  </label>
-                                                  <div class="m-checkbox-inline">
-                                                      @component('frontend.testing.khusnul.checkbox-inline')
-                                                          @slot('name', '1')
-                                                          @slot('text','Purchase')
-                                                          @slot('disabled', 'disabled')
-                                                      @endcomponent
-                                                      @component('frontend.testing.khusnul.checkbox-inline')
-                                                          @slot('name', '2')
-                                                          @slot('text','Repair')
-                                                          @slot('disabled', 'disabled')
-                                                      @endcomponent
-                                                      @component('frontend.testing.khusnul.checkbox-inline')
-                                                          @slot('name', '3')
-                                                          @slot('text','Serviceable')
-                                                          @slot('disabled', 'disabled')
-                                                      @endcomponent
-                                                      @component('frontend.testing.khusnul.checkbox-inline')
-                                                          @slot('name', '4')
-                                                          @slot('text','Unserviceable')
-                                                          @slot('disabled', 'disabled')
-                                                      @endcomponent
-                                                  </div>
+                                                    <label class="form-control-label">
+                                                        Status 
+                                                    </label>
                                                 </div>
                                             </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('name', '1')
+                                                        @slot('text','Purchase')
+                                                    @endcomponent
+                                                </div> 
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('name', '2')
+                                                        @slot('text','Repair')
+                                                    @endcomponent
+                                                </div> 
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('name', '3')
+                                                        @slot('text','Serviceable')
+                                                    @endcomponent
+                                                </div> 
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('name', '4')
+                                                        @slot('text','Unserviceable')
+                                                    @endcomponent
+                                                </div> 
+                                            </div>   
                                         </div>
                                     </div>
                                 </div>

@@ -130,7 +130,7 @@ let Workpackage2 = {
                     } else {
                         // $('#modal_customer').modal('hide');
 
-                        toastr.success('Workpackage has been created.', 'Success', {
+                        toastr.success('Work Package has been created.', 'Success', {
                             timeOut: 5000
                         });
 

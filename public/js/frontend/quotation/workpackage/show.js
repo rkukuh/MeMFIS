@@ -52,7 +52,7 @@ $('.workpackage_datatable').mDatatable({
     columns: [
         {
             field: 'code',
-            title: 'Workpackage Number',
+            title: 'Work Package Number',
             sortable: !1,
         },
         {

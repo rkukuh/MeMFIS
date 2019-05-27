@@ -33,6 +33,17 @@ class Level extends MemfisModel
     /******************************************* SCOPE *******************************************/
 
     /**
+     * Scope a query to only include level of customer.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCustomer(Builder $query)
+    {
+        return $query->where('of', 'customer');
+    }
+
+    /**
      * Scope a query to only include level of Language proficiency.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -52,5 +63,21 @@ class Level extends MemfisModel
     public function scopeOfOTR(Builder $query)
     {
         return $query->where('of', 'otr');
+    }
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Many-to-Many: A customer can have many levels.
+     *
+     * This function will retrieve all the customers of a given level.
+     * See: Customer's levels() method for the inverse
+     *
+     * @return mixed
+     */
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class)
+                    ->withTimestamps();
     }
 }

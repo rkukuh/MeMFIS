@@ -46,6 +46,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Customer::class => Policies\CustomerPolicy::class,
         Models\Document::class => Policies\DocumentPolicy::class,
         Models\Language::class => Policies\LanguagePolicy::class,
+        Models\Facility::class => Policies\FacilityPolicy::class,
         Models\Quotation::class => Policies\QuotationPolicy::class,
         Models\Threshold::class => Policies\ThresholdPolicy::class,
         Models\Department::class => Policies\DepartmentPolicy::class,
@@ -60,9 +61,10 @@ class AuthServiceProvider extends ServiceProvider
         Models\PurchaseRequest::class => Policies\PurchaseRequestPolicy::class,
         Models\OTRCertification::class => Policies\OTRCertificationPolicy::class,
         Models\CertificationEmployee::class => Policies\CertificationEmployeePolicy::class,
-        Models\ProjectWorkPackageEngineer::class => Policies\ProjectWorkPackageEngineerPolicy::class,
         Models\ProjectWorkPackageManhour::class => Policies\ProjectWorkPackageManhourPolicy::class,
         Models\Pivots\ProjectWorkPackage::class => Policies\Pivots\ProjectWorkPackagePolicy::class,
+        Models\ProjectWorkPackageEngineer::class => Policies\ProjectWorkPackageEngineerPolicy::class,
+        Models\ProjectWorkPackageFacility::class => Policies\ProjectWorkPackageFacilityPolicy::class,
     ];
 
     /**
