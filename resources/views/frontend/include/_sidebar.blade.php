@@ -204,7 +204,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.discrepancy-ppc.create') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.discrepancy-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
