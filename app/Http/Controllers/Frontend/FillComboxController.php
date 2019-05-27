@@ -663,7 +663,7 @@ class FillComboxController extends Controller
     public function customerLevel()
     {
         $customerLevel = Level::ofCustomer()
-                              ->pluck('name', 'id');
+                              ->pluck('name', 'uuid');
 
         return json_encode($customerLevel);
 
