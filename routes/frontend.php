@@ -406,20 +406,63 @@ Route::name('frontend.')->group(function () {
         /** Discrepancy */
 
         Route::namespace('Discrepancy')->group(function () {
+
             Route::resource('discrepancy', 'DiscrepancyController');
+
+            Route::resource('discrepancy-ppc', 'DiscrepancyPPCController', [
+                'parameters' => ['jobcard-ppc' => 'discrepancy']
+            ]);
+
+
+            Route::resource('discrepancy-engineer', 'DiscrepancyEngineerController', [
+                'parameters' => ['discrepancy-engineer' => 'discrepancy']
+            ]);
+
+            Route::resource('discrepancy-mechanic', 'DiscrepancyMechanicController', [
+                'parameters' => ['discrepancy-mechanic' => 'discrepancy']
+            ]);
+
+            Route::name('discrepancy.')->group(function () {
+                Route::prefix('discrepancy')->group(function () {
+
+                    /** Transaction */
+                    // Route::resource('/{jobcard}/progress', 'JobCardProgressController');
+                    // Route::resource('/{jobcard}/inspect', 'JobCardInspectController');
+
+                });
+            });
+
         });
 
-        Route::view('/discrepancy/engineer/create', 'frontend.discrepancy.engineer.create')->name('discrepancy.engineer.create');
-        // Route::view('/discrepancy/engineer/edit', 'frontend.discrepancy.engineer.edit')->name('discrepancy.engineer.edit');
-        // Route::view('/discrepancy/engineer/show', 'frontend.discrepancy.engineer.show')->name('discrepancy.engineer.show');
-        
-        // Route::view('/discrepancy/mechanic/create', 'frontend.discrepancy.mechanic.create')->name('discrepancy.mechanic.create');
-        // Route::view('/discrepancy/mechanic/edit', 'frontend.discrepancy.mechanic.edit')->name('discrepancy.mechanic.edit');
-        // Route::view('/discrepancy/mechanic/show', 'frontend.discrepancy.mechanic.show')->name('discrepancy.mechanic.show');
 
-        // Route::view('/discrepancy/ppc/create', 'frontend.discrepancy.ppc.create')->name('discrepancy.ppc.create');
-        // Route::view('/discrepancy/ppc/edit', 'frontend.discrepancy.ppc.edit')->name('discrepancy.ppc.edit');
-        // Route::view('/discrepancy/ppc/show', 'frontend.discrepancy.ppc.show')->name('discrepancy.ppc.show');
+        Route::view('/discrepancy/engineer/create', 'frontend.discrepancy.engineer.create')->name('discrepancy.engineer.create');
+        Route::view('/discrepancy/engineer/edit', 'frontend.discrepancy.engineer.edit')->name('discrepancy.engineer.edit');
+        Route::view('/discrepancy/engineer/show', 'frontend.discrepancy.engineer.show')->name('discrepancy.engineer.show');
+
+        Route::view('/discrepancy/mechanic/create', 'frontend.discrepancy.mechanic.create')->name('discrepancy.mechanic.create');
+        Route::view('/discrepancy/mechanic/edit', 'frontend.discrepancy.mechanic.edit')->name('discrepancy.mechanic.edit');
+        Route::view('/discrepancy/mechanic/show', 'frontend.discrepancy.mechanic.show')->name('discrepancy.mechanic.show');
+
+        Route::view('/discrepancy/ppc/create', 'frontend.discrepancy.ppc.create')->name('discrepancy.ppc.create');
+        Route::view('/discrepancy/ppc/edit', 'frontend.discrepancy.ppc.edit')->name('discrepancy.ppc.edit');
+        Route::view('/discrepancy/ppc/show', 'frontend.discrepancy.ppc.show')->name('discrepancy.ppc.show');
+
+
+
+        /** DEFECT CARD */
+
+        Route::view('/defectcard', 'frontend.defectcard.index')->name('defectcard.index');
+        Route::view('/defectcard-engineer-open', 'frontend.defectcard.engineer.open')->name('defectcard.engineer.open');
+        Route::view('/defectcard-engineer-pending', 'frontend.defectcard.engineer.pending')->name('defectcard.engineer.pending');
+        Route::view('/defectcard-engineer-progress', 'frontend.defectcard.engineer.progress')->name('defectcard.engineer.progress');
+
+        Route::view('/defectcard-mechanic-open', 'frontend.defectcard.mechanic.open')->name('defectcard.mechanic.open');
+        Route::view('/defectcard-mechanic-pending', 'frontend.defectcard.mechanic.pending')->name('defectcard.mechanic.pending');
+        Route::view('/defectcard-mechanic-progress', 'frontend.defectcard.mechanic.progress')->name('defectcard.mechanic.progress');
+
+        Route::view('/defectcard-project', 'frontend.defectcard.project.index')->name('defectcard.project.index');
+        Route::view('/defectcard-project/show', 'frontend.defectcard.project.show')->name('defectcard.project.show');
+
 
         /** Release to Service */
 
@@ -487,20 +530,6 @@ Route::name('frontend.')->group(function () {
         /** DOCUMENTS */
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
-
-        /** DEFECT CARD */
-
-        Route::view('/defectcard', 'frontend.defectcard.index')->name('defectcard.index');
-        Route::view('/defectcard-engineer-open', 'frontend.defectcard.engineer.open')->name('defectcard.engineer.open');
-        Route::view('/defectcard-engineer-pending', 'frontend.defectcard.engineer.pending')->name('defectcard.engineer.pending');
-        Route::view('/defectcard-engineer-progress', 'frontend.defectcard.engineer.progress')->name('defectcard.engineer.progress');
-
-        Route::view('/defectcard-mechanic-open', 'frontend.defectcard.mechanic.open')->name('defectcard.mechanic.open');
-        Route::view('/defectcard-mechanic-pending', 'frontend.defectcard.mechanic.pending')->name('defectcard.mechanic.pending');
-        Route::view('/defectcard-mechanic-progress', 'frontend.defectcard.mechanic.progress')->name('defectcard.mechanic.progress');
-
-        Route::view('/defectcard-project', 'frontend.defectcard.project.index')->name('defectcard.project.index');
-        Route::view('/defectcard-project/show', 'frontend.defectcard.project.show')->name('defectcard.project.show');
 
     });
 
