@@ -48,7 +48,10 @@ let Unit = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="" class="show-price" data-toggle="modal" data-target="#modal_price_list_show">' + t.code + "</a>"
+                        return '<a href="" class="show-price" data-toggle="modal" data-target="#modal_price_list_show"'+
+                        'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                        t.uuid +
+                        '>' + t.code + "</a>"
                     }
                 },
                 {
@@ -184,13 +187,12 @@ let Unit = {
             });
         });
 
-        let edit = $('.price_list_datatable').on('click', '.show-price', function edit () {
-            save_changes_button();
+        let show = $('.price_list_datatable').on('click', '.show-price', function edit () {
 
             let item = $(this).data('uuid');
-            document.getElementById("pn-edit").innerHTML = $(this).data('pn');
-            document.getElementById("name-edit").innerHTML = $(this).data('name');
-            document.getElementById("unit-edit").innerHTML = $(this).data('unit');
+            document.getElementById("pn-show").innerHTML = $(this).data('pn');
+            document.getElementById("name-show").innerHTML = $(this).data('name');
+            document.getElementById("unit-show").innerHTML = $(this).data('unit');
 
             $.ajax({
                 headers: {
@@ -202,7 +204,7 @@ let Unit = {
                     console.log(data[0].amount);
 
                     for (let i = 0; i < data.length; i++) {
-                        $('#price-list').append(
+                        $('#price-list-show').append(
                             //                     '<option value="' + key + '" selected>' + value + '</option>'
                             '<tr>'+
                             '<td>Unit Price '+(i+1)+'</td>'+
