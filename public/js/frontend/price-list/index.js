@@ -97,6 +97,10 @@ let Unit = {
             $('#price ').each(function (i) {
                 price_array[i] = document.getElementsByName('group-price[' + i + '][price]')[0].value;
             });
+            let level_array = [];
+            $('#level ').each(function (i) {
+                level_array[i] = document.getElementsByName('group-price[' + i + '][level]')[0].value;
+            });
 
             let item = $('#uuid').val();
 
@@ -109,6 +113,7 @@ let Unit = {
                 data: {
                     _token: $('input[name=_token]').val(),
                     price: price_array,
+                    level: level_array,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -155,8 +160,7 @@ let Unit = {
                 type: 'get',
                 url: '/item/'+item+'/prices/'+item+'/edit',
                 success: function (data) {
-                    console.log(data[0].amount);
-
+                    $('#price-list').empty();
                     for (let i = 0; i < data.length; i++) {
                         $('#price-list').append(
                             //                     '<option value="' + key + '" selected>' + value + '</option>'
@@ -201,7 +205,7 @@ let Unit = {
                 type: 'get',
                 url: '/item/'+item+'/prices/'+item+'/edit',
                 success: function (data) {
-                    console.log(data[0].amount);
+                    $('#price-list').empty();
 
                     for (let i = 0; i < data.length; i++) {
                         $('#price-list-show').append(
