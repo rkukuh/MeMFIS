@@ -331,10 +331,10 @@
                                                         @slot('type','button')
                                                         @slot('id', 'add-item')
                                                         @slot('class', 'add-item')
+                                                        @slot('text','Approved')
+                                                        @slot('icon','fa-check-circle')
                                                     @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
+                                                    
                                                     @component('frontend.common.buttons.back')
                                                         @slot('href', route('frontend.item.index'))
                                                     @endcomponent

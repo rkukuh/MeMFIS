@@ -214,101 +214,105 @@
                                             @endcomponent
                                         </div>
                                     </div>
-                                    <fieldset class="border p-2">
-                                        <legend class="w-auto">Propose Correction</legend>
-
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'remove')
-                                                    @slot('name', 'remove')
-                                                    @slot('text', '1. REMOVE')
-                                                    @slot('size', '12')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'repair')
-                                                    @slot('name', 'repair')
-                                                    @slot('text', '4. REPAIR')
-                                                    @slot('size', '12')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'test')
-                                                    @slot('name', 'test')
-                                                    @slot('text', '7. TEST')
-                                                    @slot('size', '12')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'install')
-                                                    @slot('name', 'install')
-                                                    @slot('text', '2. INSTALL')
-                                                    @slot('size', '12')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'replace')
-                                                    @slot('name', 'replace')
-                                                    @slot('text', '5. REPLACE')
-                                                    @slot('size', '12')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'shop_visit')
-                                                    @slot('name', 'shop_visit')
-                                                    @slot('text', '8. SHOP VISIT')
-                                                    @slot('size', '12')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'recrification')
-                                                    @slot('name', 'recrification')
-                                                    @slot('text', '3. RECRIFICATION')
-                                                    @slot('size', '12')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'ndt')
-                                                    @slot('name', 'ndt')
-                                                    @slot('text', '6. NDT')
-                                                    @slot('size', '12')
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <fieldset class="border p-2">
+                                                <legend class="w-auto">Propose Correction</legend>
+        
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'other')
-                                                            @slot('name', 'other')
-                                                            @slot('text', '9. Other')
+                                                            @slot('id', 'remove')
+                                                            @slot('name', 'remove')
+                                                            @slot('text', '1. REMOVE')
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        @component('frontend.common.input.textarea')
-                                                            @slot('id', 'code')
-                                                            @slot('text', 'Code')
-                                                            @slot('name', 'code')
-                                                            @slot('rows', '3')
-                                                            @slot('id_error', 'code')
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        @component('frontend.common.input.checkbox')
+                                                            @slot('id', 'repair')
+                                                            @slot('name', 'repair')
+                                                            @slot('text', '4. REPAIR')
+                                                            @slot('size', '12')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        @component('frontend.common.input.checkbox')
+                                                            @slot('id', 'test')
+                                                            @slot('name', 'test')
+                                                            @slot('text', '7. TEST')
+                                                            @slot('size', '12')
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        @component('frontend.common.input.checkbox')
+                                                            @slot('id', 'install')
+                                                            @slot('name', 'install')
+                                                            @slot('text', '2. INSTALL')
+                                                            @slot('size', '12')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        @component('frontend.common.input.checkbox')
+                                                            @slot('id', 'replace')
+                                                            @slot('name', 'replace')
+                                                            @slot('text', '5. REPLACE')
+                                                            @slot('size', '12')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        @component('frontend.common.input.checkbox')
+                                                            @slot('id', 'shop_visit')
+                                                            @slot('name', 'shop_visit')
+                                                            @slot('text', '8. SHOP VISIT')
+                                                            @slot('size', '12')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        @component('frontend.common.input.checkbox')
+                                                            @slot('id', 'recrification')
+                                                            @slot('name', 'recrification')
+                                                            @slot('text', '3. RECRIFICATION')
+                                                            @slot('size', '12')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        @component('frontend.common.input.checkbox')
+                                                            @slot('id', 'ndt')
+                                                            @slot('name', 'ndt')
+                                                            @slot('text', '6. NDT')
+                                                            @slot('size', '12')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                @component('frontend.common.input.checkbox')
+                                                                    @slot('id', 'other')
+                                                                    @slot('name', 'other')
+                                                                    @slot('text', '9. Other')
+                                                                    @slot('size', '12')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                @component('frontend.common.input.textarea')
+                                                                    @slot('id', 'code')
+                                                                    @slot('text', 'Code')
+                                                                    @slot('name', 'code')
+                                                                    @slot('rows', '3')
+                                                                    @slot('id_error', 'code')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
                                         </div>
-                                    </fieldset>
+                                    </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
@@ -331,6 +335,7 @@
                                                         @slot('type','button')
                                                         @slot('id', 'add-item')
                                                         @slot('class', 'add-item')
+                                                        @slot('text','Save & Approved')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -381,7 +386,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.job-card.engineer.discrepancy.item.tool.index')
+                            @include('frontend.discrepancy.engineer.tool.modal')
 
                             <div class="tools_datatable" id="scrolling_both"></div>
 
@@ -411,7 +416,6 @@
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Material')
-                                            @slot('id', 'material')
                                             @slot('data_target', '#modal_material')
                                         @endcomponent
 
@@ -420,7 +424,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.job-card.engineer.discrepancy.item.item.index')
+                            @include('frontend.discrepancy.engineer.material.modal')
 
                             <div class="materials_datatable" id="scrolling_both"></div>
                         </div>
@@ -448,15 +452,15 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
-
 @endpush
