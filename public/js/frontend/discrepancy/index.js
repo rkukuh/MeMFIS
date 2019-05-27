@@ -5,7 +5,7 @@ let TaskCard = {
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
 
-        $('.taskcard_datatable').mDatatable({
+        $('.Discrepancy_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
