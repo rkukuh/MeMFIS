@@ -438,16 +438,16 @@ Route::name('frontend.')->group(function () {
 
             Route::resource('defectcard', 'DefectcardController');
 
-            Route::resource('defectcard-ppc', 'DefectcardPPCController', [
-                'parameters' => ['defectcard-ppc' => 'defectcard']
-            ]);
-
             Route::resource('defectcard-engineer', 'DefectcardEngineerController', [
                 'parameters' => ['defectcard-engineer' => 'defectcard']
             ]);
 
             Route::resource('defectcard-mechanic', 'DefectcardMechanicController', [
                 'parameters' => ['defectcard-mechanic' => 'defectcard']
+            ]);
+
+            Route::resource('defectcard-project', 'DefectcardProjectController', [
+                'parameters' => ['defectcard-project' => 'defectcard']
             ]);
 
             Route::name('defectcard.')->group(function () {
