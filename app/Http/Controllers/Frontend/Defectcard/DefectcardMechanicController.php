@@ -48,7 +48,7 @@ class DefectcardMechanicController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.defectcard.mechanic.pogress');
+        return view('frontend.defectcard.mechanic.progress');
     }
 
     /**
