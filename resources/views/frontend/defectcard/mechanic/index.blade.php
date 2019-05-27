@@ -81,6 +81,13 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
     <script>
+        $('.search').on('click', '.search', function() {
+        let search = $('input[name=search]').val();
+
+        window.location.href = '/jobcard-engineer/' + search;
+    });
+    </script>
+    <script>
         let input = document.getElementById("search");
         input.addEventListener("keyup", function(event) {
             if (event.keyCode === 13) {

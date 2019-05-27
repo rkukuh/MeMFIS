@@ -627,6 +627,26 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ url('/rts-certificate') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    RTS Certificate
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ url('/receiving-inspection-report-doc') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    RIR
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
