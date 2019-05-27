@@ -5,6 +5,7 @@ let Customer = {
             let name = $('input[name=name]').val();
             let payment_term =  $('input[name=term_of_payment]').val();
             let account_code = $('#account_code').val();
+            let level = $('#customer-level').val();
 
             let phone_array = [];
             $('#phone').each(function (i) {
@@ -121,6 +122,7 @@ let Customer = {
                     attn_ext_array:attn_ext_array,
                     attn_fax_array:attn_fax_array,
                     attn_email_array:attn_email_array,
+                    level:level,
                 },
                 success: function (data) {
                     if (data.errors) {

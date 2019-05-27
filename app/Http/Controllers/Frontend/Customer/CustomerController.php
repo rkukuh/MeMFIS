@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Customer;
 
 use App\Models\Type;
 use App\Models\Email;
+use App\Models\Level;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
@@ -47,6 +48,7 @@ class CustomerController extends Controller
     {
         $attentions = [];
 
+        $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
             
             $contact['name']     = $request->attn_name_array[$person];
@@ -61,11 +63,10 @@ class CustomerController extends Controller
 
         $request->merge(['attention' => json_encode($attentions)]);
         // $request->merge(['code' => "auto-generate");
-        // dd($request->attention);
         if ($customer = Customer::create($request->all())) {
             // $email = Email::class(['address' => $request->email_array]);
             // $email = $customer->emails()->save($email);
-
+            $customer->levels()->attach($level);
             return response()->json($customer);
         }
 
