@@ -16,7 +16,7 @@ class DefectcardMechanicController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.defectcard.mechanic.index');
     }
 
     /**
