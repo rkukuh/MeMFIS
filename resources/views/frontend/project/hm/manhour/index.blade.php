@@ -35,7 +35,7 @@
                             @slot('text', 'TaskCard Performance Factor')
                             @slot('style_div','margin-top:10px')
                             @slot('help_text','If Checked, Project will use TaskCard Performance Factor')
-                            {{-- @slot('checked', 'checked') --}}
+                            @slot('icon', 'fa-info-circle m--font-info')
                         @endcomponent
                     </div>
                     <!-- <div class="col-sm-1 col-md-1 col-lg-1"  style="margin-left:-350px;margin-top:10px">
