@@ -45,6 +45,23 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
+        $attentions = [];
+
+        for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
+            
+            $contact['name']     = $request->attn_name_array[$person];
+            $contact['position'] = $request->attn_position_array[$person];
+            $contact['phones'] = $request->attn_phone_array[$person];
+            $contact['ext'] = $request->attn_ext_array[$person];
+            $contact['fax'] = $request->attn_fax_array[$person];
+            $contact['emails'] = $request->attn_email_array[$person];
+
+            array_push($attentions, $contact);
+        }
+
+        $request->merge(['attention' => json_encode($attentions)]);
+        // $request->merge(['code' => "auto-generate");
+        // dd($request->attention);
         if ($customer = Customer::create($request->all())) {
             // $email = Email::class(['address' => $request->email_array]);
             // $email = $customer->emails()->save($email);
