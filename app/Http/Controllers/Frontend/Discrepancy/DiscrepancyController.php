@@ -59,7 +59,7 @@ class DiscrepancyController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('frontend.discrepancy.engineer.edit');
     }
 
     /**
