@@ -5,7 +5,7 @@
 <div class="m-subheader hidden">
   <div class="d-flex align-items-center">
       <div class="mr-auto">
-          <h3 class="m-subheader__title m-subheader__title--separator">            
+          <h3 class="m-subheader__title m-subheader__title--separator">
             Defect Card
           </h3>
           <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
@@ -19,7 +19,7 @@
               </li>
               <li class="m-nav__item">
                   <a href="{{ route('frontend.defectcard.index') }}" class="m-nav__link">
-                      <span class="m-nav__link-text">                              
+                      <span class="m-nav__link-text">
                         Defect Card
                       </span>
                   </a>
@@ -144,7 +144,7 @@
                           <div class="form-group m-form__group row">
                               <div class="col-sm-12 col-md-12 col-lg-12">
                                   <label class="form-control-label">
-                                      Sequence No 
+                                      Sequence No
                                   </label>
                                   @component('frontend.common.input.number')
                                     @slot('text', 'sequence')
@@ -203,7 +203,7 @@
                                     @slot('name', 'is_rii')
                                     @slot('text', 'RII?')
                                     @slot('style_div','margin-top:30px')
-                                  @endcomponent 
+                                  @endcomponent
                               </div>
                           </div>
                       </div>
@@ -368,27 +368,23 @@
                       <div class="col-sm-12 col-md-12 col-lg-12 footer">
                           <div class="flex">
                               <div class="action-buttons">
-                                  @component('frontend.common.buttons.submit')
-                                      @slot('type','button')
-                                      @slot('id', 'pending')
-                                      @slot('class', 'pending')
-                                      @slot('text','Pending')
-                                      @slot('color','primary')
-                                      @slot('icon','')
-                                  @endcomponent
+                                @include('frontend.defectcard.engineer.modal-pause')
+                                @component('frontend.common.buttons.pause')
+                                    @slot('data_target', '#modal_pause')
+                                @endcomponent
 
-                                  @component('frontend.common.buttons.submit')
-                                      @slot('type','button')
-                                      @slot('id', 'closed')
-                                      @slot('class', 'closed')
-                                      @slot('text','Closed')
-                                      @slot('color','primary')
-                                      @slot('icon','')
-                                  @endcomponent
+                                @component('frontend.common.buttons.submit')
+                                    @slot('type','button')
+                                    @slot('id', 'closed')
+                                    @slot('class', 'closed')
+                                    @slot('text','Closed')
+                                    @slot('color','primary')
+                                    @slot('icon','')
+                                @endcomponent
 
-                                  @component('frontend.common.buttons.back')
-                                      @slot('href', route('frontend.receiving-inspection-report.index'))
-                                  @endcomponent
+                                @component('frontend.common.buttons.back')
+                                    @slot('href', route('frontend.receiving-inspection-report.index'))
+                                @endcomponent
                               </div>
                           </div>
                       </div>
@@ -462,7 +458,7 @@
         </div>
     </div>
   </div>
-</div>  
+</div>
 @endsection
 
 @push('footer-scripts')
