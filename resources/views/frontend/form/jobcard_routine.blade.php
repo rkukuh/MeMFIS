@@ -57,13 +57,13 @@
                     </h1>
                 </center>
             </td>
-            <td width="30%">
-                <center>
+            <td width="30%" align="left" valign="center">
+                
                     <div class="barcode">
                       {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
-                      <p style="margin-right:50%"><b>NO :</b> Generate</p>
+                      <p style="margin-right:50%"><b>NO : </b> generate</p>
                     </div>
-                </center>
+      
 
             </td>
         </tr>
