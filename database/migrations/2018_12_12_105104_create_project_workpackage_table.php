@@ -18,7 +18,7 @@ class CreateProjectWorkPackageTable extends Migration
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('workpackage_id');
             $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
-            $table->integer('tat');
+            $table->integer('tat')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
