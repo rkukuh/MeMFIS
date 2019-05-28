@@ -81,6 +81,12 @@
                                                     </span>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <a class="dropdown-item" href="{{ route('frontend.preliminary.create') }}">
+                                                        <span>
+                                                            <i class="la la-plus-circle"></i>
+                                                        <span>Preliminary</span>
+                                                        </span>
+                                                    </a>
                                                     <a class="dropdown-item" href="{{route('frontend.taskcard-eo.create')}}">
                                                         <span>
                                                             <i class="la la-plus-circle"></i>
