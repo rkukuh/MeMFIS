@@ -101,3 +101,13 @@ Route::get('/jobcard-basic', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_basic');
     return $pdf->stream();
 });
+
+Route::get('/preliminaryinspection-one', function () {
+    $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one');
+    return $pdf->stream();
+});
+
+Route::get('/preliminaryinspection-two', function () {
+    $pdf = \PDF::loadView('frontend/form/preliminaryinspection-two');
+    return $pdf->stream();
+});

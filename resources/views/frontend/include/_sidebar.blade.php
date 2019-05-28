@@ -618,12 +618,22 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.employee.index') }}" class="m-menu__link">
+                            <a href="{{ url('/preliminaryinspection-one') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
                                 <span class="m-menu__link-text">
-                                    JobCard Preliminary
+                                    JobCard Preliminary One
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ url('/preliminaryinspection-two') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    JobCard Preliminary Two
                                 </span>
                             </a>
                         </li>
