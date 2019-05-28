@@ -52,11 +52,11 @@
                             Skill @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.select')
+                        @component('frontend.common.input.select2')
                             @slot('text', 'Skill')
-                            @slot('id', 'skill')
-                            @slot('name', 'skill')
-                            @slot('id_error', 'skill')
+                            @slot('id', 'otr_certification')
+                            @slot('name', 'otr_certification')
+                            @slot('id_error', 'otr_certification')
                         @endcomponent
                     </div>
                 </div>
@@ -156,3 +156,8 @@
         </div>
     </div>
 </div>
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
+@endpush
