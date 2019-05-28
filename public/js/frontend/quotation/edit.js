@@ -4,7 +4,7 @@ let Quotation = {
     init: function() {
             let exchange_rate_value = $('input[name=exchange]').val();
             $( document ).ready(function() {
-               let GTotal = formatter.format(document.getElementById("grand_total").innerHTML);
+               let GTotal = IDRformatter.format(document.getElementById("grand_total").innerHTML);
                document.getElementById("grand_total").innerHTML = GTotal;
                 console.log($('#grand_total'));
 

@@ -1,9 +1,9 @@
 let locale = 'id';
-let options = { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 };
-let formatter = new Intl.NumberFormat(locale, options);
+let IDRformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+let USDformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'usd', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+let numberFormat = new Intl.NumberFormat('id', { maximumSignificantDigits: 3 });
 let total = 0;
 let quotation = $('#quotation_uuid').val();
-
 var DatatableAutoColumnHideDemo = function () {
 
   var demo = function () {
@@ -70,21 +70,35 @@ var DatatableAutoColumnHideDemo = function () {
           width: '700px',
 
           template: function (t) {
-            return (t.pivot.description + '<br>' +
-              '- Manhours Price : ' + t.pivot.manhour_total + ' x ' + t.pivot.manhour_rate + '<br>' +
-              '- Material Price'
-            );
+            if(currency == 1){
+              return (t.pivot.description + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Material Price'
+              );
+            }else{
+              return (t.pivot.description + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Material Price'
+              );
+            }
           }
         }, {
           field: 'ShipCity',
           title: 'Cost',
           template: function (a) {
-            document.getElementById("sub_total").innerHTML = formatter.format(total);
+            document.getElementById("sub_total").innerHTML = IDRformatter.format(total);
             $("#sub_total").attr("value", total);
-            return ('Cost<br>' +
-              formatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
-              ' 138'
-            );
+            if(currency == 1){
+              return ('Cost<br>' +
+                IDRformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
+                ' 138'
+              );
+            }else{
+              return ('Cost<br>' +
+                USDformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
+                ' 138'
+              );
+            }
           }
         },
         {
@@ -102,11 +116,20 @@ var DatatableAutoColumnHideDemo = function () {
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
+                  if(currency == 1){
                     return (
-                        formatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                        t.uuid +
-                        '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                      IDRformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                      t.uuid +
+                      '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                     );
+                  }else{
+                    return (
+                      USDformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                      t.uuid +
+                      '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                  }
+                    
                 }
                 else if(t.pivot.discount_type == 'percentage'){
                     return (
@@ -126,22 +149,40 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (t, e, i) {
             if(t.pivot.discount_value == null && t.pivot.discount_type == null){
                 total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138;
-                return (
-                    formatter.format(total)
-                  );
+                if(currency == 1){ 
+                    return (
+                      IDRformatter.format(total)
+                    );
+                  }else{
+                    return (
+                      USDformatter.format(total)
+                    );
+                  }
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
                     total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
-                    return (
-                        formatter.format(total)
-                    );
+                    if(currency == 1){ 
+                      return (
+                        IDRformatter.format(total)
+                      );
+                    }else{
+                      return (
+                        USDformatter.format(total)
+                      );
+                    }
                 }
                 else if(t.pivot.discount_type == 'percentage'){
                     total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
-                    return (
-                        formatter.format(total)
-                    );
+                    if(currency == 1){ 
+                      return (
+                        IDRformatter.format(total)
+                      );
+                    }else{
+                      return (
+                        USDformatter.format(total)
+                      );
+                    }
                 }
             }
           }

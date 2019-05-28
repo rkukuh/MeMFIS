@@ -485,8 +485,9 @@
 @push('footer-scripts')
 <script>
         let project_id = '{{  $quotation->project->uuid }}';
+        let currency = '{{  $quotation->currency_id }}';
         // let quotation = '{{  $quotation->uuid }}';
-        console.log(quotation);
+        console.log(currency);
 </script>
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
