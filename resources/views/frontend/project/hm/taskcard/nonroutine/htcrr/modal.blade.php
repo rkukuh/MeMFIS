@@ -63,17 +63,17 @@
                 <div class="form-group m-form__group row ">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Removal Mhrs @include('frontend.common.label.required')
+                            Est. Mhrs @include('frontend.common.label.required')
                         </label>
 
                         @component('frontend.common.input.number')
-                            @slot('text', 'Removal')
-                            @slot('id', 'removal')
-                            @slot('name', 'removal')
-                            @slot('id_error', 'removal')
+                            @slot('text', 'Mhrs')
+                            @slot('id', 'mhrs')
+                            @slot('name', 'mhrs')
+                            @slot('id_error', 'mhrs')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             Installation Mhrs @include('frontend.common.label.required')
                         </label>
@@ -99,7 +99,7 @@
                             @slot('id_error', 'removal_by')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             Installation By @include('frontend.common.label.required')
                         </label>
