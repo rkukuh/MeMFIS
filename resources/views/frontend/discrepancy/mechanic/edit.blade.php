@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Discrepancy
+                    Discrepancy Found
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Discrepancy
+                                Discrepancy Found
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Discrepancy
+                                    Discrepancy Found
                                 </h3>
                             </div>
                         </div>
@@ -371,7 +371,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'tool')
                                             @slot('text', 'Tool')
                                             @slot('data_target', '#modal_tool')
                                         @endcomponent
@@ -381,10 +380,9 @@
                                 </div>
                             </div>
 
-                            @include('frontend.job-card.engineer.discrepancy.item.tool.index')
+                            @include('frontend.discrepancy.mechanic.tool.modal')
 
                             <div class="tools_datatable" id="scrolling_both"></div>
-
                         </div>
                     </div>
                 </div>
@@ -411,7 +409,6 @@
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
                                             @slot('text', 'Material')
-                                            @slot('id', 'material')
                                             @slot('data_target', '#modal_material')
                                         @endcomponent
 
@@ -420,7 +417,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.job-card.engineer.discrepancy.item.item.index')
+                            @include('frontend.discrepancy.mechanic.material.modal')
 
                             <div class="materials_datatable" id="scrolling_both"></div>
                         </div>
@@ -448,15 +445,17 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
 
 @endpush

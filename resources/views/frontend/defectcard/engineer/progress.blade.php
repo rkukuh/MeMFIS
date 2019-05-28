@@ -5,7 +5,7 @@
 <div class="m-subheader hidden">
   <div class="d-flex align-items-center">
       <div class="mr-auto">
-          <h3 class="m-subheader__title m-subheader__title--separator">            
+          <h3 class="m-subheader__title m-subheader__title--separator">
             Defect Card
           </h3>
           <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
@@ -19,7 +19,7 @@
               </li>
               <li class="m-nav__item">
                   <a href="{{ route('frontend.defectcard.index') }}" class="m-nav__link">
-                      <span class="m-nav__link-text">                              
+                      <span class="m-nav__link-text">
                         Defect Card
                       </span>
                   </a>
@@ -30,7 +30,7 @@
 </div>
 <div class="m-content">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-7">
       <div class="m-portlet">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
@@ -144,7 +144,7 @@
                           <div class="form-group m-form__group row">
                               <div class="col-sm-12 col-md-12 col-lg-12">
                                   <label class="form-control-label">
-                                      Sequence No 
+                                      Sequence No
                                   </label>
                                   @component('frontend.common.input.number')
                                     @slot('text', 'sequence')
@@ -187,10 +187,10 @@
                                   </label>
 
                                   @component('frontend.common.input.select2')
-                                      @slot('id', 'skill')
+                                      @slot('id', 'otr_certification')
                                       @slot('text', 'Skill')
-                                      @slot('name', 'skill')
-                                      @slot('id_error', 'skill')
+                                      @slot('name', 'otr_certification')
+                                      @slot('id_error', 'otr_certification')
                                   @endcomponent
                               </div>
                           </div>
@@ -203,7 +203,7 @@
                                     @slot('name', 'is_rii')
                                     @slot('text', 'RII?')
                                     @slot('style_div','margin-top:30px')
-                                  @endcomponent 
+                                  @endcomponent
                               </div>
                           </div>
                       </div>
@@ -279,189 +279,112 @@
                       </div>
                     </div>
                     <div class="form-group m-form__group row">
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group m-form__group row">
-                          <div class="col-sm-12 col-md-12 col-lg-12">
-                            <label class="form-control-label">
-                                Propose Correction
-                            </label>
-                          </div>
-                        </div>
-                        <div class="form-group m-form__group row">
-                          <div class="col-sm-4 col-md-4 col-lg-4">
-                            <div class="m-checkbox-inline">
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                    @slot('name', '1')
-                                    @slot('text','1. Remove')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '2')
-                                        @slot('text','2. Install')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '3')
-                                        @slot('text','3. Rectification')
-                                @endcomponent
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-4 col-lg-4">
-                            <div class="m-checkbox-inline">
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                    @slot('name', '4')
-                                    @slot('text','4. Repair')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '5')
-                                        @slot('text','5. Replace')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '6')
-                                        @slot('text','6. Not')
-                                @endcomponent
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-4 col-lg-4">
-                            <div class="m-checkbox-inline">
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                    @slot('name', '7')
-                                    @slot('text','7. Test')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '8')
-                                        @slot('text','8. Shop Visit')
-                                @endcomponent
-                                @component('frontend.testing.khusnul.checkbox-inline')
-                                        @slot('name', '9')
-                                        @slot('text','9. Other')
-                                @endcomponent
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <div class="col-sm-12 col-md-12 col-lg-12">
-                          <div class="m-portlet">
-                              <div class="m-portlet__head">
-                                  <div class="m-portlet__head-caption">
-                                      <div class="m-portlet__head-title">
-                                          <span class="m-portlet__head-icon m--hide">
-                                              <i class="la la-gear"></i>
-                                          </span>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <fieldset class="border p-2">
+                                <legend class="w-auto">Propose Correction</legend>
 
-                                          @include('frontend.common.label.datalist')
-
-                                          <h3 class="m-portlet__head-text">
-                                              Tool(s) List
-                                          </h3>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="m-portlet m-portlet--mobile">
-                                  <div class="m-portlet__body">
-                                      <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                          <div class="row align-items-center">
-                                              <div class="col-xl-8 order-2 order-xl-1">
-                                                  <div class="form-group m-form__group row align-items-center">
-                                                      <div class="col-md-4">
-                                                          <div class="m-input-icon m-input-icon--left">
-                                                              <input type="text" class="form-control m-input" placeholder="Search..."
-                                                                  id="generalSearch">
-                                                              <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                                  <span><i class="la la-search"></i></span>
-                                                              </span>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                  <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="defectcard_tool_datatable" id="scrolling_both"></div>
-
-                                      @include('frontend.purchase-order.modal-check')
-
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="m-portlet">
-                            <div class="m-portlet__head">
-                                <div class="m-portlet__head-caption">
-                                    <div class="m-portlet__head-title">
-                                        <span class="m-portlet__head-icon m--hide">
-                                            <i class="la la-gear"></i>
-                                        </span>
-
-                                        @include('frontend.common.label.datalist')
-
-                                        <h3 class="m-portlet__head-text">
-                                            Material(s) List
-                                        </h3>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'remove')
+                                            @slot('name', 'remove')
+                                            @slot('text', '1. REMOVE')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'repair')
+                                            @slot('name', 'repair')
+                                            @slot('text', '4. REPAIR')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'test')
+                                            @slot('name', 'test')
+                                            @slot('text', '7. TEST')
+                                            @slot('size', '12')
+                                        @endcomponent
                                     </div>
                                 </div>
-                            </div>
-                            <div class="m-portlet m-portlet--mobile">
-                                <div class="m-portlet__body">
-                                    <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                        <div class="row align-items-center">
-                                            <div class="col-xl-8 order-2 order-xl-1">
-                                                <div class="form-group m-form__group row align-items-center">
-                                                    <div class="col-md-4">
-                                                        <div class="m-input-icon m-input-icon--left">
-                                                            <input type="text" class="form-control m-input" placeholder="Search..."
-                                                                id="generalSearch">
-                                                            <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                                <span><i class="la la-search"></i></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                            </div>
-                                        </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'install')
+                                            @slot('name', 'install')
+                                            @slot('text', '2. INSTALL')
+                                            @slot('size', '12')
+                                        @endcomponent
                                     </div>
-                                    <div class="defectcard_material_datatable" id="scrolling_both"></div>
-
-                                    @include('frontend.purchase-order.modal-check')
-
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'replace')
+                                            @slot('name', 'replace')
+                                            @slot('text', '5. REPLACE')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'shop_visit')
+                                            @slot('name', 'shop_visit')
+                                            @slot('text', '8. SHOP VISIT')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'recrification')
+                                            @slot('name', 'recrification')
+                                            @slot('text', '3. RECRIFICATION')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'ndt')
+                                            @slot('name', 'ndt')
+                                            @slot('text', '6. NDT')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', 'other')
+                                            @slot('name', 'other')
+                                            @slot('text', '9. Other')
+                                            @slot('size', '12')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                      </div>
                     </div>
                     <div class="form-group m-form__group row">
                       <div class="col-sm-12 col-md-12 col-lg-12 footer">
                           <div class="flex">
                               <div class="action-buttons">
-                                  @component('frontend.common.buttons.submit')
-                                      @slot('type','button')
-                                      @slot('id', 'pending')
-                                      @slot('class', 'pending')
-                                      @slot('text','Pending')
-                                      @slot('color','primary')
-                                      @slot('icon','')
-                                  @endcomponent
+                                @include('frontend.defectcard.engineer.modal-pause')
+                                @component('frontend.common.buttons.pause')
+                                    @slot('data_target', '#modal_pause')
+                                @endcomponent
 
-                                  @component('frontend.common.buttons.submit')
-                                      @slot('type','button')
-                                      @slot('id', 'closed')
-                                      @slot('class', 'closed')
-                                      @slot('text','Closed')
-                                      @slot('color','primary')
-                                      @slot('icon','')
-                                  @endcomponent
+                                @component('frontend.common.buttons.submit')
+                                    @slot('type','button')
+                                    @slot('id', 'closed')
+                                    @slot('class', 'closed')
+                                    @slot('text','Closed')
+                                    @slot('color','primary')
+                                    @slot('icon','')
+                                @endcomponent
 
-                                  @component('frontend.common.buttons.back')
-                                      @slot('href', route('frontend.receiving-inspection-report.index'))
-                                  @endcomponent
+                                @component('frontend.common.buttons.back')
+                                    @slot('href', route('frontend.receiving-inspection-report.index'))
+                                @endcomponent
                               </div>
                           </div>
                       </div>
@@ -474,15 +397,76 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-5">
+        <div class="m-portlet">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <span class="m-portlet__head-icon m--hide">
+                            <i class="la la-gear"></i>
+                        </span>
+
+                        @include('frontend.common.label.datalist')
+
+                        <h3 class="m-portlet__head-text">
+                            Tool(s) List
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet m-portlet--mobile">
+                <div class="m-portlet__body">
+                    <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                        <div class="row align-items-center">
+                            <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                <div class="defectcard_tool_datatable" id="scrolling_both"></div>
+                                <div class="m-separator m-separator--dashed d-xl-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-portlet">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <span class="m-portlet__head-icon m--hide">
+                            <i class="la la-gear"></i>
+                        </span>
+
+                        @include('frontend.common.label.datalist')
+
+                        <h3 class="m-portlet__head-text">
+                            Material(s) List
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet m-portlet--mobile">
+                <div class="m-portlet__body">
+                    <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                        <div class="row align-items-center">
+                            <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                    <div class="defectcard_material_datatable" id="scrolling_both"></div>
+                                <div class="m-separator m-separator--dashed d-xl-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
-</div>  
+</div>
 @endsection
 
 @push('footer-scripts')
-  <script src="{{ asset('js/frontend/defect-card/open.js')}}"></script>
+    <script src="{{ asset('js/frontend/defect-card/open.js')}}"></script>
 
-  <script src="{{ asset('js/frontend/functions/select2/zone.js')}}"></script>
-  <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/zone.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js')}}"></script>
 
-  <script src="{{ asset('js/frontend/functions/select2/skill.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js')}}"></script>
 @endpush

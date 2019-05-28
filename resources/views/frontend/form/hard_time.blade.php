@@ -26,7 +26,9 @@
 
         .name-footer{
           position: absolute;
-          top: 80px; left:50%; right:50%;
+          top: 80px;
+          width: 100%;
+          text-align: center;
         }
 
         .barcode{

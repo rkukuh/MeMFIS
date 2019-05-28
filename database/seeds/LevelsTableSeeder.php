@@ -11,6 +11,7 @@ class LevelsTableSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(LevelsOfCustomer::class);
         $this->call(LevelsOfLanguage::class);
         $this->call(LevelsOfOTR::class);
     }

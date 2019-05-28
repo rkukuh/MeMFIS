@@ -64,6 +64,20 @@ class Customer extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A customer can have many levels.
+     *
+     * This function will retrieve all the levels of a customer.
+     * See: Level's customers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function levels()
+    {
+        return $this->belongsToMany(Level::class)
+                    ->withTimestamps();
+    }
+
+    /**
      * Polymorphic: A customer can have zero or many phones.
      *
      * This function will get all of the customer's phones.

@@ -14,7 +14,7 @@
                 Sub Total
            </div> 
         </div>
-        <div class="col-sm-2 col-md-2 col-lg-2">
+        <div class="col-sm-3 col-md-3 col-lg-3">
             @component('frontend.common.label.data-info')
                 @slot('id', 'sub_total')
                 @slot('class', 'sub_total')
@@ -40,7 +40,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
                         @component('frontend.common.input.text')
                             @slot('id', 'document')
                             @slot('name', 'document')
@@ -65,7 +65,7 @@
                 Total in Rupiah
             </div>
         </div>
-        <div class="col-sm-2 col-md-2 col-lg-2">
+        <div class="col-sm-3 col-md-3 col-lg-3">
             @component('frontend.common.label.data-info')
                 @slot('id', 'grand_total')
                 @slot('class', 'grand_total')

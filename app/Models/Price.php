@@ -10,6 +10,7 @@ class Price extends MemfisModel
         'priceable_type',
         'priceable_id',
         'amount',
+        'level',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

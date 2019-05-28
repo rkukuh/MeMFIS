@@ -91,6 +91,7 @@ Route::name('frontend.')->group(function () {
                 Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
+                Route::put('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
             });
 
             Route::prefix('project-workshop')->group(function () {
@@ -406,7 +407,58 @@ Route::name('frontend.')->group(function () {
         /** Discrepancy */
 
         Route::namespace('Discrepancy')->group(function () {
+
             Route::resource('discrepancy', 'DiscrepancyController');
+
+            Route::resource('discrepancy-ppc', 'DiscrepancyPPCController', [
+                'parameters' => ['discrepancy-ppc' => 'discrepancy']
+            ]);
+
+
+            Route::resource('discrepancy-engineer', 'DiscrepancyEngineerController', [
+                'parameters' => ['discrepancy-engineer' => 'discrepancy']
+            ]);
+
+            Route::resource('discrepancy-mechanic', 'DiscrepancyMechanicController', [
+                'parameters' => ['discrepancy-mechanic' => 'discrepancy']
+            ]);
+
+            Route::name('discrepancy.')->group(function () {
+                Route::prefix('discrepancy')->group(function () {
+
+                    /** Transaction */
+
+                });
+            });
+
+        });
+
+        /** DEFECT CARD */
+
+        Route::namespace('Defectcard')->group(function () {
+
+            Route::resource('defectcard', 'DefectcardController');
+
+            Route::resource('defectcard-engineer', 'DefectcardEngineerController', [
+                'parameters' => ['defectcard-engineer' => 'defectcard']
+            ]);
+
+            Route::resource('defectcard-mechanic', 'DefectcardMechanicController', [
+                'parameters' => ['defectcard-mechanic' => 'defectcard']
+            ]);
+
+            Route::resource('defectcard-project', 'DefectcardProjectController', [
+                'parameters' => ['defectcard-project' => 'defectcard']
+            ]);
+
+            Route::name('defectcard.')->group(function () {
+                Route::prefix('defectcard')->group(function () {
+
+                    /** Transaction */
+
+                });
+            });
+
         });
 
         /** Release to Service */
@@ -475,19 +527,6 @@ Route::name('frontend.')->group(function () {
         /** DOCUMENTS */
 
         Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
-
-        /** DEFECT CARD */
-
-        Route::view('/defectcard', 'frontend.defectcard.index')->name('defectcard.index');
-        Route::view('/defectcard-engineer-open', 'frontend.defectcard.engineer.open')->name('defectcard.engineer.open');
-        Route::view('/defectcard-engineer-pending', 'frontend.defectcard.engineer.pending')->name('defectcard.engineer.pending');
-        Route::view('/defectcard-engineer-progress', 'frontend.defectcard.engineer.progress')->name('defectcard.engineer.progress');
-
-        Route::view('/defectcard-mechanic-open', 'frontend.defectcard.mechanic.open')->name('defectcard.mechanic.open');
-        Route::view('/defectcard-mechanic-pending', 'frontend.defectcard.mechanic.pending')->name('defectcard.mechanic.pending');
-        Route::view('/defectcard-mechanic-progress', 'frontend.defectcard.mechanic.progress')->name('defectcard.mechanic.progress');
-
-        Route::view('/defectcard-project', 'frontend.defectcard.project')->name('defectcard.project');
 
     });
 

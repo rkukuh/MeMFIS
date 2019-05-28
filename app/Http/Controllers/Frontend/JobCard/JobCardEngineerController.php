@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend\JobCard;
 
+use Validator;
 use App\Models\JobCard;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
@@ -96,7 +98,16 @@ class JobCardEngineerController extends Controller
      */
     public function search(Request $request)
     {
-        $search = JobCard::where('number',$request->search)->first();
+        $validator = Validator::make($request->all(), [
+            'number' => 'required|exists:jobcards,number'
+          ]);
+
+          if ($validator->fails()) {
+            return
+            redirect()->route('frontend.jobcard-engineer.index')->withErrors($validator)->withInput();
+          }
+
+        $search = JobCard::where('number',$request->number)->first();
 
         return redirect()->route('frontend.jobcard-engineer.edit',$search->uuid);
     }

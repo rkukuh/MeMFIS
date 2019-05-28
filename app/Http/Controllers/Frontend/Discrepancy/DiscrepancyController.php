@@ -8,12 +8,6 @@ use App\Http\Controllers\Controller;
 
 class DiscrepancyController extends Controller
 {
-    protected $skill;
-
-    public function __construct()
-    {
-        $this->skill = Type::ofTaskCardSkill()->get();
-    }
 
     /**
      * Display a listing of the resource.
@@ -32,7 +26,7 @@ class DiscrepancyController extends Controller
      */
     public function create()
     {
-        return view('frontend.discrepancy.create');
+        //
     }
 
     /**
@@ -43,7 +37,7 @@ class DiscrepancyController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request);
+        //
     }
 
     /**
@@ -54,7 +48,7 @@ class DiscrepancyController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.discrepancy.show');
+        //
     }
 
     /**
@@ -65,9 +59,7 @@ class DiscrepancyController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.discrepancy.edit', [
-            'skills' => $this->skill,
-        ]);
+        return view('frontend.discrepancy.engineer.edit');
     }
 
     /**
@@ -79,7 +71,7 @@ class DiscrepancyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json($request);
+        //
     }
 
     /**

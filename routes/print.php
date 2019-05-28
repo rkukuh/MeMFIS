@@ -47,7 +47,7 @@ Route::get('/jobcard-si', function () {
     return $pdf->stream();
 });
 
-Route::get('/hard-time', function () {
+Route::get('/jobcard-hard-time', function () {
     $pdf = \PDF::loadView('frontend/form/hard_time');
     return $pdf->stream();
 });
@@ -64,5 +64,50 @@ Route::get('/rts-certificate', function () {
 
 Route::get('/jobcard-routine2', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_routine2');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-si2', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_si2');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-eo2', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_eo2');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-sip', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_sip');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-cpcp', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_cpcp');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-cmrawl', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_cmrawl');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-adsb', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_adsb');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-basic', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_basic');
+    return $pdf->stream();
+});
+
+Route::get('/preliminaryinspection-one', function () {
+    $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one');
+    return $pdf->stream();
+});
+
+Route::get('/preliminaryinspection-two', function () {
+    $pdf = \PDF::loadView('frontend/form/preliminaryinspection-two');
     return $pdf->stream();
 });

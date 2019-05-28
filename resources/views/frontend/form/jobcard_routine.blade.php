@@ -28,7 +28,9 @@
 
         .name-footer{
           position: absolute;
-          top: 108px; left:50%; right:50%;
+          top: 108px; 
+          width: 100%;
+          text-align: center;
         }
 
         .barcode{
@@ -55,13 +57,13 @@
                     </h1>
                 </center>
             </td>
-            <td width="30%">
-                <center>
+            <td width="30%" align="left" valign="center">
+                
                     <div class="barcode">
                       {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
-                      <p style="margin-right:50%"><b>NO :</b> Generate</p>
+                      <p style="margin-right:50%"><b>NO : </b> generate</p>
                     </div>
-                </center>
+      
 
             </td>
         </tr>
@@ -86,14 +88,14 @@
                 Task No
               </div>
               <br>
-              <span><center>Generate</center></span> 
+              <span><center>lorem-#12312312</center></span> 
             </td>
             <td style="position: relative;" width="14%">
               <div style="position: absolute;">
                   A/C Type
               </div>
               <br>
-              <span><center>Generate</center></span> 
+              <span><center>lorem-#12312312 - lorem-#12312312</center></span> 
             </td>
             <td style="position: relative;" width="15%">
                 <div style="position: absolute;">
@@ -288,7 +290,7 @@
                 <b>Accomplished By :</b> 
               </div>
               
-              <div class="name-footer">Name</div>
+              <div class="name-footer">Name asdasd asdasdasd</div>
 
               <div class="date-footer">
                   Date : <span>(Date & Time)</span>

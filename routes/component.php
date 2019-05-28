@@ -45,6 +45,7 @@ Route::name('component.')->group(function () {
         Route::get('get-account-codes', 'AccountCodeController@getJournals')->name('get-account-codes');
         Route::get('get-manufacturers', 'FillComboxController@manufacturer')->name('get-manufacturers');
         Route::get('get-takcard-types', 'FillComboxController@taskcardType')->name('get-takcard-types');
+        Route::get('get-customer-level', 'FillComboxController@customerLevel')->name('get-customer-level');
         Route::get('get-threshold-types', 'FillComboxController@thresholdType')->name('get-threshold-types');
         Route::get('get-gnrl-license/{id}', 'FillComboxController@generalLicenses')->name('get-gnrl-license');
         Route::get('get-aviation-degree', 'FillComboxController@aviationDegrees')->name('get-eaviation-degree');

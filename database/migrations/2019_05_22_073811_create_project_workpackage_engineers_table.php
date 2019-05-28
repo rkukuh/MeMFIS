@@ -19,6 +19,7 @@ class CreateProjectWorkPackageEngineersTable extends Migration
             $table->unsignedInteger('project_workpackage_id');
             $table->unsignedInteger('skill_id');
             $table->unsignedInteger('engineer_id');
+            $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
 

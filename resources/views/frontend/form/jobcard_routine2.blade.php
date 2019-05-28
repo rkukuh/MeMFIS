@@ -39,6 +39,10 @@
       color: cornflowerblue;
     }
 
+    #content .jobcard-info .jobcard-info-detail table tr td{
+      vertical-align: top;
+    }
+
     #content .jobcard-info .jobcard-info-detail{
       margin-top: 12px;
     }
@@ -226,13 +230,13 @@
           <td width="25%" align="right">Actual Mhrs</td>
         </tr>
       </table>
-      <div style="width:100%;height:6%;border: 3px solid #d4d7db;border-radius: 10px;">
+      <div style="width:100%;min-height:20px;border: 3px solid #d4d7db;border-radius: 10px;">
         <table width="100%" cellpadding="10">
           <tr>
-            <td width="25%"></td>
-            <td width="25%" align="center"></td>
-            <td width="25%" align="center"></td>
-            <td width="25%" align="right"></td>
+            <td width="25%" valign="top">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse autem animi molestiae </td>
+            <td width="25%" align="center" valign="top">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </td>
+            <td width="25%" align="center" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+            <td width="25%" align="right" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit. </td>
           </tr>
         </table>
       </div>
@@ -246,23 +250,18 @@
           <th width="50%" align="center">Material</th>
           <th width="50%" align="center">Tools</th>
         </tr>
-        <tr style="position: relative;">
-          <td height="22%">
-            <div style="position: absolute;">
-              {{-- isi --}}
-            </div>
+        <tr>
+          <td height="15%" valign="top">
+           <span>Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum earum temporibus repellendus ratione, nesciunt consectetur accusantium a aliquam ipsa architecto quam itaque, cupiditate commodi iure voluptates quaerat. Blanditiis, velit fuga. </span>
           </td>
-          <td height="22%">
-            <div style="position: absolute;">
-              {{-- isi --}}
-            </div>
+          <td height="15%" valign="top">
+            <span>Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis iste blanditiis repellendus minima iusto laborum nihil eaque cum? Veritatis eligendi est adipisci, exercitationem eaque in repellendus odio incidunt error doloribus?</span>
           </td>
         </tr>
-        <tr style="position: relative;">
-          <td colspan="2" height="35">
-            <div style="position: absolute;">
-              Accomplishment Record :
-            </div>
+        <tr>
+          <td colspan="2" height="35" valign="top">
+              Accomplishment Record : <br><br>
+              <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iusto esse similique quod ducimus cupiditate voluptate voluptatem reprehenderit molestias facere earum quidem non harum dolore expedita at illo dolores odio!</span>
           </td>
         </tr>
         <tr style="position: relative;">
@@ -274,27 +273,28 @@
               <div style="margin-left:100px;margin-top:12px;">
                 <ul>
                   <li>
-                    <img src="./img/check-box-empty.png" alt="" width="13"> <span style="margin-left:6px;font-weight: bold;font-size:18px">YES</span>
+                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                   </li>
                   <li style="margin-left:12px;">
-                    <img src="./img/check.png" alt="" width="14"> <span style="margin-left:6px;font-weight: bold;font-size:18px">NO</span>
+                    <img src="./img/check.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                   </li>
                 </ul>
               </div>
             </center>
           </td>
-          <td width="50%" height="35">
-            <div style="position: absolute;">
-              Transfer to Defect Card No :
-            </div>
+          <td width="50%" height="35" valign="center">
+              Transfer to Defect Card No : <br><br>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime dolorum esse fugiat ex illo ab quae ducimus et.
           </td>
         </tr>
       </table>
       <table width="100%" style="margin-top: 12px;">
         <tr>
-          <td>Helper : <span>Yemimul</span></td>
-          <td align="center">Status : <span>Single</span></td>
-          <td align="right">Data Close : <span>10-07-1994</span></td>
+          <td width="4%" valign="top">Helper </td>
+          <td width="1%" valign="top">:</td>
+          <td width="28%" valign="top">Yemimul</td>
+          <td width="33%" valign="top" align="center">Status : <span>Single</span></td>
+          <td width="34%" valign="top" align="right">Data Close : <span>10-07-1994</span></td>
         </tr>
       </table>
     </div>

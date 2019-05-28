@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Discrepancy
+                    Discrepancy Found
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Discrepancy
+                                Discrepancy Found
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Discrepancy
+                                    Discrepancy Found
                                 </h3>
                             </div>
                         </div>
@@ -125,11 +125,8 @@
                                                 Qty Engineer
                                             </label>
 
-                                            @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -148,11 +145,8 @@
                                                 Qty Helper
                                             </label>
 
-                                            @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -171,11 +165,8 @@
                                                 Est. Mhrs
                                             </label>
 
-                                            @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -207,10 +198,8 @@
                                                 Complaint @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
-                                                @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -297,12 +286,8 @@
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        @component('frontend.common.input.textarea')
-                                                            @slot('id', 'code')
-                                                            @slot('text', 'Code')
-                                                            @slot('name', 'code')
-                                                            @slot('rows', '3')
-                                                            @slot('id_error', 'code')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', '')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -315,31 +300,9 @@
                                                 Note @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
-                                                @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated')
                                             @endcomponent
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                            <div class="flex">
-                                                <div class="action-buttons">
-                                                    @component('frontend.common.buttons.update')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index'))
-                                                    @endcomponent
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -370,18 +333,12 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'tool')
-                                            @slot('text', 'Tool')
-                                            @slot('data_target', '#modal_tool')
-                                        @endcomponent
-
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
 
-                            @include('frontend.job-card.engineer.discrepancy.item.tool.index')
+                            {{-- @include('frontend.job-card.engineer.discrepancy.item.tool.index') --}}
 
                             <div class="tools_datatable" id="scrolling_both"></div>
 
@@ -409,18 +366,12 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        @component('frontend.common.buttons.create-new')
-                                            @slot('text', 'Material')
-                                            @slot('id', 'material')
-                                            @slot('data_target', '#modal_material')
-                                        @endcomponent
-
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
 
-                            @include('frontend.job-card.engineer.discrepancy.item.item.index')
+                            {{-- @include('frontend.job-card.engineer.discrepancy.item.item.index') --}}
 
                             <div class="materials_datatable" id="scrolling_both"></div>
                         </div>

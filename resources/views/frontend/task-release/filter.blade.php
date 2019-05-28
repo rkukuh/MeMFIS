@@ -65,10 +65,10 @@
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2">
                 <label class="form-control-label">
-                    Status Task Release
+                    Status Job Card
                 </label>
                 @component('frontend.common.input.select2')
-                    @slot('text', 'Status Task Release')
+                    @slot('text', 'Status Job Card')
                     @slot('id', 'status')
                     @slot('name', 'status')
                     @slot('id_error', 'status')

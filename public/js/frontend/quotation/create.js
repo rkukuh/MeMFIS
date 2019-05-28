@@ -178,6 +178,7 @@ let Quotation = {
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
+            data.append("title", $('#title').val());
 
 
             $.ajax({
@@ -217,6 +218,9 @@ let Quotation = {
                         }
                         if (data.errors.valid_until) {
                             $("#valid_until-error").html(data.errors.valid_until[0]);
+                        }
+                        if (data.errors.title) {
+                            $("#title-error").html(data.errors.title[0]);
                         }
 
                         document.getElementById("name").value = name;
