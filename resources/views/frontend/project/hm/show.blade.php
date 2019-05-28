@@ -330,7 +330,8 @@
 
 @push('footer-scripts')
     <script>
-        let project_uuid = '{{ $project->uuid }}';
+   let project_uuid = '{{ $project->uuid }}';
+    let workpackage_uuid = '{{ $workPackage->uuid }}';
     </script>
 
 

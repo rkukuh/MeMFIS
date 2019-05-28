@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Customer;
 
 use App\Models\Type;
 use App\Models\Email;
+use App\Models\Level;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
@@ -45,10 +46,27 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
+        $attentions = [];
+
+        $level = Level::where('uuid',$request->level)->first();
+        for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
+            
+            $contact['name']     = $request->attn_name_array[$person];
+            $contact['position'] = $request->attn_position_array[$person];
+            $contact['phones'] = $request->attn_phone_array[$person];
+            $contact['ext'] = $request->attn_ext_array[$person];
+            $contact['fax'] = $request->attn_fax_array[$person];
+            $contact['emails'] = $request->attn_email_array[$person];
+
+            array_push($attentions, $contact);
+        }
+
+        $request->merge(['attention' => json_encode($attentions)]);
+        // $request->merge(['code' => "auto-generate");
         if ($customer = Customer::create($request->all())) {
             // $email = Email::class(['address' => $request->email_array]);
             // $email = $customer->emails()->save($email);
-
+            $customer->levels()->attach($level);
             return response()->json($customer);
         }
 

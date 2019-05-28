@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\WorkPackage;
+use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
@@ -119,6 +120,19 @@ class ProjectHMWorkPackageController extends Controller
     public function update(ProjecHMtUpdate $request, Project $project)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     */
+    public function engineerTeam(Project $project, WorkPackage $workPackage,Request $request)
+    {
+        $pw = ProjectWorkPackage::where('project_id',$project->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first();
+
+            dd($pw);
     }
 
     /**

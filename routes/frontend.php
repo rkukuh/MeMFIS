@@ -91,6 +91,7 @@ Route::name('frontend.')->group(function () {
                 Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
+                Route::put('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
             });
 
             Route::prefix('project-workshop')->group(function () {
