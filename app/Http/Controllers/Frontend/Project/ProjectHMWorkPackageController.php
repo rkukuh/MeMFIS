@@ -71,7 +71,7 @@ class ProjectHMWorkPackageController extends Controller
                 ->only(['skill_id'])
                 ->all();
         });
-        
+
         $skills = [];
         foreach ($subset as $value) {
             array_push($skills, $value["skill_id"]);
@@ -98,6 +98,19 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function edit(Project $project, WorkPackage $workPackage)
     {
+        // get skill_id(s) from taskcards that are used in workpackage
+        // so only required skill will showed up
+        $subset = $workPackage->taskcards->map(function ($taskcard) {
+            return collect($taskcard->toArray())
+                ->only(['skill_id'])
+                ->all();
+        });
+
+        $skills = [];
+        foreach ($subset as $value) {
+            array_push($skills, $value["skill_id"]);
+        }
+
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
@@ -106,7 +119,8 @@ class ProjectHMWorkPackageController extends Controller
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
-            'project' => $project
+            'project' => $project,
+            'skills' => $skills
         ]);
     }
 

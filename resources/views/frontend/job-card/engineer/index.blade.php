@@ -65,14 +65,15 @@
                                             <?php
                                             echo $errors->first('number','<div class="form-control-feedback text-danger" ">:message</div>');
                                             ?>
-                                            <div class="d-flex justify-content-end mt-4 search">
-                                                @include('frontend.common.buttons.filter')
-
-                                                @component('frontend.common.buttons.search')
-                                                    @slot('id','btn-search')
-                                                @endcomponent()
-                                            </div>
+                                            
                                         </form>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @component('frontend.common.buttons.search')
+                                            @slot('id','btn-search')
+                                        @endcomponent()
+                                        
+                                        @include('frontend.common.buttons.filter')
                                     </div>
                                 </div>
                             </div>

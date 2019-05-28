@@ -1,14 +1,14 @@
-<div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" id="m_accordion_2" role="tablist">                      
+<div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" id="m_accordion_2" role="tablist">
     <div class="m-portlet m-portlet--mobile">
-        <!--begin::Item-->              
+        <!--begin::Item-->
         <div class="m-accordion__item ">
             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_1_head" data-toggle="collapse" href="#m_accordion_2_item_1_body" aria-expanded="false">
                 <span class="m-accordion__item-icon"></span>
                 <span class="m-accordion__item-title">AD/SB</span>
-                <span class="m-accordion__item-mode"></span>     
+                <span class="m-accordion__item-mode"></span>
             </div>
 
-            <div class="m-accordion__item-body collapse" id="m_accordion_2_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_1_head" data-parent="#m_accordion_2"> 
+            <div class="m-accordion__item-body collapse" id="m_accordion_2_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_1_head" data-parent="#m_accordion_2">
                 <div class="m-accordion__item-content">
                     <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
@@ -48,18 +48,18 @@
                 </div>
             </div>
         </div>
-        <!--end::Item--> 
+        <!--end::Item-->
 
-        <!--begin::Item--> 
+        <!--begin::Item-->
         <div class="m-accordion__item ">
             <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_2_item_2_head" data-toggle="collapse" href="#m_accordion_2_item_2_body" aria-expanded="    false">
                 <span class="m-accordion__item-icon"></span>
                 <span class="m-accordion__item-title">CMR/AWL</span>
-                        
-                <span class="m-accordion__item-mode"></span>     
+
+                <span class="m-accordion__item-mode"></span>
             </div>
 
-            <div class="m-accordion__item-body collapse" id="m_accordion_2_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_2_head" data-parent="#m_accordion_2"> 
+            <div class="m-accordion__item-body collapse" id="m_accordion_2_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_2_head" data-parent="#m_accordion_2">
                 <div class="m-accordion__item-content">
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
@@ -98,19 +98,19 @@
                     </div>
                 </div>
             </div>
-        </div>   
-        <!--end::Item--> 
+        </div>
+        <!--end::Item-->
 
-        <!--begin::Item--> 
+        <!--begin::Item-->
         <div class="m-accordion__item ">
             <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_2_item_3_head" data-toggle="collapse" href="#m_accordion_2_item_3_body" aria-expanded="    false">
                 <span class="m-accordion__item-icon"></span>
                 <span class="m-accordion__item-title">Special Instruction</span>
-                        
-                <span class="m-accordion__item-mode"></span>     
+
+                <span class="m-accordion__item-mode"></span>
             </div>
 
-            <div class="m-accordion__item-body collapse" id="m_accordion_2_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_3_head" data-parent="#m_accordion_2"> 
+            <div class="m-accordion__item-body collapse" id="m_accordion_2_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_3_head" data-parent="#m_accordion_2">
                 <div class="m-accordion__item-content">
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
@@ -149,19 +149,19 @@
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>
         <!--end::Item-->
 
-        <!--begin::Item--> 
+        <!--begin::Item-->
         <div class="m-accordion__item ">
             <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_2_item_4_head" data-toggle="collapse" href="#m_accordion_2_item_4_body" aria-expanded="    false">
                 <span class="m-accordion__item-icon"></span>
                 <span class="m-accordion__item-title">HT/CRR</span>
-                        
-                <span class="m-accordion__item-mode"></span>     
+
+                <span class="m-accordion__item-mode"></span>
             </div>
 
-            <div class="m-accordion__item-body collapse" id="m_accordion_2_item_4_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_4_head" data-parent="#m_accordion_2"> 
+            <div class="m-accordion__item-body collapse" id="m_accordion_2_item_4_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_4_head" data-parent="#m_accordion_2">
                 <div class="m-accordion__item-content">
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
@@ -196,15 +196,16 @@
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>
         <!--end::Item-->
 
-        
+
 
     </div>
 </div>
 
-    @push('footer-scripts')
-        <script src="{{ asset('js/frontend/workpackage/non-routine/index.js')}}"></script>
-        <script src="{{ asset('js/frontend/project/hm/workpackage.js')}}"></script>
-    @endpush
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/workpackage/non-routine/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/hm/workpackage.js')}}"></script>
+
+@endpush
