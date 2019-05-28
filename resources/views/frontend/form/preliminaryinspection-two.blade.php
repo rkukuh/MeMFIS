@@ -65,12 +65,13 @@
       margin-left: 12px;
     
     }
-    #content3, #content4{
+    #content3{
       margin-top:5px;
+      margin-bottom:5px;
     }
 
-    #content3 .table1{
-      padding-left: 7px;
+    #content3 table tr td{
+      height: 25px;
     }
   </style>
 </head>
@@ -129,17 +130,141 @@
     <div class="container">
       <table width="100%" border="1" cellpadding="5">
           <tr style="background:#f7dd16">
-            <th width="2%" align="center">No</th>
+            <th width="4%" align="center">No</th>
             <th width="6%" align="center">Sub Zone Code</th>
             <th width="6%" align="center">Ins. Code</th>
-            <th width="65%" align="center">Nature of Defect</th>
+            <th width="63%" align="center">Nature of Defect</th>
             <th width="16%" align="center">Issued Repair Card No.</th>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
+          </tr>
+          <tr>
+            <td width="4%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="6%" align="center" valign="top"></td>
+            <td width="63%" align="left" valign="top"></td>
+            <td width="16%" align="center" valign="top"></td>
           </tr>
       </table>
     </div>
   </div>
 
+  <div class="container">
+    <div style="height:147px;width:130px;position:relative;bottom:60px;margin-left:72%;">
+      <div align="center">
+          Inspection performed by:
+      </div>
+      <div align="center" style="margin-top:70px">
+         Name<br>Date
+      </div>
+    </div>
+  </div>
+
   <div style="position:absolute;bottom:0;">
+    <div class="container">
+      <table width="100%">
+          <tr>
+            <td width="50%">Issued By : Name PPC</td>
+            <td width="50%" align="right">Page 2/2</td>
+          </tr>
+      </table>
+    </div>
     <img src="./img/form/printoutpreliminaryinspection/FooterPreliminaryInspection.jpg" width="100%" alt="" srcset="">
   </div>
 
