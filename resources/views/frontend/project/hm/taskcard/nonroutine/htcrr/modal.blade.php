@@ -92,10 +92,11 @@
                             Removal By @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.select')
+                        @component('frontend.common.input.text')
                             @slot('text', 'Removal')
                             @slot('id', 'removal_by')
                             @slot('name', 'removal_by')
+                            @slot('value', Auth::user()->name)
                             @slot('id_error', 'removal_by')
                         @endcomponent
                     </div>
