@@ -1,3 +1,5 @@
+let no = 0;
+
 let JobCard = {
     init: function () {
         function strtrunc(str, max, add) {
@@ -47,11 +49,25 @@ let JobCard = {
                     }
                 }
             },
-            columns: [{
-                    field: 'number',
-                    title: 'JO No.',
+            columns: [
+                {
+                    field: 'no',
+                    title: 'No.',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        no = no+1;
+                        return no
+                    }
+                },
+                {
+                    field: 'number',
+                    title: 'JC No.',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                            return '<a href="">' + t.number + "</a>"
+                    }
                 },
                 {
                     field: 'taskcard.number',
