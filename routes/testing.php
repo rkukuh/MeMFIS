@@ -46,9 +46,9 @@ Route::name('testing.')->group(function () {
             ]);
         });
 
-        Route::get('/jobcard', function () {
+        Route::get('/jobcard/{project}', function ($project) {
 
-            $project = App\Models\Project::first();
+            $project = App\Models\Project::where('uuid',$project)->first();
             foreach($project->workpackages as $wp){
                 foreach($wp->taskcards as $tc){
                     App\Models\JobCard::create([
@@ -63,6 +63,8 @@ Route::name('testing.')->group(function () {
                     // dump($tc->materials->toJson());
                 }
             }
+
+            dd('done');
 
         });
 

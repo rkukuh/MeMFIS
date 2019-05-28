@@ -6,7 +6,7 @@ let DefectCard = {
               source: {
                   read: {
                       method: 'GET',
-                      url: '',
+                      url: '/datatables/customer',
                       map: function (raw) {
                           let dataSet = raw;
 
@@ -60,15 +60,6 @@ let DefectCard = {
               {
                   field: 'payment_term',
                   title: 'Defect No',
-                  sortable: 'asc',
-                  filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
-              },
-              {
-                  field: 'payment_term',
-                  title: 'Discrepancy No',
                   sortable: 'asc',
                   filterable: !1,
                   template: function (t) {
@@ -176,14 +167,18 @@ let DefectCard = {
                           '</a>' +
                           '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
                           t.uuid +
-                          ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                          ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'+
+                          '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Delete" data-id="' + t.uuid + '">' +
+                            '<i class="la la-check"></i>' +
+                          '</a>'
+
                       );
                   }
               }
           ]
       });
 
-      
+
 
       let remove = $('.defectcard_datatable').on('click', '.delete', function () {
           let triggerid = $(this).data('id');
@@ -228,6 +223,50 @@ let DefectCard = {
               }
           });
       });
+
+      $('.defectcard_datatable').on('click', '.approve', function () {
+        let quotation_uuid = $(this).data('id');
+
+        swal({
+            title: 'Sure want to Approve?',
+            type: 'question',
+            confirmButtonText: 'Yes, Approve',
+            confirmButtonColor: '#34bfa3',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+        })
+        .then(result => {
+            if (result.value) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                            'content'
+                        )
+                    },
+                    type: 'DELETE',
+                    // url: '/quotation/' + quotation_uuid + '',
+                    success: function (data) {
+                        toastr.success('Quotation has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $('.m_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    },
+                    error: function (jqXhr, json, errorThrown) {
+                        let errors = jqXhr.responseJSON;
+
+                        $.each(errors.errors, function (index, value) {
+                            $('#delete-error').html(value);
+                        });
+                    }
+                });
+            }
+        });
+    });
 
   }
 };
