@@ -61,6 +61,17 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
+                    field: 'estimation_manhour',
+                    title: 'Job Card No',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="/task-release/create">' + t.number + "</a>"
+                        );
+                    }
+                },
+                {
                     field: 'pesawat',
                     title: 'Company Task No',
                     sortable: 'asc',
@@ -86,25 +97,25 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'estimation_manhour',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'estimation_manhour',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'estimation_manhour',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -116,11 +127,11 @@ let TaskRelease = {
                     template: function (t, e, i) {
 
                             return (
-                                '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
+                                '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Release" data-id="' + t.uuid +'">' +
+                                    '<i class="fa fa-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                    '<i class="fa fa-external-link-alt"></i>' +
                                 '</a>'
                             );
                     }
