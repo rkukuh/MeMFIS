@@ -339,6 +339,7 @@ let Quotation = {
             data.append("top_description", $('#term_and_condition').val());
             data.append("subtotal", $('#sub_total').attr("value"));
             data.append("grandtotal", $('#grand_total').attr("value"));
+            data.append("title", $('#title').val());
             
             var charge = [];
             var chargeInputs = $(".extra");
