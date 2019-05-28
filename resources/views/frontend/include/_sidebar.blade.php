@@ -659,6 +659,16 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ url('/quotation-doc2') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Quotation
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
