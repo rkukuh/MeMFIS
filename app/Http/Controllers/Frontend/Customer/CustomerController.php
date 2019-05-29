@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
 use App\Http\Requests\Frontend\CustomerUpdate;
+// use function GuzzleHttp\json_decode;
 
 class CustomerController extends Controller
 {
@@ -98,6 +99,7 @@ class CustomerController extends Controller
 
         return view('frontend.customer.edit', [
             'customer' => $customer,
+            'attentions' => json_decode($customer->attention),
             'websites' => $websites,
             'documents' => $documents
         ]);
