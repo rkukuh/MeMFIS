@@ -8,16 +8,7 @@ $("div.repeaterDewe").on("click", ".DeleteRow", function (event) {
 
 $("div.repeaterDewe").on("click", ".AddRow", function (event) {
     let newRow = $(".Copy").clone();
-    let row = $(this).closest(".repeaterRow");
-    newRow.removeClass("Copy hidden");
     $(this).closest(".repeaterRow").slideDown("slow", function () { $(this).after(newRow); });
-    
-    let attn_ext_array = [];
-    $('input[name="attn-name"]').each(function (i) {
-        attn_ext_array[i] = $('input[name="attn-name"]')[i].value;
-    });
-
-    console.log(attn_ext_array);
-
+    newRow.slideDown("slow", function () { newRow.removeClass("Copy hidden"); });
 });
 
