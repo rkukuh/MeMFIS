@@ -8,7 +8,7 @@ $("div.repeaterDewe").on("click", ".DeleteRow", function (event) {
 
 $("div.repeaterDewe").on("click", ".AddRow", function (event) {
     let newRow = $(".Copy").clone();
-    $(this).closest(".repeaterRow").slideDown("slow", function () { $(this).after(newRow); });
+    $(this).closest(".repeaterRow").after(newRow);
     newRow.slideDown("slow", function () { newRow.removeClass("Copy hidden"); });
 });
 
