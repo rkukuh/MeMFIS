@@ -409,7 +409,7 @@ Route::name('datatables.')->group(function () {
 
         /** Release To Service */
 
-        Route::name('rii-release.')->group(function () {
+        Route::name('release-to-service.')->group(function () {
 
             Route::group([
 
