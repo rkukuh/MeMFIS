@@ -42,7 +42,6 @@ let TaskCard = {
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
-            data.append( "work_area", $('#work_area').val());
             data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
             data.append( "estimation_manhour", $('input[name=manhour]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
@@ -99,7 +98,6 @@ let TaskCard = {
                                 document.getElementById('applicability_airplane').value = applicability_airplane;
                                 $('#applicability_airplane').select2('val', 'All');
                                 document.getElementById('work_area').value = work_area;
-                                $('#work_area').select2('val', 'All');
                                 document.getElementById('manhour').value = data.getAll('manhour');
                                 document.getElementById('helper_quantity').value = data.getAll('helper_quantity');
                                 document.getElementById('engineer_quantity').value = data.getAll('engineer_quantity');

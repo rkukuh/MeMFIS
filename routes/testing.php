@@ -52,7 +52,7 @@ Route::name('testing.')->group(function () {
             foreach($project->workpackages as $wp){
                 foreach($wp->taskcards as $tc){
                     App\Models\JobCard::create([
-                        'number' => 'JC-DUM-TES',
+                        'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
                         'taskcard_id' => $tc->id,
                         'data_taskcard' => $tc->toJson(),
                         'data_taskcard_items' => $tc->items->toJson(),
