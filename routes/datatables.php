@@ -414,7 +414,7 @@ Route::name('datatables.')->group(function () {
             Route::group([
 
                 'prefix'    => 'release-to-service',
-                // 'namespace' => 'ReleaseToServices'
+                'namespace' => 'ReleaseToService'
 
             ], function () {
 
