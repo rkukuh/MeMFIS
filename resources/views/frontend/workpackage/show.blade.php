@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
                                     Work Package
@@ -178,6 +178,9 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let workPackage_uuid = '{{ $workPackage->uuid }}';
+    </script>
 
     <script src="{{ asset('js/frontend/workpackage/show.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/modal/successor.js') }}"></script>
