@@ -52,7 +52,7 @@
                     <div class="col-sm-1 col-md-1 col-lg-1">
                         @include('frontend.common.buttons.create_repeater')
                     </div>
-                    <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:-33px">
+                    <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:-55px">
                         @include('frontend.common.buttons.delete_repeater')
                     </div>
                 </div>
