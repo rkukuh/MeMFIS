@@ -360,6 +360,7 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
 
                     /** Transaction */
+                    Route::get('/{jobCard}/print', 'JobCardController@print');
                     Route::resource('/{jobcard}/progress', 'JobCardProgressController');
                     Route::resource('/{jobcard}/inspect', 'JobCardInspectController');
 
