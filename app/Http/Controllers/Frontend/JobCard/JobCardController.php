@@ -113,7 +113,7 @@ class JobCardController extends Controller
         elseif (($jobCard->type->code == "ad") or ($jobCard->type->code == "sb")) {
             $pdf = \PDF::loadView('frontend/form/jobcard_adsb');
             return $pdf->stream();        }
-        elseif($jobCard->type->code == "eo"){
+        elseif(($jobCard->type->code == "eo") or ($jobCard->type->code == "ea")){
             $pdf = \PDF::loadView('frontend/form/jobcard_eo2');
             return $pdf->stream();
         }
@@ -129,7 +129,7 @@ class JobCardController extends Controller
             $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one');
             return $pdf->stream();
         } else {
-            // || ($jobCard->type->code == "ea") || ($jobCard->type->code == "htcrr") ||
+            // ($jobCard->type->code == "htcrr") ||
         }
     }
 }
