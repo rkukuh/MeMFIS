@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', '')
+                                                @slot('text', $workPackage->title)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,11 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', '')
+                                                @foreach ($aircrafts as $aircraft)
+                                                    @if ($aircraft->id == $workPackage->aircraft_id)  
+                                                        @slot('text', $aircraft->name)
+                                                    @endif   
+                                                @endforeach
                                             @endcomponent
                                         </div>
                                     </div>
@@ -77,7 +81,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', '')
+                                                @slot('text', $workPackage->description)
                                             @endcomponent
                                         </div>
                                     </div>
