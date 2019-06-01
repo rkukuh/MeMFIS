@@ -22,7 +22,9 @@ class CreateDefectcardsTable extends Migration
             $table->integer('helper_quantity');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->boolean('is_rii');
-            $table->text('complain');
+            $table->unsignedInteger('propose_correction_id')->nullable();
+            $table->string('propose_correction')->nullable();
+            $table->text('complaint');
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();
