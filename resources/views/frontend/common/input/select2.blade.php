@@ -6,7 +6,7 @@
     style="{{ $style or 'width:100%' }}"
     {{ $multiple or '' }}
     {{ $disabled or ''}}
->
+    > 
 
     <option value="">
         &mdash; Select {{ $entity or '' }} &mdash;

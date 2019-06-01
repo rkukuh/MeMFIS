@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
 use App\Http\Requests\Frontend\CustomerUpdate;
+// use function GuzzleHttp\json_decode;
 
 class CustomerController extends Controller
 {
@@ -145,6 +146,7 @@ class CustomerController extends Controller
 
         return view('frontend.customer.edit', [
             'customer' => $customer,
+            'attentions' => json_decode($customer->attention),
             'websites' => $websites,
             'documents' => $documents
         ]);
@@ -159,7 +161,25 @@ class CustomerController extends Controller
      */
     public function update(CustomerUpdate $request, Customer $customer)
     {
+        $attentions = [];
+
+        $level = Level::where('uuid',$request->level)->first();
+        // dd(sizeof($request->attn_name_array));
+        for ($person = 0; $person < sizeof($request->attn_name_array) - 1; $person++) {
+            
+            $contact['name']     = $request->attn_name_array[$person];
+            $contact['position'] = $request->attn_position_array[$person];
+            $contact['phones'] = $request->attn_phone_array[$person];
+            $contact['ext'] = $request->attn_ext_array[$person];
+            $contact['fax'] = $request->attn_fax_array[$person];
+            $contact['emails'] = $request->attn_email_array[$person];
+
+            array_push($attentions, $contact);
+        }
+
+        $request->merge(['attention' => json_encode($attentions)]);
         if ($customer->update($request->all())) {
+            $customer->levels()->attach($level);
             return response()->json($customer);
         }
 
