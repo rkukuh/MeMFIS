@@ -57,8 +57,8 @@
                                         </label>
 
                                         @component('frontend.common.input.text')
-                                            @slot('text', 'Name')
-                                            @slot('name', 'name')
+                                        @slot('text', 'Name')
+                                        @slot('name', 'name')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -81,12 +81,12 @@
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7">
                                         @component('frontend.common.input.number')
-                                            @slot('text', 'Term of Payment')
-                                            @slot('id', 'term_of_payment')
-                                            @slot('input_append', 'Hari')
-                                            @slot('name', 'term_of_payment')
-                                            @slot('id_error', 'term_of_payment')
-                                            @slot('width','50%')
+                                        @slot('text', 'Term of Payment')
+                                        @slot('id', 'term_of_payment')
+                                        @slot('input_append', 'Hari')
+                                        @slot('name', 'term_of_payment')
+                                        @slot('id_error', 'term_of_payment')
+                                        @slot('width','50%')
                                         @endcomponent
                                     </div>
 
@@ -119,28 +119,28 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
                                                             @component('frontend.common.input.text')
-                                                                @slot('name', 'phone')
-                                                                @slot('text', 'Phone')
+                                                            @slot('name', 'phone')
+                                                            @slot('text', 'Phone')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-2 col-md-2 col-lg-2">
                                                             @component('frontend.common.input.text')
-                                                                @slot('name', 'ext')
-                                                                @slot('text', 'Ext')
+                                                            @slot('name', 'ext')
+                                                            @slot('text', 'Ext')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-3 col-md-3 col-lg-3">
                                                             @component('frontend.common.input.radio')
-                                                                @slot('text', 'Work')
-                                                                @slot('name', 'type_phone')
-                                                                @slot('id', 'type_phone')
-                                                                @slot('value', 'work')
+                                                            @slot('text', 'Work')
+                                                            @slot('name', 'type_phone')
+                                                            @slot('id', 'type_phone')
+                                                            @slot('value', 'work')
                                                             @endcomponent
                                                             @component('frontend.common.input.radio')
-                                                                @slot('name', 'type_phone')
-                                                                @slot('id', 'type_phone')
-                                                                @slot('text', 'Personal')
-                                                                @slot('value', 'personal')
+                                                            @slot('name', 'type_phone')
+                                                            @slot('id', 'type_phone')
+                                                            @slot('text', 'Personal')
+                                                            @slot('value', 'personal')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-1 col-md-1 col-lg-1">
@@ -178,22 +178,22 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
                                                             @component('frontend.common.input.text')
-                                                                @slot('text', 'fax')
-                                                                @slot('name', 'fax')
+                                                            @slot('text', 'fax')
+                                                            @slot('name', 'fax')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-3 col-md-3 col-lg-3">
                                                             @component('frontend.common.input.radio')
-                                                                @slot('text', 'Work')
-                                                                @slot('name', 'type_fax')
-                                                                @slot('id', 'type_fax')
-                                                                @slot('value', 'work')
+                                                            @slot('text', 'Work')
+                                                            @slot('name', 'type_fax')
+                                                            @slot('id', 'type_fax')
+                                                            @slot('value', 'work')
                                                             @endcomponent
                                                             @component('frontend.common.input.radio')
-                                                                @slot('name', 'type_fax')
-                                                                @slot('id', 'type_fax')
-                                                                @slot('text', 'Personal')
-                                                                @slot('value', 'personal')
+                                                            @slot('name', 'type_fax')
+                                                            @slot('id', 'type_fax')
+                                                            @slot('text', 'Personal')
+                                                            @slot('value', 'personal')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-1 col-md-1 col-lg-1">
@@ -231,8 +231,8 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
                                                             @component('frontend.common.input.text')
-                                                                @slot('text', 'website')
-                                                                @slot('name', 'website')
+                                                            @slot('text', 'website')
+                                                            @slot('name', 'website')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
@@ -283,22 +283,22 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
                                                             @component('frontend.common.input.email')
-                                                                @slot('name', 'email')
-                                                                @slot('placeholder', 'Email')
+                                                            @slot('name', 'email')
+                                                            @slot('placeholder', 'Email')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-3 col-md-3 col-lg-3">
                                                             @component('frontend.common.input.radio')
-                                                                @slot('text', 'Work')
-                                                                @slot('name', 'type_email')
-                                                                @slot('id', 'type_email')
-                                                                @slot('value', 'work')
+                                                            @slot('text', 'Work')
+                                                            @slot('name', 'type_email')
+                                                            @slot('id', 'type_email')
+                                                            @slot('value', 'work')
                                                             @endcomponent
                                                             @component('frontend.common.input.radio')
-                                                                @slot('name', 'type_email')
-                                                                @slot('id', 'type_email')
-                                                                @slot('text', 'Personal')
-                                                                @slot('value', 'personal')
+                                                            @slot('name', 'type_email')
+                                                            @slot('id', 'type_email')
+                                                            @slot('text', 'Personal')
+                                                            @slot('value', 'personal')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-1 col-md-1 col-lg-1">
@@ -336,8 +336,8 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
                                                             @component('frontend.common.input.upload')
-                                                                @slot('label', 'document')
-                                                                @slot('name', 'document')
+                                                            @slot('label', 'document')
+                                                            @slot('name', 'document')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
@@ -372,8 +372,8 @@
                                         </label>
 
                                         @component('frontend.common.input.checkbox')
-                                            @slot('text', 'Active')
-                                            @slot('name', 'active')
+                                        @slot('text', 'Active')
+                                        @slot('name', 'active')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -384,8 +384,8 @@
                                         @include('frontend.common.account-code.index')
 
                                         @component('frontend.common.input.hidden')
-                                            @slot('id', 'account_code')
-                                            @slot('name', 'account_code')
+                                        @slot('id', 'account_code')
+                                        @slot('name', 'account_code')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -394,15 +394,15 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
-                                                    @slot('type','button')
-                                                    @slot('id', 'add-customer')
-                                                    @slot('class', 'add-customer')
+                                                @slot('type','button')
+                                                @slot('id', 'add-customer')
+                                                @slot('class', 'add-customer')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
 
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.item.index'))
+                                                @slot('href', route('frontend.item.index'))
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -437,8 +437,8 @@
                             <div class="row align-items-center">
                                 <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                     @component('frontend.common.buttons.create-new')
-                                        @slot('text', 'Address')
-                                        @slot('attribute', 'disabled')
+                                    @slot('text', 'Address')
+                                    @slot('attribute', 'disabled')
                                     @endcomponent
 
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -468,78 +468,161 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="m-portlet__body">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class='repeater'>
-                                            <div data-repeater-list="group-attn">
-                                                <div data-repeater-item>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Name
-                                                            </label>
+                                        <div class="repeaterDewe">
 
-                                                            @component('frontend.common.input.text')
-                                                                @slot('text', 'John Wick')
-                                                                @slot('name', 'attn-name')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Position
-                                                            </label>
+                                            <div class="repeaterRow">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Name
+                                                        </label>
 
-                                                            @component('frontend.common.input.text')
-                                                                @slot('text', 'Purchasing')
-                                                                @slot('name', 'attn-position')
-                                                            @endcomponent
-                                                        </div>
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', 'John Wick')
+                                                        @slot('name', 'attn-name')
+                                                        @endcomponent
                                                     </div>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Phone
-                                                            </label>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Position
+                                                        </label>
 
-                                                            @component('frontend.common.input.text')
-                                                                @slot('text', '+62xxxxxxx / 07777777')
-                                                                @slot('name', 'attn-phone')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-2 col-md-2 col-lg-2">
-                                                            <label class="form-control-label">
-                                                                Extension
-                                                            </label>
-                                                            @component('frontend.common.input.text')
-                                                                @slot('name', 'attn-ext')
-                                                                @slot('text', 'Ext')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Fax
-                                                            </label>
-
-                                                            @component('frontend.common.input.text')
-                                                                @slot('text', '+62xxxxxxx / 07777777')
-                                                                @slot('name', 'attn-fax')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Email
-                                                            </label>
-
-                                                            @component('frontend.common.input.text')
-                                                                @slot('text', '+62xxxxxxx / 07777777')
-                                                                @slot('name', 'attn-email')
-                                                            @endcomponent
-
-                                                        </div>
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', 'Purchasing')
+                                                        @slot('name', 'attn-position')
+                                                        @endcomponent
                                                     </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @include('frontend.common.buttons.create_repeater')
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Phone
+                                                        </label>
+
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @slot('name', 'attn-phone')
+                                                        @endcomponent
                                                     </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @include('frontend.common.buttons.delete_repeater')
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        <label class="form-control-label">
+                                                            Extension
+                                                        </label>
+                                                        @component('frontend.common.input.text')
+                                                        @slot('name', 'attn-ext')
+                                                        @slot('text', 'Ext')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Fax
+                                                        </label>
+
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @slot('name', 'attn-fax')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Email
+                                                        </label>
+
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @slot('name', 'attn-email')
+                                                        @endcomponent
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        @component('frontend.common.buttons.delete_repeater')
+                                                        @slot('class', 'DeleteRow')
+                                                        @slot('size', 'col-sm-6')
+                                                        @endcomponent
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                        @slot('class', 'AddRow')
+                                                        @slot('size', 'col-sm-6')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="repeaterRow Copy hidden">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Name
+                                                        </label>
+
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', 'John Wick')
+                                                        @slot('name', 'attn-name')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Position
+                                                        </label>
+
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', 'Purchasing')
+                                                        @slot('name', 'attn-position')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Phone
+                                                        </label>
+
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @slot('name', 'attn-phone')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        <label class="form-control-label">
+                                                            Extension
+                                                        </label>
+                                                        @component('frontend.common.input.text')
+                                                        @slot('name', 'attn-ext')
+                                                        @slot('text', 'Ext')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Fax
+                                                        </label>
+
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @slot('name', 'attn-fax')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Email
+                                                        </label>
+
+                                                        @component('frontend.common.input.text')
+                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @slot('name', 'attn-email')
+                                                        @endcomponent
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        @component('frontend.common.buttons.delete_repeater')
+                                                        @slot('class', 'DeleteRow')
+                                                        @slot('size', 'col-sm-6')
+                                                        @endcomponent
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                        @slot('class', 'AddRow')
+                                                        @slot('size', 'col-sm-6')
+                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </div>
@@ -553,6 +636,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
 
@@ -580,6 +664,9 @@
 <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/level-customer.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/level-customer.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/attn-phone.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/attn-email.js') }}"></script>
+<script src="{{ asset('js/frontend/customer/repeater.js') }}"></script>
 
 <script>
 
