@@ -18,6 +18,7 @@ class CreateJobcardsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedInteger('taskcard_id');
+            $table->unsignedInteger('quotation_id');
             $table->json('data_taskcard');
             $table->json('data_taskcard_items')->nullable();
             $table->timestamps();
@@ -25,6 +26,11 @@ class CreateJobcardsTable extends Migration
 
             $table->foreign('taskcard_id')
                     ->references('id')->on('taskcards')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('quotation_id')
+                    ->references('id')->on('quotations')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

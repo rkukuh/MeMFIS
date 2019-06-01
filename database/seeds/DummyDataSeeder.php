@@ -73,8 +73,8 @@ class DummyDataSeeder extends Seeder
         $this->call(TaskCards::class);
         $this->call(EOInstructions::class);
         $this->call(Projects::class);
-        $this->call(JobCards::class);
         $this->call(Quotations::class);
+        $this->call(JobCards::class);
         $this->call(WorkPackages::class);
         $this->call(PurchaseRequests::class);
         $this->call(PurchaseOrders::class);

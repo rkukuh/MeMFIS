@@ -78,6 +78,19 @@ class Quotation extends MemfisModel
     }
 
     /**
+     * One-to-Many: A jobcard must related to a quotation
+     *
+     * This function will retrieve all the jobcards of a quotation.
+     * See: JobCard's quotation() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcards()
+    {
+        return $this->hasMany(JobCard::class);
+    }
+
+    /**
      * One-to-Many: A quotation may have one project.
      *
      * This function will retrieve the project of a quotation.
