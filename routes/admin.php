@@ -70,6 +70,7 @@ Route::name('admin.')->group(function () {
         Route::resource('jobcard', 'JobCardController');
         Route::resource('taskcard', 'TaskCardController');
         Route::resource('quotation', 'QuotationController');
+        Route::resource('defectcard', 'DefectCardController');
         Route::resource('workpackage', 'WorkPackageController');
         Route::resource('eo-instruction', 'EOInstructionController');
         Route::resource('goods-received', 'GoodsReceivedController');

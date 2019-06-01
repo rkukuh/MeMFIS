@@ -80,6 +80,7 @@ class DummyDataSeeder extends Seeder
         $this->call(PurchaseOrders::class);
         $this->call(GoodsReceiveds::class);
         $this->call(HtCrrs::class);
+        $this->call(DefectCards::class);
         
         /** PROJECT'S WORKPACKAGES */
 
