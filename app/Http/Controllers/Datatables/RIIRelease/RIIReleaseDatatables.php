@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\RIIRelease;
 
-use App\Models\TaskCard;
+use App\Models\JobCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,22 +16,10 @@ class RIIReleaseDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
-        // $data = $alldata = json_decode(TaskCard::with('type','aircrafts')->get());
+        $JobCard=JobCard::with('taskcard')->get();
 
-        foreach($alldata as $item){
-            if(isset($item->aircrafts) ){
-                for($index = 0; sizeof($item->aircrafts) > $index; $index++){
-                    if(sizeof($item->aircrafts)-1 == $index){
-                    $item->pesawat .= $item->aircrafts[$index]->name;
-                    }
-                    else{
-                    $item->pesawat .= $item->aircrafts[$index]->name.", ";
-                    }
-                }
-            }
-        }
-        $data = $alldata = json_decode($alldata);
+        $data = $alldata = json_decode($JobCard);
+
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])

@@ -1,6 +1,6 @@
 <div class="m-portlet m-portlet--mobile">
     <div class="m-portlet__body">
-        <h1>General Tool(S) List</h1>
+        <h1>AD/SB</h1>
         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
             <div class="row align-items-center">
                 <div class="col-xl-6 order-2 order-xl-1">
@@ -17,19 +17,22 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                    @component('frontend.common.buttons.summary')
+                        @slot('text', 'AD/SB Summary')
+                        @slot('href', '#')
+                    @endcomponent
+
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
-                @include('frontend.workpackage.item.tool.index')
-
-                </div>
+            </div>
         </div>
 
-        <div class="tools_datatable" id="scrolling_both"></div>
+        <div class="ad-sb_datatable wp-datatable" id="scrolling_both"></div>
     </div>
 </div>
 <div class="m-portlet m-portlet--mobile">
     <div class="m-portlet__body">
-        <h1>General Material(S) List</h1>
+        <h1>CMR/AWL</h1>
         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
             <div class="row align-items-center">
                 <div class="col-xl-6 order-2 order-xl-1">
@@ -46,18 +49,58 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                    @component('frontend.common.buttons.create-new')
+                        @slot('text', 'CMR/AWL')
+                        @slot('data_target', '#modal_cmr_awl')
+                        @endcomponent
+                    @component('frontend.common.buttons.summary')
+                        @slot('text', 'CMR/AWL Summary')
+                        @slot('href','#')
+                    @endcomponent
+
+
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
-                @include('frontend.workpackage.item.item.index')
-
             </div>
         </div>
 
-        <div class="materials_datatable" id="scrolling_both"></div>
+        <div class="cmr-awl_datatable wp-datatable" id="scrolling_both"></div>
+    </div>
+</div>
+<div class="m-portlet m-portlet--mobile">
+    <div class="m-portlet__body">
+        <h1>Special Instruction</h1>
+        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+            <div class="row align-items-center">
+                <div class="col-xl-6 order-2 order-xl-1">
+                    <div class="form-group m-form__group row align-items-center">
+                        <div class="col-md-6">
+                            <div class="m-input-icon m-input-icon--left">
+                                <input type="text" class="form-control m-input" placeholder="Search..."
+                                    id="generalSearch">
+                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                    <span><i class="la la-search"></i></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                    @component('frontend.common.buttons.summary')
+                        @slot('text', 'SI Summary')
+                        @slot('href', '#')
+                    @endcomponent
+
+
+                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="si_datatable wp-datatable" id="scrolling_both"></div>
     </div>
 </div>
 
-
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/workpackage/item/show.js')}}"></script>
+    <script src="{{ asset('js/frontend/workpackage/non-routine/show.js')}}"></script>
 @endpush

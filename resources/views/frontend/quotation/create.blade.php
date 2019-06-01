@@ -308,40 +308,45 @@
 
                                                 </div>
                                             </div>
-                                            <div class='repeater'>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Scheduled Payment Type @include('frontend.common.label.required')
-                                                        </label>
-                                                        <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
-                                                            <option value="">
-                                                                Select a schedule payment
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Scheduled Payment @include('frontend.common.label.required')
-                                                        </label>
-                                                        <div data-repeater-list="group-scheduled_payment">
-                                                            <div data-repeater-item>
-                                                                <div class="col-sm-10 col-md-10 col-lg-10 m-0">
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('name', 'scheduled_payment')
-                                                                    @slot('id', 'scheduled_payment')
-                                                                    @slot('text', 'Scheduled Payment')
-                                                                    @slot('id_error', 'scheduled_payment_amount')
-                                                                @endcomponent
-                                                                </div>
-
-                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                    @include('frontend.common.buttons.delete_repeater')
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Scheduled Payment Type @include('frontend.common.label.required')
+                                                            </label>
+                                                            <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
+                                                                <option value="">
+                                                                    Select a schedule payment
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Scheduled Payment @include('frontend.common.label.required')
+                                                            </label>
+                                                            <div class="repeater">
+                                                                <div data-repeater-list="group-scheduled_payment">
+                                                                    <div data-repeater-item>
+                                                                        <div class="form-group m-form__group row">
+                                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                                @component('frontend.common.input.text')
+                                                                                    @slot('name', 'scheduled_payment')
+                                                                                    @slot('id', 'scheduled_payment')
+                                                                                    @slot('text', 'Scheduled Payment')
+                                                                                    @slot('id_error', 'scheduled_payment_amount')
+                                                                                @endcomponent
+                                                                            </div>
+                                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                                @include('frontend.common.buttons.create_repeater')
+                                                                            </div>
+                                                                            <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:20px">
+                                                                                @include('frontend.common.buttons.delete_repeater')
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @include('frontend.common.buttons.create_repeater')
                                                         </div>
                                                     </div>
                                                 </div>

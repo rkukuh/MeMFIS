@@ -86,4 +86,16 @@ class RIIReleaseController extends Controller
     {
         //
     }
+
+    /**
+     * Approve the specified resource in storage.
+     *
+     * @param  \App\Models\TaskCard  $taskCard
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(Taskcard $taskCard)
+    {
+        //
+    }
+
 }

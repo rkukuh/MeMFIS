@@ -17,6 +17,7 @@ class JobCardDatatables extends Controller
     public function index()
     {
         $JobCard=JobCard::with('taskcard')->get();
+
         $data = $alldata = json_decode($JobCard);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
