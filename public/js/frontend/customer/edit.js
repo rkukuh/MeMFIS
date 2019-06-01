@@ -434,6 +434,7 @@ let Customer = {
                 },
             ]
         });
+
         // $('.customer_address_datatable').mDatatable({
         //     data: {
         //         type: 'remote',
@@ -737,7 +738,7 @@ let Customer = {
         //             });
         //         }
         //     });
-        // });
+        // });        
 
         let update = $('.footer').on('click', '.edit-customer', function () {
 
