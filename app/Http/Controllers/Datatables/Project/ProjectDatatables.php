@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Project;
 
-use App\Models\JobCard;
+use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
