@@ -76,12 +76,12 @@
                                                 Type @include('frontend.common.label.required')
                                             </label>
                                             @if (empty($taskcard->type->name))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
                                                 <div style="background-color:beige; padding:15px;" class="">
                                                     {{ $taskcard->type->name }},
                                                 </div>
-                                            @else
-                                                @include('frontend.common.label.data-info')
-                                            @endif
+                                        @endif
 
                                         </div>
                                     </div>
@@ -131,11 +131,11 @@
                                             </label>
 
                                             @if (empty($taskcard->skill_id))
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskcard->skill_id)
-                                                @endcomponent
+                                                @include('frontend.common.label.data-info-nodata')
                                             @else
-                                                @include('frontend.common.label.data-info')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $taskcard->skill->name)
+                                                @endcomponent
                                             @endif
                                         </div>
                                     </div>
