@@ -49,6 +49,7 @@ Route::name('frontend.')->group(function () {
         /** MASTER */
 
         Route::resource('user', 'UserController');
+        Route::resource('htcrr', 'HtCrrController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
         Route::resource('storage', 'StorageController');
@@ -57,6 +58,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
         Route::resource('department', 'DepartmentController');
+        Route::resource('defectcard', 'DefectCardController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
@@ -79,6 +81,7 @@ Route::name('frontend.')->group(function () {
             Route::resource('project-hm', 'ProjectHMController', [
                 'parameters' => ['project-hm' => 'project']
             ]);
+
             Route::resource('project-workshop', 'ProjectWorkshopController', [
                 'parameters' => ['project-workshop' => 'project']
             ]);
@@ -91,6 +94,7 @@ Route::name('frontend.')->group(function () {
                 Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
+
                 Route::put('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
             });
 
