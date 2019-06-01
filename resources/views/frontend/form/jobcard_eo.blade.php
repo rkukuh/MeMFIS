@@ -32,7 +32,7 @@
     #content{
       margin-top:27px;
     }
-    
+
     #content .jobcard-info fieldset legend{
       font-size: 20px;
       font-weight: bold;
@@ -87,7 +87,7 @@
       font-weight: bold;
       font-size: 14px;
     }
-    
+
     #content5 .body{
       width: 100%;
       height: 138px;
@@ -102,21 +102,21 @@
     }
 
     #content5 .body .body-date{
-      position: absolute; 
-      top:108px; 
+      position: absolute;
+      top:108px;
       left:15px;
     }
 
     #content5 .body .body-name{
       position: absolute;
-      top: 88px; 
+      top: 88px;
       width: 100%;
       text-align: center;
     }
   </style>
 </head>
 <body>
-  
+
   <div id="header">
     <img src="./img/form/printoutjobcardeo/HeaderJobCardEO.png" alt=""width="100%">
   </div>
@@ -132,23 +132,23 @@
                       <tr>
                         <td width="20%">Issued Date</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{ date('d-M-Y', strtotime($jobCard->created_at)) }}</td>
                       </tr>
                       <tr>
                         <td width="20%">EO Task No</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{$jobCard->taskcard->number}}</td>
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{$jobCard->quotation->project->aircraft->name}}</td>
                       </tr>
                       <tr>
                         <td width="20%">Project No</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{$jobCard->quotation->project->code}}</td>
                         <td width="20%">A/C Reg</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{$jobCard->quotation->project->aircraft_register}}</td>
                       </tr>
                       <tr>
                         <td width="20%">Inspection Type</td>
@@ -156,7 +156,7 @@
                         <td width="29%">Generate</td>
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{$jobCard->quotation->project->aircraft_sn}}</td>
                       </tr>
                   </table>
                 </div>
@@ -165,7 +165,7 @@
       </li>
       <li>
         <div class="barcode">
-            {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',4.5,4.5)!!}
+            {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',4.5,4.5)!!}
         </div>
       </li>
     </ul>
@@ -185,7 +185,7 @@
               :
             </div>
           </td>
-          <td width="81%">Lorem</td>
+          <td width="81%">{{$jobCard->taskcard->title}}</td>
         </tr>
         <tr style="position: relative;">
           <td width="18%">
@@ -198,7 +198,7 @@
               :
             </div>
           </td>
-          <td width="81%">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam reprehenderit laudantium ducimus nisi aliquam impedit, harum rerum, sint sed ad ex voluptas obcaecati officiis eaque debitis quam cumque magnam provident.</td>
+          <td width="81%">{{$jobCard->taskcard->description}}</td>
         </tr>
         <tr style="position: relative;">
           <td width="18%">
@@ -211,7 +211,7 @@
               :
             </div>
           </td>
-          <td width="81%">Lorem</td>
+          <td width="81%">{{$jobCard->taskcard->reference}}</td>
         </tr>
       </table>
     </div>
@@ -230,9 +230,9 @@
       <div style="width:100%;min-height:20px;border: 3px solid #d4d7db;border-radius: 10px;">
         <table width="100%" cellpadding="10">
           <tr>
-            <td width="25%" valign="top">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse autem animi molestiae </td>
-            <td width="25%" align="center" valign="top">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </td>
-            <td width="25%" align="center" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+            <td width="25%" valign="top">{{$jobCard->taskcard->skill->name}}</td>
+            <td width="25%" align="center" valign="top">{{$jobCard->taskcard->work_area}}</td>
+            <td width="25%" align="center" valign="top">{{$jobCard->taskcard->estimation_manhour}}</td>
             <td width="25%" align="right" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit. </td>
           </tr>
         </table>
@@ -240,7 +240,7 @@
     </div>
   </div>
 
-  <div id="content4"> 
+  <div id="content4">
     <div class="container">
       <table width="100%" cellpadding="8" class="table-mt">
         <tr style="background: #d4d7db;">
