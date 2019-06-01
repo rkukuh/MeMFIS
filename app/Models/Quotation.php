@@ -10,6 +10,7 @@ class Quotation extends MemfisModel
         'number',
         'project_id',
         'customer_id',
+        'attention',
         'requested_at',
         'valid_until',
         'currency_id',
