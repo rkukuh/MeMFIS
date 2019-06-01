@@ -50,7 +50,7 @@ class CustomerController extends Controller
 
         $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
-            
+
             $contact['name']     = $request->attn_name_array[$person];
             $contact['position'] = $request->attn_position_array[$person];
             $contact['phones'] = $request->attn_phone_array[$person];
@@ -64,9 +64,56 @@ class CustomerController extends Controller
         $request->merge(['attention' => json_encode($attentions)]);
         // $request->merge(['code' => "auto-generate");
         if ($customer = Customer::create($request->all())) {
-            // $email = Email::class(['address' => $request->email_array]);
-            // $email = $customer->emails()->save($email);
             $customer->levels()->attach($level);
+
+            if(is_array($request->phone_array)){
+                for ($i=0; $i < sizeof($request->phone_array) ; $i++) {
+                    $customer->phones()->save(new Phone([
+                        'number' => $request->phone[$i],
+                        'ext' => $request->ext[$i],
+                        'type_id' => $request->phone_type[$i],
+                    ]));
+                }
+            }
+
+            if(is_array($request->fax_array)){
+                for ($i=0; $i < sizeof($request->fax_array) ; $i++) {
+                    $customer->faxes()->save(new Fax([
+                        'number' => $request->fax[$i],
+                        'type_id' => $request->fax_type[$i],
+                    ]));
+                }
+            }
+
+            if(is_array($request->website_array)){
+                for ($i=0; $i < sizeof($request->website_array) ; $i++) {
+                    if($request->website_type[$i] !== "Select a Website Type"){
+                        $customer->websites()->save(new Website([
+                            'url' => $request->web[$i],
+                            'type_id' => $request->website_type[$i],
+                        ]));
+                    }
+                }
+            }
+
+            if(is_array($request->email_array)){
+                for ($i=0; $i < sizeof($request->email_array) ; $i++) {
+                    $customer->emailes()->save(new Email([
+                        'address' => $request->email[$i],
+                        'type_id' => $request->email_type[$i],
+                    ]));
+                }
+            }
+
+            if(is_array($request->document_array)){
+                for ($i=0; $i < sizeof($request->document_array) ; $i++) {
+                    $customer->documentes()->save(new Document([
+                        'number' => $request->document[$i],
+                        'type_id' => $request->document_type[$i],
+                    ]));
+                }
+            }
+
             return response()->json($customer);
         }
 
