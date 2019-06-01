@@ -16,7 +16,7 @@ class TaskCardDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
+        $data = $alldata = TaskCard::with('type','aircrafts','task','skill')->get();
         // $data = $alldata = json_decode(TaskCard::with('type','aircrafts')->get());
 
         foreach($alldata as $item){
@@ -31,7 +31,9 @@ class TaskCardDatatables extends Controller
                 }
             }
         }
+
         $data = $alldata = json_decode($alldata);
+
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
