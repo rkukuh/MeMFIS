@@ -57,7 +57,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -124,7 +124,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
