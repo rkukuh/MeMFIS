@@ -315,6 +315,10 @@ let Quotation = {
         });
 
         $('.footer').on('click', '.add-quotation', function () {
+            let scheduled_payment_array = [];
+            $('#scheduled_payment ').each(function (i) {
+                scheduled_payment_array[i] = $('input[name="group-scheduled_payment[' + i + '][scheduled_payment]"]').val();
+            });
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -325,7 +329,7 @@ let Quotation = {
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
-            data.append("scheduled_payment_amount", $('#scheduled_payment').val());
+            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
             data.append("total", 0.000000);
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());

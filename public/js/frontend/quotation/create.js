@@ -176,7 +176,23 @@ let Quotation = {
             // });
         });
 
+        $('select[name="scheduled_payment_type"]').on('change', function () {
+            let type = this.options[this.selectedIndex].innerHTML;
+            if(type === "By Date"){
+                $.each($('#scheduled_payment '), function (key, value) {
+                    value[key].addClass("scheduledPayment");
+                    // console.log(value.addClass("scheduledPayment"));          
+                    console.log(value.className);          
+                });
+                $('input[name="scheduled_payment"]').addClass("scheduledPayment");
+            }
+        });
+
         $('.action-buttons').on('click', '.add-quotation', function () {
+            let scheduled_payment_array = [];
+            $('#scheduled_payment ').each(function (i) {
+                scheduled_payment_array[i] = $('input[name="group-scheduled_payment[' + i + '][scheduled_payment]"]').val();
+            });
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -187,7 +203,7 @@ let Quotation = {
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
-            data.append("scheduled_payment_amount", $('#scheduled_payment').val());
+            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
             data.append("total", 0.000000);
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
@@ -195,61 +211,61 @@ let Quotation = {
             data.append("title", $('#title').val());
 
 
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                type: 'post',
-                url: '/quotation',
-                processData: false,
-                contentType: false,
-                data: data,
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.currency_id) {
-                            $("#currency-error").html(data.errors.currency_id[0]);
-                        }
-                        if (data.errors.customer_id) {
-                            $("#customer_id-error").html(data.errors.customer_id[0]);
-                        }
-                        if (data.errors.description) {
-                            $("#description-error").html(data.errors.description[0]);
-                        }
-                        if (data.errors.exchange_rate) {
-                            $("#exchange-error").html(data.errors.exchange_rate[0]);
-                        }
-                        if (data.errors.project_id) {
-                            $("#work-order-error").html(data.errors.project_id[0]);
-                        }
-                        if (data.errors.requested_at) {
-                            $("#requested_at-error").html(data.errors.requested_at[0]);
-                        }
-                        if (data.errors.scheduled_payment_amount) {
-                            $("#scheduled_payment_amount-error").html(data.errors.scheduled_payment_amount[0]);
-                        }
-                        if (data.errors.scheduled_payment_type) {
-                            $("#scheduled_payment_type-error").html(data.errors.scheduled_payment_type[0]);
-                        }
-                        if (data.errors.valid_until) {
-                            $("#valid_until-error").html(data.errors.valid_until[0]);
-                        }
-                        if (data.errors.title) {
-                            $("#title-error").html(data.errors.title[0]);
-                        }
+            // $.ajax({
+            //     headers: {
+            //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            //     },
+            //     type: 'post',
+            //     url: '/quotation',
+            //     processData: false,
+            //     contentType: false,
+            //     data: data,
+            //     success: function (data) {
+            //         if (data.errors) {
+            //             if (data.errors.currency_id) {
+            //                 $("#currency-error").html(data.errors.currency_id[0]);
+            //             }
+            //             if (data.errors.customer_id) {
+            //                 $("#customer_id-error").html(data.errors.customer_id[0]);
+            //             }
+            //             if (data.errors.description) {
+            //                 $("#description-error").html(data.errors.description[0]);
+            //             }
+            //             if (data.errors.exchange_rate) {
+            //                 $("#exchange-error").html(data.errors.exchange_rate[0]);
+            //             }
+            //             if (data.errors.project_id) {
+            //                 $("#work-order-error").html(data.errors.project_id[0]);
+            //             }
+            //             if (data.errors.requested_at) {
+            //                 $("#requested_at-error").html(data.errors.requested_at[0]);
+            //             }
+            //             if (data.errors.scheduled_payment_amount) {
+            //                 $("#scheduled_payment_amount-error").html(data.errors.scheduled_payment_amount[0]);
+            //             }
+            //             if (data.errors.scheduled_payment_type) {
+            //                 $("#scheduled_payment_type-error").html(data.errors.scheduled_payment_type[0]);
+            //             }
+            //             if (data.errors.valid_until) {
+            //                 $("#valid_until-error").html(data.errors.valid_until[0]);
+            //             }
+            //             if (data.errors.title) {
+            //                 $("#title-error").html(data.errors.title[0]);
+            //             }
 
-                        document.getElementById("name").value = name;
-                    } else {
+            //             document.getElementById("name").value = name;
+            //         } else {
 
-                        toastr.success('Quotation has been created.', 'Success', {
-                            timeOut: 5000
-                        });
+            //             toastr.success('Quotation has been created.', 'Success', {
+            //                 timeOut: 5000
+            //             });
 
-                        window.location.href = '/quotation/' + data.uuid + '/edit';
+            //             window.location.href = '/quotation/' + data.uuid + '/edit';
 
 
-                    }
-                }
-            });
+            //         }
+            //     }
+            // });
         });
 
     }
