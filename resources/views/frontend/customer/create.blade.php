@@ -468,8 +468,7 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="m-portlet__body">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="repeaterDewe">
-
+                                        <div class="repeaterAttention">
                                             <div class="repeaterRow">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -499,9 +498,10 @@
                                                             Phone
                                                         </label>
 
-                                                        @component('frontend.common.input.text')
-                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @component('frontend.common.input.select2')
+                                                        @slot('text', 'Phone Number')
                                                         @slot('name', 'attn-phone')
+                                                        @slot('class', 'select2multiple')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -528,11 +528,11 @@
                                                             Email
                                                         </label>
 
-                                                        @component('frontend.common.input.text')
-                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @component('frontend.common.input.select2')
+                                                        @slot('text', 'Email Address')
                                                         @slot('name', 'attn-email')
+                                                        @slot('class', 'select2multiple')
                                                         @endcomponent
-
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -577,9 +577,11 @@
                                                             Phone
                                                         </label>
 
-                                                        @component('frontend.common.input.text')
-                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @component('frontend.common.input.select2')
+                                                        @slot('text', 'Phone Number')
                                                         @slot('name', 'attn-phone')
+                                                        @slot('class', 'select2multiple')
+                                                        @slot('multiple', 'multiple')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -606,11 +608,11 @@
                                                             Email
                                                         </label>
 
-                                                        @component('frontend.common.input.text')
-                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @component('frontend.common.input.select2')
+                                                        @slot('text', 'Email Address')
                                                         @slot('name', 'attn-email')
+                                                        @slot('multiple', 'multiple')
                                                         @endcomponent
-
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -657,6 +659,12 @@
 @endpush
 
 @push('footer-scripts')
+<script>
+$( document ).ready(function() {
+    $('.select2multiple').select2();
+});
+
+</script>
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/website.js') }}"></script> --}}
 <script src="{{ asset('js/frontend/customer/create.js') }}"></script>

@@ -519,7 +519,7 @@
                         <div class="form-group m-form__group row">
                             <div class="m-portlet__body">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="repeaterDewe">
+                                    <div class="repeaterAttention">
                                         @if($attentions)
                                         @foreach($attentions as $attention)
 
