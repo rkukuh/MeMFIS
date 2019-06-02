@@ -1,23 +1,23 @@
 let Quotation = {
-    init: function() {
+    init: function () {
 
         let workpackage_datatables_init = true;
-        $('select[name="currency"]').on('change', function() {
+        $('select[name="currency"]').on('change', function () {
             let exchange_id = this.options[this.selectedIndex].innerHTML;
             let exchange_rate = $('input[name=exchange]');
-            if(exchange_id === "Rupiah (Rp)"){
+            if (exchange_id === "Rupiah (Rp)") {
                 exchange_rate.val(1);
-                exchange_rate.attr("readonly",true);
-            }else{
+                exchange_rate.attr("readonly", true);
+            } else {
                 exchange_rate.val('');
-                exchange_rate.attr("readonly",false);
+                exchange_rate.attr("readonly", false);
             }
         });
 
-        $('select[name="work-order"]').on('change', function() {
+        $('select[name="work-order"]').on('change', function () {
             let project_id = this.options[this.selectedIndex].value;
             $.ajax({
-                url: '/project/'+project_id,
+                url: '/project/' + project_id,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -27,32 +27,46 @@ let Quotation = {
                     $('#customer_id').val(data.customer.uuid);
                     // alert(data.customer.uuid);
                     $.ajax({
-                        url: '/label/get-customer/'+data.customer.uuid,
+                        url: '/label/get-customer/' + data.customer.uuid,
                         type: 'GET',
                         dataType: 'json',
                         success: function (respone) {
-                            // $('select[name="attention"]').empty();
-
-                            // $('select[name="attention"]').append(
-                            //     '<option value=""> Select a Attention </option>'
-                            // );
-
-                            // $.each(JSON.parse(respone), function (value) {
-                                // $('select[name="attention"]').append(
-                                //     '<option value="' + value + '">' + value + '</option>'
-                                // );
-                                // console.log(JSON.parse(respone));
-
-                            // });
-                            let res =JSON.parse(respone);
-
+                            let res = JSON.parse(respone);
+                            $('select[name="attention"]').empty();
+                            $('select[name="phone"]').empty();
+                            $('select[name="email"]').empty();
+                            $('select[name="fax"]').empty();
+                            $('select[name="address"]').empty();
                             for (var i = 0; i < res.length; i++) {
-                                // var value = respone[0];
-                                // console.log(i);
-                                // console.log(respone.length);
-                                console.log(res[i].name);
-
-                                // $("<div id=\"" + student.id + "\">" + student.full_name + " (" + student.user_id + " - " + student.stin + ")</div>")...
+                                if(res[i].name){
+                                    $('select[name="attention"]').append(
+                                        '<option value="' + res[i].name + '">' + res[i].name + '</option>'
+                                    );
+                                }
+                                if(res[i].address){
+                                    $('select[name="attention"]').append(
+                                        '<option value="' + res[i].address + '">' + res[i].address + '</option>'
+                                    );
+                                }
+                                if(res[i].fax){
+                                    $('select[name="attention"]').append(
+                                        '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
+                                    );
+                                }
+                                if(res[i].phones){
+                                    $.each(res[i].phones, function (value) {
+                                        $('select[name="phone"]').append(
+                                            '<option value="' + res[i].phones[value] + '">' + res[i].phones[value] + '</option>'
+                                        );
+                                    });
+                                }
+                                if(res[i].emails){
+                                    $.each(res[i].emails, function (value) {
+                                        $('select[name="email"]').append(
+                                            '<option value="' + res[i].emails[value] + '">' + res[i].emails[value] + '</option>'
+                                        );
+                                    });
+                                }
                             }
 
 
@@ -75,11 +89,11 @@ let Quotation = {
                             // }
                         }
                     });
-                    if(workpackage_datatables_init == true){
+                    if (workpackage_datatables_init == true) {
                         workpackage_datatables_init = false;
                         workpackage(data.uuid);
                     }
-                    else{
+                    else {
                         let table = $('.workpackage_datatable').mDatatable();
                         table.destroy();
                         workpackage(data.uuid);
@@ -162,7 +176,7 @@ let Quotation = {
             // });
         });
 
-        $('.action-buttons').on('click', '.add-quotation', function() {
+        $('.action-buttons').on('click', '.add-quotation', function () {
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -174,7 +188,7 @@ let Quotation = {
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
             data.append("scheduled_payment_amount", $('#scheduled_payment').val());
-            data.append("total",0.000000);
+            data.append("total", 0.000000);
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
@@ -189,8 +203,8 @@ let Quotation = {
                 url: '/quotation',
                 processData: false,
                 contentType: false,
-                data:data,
-                success: function(data) {
+                data: data,
+                success: function (data) {
                     if (data.errors) {
                         if (data.errors.currency_id) {
                             $("#currency-error").html(data.errors.currency_id[0]);
@@ -241,6 +255,6 @@ let Quotation = {
     }
 };
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     Quotation.init();
 });
