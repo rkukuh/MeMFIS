@@ -59,7 +59,6 @@ let Project = {
 };
 $('select[name="customer"]').on('change', function () {
     let customer_uuid = this.options[this.selectedIndex].value;
-    console.log(customer_uuid);
     $("#name").html(customer_uuid.text);
     $.ajax({
         headers: {
