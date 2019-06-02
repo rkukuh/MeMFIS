@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li class="m-nav__separator">
-                        -   
+                        -
                     </li>
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.taskcard.index') }}" class="m-nav__link">
@@ -86,10 +86,16 @@
                                                     A/C Type @include('frontend.common.label.required')
                                                 </label>
 
-                                                <div style="background-color:beige; padding:15px;" class="">
-                                                    @foreach($taskCard->aircrafts  as $aircraft)
-                                                        {{ $aircraft->name }},
-                                                    @endforeach
+                                                <div>
+                                                    @if ($taskCard->aircrafts->isEmpty())
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                        @foreach ($taskCard->aircrafts  as $aircraft)
+                                                            @component('frontend.common.label.badge')
+                                                                @slot('text', $aircraft->name )
+                                                            @endcomponent
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -199,16 +205,16 @@
                                                 <label class="form-control-label">
                                                     Task Card Attachment @include('frontend.common.label.optional')
                                                 </label>
-    
+
                                                  @if (empty($taskcard->description))
                                                     @include('frontend.common.label.data-info-nodata')
-                                                @else 
+                                                @else
                                                     @component('frontend.common.buttons.show-file')
                                                         @slot('text', 'show task card')
                                                         @slot('data_target', '#modal_showtaskcard')
                                                     @endcomponent
                                                     @include('frontend.taskcard.modal')
-                                                 @endif     
+                                                 @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
