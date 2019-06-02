@@ -32,6 +32,9 @@ $factory->define(Quotation::class, function (Faker $faker) {
 
             return factory(Customer::class)->create()->id;
         },
+        'attention' => function (array $quotation) {
+            return Customer::find($quotation['customer_id'])->attention;
+        },
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'valid_until' => $faker->randomElement([null, Carbon::now()]),
         'currency_id' => function () {

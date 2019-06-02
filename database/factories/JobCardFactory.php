@@ -2,6 +2,7 @@
 
 use App\Models\JobCard;
 use App\Models\TaskCard;
+use App\Models\Quotation;
 use Faker\Generator as Faker;
 
 $factory->define(JobCard::class, function (Faker $faker) {
@@ -19,6 +20,7 @@ $factory->define(JobCard::class, function (Faker $faker) {
     return [
         'number' => 'JC-DUM-' . $number,
         'taskcard_id' => $taskcard->id,
+        'quotation_id' => Quotation::get()->random()->id,
         'data_taskcard' => $taskcard->toJson(),
         'data_taskcard_items' => $taskcard->items->toJson(),
     ];

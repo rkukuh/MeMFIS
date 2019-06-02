@@ -11,11 +11,25 @@ class JobCard extends MemfisModel
     protected $fillable = [
         'number',
         'taskcard_id',
+        'quotation_id',
         'data_taskcard',
         'data_taskcard_items',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A jobcard must related to a quotation
+     *
+     * This function will retrieve the quotation of a jobcard.
+     * See: Quotation's jobcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotation()
+    {
+        return $this->belongsTo(Quotation::class);
+    }
 
     /**
      * Polymorphic: An entity can have zero or many statuses.

@@ -1,318 +1,351 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <style>
-        td{
-          font-size: 12px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,body{
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+    }
 
-        h1{
-          font-size: 40px;
-        }
+    ul li{
+      display: inline-block;
+    }
 
-        .table-style{
-            border-collapse: collapse;
-        }
+    table{
+      border-collapse: collapse;
+    }
 
-        .table-style td{
-          border-left: 1px solid black;
-          border-right: 1px solid black;
-          border-bottom: 1px solid black;
+    .container{
+      width: 100%;
+      margin: 0 36px;
+    }
 
-        }
-        
-        .date-footer{
-          position: absolute; 
-          top:130px; 
-          left:2px;
-        }
+    #header{
+      margin-top:10px;
+    }
 
-        .name-footer{
-          position: absolute;
-          top: 108px; 
-          width: 100%;
-          text-align: center;
-        }
+    #content{
+      margin-top:27px;
+    }
 
-        .barcode{
-          position: relative;
-          right:50%;
-          left: 50%;
-        }
+    #content .jobcard-info fieldset legend{
+      font-size: 20px;
+      font-weight: bold;
+      color: cornflowerblue;
+    }
 
-    </style>
+    #content .jobcard-info .jobcard-info-detail table tr td{
+      vertical-align: top;
+    }
+
+    #content .jobcard-info .jobcard-info-detail{
+      margin-top: 12px;
+    }
+
+    #content .barcode{
+      margin-left:16px;
+      margin-top: -112px;
+    }
+
+    #content2{
+      margin-top:-36px;
+    }
+
+    #content3, #content4{
+      margin-top:5px;
+    }
+
+    #content3 .table1{
+      padding-left: 7px;
+    }
+
+    #content5{
+      margin-top:9px;
+    }
+
+    #content4 .table-mt{
+      border: 2px solid #d4d7db;
+    }
+
+    #content4 .table-mt tr td{
+      border-left:  1px solid  #d4d7db;
+      border-right:  1px solid  #d4d7db;
+      border-top:  1px solid  #d4d7db;
+      border-bottom:  1px solid  #d4d7db;
+    }
+
+    #content5 .head{
+      width: 100%;
+      height: 40px;
+      background: #f7dd16;
+      border-radius: 9px 9px 0px 0px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    #content5 .body{
+      width: 100%;
+      height: 138px;
+      border-left:  4px solid  #d4d7db;
+      border-right:  4px solid  #d4d7db;
+      border-bottom:  4px solid  #d4d7db;
+    }
+
+    #content5 .body table tr td{
+      position: relative;
+      border-left: 1px solid  #d4d7db;
+    }
+
+    #content5 .body .body-date{
+      position: absolute;
+      top:108px;
+      left:15px;
+    }
+
+    #content5 .body .body-name{
+      position: absolute;
+      top: 88px;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <table width="100%">
-        <tr>
-            <td width="30%">
-                <center>
-                    <img src="img/LogoMMF.png" alt="logo" height="80px">
-                    <P>Juanda International Airport <br> Surabaya Indonesia</P>
-                </center>
-            </td>
-            <td width="40%">
-                <center>
-                    <h1>
-                        JOB CARD<span style="font-weight: lighter; font-size: 25px;">(Engineering Order)</span>
-                    </h1>
-                </center>
-            </td>
-            <td width="30%">
-                <center>
-                    <div class="barcode">
-                      {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
-                      <p style="margin-right:50%"><b>NO :</b> Generate</p>
-                    </div>
-                </center>
 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" style="border-top:1px solid black;" width="100%">
-        <tr>
-            <td width="30%">
-                Phone : <span>0812323123212</span> 
-            </td>
-            <td width="30%">
-                Fax : <span>Generate</span> 
-            </td>
-            <td width="40%">
-                Email : <span>pibnu86@gmail.com</span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="14%">
-                <div style="position: absolute;">
-                    EO Task No
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="14%">
-                <div style="position: absolute;">
-                    A/C Type
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="15%">
-                <div style="position: absolute;">
-                    A/C S/N
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="15%">
-                <div style="position: absolute;">
-                    A/C Reg
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="29%">
-                <div style="position: absolute;">
-                    Inspection Type
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="13%">
-                <div style="position: absolute;">
-                    Project No
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="24%">
-                <div style="position: absolute;">
-                    Skill
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="16%">
-                <div style="position: absolute;">
-                    Est. Mhrs
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="17%">
-                <div style="position: absolute;">
-                    Actual. Mhrs
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="22%">
-                <div style="position: absolute;">
-                    Work Area
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="21%">
-                <div style="position: absolute;">
-                    Data Issue
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table> 
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="50%" height="20">
-              <div style="position: absolute;">
-                Title
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-            <td width="50%" height="20">
-              <div style="position: absolute;">
-                Refrence
-              </div>
-              <br>
-              <span><center>Generate</center></span>
-            </td>
-        </tr>
-    </table>
+  <div id="header">
+    <img src="./img/form/printoutjobcardeo/HeaderJobCardEO.png" alt=""width="100%">
+  </div>
 
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="100%" height="35">
-              <div style="position: absolute;">
-                Description
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="50%" height="100">
-              <div style="position: absolute;">
-                Material(s) :
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-            <td width="50%" height="100">
-              <div style="position: absolute;">
-                Tool(s) :
-              </div>
-              <br>
-              <span><center>Generate</center></span>
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="100%" height="50 ">
-              <div style="position: absolute;">
-                Accomplishment Record:
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="18%">
-                <div style="position: absolute;">
-                    Discrepancies Found : 
+  <div id="content">
+    <ul>
+      <li>
+        <div class="jobcard-info">
+            <fieldset>
+                <legend>JC No : 123456</legend>
+                <div class="jobcard-info-detail">
+                  <table width="80%" cellpadding="3">
+                      <tr>
+                        <td width="20%">Issued Date</td>
+                        <td width="1%">:</td>
+                        <td width="29%">{{ date('d-M-Y', strtotime($jobCard->created_at)) }}</td>
+                      </tr>
+                      <tr>
+                        <td width="20%">EO Task No</td>
+                        <td width="1%">:</td>
+                        <td width="29%">{{$jobCard->taskcard->number}}</td>
+                        <td width="20%">AC/Type</td>
+                        <td width="1%">:</td>
+                        <td width="29%">{{$jobCard->quotation->project->aircraft->name}}</td>
+                      </tr>
+                      <tr>
+                        <td width="20%">Project No</td>
+                        <td width="1%">:</td>
+                        <td width="29%">{{$jobCard->quotation->project->code}}</td>
+                        <td width="20%">A/C Reg</td>
+                        <td width="1%">:</td>
+                        <td width="29%">{{$jobCard->quotation->project->aircraft_register}}</td>
+                      </tr>
+                      <tr>
+                        <td width="20%">Inspection Type</td>
+                        <td width="1%">:</td>
+                        <td width="29%">Generate</td>
+                        <td width="20%">A/C S/N</td>
+                        <td width="1%">:</td>
+                        <td width="29%">{{$jobCard->quotation->project->aircraft_sn}}</td>
+                      </tr>
+                  </table>
                 </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="22%">
-                <div style="position: absolute;">
-                    Transfer to Detect Card No :
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="17%">
-                <div style="position: absolute;">
-                    Status : 
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="22%">
-                <div style="position: absolute;">
-                    Data Issued : 
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="21%">
-                <div style="position: absolute;">
-                    Data Close : 
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="100%" height="20">
-              <div style="position: absolute;">
-                Helper
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="30%" height="120">
-              <div style="position: absolute;">
-                <b>Accomplished By :</b> 
-              </div>
-              
-              <div class="name-footer">Name</div>
+            </fieldset>
+        </div>
+      </li>
+      <li>
+        <div class="barcode">
+            {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',4.5,4.5)!!}
+        </div>
+      </li>
+    </ul>
+  </div>
 
-              <div class="date-footer">
-                  Date : <span>(Date & Time)</span>
-              </div>
-            <td style="position: relative;" width="30%" height="120">
-              <div style="position: absolute;">
-                <b>Inspected By :</b> 
-              </div>
+  <div id="content2">
+    <div class="container">
+      <table width="100%" cellpadding="4">
+        <tr style="position: relative;">
+          <td width="18%">
+            <div style="position: absolute;">
+              Title
+            </div>
+          </td>
+          <td width="1%">
+            <div style="position: absolute;">
+              :
+            </div>
+          </td>
+          <td width="81%">{{$jobCard->taskcard->title}}</td>
+        </tr>
+        <tr style="position: relative;">
+          <td width="18%">
+            <div style="position: absolute;">
+              Description
+            </div>
+          </td>
+          <td width="1%">
+            <div style="position: absolute;">
+              :
+            </div>
+          </td>
+          <td width="81%">{{$jobCard->taskcard->description}}</td>
+        </tr>
+        <tr style="position: relative;">
+          <td width="18%">
+            <div style="position: absolute;">
+              Reference
+            </div>
+          </td>
+          <td width="1%">
+            <div style="position: absolute;">
+              :
+            </div>
+          </td>
+          <td width="81%">{{$jobCard->taskcard->reference}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-              <div class="name-footer">Name</div>
+  <div id="content3">
+    <div class="container">
+      <table width="100%" class="table1">
+        <tr>
+          <td width="25%">Skill</td>
+          <td width="25%" align="center">Work Area</td>
+          <td width="25%" align="center">Est. Mhrs</td>
+          <td width="25%" align="right">Actual Mhrs</td>
+        </tr>
+      </table>
+      <div style="width:100%;min-height:20px;border: 3px solid #d4d7db;border-radius: 10px;">
+        <table width="100%" cellpadding="10">
+          <tr>
+            <td width="25%" valign="top">{{$jobCard->taskcard->skill->name}}</td>
+            <td width="25%" align="center" valign="top">{{$jobCard->taskcard->work_area}}</td>
+            <td width="25%" align="center" valign="top">{{$jobCard->taskcard->estimation_manhour}}</td>
+            <td width="25%" align="right" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit. </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 
-              <div class="date-footer">
+  <div id="content4">
+    <div class="container">
+      <table width="100%" cellpadding="8" class="table-mt">
+        <tr style="background: #d4d7db;">
+          <th width="50%" align="center">Material(s)</th>
+          <th width="50%" align="center">Tool(s)</th>
+        </tr>
+        <tr>
+          <td height="15%" valign="top">
+           <span>Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum earum temporibus repellendus ratione, nesciunt consectetur accusantium a aliquam ipsa architecto quam itaque, cupiditate commodi iure voluptates quaerat. Blanditiis, velit fuga. </span>
+          </td>
+          <td height="15%" valign="top">
+            <span>Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis iste blanditiis repellendus minima iusto laborum nihil eaque cum? Veritatis eligendi est adipisci, exercitationem eaque in repellendus odio incidunt error doloribus?</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" height="35" valign="top">
+              Accomplishment Record : <br><br>
+              <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iusto esse similique quod ducimus cupiditate voluptate voluptatem reprehenderit molestias facere earum quidem non harum dolore expedita at illo dolores odio!</span>
+          </td>
+        </tr>
+        <tr style="position: relative;">
+          <td width="50%" height="35">
+            <div style="position: absolute;">
+              Discrepancy Found :
+            </div>
+            <center>
+              <div style="margin-left:100px;margin-top:12px;">
+                <ul>
+                  <li>
+                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                  </li>
+                  <li style="margin-left:12px;">
+                    <img src="./img/check.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                  </li>
+                </ul>
+              </div>
+            </center>
+          </td>
+          <td width="50%" height="35" valign="center">
+              Transfer to Defect Card No : <br><br>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime dolorum esse fugiat ex illo ab quae ducimus et.
+          </td>
+        </tr>
+      </table>
+      <table width="100%" style="margin-top: 12px;">
+        <tr>
+          <td width="4%" valign="top">Helper </td>
+          <td width="1%" valign="top">:</td>
+          <td width="28%" valign="top">Yemimul</td>
+          <td width="33%" valign="top" align="center">Status : <span>Single</span></td>
+          <td width="34%" valign="top" align="right">Data Close : <span>10-07-1994</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="content5">
+    <div class="container">
+      <div class="head">
+        <table width="100%" cellpadding="10">
+          <tr>
+            <td width="33%" align="center">Accomplished By</td>
+            <td width="33%" align="center">Inspected By</td>
+            <td width="34%" align="center">Rii By</td>
+          </tr>
+        </table>
+      </div>
+      <div class="body">
+        <table width="100%">
+          <tr>
+            <td width="33%" height="65%">
+              <div class="body-name">Ibnu Pratama</div>
+
+              <div class="body-date">
                   Date : <span>(Date & Time)</span>
               </div>
             </td>
-            <td style="position: relative;" width="30%" height="120">
-              <div style="position: absolute;">
-                <b>Rill By :</b>
-              </div>
-              
-              <div class="name-footer">Name</div>
+            <td width="33%" height="65%">
+              <div class="body-name">Ibnu Pratama</div>
 
-              <div class="date-footer">
+              <div class="body-date">
                   Date : <span>(Date & Time)</span>
               </div>
-                
             </td>
-        </tr>
-    </table>
+            <td width="34%" height="65%">
+              <div class="body-name">Ibnu Pratama</div>
 
+              <div class="body-date">
+                  Date : <span>(Date & Time)</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table width="100%" style="margin-top: 12px;">
+        <tr>
+          <td width="8%">Issued By</td>
+          <td width="1%">:</td>
+          <td width="91%">Name PPC</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div style="margin-top:14px;">
+    <img src="./img/form/printoutjobcardeo/FooterJobCardEO.jpg" width="100%" alt="" srcset="">
+  </div>
 </body>
 </html>

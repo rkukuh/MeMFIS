@@ -81,7 +81,11 @@ class WorkPackageController extends Controller
      */
     public function show(WorkPackage $workPackage)
     {
-        return view('frontend.workpackage.show');
+        return view('frontend.workpackage.show',[
+        'workPackage' => $workPackage,
+        'aircrafts' => $this->aircrafts,
+    ]);
+
     }
 
     /**

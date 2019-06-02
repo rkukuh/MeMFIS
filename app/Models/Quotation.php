@@ -10,6 +10,7 @@ class Quotation extends MemfisModel
         'number',
         'project_id',
         'customer_id',
+        'attention',
         'requested_at',
         'valid_until',
         'currency_id',
@@ -75,6 +76,19 @@ class Quotation extends MemfisModel
                         'note'
                     )
                     ->withTimestamps();
+    }
+
+    /**
+     * One-to-Many: A jobcard must related to a quotation
+     *
+     * This function will retrieve all the jobcards of a quotation.
+     * See: JobCard's quotation() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcards()
+    {
+        return $this->hasMany(JobCard::class);
     }
 
     /**

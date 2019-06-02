@@ -7,7 +7,7 @@ let RiiRelease = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/task-release',
+                        url: '/datatables/rii-release',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,22 +43,27 @@ let RiiRelease = {
             },
             columns: [
                 {
-                    field: 'number',
-                    title: 'No',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'title',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'type.name',
+                    field: 'taskcard.number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'number',
+                    title: 'Job Card No',
+                    sortable: 'asc',
+                    filterable: !1,
+                    // template: function (t, e, i) {
+                    //     return (
+                    //         '<a href="/task-release/create">' + t.number + "</a>"
+                    //     );
+                    // }
                 },
                 {
                     field: 'pesawat',
@@ -68,43 +73,43 @@ let RiiRelease = {
 
                 },
                 {
-                    field: 'skill',
+                    field: 'quotation.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'quotation.project.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'quotation.project.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'quotation.project.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'taskcard.skill.name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'taskcard.estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'estimation_manhour',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -116,26 +121,25 @@ let RiiRelease = {
                     template: function (t, e, i) {
 
                             return (
-                                '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
+                                '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
                     }
                 }
             ]
         });
-
-        let remove = $('.taskcard_datatable').on('click', '.delete', function () {
-            let tascard_uuid = $(this).data('uuid');
+        $('.riirelease_datatable').on('click', '.release', function () {
+            let quotation_uuid = $(this).data('id');
 
             swal({
-                title: 'Sure want to remove?',
+                title: 'Sure want to Release?',
                 type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
+                confirmButtonText: 'Yes, Release',
+                confirmButtonColor: '#34bfa3',
                 cancelButtonText: 'Cancel',
                 showCancelButton: true,
             })
@@ -148,14 +152,14 @@ let RiiRelease = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard/' + tascard_uuid + '',
+                        // url: '/quotation/' + quotation_uuid + '',
                         success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
-                                timeOut: 5000
+                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                                    timeOut: 5000
                                 }
                             );
 
-                            let table = $('.taskcard_datatable').mDatatable();
+                            let table = $('.m_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -169,7 +173,6 @@ let RiiRelease = {
                         }
                     });
                 }
-
             });
         });
 
