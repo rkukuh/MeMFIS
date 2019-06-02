@@ -58,17 +58,8 @@ let Project = {
     }
 };
 $('select[name="customer"]').on('change', function () {
-    let customer_uuid = this.options[this.selectedIndex];
-    let phone = $('#phone');
-    let fax = $('#fax');
-    let addresses = $('#address');
-    let emails = $('#email');
-    phone.empty();
-    fax.empty();
-    addresses.empty();
-    emails.empty();
-    let phoneNumber = "";
-    console.log(phone);
+    let customer_uuid = this.options[this.selectedIndex].value;
+    console.log(customer_uuid);
     $("#name").html(customer_uuid.text);
     $.ajax({
         headers: {
@@ -76,56 +67,51 @@ $('select[name="customer"]').on('change', function () {
         },
         type: 'GET',
         dataType: "json",
-        url: '/label/get-customer/'+customer_uuid.value,
-        success: function (data) {
-            // adding customer phones  option on selectBox inside identifier
-            if(jQuery.isEmptyObject(data.phones)){
-                console.log('empty phones');
-            }else{
-                console.log('get the phones data');
-                $.each( data.phones, function( key, value ) {
-                    if(value.ext === null){
-                        phoneNumber = value.number;
-                    }else{
-                        phoneNumber = value.number+' Ext. '+value.ext;
-                    }
-                    let phoneNumberOption = new Option(phoneNumber,value.uuid);
-                    phone.append(phoneNumberOption);
-                });
+        url: '/label/get-customer/'+customer_uuid,
+        success: function (respone) {
+            if (respone) {
+                let res = JSON.parse(respone);
+                    $('select[name="attention"]').empty();
+                    $('select[name="phone"]').empty();
+                    $('select[name="email"]').empty();
+                    $('select[name="fax"]').empty();
+                    $('select[name="address"]').empty();
+                    for (var i = 0; i < res.length; i++) {
+                        if(res[i].name){
+                            $('select[name="attention"]').append(
+                                '<option value="' + res[i].name + '">' + res[i].name + '</option>'
+                            );
+                        }
+                        if(res[i].address){
+                            $('select[name="attention"]').append(
+                                '<option value="' + res[i].address + '">' + res[i].address + '</option>'
+                            );
+                        }
+                        if(res[i].fax){
+                            $('select[name="attention"]').append(
+                                '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
+                            );
+                        }
+                        if(res[i].phones){
+                            $.each(res[i].phones, function (value) {
+                                $('select[name="phone"]').append(
+                                    '<option value="' + res[i].phones[value] + '">' + res[i].phones[value] + '</option>'
+                                );
+                            });
+                        }
+                        if(res[i].emails){
+                            $.each(res[i].emails, function (value) {
+                                $('select[name="email"]').append(
+                                    '<option value="' + res[i].emails[value] + '">' + res[i].emails[value] + '</option>'
+                                );
+                            });
+                        }
+                }
+            } else {
+                console.log("empty");
+
             }
 
-            // adding customer faxes  option on selectBox inside identifier
-            if(jQuery.isEmptyObject(data.faxes)){
-                console.log('empty faxes');
-            }else{
-                console.log('get the faxes data');
-                $.each( data.faxes, function( key, value ) {
-                    let faxNumberOption = new Option( value.number,value.uuid);
-                    fax.append(faxNumberOption);
-                });
-            }
-
-            // Adding customer addresses option on selectBox inside identifier
-            if(jQuery.isEmptyObject(data.addresses)){
-                console.log('empty addresses');
-            }else{
-                console.log('get the addresses data');
-                $.each( data.addresses, function( key, value ) {
-                    let addressesOption = new Option( value.address,value.uuid);
-                    addresses.append(addressesOption);
-                });
-            }
-
-            // Adding customer emails option on selectBox inside identifier
-            if(jQuery.isEmptyObject(data.emails)){
-                console.log('empty emails');
-            }else{
-                console.log('get the emails data');
-                $.each( data.emails, function( key, value ) {
-                    let emailsOption = new Option( value.address,value.uuid);
-                    emails.append(emailsOption);
-                });
-            }
         }
     });
 });

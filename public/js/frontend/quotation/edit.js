@@ -91,7 +91,6 @@ let Quotation = {
                 type: 'GET',
                 dataType: "json",
                 success: function (respone) {
-                    console.log("ccustomertr uuid : "+customer_uuid);
                     if (respone) {
                         let res = JSON.parse(respone);
                             $('select[name="attention"]').empty();
