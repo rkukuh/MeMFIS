@@ -107,10 +107,17 @@
                                                     Effectivity (A/C Type) @include('frontend.common.label.required')
                                                 </label>
 
-                                                <div style="background-color:beige; padding:15px;" class="">
-                                                    @foreach($taskcard->aircrafts  as $aircraft)
-                                                        {{ $aircraft->name }},
-                                                    @endforeach
+
+                                                <div>
+                                                    @if ($taskcard->aircrafts->isEmpty())
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                        @foreach ($taskcard->aircrafts  as $aircraft)
+                                                            @component('frontend.common.label.badge')
+                                                                @slot('text', $aircraft->name )
+                                                            @endcomponent
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -192,11 +199,11 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->scheduled_priority_id == 77) 
+                                                    @if( $taskcard->scheduled_priority_id == 77)
                                                         @slot('text', 'Next check / shop visit')
-                                                    @elseif( $taskcard->scheduled_priority_id == 78) 
+                                                    @elseif( $taskcard->scheduled_priority_id == 78)
                                                         @slot('text', 'Next heavy maintenance visit')
-                                                    @elseif( $taskcard->scheduled_priority_id == 78) 
+                                                    @elseif( $taskcard->scheduled_priority_id == 78)
                                                         @slot('text', 'As scheduled by PPC')
                                                     @else
                                                         @slot('text', 'Next heavy maintenance visit')
@@ -219,7 +226,7 @@
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                                @endif 
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row" >
@@ -229,9 +236,9 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->recurrence_id == 74) 
+                                                    @if( $taskcard->recurrence_id == 74)
                                                         @slot('text', 'One-Time')
-                                                    @elseif( $taskcard->recurrence_id == 75) 
+                                                    @elseif( $taskcard->recurrence_id == 75)
                                                         @slot('text', 'As Required')
                                                     @else
                                                         @slot('text', 'Repetitive')
@@ -255,7 +262,7 @@
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                                @endif 
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -265,13 +272,13 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->manual_affected_id == 69) 
+                                                    @if( $taskcard->manual_affected_id == 69)
                                                         @slot('text', 'MM')
-                                                    @elseif( $taskcard->manual_affected_id == 70) 
+                                                    @elseif( $taskcard->manual_affected_id == 70)
                                                         @slot('text', 'IPC')
-                                                    @elseif( $taskcard->manual_affected_id == 71) 
+                                                    @elseif( $taskcard->manual_affected_id == 71)
                                                         @slot('text', 'WDM')
-                                                    @elseif( $taskcard->manual_affected_id == 72) 
+                                                    @elseif( $taskcard->manual_affected_id == 72)
                                                         @slot('text', 'OHM')
                                                     @else
                                                         @slot('text', 'Other')
@@ -290,7 +297,7 @@
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                                @endif 
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
