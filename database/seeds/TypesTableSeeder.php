@@ -18,6 +18,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfCapability::class);
         $this->call(TypesOfDefectCardCloseReason::class);
         $this->call(TypesOfDefectCardPauseReason::class);
+        $this->call(TypesOfDefectCardProposeCorrection::class);
         $this->call(TypesOfDocument::class);
         $this->call(TypesOfEligibility::class);
         $this->call(TypesOfEmail::class);
