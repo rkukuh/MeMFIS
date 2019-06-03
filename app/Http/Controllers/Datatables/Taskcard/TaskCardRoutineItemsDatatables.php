@@ -16,11 +16,9 @@ class TaskCardRoutineItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function material($taskcard)
+    public function material(TaskCard $taskcard)
     {
-        $item = TaskCard::where('uuid',$taskcard)->first();
-
-        $materials = $item->materials;
+        $materials = $taskcard->materials;
 
         foreach($materials as $material){
             $unit_id = $material->pivot->unit_id;
@@ -122,11 +120,9 @@ class TaskCardRoutineItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool($taskcard)
+    public function tool(TaskCard $taskcard)
     {
-        $item = TaskCard::where('uuid',$taskcard)->first();
-
-        $tools = $item->tools;
+        $tools = $taskcard->tools;
 
         foreach($tools as $tool){
             $unit_id = $tool->pivot->unit_id;
