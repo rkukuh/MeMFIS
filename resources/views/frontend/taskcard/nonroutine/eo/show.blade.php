@@ -107,10 +107,17 @@
                                                     Effectivity (A/C Type) @include('frontend.common.label.required')
                                                 </label>
 
-                                                <div style="background-color:beige; padding:15px;" class="">
-                                                    @foreach($taskcard->aircrafts  as $aircraft)
-                                                        {{ $aircraft->name }},
-                                                    @endforeach
+
+                                                <div>
+                                                    @if ($taskcard->aircrafts->isEmpty())
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                        @foreach ($taskcard->aircrafts  as $aircraft)
+                                                            @component('frontend.common.label.badge')
+                                                                @slot('text', $aircraft->name )
+                                                            @endcomponent
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -192,67 +199,34 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskcard->scheduled_priority_id)
+                                                    @if( $taskcard->scheduled_priority_id == 77)
+                                                        @slot('text', 'Next check / shop visit')
+                                                    @elseif( $taskcard->scheduled_priority_id == 78)
+                                                        @slot('text', 'Next heavy maintenance visit')
+                                                    @elseif( $taskcard->scheduled_priority_id == 78)
+                                                        @slot('text', 'As scheduled by PPC')
+                                                    @else
+                                                        @slot('text', 'Next heavy maintenance visit')
+                                                    @endif
                                                 @endcomponent
-
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="prior_to">
+                                            <div class="col-sm-6 col-md-6 col-lg-6" id="prior_to">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
-
+                                                @if($taskcard->scheduled_priority_amount)
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('id', 'prior_to_date')
-                                                            @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
+                                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $taskcard->scheduled_priority_amount)
                                                         @endcomponent
                                                     </div>
-                                                    <div class="col-sm-10 col-md-10 col-lg-10">
-                                                        @component('frontend.common.input.datepicker')
-                                                            @slot('id', 'date')
-                                                            @slot('text', 'date')
-                                                            @slot('name', 'date')
-                                                            @slot('disabled', 'disabled')
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $taskcard->scheduled_priority_type)
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('id', 'prior_to_hours')
-                                                            @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-10 col-md-10 col-lg-10">
-                                                        @component('frontend.common.input.number')
-                                                            @slot('id', 'hour')
-                                                            @slot('text', 'hour')
-                                                            @slot('name', 'hour')
-                                                            @slot('disabled', 'disabled')
-                                                            @slot('input_append', 'Hours')
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('id', 'prior_to_cycle')
-                                                            @slot('name', 'prior_to')
-                                                            @slot('disabled', 'disabled')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-10 col-md-10 col-lg-10">
-                                                        @component('frontend.common.input.number')
-                                                            @slot('id', 'cycle')
-                                                            @slot('text', 'cycle')
-                                                            @slot('name', 'cycle')
-                                                            @slot('disabled', 'disabled')
-                                                            @slot('input_append', 'Cycle')
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row" >
@@ -262,45 +236,33 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskcard->recurrence_id)
+                                                    @if( $taskcard->recurrence_id == 74)
+                                                        @slot('text', 'One-Time')
+                                                    @elseif( $taskcard->recurrence_id == 75)
+                                                        @slot('text', 'As Required')
+                                                    @else
+                                                        @slot('text', 'Repetitive')
+                                                    @endif
                                                 @endcomponent
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6  hidden" id="recurrence_div">
+                                            <div class="col-sm-6 col-md-6 col-lg-6" id="recurrence_div">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
+                                                @if($taskcard->recurrence_type)
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        @component('frontend.common.input.number')
-                                                            @slot('id', 'recurrence')
-                                                            @slot('text', 'Recurrence')
-                                                            @slot('name', 'recurrence')
-                                                            @slot('disabled', 'disabled')
-                                                            @slot('id_error', 'recurrence')
+                                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $taskcard->recurrence_amount)
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $taskcard->recurrence_type)
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <select id="recurrence-select" name="recurrence-select" id="recurrence-select" class="form-control" disabled>
-                                                            <option value="">
-                                                                Select a Recurrence
-                                                            </option>
-                                                            <option value="cyrcle">
-                                                                Cycle
-                                                            </option>
-                                                            <option value="hourly">
-                                                                Hourly
-                                                            </option>
-                                                            <option value="daily">
-                                                                Daily
-                                                            </option>
-                                                            <option value="yearly">
-                                                                Yearly
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -310,20 +272,32 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskcard->manual_affected_id)
+                                                    @if( $taskcard->manual_affected_id == 69)
+                                                        @slot('text', 'MM')
+                                                    @elseif( $taskcard->manual_affected_id == 70)
+                                                        @slot('text', 'IPC')
+                                                    @elseif( $taskcard->manual_affected_id == 71)
+                                                        @slot('text', 'WDM')
+                                                    @elseif( $taskcard->manual_affected_id == 72)
+                                                        @slot('text', 'OHM')
+                                                    @else
+                                                        @slot('text', 'Other')
+                                                    @endif
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="note_div">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
-                                                @component('frontend.common.input.textarea')
-                                                    @slot('rows', '3')
-                                                    @slot('id', 'note')
-                                                    @slot('name', 'note')
-                                                    @slot('text', 'Note')
-                                                    @slot('disabled', 'disabled')
-                                                @endcomponent
+                                                @if($taskcard->manual_affected)
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $taskcard->manual_affected)
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">

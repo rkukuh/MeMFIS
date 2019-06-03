@@ -5,7 +5,7 @@
 <div class="m-subheader hidden">
   <div class="d-flex align-items-center">
       <div class="mr-auto">
-          <h3 class="m-subheader__title m-subheader__title--separator">            
+          <h3 class="m-subheader__title m-subheader__title--separator">
             Defect Card
           </h3>
           <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
@@ -19,7 +19,7 @@
               </li>
               <li class="m-nav__item">
                   <a href="{{ route('frontend.defectcard.index') }}" class="m-nav__link">
-                      <span class="m-nav__link-text">                              
+                      <span class="m-nav__link-text">
                         Defect Card
                       </span>
                   </a>
@@ -282,9 +282,9 @@
                     <div class="form-group m-form__group row">
                         <div class="col-sm-4 col-md-4 col-lg-4">
                             @component('frontend.common.input.checkbox')
-                                @slot('id', 'recrification')
-                                @slot('name', 'recrification')
-                                @slot('text', '3. RECRIFICATION')
+                                @slot('id', 'rectification')
+                                @slot('name', 'rectification')
+                                @slot('text', '3. RECTIFICATION')
                                 @slot('size', '12')
                                 @slot('disabled','disabled')
                             @endcomponent
@@ -414,7 +414,7 @@
         </div>
     </div>
   </div>
-</div>  
+</div>
 @endsection
 
 @push('footer-scripts')

@@ -77,10 +77,16 @@
                                                 A/C Type @include('frontend.common.label.required')
                                             </label>
 
-                                            <div style="background-color:beige; padding:15px;" class="">
-                                                @foreach($taskCard->aircrafts  as $aircraft)
-                                                    {{ $aircraft->name }},
-                                                @endforeach
+                                            <div>
+                                                @if ($taskCard->aircrafts->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($taskCard->aircrafts  as $aircraft)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $aircraft->name )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">

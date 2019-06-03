@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend\JobCard;
 
 use App\Models\JobCard;
-use App\Models\TaskCard;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -96,39 +95,49 @@ class JobCardController extends Controller
      */
     public function print($jobCard)
     {
-        $jobCard = TaskCard::with('type','aircrafts','task')->where('uuid',$jobCard)->first();
+        $jobCard = JobCard::with('taskcard','quotation')->whereHas('taskcard', function ($query) use ($jobCard) {
+            $query->where('uuid',$jobCard);
+        })->first();
 
-        if($jobCard->type->code == "basic"){
-            $pdf = \PDF::loadView('frontend/form/jobcard_basic');
+        if($jobCard->taskcard->type->code == "basic"){
+            $pdf = \PDF::loadView('frontend/form/jobcard_basic',[
+                    'jobCard' => $jobCard]);
             return $pdf->stream();
         }
-        elseif($jobCard->type->code == "sip"){
-            $pdf = \PDF::loadView('frontend/form/jobcard_sip');
+        elseif($jobCard->taskcard->type->code == "sip"){
+            $pdf = \PDF::loadView('frontend/form/jobcard_sip',[
+                    'jobCard' => $jobCard]);
             return $pdf->stream();
         }
-        elseif($jobCard->type->code == "cpcp"){
-            $pdf = \PDF::loadView('frontend/form/jobcard_cpcp');
+        elseif($jobCard->taskcard->type->code == "cpcp"){
+            $pdf = \PDF::loadView('frontend/form/jobcard_cpcp',[
+                    'jobCard' => $jobCard]);
             return $pdf->stream();
         }
-        elseif (($jobCard->type->code == "ad") or ($jobCard->type->code == "sb")) {
-            $pdf = \PDF::loadView('frontend/form/jobcard_adsb');
+        elseif (($jobCard->taskcard->type->code == "ad") or ($jobCard->taskcard->type->code == "sb")) {
+            $pdf = \PDF::loadView('frontend/form/jobcard_adsb',[
+                    'jobCard' => $jobCard]);
             return $pdf->stream();        }
-        elseif(($jobCard->type->code == "eo") or ($jobCard->type->code == "ea")){
-            $pdf = \PDF::loadView('frontend/form/jobcard_eo2');
+        elseif(($jobCard->taskcard->type->code == "eo") or ($jobCard->taskcard->type->code == "ea")){
+            $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
+                    'jobCard' => $jobCard]);
             return $pdf->stream();
         }
-        elseif(($jobCard->type->code == "cmr") or ($jobCard->type->code == "awl")){
-            $pdf = \PDF::loadView('frontend/form/jobcard_cmrawl');
+        elseif(($jobCard->taskcard->type->code == "cmr") or ($jobCard->taskcard->type->code == "awl")){
+            $pdf = \PDF::loadView('frontend/form/jobcard_cmrawl',[
+                    'jobCard' => $jobCard]);
             return $pdf->stream();
         }
-        elseif($jobCard->type->code == "si"){
-            $pdf = \PDF::loadView('frontend/form/jobcard_si');
+        elseif($jobCard->taskcard->type->code == "si"){
+            $pdf = \PDF::loadView('frontend/form/jobcard_si',[
+                    'jobCard' => $jobCard]);
             return $pdf->stream();
         }
-        elseif($jobCard->type->code == "preliminary"){
-            $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one');
+        elseif($jobCard->taskcard->type->code == "preliminary"){
+            $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one',[
+                    'jobCard' => $jobCard]);
             return $pdf->stream();
-        } else {
+        // } else {
             // ($jobCard->type->code == "htcrr") ||
         }
     }

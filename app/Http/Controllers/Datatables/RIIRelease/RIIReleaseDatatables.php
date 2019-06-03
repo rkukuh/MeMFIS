@@ -16,7 +16,21 @@ class RIIReleaseDatatables extends Controller
      */
     public function index()
     {
-        $JobCard=JobCard::with('taskcard')->get();
+        $JobCard =JobCard::with('taskcard','quotation')->whereHas('taskcard', function ($query) {
+                                            $query->where('is_rii', '1');
+                                            })->get();
+
+        foreach($JobCard as $aircraft){
+            $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;
+        }
+
+        foreach($JobCard as $taskcard){
+            $taskcard->skill_name .= $taskcard->taskcard->skill;
+        }
+
+        foreach($JobCard as $customer){
+            $customer->customer_name .= $customer->quotation->customer;
+        }
 
         $data = $alldata = json_decode($JobCard);
 

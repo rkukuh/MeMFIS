@@ -18,6 +18,18 @@ class JobCardDatatables extends Controller
     {
         $JobCard=JobCard::with('taskcard')->get();
 
+        foreach($JobCard as $taskcard){
+            $taskcard->skill_name .= $taskcard->taskcard->skill;
+        }
+
+        foreach($JobCard as $taskcard){
+            $taskcard->task_name .= $taskcard->taskcard->task;
+        }
+
+        foreach($JobCard as $taskcard){
+            $taskcard->task_name .= $taskcard->taskcard->type;
+        }
+
         $data = $alldata = json_decode($JobCard);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

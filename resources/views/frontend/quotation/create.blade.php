@@ -177,6 +177,7 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', '+62xxxxxxx / 07777777')
                                                                                     @slot('id', 'phone')
+                                                                                    @slot('name', 'phone')
                                                                                 @endcomponent
 
                                                                             </div>
@@ -188,6 +189,7 @@
                                                                                     @component('frontend.common.input.select2')
                                                                                         @slot('text', '+62xxxxxxx / 07777777')
                                                                                         @slot('id', 'fax')
+                                                                                        @slot('name', 'fax')
                                                                                     @endcomponent
                                                                                 </div>
                                                                         </div>
@@ -200,6 +202,7 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', '+62xxxxxxx / 07777777')
                                                                                     @slot('id', 'email')
+                                                                                    @slot('name', 'email')
                                                                                 @endcomponent
 
                                                                             </div>
@@ -217,6 +220,7 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
                                                                                     @slot('id', 'address')
+                                                                                    @slot('name', 'address')
                                                                                 @endcomponent
                                                                             </div>
                                                                         </div>
@@ -524,6 +528,7 @@
 
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/scheduled-payment.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>

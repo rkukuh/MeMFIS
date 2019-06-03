@@ -81,8 +81,8 @@
                                                                 Project Title
                                                             </label>
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('id', 'project_number')
-                                                                @slot('text', $quotation->project->title)
+                                                            @slot('id', 'project_number')
+                                                            @slot('text', $quotation->project->title)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -96,8 +96,8 @@
                                                                 Project Number
                                                             </label>
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('id', 'project_number')
-                                                                @slot('text', $quotation->project->code)
+                                                            @slot('id', 'project_number')
+                                                            @slot('text', $quotation->project->code)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -107,7 +107,7 @@
                                                                 Intruction
                                                             </label>
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', '..........')
+                                                            @slot('text', '..........')
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -153,8 +153,8 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                                @slot('text', 'XXX')
-                                                                                @slot('id', 'name')
+                                                                            @slot('text', 'XXX')
+                                                                            @slot('id', 'name')
                                                                             @endcomponent
                                                                         </div>
                                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -163,9 +163,9 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', 'Bp. Romdani')
-                                                                                @slot('id', 'attention')
-                                                                                @slot('name', 'attention')
+                                                                            @slot('text', 'Bp. Romdani')
+                                                                            @slot('id', 'attention')
+                                                                            @slot('name', 'attention')
                                                                             @endcomponent
                                                                         </div>
                                                                     </div>
@@ -180,8 +180,9 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
-                                                                                @slot('id', 'phone')
+                                                                            @slot('text', '+62xxxxxxx / 07777777')
+                                                                            @slot('id', 'phone')
+                                                                            @slot('name', 'phone')
                                                                             @endcomponent
 
                                                                         </div>
@@ -191,8 +192,9 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
-                                                                                @slot('id', 'fax')
+                                                                            @slot('text', '+62xxxxxxx / 07777777')
+                                                                            @slot('id', 'fax')
+                                                                            @slot('name', 'fax')
                                                                             @endcomponent
                                                                         </div>
                                                                     </div>
@@ -203,8 +205,9 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
-                                                                                @slot('id', 'email')
+                                                                            @slot('text', '+62xxxxxxx / 07777777')
+                                                                            @slot('id', 'email')
+                                                                            @slot('name', 'email')
                                                                             @endcomponent
 
                                                                         </div>
@@ -220,8 +223,9 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
-                                                                                @slot('id', 'address')
+                                                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
+                                                                            @slot('id', 'address')
+                                                                            @slot('name', 'address')
                                                                             @endcomponent
                                                                         </div>
                                                                     </div>
@@ -244,11 +248,11 @@
                                                             Date @include('frontend.common.label.required')
                                                         </label>
                                                         @component('frontend.common.input.datepicker')
-                                                            @slot('id', 'date')
-                                                            @slot('text', 'Date')
-                                                            @slot('name', 'date')
-                                                            @slot('id_error','requested_at')
-                                                            @slot('value', $quotation->requested_at)
+                                                        @slot('id', 'date')
+                                                        @slot('text', 'Date')
+                                                        @slot('name', 'date')
+                                                        @slot('id_error','requested_at')
+                                                        @slot('value', $quotation->requested_at)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -257,11 +261,11 @@
                                                         </label>
 
                                                         @component('frontend.common.input.datepicker')
-                                                            @slot('id', 'valid_until')
-                                                            @slot('text', 'Valid Until')
-                                                            @slot('name', 'valid_until')
-                                                            @slot('value', $quotation->valid_until)
-                                                            @slot('id_error','valid_until')
+                                                        @slot('id', 'valid_until')
+                                                        @slot('text', 'Valid Until')
+                                                        @slot('name', 'valid_until')
+                                                        @slot('value', $quotation->valid_until)
+                                                        @slot('id_error','valid_until')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -290,11 +294,11 @@
                                                         </label>
 
                                                         @component('frontend.common.input.number')
-                                                            @slot('text', 'exchange')
-                                                            @slot('name', 'exchange')
-                                                            @slot('id_error', 'exchange')
-                                                            @slot('value', $quotation->exchange_rate)
-                                                            @slot('id', 'exchange')
+                                                        @slot('text', 'exchange')
+                                                        @slot('name', 'exchange')
+                                                        @slot('id_error', 'exchange')
+                                                        @slot('value', $quotation->exchange_rate)
+                                                        @slot('id', 'exchange')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -306,12 +310,12 @@
                                                     Term of Payment @include('frontend.common.label.required')
                                                 </label>
                                                 @component('frontend.common.input.number')
-                                                    @slot('text', 'Term of Payment')
-                                                    @slot('id', 'term_of_payment')
-                                                    @slot('value', $quotation->term_of_payment)
-                                                    @slot('input_append', 'Days')
-                                                    @slot('name', 'term_of_payment')
-                                                    @slot('id_error', 'term_of_payment')
+                                                @slot('text', 'Term of Payment')
+                                                @slot('id', 'term_of_payment')
+                                                @slot('value', $quotation->term_of_payment)
+                                                @slot('input_append', 'Days')
+                                                @slot('name', 'term_of_payment')
+                                                @slot('id_error', 'term_of_payment')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -323,27 +327,54 @@
                                                 <label class="form-control-label">
                                                     Scheduled Payment Type @include('frontend.common.label.required')
                                                 </label>
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'scheduled_payment_type')
-                                                    @slot('text', 'Scheduled Payment Type')
-                                                    @slot('name', 'scheduled_payment_type')
-                                                    @slot('id_error', 'scheduled_payment_type')
-                                                @endcomponent
+
+                                                <select name="scheduled_payment_type" id="scheduled_payment_type" class="form-control m-select2">
+                                                    <option value="59" @if($quotation->scheduled_payment_type == 59) selected @endif>By Date</option>
+                                                    <option value="60" @if($quotation->scheduled_payment_type == 60) selected @endif>By Project Progress</option>
+                                                </select>
+
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Scheduled Payment @include('frontend.common.label.required')
                                                 </label>
+                                                @if(isset($scheduled_payment_amount))
                                                 <div class='repeater'>
-                                                    <div data-repeater-list="group-phone">
+                                                    <div data-repeater-list="group-scheduled_payment">
+                                                        <div data-repeater-item>
+                                                            @foreach($scheduled_payment_amount as $spa)
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-8 col-md-8 col-lg-8">
+                                                                    @component('frontend.common.input.text')
+                                                                    @slot('name', 'scheduled_payment')
+                                                                    @slot('id', 'scheduled_payment')
+                                                                    @slot('text', 'Phone')
+                                                                    @slot('id_error', 'scheduled_payment_amount')
+                                                                    @slot('value', $spa)
+                                                                    @endcomponent
+                                                                </div>
+                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                    @include('frontend.common.buttons.create_repeater')
+                                                                </div>
+                                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                    @include('frontend.common.buttons.delete_repeater')
+                                                                </div>
+                                                            </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @else
+                                                <div class='repeater'>
+                                                    <div data-repeater-list="group-scheduled_payment">
                                                         <div data-repeater-item>
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-8 col-md-8 col-lg-8">
                                                                     @component('frontend.common.input.text')
-                                                                        @slot('name', 'scheduled_payment')
-                                                                        @slot('id', 'scheduled_payment')
-                                                                        @slot('text', 'Phone')
-                                                                        @slot('id_error', 'scheduled_payment_amount')
+                                                                    @slot('name', 'scheduled_payment')
+                                                                    @slot('id', 'scheduled_payment')
+                                                                    @slot('text', 'Phone')
+                                                                    @slot('id_error', 'scheduled_payment_amount')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-2 col-md-2 col-lg-2">
@@ -356,6 +387,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -367,12 +399,12 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                            @slot('rows', '5')
-                                            @slot('id', 'title')
-                                            @slot('name', 'title')
-                                            @slot('text', 'Title')
-                                            @slot('id_error', 'title')
-                                            @slot('value', $quotation->title)
+                                        @slot('rows', '5')
+                                        @slot('id', 'title')
+                                        @slot('name', 'title')
+                                        @slot('text', 'Title')
+                                        @slot('id_error', 'title')
+                                        @slot('value', $quotation->title)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -383,12 +415,12 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                            @slot('rows', '5')
-                                            @slot('id', 'description')
-                                            @slot('name', 'description')
-                                            @slot('text', 'Description')
-                                            @slot('value', $quotation->description)
-                                            @slot('id_error', 'description')
+                                        @slot('rows', '5')
+                                        @slot('id', 'description')
+                                        @slot('name', 'description')
+                                        @slot('text', 'Description')
+                                        @slot('value', $quotation->description)
+                                        @slot('id_error', 'description')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -399,11 +431,11 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                            @slot('rows', '5')
-                                            @slot('id', 'term_and_condition')
-                                            @slot('name', 'term_and_condition')
-                                            @slot('text', 'Term and Condition')
-                                            @slot('value', $quotation->term_of_condition)
+                                        @slot('rows', '5')
+                                        @slot('id', 'term_and_condition')
+                                        @slot('name', 'term_and_condition')
+                                        @slot('text', 'Term and Condition')
+                                        @slot('value', $quotation->term_of_condition)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -429,15 +461,15 @@
                                     <div class="flex">
                                         <div class="action-buttons">
                                             @component('frontend.common.buttons.submit')
-                                                @slot('type','button')
-                                                @slot('id', 'add-quotation')
-                                                @slot('class', 'add-quotation')
+                                            @slot('type','button')
+                                            @slot('id', 'add-quotation')
+                                            @slot('class', 'add-quotation')
                                             @endcomponent
 
                                             @include('frontend.common.buttons.reset')
 
                                             @component('frontend.common.buttons.back')
-                                                @slot('href', route('frontend.quotation.index'))
+                                            @slot('href', route('frontend.quotation.index'))
                                             @endcomponent
                                         </div>
                                     </div>
@@ -478,6 +510,7 @@
     let project_id = '{{  $quotation->project->uuid }}';
     let quotation_uuid = '{{  $quotation->uuid }}';
     let currency = '{{  $quotation->currency_id }}';
+
     function myFunction(object) {
         // var numItems = $('.project').length
 
@@ -509,14 +542,59 @@
 </script>
 
 <script type="text/javascript">
-    $("#type_website").on('change', function() {
-        // var numItems = $('.project').length
-        // alert(numItems);
-        // if ($(this).val() == 'selectionKey'){
-        //     DoSomething();
-        // } else {
-        //     DoSomethingElse();
-        // }
+    $(document).ready(function() {
+        
+        let attentions = '{{ $attentions }}';
+        let attention = '{{ $attention }}';
+        if (attentions) {
+            let attn = JSON.parse(attentions);
+            let attention = JSON.parse(attention);
+            $('select[name="attention"]').empty();
+            $('select[name="phone"]').empty();
+            $('select[name="email"]').empty();
+            $('select[name="fax"]').empty();
+            $('select[name="address"]').empty();
+            for (var i = 0; i < attn.length; i++) {
+                if (attn[i].name) {
+                    $('select[name="attention"]').append(
+                        '<option value="' + attn[i].name + '">' + attn[i].name + '</option>'
+                    );
+                }
+                if (attn[i].address) {
+                    $('select[name="address"]').append(
+                        '<option value="' + attn[i].address + '">' + attn[i].address + '</option>'
+                    );
+                }
+                if (attn[i].fax) {
+                    $('select[name="fax"]').append(
+                        '<option value="' + attn[i].fax + '">' + attn[i].fax + '</option>'
+                    );
+                }
+                if (attn[i].phones) {
+                    $.each(attn[i].phones, function(value) {
+                        $('select[name="phone"]').append(
+                            '<option value="' + attn[i].phones[value] + '">' + attn[i].phones[value] + '</option>'
+                        );
+                    });
+                }
+                if (attn[i].emails) {
+                    $.each(attn[i].emails, function(value) {
+                        $('select[name="email"]').append(
+                            '<option value="' + attn[i].emails[value] + '">' + attn[i].emails[value] + '</option>'
+                        );
+                    });
+                }
+            }
+            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
+            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
+            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
+            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
+            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
+
+        } else {
+            console.log("empty");
+
+        }
     });
     let simpan = $('.tes').on('click', '.save', function() {
         var usertype = [];
@@ -560,8 +638,6 @@
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
-
 
 <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/phone.js') }}"></script>
@@ -573,8 +649,9 @@
 
 <script src="{{ asset('js/frontend/quotation/summary.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+<script src="{{ asset('js/frontend/functions/datepicker/scheduled-payment.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
+<script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 <script src="{{ asset('js/frontend/quotation/workpackage-edit.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/edit.js') }}"></script>
 

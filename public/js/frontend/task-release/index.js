@@ -73,37 +73,37 @@ let TaskRelease = {
 
                 },
                 {
-                    field: 'skill',
+                    field: 'quotation.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'quotation.project.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'quotation.project.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'quotation.project.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'taskcard.skill.name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'taskcard.estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
