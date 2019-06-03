@@ -440,19 +440,19 @@ Route::name('frontend.')->group(function () {
 
         /** DEFECT CARD */
 
-        Route::namespace('Defectcard')->group(function () {
+        Route::namespace('DefectCard')->group(function () {
 
-            Route::resource('defectcard', 'DefectcardController');
+            Route::resource('defectcard', 'DefectCardController');
 
-            Route::resource('defectcard-engineer', 'DefectcardEngineerController', [
+            Route::resource('defectcard-engineer', 'DefectCardEngineerController', [
                 'parameters' => ['defectcard-engineer' => 'defectcard']
             ]);
 
-            Route::resource('defectcard-mechanic', 'DefectcardMechanicController', [
+            Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
                 'parameters' => ['defectcard-mechanic' => 'defectcard']
             ]);
 
-            Route::resource('defectcard-project', 'DefectcardProjectController', [
+            Route::resource('defectcard-project', 'DefectCardProjectController', [
                 'parameters' => ['defectcard-project' => 'defectcard']
             ]);
 
