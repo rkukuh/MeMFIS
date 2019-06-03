@@ -94,6 +94,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of DefectCard propose correction.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDefectCardProposeCorrection(Builder $query)
+    {
+        return $query->where('of', 'defectcard-propose-correction');
+    }
+
+    /**
      * Scope a query to only include type of Document.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
