@@ -12,6 +12,6 @@ class HtCrrs extends Seeder
      */
     public function run()
     {
-        //
+        factory(HtCrr::class, config('memfis.dummies.htcrrs'))->create();
     }
 }
