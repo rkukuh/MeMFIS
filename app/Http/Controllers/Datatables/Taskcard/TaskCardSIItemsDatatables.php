@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\TaskCard;
 
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\TaskCard;
 use App\Models\ListUtil;
@@ -17,6 +18,11 @@ class TaskCardSIItemsDatatables extends Controller
      */
     public function material(TaskCard $taskcard)
     {
+        foreach($taskcard->materials as $material){
+            $unit_id = $material->pivot->unit_id;
+            $material->pivot->unit .= Unit::find($unit_id)->name;
+        }
+
         $data = $alldata = json_decode($taskcard->materials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -113,6 +119,11 @@ class TaskCardSIItemsDatatables extends Controller
      */
     public function tool(TaskCard $taskcard)
     {
+        foreach($taskcard->tools as $tool){
+            $unit_id = $tool->pivot->unit_id;
+            $tool->pivot->unit .= Unit::find($unit_id)->name;
+        }
+
         $data = $alldata = json_decode($taskcard->tools);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
