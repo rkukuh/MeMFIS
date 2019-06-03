@@ -20,4 +20,19 @@ class DefectCard extends MemfisModel
         'complaint',
         'description',
     ];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A Job Card may have none or many Defect Card.
+     *
+     * This function will retrieve the Job Card of a given Defect Card.
+     * See: JobCard's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcard()
+    {
+        return $this->belongsTo(JobCard::class);
+    }
 }
