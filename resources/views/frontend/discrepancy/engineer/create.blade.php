@@ -272,9 +272,9 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'recrification')
-                                                    @slot('name', 'recrification')
-                                                    @slot('text', '3. RECRIFICATION')
+                                                    @slot('id', 'rectification')
+                                                    @slot('name', 'rectification')
+                                                    @slot('text', '3. RECTIFICATION')
                                                     @slot('size', '12')
                                                 @endcomponent
                                             </div>
