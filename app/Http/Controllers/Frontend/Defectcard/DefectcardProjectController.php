@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\frontend\Defectcard;
+namespace App\Http\Controllers\frontend\DefectCard;
 
 use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DefectcardProjectController extends Controller
+class DefectCardProjectController extends Controller
 {
 
     /**
