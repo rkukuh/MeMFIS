@@ -12,6 +12,6 @@ class DefectCards extends Seeder
      */
     public function run()
     {
-        //
+        factory(DefectCard::class, config('memfis.dummies.defectcards'))->create();
     }
 }
