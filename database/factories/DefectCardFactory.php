@@ -17,7 +17,7 @@ $factory->define(DefectCard::class, function (Faker $faker) {
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
         'is_rii' => $faker->boolean,
         'propose_correction_id' => Type::ofDefectCardProposeCorrection()->get()->random()->id,
-        'propose_correction' => null,
+        'propose_correction_other' => null,
         'complaint' => $faker->randomElement([null, $faker->text]),
         'description' => $faker->randomElement([null, $faker->text]),
     ];

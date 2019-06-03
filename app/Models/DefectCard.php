@@ -16,7 +16,7 @@ class DefectCard extends MemfisModel
         'estimation_manhour',
         'is_rii',
         'propose_correction_id',
-        'propose_correction',
+        'propose_correction_other',
         'complaint',
         'description',
     ];
@@ -34,5 +34,15 @@ class DefectCard extends MemfisModel
     public function jobcard()
     {
         return $this->belongsTo(JobCard::class);
+    }
+
+    /**
+     * One-Way: A Defect Card must have a propose correction.
+     *
+     * @return mixed
+     */
+    public function propose_correction()
+    {
+        return $this->belongsTo(Type::class);
     }
 }
