@@ -92,6 +92,32 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-Many: An HT/CRR may have one installer.
+     *
+     * This function will retrieve all the HT/CRRs of a given installer.
+     * See: HtCrr's installedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr_installed()
+    {
+        return $this->hasMany(HtCrr::class, 'installed_by');
+    }
+
+    /**
+     * One-to-Many: An HT/CRR may have one remover.
+     *
+     * This function will retrieve all the HT/CRRs of a given remover.
+     * See: HtCrr's removedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr_removed()
+    {
+        return $this->hasMany(HtCrr::class, 'removed_by');
+    }
+
+    /**
      * Polymorphic: An employee can have zero or many phones.
      *
      * This function will get all of the employee's phones.
