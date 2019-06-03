@@ -57,6 +57,18 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
+        $attentions = [];
+        $contact = [];
+
+        $contact['name']     = $request->attention_name; 
+        $contact['phone'] = $request->attention_phone;
+        $contact['address'] = $request->attention_address;
+        $contact['fax'] = $request->attention_fax;
+        $contact['email'] = $request->attention_email;
+
+        array_push($attentions, $contact);
+
+        $request->merge(['attention' => json_encode($attentions)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
 
@@ -79,10 +91,12 @@ class QuotationController extends Controller
     public function show(Quotation $quotation)
     {
         $projects = Project::get();
+        $attention = json_decode($quotation->attention); 
 
         return view('frontend.quotation.show',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
+            'attention' => $attention[0],
             'projects' => $projects
         ]);
     }
@@ -96,10 +110,16 @@ class QuotationController extends Controller
     public function edit(Quotation $quotation)
     {
         $projects = Project::get();
-
+        $attention = $quotation->attention; 
+        $attentions = $quotation->customer->attention;
+        $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
+        // dd($scheduled_payment_amount);
         return view('frontend.quotation.edit',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
+            'attention' => $attention,
+            'attentions' => $attentions,
+            'scheduled_payment_amount' => $scheduled_payment_amount,
             'projects' => $projects
         ]);
     }
@@ -113,9 +133,21 @@ class QuotationController extends Controller
      */
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
+        $attentions = [];
+        $contact = [];
+
+        $contact['name']     = $request->attention_name; 
+        $contact['phone'] = $request->attention_phone;
+        $contact['address'] = $request->attention_address;
+        $contact['fax'] = $request->attention_fax;
+        $contact['email'] = $request->attention_email;
+
+        array_push($attentions, $contact);
+        dd($request->scheduled_payment_amount);
+        $request->merge(['attention' => json_encode($attentions)]);
+        $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
-
         $quotation->update($request->all());
 
         return response()->json($quotation);
