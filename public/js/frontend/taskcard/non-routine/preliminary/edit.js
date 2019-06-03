@@ -57,7 +57,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'pivot.unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -135,7 +135,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'pivot.unit',
                     title: 'Unit name',
                     sortable: 'asc',
                     filterable: !1,
@@ -707,7 +707,7 @@ let TaskCard = {
             data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
             data.append( "estimation_manhour", $('input[name=manhour]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
-            data.append( "helper_quantity", $('input[name=helper_quantity]').val());  
+            data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "description", $('#instruction').val());
             data.append('_method', 'PUT');
 
