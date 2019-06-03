@@ -116,6 +116,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of JobCard pause reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfJobCardPauseReason(Builder $query)
+    {
+        return $query->where('of', 'jobcard-pause-reason');
+    }
+
+    /**
      * Scope a query to only include type of Journal.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
