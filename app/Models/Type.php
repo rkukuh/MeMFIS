@@ -72,6 +72,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of DefectCard pause reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDefectCardPauseReason(Builder $query)
+    {
+        return $query->where('of', 'defectcard-pause-reason');
+    }
+
+    /**
      * Scope a query to only include type of Document.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
