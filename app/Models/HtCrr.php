@@ -53,4 +53,14 @@ class HtCrr extends MemfisModel
     {
         return $this->belongsTo(Employee::class, 'removed_by');
     }
+
+    /**
+     * One-Way: An HT/CRR must have a skill assigned to.
+     *
+     * @return mixed
+     */
+    public function skill()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }
