@@ -28,6 +28,21 @@ class CreateHtcrrTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('skill_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('removed_by')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('installed_by')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
