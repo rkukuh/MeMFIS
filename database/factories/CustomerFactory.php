@@ -2,7 +2,6 @@
 
 use Carbon\Carbon;
 use App\Models\Fax;
-use App\Models\Type;
 use App\Models\Phone;
 use App\Models\Email;
 use App\Models\Level;
