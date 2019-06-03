@@ -30,7 +30,7 @@
 </div>
 <div class="m-content">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-7">
       <div class="m-portlet">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
@@ -54,337 +54,289 @@
             <form id="itemform" name="itemform">
               <div class="m-portlet__body">
                 <div class="form-group m-form__group row">
-                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Date
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', '2/12/2012')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            A/C Type
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Discrepenct No
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            A/C Reg
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            JC No Refference
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            A/C S/N
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Sequence No
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Qty Engineer
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            ATA
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Qty Mech
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Area/Zone
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Est. Mhrs
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Skill
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            RII
+                        </label>
+
+                        @component('frontend.common.input.checkbox')
+                            @slot('id', 'is_rii')
+                            @slot('name', 'is_rii')
+                            @slot('text', 'IS RII?')
+                            @slot('disabled','disabled')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="form-control-label">
+                            Complaint @include('frontend.common.label.optional')
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="form-control-label">
+                            Remark @include('frontend.common.label.optional')
+                        </label>
+
+                        @component('frontend.common.label.data-info')
+                            @slot('text', 'Generated')
+                        @endcomponent
+                    </div>
+                </div>
+                <fieldset class="border p-2">
+                    <legend class="w-auto">Propose Correction</legend>
+
                     <div class="form-group m-form__group row">
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  <label class="form-control-label">
-                                      Date
-                                  </label>
-
-                                  @component('frontend.common.label.data-info')
-                                      @slot('text', '2019-04-25 22:37:35')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  <label class="form-control-label">
-                                      A/C Type
-                                  </label>
-
-                                  @component('frontend.common.label.data-info')
-                                      @slot('text', 'generate')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            @component('frontend.common.input.checkbox')
+                                @slot('id', 'remove')
+                                @slot('name', 'remove')
+                                @slot('text', '1. REMOVE')
+                                @slot('size', '12')
+                                @slot('disabled','disabled')
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            @component('frontend.common.input.checkbox')
+                                @slot('id', 'repair')
+                                @slot('name', 'repair')
+                                @slot('text', '4. REPAIR')
+                                @slot('size', '12')
+                                @slot('disabled','disabled')
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            @component('frontend.common.input.checkbox')
+                                @slot('id', 'test')
+                                @slot('name', 'test')
+                                @slot('text', '7. TEST')
+                                @slot('size', '12')
+                                @slot('disabled','disabled')
+                            @endcomponent
+                        </div>
                     </div>
                     <div class="form-group m-form__group row">
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  <label class="form-control-label">
-                                      Discepancy Form
-                                  </label>
-
-                                  @component('frontend.common.label.data-info')
-                                      @slot('text', 'generate')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  <label class="form-control-label">
-                                      A/C Reg
-                                  </label>
-
-                                  @component('frontend.common.label.data-info')
-                                      @slot('text', 'generate')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            @component('frontend.common.input.checkbox')
+                                @slot('id', 'install')
+                                @slot('name', 'install')
+                                @slot('text', '2. INSTALL')
+                                @slot('size', '12')
+                                @slot('disabled','disabled')
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            @component('frontend.common.input.checkbox')
+                                @slot('id', 'replace')
+                                @slot('name', 'replace')
+                                @slot('text', '5. REPLACE')
+                                @slot('size', '12')
+                                @slot('disabled','disabled')
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            @component('frontend.common.input.checkbox')
+                                @slot('id', 'shop_visit')
+                                @slot('name', 'shop_visit')
+                                @slot('text', '8. SHOP VISIT')
+                                @slot('size', '12')
+                                @slot('disabled','disabled')
+                            @endcomponent
+                        </div>
                     </div>
                     <div class="form-group m-form__group row">
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  <label class="form-control-label">
-                                      JC No Refrence
-                                  </label>
-
-                                  @component('frontend.common.label.data-info')
-                                      @slot('text', 'generate')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  <label class="form-control-label">
-                                      A/C S/N
-                                  </label>
-
-                                  @component('frontend.common.label.data-info')
-                                      @slot('text', 'generate')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            @component('frontend.common.input.checkbox')
+                                @slot('id', 'rectification')
+                                @slot('name', 'rectification')
+                                @slot('text', '3. RECTIFICATION')
+                                @slot('size', '12')
+                                @slot('disabled','disabled')
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            @component('frontend.common.input.checkbox')
+                                @slot('id', 'ndt')
+                                @slot('name', 'ndt')
+                                @slot('text', '6. NDT')
+                                @slot('size', '12')
+                                @slot('disabled','disabled')
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'other')
+                                        @slot('name', 'other')
+                                        @slot('text', '9. Other')
+                                        @slot('size', '12')
+                                        @slot('disabled','disabled')
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', '')
+                                    @endcomponent
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group m-form__group row">
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  <label class="form-control-label">
-                                      Sequence No
-                                  </label>
-                                  @component('frontend.common.input.number')
-                                    @slot('text', 'sequence')
-                                    @slot('name', 'sequence')
-                                    @slot('id_error', 'sequence')
-                                    @slot('id', 'sequence')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-6 col-md-6 col-lg-6">
-                                  <label class="form-control-label">
-                                      Qty Mech
-                                  </label>
+                </fieldset>
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                        <div class="flex">
+                            <div class="action-buttons">
+                                @component('frontend.common.buttons.submit')
+                                    @slot('type','button')
+                                    @slot('id', 'execute')
+                                    @slot('class', 'execute')
+                                    @slot('text','Execute')
+                                    @slot('color','primary')
+                                    @slot('icon','')
+                                @endcomponent
 
-                                  @component('frontend.common.label.data-info')
-                                      @slot('text', 'generate')
-                                  @endcomponent
-                              </div>
-                              <div class="col-sm-6 col-md-6 col-lg-6">
-                                  <label class="form-control-label">
-                                      Qty Engineer
-                                  </label>
-
-                                  @component('frontend.common.label.data-info')
-                                      @slot('text', 'generate')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  <label class="form-control-label">
-                                      Skill
-                                  </label>
-
-                                  @component('frontend.common.input.select2')
-                                      @slot('id', 'otr_certification')
-                                      @slot('text', 'Skill')
-                                      @slot('name', 'otr_certification')
-                                      @slot('id_error', 'otr_certification')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                  @component('frontend.common.input.checkbox')
-                                    @slot('id', 'is_rii')
-                                    @slot('name', 'is_rii')
-                                    @slot('text', 'RII?')
-                                    @slot('style_div','margin-top:30px')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <div class="col-sm-6 col-md-6 col-lg-6">
-                          <div class="form-group m-form__group row">
-                              <div class="col-sm-4 col-md-4 col-lg-4">
-                                  <label class="form-control-label">
-                                      Area/Zone
-                                  </label>
-
-                                  @component('frontend.common.input.select2')
-                                      @slot('id', 'zone')
-                                      @slot('text', 'Zone')
-                                      @slot('name', 'zone')
-                                      @slot('id_error', 'zone')
-                                  @endcomponent
-                              </div>
-                              <div class="col-sm-4 col-md-4 col-lg-4">
-                                  <label class="form-control-label">
-                                      ATA
-                                  </label>
-
-                                  @component('frontend.common.input.text')
-                                    @slot('text', 'ATA')
-                                    @slot('name', 'ata')
-                                  @endcomponent
-                              </div>
-                              <div class="col-sm-4 col-md-4 col-lg-4">
-                                  <label class="form-control-label">
-                                      Est. Mhrs @include('frontend.common.label.required')
-                                  </label>
-
-                                  @component('frontend.common.input.number')
-                                      @slot('text', 'manhour')
-                                      @slot('name', 'manhour')
-                                      @slot('id_error', 'manhour')
-                                      @slot('id', 'manhour')
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="form-group m-form__group row">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label class="form-control-label">
-                                    Complaint
-                                </label>
-
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'generate')
+                                @component('frontend.common.buttons.back')
+                                    @slot('href', route('frontend.receiving-inspection-report.index'))
                                 @endcomponent
                             </div>
                         </div>
-                      </div>
                     </div>
-                    <div class="form-group m-form__group row">
-                      <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="form-group m-form__group row">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label class="form-control-label">
-                                    Remark
-                                </label>
-
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'generate')
-                                @endcomponent
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                        <div class="col-sm-12 col-md-12 col-lg-12">
-                            <fieldset class="border p-2">
-                                <legend class="w-auto">Propose Correction</legend>
-
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'remove')
-                                            @slot('name', 'remove')
-                                            @slot('text', '1. REMOVE')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'repair')
-                                            @slot('name', 'repair')
-                                            @slot('text', '4. REPAIR')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'test')
-                                            @slot('name', 'test')
-                                            @slot('text', '7. TEST')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'install')
-                                            @slot('name', 'install')
-                                            @slot('text', '2. INSTALL')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'replace')
-                                            @slot('name', 'replace')
-                                            @slot('text', '5. REPLACE')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'shop_visit')
-                                            @slot('name', 'shop_visit')
-                                            @slot('text', '8. SHOP VISIT')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'recrification')
-                                            @slot('name', 'recrification')
-                                            @slot('text', '3. RECRIFICATION')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'ndt')
-                                            @slot('name', 'ndt')
-                                            @slot('text', '6. NDT')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'other')
-                                            @slot('name', 'other')
-                                            @slot('text', '9. Other')
-                                            @slot('size', '12')
-                                        @endcomponent
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                      <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                          <div class="flex">
-                              <div class="action-buttons">
-                                  @component('frontend.common.buttons.submit')
-                                      @slot('type','button')
-                                      @slot('id', 'execute')
-                                      @slot('class', 'execute')
-                                      @slot('text','Execute')
-                                      @slot('color','primary')
-                                      @slot('icon','')
-                                  @endcomponent
-
-                                  @component('frontend.common.buttons.back')
-                                      @slot('href', route('frontend.receiving-inspection-report.index'))
-                                  @endcomponent
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </form>

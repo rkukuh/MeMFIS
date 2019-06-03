@@ -177,6 +177,7 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', '+62xxxxxxx / 07777777')
                                                                                     @slot('id', 'phone')
+                                                                                    @slot('name', 'phone')
                                                                                 @endcomponent
 
                                                                             </div>
@@ -188,6 +189,7 @@
                                                                                     @component('frontend.common.input.select2')
                                                                                         @slot('text', '+62xxxxxxx / 07777777')
                                                                                         @slot('id', 'fax')
+                                                                                        @slot('name', 'fax')
                                                                                     @endcomponent
                                                                                 </div>
                                                                         </div>
@@ -200,6 +202,7 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', '+62xxxxxxx / 07777777')
                                                                                     @slot('id', 'email')
+                                                                                    @slot('name', 'email')
                                                                                 @endcomponent
 
                                                                             </div>
@@ -217,6 +220,7 @@
                                                                                 @component('frontend.common.input.select2')
                                                                                     @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
                                                                                     @slot('id', 'address')
+                                                                                    @slot('name', 'address')
                                                                                 @endcomponent
                                                                             </div>
                                                                         </div>
@@ -308,40 +312,45 @@
 
                                                 </div>
                                             </div>
-                                            <div class='repeater'>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Scheduled Payment Type @include('frontend.common.label.required')
-                                                        </label>
-                                                        <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
-                                                            <option value="">
-                                                                Select a schedule payment
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Scheduled Payment @include('frontend.common.label.required')
-                                                        </label>
-                                                        <div data-repeater-list="group-scheduled_payment">
-                                                            <div data-repeater-item>
-                                                                <div class="col-sm-10 col-md-10 col-lg-10 m-0">
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('name', 'scheduled_payment')
-                                                                    @slot('id', 'scheduled_payment')
-                                                                    @slot('text', 'Scheduled Payment')
-                                                                    @slot('id_error', 'scheduled_payment_amount')
-                                                                @endcomponent
-                                                                </div>
-
-                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                    @include('frontend.common.buttons.delete_repeater')
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Scheduled Payment Type @include('frontend.common.label.required')
+                                                            </label>
+                                                            <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
+                                                                <option value="">
+                                                                    Select a schedule payment
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Scheduled Payment @include('frontend.common.label.required')
+                                                            </label>
+                                                            <div class="repeater">
+                                                                <div data-repeater-list="group-scheduled_payment">
+                                                                    <div data-repeater-item>
+                                                                        <div class="form-group m-form__group row">
+                                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                                @component('frontend.common.input.text')
+                                                                                    @slot('name', 'scheduled_payment')
+                                                                                    @slot('id', 'scheduled_payment')
+                                                                                    @slot('text', 'Scheduled Payment')
+                                                                                    @slot('id_error', 'scheduled_payment_amount')
+                                                                                @endcomponent
+                                                                            </div>
+                                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                                @include('frontend.common.buttons.create_repeater')
+                                                                            </div>
+                                                                            <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:20px">
+                                                                                @include('frontend.common.buttons.delete_repeater')
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @include('frontend.common.buttons.create_repeater')
                                                         </div>
                                                     </div>
                                                 </div>
@@ -519,6 +528,7 @@
 
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/scheduled-payment.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>

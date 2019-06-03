@@ -72,6 +72,39 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of DefectCard close reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDefectCardCloseReason(Builder $query)
+    {
+        return $query->where('of', 'defectcard-close-reason');
+    }
+
+    /**
+     * Scope a query to only include type of DefectCard pause reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDefectCardPauseReason(Builder $query)
+    {
+        return $query->where('of', 'defectcard-pause-reason');
+    }
+
+    /**
+     * Scope a query to only include type of DefectCard propose correction.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDefectCardProposeCorrection(Builder $query)
+    {
+        return $query->where('of', 'defectcard-propose-correction');
+    }
+
+    /**
      * Scope a query to only include type of Document.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -113,6 +146,28 @@ class Type extends MemfisModel
     public function scopeOfFax(Builder $query)
     {
         return $query->where('of', 'fax');
+    }
+
+    /**
+     * Scope a query to only include type of JobCard close reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfJobCardCloseReason(Builder $query)
+    {
+        return $query->where('of', 'jobcard-close-reason');
+    }
+
+    /**
+     * Scope a query to only include type of JobCard pause reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfJobCardPauseReason(Builder $query)
+    {
+        return $query->where('of', 'jobcard-pause-reason');
     }
 
     /**

@@ -32,9 +32,14 @@ $factory->define(Type::class, function (Faker $faker) {
             'purchase-request',
             'scheduled-payment',
             'maintenance-cycle',
+            'jobcard-pause-reason',
+            'jobcard-close-reason',
             'taskcard-type-routine',
+            'defectcard-pause-reason',
+            'defectcard-close-reason',
             'taskcard-type-non-routine',
             'project-workpackage-manhour',
+            'defectcard-propose-correction',
         ]),
     ];
 
@@ -61,6 +66,11 @@ $factory->state(Type::class, 'aviation-degree', ['of' => 'aviation-degree']);
 $factory->state(Type::class, 'purchase-request', ['of' => 'purchase-request']);
 $factory->state(Type::class, 'scheduled-payment', ['of' => 'scheduled-payment']);
 $factory->state(Type::class, 'maintenance-cycle', ['of' => 'maintenance-cycle']);
+$factory->state(Type::class, 'jobcard-pause-reason', ['of' => 'jobcard-pause-reason']);
+$factory->state(Type::class, 'jobcard-close-reason', ['of' => 'jobcard-close-reason']);
 $factory->state(Type::class, 'taskcard-type-routine', ['of' => 'taskcard-type-routine']);
+$factory->state(Type::class, 'defectcard-pause-reason', ['of' => 'defectcard-pause-reason']);
+$factory->state(Type::class, 'defectcard-close-reason', ['of' => 'defectcard-close-reason']);
 $factory->state(Type::class, 'taskcard-type-non-routine', ['of' => 'taskcard-type-non-routine']);
 $factory->state(Type::class, 'project-workpackage-manhour', ['of' => 'project-workpackage-manhour']);
+$factory->state(Type::class, 'defectcard-propose-correction', ['of' => 'defectcard-propose-correction']);

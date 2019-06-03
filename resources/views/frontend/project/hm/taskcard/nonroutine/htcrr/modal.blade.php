@@ -52,28 +52,28 @@
                             Skill @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.select')
+                        @component('frontend.common.input.select2')
                             @slot('text', 'Skill')
-                            @slot('id', 'skill')
-                            @slot('name', 'skill')
-                            @slot('id_error', 'skill')
+                            @slot('id', 'otr_certification')
+                            @slot('name', 'otr_certification')
+                            @slot('id_error', 'otr_certification')
                         @endcomponent
                     </div>
                 </div>
                 <div class="form-group m-form__group row ">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Removal Mhrs @include('frontend.common.label.required')
+                            Est. Mhrs @include('frontend.common.label.required')
                         </label>
 
                         @component('frontend.common.input.number')
-                            @slot('text', 'Removal')
-                            @slot('id', 'removal')
-                            @slot('name', 'removal')
-                            @slot('id_error', 'removal')
+                            @slot('text', 'Mhrs')
+                            @slot('id', 'mhrs')
+                            @slot('name', 'mhrs')
+                            @slot('id_error', 'mhrs')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             Installation Mhrs @include('frontend.common.label.required')
                         </label>
@@ -92,14 +92,15 @@
                             Removal By @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.select')
+                        @component('frontend.common.input.text')
                             @slot('text', 'Removal')
                             @slot('id', 'removal_by')
                             @slot('name', 'removal_by')
+                            @slot('value', Auth::user()->name)
                             @slot('id_error', 'removal_by')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             Installation By @include('frontend.common.label.required')
                         </label>
@@ -155,3 +156,8 @@
         </div>
     </div>
 </div>
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
+@endpush

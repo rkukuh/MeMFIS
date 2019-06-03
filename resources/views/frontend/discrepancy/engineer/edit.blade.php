@@ -218,7 +218,7 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <fieldset class="border p-2">
                                                 <legend class="w-auto">Propose Correction</legend>
-        
+
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
@@ -274,9 +274,9 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'recrification')
-                                                            @slot('name', 'recrification')
-                                                            @slot('text', '3. RECRIFICATION')
+                                                            @slot('id', 'rectification')
+                                                            @slot('name', 'rectification')
+                                                            @slot('text', '3. RECTIFICATION')
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
@@ -454,7 +454,7 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
-    
+
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
 

@@ -20,6 +20,7 @@ class CreateQuotationsTable extends Migration
             $table->string('title')->nullable();
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('customer_id');
+            $table->json('attention')->nullable();
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('valid_until')->nullable();
             $table->unsignedInteger('currency_id');

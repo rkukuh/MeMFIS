@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\ReleaseToService;
 
-use App\Models\TaskCard;
+use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class ReleaseToServiceDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
+        $data = $alldata = json_decode(Project::with('aircraft','customer')->get());
         // $data = $alldata = json_decode(TaskCard::with('type','aircrafts')->get());
 
         foreach($alldata as $item){
@@ -256,7 +256,7 @@ class ReleaseToServiceDatatables extends Controller
 
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
-    
+
     /**
      * Show data from model with flter on datatable.
      *

@@ -1,5 +1,3 @@
-let no = 0;
-
 let JobCard = {
     init: function () {
         function strtrunc(str, max, add) {
@@ -51,16 +49,6 @@ let JobCard = {
             },
             columns: [
                 {
-                    field: 'no',
-                    title: 'No.',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        no = no+1;
-                        return no
-                    }
-                },
-                {
                     field: 'number',
                     title: 'JC No.',
                     sortable: 'asc',
@@ -82,7 +70,13 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task',
+                    field: 'taskcard.type.name',
+                    title: 'Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'taskcard.task.name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
@@ -104,7 +98,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'unit',
+                    field: 'taskcard.skill.name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -137,12 +131,6 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'unit',
-                    title: 'Status',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'taskcard.estimation_manhour',
                     title: 'Est. Mhrs',
                     sortable: 'asc',
@@ -155,12 +143,18 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
+                    field: 'unit',
+                    title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );

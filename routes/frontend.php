@@ -49,6 +49,7 @@ Route::name('frontend.')->group(function () {
         /** MASTER */
 
         Route::resource('user', 'UserController');
+        Route::resource('htcrr', 'HtCrrController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
         Route::resource('storage', 'StorageController');
@@ -57,6 +58,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
         Route::resource('department', 'DepartmentController');
+        Route::resource('defectcard', 'DefectCardController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
@@ -79,6 +81,7 @@ Route::name('frontend.')->group(function () {
             Route::resource('project-hm', 'ProjectHMController', [
                 'parameters' => ['project-hm' => 'project']
             ]);
+
             Route::resource('project-workshop', 'ProjectWorkshopController', [
                 'parameters' => ['project-workshop' => 'project']
             ]);
@@ -91,6 +94,7 @@ Route::name('frontend.')->group(function () {
                 Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
+
                 Route::put('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
             });
 
@@ -360,6 +364,7 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
 
                     /** Transaction */
+                    Route::get('/{jobCard}/print', 'JobCardController@print');
                     Route::resource('/{jobcard}/progress', 'JobCardProgressController');
                     Route::resource('/{jobcard}/inspect', 'JobCardInspectController');
 
@@ -376,7 +381,7 @@ Route::name('frontend.')->group(function () {
             ]);
 
             Route::name('taskrelease.')->group(function () {
-
+                Route::put('{taskrelease}/approve', 'TaskReleaseController@approve')->name('task-release.approve');
             });
         });
 
@@ -388,7 +393,7 @@ Route::name('frontend.')->group(function () {
             ]);
 
             Route::name('riirelease.')->group(function () {
-
+                Route::put('{riirelease}/approve', 'RIIReleaseController@approve')->name('rii-release.approve');
             });
         });
 
@@ -435,19 +440,19 @@ Route::name('frontend.')->group(function () {
 
         /** DEFECT CARD */
 
-        Route::namespace('Defectcard')->group(function () {
+        Route::namespace('DefectCard')->group(function () {
 
-            Route::resource('defectcard', 'DefectcardController');
+            Route::resource('defectcard', 'DefectCardController');
 
-            Route::resource('defectcard-engineer', 'DefectcardEngineerController', [
+            Route::resource('defectcard-engineer', 'DefectCardEngineerController', [
                 'parameters' => ['defectcard-engineer' => 'defectcard']
             ]);
 
-            Route::resource('defectcard-mechanic', 'DefectcardMechanicController', [
+            Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
                 'parameters' => ['defectcard-mechanic' => 'defectcard']
             ]);
 
-            Route::resource('defectcard-project', 'DefectcardProjectController', [
+            Route::resource('defectcard-project', 'DefectCardProjectController', [
                 'parameters' => ['defectcard-project' => 'defectcard']
             ]);
 

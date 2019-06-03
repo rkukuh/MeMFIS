@@ -41,5 +41,17 @@ class StatusesOfJobCard extends Seeder
             'name' => 'CLOSED',
             'of'   => 'jobcard',
         ]);
+
+        Status::create([
+            'code' => 'released',
+            'name' => 'RELEASED',
+            'of'   => 'jobcard',
+        ]);
+        
+        Status::create([
+            'code' => 'rii-released',
+            'name' => 'RII RELEASED',
+            'of'   => 'jobcard',
+        ]);
     }
 }

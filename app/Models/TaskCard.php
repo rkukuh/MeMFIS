@@ -156,6 +156,19 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * One-to-Many: A task card may have one skill.
+     *
+     * This function will retrieve the skill of a task card.
+     * See: Type's skill() method for the inverse
+     *
+     * @return mixed
+     */
+    public function skill()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
      * Many-to-Many: A task card may have zero or many (aircraft) station.
      *
      * This function will retrieve all the (aircraft) stationes of a task card.
