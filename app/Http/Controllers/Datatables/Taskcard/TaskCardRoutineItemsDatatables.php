@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\TaskCard;
 
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\TaskCard;
 use App\Models\ListUtil;
@@ -15,9 +16,19 @@ class TaskCardRoutineItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function material(TaskCard $taskcard)
+    public function material($taskcard)
     {
-        $data = $alldata = json_decode($taskcard->materials);
+        $item = TaskCard::where('uuid',$taskcard)->first();
+
+        $materials = $item->materials;
+
+        foreach($materials as $material){
+            $unit_id = $material->pivot->unit_id;
+            $material->pivot->unit .= Unit::find($unit_id)->name;
+        }
+
+        $data = $alldata = json_decode($materials);
+
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -111,9 +122,18 @@ class TaskCardRoutineItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool(TaskCard $taskcard)
+    public function tool($taskcard)
     {
-        $data = $alldata = json_decode($taskcard->tools);
+        $item = TaskCard::where('uuid',$taskcard)->first();
+
+        $tools = $item->tools;
+
+        foreach($tools as $tool){
+            $unit_id = $tool->pivot->unit_id;
+            $tool->pivot->unit .= Unit::find($unit_id)->name;
+        }
+
+        $data = $alldata = json_decode($tools);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
