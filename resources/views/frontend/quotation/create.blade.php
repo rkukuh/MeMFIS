@@ -528,6 +528,7 @@
 
     <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/scheduled-payment.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
