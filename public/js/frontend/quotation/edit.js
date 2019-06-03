@@ -324,6 +324,7 @@ let Quotation = {
             $('#scheduled_payment ').each(function (i) {
                 scheduled_payment_array[i] = $('input[name="group-scheduled_payment[' + i + '][scheduled_payment]"]').val();
             });
+            console.log(scheduled_payment_array);
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -334,7 +335,7 @@ let Quotation = {
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
-            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
+            data.append("scheduled_payment_amount", scheduled_payment_array);
             data.append("attention_name", attention_name);
             data.append("attention_phone", attention_phone);
             data.append("attention_fax", attention_fax);
