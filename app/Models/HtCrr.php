@@ -11,6 +11,7 @@ class HtCrr extends MemfisModel
     protected $fillable = [
         'code',
         'part_number',
+        'project_id',
         'skill_id',
         'is_rii',
         'estimation_manhour',
@@ -39,6 +40,19 @@ class HtCrr extends MemfisModel
     public function installedBy()
     {
         return $this->belongsTo(Employee::class, 'installed_by');
+    }
+
+    /**
+     * One-to-Many: An HT/CRR may have none or many project.
+     *
+     * This function will retrieve the project of a given HT/CRR.
+     * See: Project's htcrr() method for the inverse
+     *
+     * @return mixed
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 
     /**

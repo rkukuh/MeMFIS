@@ -46,6 +46,19 @@ class Project extends MemfisModel
     }
 
     /**
+     * One-to-Many: An HT/CRR may have none or many project.
+     *
+     * This function will retrieve all the HT/CRRs of a given Project.
+     * See: HtCrr's project() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr()
+    {
+        return $this->hasMany(HtCrr::class);
+    }
+
+    /**
      * Many-to-Many: A project may have one or many item.
      *
      * This function will retrieve all the items of a project.
