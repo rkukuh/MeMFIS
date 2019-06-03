@@ -72,6 +72,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of DefectCard close reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDefectCardCloseReason(Builder $query)
+    {
+        return $query->where('of', 'defectcard-close-reason');
+    }
+
+    /**
      * Scope a query to only include type of DefectCard pause reason.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
