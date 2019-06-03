@@ -14,6 +14,7 @@ return [
         'categories' => 10,
         'currencies' => 10,
         'customers' => 20,
+        'defectcards' => 20,
         'employees' => 50,
         'facilities' => 20,
         'goods-received' => 20,
