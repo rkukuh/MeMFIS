@@ -35,6 +35,7 @@ Route::name('admin.')->group(function () {
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
         Route::resource('threshold', 'ThresholdController');
+        Route::resource('approval', 'ApprovalController');
 
         /** MASTER */
 

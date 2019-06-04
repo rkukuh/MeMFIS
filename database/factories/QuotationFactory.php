@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\TaskCard;
+use App\Models\Approval;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Faker\Generator as Faker;
@@ -157,6 +158,12 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
                 'note' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
+    }
+
+    // Approval
+
+    if ($faker->boolean) {
+        $quotation->approvals()->save(factory(Approval::class)->make());
     }
     
 });

@@ -33,6 +33,19 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-Many: An approval (of anything) may have one approver.
+     *
+     * This function will retrieve the approver of a given approval (of anything).
+     * See: Approval's approvedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->hasMany(Approval::class);
+    }
+
+    /**
      * Polymorphic: An employee can have zero or many documents.
      *
      * This function will get all of the employee's documents.

@@ -2,6 +2,7 @@
 
 use App\Models\Type;
 use App\Models\JobCard;
+use App\Models\Approval;
 use App\Models\DefectCard;
 use Faker\Generator as Faker;
 
@@ -22,4 +23,16 @@ $factory->define(DefectCard::class, function (Faker $faker) {
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 
+});
+
+/** CALLBACKS */
+
+$factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
+
+    // Approval
+
+    if ($faker->boolean) {
+        $defectcard->approvals()->save(factory(Approval::class)->make());
+    }
+    
 });

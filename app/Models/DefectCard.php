@@ -24,6 +24,17 @@ class DefectCard extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all Quotation's approvals.
+     * See: Approvals's approvable() method for the inverse
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
      * One-to-Many: A Job Card may have none or many Defect Card.
      *
      * This function will retrieve the Job Card of a given Defect Card.
