@@ -21,7 +21,10 @@ class GoodsReceived extends MemfisModel
         'description',
     ];
 
-    protected $dates = ['received_at', 'approved_at'];
+    protected $dates = [
+        'received_at', 
+        'approved_at'
+    ];
 
     /*************************************** RELATIONSHIP ****************************************/
 
