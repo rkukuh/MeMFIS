@@ -144,7 +144,7 @@ let Quotation = {
 
         $('.calculate').on('click', function edit() {
             var nilai = [];
-            var inputs = $(".extra");
+            var inputs = $(".charge");
             //get all values
             for (var i = 0; i < inputs.length; i++) {
                 nilai[i] = parseInt($(inputs[i]).val());
@@ -324,7 +324,6 @@ let Quotation = {
             $('#scheduled_payment ').each(function (i) {
                 scheduled_payment_array[i] = $('input[name="group-scheduled_payment[' + i + '][scheduled_payment]"]').val();
             });
-            console.log(scheduled_payment_array);
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -350,7 +349,7 @@ let Quotation = {
             data.append("title", $('#title').val());
 
             var charge = [];
-            var chargeInputs = $(".extra");
+            var chargeInputs = $(".charge");
             //get all values
             for (var i = 0; i < chargeInputs.length; i++) {
                 charge[i] = parseInt($(chargeInputs[i]).val());

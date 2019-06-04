@@ -93,7 +93,6 @@ class QuotationController extends Controller
         $projects = Project::get();
         $attention = json_decode($quotation->attention); 
         $charges = json_decode($quotation->charge);
-        // dd(sizeof($charges));
         return view('frontend.quotation.show',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
@@ -115,12 +114,14 @@ class QuotationController extends Controller
         $attention = $quotation->attention; 
         $attentions = $quotation->customer->attention;
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
+        $charges = json_decode($quotation->charge);
         // dd($scheduled_payment_amount);
         return view('frontend.quotation.edit',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
             'attention' => $attention,
             'attentions' => $attentions,
+            'charges' => $charges,
             'scheduled_payment_amount' => $scheduled_payment_amount,
             'projects' => $projects
         ]);

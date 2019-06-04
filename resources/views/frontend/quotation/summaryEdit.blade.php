@@ -27,6 +27,31 @@
         <div class="col-sm-1 col-md-1 col-lg-1">
         </div>
     </div>
+
+    @if(isset($charges))
+        @foreach($charges as $charge)
+        <div class="form-group m-form__group row">
+            <div class="col-sm-5 col-md-5 col-lg-5">
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <select id="type_website" name="type_website" class="form-control">
+                    <option value="{{ $charge->type }}">
+                        {{ $charge->type }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                @component('frontend.common.input.number')
+                    @slot('id', 'charge')
+                    @slot('name', 'charge')
+                    @slot('class', 'charge')
+                    @slot('value' , $charge->amount)
+                    @slot('min', 0)
+                @endcomponent
+            </div>
+        </div>
+        @endforeach
+    @endif
     <div class='repeater'>
         <div data-repeater-list="group-document">
             <div data-repeater-item>
@@ -42,9 +67,9 @@
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         @component('frontend.common.input.number')
-                            @slot('id', 'extra')
-                            @slot('name', 'extra')
-                            @slot('class', 'extra')
+                            @slot('id', 'charge')
+                            @slot('name', 'charge')
+                            @slot('class', 'charge')
                             @slot('value' , 0)
                             @slot('min', 0)
                         @endcomponent
