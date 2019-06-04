@@ -71,6 +71,8 @@
             @component('frontend.common.label.data-info')
                 @slot('id', 'grand_total')
                 @slot('class', 'grand_total')
+                @slot('text', $quotation->grandtotal)
+                @slot('value', $quotation->grandtotal)
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">

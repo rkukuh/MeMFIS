@@ -24,7 +24,7 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div>ewe
         </div>
     </div>
     <div class="m-content">
@@ -482,6 +482,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/address') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/show.js') }}"></script>
