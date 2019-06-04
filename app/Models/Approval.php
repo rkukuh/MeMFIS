@@ -22,6 +22,9 @@ class Approval extends MemfisModel
      * - Quotation's approvals() method for the inverse
      * - JobCard's approvals() method for the inverse
      * - DefectCard's approvals() method for the inverse
+     * - GoodReceive's approvals() method for the inverse
+     * - PurchaseRequest's approvals() method for the inverse
+     * - PurchaseOrder's approvals() method for the inverse
      */
     public function approvable()
     {
