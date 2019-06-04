@@ -5,18 +5,13 @@ use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Project;
-use App\Models\Employee;
+use App\Models\Approval;
 use Faker\Generator as Faker;
 use App\Models\PurchaseRequest;
 
 $factory->define(PurchaseRequest::class, function (Faker $faker) {
 
-    $is_approved = false;
     $number = $faker->unixTime();
-
-    if ($faker->boolean) {
-        $is_approved = true;
-    }
 
     return [
         'number' => 'PR-DUM-' . $number,
@@ -29,20 +24,6 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
         },
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'required_at' => $faker->randomElement([null, Carbon::now()]),
-        'approved_by' => function () use ($is_approved) {
-            if ($is_approved) {
-                if (Employee::count()) {
-                    return Employee::get()->random()->id;
-                }
-    
-                return factory(Employee::class)->create()->id;
-            }
-        },
-        'approved_at' => function () use ($is_approved) {
-            if ($is_approved) {
-                return Carbon::now();
-            }
-        },
         'project_id' => function () use ($faker) {
             if (Project::count()) {
                 return Project::get()->random()->id;
@@ -84,6 +65,12 @@ $factory->afterCreating(PurchaseRequest::class, function ($purchase_request, $fa
                 'note' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
+    }
+
+    // Approval
+
+    if ($faker->boolean) {
+        $purchase_request->approvals()->save(factory(Approval::class)->make());
     }
 
 });
