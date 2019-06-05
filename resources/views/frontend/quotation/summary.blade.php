@@ -34,7 +34,7 @@
                     <div class="col-sm-5 col-md-5 col-lg-5">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <select id="type_website" name="type_website" class="form-control">
+                        <select id="charge_type" name="charge_type" class="form-control charge_type">
                             <option value="">
                                 Select a Type
                             </option>
@@ -50,10 +50,14 @@
                         @endcomponent
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1">
-                        @include('frontend.common.buttons.create_repeater')
+                        @component('frontend.common.buttons.create_repeater')
+                            @slot('class', 'AddRow')
+                        @endcomponent
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:-38px">
-                        @include('frontend.common.buttons.delete_repeater')
+                        @component('frontend.common.buttons.delete_repeater')
+                            @slot('class', 'DeleteRow')
+                        @endcomponent
                     </div>
                 </div>
             </div>
