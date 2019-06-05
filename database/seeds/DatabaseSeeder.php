@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AddressesTableSeeder::class);
         $this->call(DocumentsTableSeeder::class);
         $this->call(ThresholdsTableSeeder::class);
+        $this->call(ApprovalsTableSeeder::class);
 
         /** LICENSE */
 

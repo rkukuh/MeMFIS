@@ -33,6 +33,19 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-Many: An approval (of anything) may have one approver.
+     *
+     * This function will retrieve the approver of a given approval (of anything).
+     * See: Approval's approvedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->hasMany(Approval::class);
+    }
+
+    /**
      * Polymorphic: An employee can have zero or many documents.
      *
      * This function will get all of the employee's documents.
@@ -89,6 +102,32 @@ class Employee extends MemfisModel
     public function grn_received()
     {
         return $this->hasMany(GoodsReceived::class, 'received_by');
+    }
+
+    /**
+     * One-to-Many: An HT/CRR may have one installer.
+     *
+     * This function will retrieve all the HT/CRRs of a given installer.
+     * See: HtCrr's installedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr_installed()
+    {
+        return $this->hasMany(HtCrr::class, 'installed_by');
+    }
+
+    /**
+     * One-to-Many: An HT/CRR may have one remover.
+     *
+     * This function will retrieve all the HT/CRRs of a given remover.
+     * See: HtCrr's removedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr_removed()
+    {
+        return $this->hasMany(HtCrr::class, 'removed_by');
     }
 
     /**

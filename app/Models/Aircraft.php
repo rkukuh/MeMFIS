@@ -29,7 +29,7 @@ class Aircraft extends MemfisModel
      * M-M Polymorph: An AMEL content could be aircraft and/or engine.
      *
      * This function will aet all of the aircraft's AMEL.
-     * Amel's amelable() method for the inverse
+     * See: Amel's amelable() method for the inverse
      *
      * @return mixed
      */

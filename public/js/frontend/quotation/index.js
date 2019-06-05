@@ -194,8 +194,8 @@ let Quotation = {
                                 'content'
                             )
                         },
-                        type: 'DELETE',
-                        // url: '/quotation/' + quotation_uuid + '',
+                        type: 'POST',
+                        url: '/quotation/' + quotation_uuid + '/approve',
                         success: function (data) {
                             toastr.success('Quotation has been deleted.', 'Deleted', {
                                     timeOut: 5000

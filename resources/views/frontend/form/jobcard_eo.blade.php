@@ -6,6 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
+    header {
+        position: fixed;
+        top: 0cm;
+        left: 0cm;
+        right: 0cm;
+        height: 3cm;
+    }
+     footer {
+        position: fixed;
+        bottom: 0cm;
+        left: 0cm;
+        right: 0cm;
+        height: 2cm;
+    }
     html,body{
       padding: 0;
       margin: 0;
@@ -113,13 +127,21 @@
       width: 100%;
       text-align: center;
     }
+
+    .page_break { page-break-before: always; }
+    /* <div class="page_break"></div> */
+
   </style>
 </head>
 <body>
 
-  <div id="header">
+  <header id="header">
     <img src="./img/form/printoutjobcardeo/HeaderJobCardEO.png" alt=""width="100%">
-  </div>
+  </header>
+  <footer style="margin-top:14px;">
+        <img src="./img/form/printoutjobcardeo/FooterJobCardEO.jpg" width="100%" alt="" >
+      </footer>
+
 
   <div id="content">
     <ul>
@@ -211,7 +233,7 @@
               :
             </div>
           </td>
-          <td width="81%">{{$jobCard->taskcard->reference}}</td>
+          <td width="81%">aa</td>
         </tr>
       </table>
     </div>
@@ -249,7 +271,11 @@
         </tr>
         <tr>
           <td height="15%" valign="top">
-           <span>Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum earum temporibus repellendus ratione, nesciunt consectetur accusantium a aliquam ipsa architecto quam itaque, cupiditate commodi iure voluptates quaerat. Blanditiis, velit fuga. </span>
+           <span>
+               @foreach($jobCard->taskcard->items as $material)
+                    {{$material->name}} - {{$material->pivot->quantity}} {{$material->pivot->unit_id}} <br>
+               @endforeach
+           </span>
           </td>
           <td height="15%" valign="top">
             <span>Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis iste blanditiis repellendus minima iusto laborum nihil eaque cum? Veritatis eligendi est adipisci, exercitationem eaque in repellendus odio incidunt error doloribus?</span>
@@ -344,8 +370,6 @@
       </table>
     </div>
   </div>
-  <div style="margin-top:14px;">
-    <img src="./img/form/printoutjobcardeo/FooterJobCardEO.jpg" width="100%" alt="" srcset="">
-  </div>
+
 </body>
 </html>

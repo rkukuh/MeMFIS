@@ -41,6 +41,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
         Route::resource('threshold', 'ThresholdController');
+        Route::resource('approval', 'ApprovalController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
@@ -58,7 +59,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
         Route::resource('department', 'DepartmentController');
-        Route::resource('defectcard', 'DefectCardController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
@@ -121,6 +121,7 @@ Route::name('frontend.')->group(function () {
 
             Route::prefix('quotation')->group(function () {
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
+                Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
                 Route::resource('/{project}/workpackage', 'QuotationWorkPackageController', [
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
@@ -373,6 +374,66 @@ Route::name('frontend.')->group(function () {
 
         });
 
+
+        /** Discrepancy */
+
+        Route::namespace('Discrepancy')->group(function () {
+
+            Route::resource('discrepancy', 'DiscrepancyController');
+
+            Route::resource('discrepancy-ppc', 'DiscrepancyPPCController', [
+                'parameters' => ['discrepancy-ppc' => 'discrepancy']
+            ]);
+
+
+            Route::resource('discrepancy-engineer', 'DiscrepancyEngineerController', [
+                'parameters' => ['discrepancy-engineer' => 'discrepancy']
+            ]);
+
+            Route::resource('discrepancy-mechanic', 'DiscrepancyMechanicController', [
+                'parameters' => ['discrepancy-mechanic' => 'discrepancy']
+            ]);
+
+            Route::name('discrepancy.')->group(function () {
+                Route::prefix('discrepancy')->group(function () {
+
+                    /** Transaction */
+                    Route::POST('{jobcard}', 'DiscrepancyEngineerController@create')->name('jobcard.discrepancy');
+
+                });
+            });
+
+        });
+
+        /** DEFECT CARD */
+
+        Route::namespace('DefectCard')->group(function () {
+
+            Route::resource('defectcard', 'DefectCardController');
+
+            Route::resource('defectcard-engineer', 'DefectCardEngineerController', [
+                'parameters' => ['defectcard-engineer' => 'defectcard']
+            ]);
+
+            Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
+                'parameters' => ['defectcard-mechanic' => 'defectcard']
+            ]);
+
+            Route::resource('defectcard-project', 'DefectCardProjectController', [
+                'parameters' => ['defectcard-project' => 'defectcard']
+            ]);
+
+            Route::name('defectcard.')->group(function () {
+                Route::prefix('defectcard')->group(function () {
+
+                    /** Transaction */
+
+
+                });
+            });
+
+        });
+
          /** TASK RELEASE */
 
          Route::namespace('TaskRelease')->group(function () {
@@ -407,63 +468,6 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('ReceivingInspectionReport')->group(function () {
             Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
-        });
-
-        /** Discrepancy */
-
-        Route::namespace('Discrepancy')->group(function () {
-
-            Route::resource('discrepancy', 'DiscrepancyController');
-
-            Route::resource('discrepancy-ppc', 'DiscrepancyPPCController', [
-                'parameters' => ['discrepancy-ppc' => 'discrepancy']
-            ]);
-
-
-            Route::resource('discrepancy-engineer', 'DiscrepancyEngineerController', [
-                'parameters' => ['discrepancy-engineer' => 'discrepancy']
-            ]);
-
-            Route::resource('discrepancy-mechanic', 'DiscrepancyMechanicController', [
-                'parameters' => ['discrepancy-mechanic' => 'discrepancy']
-            ]);
-
-            Route::name('discrepancy.')->group(function () {
-                Route::prefix('discrepancy')->group(function () {
-
-                    /** Transaction */
-
-                });
-            });
-
-        });
-
-        /** DEFECT CARD */
-
-        Route::namespace('Defectcard')->group(function () {
-
-            Route::resource('defectcard', 'DefectcardController');
-
-            Route::resource('defectcard-engineer', 'DefectcardEngineerController', [
-                'parameters' => ['defectcard-engineer' => 'defectcard']
-            ]);
-
-            Route::resource('defectcard-mechanic', 'DefectcardMechanicController', [
-                'parameters' => ['defectcard-mechanic' => 'defectcard']
-            ]);
-
-            Route::resource('defectcard-project', 'DefectcardProjectController', [
-                'parameters' => ['defectcard-project' => 'defectcard']
-            ]);
-
-            Route::name('defectcard.')->group(function () {
-                Route::prefix('defectcard')->group(function () {
-
-                    /** Transaction */
-
-                });
-            });
-
         });
 
         /** Release to Service */

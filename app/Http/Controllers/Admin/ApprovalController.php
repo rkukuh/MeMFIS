@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\frontend\Defectcard;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Type;
-use Illuminate\Http\Request;
+use App\Models\Approval;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ApprovalStore;
+use App\Http\Requests\Admin\ApprovalUpdate;
 
-class DefectcardMechanicController extends Controller
+class ApprovalController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +16,7 @@ class DefectcardMechanicController extends Controller
      */
     public function index()
     {
-        return view('frontend.defectcard.mechanic.index');
+        //
     }
 
     /**
@@ -26,16 +26,16 @@ class DefectcardMechanicController extends Controller
      */
     public function create()
     {
-        return view('frontend.defectcard.mechanic.open');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\ApprovalStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApprovalStore $request)
     {
         //
     }
@@ -43,33 +43,33 @@ class DefectcardMechanicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Approval  $approval
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Approval $approval)
     {
-        return view('frontend.defectcard.mechanic.progress');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Approval  $approval
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Approval $approval)
     {
-        return view('frontend.defectcard.mechanic.pending');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Admin\ApprovalUpdate  $request
+     * @param  \App\Models\Approval  $approval
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApprovalUpdate $request, Approval $approval)
     {
         //
     }
@@ -77,10 +77,10 @@ class DefectcardMechanicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Approval  $approval
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Approval $approval)
     {
         //
     }

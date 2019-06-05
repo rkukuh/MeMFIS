@@ -242,7 +242,7 @@
                                                                 </option>
 
                                                                 @foreach ($websites as $website)
-                                                                <option value="{{ $website->id }}">
+                                                                <option value="{{ $website->uuid }}">
                                                                     {{ $website->name }}
                                                                 </option>
                                                                 @endforeach
@@ -341,13 +341,13 @@
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            <select id="type_website" name="type_website" class="form-control">
+                                                            <select id="type_document" name="type_document" class="form-control">
                                                                 <option value="">
                                                                     Select a Document Type
                                                                 </option>
 
                                                                 @foreach ($documents as $document)
-                                                                <option value="{{ $document->id }}">
+                                                                <option value="{{ $document->uuid }}">
                                                                     {{ $document->name }}
                                                                 </option>
                                                                 @endforeach

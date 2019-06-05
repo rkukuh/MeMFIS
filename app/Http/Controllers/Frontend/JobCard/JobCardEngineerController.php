@@ -60,10 +60,10 @@ class JobCardEngineerController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobCard)
+    public function edit(JobCard $jobcard)
     {
         return view('frontend.job-card.engineer.progress-resume', [
-            'jobCard' => $jobCard,
+            'jobcard' => $jobcard,
         ]);
     }
 

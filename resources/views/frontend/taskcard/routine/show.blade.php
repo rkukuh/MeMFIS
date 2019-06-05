@@ -91,11 +91,18 @@
                                                 Aircraft Applicability @include('frontend.common.label.required')
                                             </label>
 
-                                            <div style="background-color:beige; padding:15px;" class="">
-                                                @foreach($taskcard->aircrafts  as $aircraft)
-                                                    {{ $aircraft->name }},
-                                                @endforeach
+                                            <div>
+                                                @if ($taskcard->aircrafts->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($taskcard->aircrafts  as $aircraft)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $aircraft->name )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
                                             </div>
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -213,15 +220,18 @@
                                                 Access @include('frontend.common.label.optional')
                                             </label>
 
-                                            @if (empty($taskcard->accesses))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else
-                                            <div style="background-color:beige; padding:15px;" class="">
-                                                @foreach($taskcard->accesses  as $access)
-                                                    {{ $access->name }},
-                                                @endforeach
+                                            <div>
+                                                @if ($taskcard->accesses->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($taskcard->accesses  as $access)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $access->name )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
                                             </div>
-                                            @endif
+
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -230,15 +240,17 @@
                                                 Zone @include('frontend.common.label.optional')
                                             </label>
 
-                                            @if (empty($taskcard->zones))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else
-                                            <div style="background-color:beige; padding:15px;" class="">
-                                                @foreach($taskcard->zones  as $zone)
-                                                    {{ $zone->name }},
-                                                @endforeach
+                                            <div>
+                                                @if ($taskcard->zones->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($taskcard->zones  as $zone)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $zone->name )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
                                             </div>
-                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -260,15 +272,18 @@
                                                 Related Card @include('frontend.common.label.optional')
                                             </label>
 
-                                            @if (empty($taskcard->related_to))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else
-                                            <div style="background-color:beige; padding:15px;" class="">
-                                                @foreach($taskcard->related_to  as $related)
-                                                    {{ $related->number }},
-                                                @endforeach
+                                            <div>
+                                                @if ($taskcard->related_to->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($taskcard->related_to  as $related)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $related->number )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
                                             </div>
-                                            @endif
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
@@ -276,23 +291,22 @@
                                                     <label class="form-control-label">
                                                         Version @include('frontend.common.label.optional')
                                                     </label>
-                                                    @php
-                                                        $versions = json_decode($taskcard->version, TRUE);
-                                                    @endphp
 
-                                                    @if (empty($taskcard->version))
-                                                        @include('frontend.common.label.data-info-nodata')
-                                                    @else
-                                                    <div style="background-color:beige; padding:15px;" class="">
-                                                        @php
-                                                            $versions = json_decode($taskcard->version, TRUE);
-                                                        @endphp
+                                                    <div>
+                                                        @if (empty($taskcard->version))
+                                                            @include('frontend.common.label.data-info-nodata')
+                                                        @else
+                                                            @php
+                                                                $versions = json_decode($taskcard->version, TRUE);
+                                                            @endphp
 
-                                                        @foreach($versions  as $version)
-                                                            {{ $version }},
-                                                        @endforeach
+                                                            @foreach ($versions  as $version)
+                                                                @component('frontend.common.label.badge')
+                                                                    @slot('text', $version )
+                                                                @endcomponent
+                                                            @endforeach
+                                                        @endif
                                                     </div>
-                                                    @endif
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">

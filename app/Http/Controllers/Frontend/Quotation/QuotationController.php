@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Frontend\Quotation;
 
-
+use Auth;
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Approval;
 use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\Quotation;
@@ -60,7 +61,7 @@ class QuotationController extends Controller
         $attentions = [];
         $contact = [];
 
-        $contact['name']     = $request->attention_name; 
+        $contact['name']     = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
         $contact['address'] = $request->attention_address;
         $contact['fax'] = $request->attention_fax;
@@ -91,8 +92,8 @@ class QuotationController extends Controller
     public function show(Quotation $quotation)
     {
         $projects = Project::get();
-        $attention = json_decode($quotation->attention); 
-        $charges = json_decode($quotation->charge);
+        $attention = json_decode($quotation->attention);
+		$charges = json_decode($quotation->charge);
         return view('frontend.quotation.show',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
@@ -111,7 +112,7 @@ class QuotationController extends Controller
     public function edit(Quotation $quotation)
     {
         $projects = Project::get();
-        $attention = $quotation->attention; 
+        $attention = $quotation->attention;
         $attentions = $quotation->customer->attention;
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
         $charges = json_decode($quotation->charge);
@@ -139,7 +140,7 @@ class QuotationController extends Controller
         $attentions = [];
         $contact = [];
 
-        $contact['name']     = $request->attention_name; 
+        $contact['name']     = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
         $contact['address'] = $request->attention_address;
         $contact['fax'] = $request->attention_fax;
@@ -178,6 +179,22 @@ class QuotationController extends Controller
     public function project($project)
     {
         return response()->json($project);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(Quotation $quotation)
+    {
+        $quotation->approvals()->save(new Approval([
+            'approvable_id' => $quotation->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        return response()->json($quotation);
     }
 
     /**

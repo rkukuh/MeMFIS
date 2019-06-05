@@ -16,10 +16,15 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfARC::class);
         $this->call(TypesOfAviationDegree::class);
         $this->call(TypesOfCapability::class);
+        $this->call(TypesOfDefectCardCloseReason::class);
+        $this->call(TypesOfDefectCardPauseReason::class);
+        $this->call(TypesOfDefectCardProposeCorrection::class);
         $this->call(TypesOfDocument::class);
         $this->call(TypesOfEligibility::class);
         $this->call(TypesOfEmail::class);
         $this->call(TypesOfFax::class);
+        $this->call(TypesOfJobCardPauseReason::class);
+        $this->call(TypesOfJobCardCloseReason::class);
         $this->call(TypesOfJournal::class);
         $this->call(TypesOfMaintenanceCycle::class);
         $this->call(TypesOfPhone::class);

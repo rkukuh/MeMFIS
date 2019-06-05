@@ -65,14 +65,14 @@
                                             <?php
                                             echo $errors->first('number','<div class="form-control-feedback text-danger" ">:message</div>');
                                             ?>
-                                            
+
                                         </form>
                                     </div>
                                     <div class="col-md-3">
                                         @component('frontend.common.buttons.search')
                                             @slot('id','btn-search')
                                         @endcomponent()
-                                        
+
                                         @include('frontend.common.buttons.filter')
                                     </div>
                                 </div>

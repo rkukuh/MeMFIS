@@ -19,6 +19,30 @@ class JobCard extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all Quotation's approvals.
+     * See: Approvals's approvable() method for the inverse
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
+     * One-to-Many: A Job Card may have none or many Defect Card.
+     *
+     * This function will retrieve all the Defect Cards of a given Job Card.
+     * See: DefectCard's jobcard() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->hasMany(DefectCard::class, 'jobcard_id');
+    }
+
+    /**
      * One-to-Many: A jobcard must related to a quotation
      *
      * This function will retrieve the quotation of a jobcard.
