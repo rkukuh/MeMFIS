@@ -59,7 +59,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
         Route::resource('department', 'DepartmentController');
-        Route::resource('defectcard', 'DefectCardController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
@@ -422,11 +421,11 @@ Route::name('frontend.')->group(function () {
             ]);
 
 
-            Route::resource('discrepancy-engineer', 'DiscrepancyEngineerController', [
+            Route::resource('{jobcard}/discrepancy-engineer', 'DiscrepancyEngineerController', [
                 'parameters' => ['discrepancy-engineer' => 'discrepancy']
             ]);
 
-            Route::resource('discrepancy-mechanic', 'DiscrepancyMechanicController', [
+            Route::resource('{jobcard}/discrepancy-mechanic', 'DiscrepancyMechanicController', [
                 'parameters' => ['discrepancy-mechanic' => 'discrepancy']
             ]);
 
