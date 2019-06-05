@@ -57,7 +57,7 @@
                                                 Job Card No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                JC 012122
+                                                {{$jobcard->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -65,7 +65,7 @@
                                                 Task Card No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                TC 212212
+                                                {{$jobcard->taskcard->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -81,7 +81,7 @@
                                                 A/C Reg
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->aircraft_register}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -89,7 +89,7 @@
                                                 A/C Serial Number
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->aircraft_sn}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -113,7 +113,7 @@
                                                 Project No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->code}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -129,7 +129,7 @@
                                                 Skill
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->skill->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -137,7 +137,7 @@
                                                 Est. Mhrs
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->estimation_manhour}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -145,7 +145,7 @@
                                                 Work Area
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->work_area}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -161,7 +161,11 @@
                                                 RII
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if($jobcard->taskcard->is_rii == 1)
+                                                    Yes
+                                                @else
+                                                    No
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -169,7 +173,7 @@
                                                 Reference
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->reference}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -177,7 +181,7 @@
                                                 Title
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->title}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -185,7 +189,7 @@
                                                 Description
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->Description}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -193,7 +197,7 @@
                                                 Helper
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->helper_quantity}}
                                             </td>
                                         </tr>
 
@@ -201,7 +205,7 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                <div class="col-sm-10 col-md-10 col-lg-10 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
                                                 @include('frontend.job-card.engineer.modal-pause')
@@ -212,11 +216,15 @@
                                                 @component('frontend.common.buttons.close')
                                                     @slot('data_target', '#modal_close')
                                                 @endcomponent
-                                                @component('frontend.common.buttons.found')
-                                                @slot('href','/discrepancy-engineer/create')
-                                            @endcomponent()
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                    <form method="POST" action="{{route('frontend.discrepancy.jobcard.discrepancy',$jobcard->uuid)}}">
+                                        {!! csrf_field() !!}
+                                        @include('frontend.common.buttons.found')
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
