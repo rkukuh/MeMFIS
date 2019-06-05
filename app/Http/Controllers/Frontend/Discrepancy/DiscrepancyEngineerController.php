@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
-use App\Models\Type;
+use App\Models\JobCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,9 +24,11 @@ class DiscrepancyEngineerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(JobCard $jobcard)
     {
-        return view('frontend.discrepancy.engineer.create');
+        return view('frontend.discrepancy.engineer.create', [
+            'jobcard' => $jobcard,
+        ]);
     }
 
     /**
