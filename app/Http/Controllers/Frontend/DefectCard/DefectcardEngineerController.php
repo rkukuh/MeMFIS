@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\DefectCard;
 
-use App\Models\Type;
+use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
