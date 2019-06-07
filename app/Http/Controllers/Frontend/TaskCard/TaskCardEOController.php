@@ -59,7 +59,7 @@ class TaskCardEOController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.eo.create', [
+        return view('frontend.task-card.nonroutine.eo.create', [
             'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
     }
@@ -118,7 +118,7 @@ class TaskCardEOController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.nonroutine.eo.show',[
+        return view('frontend.task-card.nonroutine.eo.show',[
             'taskcard' => $taskCard
         ]);
     }
@@ -138,7 +138,7 @@ class TaskCardEOController extends Controller
         }
 
 
-        return view('frontend.taskcard.nonroutine.eo.edit',[
+        return view('frontend.task-card.nonroutine.eo.edit',[
             'tasks' => $this->task,
             'types' => $this->type,
             'taskCard' => $taskCard,

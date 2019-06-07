@@ -42,7 +42,7 @@ class PreliminaryController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.preliminary.create', [
+        return view('frontend.task-card.nonroutine.preliminary.create', [
             'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
     }
@@ -75,7 +75,7 @@ class PreliminaryController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.nonroutine.preliminary.show',[
+        return view('frontend.task-card.nonroutine.preliminary.show',[
             'taskCard' => $taskCard
         ]);
     }
@@ -94,7 +94,7 @@ class PreliminaryController extends Controller
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
-        return view('frontend.taskcard.nonroutine.preliminary.edit', [
+        return view('frontend.task-card.nonroutine.preliminary.edit', [
             'taskcard' => $taskCard,
             'skills' => $this->skill,
             'aircrafts' => $this->aircraft,

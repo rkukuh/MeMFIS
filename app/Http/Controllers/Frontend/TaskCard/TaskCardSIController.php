@@ -44,7 +44,7 @@ class TaskCardSIController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.si.create', [
+        return view('frontend.task-card.nonroutine.si.create', [
             'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
     }
@@ -111,7 +111,7 @@ class TaskCardSIController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.nonroutine.si.show',[
+        return view('frontend.task-card.nonroutine.si.show',[
             'taskCard' => $taskCard
         ]);
     }
@@ -130,7 +130,7 @@ class TaskCardSIController extends Controller
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
-        return view('frontend.taskcard.nonroutine.si.edit', [
+        return view('frontend.task-card.nonroutine.si.edit', [
             'taskcard' => $taskCard,
             'skills' => $this->skill,
             'work_areas' => $this->work_area,
