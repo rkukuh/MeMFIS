@@ -94,11 +94,12 @@ class QuotationController extends Controller
     {
         $projects = Project::get();
         $attention = json_decode($quotation->attention);
-
+		$charges = json_decode($quotation->charge);
         return view('frontend.quotation.show',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
             'attention' => $attention[0],
+            'charges' => $charges,
             'projects' => $projects
         ]);
     }
@@ -115,12 +116,14 @@ class QuotationController extends Controller
         $attention = $quotation->attention;
         $attentions = $quotation->customer->attention;
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
+        $charges = json_decode($quotation->charge);
         // dd($scheduled_payment_amount);
         return view('frontend.quotation.edit',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
             'attention' => $attention,
             'attentions' => $attentions,
+            'charges' => $charges,
             'scheduled_payment_amount' => $scheduled_payment_amount,
             'projects' => $projects
         ]);
@@ -144,12 +147,20 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        array_push($attentions, $contact);
+        array_push($attentions, $contact);  
+        dd($request->chargeType);
+        $request->charge = json_decode($request->charge);
+        $request->chargeType = json_decode($request->chargeType);
+        $charge = [];
+        for($index = 0; $index < sizeof($request->charge) ; $index++ ){
+            $charge[$request->chargeType[$index]] = $request->charge[$index];
+        }
         dd($request->scheduled_payment_amount);
         $request->merge(['attention' => json_encode($attentions)]);
         $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
+        dd($request->scheduled_payment_amount);
         $quotation->update($request->all());
 
         return response()->json($quotation);

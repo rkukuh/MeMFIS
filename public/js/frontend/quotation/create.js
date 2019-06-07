@@ -25,7 +25,6 @@ let Quotation = {
                     $('#project_title').html(data.title);
                     $('#name').html(data.customer.name);
                     $('#customer_id').val(data.customer.uuid);
-                    // alert(data.customer.uuid);
                     $.ajax({
                         url: '/label/get-customer/' + data.customer.uuid,
                         type: 'GET',
@@ -68,25 +67,6 @@ let Quotation = {
                                     });
                                 }
                             }
-
-
-                            // $('#project_number').html(data.code);
-                            // $('#project_title').html(data.title);
-                            // $('#name').html(data.customer.name);
-                            // $('#customer_id').val(data.customer.uuid);
-
-                            // if(workpackage_datatables_init == true){
-                            //     workpackage_datatables_init = false;
-                            //     workpackage(data.uuid);
-                            // }
-                            // else{
-                            //     let table = $('.workpackage_datatable').mDatatable();
-                            //     table.destroy();
-                            //     workpackage(data.uuid);
-                            //     table = $('.workpackage_datatable').mDatatable();
-                            //     table.originalDataSet = [];
-                            //     table.reload();
-                            // }
                         }
                     });
                     if (workpackage_datatables_init == true) {
@@ -193,9 +173,10 @@ let Quotation = {
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
             let scheduled_payment_array = [];
-            $('#scheduled_payment ').each(function (i) {
-                scheduled_payment_array[i] = $('input[name="group-scheduled_payment[' + i + '][scheduled_payment]"]').val();
+            $('select[name^=scheduled_payment] ').each(function (i) {
+                scheduled_payment_array[i] = $(this).val();
             });
+
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -213,6 +194,8 @@ let Quotation = {
             data.append("attention_email", attention_email);
             data.append("attention_address", attention_address);
             data.append("total", 0.000000);
+            data.append("subtotal", 0.000000);
+            data.append("grandtotal", 0.000000);
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());

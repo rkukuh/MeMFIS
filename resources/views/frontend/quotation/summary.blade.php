@@ -7,12 +7,12 @@
     <br>
     <hr>
     <div class="form-group m-form__group row">
-        <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="col-sm-5 col-md-5 col-lg-5">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-           <div class="m--align-left" style="padding-top:15px">
+            <div class="m--align-left" style="padding-top:15px">
                 Sub Total
-           </div> 
+            </div>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">
             @component('frontend.common.label.data-info')
@@ -31,34 +31,40 @@
         <div data-repeater-list="group-document">
             <div data-repeater-item>
                 <div class="form-group m-form__group row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-5 col-md-5 col-lg-5">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <select id="type_website" name="type_website" class="form-control">
+                        <select id="charge_type" name="charge_type" class="form-control charge_type">
                             <option value="">
                                 Select a Type
                             </option>
                         </select>
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
-                        @component('frontend.common.input.text')
-                            @slot('id', 'document')
-                            @slot('name', 'document')
-                            @slot('class', 'document')
+                        @component('frontend.common.input.number')
+                            @slot('id', 'extra')
+                            @slot('name', 'extra')
+                            @slot('class', 'extra')
+                            @slot('value' , 0)
+                            @slot('min', 0)
                         @endcomponent
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1">
-                        @include('frontend.common.buttons.create_repeater')
+                        @component('frontend.common.buttons.create_repeater')
+                            @slot('class', 'AddRow')
+                        @endcomponent
                     </div>
-                    <div class="col-sm-1 col-md-1 col-lg-1">
-                        @include('frontend.common.buttons.delete_repeater')
+                    <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:-38px">
+                        @component('frontend.common.buttons.delete_repeater')
+                            @slot('class', 'DeleteRow')
+                        @endcomponent
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="form-group m-form__group row">
-        <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="col-sm-5 col-md-5 col-lg-5">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
             <div class="m--align-left" style="padding-top:15px">
@@ -74,6 +80,12 @@
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
+            <div class="btn btn-default calculate" id="calculate">
+                <span>
+                    <i class="fa fa-calculator"></i>
+                    Calculate
+                </span>
+            </div>
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
         </div>
