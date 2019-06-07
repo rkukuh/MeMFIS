@@ -29,6 +29,7 @@ Route::name('component.')->group(function () {
         Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
         Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');
         Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
+        Route::get('get-facilities', 'FillComboxController@facility')->name('get-facilities');
         Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
         Route::get('get-licenses/{id}', 'FillComboxController@licenses')->name('get-licenses');
         Route::get('get-currencies', 'FillComboxController@currencies')->name('get-currencies');
@@ -36,7 +37,6 @@ Route::name('component.')->group(function () {
         Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
         Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
-        Route::get('get-categories-material', 'FillComboxController@categoriesMaterial')->name('get-categoriesMaterial');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
         Route::get('get-accountcodes', 'FillComboxController@accountCodes')->name('get-accountcodes');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
@@ -53,6 +53,7 @@ Route::name('component.')->group(function () {
         Route::get('get-category-taskcard', 'FillComboxController@categorieTakcard')->name('get-category-taskcard');
         Route::get('get-otr-certifications', 'FillComboxController@otrCertification')->name('get-otr-certifications');
         Route::get('get-aircraft-taskcards', 'FillComboxController@aircraftTaskcard')->name('get-aircraft-taskcards');
+        Route::get('get-categories-material', 'FillComboxController@categoriesMaterial')->name('get-categoriesMaterial');
         Route::get('get-scheduled-priorities', 'FillComboxController@scheduledPriority')->name('get-scheduled-priorities');
         Route::get('get-takcard-routine-types', 'FillComboxController@taskcardTypeRoutine')->name('get-takcard-routine-types');
         Route::get('get-applicability-engines', 'FillComboxController@applicabilityEngine')->name('get-applicability-engines');

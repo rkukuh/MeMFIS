@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Quotation;
 use Auth;
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Customer;
 use App\Models\Currency;
@@ -93,11 +94,12 @@ class QuotationController extends Controller
     {
         $projects = Project::get();
         $attention = json_decode($quotation->attention);
-
+		$charges = json_decode($quotation->charge);
         return view('frontend.quotation.show',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
             'attention' => $attention[0],
+            'charges' => $charges,
             'projects' => $projects
         ]);
     }
@@ -114,12 +116,14 @@ class QuotationController extends Controller
         $attention = $quotation->attention;
         $attentions = $quotation->customer->attention;
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
+        $charges = json_decode($quotation->charge);
         // dd($scheduled_payment_amount);
         return view('frontend.quotation.edit',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
             'attention' => $attention,
             'attentions' => $attentions,
+            'charges' => $charges,
             'scheduled_payment_amount' => $scheduled_payment_amount,
             'projects' => $projects
         ]);
@@ -143,12 +147,20 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        array_push($attentions, $contact);
+        array_push($attentions, $contact);  
+        dd($request->chargeType);
+        $request->charge = json_decode($request->charge);
+        $request->chargeType = json_decode($request->chargeType);
+        $charge = [];
+        for($index = 0; $index < sizeof($request->charge) ; $index++ ){
+            $charge[$request->chargeType[$index]] = $request->charge[$index];
+        }
         dd($request->scheduled_payment_amount);
         $request->merge(['attention' => json_encode($attentions)]);
         $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
+        dd($request->scheduled_payment_amount);
         $quotation->update($request->all());
 
         return response()->json($quotation);
@@ -190,6 +202,25 @@ class QuotationController extends Controller
             'approvable_id' => $quotation->id,
             'approved_by' => Auth::id(),
         ]));
+
+        $project = Project::where('id',$quotation->project_id)->first();
+        foreach($project->workpackages as $wp){
+            foreach($wp->taskcards as $tc){
+                JobCard::create([
+                    'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
+                    'taskcard_id' => $tc->id,
+                    'quotation_id' => $quotation->id,
+                    'data_taskcard' => $tc->toJson(),
+                    'data_taskcard_items' => $tc->items->toJson(),
+                ]);                    // // echo $tc->title.'<br>';
+                // foreach($tc->items as $item){
+                //     echo $item->name.'<br>';
+                // }
+                // dump($tc->materials->toJson());
+            }
+        }
+
+
 
         return response()->json($quotation);
     }

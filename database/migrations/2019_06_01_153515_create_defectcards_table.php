@@ -16,7 +16,7 @@ class CreateDefectcardsTable extends Migration
         Schema::create('defectcards', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->unsignedInteger('jobcard_id');
             $table->integer('engineer_quantity');
             $table->integer('helper_quantity');

@@ -20,6 +20,7 @@ class Quotation extends MemfisModel
         'subtotal',
         'charge',
         'grandtotal',
+        'title',
         'scheduled_payment_type',
         'scheduled_payment_amount',
         'term_of_payment',

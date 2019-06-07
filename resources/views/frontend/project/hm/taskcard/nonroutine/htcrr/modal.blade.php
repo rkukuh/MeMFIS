@@ -28,9 +28,9 @@
 
                         @component('frontend.common.input.number')
                             @slot('text', 'Part Number')
-                            @slot('id', 'code')
-                            @slot('name', 'code')
-                            @slot('id_error', 'code')
+                            @slot('id', 'pn')
+                            @slot('name', 'pn')
+                            @slot('id_error', 'pn')
                         @endcomponent
                     </div>
                 </div>
@@ -40,9 +40,10 @@
                             Description @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.text')
+                        @component('frontend.common.input.textarea')
                             @slot('text', 'Description')
                             @slot('id', 'description')
+                            @slot('rows', '3')
                             @slot('name', 'description')
                             @slot('id_error', 'description')
                         @endcomponent
@@ -86,7 +87,7 @@
                         @endcomponent
                     </div>
                 </div>
-                <div class="form-group m-form__group row ">
+                <div class="form-group m-form__group row hidden">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
                             Removal By @include('frontend.common.label.required')
@@ -114,7 +115,7 @@
                     </div>
                 </div>
                 <div class="form-group m-form__group row ">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             Engineer By @include('frontend.common.label.required')
                         </label>
@@ -133,9 +134,9 @@
 
                         @component('frontend.common.input.checkbox')
                             @slot('text', 'Required')
-                            @slot('id', 'rii')
-                            @slot('name', 'rii')
-                            @slot('id_error', 'installaton')
+                            @slot('id', 'is_rii')
+                            @slot('name', 'is_rii')
+                            @slot('id_error', 'is_rii')
                         @endcomponent
                     </div>
                 </div>
@@ -143,13 +144,16 @@
             <div class="modal-footer">
                 <div class="flex">
                     <div class="action-buttons">
-                        <div class="flex">
-                            <div class="action-buttons">
-                                @component('frontend.common.buttons.close')
-                                    @slot('text', 'Close')
-                                @endcomponent
-                            </div>
-                        </div>
+                        @component('frontend.common.buttons.submit')
+                            @slot('class', 'add-htcrr')
+                            @slot('type', 'button')
+                        @endcomponent
+
+                        @include('frontend.common.buttons.reset')
+
+                        @component('frontend.common.buttons.close')
+                            @slot('text', 'Close')
+                        @endcomponent
                     </div>
                 </div>
             </div>

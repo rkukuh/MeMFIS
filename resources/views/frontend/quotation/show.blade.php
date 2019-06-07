@@ -375,7 +375,6 @@
                                         @component('frontend.common.label.data-info')
                                             @slot('text', 'term and condition')
                                             @slot('text',$quotation->term_of_condition)
-
                                         @endcomponent
                                     </div>
                                 </div>
@@ -399,60 +398,61 @@
                                                 <br>
                                                 <hr>
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        Sub Total
-                                                    </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        Rp. {{ number_format($quotation->subtotal) }}
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                    </div>
-                                                </div>
-                                                <div class='repeater'>
-                                                    <div data-repeater-list="group-document">
-                                                        <div data-repeater-item>
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                    <select id="type_website" name="type_website" class="form-control">
-                                                                        <option value="">
-                                                                            Select a Type
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                    @component('frontend.common.input.text')
-                                                                        @slot('id', 'document')
-                                                                        @slot('name', 'document')
-                                                                    @endcomponent
-                                                                </div>
-                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                    @include('frontend.common.buttons.create_repeater')
-                                                                </div>
-                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                    @include('frontend.common.buttons.delete_repeater')
-                                                                </div>
-                                                            </div>
+                                                        <div class="m--align-left" style="padding-top:15px">
+                                                            Sub Total
                                                         </div>
                                                     </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('id', 'sub_total')
+                                                            @slot('class', 'sub_total')
+                                                            @slot('text', $quotation->subtotal)
+                                                            @slot('value', $quotation->subtotal)
+                                                        @endcomponent
+                                                    </div>
                                                 </div>
+                                                @if(isset($charges))
+                                                    @foreach($charges as $charge)
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            <div class="m--align-left" >
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'charge_type')
+                                                                    @slot('name', 'charge_type')
+                                                                    @slot('text', $charge->type)
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3 col-lg-3">
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('id', 'charge')
+                                                                @slot('name', 'charge')
+                                                                @slot('text', $charge->amount)
+                                                            @endcomponent
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                @endif
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        Total in Rupiah
+                                                        <div class="m--align-left" style="padding-top:15px">
+                                                            Total in Rupiah
+                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        Rp. {{ number_format($quotation->grandtotal) }}
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('id', 'grand_total')
+                                                            @slot('class', 'grand_total')
+                                                            @slot('text', $quotation->grandtotal)
+                                                            @slot('value', $quotation->grandtotal)
+                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </div>
@@ -508,8 +508,6 @@
 <script>
     let project_id = '{{  $quotation->project->uuid }}';
     let currency = '{{  $quotation->currency_id }}';
-    // let quotation = '{{  $quotation->uuid }}';
-    console.log(currency);
 </script>
 <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>

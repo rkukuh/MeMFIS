@@ -144,7 +144,7 @@ let Quotation = {
 
         $('.calculate').on('click', function edit() {
             var nilai = [];
-            var inputs = $(".extra");
+            var inputs = $(".charge");
             //get all values
             for (var i = 0; i < inputs.length; i++) {
                 nilai[i] = parseInt($(inputs[i]).val());
@@ -322,9 +322,9 @@ let Quotation = {
             let attention_address = $('#address').val();
             let scheduled_payment_array = [];
             $('#scheduled_payment ').each(function (i) {
-                scheduled_payment_array[i] = $('input[name="group-scheduled_payment[' + i + '][scheduled_payment]"]').val();
+                scheduled_payment_array[i] = $(this).val();
             });
-            console.log(scheduled_payment_array);
+            scheduled_payment_array.pop();
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -350,12 +350,22 @@ let Quotation = {
             data.append("title", $('#title').val());
 
             var charge = [];
-            var chargeInputs = $(".extra");
+            var chargeInputs = $(".charge");
             //get all values
             for (var i = 0; i < chargeInputs.length; i++) {
                 charge[i] = parseInt($(chargeInputs[i]).val());
             }
             data.append("charge", JSON.stringify(charge));
+            var chargeType = [];
+            var chargeTypeInputs = $("select[name^=charge_type]");
+            //get all values
+            for (var i = 0; i < chargeTypeInputs.length; i++) {
+                chargeType[i] = parseInt($(chargeTypeInputs[i]).val());
+            }
+            data.append("chargeType", JSON.stringify(chargeType));
+            console.log(chargeType);
+            console.log(chargeTypeInputs);
+            console.log(chargeTypeInputs.length);
             data.append('_method', 'PUT');
 
             $.ajax({

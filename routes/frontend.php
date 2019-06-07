@@ -97,7 +97,10 @@ Route::name('frontend.')->group(function () {
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
 
+                Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
                 Route::put('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
+                Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
+                Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
             });
 
             Route::prefix('project-workshop')->group(function () {
@@ -400,7 +403,8 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('discrepancy')->group(function () {
 
                     /** Transaction */
-                    Route::POST('{jobcard}', 'DiscrepancyEngineerController@create')->name('jobcard.discrepancy');
+                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.discrepancy.create');
+                    Route::POST('engineer', 'DiscrepancyEngineerController@store')->name('jobcard.discrepancy.store');
 
                 });
             });

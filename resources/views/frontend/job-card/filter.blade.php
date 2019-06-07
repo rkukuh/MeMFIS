@@ -1,76 +1,7 @@
 <div class="advanceFilter">
     <div class="hidden" id="advanceFilter">
         <div class="form-group m-form__group row">
-
             <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="form-control-label">
-                    Task
-                </label>
-                @component('frontend.common.input.select2')
-                    @slot('text', 'Task Type')
-                    @slot('id', 'task_type_id')
-                    @slot('name', 'task_type_id')
-                    @slot('id_error', 'task_type_id')
-                    @slot('class','filter')
-                @endcomponent
-            </div>
-
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="form-control-label">
-                    A/C Type
-                </label>
-                @component('frontend.common.input.select2')
-                    @slot('text', 'Applicability Airplane')
-                    @slot('id', 'applicability_airplane')
-                    @slot('name', 'applicability_airplane')
-                    @slot('multiple','multiple')
-                    @slot('id_error', 'applicability-airplane')
-                    @slot('class','filter')
-                @endcomponent
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="form-control-label">
-                    Skill
-                </label>
-                @component('frontend.common.input.select2')
-                    @slot('text', 'Otr Certification')
-                    @slot('id', 'otr_certification')
-                    @slot('name', 'otr_certification')
-                    @slot('id_error', 'otr-certification')
-                    @slot('class','filter')
-                @endcomponent
-
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="form-control-label">
-                    Project No
-                </label>
-                @component('frontend.common.input.select2')
-                    @slot('text', 'Project No')
-                    @slot('id', 'project_no')
-                    @slot('name', 'project_no')
-                    @slot('id_error', 'project_no')
-                    @slot('class','filter')
-                @endcomponent
-            </div>
-
-        </div>
-        <div class="form-group m-form__group row">
-
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="form-control-label">
-                    Taskcard Type
-                </label>
-                @component('frontend.common.input.select2')
-                    @slot('text', 'Taskcard Type')
-                    @slot('id', 'taskcard_routine_type')
-                    @slot('multiple', 'multiple')
-                    @slot('name', 'taskcard_routine_type')
-                    @slot('id_error', 'taskcard_routine_type')
-                    @slot('class','filter')
-                @endcomponent
-            </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
                 <label class="form-control-label">
                     Date Issued
                 </label>
@@ -82,7 +13,7 @@
                     @slot('class','filter')
                 @endcomponent
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     JC No
                 </label>
@@ -96,6 +27,18 @@
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
+                    Project No
+                </label>
+                @component('frontend.common.input.select2')
+                    @slot('text', 'Project No')
+                    @slot('id', 'project_no')
+                    @slot('name', 'project_no')
+                    @slot('id_error', 'project_no')
+                    @slot('class','filter')
+                @endcomponent
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label class="form-control-label">
                     Customer
                 </label>
                 @component('frontend.common.input.select2')
@@ -103,6 +46,56 @@
                     @slot('id', 'customer')
                     @slot('name', 'customer')
                     @slot('id_error', 'customer')
+                    @slot('class','filter')
+                @endcomponent
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label class="form-control-label">
+                    A/C Type
+                </label>
+                @component('frontend.common.input.select2')
+                    @slot('text', 'Applicability Airplane')
+                    @slot('id', 'applicability_airplane')
+                    @slot('name', 'applicability_airplane')
+                    @slot('multiple','multiple')
+                    @slot('id_error', 'applicability-airplane')
+                    @slot('class','filter')
+                @endcomponent
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label class="form-control-label">
+                    Task
+                </label>
+                @component('frontend.common.input.select2')
+                    @slot('text', 'Task Type')
+                    @slot('id', 'task_type_id')
+                    @slot('name', 'task_type_id')
+                    @slot('id_error', 'task_type_id')
+                    @slot('class','filter')
+                @endcomponent
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label class="form-control-label">
+                    Skill
+                </label>
+                @component('frontend.common.input.select2')
+                    @slot('text', 'Otr Certification')
+                    @slot('id', 'otr_certification')
+                    @slot('name', 'otr_certification')
+                    @slot('id_error', 'otr-certification')
+                    @slot('class','filter')
+                @endcomponent
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label class="form-control-label">
+                    Taskcard Type
+                </label>
+                @component('frontend.common.input.select2')
+                    @slot('text', 'Taskcard Type')
+                    @slot('id', 'taskcard_routine_type')
+                    @slot('multiple', 'multiple')
+                    @slot('name', 'taskcard_routine_type')
+                    @slot('id_error', 'taskcard_routine_type')
                     @slot('class','filter')
                 @endcomponent
             </div>

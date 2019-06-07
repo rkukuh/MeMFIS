@@ -6,7 +6,7 @@ let Workpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/basic/',
+                        url: '/datatables/project/'+project_uuid+'/htcrr/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,12 +43,12 @@ let Workpackage = {
                 }
             },
             columns: [{
-                    field: '',
+                    field: 'code',
                     title: 'CRI No',
                     sortable: !1,
                 },
                 {
-                    field: '',
+                    field: 'part_number',
                     title: 'P/N',
                     sortable: 'asc',
                     filterable: !1,
@@ -78,7 +78,7 @@ let Workpackage = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'skill.name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -126,6 +126,119 @@ let Workpackage = {
                         }
                 }
             ]
+        });
+
+        $('.modal-footer').on('click', '.add-htcrr', function () {
+
+            let cri = $('input[name=cri]').val();
+            let pn = $('input[name=pn]').val();
+            let description = $('#description').val();
+            let otr_certification = $('#otr_certification').val();
+            let mhrs = $('input[name=mhrs]').val();
+            let is_rii;
+            if (document.getElementById("is_rii").checked) {
+                is_rii = 1;
+            } else {
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/project-hm/htcrr',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    code: cri,
+                    part_number: pn,
+                    description: description,
+                    skill_id: otr_certification,
+                    estimation_manhour: mhrs,
+                    is_rii: is_rii,
+                    project_id: project_uuid,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+
+                        toastr.success('HT/CRR has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        $('#modal_ht_crr').modal('hide');
+
+                        let table = $('.ht_crr_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+
+                    }
+                }
+            });
+        });
+        $('.footer').on('click', '.add-manhour', function () {
+            // alert('tes');
+            let manhour = total_mhrs;
+            let performa_used = performa;
+            let total =  total.toFixed(2);
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workpackage_uuid+'/manhoursPropotion',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    manhour: manhour,
+                    performa_used: performa_used,
+                    total: total,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+
+                        toastr.success('Manhours Propotion has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+
+                    }
+                }
+            });
+        });
+        $('.footer').on('click', '.add-facility', function () {
+            let facility_array = [];
+            $('#facility ').each(function (i) {
+                facility_array[i] = document.getElementsByName('group-facility[' + i + '][facility]')[0].value;
+            });
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workpackage_uuid+'/facilityUsed',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    facility_array: facility_array,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+
+                        toastr.success('Facility has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+
+                    }
+                }
+            });
         });
     }
 };

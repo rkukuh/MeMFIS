@@ -58,11 +58,9 @@ class TaskCardRoutineController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.routine.create', [
+        return view('frontend.task-card.routine.create', [
             'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
-
-        // return view('frontend.taskcard.routine.create');
     }
 
     /**
@@ -187,7 +185,7 @@ class TaskCardRoutineController extends Controller
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
-        return view('frontend.taskcard.routine.show', [
+        return view('frontend.task-card.routine.show', [
             'taskcard' => $taskCard,
             'types' => $this->type,
             'work_areas' => $this->work_area,
@@ -235,7 +233,7 @@ class TaskCardRoutineController extends Controller
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
-        return view('frontend.taskcard.routine.edit', [
+        return view('frontend.task-card.routine.edit', [
             'taskcard' => $taskCard,
             'aircraft_taskcards' => $aircraft_taskcards,
             'access_taskcards' => $access_taskcards,

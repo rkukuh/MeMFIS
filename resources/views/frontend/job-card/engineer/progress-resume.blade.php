@@ -220,7 +220,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2 col-md-2 col-lg-2">
-                                    <form method="POST" action="{{route('frontend.discrepancy.jobcard.discrepancy',$jobcard->uuid)}}">
+                                    <form method="POST" action="{{route('frontend.discrepancy.jobcard.discrepancy.create',$jobcard->uuid)}}">
                                         {!! csrf_field() !!}
                                         @include('frontend.common.buttons.found')
                                     </form>

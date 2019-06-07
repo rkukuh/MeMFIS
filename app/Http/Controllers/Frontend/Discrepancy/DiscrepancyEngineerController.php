@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
+use App\Models\DefectCard;
 use App\Models\JobCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,7 +40,11 @@ class DiscrepancyEngineerController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request);
+        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+        $defectcard = DefectCard::create($request->all());
+
+        // dd($jobcard);
+        return response()->json($defectcard);
     }
 
     /**
