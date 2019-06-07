@@ -193,6 +193,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'ProjectDatatables@index')->name('all');
+                Route::get('{project}/htcrr/', 'HtCrrDatatables@index')->name('htcrr.all');
                 Route::get('/{project}/workpackage', 'ProjectDatatables@workpackage')->name('workpackage.project');
 
             });

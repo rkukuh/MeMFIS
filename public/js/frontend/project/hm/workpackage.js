@@ -6,7 +6,7 @@ let Workpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/basic/',
+                        url: '/datatables/project/'+project_uuid+'/htcrr/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,12 +43,12 @@ let Workpackage = {
                 }
             },
             columns: [{
-                    field: '',
+                    field: 'code',
                     title: 'CRI No',
                     sortable: !1,
                 },
                 {
-                    field: '',
+                    field: 'part_number',
                     title: 'P/N',
                     sortable: 'asc',
                     filterable: !1,
@@ -78,7 +78,7 @@ let Workpackage = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'skill.name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
