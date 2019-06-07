@@ -11,6 +11,7 @@ class Progress extends MemfisModel
         'progressable_id',
         'status_id',
         'progressed_by',
+        'note',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

@@ -19,6 +19,7 @@ class CreateProgressesTable extends Migration
             $table->morphs('progressable');
             $table->unsignedInteger('status_id');
             $table->unsignedInteger('progressed_by');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
