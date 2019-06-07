@@ -43,6 +43,17 @@ class JobCard extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many progresses.
+     *
+     * This function will get all JobCard's progresses.
+     * See: Progress's progressable() method for the inverse
+     */
+    public function progresses()
+    {
+        return $this->morphMany(Progress::class, 'progressable');
+    }
+
+    /**
      * One-to-Many: A jobcard must related to a quotation
      *
      * This function will retrieve the quotation of a jobcard.
