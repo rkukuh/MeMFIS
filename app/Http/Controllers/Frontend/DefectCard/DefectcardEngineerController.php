@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\frontend\DefectCard;
+namespace App\Http\Controllers\Frontend\DefectCard;
 
-use App\Models\Type;
+use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DefectCardController extends Controller
+class DefectCardEngineerController extends Controller
 {
 
     /**
@@ -16,7 +16,7 @@ class DefectCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.defectcard.index');
+        return view('frontend.defectcard.engineer.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class DefectCardController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.defectcard.engineer.open');
     }
 
     /**
@@ -48,7 +48,7 @@ class DefectCardController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('frontend.defectcard.engineer.progress');
     }
 
     /**
@@ -59,7 +59,7 @@ class DefectCardController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('frontend.defectcard.engineer.pending');
     }
 
     /**

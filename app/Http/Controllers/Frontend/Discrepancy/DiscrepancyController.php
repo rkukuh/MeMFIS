@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\frontend\Discrepancy;
+namespace App\Http\Controllers\Frontend\Discrepancy;
 
 use App\Models\Type;
 use Illuminate\Http\Request;
