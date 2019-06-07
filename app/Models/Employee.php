@@ -35,7 +35,7 @@ class Employee extends MemfisModel
     /**
      * One-to-Many: An approval (of anything) may have one approver.
      *
-     * This function will retrieve the approver of a given approval (of anything).
+     * This function will retrieve all the approvals (of anything) of an employee.
      * See: Approval's approvedBy() method for the inverse
      *
      * @return mixed
@@ -139,6 +139,19 @@ class Employee extends MemfisModel
     public function phones()
     {
         return $this->morphMany(Phone::class, 'phoneable');
+    }
+
+    /**
+     * One-to-Many: A progress (of anything) may have one doer.
+     *
+     * This function will retrieve all the progress (of anything) of an employee.
+     * See: Progress's conductedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function progresses()
+    {
+        return $this->hasMany(Progress::class);
     }
 
     /**
