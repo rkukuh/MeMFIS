@@ -86,7 +86,7 @@
                         @endcomponent
                     </div>
                 </div>
-                <div class="form-group m-form__group row ">
+                <div class="form-group m-form__group row hidden">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
                             Removal By @include('frontend.common.label.required')
@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <div class="form-group m-form__group row ">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             Engineer By @include('frontend.common.label.required')
                         </label>
