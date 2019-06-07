@@ -6,6 +6,7 @@ use App\Models\TaskCard;
 use App\Models\Approval;
 use App\Models\Progress;
 use App\Models\Quotation;
+use App\Models\Inspection;
 use Faker\Generator as Faker;
 
 $factory->define(JobCard::class, function (Faker $faker) {
@@ -48,6 +49,12 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
                 'status_id' => Status::ofJobCard()->get()->first()->id + $i
             ])
         );
+    }
+
+    // Inspection
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $jobcard->inspections()->save(factory(Inspection::class)->make());
     }
     
 });

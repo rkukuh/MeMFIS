@@ -43,6 +43,17 @@ class JobCard extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many inspections.
+     *
+     * This function will get all JobCard's inspections.
+     * See: Inspection's inspectable() method for the inverse
+     */
+    public function inspections()
+    {
+        return $this->morphMany(Progress::class, 'inspectable');
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many progresses.
      *
      * This function will get all JobCard's progresses.

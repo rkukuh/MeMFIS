@@ -153,6 +153,19 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-Many: An inspection (of anything) may have one doer.
+     *
+     * This function will retrieve all the inspections (of anything) of an employee.
+     * See: Inspection's inspectedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inspections()
+    {
+        return $this->hasMany(Inspection::class);
+    }
+
+    /**
      * Many-to-Many: An employee may have zero or many languages.
      *
      * This function will retrieve all the languages of an employee.
