@@ -42,6 +42,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('document', 'DocumentController');
         Route::resource('threshold', 'ThresholdController');
         Route::resource('approval', 'ApprovalController');
+        Route::resource('progress', 'ProgressController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
