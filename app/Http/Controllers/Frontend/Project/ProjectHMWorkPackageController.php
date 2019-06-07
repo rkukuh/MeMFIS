@@ -140,10 +140,36 @@ class ProjectHMWorkPackageController extends Controller
      * Update the specified resource in storage.
      *
      */
-    public function engineerTeam(Project $project, WorkPackage $workPackage,Request $request)
+    public function engineerTeam(Project $project, WorkPackage $workpackage,Request $request)
     {
         $pw = ProjectWorkPackage::where('project_id',$project->id)
-            ->where('workpackage_id',$workPackage->id)
+            ->where('workpackage_id',$workpackage->id)
+            ->first();
+
+            dd($pw);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     */
+    public function manhoursPropotion(Project $project, WorkPackage $workpackage,Request $request)
+    {
+        $pw = ProjectWorkPackage::where('project_id',$project->id)
+            ->where('workpackage_id',$workpackage->id)
+            ->first();
+
+            dd($pw);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     */
+    public function facilityUsed(Project $project, WorkPackage $workpackage,Request $request)
+    {
+        $pw = ProjectWorkPackage::where('project_id',$project->id)
+            ->where('workpackage_id',$workpackage->id)
             ->first();
 
             dd($pw);
