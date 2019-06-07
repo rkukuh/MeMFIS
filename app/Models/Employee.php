@@ -145,7 +145,7 @@ class Employee extends MemfisModel
      * One-to-Many: A progress (of anything) may have one doer.
      *
      * This function will retrieve all the progress (of anything) of an employee.
-     * See: Progress's conductedBy() method for the inverse
+     * See: Progress's progressedBy() method for the inverse
      *
      * @return mixed
      */

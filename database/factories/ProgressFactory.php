@@ -9,7 +9,7 @@ $factory->define(Progress::class, function (Faker $faker) {
 
     return [
         'status_id' => Status::get()->random()->id,
-        'conducted_by' => Employee::get()->random()->id
+        'progressed_by' => Employee::get()->random()->id
     ];
 
 });

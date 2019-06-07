@@ -10,7 +10,7 @@ class Progress extends MemfisModel
         'progressable_type',
         'progressable_id',
         'status_id',
-        'conducted_by',
+        'progressed_by',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -35,8 +35,8 @@ class Progress extends MemfisModel
      *
      * @return mixed
      */
-    public function conductedBy()
+    public function progressedBy()
     {
-        return $this->belongsTo(Employee::class, 'conducted_by');
+        return $this->belongsTo(Employee::class, 'progressed_by');
     }
 }
