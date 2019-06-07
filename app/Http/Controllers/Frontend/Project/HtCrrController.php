@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Project;
 
 use App\Models\HtCrr;
+use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\HtCrrStore;
 use App\Http\Requests\Frontend\HtCrrUpdate;
@@ -37,7 +38,11 @@ class HtCrrController extends Controller
      */
     public function store(HtCrrStore $request)
     {
-        //
+        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+
+        $htcrr = HtCrr::create($request->all());
+
+        return response()->json($htcrr);
     }
 
     /**

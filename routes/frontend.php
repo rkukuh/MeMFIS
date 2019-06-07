@@ -95,9 +95,10 @@ Route::name('frontend.')->group(function () {
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
 
+                Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
                 Route::put('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
-                Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
                 Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
+                Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
             });
 
             Route::prefix('project-workshop')->group(function () {
