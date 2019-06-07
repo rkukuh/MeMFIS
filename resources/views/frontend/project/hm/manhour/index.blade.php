@@ -64,8 +64,8 @@
             <div class="action-buttons">
                 @component('frontend.common.buttons.submit')
                     @slot('type','button')
-                    @slot('id', 'add-project')
-                    @slot('class', 'add-project')
+                    @slot('id', 'add-manhour')
+                    @slot('class', 'add-manhour')
                 @endcomponent
 
                 @include('frontend.common.buttons.reset')
@@ -88,17 +88,20 @@
             let project_prfm_factor = $('#perfoma').val();
             let total  = project_prfm_factor*total_mhrs;
             document.getElementById('total').innerHTML = total.toFixed(2);
+            let performa = 0;
 
         });
         $("#default").change(function() {
             if(this.checked) {
                 let total  = ($('#default').val()*total_mhrs);
+                performa = $('#default').val();
                 document.getElementById('perfoma').value = $('#default').val();
                 $("#perfoma").prop('disabled', true);
                 document.getElementById('total').innerHTML = total.toFixed(2);
             }
             else{
                 let total  = (1.6*total_mhrs);
+                performa = 1.6;
                 document.getElementById('perfoma').value = 1.6;
                 $("#perfoma").prop('disabled', false);
                 document.getElementById('total').innerHTML = total.toFixed(2);
