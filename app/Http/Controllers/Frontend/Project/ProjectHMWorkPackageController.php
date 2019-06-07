@@ -168,11 +168,17 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function facilityUsed(Project $project, WorkPackage $workpackage,Request $request)
     {
-        $pw = ProjectWorkPackage::where('project_id',$project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
+        foreach($request->facility_array as $facility){
+            $project_workpackage->facilities()->create([
+                'facility_id' => $facility,
+            ]);
 
-            dd($pw);
+        }
+
+        return response()->json($project_workpackage);
     }
 
     /**

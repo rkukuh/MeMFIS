@@ -127,6 +127,37 @@ let Workpackage = {
                 }
             ]
         });
+
+        $('.footer').on('click', '.add-facility', function () {
+            let facility_array = [];
+            $('#facility ').each(function (i) {
+                facility_array[i] = document.getElementsByName('group-facility[' + i + '][facility]')[0].value;
+            });
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workpackage_uuid+'/facilityUsed',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    facility_array: facility_array,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+
+                        toastr.success('Facility has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+
+                    }
+                }
+            });
+        });
     }
 };
 
