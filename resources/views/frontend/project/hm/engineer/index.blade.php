@@ -307,7 +307,7 @@
 <script src="{{ asset('js/frontend/functions/select2/cabin.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/select2/instrument.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/select2/employee.js')}}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/Employee.js')}}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/employee.js')}}"></script>
 <script>
     let project_uuid = '{{ $project->uuid }}';
     let workpackage_uuid = '{{ $workPackage->uuid }}';
