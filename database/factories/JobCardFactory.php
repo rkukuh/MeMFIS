@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\TaskCard;
 use App\Models\Approval;
+use App\Models\Progress;
 use App\Models\Quotation;
 use Faker\Generator as Faker;
 
@@ -36,6 +38,16 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
 
     if ($faker->boolean) {
         $jobcard->approvals()->save(factory(Approval::class)->make());
+    }
+
+    // Progress
+
+    for ($i = 0; $i < rand(1, Status::ofJobCard()->count()); $i++) {
+        $jobcard->progresses()->save(
+            factory(Progress::class)->make([
+                'status_id' => Status::ofJobCard()->get()->first()->id + $i
+            ])
+        );
     }
     
 });
