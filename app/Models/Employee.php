@@ -33,6 +33,17 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-Way: An employee may have zero or many AME Licenses (by DGCA).
+     *
+     * @return mixed
+     */
+    public function amels_dgca()
+    {
+        return $this->hasMany(EmployeeLicense::class)
+                    ->where('license_id', License::ofAMELDGCA()->first()->id);
+    }
+
+    /**
      * One-to-Many: An approval (of anything) may have one approver.
      *
      * This function will retrieve all the approvals (of anything) of an employee.
@@ -76,6 +87,17 @@ class Employee extends MemfisModel
     public function faxes()
     {
         return $this->morphMany(Fax::class, 'faxable');
+    }
+
+    /**
+     * One-Way: An employee may have zero or many general licenses.
+     *
+     * @return mixed
+     */
+    public function general_licenses()
+    {
+        return $this->hasMany(EmployeeLicense::class)
+                    ->where('license_id', License::ofGeneralLicense()->first()->id);
     }
 
     /**
@@ -128,6 +150,41 @@ class Employee extends MemfisModel
     public function htcrr_removed()
     {
         return $this->hasMany(HtCrr::class, 'removed_by');
+    }
+
+    /**
+     * Many-to-Many: An employee may have zero or many languages.
+     *
+     * This function will retrieve all the languages of an employee.
+     * See: Language's employees() method for the inverse
+     *
+     * @return mixed
+     */
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class)
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: An employee may have zero or many licenses.
+     *
+     * This function will retrieve all the licenses of an employee.
+     * See: License's employees() method for the inverse
+     *
+     * @return mixed
+     */
+    public function licenses()
+    {
+        return $this->belongsToMany(License::class)
+                    ->using(EmployeeLicense::class)
+                    ->withPivot(
+                        'number',
+                        'issued_at',
+                        'valid_until',
+                        'revoke_at'
+                    )
+                    ->withTimestamps();
     }
 
     /**
@@ -192,20 +249,6 @@ class Employee extends MemfisModel
     }
 
     /**
-     * Many-to-Many: An employee may have zero or many languages.
-     *
-     * This function will retrieve all the languages of an employee.
-     * See: Language's employees() method for the inverse
-     *
-     * @return mixed
-     */
-    public function languages()
-    {
-        return $this->belongsToMany(Language::class)
-                    ->withTimestamps();
-    }
-
-    /**
      * Many-to-Many: An employee may have zero or many schools.
      *
      * This function will retrieve all the schools of an employee.
@@ -217,48 +260,5 @@ class Employee extends MemfisModel
     {
         return $this->belongsToMany(School::class)
                     ->withTimestamps();
-    }
-
-    /**
-     * Many-to-Many: An employee may have zero or many licenses.
-     *
-     * This function will retrieve all the licenses of an employee.
-     * See: License's employees() method for the inverse
-     *
-     * @return mixed
-     */
-    public function licenses()
-    {
-        return $this->belongsToMany(License::class)
-                    ->using(EmployeeLicense::class)
-                    ->withPivot(
-                        'number',
-                        'issued_at',
-                        'valid_until',
-                        'revoke_at'
-                    )
-                    ->withTimestamps();
-    }
-
-    /**
-     * One-Way: An employee may have zero or many general licenses.
-     *
-     * @return mixed
-     */
-    public function general_licenses()
-    {
-        return $this->hasMany(EmployeeLicense::class)
-                    ->where('license_id', License::ofGeneralLicense()->first()->id);
-    }
-
-    /**
-     * One-Way: An employee may have zero or many AME Licenses (by DGCA).
-     *
-     * @return mixed
-     */
-    public function amels_dgca()
-    {
-        return $this->hasMany(EmployeeLicense::class)
-                    ->where('license_id', License::ofAMELDGCA()->first()->id);
     }
 }
