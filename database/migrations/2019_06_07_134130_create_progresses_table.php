@@ -15,7 +15,22 @@ class CreateProgressesTable extends Migration
     {
         Schema::create('progresses', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->morphs('progressable');
+            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('conducted_by');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('status_id')
+                    ->references('id')->on('statuses')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('conducted_by')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
