@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Progress::class, function (Faker $faker) {
 
     return [
-        'status_id' => Status::ofJobCard()->get()->random()->id,
+        'status_id' => Status::get()->random()->id,
         'conducted_by' => Employee::get()->random()->id
     ];
 
