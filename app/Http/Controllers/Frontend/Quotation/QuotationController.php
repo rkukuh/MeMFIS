@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Quotation;
 use Auth;
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Customer;
 use App\Models\Currency;
@@ -190,6 +191,25 @@ class QuotationController extends Controller
             'approvable_id' => $quotation->id,
             'approved_by' => Auth::id(),
         ]));
+
+        $project = Project::where('id',$quotation->project_id)->first();
+        foreach($project->workpackages as $wp){
+            foreach($wp->taskcards as $tc){
+                JobCard::create([
+                    'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
+                    'taskcard_id' => $tc->id,
+                    'quotation_id' => $quotation->id,
+                    'data_taskcard' => $tc->toJson(),
+                    'data_taskcard_items' => $tc->items->toJson(),
+                ]);                    // // echo $tc->title.'<br>';
+                // foreach($tc->items as $item){
+                //     echo $item->name.'<br>';
+                // }
+                // dump($tc->materials->toJson());
+            }
+        }
+
+
 
         return response()->json($quotation);
     }
