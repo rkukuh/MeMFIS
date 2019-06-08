@@ -236,13 +236,12 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                            @component('frontend.common.buttons.execute')
-                                                @slot('type','button')
-                                                @slot('id', 'add-item')
-                                                @slot('class', 'add-item')
-                                                @slot('href',route('frontend.jobcard-engineer.edit',[
-                                                    'id' => 1]))
-                                            @endcomponent
+                                            <form method="POST" action="{{route('frontend.jobcard-engineer.update',$jobcard->uuid)}}">
+                                                {{method_field('PATCH')}}
+                                                {!! csrf_field() !!}
+                                                <input type="hidden" name="progress" value="{{$status->uuid}}">
+                                                @include('frontend.common.buttons.execute')
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

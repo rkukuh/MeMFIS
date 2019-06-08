@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Frontend\JobCard;
 
+use Auth;
 use Validator;
 use App\Models\Status;
 use App\Models\JobCard;
+use App\Models\Progress;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -99,9 +101,16 @@ class JobCardEngineerController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $jobCard)
+    public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-        //
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
+            $jobcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','progress')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.jobcard-engineer.index');
+        }
+
     }
 
     /**
@@ -110,7 +119,7 @@ class JobCardEngineerController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobCard $jobCard)
+    public function destroy(JobCard $jobcard)
     {
         //
     }
