@@ -8,7 +8,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="WorkpackageForm">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="{{route('frontend.jobcard-engineer.update',$jobcard->uuid)}}" id="WorkpackageForm">
+                    {{method_field('PATCH')}}
+                    {!! csrf_field() !!}
+                    <input type="hidden" name="progress" value="{{$closed->uuid}}">
+
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
@@ -51,10 +55,7 @@
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-workpackage')
-                                    @slot('type', 'button')
-                                @endcomponent
+                                @include('frontend.common.buttons.submit')
 
                                 @include('frontend.common.buttons.reset')
 
