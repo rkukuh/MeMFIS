@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Frontend\TaskRelease;
 
-use App\Models\TaskCard;
+use Auth;
+use App\Models\Status;
+use App\Models\JobCard;
+use App\Models\Approval;
+use App\Models\Progress;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\TaskCardStore;
-use App\Http\Requests\Frontend\TaskCardUpdate;
+use App\Http\Requests\Frontend\JobCardStore;
+use App\Http\Requests\Frontend\JobCardUpdate;
 
 class TaskReleaseController extends Controller
 {
@@ -32,23 +36,21 @@ class TaskReleaseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\TaskCardStore  $request
+     * @param  \App\Http\Requests\Frontend\JobCardStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskCardStore $request)
+    public function store(JobCardStore $request)
     {
-        $taskcard = TaskCard::create($request->all());
-
-        return response()->json($taskcard);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function show(TaskCard $taskCard)
+    public function show(TaskCard $taskrelease)
     {
         //
     }
@@ -56,13 +58,14 @@ class TaskReleaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function edit(Taskcard $taskCard)
+    public function edit(JobCard $taskrelease)
     {
        //
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -71,29 +74,41 @@ class TaskReleaseController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskCardUpdate $request, Taskcard $taskCard)
+    public function update(JobCardUpdate $request, JobCard $taskrelease)
     {
-        //
+        $status = Status::ofJobcard()->where('code','released')->first()->id;
+
+        $taskrelease->progresses()->save(new Progress([
+            'status_id' => $status,
+            'conducted_by' => Auth::id()
+        ]));
+
+        $taskrelease->approvals()->save(new Approval([
+            'approvable_id' => $taskrelease->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        return response()->json($taskrelease);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaskCard $taskcard)
+    public function destroy(JobCard $taskrelease)
     {
         //
     }
 
-     /**
+    /**
      * Approve the specified resource in storage.
      *
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function approve(Taskcard $taskCard)
+    public function approve(JobCard $taskrelease)
     {
         //
     }
