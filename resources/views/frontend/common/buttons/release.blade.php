@@ -12,7 +12,7 @@
 >
 
     <span>
-        <i class="fa {{ $icon or 'fa-save' }}"></i>
+        <i class="fa {{ $icon or 'fa-check-circle' }}"></i>
 
         <span>{{ $text or 'Release Task' }}</span>
     </span>
