@@ -6,6 +6,7 @@ use Auth;
 use Validator;
 use App\Models\Status;
 use App\Models\JobCard;
+use App\Models\Approval;
 use App\Models\Progress;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -122,6 +123,12 @@ class JobCardEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','closed')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
+
+            $jobcard->approvals()->save(new Approval([
+                'approvable_id' => $jobcard->id,
+                'approved_by' => Auth::id(),
+            ]));
+
             return redirect()->route('frontend.jobcard-engineer.index');
         }
 
