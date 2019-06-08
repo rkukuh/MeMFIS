@@ -71,7 +71,7 @@ class JobCardEngineerController extends Controller
     public function edit(JobCard $jobcard)
     {
         if ($jobcard->progresses->count() == 0) {
-            return view('frontend.job-card.engineer.open', [
+            return view('frontend.job-card.engineer.progress-open', [
                 'jobcard' => $jobcard,
                 'status' => $this->statuses->where('code','open')->first(),
             ]);
