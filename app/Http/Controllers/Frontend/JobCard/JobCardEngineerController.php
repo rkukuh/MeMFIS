@@ -72,7 +72,7 @@ class JobCardEngineerController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
-        if ($jobcard->progresses->count() == 0) {
+        if ($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open") {
             return view('frontend.job-card.engineer.progress-open', [
                 'jobcard' => $jobcard,
                 'status' => $this->statuses->where('code','open')->first(),
@@ -88,7 +88,7 @@ class JobCardEngineerController extends Controller
         else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "pending"){
             return view('frontend.job-card.engineer.progress-pause', [
                 'jobcard' => $jobcard,
-                'resume' => $this->statuses->where('code','progress')->first(),
+                'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
@@ -106,6 +106,20 @@ class JobCardEngineerController extends Controller
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $jobcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.jobcard-engineer.index');
+        }
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
+            $jobcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','pending')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.jobcard-engineer.index');
+        }
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
+            $jobcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','closed')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
             return redirect()->route('frontend.jobcard-engineer.index');
