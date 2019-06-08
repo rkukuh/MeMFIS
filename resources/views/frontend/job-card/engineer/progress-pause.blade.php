@@ -204,8 +204,17 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                            @include('frontend.common.buttons.resume')
-                                            @include('frontend.common.buttons.close')
+                                            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="{{route('frontend.jobcard-engineer.update',$jobcard->uuid)}}" id="WorkpackageForm">
+                                                {{method_field('PATCH')}}
+                                                {!! csrf_field() !!}
+                                                <input type="hidden" name="progress" value="{{$open->uuid}}">
+
+                                                @include('frontend.common.buttons.resume')
+                                            </form>
+                                            @include('frontend.job-card.engineer.modal-close')
+                                            @component('frontend.common.buttons.close')
+                                                @slot('data_target', '#modal_close')
+                                            @endcomponent
                                             @include('frontend.common.buttons.found')
                                         </div>
                                     </div>
