@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Frontend\Quotation;
 
 use Auth;
 use App\Models\Type;
+use App\Models\Status;
 use App\Models\Project;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Customer;
 use App\Models\Currency;
+use App\Models\Progress;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
@@ -147,7 +149,7 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        array_push($attentions, $contact);  
+        array_push($attentions, $contact);
         dd($request->chargeType);
         $request->charge = json_decode($request->charge);
         $request->chargeType = json_decode($request->chargeType);
@@ -206,7 +208,7 @@ class QuotationController extends Controller
         $project = Project::where('id',$quotation->project_id)->first();
         foreach($project->workpackages as $wp){
             foreach($wp->taskcards as $tc){
-                JobCard::create([
+                $jobcard = JobCard::create([
                     'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
                     'taskcard_id' => $tc->id,
                     'quotation_id' => $quotation->id,
@@ -217,6 +219,12 @@ class QuotationController extends Controller
                 //     echo $item->name.'<br>';
                 // }
                 // dump($tc->materials->toJson());
+
+                $jobcard->progresses()->save(new Progress([
+                    'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                    'progressed_by' => Auth::id()
+                ]));
+
             }
         }
 
