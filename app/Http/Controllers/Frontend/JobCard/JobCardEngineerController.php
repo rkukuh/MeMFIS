@@ -128,10 +128,8 @@ class JobCardEngineerController extends Controller
                 'approvable_id' => $jobcard->id,
                 'approved_by' => Auth::id(),
             ]));
-
             return redirect()->route('frontend.jobcard-engineer.index');
         }
-
     }
 
     /**
