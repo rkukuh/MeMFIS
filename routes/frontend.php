@@ -462,7 +462,7 @@ Route::name('frontend.')->group(function () {
             ]);
 
             Route::name('taskrelease.')->group(function () {
-                Route::put('{taskrelease}/approve', 'TaskReleaseController@approve')->name('task-release.approve');
+
             });
         });
 
@@ -474,7 +474,7 @@ Route::name('frontend.')->group(function () {
             ]);
 
             Route::name('riirelease.')->group(function () {
-                Route::put('{riirelease}/approve', 'RIIReleaseController@approve')->name('rii-release.approve');
+
             });
         });
 

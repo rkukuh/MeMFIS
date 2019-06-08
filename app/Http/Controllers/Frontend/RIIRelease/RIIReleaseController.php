@@ -101,15 +101,4 @@ class RIIReleaseController extends Controller
         //
     }
 
-    /**
-     * Approve the specified resource in storage.
-     *
-     * @param  \App\Models\JobCard  $jobcard
-     * @return \Illuminate\Http\Response
-     */
-    public function approve(JobCard $riirelease)
-    {
-        //
-    }
-
 }
