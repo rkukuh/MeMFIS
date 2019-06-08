@@ -79,7 +79,7 @@ class RIIReleaseController extends Controller
 
         $riirelease->progresses()->save(new Progress([
             'status_id' => $status,
-            'conducted_by' => Auth::id()
+            'progressed_by' => Auth::id()
         ]));
 
         $riirelease->approvals()->save(new Approval([

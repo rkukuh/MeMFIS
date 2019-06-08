@@ -80,7 +80,7 @@ class TaskReleaseController extends Controller
 
         $taskrelease->progresses()->save(new Progress([
             'status_id' => $status,
-            'conducted_by' => Auth::id()
+            'progressed_by' => Auth::id()
         ]));
 
         $taskrelease->approvals()->save(new Approval([
