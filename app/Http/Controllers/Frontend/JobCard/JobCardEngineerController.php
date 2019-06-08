@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\JobCard;
 
 use Validator;
+use App\Models\Status;
 use App\Models\JobCard;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,6 +13,13 @@ use App\Http\Requests\Frontend\JobCardUpdate;
 
 class JobCardEngineerController extends Controller
 {
+    protected $statuses;
+
+    public function __construct()
+    {
+        $this->statuses = Status::ofJobCard()->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +37,7 @@ class JobCardEngineerController extends Controller
      */
     public function create()
     {
-        return view('frontend.job-card.engineer.open');
+        //
     }
 
     /**
@@ -62,9 +70,26 @@ class JobCardEngineerController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
-        return view('frontend.job-card.engineer.progress-resume', [
-            'jobcard' => $jobcard,
-        ]);
+        if ($jobcard->progresses->count() == 0) {
+            return view('frontend.job-card.engineer.open', [
+                'jobcard' => $jobcard,
+                'status' => $this->statuses->where('code','open')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "progress"){
+            return view('frontend.job-card.engineer.progress-resume', [
+                'jobcard' => $jobcard,
+                'pending' => $this->statuses->where('code','pending')->first(),
+                'closed' => $this->statuses->where('code','closed')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "pending"){
+            return view('frontend.job-card.engineer.progress-pause', [
+                'jobcard' => $jobcard,
+                'resume' => $this->statuses->where('code','progress')->first(),
+                'closed' => $this->statuses->where('code','closed')->first(),
+            ]);
+        }
     }
 
     /**
