@@ -33,13 +33,13 @@ class TaskCard extends MemfisModel
         'reference',
         'category_id',
         'scheduled_priority_id',
-        'scheduled_priority_amount',
+        'scheduled_priority_text',
         'scheduled_priority_type',
         'recurrence_id',
         'recurrence_amount',
         'recurrence_type',
         'manual_affected_id',
-        'manual_affected',
+        'manual_affected_text',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
