@@ -24,6 +24,8 @@ class Progress extends MemfisModel
      * This function will get all of the owning progressable models.
      * See:
      * - JobCard's progresses() method for the inverse
+     * - DefectCard's progresses() method for the inverse
+     * 
      */
     public function progressable()
     {

@@ -48,6 +48,17 @@ class DefectCard extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many progresses.
+     *
+     * This function will get all DefectCard's progresses.
+     * See: Progress's progressable() method for the inverse
+     */
+    public function progresses()
+    {
+        return $this->morphMany(Progress::class, 'progressable');
+    }
+
+    /**
      * One-Way: A Defect Card must have a propose correction.
      *
      * @return mixed
