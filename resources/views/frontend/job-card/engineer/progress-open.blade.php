@@ -198,19 +198,50 @@
                                         </tr>
 
                                     </table>
+                                    <table border="1px" width="100%" style="margin-top:10px">
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Helper
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    <div class='repeater'>
+                                                        <div data-repeater-list="group-email">
+                                                            <div data-repeater-item>
+                                                                <div class=" row">
+                                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                        {{-- TO DO ganti select--}}
+                                                                        @component('frontend.common.input.text')
+                                                                            @slot('text', 'helper')
+                                                                            @slot('id', 'helper')
+                                                                            @slot('name', 'helper')
+                                                                            @slot('id_error', 'helper')
+                                                                        @endcomponent
+                                                                    </div>
+                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                        @include('frontend.common.buttons.create_repeater')
+                                                                    </div>
+                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                        @include('frontend.common.buttons.delete_repeater')
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    </table>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                            @component('frontend.common.buttons.execute')
-                                                @slot('type','button')
-                                                @slot('id', 'add-item')
-                                                @slot('class', 'add-item')
-                                                @slot('href',route('frontend.jobcard-mechanic.edit',[
-                                                    'id' => 1]))
-                                            @endcomponent
+                                            <form method="POST" action="{{route('frontend.jobcard-engineer.update',$jobcard->uuid)}}">
+                                                {{method_field('PATCH')}}
+                                                {!! csrf_field() !!}
+                                                <input type="hidden" name="progress" value="{{$status->uuid}}">
+                                                @include('frontend.common.buttons.execute')
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -224,6 +255,7 @@
 @endsection
 
 @push('footer-scripts')
+<script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/type.js')}}"></script>

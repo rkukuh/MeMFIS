@@ -52,7 +52,6 @@ Route::name('frontend.')->group(function () {
         /** MASTER */
 
         Route::resource('user', 'UserController');
-        Route::resource('htcrr', 'HtCrrController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
         Route::resource('storage', 'StorageController');
@@ -270,6 +269,21 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        /** HT/CRR */
+
+        Route::namespace('Project')->group(function () {
+            Route::resource('htcrr', 'HtCrrController');
+
+            Route::name('htcrr.')->group(function () {
+                Route::prefix('htcrr')->group(function () {
+
+
+                });
+            });
+
+        });
+
+
         /** TASK CARD */
 
         Route::namespace('TaskCard')->group(function () {
@@ -448,7 +462,7 @@ Route::name('frontend.')->group(function () {
             ]);
 
             Route::name('taskrelease.')->group(function () {
-                Route::put('{taskrelease}/approve', 'TaskReleaseController@approve')->name('task-release.approve');
+
             });
         });
 
@@ -456,11 +470,11 @@ Route::name('frontend.')->group(function () {
 
          Route::namespace('RIIRelease')->group(function () {
             Route::resource('rii-release', 'RIIReleaseController', [
-                'parameters' => ['rii-release' => 'taskrelease']
+                'parameters' => ['rii-release' => 'riirelease']
             ]);
 
             Route::name('riirelease.')->group(function () {
-                Route::put('{riirelease}/approve', 'RIIReleaseController@approve')->name('rii-release.approve');
+
             });
         });
 

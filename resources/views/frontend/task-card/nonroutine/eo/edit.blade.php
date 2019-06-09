@@ -561,7 +561,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.routine.threshold.modal')
+                            @include('frontend.task-card.routine.threshold.modal')
 
                             <div class="threshold_datatable" id="item_datatable"></div>
                         </div>
@@ -599,7 +599,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.routine.repeat.modal')
+                            @include('frontend.task-card.routine.repeat.modal')
 
                             <div class="repeat_datatable" id="item_datatable"></div>
                         </div>
@@ -641,11 +641,11 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.nonroutine.eo.instruction.modal')
-                            @include('frontend.taskcard.nonroutine.eo.tool.index')
-                            @include('frontend.taskcard.nonroutine.eo.tool.modal')
-                            @include('frontend.taskcard.nonroutine.eo.item.index')
-                            @include('frontend.taskcard.nonroutine.eo.item.modal')
+                            @include('frontend.task-card.nonroutine.eo.instruction.modal')
+                            @include('frontend.task-card.nonroutine.eo.tool.index')
+                            @include('frontend.task-card.nonroutine.eo.tool.modal')
+                            @include('frontend.task-card.nonroutine.eo.item.index')
+                            @include('frontend.task-card.nonroutine.eo.item.modal')
 
                             <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>

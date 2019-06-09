@@ -2,15 +2,27 @@
 
 namespace App\Http\Controllers\Frontend\JobCard;
 
+use Auth;
 use Validator;
+use App\Models\Status;
 use App\Models\JobCard;
+use App\Models\Approval;
+use App\Models\Progress;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
 
 class JobCardMechanicController extends Controller
 {
+    protected $statuses;
+
+    public function __construct()
+    {
+        $this->statuses = Status::ofJobCard()->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +60,7 @@ class JobCardMechanicController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function show(JobCard $jobCard)
+    public function show(JobCard $jobcard)
     {
         //
     }
@@ -59,12 +71,29 @@ class JobCardMechanicController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobCard)
+    public function edit(JobCard $jobcard)
     {
-        return view('frontend.job-card.mechanic.progress-resume', [
-            'jobCard' => $jobCard,
-        ]);
-        // return view('frontend.job-card.mechanic.progress-pause');
+        if ($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open") {
+            return view('frontend.job-card.mechanic.progress-open', [
+                'jobcard' => $jobcard,
+                'status' => $this->statuses->where('code','open')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "progress"){
+            return view('frontend.job-card.mechanic.progress-resume', [
+                'jobcard' => $jobcard,
+                'pending' => $this->statuses->where('code','pending')->first(),
+                'closed' => $this->statuses->where('code','closed')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "pending"){
+            return view('frontend.job-card.mechanic.progress-pause', [
+                'jobcard' => $jobcard,
+                'open' => $this->statuses->where('code','open')->first(),
+                'closed' => $this->statuses->where('code','closed')->first(),
+            ]);
+        }
+
     }
 
     /**
@@ -74,9 +103,29 @@ class JobCardMechanicController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $jobCard)
+    public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-        //
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
+            $jobcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','progress')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.jobcard-mechanic.index');
+        }
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
+            $jobcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','pending')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.jobcard-mechanic.index');
+        }
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
+            $jobcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','closed')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.jobcard-mechanic.index');
+        }
     }
 
     /**
@@ -85,7 +134,7 @@ class JobCardMechanicController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobCard $jobCard)
+    public function destroy(JobCard $jobcard)
     {
         //
     }

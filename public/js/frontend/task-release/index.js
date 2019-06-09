@@ -59,11 +59,11 @@ let TaskRelease = {
                     title: 'Job Card No',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t, e, i) {
-                    //     return (
-                    //         '<a href="/task-release/create">' + t.number + "</a>"
-                    //     );
-                    // }
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="/task-release/create">' + t.number + "</a>"
+                        );
+                    }
                 },
                 {
                     field: 'pesawat',
@@ -121,7 +121,7 @@ let TaskRelease = {
                     template: function (t, e, i) {
 
                             return (
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-id="' + t.uuid +'">' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
                                 '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
@@ -134,7 +134,7 @@ let TaskRelease = {
         });
 
         $('.taskrelease_datatable').on('click', '.release', function () {
-            let quotation_uuid = $(this).data('id');
+            let jobcard_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to Release?',
@@ -152,8 +152,8 @@ let TaskRelease = {
                                 'content'
                             )
                         },
-                        type: 'DELETE',
-                        // url: '/quotation/' + quotation_uuid + '',
+                        type: 'PUT',
+                        url: '/task-release/' + jobcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Quotation has been deleted.', 'Deleted', {
                                     timeOut: 5000

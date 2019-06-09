@@ -50,11 +50,10 @@
                     <div class="m-portlet__body">
                         <div class="row align-items-center" style="margin-top:50px;">
                             <div class="col-xl-12 order-2 order-xl-1">
-                                <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
-                                    <div class="col-md-4">
-                                        <form method="POST" action="{{route('frontend.engineer.jobcard.seacrh')}}">
-                                            {!! csrf_field() !!}
-
+                                <form method="POST" action="{{route('frontend.engineer.jobcard.seacrh')}}">
+                                    {!! csrf_field() !!}
+                                    <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
+                                        <div class="col-md-4">
                                             <div class="m-input-icon m-input-icon--left">
                                                 <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
 
@@ -65,19 +64,17 @@
                                             <?php
                                             echo $errors->first('number','<div class="form-control-feedback text-danger" ">:message</div>');
                                             ?>
+                                        </div>
+                                        <div class="col-md-3 search">
+                                            @component('frontend.common.buttons.search')
+                                                @slot('id','btn-search')
+                                            @endcomponent()
 
-                                        </form>
+                                            @include('frontend.common.buttons.filter')
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        @component('frontend.common.buttons.search')
-                                            @slot('id','btn-search')
-                                        @endcomponent()
-
-                                        @include('frontend.common.buttons.filter')
-                                    </div>
-                                </div>
+                                </form>
                             </div>
-
                         </div>
                     </div>
 
@@ -93,9 +90,6 @@
                             <div class="job_card_datatable" id="scrolling_both"></div>
                         </div>
 
-                        @include('frontend.job-card.engineer.tool.index')
-                        @include('frontend.job-card.engineer.item.index')
-
                     </div>
 
                 </div>
@@ -106,10 +100,7 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
 <script>
     let input = document.getElementById("search");
     input.addEventListener("keyup", function(event) {

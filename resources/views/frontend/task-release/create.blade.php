@@ -323,9 +323,7 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.release')
-                                                    @slot('icon','fa-check-circle')
-                                                @endcomponent
+                                                @include('frontend.common.buttons.release')
                                                 @component('frontend.common.buttons.back')
                                                     @slot('href', route('frontend.task-release.index'))
                                                 @endcomponent
