@@ -393,7 +393,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.nonroutine.si.tool.modal')
+                            @include('frontend.task-card.nonroutine.si.tool.modal')
 
                             <div class="tool_datatable" id="tool_datatable"></div>
                         </div>
@@ -431,7 +431,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.nonroutine.si.item.modal')
+                            @include('frontend.task-card.nonroutine.si.item.modal')
 
                             <div class="item_datatable" id="item_datatable"></div>
                         </div>
@@ -469,7 +469,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.routine.threshold.modal')
+                            @include('frontend.task-card.routine.threshold.modal')
 
                             <div class="threshold_datatable" id="item_datatable"></div>
                         </div>
@@ -507,7 +507,7 @@
                                 </div>
                             </div>
 
-                            @include('frontend.taskcard.routine.repeat.modal')
+                            @include('frontend.task-card.routine.repeat.modal')
 
                             <div class="repeat_datatable" id="item_datatable"></div>
                         </div>
