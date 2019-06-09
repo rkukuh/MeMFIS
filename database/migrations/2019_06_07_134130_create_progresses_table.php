@@ -18,6 +18,8 @@ class CreateProgressesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->morphs('progressable');
             $table->unsignedInteger('status_id');
+            $table->unsignedInteger('reason_id')->nullable();
+            $table->string('reason_text')->nullable();
             $table->unsignedInteger('progressed_by');
             $table->text('note')->nullable();
             $table->timestamps();
@@ -25,6 +27,11 @@ class CreateProgressesTable extends Migration
 
             $table->foreign('status_id')
                     ->references('id')->on('statuses')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('reason_id')
+                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
