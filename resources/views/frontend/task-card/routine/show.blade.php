@@ -337,7 +337,7 @@
                                                     @slot('text', 'show task card')
                                                     @slot('data_target', '#modal_showtaskcard')
                                                 @endcomponent
-                                                @include('frontend.taskcard.modal')
+                                                @include('frontend.task-card.modal')
                                             @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">

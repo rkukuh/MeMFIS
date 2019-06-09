@@ -149,7 +149,7 @@
                                                             @slot('text', 'show task card')
                                                             @slot('data_target', '#modal_showtaskcard')
                                                         @endcomponent
-                                                    @include('frontend.taskcard.modal')
+                                                    @include('frontend.task-card.modal')
                                                     @endif
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -395,9 +395,9 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            @include('frontend.taskcard.nonroutine.eo.instruction.modal')
-                            @include('frontend.taskcard.nonroutine.eo.tool.modal')
-                            @include('frontend.taskcard.nonroutine.eo.item.modal')
+                            @include('frontend.task-card.nonroutine.eo.instruction.modal')
+                            @include('frontend.task-card.nonroutine.eo.tool.modal')
+                            @include('frontend.task-card.nonroutine.eo.item.modal')
 
                             <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>
