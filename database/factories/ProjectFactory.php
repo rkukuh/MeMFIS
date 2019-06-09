@@ -74,11 +74,13 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
         $workpackage = factory(WorkPackage::class)->create();
 
         $project->workpackages()->save($workpackage, [
+            'tat' => $faker->randomDigitNotNull,
             'performance_factor' => $faker->randomElement([
                 null,
                 (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
             ]),
-            'tat' => $faker->randomDigitNotNull,
+            'total_manhours' => $faker->randomFloat(2, 0, 9999),
+            'total_manhours_with_performance_factor' => $faker->randomFloat(2, 0, 9999) * 2,
         ]);
     }
 
