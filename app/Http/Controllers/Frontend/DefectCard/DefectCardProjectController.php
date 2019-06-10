@@ -15,7 +15,7 @@ class DefectCardProjectController extends Controller
      */
     public function index()
     {
-        return view('frontend.defect-card.i.project.index');
+        return view('frontend.defect-card.project.index');
     }
 
     /**
@@ -47,7 +47,7 @@ class DefectCardProjectController extends Controller
      */
     public function show(DefectCard $defectCard)
     {
-        return view('frontend.defect-card.i.project.show');
+        return view('frontend.defect-card.project.show');
     }
 
     /**

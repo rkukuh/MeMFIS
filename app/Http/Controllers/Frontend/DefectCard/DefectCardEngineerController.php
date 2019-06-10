@@ -15,7 +15,7 @@ class DefectCardEngineerController extends Controller
      */
     public function index()
     {
-        return view('frontend.defect-card.i.engineer.index');
+        return view('frontend.defect-card.engineer.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class DefectCardEngineerController extends Controller
      */
     public function create()
     {
-        return view('frontend.defect-card.i.engineer.open');
+        return view('frontend.defect-card.engineer.open');
     }
 
     /**
@@ -47,7 +47,7 @@ class DefectCardEngineerController extends Controller
      */
     public function show(DefectCard $defectCard)
     {
-        return view('frontend.defect-card.i.engineer.progress');
+        return view('frontend.defect-card.engineer.progress');
     }
 
     /**
@@ -58,7 +58,7 @@ class DefectCardEngineerController extends Controller
      */
     public function edit(DefectCard $defectCard)
     {
-        return view('frontend.defect-card.i.engineer.pending');
+        return view('frontend.defect-card.engineer.pending');
     }
 
     /**
@@ -82,5 +82,28 @@ class DefectCardEngineerController extends Controller
     public function destroy(DefectCard $defectCard)
     {
         //
+    }
+
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'number' => 'required|exists:jobcards,number'
+          ]);
+
+          if ($validator->fails()) {
+            return
+            redirect()->route('frontend.jobcard-engineer.index')->withErrors($validator)->withInput();
+          }
+
+        $search = DefectCard::where('code',$request->number)->first();
+
+        return redirect()->route('frontend.jobcard-engineer.edit',$search->uuid);
     }
 }
