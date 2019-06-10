@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
-use App\Models\DefectCard;
+use Auth;
+use App\Models\Status;
 use App\Models\JobCard;
+use App\Models\Progress;
+use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -42,6 +45,11 @@ class DiscrepancyEngineerController extends Controller
     {
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
         $defectcard = DefectCard::create($request->all());
+
+        $defectcard->progresses()->save(new Progress([
+            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
         return response()->json($defectcard);
     }
