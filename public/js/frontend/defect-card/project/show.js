@@ -6,7 +6,7 @@ let DcProjectShow = {
               source: {
                   read: {
                       method: 'GET',
-                      url: '/datatables/customer',
+                      url: '/datatables/defectcard/project/'+project_uuid+'/',
                       map: function (raw) {
                           let dataSet = raw;
 

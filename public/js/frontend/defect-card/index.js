@@ -7,7 +7,7 @@ let DefectCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/defectcard',
+                        url: '/datatables/defectcard/project',
 
                         map: function (raw) {
                             let dataSet = raw;
