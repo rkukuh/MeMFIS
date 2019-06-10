@@ -321,9 +321,16 @@ let Quotation = {
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
             let scheduled_payment_array = [];
-            $('#scheduled_payment ').each(function (i) {
-                scheduled_payment_array[i] = parseInt($(this).val());
-            });
+            let type = $('#scheduled_payment_type').children("option:selected").html();
+            if(type === "By Date"){
+                $('select[name^=scheduled_payment] ').each(function (i) {
+                    scheduled_payment_array[i] = $(this).val();
+                });
+            }else{
+                $('#scheduled_payment ').each(function (i) {
+                    scheduled_payment_array[i] = parseInt($(this).val());
+                });
+            }
             scheduled_payment_array.pop();
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
