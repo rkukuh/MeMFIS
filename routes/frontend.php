@@ -393,6 +393,29 @@ Route::name('frontend.')->group(function () {
 
         });
 
+          /** TASK RELEASE */
+
+          Route::namespace('TaskRelease')->group(function () {
+            Route::resource('task-release', 'TaskReleaseController', [
+                'parameters' => ['task-release' => 'taskrelease']
+            ]);
+
+            Route::name('taskrelease.')->group(function () {
+
+            });
+        });
+
+         /** RII RELEASE */
+
+         Route::namespace('RIIRelease')->group(function () {
+            Route::resource('rii-release', 'RIIReleaseController', [
+                'parameters' => ['rii-release' => 'riirelease']
+            ]);
+
+            Route::name('riirelease.')->group(function () {
+
+            });
+        });
 
         /** Discrepancy */
 
@@ -460,29 +483,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-         /** TASK RELEASE */
-
-         Route::namespace('TaskRelease')->group(function () {
-            Route::resource('task-release', 'TaskReleaseController', [
-                'parameters' => ['task-release' => 'taskrelease']
-            ]);
-
-            Route::name('taskrelease.')->group(function () {
-
-            });
-        });
-
-         /** RII RELEASE */
-
-         Route::namespace('RIIRelease')->group(function () {
-            Route::resource('rii-release', 'RIIReleaseController', [
-                'parameters' => ['rii-release' => 'riirelease']
-            ]);
-
-            Route::name('riirelease.')->group(function () {
-
-            });
-        });
 
         /** INTERCHANGE */
 
