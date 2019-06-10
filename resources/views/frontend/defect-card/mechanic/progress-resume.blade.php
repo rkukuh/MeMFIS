@@ -321,7 +321,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                         <div class="flex">
                             <div class="action-buttons">
-                            @include('frontend.defectcard.mechanic.modal-pause')
+                            @include('frontend.defect-card.mechanic.modal-pause')
                             @component('frontend.common.buttons.pause')
                                 @slot('data_target', '#modal_pause')
                             @endcomponent
