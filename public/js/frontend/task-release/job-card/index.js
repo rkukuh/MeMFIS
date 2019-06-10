@@ -61,7 +61,7 @@ let TaskRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/task-release/create">' + t.number + "</a>"
+                            '<a href="/taskrelease-jobcard/task-release/create">' + t.number + "</a>"
                         );
                     }
                 },
@@ -124,7 +124,7 @@ let TaskRelease = {
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
@@ -153,14 +153,14 @@ let TaskRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/task-release/' + jobcard_uuid + '/',
+                        url: '/taskrelease-jobcard/task-release/' + jobcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Quotation has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.taskrelease_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

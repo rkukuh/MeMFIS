@@ -325,7 +325,7 @@
                                             <div class="action-buttons">
                                                 @include('frontend.common.buttons.release')
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.workpackage.create'))
+                                                @slot('href', route('frontend.riirelease-jobcard.rii-release.index'))
                                                 @endcomponent
                                             </div>
                                         </div>

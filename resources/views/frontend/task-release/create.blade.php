@@ -325,7 +325,7 @@
                                             <div class="action-buttons">
                                                 @include('frontend.common.buttons.release')
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.task-release.index'))
+                                                    @slot('href', route('frontend.taskrelease-jobcard.task-release.index'))
                                                 @endcomponent
                                             </div>
                                         </div>
