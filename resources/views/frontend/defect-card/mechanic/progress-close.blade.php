@@ -40,7 +40,7 @@
                     </span>
 
                     @component('frontend.common.label.create-new')
-                        @slot('text','progress')
+                        @slot('text','pending')
                     @endcomponent
 
                     <h3 class="m-portlet__head-text">
@@ -51,6 +51,7 @@
         </div>
         <div class="m-portlet m-portlet--mobile">
           <div class="m-portlet__body">
+            <form id="itemform" name="itemform">
               <div class="m-portlet__body">
                 <div class="form-group m-form__group row">
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -191,6 +192,7 @@
                             @slot('id', 'is_rii')
                             @slot('name', 'is_rii')
                             @slot('text', 'IS RII?')
+                            @slot('disabled','disabled')
                         @endcomponent
                     </div>
                 </div>
@@ -320,21 +322,13 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                @include('frontend.defect-card.engineer.modal-pause')
-                                @component('frontend.common.buttons.pause')
-                                    @slot('data_target', '#modal_pause')
-                                @endcomponent
-
-                                @include('frontend.defect-card.engineer.modal-close')
-                                @component('frontend.common.buttons.close')
-                                    @slot('data_target', '#modal_close')
-                                    @slot('class', 'ml-2')
-                                @endcomponent
+                                @include('frontend.common.buttons.back')
                             </div>
                         </div>
                     </div>
                 </div>
               </div>
+            </form>
           </div>
         </div>
       </div>

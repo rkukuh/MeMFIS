@@ -51,7 +51,6 @@
         </div>
         <div class="m-portlet m-portlet--mobile">
           <div class="m-portlet__body">
-            <form id="itemform" name="itemform">
               <div class="m-portlet__body">
                 <div class="form-group m-form__group row">
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -322,33 +321,18 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                @component('frontend.common.buttons.submit')
-                                    @slot('type','button')
-                                    @slot('id', 'resume')
-                                    @slot('class', 'resume')
-                                    @slot('text','Resume')
-                                    @slot('color','primary')
-                                    @slot('icon','')
-                                @endcomponent
+                                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.defectcard-mechanic.update',$defectcard->uuid)}}" id="WorkpackageForm">
+                                    {{method_field('PATCH')}}
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="progress" value="{{$open->uuid}}">
 
-                                @component('frontend.common.buttons.submit')
-                                    @slot('type','button')
-                                    @slot('id', 'closed')
-                                    @slot('class', 'closed')
-                                    @slot('text','Closed')
-                                    @slot('color','primary')
-                                    @slot('icon','')
-                                @endcomponent
-
-                                @component('frontend.common.buttons.back')
-                                    @slot('href', route('frontend.receiving-inspection-report.index'))
-                                @endcomponent
+                                    @include('frontend.common.buttons.resume')
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>

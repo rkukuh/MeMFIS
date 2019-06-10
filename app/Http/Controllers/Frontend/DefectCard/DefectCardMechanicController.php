@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Frontend\DefectCard;
 
+use Auth;
+use Validator;
 use App\Models\Status;
+use App\Models\Progress;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 
 class DefectCardMechanicController extends Controller
 {
@@ -87,6 +89,11 @@ class DefectCardMechanicController extends Controller
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
+        else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "closed"){
+            return view('frontend.defect-card.mechanic.progress-close', [
+                'defectcard' => $defectcard,
+            ]);
+        }
     }
 
     /**
@@ -96,9 +103,30 @@ class DefectCardMechanicController extends Controller
      * @param  \App\Models\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DefectCard $defectCard)
+    public function update(Request $request, DefectCard $defectcard)
     {
-        //
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
+            $defectcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','progress')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.defectcard-mechanic.index');
+        }
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
+            $defectcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','pending')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.defectcard-mechanic.index');
+        }
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
+            $defectcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','closed')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+
+            return redirect()->route('frontend.defectcard-mechanic.index');
+        }
     }
 
     /**
