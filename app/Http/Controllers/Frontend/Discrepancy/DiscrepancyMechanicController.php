@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
 use App\Models\JobCard;
+use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -65,7 +66,9 @@ class DiscrepancyMechanicController extends Controller
      */
     public function edit(DefectCard $discrepancy)
     {
-        return view('frontend.discrepancy.mechanic.edit');
+        return view('frontend.discrepancy.mechanic.edit', [
+            'discrepancy' => $discrepancy,
+        ]);
     }
 
     /**

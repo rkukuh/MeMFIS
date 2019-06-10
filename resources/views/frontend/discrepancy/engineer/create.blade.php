@@ -345,7 +345,7 @@
                                                         @slot('type','button')
                                                         @slot('id', 'add-discrepancy')
                                                         @slot('class', 'add-discrepancy')
-                                                        @slot('text','Save & Approved')
+                                                        @slot('text','Save')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
