@@ -104,6 +104,6 @@ class DefectCardEngineerController extends Controller
 
         $search = DefectCard::where('code',$request->number)->first();
 
-        return redirect()->route('frontend.jobcard-engineer.edit',$search->uuid);
+        return redirect()->route('frontend.defectcard-engineer.edit',$search->uuid);
     }
 }

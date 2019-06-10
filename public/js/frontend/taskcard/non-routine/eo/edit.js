@@ -1253,13 +1253,13 @@ $('.footer').on('click', '.add-taskcard', function () {
     data.append("scheduled_priority_id", $('#scheduled_priority_id').val());
     data.append("scheduled_priority_type", $('input[name=prior_to]:checked').val());
     if ($('input[name=prior_to]:checked').val() == 'date') {
-        data.append("scheduled_priority_amount", $('#date').val());
+        data.append("scheduled_priority_text", $('#date').val());
     }
     else if ($('input[name=prior_to]:checked').val() == 'hour') {
-        data.append("scheduled_priority_amount", $('#hour').val());
+        data.append("scheduled_priority_text", $('#hour').val());
     }
     else if ($('input[name=prior_to]:checked').val() == 'cycle') {
-        data.append("scheduled_priority_amount", $('#cycle').val());
+        data.append("scheduled_priority_text", $('#cycle').val());
     }
     data.append("recurrence_id", $('#recurrence_id').val());
     data.append("recurrence_amount", $('input[name=recurrence]').val());
