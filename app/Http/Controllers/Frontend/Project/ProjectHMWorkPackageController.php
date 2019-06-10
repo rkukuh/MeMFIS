@@ -80,6 +80,7 @@ class ProjectHMWorkPackageController extends Controller
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = false;
+        // dd($skills);
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
@@ -110,7 +111,7 @@ class ProjectHMWorkPackageController extends Controller
         foreach ($subset as $value) {
             array_push($skills, $value["skill_id"]);
         }
-
+        // TO DO : get all skill from $skills
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
@@ -155,11 +156,20 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function manhoursPropotion(Project $project, WorkPackage $workpackage,Request $request)
     {
-        $pw = ProjectWorkPackage::where('project_id',$project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
 
-            dd($pw);
+        dd($request->skills);
+
+        $project_workpackage->engineer()->create([
+            'skill_id' => $facility,
+            'engineer_id' => $facility,
+            'quantity' => $facility,
+        ]);
+
+        return response()->json($project_workpackage->engineer());
+        
     }
 
     /**
