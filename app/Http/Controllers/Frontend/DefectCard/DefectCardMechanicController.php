@@ -101,8 +101,8 @@ class DefectCardMechanicController extends Controller
             redirect()->route('frontend.jobcard-engineer.index')->withErrors($validator)->withInput();
           }
 
-        $search = JobCard::where('number',$request->number)->first();
+        $search = DefectCard::where('code',$request->number)->first();
 
-        return redirect()->route('frontend.jobcard-engineer.edit',$search->uuid);
+        return redirect()->route('frontend.defectcard-engineer.edit',$search->uuid);
     }
 }
