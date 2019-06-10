@@ -127,11 +127,11 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
+                                                    @slot('text', 'Engineer Quantity')
+                                                    @slot('id', 'engineer_qty')
+                                                    @slot('name', 'engineer_qty')
                                                     @slot('value', $discrepancy->engineer_quantity)
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('id_error', 'engineer_qty')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -151,11 +151,11 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
+                                                    @slot('text', 'Helper Quantity')
+                                                    @slot('id', 'helper_quantity')
+                                                    @slot('name', 'helper_quantity')
                                                     @slot('value', $discrepancy->helper_quantity)
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('id_error', 'helper_quantity')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -175,11 +175,11 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
+                                                    @slot('text', 'Manhours')
+                                                    @slot('id', 'manhours')
+                                                    @slot('name', 'manhours')
                                                     @slot('value', $discrepancy->estimation_manhour)
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('id_error', 'manhours')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -217,7 +217,9 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                                @slot('id', 'complaint')
+                                                @slot('name', 'complaint')
+                                                @slot('id_error', 'complaint')
                                                 @slot('value', $discrepancy->complaint)
                                             @endcomponent
                                         </div>
@@ -326,7 +328,9 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('id_error', 'description')
                                                 @slot('value', $discrepancy->description)
                                             @endcomponent
                                         </div>
