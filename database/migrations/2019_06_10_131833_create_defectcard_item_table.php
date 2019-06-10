@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemQuotationTable extends Migration
+class CreateDefectcardItemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateItemQuotationTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_quotation', function (Blueprint $table) {
+        Schema::create('defectcard_item', function (Blueprint $table) {
+            $table->unsignedInteger('defectcard_id');
             $table->unsignedInteger('item_id');
-            $table->unsignedInteger('quotation_id');
-            $table->unsignedInteger('taskcard_id');
-            $table->unsignedInteger('pricelist_unit_id');
-            $table->double('pricelist_price');
-            $table->double('subtotal');
-            $table->text('note')->nullable();
+            $table->integer('quantity');
+            $table->unsignedInteger('unit_id');
+            $table->string('ipc_ref');
+            $table->string('sn_on');
+            $table->string('sn_off');
             $table->timestamps();
             $table->softDeletes();
 
@@ -29,17 +29,12 @@ class CreateItemQuotationTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('quotation_id')
-                    ->references('id')->on('quotations')
+            $table->foreign('defectcard_id')
+                    ->references('id')->on('defectcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('taskcard_id')
-                    ->references('id')->on('taskcards')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('pricelist_unit_id')
+            $table->foreign('unit_id')
                     ->references('id')->on('units')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
@@ -53,6 +48,6 @@ class CreateItemQuotationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_quotation');
+        Schema::dropIfExists('defectcard_item');
     }
 }

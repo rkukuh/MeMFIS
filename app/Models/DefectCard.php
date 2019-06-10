@@ -35,6 +35,27 @@ class DefectCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A defect card may have zero or many item.
+     *
+     * This function will retrieve all the items of a defect card.
+     * See: Item's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'defectcard_item', 'defectcard_id', 'item_id')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'ipc_ref',
+                        'sn_on',
+                        'sn_off'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: A Job Card may have none or many Defect Card.
      *
      * This function will retrieve the Job Card of a given Defect Card.

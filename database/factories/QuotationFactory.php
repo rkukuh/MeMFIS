@@ -152,7 +152,7 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
 
             $quotation->items()->save($item, [
                 'taskcard_id' => $taskcard->id,
-                'pricelist_unit' => $unit->id,
+                'pricelist_unit_id' => $unit->id,
                 'pricelist_price' => rand(1, 10) * 1000000,
                 'subtotal' => rand(10, 20) * 1000000,
                 'note' => $faker->randomElement([null, $faker->sentence]),
