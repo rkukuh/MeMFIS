@@ -58,8 +58,11 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
             }
 
             $defectcard->items()->save($item, [
-                'unit_id' => $unit->id,
                 'quantity' => rand(10, 100),
+                'unit_id' => $unit->id,
+                'ipc_ref' => $faker->numerify('REF-#####'),
+                'sn_on' => $faker->numerify('SN-ON-#####'),
+                'sn_off' => $faker->numerify('SN-OFF-#####'),
             ]);
         }
     }

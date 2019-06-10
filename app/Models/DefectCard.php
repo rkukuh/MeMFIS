@@ -47,7 +47,10 @@ class DefectCard extends MemfisModel
         return $this->belongsToMany(Item::class, 'defectcard_item', 'defectcard_id', 'item_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id'
+                        'unit_id',
+                        'ipc_ref',
+                        'sn_on',
+                        'sn_off'
                     )
                     ->withTimestamps();
     }

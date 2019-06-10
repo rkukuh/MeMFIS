@@ -80,7 +80,10 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(DefectCard::class, 'defectcard_item', 'item_id', 'defectcard_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id'
+                        'unit_id',
+                        'ipc_ref',
+                        'sn_on',
+                        'sn_off'
                     )
                     ->withTimestamps();
     }
