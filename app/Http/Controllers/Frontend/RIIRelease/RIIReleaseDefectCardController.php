@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\TaskRelease;
+namespace App\Http\Controllers\Frontend\RIIRelease;
 
 use Auth;
 use App\Models\Status;
@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
 
-class TaskReleaseController extends Controller
+class RIIReleaseDefectCardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class TaskReleaseController extends Controller
      */
     public function index()
     {
-        return view('frontend.task-release.index');
+        return view('frontend.rii-release.index');
     }
 
     /**
@@ -30,7 +30,7 @@ class TaskReleaseController extends Controller
      */
     public function create()
     {
-        return view('frontend.task-release.create');
+        return view('frontend.rii-release.create');
     }
 
     /**
@@ -50,7 +50,7 @@ class TaskReleaseController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function show(TaskCard $taskrelease)
+    public function show(TaskCard $riirelease)
     {
         //
     }
@@ -61,34 +61,33 @@ class TaskReleaseController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $taskrelease)
+    public function edit(JobCard $riirelease)
     {
        //
     }
 
-
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\TaskCardUpdate  $request
-     * @param  \App\Models\TaskCard  $taskCard
+     * @param  \App\Http\Requests\Frontend\JobCardUpdate  $request
+     * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $taskrelease)
+    public function update(JobCardUpdate $request, JobCard $riirelease)
     {
-        $status = Status::ofJobcard()->where('code','released')->first()->id;
+        $status = Status::ofJobcard()->where('code','rii-released')->first()->id;
 
-        $taskrelease->progresses()->save(new Progress([
+        $riirelease->progresses()->save(new Progress([
             'status_id' => $status,
             'progressed_by' => Auth::id()
         ]));
 
-        $taskrelease->approvals()->save(new Approval([
-            'approvable_id' => $taskrelease->id,
+        $riirelease->approvals()->save(new Approval([
+            'approvable_id' => $riirelease->id,
             'approved_by' => Auth::id(),
         ]));
 
-        return response()->json($taskrelease);
+        return response()->json($riirelease);
     }
 
     /**
@@ -97,7 +96,7 @@ class TaskReleaseController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobCard $taskrelease)
+    public function destroy(JobCard $riirelease)
     {
         //
     }

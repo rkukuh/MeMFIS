@@ -136,7 +136,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.task-release.index') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.taskrelease-jobcard.task-release.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -146,7 +146,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.rii-release.index') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.riirelease-jobcard.rii-release.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
