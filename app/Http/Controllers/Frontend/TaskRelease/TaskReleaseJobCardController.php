@@ -30,7 +30,7 @@ class TaskReleaseJobCardController extends Controller
      */
     public function create()
     {
-        return view('frontend.task-release.create');
+        //
     }
 
     /**
@@ -63,9 +63,11 @@ class TaskReleaseJobCardController extends Controller
      */
     public function edit(JobCard $taskrelease)
     {
-       //
-    }
+        return view('frontend.task-release.create', [
+            'taskrelease' => $taskrelease,
+        ]);
 
+    }
 
     /**
      * Update the specified resource in storage.
