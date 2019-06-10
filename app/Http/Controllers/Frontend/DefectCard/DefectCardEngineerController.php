@@ -95,6 +95,11 @@ class DefectCardEngineerController extends Controller
                 'defectcard' => $defectcard,
             ]);
         }
+        else{
+            return view('frontend.defect-card.engineer.progress-close', [
+                'defectcard' => $defectcard,
+            ]);
+        }
     }
 
     /**
