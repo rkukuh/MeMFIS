@@ -55,7 +55,7 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-
+            let status = true;
             let access = [];
             let i = 0;
             $("#access").val().forEach(function(entry) {
@@ -85,12 +85,24 @@ let TaskCard = {
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
-                threshold_type[i] = $(this).val();
+                if($(this).val() == 'Select'){
+                    $(this).siblings(".select2-container").css('border', '5px solid red');
+                    status = false;
+                }else{
+                    $(this).siblings(".select2-container").css('border', '2px grey');
+                    threshold_type[i] = $(this).val();
+                }
             });
 
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
-                repeat_type[i] = $(this).val();
+                if($(this).val() == 'Select'){
+                    $(this).siblings(".select2-container").css('border', '5px solid red');
+                    status = false;
+                }else{
+                    $(this).siblings(".select2-container").css('border', '2px grey');
+                    repeat_type[i] = $(this).val();
+                }
             });
 
             let threshold_amount = [];
@@ -107,6 +119,10 @@ let TaskCard = {
                 is_rii = 1;
             } else {
                 is_rii = 0;
+            }
+
+            if(status == false){
+                return $status;
             }
 
             let data = new FormData();

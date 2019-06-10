@@ -50,27 +50,32 @@
                     <div class="m-portlet__body">
                         <div class="row align-items-center" style="margin-top:50px;">
                             <div class="col-xl-12 order-2 order-xl-1">
-                                <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
-                                    <div class="col-md-4">
-                                        {{-- <form method="POST" action="{{route('frontend.mechanic.jobcard.seacrh')}}"> --}}
+                                <form method="POST" action="{{route('frontend.engineer.defectcard.seacrh')}}">
+                                    {!! csrf_field() !!}
+                                    <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
+                                        <div class="col-md-4">
                                             <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" id="search" name="search" placeholder="Search...">
+                                                <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
 
-                                                {{-- <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch"> --}}
                                                 <span class="m-input-icon__icon m-input-icon__icon--left">
                                                     <span><i class="la la-search"></i></span>
                                                 </span>
                                             </div>
-                                            <div class="d-flex justify-content-end mt-4 search">
-                                                @include('frontend.common.buttons.filter')
+                                            <?php
+                                            echo $errors->first('number','<div class="form-control-feedback text-danger" ">:message</div>');
+                                            ?>
+                                        </div>
+                                        <div class="col-md-3 search">
+                                            @component('frontend.common.buttons.search')
+                                                @slot('id','btn-search')
+                                            @endcomponent()
 
-                                                @include('frontend.common.buttons.search')
-                                            </div>
-                                        {{-- </form> --}}
-                                    </div>
+                                            @include('frontend.common.buttons.filter')
+                                        </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -99,17 +104,9 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
+<script src="{{ asset('js/frontend/defect-card/index.js') }}"></script>
 <script>
-    $('.search').on('click', '.search', function() {
-        let search = $('input[name=search]').val();
-
-        window.location.href = '/defectcard-engineer/' + search;
-
-    });
+    $("#number").focus();
 </script>
  <script>
     let input = document.getElementById("search");

@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', '2/12/2012')
+                                                @slot('text', $discrepancy->jobcard->quotation->project->created_at)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $discrepancy->jobcard->quotation->project->aircraft->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->quotation->project->aircraft_register)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -97,8 +97,9 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->number)
                                             @endcomponent
+                                            <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->jobcard->uuid}}">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -106,7 +107,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->quotation->project->aircraft_sn)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -128,6 +129,7 @@
                                             @component('frontend.common.input.number')
                                                     @slot('text', 'PPN')
                                                     @slot('id', 'ppn_amount')
+                                                    @slot('value', $discrepancy->engineer_quantity)
                                                     @slot('name', 'ppn_amount')
                                                     @slot('id_error', 'ppn_amount')
                                             @endcomponent
@@ -151,6 +153,7 @@
                                             @component('frontend.common.input.number')
                                                     @slot('text', 'PPN')
                                                     @slot('id', 'ppn_amount')
+                                                    @slot('value', $discrepancy->helper_quantity)
                                                     @slot('name', 'ppn_amount')
                                                     @slot('id_error', 'ppn_amount')
                                             @endcomponent
@@ -163,7 +166,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $discrepancy->jobcard->taskcard->work_area)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -174,6 +177,7 @@
                                             @component('frontend.common.input.number')
                                                     @slot('text', 'PPN')
                                                     @slot('id', 'ppn_amount')
+                                                    @slot('value', $discrepancy->estimation_manhour)
                                                     @slot('name', 'ppn_amount')
                                                     @slot('id_error', 'ppn_amount')
                                             @endcomponent
@@ -186,7 +190,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->taskcard->skill->name)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -198,6 +202,9 @@
                                                 @slot('id', 'is_rii')
                                                 @slot('name', 'is_rii')
                                                 @slot('text', 'IS RII?')
+                                                @if ($discrepancy->is_rii == 1)
+                                                        @slot('checked', 'checked')
+                                                    @endif
                                             @endcomponent
                                         </div>
                                     </div>
@@ -211,6 +218,7 @@
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
                                                 @slot('id_error', 'tag')
+                                                @slot('value', $discrepancy->complaint)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -323,6 +331,7 @@
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
                                                 @slot('id_error', 'tag')
+                                                @slot('value', $discrepancy->description)
                                             @endcomponent
                                         </div>
                                     </div>

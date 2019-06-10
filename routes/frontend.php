@@ -417,7 +417,8 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('discrepancy')->group(function () {
 
                     /** Transaction */
-                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.discrepancy.create');
+                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy.create');
+                    Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
                     Route::POST('engineer', 'DiscrepancyEngineerController@store')->name('jobcard.discrepancy.store');
 
                 });
@@ -435,9 +436,13 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['defectcard-engineer' => 'defectcard']
             ]);
 
+            Route::post('defectcard-engineer', 'DefectCardEngineerController@search')->name('engineer.defectcard.seacrh');
+
             Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
                 'parameters' => ['defectcard-mechanic' => 'defectcard']
             ]);
+
+            Route::post('defectcard-mechanic', 'DefectCardMechanicController@search')->name('mechanic.defectcard.seacrh');
 
             Route::resource('defectcard-project', 'DefectCardProjectController', [
                 'parameters' => ['defectcard-project' => 'defectcard']

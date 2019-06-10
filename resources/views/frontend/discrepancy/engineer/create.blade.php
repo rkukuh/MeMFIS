@@ -456,6 +456,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/discrepancy/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/engineer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
 @endpush

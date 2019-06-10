@@ -27,7 +27,7 @@ let Discrepancy = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/discrepancy/engineer',
+                url: '/discrepancy/mechanic',
                 data: {
                     _token: $('input[name=_token]').val(),
                     jobcard_id: uuid,
@@ -57,7 +57,7 @@ let Discrepancy = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+                        window.location.href = '/discrepancy-mechanic/' + data.uuid + '/edit';
 
                     }
                 }

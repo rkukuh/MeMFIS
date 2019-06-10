@@ -314,6 +314,31 @@ let Quotation = {
             });
         });
 
+        $('select[name="scheduled_payment_type"]').on('change', function () {
+            let type = this.options[this.selectedIndex].innerHTML;
+            if(type === "By Date"){
+                $.each($('#scheduled_payment '), function () {
+                    $(this).addClass("scheduledPayment");
+                    $(this).val("");
+                    $(this).datetimepicker({
+                        format: "yyyy-mm-dd",
+                        todayHighlight: !0,
+                        autoclose: !0,
+                        startView: 2,
+                        minView: 2,
+                        forceParse: 0,
+                        pickerPosition: "bottom-left"
+                    });
+                });
+            }else{
+                $.each($('#scheduled_payment '), function () {
+                    $(this).val("");
+                    $(this).removeClass("scheduledPayment");
+                    $(this).datetimepicker( "remove" );
+                });
+            }
+        });
+        
         $('.footer').on('click', '.add-quotation', function () {
             let attention_name = $('#attention').val();
             let attention_phone = $('#phone').val();
@@ -321,9 +346,16 @@ let Quotation = {
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
             let scheduled_payment_array = [];
-            $('#scheduled_payment ').each(function (i) {
-                scheduled_payment_array[i] = $(this).val();
-            });
+            let type = $('#scheduled_payment_type').children("option:selected").html();
+            if(type === "By Date"){
+                $('select[name^=scheduled_payment] ').each(function (i) {
+                    scheduled_payment_array[i] = $(this).val();
+                });
+            }else{
+                $('#scheduled_payment ').each(function (i) {
+                    scheduled_payment_array[i] = parseInt($(this).val());
+                });
+            }
             scheduled_payment_array.pop();
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
@@ -335,7 +367,7 @@ let Quotation = {
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
-            data.append("scheduled_payment_amount", scheduled_payment_array);
+            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
             data.append("attention_name", attention_name);
             data.append("attention_phone", attention_phone);
             data.append("attention_fax", attention_fax);
@@ -350,22 +382,18 @@ let Quotation = {
             data.append("title", $('#title').val());
 
             var charge = [];
-            var chargeInputs = $(".charge");
+            var chargeInputs = $('input[name^="charge"]');
             //get all values
             for (var i = 0; i < chargeInputs.length; i++) {
                 charge[i] = parseInt($(chargeInputs[i]).val());
             }
             data.append("charge", JSON.stringify(charge));
             var chargeType = [];
-            var chargeTypeInputs = $("select[name^=charge_type]");
             //get all values
-            for (var i = 0; i < chargeTypeInputs.length; i++) {
-                chargeType[i] = parseInt($(chargeTypeInputs[i]).val());
-            }
+            $("select[name^=charge_type]").each(function() {
+                chargeType.push($(this).children("option:selected").val());
+              });
             data.append("chargeType", JSON.stringify(chargeType));
-            console.log(chargeType);
-            console.log(chargeTypeInputs);
-            console.log(chargeTypeInputs.length);
             data.append('_method', 'PUT');
 
             $.ajax({

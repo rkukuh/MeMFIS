@@ -52,10 +52,11 @@
                                 <div class="col-xl-12 order-2 order-xl-1">
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
-                                            {{-- <form method="POST" action="{{route('frontend.mechanic.jobcard.seacrh')}}"> --}}
+                                            <form method="POST" action="{{route('frontend.mechanic.jobcard.seacrh')}}">
                                                 {!! csrf_field() !!}
                                                 <div class="m-input-icon m-input-icon--left">
-                                                        <input type="text" class="form-control m-input" id="search" name="search" placeholder="Search..." autofocus>
+                                                    <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
+
                                                     <span class="m-input-icon__icon m-input-icon__icon--left">
                                                         <span><i class="la la-search"></i></span>
                                                     </span>
@@ -65,7 +66,7 @@
                                                         @slot('id','btn-search')
                                                     @endcomponent()
                                                 </div>
-                                            {{-- </form> --}}
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -79,13 +80,8 @@
 @endsection
 
 @push('footer-scripts')
-    {{-- <script src="{{ asset('js/frontend/job-card/index.js') }}"></script> --}}
     <script>
-        $('.search').on('click', '.search', function() {
-        let search = $('input[name=search]').val();
-
-        window.location.href = '/defectcard-engineer/' + search;
-    });
+        $("#number").focus();
     </script>
     <script>
         let input = document.getElementById("search");
