@@ -20,6 +20,7 @@
                                 @component('frontend.common.input.radio')
                                     @slot('id', 'break')
                                     @slot('name', 'pause')
+                                    @slot('value', $break)
                                     @slot('text', 'Rest Time/ Beak Time')
                                 @endcomponent
                             </div>
@@ -29,6 +30,7 @@
                                 @component('frontend.common.input.radio')
                                     @slot('id', 'waiting')
                                     @slot('name', 'pause')
+                                    @slot('value', $waiting)
                                     @slot('text', 'Waiting for Material')
                                 @endcomponent
                             </div>
@@ -38,6 +40,7 @@
                                 @component('frontend.common.input.radio')
                                     @slot('id', 'other')
                                     @slot('name', 'pause')
+                                    @slot('value', $other)
                                     @slot('text', 'Other')
                                 @endcomponent
                             </div>

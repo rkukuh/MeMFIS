@@ -20,6 +20,7 @@
                                 <label class="form-control-label">
                                     Accomplishment Notes: @include('frontend.common.label.required')
                                 </label>
+                                <input type="hidden" id="accomplishment" name="accomplishment" value="{{$accomplished}}">
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
                                     @slot('id', 'note')
@@ -37,6 +38,7 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                         @component('frontend.common.input.radio')
                                             @slot('id', 'yes')
+                                            @slot('value', '1')
                                             @slot('name', 'discrepancy')
                                             @slot('text', 'Yes')
                                         @endcomponent
@@ -44,6 +46,7 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                         @component('frontend.common.input.radio')
                                             @slot('id', 'no')
+                                            @slot('value', '0')
                                             @slot('name', 'discrepancy')
                                             @slot('text', 'No')
                                         @endcomponent
