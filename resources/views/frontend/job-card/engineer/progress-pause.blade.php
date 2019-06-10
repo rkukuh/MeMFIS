@@ -208,7 +208,7 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="action-buttons d-flex flex-row-reverse">
-                                        <form method="POST" action="{{route('frontend.discrepancy.jobcard.discrepancy.create',$jobcard->uuid)}}">
+                                        <form method="POST" action="{{route('frontend.discrepancy.jobcard.engineer.discrepancy.create',$jobcard->uuid)}}">
                                             {!! csrf_field() !!}
                                             @include('frontend.common.buttons.found')
                                         </form>
