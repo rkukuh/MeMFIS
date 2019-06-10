@@ -417,7 +417,8 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('discrepancy')->group(function () {
 
                     /** Transaction */
-                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.discrepancy.create');
+                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy.create');
+                    Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
                     Route::POST('engineer', 'DiscrepancyEngineerController@store')->name('jobcard.discrepancy.store');
 
                 });
