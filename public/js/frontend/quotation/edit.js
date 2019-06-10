@@ -322,7 +322,7 @@ let Quotation = {
             let attention_address = $('#address').val();
             let scheduled_payment_array = [];
             $('#scheduled_payment ').each(function (i) {
-                scheduled_payment_array[i] = $(this).val();
+                scheduled_payment_array[i] = parseInt($(this).val());
             });
             scheduled_payment_array.pop();
             let data = new FormData();
@@ -335,7 +335,7 @@ let Quotation = {
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
-            data.append("scheduled_payment_amount", scheduled_payment_array);
+            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
             data.append("attention_name", attention_name);
             data.append("attention_phone", attention_phone);
             data.append("attention_fax", attention_fax);
@@ -350,22 +350,18 @@ let Quotation = {
             data.append("title", $('#title').val());
 
             var charge = [];
-            var chargeInputs = $(".charge");
+            var chargeInputs = $('input[name^="charge"]');
             //get all values
             for (var i = 0; i < chargeInputs.length; i++) {
                 charge[i] = parseInt($(chargeInputs[i]).val());
             }
             data.append("charge", JSON.stringify(charge));
             var chargeType = [];
-            var chargeTypeInputs = $("select[name^=charge_type]");
             //get all values
-            for (var i = 0; i < chargeTypeInputs.length; i++) {
-                chargeType[i] = parseInt($(chargeTypeInputs[i]).val());
-            }
+            $("select[name^=charge_type]").each(function() {
+                chargeType.push($(this).children("option:selected").val());
+              });
             data.append("chargeType", JSON.stringify(chargeType));
-            console.log(chargeType);
-            console.log(chargeTypeInputs);
-            console.log(chargeTypeInputs.length);
             data.append('_method', 'PUT');
 
             $.ajax({
