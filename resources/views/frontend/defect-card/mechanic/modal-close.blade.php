@@ -20,6 +20,7 @@
                                     <label class="form-control-label">
                                         Accomplishment Notes: @include('frontend.common.label.required')
                                     </label>
+                                    <input type="hidden" id="accomplishment" name="accomplishment" value="{{$accomplished}}">
                                     @component('frontend.common.input.textarea')
                                         @slot('rows', '3')
                                         @slot('id', 'note')
