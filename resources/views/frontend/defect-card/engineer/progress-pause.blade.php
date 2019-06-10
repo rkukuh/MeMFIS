@@ -328,12 +328,12 @@
 
                                             @include('frontend.common.buttons.resume')
                                         </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

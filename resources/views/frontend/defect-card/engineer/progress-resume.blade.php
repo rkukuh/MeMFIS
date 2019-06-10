@@ -321,16 +321,16 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                         <div class="flex">
                             <div class="action-buttons">
-                            @include('frontend.defect-card.engineer.modal-pause')
-                            @component('frontend.common.buttons.pause')
-                                @slot('data_target', '#modal_pause')
-                            @endcomponent
+                                @include('frontend.defect-card.engineer.modal-pause')
+                                @component('frontend.common.buttons.pause')
+                                    @slot('data_target', '#modal_pause')
+                                @endcomponent
 
-                            @include('frontend.defect-card.engineer.modal-close')
-                            @component('frontend.common.buttons.close')
-                                @slot('data_target', '#modal_close')
-                                @slot('class', 'ml-2')
-                            @endcomponent
+                                @include('frontend.defect-card.engineer.modal-close')
+                                @component('frontend.common.buttons.close')
+                                    @slot('data_target', '#modal_close')
+                                    @slot('class', 'ml-2')
+                                @endcomponent
 
                             </div>
                         </div>
