@@ -7,7 +7,7 @@ let TaskRelease = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/task-release',
+                        url: '/datatables/task-release-jobcard',
                         map: function (raw) {
                             let dataSet = raw;
 

@@ -7,7 +7,7 @@ let RiiRelease = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/rii-release',
+                        url: '/datatables/rii-release-defectcard',
                         map: function (raw) {
                             let dataSet = raw;
 
