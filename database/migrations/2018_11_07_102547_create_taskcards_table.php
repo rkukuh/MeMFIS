@@ -41,13 +41,13 @@ class CreateTaskcardsTable extends Migration
             $table->string('reference')->nullable();
             $table->unsignedInteger('category_id')->nullable();
             $table->unsignedInteger('scheduled_priority_id')->nullable();
-            $table->string('scheduled_priority_amount')->nullable();
+            $table->string('scheduled_priority_text')->nullable();
             $table->string('scheduled_priority_type')->nullable();
             $table->unsignedInteger('recurrence_id')->nullable();
             $table->integer('recurrence_amount')->nullable();
             $table->string('recurrence_type')->nullable();
             $table->unsignedInteger('manual_affected_id')->nullable();
-            $table->string('manual_affected')->nullable();
+            $table->string('manual_affected_text')->nullable();
 
             /** SI */
             // Fieldset #1 : SI No (req/1), Title (req/2), A/C Type (req/3), Skill (req/4), RII (req/5), Manhour (req/6), Helper Quantity (opt/7)

@@ -28,6 +28,17 @@ class Status extends MemfisModel
     }
 
     /**
+     * Scope a query to only include category of defect card.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDefectCard(Builder $query)
+    {
+        return $query->where('of', 'defectcard');
+    }
+
+    /**
      * Scope a query to only include category of employment.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

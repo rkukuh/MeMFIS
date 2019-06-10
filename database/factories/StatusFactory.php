@@ -12,7 +12,9 @@ $factory->define(Status::class, function (Faker $faker) {
         'name' => 'Status Dummy #' . $number,
         'of'   => $faker->randomElement([
             'marital',
+            'jobcard',
             'employment',
+            'defectcard',
             'customer-component-repair',
         ])
     ];
@@ -20,5 +22,7 @@ $factory->define(Status::class, function (Faker $faker) {
 });
 
 $factory->state(Status::class, 'marital', ['of' => 'marital']);
+$factory->state(Status::class, 'jobcard', ['of' => 'jobcard']);
 $factory->state(Status::class, 'employment', ['of' => 'employment']);
+$factory->state(Status::class, 'defecetcard', ['of' => 'defecetcard']);
 $factory->state(Status::class, 'customer-component-repair', ['of' => 'customer-component-repair']);

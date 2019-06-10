@@ -435,9 +435,13 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['defectcard-engineer' => 'defectcard']
             ]);
 
+            Route::post('defectcard-engineer', 'DefectCardEngineerController@search')->name('engineer.defectcard.seacrh');
+
             Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
                 'parameters' => ['defectcard-mechanic' => 'defectcard']
             ]);
+
+            Route::post('defectcard-mechanic', 'DefectCardMechanicController@search')->name('mechanic.defectcard.seacrh');
 
             Route::resource('defectcard-project', 'DefectCardProjectController', [
                 'parameters' => ['defectcard-project' => 'defectcard']

@@ -135,7 +135,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
             return factory(Category::class)->states('taskcard-eo')->create()->id;
         },
         'scheduled_priority_id' => $scheduled_priority->id,
-        'scheduled_priority_amount' => function () use ($scheduled_priority, $scheduled_priority_type) {
+        'scheduled_priority_text' => function () use ($scheduled_priority, $scheduled_priority_type) {
             if ($scheduled_priority->code == 'prior-to') {
                 if ($scheduled_priority_type == 'date') {
                     return Carbon::now();
@@ -169,7 +169,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
             }
         },
         'manual_affected_id' => $manual_affected->id,
-        'manual_affected' => function () use ($manual_affected, $faker) {
+        'manual_affected_text' => function () use ($manual_affected, $faker) {
             if ($manual_affected->code == 'other') {
                 return $faker->text;
             } else {

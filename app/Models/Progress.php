@@ -10,6 +10,8 @@ class Progress extends MemfisModel
         'progressable_type',
         'progressable_id',
         'status_id',
+        'reason_id',
+        'reason_text',
         'progressed_by',
         'note',
     ];
@@ -22,6 +24,8 @@ class Progress extends MemfisModel
      * This function will get all of the owning progressable models.
      * See:
      * - JobCard's progresses() method for the inverse
+     * - DefectCard's progresses() method for the inverse
+     * 
      */
     public function progressable()
     {
@@ -39,5 +43,15 @@ class Progress extends MemfisModel
     public function progressedBy()
     {
         return $this->belongsTo(Employee::class, 'progressed_by');
+    }
+
+    /**
+     * One-Way: A Progress may have a reason behind.
+     *
+     * @return mixed
+     */
+    public function reason()
+    {
+        return $this->belongsTo(Type::class);
     }
 }

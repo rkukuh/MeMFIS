@@ -16,7 +16,7 @@ class DefectCard extends MemfisModel
         'estimation_manhour',
         'is_rii',
         'propose_correction_id',
-        'propose_correction_other',
+        'propose_correction_text',
         'complaint',
         'description',
     ];
@@ -45,6 +45,17 @@ class DefectCard extends MemfisModel
     public function jobcard()
     {
         return $this->belongsTo(JobCard::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many progresses.
+     *
+     * This function will get all DefectCard's progresses.
+     * See: Progress's progressable() method for the inverse
+     */
+    public function progresses()
+    {
+        return $this->morphMany(Progress::class, 'progressable');
     }
 
     /**
