@@ -66,7 +66,6 @@ class TaskReleaseJobCardController extends Controller
         return view('frontend.task-release.create', [
             'taskrelease' => $taskrelease,
         ]);
-
     }
 
     /**
