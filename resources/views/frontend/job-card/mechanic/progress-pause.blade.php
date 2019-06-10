@@ -200,23 +200,26 @@
                                     </table>
                                 </div>
                             </div>
+                            <hr class="mt-4">
                             <div class="form-group m-form__group row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                    <div class="flex">
-                                        <div class="action-buttons">
-                                            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="{{route('frontend.jobcard-mechanic.update',$jobcard->uuid)}}" id="WorkpackageForm">
-                                                {{method_field('PATCH')}}
-                                                {!! csrf_field() !!}
-                                                <input type="hidden" name="progress" value="{{$open->uuid}}">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="action-buttons d-flex flex-row-reverse">
+                                       
+                                        @include('frontend.common.buttons.found')
+                                    
+                                        @include('frontend.job-card.engineer.modal-close')
+                                        @component('frontend.common.buttons.close')
+                                            @slot('data_target', '#modal_close')
+                                            @slot('class', 'mx-2')
+                                        @endcomponent
 
-                                                @include('frontend.common.buttons.resume')
-                                            </form>
-                                            @include('frontend.job-card.engineer.modal-close')
-                                            @component('frontend.common.buttons.close')
-                                                @slot('data_target', '#modal_close')
-                                            @endcomponent
-                                            @include('frontend.common.buttons.found')
-                                        </div>
+                                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="{{route('frontend.jobcard-mechanic.update',$jobcard->uuid)}}" id="WorkpackageForm">
+                                            {{method_field('PATCH')}}
+                                            {!! csrf_field() !!}
+                                            <input type="hidden" name="progress" value="{{$open->uuid}}">
+
+                                            @include('frontend.common.buttons.resume')
+                                        </form>
                                     </div>
                                 </div>
                             </div>
