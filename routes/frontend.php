@@ -393,27 +393,42 @@ Route::name('frontend.')->group(function () {
 
         });
 
-          /** TASK RELEASE */
+        /** TASK RELEASE */
 
-          Route::namespace('TaskRelease')->group(function () {
-            Route::resource('task-release', 'TaskReleaseController', [
-                'parameters' => ['task-release' => 'taskrelease']
-            ]);
+        Route::namespace('TaskRelease')->group(function () {
+            Route::name('taskrelease-jobcard.')->group(function () {
+                Route::prefix('taskrelease-jobcard')->group(function () {
+                    Route::resource('task-release', 'TaskReleaseJobCardController', [
+                        'parameters' => ['task-release' => 'taskrelease']
+                    ]);
 
-            Route::name('taskrelease.')->group(function () {
-
+                });
+            });
+            Route::name('taskrelease-defectcard.')->group(function () {
+                Route::prefix('taskrelease-defectcard')->group(function () {
+                    Route::resource('task-release', 'TaskReleaseDefectCardController', [
+                        'parameters' => ['task-release' => 'taskrelease']
+                    ]);
+                });
             });
         });
 
          /** RII RELEASE */
 
          Route::namespace('RIIRelease')->group(function () {
-            Route::resource('rii-release', 'RIIReleaseController', [
-                'parameters' => ['rii-release' => 'riirelease']
-            ]);
-
-            Route::name('riirelease.')->group(function () {
-
+            Route::name('riirelease-jobcard.')->group(function () {
+                Route::prefix('riirelease-jobcard')->group(function () {
+                    Route::resource('rii-release', 'RIIReleaseJobCardController', [
+                        'parameters' => ['rii-release' => 'riirelease']
+                    ]);
+                });
+            });
+            Route::name('riirelease-defectcard.')->group(function () {
+                Route::prefix('riirelease-defectcard')->group(function () {
+                    Route::resource('rii-release', 'RIIReleaseDefectCardController', [
+                        'parameters' => ['rii-release' => 'riirelease']
+                    ]);
+                });
             });
         });
 
