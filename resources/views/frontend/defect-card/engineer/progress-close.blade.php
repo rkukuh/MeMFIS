@@ -321,19 +321,13 @@
                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                 <div class="flex">
                                     <div class="action-buttons">
-                                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.defectcard-engineer.update',$defectcard->uuid)}}" id="WorkpackageForm">
-                                            {{method_field('PATCH')}}
-                                            {!! csrf_field() !!}
-                                            <input type="hidden" name="progress" value="{{$open->uuid}}">
-
-                                            @include('frontend.common.buttons.resume')
-                                        </form>
-                                        </div>
+                                        @include('frontend.common.buttons.back')
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
