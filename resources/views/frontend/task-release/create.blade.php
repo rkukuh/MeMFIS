@@ -368,7 +368,7 @@
                     type: 'PUT',
                     url: '/taskrelease-jobcard/task-release/' + jobcard_uuid + '/',
                     success: function (data) {
-                        toastr.success('Quotation has been deleted.', 'Deleted', {
+                        toastr.success('Task has been released.', 'Released', {
                                 timeOut: 5000
                             }
                         );
