@@ -446,6 +446,24 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** DEFECT CARD */
+
+        Route::name('defectcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'defectcard',
+                'namespace' => 'DefectCard'
+
+            ], function () {
+
+                Route::get('/', 'DefectCardDatatables@index')->name('all');
+                Route::post('/filter/', 'DefectCardDatatables@filter')->name('filter');
+
+            });
+
+        });
+
         /** WORK PACKAGE */
 
         Route::name('workpackage.')->group(function () {
