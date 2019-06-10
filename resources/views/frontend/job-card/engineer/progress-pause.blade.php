@@ -208,7 +208,10 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="action-buttons d-flex flex-row-reverse">
-                                        @include('frontend.common.buttons.found')
+                                        <form method="POST" action="{{route('frontend.discrepancy.jobcard.discrepancy.create',$jobcard->uuid)}}">
+                                            {!! csrf_field() !!}
+                                            @include('frontend.common.buttons.found')
+                                        </form>
 
                                         <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.jobcard-engineer.update',$jobcard->uuid)}}" id="WorkpackageForm">
                                             {{method_field('PATCH')}}
