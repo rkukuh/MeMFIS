@@ -115,16 +115,11 @@ class QuotationController extends Controller
     public function edit(Quotation $quotation)
     {
         $projects = Project::get();
-        $attention = $quotation->attention;
-        $attentions = $quotation->customer->attention;
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
         $charges = json_decode($quotation->charge);
-        // dd($scheduled_payment_amount);
         return view('frontend.quotation.edit',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
-            'attention' => $attention,
-            'attentions' => $attentions,
             'charges' => $charges,
             'scheduled_payment_amount' => $scheduled_payment_amount,
             'projects' => $projects
@@ -140,17 +135,16 @@ class QuotationController extends Controller
      */
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
-        $attentions = [];
+        $attention = [];
         $contact = [];
 
-        $contact['name']     = $request->attention_name;
-        $contact['phone'] = $request->attention_phone;
-        $contact['address'] = $request->attention_address;
-        $contact['fax'] = $request->attention_fax;
-        $contact['email'] = $request->attention_email;
+        $attention['name']     = $request->attention_name;
+        $attention['phone'] = $request->attention_phone;
+        $attention['address'] = $request->attention_address;
+        $attention['fax'] = $request->attention_fax;
+        $attention['email'] = $request->attention_email;
 
-        array_push($attentions, $contact);
-        // dd($request->chargeType);
+        // array_push($attention, $contact);
         $request->charge = json_decode($request->charge);
         $request->chargeType = json_decode($request->chargeType);
         $charge = [];
@@ -161,9 +155,7 @@ class QuotationController extends Controller
             $charge['amount'] = $request->charge[$index];
             array_push($charges, $charge);
         }
-        // dd($charges);
-        // dd($request->scheduled_payment_amount);
-        $request->merge(['attention' => json_encode($attentions)]);
+        $request->merge(['attention' => json_encode($attention)]);
         $request->merge(['charge' => json_encode($charges)]);
         // $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
