@@ -104,7 +104,7 @@
 @endsection
 
 @push('footer-scripts')
-{{-- <script src="{{ asset('js/frontend/job-card/index.js') }}"></script> --}}
+<script src="{{ asset('js/frontend/defect-card/index.js') }}"></script>
 <script>
     $("#number").focus();
 </script>
