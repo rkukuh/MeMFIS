@@ -111,6 +111,11 @@ class JobCardMechanicController extends Controller
                 'jobcard' => $jobcard,
             ]);
         }
+        else{
+            return view('frontend.job-card.mechanic.progress-close', [
+                'jobcard' => $jobcard,
+            ]);
+        }
 
     }
 
