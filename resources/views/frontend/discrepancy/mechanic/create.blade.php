@@ -329,8 +329,9 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
+                                                        @slot('id', 'add-discrepancy')
+                                                        @slot('class', 'add-discrepancy')
+                                                        @slot('text','Save & Approved')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -441,6 +442,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/mechanic/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
 @endpush
