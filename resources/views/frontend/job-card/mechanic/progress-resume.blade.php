@@ -208,11 +208,11 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="action-buttons d-flex flex-row-reverse">
-                                        <form class="ml-2" method="POST" action="{{route('frontend.discrepancy.jobcard.discrepancy.create',$jobcard->uuid)}}">
+                                        <form class="ml-2" method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
                                             {!! csrf_field() !!}
                                             @include('frontend.common.buttons.found')
                                         </form>
-                                       
+
                                         @include('frontend.job-card.mechanic.modal-close')
                                         @component('frontend.common.buttons.close')
                                             @slot('data_target', '#modal_close')
