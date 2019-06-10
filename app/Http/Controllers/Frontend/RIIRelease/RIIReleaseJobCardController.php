@@ -30,7 +30,7 @@ class RIIReleaseJobCardController extends Controller
      */
     public function create()
     {
-        return view('frontend.rii-release.create');
+        //
     }
 
     /**
@@ -63,7 +63,9 @@ class RIIReleaseJobCardController extends Controller
      */
     public function edit(JobCard $riirelease)
     {
-       //
+        return view('frontend.rii-release.create', [
+            'riirelease' => $riirelease,
+        ]);
     }
 
     /**

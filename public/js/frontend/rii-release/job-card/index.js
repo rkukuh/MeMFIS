@@ -61,7 +61,7 @@ let RiiRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/riirelease-jobcard/rii-release/create">' + t.number + "</a>"
+                            '<a href="/riirelease-jobcard/rii-release/'+t.uuid+'/edit">' + t.number + "</a>"
                         );
                     }
                 },
@@ -154,7 +154,7 @@ let RiiRelease = {
                         type: 'PUT',
                         url: '/riirelease-jobcard/rii-release/' + jobcard_uuid + '/',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('RII has been released.', 'Released', {
                                     timeOut: 5000
                                 }
                             );
