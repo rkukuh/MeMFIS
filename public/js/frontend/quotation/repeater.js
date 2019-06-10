@@ -4,7 +4,7 @@ $("div.repeaterScheduledPayment").on("click", ".AddRow", function (event) {
     $('.select2multiple').select2();
     newRow.slideDown("swing", function () { newRow.removeClass("Copy hidden"); });
     let type = $('#scheduled_payment_type').children("option:selected").html();
-    if(type === "By Date"){
+    if (type === "By Date") {
         $.each($('#scheduled_payment '), function () {
             $(this).addClass("scheduledPayment");
             $(this).datetimepicker({
@@ -17,17 +17,17 @@ $("div.repeaterScheduledPayment").on("click", ".AddRow", function (event) {
                 pickerPosition: "bottom-left"
             });
         });
-    }else{
+    } else {
         $.each($('#scheduled_payment '), function () {
             $(this).removeClass("scheduledPayment");
-            $(this).datetimepicker( "remove" );
+            $(this).datetimepicker("remove");
         });
     }
 });
 
 $("div.repeaterScheduledPayment").on("click", ".DeleteRow", function (event) {
     let counter = $("div.repeaterRow").length;
-    if(counter > 2){
+    if (counter > 2) {
         $(this).closest(".repeaterRow").slideUp("swing", function () { $(this).remove(); });
     }
 });

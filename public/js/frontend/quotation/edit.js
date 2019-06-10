@@ -314,6 +314,31 @@ let Quotation = {
             });
         });
 
+        $('select[name="scheduled_payment_type"]').on('change', function () {
+            let type = this.options[this.selectedIndex].innerHTML;
+            if(type === "By Date"){
+                $.each($('#scheduled_payment '), function () {
+                    $(this).addClass("scheduledPayment");
+                    $(this).val("");
+                    $(this).datetimepicker({
+                        format: "yyyy-mm-dd",
+                        todayHighlight: !0,
+                        autoclose: !0,
+                        startView: 2,
+                        minView: 2,
+                        forceParse: 0,
+                        pickerPosition: "bottom-left"
+                    });
+                });
+            }else{
+                $.each($('#scheduled_payment '), function () {
+                    $(this).val("");
+                    $(this).removeClass("scheduledPayment");
+                    $(this).datetimepicker( "remove" );
+                });
+            }
+        });
+        
         $('.footer').on('click', '.add-quotation', function () {
             let attention_name = $('#attention').val();
             let attention_phone = $('#phone').val();

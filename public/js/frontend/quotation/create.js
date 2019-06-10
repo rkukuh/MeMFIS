@@ -161,6 +161,7 @@ let Quotation = {
             if(type === "By Date"){
                 $.each($('#scheduled_payment '), function () {
                     $(this).addClass("scheduledPayment");
+                    $(this).val("");
                     $(this).datetimepicker({
                         format: "yyyy-mm-dd",
                         todayHighlight: !0,
@@ -173,6 +174,7 @@ let Quotation = {
                 });
             }else{
                 $.each($('#scheduled_payment '), function () {
+                    $(this).val("");
                     $(this).removeClass("scheduledPayment");
                     $(this).datetimepicker( "remove" );
                 });
