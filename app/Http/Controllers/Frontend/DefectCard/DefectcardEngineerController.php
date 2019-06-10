@@ -16,7 +16,7 @@ class DefectCardEngineerController extends Controller
      */
     public function index()
     {
-        return view('frontend.defectcard.engineer.index');
+        return view('frontend.defect-card.i.engineer.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class DefectCardEngineerController extends Controller
      */
     public function create()
     {
-        return view('frontend.defectcard.engineer.open');
+        return view('frontend.defect-card.i.engineer.open');
     }
 
     /**
@@ -48,7 +48,7 @@ class DefectCardEngineerController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.defectcard.engineer.progress');
+        return view('frontend.defect-card.i.engineer.progress');
     }
 
     /**
@@ -59,7 +59,7 @@ class DefectCardEngineerController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.defectcard.engineer.pending');
+        return view('frontend.defect-card.i.engineer.pending');
     }
 
     /**

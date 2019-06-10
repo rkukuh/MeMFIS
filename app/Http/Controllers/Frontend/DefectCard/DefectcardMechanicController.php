@@ -16,7 +16,7 @@ class DefectCardMechanicController extends Controller
      */
     public function index()
     {
-        return view('frontend.defectcard.mechanic.index');
+        return view('frontend.defect-card.i.mechanic.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class DefectCardMechanicController extends Controller
      */
     public function create()
     {
-        return view('frontend.defectcard.mechanic.open');
+        return view('frontend.defectdefect-card.icard.mechanic.open');
     }
 
     /**
@@ -48,7 +48,7 @@ class DefectCardMechanicController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.defectcard.mechanic.progress');
+        return view('frontend.defect-card.i.mechanic.progress');
     }
 
     /**
@@ -59,7 +59,7 @@ class DefectCardMechanicController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.defectcard.mechanic.pending');
+        return view('frontend.defect-card.i.mechanic.pending');
     }
 
     /**
