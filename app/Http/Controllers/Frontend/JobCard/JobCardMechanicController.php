@@ -93,6 +93,11 @@ class JobCardMechanicController extends Controller
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
+        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "closed"){
+            return view('frontend.job-card.mechanic.progress-close', [
+                'jobcard' => $jobcard,
+            ]);
+        }
 
     }
 
