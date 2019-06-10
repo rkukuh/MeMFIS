@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\DefectCard;
 
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
 class DefectCardEngineerController extends Controller
@@ -94,15 +95,15 @@ class DefectCardEngineerController extends Controller
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'number' => 'required|exists:jobcards,number'
+            'code' => 'required|exists:defectcards,code'
           ]);
 
           if ($validator->fails()) {
             return
-            redirect()->route('frontend.jobcard-engineer.index')->withErrors($validator)->withInput();
+            redirect()->route('frontend.defectcard-engineer.index')->withErrors($validator)->withInput();
           }
 
-        $search = DefectCard::where('code',$request->number)->first();
+        $search = DefectCard::where('code',$request->code)->first();
 
         return redirect()->route('frontend.defectcard-engineer.edit',$search->uuid);
     }
