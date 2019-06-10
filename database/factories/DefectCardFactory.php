@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Type;
+use App\Models\Item;
+use App\Models\Unit;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
@@ -35,6 +37,31 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
 
     if ($faker->boolean) {
         $defectcard->approvals()->save(factory(Approval::class)->make());
+    }
+
+    // Item
+
+    if ($faker->boolean) {
+        $item = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
+            $defectcard->items()->save($item, [
+                'unit_id' => $unit->id,
+                'quantity' => rand(10, 100),
+            ]);
+        }
     }
 
     // Progress

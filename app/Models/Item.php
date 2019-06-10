@@ -68,6 +68,24 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: A defect card may have zero or many item.
+     *
+     * This function will retrieve all the defect cards of an item.
+     * See: DefectCard's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->belongsToMany(DefectCard::class, 'defectcard_item', 'item_id', 'defectcard_id')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A task card (EO) may have zero or many items.
      *
      * This function will retrieve all the EO Instructions of an item.
