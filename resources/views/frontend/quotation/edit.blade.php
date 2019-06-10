@@ -627,7 +627,6 @@
             $('select[name="emails"] option[value="' + attention.emails + '"]').prop("selected", true);
         } else {
             console.log("empty");
-
         }
     });
     let simpan = $('.tes').on('click', '.save', function() {

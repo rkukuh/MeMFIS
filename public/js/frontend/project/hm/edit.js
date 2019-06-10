@@ -267,64 +267,6 @@ let Project = {
                 }
             });
         });
-
-        $(document).ready(function() {
-            let customer_uuid = $('#customer')[0].value;
-            $("#name").html(customer_uuid.text);
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'GET',
-                dataType: "json",
-                url: '/label/get-customer/'+customer_uuid,
-                success: function (respone) {
-                    if (respone) {
-                        let res = JSON.parse(respone);
-                            $('select[name="attention"]').empty();
-                            $('select[name="phone"]').empty();
-                            $('select[name="email"]').empty();
-                            $('select[name="fax"]').empty();
-                            $('select[name="address"]').empty();
-                            for (var i = 0; i < res.length; i++) {
-                                if(res[i].name){
-                                    $('select[name="attention"]').append(
-                                        '<option value="' + res[i].name + '">' + res[i].name + '</option>'
-                                    );
-                                }
-                                if(res[i].address){
-                                    $('select[name="attention"]').append(
-                                        '<option value="' + res[i].address + '">' + res[i].address + '</option>'
-                                    );
-                                }
-                                if(res[i].fax){
-                                    $('select[name="attention"]').append(
-                                        '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
-                                    );
-                                }
-                                if(res[i].phones){
-                                    $.each(res[i].phones, function (value) {
-                                        $('select[name="phone"]').append(
-                                            '<option value="' + res[i].phones[value] + '">' + res[i].phones[value] + '</option>'
-                                        );
-                                    });
-                                }
-                                if(res[i].emails){
-                                    $.each(res[i].emails, function (value) {
-                                        $('select[name="email"]').append(
-                                            '<option value="' + res[i].emails[value] + '">' + res[i].emails[value] + '</option>'
-                                        );
-                                    });
-                                }
-                        }
-                    } else {
-                        console.log("empty");
-        
-                    }
-        
-                }
-            });
-        });
         
         $('select[name="customer"]').on('change', function () {
             let customer_uuid = this.options[this.selectedIndex].value;
