@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers\Frontend\DefectCard;
 
+use App\Models\Status;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class DefectCardMechanicController extends Controller
 {
+    protected $statuses;
+
+    public function __construct()
+    {
+        $this->statuses = Status::ofDefectCard()->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -57,9 +65,28 @@ class DefectCardMechanicController extends Controller
      * @param  \App\Models\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(DefectCard $defectCard)
+    public function edit(DefectCard $defectcard)
     {
-        return view('frontend.defect-card.mechanic.pending');
+        if ($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "open") {
+            return view('frontend.defect-card.mechanic.progress-open', [
+                'defectcard' => $defectcard,
+                'status' => $this->statuses->where('code','open')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "progress"){
+            return view('frontend.defect-card.mechanic.progress-resume', [
+                'defectcard' => $defectcard,
+                'pending' => $this->statuses->where('code','pending')->first(),
+                'closed' => $this->statuses->where('code','closed')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "pending"){
+            return view('frontend.defect-card.mechanic.progress-pause', [
+                'defectcard' => $defectcard,
+                'open' => $this->statuses->where('code','open')->first(),
+                'closed' => $this->statuses->where('code','closed')->first(),
+            ]);
+        }
     }
 
     /**
