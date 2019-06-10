@@ -159,10 +159,22 @@ let Quotation = {
         $('select[name="scheduled_payment_type"]').on('change', function () {
             let type = this.options[this.selectedIndex].innerHTML;
             if(type === "By Date"){
-                $.each($('#scheduled_payment '), function (key, value) {
-                    value[key].addClass("scheduledPayment");
+                $.each($('#scheduled_payment '), function () {
+                    $(this).addClass("scheduledPayment");
                 });
-                $('input[name="scheduled_payment"]').addClass("scheduledPayment");
+                $(".scheduledPayment").datetimepicker({
+                    format: "yyyy-mm-dd",
+                    todayHighlight: !0,
+                    autoclose: !0,
+                    startView: 2,
+                    minView: 2,
+                    forceParse: 0,
+                    pickerPosition: "bottom-left"
+                });
+            }else{
+                $.each($('#scheduled_payment '), function () {
+                    console.log($(this).datetimepicker( "destroy" ).removeClass("scheduledPayment"));
+                });
             }
         });
 
