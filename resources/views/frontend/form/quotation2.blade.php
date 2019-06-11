@@ -13,12 +13,34 @@
       font-size: 12px;
     }
 
+    header {
+      position: fixed;
+      top: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 3cm;
+    }
+    
+    footer {
+      position: fixed;
+      bottom: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 1cm;
+    }
     ul li{
       display: inline-block;
     }
 
     table{
       border-collapse: collapse;
+    }
+
+    #head{
+        top:0px;
+        left: 520px;
+        position: absolute;
+        color:white;
     }
 
     .container{
@@ -31,23 +53,11 @@
       margin-top: -12px;
     }
 
-    #header .quotation-number{
-      height: 50px;
-      width: 300px;
-      float: right;
-      color: white;
-      position: relative;
-    }
-
-    #header .quotation-number h1{
-      font-size: 35px;
-    }
-
     #content{
         width:100%;
         height:190px;
         background:#efefef;
-        margin-top:10px;
+        margin-top:130px;
     }
 
     #content2{
@@ -66,7 +76,23 @@
 
     #content3 .body{
       width: 100%;
-      min-height: 138px;
+      height: 458px;
+      border-left:  2px solid  #d4d7db;
+      border-right:  2px solid  #d4d7db;
+      border-bottom:  2px solid  #d4d7db;
+    }
+
+    #content3-next {
+        margin-top:142px;
+    }
+    #content3-next .head{
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    #content3-next .body{
+      width: 100%;
+      height: 300px;
       border-left:  2px solid  #d4d7db;
       border-right:  2px solid  #d4d7db;
       border-bottom:  2px solid  #d4d7db;
@@ -83,23 +109,35 @@
         margin-top: 50px;
     }
 
+
+    .page_break { page-break-before: always; }
+
 </style>
 <body>
-    <div id="header">
+
+    <header>
         <img src="./img/form/printoutquotation/HeaderQuotation.jpg" alt=""width="100%">
-        <div class="quotation-number">
-            <h1>QUOTATION</h1>
-            <div style="height:20px;width:220px;position:absolute;top:70px;font-size:14px;letter-spacing: 1px">
-                <table width="100%">
-                    <tr>
-                        <td width="25%" valign="top">QN No.</td>
-                        <td width="1%" valign="top">:</td>
-                        <td width="74%" valign="top">001/QN/PJ-MMF/05/19</td>
-                    </tr>
-                </table>
+        <div id="head">
+            <div style="margin-right:20px;text-align:left;">
+                <h1 style="font-size:34px;">QUOTATION</h1>
+                <div style="font-size:14px;letter-spacing:1px;margin-top:-15px">
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" valign="top">QN No.</td>
+                            <td width="1%" valign="top">:</td>
+                            <td width="79%" valign="top">001/QN/PJ-MMF/05/19</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
+    </header>
+
+    <footer style="margin-top:14px;">
+        <span style="margin-left:6px">Created By : Name;Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
+        <img src="./img/form/printoutquotation/FooterQuotation.jpg" width="100%" alt="" >
+    </footer>
+    
     <div id="content">
         <div class="container">
             <table width="100%" cellpadding="1" style="margin-top:20px;">
@@ -263,76 +301,204 @@
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top">$2.500</td>
                     </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top">2</td>
+                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
+                        <td width="16%" align="center" valign="top"></td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top"></td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
+                        <td width="16%" align="center" valign="top">$22.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$22.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Material Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Facilities Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top">3</td>
+                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
+                        <td width="16%" align="center" valign="top"></td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top"></td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
+                        <td width="16%" align="center" valign="top">$22.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$22.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Material Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Facilities Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top">4</td>
+                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
+                        <td width="16%" align="center" valign="top"></td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top"></td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
+                        <td width="16%" align="center" valign="top">$22.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$22.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Material Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Facilities Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr> 
                 </table>
             </div>
         </div>
     </div>
-    <div id="content4">
-        <div class="container">
-            <table width="100%" cellpadding="3">
-                <tr>
-                    <th width="50%" rowspan="7" valign="top">Term & Condition</th>
-                    <td width="25%" valign="top" align="left">Total</td>
-                    <td width="25%" valign="top" align="right">$25.000</td>
-                </tr>
-                <tr>
-                    <td width="25%" valign="top" align="left">Disc</td>
-                    <td width="25%" valign="top" align="right">$ / %</td>
-                </tr>
-                <tr>
-                    <td width="25%" valign="top" align="left">Vat 10%</td>
-                    <td width="25%" valign="top" align="right">$000</td>
-                </tr>
-                <tr>
-                    <td width="25%" valign="top" align="left">Delivery Cost</td>
-                    <td width="25%" valign="top" align="right">$52</td>
-                </tr>
-                <tr>
-                    <td width="25%" valign="top" align="left">Other Cost(if available)</td>
-                    <td width="25%" valign="top" align="right">$000 <hr width="100%"></td>
-                </tr>
-                <tr>
-                    <th width="25%" valign="top" align="left">Grand Total in USD</th>
-                    <th width="25%" valign="top" align="right">$2.100.000</th>
-                </tr>
-                <tr>
-                    <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
-                    <th width="25%" valign="top" align="right">Rp. 2.321.000.000</th>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div id="content5">
-        <div class="container">
-            <table width="100%">
-                <tr>
-                    <th width="50%" align="center">
-                        Actnowledge by,
-                    </th>
-                    <th width="50%" align="center">
-                        Approved by,
-                    </th>
-                </tr>
-            </table>
-            <table style="margin-top:80px;" width="100%">
-                <tr>
-                    <td width="50%" align="center">
-                        <b> EDDY SIREGAR</b><br>
-                        Marketing Manager
-                    </td>
-                    <td width="50%" align="center">
-                        <b> EDDY SIREGAR </b><br>
-                        Sriwijaya Air
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
 
-    <div style="position:absolute;bottom:0;">
-        <div class="container">
+    <div class="page_break">
+        <div id="content3-next">
+            <div class="container">
+                <div class="head">
+                    <table width="100%" border="1" cellpadding="10">
+                        <tr style="background:#f7dd16;">
+                            <td width="8%" align="center">No</td>
+                            <td width="42%" align="center">Description</td>
+                            <td width="16%" align="center">Sub Total</td>
+                            <td width="17%" align="center">Disc %</td>
+                            <td width="17%" align="center">Total</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="body">
+                    <table width="100%" cellpadding="5">
+                        <tr>
+                            <td width="8%" align="center" valign="top">1</td>
+                            <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
+                            <td width="16%" align="center" valign="top"></td>
+                            <td width="17%" align="center" valign="top"></td>
+                            <td width="17%" align="right" valign="top"></td>
+                        </tr> 
+                        <tr>
+                            <td width="8%" align="center" valign="top"></td>
+                            <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
+                            <td width="16%" align="center" valign="top">$22.500</td>
+                            <td width="17%" align="center" valign="top"></td>
+                            <td width="17%" align="right" valign="top">$22.500</td>
+                        </tr> 
+                        <tr>
+                            <td width="8%" align="center" valign="top"></td>
+                            <td width="42%" align="left" valign="top">- Material Price</td>
+                            <td width="16%" align="center" valign="top">$2.500</td>
+                            <td width="17%" align="center" valign="top"></td>
+                            <td width="17%" align="right" valign="top">$2.500</td>
+                        </tr> 
+                        <tr>
+                            <td width="8%" align="center" valign="top"></td>
+                            <td width="42%" align="left" valign="top">- Facilities Price</td>
+                            <td width="16%" align="center" valign="top">$2.500</td>
+                            <td width="17%" align="center" valign="top"></td>
+                            <td width="17%" align="right" valign="top">$2.500</td>
+                        </tr> 
+                    </table>
+                </div>
+            </div>
         </div>
-        <img src="./img/form/printoutquotation/FooterQuotation.jpg" width="100%" alt="" srcset="">
+        <div id="content4">
+            <div class="container">
+                <table width="100%" cellpadding="3">
+                    <tr>
+                        <th width="50%" rowspan="7" valign="top">Term & Condition <br></th>
+                        <td width="25%" valign="top" align="left">Total</td>
+                        <td width="25%" valign="top" align="right">$25.000</td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" align="left">Disc</td>
+                        <td width="25%" valign="top" align="right">$ / %</td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" align="left">Vat 10%</td>
+                        <td width="25%" valign="top" align="right">$000</td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" align="left">Delivery Cost</td>
+                        <td width="25%" valign="top" align="right">$52</td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" align="left">Other Cost(if available)</td>
+                        <td width="25%" valign="top" align="right">$000 <hr width="100%"></td>
+                    </tr>
+                    <tr>
+                        <th width="25%" valign="top" align="left">Grand Total in USD</th>
+                        <th width="25%" valign="top" align="right">$2.100.000</th>
+                    </tr>
+                    <tr>
+                        <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
+                        <th width="25%" valign="top" align="right">Rp. 2.321.000.000</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="content5">
+            <div class="container">
+                <table width="100%">
+                    <tr>
+                        <th width="50%" align="center">
+                            Actnowledge by,
+                        </th>
+                        <th width="50%" align="center">
+                            Approved by,
+                        </th>
+                    </tr>
+                </table>
+                <table style="margin-top:80px;" width="100%">
+                    <tr>
+                        <td width="50%" align="center">
+                            <b> EDDY SIREGAR</b><br>
+                            Marketing Manager
+                        </td>
+                        <td width="50%" align="center">
+                            <b> EDDY SIREGAR </b><br>
+                            Sriwijaya Air
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
         
 </body>
