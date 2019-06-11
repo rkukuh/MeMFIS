@@ -256,9 +256,6 @@ let Workpackage = {
                 engineer.push( $('#employee_ndi_ndt').val());
                 engineer_qty.push( $('#ndi_ndt_qty').val());
             }
-            console.log("engineer_skills : "+engineer_skills);
-            console.log("engineer : "+engineer);
-            console.log("engineer_qty : "+engineer_qty);
             let tat = $('#tat').val();
 
             $.ajax({

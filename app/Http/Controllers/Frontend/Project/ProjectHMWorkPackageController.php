@@ -6,6 +6,7 @@ use App\Models\Type;
 use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
+use App\Models\Employee;
 use App\Models\WorkPackage;
 use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
@@ -151,15 +152,16 @@ class ProjectHMWorkPackageController extends Controller
             ->where('workpackage_id',$workpackage->id)
             ->first();
 
-            dd($request->engineer_qty);
         $project_workpackage->update(['tat' =>  $request->tat]);
-        $project_workpackage->engineer()->create([
-            'skill_id' => $facility,
-            'engineer_id' => $facility,
-            'quantity' => $facility,
-        ]);
-
-        return response()->json($project_workpackage->engineer());
+        for($index = 0 ; $index < sizeof($request->engineer_skills) ; $index++){
+            $project_workpackage->engineers()->create([
+                'skill_id' => Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )->first()->id,
+                'engineer_id' => Employee::where('code',$request->engineer[$index])->first()->id,
+                'quantity' => (int) $request->engineer_qty[$index],
+            ]);
+        }
+        
+        return response()->json($project_workpackage());
     }
 
     /**
@@ -174,7 +176,7 @@ class ProjectHMWorkPackageController extends Controller
 
         dd($request->manhours);
 
-        return response()->json($project_workpackage->manhours());
+        return response()->json($project_workpackage);
         
     }
 
