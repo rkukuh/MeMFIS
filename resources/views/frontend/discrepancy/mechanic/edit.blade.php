@@ -79,6 +79,7 @@
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', 'Generated')
                                             @endcomponent
+                                            <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->uuid}}">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -99,7 +100,6 @@
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $discrepancy->jobcard->number)
                                             @endcomponent
-                                            <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->jobcard->uuid}}">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
