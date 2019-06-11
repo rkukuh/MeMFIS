@@ -21,8 +21,6 @@ $factory->define(DefectCard::class, function (Faker $faker) {
         'helper_quantity' => rand(10, 100),
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
         'is_rii' => $faker->boolean,
-        'propose_correction_id' => Type::ofDefectCardProposeCorrection()->get()->random()->id,
-        'propose_correction_text' => $faker->randomElement([null, $faker->sentence]),
         'complaint' => $faker->randomElement([null, $faker->text]),
         'description' => $faker->randomElement([null, $faker->text]),
     ];
@@ -75,6 +73,17 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
                 'status_id' => Status::ofDefectCard()->get()->first()->id + $i
             ])
         );
+    }   
+
+    // Propose Correction
+
+    for ($i = 0; $i < rand(1, 5); $i++) {
+        $propose_correction = Type::ofDefectCardProposeCorrection()->get()->random();
+
+        $defectcard->propose_corrections()->attach(
+            $propose_correction, [
+            'propose_correction_text' => $faker->randomElement([null, $faker->sentence]),
+        ]);
     }
     
 });
