@@ -54,7 +54,7 @@ let JobCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="">' + t.number + "</a>"
+                            return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
                     }
                 },
                 {

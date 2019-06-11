@@ -52,151 +52,154 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <table border="1px" width="100%">
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Job Card No
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                JC 012122
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Task Card No
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                TC 212212
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                A/C Type
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                A/C Reg
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                A/C Serial Number
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Inspection Type
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Company Task No
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Project No
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Inspection Type
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Skill
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Est. Mhrs
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Work Area
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Sequence
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                RII
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Reference
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Title
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Description
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Helper
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Job Card No
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->number}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Task Card No
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->taskcard->number}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    A/C Type
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    Generated
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    A/C Reg
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->quotation->project->aircraft_register}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    A/C Serial Number
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->quotation->project->aircraft_sn}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Inspection Type
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    Generated
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Company Task No
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    Generated
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Project No
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->quotation->project->code}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Inspection Type
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    Generated
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Skill
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->taskcard->skill->name}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Est. Mhrs
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->taskcard->estimation_manhour}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Work Area
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->taskcard->work_area}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Sequence
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    Generated
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    RII
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    @if($jobcard->taskcard->is_rii == 1)
+                                                        Yes
+                                                    @else
+                                                        No
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Reference
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->taskcard->reference}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Title
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->taskcard->title}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Description
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->taskcard->Description}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Helper
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{$jobcard->taskcard->helper_quantity}}
+                                                </td>
+                                            </tr>
                                     </table>
                                 </div>
                             </div>
@@ -205,6 +208,8 @@
                                     <div class="flex">
                                         <div class="action-buttons">
                                             @include('frontend.common.buttons.print')
+                                            @include('frontend.common.buttons.back')
+
                                         </div>
                                     </div>
                                 </div>
