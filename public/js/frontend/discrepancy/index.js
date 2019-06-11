@@ -11,7 +11,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard',
+                        url: '/datatables/discrepancy',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -47,138 +47,92 @@ let TaskCard = {
             },
             columns: [
                 {
-                    field: 'number',
-                    title: 'Taskcard No',
+                    field: 'created_at',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'title',
-                    title: 'Title',
+                    field: 'code',
+                    title: 'Discrepancy No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
+                        return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
                     }
-
                 },
                 {
-                    field: 'type.name',
+                    field: 'jobcard.number',
+                    title: 'JobCard Reference',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
+                    }
+                },
+                {
+                    field: 'jobcard.taskcard.number',
+                    title: 'Taskcard No',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return '<a href="/taskcard/'+t.jobcard.taskcard.uuid+'">' + t.jobcard.taskcard.number + "</a>"
+                    }
+                },
+                {
+                    field: 'jobcard.quotation.project.customer.name',
+                    title: 'Customer',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'jobcard.taskcard.type.name',
                     title: 'TC Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'pesawat',
+                    field: 'jobcard.quotation.project.aircraft.name',
                     title: 'A/C',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'skill',
+                    field: 'jobcard.taskcard.skill.name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
-                    title: 'Task Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
+                    field: 'jobcard.taskcard.estimation_manhour',
                     title: 'Manhours',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
 
-                        return ''
-                    }
-                },
                 {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return (
-                                '<a href="discrepancy/1/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return (
-                                '<a href="discrepancy/1/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if(t.type.code == "si"){
-                            return (
-                                '<a href="discrepancy/1/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return (
-                                '<a href="discrepancy/1/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
+                        return (
+                            '<a href="/tool/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'+
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-check"></i>' +
+                            '</a>'
+                        );
                     }
                 }
             ]
         });
 
-        let remove = $('.taskcard_datatable').on('click', '.delete', function () {
+        let remove = $('.Discrepancy_datatable').on('click', '.delete', function () {
             let tascard_uuid = $(this).data('uuid');
 
             swal({
@@ -220,6 +174,50 @@ let TaskCard = {
                     });
                 }
 
+            });
+        });
+
+        $('.Discrepancy_datatable').on('click', '.approve', function () {
+            let discrepancy_uuid = $(this).data('uuid');
+
+            swal({
+                title: 'Sure want to Approve?',
+                type: 'question',
+                confirmButtonText: 'Yes, Approve',
+                confirmButtonColor: '#34bfa3',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'PUT',
+                        url: '/discrepancy/' + discrepancy_uuid + '/ppc/approve',
+                        success: function (data) {
+                            toastr.success('Discrepancy has been approved.', 'Approved', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.Discrepancy_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
             });
         });
 
