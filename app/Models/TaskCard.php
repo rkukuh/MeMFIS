@@ -151,6 +151,8 @@ class TaskCard extends MemfisModel
      *
      * This function will get all of the task card's repeats.
      * See: Repeat's repeatable() method for the inverse
+     *
+     * @return mixed
      */
     public function repeats()
     {
@@ -215,6 +217,8 @@ class TaskCard extends MemfisModel
      *
      * This function will get all of the task card's thresholds.
      * See: Threshold's thresholdable() method for the inverse
+     *
+     * @return mixed
      */
     public function thresholds()
     {

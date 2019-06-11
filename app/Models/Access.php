@@ -20,6 +20,8 @@ class Access extends MemfisModel
      * This function will get all of the owning accessable models.
      * See:
      * - Aircraft's accesses() method for the inverse
+     *
+     * @return mixed
      */
     public function accessable()
     {

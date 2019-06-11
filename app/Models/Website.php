@@ -35,6 +35,8 @@ class Website extends MemfisModel
      * See:
      * - Customer's websites() method for the inverse
      * - Employee's websites() method for the inverse
+     *
+     * @return mixed
      */
     public function websiteable()
     {

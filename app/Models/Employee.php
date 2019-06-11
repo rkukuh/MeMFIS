@@ -26,6 +26,8 @@ class Employee extends MemfisModel
      *
      * This function will get all of the employee's addresses.
      * See: Address' addressable() method for the inverse
+     *
+     * @return mixed
      */
     public function addresses()
     {
@@ -61,6 +63,8 @@ class Employee extends MemfisModel
      *
      * This function will get all of the employee's documents.
      * See: Document's documentable() method for the inverse
+     *
+     * @return mixed
      */
     public function documents()
     {
@@ -72,6 +76,8 @@ class Employee extends MemfisModel
      *
      * This function will get all of the employee's emailable.
      * See: Email's emailable() method for the inverse
+     *
+     * @return mixed
      */
     public function emails()
     {
@@ -83,6 +89,8 @@ class Employee extends MemfisModel
      *
      * This function will get all of the employee's faxable.
      * See: Fax's faxable() method for the inverse
+     *
+     * @return mixed
      */
     public function faxes()
     {
@@ -205,6 +213,8 @@ class Employee extends MemfisModel
      *
      * This function will get all of the employee's phones.
      * See: Phone's phoneable() method for the inverse
+     *
+     * @return mixed
      */
     public function phones()
     {

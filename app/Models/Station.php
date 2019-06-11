@@ -20,6 +20,8 @@ class Station extends MemfisModel
      * This function will get all of the owning stationable models.
      * See:
      * - Aircraft's stations() method for the inverse
+     *
+     * @return mixed
      */
     public function stationable()
     {

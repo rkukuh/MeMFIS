@@ -61,6 +61,8 @@ class Item extends MemfisModel implements HasMedia
      *
      * This function will get all of the categories that are assigned to this item.
      * See: Category's items() method for the inverse
+     *
+     * @return mixed
      */
     public function categories()
     {
@@ -143,6 +145,8 @@ class Item extends MemfisModel implements HasMedia
      * One-to-Many: A manufacturer can create zero or many items.
      *
      * This function will get a manufacturer of an item.
+     *
+     * @return mixed
      */
     public function manufacturer()
     {
@@ -154,6 +158,8 @@ class Item extends MemfisModel implements HasMedia
      *
      * This function will get all of the item's prices.
      * See: Price's priceable() method for the inverse
+     *
+     * @return mixed
      */
     public function prices()
     {
@@ -275,6 +281,8 @@ class Item extends MemfisModel implements HasMedia
      * One-Way 1-1: An item must have initial unit.
      *
      * This function will get a unit of a given item.
+     *
+     * @return mixed
      */
     public function unit()
     {

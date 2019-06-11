@@ -24,6 +24,8 @@ class Customer extends MemfisModel
      *
      * This function will get all of the customer's addresses.
      * See: Address' addressable() method for the inverse
+     *
+     * @return mixed
      */
     public function addresses()
     {
@@ -35,6 +37,8 @@ class Customer extends MemfisModel
      *
      * This function will get all of the customer's documents.
      * See: Document's documentable() method for the inverse
+     *
+     * @return mixed
      */
     public function documents()
     {
@@ -46,6 +50,8 @@ class Customer extends MemfisModel
      *
      * This function will get all of the customer's emails.
      * See: Email's emailable() method for the inverse
+     *
+     * @return mixed
      */
     public function emails()
     {
@@ -57,6 +63,8 @@ class Customer extends MemfisModel
      *
      * This function will get all of the customer's faxes.
      * See: Fax's faxable() method for the inverse
+     *
+     * @return mixed
      */
     public function faxes()
     {
@@ -82,6 +90,8 @@ class Customer extends MemfisModel
      *
      * This function will get all of the customer's phones.
      * See: Phone's phoneable() method for the inverse
+     *
+     * @return mixed
      */
     public function phones()
     {
@@ -119,6 +129,8 @@ class Customer extends MemfisModel
      *
      * This function will get all of the customer's websites.
      * See: Website's websiteable() method for the inverse
+     *
+     * @return mixed
      */
     public function websites()
     {

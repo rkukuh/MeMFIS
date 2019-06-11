@@ -37,6 +37,8 @@ class Phone extends MemfisModel
      * See:
      * - Customer's phones() method for the inverse
      * - Employee's phones() method for the inverse
+     *
+     * @return mixed
      */
     public function phoneable()
     {
