@@ -63,7 +63,9 @@ class DiscrepancyPPCController extends Controller
      */
     public function edit(DefectCard $discrepancy)
     {
-        return view('frontend.discrepancy.ppc.edit');
+        return view('frontend.discrepancy.ppc.edit', [
+            'discrepancy' => $discrepancy,
+        ]);
     }
 
     /**
@@ -75,7 +77,13 @@ class DiscrepancyPPCController extends Controller
      */
     public function update(Request $request,DefectCard $discrepancy)
     {
-        return response()->json($request);
+        // TODO : update data discrepancy
+        $discrepancy->approvals()->save(new Approval([
+            'approvable_id' => $discrepancy->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        return response()->json($discrepancy);
     }
 
     /**

@@ -52,6 +52,11 @@ class DiscrepancyEngineerController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
+        $defectcard->approvals()->save(new Approval([
+            'approvable_id' => $defectcard->id,
+            'approved_by' => Auth::id(),
+        ]));
+
         return response()->json($defectcard);
     }
 
@@ -88,7 +93,13 @@ class DiscrepancyEngineerController extends Controller
      */
     public function update(Request $request,DefectCard $discrepancy)
     {
-        return response()->json($request);
+        // TODO : update data discrepancy
+        $discrepancy->approvals()->save(new Approval([
+            'approvable_id' => $discrepancy->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        return response()->json($discrepancy);
     }
 
     /**

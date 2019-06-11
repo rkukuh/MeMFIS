@@ -117,10 +117,10 @@ let TaskCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/tool/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/discrepancy-ppc/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'+
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
@@ -133,7 +133,7 @@ let TaskCard = {
         });
 
         let remove = $('.Discrepancy_datatable').on('click', '.delete', function () {
-            let tascard_uuid = $(this).data('uuid');
+            let discrepancy_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to remove?',
@@ -152,14 +152,14 @@ let TaskCard = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard/' + tascard_uuid + '',
+                        url: '/discrepancy-ppc/' + discrepancy_uuid + '',
                         success: function (data) {
                             toastr.success('Taskcard has been deleted.', 'Deleted', {
                                 timeOut: 5000
                                 }
                             );
 
-                            let table = $('.taskcard_datatable').mDatatable();
+                            let table = $('.Discrepancy_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
