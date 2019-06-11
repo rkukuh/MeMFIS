@@ -88,7 +88,7 @@
                             <div class="col-lg-12">
                                 @include('frontend.job-card.filter')
                             </div>
-                            <div class="job_card_datatable" id="scrolling_both"></div>
+                            <div class="defectcard_engineer_datatable" id="scrolling_both"></div>
                         </div>
 
                         @include('frontend.job-card.engineer.tool.index')
