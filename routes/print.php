@@ -116,3 +116,8 @@ Route::get('/quotation-doc2', function () {
     $pdf = \PDF::loadView('frontend/form/quotation2');
     return $pdf->stream();
 });
+
+Route::get('/dc-summary', function () {
+    $pdf = \PDF::loadView('frontend/form/dc_summary');
+    return $pdf->stream();
+});
