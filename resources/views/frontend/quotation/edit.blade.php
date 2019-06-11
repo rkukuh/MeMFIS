@@ -504,6 +504,14 @@
                                 </div>
                             </div>
                     </div>
+                    @component('frontend.common.input.hidden')
+                        @slot('id', 'attentions-val')
+                        @slot('value', $quotation->customer->attention)
+                    @endcomponent
+                    @component('frontend.common.input.hidden')
+                        @slot('id', 'attention-val')
+                        @slot('value', $quotation->attention)
+                    @endcomponent
                     </form>
                 </div>
             </div>
@@ -571,12 +579,11 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        
-        let attentions = '{{ $attentions }}';
-        let attention = '{{ $attention }}';
+        let attentions = $('#attentions-val').val();
+        let attention = $('#attention-val').val();
+        attention = JSON.parse(attention)[0];
         if (attentions) {
             let attn = JSON.parse(attentions);
-            let attention = JSON.parse(attention);
             $('select[name="attention"]').empty();
             $('select[name="phone"]').empty();
             $('select[name="email"]').empty();
@@ -613,15 +620,13 @@
                     });
                 }
             }
-            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
-            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
-            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
-            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
-            $('select[name="attention"] option[value=' + attention.name + ']').prop("selected", true);
-
+            $('select[name="attention"] option[value="' + attention.name + '"]').prop("selected", true);
+            $('select[name="address"] option[value="' + attention.address + '"]').prop("selected", true);
+            $('select[name="fax"] option[value="' + attention.fax + '"]').prop("selected", true);
+            $('select[name="phones"] option[value="' + attention.phones + '"]').prop("selected", true);
+            $('select[name="emails"] option[value="' + attention.emails + '"]').prop("selected", true);
         } else {
             console.log("empty");
-
         }
     });
     let simpan = $('.tes').on('click', '.save', function() {

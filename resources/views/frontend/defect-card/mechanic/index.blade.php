@@ -52,10 +52,10 @@
                                 <div class="col-xl-12 order-2 order-xl-1">
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
-                                            <form method="POST" action="{{route('frontend.mechanic.jobcard.seacrh')}}">
+                                            <form method="POST" action="{{route('frontend.mechanic.defectcard.seacrh')}}">
                                                 {!! csrf_field() !!}
                                                 <div class="m-input-icon m-input-icon--left">
-                                                    <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
+                                                    <input type="text" class="form-control m-input" id="code" name="code" placeholder="Search...">
 
                                                     <span class="m-input-icon__icon m-input-icon__icon--left">
                                                         <span><i class="la la-search"></i></span>
@@ -81,7 +81,7 @@
 
 @push('footer-scripts')
     <script>
-        $("#number").focus();
+        $("#code").focus();
     </script>
     <script>
         let input = document.getElementById("search");

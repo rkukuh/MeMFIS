@@ -7,7 +7,7 @@ let RiiRelease = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/rii-release',
+                        url: '/datatables/rii-release-jobcard',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -61,7 +61,7 @@ let RiiRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/rii-release/create">' + t.number + "</a>"
+                            '<a href="/riirelease-jobcard/rii-release/'+t.uuid+'/edit">' + t.number + "</a>"
                         );
                     }
                 },
@@ -124,7 +124,7 @@ let RiiRelease = {
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
@@ -152,14 +152,14 @@ let RiiRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/rii-release/' + jobcard_uuid + '/',
+                        url: '/riirelease-jobcard/rii-release/' + jobcard_uuid + '/',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('RII has been released.', 'Released', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.riirelease_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

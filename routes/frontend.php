@@ -97,8 +97,8 @@ Route::name('frontend.')->group(function () {
                 ]);
 
                 Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
-                Route::put('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
-                Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
+                Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
+                Route::post('/{project}/workpackage/{workpackage}/','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
                 Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
             });
 
@@ -393,6 +393,44 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        /** TASK RELEASE */
+
+        Route::namespace('TaskRelease')->group(function () {
+            Route::name('taskrelease-jobcard.')->group(function () {
+                Route::prefix('taskrelease-jobcard')->group(function () {
+                    Route::resource('task-release', 'TaskReleaseJobCardController', [
+                        'parameters' => ['task-release' => 'taskrelease']
+                    ]);
+
+                });
+            });
+            Route::name('taskrelease-defectcard.')->group(function () {
+                Route::prefix('taskrelease-defectcard')->group(function () {
+                    Route::resource('task-release', 'TaskReleaseDefectCardController', [
+                        'parameters' => ['task-release' => 'taskrelease']
+                    ]);
+                });
+            });
+        });
+
+         /** RII RELEASE */
+
+         Route::namespace('RIIRelease')->group(function () {
+            Route::name('riirelease-jobcard.')->group(function () {
+                Route::prefix('riirelease-jobcard')->group(function () {
+                    Route::resource('rii-release', 'RIIReleaseJobCardController', [
+                        'parameters' => ['rii-release' => 'riirelease']
+                    ]);
+                });
+            });
+            Route::name('riirelease-defectcard.')->group(function () {
+                Route::prefix('riirelease-defectcard')->group(function () {
+                    Route::resource('rii-release', 'RIIReleaseDefectCardController', [
+                        'parameters' => ['rii-release' => 'riirelease']
+                    ]);
+                });
+            });
+        });
 
         /** Discrepancy */
 
@@ -419,7 +457,8 @@ Route::name('frontend.')->group(function () {
                     /** Transaction */
                     Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy.create');
                     Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
-                    Route::POST('engineer', 'DiscrepancyEngineerController@store')->name('jobcard.discrepancy.store');
+                    Route::POST('engineer', 'DiscrepancyEngineerController@store')->name('jobcard.engineer.discrepancy.store');
+                    Route::POST('mechanic', 'DiscrepancyMechanicController@store')->name('jobcard.mechanic.discrepancy.store');
 
                 });
             });
@@ -459,29 +498,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-         /** TASK RELEASE */
-
-         Route::namespace('TaskRelease')->group(function () {
-            Route::resource('task-release', 'TaskReleaseController', [
-                'parameters' => ['task-release' => 'taskrelease']
-            ]);
-
-            Route::name('taskrelease.')->group(function () {
-
-            });
-        });
-
-         /** RII RELEASE */
-
-         Route::namespace('RIIRelease')->group(function () {
-            Route::resource('rii-release', 'RIIReleaseController', [
-                'parameters' => ['rii-release' => 'riirelease']
-            ]);
-
-            Route::name('riirelease.')->group(function () {
-
-            });
-        });
 
         /** INTERCHANGE */
 

@@ -267,8 +267,7 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(TaskCard::class, 'item_taskcard', 'item_id', 'taskcard_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id',
-                    )
+                        'unit_id')
                     ->withTimestamps();
     }
 

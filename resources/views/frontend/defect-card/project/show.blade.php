@@ -58,7 +58,7 @@
                                   </label>
 
                                   @component('frontend.common.label.data-info')
-                                      @slot('text', '2019-04-25 22:37:35')
+                                      @slot('text', $project->title)
                                   @endcomponent
                               </div>
                           </div>
@@ -91,16 +91,22 @@
                             </tr>
                             <tr>
                                 <td height="20px" style="text-align:center">
+                                    {{$project->created_at}}
                                 </td>
                                 <td height="20px" style="text-align:center">
+                                    {{$project->code}}
                                 </td>
                                 <td height="20px" style="text-align:center">
+                                    {{$project->no_wo}}
                                 </td>
                                 <td height="20px" style="text-align:center">
+                                    {{$project->aircraft->name}}
                                 </td>
                                 <td height="20px" style="text-align:center">
+                                    {{$project->aircraft_register}}
                                 </td>
                                 <td height="20px" style="text-align:center">
+                                    {{$project->aircraft_sn}}
                                 </td>
                                 <td height="20px" style="text-align:center">
                                 </td>
@@ -157,5 +163,8 @@
 
 
 @push('footer-scripts')
+  <script>
+        let project_uuid ='{{$project->uuid}}';
+    </script>
   <script src="{{ asset('js/frontend/defect-card/project/show.js')}}"></script>
 @endpush

@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\RIIRelease;
+namespace App\Http\Controllers\Frontend\TaskRelease;
 
 use Auth;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Inspection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
 
-class RIIReleaseController extends Controller
+class TaskReleaseJobCardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class RIIReleaseController extends Controller
      */
     public function index()
     {
-        return view('frontend.rii-release.index');
+        return view('frontend.task-release.index');
     }
 
     /**
@@ -30,7 +31,7 @@ class RIIReleaseController extends Controller
      */
     public function create()
     {
-        return view('frontend.rii-release.create');
+        //
     }
 
     /**
@@ -50,7 +51,7 @@ class RIIReleaseController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function show(TaskCard $riirelease)
+    public function show(TaskCard $taskrelease)
     {
         //
     }
@@ -61,33 +62,40 @@ class RIIReleaseController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $riirelease)
+    public function edit(JobCard $taskrelease)
     {
-       //
+        return view('frontend.task-release.create', [
+            'taskrelease' => $taskrelease,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\JobCardUpdate  $request
-     * @param  \App\Models\JobCard  $jobcard
+     * @param  \App\Http\Requests\Frontend\TaskCardUpdate  $request
+     * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $riirelease)
+    public function update(JobCardUpdate $request, JobCard $taskrelease)
     {
-        $status = Status::ofJobcard()->where('code','rii-released')->first()->id;
+        $status = Status::ofJobcard()->where('code','released')->first()->id;
 
-        $riirelease->progresses()->save(new Progress([
+        $taskrelease->progresses()->save(new Progress([
             'status_id' => $status,
             'progressed_by' => Auth::id()
         ]));
 
-        $riirelease->approvals()->save(new Approval([
-            'approvable_id' => $riirelease->id,
+        $taskrelease->inspections()->save(new Inspection([
+            'is_rii' => '0',
+            'inspected_by' => Auth::id()
+        ]));
+
+        $taskrelease->approvals()->save(new Approval([
+            'approvable_id' => $taskrelease->id,
             'approved_by' => Auth::id(),
         ]));
 
-        return response()->json($riirelease);
+        return response()->json($taskrelease);
     }
 
     /**
@@ -96,7 +104,7 @@ class RIIReleaseController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobCard $riirelease)
+    public function destroy(JobCard $taskrelease)
     {
         //
     }

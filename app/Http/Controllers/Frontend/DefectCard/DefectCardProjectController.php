@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\DefectCard;
 
+use App\Models\Project;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,9 +46,11 @@ class DefectCardProjectController extends Controller
      * @param  \App\Models\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function show(DefectCard $defectCard)
+    public function show(Project $defectcard)
     {
-        return view('frontend.defect-card.project.show');
+        return view('frontend.defect-card.project.show',[
+            'project' => $defectcard
+        ]);
     }
 
     /**
