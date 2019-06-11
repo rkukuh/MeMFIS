@@ -93,7 +93,10 @@ class DiscrepancyEngineerController extends Controller
      */
     public function update(Request $request,DefectCard $discrepancy)
     {
-        // TODO : update data discrepancy
+        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+
+        $discrepancy->update($request->all());
+
         $discrepancy->approvals()->save(new Approval([
             'approvable_id' => $discrepancy->id,
             'approved_by' => Auth::id(),
