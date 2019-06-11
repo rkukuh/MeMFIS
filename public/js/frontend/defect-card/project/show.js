@@ -43,7 +43,7 @@ let DcProjectShow = {
           },
           columns: [
               {
-                  field: 'code',
+                  field: 'created_at',
                   title: 'Date',
                   sortable: 'asc',
                   filterable: !1,
@@ -53,81 +53,54 @@ let DcProjectShow = {
                   title: 'Defect card No',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
-                  }
+                //   template: function (t) {
+                //       return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
+                //   }
               },
               {
-                  field: 'name',
+                  field: 'jobcard.number',
                   title: 'JC Ref.',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'payment_term',
+                  field: 'complaint',
                   title: 'Complaint',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
               },
               {
-                  field: 'payment_term',
-                  title: 'Complaint',
-                  sortable: 'asc',
-                  filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
-              },
-              {
-                  field: 'payment_term',
+                  field: '',
                   title: 'Date Finished',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
               },
               {
-                  field: 'payment_term',
+                  field: '',
                   title: 'Act. Mhrs',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
               },
               {
-                  field: 'payment_term',
+                  field: '',
                   title: 'Mech',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
               },
               {
-                  field: 'payment_term',
+                  field: '',
                   title: 'Eng',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
               },
               {
-                  field: 'payment_term',
+                  field: '',
                   title: 'Controller',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
               },
               {
-                  field: 'payment_term',
+                  field: '',
                   title: 'Status',
                   sortable: 'asc',
                   filterable: !1,

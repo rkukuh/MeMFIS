@@ -248,9 +248,13 @@ class DefectCardDatatables extends Controller
     public function show(Project $project)
     {
         $quotation = Quotation::where('project_id',$project->id)->first()->id;
-        $jobcard = JobCard::with('defectcards')->where('quotation_id',$quotation)->get();
 
-        $data = $alldata = json_decode($jobcard->defectcards);
+        $defectcard = DefectCard::with('jobcard')
+                                ->whereHas('jobcard', function ($query) use ($quotation){
+                                    $query->where('quotation_id', $quotation);
+                                })->get();
+
+        $data = $alldata = json_decode($defectcard);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
