@@ -459,6 +459,8 @@ Route::name('frontend.')->group(function () {
                     Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
                     Route::POST('engineer', 'DiscrepancyEngineerController@store')->name('jobcard.engineer.discrepancy.store');
                     Route::POST('mechanic', 'DiscrepancyMechanicController@store')->name('jobcard.mechanic.discrepancy.store');
+                    Route::PUT('{discrepancy}/engineer/approve', 'DiscrepancyEngineerController@approve')->name('jobcard.engineer.discrepancy.approve');
+                    Route::PUT('{discrepancy}/ppc/approve', 'DiscrepancyPPCController@approve')->name('jobcard.ppc.discrepancy.approve');
 
                 });
             });
