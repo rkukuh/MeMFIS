@@ -179,10 +179,9 @@ let Workpackage = {
             });
         });
         $('.footer').on('click', '.add-manhour', function () {
-            // alert('tes');
             let manhour = total_mhrs;
             let performa_used = performa;
-            let total = total.toFixed(2);
+            let total = $('#total').html();
 
             $.ajax({
                 headers: {
@@ -212,26 +211,51 @@ let Workpackage = {
         });
 
         $('.footer').on('click', '.add-engineer', function () {
-            let employee_airframe = $('#employee_airframe').val();
-            let airframe_qty = $('#airframe_qty').val();
-            let employee_powerplant = $('#employee_powerplant').val();
-            let powerplant_qty = $('#powerplant_qty').val();
-            let employee_electrical = $('#employee_electrical').val();
-            let electrical_qty = $('#electrical_qty').val();
-            let employee_radio = $('#employee_radio').val();
-            let radio_qty = $('#radio_qty').val();
-            let employee_cabinMaintenance = $('#employee_cabinMaintenance').val();
-            let cabin_qty = $('#cabin_qty').val();
-            let employee_runup = $('#employee_runup').val();
-            let runup_qty = $('#runup_qty').val();
-            let employee_repair = $('#employee_repair').val();
-            let repair_qty = $('#repair_qty').val();
-            let employee_repainting = $('#employee_repainting').val();
-            let repainting_qty = $('#repainting_qty').val();
-            let employee_ndi_ndt = $('#employee_ndi_ndt').val();
-            let ndi_ndt_qty = $('#ndi_ndt_qty').val();
+            let engineer_qty = [], engineer_skills = [], engineer = [];
+            $('#engineer_skills ').each(function() {
+                engineer_skills.push($(this).val());
+            });
+            if(engineer_skills.indexOf("Airframe") >= 0) {
+                engineer.push( $('#employee_airframe').val());
+                engineer_qty.push( $('#airframe_qty').val());
+            }
+            if(engineer_skills.indexOf("Powerplant") >= 0) {
+                engineer.push( $('#employee_powerplant').val());
+                engineer_qty.push( $('#powerplant_qty').val());
+            }
+            if(engineer_skills.indexOf("Electrical") >= 0) {
+                engineer.push( $('#employee_electrical').val());
+                engineer_qty.push( $('#electrical_qty').val());
+            }
+            if(engineer_skills.indexOf("Radio") >= 0) {
+                engineer.push( $('#employee_radio').val());
+                engineer_qty.push( $('#radio_qty').val());
+            }
+            if(engineer_skills.indexOf("Instrument") >= 0) {
+                engineer.push( $('#employee_instrument').val());
+                engineer_qty.push( $('#instrument_qty').val());
+            }
+            if(engineer_skills.indexOf("Cabin Maintenance") >= 0) {
+                engineer.push( $('#employee_cabinMaintenance').val());
+                engineer_qty.push( $('#cabin_qty').val());
+            }
+            if(engineer_skills.indexOf("Run-Up") >= 0) {
+                engineer.push( $('#employee_runup').val());
+                engineer_qty.push( $('#runup_qty').val());
+            }
+            if(engineer_skills.indexOf("Repair") >= 0) {
+                engineer.push( $('#employee_repair').val());
+                engineer_qty.push( $('#repair_qty').val());
+            }
+            if(engineer_skills.indexOf("Repainting") >= 0) {
+                engineer.push( $('#employee_repainting').val());
+                engineer_qty.push( $('#repainting_qty').val());
+            }
+            if(engineer_skills.indexOf("NDI/NDT") >= 0) {
+                engineer.push( $('#employee_ndi_ndt').val());
+                engineer_qty.push( $('#ndi_ndt_qty').val());
+            }
             let tat = $('#tat').val();
-            let skills = $('#skills').val();
 
             $.ajax({
                 headers: {
@@ -241,25 +265,9 @@ let Workpackage = {
                 url: '/project-hm/' + project_uuid + '/workpackage/' + workpackage_uuid + '/engineerTeam',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    employee_airframe: employee_airframe,
-                    airframe_qty: airframe_qty,
-                    employee_powerplant: employee_powerplant,
-                    powerplant_qty: powerplant_qty,
-                    employee_electrical: employee_electrical,
-                    electrical_qty: electrical_qty,
-                    employee_radio: employee_radio,
-                    radio_qty: radio_qty,
-                    employee_cabinMaintenance: employee_cabinMaintenance,
-                    cabin_qty: cabin_qty,
-                    employee_runup: employee_runup,
-                    runup_qty: runup_qty,
-                    employee_repair: employee_repair,
-                    repair_qty: repair_qty,
-                    employee_repainting: employee_repainting,
-                    repainting_qty: repainting_qty,
-                    employee_ndi_ndt: employee_ndi_ndt,
-                    ndi_ndt_qty: ndi_ndt_qty,
-                    skills: skills,
+                    engineer_skills: engineer_skills,
+                    engineer: engineer,
+                    engineer_qty: engineer_qty,
                     tat: tat,
                 },
                 success: function (data) {

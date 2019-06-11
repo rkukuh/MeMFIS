@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use App\Models\Type;
 use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
+use App\Models\Employee;
 use App\Models\WorkPackage;
 use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
@@ -80,7 +82,6 @@ class ProjectHMWorkPackageController extends Controller
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = false;
-        // dd($skills);
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
@@ -106,12 +107,15 @@ class ProjectHMWorkPackageController extends Controller
                 ->only(['skill_id'])
                 ->all();
         });
-
-        $skills = [];
+        $engineer_skills = $skills = [];
         foreach ($subset as $value) {
             array_push($skills, $value["skill_id"]);
         }
-        // TO DO : get all skill from $skills
+        sort($skills);
+        $skills = Type::find($skills)->pluck('name') ;
+        foreach ($skills as $value) {
+            array_push($engineer_skills, $value);
+        }
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
@@ -121,7 +125,7 @@ class ProjectHMWorkPackageController extends Controller
             'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
             'project' => $project,
-            'skills' => $skills
+            'engineer_skills' => $engineer_skills,
         ]);
     }
 
@@ -143,11 +147,20 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function engineerTeam(Project $project, WorkPackage $workpackage,Request $request)
     {
-        $pw = ProjectWorkPackage::where('project_id',$project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
 
-            dd($pw);
+        $project_workpackage->update(['tat' =>  $request->tat]);
+        for($index = 0 ; $index < sizeof($request->engineer_skills) ; $index++){
+            $project_workpackage->engineers()->create([
+                'skill_id' => Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )->first()->id,
+                'engineer_id' => Employee::where('code',$request->engineer[$index])->first()->id,
+                'quantity' => (int) $request->engineer_qty[$index],
+            ]);
+        }
+        
+        return response()->json($project_workpackage());
     }
 
     /**
@@ -160,15 +173,13 @@ class ProjectHMWorkPackageController extends Controller
             ->where('workpackage_id',$workpackage->id)
             ->first();
 
-        dd($request->skills);
+        $project_workpackage->update([
+            'performance_factor' =>  $request->performa_used,
+            'total_manhours' =>  $request->manhour,
+            'total_manhours_with_performance_factor' =>  $request->total,
+            ]);
 
-        $project_workpackage->engineer()->create([
-            'skill_id' => $facility,
-            'engineer_id' => $facility,
-            'quantity' => $facility,
-        ]);
-
-        return response()->json($project_workpackage->engineer());
+        return response()->json($project_workpackage);
         
     }
 

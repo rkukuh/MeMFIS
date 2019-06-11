@@ -1,6 +1,6 @@
 <div class="form-group m-form__group row px-4 pb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        @if(in_array(100,$skills))
+        @if(in_array('Airframe',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -14,6 +14,11 @@
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
                 @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Airframe')
+                @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
@@ -26,7 +31,8 @@
                 @endcomponent
             </div>
         </div>
-        @elseif(in_array(82,$skills))
+        @endif 
+        @if(in_array('Powerplant / Engine',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -40,6 +46,11 @@
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
                 @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Powerplant')
+                @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
@@ -52,7 +63,8 @@
                 @endcomponent
             </div>
         </div>
-        @elseif(in_array(83,$skills))
+        @endif 
+        @if(in_array('Electrical',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -66,6 +78,11 @@
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
                 @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Electrical')
+                @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
@@ -78,7 +95,8 @@
                 @endcomponent
             </div>
         </div>
-        @elseif(in_array(84,$skills))
+        @endif 
+        @if(in_array('Radio',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -91,6 +109,11 @@
                     @slot('text', 'Radio')
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
+                @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Radio')
                 @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -105,7 +128,8 @@
             </div>
         </div>
 
-        @elseif(in_array(85,$skills))
+        @endif 
+        @if(in_array('Instrument',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -119,6 +143,11 @@
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
                 @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Instrument')
+                @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
@@ -131,7 +160,8 @@
                 @endcomponent
             </div>
         </div>
-        @elseif(in_array(86,$skills))
+        @endif 
+        @if(in_array('Cabin Maintenance',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -145,6 +175,11 @@
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
                 @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Cabin Maintenance')
+                @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
@@ -157,7 +192,8 @@
                 @endcomponent
             </div>
         </div>
-        @elseif(in_array(87,$skills))
+        @endif 
+        @if(in_array('Run-Up',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -171,6 +207,11 @@
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
                 @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Run-Up')
+                @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
@@ -183,7 +224,8 @@
                 @endcomponent
             </div>
         </div>
-        @elseif(in_array(88,$skills))
+        @endif 
+        @if(in_array('Repair',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -197,6 +239,11 @@
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
                 @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Repair')
+                @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
@@ -209,7 +256,8 @@
                 @endcomponent
             </div>
         </div>
-        @elseif(in_array(89,$skills))
+        @endif 
+        @if(in_array('Repainting',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -223,6 +271,11 @@
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
                 @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'Repainting')
+                @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
@@ -235,7 +288,8 @@
                 @endcomponent
             </div>
         </div>
-        @elseif(in_array(90,$skills))
+        @endif 
+        @if(in_array('NDI/NDT',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
@@ -248,6 +302,11 @@
                     @slot('text', 'NDI/NDT')
                     @slot('name', 'employee')
                     @slot('id_error', 'employee')
+                @endcomponent
+                @component('frontend.common.input.hidden')
+                    @slot('id', 'engineer_skills')
+                    @slot('name', 'engineer_skills')
+                    @slot('value', 'NDI/NDT')
                 @endcomponent
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -294,6 +353,7 @@
                 @component('frontend.common.buttons.back')
                     @slot('href', route('frontend.workpackage.index'))
                 @endcomponent
+
             </div>
         </div>
     </div>
