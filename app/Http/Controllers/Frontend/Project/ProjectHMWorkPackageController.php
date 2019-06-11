@@ -82,7 +82,6 @@ class ProjectHMWorkPackageController extends Controller
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = false;
-        // dd($skills);
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
@@ -174,7 +173,11 @@ class ProjectHMWorkPackageController extends Controller
             ->where('workpackage_id',$workpackage->id)
             ->first();
 
-        dd($request->manhours);
+        $project_workpackage->update([
+            'performance_factor' =>  $request->performa_used,
+            'total_manhours' =>  $request->manhour,
+            'total_manhours_with_performance_factor' =>  $request->total,
+            ]);
 
         return response()->json($project_workpackage);
         

@@ -179,10 +179,9 @@ let Workpackage = {
             });
         });
         $('.footer').on('click', '.add-manhour', function () {
-            // alert('tes');
             let manhour = total_mhrs;
             let performa_used = performa;
-            let total = total.toFixed(2);
+            let total = $('#total').html();
 
             $.ajax({
                 headers: {
