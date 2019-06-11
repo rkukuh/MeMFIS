@@ -220,6 +220,19 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * One-to-Many: A task card may have one workarea.
+     *
+     * This function will retrieve the workarea of a task card.
+     * See: Type's workarea() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workarea()
+    {
+        return $this->belongsTo(Type::class, 'work_area');
+    }
+
+    /**
      * Many-to-Many: A task card may have one or many workpackage.
      *
      * This function will retrieve all the work packages of a task card.
