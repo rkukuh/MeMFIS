@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use App\Models\Type;
 use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
@@ -106,12 +107,15 @@ class ProjectHMWorkPackageController extends Controller
                 ->only(['skill_id'])
                 ->all();
         });
-
-        $skills = [];
+        $engineer_skills = $skills = [];
         foreach ($subset as $value) {
             array_push($skills, $value["skill_id"]);
         }
-        // TO DO : get all skill from $skills
+        sort($skills);
+        $skills = Type::find($skills)->pluck('name') ;
+        foreach ($skills as $value) {
+            array_push($engineer_skills, $value);
+        }
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
@@ -121,7 +125,7 @@ class ProjectHMWorkPackageController extends Controller
             'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
             'project' => $project,
-            'skills' => $skills
+            'engineer_skills' => $engineer_skills,
         ]);
     }
 
@@ -143,11 +147,19 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function engineerTeam(Project $project, WorkPackage $workpackage,Request $request)
     {
-        $pw = ProjectWorkPackage::where('project_id',$project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
 
-            dd($pw);
+            dd($request->engineer_qty);
+        $project_workpackage->update(['tat' =>  $request->tat]);
+        $project_workpackage->engineer()->create([
+            'skill_id' => $facility,
+            'engineer_id' => $facility,
+            'quantity' => $facility,
+        ]);
+
+        return response()->json($project_workpackage->engineer());
     }
 
     /**
@@ -160,15 +172,9 @@ class ProjectHMWorkPackageController extends Controller
             ->where('workpackage_id',$workpackage->id)
             ->first();
 
-        dd($request->skills);
+        dd($request->manhours);
 
-        $project_workpackage->engineer()->create([
-            'skill_id' => $facility,
-            'engineer_id' => $facility,
-            'quantity' => $facility,
-        ]);
-
-        return response()->json($project_workpackage->engineer());
+        return response()->json($project_workpackage->manhours());
         
     }
 
