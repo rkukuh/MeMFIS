@@ -55,14 +55,14 @@
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
                                             <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
+                                                <input type="text" class="form-control m-input" id="code" name="code" placeholder="Search...">
 
                                                 <span class="m-input-icon__icon m-input-icon__icon--left">
                                                     <span><i class="la la-search"></i></span>
                                                 </span>
                                             </div>
                                             <?php
-                                            echo $errors->first('number','<div class="form-control-feedback text-danger" ">:message</div>');
+                                            echo $errors->first('code','<div class="form-control-feedback text-danger" ">:message</div>');
                                             ?>
                                         </div>
                                         <div class="col-md-3 search">
@@ -106,7 +106,7 @@
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/defect-card/index.js') }}"></script>
 <script>
-    $("#number").focus();
+    $("#code").focus();
 </script>
  <script>
     let input = document.getElementById("search");

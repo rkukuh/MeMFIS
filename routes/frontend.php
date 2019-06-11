@@ -393,6 +393,44 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        /** TASK RELEASE */
+
+        Route::namespace('TaskRelease')->group(function () {
+            Route::name('taskrelease-jobcard.')->group(function () {
+                Route::prefix('taskrelease-jobcard')->group(function () {
+                    Route::resource('task-release', 'TaskReleaseJobCardController', [
+                        'parameters' => ['task-release' => 'taskrelease']
+                    ]);
+
+                });
+            });
+            Route::name('taskrelease-defectcard.')->group(function () {
+                Route::prefix('taskrelease-defectcard')->group(function () {
+                    Route::resource('task-release', 'TaskReleaseDefectCardController', [
+                        'parameters' => ['task-release' => 'taskrelease']
+                    ]);
+                });
+            });
+        });
+
+         /** RII RELEASE */
+
+         Route::namespace('RIIRelease')->group(function () {
+            Route::name('riirelease-jobcard.')->group(function () {
+                Route::prefix('riirelease-jobcard')->group(function () {
+                    Route::resource('rii-release', 'RIIReleaseJobCardController', [
+                        'parameters' => ['rii-release' => 'riirelease']
+                    ]);
+                });
+            });
+            Route::name('riirelease-defectcard.')->group(function () {
+                Route::prefix('riirelease-defectcard')->group(function () {
+                    Route::resource('rii-release', 'RIIReleaseDefectCardController', [
+                        'parameters' => ['rii-release' => 'riirelease']
+                    ]);
+                });
+            });
+        });
 
         /** Discrepancy */
 
@@ -417,8 +455,10 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('discrepancy')->group(function () {
 
                     /** Transaction */
-                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.discrepancy.create');
-                    Route::POST('engineer', 'DiscrepancyEngineerController@store')->name('jobcard.discrepancy.store');
+                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy.create');
+                    Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
+                    Route::POST('engineer', 'DiscrepancyEngineerController@store')->name('jobcard.engineer.discrepancy.store');
+                    Route::POST('mechanic', 'DiscrepancyMechanicController@store')->name('jobcard.mechanic.discrepancy.store');
 
                 });
             });
@@ -458,29 +498,6 @@ Route::name('frontend.')->group(function () {
 
         });
 
-         /** TASK RELEASE */
-
-         Route::namespace('TaskRelease')->group(function () {
-            Route::resource('task-release', 'TaskReleaseController', [
-                'parameters' => ['task-release' => 'taskrelease']
-            ]);
-
-            Route::name('taskrelease.')->group(function () {
-
-            });
-        });
-
-         /** RII RELEASE */
-
-         Route::namespace('RIIRelease')->group(function () {
-            Route::resource('rii-release', 'RIIReleaseController', [
-                'parameters' => ['rii-release' => 'riirelease']
-            ]);
-
-            Route::name('riirelease.')->group(function () {
-
-            });
-        });
 
         /** INTERCHANGE */
 

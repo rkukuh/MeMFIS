@@ -23,7 +23,7 @@ $('.filter').on('change', function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: 'post',
-        url: '/datatables/rii-release/filter',
+        url: '/datatables/rii-release-jobcard/filter',
         data: {
             _token: $('input[name=_token]').val(),
             date: date,
@@ -87,7 +87,7 @@ $('.filter').on('change', function () {
                         title: 'Company Task No',
                         sortable: 'asc',
                         filterable: !1,
-    
+
                     },
                     {
                         field: 'skill',
@@ -136,7 +136,7 @@ $('.filter').on('change', function () {
                         sortable: !1,
                         overflow: 'visible',
                         template: function (t, e, i) {
-    
+
                                 return (
                                     '<a href="/taskcard-routine/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                         '<i class="la la-pencil"></i>' +

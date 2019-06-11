@@ -345,7 +345,7 @@
                                                         @slot('type','button')
                                                         @slot('id', 'add-discrepancy')
                                                         @slot('class', 'add-discrepancy')
-                                                        @slot('text','Save & Approved')
+                                                        @slot('text','Save')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -456,6 +456,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/discrepancy/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/engineer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
 @endpush

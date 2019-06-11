@@ -40,7 +40,7 @@
                     </span>
 
                     @component('frontend.common.label.create-new')
-                        @slot('text','open')
+                        @slot('text','pending')
                     @endcomponent
 
                     <h3 class="m-portlet__head-text">
@@ -322,18 +322,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                @component('frontend.common.buttons.submit')
-                                    @slot('type','button')
-                                    @slot('id', 'execute')
-                                    @slot('class', 'execute')
-                                    @slot('text','Execute')
-                                    @slot('color','primary')
-                                    @slot('icon','')
-                                @endcomponent
-
-                                @component('frontend.common.buttons.back')
-                                    @slot('href', route('frontend.receiving-inspection-report.index'))
-                                @endcomponent
+                                @include('frontend.common.buttons.back')
                             </div>
                         </div>
                     </div>

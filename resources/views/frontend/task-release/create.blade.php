@@ -323,9 +323,12 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @include('frontend.common.buttons.release')
+                                                @component('frontend.common.buttons.release')
+                                                    @slot('class', 'release')
+                                                @endcomponent
+
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.task-release.index'))
+                                                    @slot('href', route('frontend.taskrelease-jobcard.task-release.index'))
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -340,3 +343,47 @@
     </div>
 </div>
 @endsection
+
+@push('footer-scripts')
+    <script>
+    $('.footer').on('click', '.release', function () {
+        let jobcard_uuid = '{{ $taskrelease->uuid }}';
+
+        swal({
+            title: 'Sure want to Release?',
+            type: 'question',
+            confirmButtonText: 'Yes, Release',
+            confirmButtonColor: '#34bfa3',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+        })
+        .then(result => {
+            if (result.value) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                            'content'
+                        )
+                    },
+                    type: 'PUT',
+                    url: '/taskrelease-jobcard/task-release/' + jobcard_uuid + '/',
+                    success: function (data) {
+                        toastr.success('Task has been released.', 'Released', {
+                                timeOut: 5000
+                            }
+                        );
+
+                    },
+                    error: function (jqXhr, json, errorThrown) {
+                        let errors = jqXhr.responseJSON;
+
+                        $.each(errors.errors, function (index, value) {
+                            $('#delete-error').html(value);
+                        });
+                    }
+                });
+            }
+        });
+    });
+    </script>
+@endpush

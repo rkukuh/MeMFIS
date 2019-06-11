@@ -371,18 +371,35 @@ Route::name('datatables.')->group(function () {
 
         /** TASK RELEASE */
 
-        Route::name('task-release.')->group(function () {
+        Route::name('task-release-jobcard.')->group(function () {
 
             Route::group([
 
-                'prefix'    => 'task-release',
+                'prefix'    => 'task-release-jobcard',
                 'namespace' => 'TaskRelease'
 
             ], function () {
 
                 /** Master Data */
-                Route::get('/', 'TaskReleaseDatatables@index')->name('all');
-                Route::post('/filter/', 'TaskReleaseDatatables@filter')->name('filter');
+                Route::get('/', 'TaskReleaseJobCardDatatables@index')->name('all');
+                Route::post('/filter/', 'TaskReleaseJobCardDatatables@filter')->name('filter');
+
+            });
+
+        });
+
+        Route::name('task-release-defectcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'task-release-defectcard',
+                'namespace' => 'TaskRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'TaskReleaseDefectCardDatatables@index')->name('all');
+                Route::post('/filter/', 'TaskReleaseDefectCardDatatables@filter')->name('filter');
 
             });
 
@@ -390,18 +407,36 @@ Route::name('datatables.')->group(function () {
 
         /** RII RELEASE */
 
-        Route::name('rii-release.')->group(function () {
+        Route::name('rii-release-jobcard.')->group(function () {
 
             Route::group([
 
-                'prefix'    => 'rii-release',
+                'prefix'    => 'rii-release-jobcard',
                 'namespace' => 'RIIRelease'
 
             ], function () {
 
                 /** Master Data */
-                Route::get('/', 'RIIReleaseDatatables@index')->name('all');
-                Route::post('/filter/', 'RIIReleaseDatatables@filter')->name('filter');
+                Route::get('/', 'RIIReleaseJobCardDatatables@index')->name('all');
+                Route::post('/filter/', 'RIIReleaseJobCardDatatables@filter')->name('filter');
+
+
+            });
+
+        });
+
+        Route::name('rii-release-defectcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'rii-release-defectcard',
+                'namespace' => 'RIIRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'RIIReleaseDefectCardDatatables@index')->name('all');
+                Route::post('/filter/', 'RIIReleaseDefectCardDatatables@filter')->name('filter');
 
 
             });
@@ -441,6 +476,26 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/', 'JobCardDatatables@index')->name('all');
                 Route::post('/filter/', 'JobCardDatatables@filter')->name('filter');
+
+            });
+
+        });
+
+        /** DEFECT CARD */
+
+        Route::name('defectcard.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'defectcard',
+                'namespace' => 'DefectCard'
+
+            ], function () {
+
+                Route::get('/', 'DefectCardDatatables@index')->name('all');
+                Route::get('/project', 'DefectCardDatatables@project')->name('all.project');
+                Route::get('/project/{project}', 'DefectCardDatatables@show')->name('all.show');
+                Route::post('/filter/', 'DefectCardDatatables@filter')->name('filter');
 
             });
 

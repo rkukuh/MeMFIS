@@ -83,5 +83,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/rii-release/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/rii-release/job-card/index.js')}}"></script>
 @endpush

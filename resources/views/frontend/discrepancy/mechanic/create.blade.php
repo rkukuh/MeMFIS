@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', '2/12/2012')
+                                                @slot('text', $jobcard->quotation->project->created_at)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $jobcard->quotation->project->aircraft->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $jobcard->quotation->project->aircraft_register)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -97,8 +97,9 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $jobcard->number)
                                             @endcomponent
+                                            <input type="hidden"id="uuid" name="uuid" value="{{$jobcard->uuid}}">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -106,7 +107,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $jobcard->quotation->project->aircraft_sn)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -126,10 +127,10 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('text', 'Engineer Quantity')
+                                                    @slot('id', 'engineer_qty')
+                                                    @slot('name', 'engineer_qty')
+                                                    @slot('id_error', 'engineer_qty')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -149,10 +150,10 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('text', 'Helper Quantity')
+                                                    @slot('id', 'helper_quantity')
+                                                    @slot('name', 'helper_quantity')
+                                                    @slot('id_error', 'helper_quantity')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -163,7 +164,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $jobcard->taskcard->work_area)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -172,10 +173,10 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('text', 'Manhours')
+                                                    @slot('id', 'manhours')
+                                                    @slot('name', 'manhours')
+                                                    @slot('id_error', 'manhours')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -186,7 +187,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $jobcard->taskcard->skill->name)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -210,7 +211,9 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                                @slot('id', 'complaint')
+                                                @slot('name', 'complaint')
+                                                @slot('id_error', 'complaint')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -318,7 +321,9 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('id_error', 'description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -329,8 +334,9 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
+                                                        @slot('id', 'add-discrepancy')
+                                                        @slot('class', 'add-discrepancy')
+                                                        @slot('text','Save')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -441,6 +447,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/mechanic/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
 @endpush

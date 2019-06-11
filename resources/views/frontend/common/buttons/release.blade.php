@@ -1,6 +1,6 @@
 <button
     id="{{ $id or '' }}"
-    type="{{ $type or 'submit' }}"
+    type="{{ $type or 'button' }}"
     name="{{ $name or 'submit' }}"
     value="{{ $value or '' }}"
     class="btn

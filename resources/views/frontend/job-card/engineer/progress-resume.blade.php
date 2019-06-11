@@ -204,27 +204,26 @@
                                     </table>
                                 </div>
                             </div>
+                            <hr class="mt-4">
                             <div class="form-group m-form__group row">
-                                <div class="col-sm-10 col-md-10 col-lg-10 footer">
-                                    <div class="flex">
-                                        <div class="action-buttons">
-                                                @include('frontend.job-card.engineer.modal-pause')
-                                                @component('frontend.common.buttons.pause')
-                                                    @slot('data_target', '#modal_pause')
-                                                @endcomponent
-                                                @include('frontend.job-card.engineer.modal-close')
-                                                @component('frontend.common.buttons.close')
-                                                    @slot('data_target', '#modal_close')
-                                                @endcomponent
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                    <form method="POST" action="{{route('frontend.discrepancy.jobcard.discrepancy.create',$jobcard->uuid)}}">
-                                        {!! csrf_field() !!}
-                                        @include('frontend.common.buttons.found')
-                                    </form>
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="action-buttons d-flex flex-row-reverse">
+                                        <form class="ml-2" method="POST" action="{{route('frontend.discrepancy.jobcard.engineer.discrepancy.create',$jobcard->uuid)}}">
+                                            {!! csrf_field() !!}
+                                            @include('frontend.common.buttons.found')
+                                        </form>
 
+                                        @include('frontend.job-card.engineer.modal-close')
+                                        @component('frontend.common.buttons.close')
+                                            @slot('data_target', '#modal_close')
+                                            @slot('class', 'ml-2')
+                                        @endcomponent
+
+                                        @include('frontend.job-card.engineer.modal-pause')
+                                        @component('frontend.common.buttons.pause')
+                                            @slot('data_target', '#modal_pause')
+                                        @endcomponent
+                                    </div>
                                 </div>
                             </div>
                         </div>

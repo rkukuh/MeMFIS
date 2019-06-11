@@ -1,13 +1,13 @@
-let TaskRelease = {
+let RiiRelease = {
     init: function () {
 
-        $('.taskrelease_datatable').mDatatable({
+        $('.riirelease_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/task-release',
+                        url: '/datatables/rii-release-defectcard',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -61,7 +61,7 @@ let TaskRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/task-release/create">' + t.number + "</a>"
+                            '<a href="/rii-release/create">' + t.number + "</a>"
                         );
                     }
                 },
@@ -132,8 +132,7 @@ let TaskRelease = {
                 }
             ]
         });
-
-        $('.taskrelease_datatable').on('click', '.release', function () {
+        $('.riirelease_datatable').on('click', '.release', function () {
             let jobcard_uuid = $(this).data('uuid');
 
             swal({
@@ -153,7 +152,7 @@ let TaskRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/task-release/' + jobcard_uuid + '/',
+                        url: '/rii-release/' + jobcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Quotation has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -181,5 +180,5 @@ let TaskRelease = {
 };
 
 jQuery(document).ready(function () {
-    TaskRelease.init();
+    RiiRelease.init();
 });

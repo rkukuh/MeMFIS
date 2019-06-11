@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\TaskRelease;
+namespace App\Http\Controllers\Datatables\RIIRelease;
 
 use App\Models\JobCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TaskReleaseDatatables extends Controller
+class RIIReleaseJobCardDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,9 @@ class TaskReleaseDatatables extends Controller
      */
     public function index()
     {
-        $JobCard=JobCard::with('taskcard','quotation')->get();
+        $JobCard =JobCard::with('taskcard','quotation')->whereHas('taskcard', function ($query) {
+                                            $query->where('is_rii', '1');
+                                            })->get();
 
         foreach($JobCard as $aircraft){
             $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;

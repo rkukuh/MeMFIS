@@ -2,12 +2,32 @@
 
 namespace App\Http\Controllers\Frontend\DefectCard;
 
+use Auth;
+use Validator;
+use App\Models\Type;
+use App\Models\Status;
+use App\Models\Progress;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DefectCardMechanicController extends Controller
 {
+    protected $statuses;
+    protected $break;
+    protected $waiting;
+    protected $other;
+    protected $accomplished;
+
+    public function __construct()
+    {
+        $this->statuses = Status::ofDefectCard()->get();
+        $this->break = Type::ofJobCardPauseReason()->where('code','break-time')->first()->uuid;
+        $this->waiting = Type::ofJobCardPauseReason()->where('code','waiting-material')->first()->uuid;
+        $this->other = Type::ofJobCardPauseReason()->where('code','other')->first()->uuid;
+        $this->accomplished = Type::ofJobCardCloseReason()->where('code','accomplished')->first()->uuid;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -56,9 +76,42 @@ class DefectCardMechanicController extends Controller
      * @param  \App\Models\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(DefectCard $defectCard)
+    public function edit(DefectCard $defectcard)
     {
-        return view('frontend.defect-card.mechanic.pending');
+        if ($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "open") {
+            return view('frontend.defect-card.mechanic.progress-open', [
+                'defectcard' => $defectcard,
+                'status' => $this->statuses->where('code','open')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "progress"){
+            return view('frontend.defect-card.mechanic.progress-resume', [
+                'break' => $this->break,
+                'waiting' => $this->waiting,
+                'other' => $this->other,
+                'accomplished' => $this->accomplished,
+                'defectcard' => $defectcard,
+                'pending' => $this->statuses->where('code','pending')->first(),
+                'closed' => $this->statuses->where('code','closed')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "pending"){
+            return view('frontend.defect-card.mechanic.progress-pause', [
+                'defectcard' => $defectcard,
+                'open' => $this->statuses->where('code','open')->first(),
+                'closed' => $this->statuses->where('code','closed')->first(),
+            ]);
+        }
+        else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "closed"){
+            return view('frontend.defect-card.mechanic.progress-close', [
+                'defectcard' => $defectcard,
+            ]);
+        }
+        else{
+            return view('frontend.defect-card.mechanic.progress-close', [
+                'defectcard' => $defectcard,
+            ]);
+        }
     }
 
     /**
@@ -68,9 +121,34 @@ class DefectCardMechanicController extends Controller
      * @param  \App\Models\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DefectCard $defectCard)
+    public function update(Request $request, DefectCard $defectcard)
     {
-        //
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
+            $defectcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','progress')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.defectcard-mechanic.index');
+        }
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
+            $defectcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','pending')->first()->id,
+                'reason_id' =>  Type::ofJobCardPauseReason()->where('uuid',$request->pause)->first()->id,
+                'reason_text' =>  $request->reason,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.defectcard-mechanic.index');
+        }
+        if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
+            $defectcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','closed')->first()->id,
+                'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
+                'reason_text' =>  $request->note,
+                'progressed_by' => Auth::id()
+            ]));
+
+            return redirect()->route('frontend.defectcard-mechanic.index');
+        }
     }
 
     /**
@@ -93,16 +171,16 @@ class DefectCardMechanicController extends Controller
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'number' => 'required|exists:jobcards,number'
+            'code' => 'required|exists:defectcards,code'
           ]);
 
           if ($validator->fails()) {
             return
-            redirect()->route('frontend.jobcard-engineer.index')->withErrors($validator)->withInput();
+            redirect()->route('frontend.defectcard-mechanic.index')->withErrors($validator)->withInput();
           }
 
-        $search = DefectCard::where('code',$request->number)->first();
+        $search = DefectCard::where('code',$request->code)->first();
 
-        return redirect()->route('frontend.defectcard-engineer.edit',$search->uuid);
+        return redirect()->route('frontend.defectcard-mechanic.edit',$search->uuid);
     }
 }

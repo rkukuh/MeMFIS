@@ -82,7 +82,7 @@ class Quotation extends MemfisModel
         return $this->belongsToMany(Item::class)
                     ->withPivot(
                         'taskcard_id',
-                        'pricelist_unit',
+                        'pricelist_unit_id',
                         'pricelist_price',
                         'subtotal',
                         'note'
