@@ -56,7 +56,7 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="">' + t.code + "</a>"
+                            return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
@@ -65,7 +65,7 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="">' + t.jobcard.number + "</a>"
+                            return '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
                     }
                 },
                 {
@@ -74,7 +74,7 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="">' + t.jobcard.taskcard.number + "</a>"
+                        return '<a href="/taskcard/'+t.jobcard.taskcard.uuid+'">' + t.jobcard.taskcard.number + "</a>"
                     }
                 },
                 {
