@@ -7,6 +7,7 @@ use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Inspection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
@@ -82,6 +83,11 @@ class RIIReleaseJobCardController extends Controller
         $riirelease->progresses()->save(new Progress([
             'status_id' => $status,
             'progressed_by' => Auth::id()
+        ]));
+
+        $riirelease->inspections()->save(new Inspection([
+            'is_rii' => '1',
+            'inspected_by' => Auth::id()
         ]));
 
         $riirelease->approvals()->save(new Approval([
