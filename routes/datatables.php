@@ -481,6 +481,24 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** DISCREPANCY */
+
+        Route::name('discrepancy.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'discrepancy',
+                'namespace' => 'Discrepancy'
+
+            ], function () {
+
+                Route::get('/', 'DiscrepancyDatatables@index')->name('all');
+                Route::post('/filter/', 'DiscrepancyDatatables@filter')->name('filter');
+
+            });
+
+        });
+
         /** DEFECT CARD */
 
         Route::name('defectcard.')->group(function () {

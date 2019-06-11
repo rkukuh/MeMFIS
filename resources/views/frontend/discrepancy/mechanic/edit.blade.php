@@ -79,6 +79,7 @@
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', 'Generated')
                                             @endcomponent
+                                            <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->uuid}}">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -95,11 +96,10 @@
                                             <label class="form-control-label">
                                                 JC No Refference
                                             </label>
-
+                                            <input type="hidden"id="jobcard_id" name="jobcard_id" value="{{$discrepancy->jobcard->uuid}}">
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $discrepancy->jobcard->number)
                                             @endcomponent
-                                            <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->jobcard->uuid}}">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -342,8 +342,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.update')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
+                                                        @slot('id', 'edit-discrepancy')
+                                                        @slot('class', 'edit-discrepancy')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -458,6 +458,7 @@
 @endpush
 
 @push('footer-scripts')
+<script src="{{ asset('js/frontend/discrepancy/mechanic/edit.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>

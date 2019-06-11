@@ -310,11 +310,11 @@
                                                             </div>
                                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                                 @component('frontend.common.input.textarea')
-                                                                    @slot('id', 'other')
-                                                                    @slot('text', 'other')
-                                                                    @slot('name', 'other')
+                                                                    @slot('id', 'code')
+                                                                    @slot('text', 'Code')
+                                                                    @slot('name', 'code')
                                                                     @slot('rows', '3')
-                                                                    @slot('id_error', 'other')
+                                                                    @slot('id_error', 'code')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -465,7 +465,7 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/discrepancy/engineer/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/edit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>

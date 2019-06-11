@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
-use App\Models\Type;
-use Illuminate\Http\Request;
+use Auth;
+use App\Models\Status;
+use App\Models\JobCard;
+use App\Models\Approval;
+use App\Models\Progress;
+use App\Models\DefectCard;use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DiscrepancyPPCController extends Controller
@@ -16,7 +20,7 @@ class DiscrepancyPPCController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.discrepancy.ppc.index');
     }
 
     /**
@@ -59,7 +63,9 @@ class DiscrepancyPPCController extends Controller
      */
     public function edit(DefectCard $discrepancy)
     {
-        return view('frontend.discrepancy.ppc.edit');
+        return view('frontend.discrepancy.ppc.edit', [
+            'discrepancy' => $discrepancy,
+        ]);
     }
 
     /**
@@ -71,7 +77,16 @@ class DiscrepancyPPCController extends Controller
      */
     public function update(Request $request,DefectCard $discrepancy)
     {
-        return response()->json($request);
+        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+
+        $discrepancy->update($request->all());
+
+        $discrepancy->approvals()->save(new Approval([
+            'approvable_id' => $discrepancy->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        return response()->json($discrepancy);
     }
 
     /**
@@ -82,6 +97,24 @@ class DiscrepancyPPCController extends Controller
      */
     public function destroy(DefectCard $discrepancy)
     {
-        //
+        $discrepancy->delete();
+
+        return response()->json($discrepancy);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(DefectCard $discrepancy)
+    {
+        $discrepancy->approvals()->save(new Approval([
+            'approvable_id' => $discrepancy->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        return response()->json($discrepancy);
     }
 }
