@@ -26,6 +26,7 @@ class TaskCard extends MemfisModel
         'sequence',
         'stringer',
         'version',
+        'tat',
         'description',
         'additionals',
 
