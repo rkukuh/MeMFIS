@@ -66,6 +66,8 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, WorkPackage $workPackage)
     {
+        $engineer_skills = $skills = [];
+        
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         $subset = $workPackage->taskcards->map(function ($taskcard) {
@@ -74,9 +76,14 @@ class ProjectHMWorkPackageController extends Controller
                 ->all();
         });
 
-        $skills = [];
         foreach ($subset as $value) {
             array_push($skills, $value["skill_id"]);
+        }
+        sort($skills);
+
+        $skills = Type::find($skills)->pluck('name') ;
+        foreach ($skills as $value) {
+            array_push($engineer_skills, $value);
         }
 
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
@@ -100,6 +107,8 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function edit(Project $project, WorkPackage $workPackage)
     {
+        $engineer_skills = $skills = [];
+
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         $subset = $workPackage->taskcards->map(function ($taskcard) {
@@ -107,15 +116,17 @@ class ProjectHMWorkPackageController extends Controller
                 ->only(['skill_id'])
                 ->all();
         });
-        $engineer_skills = $skills = [];
+
         foreach ($subset as $value) {
             array_push($skills, $value["skill_id"]);
         }
         sort($skills);
+
         $skills = Type::find($skills)->pluck('name') ;
         foreach ($skills as $value) {
             array_push($engineer_skills, $value);
         }
+
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;

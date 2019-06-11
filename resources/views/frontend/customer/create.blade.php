@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                        <select id="customer-level" name="customer-level" class="form-control">
+                                        <select id="customer-level" name="customer-level" class="form-control select">
                                         </select>
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7">
@@ -299,37 +299,71 @@
                                             </div>
                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                             </div>
-
                                         </div>
-                                        <div class='repeater'>
-                                            <div data-repeater-list="group-website">
-                                                <div data-repeater-item>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.text')
-                                                                @slot('text', 'website')
-                                                                @slot('name', 'website')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            <select id="type_website" name="type_website" class="form-control">
-                                                                <option value="">
-                                                                    Select a Website Type
-                                                                </option>
+                                        <div class="repeaterWebsite">
+                                            <div class="repeaterRow">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        @component('frontend.common.input.text')
+                                                            @slot('text', 'website')
+                                                            @slot('name', 'website')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        <select name="type_website" class="form-control select">
+                                                            <option value="">
+                                                                Select a Website Type
+                                                            </option>
 
-                                                                @foreach ($websites as $website)
-                                                                <option value="{{ $website->uuid }}">
-                                                                    {{ $website->name }}
-                                                                </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @include('frontend.common.buttons.create_repeater')
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @include('frontend.common.buttons.delete_repeater')
-                                                        </div>
+                                                            @foreach ($websites as $website)
+                                                            <option value="{{ $website->uuid }}">
+                                                                {{ $website->name }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.delete_repeater')
+                                                            @slot('class', 'DeleteRow')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('class', 'AddRow')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="repeaterRow CopyWebsite hidden">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        @component('frontend.common.input.text')
+                                                            @slot('text', 'website')
+                                                            @slot('name', 'website')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        <select name="type_website" class="form-control select">
+                                                            <option value="">
+                                                                Select a Website Type
+                                                            </option>
+
+                                                            @foreach ($websites as $website)
+                                                            <option value="{{ $website->uuid }}">
+                                                                {{ $website->name }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.delete_repeater')
+                                                            @slot('class', 'DeleteRow')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('class', 'AddRow')
+                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </div>
@@ -351,38 +385,73 @@
                                             </div>
                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                             </div>
-
                                         </div>
-                                        <div class='repeater'>
-                                            <div data-repeater-list="group-email">
-                                                <div data-repeater-item>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.email')
-                                                                @slot('name', 'email')
-                                                                @slot('placeholder', 'Email')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-3 col-md-3 col-lg-3">
-                                                            @component('frontend.common.input.radio')
-                                                                @slot('text', 'Work')
-                                                                @slot('name', 'type_email')
-                                                                @slot('id', 'type_email')
-                                                                @slot('value', 'work')
-                                                            @endcomponent
-                                                            @component('frontend.common.input.radio')
-                                                                @slot('name', 'type_email')
-                                                                @slot('id', 'type_email')
-                                                                @slot('text', 'Personal')
-                                                                @slot('value', 'personal')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @include('frontend.common.buttons.create_repeater')
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @include('frontend.common.buttons.delete_repeater')
-                                                        </div>
+                                        <div class="repeaterEmail">
+                                            <div class="repeaterRow">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        @component('frontend.common.input.email')
+                                                            @slot('name', 'email')
+                                                            @slot('placeholder', 'Email')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('text', 'Work')
+                                                            @slot('name', 'type_email')
+                                                            @slot('id', 'type_email')
+                                                            @slot('value', 'work')
+                                                        @endcomponent
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('name', 'type_email')
+                                                            @slot('id', 'type_email')
+                                                            @slot('text', 'Personal')
+                                                            @slot('value', 'personal')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.delete_repeater')
+                                                            @slot('class', 'DeleteRow')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('class', 'AddRow')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="repeaterRow CopyEmail hidden">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        @component('frontend.common.input.email')
+                                                            @slot('name', 'email')
+                                                            @slot('placeholder', 'Email')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('text', 'Work')
+                                                            @slot('name', 'type_email')
+                                                            @slot('id', 'type_email')
+                                                            @slot('value', 'work')
+                                                        @endcomponent
+                                                        @component('frontend.common.input.radio')
+                                                            @slot('name', 'type_email')
+                                                            @slot('id', 'type_email')
+                                                            @slot('text', 'Personal')
+                                                            @slot('value', 'personal')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.delete_repeater')
+                                                            @slot('class', 'DeleteRow')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('class', 'AddRow')
+                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </div>
@@ -404,37 +473,71 @@
                                             </div>
                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                             </div>
-
                                         </div>
-                                        <div class='repeater'>
-                                            <div data-repeater-list="group-document">
-                                                <div data-repeater-item>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.upload')
-                                                                @slot('label', 'document')
-                                                                @slot('name', 'document')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            <select id="type_document" name="type_document" class="form-control">
-                                                                <option value="">
-                                                                    Select a Document Type
-                                                                </option>
+                                        <div class="repeaterDocument">
+                                            <div class="repeaterRow">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        @component('frontend.common.input.upload')
+                                                            @slot('label', 'document')
+                                                            @slot('name', 'document')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        <select name="type_document" class="form-control select">
+                                                            <option value="">
+                                                                Select a Document Type
+                                                            </option>
 
-                                                                @foreach ($documents as $document)
-                                                                <option value="{{ $document->uuid }}">
-                                                                    {{ $document->name }}
-                                                                </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @include('frontend.common.buttons.create_repeater')
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @include('frontend.common.buttons.delete_repeater')
-                                                        </div>
+                                                            @foreach ($documents as $document)
+                                                            <option value="{{ $document->uuid }}">
+                                                                {{ $document->name }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.delete_repeater')
+                                                            @slot('class', 'DeleteRow')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('class', 'AddRow')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="repeaterRow CopyDocument hidden">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        @component('frontend.common.input.upload')
+                                                            @slot('label', 'document')
+                                                            @slot('name', 'document')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        <select name="type_document" class="form-control select">
+                                                            <option value="">
+                                                                Select a Document Type
+                                                            </option>
+
+                                                            @foreach ($documents as $document)
+                                                            <option value="{{ $document->uuid }}">
+                                                                {{ $document->name }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.delete_repeater')
+                                                            @slot('class', 'DeleteRow')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                        @component('frontend.common.buttons.create_repeater')
+                                                            @slot('class', 'AddRow')
+                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </div>
@@ -733,13 +836,17 @@
 
 @push('footer-scripts')
 <script>
-
+    $( document ).ready(function() {
+        $('.select').select2();
+    });
 </script>
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/website.js') }}"></script> --}}
 <script src="{{ asset('js/frontend/customer/create.js') }}"></script>
 <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
+{{-- <script src="{{ asset('js/frontend/functions/select2/type-document.js') }}"></script> --}}
+{{-- <script src="{{ asset('js/frontend/functions/select2/type-website.js') }}"></script> --}}
 <script src="{{ asset('js/frontend/functions/select2/level-customer.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/level-customer.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/attn-phone.js') }}"></script>
