@@ -94,7 +94,9 @@ class DiscrepancyPPCController extends Controller
      */
     public function destroy(DefectCard $discrepancy)
     {
-        //
+        $discrepancy->delete();
+
+        return response()->json($discrepancy);
     }
 
     /**
