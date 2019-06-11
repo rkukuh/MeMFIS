@@ -121,10 +121,10 @@
 <body>
   
   <header id="header">
-    <img src="./img/HeaderJobCardRoutine.png" alt=""width="100%">
+    <img src="./img/form/printoutjobcardroutine/HeaderJobCardRoutine.png" alt=""width="100%">
   </header>
   <footer style="margin-top:14px;">
-    <img src="./img/FooterJobCardRoutine.jpg" width="100%" alt="" >
+    <img src="./img/form/printoutjobcardroutine/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
 
   <div id="content">

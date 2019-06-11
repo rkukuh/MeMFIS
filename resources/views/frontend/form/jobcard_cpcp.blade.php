@@ -124,7 +124,7 @@
     <img src="./img/form/printoutjobcardcpcp/HeaderJobCardCPCP.jpg" alt=""width="100%">
   </header>
   <footer style="margin-top:14px;">
-    <img src="./img/form/printoutjobcardcpcp/FooterJobCardRoutine.jpg" width="100%" alt="" >
+    <img src="./img/form/printoutjobcardcpcp/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
 
   <div id="content">

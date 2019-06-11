@@ -44,7 +44,7 @@
     }
 
     #content{
-      margin-top:150px;
+      margin-top:168px;
     }
     
     #content .jobcard-info fieldset legend{
@@ -119,10 +119,10 @@
 <body>
 
   <header id="header">
-    <img src="./img/form/printoutjobcardsip/HeaderJobCardSIP.jpg" alt=""width="100%">
+    <img src="./img/form/printoutjobcardsip/HeaderJobCardSIP.png" alt=""width="100%">
   </header>
   <footer>
-    <img src="./img/form/printoutjobcardsip/FooterJobCardRoutine.jpg" width="100%" alt="" >
+    <img src="./img/form/printoutjobcardsip/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
 
   <div id="content">
