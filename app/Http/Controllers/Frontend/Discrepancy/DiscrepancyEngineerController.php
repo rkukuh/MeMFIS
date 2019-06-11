@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Progress;
+use App\Models\Approval;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class DiscrepancyEngineerController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.discrepancy.engineer.index');
     }
 
     /**
@@ -96,8 +97,24 @@ class DiscrepancyEngineerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyDefectCard(DefectCard $discrepancy)
+    public function destroy(DefectCard $discrepancy)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(DefectCard $discrepancy)
+    {
+        $discrepancy->approvals()->save(new Approval([
+            'approvable_id' => $discrepancy->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        return response()->json($discrepancy);
     }
 }
