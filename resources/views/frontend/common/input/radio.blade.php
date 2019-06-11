@@ -14,6 +14,7 @@
         onclick="{{ $onclick or '' }}"
         {{ $disabled or ''}}
         {{ $checked or ''}}
+        {{ $required or ''}}
     >
 
     {{ $text or '' }}
