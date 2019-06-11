@@ -80,7 +80,11 @@ class DiscrepancyMechanicController extends Controller
      */
     public function update(Request $request,DefectCard $discrepancy)
     {
-        return response()->json($request);
+        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+
+        $discrepancy->update($request->all());
+
+        return response()->json($discrepancy);
     }
 
     /**
