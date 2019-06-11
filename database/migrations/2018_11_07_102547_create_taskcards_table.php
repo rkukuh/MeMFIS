@@ -35,6 +35,7 @@ class CreateTaskcardsTable extends Migration
             $table->json('stringer')->nullable(); // for CPCP only
             $table->json('version')->nullable();
             $table->longText('description')->nullable();
+            $table->json('additionals')->nullable();
 
             /** EO Header */
             $table->string('revision')->nullable();

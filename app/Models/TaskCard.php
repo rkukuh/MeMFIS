@@ -27,6 +27,7 @@ class TaskCard extends MemfisModel
         'stringer',
         'version',
         'description',
+        'additionals',
 
         /** EO Header */
         'revision',

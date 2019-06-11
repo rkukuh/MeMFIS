@@ -85,6 +85,13 @@ $factory->define(TaskCard::class, function (Faker $faker) {
             return $faker->randomElement([null, json_encode($versions)]);
         },
         'description' => $faker->paragraph(rand(10, 20)),
+        'additionals' => function () use ($faker) {
+            $additionals = [
+                'internal_number' => 'TC-INT-DUM-' . $faker->unixTime()
+            ];
+
+            return $faker->randomElement([null, json_encode($additionals)]);
+        }
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
     ];
