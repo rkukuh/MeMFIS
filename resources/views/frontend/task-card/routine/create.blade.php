@@ -51,7 +51,7 @@
                         <form id="taskcardform" name="taskcardform">
                             <div class="m-portlet__body">
                                 <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                             Title @include('frontend.common.label.required')
                                         </label>
@@ -63,8 +63,6 @@
                                             @slot('id_error', 'title')
                                         @endcomponent
                                     </div>
-                                </div>
-                                <div class="form-group m-form__group row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                             Task Card Number @include('frontend.common.label.required')
@@ -75,6 +73,20 @@
                                             @slot('text', 'Taskcard Number')
                                             @slot('name', 'number')
                                             @slot('id_error', 'number')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                            Company Task Number @include('frontend.common.label.optional')
+                                        </label>
+
+                                        @component('frontend.common.input.text')
+                                            @slot('id', 'company_number')
+                                            @slot('text', 'Company Task Number')
+                                            @slot('name', 'company_number')
+                                            @slot('id_error', 'company_number')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -106,13 +118,28 @@
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', 'is_rii')
-                                            @slot('name', 'is_rii')
-                                            @slot('text', 'RII?')
-                                            @slot('style_div','margin-top:30px')
-                                        @endcomponent
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    ATA @include('frontend.common.label.optional')
+                                                </label>
 
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'ata')
+                                                    @slot('text', 'ATA')
+                                                    @slot('name', 'ata')
+                                                    @slot('id_error', 'ata')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                @component('frontend.common.input.checkbox')
+                                                    @slot('id', 'is_rii')
+                                                    @slot('name', 'is_rii')
+                                                    @slot('text', 'RII?')
+                                                    @slot('style_div','margin-top:30px')
+                                                @endcomponent
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
@@ -698,7 +725,7 @@
                 if (maintenanceCycles[i].id == 1) {} else {
                     cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
                 }
-            };                                                    
+            };
             cols += '</select><div class="form-control-feedback text-danger"></div></td>';
             cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
             newRow.append(cols);
@@ -730,7 +757,7 @@
                 if (maintenanceCycles[i].id == 1) {} else {
                     cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
                 }
-            };                 
+            };
             cols += '</select><div class="form-control-feedback text-danger"></div></td>';
             cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
             newRow.append(cols);
