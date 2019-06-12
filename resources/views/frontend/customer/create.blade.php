@@ -484,7 +484,7 @@
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        <select name="type_document" class="form-control select">
+                                                        <select name="type_document" class="form-control selectDocument">
                                                             <option value="">
                                                                 Select a Document Type
                                                             </option>
@@ -517,7 +517,7 @@
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        <select name="type_document" class="form-control select">
+                                                        <select name="type_document" class="form-control">
                                                             <option value="">
                                                                 Select a Document Type
                                                             </option>
@@ -680,6 +680,7 @@
                                                         @component('frontend.common.input.select2')
                                                             @slot('text', 'Phone Number')
                                                             @slot('name', 'attn-phone')
+                                                            @slot('class', 'attn-phone')
                                                             @slot('multiple','multiple')
                                                         @endcomponent
                                                     </div>
@@ -710,6 +711,7 @@
                                                         @component('frontend.common.input.select2')
                                                             @slot('text', 'Email Address')
                                                             @slot('name', 'attn-email')
+                                                            @slot('class', 'attn-email')
                                                             @slot('multiple','multiple')
                                                         @endcomponent
                                                     </div>
@@ -841,6 +843,7 @@
     $( document ).ready(function() {
         $('.select').select2();
         $('.selectWebsite').select2();
+        $('.selectDocument').select2();
     });
 </script>
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
