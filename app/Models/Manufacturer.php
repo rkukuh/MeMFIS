@@ -45,6 +45,8 @@ class Manufacturer extends MemfisModel
      * One-to-Many: A manufacturer can create zero or many items.
      *
      * This function will get a manufacturer of an item.
+     *
+     * @return mixed
      */
     public function items()
     {

@@ -37,6 +37,8 @@ class Quotation extends MemfisModel
      *
      * This function will get all Quotation's approvals.
      * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
      */
     public function approvals()
     {

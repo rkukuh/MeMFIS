@@ -15,8 +15,6 @@ class DefectCard extends MemfisModel
         'helper_quantity',
         'estimation_manhour',
         'is_rii',
-        'propose_correction_id',
-        'propose_correction_text',
         'complaint',
         'description',
     ];
@@ -28,6 +26,8 @@ class DefectCard extends MemfisModel
      *
      * This function will get all Quotation's approvals.
      * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
      */
     public function approvals()
     {
@@ -73,6 +73,8 @@ class DefectCard extends MemfisModel
      *
      * This function will get all DefectCard's progresses.
      * See: Progress's progressable() method for the inverse
+     *
+     * @return mixed
      */
     public function progresses()
     {
@@ -80,12 +82,17 @@ class DefectCard extends MemfisModel
     }
 
     /**
-     * One-Way: A Defect Card must have a propose correction.
+     * One-to-Many: A defect card may have zero or many propose correction.
+     *
+     * This function will retrieve all propose corrections of a defect card.
+     * See: Type's defectcards() method for the inverse
      *
      * @return mixed
      */
-    public function propose_correction()
+    public function propose_corrections()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsToMany(Type::class, 'defectcard_propose_correction', 'defectcard_id', 'propose_correction_id')
+                    ->withPivot('propose_correction_text')
+                    ->withTimestamps();;
     }
 }

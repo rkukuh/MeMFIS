@@ -23,6 +23,8 @@ class JobCard extends MemfisModel
      *
      * This function will get all Quotation's approvals.
      * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
      */
     public function approvals()
     {
@@ -47,6 +49,8 @@ class JobCard extends MemfisModel
      *
      * This function will get all JobCard's inspections.
      * See: Inspection's inspectable() method for the inverse
+     *
+     * @return mixed
      */
     public function inspections()
     {
@@ -58,6 +62,8 @@ class JobCard extends MemfisModel
      *
      * This function will get all JobCard's progresses.
      * See: Progress's progressable() method for the inverse
+     *
+     * @return mixed
      */
     public function progresses()
     {
@@ -82,6 +88,8 @@ class JobCard extends MemfisModel
      *
      * This function will get all of the jobcard's statuses.
      * See: Access's accessable() method for the inverse
+     *
+     * @return mixed
      */
     public function statuses()
     {

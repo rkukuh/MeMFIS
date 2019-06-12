@@ -24,6 +24,8 @@ class Version extends MemfisModel
      * This function will get all of the owning versionable models.
      * See:
      * - none
+     *
+     * @return mixed
      */
     public function versionable()
     {

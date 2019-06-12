@@ -37,6 +37,8 @@ class Address extends MemfisModel
      * See:
      * - Customer's addresses() method for the inverse
      * - Employee's addresses() method for the inverse
+     *
+     * @return mixed
      */
     public function addressable()
     {

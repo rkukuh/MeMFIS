@@ -96,7 +96,7 @@
                                             <label class="form-control-label">
                                                 JC No Refference
                                             </label>
-
+                                            <input type="hidden"id="jobcard_id" name="jobcard_id" value="{{$discrepancy->jobcard->uuid}}">
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $discrepancy->jobcard->number)
                                             @endcomponent
@@ -127,11 +127,11 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('value', $discrepancy->engineer_quantity)
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                @slot('text', 'Engineer Quantity')
+                                                @slot('id', 'engineer_qty')
+                                                @slot('value', $discrepancy->engineer_quantity)
+                                                @slot('name', 'engineer_qty')
+                                                @slot('id_error', 'engineer_qty')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -151,11 +151,11 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('value', $discrepancy->helper_quantity)
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                @slot('text', 'Helper Quoantity')
+                                                @slot('id', 'helper_quantity')
+                                                @slot('value', $discrepancy->helper_quantity)
+                                                @slot('name', 'helper_quantity')
+                                                @slot('id_error', 'helper_quantity')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -175,11 +175,11 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('value', $discrepancy->estimation_manhour)
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                @slot('text', 'Manhours')
+                                                @slot('id', 'manhours')
+                                                @slot('value', $discrepancy->estimation_manhour)
+                                                @slot('name', 'manhours')
+                                                @slot('id_error', 'manhours')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -217,6 +217,8 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
+                                                @slot('id', 'complaint')
+                                                @slot('name', 'complaint')
                                                 @slot('id_error', 'tag')
                                                 @slot('value', $discrepancy->complaint)
                                             @endcomponent
@@ -330,7 +332,9 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('id_error', 'description')
                                                 @slot('value', $discrepancy->description)
                                             @endcomponent
                                         </div>

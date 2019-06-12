@@ -36,6 +36,8 @@ class Fax extends MemfisModel
      * See:
      * - Customer's faxes() method for the inverse
      * - Employee's faxes() method for the inverse
+     *
+     * @return mixed
      */
     public function faxable()
     {

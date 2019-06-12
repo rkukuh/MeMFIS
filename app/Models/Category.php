@@ -60,6 +60,8 @@ class Category extends MemfisModel
      *
      * This function will get all of the items that are assigned to this category.
      * See: Item's categories() method for the inverse
+     *
+     * @return mixed
      */
     public function items()
     {

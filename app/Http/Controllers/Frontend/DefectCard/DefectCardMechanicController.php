@@ -18,6 +18,7 @@ class DefectCardMechanicController extends Controller
     protected $waiting;
     protected $other;
     protected $accomplished;
+    protected $notification;
 
     public function __construct()
     {
@@ -26,6 +27,11 @@ class DefectCardMechanicController extends Controller
         $this->waiting = Type::ofJobCardPauseReason()->where('code','waiting-material')->first()->uuid;
         $this->other = Type::ofJobCardPauseReason()->where('code','other')->first()->uuid;
         $this->accomplished = Type::ofJobCardCloseReason()->where('code','accomplished')->first()->uuid;
+        $this->notification = $notification = array(
+            'message' => "DefectCard's status has been updated",
+            'title' => "Success",
+            'alert-type' => "success"
+        );
     }
 
     /**
@@ -128,7 +134,7 @@ class DefectCardMechanicController extends Controller
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.defectcard-mechanic.index');
+            return redirect()->route('frontend.defectcard-mechanic.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
             $defectcard->progresses()->save(new Progress([
@@ -137,7 +143,7 @@ class DefectCardMechanicController extends Controller
                 'reason_text' =>  $request->reason,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.defectcard-mechanic.index');
+            return redirect()->route('frontend.defectcard-mechanic.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
             $defectcard->progresses()->save(new Progress([
@@ -147,7 +153,7 @@ class DefectCardMechanicController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.defectcard-mechanic.index');
+            return redirect()->route('frontend.defectcard-mechanic.index')->with($this->notification);
         }
     }
 

@@ -25,6 +25,8 @@ class Approval extends MemfisModel
      * - GoodReceive's approvals() method for the inverse
      * - PurchaseRequest's approvals() method for the inverse
      * - PurchaseOrder's approvals() method for the inverse
+     *
+     * @return mixed
      */
     public function approvable()
     {
