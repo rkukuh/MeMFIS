@@ -6,6 +6,7 @@ let Customer = {
             let payment_term =  $('input[name=term_of_payment]').val();
             let account_code = $('#account_code').val();
             let level = $('#customer-level').val();
+            let ai = 0;
 
             let phone_array = [];
             $('#phone ').each(function (i) {
@@ -20,7 +21,7 @@ let Customer = {
             ext_phone_array.pop();
 
             let type_phone_array = [];
-            $('#phone ').each(function (i) {
+            $('#type_phone ').each(function (i) {
                 type_phone_array[i] = $(this).val();
             });
             type_phone_array.pop();
@@ -32,7 +33,7 @@ let Customer = {
             fax_array.pop();
 
             let type_fax_array = [];
-            $('#fax ').each(function (i) {
+            $('#type_fax ').each(function (i) {
                 type_fax_array[i] = $(this).val();
             });
             type_fax_array.pop();
@@ -44,7 +45,7 @@ let Customer = {
             website_array.pop();
 
             let type_website_array = [];
-            $('#website ').each(function (i) {
+            $('select[name^=type_website]').each(function (i) {
                 type_website_array[i] = $(this).val();
             });
             type_website_array.pop();
@@ -56,28 +57,34 @@ let Customer = {
             email_array.pop();
 
             let type_email_array = [];
-            $('#email ').each(function (i) {
+            $('#type_email ').each(function (i) {
                 type_email_array[i] = $(this).val();
             });
             type_email_array.pop();
 
             let document_array = [];
             $('#email ').each(function (i) {
-                document_array[i] = $(this).val.val();
+                document_array[i] = $(this).val();
             });
             document_array.pop();
 
             let type_document_array = [];
-            $('#type_document ').each(function (i) {
+            $('input[name^=type_document]').each(function (i) {
                 type_document_array[i] = $(this).val();
             });
             type_document_array.pop();
 
-            attentions = [];
-
             let attn_phone_array = [];
-            $('#attn-phone ').each(function (i) {
-                attn_phone_array[i] = $(this).val();
+            $('select[name^=attn-phone]').each(function () {
+                let attn_phone_array_row = [];
+                console.log($(this));
+                ai = 0;
+                $(this).val().forEach(function(entry) {
+                    attn_phone_array_row[ai] = entry;
+                    console.log(entry);
+                    ai++;
+                });;
+                attn_phone_array.push(attn_phone_array_row);
             });
             attn_phone_array.pop();
 
@@ -106,24 +113,18 @@ let Customer = {
             attn_fax_array.pop();
 
             let attn_email_array = [];
-            $('#attn-email ').each(function (i) {
-                attn_email_array[i] = $(this).val();
+            $('select[name^=attn-email]').each(function (i) {
+                let attn_email_array_row = [];
+                console.log($(this));
+                ai = 0;
+                $(this).val().forEach(function(entry) {
+                    console.log(entry);
+                    attn_email_array_row[ai] = entry;
+                   ai++;
+               });;
+               attn_email_array.push(attn_email_array_row);
             });
             attn_email_array.pop();
-
-            for (let index = 0; index < attn_name_array.length; index++) {
-                let contact = [];
-
-                contact["name"] = attn_name_array[index];
-                contact["position"] = attn_position_array[index];
-                contact["phone"] = attn_phone_array[index];
-                contact["ext"] = attn_ext_array[index];
-                contact["fax"] = attn_fax_array[index];
-                contact["email"] = attn_email_array[index];
-
-                attentions.push(contact);
-            }
-            contact.pop();
 
             $.ajax({
                 headers: {

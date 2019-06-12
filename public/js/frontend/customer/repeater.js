@@ -3,7 +3,7 @@ $("div.repeaterAttention").on("click", ".AddRow", function (event) {
     $(this).closest(".repeaterRow").after(newRow);
     newRow.slideDown("slow", function () { newRow.removeClass("CopyAttention hidden"); });
     newRow.find("select[name=attn-email]").select2({
-        placeholder: 'Phone Numbers',
+        placeholder: 'Email Adresses',
         tags: true
     });
     newRow.find("select[name=attn-phone]").select2({
@@ -30,14 +30,6 @@ $("div.repeaterPhone").on("click", ".AddRow", function (event) {
         });
         counter++;
     });
-    // let rlength = $("div.repeaterPhone > div.repeaterRow").length;
-    // rlength = rlength - 1;
-    // for(let counter = 0; counter < rlength ;counter++){
-    //     console.log(rows[counter]);
-    //     // rows[counter].find("input[type=radio][name=type_phone]").each(function() {
-    //     //     $(this).attr('name','type_phone_'+counter);
-    //     // });
-    // };
 });
 
 $("div.repeaterPhone").on("click", ".DeleteRow", function (event) {
@@ -51,6 +43,13 @@ $("div.repeaterFax").on("click", ".AddRow", function (event) {
     let newRow = $(".CopyFax").clone();
     $(this).closest(".repeaterRow").after(newRow);
     newRow.slideDown("slow", function () { newRow.removeClass("CopyFax hidden"); });
+    let counter = 1;
+    $("div.repeaterFax > div.repeaterRow").each(function() {
+        $(this).find("input[type=radio][id=type_fax]").each(function() {
+            $(this).attr('name','type_fax'+counter);
+        });
+        counter++;
+    });
 });
 
 $("div.repeaterFax").on("click", ".DeleteRow", function (event) {
@@ -77,11 +76,17 @@ $("div.repeaterWebsite").on("click", ".DeleteRow", function (event) {
     }
 });
 
-
 $("div.repeaterEmail").on("click", ".AddRow", function (event) {
     let newRow = $(".CopyEmail").clone();
     $(this).closest(".repeaterRow").after(newRow);
     newRow.slideDown("slow", function () { newRow.removeClass("CopyEmail hidden"); });
+    let counter = 1;
+    $("div.repeaterEmail > div.repeaterRow").each(function() {
+        $(this).find("input[type=radio][id=type_email]").each(function() {
+            $(this).attr('name','type_email'+counter);
+        });
+        counter++;
+    });
 });
 
 $("div.repeaterEmail").on("click", ".DeleteRow", function (event) {
