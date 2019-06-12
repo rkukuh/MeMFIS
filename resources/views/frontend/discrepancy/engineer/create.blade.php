@@ -203,6 +203,16 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Attachment @include('frontend.common.label.optional')
+                                            </label>
+                                            <br>
+
+                                            <input type="file" id="file" multiple name="name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
                                                 Complaint @include('frontend.common.label.optional')
