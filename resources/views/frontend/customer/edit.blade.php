@@ -84,13 +84,7 @@
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
-                                                <select id="level_customer" name="level_customer" class="form-control">
-                                                    <option value="1">
-                                                        1
-                                                    </option>
-                                                    <option value="2">
-                                                        2
-                                                    </option>
+                                                <select name="customer-level" class="form-control select">
                                                 </select>
                                             </div>
                                             <div class="col-sm-7 col-md-7 col-lg-7">
@@ -127,33 +121,51 @@
                                                     </div>
                                                 </div>
                                                 <div class="repeaterPhone">
+                                                    @for($counter=0 ; $counter < sizeof($customer->phones); $counter++)
                                                     <div class="repeaterRow">
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                                 @component('frontend.common.input.text')
                                                                     @slot('name', 'phone')
-                                                                    @slot('text', 'Phone')
+                                                                    @slot('value', $customer->phones[$counter]->number)
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                                                 @component('frontend.common.input.text')
                                                                     @slot('name', 'ext')
-                                                                    @slot('text', 'Ext')
+                                                                    @slot('value', $customer->phones[$counter]->ext)
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-3 col-md-3 col-lg-3">
-                                                                @component('frontend.common.input.radio')
-                                                                    @slot('text', 'Work')
-                                                                    @slot('name', 'type_phone_1')
-                                                                    @slot('id', 'type_phone')
-                                                                    @slot('value', 'work')
-                                                                @endcomponent
-                                                                @component('frontend.common.input.radio')
-                                                                    @slot('id', 'type_phone')
-                                                                    @slot('name', 'type_phone_1')
-                                                                    @slot('text', 'Personal')
-                                                                    @slot('value', 'personal')
-                                                                @endcomponent
+                                                                @if( $customer->phones[$counter]->type->name === "Work" )
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Work')
+                                                                        @slot('name', 'type_phone_'+$counter)
+                                                                        @slot('id', 'type_phone')
+                                                                        @slot('value', 'work')
+                                                                        @slot('checked', 'checked')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_phone')
+                                                                        @slot('name', 'type_phone_'+$counter)
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                    @endcomponent
+                                                                @else
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Work')
+                                                                        @slot('name', 'type_phone_'+$counter)
+                                                                        @slot('id', 'type_phone')
+                                                                        @slot('value', 'work')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_phone')
+                                                                        @slot('name', 'type_phone_'+$counter)
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                        @slot('checked', 'checked')
+                                                                    @endcomponent
+                                                                @endif
                                                             </div>
                                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                                 @component('frontend.common.buttons.delete_repeater')
@@ -167,6 +179,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @endfor
                                                     <div class="repeaterRow CopyPhone hidden">
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-5 col-md-5 col-lg-5">
@@ -924,18 +937,20 @@
 </script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
-<script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
-{{-- <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script> --}}
-<script src="{{ asset('js/frontend/functions/fill-combobox/address-type.js') }}"></script>
-<script src="{{ asset('js/frontend/customer/edit.js') }}"></script>
-<script src="{{ asset('js/frontend/customer/repeater.js') }}"></script>
-<script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 
 <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/address-type.js') }}"></script>
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+{{-- <script src="{{ asset('js/frontend/functions/fill-combobox/term-of-payment.js') }}"></script> --}}
+<script src="{{ asset('js/frontend/functions/fill-combobox/level-customer.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/address-type.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/level-customer.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/address-type.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/term-of-payment.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/attn-phone.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/attn-email.js') }}"></script>
 
+<script src="{{ asset('js/frontend/customer/edit.js') }}"></script>
+<script src="{{ asset('js/frontend/customer/repeater.js') }}"></script>
+<script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 
 @endpush
