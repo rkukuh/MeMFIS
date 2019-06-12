@@ -54,14 +54,13 @@ class CustomerController extends Controller
         $attentions = [];
         $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
-            $contact = [];
-            $contact['phones'] = $contact['emails'] = [];
+
             $contact['name']     = $request->attn_name_array[$person];
             $contact['position'] = $request->attn_position_array[$person];
-            array_push($contact['phones'], $request->attn_phone_array[$person]);
+            $contact['phones'] = $request->attn_phone_array[$person];
             $contact['ext'] = $request->attn_ext_array[$person];
             $contact['fax'] = $request->attn_fax_array[$person];
-            array_push($contact['emails'], $request->attn_email_array[$person]);
+            $contact['emails'] = $request->attn_email_array[$person];
 
             array_push($attentions, $contact);
         }
