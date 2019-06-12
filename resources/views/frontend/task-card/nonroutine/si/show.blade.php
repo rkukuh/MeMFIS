@@ -77,11 +77,11 @@
                                                     Company Task Number @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @if (empty($taskcard->additionals))
+                                                @if (empty($taskCard->additionals))
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', json_decode($taskcard->additionals)->internal_number))
+                                                        @slot('text', json_decode($taskCard->additionals)->internal_number))
                                                     @endcomponent
                                                 @endif
                                             </div>
