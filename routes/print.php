@@ -126,3 +126,13 @@ Route::get('/dc-summary', function () {
     $pdf = \PDF::loadView('frontend/form/dc_summary');
     return $pdf->stream();
 });
+
+Route::get('/dc-page1', function () {
+    $pdf = \PDF::loadView('frontend/form/dc_page1');
+    return $pdf->stream();
+});
+
+Route::get('/dc-page2', function () {
+    $pdf = \PDF::loadView('frontend/form/dc_page2');
+    return $pdf->stream();
+});
