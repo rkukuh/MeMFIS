@@ -699,6 +699,8 @@ let TaskCard = {
                 repeat_amount[i] = $(this).val();
             });
             repeat_amount = repeat_amount.filter(Boolean);
+            let internal_number = { internal_number: $('input[name=company_number]').val() };
+            let internal_numberJSON = JSON.stringify(internal_number);
 
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
@@ -709,6 +711,8 @@ let TaskCard = {
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "description", $('#instruction').val());
+            data.append(" additionals",  internal_numberJSON);
+
             data.append('_method', 'PUT');
 
             $.ajax({
