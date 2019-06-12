@@ -158,10 +158,11 @@ class CustomerController extends Controller
     {
         $documents = Type::ofDocument()->get();
         $websites = Type::ofWebsite()->get();
-
+        $attentions = json_decode($customer->attention);
+        // dd($attentions[0]->phones);
         return view('frontend.customer.edit', [
             'customer' => $customer,
-            'attentions' => json_decode($customer->attention),
+            'attentions' => $attentions,
             'websites' => $websites,
             'documents' => $documents
         ]);
