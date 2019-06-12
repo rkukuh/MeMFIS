@@ -74,6 +74,15 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
+                                                Company Task Number @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $taskCard->number)
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
                                                 A/C Type @include('frontend.common.label.required')
                                             </label>
 
@@ -89,6 +98,8 @@
                                                 @endif
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Manhour Estimation @include('frontend.common.label.required')
@@ -98,8 +109,6 @@
                                                 @slot('text', $taskCard->estimation_manhour)
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
