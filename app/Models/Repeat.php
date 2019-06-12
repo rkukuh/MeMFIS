@@ -21,6 +21,8 @@ class Repeat extends MemfisModel
      * This function will get all of the owning repeatable models.
      * See:
      * - TaskCard's repeats() method for the inverse
+     *
+     * @return mixed
      */
     public function repeatable()
     {

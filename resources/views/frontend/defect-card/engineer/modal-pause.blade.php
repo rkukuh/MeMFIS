@@ -51,6 +51,7 @@
                                     @slot('name', 'reason')
                                     @slot('text', 'reason')
                                     @slot('rows', '3')
+                                    @slot('disabled', 'disabled')
                                 @endcomponent
                             </div>
                         </div>
@@ -71,3 +72,18 @@
         </div>
     </div>
 </div>
+
+@push('footer-scripts')
+    <script>
+        $('#break').on('click', function () {
+            $('#reason').prop("disabled", true);
+        });
+        $('#waiting').on('click', function () {
+            $('#reason').prop("disabled", true);
+        });
+        $('#other').on('click', function () {
+            $('#reason').removeAttr("disabled");
+        });
+    </script>
+@endpush
+

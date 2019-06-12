@@ -22,6 +22,8 @@ class Inspection extends MemfisModel
      * This function will get all of the owning inspectable models.
      * See:
      * - JobCard's inspections() method for the inverse
+     *
+     * @return mixed
      */
     public function inspectable()
     {

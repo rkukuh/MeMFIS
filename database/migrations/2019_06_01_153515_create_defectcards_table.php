@@ -22,8 +22,6 @@ class CreateDefectcardsTable extends Migration
             $table->integer('helper_quantity');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->boolean('is_rii');
-            $table->unsignedInteger('propose_correction_id')->nullable();
-            $table->string('propose_correction_text')->nullable();
             $table->text('complaint')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
@@ -31,11 +29,6 @@ class CreateDefectcardsTable extends Migration
 
             $table->foreign('jobcard_id')
                     ->references('id')->on('jobcards')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('propose_correction_id')
-                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

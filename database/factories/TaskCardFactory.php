@@ -84,6 +84,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
             return $faker->randomElement([null, json_encode($versions)]);
         },
+        'tat' => null,
         'description' => $faker->paragraph(rand(10, 20)),
         'additionals' => function () use ($faker) {
             $additionals = [

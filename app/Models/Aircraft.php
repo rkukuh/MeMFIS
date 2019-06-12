@@ -19,6 +19,8 @@ class Aircraft extends MemfisModel
      *
      * This function will get all of the aircraft's accesses.
      * See: Access's accessable() method for the inverse
+     *
+     * @return mixed
      */
     public function accesses()
     {
@@ -69,6 +71,8 @@ class Aircraft extends MemfisModel
      *
      * This function will get all of the aircraft's stations.
      * See: Station's stationable() method for the inverse
+     *
+     * @return mixed
      */
     public function stations()
     {
@@ -107,6 +111,8 @@ class Aircraft extends MemfisModel
      *
      * This function will get all of the aircraft's zones.
      * See: Zone's accessable() method for the inverse
+     *
+     * @return mixed
      */
     public function zones()
     {

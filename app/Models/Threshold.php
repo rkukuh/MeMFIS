@@ -21,6 +21,8 @@ class Threshold extends MemfisModel
      * This function will get all of the owning thresholdable models.
      * See:
      * - TaskCard's thresholds() method for the inverse
+     *
+     * @return mixed
      */
     public function thresholdable()
     {

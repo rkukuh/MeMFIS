@@ -90,6 +90,8 @@ class Status extends MemfisModel
      * This function will get all of the owning statusable models.
      * See:
      * - JobCard's statuses() method for the inverse
+     *
+     * @return mixed
      */
     public function statusable()
     {

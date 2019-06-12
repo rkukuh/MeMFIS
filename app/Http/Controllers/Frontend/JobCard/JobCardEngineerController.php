@@ -22,6 +22,7 @@ class JobCardEngineerController extends Controller
     protected $waiting;
     protected $other;
     protected $accomplished;
+    protected $notification;
 
     public function __construct()
     {
@@ -30,6 +31,11 @@ class JobCardEngineerController extends Controller
         $this->waiting = Type::ofJobCardPauseReason()->where('code','waiting-material')->first()->uuid;
         $this->other = Type::ofJobCardPauseReason()->where('code','other')->first()->uuid;
         $this->accomplished = Type::ofJobCardCloseReason()->where('code','accomplished')->first()->uuid;
+        $this->notification = $notification = array(
+                            'message' => "JobCard's status has been updated",
+                            'title' => "Success",
+                            'alert-type' => "success"
+                        );
     }
 
     /**
@@ -132,7 +138,7 @@ class JobCardEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-engineer.index');
+            return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
             $jobcard->progresses()->save(new Progress([
@@ -141,7 +147,8 @@ class JobCardEngineerController extends Controller
                 'reason_text' =>  $request->reason,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-engineer.index');
+
+            return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
             $jobcard->progresses()->save(new Progress([
@@ -155,7 +162,7 @@ class JobCardEngineerController extends Controller
                 'approvable_id' => $jobcard->id,
                 'approved_by' => Auth::id(),
             ]));
-            return redirect()->route('frontend.jobcard-engineer.index');
+            return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
         }
     }
 
