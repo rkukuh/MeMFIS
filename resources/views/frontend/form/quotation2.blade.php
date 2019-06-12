@@ -76,7 +76,6 @@
 
     #content3 .body{
       width: 100%;
-      height: 458px;
       border-left:  2px solid  #d4d7db;
       border-right:  2px solid  #d4d7db;
       border-bottom:  2px solid  #d4d7db;
@@ -271,94 +270,14 @@
                     </tr>
                 </table>
             </div>
-            <div class="body">
+            @if(1 == 1)
+                <div class="body" style="min-height:120px">
+            @else
+                <div class="body" style="height: 458px;">
+            @endif
                 <table width="100%" cellpadding="5">
                     <tr>
                         <td width="8%" align="center" valign="top">1</td>
-                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
-                        <td width="16%" align="center" valign="top"></td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top"></td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
-                        <td width="16%" align="center" valign="top">$22.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$22.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Material Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Facilities Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top">2</td>
-                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
-                        <td width="16%" align="center" valign="top"></td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top"></td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
-                        <td width="16%" align="center" valign="top">$22.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$22.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Material Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Facilities Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top">3</td>
-                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
-                        <td width="16%" align="center" valign="top"></td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top"></td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
-                        <td width="16%" align="center" valign="top">$22.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$22.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Material Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Facilities Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
-                    <tr>
-                        <td width="8%" align="center" valign="top">4</td>
                         <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
                         <td width="16%" align="center" valign="top"></td>
                         <td width="17%" align="center" valign="top"></td>
@@ -389,7 +308,71 @@
             </div>
         </div>
     </div>
+    @if(1==1)
+    <div id="content4">
+        <div class="container">
+            <table width="100%" cellpadding="3">
+                <tr>
+                    <th width="50%" rowspan="7" valign="top">Term & Condition <br></th>
+                    <td width="25%" valign="top" align="left">Total</td>
+                    <td width="25%" valign="top" align="right">$25.000</td>
+                </tr>
+                <tr>
+                    <td width="25%" valign="top" align="left">Disc</td>
+                    <td width="25%" valign="top" align="right">$ / %</td>
+                </tr>
+                <tr>
+                    <td width="25%" valign="top" align="left">Vat 10%</td>
+                    <td width="25%" valign="top" align="right">$000</td>
+                </tr>
+                <tr>
+                    <td width="25%" valign="top" align="left">Delivery Cost</td>
+                    <td width="25%" valign="top" align="right">$52</td>
+                </tr>
+                <tr>
+                    <td width="25%" valign="top" align="left">Other Cost(if available)</td>
+                    <td width="25%" valign="top" align="right">$000 <hr width="100%"></td>
+                </tr>
+                <tr>
+                    <th width="25%" valign="top" align="left">Grand Total in USD</th>
+                    <th width="25%" valign="top" align="right">$2.100.000</th>
+                </tr>
+                <tr>
+                    <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
+                    <th width="25%" valign="top" align="right">Rp. 2.321.000.000</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="content5">
+        <div class="container">
+            <table width="100%">
+                <tr>
+                    <th width="50%" align="center">
+                        Actnowledge by,
+                    </th>
+                    <th width="50%" align="center">
+                        Approved by,
+                    </th>
+                </tr>
+            </table>
+            <table style="margin-top:80px;" width="100%">
+                <tr>
+                    <td width="50%" align="center">
+                        <b> EDDY SIREGAR</b><br>
+                        Marketing Manager
+                    </td>
+                    <td width="50%" align="center">
+                        <b> EDDY SIREGAR </b><br>
+                        Sriwijaya Air
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    @endif
 
+    @if(1!=1)
     <div class="page_break">
         <div id="content3-next">
             <div class="container">
@@ -500,6 +483,7 @@
             </div>
         </div>
     </div>
+    @endif
         
 </body>
 </html>
