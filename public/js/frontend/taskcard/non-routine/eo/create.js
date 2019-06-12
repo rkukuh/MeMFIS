@@ -131,6 +131,8 @@ let TaskCard = {
             $('input[name^="repeat_amount"]').each(function(i) {
                 repeat_amount[i] = $(this).val();
             });
+            let internal_number = { internal_number: $('input[name=company_number]').val() };
+            let internal_numberJSON = JSON.stringify(internal_number);
 
             let data = new FormData();
             data.append( "title", $('input[name=title]').val());
@@ -152,6 +154,7 @@ let TaskCard = {
             else if($('input[name=prior_to]:checked').val() == 'cycle'){
                 data.append( "scheduled_priority_text", $('#cycle').val());
             }
+            data.append( "additionals",  internal_numberJSON);
             data.append( "recurrence_id", $('#recurrence_id').val());
             data.append( "recurrence_amount", $('input[name=recurrence]').val());
             data.append( "recurrence_type", $('#recurrence-select').val());

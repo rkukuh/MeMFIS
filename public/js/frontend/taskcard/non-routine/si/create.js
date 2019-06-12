@@ -39,6 +39,9 @@ let TaskCard = {
                 i++;
             });
             console.log(JSON.stringify(applicability_airplane));
+            let internal_number = { internal_number: $('input[name=company_number]').val() };
+            let internal_numberJSON = JSON.stringify(internal_number);
+
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
@@ -54,6 +57,7 @@ let TaskCard = {
             data.append( "repeat_type", JSON.stringify(repeat_type));
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "additionals",  internal_numberJSON);
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
 
             $.ajax({
