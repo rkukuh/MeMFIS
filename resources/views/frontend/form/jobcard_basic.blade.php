@@ -122,7 +122,7 @@
   
 
   <header id="header">
-    <img src="./img/form/printoutjobcardbasic/HeaderJobCardBasic.jpg" alt=""width="100%">
+    <img src="./img/form/printoutjobcardbasic/HeaderJobCardBasic.png" alt=""width="100%">
   </header>
   <footer style="margin-top:14px;">
     <img src="./img/form/printoutjobcardbasic/FooterJobCardRoutine.jpg" width="100%" alt="" >
