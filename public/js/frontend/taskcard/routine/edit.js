@@ -757,7 +757,9 @@ let TaskCard = {
             if(status == false){
                 return $status;
             }
-            
+            let internal_number = { internal_number: $('input[name=company_number]').val() };
+            let internal_numberJSON = JSON.stringify(internal_number);
+
             let data = new FormData();
             data.append("title", $('input[id=title]').val());
             data.append("number", $('input[id=number]').val());
@@ -782,6 +784,7 @@ let TaskCard = {
             data.append("threshold_amount", JSON.stringify(threshold_amount));
             data.append("repeat_amount", JSON.stringify(repeat_amount));
             data.append("is_rii", is_rii);
+            data.append("additionals",  internal_numberJSON);
             data.append("fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');
 

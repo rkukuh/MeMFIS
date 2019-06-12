@@ -64,12 +64,12 @@
                                             <label class="form-control-label">
                                                 Company Task Number @include('frontend.common.label.optional')
                                             </label>
-                                            @if (empty($taskcard->type->name))
+                                            @if (empty($taskcard->additionals))
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
-                                                <div style="background-color:beige; padding:15px;" class="">
-                                                    {{ $taskcard->type->name }},
-                                                </div>
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', json_decode($taskcard->additionals)->internal_number))
+                                                @endcomponent
                                             @endif
                                         </div>
                                     </div>
