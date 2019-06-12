@@ -1240,6 +1240,8 @@ $('.footer').on('click', '.add-taskcard', function () {
         repeat_amount[i] = $(this).val();
     });
     repeat_amount = repeat_amount.filter(Boolean);
+    let internal_number = { internal_number: $('input[name=company_number]').val() };
+    let internal_numberJSON = JSON.stringify(internal_number);
 
     let data = new FormData();
     data.append("title", $('input[name=title]').val());
@@ -1271,6 +1273,7 @@ $('.footer').on('click', '.add-taskcard', function () {
     data.append("threshold_amount", JSON.stringify(threshold_amount));
     data.append("repeat_amount", JSON.stringify(repeat_amount));
     data.append("category_id", $('#category').val());
+    data.append("additionals",  internal_numberJSON);
     data.append("fileInput", document.getElementById('taskcard').files[0]);
     data.append('_method', 'PUT');
 

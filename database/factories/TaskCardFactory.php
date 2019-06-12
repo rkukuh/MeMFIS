@@ -68,7 +68,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
         'stringer' => function () use ($faker) {
             $stringers = [];
-            
+
             for ($i = 0; $i < rand(2, 5); $i++) {
                 $stringers[] = $faker->numberBetween(100, 999);
             }
@@ -77,14 +77,14 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         },
         'version' => function () use ($faker) {
             $versions = [];
-            
+
             for ($i = 0; $i < rand(2, 5); $i++) {
                 $versions[] = rand(1, 9) . '.' . rand(1, 9);
             }
 
             return $faker->randomElement([null, json_encode($versions)]);
         },
-        'tat' => null,
+        'ata' => null,
         'description' => $faker->paragraph(rand(10, 20)),
         'additionals' => function () use ($faker) {
             $additionals = [

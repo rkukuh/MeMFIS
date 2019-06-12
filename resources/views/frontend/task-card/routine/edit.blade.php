@@ -51,7 +51,7 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Title @include('frontend.common.label.required')
                                             </label>
@@ -64,8 +64,6 @@
                                                 @slot('id_error', 'title')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Task Card Number @include('frontend.common.label.required')
@@ -78,6 +76,30 @@
                                                 @slot('value', $taskcard->number)
                                                 @slot('id_error', 'number')
                                             @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Company Task Number @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @if (empty($taskcard->additionals))
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'company_number')
+                                                @slot('text', 'Company Task Number')
+                                                @slot('name', 'company_number')
+                                                @slot('id_error', 'company_number')
+                                            @endcomponent
+                                        @else
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'company_number')
+                                                @slot('text', 'Company Task Number')
+                                                @slot('name', 'company_number')
+                                                @slot('value', json_decode($taskcard->additionals)->internal_number)
+                                                @slot('id_error', 'company_number')
+                                            @endcomponent
+                                        @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -126,17 +148,33 @@
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                @component('frontend.common.input.checkbox')
-                                                @slot('id', 'is_rii')
-                                                @slot('name', 'is_rii')
-                                                @slot('text', 'RII?')
-                                                @if ($taskcard->is_rii == 1)
-                                                    @slot('checked', 'checked')
-                                                @endif
-                                                @slot('style_div','margin-top:30px')
-                                            @endcomponent
-                                        </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        ATA @include('frontend.common.label.optional')
+                                                    </label>
 
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'ata')
+                                                        @slot('text', 'ATA')
+                                                        @slot('name', 'ata')
+                                                        @slot('value', $taskcard->ata)
+                                                        @slot('id_error', 'ata')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('id', 'is_rii')
+                                                        @slot('name', 'is_rii')
+                                                        @slot('text', 'RII?')
+                                                        @if ($taskcard->is_rii == 1)
+                                                            @slot('checked', 'checked')
+                                                        @endif
+                                                        @slot('style_div','margin-top:30px')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">

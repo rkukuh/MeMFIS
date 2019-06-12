@@ -73,22 +73,40 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Revision @include('frontend.common.label.required')
+                                                    Company Task Number   @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskcard->revision)
-                                                @endcomponent
-                                            </div>
+                                                @if (empty($taskcard->additionals))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', json_decode($taskcard->additionals)->internal_number))
+                                                    @endcomponent
+                                                @endif
+                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Reference @include('frontend.common.label.optional')
-                                                </label>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Revision @include('frontend.common.label.required')
+                                                        </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskcard->reference)
-                                                @endcomponent
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $taskcard->revision)
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Reference @include('frontend.common.label.optional')
+                                                        </label>
+
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $taskcard->reference)
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">

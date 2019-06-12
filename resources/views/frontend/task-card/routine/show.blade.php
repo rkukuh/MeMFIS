@@ -51,7 +51,7 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Title @include('frontend.common.label.required')
                                             </label>
@@ -59,6 +59,18 @@
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->title)
                                             @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Company Task Number @include('frontend.common.label.optional')
+                                            </label>
+                                            @if (empty($taskcard->additionals))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', json_decode($taskcard->additionals)->internal_number))
+                                                @endcomponent
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -81,8 +93,7 @@
                                                 <div style="background-color:beige; padding:15px;" class="">
                                                     {{ $taskcard->type->name }},
                                                 </div>
-                                        @endif
-
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -105,17 +116,35 @@
 
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                RII @include('frontend.common.label.required')
-                                            </label>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        ATA @include('frontend.common.label.optional')
+                                                    </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @if($taskcard->is_rii == true)
-                                                    @slot('text','RII Needed')
-                                                @else
-                                                    @slot('text', 'RII Uneeded')
-                                                @endif
-                                            @endcomponent
+                                                    @if (empty($taskcard->ata))
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                        <div style="background-color:beige; padding:15px;" class="">
+                                                            {{ $taskcard->ata }},
+                                                        </div>
+                                                    @endif
+
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        RII @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @if($taskcard->is_rii == true)
+                                                            @slot('text','RII Needed')
+                                                        @else
+                                                            @slot('text', 'RII Uneeded')
+                                                        @endif
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

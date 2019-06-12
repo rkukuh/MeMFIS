@@ -74,12 +74,16 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Skill @include('frontend.common.label.required')
+                                                    Company Task Number @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Skills needed')
-                                                @endcomponent
+                                                @if (empty($taskCard->additionals))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', json_decode($taskCard->additionals)->internal_number))
+                                                    @endcomponent
+                                                @endif
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -109,11 +113,22 @@
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskCard->work_area)
+                                                    @slot('text', $taskCard->workarea->name)
                                                 @endcomponent
                                                 @endif
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Skill @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', 'Skills needed')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
                                                     Manhour Estimation @include('frontend.common.label.required')
                                                 </label>
@@ -122,9 +137,7 @@
                                                     @slot('text', $taskCard->estimation_manhour)
                                                 @endcomponent
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
                                                     Performance Factor @include('frontend.common.label.required')
                                                 </label>

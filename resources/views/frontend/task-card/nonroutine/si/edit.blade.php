@@ -83,22 +83,25 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Skill @include('frontend.common.label.required')
+                                                    Company Task Number @include('frontend.common.label.optional')
                                                 </label>
 
-                                                <select id="otr_certification" name="otr_certification" class="form-control m-select2" style="width:100%">
-                                                    <option value="">
-                                                        &mdash; Select a Skill &mdash;
-                                                    </option>
-
-                                                    @foreach ($skills as $skill)
-                                                        <option value="{{ $skill->id }}"
-                                                            @if ($skill->id == $taskcard->skill_id) selected @endif>
-                                                            {{ $skill->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-
+                                                @if (empty($taskcard->additionals))
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'company_number')
+                                                        @slot('text', 'Company Task Number')
+                                                        @slot('name', 'company_number')
+                                                        @slot('id_error', 'company_number')
+                                                    @endcomponent
+                                                @else
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'company_number')
+                                                        @slot('text', 'Company Task Number')
+                                                        @slot('name', 'company_number')
+                                                        @slot('value', json_decode($taskcard->additionals)->internal_number)
+                                                        @slot('id_error', 'company_number')
+                                                    @endcomponent
+                                                @endif
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -145,8 +148,27 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-
                                             </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Skill @include('frontend.common.label.required')
+                                                </label>
+
+                                                <select id="otr_certification" name="otr_certification" class="form-control m-select2" style="width:100%">
+                                                    <option value="">
+                                                        &mdash; Select a Skill &mdash;
+                                                    </option>
+
+                                                    @foreach ($skills as $skill)
+                                                        <option value="{{ $skill->id }}"
+                                                            @if ($skill->id == $taskcard->skill_id) selected @endif>
+                                                            {{ $skill->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
                                                     Manhour Estimation @include('frontend.common.label.required')
@@ -175,8 +197,6 @@
                                                     @slot('value','1')
                                                 @endcomponent
                                             </div>
-                                        </div>
-                                        <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">

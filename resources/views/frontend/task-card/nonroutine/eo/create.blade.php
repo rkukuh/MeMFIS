@@ -79,26 +79,42 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Revision @include('frontend.common.label.required')
+                                                Company Task Number @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('id', 'revision')
-                                                @slot('text', 'Revision')
-                                                @slot('name', 'revision')
-                                                @slot('id_error', 'revision')
+                                                @slot('id', 'company_number')
+                                                @slot('text', 'Company Task Number')
+                                                @slot('name', 'company_number')
+                                                @slot('id_error', 'company_number')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Reference @include('frontend.common.label.optional')
-                                            </label>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Revision @include('frontend.common.label.required')
+                                                    </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'reference')
-                                                @slot('text', 'Reference')
-                                                @slot('name', 'reference')
-                                            @endcomponent
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'revision')
+                                                        @slot('text', 'Revision')
+                                                        @slot('name', 'revision')
+                                                        @slot('id_error', 'revision')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Reference @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'reference')
+                                                        @slot('text', 'Reference')
+                                                        @slot('name', 'reference')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

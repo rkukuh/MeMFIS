@@ -34,7 +34,7 @@ class CreateTaskcardsTable extends Migration
             $table->unsignedInteger('sequence')->nullable(); // TODO: FK to what table?
             $table->json('stringer')->nullable(); // for CPCP only
             $table->json('version')->nullable();
-            $table->string('tat')->nullable();
+            $table->string('ata')->nullable();
             $table->longText('description')->nullable();
             $table->json('additionals')->nullable();
 
