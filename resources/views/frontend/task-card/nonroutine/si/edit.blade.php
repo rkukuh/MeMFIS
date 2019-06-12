@@ -86,13 +86,22 @@
                                                     Company Task Number @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'company_number')
-                                                    @slot('text', 'Company Task Number')
-                                                    @slot('name', 'company_number')
-                                                    @slot('value', 'company_number')
-                                                    @slot('id_error', 'company_number')
-                                                @endcomponent
+                                                @if (empty($taskcard->additionals))
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'company_number')
+                                                        @slot('text', 'Company Task Number')
+                                                        @slot('name', 'company_number')
+                                                        @slot('id_error', 'company_number')
+                                                    @endcomponent
+                                                @else
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'company_number')
+                                                        @slot('text', 'Company Task Number')
+                                                        @slot('name', 'company_number')
+                                                        @slot('value', json_decode($taskcard->additionals)->internal_number)
+                                                        @slot('id_error', 'company_number')
+                                                    @endcomponent
+                                                @endif
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">

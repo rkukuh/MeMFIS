@@ -77,9 +77,13 @@
                                                     Company Task Number @include('frontend.common.label.optional')
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskCard->number)
-                                                @endcomponent
+                                                @if (empty($taskcard->additionals))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', json_decode($taskcard->additionals)->internal_number))
+                                                    @endcomponent
+                                                @endif
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -109,7 +113,7 @@
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskCard->work_area)
+                                                    @slot('text', $taskCard->workarea->name)
                                                 @endcomponent
                                                 @endif
                                             </div>
