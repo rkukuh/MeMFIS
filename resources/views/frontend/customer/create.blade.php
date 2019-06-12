@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                        <select id="customer-level" name="customer-level" class="form-control select">
+                                        <select name="customer-level" class="form-control select">
                                         </select>
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7">
@@ -310,7 +310,7 @@
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        <select name="type_website" class="form-control select">
+                                                        <select name="type_website" class="form-control selectWebsite">
                                                             <option value="">
                                                                 Select a Website Type
                                                             </option>
@@ -343,7 +343,7 @@
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        <select name="type_website" class="form-control select">
+                                                        <select name="type_website" class="form-control">
                                                             <option value="">
                                                                 Select a Website Type
                                                             </option>
@@ -680,6 +680,7 @@
                                                         @component('frontend.common.input.select2')
                                                             @slot('text', 'Phone Number')
                                                             @slot('name', 'attn-phone')
+                                                            @slot('multiple','multiple')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -709,6 +710,7 @@
                                                         @component('frontend.common.input.select2')
                                                             @slot('text', 'Email Address')
                                                             @slot('name', 'attn-email')
+                                                            @slot('multiple','multiple')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -838,6 +840,7 @@
 <script>
     $( document ).ready(function() {
         $('.select').select2();
+        $('.selectWebsite').select2();
     });
 </script>
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>

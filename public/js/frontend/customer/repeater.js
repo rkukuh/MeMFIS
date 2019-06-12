@@ -39,11 +39,13 @@ $("div.repeaterFax").on("click", ".DeleteRow", function (event) {
 
 $("div.repeaterWebsite").on("click", ".AddRow", function (event) {
     let newRow = $(".CopyWebsite").clone();
+
     $(this).closest(".repeaterRow").after(newRow);
     newRow.slideDown("slow", function () { 
-        $('.select').select2();
         newRow.removeClass("CopyWebsite hidden"); 
-        });
+    });
+    console.log(newRow.find("select[name=type_website]").addClass("selectWebsite"));
+    $(".selectWebsite").select2();
 });
 
 $("div.repeaterWebsite").on("click", ".DeleteRow", function (event) {
@@ -68,12 +70,13 @@ $("div.repeaterEmail").on("click", ".DeleteRow", function (event) {
 });
 
 $("div.repeaterDocument").on("click", ".AddRow", function (event) {
+    $(".select").select2("destroy");
     let newRow = $(".CopyDocument").clone();
     $(this).closest(".repeaterRow").after(newRow);
     newRow.slideDown("slow", function () {
-         $('.select').select2();
          newRow.removeClass("CopyDocument hidden"); 
          });
+    $(".select").select2();
 });
 
 $("div.repeaterDocument").on("click", ".DeleteRow", function (event) {
@@ -82,5 +85,4 @@ $("div.repeaterDocument").on("click", ".DeleteRow", function (event) {
         $(this).closest(".repeaterRow").slideUp("slow", function () { $(this).remove(); });
     }
 });
-
 
