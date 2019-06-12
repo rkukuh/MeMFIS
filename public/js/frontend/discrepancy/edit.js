@@ -1,58 +1,43 @@
 
 let Discrepancy = {
     init: function () {
-        let simpan = $('.footer').on('click', '.add-discrepancy', function () {
+        let simpan = $('.footer').on('click', '.edit-discrepancy', function () {
+            let uuid = $('input[name=uuid]').val();
+            let engineer_qty = $('input[name=engineer_qty]').val();
+            let helper_quantity =  $('input[name=helper_quantity]').val();
+            let manhours =  $('input[name=manhours]').val();
+            let description = $('#description').val();
+            let complaint = $('#complaint').val();
+            let other = $('#other').val();
 
-            let date = $('input[name=date]').val();
-            let applicability_airplane =  $('input[name=applicability_airplane]').val();
-            let discrepancy_form = $('#discrepancy_form').val();
-            let aircraft_register = $('#aircraft_register').val();
-            let jc_no = $('#jc_no').val();
-            let aircraft_serial_number = $('#aircraft_serial_number').val();
-            let sequence = $('#sequence').val();
-            let engineer_quantity = $('#engineer_quantity').val();
-            let mechanic_quantity = $('#mechanic_quantity').val();
-            let otr_certification = $('#otr_certification').val();
-            let zone = $('#zone').val();
-            let ATA = $('#ATA').val();
-            let manhour = $('#manhour').val();
-            let remark = $('#remark').val();
             let is_rii;
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
                 is_rii = 0;
             }
-
             let propose = [];
-            $.each($("input[name='Propose[]']:checked"), function() {
+            $.each($("input[name='propose[]']:checked"), function() {
                 propose.push($(this).val());
               });
+            // console.log(propose);
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'put',
-                url: '/discrepancy',
+                type: 'PUT',
+                url: '/discrepancy-ppc/'+uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    date: date,
-                    applicability_airplane: applicability_airplane,
-                    discrepancy_form: discrepancy_form,
-                    aircraft_register: aircraft_register,
-                    jc_no: jc_no,
-                    aircraft_serial_number: aircraft_serial_number,
-                    sequence: sequence,
-                    engineer_quantity: engineer_quantity,
-                    mechanic_quantity: mechanic_quantity,
-                    otr_certification: otr_certification,
-                    zone: zone,
-                    ATA: ATA,
-                    manhour: manhour,
-                    remark: remark,
+                    jobcard_id: uuid,
+                    engineer_quantity: engineer_qty,
+                    helper_quantity: helper_quantity,
+                    estimation_manhour: manhours,
+                    description: description,
                     complaint: complaint,
-                    propose: propose,
+                    // propose: propose,
+                    propose_correction_other: other,
                     is_rii:is_rii,
                 },
                 success: function (data) {
@@ -68,11 +53,11 @@ let Discrepancy = {
 
                     } else {
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Discrepancy has been updated.', 'Success', {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+                        // window.location.href = '/discrepancy-engineer/' + data.uuid + '/edit';
 
                     }
                 }

@@ -48,9 +48,20 @@ class TaskCardController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function show(TaskCard $taskCard)
+    public function show(TaskCard $taskcard)
     {
-        return view('frontend.task-card.show');
+        if(($taskcard->type->code == "basic") || ($taskcard->type->code == "sip") || ($taskcard->type->code == "cpcp")){
+            return redirect()->route('frontend.taskcard-routine.show',$taskcard->uuid);
+        }
+        else if (($taskcard->type->code == "ad") || ($taskcard->type->code == "sb") || ($taskcard->type->code == "eo") || ($taskcard->type->code == "ea") || ($taskcard->type->code == "htcrr") || ($taskcard->type->code == "cmr") || ($taskcard->type->code == "awl")){
+            return redirect()->route('frontend.taskcard-eo.show',$taskcard->uuid);
+        }
+        else if($taskcard->type->code == "si"){
+            return redirect()->route('frontend.taskcard-si.show',$taskcard->uuid);
+        }
+        else if($taskcard->type->code == "preliminary"){
+            return redirect()->route('frontend.preliminary.show',$taskcard->uuid);
+        }
     }
 
     /**

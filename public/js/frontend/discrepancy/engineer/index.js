@@ -117,7 +117,7 @@ let TaskCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/discrepancy-ppc/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/discrepancy-engineer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
@@ -152,9 +152,9 @@ let TaskCard = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/discrepancy-ppc/' + discrepancy_uuid + '',
+                        url: '/discrepancy-engineer/' + discrepancy_uuid + '',
                         success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                            toastr.success('Discrepancy has been deleted.', 'Deleted', {
                                 timeOut: 5000
                                 }
                             );
@@ -197,7 +197,7 @@ let TaskCard = {
                             )
                         },
                         type: 'PUT',
-                        url: '/discrepancy/' + discrepancy_uuid + '/ppc/approve',
+                        url: '/discrepancy/' + discrepancy_uuid + '/engineer/approve',
                         success: function (data) {
                             toastr.success('Discrepancy has been approved.', 'Approved', {
                                     timeOut: 5000

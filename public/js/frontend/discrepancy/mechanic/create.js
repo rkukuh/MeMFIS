@@ -27,7 +27,7 @@ let Discrepancy = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/discrepancy/mechanic',
+                url: '/discrepancy-mechanic',
                 data: {
                     _token: $('input[name=_token]').val(),
                     jobcard_id: uuid,

@@ -5,7 +5,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                DefectCards
+                Discrepancy
             </h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                 <li class="m-nav__item">
                     <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            DefectCards
+                            Discrepancy
                         </span>
                     </a>
                 </li>
@@ -41,7 +41,7 @@
                             @include('frontend.common.label.datalist')
 
                             <h3 class="m-portlet__head-text">
-                                DefectCards
+                                Discrepancy
                             </h3>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                             <div class="col-lg-12">
                                 @include('frontend.job-card.filter')
                             </div>
-                            <div class="defectcard_engineer_datatable" id="scrolling_both"></div>
+                            <div class="Discrepancy_datatable" id="scrolling_both"></div>
                         </div>
 
                         @include('frontend.job-card.engineer.tool.index')
@@ -104,7 +104,7 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/defect-card/index.js') }}"></script>
+<script src="{{ asset('js/frontend/discrepancy/engineer/index.js') }}"></script>
 <script>
     $("#code").focus();
 </script>

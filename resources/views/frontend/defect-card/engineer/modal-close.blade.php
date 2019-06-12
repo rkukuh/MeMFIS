@@ -41,6 +41,7 @@
                                             @slot('id', 'yes')
                                             @slot('name', 'discrepancy')
                                             @slot('text', 'Yes')
+                                            @slot('required','required')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-3 col-md-3 col-lg-3">

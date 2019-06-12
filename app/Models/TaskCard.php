@@ -27,6 +27,7 @@ class TaskCard extends MemfisModel
         'stringer',
         'version',
         'description',
+        'additionals',
 
         /** EO Header */
         'revision',
@@ -217,6 +218,19 @@ class TaskCard extends MemfisModel
     public function thresholds()
     {
         return $this->morphMany(Threshold::class, 'thresholdable');
+    }
+
+    /**
+     * One-to-Many: A task card may have one workarea.
+     *
+     * This function will retrieve the workarea of a task card.
+     * See: Type's workarea() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workarea()
+    {
+        return $this->belongsTo(Type::class, 'work_area');
     }
 
     /**

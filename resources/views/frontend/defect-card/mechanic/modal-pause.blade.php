@@ -22,6 +22,7 @@
                                         @slot('name', 'pause')
                                         @slot('value', $break)
                                         @slot('text', 'Rest Time/ Beak Time')
+                                        @slot('required','required')
                                     @endcomponent
                                 </div>
                             </div>

@@ -45,9 +45,11 @@ class DefectCardController extends Controller
      * @param  \App\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function show(DefectCard $defectCard)
+    public function show(DefectCard $defectcard)
     {
-        //
+        return view('frontend.defect-card.mechanic.progress-close', [
+            'defectcard' => $defectcard,
+        ]);
     }
 
     /**

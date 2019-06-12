@@ -73,7 +73,7 @@
                                                 A/C Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                               {{$jobcard->quotation->project->aircraft->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -145,7 +145,9 @@
                                                 Work Area
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->work_area}}
+                                                @if(isset($jobcard->taskcard->workarea->name))
+                                                    {{$jobcard->taskcard->workarea->name}}
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -153,7 +155,7 @@
                                                 Sequence
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                               {{$jobcard->taskcard->sequence}}
                                             </td>
                                         </tr>
                                         <tr>
