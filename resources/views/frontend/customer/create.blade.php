@@ -130,13 +130,13 @@
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
                                                             @slot('text', 'Work')
-                                                            @slot('name', 'type_phone')
+                                                            @slot('name', 'type_phone_1')
                                                             @slot('id', 'type_phone')
                                                             @slot('value', 'work')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
-                                                            @slot('name', 'type_phone')
                                                             @slot('id', 'type_phone')
+                                                            @slot('name', 'type_phone_1')
                                                             @slot('text', 'Personal')
                                                             @slot('value', 'personal')
                                                         @endcomponent
@@ -175,8 +175,8 @@
                                                             @slot('value', 'work')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
-                                                            @slot('name', 'type_phone')
                                                             @slot('id', 'type_phone')
+                                                            @slot('name', 'type_phone')
                                                             @slot('text', 'Personal')
                                                             @slot('value', 'personal')
                                                         @endcomponent

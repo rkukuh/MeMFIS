@@ -23,6 +23,21 @@ $("div.repeaterPhone").on("click", ".AddRow", function (event) {
     let newRow = $(".CopyPhone").clone();
     $(this).closest(".repeaterRow").after(newRow);
     newRow.slideDown("slow", function () { newRow.removeClass("CopyPhone hidden"); });
+    let counter = 1;
+    $("div.repeaterPhone > div.repeaterRow").each(function() {
+        $(this).find("input[type=radio][id=type_phone]").each(function() {
+            $(this).attr('name','type_phone_'+counter);
+        });
+        counter++;
+    });
+    // let rlength = $("div.repeaterPhone > div.repeaterRow").length;
+    // rlength = rlength - 1;
+    // for(let counter = 0; counter < rlength ;counter++){
+    //     console.log(rows[counter]);
+    //     // rows[counter].find("input[type=radio][name=type_phone]").each(function() {
+    //     //     $(this).attr('name','type_phone_'+counter);
+    //     // });
+    // };
 });
 
 $("div.repeaterPhone").on("click", ".DeleteRow", function (event) {

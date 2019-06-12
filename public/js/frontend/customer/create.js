@@ -9,107 +9,122 @@ let Customer = {
 
             let phone_array = [];
             $('#phone ').each(function (i) {
-                phone_array[i] = document.getElementsByName('group-phone[' + i + '][phone]')[0].value;
+                phone_array[i] = $(this).val();
             });
-
+            phone_array.pop();
 
             let ext_phone_array = [];
             $('#ext ').each(function (i) {
-                ext_phone_array[i] = document.getElementsByName('group-phone[' + i + '][ext]')[0].value;
+                ext_phone_array[i] = $(this).val();
             });
+            ext_phone_array.pop();
 
             let type_phone_array = [];
             $('#phone ').each(function (i) {
-                type_phone_array[i] = $('input[name="group-phone[' + i + '][type_phone]"]:checked').val();
+                type_phone_array[i] = $(this).val();
             });
-
+            type_phone_array.pop();
 
             let fax_array = [];
             $('#fax ').each(function (i) {
-                fax_array[i] = document.getElementsByName('group-fax[' + i + '][fax]')[0].value;
+                fax_array[i] = $(this).val();
             });
+            fax_array.pop();
 
             let type_fax_array = [];
             $('#fax ').each(function (i) {
-                type_fax_array[i] = $('input[name="group-fax[' + i + '][type_fax]"]:checked').val();
+                type_fax_array[i] = $(this).val();
             });
+            type_fax_array.pop();
 
             let website_array = [];
             $('#website ').each(function (i) {
-                website_array[i] = document.getElementsByName('group-website[' + i + '][website]')[0].value;
+                website_array[i] = $(this).val();
             });
+            website_array.pop();
 
             let type_website_array = [];
             $('#website ').each(function (i) {
-                type_website_array[i] = document.getElementsByName('group-website[' + i + '][type_website]')[0].value;
+                type_website_array[i] = $(this).val();
             });
+            type_website_array.pop();
 
             let email_array = [];
             $('#email ').each(function (i) {
-                email_array[i] = document.getElementsByName('group-email[' + i + '][email]')[0].value;
+                email_array[i] = $(this).val();
             });
+            email_array.pop();
 
             let type_email_array = [];
             $('#email ').each(function (i) {
-                type_email_array[i] = $('input[name="group-email[' + i + '][type_email]"]:checked').val();
+                type_email_array[i] = $(this).val();
             });
+            type_email_array.pop();
 
-            // let document_array = [];
-            // $('#email ').each(function (i) {
-            //     document_array[i] = "document.getElementsByName('group-document[' + i + '][document]')[0].value";
-            //     // document_array[i] = document.getElementsByName('group-document[' + i + '][document]')[0].value;
-            // });
+            let document_array = [];
+            $('#email ').each(function (i) {
+                document_array[i] = $(this).val.val();
+            });
+            document_array.pop();
 
             let type_document_array = [];
             $('#type_document ').each(function (i) {
-                type_document_array[i] = document.getElementsByName('group-document[' + i + '][type_document]')[0].value;
+                type_document_array[i] = $(this).val();
             });
+            type_document_array.pop();
 
-            // attentions = [];
+            attentions = [];
 
-            // let attn_phone_array = [];
-            // $('#attn-phone ').each(function (i) {
-            //     attn_phone_array[i] = document.getElementsByName('group-attn[' + i + '][attn-phone]')[0].value;
-            //     console.log(attn_phone_array[i]);
-            // });
+            let attn_phone_array = [];
+            $('#attn-phone ').each(function (i) {
+                attn_phone_array[i] = $(this).val();
+            });
+            attn_phone_array.pop();
 
-            // let attn_position_array = [];
-            // $('#attn-position ').each(function (i) {
-            //     attn_position_array[i] = document.getElementsByName('group-attn[' + i + '][attn-position]')[0].value;
-            // });
+            let attn_position_array = [];
+            $('#attn-position ').each(function (i) {
+                attn_position_array[i] = $(this).val();
+            });
+            attn_position_array.pop();
 
-            // let attn_name_array = [];
-            // $('#attn-name ').each(function (i) {
-            //     attn_name_array[i] = document.getElementsByName('group-attn[' + i + '][attn-name]')[0].value;
-            // });
+            let attn_name_array = [];
+            $('#attn-name ').each(function (i) {
+                attn_name_array[i] = $(this).val();
+            });
+            attn_name_array.pop();
 
-            // let attn_ext_array = [];
-            // $('#attn-ext ').each(function (i) {
-            //     attn_ext_array[i] = document.getElementsByName('group-attn[' + i + '][attn-ext]')[0].value;
-            // });
+            let attn_ext_array = [];
+            $('#attn-ext ').each(function (i) {
+                attn_ext_array[i] = $(this).val();
+            });
+            attn_ext_array.pop();
 
-            // let attn_fax_array = [];
-            // $('#attn-fax ').each(function (i) {
-            //     attn_fax_array[i] = document.getElementsByName('group-attn[' + i + '][attn-fax]')[0].value;
-            // });
+            let attn_fax_array = [];
+            $('#attn-fax ').each(function (i) {
+                attn_fax_array[i] = $(this).val();
+            });
+            attn_fax_array.pop();
 
-            // let attn_email_array = [];
-            // $('#attn-email ').each(function (i) {
-            //     attn_email_array[i] = document.getElementsByName('group-attn[' + i + '][attn-email]')[0].value;
-            // });
+            let attn_email_array = [];
+            $('#attn-email ').each(function (i) {
+                attn_email_array[i] = $(this).val();
+            });
+            attn_email_array.pop();
 
-            // for (let index = 0; index < attn_name_array.length; index++) {
-            //     let contact = [];
+            for (let index = 0; index < attn_name_array.length; index++) {
+                let contact = [];
 
-            //     contact["name"] = attn_name_array[index];
-            //     contact["position"] = attn_position_array[index];
-            //     contact["phone"] = attn_phone_array[index];
-            //     contact["ext"] = attn_ext_array[index];
-            //     contact["fax"] = attn_fax_array[index];
-            //     contact["email"] = attn_email_array[index];
+                contact["name"] = attn_name_array[index];
+                contact["position"] = attn_position_array[index];
+                contact["phone"] = attn_phone_array[index];
+                contact["ext"] = attn_ext_array[index];
+                contact["fax"] = attn_fax_array[index];
+                contact["email"] = attn_email_array[index];
 
-            //     attentions.push(contact);
-            // }
+                attentions.push(contact);
+            }
+            contact.pop();
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -133,14 +148,14 @@ let Customer = {
                     type_website_array: type_website_array,
                     email_array: email_array,
                     type_email_array: type_email_array,
-                    // document_array: document_array,
+                    document_array: document_array,
                     type_document_array: type_document_array,
-                    // attn_phone_array:attn_phone_array,
-                    // attn_name_array:attn_name_array,
-                    // attn_position_array:attn_position_array,
-                    // attn_ext_array:attn_ext_array,
-                    // attn_fax_array:attn_fax_array,
-                    // attn_email_array:attn_email_array,
+                    attn_phone_array:attn_phone_array,
+                    attn_name_array:attn_name_array,
+                    attn_position_array:attn_position_array,
+                    attn_ext_array:attn_ext_array,
+                    attn_fax_array:attn_fax_array,
+                    attn_email_array:attn_email_array,
                     level:level,
                 },
                 success: function (data) {
