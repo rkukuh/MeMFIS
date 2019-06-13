@@ -19,6 +19,8 @@ class DefectCardMechanicController extends Controller
     protected $other;
     protected $accomplished;
     protected $notification;
+    protected $propose_corrections;
+    protected $propose_correction_text;
 
     public function __construct()
     {
@@ -84,10 +86,22 @@ class DefectCardMechanicController extends Controller
      */
     public function edit(DefectCard $defectcard)
     {
+        $this->propose_corrections = array();
+        foreach($defectcard->propose_corrections as $i => $defectCard){
+            $this->propose_corrections[$i] =  $defectCard->code;
+        }
+
+        $this->propose_correction_text = '';
+        foreach($defectcard->propose_corrections as $i => $defectCard){
+            $this->propose_correction_text =  $defectCard->pivot->propose_correction_text;
+        }
+
         if ($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "open") {
             return view('frontend.defect-card.mechanic.progress-open', [
                 'defectcard' => $defectcard,
                 'status' => $this->statuses->where('code','open')->first(),
+                'propose_corrections' => $this->propose_corrections,
+                'propose_correction_text' => $this->propose_correction_text,
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "progress"){
@@ -99,6 +113,8 @@ class DefectCardMechanicController extends Controller
                 'defectcard' => $defectcard,
                 'pending' => $this->statuses->where('code','pending')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
+                'propose_corrections' => $this->propose_corrections,
+                'propose_correction_text' => $this->propose_correction_text,
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "pending"){
@@ -106,16 +122,22 @@ class DefectCardMechanicController extends Controller
                 'defectcard' => $defectcard,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
+                'propose_corrections' => $this->propose_corrections,
+                'propose_correction_text' => $this->propose_correction_text,
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "closed"){
             return view('frontend.defect-card.mechanic.progress-close', [
                 'defectcard' => $defectcard,
+                'propose_corrections' => $this->propose_corrections,
+                'propose_correction_text' => $this->propose_correction_text,
             ]);
         }
         else{
             return view('frontend.defect-card.mechanic.progress-close', [
                 'defectcard' => $defectcard,
+                'propose_corrections' => $this->propose_corrections,
+                'propose_correction_text' => $this->propose_correction_text,
             ]);
         }
     }
