@@ -243,24 +243,36 @@
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'remove')
-                                                            @slot('name', 'remove')
+                                                            @slot('name', 'propose[]')
+                                                            @slot('value', 'remove')
                                                             @slot('text', '1. REMOVE')
                                                             @slot('size', '12')
+                                                            @if(in_array('remove',$propose_corrections))
+                                                                @slot('checked', 'checked')
+                                                            @endif
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'repair')
-                                                            @slot('name', 'repair')
+                                                            @slot('name', 'propose[]')
+                                                            @slot('value', 'repair')
                                                             @slot('text', '4. REPAIR')
+                                                            @if(in_array('repair',$propose_corrections))
+                                                                @slot('checked', 'checked')
+                                                            @endif
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'test')
-                                                            @slot('name', 'test')
+                                                            @slot('name', 'propose[]')
+                                                            @slot('value', 'test')
                                                             @slot('text', '7. TEST')
+                                                            @if(in_array('test',$propose_corrections))
+                                                                @slot('checked', 'checked')
+                                                            @endif
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
@@ -269,24 +281,36 @@
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'install')
-                                                            @slot('name', 'install')
+                                                            @slot('name', 'propose[]')
+                                                            @slot('value', 'install')
                                                             @slot('text', '2. INSTALL')
+                                                            @if(in_array('install',$propose_corrections))
+                                                                @slot('checked', 'checked')
+                                                            @endif
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'replace')
-                                                            @slot('name', 'replace')
+                                                            @slot('name', 'propose[]')
+                                                            @slot('value', 'replace')
                                                             @slot('text', '5. REPLACE')
+                                                            @if(in_array('replace',$propose_corrections))
+                                                                @slot('checked', 'checked')
+                                                            @endif
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'shop_visit')
-                                                            @slot('name', 'shop_visit')
+                                                            @slot('name', 'propose[]')
+                                                            @slot('value', 'shop-visit')
                                                             @slot('text', '8. SHOP VISIT')
+                                                            @if(in_array('shop-visit',$propose_corrections))
+                                                                @slot('checked', 'checked')
+                                                            @endif
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
@@ -295,16 +319,24 @@
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'rectification')
-                                                            @slot('name', 'rectification')
+                                                            @slot('name', 'propose[]')
+                                                            @slot('value', 'rectification')
                                                             @slot('text', '3. RECTIFICATION')
+                                                            @if(in_array('rectification',$propose_corrections))
+                                                                @slot('checked', 'checked')
+                                                            @endif
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'ndt')
-                                                            @slot('name', 'ndt')
+                                                            @slot('name', 'propose[]')
+                                                            @slot('value', 'ndt')
                                                             @slot('text', '6. NDT')
+                                                            @if(in_array('ndt',$propose_corrections))
+                                                                @slot('checked', 'checked')
+                                                            @endif
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
@@ -313,18 +345,26 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 @component('frontend.common.input.checkbox')
                                                                     @slot('id', 'other')
-                                                                    @slot('name', 'other')
+                                                                    @slot('name', 'propose[]')
+                                                                    @slot('value', 'other')
                                                                     @slot('text', '9. Other')
+                                                                    @if(in_array('other',$propose_corrections))
+                                                                        @slot('checked', 'checked')
+                                                                    @endif
                                                                     @slot('size', '12')
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                                 @component('frontend.common.input.textarea')
-                                                                    @slot('id', 'code')
-                                                                    @slot('text', 'Code')
-                                                                    @slot('name', 'code')
+                                                                    @slot('id', 'other_text')
+                                                                    @slot('text', 'other_text')
+                                                                    @slot('name', 'other_text')
+                                                                    @if(empty($propose_correction_text))
+                                                                        @slot('disabled','disabled')
+                                                                    @endif
+                                                                    @slot('value', $propose_correction_text)
                                                                     @slot('rows', '3')
-                                                                    @slot('id_error', 'code')
+                                                                    @slot('id_error', 'other_text')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
