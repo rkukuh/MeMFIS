@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
 use Auth;
+use App\Models\Type;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
@@ -84,6 +85,11 @@ class DiscrepancyPPCController extends Controller
         $discrepancy->approvals()->save(new Approval([
             'approvable_id' => $discrepancy->id,
             'approved_by' => Auth::id(),
+        ]));
+
+        $discrepancy->progresses()->save(new Progress([
+            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
         ]));
 
         return response()->json($discrepancy);
