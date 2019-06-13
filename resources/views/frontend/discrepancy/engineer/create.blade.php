@@ -281,7 +281,7 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'shop_visit')
-                                                    @slot('value', 'shop_visit')
+                                                    @slot('value', 'shop-visit')
                                                     @slot('name', 'propose[]')
                                                     @slot('text', '8. SHOP VISIT')
                                                     @slot('size', '12')
@@ -320,9 +320,10 @@
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         @component('frontend.common.input.textarea')
-                                                            @slot('id', 'other')
+                                                            @slot('id', 'other_text')
                                                             @slot('text', 'Other')
                                                             @slot('name', 'other')
+                                                            @slot('disabled', 'disabled')
                                                             @slot('rows', '3')
                                                             @slot('id_error', 'other')
                                                         @endcomponent
