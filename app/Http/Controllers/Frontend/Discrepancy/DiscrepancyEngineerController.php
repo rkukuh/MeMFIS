@@ -87,8 +87,20 @@ class DiscrepancyEngineerController extends Controller
      */
     public function edit(DefectCard $discrepancy)
     {
+        $propose_corrections = array();
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_corrections[$i] =  $defectcard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_correction_text =  $defectcard->pivot->propose_correction_text;
+        }
+
         return view('frontend.discrepancy.engineer.edit', [
             'discrepancy' => $discrepancy,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
         ]);
     }
 
@@ -104,6 +116,20 @@ class DiscrepancyEngineerController extends Controller
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
 
         $discrepancy->update($request->all());
+
+        $discrepancy->propose_corrections()->detach();
+
+        foreach($request->propose as $propose ){
+            $propose_correction = Type::ofDefectCardProposeCorrection()->where('code',$propose)->first()->id;
+            if($propose == 'other'){
+                $discrepancy->propose_corrections()->attach(
+                    $propose_correction, [
+                    'propose_correction_text' => $request->propose_correction_text,
+                ]);
+            }else{
+                $discrepancy->propose_corrections()->attach($propose_correction);
+            }
+        }
 
         $discrepancy->approvals()->save(new Approval([
             'approvable_id' => $discrepancy->id,
