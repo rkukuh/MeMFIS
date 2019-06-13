@@ -43,13 +43,12 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
 
     // Progress
 
-    for ($i = 0; $i < rand(1, Status::ofJobCard()->count()); $i++) {
-        $jobcard->progresses()->save(
-            factory(Progress::class)->make([
-                'status_id' => Status::ofJobCard()->get()->first()->id + $i
-            ])
-        );
-    }
+    $jobcard->progresses()->save(
+        factory(Progress::class)->make([
+            // Set all progress to 'open' to make testing phase easier
+            'status_id' => Status::ofJobCard()->where('code', 'open')->first()
+        ])
+    );
 
     // Inspection
 
