@@ -71,10 +71,8 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
-
         $this->decoder($request);
-        $accesses = [];
-        $zones = [];
+        $accesses = $zones = [];
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
