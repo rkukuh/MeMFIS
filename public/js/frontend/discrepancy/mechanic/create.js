@@ -6,6 +6,7 @@ let Discrepancy = {
                 if (document.getElementById("other").checked) {
                     $('#other_text').prop("disabled", false);
                 } else {
+                    document.getElementById('other_text').value = null;
                     $('#other_text').prop("disabled", true);
                 }
             };
