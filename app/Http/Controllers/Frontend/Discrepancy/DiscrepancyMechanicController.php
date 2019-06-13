@@ -80,8 +80,20 @@ class DiscrepancyMechanicController extends Controller
      */
     public function edit(DefectCard $discrepancy)
     {
+        $propose_corrections = array();
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_corrections[$i] =  $defectcard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_correction_text =  $defectcard->pivot->propose_correction_text;
+        }
+
         return view('frontend.discrepancy.mechanic.edit', [
             'discrepancy' => $discrepancy,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
         ]);
     }
 
@@ -98,6 +110,19 @@ class DiscrepancyMechanicController extends Controller
 
         $discrepancy->update($request->all());
 
+        $discrepancy->propose_corrections()->detach();
+        // dd($request->propose_correction_text);
+        foreach($request->propose as $propose ){
+            $propose_correction = Type::ofDefectCardProposeCorrection()->where('code',$propose)->first()->id;
+            if($propose == 'other'){
+                $discrepancy->propose_corrections()->attach(
+                    $propose_correction, [
+                    'propose_correction_text' => $request->propose_correction_text,
+                ]);
+            }else{
+                $discrepancy->propose_corrections()->attach($propose_correction);
+            }
+        }
         return response()->json($discrepancy);
     }
 
