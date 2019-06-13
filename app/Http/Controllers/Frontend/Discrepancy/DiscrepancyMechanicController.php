@@ -111,7 +111,7 @@ class DiscrepancyMechanicController extends Controller
         $discrepancy->update($request->all());
 
         $discrepancy->propose_corrections()->detach();
-        // dd($request->propose_correction_text);
+
         foreach($request->propose as $propose ){
             $propose_correction = Type::ofDefectCardProposeCorrection()->where('code',$propose)->first()->id;
             if($propose == 'other'){
