@@ -126,7 +126,7 @@ Route::name('frontend.')->group(function () {
             Route::prefix('quotation')->group(function () {
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
                 Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
-                Route::resource('/{project}/workpackage', 'QuotationWorkPackageController', [
+                Route::resource('/{quotation}/workpackage', 'QuotationWorkPackageController', [
                     'parameters' => ['workpackage' => 'workPackage']
                 ]);
             });
