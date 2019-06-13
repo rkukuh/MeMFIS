@@ -97,15 +97,17 @@ class DiscrepancyPPCController extends Controller
 
         $discrepancy->propose_corrections()->detach();
 
-        foreach($request->propose as $propose ){
-            $propose_correction = Type::ofDefectCardProposeCorrection()->where('code',$propose)->first()->id;
-            if($propose == 'other'){
-                $discrepancy->propose_corrections()->attach(
-                    $propose_correction, [
-                    'propose_correction_text' => $request->propose_correction_text,
-                ]);
-            }else{
-                $discrepancy->propose_corrections()->attach($propose_correction);
+        if($request->propose){
+            foreach($request->propose as $propose ){
+                $propose_correction = Type::ofDefectCardProposeCorrection()->where('code',$propose)->first()->id;
+                if($propose == 'other'){
+                    $discrepancy->propose_corrections()->attach(
+                        $propose_correction, [
+                        'propose_correction_text' => $request->propose_correction_text,
+                    ]);
+                }else{
+                    $discrepancy->propose_corrections()->attach($propose_correction);
+                }
             }
         }
 
