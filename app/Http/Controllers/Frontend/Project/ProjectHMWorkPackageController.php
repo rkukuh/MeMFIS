@@ -95,6 +95,7 @@ class ProjectHMWorkPackageController extends Controller
             'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
             'project' => $project,
+            'engineer_skills' => $engineer_skills,
             'skills' => $skills
         ]);
     }

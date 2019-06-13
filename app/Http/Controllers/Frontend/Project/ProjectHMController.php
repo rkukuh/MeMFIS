@@ -86,10 +86,8 @@ class ProjectHMController extends Controller
     public function edit(Project $project)
     {
         $attention = $project->quotations;
-        // dd($attention);
         return view('frontend.project.hm.edit',[
             'project' => $project,
-            'attention' => json_encode($project->quotations[0]->attention),
             'aircrafts' => $this->aircrafts,
             'customers' => $this->customers
         ]);
