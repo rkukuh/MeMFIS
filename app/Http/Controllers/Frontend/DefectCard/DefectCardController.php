@@ -47,8 +47,20 @@ class DefectCardController extends Controller
      */
     public function show(DefectCard $defectcard)
     {
-        return view('frontend.defect-card.mechanic.progress-close', [
+        $propose_corrections = array();
+        foreach($defectcard->propose_corrections as $i => $defectCard){
+            $propose_corrections[$i] =  $defectCard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($defectcard->propose_corrections as $i => $defectCard){
+            $propose_correction_text =  $defectCard->pivot->propose_correction_text;
+        }
+
+        return view('frontend.defect-card.progress-close', [
             'defectcard' => $defectcard,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
         ]);
     }
 
