@@ -229,12 +229,12 @@
                                     </div>
                                     <fieldset class="border p-2">
                                         <legend class="w-auto">Propose Correction</legend>
-
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'remove')
-                                                    @slot('name', 'remove')
+                                                    @slot('value', 'remove')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '1. REMOVE')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -242,7 +242,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'repair')
-                                                    @slot('name', 'repair')
+                                                    @slot('value', 'repair')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '4. REPAIR')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -250,7 +251,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'test')
-                                                    @slot('name', 'test')
+                                                    @slot('value', 'test')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '7. TEST')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -260,7 +262,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'install')
-                                                    @slot('name', 'install')
+                                                    @slot('value', 'install')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '2. INSTALL')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -268,7 +271,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'replace')
-                                                    @slot('name', 'replace')
+                                                    @slot('value', 'replace')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '5. REPLACE')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -276,7 +280,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'shop_visit')
-                                                    @slot('name', 'shop_visit')
+                                                    @slot('value', 'shop-visit')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '8. SHOP VISIT')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -286,7 +291,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'rectification')
-                                                    @slot('name', 'rectification')
+                                                    @slot('value', 'rectification')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '3. RECTIFICATION')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -294,7 +300,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'ndt')
-                                                    @slot('name', 'ndt')
+                                                    @slot('value', 'ndt')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '6. NDT')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -304,18 +311,20 @@
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'other')
-                                                            @slot('name', 'other')
+                                                            @slot('value', 'other')
+                                                            @slot('name', 'propose[]')
                                                             @slot('text', '9. Other')
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         @component('frontend.common.input.textarea')
-                                                            @slot('id', 'code')
-                                                            @slot('text', 'Code')
-                                                            @slot('name', 'code')
+                                                            @slot('id', 'other_text')
+                                                            @slot('text', 'Other')
+                                                            @slot('name', 'other')
+                                                            @slot('disabled', 'disabled')
                                                             @slot('rows', '3')
-                                                            @slot('id_error', 'code')
+                                                            @slot('id_error', 'other')
                                                         @endcomponent
                                                     </div>
                                                 </div>

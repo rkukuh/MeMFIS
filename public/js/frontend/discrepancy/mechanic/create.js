@@ -1,6 +1,15 @@
 
 let Discrepancy = {
     init: function () {
+        $(document).ready(function () {
+            document.getElementById('other').onchange = function () {
+                if (document.getElementById("other").checked) {
+                    $('#other_text').prop("disabled", false);
+                } else {
+                    $('#other_text').prop("disabled", true);
+                }
+            };
+        });
         let simpan = $('.footer').on('click', '.add-discrepancy', function () {
             let uuid = $('input[name=uuid]').val();
             let engineer_qty = $('input[name=engineer_qty]').val();
@@ -8,7 +17,7 @@ let Discrepancy = {
             let manhours =  $('input[name=manhours]').val();
             let description = $('#description').val();
             let complaint = $('#complaint').val();
-            let other = $('#other').val();
+            let other = $('#other_text').val();
 
             let is_rii;
             if (document.getElementById("is_rii").checked) {
@@ -36,8 +45,8 @@ let Discrepancy = {
                     estimation_manhour: manhours,
                     description: description,
                     complaint: complaint,
-                    // propose: propose,
-                    propose_correction_other: other,
+                    propose: propose,
+                    propose_correction_text: other,
                     is_rii:is_rii,
                 },
                 success: function (data) {
