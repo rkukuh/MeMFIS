@@ -158,7 +158,14 @@ class JobCardMechanicController extends Controller
                 'reason_text' =>  $request->note,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->notification);
+
+            if($request->discrepancy == 1){
+                return redirect()->route('frontend.discrepancy.jobcard.mechanic.discrepancy',$jobcard->uuid);
+            }
+            else{
+                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->notification);
+            }
+
         }
     }
 
