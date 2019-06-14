@@ -61,12 +61,20 @@
       margin-top:20px;
       margin-bottom:20px;
     }
+
+    #content3 table{
+      border: 1px solid #d4d7db;
+    }
+
+    #content3 table tr td{
+      border: 1px solid #d4d7db;
+    }
     
 </style>
 <body>
 
     <header>
-        <img src="./img/form/printoutquotation/HeaderQuotation.jpg" alt=""width="100%">
+        <img src="./img/form/printoutdc-summary/HeaderDefectCard.png" alt=""width="100%">
         <div id="head">
             <div style="margin-right:20px;text-align:left;">
                 <h1 style="font-size:34px;">belum ada</h1>
@@ -84,8 +92,10 @@
     </header>
 
     <footer style="margin-top:14px;">
-        <span style="margin-left:6px">Created By : Name;Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
-        <img src="./img/form/printoutquotation/FooterQuotation.jpg" width="100%" alt="" >
+        <div class="container">
+            <span style="margin-left:6px">Created By : Name;Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
+        </div>
+        <img src="./img/form/printoutdc-summary/FooterDefectCard.png" width="100%" alt="" >
     </footer>
         
     <div id="content">
@@ -135,9 +145,9 @@
         </div>
     </div>
 
-    <div class="content3">
+    <div id="content3">
         <div class="container">
-            <table width="100%" cellpadding="4" border="1">
+            <table width="100%" cellpadding="4">
                 <tr style="background: #f4b942">
                     <td width="5%" align="center">No</td>
                     <td width="14%" align="center">Defect Card No.</td>
@@ -150,15 +160,15 @@
                     <td width="11%" align="center">ctrl Sign</td>
                 </tr>
                 <tr>
-                    <td width="5%" align="center">-</td>
-                    <td width="14%" align="center">-</td>
-                    <td width="14%" align="center">-</td>
-                    <td width="11%" align="center">-</td>
-                    <td width="11%" align="center">-</td>
-                    <td width="11%" align="center">-</td>
-                    <td width="12%" align="center">-</td>
-                    <td width="11%" align="center">-</td>
-                    <td width="11%" align="center">-</td>
+                    <td width="5%" valign="top" align="center">Generate</td>
+                    <td width="14%" valign="top" align="center">Generate</td>
+                    <td width="14%" valign="top" align="center">Generate</td>
+                    <td width="11%" valign="top" align="center">Generate</td>
+                    <td width="11%" valign="top" align="center">Generate</td>
+                    <td width="11%" valign="top" align="center">Generate</td>
+                    <td width="12%" valign="top" align="center">Generate</td>
+                    <td width="11%" valign="top" align="center">Generate</td>
+                    <td width="11%" valign="top" align="center">Generate</td>
                 </tr>
             </table>
         </div>
