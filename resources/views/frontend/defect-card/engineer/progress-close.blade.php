@@ -413,6 +413,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tools_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
             </div>
@@ -442,6 +443,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="materials_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
             </div>
@@ -451,11 +453,8 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/defect-card/open.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/zone.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js')}}"></script>
+    <script>
+        let uuid = '{{$defectcard->uuid}}';
+   </script>
+    <script src="{{ asset('js/frontend/defect-card/items.js')}}"></script>
 @endpush
