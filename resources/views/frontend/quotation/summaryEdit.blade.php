@@ -28,18 +28,48 @@
         </div>
     </div>
 
-    @if(isset($charges))
-        <div class="repeaterScheduledPayment">
-            @foreach($charges as $charge)
+    <div class="repeaterChargeTypes">
+        @if(isset($charges))
+                @foreach($charges as $charge)
+                <div class="repeaterRow">
+                    <div class="form-group m-form__group row">
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <select name="charge_type" class="form-control charge_type">
+                                <option value="Shipping Fee" selected>Shipping Fee</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            @component('frontend.common.input.number')
+                                @slot('id', 'charge')
+                                @slot('name', 'charge')
+                                @slot('class', 'charge')
+                                @slot('value' , $charge->amount)
+                                @slot('min', 0)
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-1 col-md-1 col-lg-1">
+                            @component('frontend.common.buttons.create_repeater')
+                                @slot('class', 'AddRow')
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:-38px">
+                            @component('frontend.common.buttons.delete_repeater')
+                                @slot('class', 'DeleteRow')
+                            @endcomponent
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+        @else
             <div class="repeaterRow">
                 <div class="form-group m-form__group row">
                     <div class="col-sm-5 col-md-5 col-lg-5">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <select id="charge_type" name="charge_type" class="form-control charge_type">
-                            <option value="{{ $charge->type }}">
-                                {{ $charge->type }}
-                            </option>
+                        <select name="charge_type" class="form-control charge_type">
+                            <option value="Shipping Fee">Shipping Fee</option>
                         </select>
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -47,7 +77,7 @@
                             @slot('id', 'charge')
                             @slot('name', 'charge')
                             @slot('class', 'charge')
-                            @slot('value' , $charge->amount)
+                            @slot('value' , 0)
                             @slot('min', 0)
                         @endcomponent
                     </div>
@@ -63,44 +93,39 @@
                     </div>
                 </div>
             </div>
-            @endforeach
-        </div>
-    @else
-    <div class='repeaterScheduledPayment'>
-        <div class="repeaterRow">
-            <div class="form-group m-form__group row">
-                <div class="col-sm-5 col-md-5 col-lg-5">
-                </div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                    <select id="charge_type" name="charge_type" class="form-control charge_type">
-                        <option value="">
-                            Select a Type
-                        </option>
-                    </select>
-                </div>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    @component('frontend.common.input.number')
-                        @slot('id', 'charge')
-                        @slot('name', 'charge')
-                        @slot('class', 'charge')
-                        @slot('value' , 0)
-                        @slot('min', 0)
-                    @endcomponent
-                </div>
-                <div class="col-sm-1 col-md-1 col-lg-1">
-                    @component('frontend.common.buttons.create_repeater')
-                        @slot('class', 'AddRow')
-                    @endcomponent
-                </div>
-                <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:-38px">
-                    @component('frontend.common.buttons.delete_repeater')
-                        @slot('class', 'DeleteRow')
-                    @endcomponent
+        @endif
+        <div class="repeaterRow copyChargeTypes hidden">
+                <div class="form-group m-form__group row">
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <select name="charge_type" class="form-control">
+                            <option value="Shipping Fee">Shipping Fee</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        @component('frontend.common.input.number')
+                            @slot('id', 'charge')
+                            @slot('name', 'charge')
+                            @slot('class', 'charge')
+                            @slot('value' , 0)
+                            @slot('min', 0)
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        @component('frontend.common.buttons.create_repeater')
+                            @slot('class', 'AddRow')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-lg-1" style="margin-left:-38px">
+                        @component('frontend.common.buttons.delete_repeater')
+                            @slot('class', 'DeleteRow')
+                        @endcomponent
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
-    @endif
+
     <div class="form-group m-form__group row">
         <div class="col-sm-5 col-md-5 col-lg-5">
         </div>
