@@ -464,6 +464,9 @@ Route::name('frontend.')->group(function () {
                     Route::PUT('{discrepancy}/engineer/approve', 'DiscrepancyEngineerController@approve')->name('jobcard.engineer.discrepancy.approve');
                     Route::PUT('{discrepancy}/ppc/approve', 'DiscrepancyPPCController@approve')->name('jobcard.ppc.discrepancy.approve');
 
+                    /** Transaction: Item */
+                    Route::resource('/{discrepancy}/item', 'DiscrepancyItemController');
+
                 });
             });
 
