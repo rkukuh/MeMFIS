@@ -67,7 +67,7 @@
     }
 
     #content3 {
-        margin-top:-60px;
+        margin-top:-80px;
     }
     #content3 .head{
       font-weight: bold;
@@ -105,7 +105,7 @@
         height:60px;
         width:100%;
         padding-top: 20px;
-        margin-top: 50px;
+        margin-top: 20px;
     }
 
 
@@ -115,7 +115,7 @@
 <body>
 
     <header>
-        <img src="./img/form/printoutquotation/HeaderQuotation.jpg" alt=""width="100%">
+        <img src="./img/form/printoutquotation/HeaderQuotation.png" alt=""width="100%">
         <div id="head">
             <div style="margin-right:20px;text-align:left;">
                 <h1 style="font-size:34px;">QUOTATION</h1>
@@ -134,7 +134,7 @@
 
     <footer style="margin-top:14px;">
         <span style="margin-left:6px">Created By : Name;Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
-        <img src="./img/form/printoutquotation/FooterQuotation.jpg" width="100%" alt="" >
+        <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
     </footer>
     
     <div id="content">
@@ -213,7 +213,7 @@
     </div>
     <div id="content2">
         <div class="container">
-            <table width="100%" cellpadding="7">
+            <table width="100%" cellpadding="4">
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
@@ -260,7 +260,7 @@
     <div id="content3">
         <div class="container">
             <div class="head">
-                <table width="100%" border="1" cellpadding="10">
+                <table width="100%" border="1" cellpadding="4">
                     <tr style="background:#f7dd16;">
                         <td width="8%" align="center">No</td>
                         <td width="42%" align="center">Description</td>
@@ -275,7 +275,35 @@
             @else
                 <div class="body" style="height: 458px;">
             @endif
-                <table width="100%" cellpadding="5">
+                <table width="100%" cellpadding="4">
+                    <tr>
+                        <td width="8%" align="center" valign="top">1</td>
+                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
+                        <td width="16%" align="center" valign="top"></td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top"></td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
+                        <td width="16%" align="center" valign="top">$22.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$22.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Material Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr> 
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Facilities Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr>
                     <tr>
                         <td width="8%" align="center" valign="top">1</td>
                         <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
@@ -377,7 +405,7 @@
         <div id="content3-next">
             <div class="container">
                 <div class="head">
-                    <table width="100%" border="1" cellpadding="10">
+                    <table width="100%" border="1" cellpadding="4">
                         <tr style="background:#f7dd16;">
                             <td width="8%" align="center">No</td>
                             <td width="42%" align="center">Description</td>
@@ -388,7 +416,7 @@
                     </table>
                 </div>
                 <div class="body">
-                    <table width="100%" cellpadding="5">
+                    <table width="100%" cellpadding="4">
                         <tr>
                             <td width="8%" align="center" valign="top">1</td>
                             <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
