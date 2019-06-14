@@ -78,6 +78,8 @@ Route::name('frontend.')->group(function () {
         Route::namespace('Project')->group(function () {
 
             Route::resource('project', 'ProjectController');
+            Route::post('/project/{project}/approve', 'ProjectController@approve')->name('project.approve');
+
 
             Route::resource('project-hm', 'ProjectHMController', [
                 'parameters' => ['project-hm' => 'project']
