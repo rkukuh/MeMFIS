@@ -110,9 +110,9 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!-- <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
-                                                </li>
+                                                </li> -->
                                             </ul>
 
                                             <div class="tab-content">
@@ -156,13 +156,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
+                                                <!-- <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
                                                     @include('frontend.workpackage.item.index')
-                                                </div>
+                                                </div> -->
                                             </div>
 
-                                            @include('frontend.workpackage.modal.material.eo')
-                                            @include('frontend.workpackage.modal.tool.eo')
+                                            <!-- @include('frontend.workpackage.modal.material.eo') -->
+                                            <!-- @include('frontend.workpackage.modal.tool.eo') -->
                                             @include('frontend.workpackage.modal.material.routine-si')
                                             @include('frontend.workpackage.modal.tool.routine-si')
                                             @include('frontend.workpackage.modal.sequence')
