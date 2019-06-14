@@ -156,7 +156,7 @@ var DatatableAutoColumnHideDemo = function () {
                     );
                   }else{
                     return (
-                      '$ '+IDRformatter.format(total * exchange_rate)
+                      IDRformatter.format(total * exchange_rate)
                     );
                   }
             }
@@ -174,7 +174,7 @@ var DatatableAutoColumnHideDemo = function () {
                       );
                     }else{
                       return (
-                      '$ '+IDRformatter.format(total * exchange_rate)
+                      IDRformatter.format(total * exchange_rate)
                       );
                     }
                 }
@@ -191,7 +191,7 @@ var DatatableAutoColumnHideDemo = function () {
                       );
                     }else{
                       return (
-                       '$ '+IDRformatter.format(total * exchange_rate)
+                       IDRformatter.format(total * exchange_rate)
                       );
                     }
                 }
