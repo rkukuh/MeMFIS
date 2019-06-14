@@ -165,18 +165,23 @@ class ProjectHMWorkPackageController extends Controller
 
         $project_workpackage->update(['tat' =>  $request->tat]);
         for($index = 0 ; $index < sizeof($request->engineer_skills) ; $index++){
+            $engineer = Employee::where('code',$request->engineer[$index])->first()->id;
+            return response()->json($project_workpackage);
+
             if(sizeof( $project_workpackage->engineers) > 0){
-                $project_workpackage->engineers()->create([
+                $res = $project_workpackage->engineers()->updateExistingPivot($engineer,[
                     'skill_id' => Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )->first()->id,
-                    'engineer_id' => Employee::where('code',$request->engineer[$index])->first()->id,
+                    'engineer_id' => $engineer,
                     'quantity' => (int) $request->engineer_qty[$index],
                 ]);
+                return response()->json($res);
             }else{
-                $project_workpackage->engineers()->updateExistingPivot([
+                $res = $project_workpackage->engineers()->create([
                     'skill_id' => Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )->first()->id,
-                    'engineer_id' => Employee::where('code',$request->engineer[$index])->first()->id,
+                    'engineer_id' => $engineer,
                     'quantity' => (int) $request->engineer_qty[$index],
                 ]);
+                return response()->json($res);
             }
         }
         
