@@ -278,7 +278,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/quotation/'+project_uuid+'/workpackage/'+workPackage_uuid+'/',
+                url: '/quotation/'+quotation_uuid+'/workpackage/'+workPackage_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     manhour_total: total_mhrs,

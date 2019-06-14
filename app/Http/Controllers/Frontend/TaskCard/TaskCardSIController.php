@@ -58,7 +58,7 @@ class TaskCardSIController extends Controller
     public function store(TaskCardSIStore $request)
     {
         $this->decoder($request);
-
+        dd($request->work_area);
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
