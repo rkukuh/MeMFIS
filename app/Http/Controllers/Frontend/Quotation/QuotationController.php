@@ -83,6 +83,11 @@ class QuotationController extends Controller
             $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id);
         }
 
+        // $quotation->progresses()->save(new Progress([
+        //     'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
+        //     'progressed_by' => Auth::id()
+        // ]));
+
         return response()->json($quotation);
     }
 
@@ -149,7 +154,7 @@ class QuotationController extends Controller
         $request->chargeType = json_decode($request->chargeType);
         $charge = [];
         $charges = [];
-        
+
         for($index = 0; $index < sizeof($request->charge) ; $index++ ){
             $charge['type'] = $request->chargeType[$index];
             $charge['amount'] = $request->charge[$index];
@@ -201,6 +206,11 @@ class QuotationController extends Controller
             'approvable_id' => $quotation->id,
             'approved_by' => Auth::id(),
         ]));
+
+        // $quotation->progresses()->save(new Progress([
+        //     'status_id' =>  Status::ofQuotation()->where('code','approve')->first()->id,
+        //     'progressed_by' => Auth::id()
+        // ]));
 
         $project = Project::where('id',$quotation->project_id)->first();
         foreach($project->workpackages as $wp){
