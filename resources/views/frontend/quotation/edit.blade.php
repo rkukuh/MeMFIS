@@ -679,6 +679,7 @@
 <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/charge-type.js') }}"></script>
 
 <script src="{{ asset('js/frontend/quotation/summary.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
