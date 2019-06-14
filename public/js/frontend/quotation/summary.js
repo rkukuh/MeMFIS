@@ -1,7 +1,7 @@
 let locale = 'id';
 let IDRformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 let USDformatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let numberFormat = new Intl.NumberFormat('id', { maximumSignificantDigits: 3 });
+let numberFormat = new Intl.NumberFormat('id', { maximumFractionDigits: 3 });
 let total = 0;
 let quotation = $('#quotation_uuid').val();
 var DatatableAutoColumnHideDemo = function () {
@@ -147,6 +147,7 @@ var DatatableAutoColumnHideDemo = function () {
           sortable: 'asc',
           filterable: !1,
           template: function (t, e, i) {
+            total = 0;
             if(t.pivot.discount_value == null && t.pivot.discount_type == null){
                 total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138;
                 if(currency == 1){ 
