@@ -77,13 +77,16 @@ let Discrepancy = {
 };
 let Item = {
     init: function() {
+        let uuid = $('input[name=uuid]').val();
+
         $(".tools_datatable").mDatatable({
             data: {
                 type: "remote",
                 source: {
                     read: {
                         method: "GET",
-                        url: "/datatables/tool",
+                        url: '/datatables/discrepancy/'+uuid+'/tools',
+
 
                         map: function(raw) {
                             let dataSet = raw;
@@ -125,11 +128,6 @@ let Item = {
                     title: "Part No.",
                     sortable: "asc",
                     filterable: !1,
-                    template: function(t) {
-                        return (
-                            '<a href="/item/' + t.uuid + '">' + t.code + "</a>"
-                        );
-                    }
                 },
                 {
                     field: "name",
@@ -138,22 +136,133 @@ let Item = {
                     filterable: !1
                 },
                 {
-                    field: "unit",
+                    field: "pivot.sn_off",
+                    title: "SN Off",
+                    sortable: "asc",
+                    filterable: !1
+                },
+                {
+                    field: "pivot.sn_on",
+                    title: "SN On",
+                    sortable: "asc",
+                    filterable: !1
+                },
+                {
+                    field: "pivot.quantity",
+                    title: "Quantity",
+                    sortable: "asc",
+                    filterable: !1,
+                },
+                {
+                    field: "pivot.unit",
                     title: "Unit",
                     sortable: "asc",
                     filterable: !1,
-                    template: function(t) {
-                        return t.unit.name + " (" + t.unit.symbol + ")";
-                    }
                 },
                 {
-                    field: "caterory",
-                    title: "Category",
+                    field: "pivot.ipc_ref",
+                    title: "IPC Ref",
                     sortable: "asc",
                     filterable: !1,
-                    template: function(t) {
-                        return t.categories[0].name;
+                },
+                {
+                    field: "",
+                    title: "Remark",
+                    sortable: "asc",
+                    filterable: !1,
+                }
+            ]
+        });
+        $(".materials_datatable").mDatatable({
+            data: {
+                type: "remote",
+                source: {
+                    read: {
+                        method: "GET",
+                        url: '/datatables/discrepancy/'+uuid+'/materials',
+
+                        map: function(raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== "undefined") {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
                     }
+                },
+                pageSize: 10,
+                serverPaging: !1,
+                serverSorting: !1
+            },
+            layout: {
+                theme: "default",
+                class: "",
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $("#generalSearch")
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: "code",
+                    title: "Part No.",
+                    sortable: "asc",
+                    filterable: !1,
+                },
+                {
+                    field: "name",
+                    title: "Material Name",
+                    sortable: "asc",
+                    filterable: !1
+                },
+                {
+                    field: "pivot.sn_off",
+                    title: "SN Off",
+                    sortable: "asc",
+                    filterable: !1
+                },
+                {
+                    field: "pivot.sn_on",
+                    title: "SN On",
+                    sortable: "asc",
+                    filterable: !1
+                },
+                {
+                    field: "pivot.quantity",
+                    title: "Quantity",
+                    sortable: "asc",
+                    filterable: !1,
+                },
+                {
+                    field: "pivot.unit",
+                    title: "Unit",
+                    sortable: "asc",
+                    filterable: !1,
+                },
+                {
+                    field: "pivot.ipc_ref",
+                    title: "IPC Ref",
+                    sortable: "asc",
+                    filterable: !1,
+                },
+                {
+                    field: "",
+                    title: "Remark",
+                    sortable: "asc",
+                    filterable: !1,
                 }
             ]
         });

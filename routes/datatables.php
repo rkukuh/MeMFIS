@@ -494,6 +494,9 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/', 'DiscrepancyDatatables@index')->name('all');
                 Route::post('/filter/', 'DiscrepancyDatatables@filter')->name('filter');
+                Route::get('/{discrepancy}/materials', 'DiscrepancyItemDatatables@material')->name('materials.index');
+                Route::get('/{discrepancy}/tools', 'DiscrepancyItemDatatables@tool')->name('tools.index');
+
 
             });
 
