@@ -18,7 +18,7 @@
       bottom: 0cm;
       left: 0cm;
       right: 0cm;
-      height: 2cm;
+      height: 1cm;
     }
     html,body{
       padding: 0;
@@ -44,7 +44,7 @@
     }
 
     #content{
-      margin-top:150px;
+      margin-top:168px;
     }
     
     #content .jobcard-info fieldset legend{
@@ -120,10 +120,10 @@
 <body>
   
   <header id="header">
-    <img src="./img/form/printoutjobcardad-sb/HeaderJobCardAD-SB.jpg" alt=""width="100%">
+    <img src="./img/form/printoutjobcardad-sb/HeaderJobCardAD-SB.png" alt=""width="100%">
   </header>
   <footer style="margin-top:14px;">
-    <img src="./img/form/printoutjobcardad-sb/FooterJobCardAD-SB.jpg" width="100%" alt="" >
+    <img src="./img/form/printoutjobcardad-sb/FooterJobCardAD-SB.png" width="100%" alt="" >
   </footer>
 
   <div id="content">
