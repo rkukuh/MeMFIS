@@ -30,30 +30,6 @@
                                     @endcomponent
                                 </div>
                             </div>
-                            <div class="form-group m-form__group row ">
-                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                    <label class="form-control-label">
-                                        With Discrepancy Found: @include('frontend.common.label.required')
-                                    </label>
-                                    <div class="row" style="margin-top:20px">
-                                        <div class="col-sm-3 col-md-3 col-lg-3">
-                                            @component('frontend.common.input.radio')
-                                                @slot('id', 'yes')
-                                                @slot('name', 'discrepancy')
-                                                @slot('text', 'Yes')
-                                                @slot('required','required')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-3 col-md-3 col-lg-3">
-                                            @component('frontend.common.input.radio')
-                                                @slot('id', 'no')
-                                                @slot('name', 'discrepancy')
-                                                @slot('text', 'No')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <div class="flex">
