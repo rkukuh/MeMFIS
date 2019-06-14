@@ -439,7 +439,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'tool')
                                             @slot('text', 'Tool')
                                             @slot('data_target', '#modal_tool')
                                         @endcomponent
