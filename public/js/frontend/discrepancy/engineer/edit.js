@@ -366,33 +366,40 @@ let Item = {
         });
 
         $('.add-item').on('click', function () {
-            let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
+            let quantity = $('input[name=quantity_material]').val();
+            let ipc = $('input[name=ipc_material]').val();
+            let sn_on = $('input[name=sn_on_material]').val();
+            let sn_off = $('input[name=sn_off_material]').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/taskcard-routine/'+taskcard_uuid+'/item',
+                url: '/discrepancy/'+uuid+'/item',
                 data: {
                     _token: $('input[name=_token]').val(),
                     item_id: material,
                     quantity: quantity,
                     unit_id: unit_material,
+                    ipc_ref: ipc,
+                    sn_on: sn_on,
+                    sn_off: sn_off,
+
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.item_id) {
-                            $('#material-error').html(data.errors.item_id[0]);
-                        }
+                        // if (data.errors.item_id) {
+                        //     $('#material-error').html(data.errors.item_id[0]);
+                        // }
 
-                        if (data.errors.quantity) {
-                            $('#quantity_item-error').html(data.errors.quantity[0]);
-                        }
-                        document.getElementById('material').value = material;
-                        document.getElementById('quantity').value = quantity;
+                        // if (data.errors.quantity) {
+                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
+                        // }
+                        // document.getElementById('material').value = material;
+                        // document.getElementById('quantity').value = quantity;
 
                     } else {
 
@@ -400,18 +407,18 @@ let Item = {
                             timeOut: 5000
                         });
 
-                        let table = $('.item_datatable').mDatatable();
+                        let table = $('.materials_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
-                        $('#modal_item').modal('hide');
+                        $('#modal_material').modal('hide');
 
                     }
                 }
             });
         });
 
-        $('.item_datatable').on('click', '.material-delete', function () {
+        $('.materials_datatable').on('click', '.material-delete', function () {
             let item_uuid = $(this).data('item_uuid');
             // let taskcard_uuid = $(this).data('taskcard_uuid');
 

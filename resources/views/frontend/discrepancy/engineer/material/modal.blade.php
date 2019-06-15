@@ -38,11 +38,11 @@
                                   Qty
                               </label>
                               @component('frontend.common.input.number')
-                                @slot('text', 'PPN')
-                                @slot('id', 'ppn_amount')
-                                @slot('name', 'ppn_amount')
-                                @slot('id_error', 'ppn_amount')
-                              @endcomponent
+                                @slot('text', 'Quantity')
+                                @slot('id', 'quantity')
+                                @slot('name', 'quantity_material')
+                                @slot('id_error', 'quantity')
+                                @endcomponent
                           </div>
                           <div class="col-sm-3 col-md-3 col-lg-3">
                               <label class="form-control-label">
@@ -61,8 +61,9 @@
                               </label>
                               @component('frontend.common.input.text')
                                 @slot('text', 'IPC Ref.')
-                                @slot('name', 'ipc')
-                              @endcomponent
+                                @slot('name', 'ipc_material')
+                                @slot('id', 'ipc')
+                                @endcomponent
                           </div>
                         </div>
                         <div class="form-group m-form__group row item-info">
@@ -71,18 +72,20 @@
                                   S/N On
                               </label>
                               @component('frontend.common.input.text')
-                                @slot('text', 'IPC Ref.')
-                                @slot('name', 'ipc')
-                              @endcomponent
+                                @slot('text', 'S/N On')
+                                @slot('name', 'sn_on_material')
+                                @slot('id', 'sn_on')
+                                @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                               <label class="form-control-label">
                                   S/N Off
                               </label>
                               @component('frontend.common.input.text')
-                                @slot('text', 'IPC Ref.')
-                                @slot('name', 'ipc')
-                              @endcomponent
+                                @slot('text', 'S/N Off.')
+                                @slot('name', 'sn_off_material')
+                                @slot('id', 'sn_off')
+                                @endcomponent
                             </div>
                         </div>
                     </div>
@@ -90,7 +93,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-stock')
+                                    @slot('class', 'add-item')
                                     @slot('type', 'button')
                                 @endcomponent
 
