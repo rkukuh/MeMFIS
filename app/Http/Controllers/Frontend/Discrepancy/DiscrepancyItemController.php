@@ -93,6 +93,8 @@ class DiscrepancyItemController extends Controller
      */
     public function destroy(DefectCard $discrepancy,Item $item)
     {
-        //
+        $discrepancy->items()->detach($item);
+
+        return response()->json($discrepancy);
     }
 }

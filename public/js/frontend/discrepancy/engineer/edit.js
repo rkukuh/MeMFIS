@@ -170,7 +170,23 @@ let Item = {
                     title: "Remark",
                     sortable: "asc",
                     filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool-edit" title="Edit" data-tool_uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool-delete" href="#" data-tool_uuid=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                        );
+                    }
                 }
+
             ]
         });
 
@@ -227,8 +243,8 @@ let Item = {
         });
 
 
-        $('.tool_datatable').on('click', '.tool-delete', function () {
-            let item_uuid = $(this).data('item_uuid');
+        $('.tools_datatable').on('click', '.tool-delete', function () {
+            let item_uuid = $(this).data('tool_uuid');
             swal({
                 title: 'Sure want to remove?',
                 type: 'question',
@@ -245,14 +261,14 @@ let Item = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard-routine/' + taskcard_uuid + '/' + item_uuid+'/item/',
+                        url: '/discrepancy/' +uuid+'/item/' + item_uuid+'/',
                         success: function (data) {
                             toastr.success('Takscard Tool has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.tool_datatable').mDatatable();
+                            let table = $('.tools_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -361,7 +377,23 @@ let Item = {
                     title: "Remark",
                     sortable: "asc",
                     filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material-edit" title="Edit" data-item_uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material-delete" href="#" data-item_uuid=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                        );
+                    }
                 }
+
             ]
         });
 
@@ -419,7 +451,7 @@ let Item = {
         });
 
         $('.materials_datatable').on('click', '.material-delete', function () {
-            let item_uuid = $(this).data('item_uuid');
+            let tool_uuid = $(this).data('item_uuid');
             // let taskcard_uuid = $(this).data('taskcard_uuid');
 
             swal({
@@ -438,14 +470,14 @@ let Item = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/taskcard-routine/' + taskcard_uuid + '/' + item_uuid+'/item/',
+                        url: '/discrepancy/' +uuid+'/item/' + tool_uuid+'/',
                         success: function (data) {
                             toastr.success('Takscard Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.item_datatable').mDatatable();
+                            let table = $('.materials_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
