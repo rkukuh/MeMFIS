@@ -242,5 +242,4 @@
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
     <script src="{{ asset('js/frontend/workpackage/modal/datatables.js')}}"></script>
-
 @endpush

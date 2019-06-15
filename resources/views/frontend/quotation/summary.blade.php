@@ -35,9 +35,8 @@
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
                         <select id="charge_type" name="charge_type" class="form-control charge_type">
-                            <option value="">
-                                Select a Type
-                            </option>
+                            <option value="">Select Extra Charge Type</option>
+                            <option value="Shipping Fee">Shipping Fee</option>
                         </select>
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
