@@ -70,7 +70,10 @@ class DiscrepancyItemController extends Controller
      */
     public function edit(DefectCard $discrepancy,Item $item)
     {
-        //
+        $item = $discrepancy->items()->where('item_id',$item->id)->first();
+
+        return response()->json($item);
+
     }
 
     /**
@@ -82,7 +85,16 @@ class DiscrepancyItemController extends Controller
      */
     public function update(Request $request, DefectCard $discrepancy,Item $item)
     {
-        //
+        $discrepancy->items()->updateExistingPivot($item, [
+            'item_id' => $request->item_id,
+            'unit_id' => $request->unit_id,
+            'quantity' => $request->quantity,
+            'ipc_ref'=> $request->ipc_ref,
+            'sn_on'=> $request->sn_on,
+            'sn_off'=> $request->sn_off,
+        ]);
+
+        return response()->json($discrepancy);
     }
 
     /**

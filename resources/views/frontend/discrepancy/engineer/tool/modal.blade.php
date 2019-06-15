@@ -17,7 +17,7 @@
             <div class="modal-body">
 
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="MinMaxStockForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row item-info">
                           <div class="col-sm-12 col-md-12 col-lg-12">
@@ -74,7 +74,7 @@
                               @component('frontend.common.input.text')
                                 @slot('text', 'S/N On')
                                 @slot('name', 'sn_on')
-                                @slot('name', 'sn_on')
+                                @slot('id', 'sn_on')
                               @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -84,7 +84,7 @@
                               @component('frontend.common.input.text')
                                 @slot('text', 'S/N Off.')
                                 @slot('name', 'sn_off')
-                                @slot('name', 'sn_off')
+                                @slot('id', 'sn_off')
                               @endcomponent
                             </div>
                         </div>

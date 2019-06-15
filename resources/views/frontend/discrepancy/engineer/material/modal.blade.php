@@ -17,7 +17,7 @@
             <div class="modal-body">
 
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="MinMaxStockForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="material_uuid" id="material_uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row item-info">
                           <div class="col-sm-12 col-md-12 col-lg-12">
@@ -39,7 +39,7 @@
                               </label>
                               @component('frontend.common.input.number')
                                 @slot('text', 'Quantity')
-                                @slot('id', 'quantity')
+                                @slot('id', 'quantity_material')
                                 @slot('name', 'quantity_material')
                                 @slot('id_error', 'quantity')
                                 @endcomponent
@@ -62,7 +62,7 @@
                               @component('frontend.common.input.text')
                                 @slot('text', 'IPC Ref.')
                                 @slot('name', 'ipc_material')
-                                @slot('id', 'ipc')
+                                @slot('id', 'ipc_material')
                                 @endcomponent
                           </div>
                         </div>
@@ -74,7 +74,7 @@
                               @component('frontend.common.input.text')
                                 @slot('text', 'S/N On')
                                 @slot('name', 'sn_on_material')
-                                @slot('id', 'sn_on')
+                                @slot('id', 'sn_on_material')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -84,7 +84,7 @@
                               @component('frontend.common.input.text')
                                 @slot('text', 'S/N Off.')
                                 @slot('name', 'sn_off_material')
-                                @slot('id', 'sn_off')
+                                @slot('id', 'sn_off_material')
                                 @endcomponent
                             </div>
                         </div>
