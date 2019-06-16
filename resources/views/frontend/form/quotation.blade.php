@@ -20,7 +20,7 @@
       right: 0cm;
       height: 3cm;
     }
-    
+
     footer {
       position: fixed;
       bottom: 0cm;
@@ -124,7 +124,7 @@
                         <tr>
                             <td width="20%" valign="top">QN No.</td>
                             <td width="1%" valign="top">:</td>
-                            <td width="79%" valign="top">001/QN/PJ-MMF/05/19</td>
+                            <td width="79%" valign="top">{{$quotation->number}}</td>
                         </tr>
                     </table>
                 </div>
@@ -133,10 +133,10 @@
     </header>
 
     <footer style="margin-top:14px;">
-        <span style="margin-left:6px">Created By : Name;Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
+        <span style="margin-left:6px">Created By : Name ; {{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
         <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
     </footer>
-    
+
     <div id="content">
         <div class="container">
             <table width="100%" cellpadding="1" style="margin-top:20px;">
@@ -144,9 +144,9 @@
                     <td width="33%" rowspan="5" valign="top">
                        <span style="line-height:20px;">
                             PT. MERPATI MAINTANANCE FACILITY <br> JUANDA INTERNASIONAL AIRPORT <br> JL. RAYA JUANDA NO.16 <br>
-                            BETRO,SEDATI SIDOARJO JAWA TIMUR <br> INDONESIA 61253 <br> 
+                            BETRO,SEDATI SIDOARJO JAWA TIMUR <br> INDONESIA 61253 <br>
                             <span style="line-height:20px;">TELP &nbsp; : 031-8686481</span> <br>
-                            <span style="line-height:20px;">FAX &nbsp;&nbsp; : 031-8686500</span> <br>    
+                            <span style="line-height:20px;">FAX &nbsp;&nbsp; : 031-8686500</span> <br>
                        </span>
                     </td>
                     <th width="9%" valign="top">
@@ -156,12 +156,12 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        PT. MAJU MUNDUR
+                        {{$quotation->customer->name}}
                     </td>
                     <td width="33%" rowspan="5" align="center">
                             <div class="barcode">
-                                {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5.6,5.6)!!}    
-                            </div> 
+                                {!!DNS2D::getBarcodeHTML($quotation->number, 'QRCODE',5.6,5.6)!!}
+                            </div>
                     </td>
                 </tr>
                 <tr>
@@ -205,7 +205,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        Nomor Work Order
+                        {{$quotation->project->no_wo}}
                     </td>
                 </tr>
             </table>
@@ -217,39 +217,39 @@
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top"></td>
+                    <td width="35%" valign="top">{{$quotation->created_at}}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top"></td>
+                    <td width="35%" valign="top">{{$quotation->project->code}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Currency</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top"></td>
+                    <td width="35%" valign="top">{{$quotation->currency->name}}</td>
                     <th width="14%" valign="top">A/C Type</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top"></td>
+                    <td width="35%" valign="top">{{$quotation->project->aircraft->name}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Exchange Rate</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top"></td>
+                    <td width="35%" valign="top">{{$quotation->exchange_rate}}</td>
                     <th width="14%" valign="top">A/C Reg.</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top"></td>
+                    <td width="35%" valign="top">{{$quotation->project->aircraft_register}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Valid Until</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top"></td>
+                    <td width="35%" valign="top">{{$quotation->valid_until}}</td>
                     <th width="14%" valign="top">A/C Serial No.</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top"></td>
+                    <td width="35%" valign="top">{{$quotation->project->aircraft_sn}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Subject</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">Isi subject adalah title project</td>
+                    <td width="35%" valign="top">{{$quotation->project->title}}</td>
                     <td width="14%" valign="top"></td>
                     <td width="1%" valign="top"></td>
                     <td width="35%" valign="top"></td>
@@ -282,21 +282,21 @@
                         <td width="16%" align="center" valign="top"></td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top"></td>
-                    </tr> 
+                    </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
                         <td width="16%" align="center" valign="top">$22.500</td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top">$22.500</td>
-                    </tr> 
+                    </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Material Price</td>
                         <td width="16%" align="center" valign="top">$2.500</td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
+                    </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Facilities Price</td>
@@ -310,28 +310,28 @@
                         <td width="16%" align="center" valign="top"></td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top"></td>
-                    </tr> 
+                    </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
                         <td width="16%" align="center" valign="top">$22.500</td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top">$22.500</td>
-                    </tr> 
+                    </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Material Price</td>
                         <td width="16%" align="center" valign="top">$2.500</td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
+                    </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Facilities Price</td>
                         <td width="16%" align="center" valign="top">$2.500</td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr> 
+                    </tr>
                 </table>
             </div>
         </div>
@@ -343,7 +343,7 @@
                 <tr>
                     <th width="50%" rowspan="7" valign="top">Term & Condition <br></th>
                     <td width="25%" valign="top" align="left">Total</td>
-                    <td width="25%" valign="top" align="right">$25.000</td>
+                    <td width="25%" valign="top" align="right">Rp. {{$quotation->subtotal}}</td>
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Disc</td>
@@ -367,7 +367,7 @@
                 </tr>
                 <tr>
                     <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
-                    <th width="25%" valign="top" align="right">Rp. 2.321.000.000</th>
+                    <th width="25%" valign="top" align="right">Rp. {{$quotation->grandtotal}}</th>
                 </tr>
             </table>
         </div>
@@ -423,28 +423,28 @@
                             <td width="16%" align="center" valign="top"></td>
                             <td width="17%" align="center" valign="top"></td>
                             <td width="17%" align="right" valign="top"></td>
-                        </tr> 
+                        </tr>
                         <tr>
                             <td width="8%" align="center" valign="top"></td>
                             <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
                             <td width="16%" align="center" valign="top">$22.500</td>
                             <td width="17%" align="center" valign="top"></td>
                             <td width="17%" align="right" valign="top">$22.500</td>
-                        </tr> 
+                        </tr>
                         <tr>
                             <td width="8%" align="center" valign="top"></td>
                             <td width="42%" align="left" valign="top">- Material Price</td>
                             <td width="16%" align="center" valign="top">$2.500</td>
                             <td width="17%" align="center" valign="top"></td>
                             <td width="17%" align="right" valign="top">$2.500</td>
-                        </tr> 
+                        </tr>
                         <tr>
                             <td width="8%" align="center" valign="top"></td>
                             <td width="42%" align="left" valign="top">- Facilities Price</td>
                             <td width="16%" align="center" valign="top">$2.500</td>
                             <td width="17%" align="center" valign="top"></td>
                             <td width="17%" align="right" valign="top">$2.500</td>
-                        </tr> 
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -512,6 +512,6 @@
         </div>
     </div>
     @endif
-        
+
 </body>
 </html>

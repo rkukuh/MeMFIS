@@ -107,11 +107,9 @@ let Quotation = {
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
                 },
                 {
                     field: 'Actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
@@ -124,7 +122,11 @@ let Quotation = {
                             '</a>'+
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Delete" data-id="' + t.uuid + '">' +
                                 '<i class="la la-check"></i>' +
+                            '</a>'+
+                            '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                '<i class="la la-print"></i>' +
                             '</a>'
+
                         );
                     }
                 }

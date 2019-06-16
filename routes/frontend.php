@@ -124,6 +124,7 @@ Route::name('frontend.')->group(function () {
             Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
             Route::prefix('quotation')->group(function () {
+                Route::get('/{quotation}/print', 'QuotationController@print');
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
                 Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
                 Route::name('quotation.')->group(function () {

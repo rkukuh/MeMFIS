@@ -256,4 +256,21 @@ class QuotationController extends Controller
 
     }
 
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function print(Quotation $quotation)
+    {
+        $username = Auth::user()->name;
+
+        $pdf = \PDF::loadView('frontend/form/quotation',[
+                'username' => $username,
+                'quotation' => $quotation
+                ]);
+        return $pdf->stream();
+    }
+
 }
