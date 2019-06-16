@@ -51,6 +51,8 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
+        dd($request->phone_array);
+
         $attentions = [];
         $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
