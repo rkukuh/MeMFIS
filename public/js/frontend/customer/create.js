@@ -13,6 +13,9 @@ let Customer = {
                 phone_array[i] = $(this).val();
             });
             phone_array.pop();
+            if(phone_array.filter(Boolean).length < 1){
+                // return;
+            }
 
             let ext_phone_array = [];
             $('#ext ').each(function (i) {
@@ -55,6 +58,7 @@ let Customer = {
                 email_array[i] = $(this).val();
             });
             email_array.pop();
+            console.log(email_array);
 
             let type_email_array = [];
             $('#type_email ').each(function (i) {
@@ -176,7 +180,7 @@ let Customer = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/customer/' + data.uuid + '/edit';
+                        // window.location.href = '/customer/' + data.uuid + '/edit';
 
                     }
                 }

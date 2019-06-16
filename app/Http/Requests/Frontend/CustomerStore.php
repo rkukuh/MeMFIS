@@ -29,6 +29,10 @@ class CustomerStore extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            'phone_array.*' => 'required',
+            'phone_array' => 'array|min:1',
+            'email_array.*' => 'required',
+            'email_array' => 'array|min:1',
         ];
     }
 
