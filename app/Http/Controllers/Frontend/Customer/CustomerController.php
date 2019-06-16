@@ -51,8 +51,6 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
-        dd($request->phone_array);
-
         $attentions = [];
         $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
@@ -86,18 +84,20 @@ class CustomerController extends Controller
 
             if(is_array($request->fax_array)){
                 for ($i=0; $i < sizeof($request->fax_array) ; $i++) {
-                    $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
-
-                    $customer->faxes()->save(new Fax([
-                        'number' => $request->fax_array[$i],
-                        'type_id' => $fax_type->id,
-                    ]));
+                    if(isset($request->fax_array[$i])){
+                        $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
+    
+                        $customer->faxes()->save(new Fax([
+                            'number' => $request->fax_array[$i],
+                            'type_id' => $fax_type->id,
+                        ]));
+                    }
                 }
             }
 
             if(is_array($request->website_array)){
                 for ($i=0; $i < sizeof($request->website_array) ; $i++) {
-                    if($request->website_type[$i] !== "Select a Website Type"){
+                        if($request->website_type[$i] !== "Select a Website Type" && isset($request->website_array[$i])){
                         $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
                         $customer->websites()->save(new Website([
                             'url' => $request->website_array[$i],
@@ -121,7 +121,7 @@ class CustomerController extends Controller
             // if(is_array($request->document_array)){
             if(is_array($request->type_document_array)){
                 for ($i=0; $i < sizeof($request->type_document_array) ; $i++) {
-                    if($request->website_type[$i] !== "Select a Document Type"){
+                    if($request->website_type[$i] !== "Select a Document Type" && isset($request->document_array[$i])){
                         $document_type = Type::ofDocument()->where('uuid',$request->type_document_array[$i])->first();
 
                         $customer->documents()->save(new Document([
