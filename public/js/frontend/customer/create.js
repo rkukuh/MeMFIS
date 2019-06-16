@@ -13,9 +13,6 @@ let Customer = {
                 phone_array[i] = $(this).val();
             });
             phone_array.pop();
-            if(phone_array.filter(Boolean).length < 1){
-                // return;
-            }
 
             let ext_phone_array = [];
             $('#ext ').each(function (i) {
