@@ -276,62 +276,24 @@
                 <div class="body" style="height: 458px;">
             @endif
                 <table width="100%" cellpadding="4">
+                    @php
+                        $i = 1;
+                    @endphp
+                    @foreach ($quotation->workpackages as $jobRequest)
                     <tr>
-                        <td width="8%" align="center" valign="top">1</td>
-                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
-                        <td width="16%" align="center" valign="top"></td>
-                        <td width="17%" align="center" valign="top"></td>
+                        <td width="8%" align="center" valign="top">{{$i++}}</td>
+                        <td width="42%" align="left" valign="top">
+                            {{$jobRequest->pivot->description}} <br>
+                            - Manhours Price : {{$jobRequest->pivot->manhour_total}} x {{$jobRequest->pivot->manhour_rate}}<br>
+                            - Material Price : <br>
+                            - Facilities Price
+                        </td>
+                        <td width="16%" align="center" valign="top">{{$jobRequest->pivot->manhour_total*$jobRequest->pivot->manhour_rate}}</td>
+                        <td width="17%" align="center" valign="top">{{$jobRequest->pivot->discount_value}}</td>
                         <td width="17%" align="right" valign="top"></td>
                     </tr>
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
-                        <td width="16%" align="center" valign="top">$22.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$22.500</td>
-                    </tr>
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Material Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr>
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Facilities Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr>
-                    <tr>
-                        <td width="8%" align="center" valign="top">1</td>
-                        <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
-                        <td width="16%" align="center" valign="top"></td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top"></td>
-                    </tr>
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
-                        <td width="16%" align="center" valign="top">$22.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$22.500</td>
-                    </tr>
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Material Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr>
-                    <tr>
-                        <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Facilities Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
-                        <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$2.500</td>
-                    </tr>
+
+                    @endforeach
                 </table>
             </div>
         </div>
