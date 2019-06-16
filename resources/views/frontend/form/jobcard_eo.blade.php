@@ -215,7 +215,7 @@
                       <tr>
                         <td width="20%">Inspection Type</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{$jobCard->taskcard->task->name}}</td>
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
                         <td width="29%">
