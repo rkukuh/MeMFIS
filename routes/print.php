@@ -1,10 +1,5 @@
 <?php
 
-Route::get('/quotation-doc', function () {
-    $pdf = \PDF::loadView('frontend/form/quotation');
-    return $pdf->stream();
-});
-
 Route::get('/preliminary', function () {
     $pdf = \PDF::loadView('frontend/form/preliminary');
     return $pdf->stream();
