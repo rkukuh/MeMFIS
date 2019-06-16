@@ -113,7 +113,7 @@ Route::get('/preliminaryinspection-two', function () {
 });
 
 Route::get('/quotation-doc2', function () {
-    $pdf = \PDF::loadView('frontend/form/quotation2');
+    $pdf = \PDF::loadView('frontend/form/quotation');
     return $pdf->stream();
 });
 
