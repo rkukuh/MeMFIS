@@ -516,6 +516,9 @@
 <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
 
+<script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+
 <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
 
