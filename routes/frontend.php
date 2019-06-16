@@ -10,11 +10,6 @@ Route::name('frontend.')->group(function () {
     ], function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
-        Route::view('/project/hm', 'frontend.project.hm.index')->name('hm');
-        Route::view('/project/hm/create', 'frontend.project.hm.create')->name('hm.create');
-        Route::view('/project/hm/show', 'frontend.project.hm.show')->name('hm.show');
-        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('workshop');
-        Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('workshop.create');
         Route::view('/purchase-request', 'frontend.purchase-request.index')->name('purchase-request.index');
         Route::view('/purchase-request/create', 'frontend.purchase-request.create')->name('purchase-request.create');
 
@@ -94,10 +89,11 @@ Route::name('frontend.')->group(function () {
             Route::get('project/{project}/blank-workpackage/{workPackage}/edit','BlankWorkPackageController@edit')->name('project-blank-workpackage.edit');
 
             Route::prefix('project-hm')->group(function () {
-                Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
-                    'parameters' => ['workpackage' => 'workPackage']
-                ]);
-
+                Route::name('project-hm.')->group(function () {
+                    Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+                });
                 Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
                 Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
                 Route::post('/{project}/workpackage/{workpackage}/','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
@@ -105,9 +101,11 @@ Route::name('frontend.')->group(function () {
             });
 
             Route::prefix('project-workshop')->group(function () {
-                Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
-                    'parameters' => ['workpackage' => 'workPackage']
-                ]);
+                Route::name('project-workshop.')->group(function () {
+                    Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+                });
             });
 
         });
@@ -128,9 +126,11 @@ Route::name('frontend.')->group(function () {
             Route::prefix('quotation')->group(function () {
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
                 Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
-                Route::resource('/{quotation}/workpackage', 'QuotationWorkPackageController', [
-                    'parameters' => ['workpackage' => 'workPackage']
-                ]);
+                Route::name('quotation.')->group(function () {
+                    Route::resource('/{quotation}/workpackage', 'QuotationWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+                });
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('quotation.summary.basic');
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('quotation.summary.sip');
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('quotation.summary.cpcp');
