@@ -734,77 +734,39 @@
                                                     </div>
                                                 </div>
                                                 <div class="repeaterDocument">
-                                                    @if(isset($customer->documents) && sizeof($customer->documents) > 0)
-                                                        @for($counter=0 ; $counter < sizeof($customer->documents); $counter++)
-                                                            <div class="repeaterRow">
-                                                                <div class="form-group m-form__group row">
-                                                                    <div class="col-sm-5 col-md-5 col-lg-5">
-                                                                        @component('frontend.common.input.upload')
-                                                                            @slot('label', 'document')
-                                                                            @slot('name', 'document')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-5 col-md-5 col-lg-5">
-                                                                        <select name="type_document" class="form-control selectDocument">
-                                                                            <option value="">
-                                                                                Select a Document Type
-                                                                            </option>
-
-                                                                            @foreach ($documents as $document)
-                                                                            <option value="{{ $document->uuid }}" @if($customer->document[$counter]->type->uuid === $document->uuid) selected @endif>
-                                                                                {{ $document->name }}
-                                                                            </option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                        @component('frontend.common.buttons.delete_repeater')
-                                                                            @slot('class', 'DeleteRow')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                        @component('frontend.common.buttons.create_repeater')
-                                                                            @slot('class', 'AddRow')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
+                                                    <div class="repeaterRow">
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.upload')
+                                                                    @slot('label', 'document')
+                                                                    @slot('name', 'document')
+                                                                @endcomponent
                                                             </div>
-                                                        @endfor
-                                                    @else
-                                                        <div class="repeaterRow">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-5 col-md-5 col-lg-5">
-                                                                    @component('frontend.common.input.upload')
-                                                                        @slot('label', 'document')
-                                                                        @slot('name', 'document')
-                                                                    @endcomponent
-                                                                </div>
-                                                                <div class="col-sm-5 col-md-5 col-lg-5">
-                                                                    <select name="type_document" class="form-control selectDocument">
-                                                                        <option value="">
-                                                                            Select a Document Type
-                                                                        </option>
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                <select name="type_document" class="form-control selectDocument">
+                                                                    <option value="">
+                                                                        Select a Document Type
+                                                                    </option>
 
-                                                                        @foreach ($documents as $document)
-                                                                        <option value="{{ $document->uuid }}">
-                                                                            {{ $document->name }}
-                                                                        </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                    @component('frontend.common.buttons.delete_repeater')
-                                                                        @slot('class', 'DeleteRow')
-                                                                    @endcomponent
-                                                                </div>
-                                                                <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                    @component('frontend.common.buttons.create_repeater')
-                                                                        @slot('class', 'AddRow')
-                                                                    @endcomponent
-                                                                </div>
+                                                                    @foreach ($documents as $document)
+                                                                    <option value="{{ $document->uuid }}">
+                                                                        {{ $document->name }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.delete_repeater')
+                                                                    @slot('class', 'DeleteRow')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('class', 'AddRow')
+                                                                @endcomponent
                                                             </div>
                                                         </div>
-                                                    @endif
+                                                    </div>
                                                     <div class="repeaterRow CopyDocument hidden">
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-5 col-md-5 col-lg-5">

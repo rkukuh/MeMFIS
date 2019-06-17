@@ -372,7 +372,66 @@
 <script>
     let project_uuid = '{{ $project->uuid }}';
     let workpackage_uuid = '{{ $workPackage->uuid }}';
-    let skills = '{{ $skills }}';
-    console.log(skills);
-</script>
+    let engineers = {!! $engineers !!};
+    selectEngineer = function() {
+        for(let ind=0; ind < engineers.length; ind++){
+            console.log($('#employee_airframe option').filter(function() { 
+                        return ($(this).val() == 1);
+                    }).prop('selected', true));
+            switch(engineers[ind].skill_id){
+                case 100:
+                    $('#employee_airframe option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 101:
+                    $('#employee_powerplant option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 102:
+                    $('#employee_electrical option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 103:
+                    $('#employee_radio option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 104:
+                    $('#employee_instrument option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 105:
+                    $('#employee_cabinMaintenance option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 106:
+                    $('#employee_runup option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 107:
+                    $('#employee_repair option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 108:
+                    $('#employee_repainting option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+                case 109:
+                    $('#employee_ndi_ndt option').filter(function() { 
+                        return ($(this).val() == engineers[ind].engineer_id);
+                    }).prop('selected', true);
+                break;
+            }
+        }
+    };
+    
+    </script>
 @endpush

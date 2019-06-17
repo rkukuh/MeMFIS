@@ -69,6 +69,9 @@ class ProjectHMWorkPackageController extends Controller
     {
         $engineer_skills = $skills = [];
         
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
+        ->where('workpackage_id',$workPackage->id)
+        ->first();
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         $subset = $workPackage->taskcards->map(function ($taskcard) {
@@ -103,7 +106,8 @@ class ProjectHMWorkPackageController extends Controller
             'edit' => $edit,
             'project' => $project,
             'engineer_skills' => $engineer_skills,
-            'skills' => json_encode($skills)
+            'skills' => json_encode($skills),
+            'engineers' => $project_workpackage->engineers
         ]);
     }
 
@@ -116,7 +120,8 @@ class ProjectHMWorkPackageController extends Controller
     public function edit(Project $project, WorkPackage $workPackage)
     {
         $engineer_skills = $skills = [];
-
+       
+            
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         $subset = $workPackage->taskcards->map(function ($taskcard) {
@@ -138,6 +143,7 @@ class ProjectHMWorkPackageController extends Controller
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
+
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
