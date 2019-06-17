@@ -26,7 +26,7 @@
       bottom: 0cm;
       left: 0cm;
       right: 0cm;
-      height: 1cm;
+      height: 1.4cm;
     }
     ul li{
       display: inline-block;
@@ -270,7 +270,7 @@
                     </tr>
                 </table>
             </div>
-            @if(1 == 1)
+            @if(sizeof($quotation->workpackages->toArray()) == 2)
                 <div class="body" style="min-height:120px">
             @else
                 <div class="body" style="height: 458px;">
@@ -278,27 +278,43 @@
                 <table width="100%" cellpadding="4">
                     @php
                         $i = 1;
+                        $jobRequest = $quotation->workpackages;
                     @endphp
-                    @foreach ($quotation->workpackages as $jobRequest)
+                    @for($a = 0 ;$a<=3; $a++)
                     <tr>
                         <td width="8%" align="center" valign="top">{{$i++}}</td>
-                        <td width="42%" align="left" valign="top">
-                            {{$jobRequest->pivot->description}} <br>
-                            - Manhours Price : {{$jobRequest->pivot->manhour_total}} x {{$jobRequest->pivot->manhour_rate}}<br>
-                            - Material Price : <br>
-                            - Facilities Price
-                        </td>
-                        <td width="16%" align="center" valign="top">{{$jobRequest->pivot->manhour_total*$jobRequest->pivot->manhour_rate}}</td>
-                        <td width="17%" align="center" valign="top">{{$jobRequest->pivot->discount_value}}</td>
+                        <td width="42%" align="left" valign="top">{{$jobRequest[$a]->pivot->description}}</td>
+                        <td width="16%" align="center" valign="top">{{$jobRequest[$a]->pivot->discount_value}}</td>
+                        <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top"></td>
                     </tr>
-
-                    @endforeach
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$a]->pivot->manhour_total}} x {{$jobRequest[$a]->pivot->manhour_rate}}</td>
+                        <td width="16%" align="center" valign="top">{{$jobRequest[$a]->pivot->manhour_total*$jobRequest[$a]->pivot->manhour_rate}}</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$22.500</td>
+                    </tr>
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Material Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr>
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Facilities Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr>
+                    @endfor
                 </table>
             </div>
         </div>
     </div>
-    @if(1==1)
+    @if(sizeof($quotation->workpackages->toArray())==2)
     <div id="content4">
         <div class="container">
             <table width="100%" cellpadding="3">
@@ -362,7 +378,7 @@
     </div>
     @endif
 
-    @if(1!=1)
+    @if(sizeof($quotation->workpackages->toArray())!=2)
     <div class="page_break">
         <div id="content3-next">
             <div class="container">
@@ -379,17 +395,23 @@
                 </div>
                 <div class="body">
                     <table width="100%" cellpadding="4">
+                        @php
+                            $i = $a+1;
+                            $jobRequest = $quotation->workpackages;
+
+                        @endphp
+                        @for($b = 4 ;$b<(sizeof($jobRequest->toArray())); $b++)
                         <tr>
-                            <td width="8%" align="center" valign="top">1</td>
-                            <td width="42%" align="left" valign="top">Job Request Description yang diinput marketing</td>
-                            <td width="16%" align="center" valign="top"></td>
+                            <td width="8%" align="center" valign="top">{{$i++}}</td>
+                            <td width="42%" align="left" valign="top">{{$jobRequest[$b]->pivot->description}}</td>
+                            <td width="16%" align="center" valign="top">{{$jobRequest[$b]->pivot->discount_value}}</td>
                             <td width="17%" align="center" valign="top"></td>
                             <td width="17%" align="right" valign="top"></td>
                         </tr>
                         <tr>
                             <td width="8%" align="center" valign="top"></td>
-                            <td width="42%" align="left" valign="top">- Manhours Price : 1.250 x $18</td>
-                            <td width="16%" align="center" valign="top">$22.500</td>
+                            <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$b]->pivot->manhour_total}} x {{$jobRequest[$b]->pivot->manhour_rate}}</td>
+                            <td width="16%" align="center" valign="top">{{$jobRequest[$b]->pivot->manhour_total*$jobRequest[$b]->pivot->manhour_rate}}</td>
                             <td width="17%" align="center" valign="top"></td>
                             <td width="17%" align="right" valign="top">$22.500</td>
                         </tr>
@@ -407,6 +429,7 @@
                             <td width="17%" align="center" valign="top"></td>
                             <td width="17%" align="right" valign="top">$2.500</td>
                         </tr>
+                        @endfor
                     </table>
                 </div>
             </div>
