@@ -26,7 +26,7 @@
       bottom: 0cm;
       left: 0cm;
       right: 0cm;
-      height: 1cm;
+      height: 2cm;
     }
     ul li{
       display: inline-block;
@@ -270,7 +270,7 @@
                     </tr>
                 </table>
             </div>
-            @if(1 == 1)
+            @if(sizeof($quotation->workpackages->toArray()) == 2)
                 <div class="body" style="min-height:120px">
             @else
                 <div class="body" style="height: 458px;">
@@ -278,27 +278,29 @@
                 <table width="100%" cellpadding="4">
                     @php
                         $i = 1;
+                        $jobRequest = $quotation->workpackages;
                     @endphp
-                    @foreach ($quotation->workpackages as $jobRequest)
+                    @for($a = 0 ;$a<=2; $a++)
+                    {{-- @foreach ($quotation->workpackages as $jobRequest) --}}
                     <tr>
                         <td width="8%" align="center" valign="top">{{$i++}}</td>
                         <td width="42%" align="left" valign="top">
-                            {{$jobRequest->pivot->description}} <br>
-                            - Manhours Price : {{$jobRequest->pivot->manhour_total}} x {{$jobRequest->pivot->manhour_rate}}<br>
+                            {{$jobRequest[$a]->pivot->description}} <br>
+                            - Manhours Price : {{$jobRequest[$a]->pivot->manhour_total}} x {{$jobRequest[$a]->pivot->manhour_rate}}<br>
                             - Material Price : <br>
                             - Facilities Price
                         </td>
-                        <td width="16%" align="center" valign="top">{{$jobRequest->pivot->manhour_total*$jobRequest->pivot->manhour_rate}}</td>
-                        <td width="17%" align="center" valign="top">{{$jobRequest->pivot->discount_value}}</td>
+                        <td width="16%" align="center" valign="top">{{$jobRequest[$a]->pivot->manhour_total*$jobRequest->pivot->manhour_rate}}</td>
+                        <td width="17%" align="center" valign="top">{{$jobRequest[$a]->pivot->discount_value}}</td>
                         <td width="17%" align="right" valign="top"></td>
                     </tr>
-
-                    @endforeach
+                    @endfor
+                    {{-- @endforeach --}}
                 </table>
             </div>
         </div>
     </div>
-    @if(1==1)
+    @if(sizeof($quotation->workpackages->toArray())==2)
     <div id="content4">
         <div class="container">
             <table width="100%" cellpadding="3">
@@ -362,7 +364,7 @@
     </div>
     @endif
 
-    @if(1!=1)
+    @if(sizeof($quotation->workpackages->toArray())!=2)
     <div class="page_break">
         <div id="content3-next">
             <div class="container">
