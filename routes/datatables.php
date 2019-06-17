@@ -548,6 +548,25 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/modal', 'WorkPackageDatatables@workpackageModal')->name('workpackage.modal');
 
+                /** SUMARRY WORK PACKAGE */
+                Route::get('/{workPackage}/routine/materials', 'WorkPackageTaskCardRoutineSummaryDatatables@routineMaterial')->name('workpackage.taskcard.routine.material.summary');
+                Route::get('/{workPackage}/routine/tools', 'WorkPackageTaskCardRoutineSummaryDatatables@routineTool')->name('workpackage.taskcard.routine.tool.summary');
+                Route::get('/{workPackage}/basic/materials', 'WorkPackageTaskCardRoutineSummaryDatatables@basicMaterial')->name('workpackage.taskcard.basic.material.summary');
+                Route::get('/{workPackage}/basic/tools', 'WorkPackageTaskCardRoutineSummaryDatatables@basicTool')->name('workpackage.taskcard.basic.tool.summary');
+                Route::get('/{workPackage}/cpcp/materials', 'WorkPackageTaskCardRoutineSummaryDatatables@cpcpMaterial')->name('workpackage.taskcard.cpcp.material.summary');
+                Route::get('/{workPackage}/cpcp/tools', 'WorkPackageTaskCardRoutineSummaryDatatables@cpcpTool')->name('workpackage.taskcard.cpcp.tool.summary');
+                Route::get('/{workPackage}/sip/materials', 'WorkPackageTaskCardRoutineSummaryDatatables@sipMaterial')->name('workpackage.taskcard.sip.material.summary');
+                Route::get('/{workPackage}/sip/tools', 'WorkPackageTaskCardRoutineSummaryDatatables@sipTool')->name('workpackage.taskcard.sip.tool.summary');
+
+                Route::get('/{workPackage}/non-routine/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@nonRoutineMaterial')->name('workpackage.taskcard.nonroutine.material.summary');
+                Route::get('/{workPackage}/non-routine/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@nonRoutineTool')->name('workpackage.taskcard.nonroutine.tool.summary');
+                Route::get('/{workPackage}/cmr-awl/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@ad_sbMaterial')->name('workpackage.taskcard.cmr-awl.material.summary');
+                Route::get('/{workPackage}/cmr-awl/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@ad_sbTool')->name('workpackage.taskcard.cmr-awl.tool.summary');
+                Route::get('/{workPackage}/ad-sb/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@cmr_awlMaterial')->name('workpackage.taskcard.ad-sb.material.summary');
+                Route::get('/{workPackage}/ad-sb/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@cmr_awlTool')->name('workpackage.taskcard.ad-sb.tool.summary');
+                Route::get('/{workPackage}/si/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@siMaterial')->name('workpackage.taskcard.si.material.summary');
+                Route::get('/{workPackage}/si/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@siTool')->name('workpackage.taskcard.si.tool.summary');
+
             });
 
         });

@@ -7,7 +7,7 @@ let summaryroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/basic/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -99,7 +99,7 @@ let summaryroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/basic/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -192,7 +192,7 @@ let summaryroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/sip/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -284,7 +284,7 @@ let summaryroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/sip/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -377,7 +377,7 @@ let summaryroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/cpcp/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -469,7 +469,7 @@ let summaryroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/cpcp/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -562,7 +562,7 @@ let summaryroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/routine/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -654,7 +654,7 @@ let summaryroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/routine/materials',
                         map: function (raw) {
                             let dataSet = raw;
 

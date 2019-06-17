@@ -8,6 +8,7 @@ use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\WorkPackage;
+use App\Models\ProjectWorkPackageEngineer;
 use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -89,6 +90,12 @@ class ProjectHMWorkPackageController extends Controller
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = false;
+
+        $project_workpackage_id = ProjectWorkPackage::where('project_id',$project->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first()->id;
+        $ProjectWorkPackageEngineer = ProjectWorkPackageEngineer::where('project_workpackage_id',$project_workpackage_id)
+            ->get();
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
@@ -96,7 +103,7 @@ class ProjectHMWorkPackageController extends Controller
             'edit' => $edit,
             'project' => $project,
             'engineer_skills' => $engineer_skills,
-            'skills' => $skills
+            'skills' => json_encode($skills)
         ]);
     }
 
@@ -165,27 +172,30 @@ class ProjectHMWorkPackageController extends Controller
 
         $project_workpackage->update(['tat' =>  $request->tat]);
         for($index = 0 ; $index < sizeof($request->engineer_skills) ; $index++){
+            $skill = Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )
+                            ->where('of','taskcard-skill')->first()->id;
             $engineer = Employee::where('code',$request->engineer[$index])->first()->id;
-            return response()->json($project_workpackage);
+            $ProjectWorkPackageEngineer = ProjectWorkPackageEngineer::where('project_workpackage_id',$project_workpackage->id)
+                    ->where('skill_id',$skill)
+                    ->first();
+            // return response()->json(isset($ProjectWorkPackageEngineer));
 
-            if(sizeof( $project_workpackage->engineers) > 0){
-                $res = $project_workpackage->engineers()->updateExistingPivot($engineer,[
-                    'skill_id' => Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )->first()->id,
+            if(isset($ProjectWorkPackageEngineer)){
+                $res = $ProjectWorkPackageEngineer->update([
                     'engineer_id' => $engineer,
                     'quantity' => (int) $request->engineer_qty[$index],
-                ]);
-                return response()->json($res);
+                    ]);
             }else{
-                $res = $project_workpackage->engineers()->create([
-                    'skill_id' => Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )->first()->id,
+                $res = ProjectWorkPackageEngineer::create([
+                    'project_workpackage_id' => $project_workpackage->id,
+                    'skill_id' => $skill,
                     'engineer_id' => $engineer,
                     'quantity' => (int) $request->engineer_qty[$index],
                 ]);
-                return response()->json($res);
             }
         }
         
-        return response()->json($project_workpackage());
+        return response()->json($project_workpackage);
     }
 
     /**

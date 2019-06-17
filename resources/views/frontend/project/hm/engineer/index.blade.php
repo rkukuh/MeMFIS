@@ -372,5 +372,7 @@
 <script>
     let project_uuid = '{{ $project->uuid }}';
     let workpackage_uuid = '{{ $workPackage->uuid }}';
+    let skills = '{{ $skills }}';
+    console.log(skills);
 </script>
 @endpush
