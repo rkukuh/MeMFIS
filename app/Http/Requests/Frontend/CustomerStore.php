@@ -37,6 +37,19 @@ class CustomerStore extends FormRequest
     }
 
     /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'phone_array.*.required' => 'The phone field is required.',
+            'email_array.*.required' => 'The email field is required.',
+        ];
+    }
+
+    /**
      * Configure the validator instance.
      *
      * @param  \Illuminate\Validation\Validator  $validator
