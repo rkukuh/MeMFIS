@@ -26,7 +26,7 @@
       bottom: 0cm;
       left: 0cm;
       right: 0cm;
-      height: 2cm;
+      height: 1.4cm;
     }
     ul li{
       display: inline-block;
