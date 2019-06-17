@@ -222,12 +222,13 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function basicMaterial(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'Basic');
-                                    })
-                                    ->get();
-        $data = $alldata = json_decode($workPackages);
+        // $workPackages = $workPackage->taskcards()->with('type','task')
+        //                             ->whereHas('type', function ($query) {
+        //                                 $query->where('name', 'Basic');
+        //                             })
+        //                             ->get();
+        // $data = $alldata = json_decode($workPackages);
+        $data = $alldata = json_decode($workPackage->items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -324,12 +325,13 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function basicTool(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'Basic');
-                                    })
-                                    ->get();
-        $data = $alldata = json_decode($workPackages);
+        // $workPackages = $workPackage->taskcards()->with('type','task')
+        //                             ->whereHas('type', function ($query) {
+        //                                 $query->where('name', 'Basic');
+        //                             })
+        //                             ->get();
+        // $data = $alldata = json_decode($workPackages);
+        $data = $alldata = json_decode($workPackage->items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
