@@ -173,4 +173,23 @@ class WorkPackageController extends Controller
 
         return response()->json($workPackage);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function summary(WorkPackage $workPackage)
+    {
+        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->count('uuid');
+        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->sum('estimation_manhour');
+
+        return view('frontend.workpackage.summary',[
+            'total_taskcard' => $total_taskcard,
+            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'workPackage' => $workPackage
+        ]);
+    }
+
 }
