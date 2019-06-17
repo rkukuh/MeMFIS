@@ -9,13 +9,10 @@ let Customer = {
             let ai = 0;
 
             let phone_array = [];
-            $('#phone ').each(function (i) {
+            $('input[name^=phone_array]').each(function (i) {
                 phone_array[i] = $(this).val();
             });
             phone_array.pop();
-            if(phone_array.filter(Boolean).length < 1){
-                // return;
-            }
 
             let ext_phone_array = [];
             $('#ext ').each(function (i) {
@@ -54,11 +51,10 @@ let Customer = {
             type_website_array.pop();
 
             let email_array = [];
-            $('#email ').each(function (i) {
+            $('input[name^=email_array]').each(function (i) {
                 email_array[i] = $(this).val();
             });
             email_array.pop();
-            console.log(email_array);
 
             let type_email_array = [];
             $('#type_email ').each(function (i) {
@@ -81,11 +77,9 @@ let Customer = {
             let attn_phone_array = [];
             $('select[name^=attn-phone]').each(function () {
                 let attn_phone_array_row = [];
-                console.log($(this));
                 ai = 0;
                 $(this).val().forEach(function(entry) {
                     attn_phone_array_row[ai] = entry;
-                    console.log(entry);
                     ai++;
                 });;
                 attn_phone_array.push(attn_phone_array_row);
@@ -119,10 +113,8 @@ let Customer = {
             let attn_email_array = [];
             $('select[name^=attn-email]').each(function (i) {
                 let attn_email_array_row = [];
-                console.log($(this));
                 ai = 0;
                 $(this).val().forEach(function(entry) {
-                    console.log(entry);
                     attn_email_array_row[ai] = entry;
                    ai++;
                });;
@@ -165,12 +157,15 @@ let Customer = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-                        }
-                        if (data.errors.payment_term) {
-                            $('#payment_term-error').html(data.errors.payment_term[0]);
-                        }
+                        $.each(data.errors, function (key, value) {
+                            var name = $("input[name='"+key+"']");
+                            if(key.indexOf(".") != -1){
+                              var arr = key.split(".");
+                              name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
+                            }
+                            name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
+                          }); 
+
                         document.getElementById('name').value = name;
                         document.getElementById('term_of_payment').value = payment_term;
 
@@ -180,7 +175,7 @@ let Customer = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/customer/' + data.uuid + '/edit';
+                        window.location.href = '/customer/' + data.uuid + '/edit';
 
                     }
                 }
