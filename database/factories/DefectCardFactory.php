@@ -67,13 +67,12 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
 
     // Progress
 
-    for ($i = 0; $i < rand(1, Status::ofDefectCard()->count()); $i++) {
-        $defectcard->progresses()->save(
-            factory(Progress::class)->make([
-                'status_id' => Status::ofDefectCard()->get()->first()->id + $i
-            ])
-        );
-    }   
+    $defectcard->progresses()->save(
+        factory(Progress::class)->make([
+            // Set all progress to 'open' to make testing phase easier
+            'status_id' => Status::ofDefectCard()->where('code', 'open')->first()
+        ])
+    );
 
     // Propose Correction
 
