@@ -285,10 +285,10 @@ let Workpackage = {
 
         $('.footer').on('click', '.add-facility', function () {
             let facility_array = [];
-            $('#facility ').each(function (i) {
-                facility_array[i] = document.getElementsByName('group-facility[' + i + '][facility]')[0].value;
+            $('select[name^=facility]').each(function (i) {
+                facility_array[i] = $(this).val();
             });
-
+            facility_array.pop();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

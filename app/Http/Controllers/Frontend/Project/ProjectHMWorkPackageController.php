@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\Employee;
+use App\Models\Facility;
 use App\Models\WorkPackage;
 use App\Models\ProjectWorkPackageEngineer;
 use App\Models\Pivots\ProjectWorkPackage;
@@ -103,16 +104,18 @@ class ProjectHMWorkPackageController extends Controller
 
         //get employees
         $employees = Employee::all();
+        $facilities = Facility::all();
         return view('frontend.project.hm.workpackage.index',[
             'edit' => $edit,
             'project' => $project,
             'employees' => $employees,
             'total_mhrs' => $total_mhrs,
+            'facilities' => $facilities,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
             'engineer_skills' => $engineer_skills,
             'total_pfrm_factor' => $total_pfrm_factor,
-            'project_workpackage' => $project_workpackage
+            'project_workpackage' => $project_workpackage,
         ]);
     }
 
@@ -239,10 +242,10 @@ class ProjectHMWorkPackageController extends Controller
             ->where('workpackage_id',$workpackage->id)
             ->first();
         foreach($request->facility_array as $facility){
+            $facility = Facility::where('uuid', $facility)->first()->id;
             $project_workpackage->facilities()->create([
                 'facility_id' => $facility,
             ]);
-
         }
 
         return response()->json($project_workpackage);
