@@ -102,11 +102,7 @@ class ProjectHMWorkPackageController extends Controller
             ->get();
 
         //get employees
-        // $employees = Employee::pluck('first_name','code','id');
         $employees = Employee::all();
-        // foreach ($employees as $employee) {
-        //     dd($employee);
-        // }
         return view('frontend.project.hm.workpackage.index',[
             'edit' => $edit,
             'project' => $project,
@@ -116,7 +112,7 @@ class ProjectHMWorkPackageController extends Controller
             'skills' => json_encode($skills),
             'engineer_skills' => $engineer_skills,
             'total_pfrm_factor' => $total_pfrm_factor,
-            'engineers' => $project_workpackage->engineers
+            'project_workpackage' => $project_workpackage
         ]);
     }
 
