@@ -387,12 +387,14 @@ let Quotation = {
             for (var i = 0; i < chargeInputs.length; i++) {
                 charge[i] = parseInt($(chargeInputs[i]).val());
             }
+            charge.pop();
             data.append("charge", JSON.stringify(charge));
             var chargeType = [];
             //get all values
             $("select[name^=charge_type]").each(function() {
                 chargeType.push($(this).children("option:selected").val());
               });
+              chargeType.pop();
             data.append("chargeType", JSON.stringify(chargeType));
             data.append('_method', 'PUT');
 

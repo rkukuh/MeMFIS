@@ -26,8 +26,29 @@ $("div.repeaterScheduledPayment").on("click", ".AddRow", function (event) {
 });
 
 $("div.repeaterScheduledPayment").on("click", ".DeleteRow", function (event) {
-    let counter = $("div.repeaterRow").length;
+    let counter = $("div.repeaterScheduledPayment > div.repeaterRow").length;
     if (counter > 2) {
         $(this).closest(".repeaterRow").slideUp("swing", function () { $(this).remove(); });
+    }
+});
+
+$("div.repeaterChargeTypes").on("click", ".AddRow", function (event) {
+    let newRow = $(".copyChargeTypes").clone();
+    $(this).closest(".repeaterRow").after(newRow);
+    newRow.slideDown("slow", function () {
+         newRow.removeClass("copyChargeTypes hidden"); 
+         });
+    newRow.find("select[name=charge_type]").addClass("charge_type");
+    newRow.find("select[name=charge_type]").each(function() {
+        $(this).select2({
+            placeholder: 'Select Extra Charge Type',
+        });
+    });
+});
+
+$("div.repeaterChargeTypes").on("click", ".DeleteRow", function (event) {
+    let counter = $("div.repeaterChargeTypes > div.repeaterRow").length;
+    if(counter > 2){
+        $(this).closest(".repeaterRow").slideUp("slow", function () { $(this).remove(); });
     }
 });

@@ -8,6 +8,7 @@ use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\WorkPackage;
+use App\Models\ProjectWorkPackageEngineer;
 use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -68,6 +69,9 @@ class ProjectHMWorkPackageController extends Controller
     {
         $engineer_skills = $skills = [];
         
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
+        ->where('workpackage_id',$workPackage->id)
+        ->first();
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         $subset = $workPackage->taskcards->map(function ($taskcard) {
@@ -89,13 +93,26 @@ class ProjectHMWorkPackageController extends Controller
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = false;
+
+        // get engineer list
+        $project_workpackage_id = ProjectWorkPackage::where('project_id',$project->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first()->id;
+        $ProjectWorkPackageEngineer = ProjectWorkPackageEngineer::where('project_workpackage_id',$project_workpackage_id)
+            ->get();
+
+        //get employees
+        $employees = Employee::all();
         return view('frontend.project.hm.workpackage.index',[
-            'workPackage' => $workPackage,
-            'total_mhrs' => $total_mhrs,
-            'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
             'project' => $project,
-            'skills' => $skills
+            'employees' => $employees,
+            'total_mhrs' => $total_mhrs,
+            'workPackage' => $workPackage,
+            'skills' => json_encode($skills),
+            'engineer_skills' => $engineer_skills,
+            'total_pfrm_factor' => $total_pfrm_factor,
+            'project_workpackage' => $project_workpackage
         ]);
     }
 
@@ -108,7 +125,8 @@ class ProjectHMWorkPackageController extends Controller
     public function edit(Project $project, WorkPackage $workPackage)
     {
         $engineer_skills = $skills = [];
-
+       
+            
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         $subset = $workPackage->taskcards->map(function ($taskcard) {
@@ -130,6 +148,7 @@ class ProjectHMWorkPackageController extends Controller
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
+
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
@@ -164,14 +183,30 @@ class ProjectHMWorkPackageController extends Controller
 
         $project_workpackage->update(['tat' =>  $request->tat]);
         for($index = 0 ; $index < sizeof($request->engineer_skills) ; $index++){
-            $project_workpackage->engineers()->create([
-                'skill_id' => Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )->first()->id,
-                'engineer_id' => Employee::where('code',$request->engineer[$index])->first()->id,
-                'quantity' => (int) $request->engineer_qty[$index],
-            ]);
+            $skill = Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )
+                            ->where('of','taskcard-skill')->first()->id;
+            $engineer = Employee::where('code',$request->engineer[$index])->first()->id;
+            $ProjectWorkPackageEngineer = ProjectWorkPackageEngineer::where('project_workpackage_id',$project_workpackage->id)
+                    ->where('skill_id',$skill)
+                    ->first();
+            // return response()->json(isset($ProjectWorkPackageEngineer));
+
+            if(isset($ProjectWorkPackageEngineer)){
+                $res = $ProjectWorkPackageEngineer->update([
+                    'engineer_id' => $engineer,
+                    'quantity' => (int) $request->engineer_qty[$index],
+                    ]);
+            }else{
+                $res = ProjectWorkPackageEngineer::create([
+                    'project_workpackage_id' => $project_workpackage->id,
+                    'skill_id' => $skill,
+                    'engineer_id' => $engineer,
+                    'quantity' => (int) $request->engineer_qty[$index],
+                ]);
+            }
         }
         
-        return response()->json($project_workpackage());
+        return response()->json($project_workpackage);
     }
 
     /**

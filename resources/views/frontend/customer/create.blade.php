@@ -117,7 +117,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                         @component('frontend.common.input.text')
-                                                            @slot('name', 'phone')
+                                                            @slot('name', 'phone_array')
                                                             @slot('text', 'Phone')
                                                         @endcomponent
                                                     </div>
@@ -157,7 +157,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                         @component('frontend.common.input.text')
-                                                            @slot('name', 'phone')
+                                                            @slot('name', 'phone_array')
                                                             @slot('text', 'Phone')
                                                         @endcomponent
                                                     </div>
@@ -391,7 +391,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                         @component('frontend.common.input.email')
-                                                            @slot('name', 'email')
+                                                            @slot('name', 'email_array')
                                                             @slot('placeholder', 'Email')
                                                         @endcomponent
                                                     </div>
@@ -425,7 +425,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                         @component('frontend.common.input.email')
-                                                            @slot('name', 'email')
+                                                            @slot('name', 'email_array')
                                                             @slot('placeholder', 'Email')
                                                         @endcomponent
                                                     </div>

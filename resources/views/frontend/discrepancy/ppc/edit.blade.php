@@ -439,7 +439,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'tool')
                                             @slot('text', 'Tool')
                                             @slot('data_target', '#modal_tool')
                                         @endcomponent
@@ -522,6 +521,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>

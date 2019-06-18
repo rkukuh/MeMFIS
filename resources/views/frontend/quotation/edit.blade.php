@@ -307,7 +307,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Term of Payment @include('frontend.common.label.required')
+                                                    Term of Payment @include('frontend.common.label.optional')
                                                 </label>
                                                 @component('frontend.common.input.number')
                                                     @slot('text', 'Term of Payment')
@@ -679,6 +679,7 @@
 <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/charge-type.js') }}"></script>
 
 <script src="{{ asset('js/frontend/quotation/summary.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>

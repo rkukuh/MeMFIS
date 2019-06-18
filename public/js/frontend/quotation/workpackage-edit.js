@@ -59,7 +59,7 @@ $('.workpackage_datatable').mDatatable({
             sortable: 'asc',
             filterable: !1,
             template: function (t) {
-                return '<a href="/quotation/'+projectuuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                return '<a href="/quotation/'+quotation_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
             }
         },
         {

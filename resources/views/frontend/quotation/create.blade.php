@@ -297,7 +297,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Term of Payment @include('frontend.common.label.required')
+                                                        Term of Payment @include('frontend.common.label.optional')
                                                     </label>
                                                     @component('frontend.common.input.number')
                                                         @slot('text', 'Term of Payment')

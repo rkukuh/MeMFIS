@@ -86,6 +86,9 @@ let Aircraft = {
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
+                            '</a>'+
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-check"></i>' +
                             '</a>'
                         );
                     }
@@ -135,6 +138,50 @@ let Aircraft = {
                             );
 
                             let table = $('.project_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.project_datatable').on('click', '.approve', function () {
+            let project_uuid = $(this).data('uuid');
+
+            swal({
+                title: 'Sure want to Approve?',
+                type: 'question',
+                confirmButtonText: 'Yes, Approve',
+                confirmButtonColor: '#34bfa3',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'POST',
+                        url: '/project/' + project_uuid + '/approve',
+                        success: function (data) {
+                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.m_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

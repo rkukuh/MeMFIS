@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\JobCard;
 
+use Auth;
+use App\Models\Status;
 use App\Models\JobCard;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -119,8 +121,19 @@ class JobCardController extends Controller
                     'jobCard' => $jobCard]);
             return $pdf->stream();        }
         elseif(($jobCard->taskcard->type->code == "eo") or ($jobCard->taskcard->type->code == "ea")){
+            $username = Auth::user()->name;
+            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
+            if($lastStatus == "CLOSED"){
+                $dateClosed = $jobCard->progresses->last()->created_at;
+            }else{
+                $dateClosed = "-";
+            }
             $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
-                    'jobCard' => $jobCard]);
+                    'jobCard' => $jobCard,
+                    'username' => $username,
+                    'lastStatus' => $lastStatus,
+                    'dateClosed' => $dateClosed
+                    ]);
             return $pdf->stream();
         }
         elseif(($jobCard->taskcard->type->code == "cmr") or ($jobCard->taskcard->type->code == "awl")){

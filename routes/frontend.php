@@ -10,11 +10,6 @@ Route::name('frontend.')->group(function () {
     ], function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
-        Route::view('/project/hm', 'frontend.project.hm.index')->name('hm');
-        Route::view('/project/hm/create', 'frontend.project.hm.create')->name('hm.create');
-        Route::view('/project/hm/show', 'frontend.project.hm.show')->name('hm.show');
-        Route::view('/project/workshop', 'frontend.project.workshop.index')->name('workshop');
-        Route::view('/project/workshop/create', 'frontend.project.workshop.create')->name('workshop.create');
         Route::view('/purchase-request', 'frontend.purchase-request.index')->name('purchase-request.index');
         Route::view('/purchase-request/create', 'frontend.purchase-request.create')->name('purchase-request.create');
 
@@ -78,6 +73,8 @@ Route::name('frontend.')->group(function () {
         Route::namespace('Project')->group(function () {
 
             Route::resource('project', 'ProjectController');
+            Route::post('/project/{project}/approve', 'ProjectController@approve')->name('project.approve');
+
 
             Route::resource('project-hm', 'ProjectHMController', [
                 'parameters' => ['project-hm' => 'project']
@@ -92,10 +89,11 @@ Route::name('frontend.')->group(function () {
             Route::get('project/{project}/blank-workpackage/{workPackage}/edit','BlankWorkPackageController@edit')->name('project-blank-workpackage.edit');
 
             Route::prefix('project-hm')->group(function () {
-                Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
-                    'parameters' => ['workpackage' => 'workPackage']
-                ]);
-
+                Route::name('project-hm.')->group(function () {
+                    Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+                });
                 Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
                 Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
                 Route::post('/{project}/workpackage/{workpackage}/','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
@@ -103,9 +101,11 @@ Route::name('frontend.')->group(function () {
             });
 
             Route::prefix('project-workshop')->group(function () {
-                Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
-                    'parameters' => ['workpackage' => 'workPackage']
-                ]);
+                Route::name('project-workshop.')->group(function () {
+                    Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+                });
             });
 
         });
@@ -124,11 +124,20 @@ Route::name('frontend.')->group(function () {
             Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
             Route::prefix('quotation')->group(function () {
+                Route::get('/{quotation}/print', 'QuotationController@print');
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
                 Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
-                Route::resource('/{project}/workpackage', 'QuotationWorkPackageController', [
-                    'parameters' => ['workpackage' => 'workPackage']
-                ]);
+                Route::name('quotation.')->group(function () {
+                    Route::resource('/{quotation}/workpackage', 'QuotationWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+                });
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('quotation.summary.basic');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('quotation.summary.sip');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('quotation.summary.cpcp');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/adsb', 'SummaryNonRoutineTaskcardController@adsb')->name('quotation.summary.adsb');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/cmrawl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('quotation.summary.cmrawl');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('quotation.summary.si');
             });
         });
 
@@ -173,6 +182,9 @@ Route::name('frontend.')->group(function () {
                 Route::get('/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
                 Route::get('/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
                 Route::get('/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
+                Route::get('/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
+                Route::get('/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
+                Route::get('/{workPackage}/summary/', 'WorkPackageController@summary')->name('summary.workpackage');
 
                 /** Transaction: Item */
                 Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
@@ -456,9 +468,14 @@ Route::name('frontend.')->group(function () {
 
                     /** Transaction */
                     Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy.create');
+                    Route::GET('{jobcard}/engineer/', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy');
                     Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
+                    Route::GET('{jobcard}/mechanic/', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy');
                     Route::PUT('{discrepancy}/engineer/approve', 'DiscrepancyEngineerController@approve')->name('jobcard.engineer.discrepancy.approve');
                     Route::PUT('{discrepancy}/ppc/approve', 'DiscrepancyPPCController@approve')->name('jobcard.ppc.discrepancy.approve');
+
+                    /** Transaction: Item */
+                    Route::resource('/{discrepancy}/item', 'DiscrepancyItemController');
 
                 });
             });
@@ -554,25 +571,10 @@ Route::name('frontend.')->group(function () {
             });
         });
 
-        /** WORK PACKAGE */
-
-        Route::view('/summary/workpackage-summary', 'frontend.workpackage.summary')->name('summary.workpackage-summary');
-        Route::view('/summary/routine-summary', 'frontend.workpackage.routine.summary')->name('summary.routine-summary');
-        Route::view('/summary/nonroutine-summary', 'frontend.workpackage.nonroutine.summary')->name('summary.nonroutine-summary');
-
         /** PRICE LIST */
 
         Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
 
-        /** QUOTATION */
-
-        Route::view('/quotation-view/workpackage', 'frontend.quotation.workpackage')->name('quotation.workpackage');
-        Route::view('/quotation-view/summary/basic', 'frontend.quotation.routine.basic.basic-summary')->name('quotation.summary.basic');
-        Route::view('/quotation-view/summary/sip', 'frontend.quotation.routine.sip.sip-summary')->name('quotation.summary.sip');
-        Route::view('/quotation-view/summary/cpcp', 'frontend.quotation.routine.cpcp.cpcp-summary')->name('quotation.summary.cpcp');
-        Route::view('/quotation-view/summary/adsb', 'frontend.quotation.nonroutine.adsb.ad-sb-summary')->name('quotation.summary.adsb');
-        Route::view('/quotation-view/summary/cmrawl', 'frontend.quotation.nonroutine.cmrawl.cmr-awl-summary')->name('quotation.summary.cmrawl');
-        Route::view('/quotation-view/summary/si', 'frontend.quotation.nonroutine.si.si-summary')->name('quotation.summary.si');
 
         /** DOCUMENTS */
 

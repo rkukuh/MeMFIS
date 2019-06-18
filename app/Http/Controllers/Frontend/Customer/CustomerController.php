@@ -70,6 +70,21 @@ class CustomerController extends Controller
         if ($customer = Customer::create($request->all())) {
             $customer->levels()->attach($level);
 
+            if(is_array($request->website_array)){
+                for ($i=0; $i < sizeof($request->website_array) ; $i++) {
+                        if($request->website_type[$i] !== null && isset($request->website_array[$i])){
+                            dd($request->website_type[$i]);
+                        $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
+                        $customer->websites()->save(new Website([
+                            'url' => $request->website_array[$i],
+                            'type_id' => $website_type->id,
+                        ]));
+                    }else{
+                        dd("fales");
+                    }
+                }
+            }
+
             if(is_array($request->phone_array)){
                 for ($i=0; $i < sizeof($request->phone_array) ; $i++) {
                     $phone_type = Type::ofPhone()->where('code',$request->type_phone_array[$i])->first();
@@ -84,22 +99,12 @@ class CustomerController extends Controller
 
             if(is_array($request->fax_array)){
                 for ($i=0; $i < sizeof($request->fax_array) ; $i++) {
-                    $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
-
-                    $customer->faxes()->save(new Fax([
-                        'number' => $request->fax_array[$i],
-                        'type_id' => $fax_type->id,
-                    ]));
-                }
-            }
-
-            if(is_array($request->website_array)){
-                for ($i=0; $i < sizeof($request->website_array) ; $i++) {
-                    if($request->website_type[$i] !== "Select a Website Type"){
-                        $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
-                        $customer->websites()->save(new Website([
-                            'url' => $request->website_array[$i],
-                            'type_id' => $website_type->id,
+                    if(isset($request->fax_array[$i])){
+                        $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
+    
+                        $customer->faxes()->save(new Fax([
+                            'number' => $request->fax_array[$i],
+                            'type_id' => $fax_type->id,
                         ]));
                     }
                 }
@@ -119,7 +124,7 @@ class CustomerController extends Controller
             // if(is_array($request->document_array)){
             if(is_array($request->type_document_array)){
                 for ($i=0; $i < sizeof($request->type_document_array) ; $i++) {
-                    if($request->website_type[$i] !== "Select a Document Type"){
+                    if($request->website_type[$i] !== null && isset($request->document_array[$i])){
                         $document_type = Type::ofDocument()->where('uuid',$request->type_document_array[$i])->first();
 
                         $customer->documents()->save(new Document([

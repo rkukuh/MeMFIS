@@ -162,7 +162,13 @@ class JobCardEngineerController extends Controller
                 'approvable_id' => $jobcard->id,
                 'approved_by' => Auth::id(),
             ]));
-            return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
+
+            if($request->discrepancy == 1){
+                return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
+            }
+            else{
+                return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
+            }
         }
     }
 

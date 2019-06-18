@@ -2,7 +2,7 @@
     <div class="m-portlet__body">
         <div class="form-group m-form__group row ">
 
-            <input type="hidden" id="uuid" name="uuid" value="{{$project->uuid}}">
+            <input type="hidden" id="uuid" name="uuid" value="{{$project}}">
 
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <label class="form-control-label">
@@ -14,6 +14,7 @@
                     @slot('id', 'description')
                     @slot('rows', '5')
                     @slot('id_error', 'description')
+                    @slot('value',$job_request->pivot->description)
                 @endcomponent
             </div>
         </div>
@@ -23,9 +24,9 @@
                     Total Manhours @include('frontend.common.label.required')
                 </label>
                 @component('frontend.common.label.data-info')
-                    @slot('text', $total_mhrs)
                     @slot('id', 'total_mhrs')
                     @slot('name', 'total_mhrs')
+                    @slot('text', $total_mhrs)
                 @endcomponent
 
             </div>
@@ -38,6 +39,7 @@
                     @slot('name', 'rate')
                     @slot('id', 'rate')
                     @slot('id_error', 'rate')
+                    @slot('value',$job_request->pivot->manhour_rate)
                 @endcomponent
             </div>
         </div>

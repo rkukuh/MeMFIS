@@ -56,7 +56,7 @@
         <img src="./img/RTS-Certificate.jpg" alt="">
     </div>  
     <div class="kotak">
-      <h2>CERTIFICATE RELEASE TO SERVICE</h2>
+      <h2>CERTIFICATE OF RELEASE TO SERVICE</h2>
       <table width="100%">
         <tr width="100%">
           <td width="40%">Project Refrence</td>
