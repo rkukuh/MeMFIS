@@ -72,16 +72,12 @@
                         <h3 class="m-widget_content-title">Manhour</h3>
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
-                                <span>Total MPD</span>
-                                <span class="m--font-accent">{{ number_format(367) }}</span>
+                                <span>Total Manhour MPD</span>
+                                <span class="m--font-accent">{{ $total_manhor_taskcard }}</span>
                             </div>
                             <div class="m-widget_content-item">
-                                <span>Performance Factor</span>
-                                <span class="m--font-brand">+15%</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>Total</span>
-                                <span>{{ number_format(5973) }}</span>
+                                <span>Total TaskCard</span>
+                                <span>{{ $total_taskcard }}</span>
                             </div>
                         </div>
                     </div>
@@ -97,19 +93,19 @@
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>Basic</span>
-                                <span class="m--font-accent">0</span>
+                                <span class="m--font-accent">{{$basic}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>SIP</span>
-                                <span class="m--font-brand">14</span>
+                                <span class="m--font-brand">{{$sip}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>CPCP</span>
-                                <span class="m--font-focus">15</span>
+                                <span class="m--font-focus">{{$cpcp}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>29</span>
+                                <span>{{$basic+$sip+$cpcp}}</span>
                             </div>
                         </div>
                     </div>
@@ -122,23 +118,19 @@
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>AD/SB</span>
-                                <span class="m--font-accent">450</span>
+                                <span class="m--font-accent">{{$adsb}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>CMR/AWL</span>
-                                <span class="m--font-brand">79</span>
+                                <span class="m--font-brand">{{$cmrawl}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Special Instruction (SI)</span>
-                                <span class="m--font-focus">88</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>HT/CRR</span>
-                                <span class="m--font-success">16</span>
+                                <span class="m--font-focus">{{$si}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>633</span>
+                                <span>{{$adsb+$cmrawl+$si}}</span>
                             </div>
                         </div>
 

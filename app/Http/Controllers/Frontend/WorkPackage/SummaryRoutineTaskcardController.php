@@ -76,13 +76,32 @@ class SummaryRoutineTaskcardController extends Controller
      */
     public function summary(WorkPackage $workPackage)
     {
-        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->sum('estimation_manhour');
+        $basic = $workPackage->taskcards()->with('type','task')
+                            ->whereHas('type', function ($query) {
+                                $query->where('code', 'basic');
+                            })
+                            ->count();
+        $sip = $workPackage->taskcards()->with('type','task')
+                            ->whereHas('type', function ($query) {
+                                $query->where('code', 'sip');
+                            })
+                            ->count();
+        $cpcp = $workPackage->taskcards()->with('type','task')
+                            ->whereHas('type', function ($query) {
+                                $query->where('code', 'cpcp');
+                            })
+                            ->count();
+
+        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-routine')->count('uuid');
+        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-routine')->sum('estimation_manhour');
 
         return view('frontend.workpackage.routine.summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhor_taskcard' => $total_manhor_taskcard,
-            'workPackage' => $workPackage
+            'workPackage' => $workPackage,
+            'basic' => $basic,
+            'sip' => $sip,
+            'cpcp' => $cpcp
         ]);
     }
 
