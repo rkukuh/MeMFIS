@@ -26,13 +26,7 @@ class StatusesOfHtCrr extends Seeder
 
         Status::create([
             'code' => 'pending',
-            'name' => 'PENDING',
-            'of'   => 'htcrr',
-        ]);
-
-        Status::create([
-            'code' => 'paused',
-            'name' => 'PAUSED',
+            'name' => 'PENDING / PAUSE',
             'of'   => 'htcrr',
         ]);
 
