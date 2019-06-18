@@ -16,12 +16,17 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function routineMaterial(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'Basic');
-                                    })
-                                    ->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->of == 'taskcard-type-routine'){
+                foreach($taskcard->materials as $item){
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -119,12 +124,17 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function routineTool(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'Basic');
-                                    })
-                                    ->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->of == 'taskcard-type-routine'){
+                foreach($taskcard->tools as $item){
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -222,13 +232,17 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function basicMaterial(WorkPackage $workPackage)
     {
-        // $workPackages = $workPackage->taskcards()->with('type','task')
-        //                             ->whereHas('type', function ($query) {
-        //                                 $query->where('name', 'Basic');
-        //                             })
-        //                             ->get();
-        // $data = $alldata = json_decode($workPackages);
-        $data = $alldata = json_decode($workPackage->items);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            // if($taskcard->type->code == 'basic'){
+                foreach($taskcard->items as $item){
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            // }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -325,13 +339,17 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function basicTool(WorkPackage $workPackage)
     {
-        // $workPackages = $workPackage->taskcards()->with('type','task')
-        //                             ->whereHas('type', function ($query) {
-        //                                 $query->where('name', 'Basic');
-        //                             })
-        //                             ->get();
-        // $data = $alldata = json_decode($workPackages);
-        $data = $alldata = json_decode($workPackage->items);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'basic'){
+                foreach($taskcard->tools as $item){
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -428,11 +446,17 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function sipMaterial(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'SIP');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'sip'){
+                foreach($taskcard->materials as $item){
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -529,11 +553,17 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function sipTool(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'SIP');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'sip'){
+                foreach($taskcard->tools as $item){
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -630,11 +660,17 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function cpcpMaterial(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'CPCP');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'cpcp'){
+                foreach($taskcard->materials as $item){
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -731,11 +767,17 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
      */
     public function cpcpTool(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'CPCP');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'cpcp'){
+                foreach($taskcard->tools as $item){
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
