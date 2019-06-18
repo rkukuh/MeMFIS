@@ -8,12 +8,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_airframe')
-                    @slot('text', 'Airframe')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'Airframe')
+                        <select name="employee" style="width:100%" id="employee_airframe" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}" @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_airframe" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -40,12 +50,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_powerplant')
-                    @slot('text', 'Powerplant')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'Powerplant / Engine')
+                        <select name="employee" style="width:100%" id="employee_powerplant" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_powerplant" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -72,12 +92,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_electrical')
-                    @slot('text', 'Electrical')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'Electrical')
+                        <select name="employee" style="width:100%" id="employee_electrical" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_electrical" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -104,12 +134,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_radio')
-                    @slot('text', 'Radio')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                @if($engineer->skill->name == 'Radio')
+                        <select name="employee" style="width:100%" id="employee_radio" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_radio" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -137,12 +177,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_instrument')
-                    @slot('text', 'Instrument')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'Instrument')
+                        <select name="employee" style="width:100%" id="employee_instrument" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_instrument" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -169,12 +219,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_cabinMaintenance')
-                    @slot('text', 'Cabin Maintenance')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'Cabin Maintenance')
+                        <select name="employee" style="width:100%" id="employee_cabinMaintenance" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_cabinMaintenance" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -201,12 +261,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_runup')
-                    @slot('text', 'Run Up')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'Run-Up')
+                        <select name="employee" style="width:100%" id="employee_runup" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_runup" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -233,12 +303,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_repair')
-                    @slot('text', 'Repair')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'Repair')
+                        <select name="employee" style="width:100%" id="employee_repair" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_repair" class="form-control">
+                        <option value="">Select an Employee</option>
+                        @foreach($employees as $employee)
+                            <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                        @endforeach
+                    </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -265,12 +345,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_repainting')
-                    @slot('text', 'Repainting')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'Repainting')
+                        <select name="employee" style="width:100%" id="employee_repainting" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_repainting" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -297,12 +387,22 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.input.select2')
-                    @slot('id', 'employee_ndi_ndt')
-                    @slot('text', 'NDI/NDT')
-                    @slot('name', 'employee')
-                    @slot('id_error', 'employee')
-                @endcomponent
+                @foreach($engineers as $engineer)
+                    @if($engineer->skill->name == 'NDI/NDT')
+                        <select name="employee" style="width:100%" id="employee_ndi_ndt" class="form-control">
+                            <option value="">Select an Employee</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                @endforeach
+                <select name="employee" style="width:100%" id="employee_ndi_ndt" class="form-control">
+                    <option value="">Select an Employee</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->code }}">{{ $employee->first_name }}</option>
+                    @endforeach
+                </select>
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
@@ -367,71 +467,40 @@
 <script src="{{ asset('js/frontend/functions/select2/electrical.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/select2/cabin.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/select2/instrument.js')}}"></script>
-<script src="{{ asset('js/frontend/functions/select2/employee.js')}}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/employee.js')}}"></script>
+{{-- <script src="{{ asset('js/frontend/functions/fill-combobox/employee.js')}}"></script> --}}
 <script>
     let project_uuid = '{{ $project->uuid }}';
     let workpackage_uuid = '{{ $workPackage->uuid }}';
-    let engineers = {!! $engineers !!};
-    selectEngineer = function() {
-        for(let ind=0; ind < engineers.length; ind++){
-            console.log($('#employee_airframe option').filter(function() { 
-                        return ($(this).val() == 1);
-                    }).prop('selected', true));
-            switch(engineers[ind].skill_id){
-                case 100:
-                    $('#employee_airframe option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 101:
-                    $('#employee_powerplant option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 102:
-                    $('#employee_electrical option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 103:
-                    $('#employee_radio option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 104:
-                    $('#employee_instrument option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 105:
-                    $('#employee_cabinMaintenance option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 106:
-                    $('#employee_runup option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 107:
-                    $('#employee_repair option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 108:
-                    $('#employee_repainting option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-                case 109:
-                    $('#employee_ndi_ndt option').filter(function() { 
-                        return ($(this).val() == engineers[ind].engineer_id);
-                    }).prop('selected', true);
-                break;
-            }
-        }
-    };
-    
+    if($('#employee_airframe ').length > 1){
+        $('#employee_airframe ')[1].remove();
+    }
+    if($('#employee_powerplant ').length > 1){
+        $('#employee_powerplant ')[1].remove();
+    }
+    if($('#employee_electrical ').length > 1){
+        $('#employee_electrical ')[1].remove();
+    }
+    if($('#employee_radio ').length > 1){
+        $('#employee_radio ')[1].remove();
+    }
+    if($('#employee_instrument ').length > 1){
+        $('#employee_instrument ')[1].remove();
+    }
+    if($('#employee_cabinMaintenance ').length > 1){
+        $('#employee_cabinMaintenance ')[1].remove();
+    }
+    if($('#employee_runup ').length > 1){
+        $('#employee_runup ')[1].remove();
+    }
+    if($('#employee_repair ').length > 1){
+        $('#employee_repair ')[1].remove();
+    }
+    if($('#employee_repainting ').length > 1){
+        $('#employee_repainting ')[1].remove();
+    }
+    if($('#employee_ndi_ndt ').length > 1){
+        $('#employee_ndi_ndt ')[1].remove();
+    }
     </script>
+<script src="{{ asset('js/frontend/functions/select2/employee.js')}}"></script>
 @endpush

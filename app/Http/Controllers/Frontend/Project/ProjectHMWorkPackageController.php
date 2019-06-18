@@ -94,19 +94,28 @@ class ProjectHMWorkPackageController extends Controller
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = false;
 
+        // get engineer list
         $project_workpackage_id = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workPackage->id)
             ->first()->id;
         $ProjectWorkPackageEngineer = ProjectWorkPackageEngineer::where('project_workpackage_id',$project_workpackage_id)
             ->get();
+
+        //get employees
+        // $employees = Employee::pluck('first_name','code','id');
+        $employees = Employee::all();
+        // foreach ($employees as $employee) {
+        //     dd($employee);
+        // }
         return view('frontend.project.hm.workpackage.index',[
-            'workPackage' => $workPackage,
-            'total_mhrs' => $total_mhrs,
-            'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
             'project' => $project,
-            'engineer_skills' => $engineer_skills,
+            'employees' => $employees,
+            'total_mhrs' => $total_mhrs,
+            'workPackage' => $workPackage,
             'skills' => json_encode($skills),
+            'engineer_skills' => $engineer_skills,
+            'total_pfrm_factor' => $total_pfrm_factor,
             'engineers' => $project_workpackage->engineers
         ]);
     }
