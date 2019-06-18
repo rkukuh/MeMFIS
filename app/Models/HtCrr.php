@@ -17,8 +17,10 @@ class HtCrr extends MemfisModel
         'estimation_manhour',
         'removed_at',
         'removed_by',
+        'removal_manhour_estimation',
         'installed_at',
         'installed_by',
+        'installation_manhour_estimation',
         'description',
     ];
 

@@ -19,11 +19,13 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'project_id' => Project::get()->random()->id,
         'skill_id' => Type::ofTaskCardSkill()->get()->random()->id,
         'is_rii' => $faker->boolean,
-        'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
+        'estimation_manhour' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
         'removed_at' => Carbon::now()->subWeeks(rand(1, 3)),
         'removed_by' => Employee::get()->random()->id,
+        'removal_manhour_estimation' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
         'installed_at' => Carbon::now()->addWeeks(rand(1, 3)),
         'installed_by' => Employee::get()->random()->id,
+        'installation_manhour_estimation' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 
