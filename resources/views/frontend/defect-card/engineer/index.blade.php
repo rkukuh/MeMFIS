@@ -50,7 +50,7 @@
                     <div class="m-portlet__body">
                         <div class="row align-items-center" style="margin-top:50px;">
                             <div class="col-xl-12 order-2 order-xl-1">
-                                <form method="POST" action="{{route('frontend.engineer.defectcard.seacrh')}}">
+                                <form method="POST" action="{{route('frontend.engineer.defectcard.search')}}">
                                     {!! csrf_field() !!}
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
