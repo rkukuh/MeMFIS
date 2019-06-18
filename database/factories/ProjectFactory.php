@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Aircraft;
 use App\Models\Progress;
+use App\Models\Approval;
 use App\Models\WorkPackage;
 use Faker\Generator as Faker;
 
@@ -41,6 +42,12 @@ $factory->define(Project::class, function (Faker $faker) {
 /** CALLBACKS */
 
 $factory->afterCreating(Project::class, function ($project, $faker) {
+
+    // Approval
+
+    if ($faker->boolean) {
+        $project->approvals()->save(factory(Approval::class)->make());
+    }
 
     // Item
 

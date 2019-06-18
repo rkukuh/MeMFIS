@@ -33,6 +33,19 @@ class Project extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all Project's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
      * One-to-Many: A project must have a customer
      *
      * This function will retrieve the customer of a project.
