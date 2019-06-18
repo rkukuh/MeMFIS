@@ -119,6 +119,19 @@ class Quotation extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many progresses.
+     *
+     * This function will get all Quotation's progresses.
+     * See: Progress's progressable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function progresses()
+    {
+        return $this->morphMany(Progress::class, 'progressable');
+    }
+
+    /**
      * Many-to-Many: A quotation may have one or many workpackage.
      *
      * This function will retrieve all the workpackages of a quotation.

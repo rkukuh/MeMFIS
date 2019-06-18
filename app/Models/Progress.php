@@ -27,6 +27,7 @@ class Progress extends MemfisModel
      * - HtCrr's progresses() method for the inverse
      * - JobCard's progresses() method for the inverse
      * - Project's progresses() method for the inverse
+     * - Quotation's progresses() method for the inverse
      *
      * @return mixed
      */
