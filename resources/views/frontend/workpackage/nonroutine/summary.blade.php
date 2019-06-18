@@ -26,7 +26,7 @@
 
     <div class="row">
 
-        <div class="col-xl-6">
+        <div class="col-xl-8">
             <div class="m-portlet m-portlet--mobile ">
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
@@ -68,54 +68,27 @@
             </div>
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-4">
             <div class="m-widget29">
                 <div class="m-portlet m-portlet--mobile">
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-widget_content">
-                            <h3 class="m-widget_content-title">Routine Taskcard</h3>
-                            <div class="m-widget_content-items">
-                                <div class="m-widget_content-item">
-                                    <span>Basic</span>
-                                    <span class="m--font-accent">0</span>
-                                </div>
-                                <div class="m-widget_content-item">
-                                    <span>SIP</span>
-                                    <span class="m--font-brand">14</span>
-                                </div>
-                                <div class="m-widget_content-item">
-                                    <span>CPCP</span>
-                                    <span class="m--font-focus">15</span>
-                                </div>
-                                <div class="m-widget_content-item">
-                                    <span>Total</span>
-                                    <span>29</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="m-widget_content">
                         <h3 class="m-widget_content-title">Non Routine Taskcard</h3>
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>AD/SB</span>
-                                <span class="m--font-accent">450</span>
+                                <span class="m--font-accent">{{$adsb}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>CMR/AWL</span>
-                                <span class="m--font-brand">79</span>
+                                <span class="m--font-brand">{{$cmrawl}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Special Instruction (SI)</span>
-                                <span class="m--font-focus">88</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>HT/CRR</span>
-                                <span class="m--font-success">16</span>
+                                <span class="m--font-focus">{{$si}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>633</span>
+                                <span>{{$adsb+$cmrawl+$si}}</span>
                             </div>
                         </div>
 
@@ -126,16 +99,12 @@
                         <h3 class="m-widget_content-title">Manhour</h3>
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
-                                <span>Total MPD</span>
-                                <span class="m--font-accent">{{ number_format(367) }}</span>
+                                <span>Total Manhour MPD</span>
+                                <span class="m--font-accent">{{$total_manhor_taskcard}}</span>
                             </div>
                             <div class="m-widget_content-item">
-                                <span>Performance Factor</span>
-                                <span class="m--font-brand">+15%</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>Total</span>
-                                <span>{{ number_format(5973) }}</span>
+                                <span>Total TaskCard</span>
+                                <span>{{$total_taskcard}}</span>
                             </div>
                         </div>
                     </div>
