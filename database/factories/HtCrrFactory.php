@@ -3,8 +3,10 @@
 use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\HtCrr;
+use App\Models\Status;
 use App\Models\Project;
 use App\Models\Employee;
+use App\Models\Progress;
 use Faker\Generator as Faker;
 
 $factory->define(HtCrr::class, function (Faker $faker) {
@@ -25,4 +27,19 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 
+});
+
+/** CALLBACKS */
+
+$factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
+
+    // Progress
+
+    $htcrr->progresses()->save(
+        factory(Progress::class)->make([
+            // Set all progress to 'open' to make testing phase easier
+            'status_id' => Status::ofHtCrr()->where('code', 'open')->first()
+        ])
+    );
+    
 });

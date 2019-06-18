@@ -50,6 +50,17 @@ class Status extends MemfisModel
     }
 
     /**
+     * Scope a query to only include category of HTCRR.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfHtCrr(Builder $query)
+    {
+        return $query->where('of', 'htcrr');
+    }
+
+    /**
      * Scope a query to only include category of job card.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
