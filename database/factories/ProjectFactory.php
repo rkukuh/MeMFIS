@@ -2,9 +2,11 @@
 
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Status;
 use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Aircraft;
+use App\Models\Progress;
 use App\Models\WorkPackage;
 use Faker\Generator as Faker;
 
@@ -65,6 +67,15 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
             ]);
         }
     }
+
+    // Progress
+
+    $project->progresses()->save(
+        factory(Progress::class)->make([
+            // Set all progress to 'open' to make testing phase easier
+            'status_id' => Status::ofProject()->where('code', 'open')->first()
+        ])
+    );
 
     // Work Package
 

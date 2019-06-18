@@ -74,6 +74,19 @@ class Project extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many progresses.
+     *
+     * This function will get all Project's progresses.
+     * See: Progress's progressable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function progresses()
+    {
+        return $this->morphMany(Progress::class, 'progressable');
+    }
+
+    /**
      * One-to-Many: A purchase request may have zero or one project
      *
      * This function will retrieve all the purchase requests of a project.

@@ -83,6 +83,17 @@ class Status extends MemfisModel
     }
 
     /**
+     * Scope a query to only include category of project.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfProject(Builder $query)
+    {
+        return $query->where('of', 'project');
+    }
+
+    /**
      * Scope a query to only include category of quotation.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
