@@ -28,7 +28,7 @@ class CustomerUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|min:3|max:50',
             'phone_array.*' => 'required',
             'phone_array' => 'array|min:1',
             'email_array.*' => 'required',
