@@ -105,6 +105,10 @@ class ProjectHMWorkPackageController extends Controller
         //get employees
         $employees = Employee::all();
         $facilities = Facility::all();
+        $materialCount = $workPackage->items->count();
+        $toolCount = $workPackage->tools->count();
+        // dd($count);
+
         return view('frontend.project.hm.workpackage.index',[
             'edit' => $edit,
             'project' => $project,
@@ -116,6 +120,8 @@ class ProjectHMWorkPackageController extends Controller
             'engineer_skills' => $engineer_skills,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project_workpackage' => $project_workpackage,
+            'materialCount' => $materialCount,
+            'toolCount' => $toolCount,
         ]);
     }
 
@@ -151,7 +157,6 @@ class ProjectHMWorkPackageController extends Controller
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
-
         return view('frontend.project.hm.workpackage.index',[
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
