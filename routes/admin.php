@@ -68,6 +68,7 @@ Route::name('admin.')->group(function () {
 
         /** TRANSACTION */
 
+        Route::resource('rts', 'RTSController');
         Route::resource('htcrr', 'HtCrrController');
         Route::resource('project', 'ProjectController');
         Route::resource('jobcard', 'JobCardController');

@@ -193,8 +193,6 @@ Route::name('frontend.')->group(function () {
             });
         });
 
-
-
         /** ITEM */
 
         Route::namespace('Item')->group(function () {
@@ -288,13 +286,21 @@ Route::name('frontend.')->group(function () {
 
             Route::name('htcrr.')->group(function () {
                 Route::prefix('htcrr')->group(function () {
-
-
+                    // 
                 });
             });
 
         });
 
+        /** RTS */
+
+        Route::resource('rts', 'RTSController');
+
+        Route::name('rts.')->group(function () {
+            Route::prefix('rts')->group(function () {
+                // 
+            });
+        });
 
         /** TASK CARD */
 
