@@ -66,14 +66,14 @@ let Workpackage = {
                 filterable: !1,
             },
             {
-                field: '',
-                title: 'Removal Mhrs',
+                field: 'removal_manhour_estimation',
+                title: 'Removal Mhrs Est.',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: '',
-                title: 'Installation Mhrs',
+                field: 'estimation_manhour',
+                title: 'Installation Mhrs Est.',
                 sortable: 'asc',
                 filterable: !1,
             },
