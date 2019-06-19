@@ -58,14 +58,23 @@ class TaskCardSIController extends Controller
     public function store(TaskCardSIStore $request)
     {
         $this->decoder($request);
-        dd($request->work_area);
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
+
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
+
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+                $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                $taskcard->skills()->attach($request->skill_id);
+            }
 
             if(is_array($request->threshold_amount)){
                 for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
