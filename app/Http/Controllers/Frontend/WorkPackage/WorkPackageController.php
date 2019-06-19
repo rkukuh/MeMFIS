@@ -182,13 +182,51 @@ class WorkPackageController extends Controller
      */
     public function summary(WorkPackage $workPackage)
     {
-        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->sum('estimation_manhour');
+        $basic = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'basic');
+                })
+                ->count();
+        $sip = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'sip');
+                })
+                ->count();
+        $cpcp = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'cpcp');
+                })
+                ->count();
+
+        $adsb = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'ad')->orwhere('code', 'sb');
+                })
+                ->count();
+        $cmrawl = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'cmr')->orwhere('code', 'awl');
+                })
+                ->count();
+        $si = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'si');
+                })
+                ->count();
+
+        $total_taskcard  = $workPackage->taskcards->count('uuid');
+        $total_manhor_taskcard  = $workPackage->taskcards->sum('estimation_manhour');
 
         return view('frontend.workpackage.summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhor_taskcard' => $total_manhor_taskcard,
-            'workPackage' => $workPackage
+            'workPackage' => $workPackage,
+            'basic' => $basic,
+            'sip' => $sip,
+            'cpcp' => $cpcp,
+            'adsb' => $adsb,
+            'cmrawl' => $cmrawl,
+            'si' => $si,
         ]);
     }
 

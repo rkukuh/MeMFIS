@@ -23,8 +23,11 @@ class Progress extends MemfisModel
      *
      * This function will get all of the owning progressable models.
      * See:
-     * - JobCard's progresses() method for the inverse
      * - DefectCard's progresses() method for the inverse
+     * - HtCrr's progresses() method for the inverse
+     * - JobCard's progresses() method for the inverse
+     * - Project's progresses() method for the inverse
+     * - Quotation's progresses() method for the inverse
      *
      * @return mixed
      */

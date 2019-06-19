@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
 use Auth;
+use Validator;
 use App\Models\Type;
 use App\Models\Status;
 use App\Models\JobCard;
@@ -170,5 +171,28 @@ class DiscrepancyEngineerController extends Controller
         ]));
 
         return response()->json($discrepancy);
+    }
+
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|exists:defectcards,code'
+          ]);
+
+          if ($validator->fails()) {
+            return
+            redirect()->route('frontend.defectcard-engineer.index')->withErrors($validator)->withInput();
+          }
+
+        $search = DefectCard::where('code',$request->code)->first();
+
+        return redirect()->route('frontend.discrepancy-engineer.edit',$search->uuid);
     }
 }

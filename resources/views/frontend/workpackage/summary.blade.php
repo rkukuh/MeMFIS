@@ -72,16 +72,12 @@
                         <h3 class="m-widget_content-title">Manhour</h3>
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
-                                <span>Total MPD</span>
-                                <span class="m--font-accent">{{ number_format(367) }}</span>
+                                <span>Total Manhour MPD</span>
+                                <span class="m--font-accent">{{ $total_manhor_taskcard }}</span>
                             </div>
                             <div class="m-widget_content-item">
-                                <span>Performance Factor</span>
-                                <span class="m--font-brand">+15%</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>Total</span>
-                                <span>{{ number_format(5973) }}</span>
+                                <span>Total TaskCard</span>
+                                <span>{{ $total_taskcard }}</span>
                             </div>
                         </div>
                     </div>
@@ -97,19 +93,19 @@
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>Basic</span>
-                                <span class="m--font-accent">0</span>
+                                <span class="m--font-accent">{{$basic}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>SIP</span>
-                                <span class="m--font-brand">14</span>
+                                <span class="m--font-brand">{{$sip}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>CPCP</span>
-                                <span class="m--font-focus">15</span>
+                                <span class="m--font-focus">{{$cpcp}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>29</span>
+                                <span>{{$basic+$sip+$cpcp}}</span>
                             </div>
                         </div>
                     </div>
@@ -122,23 +118,19 @@
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>AD/SB</span>
-                                <span class="m--font-accent">450</span>
+                                <span class="m--font-accent">{{$adsb}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>CMR/AWL</span>
-                                <span class="m--font-brand">79</span>
+                                <span class="m--font-brand">{{$cmrawl}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Special Instruction (SI)</span>
-                                <span class="m--font-focus">88</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>HT/CRR</span>
-                                <span class="m--font-success">16</span>
+                                <span class="m--font-focus">{{$si}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>633</span>
+                                <span>{{$adsb+$cmrawl+$si}}</span>
                             </div>
                         </div>
 
@@ -251,102 +243,6 @@
 
             <div class="m-portlet m-portlet--mobile">
                 <div class="m-portlet__body">
-                    <div id="m_accordion_4" class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" role="tablist">
-
-                        <div class="m-accordion__item ">
-                            <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_4_item_1_head" data-toggle="collapse" href="#m_accordion_4_item_1_body" aria-expanded="false">
-                                <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title">
-                                    <h1>General Tools(S) List</h1>
-                                </span>
-
-                                <span class="m-accordion__item-mode"></span>
-                            </div>
-
-                            <div class="m-accordion__item-body collapse show" id="m_accordion_4_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_4_item_1_head" data-parent="#m_accordion_1">
-
-                                <div class="m-portlet m-portlet--mobile">
-                                    <div class="m-portlet__body">
-                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                            <div class="row align-items-center">
-                                                <div class="col-xl-6 order-2 order-xl-1">
-                                                    <div class="form-group m-form__group row align-items-center">
-                                                        <div class="col-md-6">
-                                                            <div class="m-input-icon m-input-icon--left">
-                                                                <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
-                                                                <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                                    <span><i class="la la-search"></i></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="m-accordion__item-content">
-                                            <div class="general_tools_datatable" id="scrolling_both"></div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="m-portlet m-portlet--mobile">
-                <div class="m-portlet__body">
-                    <div id="m_accordion_3" class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" role="tablist">
-
-                        <div class="m-accordion__item ">
-                            <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_3_item_1_head" data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="false">
-                                <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title">
-                                    <h1>General Material(S) List</h1>
-                                </span>
-
-                                <span class="m-accordion__item-mode"></span>
-                            </div>
-
-                            <div class="m-accordion__item-body collapse show" id="m_accordion_3_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_3_item_1_head" data-parent="#m_accordion_1">
-
-                                <div class="m-portlet m-portlet--mobile">
-                                    <div class="m-portlet__body">
-                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                            <div class="row align-items-center">
-                                                <div class="col-xl-6 order-2 order-xl-1">
-                                                    <div class="form-group m-form__group row align-items-center">
-                                                        <div class="col-md-6">
-                                                            <div class="m-input-icon m-input-icon--left">
-                                                                <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
-                                                                <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                                    <span><i class="la la-search"></i></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="m-accordion__item-content">
-                                            <div class="general_materials_datatable" id="scrolling_both"></div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="m-portlet m-portlet--mobile">
-                <div class="m-portlet__body">
                     <div class="flex">
                         <div class="action-buttons">
                             @component('frontend.common.buttons.back')
@@ -363,3 +259,11 @@
 
 </div>
 @endsection
+
+@push('footer-scripts')
+    <script>
+        let workPackage_uuid = '{{ $workPackage->uuid }}';
+    </script>
+    <script src="{{ asset('js/frontend/workpackage/summary.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
+@endpush

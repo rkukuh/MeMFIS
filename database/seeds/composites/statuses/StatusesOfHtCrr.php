@@ -3,7 +3,7 @@
 use App\Models\Status;
 use Illuminate\Database\Seeder;
 
-class StatusesOfJobCard extends Seeder
+class StatusesOfHtCrr extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,37 +15,37 @@ class StatusesOfJobCard extends Seeder
         Status::create([
             'code' => 'open',
             'name' => 'OPEN',
-            'of'   => 'jobcard',
+            'of'   => 'htcrr',
         ]);
 
         Status::create([
             'code' => 'progress',
             'name' => 'IN-PROGRESS',
-            'of'   => 'jobcard',
+            'of'   => 'htcrr',
         ]);
 
         Status::create([
             'code' => 'pending',
             'name' => 'PENDING / PAUSE',
-            'of'   => 'jobcard',
+            'of'   => 'htcrr',
         ]);
 
         Status::create([
             'code' => 'closed',
             'name' => 'CLOSED',
-            'of'   => 'jobcard',
+            'of'   => 'htcrr',
         ]);
 
         Status::create([
             'code' => 'released',
             'name' => 'RELEASED',
-            'of'   => 'jobcard',
+            'of'   => 'htcrr',
         ]);
         
         Status::create([
             'code' => 'rii-released',
             'name' => 'RII RELEASED',
-            'of'   => 'jobcard',
+            'of'   => 'htcrr',
         ]);
     }
 }

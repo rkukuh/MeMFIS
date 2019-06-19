@@ -1,5 +1,9 @@
 let summarynonroutine = {
     init: function () {
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
 
         $('.adsb_tools_datatable').mDatatable({
             data: {
@@ -7,7 +11,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/ad-sb/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -44,52 +48,57 @@ let summarynonroutine = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'P/N',
-                    sortable: !1,
-                },
-                {
-                    field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
+                field: 'code',
+                title: 'P/N',
+                sortable: !1,
+            },
+            {
+                field: 'name',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'pivot.quantity',
+                title: 'Qty',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'unit_name',
+                title: 'Unit',
+                sortable: 'asc',
+                filterable: !1,
+
+            },
+            {
+                field: 'description',
+                title: 'Remarks',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.description) {
+                        data = strtrunc(t.description, 50);
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<p>' + data + '</p>'
                         );
                     }
+
+                    return ''
                 }
+            },
+            // {
+            //     field: 'Actions',
+            //     sortable: !1,
+            //     overflow: 'visible',
+            //     template: function (t, e, i) {
+            //         return (
+            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+            //                 '<i class="la la-trash"></i>' +
+            //             '</a>'
+            //         );
+            //     }
+            // }
             ]
         });
 
@@ -99,7 +108,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/ad-sb/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -136,53 +145,57 @@ let summarynonroutine = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'P/N',
-                    sortable: !1,
-                },
-                {
-                    field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
+                field: 'code',
+                title: 'P/N',
+                sortable: !1,
+            },
+            {
+                field: 'name',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'pivot.quantity',
+                title: 'Qty',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'unit_name',
+                title: 'Unit',
+                sortable: 'asc',
+                filterable: !1,
 
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
+            },
+            {
+                field: 'description',
+                title: 'Remarks',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.description) {
+                        data = strtrunc(t.description, 50);
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<p>' + data + '</p>'
                         );
                     }
+
+                    return ''
                 }
+            },
+            // {
+            //     field: 'Actions',
+            //     sortable: !1,
+            //     overflow: 'visible',
+            //     template: function (t, e, i) {
+            //         return (
+            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+            //                 '<i class="la la-trash"></i>' +
+            //             '</a>'
+            //         );
+            //     }
+            // }
             ]
         });
 
@@ -192,7 +205,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/cmr-awl/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -229,52 +242,57 @@ let summarynonroutine = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'P/N',
-                    sortable: !1,
-                },
-                {
-                    field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
+                field: 'code',
+                title: 'P/N',
+                sortable: !1,
+            },
+            {
+                field: 'name',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'pivot.quantity',
+                title: 'Qty',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'unit_name',
+                title: 'Unit',
+                sortable: 'asc',
+                filterable: !1,
+
+            },
+            {
+                field: 'description',
+                title: 'Remarks',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.description) {
+                        data = strtrunc(t.description, 50);
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<p>' + data + '</p>'
                         );
                     }
+
+                    return ''
                 }
+            },
+            // {
+            //     field: 'Actions',
+            //     sortable: !1,
+            //     overflow: 'visible',
+            //     template: function (t, e, i) {
+            //         return (
+            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+            //                 '<i class="la la-trash"></i>' +
+            //             '</a>'
+            //         );
+            //     }
+            // }
             ]
         });
 
@@ -284,7 +302,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/cmr-awl/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -321,53 +339,57 @@ let summarynonroutine = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'P/N',
-                    sortable: !1,
-                },
-                {
-                    field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
+                field: 'code',
+                title: 'P/N',
+                sortable: !1,
+            },
+            {
+                field: 'name',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'pivot.quantity',
+                title: 'Qty',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'unit_name',
+                title: 'Unit',
+                sortable: 'asc',
+                filterable: !1,
 
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
+            },
+            {
+                field: 'description',
+                title: 'Remarks',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.description) {
+                        data = strtrunc(t.description, 50);
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<p>' + data + '</p>'
                         );
                     }
+
+                    return ''
                 }
+            },
+            // {
+            //     field: 'Actions',
+            //     sortable: !1,
+            //     overflow: 'visible',
+            //     template: function (t, e, i) {
+            //         return (
+            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+            //                 '<i class="la la-trash"></i>' +
+            //             '</a>'
+            //         );
+            //     }
+            // }
             ]
         });
 
@@ -377,7 +399,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/si/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -414,52 +436,57 @@ let summarynonroutine = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'P/N',
-                    sortable: !1,
-                },
-                {
-                    field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
+                field: 'code',
+                title: 'P/N',
+                sortable: !1,
+            },
+            {
+                field: 'name',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'pivot.quantity',
+                title: 'Qty',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'unit_name',
+                title: 'Unit',
+                sortable: 'asc',
+                filterable: !1,
+
+            },
+            {
+                field: 'description',
+                title: 'Remarks',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.description) {
+                        data = strtrunc(t.description, 50);
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<p>' + data + '</p>'
                         );
                     }
+
+                    return ''
                 }
+            },
+            // {
+            //     field: 'Actions',
+            //     sortable: !1,
+            //     overflow: 'visible',
+            //     template: function (t, e, i) {
+            //         return (
+            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+            //                 '<i class="la la-trash"></i>' +
+            //             '</a>'
+            //         );
+            //     }
+            // }
             ]
         });
 
@@ -469,7 +496,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/si/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -506,53 +533,57 @@ let summarynonroutine = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'P/N',
-                    sortable: !1,
-                },
-                {
-                    field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
+                field: 'code',
+                title: 'P/N',
+                sortable: !1,
+            },
+            {
+                field: 'name',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'pivot.quantity',
+                title: 'Qty',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'unit_name',
+                title: 'Unit',
+                sortable: 'asc',
+                filterable: !1,
 
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
+            },
+            {
+                field: 'description',
+                title: 'Remarks',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.description) {
+                        data = strtrunc(t.description, 50);
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<p>' + data + '</p>'
                         );
                     }
+
+                    return ''
                 }
+            },
+            // {
+            //     field: 'Actions',
+            //     sortable: !1,
+            //     overflow: 'visible',
+            //     template: function (t, e, i) {
+            //         return (
+            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+            //                 '<i class="la la-trash"></i>' +
+            //             '</a>'
+            //         );
+            //     }
+            // }
             ]
         });
 
@@ -562,7 +593,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/non-routine/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -599,52 +630,57 @@ let summarynonroutine = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'P/N',
-                    sortable: !1,
-                },
-                {
-                    field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
+                field: 'code',
+                title: 'P/N',
+                sortable: !1,
+            },
+            {
+                field: 'name',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'pivot.quantity',
+                title: 'Qty',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'unit_name',
+                title: 'Unit',
+                sortable: 'asc',
+                filterable: !1,
+
+            },
+            {
+                field: 'description',
+                title: 'Remarks',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.description) {
+                        data = strtrunc(t.description, 50);
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<p>' + data + '</p>'
                         );
                     }
+
+                    return ''
                 }
+            },
+            // {
+            //     field: 'Actions',
+            //     sortable: !1,
+            //     overflow: 'visible',
+            //     template: function (t, e, i) {
+            //         return (
+            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+            //                 '<i class="la la-trash"></i>' +
+            //             '</a>'
+            //         );
+            //     }
+            // }
             ]
         });
 
@@ -654,7 +690,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/non-routine/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -691,53 +727,57 @@ let summarynonroutine = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'P/N',
-                    sortable: !1,
-                },
-                {
-                    field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.unit_id',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
+                field: 'code',
+                title: 'P/N',
+                sortable: !1,
+            },
+            {
+                field: 'name',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'pivot.quantity',
+                title: 'Qty',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'unit_name',
+                title: 'Unit',
+                sortable: 'asc',
+                filterable: !1,
 
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
+            },
+            {
+                field: 'description',
+                title: 'Remarks',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.description) {
+                        data = strtrunc(t.description, 50);
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<p>' + data + '</p>'
                         );
                     }
+
+                    return ''
                 }
+            },
+            // {
+            //     field: 'Actions',
+            //     sortable: !1,
+            //     overflow: 'visible',
+            //     template: function (t, e, i) {
+            //         return (
+            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
+            //                 '<i class="la la-trash"></i>' +
+            //             '</a>'
+            //         );
+            //     }
+            // }
             ]
         });
     }
