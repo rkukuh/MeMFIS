@@ -66,17 +66,15 @@ class TypesOfTaskCardSkill extends Seeder
             'of'   => 'taskcard-skill',
         ]);
 
-        //Non Destructive Test / Non Destructive Inspection
         Type::create([
-            'code' => 'ndi/ndt',
-            'name' => 'NDI/NDT',
+            'code' => 'ndi-ndt',
+            'name' => 'NDI / NDT', // Non Destructive Test / Non Destructive Inspection
             'of'   => 'taskcard-skill',
         ]);
 
-        //Electrical Radio Instrument
         Type::create([
             'code' => 'eri',
-            'name' => 'ERI',
+            'name' => 'ERI', // Electrical, Radio, & Instrument
             'of'   => 'taskcard-skill',
         ]);
     }

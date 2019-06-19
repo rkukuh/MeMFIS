@@ -251,7 +251,7 @@ let Workpackage = {
                 engineer.push( $('#employee_repainting').val());
                 engineer_qty.push( $('#repainting_qty').val());
             }
-            if(engineer_skills.indexOf("NDI/NDT") >= 0) {
+            if(engineer_skills.indexOf("NDI / NDT") >= 0) {
                 engineer.push( $('#employee_ndi_ndt').val());
                 engineer_qty.push( $('#ndi_ndt_qty').val());
             }

@@ -497,15 +497,15 @@
             @endcomponent
         </div>
         @endif 
-        @if(in_array('NDI/NDT',$engineer_skills))
+        @if(in_array('NDI / NDT',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
-                    NDI/NDT
+                    NDI / NDT
                 </label>
             </div>
             @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'NDI/NDT')
+                @if($engineer->skill->name == 'NDI / NDT')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_ndi_ndt" class="form-control">
                             <option value="">Select an Employee</option>
@@ -517,7 +517,7 @@
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         @component('frontend.common.input.number')
                             @slot('id', 'ndi_ndt_qty')
-                            @slot('text', 'NDI/NDT Quantity')
+                            @slot('text', 'NDI / NDT Quantity')
                             @slot('name', 'ndi_ndt_qty')
                             @slot('id_error', 'ndi_ndt_qty')
                             @slot('input_append', 'person')
@@ -538,7 +538,7 @@
             <div class="col-sm-3 col-md-3 col-lg-3">
                 @component('frontend.common.input.number')
                     @slot('id', 'ndi_ndt_qty')
-                    @slot('text', 'NDI/NDT Quantity')
+                    @slot('text', 'NDI / NDT Quantity')
                     @slot('name', 'ndi_ndt_qty')
                     @slot('id_error', 'ndi_ndt_qty')
                     @slot('input_append', 'person')
@@ -549,7 +549,7 @@
                 @component('frontend.common.input.hidden')
                     @slot('id', 'engineer_skills')
                     @slot('name', 'engineer_skills')
-                    @slot('value', 'NDI/NDT')
+                    @slot('value', 'NDI / NDT')
                 @endcomponent
             </div>
         @endif
