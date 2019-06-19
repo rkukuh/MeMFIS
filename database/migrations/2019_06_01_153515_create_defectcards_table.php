@@ -24,6 +24,7 @@ class CreateDefectcardsTable extends Migration
             $table->boolean('is_rii');
             $table->text('complaint')->nullable();
             $table->text('description')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

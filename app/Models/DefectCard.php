@@ -17,6 +17,7 @@ class DefectCard extends MemfisModel
         'is_rii',
         'complaint',
         'description',
+        'note',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

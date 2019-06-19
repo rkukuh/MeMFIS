@@ -23,6 +23,7 @@ $factory->define(DefectCard::class, function (Faker $faker) {
         'is_rii' => $faker->boolean,
         'complaint' => $faker->randomElement([null, $faker->text]),
         'description' => $faker->randomElement([null, $faker->text]),
+        'note' => $faker->randomElement([null, $faker->text]),
     ];
 
 });
