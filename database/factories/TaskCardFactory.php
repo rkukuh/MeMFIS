@@ -246,42 +246,11 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
         $taskcard->stations()->saveMany($aircraft->stations);
     }
 
-    // SKill
-
-    for ($i = 1; $i <= rand(1, 3); $i++) {
-        if (Type::ofTaskCardSkill()->count()) {
-            $skill = Type::ofTaskCardSkill()->get()->random();
-        }
-        else {
-            $skill = factory(Type::class)->states('taskcard-skill')->create();
-        }
-    
-        $taskcard->skills()->attach($skill);
-    }
-
 });
 
 /** CALLBACKS for States */
 
 $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $faker) {
-
-    // Related-to
-
-    if ($faker->boolean) {
-        $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
-    }
-
-    // Threshold and Repeat
-
-    if ($faker->boolean) {
-        $taskcard->thresholds()->saveMany(
-            factory(Threshold::class, rand(1, 2))->make()
-        );
-
-        $taskcard->repeats()->saveMany(
-            factory(Repeat::class, rand(1, 2))->make()
-        );
-    }
 
     // Item
 
@@ -302,6 +271,37 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
             'quantity' => rand(1, 10),
             'unit_id' => $unit->id,
         ]);
+    }
+
+    // Related-to
+
+    if ($faker->boolean) {
+        $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
+    }
+
+    // SKill
+
+    for ($i = 1; $i <= rand(1, 3); $i++) {
+        if (Type::ofTaskCardSkill()->count()) {
+            $skill = Type::ofTaskCardSkill()->get()->random();
+        }
+        else {
+            $skill = factory(Type::class)->states('taskcard-skill')->create();
+        }
+    
+        $taskcard->skills()->attach($skill);
+    }
+
+    // Threshold and Repeat
+
+    if ($faker->boolean) {
+        $taskcard->thresholds()->saveMany(
+            factory(Threshold::class, rand(1, 2))->make()
+        );
+
+        $taskcard->repeats()->saveMany(
+            factory(Repeat::class, rand(1, 2))->make()
+        );
     }
 
 });
@@ -337,6 +337,8 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
 
 $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
 
+    // Item
+
     for ($i = 1; $i <= rand(2, 5); $i++) {
         if (Item::count()) {
             $item = Item::get()->random();
@@ -354,6 +356,19 @@ $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker)
             'quantity' => rand(1, 10),
             'unit_id' => $unit->id,
         ]);
+    }
+
+    // SKill
+
+    for ($i = 1; $i <= rand(1, 3); $i++) {
+        if (Type::ofTaskCardSkill()->count()) {
+            $skill = Type::ofTaskCardSkill()->get()->random();
+        }
+        else {
+            $skill = factory(Type::class)->states('taskcard-skill')->create();
+        }
+    
+        $taskcard->skills()->attach($skill);
     }
 
 });
