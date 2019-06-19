@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDefectcardProposeCorrectionTable extends Migration
+class CreateSkillTaskcardTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,18 @@ class CreateDefectcardProposeCorrectionTable extends Migration
      */
     public function up()
     {
-        Schema::create('defectcard_propose_correction', function (Blueprint $table) {
-            $table->unsignedInteger('defectcard_id');
-            $table->unsignedInteger('propose_correction_id');
-            $table->string('propose_correction_text')->nullable();
+        Schema::create('skill_taskcard', function (Blueprint $table) {
+            $table->unsignedInteger('taskcard_id');
+            $table->unsignedInteger('skill_id');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('defectcard_id')
-                    ->references('id')->on('defectcards')
+            $table->foreign('taskcard_id')
+                    ->references('id')->on('taskcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('propose_correction_id')
+            $table->foreign('skill_id')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
@@ -39,6 +38,6 @@ class CreateDefectcardProposeCorrectionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('defectcard_propose_correction');
+        Schema::dropIfExists('skill_taskcard');
     }
 }

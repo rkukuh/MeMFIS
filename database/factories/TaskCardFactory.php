@@ -41,13 +41,6 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
             return factory(Type::class)->states('taskcard-task')->create()->id;
         },
-        'skill_id' => function () {
-            if (Type::ofTaskCardSkill()->count()) {
-                return Type::ofTaskCardSkill()->get()->random()->id;
-            }
-
-            return factory(Type::class)->states('taskcard-skill')->create()->id;
-        },
         'work_area' => function () {
             if (Type::ofWorkArea()->count()) {
                 return Type::ofWorkArea()->get()->random()->id;
@@ -251,6 +244,19 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
     if ($faker->boolean) {
         $taskcard->stations()->saveMany($aircraft->stations);
+    }
+
+    // SKill
+
+    for ($i = 1; $i <= rand(1, 3); $i++) {
+        if (Type::ofTaskCardSkill()->count()) {
+            $skill = Type::ofTaskCardSkill()->get()->random();
+        }
+        else {
+            $skill = factory(Type::class)->states('taskcard-skill')->create();
+        }
+    
+        $taskcard->skills()->attach($skill);
     }
 
 });

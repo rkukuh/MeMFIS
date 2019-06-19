@@ -539,16 +539,17 @@ class Type extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have zero or many type.
+     * One-to-Many: A task card may have zero or many skill.
      *
-     * This function will retrieve all task cards of a type.
-     * See: TaskCard's type() method for the inverse
+     * This function will retrieve all task card skills of a type.
+     * See: TaskCard's skills() method for the inverse
      *
      * @return mixed
      */
-    public function taskcards()
+    public function skill_taskcards()
     {
-        return $this->hasMany(TaskCard::class);
+        return $this->belongsToMany(TaskCard::class, 'skill_taskcard', 'skill_id', 'taskcard_id')
+                    ->withTimestamps();;
     }
 
     /**
@@ -562,6 +563,19 @@ class Type extends MemfisModel
     public function taskcard_tasks()
     {
         return $this->hasMany(TaskCard::class, 'task_id', 'id');
+    }
+
+    /**
+     * One-to-Many: A task card may have zero or many type.
+     *
+     * This function will retrieve all task cards of a type.
+     * See: TaskCard's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcard_types()
+    {
+        return $this->hasMany(TaskCard::class, 'type_id', 'id');
     }
 
     /**
