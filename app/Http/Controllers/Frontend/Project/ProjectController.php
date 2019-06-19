@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use Auth;
 use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
