@@ -57,6 +57,7 @@ class CreateQuotationsTable extends Migration
                     ->onDelete('restrict');
 
             $table->index('number');
+            $table->index('title');
         });
     }
 

@@ -14,6 +14,7 @@ class CreateItemTaskcardTable extends Migration
     public function up()
     {
         Schema::create('item_taskcard', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');

@@ -14,6 +14,7 @@ class CreateItemPurchaseRequestTable extends Migration
     public function up()
     {
         Schema::create('item_purchase_request', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('purchase_request_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');

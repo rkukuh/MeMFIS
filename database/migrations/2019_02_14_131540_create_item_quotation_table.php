@@ -14,6 +14,7 @@ class CreateItemQuotationTable extends Migration
     public function up()
     {
         Schema::create('item_quotation', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('quotation_id');
             $table->unsignedInteger('taskcard_id');

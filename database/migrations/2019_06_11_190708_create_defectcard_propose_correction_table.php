@@ -14,6 +14,7 @@ class CreateDefectcardProposeCorrectionTable extends Migration
     public function up()
     {
         Schema::create('defectcard_propose_correction', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('defectcard_id');
             $table->unsignedInteger('propose_correction_id');
             $table->string('propose_correction_text')->nullable();

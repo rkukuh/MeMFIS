@@ -32,6 +32,8 @@ class CreateDefectcardsTable extends Migration
                     ->references('id')->on('jobcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            $table->index('code');
         });
     }
 

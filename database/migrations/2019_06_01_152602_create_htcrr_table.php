@@ -51,6 +51,9 @@ class CreateHtcrrTable extends Migration
                     ->references('id')->on('employees')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            $table->index('code');
+            $table->index('part_number');
         });
     }
 

@@ -14,6 +14,7 @@ class CreateDefectcardItemTable extends Migration
     public function up()
     {
         Schema::create('defectcard_item', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('defectcard_id');
             $table->unsignedInteger('item_id');
             $table->integer('quantity');

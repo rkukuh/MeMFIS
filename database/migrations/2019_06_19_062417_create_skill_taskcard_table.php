@@ -14,6 +14,7 @@ class CreateSkillTaskcardTable extends Migration
     public function up()
     {
         Schema::create('skill_taskcard', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('skill_id');
             $table->timestamps();
