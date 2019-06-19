@@ -542,6 +542,20 @@ class Type extends MemfisModel
      * One-to-Many: A task card may have zero or many skill.
      *
      * This function will retrieve all task card skills of a type.
+     * See: EOInstruction's skills() method for the inverse
+     *
+     * @return mixed
+     */
+    public function skill_eo_instructions()
+    {
+        return $this->belongsToMany(EOInstruction::class, 'eo_instruction_skill', 'skill_id', 'eo_instruction_id')
+                    ->withTimestamps();;
+    }
+
+    /**
+     * One-to-Many: A task card may have zero or many skill.
+     *
+     * This function will retrieve all task card skills of a type.
      * See: TaskCard's skills() method for the inverse
      *
      * @return mixed

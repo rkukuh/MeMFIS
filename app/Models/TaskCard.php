@@ -162,7 +162,7 @@ class TaskCard extends MemfisModel
      * One-to-Many: A task card may have zero or many skill.
      *
      * This function will retrieve all the skills of a task card.
-     * See: Type's taskcard_skills() method for the inverse
+     * See: Type's skill_taskcards() method for the inverse
      *
      * @return mixed
      */
@@ -190,7 +190,7 @@ class TaskCard extends MemfisModel
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of a task card.
-     * See: Type's taskcards() method for the inverse
+     * See: Type's type_taskcards() method for the inverse
      *
      * @return mixed
      */
@@ -203,7 +203,7 @@ class TaskCard extends MemfisModel
      * One-to-Many: A task card may have zero or many task.
      *
      * This function will retrieve the task of a task card.
-     * See: Type's taskcard_tasks() method for the inverse
+     * See: Type's task_taskcards() method for the inverse
      *
      * @return mixed
      */
