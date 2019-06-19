@@ -68,28 +68,29 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, WorkPackage $workPackage)
     {
-        $engineer_skills = $skills = [];
+        $engineer_skills = $skills = $subset = [];
         
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
-        $subset = $workPackage->taskcards->map(function ($taskcard) {
-            return collect($taskcard->toArray())
-                ->only(['skill_id'])
-                ->all();
-        });
+        foreach($workPackage->taskcards as $taskcard){
+            $result = $taskcard->skills->map(function ($taskcard) {
+                return collect($taskcard->toArray())
+                    ->only(['name'])
+                    ->all();
+            });
 
+            array_push($subset , $result);
+        }
         foreach ($subset as $value) {
-            array_push($skills, $value["skill_id"]);
+            foreach($value as $skill){
+                array_push($skills, $skill["name"]);
+            }
         }
         sort($skills);
-
-        $skills = Type::find($skills)->pluck('name') ;
-        foreach ($skills as $value) {
-            array_push($engineer_skills, $value);
-        }
+        $skills = array_unique($skills);
 
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
@@ -115,9 +116,9 @@ class ProjectHMWorkPackageController extends Controller
             'employees' => $employees,
             'total_mhrs' => $total_mhrs,
             'facilities' => $facilities,
+            'engineer_skills' => $skills,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
-            'engineer_skills' => $engineer_skills,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project_workpackage' => $project_workpackage,
             'materialCount' => $materialCount,
