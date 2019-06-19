@@ -18,6 +18,7 @@ class CreateEmployeeNationalityTable extends Migration
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('nationality_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('employee_id')
                     ->references('id')->on('employees')

@@ -19,6 +19,7 @@ class CreateEmployeeFamilyTable extends Migration
             $table->unsignedInteger('family_id');
             $table->unsignedInteger('relationship_type');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('employee_id')
                     ->references('id')->on('employees')

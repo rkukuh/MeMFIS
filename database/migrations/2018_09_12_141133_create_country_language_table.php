@@ -18,6 +18,7 @@ class CreateCountryLanguageTable extends Migration
             $table->unsignedInteger('country_id');
             $table->unsignedInteger('language_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('country_id')
                     ->references('id')->on('countries')
