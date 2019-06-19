@@ -14,7 +14,6 @@ class TaskCard extends MemfisModel
         'title',
         'type_id',
         'task_id',
-        'skill_id',
         'work_area',
         'estimation_manhour',
         'engineer_quantity',
@@ -160,16 +159,17 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have one skill.
+     * One-to-Many: A task card may have zero or many skill.
      *
-     * This function will retrieve the skill of a task card.
-     * See: Type's skill() method for the inverse
+     * This function will retrieve all the skills of a task card.
+     * See: Type's taskcard_skills() method for the inverse
      *
      * @return mixed
      */
-    public function skill()
+    public function skills()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsToMany(Type::class, 'skill_taskcard', 'taskcard_id', 'skill_id')
+                    ->withTimestamps();;
     }
 
     /**

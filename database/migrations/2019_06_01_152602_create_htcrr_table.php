@@ -24,8 +24,10 @@ class CreateHtcrrTable extends Migration
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->timestamp('removed_at')->nullable();
             $table->unsignedInteger('removed_by')->nullable();
+            $table->unsignedDecimal('removal_manhour_estimation', 8, 2)->nullable();
             $table->timestamp('installed_at')->nullable();
             $table->unsignedInteger('installed_by')->nullable();
+            $table->unsignedDecimal('installation_manhour_estimation', 8, 2)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

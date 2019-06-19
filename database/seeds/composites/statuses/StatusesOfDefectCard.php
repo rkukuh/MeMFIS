@@ -26,13 +26,7 @@ class StatusesOfDefectCard extends Seeder
 
         Status::create([
             'code' => 'pending',
-            'name' => 'PENDING',
-            'of'   => 'defectcard',
-        ]);
-
-        Status::create([
-            'code' => 'paused',
-            'name' => 'PAUSED',
+            'name' => 'PENDING / PAUSE',
             'of'   => 'defectcard',
         ]);
 

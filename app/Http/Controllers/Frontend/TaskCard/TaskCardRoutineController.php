@@ -97,6 +97,15 @@ class TaskCardRoutineController extends Controller
 
             }
 
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+                $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                $taskcard->skills()->attach($request->skill_id);
+            }
+
             if($request->zone){
                 foreach ($request->zone as $zone_name ) {
                     foreach ($request->applicability_airplane as $airplane) {

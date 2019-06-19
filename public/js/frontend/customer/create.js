@@ -165,7 +165,7 @@ let Customer = {
                               console.log(arr);
                             }
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                          }); 
+                          });
 
                         document.getElementById('name').value = name;
                         document.getElementById('term_of_payment').value = payment_term;

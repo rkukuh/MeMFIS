@@ -19,7 +19,17 @@ class JobCardDatatables extends Controller
         $JobCard=JobCard::with('taskcard')->get();
 
         foreach($JobCard as $taskcard){
-            $taskcard->skill_name .= $taskcard->taskcard->skill;
+            if(isset($taskcard->taskcard->skills) ){
+                if(sizeof($taskcard->taskcard->skills) == 3){
+                    $taskcard->skill_name .= "ERI";
+                }
+                else if(sizeof($taskcard->taskcard->skills) == 1){
+                    $taskcard->skill_name .= $taskcard->taskcard->skills[0]->name;
+                }
+                else{
+                    $taskcard->skill_name .= '';
+                }
+            }
         }
 
         foreach($JobCard as $taskcard){

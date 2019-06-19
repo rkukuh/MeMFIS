@@ -91,7 +91,7 @@
 
     #content3-next .body{
       width: 100%;
-      height: 300px;
+      min-height: 300px;
       border-left:  2px solid  #d4d7db;
       border-right:  2px solid  #d4d7db;
       border-bottom:  2px solid  #d4d7db;
@@ -350,17 +350,13 @@
         <div class="container">
             <table width="100%" cellpadding="3">
                 <tr>
-                    <th width="50%" rowspan="7" valign="top">Term & Condition <br></th>
+                    <th width="50%" rowspan="6" valign="top">Term & Condition <br></th>
                     <td width="25%" valign="top" align="left">Total</td>
                     <td width="25%" valign="top" align="right">Rp. {{$quotation->subtotal}}</td>
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Disc</td>
                     <td width="25%" valign="top" align="right">$ / %</td>
-                </tr>
-                <tr>
-                    <td width="25%" valign="top" align="left">Vat 10%</td>
-                    <td width="25%" valign="top" align="right">$000</td>
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Delivery Cost</td>
@@ -469,17 +465,13 @@
             <div class="container">
                 <table width="100%" cellpadding="3">
                     <tr>
-                        <th width="50%" rowspan="7" valign="top">Term & Condition <br></th>
+                        <th width="50%" rowspan="6" valign="top">Term & Condition <br></th>
                         <td width="25%" valign="top" align="left">Total</td>
                         <td width="25%" valign="top" align="right">$25.000</td>
                     </tr>
                     <tr>
                         <td width="25%" valign="top" align="left">Disc</td>
                         <td width="25%" valign="top" align="right">$ / %</td>
-                    </tr>
-                    <tr>
-                        <td width="25%" valign="top" align="left">Vat 10%</td>
-                        <td width="25%" valign="top" align="right">$000</td>
                     </tr>
                     <tr>
                         <td width="25%" valign="top" align="left">Delivery Cost</td>
