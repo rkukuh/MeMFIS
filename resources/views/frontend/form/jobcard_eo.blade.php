@@ -317,10 +317,12 @@
         <table width="100%" cellpadding="10">
           <tr>
             <td width="25%" valign="top">
-              @if($jobCard->taskcard->skill->name)
-              {{$jobCard->taskcard->skill->name}}
+              @if(sizeof($jobCard->taskcard->skills) == 3)
+                  @slot('text', 'ERI')
+              @elseif(sizeof($jobCard->skills) == 1)
+                  @slot('text', $jobCard->taskcard->skills[0]->name)
               @else
-                -
+                  @slot('text', '-')
               @endif
             </td>
             <td width="25%" align="center" valign="top">

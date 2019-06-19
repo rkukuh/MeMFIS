@@ -91,7 +91,7 @@ let TaskCard = {
 
                 },
                 {
-                    field: 'skill.name',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,

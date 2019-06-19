@@ -122,9 +122,19 @@
                                                     Skill @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Skills needed')
-                                                @endcomponent
+                                                @if (empty($taskCard->skills))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @component('frontend.common.label.data-info')
+                                                        @if(sizeof($taskCard->skills) == 3)
+                                                            @slot('text', 'ERI')
+                                                        @elseif(sizeof($taskCard->skills) == 1)
+                                                            @slot('text', $taskCard->skills[0]->name)
+                                                        @else
+                                                            @include('frontend.common.label.data-info-nodata')
+                                                        @endif
+                                                    @endcomponent
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">

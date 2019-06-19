@@ -72,5 +72,12 @@ class TypesOfTaskCardSkill extends Seeder
             'name' => 'NDI/NDT',
             'of'   => 'taskcard-skill',
         ]);
+
+        //Electrical Radio Instrument
+        Type::create([
+            'code' => 'eri',
+            'name' => 'ERI',
+            'of'   => 'taskcard-skill',
+        ]);
     }
 }

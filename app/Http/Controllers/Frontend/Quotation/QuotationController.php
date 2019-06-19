@@ -105,7 +105,6 @@ class QuotationController extends Controller
         return view('frontend.quotation.show',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
-            'attention' => $attention[0],
             'charges' => $charges,
             'projects' => $projects
         ]);
@@ -265,10 +264,17 @@ class QuotationController extends Controller
     public function print(Quotation $quotation)
     {
         $username = Auth::user()->name;
-
+        // dd(json_decode($quotation->charge));
+        $totalCharge = 0;
+        foreach(json_decode($quotation->charge) as $charge){
+            $totalCharge =  $totalCharge +  $charge->amount;
+        }
+        // dd($totalCharge);
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
-                'quotation' => $quotation
+                'quotation' => $quotation,
+                'totalCharge' => $totalCharge,
+                'attention' => json_decode($quotation->attention)
                 ]);
         return $pdf->stream();
     }

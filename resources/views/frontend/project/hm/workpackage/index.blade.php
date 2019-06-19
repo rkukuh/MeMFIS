@@ -97,4 +97,6 @@
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
     </script>
+    <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
+
 @endpush
