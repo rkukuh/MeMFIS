@@ -560,7 +560,7 @@ class Type extends MemfisModel
      *
      * @return mixed
      */
-    public function taskcard_tasks()
+    public function task_taskcards()
     {
         return $this->hasMany(TaskCard::class, 'task_id', 'id');
     }
