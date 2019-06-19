@@ -16,7 +16,7 @@ class TaskCardDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = TaskCard::with('type','aircrafts','task','skill')->get();
+        $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
 
         foreach($alldata as $item){
             if(isset($item->aircrafts) ){
@@ -27,6 +27,20 @@ class TaskCardDatatables extends Controller
                     else{
                     $item->pesawat .= $item->aircrafts[$index]->name.", ";
                     }
+                }
+            }
+        }
+
+        foreach($alldata as $item){
+            if(isset($item->skills) ){
+                if(sizeof($item->skills) == 3){
+                    $item->skill .= "ERI";
+                }
+                else if(sizeof($item->skills) == 1){
+                    $item->skill .= $item->skills[0]->name;
+                }
+                else{
+                    $item->skill .= '';
                 }
             }
         }
