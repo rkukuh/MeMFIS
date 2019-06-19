@@ -176,12 +176,12 @@ let Aircraft = {
                         type: 'POST',
                         url: '/project/' + project_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('Quotation has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.project_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
