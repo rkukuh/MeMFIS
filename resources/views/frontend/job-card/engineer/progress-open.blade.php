@@ -131,7 +131,7 @@
                                             <td width="70%" style="text-align:center">
                                                 @if(sizeof($jobcard->taskcard->skills) == 3)
                                                     ERI
-                                                @elseif(sizeof($taskcard->skills) == 1)
+                                                @elseif(sizeof($jobcard->taskcard->skills) == 1)
                                                     {{$jobcard->taskcard->skills[0]->name}}
                                                 @else
                                                     -
