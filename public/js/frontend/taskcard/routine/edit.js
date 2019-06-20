@@ -477,6 +477,7 @@ let TaskCard = {
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
+            let remark_material = $('#remark_material').val();
 
             $.ajax({
                 headers: {
@@ -489,6 +490,7 @@ let TaskCard = {
                     item_id: material,
                     quantity: quantity,
                     unit_id: unit_material,
+                    remark_material: remark_material,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -522,6 +524,7 @@ let TaskCard = {
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
+            let remark_tool = $('#remark_tool').val();
 
             $.ajax({
                 headers: {
@@ -534,6 +537,7 @@ let TaskCard = {
                     item_id: tool,
                     quantity: quantity,
                     unit_id: unit_tool,
+                    remark_tool: remark_tool,
                 },
                 success: function (data) {
                     if (data.errors) {

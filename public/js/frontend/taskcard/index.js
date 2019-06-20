@@ -18,6 +18,7 @@ let TaskCard = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
+
                             return dataSet;
                         }
                     }
@@ -79,13 +80,13 @@ let TaskCard = {
                 },
                 {
                     field: 'type.name',
-                    title: 'TC Type',
+                    title: 'Taskcard Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'pesawat',
-                    title: 'A/C',
+                    title: 'A/C Applicability',
                     sortable: 'asc',
                     filterable: !1,
 
@@ -103,6 +104,12 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
+                    field: 'work_area',
+                    title: 'Work Area',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'estimation_manhour',
                     title: 'Manhours',
                     sortable: 'asc',
@@ -110,7 +117,7 @@ let TaskCard = {
                 },
                 {
                     field: 'description',
-                    title: 'Description',
+                    title: 'Instruction',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
