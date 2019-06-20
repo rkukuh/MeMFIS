@@ -206,10 +206,10 @@ class QuotationController extends Controller
             'approved_by' => Auth::id(),
         ]));
 
-        // $quotation->progresses()->save(new Progress([
-        //     'status_id' =>  Status::ofQuotation()->where('code','approve')->first()->id,
-        //     'progressed_by' => Auth::id()
-        // ]));
+        $quotation->progresses()->save(new Progress([
+            'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
         $project = Project::where('id',$quotation->project_id)->first();
         foreach($project->workpackages as $wp){

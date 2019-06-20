@@ -107,6 +107,13 @@ let Quotation = {
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                    // template: function (t) {
+                        // if (t.approvals === undefined || t.approvals.length == 0) {
+                            // return t.approvals;
+                        // }else{
+                        //     return 'Approved'
+                        // }
+                    // }
                 },
                 {
                     field: 'Actions',
