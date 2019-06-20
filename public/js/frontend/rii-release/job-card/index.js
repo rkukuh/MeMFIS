@@ -123,7 +123,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,

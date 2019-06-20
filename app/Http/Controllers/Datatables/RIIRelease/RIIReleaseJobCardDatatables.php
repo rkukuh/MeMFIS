@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\RIIRelease;
 
+use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -16,13 +17,23 @@ class RIIReleaseJobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard =JobCard::with('taskcard','quotation')->whereHas('taskcard', function ($query) {
+        $JobCard =JobCard::with('taskcard','quotation','progresses')
+                                            ->whereHas('taskcard', function ($query) {
                                             $query->where('is_rii', '1');
-                                            })->get();
+                                            })
+                                            ->whereHas('progresses', function ($query) {
+                                            $query->where('status_id', Status::where('code','released')->where('of','jobcard')->first()->id);
+                                            })
+                                            ->get();
 
         foreach($JobCard as $aircraft){
             $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;
         }
+
+        foreach($JobCard as $status){
+            $status->status .= Status::find($status->progresses->last()->status_id)->name;
+        }
+
 
         foreach($JobCard as $taskcard){
             if(isset($taskcard->taskcard->skills) ){
