@@ -102,7 +102,7 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>Tool(S) List (from taskcard)</h1></span>
+                                <span class="m-accordion__item-title"> <h1>Tool(s) Taskcard List</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -147,7 +147,7 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_1_head" data-toggle="collapse" href="#m_accordion_2_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>Item(S) List (from taskcard)</h1></span>
+                                <span class="m-accordion__item-title"> <h1>Material(s) Taskcard List</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
