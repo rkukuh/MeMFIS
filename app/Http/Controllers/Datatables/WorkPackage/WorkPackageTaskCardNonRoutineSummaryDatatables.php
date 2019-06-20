@@ -20,6 +20,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->of == 'taskcard-type-non-routine'){
                 foreach($taskcard->materials as $item){
+                    $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
@@ -127,6 +128,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->of == 'taskcard-type-non-routine'){
                 foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
@@ -234,6 +236,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->code == 'ad' or $taskcard->type->code == 'sb'){
                 foreach($taskcard->materials as $item){
+                    $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
@@ -341,6 +344,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->code == 'ad' or $taskcard->type->code == 'sb'){
                 foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
@@ -448,6 +452,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->code == 'cmr' or $taskcard->type->code == 'awl'){
                 foreach($taskcard->materials as $item){
+                    $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
@@ -555,6 +560,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->code == 'cmr' or $taskcard->type->code == 'awl'){
                 foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
@@ -662,6 +668,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->code == 'si'){
                 foreach($taskcard->materials as $item){
+                    $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
@@ -769,6 +776,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->code == 'si'){
                 foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }

@@ -46,7 +46,13 @@ let summary = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+            {
+                field: 'tackcard_number',
+                title: 'Taskcard No.',
+                sortable: !1,
+            },
+            {
                 field: 'code',
                 title: 'P/N',
                 sortable: !1,
@@ -143,7 +149,13 @@ let summary = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+            {
+                field: 'tackcard_number',
+                title: 'Taskcard No.',
+                sortable: !1,
+            },
+            {
                 field: 'code',
                 title: 'P/N',
                 sortable: !1,
