@@ -76,21 +76,38 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
+                    field: 'status',
+                    title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'+
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-check"></i>' +
-                            '</a>'
-                        );
+                        if(t.status == 'Project Approved' || t.status == 'Quotation Approved'){
+                            return (
+                                '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'
+                            );
+                        }else{
+                            return (
+                                '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'+
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-check"></i>' +
+                                '</a>'
+                            );
+                        }
                     }
                 }
             ]
