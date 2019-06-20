@@ -16,7 +16,21 @@ class ProjectDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(Project::with('aircraft','customer')->get());
+        $projects = Project::with('aircraft','customer')->get();
+        foreach($projects as $project){
+            if(empty($project->approvals->toArray())){
+                $project->status .= '';
+            }elseif(sizeof($project->approvals->toArray()) == 1){
+                $project->status .= 'Project Approved';
+            }elseif(sizeof($project->approvals->toArray()) == 2){
+                $project->status .= 'Quotation Approved';
+            }
+            else{
+                $project->status .= '?';
+            }
+        }
+
+        $data = $alldata = json_decode($projects);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
