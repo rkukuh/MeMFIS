@@ -125,7 +125,29 @@
                 </div>
             </div>
     </div>
-
+    @if($quotation->currency->symbol !== "Rp")
+    <div class="form-group m-form__group row">
+        <div class="col-sm-5 col-md-5 col-lg-5">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="m--align-left" style="padding-top:15px">
+                Total in <div id="currency_symbol">{{ $quotation->currency->symbol }}</div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            @component('frontend.common.label.data-info')
+                @slot('id', 'grand_total')
+                @slot('class', 'grand_total')
+                @slot('text', $quotation->grandtotal)
+                @slot('value', $quotation->grandtotal)
+            @endcomponent
+        </div>
+        <div class="col-sm-1 col-md-1 col-lg-1">
+        </div>
+        <div class="col-sm-1 col-md-1 col-lg-1">
+        </div>
+    </div>
+    @endif
     <div class="form-group m-form__group row">
         <div class="col-sm-5 col-md-5 col-lg-5">
         </div>
@@ -136,8 +158,8 @@
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">
             @component('frontend.common.label.data-info')
-                @slot('id', 'grand_total')
-                @slot('class', 'grand_total')
+                @slot('id', 'grand_total_rupiah')
+                @slot('class', 'grand_total_rupiah')
                 @slot('text', $quotation->grandtotal)
                 @slot('value', $quotation->grandtotal)
             @endcomponent

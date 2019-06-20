@@ -9,7 +9,7 @@ let Quotation = {
                 exchange_rate.val(1);
                 exchange_rate.attr("readonly", true);
             } else {
-                exchange_rate.val('');
+                exchange_rate.val(1);
                 exchange_rate.attr("readonly", false);
             }
         });
