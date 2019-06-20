@@ -28,8 +28,8 @@
 
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '3')
-                                                @slot('id', 'address')
-                                                @slot('name', 'address')
+                                                @slot('id', 'address-modal')
+                                                @slot('name', 'address-modal')
                                                 @slot('text', 'Address')
                                             @endcomponent
                                         </div>
@@ -59,11 +59,11 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-address')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
-                                            @slot('class', 'reset-item')
+                                            @slot('class', 'reset-address')
                                         @endcomponent
                                     @include('frontend.common.buttons.close')
                                 </div>

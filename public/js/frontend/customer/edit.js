@@ -58,13 +58,14 @@ let Customer = {
                 },
             ]
         });
+        
         $('.customer_address_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer/'+ customer_uuid +'/address',
+                        url: '/datatables/customer/'+ customer_uuid +'/addresses',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -889,6 +890,45 @@ let Customer = {
             });
         });
 
+        $('.modal-footer').on('click', '.add-address', function () {
+            let address = $('#address-modal').val();
+            let address_type = $('#address_type').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'POST',
+                url: '/customer/' + customer_uuid + '/addresses',data: {
+                    _token: $('input[name=_token]').val(),
+                    address:address,
+                    address_type: address_type
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        $.each(data.errors, function (key, value) {
+                            var name = $("input[name='"+key+"']");
+                            if(key.indexOf(".") != -1){
+                              var arr = key.split(".");
+                              name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
+                            }
+                            name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
+                          }); 
+                    } else {
+                        $('#modal_address').modal('hide');
+
+                        let table = $('.customer_address_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+                    }
+                }
+            });
+        });
     }
 };
 
