@@ -111,9 +111,7 @@ class WorkPackageController extends Controller
      */
     public function update(WorkPackageUpdate $request, WorkPackage $workPackage)
     {
-        $workPackage = WorkPackage::find($workPackage);
-        // $workPackage->name = $request->name;
-        // $workPackage->save();
+        $workPackage->update($request->all());
 
         return response()->json($workPackage);
     }
