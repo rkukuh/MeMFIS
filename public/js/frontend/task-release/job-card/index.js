@@ -97,7 +97,7 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'skill_name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
