@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\TaskRelease;
 
+use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -17,6 +18,10 @@ class TaskReleaseJobCardDatatables extends Controller
     public function index()
     {
         $JobCard=JobCard::with('taskcard','quotation')->get();
+
+        foreach($JobCard as $status){
+            $status->status .= Status::find($status->progresses->last()->status_id)->name;
+        }
 
         foreach($JobCard as $aircraft){
             $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;
