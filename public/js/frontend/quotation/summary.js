@@ -82,14 +82,14 @@ var DatatableAutoColumnHideDemo = function () {
           field: 'ShipCity',
           title: 'Cost',
           template: function (a) {
-            
+
             if(currency == 1){
-              return ('Cost<br>' +
+              return ('<br>' +
                 IDRformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
             }else{
-              return ('Cost<br>' +
+              return ('<br>' +
                 '$ '+USDformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
@@ -124,7 +124,7 @@ var DatatableAutoColumnHideDemo = function () {
                       '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                     );
                   }
-                    
+
                 }
                 else if(t.pivot.discount_type == 'percentage'){
                     return (
@@ -150,7 +150,7 @@ var DatatableAutoColumnHideDemo = function () {
                 document.getElementById("grand_total").innerHTML = IDRformatter.format(subtotal);
                 $("#grand_total").attr("value", subtotal);
                 $("#sub_total").attr("value", subtotal);
-                if(currency == 1){ 
+                if(currency == 1){
                     return (
                       IDRformatter.format(total)
                     );
@@ -168,7 +168,7 @@ var DatatableAutoColumnHideDemo = function () {
                     document.getElementById("grand_total").innerHTML = IDRformatter.format(subtotal);
                     $("#grand_total").attr("value", subtotal);
                     $("#sub_total").attr("value", subtotal);
-                    if(currency == 1){ 
+                    if(currency == 1){
                       return (
                         IDRformatter.format(total)
                       );
@@ -185,7 +185,7 @@ var DatatableAutoColumnHideDemo = function () {
                     document.getElementById("grand_total").innerHTML = IDRformatter.format(subtotal);
                     $("#grand_total").attr("value", subtotal);
                     $("#sub_total").attr("value", subtotal);
-                    if(currency == 1){ 
+                    if(currency == 1){
                       return (
                         IDRformatter.format(total)
                       );
@@ -196,7 +196,7 @@ var DatatableAutoColumnHideDemo = function () {
                     }
                 }
             }
-            
+
           }
         },
       ],
