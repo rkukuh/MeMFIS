@@ -54,8 +54,9 @@ class QuotationWorkPackageController extends Controller
      */
     public function show(Quotation $quotation, WorkPackage $workPackage)
     {
-        $job_request = $quotation->workpackages()->where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->first();
-        // dd($quotation->id);
+        $job_request = $quotation->workpackages()->where('quotation_id',$quotation->id)
+        // ->where('workpackage_id',$workPackage->id)
+        ->first();
 
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
@@ -100,7 +101,7 @@ class QuotationWorkPackageController extends Controller
      */
     public function update(Request $request, Quotation $quotation, WorkPackage $workPackage)
     {
-        return response()->json($quotation->workpackages()->updateExistingPivot($workPackage, ['manhour_total'=>$request->manhour_total,'manhour_rate'=>$request->manhour_rate,'description'=>$request->description]));
+        return response()->json($quotation->workpackages()->updateExistingPivot($quotation, ['manhour_total'=>$request->manhour_total,'manhour_rate'=>$request->manhour_rate,'description'=>$request->description]));
     }
 
     /**

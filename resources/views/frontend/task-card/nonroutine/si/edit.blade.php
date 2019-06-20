@@ -161,7 +161,7 @@
 
                                                     @foreach ($skills as $skill)
                                                         <option value="{{ $skill->id }}"
-                                                            @if ($skill->id == $taskcard->skill_id) selected @endif>
+                                                        @if ($skill->name == "ERI" && sizeof($taskcard->skills) == 3) selected @elseif($skill->id == $taskcard->skills[0]->id) selected @endif>
                                                             {{ $skill->name }}
                                                         </option>
                                                     @endforeach
