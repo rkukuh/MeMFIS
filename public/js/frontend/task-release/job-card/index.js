@@ -109,7 +109,7 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -119,7 +119,7 @@ let TaskRelease = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-
+                        if(t.status == 'CLOSED'){
                             return (
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
@@ -128,6 +128,13 @@ let TaskRelease = {
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
+                        }else{
+                            return (
+                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-external-link"></i>' +
+                                '</a>'
+                            );
+                        }
                     }
                 }
             ]
