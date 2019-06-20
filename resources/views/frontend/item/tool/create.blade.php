@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.tool.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Tool
                             </span>
@@ -238,7 +238,7 @@
                                                     @include('frontend.common.buttons.reset')
 
                                                     @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index'))
+                                                        @slot('href', route('frontend.tool.index'))
                                                     @endcomponent
                                                 </div>
                                             </div>
