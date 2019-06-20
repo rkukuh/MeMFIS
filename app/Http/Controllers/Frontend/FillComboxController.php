@@ -303,7 +303,7 @@ class FillComboxController extends Controller
      */
     public function taskcardRelationship()
     {
-        $taskcard_relationships = Taskcard::pluck('title', 'id');
+        $taskcard_relationships = Taskcard::pluck('number', 'id');
 
         return json_encode($taskcard_relationships);
 

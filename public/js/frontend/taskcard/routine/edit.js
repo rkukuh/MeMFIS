@@ -13,7 +13,7 @@ let TaskCard = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-
+                            console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -43,7 +43,12 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [
+            columns: [{
+                field: 'code',
+                title: 'PN',
+                sortable: 'asc',
+                filterable: !1,
+                },
                 {
                     field: 'name',
                     title: 'Tool',
@@ -59,6 +64,12 @@ let TaskCard = {
                 {
                     field: 'pivot.unit',
                     title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.remark',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -296,6 +307,12 @@ let TaskCard = {
             },
             columns: [
                 {
+                    field: 'code',
+                    title: 'PN',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'name',
                     title: 'Material',
                     sortable: 'asc',
@@ -310,6 +327,12 @@ let TaskCard = {
                 {
                     field: 'pivot.unit',
                     title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.remark',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -474,7 +497,7 @@ let TaskCard = {
         });
 
         $('.add-item').on('click', function () {
-            let quantity = $('input[name=quantity_item]').val();
+            let quantity = $('#quantity_material').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
             let remark_material = $('#remark_material').val();
@@ -502,7 +525,7 @@ let TaskCard = {
                             $('#quantity_item-error').html(data.errors.quantity[0]);
                         }
                         document.getElementById('material').value = material;
-                        document.getElementById('quantity').value = quantity;
+                        document.getElementById('quantity_item').value = quantity;
 
                     } else {
 
@@ -521,7 +544,7 @@ let TaskCard = {
             });
         });
         $('.add-tool').on('click', function () {
-            let quantity = $('input[name=quantity]').val();
+            let quantity = $('#quantity_tool').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
             let remark_tool = $('#remark_tool').val();
@@ -549,7 +572,7 @@ let TaskCard = {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
                         document.getElementById('tool').value = tool;
-                        document.getElementById('quantity').value = quantity;
+                        document.getElementById('quantity_tool').value = quantity;
                     } else {
 
                         toastr.success('Tool has been created.', 'Success', {
