@@ -216,6 +216,7 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
+        // dd($taskCard->skills);
         $aircraft_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
@@ -274,6 +275,18 @@ class TaskCardRoutineController extends Controller
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+                $taskCard->skills()->detach();
+                $taskCard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskCard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskCard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                if(sizeof($taskCard->skills) > 1 ){
+                    $taskCard->skills()->detach();
+                }
+                $taskCard->skills()->sync($request->skill_id);
+            }
 
             if(is_array($request->access)){
                 foreach ($request->access as $access_name ) {
