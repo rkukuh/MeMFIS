@@ -581,7 +581,7 @@
     $(document).ready(function() {
         let attentions = $('#attentions-val').val();
         let attention = $('#attention-val').val();
-        attention = JSON.parse(attention)[0];
+        // attention = JSON.parse(attention)[0];
         if (attentions) {
             let attn = JSON.parse(attentions);
             $('select[name="attention"]').empty();
