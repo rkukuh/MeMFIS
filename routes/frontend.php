@@ -408,6 +408,36 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        /** JOB CARD HARD TIME*/
+
+        Route::namespace('JobCardHardTime')->group(function () {
+
+            Route::resource('jobcard-hardtime-ppc', 'JobCardHardTimePPCController', [
+                'parameters' => ['jobcard-ppc' => 'jobcard']
+            ]);
+
+            Route::resource('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController', [
+                'parameters' => ['jobcard-engineer' => 'jobcard']
+            ]);
+
+            Route::post('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController@search')->name('engineer.jobcard.hardtime.search');
+
+            Route::resource('jobcard-hardtime-mechanic', 'JobCardHardTimeMechanicController', [
+                'parameters' => ['jobcard-mechanic' => 'jobcard']
+            ]);
+
+            Route::post('jobcard-hardtime-mechanic/', 'JobCardHardTimeMechanicController@search')->name('mechanic.jobcard.hardtime.search');
+
+            Route::name('jobcard.hardtime.')->group(function () {
+                Route::prefix('jobcard-hardtime')->group(function () {
+
+                    /** Transaction */
+                    Route::get('/{jobCard}/print', 'JobCardHardTimeController@print');
+                });
+            });
+
+        });
+
         /** TASK RELEASE */
 
         Route::namespace('TaskRelease')->group(function () {
