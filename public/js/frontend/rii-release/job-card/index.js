@@ -43,7 +43,7 @@ let RiiRelease = {
             },
             columns: [
                 {
-                    field: 'title',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
@@ -66,11 +66,25 @@ let RiiRelease = {
                     }
                 },
                 {
-                    field: 'pesawat',
+                    field: 'company',
                     title: 'Company Task No',
                     sortable: 'asc',
                     filterable: !1,
-
+                    template: function (t, e, i) {
+                        if(t.taskcard.additionals){
+                            let company = t.taskcard.additionals;
+                            obj = JSON.parse(company);
+                            // console.log()
+                            return (
+                                obj.internal_number
+                            );
+                        }
+                        else{
+                            return(
+                                ''
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'quotation.customer.name',
@@ -97,7 +111,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'skill_name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -109,7 +123,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,

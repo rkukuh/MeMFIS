@@ -43,7 +43,7 @@ let TaskRelease = {
             },
             columns: [
                 {
-                    field: 'title',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
