@@ -3,7 +3,44 @@ function strtrunc(str, max, add) {
     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
 };
 
+let workpackage_datatables_init = true;
+$(document).ready(function () {
+    $.ajax({
+        url: '/project/' + project_id,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            if (workpackage_datatables_init == true) {
+                workpackage_datatables_init = false;
+                workpackage(data.uuid);
+            }
+            else {
+                let table = $('.workpackage_datatable').mDatatable();
+                table.destroy();
+                workpackage(data.uuid);
+                table = $('.workpackage_datatable').mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+            }
+        }
+    });
+});
 
+$('.nav-tabs').on('click', '.workpackage', function () {
+    let workpackage = $('.workpackage_datatable').mDatatable();
+
+    workpackage.originalDataSet = [];
+    workpackage.reload();
+});
+
+$('.nav-tabs').on('click', '.summary', function () {
+
+    let summary = $('.summary_datatable').mDatatable();
+
+    summary.originalDataSet = [];
+    summary.reload();
+
+});
 
 function workpackage(triggeruuid) {
 
