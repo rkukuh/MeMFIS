@@ -1,3 +1,4 @@
+
 let Quotation = {
   init: function () {
    
@@ -79,16 +80,16 @@ let Quotation = {
 // untuk formatting angka pada kolom cost
 let locale = 'id';
 let IDRformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let USDformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'usd', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+let USDformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode, minimumFractionDigits: 2, maximumFractionDigits: 2 });
 let numberFormat = new Intl.NumberFormat('id', { maximumSignificantDigits: 3 });
 let total = 0;
 let quotation = $('#quotation_uuid').val();
 
 $(document).ready(function () {
   if(currency == 1){
-    let GTotal = IDRformatter.format(document.getElementById("grand_total").innerHTML);
+    let GTotal = IDRformatter.format(document.getElementById("grand_total").innerHTML).replace(/^(\D+)/, '$1 ');
     document.getElementById("grand_total").innerHTML = GTotal;
-    let subTotal = IDRformatter.format(document.getElementById("sub_total").innerHTML);
+    let subTotal = IDRformatter.format(document.getElementById("sub_total").innerHTML).replace(/^(\D+)/, '$1 ');
     document.getElementById("sub_total").innerHTML = subTotal;
     if($('#charge ').length > 0){
       for (let index = 0; index < $('#charge ').length; index++) {
@@ -98,14 +99,14 @@ $(document).ready(function () {
       }
     }
   }else{
-    let GTotal = USDformatter.format(document.getElementById("grand_total").innerHTML);
+    let GTotal = USDformatter.format(document.getElementById("grand_total").innerHTML).replace(/^(\D+)/, '$1 ');
     document.getElementById("grand_total").innerHTML = GTotal;
-    let subTotal = USDformatter.format(document.getElementById("sub_total").innerHTML);
+    let subTotal = USDformatter.format(document.getElementById("sub_total").innerHTML).replace(/^(\D+)/, '$1 ');
     document.getElementById("sub_total").innerHTML = subTotal;
     if($('#charge ').length > 0){
       for (let index = 0; index < $('#charge ').length; index++) {
         let element = $('#charge ')[index];
-        let tempAmount = USDformatter.format(element.innerHTML);
+        let tempAmount = USDformatter.format(element.innerHTML).replace(/^(\D+)/, '$1 ');
         element.innerHTML = tempAmount;
       }
     }
@@ -117,11 +118,11 @@ var DatatableAutoColumnHideDemo = function () {
 
   // basic demo
   var demo = function () {
+    let quotation = $('#quotation_uuid').val();
     console.log(quotation);
     // var dataJSONArrayLong = JSON.parse('[{ "OrderID" : "OrderID","ShipCountry" : "ShipCountry","ShipCity" : "ShipCity","Currency" : "Currency","ShipDate" : "ShipDate", "Latitude" : "Latitude","Longitude" : "Longitude","Notes" : "Notes","Department" : "Department","Website" : "Website", "TotalPayment" : "TotalPayment","Status" : 1,"Type" : 1},{ "OrderID" : "OrderID","ShipCountry" : "ShipCountry","ShipCity" : "ShipCity","Currency" : "Currency","ShipDate" : "ShipDate", "Latitude" : "Latitude","Longitude" : "Longitude","Notes" : "Notes","Department" : "Department","Website" : "Website", "TotalPayment" : "TotalPayment","Status" : 1,"Type" : 1}]');
 
     $('.summary_datatable').mDatatable({
-      // datasource definition
       data: {
         type: 'remote',
         source: {
@@ -130,11 +131,12 @@ var DatatableAutoColumnHideDemo = function () {
             url: '/datatables/quotation/' + quotation + '/job-request',
             map: function (raw) {
               let dataSet = raw;
-
+              let total = subtotal = 0;
+             
               if (typeof raw.data !== 'undefined') {
                 dataSet = raw.data;
               }
-
+              console.log(dataSet);
               return dataSet;
             }
           }
@@ -143,23 +145,19 @@ var DatatableAutoColumnHideDemo = function () {
         serverPaging: !1,
         serverSorting: !1
 
-        //   saveState: false,
-        //   serverPaging: true,
-        //   serverFiltering: true,
-        //   serverSorting: true,
-      },
+    },
       responsive: true,
-      // column sorting
+
       sortable: true,
 
       pagination: true,
 
       toolbar: {
-        // toolbar items
+
         items: {
-          // pagination
-          pagination: {
-            // page size select
+
+            pagination: {
+
             pageSizeSelect: [10, 20, 30, 50, 100],
           },
         },
@@ -170,11 +168,9 @@ var DatatableAutoColumnHideDemo = function () {
       },
 
       rows: {
-        // auto hide columns, if rows overflow
-        //   autoHide: true,
-      },
 
-      // columns definition
+
+      },
       columns: [
         {
           field: 'code',
@@ -186,14 +182,14 @@ var DatatableAutoColumnHideDemo = function () {
           width: '700px',
 
           template: function (t) {
-            if (currency == 1) {
+            if(currency == 1){
               return (t.pivot.description + '<br>' +
                 '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
                 '- Material Price'
               );
-            } else {
+            }else{
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x $ ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
                 '- Material Price'
               );
             }
@@ -202,16 +198,14 @@ var DatatableAutoColumnHideDemo = function () {
           field: 'ShipCity',
           title: 'Cost',
           template: function (a) {
-            total = total + a.pivot.manhour_total * a.pivot.manhour_rate + 138;
-            document.getElementById("sub_total").innerHTML = IDRformatter.format(total);
-            $("#sub_total").attr("value", total);
-            if (currency == 1) {
-              return ('Cost<br>' +
+            
+            if(currency == 1){
+              return ('<br>' +
                 IDRformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
-            } else {
-              return ('Cost<br>' +
+            }else{
+              return ('<br>' +
                 USDformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
@@ -224,37 +218,37 @@ var DatatableAutoColumnHideDemo = function () {
           sortable: 'asc',
           filterable: !1,
           template: function (t, e, i) {
-            if (t.pivot.discount_value == null && t.pivot.discount_type == null) {
-              return (
-                '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                t.uuid +
-                '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-              );
-            }
-            else {
-              if (t.pivot.discount_type == 'amount') {
-                if (currency == 1) {
-                  return (
-                    IDRformatter.format(t.pivot.discount_value) + '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                    t.uuid +
-                    '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                  );
-                } else {
-                  return (
-                    USDformatter.format(t.pivot.discount_value) + '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                    t.uuid +
-                    '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                  );
-                }
-
-              }
-              else if (t.pivot.discount_type == 'percentage') {
+            if(t.pivot.discount_value == null && t.pivot.discount_type == null){
                 return (
-                  t.pivot.discount_value + '%' + '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                  t.uuid +
-                  '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                );
-              }
+                    '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                    t.uuid +
+                    '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                  );
+            }
+            else{
+                if(t.pivot.discount_type ==  'amount'){
+                  if(currency == 1){
+                    return (
+                      IDRformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                      t.uuid +
+                      '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                  }else{
+                    return (
+                      USDformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                      t.uuid +
+                      '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                  }
+                    
+                }
+                else if(t.pivot.discount_type == 'percentage'){
+                    return (
+                        t.pivot.discount_value+'%'+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                        t.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                }
             }
           }
         },
@@ -264,43 +258,92 @@ var DatatableAutoColumnHideDemo = function () {
           sortable: 'asc',
           filterable: !1,
           template: function (t, e, i) {
-            if (t.pivot.discount_value == null && t.pivot.discount_type == null) {
-              total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138;
-              if (currency == 1) {
-                return (
-                  IDRformatter.format(total)
-                );
-              } else {
-                return (
-                  USDformatter.format(total)
-                );
-              }
+            total = 0;
+            if(t.pivot.discount_value == null && t.pivot.discount_type == null){
+                total = t.pivot.manhour_total * t.pivot.manhour_rate + 138;
+                subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate ;
+                if(currency == 1){
+                  document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                  document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                  $("#grand_total_rupiah").attr("value", subtotal);
+                  $("#sub_total").attr("value", subtotal);
+                }else{
+                  let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                }
+                if(currency == 1){ 
+                    return (
+                      IDRformatter.format(total)
+                    );
+                  }else{
+                    return (
+                      USDformatter.format(total * exchange_rate)
+                    );
+                  }
             }
-            else {
-              if (t.pivot.discount_type == 'amount') {
-                total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
-                if (currency == 1) {
-                  return (
-                    IDRformatter.format(total)
-                  );
-                } else {
-                  return (
-                    USDformatter.format(total)
-                  );
+            else{
+                if(t.pivot.discount_type ==  'amount'){
+                    total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
+                    subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
+                    if(currency == 1){
+                      document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                      $("#grand_total_rupiah").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+                    }else{
+                      let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                    }
+                    if(currency == 1){ 
+                      return (
+                        IDRformatter.format(total)
+                      );
+                    }else{
+                      return (
+                        USDformatter.format(total * exchange_rate)
+                      );
+                    }
                 }
-              }
-              else if (t.pivot.discount_type == 'percentage') {
-                total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138) * t.pivot.discount_value) / 100);
-                if (currency == 1) {
-                  return (
-                    IDRformatter.format(total)
-                  );
-                } else {
-                  return (
-                    USDformatter.format(total)
-                  );
+                else if(t.pivot.discount_type == 'percentage'){
+                    total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
+                    subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
+                    if(currency == 1){
+                      document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                      $("#grand_total_rupiah").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+                    }else{
+                      let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                    }
+                    if(currency == 1){ 
+                      return (
+                        IDRformatter.format(total)
+                      );
+                    }else{
+                      return (
+                       USDformatter.format(total * exchange_rate)
+                      );
+                    }
                 }
-              }
             }
           }
         },
