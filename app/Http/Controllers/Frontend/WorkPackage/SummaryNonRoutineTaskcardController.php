@@ -135,7 +135,7 @@ class SummaryNonRoutineTaskcardController extends Controller
     {
         $skills = $subset = [];
 
-        foreach($workPackage->taskcards as $taskcard){
+        foreach($workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb']) as $taskcard){
             $result = $taskcard->skills->map(function ($skills) {
                 return collect($skills->toArray())
                     ->only(['code'])
@@ -144,27 +144,49 @@ class SummaryNonRoutineTaskcardController extends Controller
 
             array_push($subset , $result);
         }
+
+        $adsb = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'ad')->orwhere('code', 'sb');
+                })
+                ->count();
+
+        foreach($workPackage->taskcards->load('type')->whereIn('type.code', ['cmr','awl']) as $taskcard){
+            $result = $taskcard->skills->map(function ($skills) {
+                return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+            });
+
+            array_push($subset , $result);
+        }
+        $cmrawl = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'cmr')->orwhere('code', 'awl');
+                })
+                ->count();
+
+        foreach($workPackage->taskcards->load('type')->where('type.code', 'si') as $taskcard){
+            $result = $taskcard->skills->map(function ($skills) {
+                return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+            });
+
+            array_push($subset , $result);
+        }
+        $si = $workPackage->taskcards()->with('type','task')
+                ->whereHas('type', function ($query) {
+                    $query->where('code', 'si');
+                })
+                ->count();
+
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["code"]);
             }
         }
         $otr = array_count_values($skills);
-        $adsb = $workPackage->taskcards()->with('type','task')
-                ->whereHas('type', function ($query) {
-                    $query->where('code', 'ad')->orwhere('code', 'sb');
-                })
-                ->count();
-        $cmrawl = $workPackage->taskcards()->with('type','task')
-                ->whereHas('type', function ($query) {
-                    $query->where('code', 'cmr')->orwhere('code', 'awl');
-                })
-                ->count();
-        $si = $workPackage->taskcards()->with('type','task')
-                ->whereHas('type', function ($query) {
-                    $query->where('code', 'si');
-                })
-                ->count();
 
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->count('uuid');
         $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->sum('estimation_manhour');

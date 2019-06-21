@@ -135,7 +135,7 @@ class SummaryRoutineTaskcardController extends Controller
     {
         $skills = $subset = [];
 
-        foreach($workPackage->taskcards as $taskcard){
+        foreach($workPackage->taskcards->load('type')->where('type.name', 'Basic') as $taskcard){
             $result = $taskcard->skills->map(function ($skills) {
                 return collect($skills->toArray())
                     ->only(['code'])
@@ -144,22 +144,37 @@ class SummaryRoutineTaskcardController extends Controller
 
             array_push($subset , $result);
         }
-        foreach ($subset as $value) {
-            foreach($value as $skill){
-                array_push($skills, $skill["code"]);
-            }
-        }
-        $otr = array_count_values($skills);
+        
         $basic = $workPackage->taskcards()->with('type','task')
                             ->whereHas('type', function ($query) {
                                 $query->where('code', 'basic');
                             })
                             ->count();
+
+        foreach($workPackage->taskcards->load('type')->where('type.name', 'CPCP') as $taskcard){
+            $result = $taskcard->skills->map(function ($skills) {
+                return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+            });
+
+            array_push($subset , $result);
+        }
         $sip = $workPackage->taskcards()->with('type','task')
                             ->whereHas('type', function ($query) {
                                 $query->where('code', 'sip');
                             })
                             ->count();
+
+        foreach($workPackage->taskcards->load('type')->where('type.name', 'SIP') as $taskcard){
+            $result = $taskcard->skills->map(function ($skills) {
+                return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+            });
+
+            array_push($subset , $result);
+        }
         $cpcp = $workPackage->taskcards()->with('type','task')
                             ->whereHas('type', function ($query) {
                                 $query->where('code', 'cpcp');
@@ -168,6 +183,13 @@ class SummaryRoutineTaskcardController extends Controller
 
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-routine')->count('uuid');
         $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-routine')->sum('estimation_manhour');
+        
+        foreach ($subset as $value) {
+            foreach($value as $skill){
+                array_push($skills, $skill["code"]);
+            }
+        }
+        $otr = array_count_values($skills);
 
         return view('frontend.workpackage.routine.summary',[
             'total_taskcard' => $total_taskcard,
