@@ -76,8 +76,8 @@ class ProjectHMWorkPackageController extends Controller
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         foreach($workPackage->taskcards as $taskcard){
-            $result = $taskcard->skills->map(function ($taskcard) {
-                return collect($taskcard->toArray())
+            $result = $taskcard->skills->map(function ($skills) {
+                return collect($skills->toArray())
                     ->only(['name'])
                     ->all();
             });
@@ -135,8 +135,8 @@ class ProjectHMWorkPackageController extends Controller
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         foreach($workPackage->taskcards as $taskcard){
-            $result = $taskcard->skills->map(function ($taskcard) {
-                return collect($taskcard->toArray())
+            $result = $taskcard->skills->map(function ($skills) {
+                return collect($skills->toArray())
                     ->only(['name'])
                     ->all();
             });

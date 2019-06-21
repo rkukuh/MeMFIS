@@ -180,6 +180,23 @@ class WorkPackageController extends Controller
      */
     public function summary(WorkPackage $workPackage)
     {
+        $skills = $subset = [];
+
+        foreach($workPackage->taskcards as $taskcard){
+            $result = $taskcard->skills->map(function ($skills) {
+                return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+            });
+
+            array_push($subset , $result);
+        }
+        foreach ($subset as $value) {
+            foreach($value as $skill){
+                array_push($skills, $skill["code"]);
+            }
+        }
+        $otr = array_count_values($skills);
         $basic = $workPackage->taskcards()->with('type','task')
                 ->whereHas('type', function ($query) {
                     $query->where('code', 'basic');
@@ -224,6 +241,7 @@ class WorkPackageController extends Controller
             'cpcp' => $cpcp,
             'adsb' => $adsb,
             'cmrawl' => $cmrawl,
+            'otr' => $otr,
             'si' => $si,
         ]);
     }
