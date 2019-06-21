@@ -411,7 +411,7 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        Route::view('/jobcard-hardtime-engineer', 'frontend.job-card-hard-time.engineer.index')->name('job-card.hardtime.engineer');
+        Route::view('/jobcard-hardtime-engineer', 'frontend.job-card-hard-time.engineer.index')->name('job-card-hard-time.engineer');
         Route::view('/jobcard-hardtime-engineer-instalation-open', 'frontend.job-card-hard-time.engineer.progress.instalation.progress-open')->name('job-card-hardtime.engineer.instalation.open');
         Route::view('/jobcard-hardtime-engineer-instalation-resume', 'frontend.job-card-hard-time.engineer.progress.instalation.progress-resume')->name('job-card-hardtime.engineer.instalation.resume');
         Route::view('/jobcard-hardtime-engineer-instalation-pause', 'frontend.job-card-hard-time.engineer.progress.instalation.progress-pause')->name('job-card-hardtime.engineer.instalation.pause');
@@ -427,8 +427,8 @@ Route::name('frontend.')->group(function () {
         Route::view('/jobcard-hardtime-mechanic-removal-resume', 'frontend.job-card-hard-time.mechanic.progress.removal.progress-resume')->name('job-card-hardtime.mechanic.removal.resume');
         Route::view('/jobcard-hardtime-mechanic-removal-pause', 'frontend.job-card-hard-time.mechanic.progress.removal.progress-pause')->name('job-card-hardtime.mechanic.removal.pause');
 
-        Route::view('/jobcard-hardtime-ppc', 'frontend.job-card-hard-time.ppc.index')->name('job-card.hardtime.ppc');
-        Route::view('/jobcard-hardtime-ppc-show', 'frontend.job-card-hard-time.ppc.show')->name('job-card.hardtime.ppc.show');
+        Route::view('/jobcard-hardtime-ppc', 'frontend.job-card-hard-time.ppc.index')->name('job-card-hard-time.ppc');
+        Route::view('/jobcard-hardtime-ppc-show', 'frontend.job-card-hard-time.ppc.show')->name('job-card-hard-time.ppc.show');
       
 
         /** TASK RELEASE */
