@@ -45,7 +45,7 @@ class JobCardHardTimeEngineerController extends Controller
      */
     public function index()
     {
-        return view('frontend.job-card.engineer.index');
+        return view('frontend.job-card-hard-time.engineer.index');
     }
 
     /**
@@ -89,13 +89,13 @@ class JobCardHardTimeEngineerController extends Controller
     public function edit(JobCard $jobcard)
     {
         if ($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open") {
-            return view('frontend.job-card.engineer.progress-open', [
+            return view('frontend.job-card-hard-time.engineer.progress-open', [
                 'jobcard' => $jobcard,
                 'status' => $this->statuses->where('code','open')->first(),
             ]);
         }
         else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "progress"){
-            return view('frontend.job-card.engineer.progress-resume', [
+            return view('frontend.job-card-hard-time.engineer.progress-resume', [
                 'break' => $this->break,
                 'waiting' => $this->waiting,
                 'other' => $this->other,
@@ -106,19 +106,19 @@ class JobCardHardTimeEngineerController extends Controller
             ]);
         }
         else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "pending"){
-            return view('frontend.job-card.engineer.progress-pause', [
+            return view('frontend.job-card-hard-time.engineer.progress-pause', [
                 'jobcard' => $jobcard,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
         else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "closed"){
-            return view('frontend.job-card.engineer.progress-close', [
+            return view('frontend.job-card-hard-time.engineer.progress-close', [
                 'jobcard' => $jobcard,
             ]);
         }
         else{
-            return view('frontend.job-card.engineer.progress-close', [
+            return view('frontend.job-card-hard-time.engineer.progress-close', [
                 'jobcard' => $jobcard,
             ]);
         }
