@@ -510,8 +510,8 @@
                 <th width="15%" align="center">Qty</th>
                 <th width="15%" align="center">Unit</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             @if(empty($jobCard->taskcard->tools->toArray()))
                 <tr>
                     <td colspan="5" align="center">empty</td>
@@ -527,7 +527,7 @@
                 <td align="center" valign="top" width="15%">{{App\Models\Unit::find($tool->pivot->unit_id)->name}}</td>
             </tr>
             @endforeach
-            </tbody>
+          </tbody>
         </table>
       </div>
     </div>
