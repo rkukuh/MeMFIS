@@ -113,21 +113,6 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
-                            <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle"
-                                title="Non functional dummy link"><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                    class="m-menu__link-text">Hard Time</span><i class="m-menu__ver-arrow la la-angle-right"></i></a>
-                                    <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
-                                        <ul class="m-menu__subnav">
-                                            <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.taskcard-routine.create') }}"
-                                                class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                                class="m-menu__link-text">Engineer</span></a>
-                                            </li>
-                                            <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.taskcard-routine.create') }}"
-                                                class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                                class="m-menu__link-text">Mechanic</span></a>
-                                            </li>
-                                        </ul>
-                                    </div>
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard-mechanic.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -175,6 +160,50 @@
                                 </i>
                                 <span class="m-menu__link-text">
                                         RII Release
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="#" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Job Card Hard Time
+                    </span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                </a>
+                <div class="m-menu__submenu">
+                    <span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.job-card.hardtime.mechanic') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Mechanic
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.job-card-hard-time.engineer') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Engineer
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.job-card-hard-time.ppc') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    PPC
                                 </span>
                             </a>
                         </li>
