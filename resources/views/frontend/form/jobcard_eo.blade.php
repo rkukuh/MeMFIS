@@ -317,10 +317,12 @@
         <table width="100%" cellpadding="10">
           <tr>
             <td width="25%" valign="top">
-              @if($jobCard->taskcard->skill->name)
-              {{$jobCard->taskcard->skill->name}}
+              @if(sizeof($jobCard->taskcard->skills) == 3)
+                  @slot('text', 'ERI')
+              @elseif(sizeof($jobCard->taskcard->skills) == 1)
+                  @slot('text', $jobCard->taskcard->skills[0]->name)
               @else
-                -
+                  @slot('text', '-')
               @endif
             </td>
             <td width="25%" align="center" valign="top">
@@ -399,8 +401,8 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                @if(isset($jobCard->defectcards))
-                {{$jobCard->defectcards->first()->code}}
+                @if(empty($jobCard->defectcards))
+                    {{$jobCard->defectcards->first()->code}}
                 @endif
               </span>
           </td>

@@ -358,50 +358,43 @@ let JobCard = {
             }
         });
 
-
-        $('.job_card_datatable').on('click', '.delete', function () {
-            let item_uuid = $(this).data('id');
-
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/item/' + item_uuid + '',
-                        success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.job_card_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-            });
+         material_datatables_init = true;
+        let triggeruuid3 ="";
+        let material2 = $('.job_card_engineer_datatable').on('click', '.material', function () {
+            if(material_datatables_init == true){
+                material_datatables_init = false;
+                triggeruuid3 = $(this).data('uuid');
+                jobcard_item(triggeruuid3);
+                $('#m_datatable_item').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_item').DataTable();
+                table.destroy();
+                triggeruuid3 = $(this).data('uuid');
+                jobcard_item(triggeruuid3);
+                $('#m_datatable_item').DataTable().ajax.reload();
+            }
         });
+
+         tool_datatables_init = true;
+        let triggeruuid4 ="";
+        let tool2 = $('.job_card_engineer_datatable').on('click', '.tool', function () {
+            if(tool_datatables_init == true){
+                tool_datatables_init = false;
+                triggeruuid4 = $(this).data('uuid');
+                jobcard_tool(triggeruuid4);
+                $('#m_datatable_tool').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool').DataTable();
+                table.destroy();
+                triggeruuid4 = $(this).data('uuid');
+                jobcard_tool(triggeruuid4);
+                $('#m_datatable_tool').DataTable().ajax.reload();
+            }
+        });
+
+
     }
 };
 

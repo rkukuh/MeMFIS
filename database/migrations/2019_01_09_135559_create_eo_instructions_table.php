@@ -17,7 +17,6 @@ class CreateEOInstructionsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('taskcard_id')->nullable();
-            $table->unsignedInteger('skill_id')->nullable();
             $table->unsignedInteger('work_area')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->integer('engineer_quantity')->default(1);
@@ -32,11 +31,6 @@ class CreateEOInstructionsTable extends Migration
 
             $table->foreign('taskcard_id')
                     ->references('id')->on('taskcards')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('skill_id')
-                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

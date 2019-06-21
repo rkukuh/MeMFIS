@@ -28,6 +28,9 @@ class CreateJournalsTable extends Migration
                   ->references('id')->on('types')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
+
+            $table->index('code');
+            $table->index('name');
         });
     }
 

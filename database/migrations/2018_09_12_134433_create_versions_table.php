@@ -17,11 +17,13 @@ class CreateVersionsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->longText('change_log');
+            $table->longText('change_log')->nullable();
             $table->timestamp('versioned_at')->nullable();
             $table->morphs('versionable');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('number');
         });
     }
 

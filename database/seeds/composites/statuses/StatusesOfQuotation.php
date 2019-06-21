@@ -19,20 +19,14 @@ class StatusesOfQuotation extends Seeder
         ]);
 
         Status::create([
-            'code' => 'close',
-            'name' => 'Close',
-            'of'   => 'quotation',
-        ]);
-
-        Status::create([
-            'code' => 'approve',
-            'name' => 'Approve',
-            'of'   => 'quotation',
-        ]);
-
-        Status::create([
             'code' => 'cancel',
             'name' => 'Cancel',
+            'of'   => 'quotation',
+        ]);
+
+        Status::create([
+            'code' => 'close',
+            'name' => 'Close',
             'of'   => 'quotation',
         ]);
     }

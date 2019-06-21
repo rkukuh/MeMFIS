@@ -14,7 +14,9 @@
                     @slot('id', 'description')
                     @slot('rows', '5')
                     @slot('id_error', 'description')
+                    @if(isset($job_request))
                     @slot('value',$job_request->pivot->description)
+                    @endif
                 @endcomponent
             </div>
         </div>
@@ -39,7 +41,9 @@
                     @slot('name', 'rate')
                     @slot('id', 'rate')
                     @slot('id_error', 'rate')
+                    @if(isset($job_request))
                     @slot('value',$job_request->pivot->manhour_rate)
+                    @endif
                 @endcomponent
             </div>
         </div>

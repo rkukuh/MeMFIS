@@ -25,7 +25,7 @@
     </div>
 
     <div class="row">
-        
+
         <div class="col-xl-8">
             <div class="m-portlet m-portlet--mobile ">
                 <div class="m-portlet__head">
@@ -48,17 +48,35 @@
                                     <th>Radio</th>
                                     <th>Electrical</th>
                                     <th>Instrument</th>
-                                    <th>Cabin Maintenance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
+                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} @else 0 @endif</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered ">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Run-Up</th>
+                                    <th>Repair</th>
+                                    <th>Repainting</th>
+                                    <th>Cabin Maintenance</th>
+                                    <th>NDI / NDT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} @else 0 @endif</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -76,19 +94,19 @@
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>Basic</span>
-                                <span class="m--font-accent">0</span>
+                                <span class="m--font-accent">{{$basic}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>SIP</span>
-                                <span class="m--font-brand">14</span>
+                                <span class="m--font-brand">{{$sip}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>CPCP</span>
-                                <span class="m--font-focus">15</span>
+                                <span class="m--font-focus">{{$cpcp}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>29</span>
+                                <span>{{$basic+$sip+$cpcp}}</span>
                             </div>
                         </div>
                     </div>
@@ -98,16 +116,12 @@
                         <h3 class="m-widget_content-title">Manhour</h3>
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
-                                <span>Total MPD</span>
-                                <span class="m--font-accent">{{ number_format(367) }}</span>
+                                <span>Total Manhour MPD</span>
+                                <span class="m--font-accent">{{ $total_manhor_taskcard }}</span>
                             </div>
                             <div class="m-widget_content-item">
-                                <span>Performance Factor</span>
-                                <span class="m--font-brand">+15%</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>Total</span>
-                                <span>{{ number_format(5973) }}</span>
+                                <span>Total TaskCard</span>
+                                <span>{{ $total_taskcard }}</span>
                             </div>
                         </div>
                     </div>
@@ -128,7 +142,7 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>Tool(S) List (from taskcard)</h1></span>
+                                <span class="m-accordion__item-title"> <h1>Tool(s) Taskcard List</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -174,7 +188,7 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_1_head" data-toggle="collapse" href="#m_accordion_2_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>Item(S) List (from taskcard)</h1></span>
+                                <span class="m-accordion__item-title"> <h1>Material(s) Taskcard List</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -217,7 +231,7 @@
                     <div class="flex">
                         <div class="action-buttons">
                             @component('frontend.common.buttons.back')
-                            @slot('href', route('frontend.workpackage.create'))
+                            @slot('href', route('frontend.workpackage.edit',['id' => $workPackage->uuid]))
                             @endcomponent
                         </div>
                     </div>

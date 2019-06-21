@@ -30,8 +30,19 @@ class DiscrepancyDatatables extends Controller
         }
 
         foreach($DefectCard as $jobcard){
-            $jobcard->skill .= $jobcard->jobcard->taskcard->skill->name;
+            if(isset($jobcard->taskcard->skills) ){
+                if(sizeof($jobcard->taskcard->skills) == 3){
+                    $jobcard->skill .= "ERI";
+                }
+                else if(sizeof($jobcard->taskcard->skills) == 1){
+                    $jobcard->skill .= $jobcard->taskcard->skills[0]->name;
+                }
+                else{
+                    $jobcard->skill .= '';
+                }
+            }
         }
+
         foreach($DefectCard as $jobcard){
             $jobcard->type .= $jobcard->jobcard->taskcard->type->name;
         }

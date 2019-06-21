@@ -14,6 +14,7 @@ class CreateItemProjectTable extends Migration
     public function up()
     {
         Schema::create('item_project', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');

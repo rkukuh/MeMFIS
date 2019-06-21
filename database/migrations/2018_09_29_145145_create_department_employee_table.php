@@ -19,6 +19,7 @@ class CreateDepartmentEmployeeTable extends Migration
             $table->timestamp('joined_at')->nullable();
             $table->timestamp('left_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('department_id')
                     ->references('id')->on('departments')

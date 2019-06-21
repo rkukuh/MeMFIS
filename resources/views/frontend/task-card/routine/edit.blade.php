@@ -209,7 +209,7 @@
 
                                                 @foreach ($skills as $skill)
                                                     <option value="{{ $skill->id }}"
-                                                        @if ($skill->id == $taskcard->skill_id) selected @endif>
+                                                        @if ($skill->name == "ERI" && sizeof($taskcard->skills) == 3) selected @elseif($skill->id == $taskcard->skills[0]->id) selected @endif>
                                                         {{ $skill->name }}
                                                     </option>
                                                 @endforeach
@@ -370,14 +370,14 @@
                                                 @if ($taskcard->related_to->isEmpty())
                                                     @foreach ($taskcards as $taskCard)
                                                         <option value="{{ $taskCard->id }}">
-                                                            {{ $taskCard->title }}
+                                                            {{ $taskCard->number }}
                                                         </option>
                                                     @endforeach
                                                 @else
                                                     @foreach ($taskcards as $taskCard)
                                                         <option value="{{ $taskcard->id }}"
                                                             @if(in_array( $taskCard->id ,$relation_taskcards)) selected @endif>
-                                                            {{ $taskCard->title }}
+                                                            {{ $taskCard->number }}
                                                         </option>
                                                     @endforeach
                                                 @endif

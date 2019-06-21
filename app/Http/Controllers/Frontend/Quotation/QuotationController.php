@@ -105,7 +105,6 @@ class QuotationController extends Controller
         return view('frontend.quotation.show',[
             'currencies' => $this->currencies,
             'quotation' => $quotation,
-            'attention' => $attention[0],
             'charges' => $charges,
             'projects' => $projects
         ]);
@@ -207,12 +206,18 @@ class QuotationController extends Controller
             'approved_by' => Auth::id(),
         ]));
 
-        // $quotation->progresses()->save(new Progress([
-        //     'status_id' =>  Status::ofQuotation()->where('code','approve')->first()->id,
-        //     'progressed_by' => Auth::id()
-        // ]));
+        $quotation->progresses()->save(new Progress([
+            'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
-        $project = Project::where('id',$quotation->project_id)->first();
+        $project = Project::find($quotation->project_id);
+        $project->approvals()->save(new Approval([
+            'approvable_id' => $project->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        $project = Project::find($quotation->project_id);
         foreach($project->workpackages as $wp){
             foreach($wp->taskcards as $tc){
                 $jobcard = JobCard::create([
@@ -265,10 +270,18 @@ class QuotationController extends Controller
     public function print(Quotation $quotation)
     {
         $username = Auth::user()->name;
-
+        $totalCharge = 0;
+        if(json_decode($quotation->charge) !== null) {
+            foreach(json_decode($quotation->charge) as $charge){
+                $totalCharge =  $totalCharge +  $charge->amount;
+            }
+        }
+        // dd($totalCharge);
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
-                'quotation' => $quotation
+                'quotation' => $quotation,
+                'totalCharge' => $totalCharge,
+                'attention' => json_decode($quotation->attention)
                 ]);
         return $pdf->stream();
     }

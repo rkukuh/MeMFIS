@@ -1,6 +1,6 @@
 let FacilitySelect2 = {
     init: function () {
-        $('#facility, #facility_validate').select2({
+        $('.facility, #facility_validate').select2({
             placeholder: 'Select a Facility'
         });
     }

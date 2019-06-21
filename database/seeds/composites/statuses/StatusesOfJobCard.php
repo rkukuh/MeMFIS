@@ -26,13 +26,7 @@ class StatusesOfJobCard extends Seeder
 
         Status::create([
             'code' => 'pending',
-            'name' => 'PENDING',
-            'of'   => 'jobcard',
-        ]);
-
-        Status::create([
-            'code' => 'paused',
-            'name' => 'PAUSED',
+            'name' => 'PENDING / PAUSE',
             'of'   => 'jobcard',
         ]);
 

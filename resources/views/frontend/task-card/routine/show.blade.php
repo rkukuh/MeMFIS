@@ -165,12 +165,17 @@
                                             <label class="form-control-label">
                                                 Skill @include('frontend.common.label.required')
                                             </label>
-
-                                            @if (empty($taskcard->skill_id))
+                                            @if (empty($taskcard->skills))
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $taskcard->skill->name)
+                                                    @if(sizeof($taskcard->skills) == 3)
+                                                        @slot('text', 'ERI')
+                                                    @elseif(sizeof($taskcard->skills) == 1)
+                                                        @slot('text', $taskcard->skills[0]->name)
+                                                    @else
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @endif
                                                 @endcomponent
                                             @endif
                                         </div>

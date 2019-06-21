@@ -46,7 +46,7 @@
     #content{
       margin-top:168px;
     }
-    
+
     #content .jobcard-info fieldset legend{
       font-size: 20px;
       font-weight: bold;
@@ -100,7 +100,7 @@
       font-weight: bold;
       font-size: 14px;
     }
-    
+
     #content5 .body{
       width: 100%;
       border-left:  4px solid  #d4d7db;
@@ -118,7 +118,7 @@
   </style>
 </head>
 <body>
-  
+
   <header id="header">
     <img src="./img/form/printoutjobcardad-sb/HeaderJobCardAD-SB.png" alt=""width="100%">
   </header>
@@ -284,10 +284,12 @@
         <table width="100%" cellpadding="10">
           <tr>
             <td width="25%" valign="top">
-              @if($jobCard->taskcard->skill->name)
-                {{$jobCard->taskcard->skill->name}}
+              @if(sizeof($jobCard->taskcard->skills) == 3)
+                  @slot('text', 'ERI')
+              @elseif(sizeof($jobCard->taskcard->skills) == 1)
+                  @slot('text', $jobCard->taskcard->skills[0]->name)
               @else
-                -
+                  @slot('text', '-')
               @endif
             </td>
             <td width="25%" align="center" valign="top">
@@ -317,7 +319,7 @@
     </div>
   </div>
 
-  <div id="content4"> 
+  <div id="content4">
     <div class="container">
       <table width="100%" cellpadding="8" class="table-mt">
         <tr style="background: #d4d7db;">
@@ -399,7 +401,7 @@
                 -
               @endif --}}
           </td>
-          <td width="33%" valign="top" align="center">Status : 
+          <td width="33%" valign="top" align="center">Status :
               generate
               {{-- @if()
               {{}}
@@ -407,7 +409,7 @@
                 -
               @endif --}}
           </td>
-          <td width="34%" valign="top" align="right">Data Close : 
+          <td width="34%" valign="top" align="right">Data Close :
               generate
               {{-- @if()
               {{}}

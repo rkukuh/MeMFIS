@@ -88,6 +88,19 @@
                               @endcomponent
                             </div>
                         </div>
+                        <div class="form-group m-form__group row item-info">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                              <label class="form-control-label">
+                                  Remark
+                              </label>
+                              @component('frontend.common.input.textarea')
+                                @slot('text', 'Remark')
+                                @slot('name', 'remark')
+                                @slot('rows', '3')
+                                @slot('id', 'remark')
+                                @endcomponent
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <div class="flex">

@@ -14,6 +14,7 @@ class CreateDepartmentJobTitleTable extends Migration
     public function up()
     {
         Schema::create('department_jobtitle', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('department_id');
             $table->unsignedInteger('jobtitle_id');
             $table->timestamps();

@@ -104,8 +104,7 @@ class FillComboxController extends Controller
      */
     public function units()
     {
-        $units = Unit::ofQuantity()
-                     ->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
+        $units = Unit::selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
                      ->pluck('name', 'id');
 
         return json_encode($units);
@@ -303,7 +302,7 @@ class FillComboxController extends Controller
      */
     public function taskcardRelationship()
     {
-        $taskcard_relationships = Taskcard::pluck('title', 'id');
+        $taskcard_relationships = Taskcard::pluck('number', 'id');
 
         return json_encode($taskcard_relationships);
 
