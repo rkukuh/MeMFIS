@@ -17,7 +17,7 @@
                   data: "pivot.quantity"
               },
               {
-                  data: "unit.name"
+                  data: "unit_name"
               },
           ],
 
