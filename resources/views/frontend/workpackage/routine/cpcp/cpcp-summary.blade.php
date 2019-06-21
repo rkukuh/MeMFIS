@@ -191,8 +191,8 @@
                 <div class="m-portlet__body">
                     <div class="flex">
                         <div class="action-buttons">
-                            @component('frontend.common.buttons.back')
-                            @slot('href', route('frontend.workpackage.create'))
+                            @component('frontend.common.buttons.back')                            
+                            @slot('href', route('frontend.workpackage.edit',['id' => $workPackage->uuid]))
                             @endcomponent
                         </div>
                     </div>

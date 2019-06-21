@@ -55,9 +55,8 @@ class QuotationWorkPackageController extends Controller
     public function show(Quotation $quotation, WorkPackage $workPackage)
     {
         $job_request = $quotation->workpackages()->where('quotation_id',$quotation->id)
-        // ->where('workpackage_id',$workPackage->id)
+        ->where('workpackage_id',$workPackage->id)
         ->first();
-
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         return view('frontend.quotation.workpackage.index',[
