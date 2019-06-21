@@ -193,12 +193,6 @@
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                                 <div class="action-buttons d-flex flex-row-reverse">
-                                                                    @include('frontend.job-card-hard-time.modal.modal-close')
-                                                                    @component('frontend.common.buttons.close')
-                                                                        @slot('data_target', '#modal_close')
-                                                                        @slot('class', 'ml-2')
-                                                                    @endcomponent
-                            
                                                                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.jobcard-engineer.update','')}}" id="WorkpackageForm">
                                                                         {{method_field('PATCH')}}
                                                                         {!! csrf_field() !!}
