@@ -299,6 +299,7 @@
                                                         @component('frontend.common.label.data-info')
                                                             @slot('id', 'exchange_rate')
                                                             @slot('text',$quotation->exchange_rate)
+                                                            @slot('value',$quotation->exchange_rate)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -485,8 +486,8 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('id', 'grand_total')
-                                                            @slot('class', 'grand_total')
+                                                            @slot('id', 'grand_total_rupiah')
+                                                            @slot('class', 'grand_total_rupiah')
                                                             @slot('text', 'Rp '.$quotation->grandtotal)
                                                             @slot('value', $quotation->grandtotal)
                                                         @endcomponent
