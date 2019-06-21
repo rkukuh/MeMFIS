@@ -8,7 +8,7 @@
           serverSide: !0,
           lengthMenu: [5, 10, 25, 50 ],
           pageLength:5,
-          ajax: "/datatables/taskcard-eo/"+triggeruuid+"/materials",
+          ajax: "/datatables/jobcard/"+triggeruuid+"/materials",
           columns: [
               {
                   data: "name"
