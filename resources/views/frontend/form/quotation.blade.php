@@ -194,7 +194,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        Bp. Dwi Iswantoro
+                        @if($attention)
+                        {{ $attention->name }}
+                        @else
+                        -
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -278,9 +282,27 @@
                 <table width="100%" cellpadding="4">
                     @php
                         $i = 1;
+                        $subtotal = $total = 0;
                         $jobRequest = $quotation->workpackages;
                     @endphp
-                    @for($a = 0 ;$a<=3; $a++)
+                    @for($a = 0 ; $a<=3 && $a < sizeof($jobRequest); $a++)
+                    @php
+                    if($jobRequest[$a]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null){
+                        $total = $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138;
+                        $subtotal = $subtotal + $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate ;
+                    }
+                    else{
+                        if($jobRequest[$a]->pivot->discount_type ==  'amount'){
+                            $total = $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - $jobRequest[$a]->pivot->discount_value;
+                            $subtotal = $subtotal + $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - $jobRequest[$a]->pivot->discount_value;
+                        }
+                        else if($jobRequest[$a]->pivot->discount_type == 'percentage'){
+                            $total = $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - ((($jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138)*$jobRequest[$a]->pivot->discount_value)/100);
+                            $subtotal = $subtotal + $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - ((($jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138)*$jobRequest[$a]->pivot->discount_value)/100);
+                        }
+                    }
+                    @endphp
+                    @endphp
                     <tr>
                         <td width="8%" align="center" valign="top">{{$i++}}</td>
                         <td width="42%" align="left" valign="top">{{$jobRequest[$a]->pivot->description}}</td>
@@ -290,10 +312,19 @@
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$a]->pivot->manhour_total}} x {{$jobRequest[$a]->pivot->manhour_rate}}</td>
-                        <td width="16%" align="center" valign="top">{{$jobRequest[$a]->pivot->manhour_total*$jobRequest[$a]->pivot->manhour_rate}}</td>
+                        <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$a]->pivot->manhour_total}} x {{ number_format($jobRequest[$a]->pivot->manhour_rate) }}</td>
+                        <td width="16%" align="center" valign="top"> Rp. {{ number_format($jobRequest[$a]->pivot->manhour_total*$jobRequest[$a]->pivot->manhour_rate) }}</td>
+                        
+                        @if($jobRequest[$a]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null)
                         <td width="17%" align="center" valign="top"></td>
-                        <td width="17%" align="right" valign="top">$22.500</td>
+                        @else
+                            @if($jobRequest[$a]->pivot->discount_type ==  'amount')
+                            <td width="17%" align="center" valign="top">{{ number_format($jobRequest[$a]->pivot->discount_value) }}</td>
+                            @elseif($jobRequest[$a]->pivot->discount_type == 'percentage'){
+                            <td width="17%" align="center" valign="top">{{ $jobRequest[$a]->pivot->discount_value }}%</td>
+                            @endif
+                        @endif
+                        <td width="17%" align="right" valign="top">Rp. {{ number_format($subtotal   ) }}</td>
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
@@ -329,11 +360,11 @@
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Delivery Cost</td>
-                    <td width="25%" valign="top" align="right">$52</td>
+                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Other Cost(if available)</td>
-                    <td width="25%" valign="top" align="right">$000 <hr width="100%"></td>
+                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td>
                 </tr>
                 <tr>
                     <th width="25%" valign="top" align="left">Grand Total in USD</th>
@@ -444,11 +475,11 @@
                     </tr>
                     <tr>
                         <td width="25%" valign="top" align="left">Delivery Cost</td>
-                        <td width="25%" valign="top" align="right">$52</td>
+                        <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
                     </tr>
                     <tr>
                         <td width="25%" valign="top" align="left">Other Cost(if available)</td>
-                        <td width="25%" valign="top" align="right">$000 <hr width="100%"></td>
+                        <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td>
                     </tr>
                     <tr>
                         <th width="25%" valign="top" align="left">Grand Total in USD</th>

@@ -22,6 +22,7 @@ class CreateVendorsTable extends Migration
             $table->softDeletes();
 
             $table->index('code');
+            $table->index('name');
         });
     }
 

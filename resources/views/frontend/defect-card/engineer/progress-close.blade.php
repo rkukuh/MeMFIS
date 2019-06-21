@@ -185,7 +185,13 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $defectcard->jobcard->taskcard->skill->name)
+                                        @if(sizeof($defectcard->jobcard->taskcard->skills) == 3)
+                                            @slot('text', 'ERI')
+                                        @elseif(sizeof($defectcard->jobcard->taskcard->skills) == 1)
+                                            @slot('text', $defectcard->jobcard->taskcard->skills[0]->name)
+                                        @else
+                                            @include('frontend.common.label.data-info-nodata')
+                                        @endif
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">

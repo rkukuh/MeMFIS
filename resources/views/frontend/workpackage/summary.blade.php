@@ -37,6 +37,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="m-portlet__body">
                     <!--begin: Datatable -->
                     <div class="table-responsive-xl text-center">
@@ -48,17 +49,35 @@
                                     <th>Radio</th>
                                     <th>Electrical</th>
                                     <th>Instrument</th>
-                                    <th>Cabin Maintenance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
+                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} @else 0 @endif</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered ">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Run-Up</th>
+                                    <th>Repair</th>
+                                    <th>Repainting</th>
+                                    <th>Cabin Maintenance</th>
+                                    <th>NDI / NDT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} @else 0 @endif</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -72,16 +91,12 @@
                         <h3 class="m-widget_content-title">Manhour</h3>
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
-                                <span>Total MPD</span>
-                                <span class="m--font-accent">{{ number_format(367) }}</span>
+                                <span>Total Manhour MPD</span>
+                                <span class="m--font-accent">{{ $total_manhor_taskcard }}</span>
                             </div>
                             <div class="m-widget_content-item">
-                                <span>Performance Factor</span>
-                                <span class="m--font-brand">+15%</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>Total</span>
-                                <span>{{ number_format(5973) }}</span>
+                                <span>Total TaskCard</span>
+                                <span>{{ $total_taskcard }}</span>
                             </div>
                         </div>
                     </div>
@@ -97,19 +112,19 @@
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>Basic</span>
-                                <span class="m--font-accent">0</span>
+                                <span class="m--font-accent">{{$basic}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>SIP</span>
-                                <span class="m--font-brand">14</span>
+                                <span class="m--font-brand">{{$sip}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>CPCP</span>
-                                <span class="m--font-focus">15</span>
+                                <span class="m--font-focus">{{$cpcp}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>29</span>
+                                <span>{{$basic+$sip+$cpcp}}</span>
                             </div>
                         </div>
                     </div>
@@ -122,23 +137,19 @@
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>AD/SB</span>
-                                <span class="m--font-accent">450</span>
+                                <span class="m--font-accent">{{$adsb}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>CMR/AWL</span>
-                                <span class="m--font-brand">79</span>
+                                <span class="m--font-brand">{{$cmrawl}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Special Instruction (SI)</span>
-                                <span class="m--font-focus">88</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>HT/CRR</span>
-                                <span class="m--font-success">16</span>
+                                <span class="m--font-focus">{{$si}}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>633</span>
+                                <span>{{$adsb+$cmrawl+$si}}</span>
                             </div>
                         </div>
 
@@ -162,7 +173,7 @@
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
                                 <span class="m-accordion__item-title">
-                                    <h1>Tool(S) List (from taskcard)</h1>
+                                    <h1>Tool(s) Taskcard List</h1>
                                 </span>
 
                                 <span class="m-accordion__item-mode"></span>
@@ -210,7 +221,7 @@
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_1_head" data-toggle="collapse" href="#m_accordion_2_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
                                 <span class="m-accordion__item-title">
-                                    <h1>Item(S) List (from taskcard)</h1>
+                                    <h1>Material(s) Taskcard List</h1>
                                 </span>
 
                                 <span class="m-accordion__item-mode"></span>
@@ -254,7 +265,7 @@
                     <div class="flex">
                         <div class="action-buttons">
                             @component('frontend.common.buttons.back')
-                            @slot('href', route('frontend.workpackage.create'))
+                            @slot('href', route('frontend.workpackage.edit',['id' => $workPackage->uuid]))
                             @endcomponent
                         </div>
                     </div>

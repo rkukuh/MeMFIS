@@ -14,8 +14,11 @@ class CreateCategorizablesTable extends Migration
     public function up()
     {
         Schema::create('categorizables', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('category_id');
             $table->morphs('categorizable');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

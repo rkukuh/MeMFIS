@@ -73,14 +73,11 @@ class CustomerController extends Controller
             if(is_array($request->website_array)){
                 for ($i=0; $i < sizeof($request->website_array) ; $i++) {
                         if($request->website_type[$i] !== null && isset($request->website_array[$i])){
-                            dd($request->website_type[$i]);
                         $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
                         $customer->websites()->save(new Website([
                             'url' => $request->website_array[$i],
                             'type_id' => $website_type->id,
                         ]));
-                    }else{
-                        dd("fales");
                     }
                 }
             }
@@ -101,7 +98,7 @@ class CustomerController extends Controller
                 for ($i=0; $i < sizeof($request->fax_array) ; $i++) {
                     if(isset($request->fax_array[$i])){
                         $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
-    
+
                         $customer->faxes()->save(new Fax([
                             'number' => $request->fax_array[$i],
                             'type_id' => $fax_type->id,
@@ -164,7 +161,7 @@ class CustomerController extends Controller
         $documents = Type::ofDocument()->get();
         $websites = Type::ofWebsite()->get();
         $attentions = json_decode($customer->attention);
-        // dd($attentions[0]->phones);
+       //dd($customer->phones);
         return view('frontend.customer.edit', [
             'customer' => $customer,
             'attentions' => $attentions,

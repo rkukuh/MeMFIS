@@ -16,11 +16,18 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      */
     public function nonRoutineMaterial(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'ad')->orWhere('code','sb');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->of == 'taskcard-type-non-routine'){
+                foreach($taskcard->materials as $item){
+                    $item->tackcard_number .= $taskcard->number;
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -117,11 +124,18 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      */
     public function nonRoutineTool(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'ad')->orWhere('code','sb');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->of == 'taskcard-type-non-routine'){
+                foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->number;
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -218,11 +232,18 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      */
     public function ad_sbMaterial(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'ad')->orWhere('code','sb');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'ad' or $taskcard->type->code == 'sb'){
+                foreach($taskcard->materials as $item){
+                    $item->tackcard_number .= $taskcard->number;
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -319,11 +340,18 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      */
     public function ad_sbTool(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'ad')->orWhere('code','sb');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'ad' or $taskcard->type->code == 'sb'){
+                foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->number;
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -420,11 +448,18 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      */
     public function cmr_awlMaterial(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'cmr')->orWhere('code','awl');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'cmr' or $taskcard->type->code == 'awl'){
+                foreach($taskcard->materials as $item){
+                    $item->tackcard_number .= $taskcard->number;
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -521,11 +556,18 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      */
     public function cmr_awlTool(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'cmr')->orWhere('code','awl');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'cmr' or $taskcard->type->code == 'awl'){
+                foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->number;
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -622,11 +664,18 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      */
     public function siMaterial(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'si');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'si'){
+                foreach($taskcard->materials as $item){
+                    $item->tackcard_number .= $taskcard->number;
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -723,11 +772,18 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      */
     public function siTool(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'si');
-                                    })->get();
-        $data = $alldata = json_decode($workPackages);
+        $items =[];
+        foreach($workPackage->taskcards as $taskcard){
+            if($taskcard->type->code == 'si'){
+                foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->number;
+                    $item->unit_name .= $item->unit->name;
+                    array_push($items, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

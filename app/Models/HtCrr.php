@@ -17,8 +17,10 @@ class HtCrr extends MemfisModel
         'estimation_manhour',
         'removed_at',
         'removed_by',
+        'removal_manhour_estimation',
         'installed_at',
         'installed_by',
+        'installation_manhour_estimation',
         'description',
     ];
 
@@ -40,6 +42,19 @@ class HtCrr extends MemfisModel
     public function installedBy()
     {
         return $this->belongsTo(Employee::class, 'installed_by');
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many progresses.
+     *
+     * This function will get all HtCrr's progresses.
+     * See: Progress's progressable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function progresses()
+    {
+        return $this->morphMany(Progress::class, 'progressable');
     }
 
     /**

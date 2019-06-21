@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Customer;
 
 use App\Models\Customer;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -34,9 +35,13 @@ class CustomerAddressesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Customer $customer, Request $request)
     {
-        //
+        $customer->addresses()->save(new Address([
+            'address' => $request->address,
+            'type_id' => $request->address_type,    
+        ]));
+        return response()->json($request);
     }
 
     /**

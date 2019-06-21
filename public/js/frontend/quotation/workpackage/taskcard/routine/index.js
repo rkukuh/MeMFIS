@@ -65,6 +65,12 @@ let RoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'description',
                     title: 'Description',
                     sortable: 'asc',
@@ -218,6 +224,12 @@ let RoutineWorkpackage = {
                 {
                     field: 'task.name',
                     title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -381,6 +393,12 @@ let RoutineWorkpackage = {
                 {
                     field: 'task.name',
                     title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
                     sortable: 'asc',
                     filterable: !1,
                 },

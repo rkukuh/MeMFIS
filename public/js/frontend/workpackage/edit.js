@@ -682,8 +682,53 @@ let Workpackage = {
             });
         });
 
-    }
+        let simpan = $('.action-buttons').on('click', '.add-workpackage.update', function () {
+            let title = $('input[name=title]').val();
+            let applicability_airplane = $('#applicability_airplane').val();
+            let description = $('#description').val();
 
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    title: title,
+                    aircraft_id: applicability_airplane,
+                    description: description,
+                    is_template:'1',
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.aircraft_id) {
+                            $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
+                        }
+                        if (data.errors.title) {
+                            $('#title-error').html(data.errors.title[0]);
+                        }
+
+                        // document.getElementById('applicability-airplane').value = applicability-airplane;
+                        // document.getElementById('title').value = title;
+
+                    } else {
+                        // $('#modal_customer').modal('hide');
+
+                        toastr.success('Work Package has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // let table = $('.m_datatable').mDatatable();
+
+                        // table.originalDataSet = [];
+                        // table.reload();
+                    }
+                }
+            });
+        });
+    }
+    
 
 };
 

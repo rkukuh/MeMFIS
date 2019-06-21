@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\TaskCard;
 
+use App\Models\Type;
 use App\Models\TaskCard;
 use App\Models\EOInstruction;
 use App\Http\Controllers\Controller;
@@ -39,7 +40,16 @@ class EOInstructionController extends Controller
     public function store(TaskCard $taskcard, EOInstructionStore $request)
     {
         $eo_instruction = new EOInstruction($request->all());
-        $taskcard->eo_instructions()->save($eo_instruction);
+        $eo = $taskcard->eo_instructions()->save($eo_instruction);
+        if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+            $eo->skills()->attach(Type::where('code','electrical')->first()->id);
+            $eo->skills()->attach(Type::where('code','radio')->first()->id);
+            $eo->skills()->attach(Type::where('code','instrument')->first()->id);
+        }
+        else{
+            $eo->skills()->attach($request->skill_id);
+        }
+
         return response()->json($taskcard);
 
     }

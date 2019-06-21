@@ -96,7 +96,7 @@ Route::name('frontend.')->group(function () {
                 });
                 Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
                 Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
-                Route::post('/{project}/workpackage/{workpackage}/','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
+                Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
                 Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
             });
 
@@ -193,8 +193,6 @@ Route::name('frontend.')->group(function () {
             });
         });
 
-
-
         /** ITEM */
 
         Route::namespace('Item')->group(function () {
@@ -288,13 +286,21 @@ Route::name('frontend.')->group(function () {
 
             Route::name('htcrr.')->group(function () {
                 Route::prefix('htcrr')->group(function () {
-
-
+                    // 
                 });
             });
 
         });
 
+        /** RTS */
+
+        Route::resource('rts', 'RTSController');
+
+        Route::name('rts.')->group(function () {
+            Route::prefix('rts')->group(function () {
+                // 
+            });
+        });
 
         /** TASK CARD */
 
@@ -384,13 +390,13 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['jobcard-engineer' => 'jobcard']
             ]);
 
-            Route::post('jobcard-engineer', 'JobCardEngineerController@search')->name('engineer.jobcard.seacrh');
+            Route::post('jobcard-engineer', 'JobCardEngineerController@search')->name('engineer.jobcard.search');
 
             Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
 
-            Route::post('jobcard-mechanic/', 'JobCardMechanicController@search')->name('mechanic.jobcard.seacrh');
+            Route::post('jobcard-mechanic/', 'JobCardMechanicController@search')->name('mechanic.jobcard.search');
 
             Route::name('jobcard.')->group(function () {
                 Route::prefix('jobcard')->group(function () {
@@ -454,6 +460,8 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['discrepancy-ppc' => 'discrepancy']
             ]);
 
+            Route::post('discrepancy-engineer/search', 'DiscrepancyEngineerController@search')->name('engineer.discrepancy.search');
+
 
             Route::resource('discrepancy-engineer', 'DiscrepancyEngineerController', [
                 'parameters' => ['discrepancy-engineer' => 'discrepancy']
@@ -492,13 +500,13 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['defectcard-engineer' => 'defectcard']
             ]);
 
-            Route::post('defectcard-engineer', 'DefectCardEngineerController@search')->name('engineer.defectcard.seacrh');
+            Route::post('defectcard-engineer', 'DefectCardEngineerController@search')->name('engineer.defectcard.search');
 
             Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
                 'parameters' => ['defectcard-mechanic' => 'defectcard']
             ]);
 
-            Route::post('defectcard-mechanic', 'DefectCardMechanicController@search')->name('mechanic.defectcard.seacrh');
+            Route::post('defectcard-mechanic', 'DefectCardMechanicController@search')->name('mechanic.defectcard.search');
 
             Route::resource('defectcard-project', 'DefectCardProjectController', [
                 'parameters' => ['defectcard-project' => 'defectcard']

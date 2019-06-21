@@ -32,34 +32,45 @@
                                         @slot('id_error', 'tool')
                                     @endcomponent
                                 </div>
-                            </div>
-                            <div class="form-group m-form__group row ">
-
-                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-sm-3 col-md-3 col-lg-3">
                                     <label class="form-control-label">
                                         Quantity @include('frontend.common.label.required')
                                     </label>
 
                                     @component('frontend.common.input.number')
                                         @slot('text', 'Quantity')
-                                        @slot('name', 'quantity')
-                                        @slot('id', 'quantity')
-                                        @slot('id_error', 'quantity')
+                                        @slot('name', 'quantity_tool')
+                                        @slot('id', 'quantity_tool')
+                                        @slot('id_error', 'quantity_tool')
                                         @slot('min',0)
                                     @endcomponent
                                 </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Unit @include('frontend.common.label.required')
-                                        </label>
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label class="form-control-label">
+                                        Unit @include('frontend.common.label.required')
+                                    </label>
 
-                                        @component('frontend.common.input.select2')
-                                            @slot('id', 'unit_tool')
-                                            @slot('text', 'Unit')
-                                            @slot('name', 'unit_tool')
-                                            @slot('id_error', 'unit_tool')
-                                        @endcomponent
-                                    </div>
+                                    @component('frontend.common.input.select2')
+                                        @slot('id', 'unit_tool')
+                                        @slot('text', 'Unit')
+                                        @slot('name', 'unit_tool')
+                                        @slot('id_error', 'unit_tool')
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row ">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-control-label">
+                                        Remark @include('frontend.common.label.required')
+                                    </label>
+
+                                    @component('frontend.common.input.textarea')
+                                        @slot('id', 'remark_tool')
+                                        @slot('text', 'Remark')
+                                        @slot('name', 'remark_tool')
+                                        @slot('id_error', 'remark_tool')
+                                    @endcomponent
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">

@@ -4,11 +4,13 @@ use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Status;
 use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\TaskCard;
 use App\Models\Approval;
+use App\Models\Progress;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Faker\Generator as Faker;
@@ -90,40 +92,10 @@ $factory->define(Quotation::class, function (Faker $faker) {
 
 $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
 
-    // WorkPackage
+    // Approval
 
     if ($faker->boolean) {
-        $workpackage = null;
-
-        for ($i = 1; $i <= rand(5, 10); $i++) {
-            if (WorkPackage::count()) {
-                $workpackage = WorkPackage::get()->random();
-            } else {
-                $workpackage = factory(WorkPackage::class)->create();
-            }
-
-            $disc_type = null;
-            $disc_value = null;
-
-            if ($faker->boolean) {
-                $disc_type = $faker->randomElement(['percentage', 'amount']);
-                
-                if ($disc_type == 'percentage') {
-                    $disc_value = $faker->randomElement([5, 10, 15, 20, 25]);
-                } 
-                else if ($disc_type == 'amount') {
-                    $disc_value = rand(1, 10) * 100000;
-                }
-            }
-
-            $quotation->workpackages()->save($workpackage, [
-                'manhour_total' => rand(10, 20),
-                'manhour_rate' => rand(10, 20) * 1000000,
-                'discount_type' => $disc_type,
-                'discount_value' => $disc_value,
-                'description' => $faker->randomElement([null, $faker->sentence]),
-            ]);
-        }
+        $quotation->approvals()->save(factory(Approval::class)->make());
     }
 
     // Item
@@ -160,10 +132,49 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
         }
     }
 
-    // Approval
+    // Progress
+
+    $quotation->progresses()->save(
+        factory(Progress::class)->make([
+            // Set all progress to 'open' to make testing phase easier
+            'status_id' => Status::ofQuotation()->where('code', 'open')->first()
+        ])
+    );
+
+    // WorkPackage
 
     if ($faker->boolean) {
-        $quotation->approvals()->save(factory(Approval::class)->make());
+        $workpackage = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (WorkPackage::count()) {
+                $workpackage = WorkPackage::get()->random();
+            } else {
+                $workpackage = factory(WorkPackage::class)->create();
+            }
+
+            $disc_type = null;
+            $disc_value = null;
+
+            if ($faker->boolean) {
+                $disc_type = $faker->randomElement(['percentage', 'amount']);
+                
+                if ($disc_type == 'percentage') {
+                    $disc_value = $faker->randomElement([5, 10, 15, 20, 25]);
+                } 
+                else if ($disc_type == 'amount') {
+                    $disc_value = rand(1, 10) * 100000;
+                }
+            }
+
+            $quotation->workpackages()->save($workpackage, [
+                'manhour_total' => rand(10, 20),
+                'manhour_rate' => rand(10, 20) * 1000000,
+                'discount_type' => $disc_type,
+                'discount_value' => $disc_value,
+                'description' => $faker->randomElement([null, $faker->sentence]),
+            ]);
+        }
     }
     
 });

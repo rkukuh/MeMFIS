@@ -84,6 +84,7 @@ class DummyDataSeeder extends Seeder
         $this->call(GoodsReceiveds::class);
         $this->call(HtCrrs::class);
         $this->call(DefectCards::class);
+        $this->call(RTSs::class);
         
         /** PROJECT'S WORKPACKAGES */
 

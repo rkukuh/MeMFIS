@@ -14,6 +14,7 @@ class CreateItemWorkPackageTable extends Migration
     public function up()
     {
         Schema::create('item_workpackage', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('workpackage_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');

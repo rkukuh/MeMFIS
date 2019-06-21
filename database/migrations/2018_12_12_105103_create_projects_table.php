@@ -38,6 +38,7 @@ class CreateProjectsTable extends Migration
 
             $table->index('code');
             $table->index('title');
+            $table->index('no_wo');
         });
     }
 

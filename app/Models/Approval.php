@@ -19,12 +19,13 @@ class Approval extends MemfisModel
      *
      * This function will get all of the owning approvable models.
      * See:
-     * - Quotation's approvals() method for the inverse
-     * - JobCard's approvals() method for the inverse
      * - DefectCard's approvals() method for the inverse
-     * - GoodReceive's approvals() method for the inverse
-     * - PurchaseRequest's approvals() method for the inverse
+     * - GoodsReceive's approvals() method for the inverse
+     * - JobCard's approvals() method for the inverse
+     * - Quotation's approvals() method for the inverse
+     * - Project's approvals() method for the inverse
      * - PurchaseOrder's approvals() method for the inverse
+     * - PurchaseRequest's approvals() method for the inverse
      *
      * @return mixed
      */
