@@ -286,7 +286,7 @@ Route::name('frontend.')->group(function () {
 
             Route::name('htcrr.')->group(function () {
                 Route::prefix('htcrr')->group(function () {
-                    // 
+                    //
                 });
             });
 
@@ -298,7 +298,7 @@ Route::name('frontend.')->group(function () {
 
         Route::name('rts.')->group(function () {
             Route::prefix('rts')->group(function () {
-                // 
+                //
             });
         });
 
@@ -403,9 +403,6 @@ Route::name('frontend.')->group(function () {
 
                     /** Transaction */
                     Route::get('/{jobCard}/print', 'JobCardController@print');
-                    Route::resource('/{jobcard}/progress', 'JobCardProgressController');
-                    Route::resource('/{jobcard}/inspect', 'JobCardInspectController');
-
                 });
             });
 
