@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\JobCard;
+namespace App\Http\Controllers\Frontend\JobCardHardTime;
 
 use App\Models\JobCard;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\JobCardStore;
+use App\Http\Requests\Frontend\JobCardUpdate;
 
-class JobCardProgressController extends Controller
+class JobCardHardTimePPCController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class JobCardProgressController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.job-card-hard-time.ppc.index');
     }
 
     /**
@@ -31,10 +32,10 @@ class JobCardProgressController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\JobCardStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobCardStore $request)
     {
         //
     }
@@ -42,21 +43,23 @@ class JobCardProgressController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobcard
+     * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
     public function show(JobCard $jobcard)
     {
-        //
+        return view('frontend.job-card-hard-time.ppc.show', [
+            'jobcard' => $jobcard,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobcard
+     * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobcard)
+    public function edit(JobCard $jobCard)
     {
         //
     }
@@ -64,11 +67,11 @@ class JobCardProgressController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\JobCard  $jobcard
+     * @param  \App\Http\Requests\Frontend\JobCardUpdate  $request
+     * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobCard $jobcard)
+    public function update(JobCardUpdate $request, JobCard $jobCard)
     {
         //
     }
@@ -76,11 +79,12 @@ class JobCardProgressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobCard  $jobcard
+     * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobCard $jobcard)
+    public function destroy(JobCard $jobCard)
     {
         //
     }
+
 }
