@@ -270,10 +270,11 @@ class QuotationController extends Controller
     public function print(Quotation $quotation)
     {
         $username = Auth::user()->name;
-        // dd(json_decode($quotation->charge));
         $totalCharge = 0;
-        foreach(json_decode($quotation->charge) as $charge){
-            $totalCharge =  $totalCharge +  $charge->amount;
+        if(json_decode($quotation->charge) !== null) {
+            foreach(json_decode($quotation->charge) as $charge){
+                $totalCharge =  $totalCharge +  $charge->amount;
+            }
         }
         // dd($totalCharge);
         $pdf = \PDF::loadView('frontend/form/quotation',[
