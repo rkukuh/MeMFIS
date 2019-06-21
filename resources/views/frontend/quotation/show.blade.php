@@ -513,6 +513,7 @@
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/workpackage/show.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/show.js') }}"></script>
+<script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
 @endpush
