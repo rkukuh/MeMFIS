@@ -22,15 +22,16 @@ class SummaryNonRoutineTaskcardController extends Controller
      */
     public function adsb(WorkPackage $workPackage)
     {
-        $taskcards  = $workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb']);
         $skills = $subset = [];
-
+        $taskcards  = $workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb']);
         foreach($taskcards as $taskcard){
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['code'])
-                    ->all();
-            });
+            foreach($taskcard->eo_instructions as $eo_instruction){
+                $result = $eo_instruction->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                        ->only(['code'])
+                        ->all();
+                });
+            }
 
             array_push($subset , $result);
         }
@@ -136,11 +137,13 @@ class SummaryNonRoutineTaskcardController extends Controller
         $skills = $subset = [];
 
         foreach($workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb']) as $taskcard){
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['code'])
-                    ->all();
-            });
+            foreach($taskcard->eo_instructions as $eo_instruction){
+                $result = $eo_instruction->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                        ->only(['code'])
+                        ->all();
+                });
+            }
 
             array_push($subset , $result);
         }
