@@ -17,6 +17,7 @@ class CreateRtsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('project_id');
+            $table->unsignedDecimal('aircraft_total_time', 8, 2)->nullable();
             $table->text('work_performed')->nullable();
             $table->text('work_data')->nullable();
             $table->text('exception')->nullable();
