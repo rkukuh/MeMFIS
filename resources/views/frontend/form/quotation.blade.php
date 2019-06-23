@@ -285,7 +285,7 @@
                         $subtotal = $total = 0;
                         $jobRequest = $quotation->workpackages;
                     @endphp
-                    @for($a = 0 ;$a<=3; $a++)
+                    @for($a = 0 ; $a<=3 && $a < sizeof($jobRequest); $a++)
                     @php
                     if($jobRequest[$a]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null){
                         $total = $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138;

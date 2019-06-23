@@ -319,7 +319,7 @@
             <td width="25%" valign="top">
               @if(sizeof($jobCard->taskcard->skills) == 3)
                   @slot('text', 'ERI')
-              @elseif(sizeof($jobCard->skills) == 1)
+              @elseif(sizeof($jobCard->taskcard->skills) == 1)
                   @slot('text', $jobCard->taskcard->skills[0]->name)
               @else
                   @slot('text', '-')
@@ -401,8 +401,8 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                @if(isset($jobCard->defectcards))
-                {{$jobCard->defectcards->first()->code}}
+                @if(empty($jobCard->defectcards))
+                    {{$jobCard->defectcards->first()->code}}
                 @endif
               </span>
           </td>
@@ -512,8 +512,8 @@
                 <th width="15%" align="center">Qty</th>
                 <th width="15%" align="center">Unit</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             @if(empty($jobCard->taskcard->tools->toArray()))
                 <tr>
                     <td colspan="5" align="center">empty</td>
@@ -529,7 +529,7 @@
                 <td align="center" valign="top" width="15%">{{App\Models\Unit::find($tool->pivot->unit_id)->name}}</td>
             </tr>
             @endforeach
-            </tbody>
+          </tbody>
         </table>
       </div>
     </div>

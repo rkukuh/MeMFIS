@@ -162,7 +162,6 @@ let Customer = {
                             if(key.indexOf(".") != -1){
                               var arr = key.split(".");
                               name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
-                              console.log(arr);
                             }
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
                           });

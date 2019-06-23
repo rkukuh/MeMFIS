@@ -88,6 +88,10 @@
                                 @include('frontend.job-card.filter')
                             </div>
                             <div class="job_card_engineer_datatable" id="scrolling_both"></div>
+
+                            @include('frontend.job-card.engineer.tool.index')
+                            @include('frontend.job-card.engineer.item.index')
+
                         </div>
 
                     </div>
@@ -100,7 +104,10 @@
 @endsection
 
 @push('footer-scripts')
+<script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
+<script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
+<script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
 <script>
     $("#number").focus();
 </script>

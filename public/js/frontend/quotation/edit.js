@@ -4,18 +4,26 @@ let Quotation = {
     init: function () {
         let exchange_rate_value = $('input[name=exchange]').val();
         $(document).ready(function () {
-            let GTotal = IDRformatter.format(document.getElementById("grand_total").innerHTML);
-            document.getElementById("grand_total").innerHTML = GTotal;
+            let GTotal = 0;
+            if(currency == 1){
+                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
+                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+            }else{
+                GTotal = USDformatter.format(document.getElementById("grand_total").innerHTML);
+                document.getElementById("grand_total").innerHTML = GTotal;
+                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
+                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+            }
         });
 
         $('select[name="currency"]').on('change', function () {
             let exchange_id = this.options[this.selectedIndex].innerHTML;
             let exchange_rate = $('input[name=exchange]');
-            if (exchange_id === "Rupiah (Rp)") {
+            if (exchange_id.includes("Rp")) {
                 exchange_rate.val(1);
                 exchange_rate.attr("readonly", true);
             } else {
-                exchange_rate.val('');
+                exchange_rate.val(1);
                 exchange_rate.attr("readonly", false);
             }
         });
@@ -142,19 +150,28 @@ let Quotation = {
             document.getElementById("workpackage_uuid").value = $(this).data('uuid');
         });
 
-        $('.calculate').on('click', function edit() {
-            var nilai = [];
-            var inputs = $(".charge");
+        $('.calculate').on('click', function calculate_total() {
+            let value = [];
+            let inputs = $(".charge");
+            let currency = $("#currency").val();
+            let exchange_rate = $("#exchange").val();
+            let grandTotal = grandTotalRupiah = 0;
             //get all values
-            for (var i = 0; i < inputs.length; i++) {
-                nilai[i] = parseInt($(inputs[i]).val());
+            for (let i = 0; i < inputs.length; i++) {
+                value[i] = parseInt($(inputs[i]).val());
             }
-            //sum semua nilai pada array
             const arrSum = arr => arr.reduce((a, b) => a + b, 0);
             let subTotal = $('#sub_total').attr("value");
-            let grandTotal = parseInt(subTotal) + parseInt(arrSum(nilai));
+            grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
+
+            if(currency !== 1){
+                grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+            }
+                        
             $('#grand_total').attr("value", grandTotal);
-            $('#grand_total').html(IDRformatter.format(grandTotal));
+            $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+            $('#grand_total').html("$ "+USDformatter.format(grandTotal));
+            $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
         });
 
         $('.action-buttons').on('click', '.discount', function () {
@@ -214,7 +231,28 @@ let Quotation = {
 
             summary.originalDataSet = [];
             summary.reload();
+            
+            let value = [];
+            let inputs = $(".charge");
+            let currency = $("#currency").val();
+            let exchange_rate = $("#exchange").val();
+            let grandTotal = grandTotalRupiah = 0;
+            //get all values
+            for (let i = 0; i < inputs.length; i++) {
+                value[i] = parseInt($(inputs[i]).val());
+            }
+            const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+            let subTotal = $('#sub_total').attr("value");
+            grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
 
+            if(currency !== 1){
+                grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+            }
+                        
+            $('#grand_total').attr("value", grandTotal);
+            $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+            $('#grand_total').html("$ "+USDformatter.format(grandTotal));
+            $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
         });
 
         $('select[name="work-order"]').on('change', function () {

@@ -104,7 +104,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                         <label class="form-control-label">
-                                                            Phone @include('frontend.common.label.optional')
+                                                            Phone @include('frontend.common.label.required')
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -577,7 +577,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                         <label class="form-control-label">
-                                                            Email @include('frontend.common.label.optional')
+                                                            Email @include('frontend.common.label.required')
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -980,9 +980,11 @@
                                                             </label>
 
                                                             <select name="attn-phone" class="form-control attn-phone" multiple>
-                                                                @foreach($attention->phones as $attnPhone)
-                                                                <option value="{{ $attnPhone }}" selected>{{ $attnPhone }}</option>
-                                                                @endforeach
+                                                                @if(isset($attention->phones))
+                                                                    @foreach($attention->phones as $attnPhone)
+                                                                    <option value="{{ $attnPhone }}" selected>{{ $attnPhone }}</option>
+                                                                    @endforeach
+                                                                @endif
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-3 col-md-3 col-lg-3">
@@ -1010,9 +1012,11 @@
                                                             </label>
 
                                                             <select name="attn-email" class="form-control attn-email" multiple>
-                                                                @foreach($attention->emails as $emails)
-                                                                <option value="{{ $emails }}" selected>{{ $emails }}</option>
-                                                                @endforeach
+                                                                @if(isset($attention->phones))
+                                                                    @foreach($attention->emails as $emails)
+                                                                    <option value="{{ $emails }}" selected>{{ $emails }}</option>
+                                                                    @endforeach
+                                                                @endif
                                                             </select>
                                                         </div>
                                                     </div>

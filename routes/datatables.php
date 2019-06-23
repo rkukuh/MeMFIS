@@ -476,6 +476,8 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/', 'JobCardDatatables@index')->name('all');
                 Route::post('/filter/', 'JobCardDatatables@filter')->name('filter');
+                Route::get('/{jobcard}/materials', 'JobCardDatatables@material')->name('material');
+                Route::get('/{jobcard}/tools', 'JobCardDatatables@tool')->name('tool');
 
             });
 

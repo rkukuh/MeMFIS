@@ -73,7 +73,6 @@ class CustomerController extends Controller
             if(is_array($request->website_array)){
                 for ($i=0; $i < sizeof($request->website_array) ; $i++) {
                         if($request->website_type[$i] !== null && isset($request->website_array[$i])){
-                            dd($request->website_type[$i]);
                         $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
                         $customer->websites()->save(new Website([
                             'url' => $request->website_array[$i],

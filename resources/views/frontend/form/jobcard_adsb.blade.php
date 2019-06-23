@@ -286,7 +286,7 @@
             <td width="25%" valign="top">
               @if(sizeof($jobCard->taskcard->skills) == 3)
                   @slot('text', 'ERI')
-              @elseif(sizeof($jobCard->skills) == 1)
+              @elseif(sizeof($jobCard->taskcard->skills) == 1)
                   @slot('text', $jobCard->taskcard->skills[0]->name)
               @else
                   @slot('text', '-')

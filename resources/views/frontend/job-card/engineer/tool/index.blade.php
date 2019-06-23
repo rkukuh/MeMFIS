@@ -14,7 +14,6 @@
                             <th>Material</th>
                             <th>Quantity</th>
                             <th>Unit</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>

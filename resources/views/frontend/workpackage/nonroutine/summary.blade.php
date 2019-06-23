@@ -37,6 +37,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="m-portlet__body">
                     <!--begin: Datatable -->
                     <div class="table-responsive-xl text-center">
@@ -48,17 +49,35 @@
                                     <th>Radio</th>
                                     <th>Electrical</th>
                                     <th>Instrument</th>
-                                    <th>Cabin Maintenance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>5</td>
+                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} @else 0 @endif</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered ">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Run-Up</th>
+                                    <th>Repair</th>
+                                    <th>Repainting</th>
+                                    <th>Cabin Maintenance</th>
+                                    <th>NDI / NDT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} @else 0 @endif</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -126,7 +145,7 @@
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
                                 <span class="m-accordion__item-title">
-                                    <h1>Tool(S) List (from taskcard)</h1>
+                                    <h1>Tool(s) Taskcard List</h1>
                                 </span>
 
                                 <span class="m-accordion__item-mode"></span>
@@ -174,7 +193,7 @@
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_1_head" data-toggle="collapse" href="#m_accordion_2_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
                                 <span class="m-accordion__item-title">
-                                    <h1>Item(S) List (from taskcard)</h1>
+                                    <h1>Material(s) Taskcard List</h1>
                                 </span>
 
                                 <span class="m-accordion__item-mode"></span>
@@ -217,8 +236,8 @@
                 <div class="m-portlet__body">
                     <div class="flex">
                         <div class="action-buttons">
-                            @component('frontend.common.buttons.back')
-                            @slot('href', route('frontend.workpackage.create'))
+                            @component('frontend.common.buttons.back')                            
+                            @slot('href', route('frontend.workpackage.edit',['id' => $workPackage->uuid]))
                             @endcomponent
                         </div>
                     </div>

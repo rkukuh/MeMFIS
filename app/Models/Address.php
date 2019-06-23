@@ -7,7 +7,7 @@ use App\MemfisModel;
 class Address extends MemfisModel
 {
     protected $fillable = [
-        'addresss',
+        'address',
         'latitude',
         'longitude',
         'type_id',

@@ -96,7 +96,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <label class="form-control-label">
-                                                    Phone @include('frontend.common.label.optional')
+                                                    Phone @include('frontend.common.label.required')
                                                 </label>
                                             </div>
                                             <div class="col-sm-2 col-md-2 col-lg-2">
@@ -375,7 +375,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <label class="form-control-label">
-                                                    Email @include('frontend.common.label.optional')
+                                                    Email @include('frontend.common.label.required')
                                                 </label>
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">

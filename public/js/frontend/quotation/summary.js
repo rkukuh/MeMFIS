@@ -17,6 +17,7 @@ var DatatableAutoColumnHideDemo = function () {
             map: function (raw) {
               let dataSet = raw;
               let total = subtotal = 0;
+             
               if (typeof raw.data !== 'undefined') {
                 dataSet = raw.data;
               }
@@ -84,12 +85,12 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (a) {
             
             if(currency == 1){
-              return ('Cost<br>' +
+              return ('<br>' +
                 IDRformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
             }else{
-              return ('Cost<br>' +
+              return ('<br>' +
                 '$ '+USDformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
@@ -146,17 +147,28 @@ var DatatableAutoColumnHideDemo = function () {
             if(t.pivot.discount_value == null && t.pivot.discount_type == null){
                 total = t.pivot.manhour_total * t.pivot.manhour_rate + 138;
                 subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate ;
-                document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
-                document.getElementById("grand_total").innerHTML = IDRformatter.format(subtotal);
-                $("#grand_total").attr("value", subtotal);
-                $("#sub_total").attr("value", subtotal);
+                if(currency == 1){
+                  document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                  document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                  $("#grand_total_rupiah").attr("value", subtotal);
+                  $("#sub_total").attr("value", subtotal);
+                }else{
+                  let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                }
                 if(currency == 1){ 
                     return (
                       IDRformatter.format(total)
                     );
                   }else{
                     return (
-                      IDRformatter.format(total * exchange_rate)
+                      "$"+USDformatter.format(total * exchange_rate)
                     );
                   }
             }
@@ -164,44 +176,85 @@ var DatatableAutoColumnHideDemo = function () {
                 if(t.pivot.discount_type ==  'amount'){
                     total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
                     subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
-                    document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
-                    document.getElementById("grand_total").innerHTML = IDRformatter.format(subtotal);
-                    $("#grand_total").attr("value", subtotal);
-                    $("#sub_total").attr("value", subtotal);
+                    if(currency == 1){
+                      document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                      $("#grand_total_rupiah").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+                    }else{
+                      let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                    }
                     if(currency == 1){ 
                       return (
                         IDRformatter.format(total)
                       );
                     }else{
                       return (
-                      IDRformatter.format(total * exchange_rate)
+                        "$"+USDformatter.format(total * exchange_rate)
                       );
                     }
                 }
                 else if(t.pivot.discount_type == 'percentage'){
                     total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
                     subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
-                    document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
-                    document.getElementById("grand_total").innerHTML = IDRformatter.format(subtotal);
-                    $("#grand_total").attr("value", subtotal);
-                    $("#sub_total").attr("value", subtotal);
+                    if(currency == 1){
+                      document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                      $("#grand_total_rupiah").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+                    }else{
+                      let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                    }
                     if(currency == 1){ 
                       return (
                         IDRformatter.format(total)
                       );
                     }else{
                       return (
-                       IDRformatter.format(total * exchange_rate)
+                       "$"+USDformatter.format(total * exchange_rate)
                       );
                     }
                 }
             }
-            
           }
         },
       ],
     });
+    let value = [];
+    let inputs = $(".charge");
+    let currency = $("#currency").val();
+    let exchange_rate = $("#exchange").val();
+    let grandTotal = grandTotalRupiah = 0;
+    //get all values
+    for (let i = 0; i < inputs.length; i++) {
+        value[i] = parseInt($(inputs[i]).val());
+    }
+    const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+    let subTotal = $('#sub_total').attr("value");
+    grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
 
+    if(currency !== 1){
+        grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+    }
+                
+    $('#grand_total').attr("value", grandTotal);
+    $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+    $('#grand_total').html("$ "+USDformatter.format(grandTotal));
+    $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
   };
 
   return {
