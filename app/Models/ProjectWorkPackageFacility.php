@@ -12,6 +12,7 @@ class ProjectWorkPackageFacility extends MemfisModel
         'project_workpackage_id',
         'facility_id',
         'price_id',
+        'price_amount',
         'note',
     ];
 
