@@ -18,7 +18,6 @@ class CreateFacilitiesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

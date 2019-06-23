@@ -9,7 +9,6 @@ class Facility extends MemfisModel
     protected $fillable = [
         'code',
         'name',
-        'note',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
