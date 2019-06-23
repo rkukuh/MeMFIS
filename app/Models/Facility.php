@@ -11,4 +11,19 @@ class Facility extends MemfisModel
         'name',
         'note',
     ];
+
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Polymorphic: A Facility can have zero or many prices.
+     *
+     * This function will get all of the Facility's prices.
+     * See: Price's priceable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function prices()
+    {
+        return $this->morphMany(Price::class, 'priceable');
+    }
 }
