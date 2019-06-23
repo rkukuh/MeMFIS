@@ -20,6 +20,7 @@ class Price extends MemfisModel
      *
      * This function will get all of the owning priceable models.
      * See:
+     * - Facility's prices() method for the inverse
      * - Item's prices() method for the inverse
      *
      * @return mixed
