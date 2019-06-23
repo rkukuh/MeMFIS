@@ -127,6 +127,19 @@ class Project extends MemfisModel
     }
 
     /**
+     * One-to-One: A Project have one RTS.
+     *
+     * This function will retrieve RTS of a given Project.
+     * See: RTS's project() method for the inverse
+     *
+     * @return mixed
+     */
+    public function rts()
+    {
+        return $this->belongsTo(RTS::class);
+    }
+
+    /**
      * Many-to-Many: A project may have one or many workpackage.
      *
      * This function will retrieve all the work packages of a project.

@@ -12,6 +12,6 @@ class RTSs extends Seeder
      */
     public function run()
     {
-        //
+        factory(RTS::class, config('memfis.dummies.rts'))->create();
     }
 }
