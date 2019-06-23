@@ -14,6 +14,7 @@ $factory->define(RTS::class, function (Faker $faker) {
 
             return factory(Project::class)->create()->id;
         },
+        'aircraft_total_time' => $faker->randomFloat(2, 0, 9999),
         'work_performed' => $faker->randomElement([null, $faker->text]),
         'work_data' => $faker->randomElement([null, $faker->text]),
         'exception' => $faker->randomElement([null, $faker->text]),

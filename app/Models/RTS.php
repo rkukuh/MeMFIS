@@ -10,6 +10,7 @@ class RTS extends MemfisModel
 
     protected $fillable = [
         'project_id',
+        'aircraft_total_time',
         'work_performed',
         'work_data',
         'exception',
