@@ -11,7 +11,6 @@ $factory->define(Facility::class, function (Faker $faker) {
     return [
         'code' => 'FAC-DUM-' . $number,
         'name' => 'Facility Dummy #' . $number,
-        'note' => $faker->randomElement([null, $faker->text]),
     ];
 
 });
