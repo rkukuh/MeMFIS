@@ -26,6 +26,7 @@ class Approval extends MemfisModel
      * - Project's approvals() method for the inverse
      * - PurchaseOrder's approvals() method for the inverse
      * - PurchaseRequest's approvals() method for the inverse
+     * - RTS's approvals() method for the inverse
      *
      * @return mixed
      */
