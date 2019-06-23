@@ -25,7 +25,8 @@ class ProjectWorkPackageFacilities extends Seeder
 
                 $project_workpackage->facilities()->create([
                     'facility_id' => Facility::find($j)->id,
-                    'price_id' => $rental_prices->random()->id,
+                    'price_id' => $faker->randomElement([$rental_prices->random()->id]),
+                    'price_amount' => $faker->randomElement([rand(10, 100) * 1000000]),
                     'note' => $faker->randomElement([null, $faker->text]),
                 ]);
             }
