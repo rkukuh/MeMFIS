@@ -8,7 +8,11 @@ class ProjectWorkPackageFacility extends MemfisModel
 {
     protected $table = 'project_workpackage_facilities';
     
-    protected $fillable = ['facility_id'];
+    protected $fillable = [
+        'project_workpackage_id',
+        'facility_id',
+        'note',
+    ];
 
     /*************************************** RELATIONSHIP ****************************************/
 

@@ -18,6 +18,7 @@ class CreateProjectWorkPackageFacilitiesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->unsignedInteger('project_workpackage_id');
             $table->unsignedInteger('facility_id');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -14,6 +14,7 @@ $factory->define(ProjectWorkPackageFacility::class, function (Faker $faker) {
         'facility_id' => function () {
             return Facility::get()->random()->id;
         },
+        'note' => $faker->randomElement([null, $faker->text]),
     ];
 
 });
