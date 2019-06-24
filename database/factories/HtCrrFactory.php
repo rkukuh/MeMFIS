@@ -30,18 +30,12 @@ $factory->define(HtCrr::class, function (Faker $faker) {
             return factory(Project::class)->create()->id;
         },
         'position' => 'Pos-' . ucfirst($faker->word),
-        'sn_on' => 'S/N-On-' . $faker->randomNumber,
-        'sn_off' => 'S/N-Off-' . $faker->randomNumber,
-        'pn_on' => 'P/N-On-' . $faker->randomNumber,
-        'pn_off' => 'P/N-Off-' . $faker->randomNumber,
-        'is_rii' => $faker->boolean,
+        'serial_number' => 'S/N-' . $faker->randomNumber,
+        'part_number' => 'P/N-' . $faker->randomNumber,
+        'conducted_at' => Carbon::now()->subWeeks(rand(1, 3)),
+        'conducted_by' => Employee::get()->random()->id,
         'estimation_manhour' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
-        'removed_at' => Carbon::now()->subWeeks(rand(1, 3)),
-        'removed_by' => Employee::get()->random()->id,
-        'removal_manhour_estimation' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
-        'installed_at' => Carbon::now()->addWeeks(rand(1, 3)),
-        'installed_by' => Employee::get()->random()->id,
-        'installation_manhour_estimation' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
+        'is_rii' => $faker->boolean,
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 
