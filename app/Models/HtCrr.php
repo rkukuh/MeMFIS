@@ -83,9 +83,9 @@ class HtCrr extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A HTCRR may have zero or many skill.
+     * Many-to-Many: An HTCRR may have zero or many skill.
      *
-     * This function will retrieve all the skills of a HTCRR.
+     * This function will retrieve all the skills of an HTCRR.
      * See: Type's skill_htcrr() method for the inverse
      *
      * @return mixed

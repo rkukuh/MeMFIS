@@ -586,7 +586,7 @@ class Type extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A HTCRR may have zero or many skill.
+     * Many-to-Many: An HTCRR may have zero or many skill.
      *
      * This function will retrieve all HTCRR skills of a type.
      * See: HtCrr's skills() method for the inverse

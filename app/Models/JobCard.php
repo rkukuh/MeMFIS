@@ -45,6 +45,20 @@ class JobCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A JobCard may have zero or many helper.
+     *
+     * This function will retrieve all the helpers of a JobCard.
+     * See: Employee's jobcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function helpers()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_jobcard', 'jobcard_id', 'employee_id')
+                    ->withTimestamps();;
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many inspections.
      *
      * This function will get all JobCard's inspections.

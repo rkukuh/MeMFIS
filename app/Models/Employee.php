@@ -135,6 +135,20 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A JobCard may have zero or many helper.
+     *
+     * This function will retrieve all the JobCards of a helper.
+     * See: JobCard's helpers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcards()
+    {
+        return $this->belongsToMany(JobCard::class, 'employee_jobcard', 'employee_id', 'jobcard_id')
+                    ->withTimestamps();;
+    }
+
+    /**
      * One-to-Many: An HT/CRR may have one installer.
      *
      * This function will retrieve all the HT/CRRs of a given installer.
