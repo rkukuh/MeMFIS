@@ -50,7 +50,7 @@
                     <div class="m-portlet__body">
                         <div class="row align-items-center" style="margin-top:50px;">
                             <div class="col-xl-12 order-2 order-xl-1">
-                                <form method="POST" action="{{route('frontend.engineer.jobcard.search')}}">
+                                <form method="POST" action="{{route('frontend.engineer.jobcard.hardtime.search')}}">
                                     {!! csrf_field() !!}
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
@@ -104,10 +104,7 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('js/frontend/job-card-hard-time/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card-hard-time/item/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card-hard-time/tool/index.js') }}"></script>
 <script>
     $("#number").focus();
 </script>

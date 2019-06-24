@@ -483,6 +483,24 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** JOB CARD HTCRR*/
+
+        Route::name('jobcard.htcrr.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'jobcard-htcrr',
+                'namespace' => 'HtCrr'
+
+            ], function () {
+
+                Route::get('/', 'HtCrrDatatables@index')->name('all');
+                Route::post('/filter/', 'HtCrrDatatables@filter')->name('filter');
+
+            });
+
+        });
+
         /** DISCREPANCY */
 
         Route::name('discrepancy.')->group(function () {
