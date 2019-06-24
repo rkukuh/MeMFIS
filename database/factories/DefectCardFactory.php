@@ -23,7 +23,6 @@ $factory->define(DefectCard::class, function (Faker $faker) {
         'is_rii' => $faker->boolean,
         'complaint' => $faker->randomElement([null, $faker->text]),
         'description' => $faker->randomElement([null, $faker->text]),
-        'note' => $faker->randomElement([null, $faker->text]),
     ];
 
 });
@@ -62,6 +61,7 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
                 'ipc_ref' => $faker->numerify('REF-#####'),
                 'sn_on' => $faker->numerify('SN-ON-#####'),
                 'sn_off' => $faker->numerify('SN-OFF-#####'),
+                'note' => $faker->randomElement([null, $faker->text]),
             ]);
         }
     }

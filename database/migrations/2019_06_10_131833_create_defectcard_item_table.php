@@ -22,6 +22,7 @@ class CreateDefectcardItemTable extends Migration
             $table->string('ipc_ref');
             $table->string('sn_on');
             $table->string('sn_off');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
