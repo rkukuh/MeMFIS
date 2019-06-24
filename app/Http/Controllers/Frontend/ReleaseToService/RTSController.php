@@ -47,10 +47,10 @@ class RTSController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RTS  $rTS
+     * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function show(RTS $rTS)
+    public function show(RTS $rts)
     {
         return view('frontend.rts.show');
     }
@@ -58,10 +58,10 @@ class RTSController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\RTS  $rTS
+     * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function edit(RTS $rTS)
+    public function edit(RTS $rts)
     {
         //
     }
@@ -70,10 +70,10 @@ class RTSController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\RTSUpdate  $request
-     * @param  \App\Models\RTS  $rTS
+     * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function update(RTSUpdate $request, RTS $rTS)
+    public function update(RTSUpdate $request, RTS $rts)
     {
         //
     }
@@ -81,10 +81,10 @@ class RTSController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RTS  $rTS
+     * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RTS $rTS)
+    public function destroy(RTS $rts)
     {
         //
     }

@@ -294,7 +294,9 @@ Route::name('frontend.')->group(function () {
 
         /** RTS */
         Route::namespace('ReleaseToService')->group(function () {
-            Route::resource('rts', 'RTSController');
+            Route::resource('rts', 'RTSController', [
+                'parameters' => ['rts' => 'rts']
+            ]);
 
             Route::name('rts.')->group(function () {
                 Route::prefix('rts')->group(function () {

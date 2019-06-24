@@ -514,13 +514,9 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons d-flex flex-row-reverse">
-                                                                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.jobcard-hardtime-engineer.update',$htcrr->uuid)}}" id="WorkpackageForm">
-                                                                    {{method_field('PATCH')}}
-                                                                    {!! csrf_field() !!}
-                                                                    <input type="hidden" name="progress" value="{{$open->uuid}}">
-
-                                                                    @include('frontend.common.buttons.resume')
-                                                                </form>
+                                                                @component('frontend.common.buttons.back')
+                                                                    @slot('href', route('frontend.item.index'))
+                                                                @endcomponent
                                                             </div>
                                                         </div>
                                                     </div>
