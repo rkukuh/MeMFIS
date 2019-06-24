@@ -15,8 +15,25 @@ $factory->define(HtCrr::class, function (Faker $faker) {
 
     return [
         'code' => 'HTCRR-DUM-' . $number,
-        'part_number' => 'P/N-' . $faker->randomNumber,
-        'project_id' => Project::get()->random()->id,
+        'type_id' => function () use ($faker) {
+            if (Type::ofHtCrrType()->count()) {
+                return Type::ofHtCrrType()->get()->random()->id;
+            }
+            
+            return factory(Type::class)->states('htcrr-type')->create()->id;
+        },
+        'project_id' => function () use ($faker) {
+            if (Project::count()) {
+                return Project::get()->random()->id;
+            }
+            
+            return factory(Project::class)->create()->id;
+        },
+        'position' => 'Pos-' . ucfirst($faker->word),
+        'sn_on' => 'S/N-On-' . $faker->randomNumber,
+        'sn_off' => 'S/N-Off-' . $faker->randomNumber,
+        'pn_on' => 'P/N-On-' . $faker->randomNumber,
+        'pn_off' => 'P/N-Off-' . $faker->randomNumber,
         'is_rii' => $faker->boolean,
         'estimation_manhour' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
         'removed_at' => Carbon::now()->subWeeks(rand(1, 3)),

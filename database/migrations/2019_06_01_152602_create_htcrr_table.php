@@ -17,9 +17,13 @@ class CreateHtcrrTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
-            $table->string('part_number');
-            $table->string('position')->nullable();
+            $table->unsignedInteger('type_id');
             $table->unsignedInteger('project_id');
+            $table->string('position')->nullable();
+            $table->string('sn_off');
+            $table->string('sn_on');
+            $table->string('pn_on');
+            $table->string('pn_off');
             $table->boolean('is_rii');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->timestamp('removed_at')->nullable();
@@ -48,7 +52,6 @@ class CreateHtcrrTable extends Migration
                     ->onDelete('restrict');
 
             $table->index('code');
-            $table->index('part_number');
         });
     }
 

@@ -10,8 +10,13 @@ class HtCrr extends MemfisModel
 
     protected $fillable = [
         'code',
-        'part_number',
+        'type_id',
         'project_id',
+        'position',
+        'sn_on',
+        'sn_off',
+        'pn_on',
+        'pn_off',
         'is_rii',
         'estimation_manhour',
         'removed_at',
@@ -94,5 +99,18 @@ class HtCrr extends MemfisModel
     {
         return $this->belongsToMany(Type::class, 'htcrr_skill', 'htcrr_id', 'skill_id')
                     ->withTimestamps();;
+    }
+
+    /**
+     * One-to-Many: An HTCRR may have zero or many type.
+     *
+     * This function will retrieve the type of an HTCRR.
+     * See: Type's type_htcrrs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
     }
 }
