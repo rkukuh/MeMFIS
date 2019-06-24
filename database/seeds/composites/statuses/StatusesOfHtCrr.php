@@ -13,25 +13,49 @@ class StatusesOfHtCrr extends Seeder
     public function run()
     {
         Status::create([
-            'code' => 'open',
+            'code' => 'removal-open',
             'name' => 'OPEN',
             'of'   => 'htcrr',
         ]);
 
         Status::create([
-            'code' => 'progress',
+            'code' => 'removal-progress',
             'name' => 'IN-PROGRESS',
             'of'   => 'htcrr',
         ]);
 
         Status::create([
-            'code' => 'pending',
+            'code' => 'removal-pending',
             'name' => 'PENDING / PAUSE',
             'of'   => 'htcrr',
         ]);
 
         Status::create([
-            'code' => 'closed',
+            'code' => 'removal-closed',
+            'name' => 'CLOSED',
+            'of'   => 'htcrr',
+        ]);
+
+        Status::create([
+            'code' => 'installation-open',
+            'name' => 'OPEN',
+            'of'   => 'htcrr',
+        ]);
+
+        Status::create([
+            'code' => 'installation-progress',
+            'name' => 'IN-PROGRESS',
+            'of'   => 'htcrr',
+        ]);
+
+        Status::create([
+            'code' => 'installation-pending',
+            'name' => 'PENDING / PAUSE',
+            'of'   => 'htcrr',
+        ]);
+
+        Status::create([
+            'code' => 'installation-closed',
             'name' => 'CLOSED',
             'of'   => 'htcrr',
         ]);
@@ -41,7 +65,7 @@ class StatusesOfHtCrr extends Seeder
             'name' => 'RELEASED',
             'of'   => 'htcrr',
         ]);
-        
+
         Status::create([
             'code' => 'rii-released',
             'name' => 'RII RELEASED',

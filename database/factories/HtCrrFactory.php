@@ -50,7 +50,7 @@ $factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
     $htcrr->progresses()->save(
         factory(Progress::class)->make([
             // Set all progress to 'open' to make testing phase easier
-            'status_id' => Status::ofHtCrr()->where('code', 'open')->first()
+            'status_id' => Status::ofHtCrr()->where('code', 'removal-open')->first()
         ])
     );
 
@@ -63,8 +63,8 @@ $factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
         else {
             $skill = factory(Type::class)->states('taskcard-skill')->create();
         }
-    
+
         $htcrr->skills()->attach($skill);
     }
-    
+
 });

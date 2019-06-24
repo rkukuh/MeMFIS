@@ -8,10 +8,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="{{route('frontend.jobcard-engineer.update','')}}" id="WorkpackageForm">
+                    <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="{{route('frontend.jobcard-hardtime-engineer.update',$htcrr->uuid)}}" id="WorkpackageForm">
                         {{method_field('PATCH')}}
                         {!! csrf_field() !!}
-                        <input type="hidden" name="progress" value="">
+                        <input type="hidden" name="progress" value="{{$closed->uuid}}">
 
                         <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                         <div class="m-portlet__body">
@@ -20,7 +20,7 @@
                                     <label class="form-control-label">
                                         Accomplishment Notes: @include('frontend.common.label.required')
                                     </label>
-                                    <input type="hidden" id="accomplishment" name="accomplishment" value="">
+                                    <input type="hidden" id="accomplishment" name="accomplishment" value="{{$accomplished}}">
                                     @component('frontend.common.input.textarea')
                                         @slot('rows', '3')
                                         @slot('id', 'note')

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\ReleaseToService;
 
+use Auth;
 use App\Models\RTS;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\RTSStore;
@@ -16,7 +17,7 @@ class RTSController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.rts.index');
     }
 
     /**
@@ -26,7 +27,7 @@ class RTSController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.rts.create');
     }
 
     /**
@@ -37,27 +38,31 @@ class RTSController extends Controller
      */
     public function store(RTSStore $request)
     {
-        //
+        $request->merge(['work_performed' => join("|", $request->work_performed)]);
+
+        $project = RTS::create($request->all());
+
+        return response()->json($project);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RTS  $rTS
+     * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function show(RTS $rTS)
+    public function show(RTS $rts)
     {
-        //
+        return view('frontend.rts.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\RTS  $rTS
+     * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function edit(RTS $rTS)
+    public function edit(RTS $rts)
     {
         //
     }
@@ -66,10 +71,10 @@ class RTSController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\RTSUpdate  $request
-     * @param  \App\Models\RTS  $rTS
+     * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function update(RTSUpdate $request, RTS $rTS)
+    public function update(RTSUpdate $request, RTS $rts)
     {
         //
     }
@@ -77,11 +82,29 @@ class RTSController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RTS  $rTS
+     * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RTS $rTS)
+    public function destroy(RTS $rts)
     {
         //
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function print(RTS $rts)
+    {
+        $username = Auth::user()->name;
+
+        $pdf = \PDF::loadView('frontend/form/rts_certificate',[
+                'username' => $username,
+                'rts' => $rts,
+
+                ]);
+        return $pdf->stream();
     }
 }

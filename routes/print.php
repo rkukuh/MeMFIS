@@ -129,5 +129,6 @@ Route::get('/dc-page1', function () {
 
 Route::get('/dc-page2', function () {
     $pdf = \PDF::loadView('frontend/form/dc_page2');
+    $pdf->setPaper('A4', 'landscape');
     return $pdf->stream();
 });
