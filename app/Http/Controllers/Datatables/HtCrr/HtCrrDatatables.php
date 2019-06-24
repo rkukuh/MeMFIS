@@ -25,7 +25,7 @@ class HtCrrDatatables extends Controller
                 if(sizeof($data->skills) == 3){
                     $data->skill_name .= "ERI";
                 }
-                else if(sizeof($taskcard->skills) == 1){
+                else if(sizeof($data->skills) == 1){
                     $data->skill_name .= $data->skills[0]->name;
                 }
                 else{
