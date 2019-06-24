@@ -413,17 +413,17 @@ Route::name('frontend.')->group(function () {
         Route::namespace('JobCardHardTime')->group(function () {
 
             Route::resource('jobcard-hardtime-ppc', 'JobCardHardTimePPCController', [
-                'parameters' => ['jobcard-ppc' => 'jobcard']
+                'parameters' => ['jobcard-hardtime-ppc' => 'htcrr']
             ]);
 
             Route::resource('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController', [
-                'parameters' => ['jobcard-engineer' => 'jobcard']
+                'parameters' => ['jobcard-hardtime-engineer' => 'htcrr']
             ]);
 
             Route::post('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController@search')->name('engineer.jobcard.hardtime.search');
 
             Route::resource('jobcard-hardtime-mechanic', 'JobCardHardTimeMechanicController', [
-                'parameters' => ['jobcard-mechanic' => 'jobcard']
+                'parameters' => ['jobcard-hardtime-mechanic' => 'htcrr']
             ]);
 
             Route::post('jobcard-hardtime-mechanic/', 'JobCardHardTimeMechanicController@search')->name('mechanic.jobcard.hardtime.search');
