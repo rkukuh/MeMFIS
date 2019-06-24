@@ -153,28 +153,28 @@
                         <div class="jobcard-info-detail">
                         <table width="80%" cellpadding="3">
                             <tr>
-                                <td width="20%">Issued Date</td>
-                                <td width="1%">:</td>
-                                <td width="29%">Generate</td>
-                                <td width="20%">AC/Type</td>
-                                <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="20%" valign="top">Issued Date</td>
+                                <td width="1%" valign="top">:</td>
+                                <td width="29%" valign="top">Generate</td>
+                                <td width="20%" valign="top">AC/Type</td>
+                                <td width="1%" valign="top">:</td>
+                                <td width="29%" valign="top">Generate</td>
                             </tr>
                             <tr>
-                                <td width="20%">Project No</td>
-                                <td width="1%">:</td>
-                                <td width="29%">Generate</td>
-                                <td width="20%">A/C Reg</td>
-                                <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="20%" valign="top">Project No</td>
+                                <td width="1%" valign="top">:</td>
+                                <td width="29%" valign="top">Generate</td>
+                                <td width="20%" valign="top">A/C Reg</td>
+                                <td width="1%" valign="top">:</td>
+                                <td width="29%" valign="top">Generate</td>
                             </tr>
                             <tr>
-                                <td width="20%">Inspection Tpe</td>
-                                <td width="1%">:</td>
-                                <td width="29%">Generate</td>
-                                <td width="20%">A/C SN</td>
-                                <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="20%" valign="top">Project Title</td>
+                                <td width="1%" valign="top">:</td>
+                                <td width="29%" valign="top">Generate</td>
+                                <td width="20%" valign="top">A/C SN</td>
+                                <td width="1%" valign="top">:</td>
+                                <td width="29%" valign="top">Generate</td>
                             </tr>
                         </table>
                         </div>
@@ -193,12 +193,12 @@
         <div class="container">
             <table width="100%" cellpadding="4">
                 <tr style="background:#d4d7db">
-                    <th align="center">Item Description</th>
-                    <th align="center">P/N</th>
-                    <th align="center">Position</th>
-                    <th align="center">S/N Off</th>
-                    <th align="center">Est. Mhrs</th>
-                    <th align="center">Actual Mhrs</th>
+                    <th align="center" width="22%" >Item Description</th>
+                    <th align="center" width="15%">P/N</th>
+                    <th align="center" width="15%">Position</th>
+                    <th align="center" width="16%">S/N Off</th>
+                    <th align="center" width="16%">Est. Mhrs</th>
+                    <th align="center" width="16%">Actual Mhrs</th>
                 </tr>
                 <tr>
                     <td valign="top">-</td>
@@ -238,13 +238,13 @@
 
     <div id="content4">
         <div class="container">
-            <table width="100%" cellpadding="4">
+            <table width="100%" cellpadding="2">
                     <tr style="background:#d4d7db">
                         <td align="center" width="50%">Material(s)</td>
                         <td align="center" width="50%">Tool(s)</td>
                     </tr>
                     <tr>
-                        <td valign="top" height="23"></td>
+                        <td valign="top" height="23">Lorem <br> lorem </td>
                         <td valign="top" height="23"></td>
                     </tr>
             </table>
@@ -332,7 +332,7 @@
 
     <div id="content4-repeat">
         <div class="container">
-            <table width="100%" cellpadding="4">
+            <table width="100%" cellpadding="2">
                     <tr style="background:#d4d7db">
                         <td align="center" width="50%">Material(s)</td>
                         <td align="center" width="50%">Tool(s)</td>
