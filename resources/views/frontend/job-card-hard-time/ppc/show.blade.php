@@ -58,7 +58,7 @@
                                                         <a class="nav-link show" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Removal</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link active" data-toggle="tab" href="#m_tabs_1_2">Instalation</a>
+                                                        <a class="nav-link active" data-toggle="tab" href="#m_tabs_1_2">Installation</a>
                                                     </li>
                                                 </ul>
 
