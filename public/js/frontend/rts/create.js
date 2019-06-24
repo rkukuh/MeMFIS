@@ -1,19 +1,47 @@
 
 let ReleaseToService = {
     init: function () {
-        let simpan = $('.footer').on('click', '.add-release-to-service', function () {
+        $('#project').on('change', function(){
+            let project_id = this.options[this.selectedIndex].value;
+                $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'GET',
+                dataType: "json",
+                url: '/label/get-project/'+project_id,
+                success: function (response) {
+                    if (response) {
+                        // Note: change select2 selected option by jquery
+                        $('#applicability_airplane  option[value='+response.aircraft_id+']').attr('selected','selected');
+                        $('#applicability_airplane').select2().trigger('change');
+                        $('#aircraft_register').empty();
+                        $('#aircraft_register').val(response.aircraft_register);
+                        $("#date").datetimepicker().datetimepicker("setDate", new Date());
+                        if(response.quotations[0]){
+                            $('#work_performed').empty();
+                            $('#work_performed').val(response.quotations[0].title);
+                        }
+                    } else {
+                        console.log("empty");
+                    }
+    
+                }
+            });
+        });
 
-            let project_no = $('#project_no').val();
+        let simpan = $('.footer').on('click', '.add-rts', function () {
+
+            let project_id = $('#project').val();
             let applicability_airplane = $('#applicability_airplane').val();
             let date = $('#date').val();
             let aircraft_register = $('#aircraft_register').val();
             let work_performed = [];
-            $.each($("input[name='work_performed[]']:checked"), function () {
+            $.each($("input[name='work_performed']"), function () {
                 work_performed.push($(this).val());
             });
             let work_data = $('#work_data').val();
             let exceptions = $('#exceptions').val();
-
 
             let approval = [];
             $.each($("input[name='approval[]']:checked"), function () {
@@ -24,11 +52,11 @@ let ReleaseToService = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'post',
-                url: '/release-to-service',
+                type: 'POST',
+                url: '/rts',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    project_no: project_no,
+                    project_id: project_id,
                     applicability_airplane: applicability_airplane,
                     date: date,
                     aircraft_register: aircraft_register,
@@ -65,6 +93,5 @@ let ReleaseToService = {
 
 
 jQuery(document).ready(function () {
-    console.log('ready');
     ReleaseToService.init();
 });

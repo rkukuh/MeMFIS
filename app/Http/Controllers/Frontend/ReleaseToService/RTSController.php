@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\ReleaseToService;
 
 use App\Models\RTS;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class RTSController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.rts.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class RTSController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.rts.create');
     }
 
     /**
@@ -37,7 +37,11 @@ class RTSController extends Controller
      */
     public function store(RTSStore $request)
     {
-        //
+        $request->merge(['work_performed' => join("|", $request->work_performed)]);
+        
+        $project = RTS::create($request->all());
+
+        return response()->json($project);
     }
 
     /**
@@ -48,7 +52,7 @@ class RTSController extends Controller
      */
     public function show(RTS $rTS)
     {
-        //
+        return view('frontend.rts.show');
     }
 
     /**

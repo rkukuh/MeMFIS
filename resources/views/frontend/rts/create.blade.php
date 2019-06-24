@@ -97,8 +97,6 @@
                                     </div>
                                 </div>
 
-
-
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
@@ -108,7 +106,7 @@
                                         @component('frontend.common.input.text')
                                         @slot('id', 'work_performed')
                                         @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed[]')
+                                        @slot('name', 'work_performed')
                                         @slot('id_error', 'work_performed')
                                         @endcomponent
                                     </div>
@@ -118,7 +116,7 @@
                                         @component('frontend.common.input.text')
                                         @slot('id', 'work_performed')
                                         @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed[]')
+                                        @slot('name', 'work_performed')
                                         @slot('id_error', 'work_performed')
                                         @slot('placeholder','Optional')
                                         @endcomponent
@@ -129,7 +127,7 @@
                                         @component('frontend.common.input.text')
                                         @slot('id', 'work_performed')
                                         @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed[]')
+                                        @slot('name', 'work_performed')
                                         @slot('id_error', 'work_performed')
                                         @slot('placeholder','Optional')
                                         @endcomponent
@@ -208,14 +206,14 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.save-and-print')
                                                     @slot('type','button')
-                                                    @slot('id', 'add-release-to-service')
-                                                    @slot('class', 'add-release-to-service')
+                                                    @slot('id', 'add-rts')
+                                                    @slot('class', 'add-rts')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
 
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.release-to-service.index'))
+                                                    @slot('href', route('frontend.rts.index'))
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -236,8 +234,8 @@
 @endpush
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/release-to-service/create.js') }}"></script>
-<script src="{{ asset('js/frontend/release-to-service/form-reset.js') }}"></script>
+<script src="{{ asset('js/frontend/rts/create.js') }}"></script>
+<script src="{{ asset('js/frontend/rts/form-reset.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
@@ -257,34 +255,7 @@
 
 <script>
   
-    $('#project').on('change', function(){
-        let project_id = this.options[this.selectedIndex].value;
-        $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type: 'GET',
-        dataType: "json",
-        url: '/label/get-project/'+project_id,
-        success: function (response) {
-            if (response) {
-                // Note: change select2 selected option by jquery
-                $('#applicability_airplane  option[value='+response.aircraft_id+']').attr('selected','selected');
-                $('#applicability_airplane').select2().trigger('change');
-                $('#aircraft_register').empty();
-                $('#aircraft_register').val(response.aircraft_register);
-                $("#date").datetimepicker().datetimepicker("setDate", new Date());
-                if(response.quotations[0]){
-                    $('#work_performed').empty();
-                    $('#work_performed').val(response.quotations[0].title);
-                }
-            } else {
-                console.log("empty");
-            }
-
-        }
-    });
-    });
+    
 </script>
 
 @endpush

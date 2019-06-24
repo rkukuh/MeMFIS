@@ -293,15 +293,15 @@ Route::name('frontend.')->group(function () {
         });
 
         /** RTS */
+        Route::namespace('ReleaseToService')->group(function () {
+            Route::resource('rts', 'RTSController');
 
-        Route::resource('rts', 'RTSController');
-
-        Route::name('rts.')->group(function () {
-            Route::prefix('rts')->group(function () {
-                //
+            Route::name('rts.')->group(function () {
+                Route::prefix('rts')->group(function () {
+                    //
+                });
             });
         });
-
         /** TASK CARD */
 
         Route::namespace('TaskCard')->group(function () {
@@ -581,12 +581,6 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('ReceivingInspectionReport')->group(function () {
             Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
-        });
-
-        /** Release to Service */
-
-        Route::namespace('ReleaseToService')->group(function () {
-            Route::resource('release-to-service', 'ReleaseToServiceController');
         });
 
         /** PURCHASE REQUEST */
