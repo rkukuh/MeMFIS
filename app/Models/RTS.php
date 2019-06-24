@@ -39,7 +39,7 @@ class RTS extends MemfisModel
      *
      * @return mixed
      */
-    public function projet()
+    public function project()
     {
         return $this->hasOne(Project::class);
     }
