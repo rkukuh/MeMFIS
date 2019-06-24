@@ -144,25 +144,28 @@ class JobCardHardTimeEngineerController extends Controller
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
             $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','pending')->first()->id,
-                'reason_id' =>  Type::ofJobCardPauseReason()->where('uuid',$request->pause)->first()->id,
+                'reason_id' =>  Type::ofHtCrrPauseReason()->where('uuid',$request->pause)->first()->id,
                 'reason_text' =>  $request->reason,
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.job-card-hard-time.engineer.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard-hardtime-engineer.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
             $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','closed')->first()->id,
-                'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
+                'reason_id' =>  Type::ofHtCrrCloseReason()->where('uuid',$request->accomplishment)->first()->id,
                 'reason_text' =>  $request->note,
                 'progressed_by' => Auth::id()
             ]));
 
-            $htcrr->approvals()->save(new Approval([
-                'approvable_id' => $jobcard->id,
-                'approved_by' => Auth::id(),
-            ]));
+            // $htcrr->approvals()->save(new Approval([
+            //     'approvable_id' => $htcrr->id,
+            //     'approved_by' => Auth::id(),
+            // ]));
+
+            return redirect()->route('frontend.jobcard-hardtime-engineer.index')->with($this->notification);
+
         }
     }
 
