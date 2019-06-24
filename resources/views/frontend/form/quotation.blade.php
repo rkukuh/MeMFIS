@@ -111,6 +111,9 @@
 
     .page_break { page-break-before: always; }
 
+
+    footer .num:after { content: counter(page); }
+    
 </style>
 <body>
 
@@ -133,7 +136,7 @@
     </header>
 
     <footer style="margin-top:14px;">
-        <span style="margin-left:6px">Created By : Name ; {{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+        <span style="margin-left:6px">Created By : Name ; {{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" class="num">PAGE </span>
         <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
     </footer>
 

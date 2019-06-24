@@ -90,7 +90,7 @@
             <div style="margin-top:-15px;">
               <ul style="margin-left:-40px;">
                 <li>-</li>
-                <li>free text</li>
+                <li>{{ $rTS->work_performed[0] }}</li>
               </ul>
               <ul style="margin-top:-12px;margin-left:-40px;">
                 <li>-</li>
