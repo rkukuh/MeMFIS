@@ -515,10 +515,10 @@
                                                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                                 <div class="flex">
                                                                     <div class="action-buttons">
-                                                                        <form method="POST" action="{{route('frontend.jobcard-engineer.update','')}}">
+                                                                        <form method="POST" action="{{route('frontend.jobcard-hardtime-engineer.update',$htcrr->uuid)}}">
                                                                             {{method_field('PATCH')}}
                                                                             {!! csrf_field() !!}
-                                                                            <input type="hidden" name="progress" value="">
+                                                                            <input type="hidden" name="progress" value="{{$status->uuid}}">
                                                                             @include('frontend.common.buttons.execute')
                                                                         </form>
                                                                         @component('frontend.common.buttons.back')
