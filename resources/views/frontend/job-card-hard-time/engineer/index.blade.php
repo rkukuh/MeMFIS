@@ -5,7 +5,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                Job Cards
+                Job Cards HTCRR
             </h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                 <li class="m-nav__item">
                     <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            Job Cards
+                            Job Cards HTCRR
                         </span>
                     </a>
                 </li>
@@ -41,7 +41,7 @@
                             @include('frontend.common.label.datalist')
 
                             <h3 class="m-portlet__head-text">
-                                Job Cards
+                                Job Cards HTCRR
                             </h3>
                         </div>
                     </div>
@@ -55,14 +55,14 @@
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
                                             <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
+                                                <input type="text" class="form-control m-input" id="code" name="code" placeholder="Search...">
 
                                                 <span class="m-input-icon__icon m-input-icon__icon--left">
                                                     <span><i class="la la-search"></i></span>
                                                 </span>
                                             </div>
                                             <?php
-                                            echo $errors->first('number','<div class="form-control-feedback text-danger" ">:message</div>');
+                                            echo $errors->first('code','<div class="form-control-feedback text-danger" ">:message</div>');
                                             ?>
                                         </div>
                                         <div class="col-md-3 search">
