@@ -149,6 +149,28 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of HTCRR's close reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfHtCrrCloseReason(Builder $query)
+    {
+        return $query->where('of', 'htcrr-close-reason');
+    }
+
+    /**
+     * Scope a query to only include type of HTCRR's pause reason.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfHtCrrPauseReason(Builder $query)
+    {
+        return $query->where('of', 'htcrr-pause-reason');
+    }
+
+    /**
      * Scope a query to only include type of HTCRR's skill.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
