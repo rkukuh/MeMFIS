@@ -132,44 +132,37 @@ class JobCardHardTimeEngineerController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $jobcard)
+    public function update(JobCardUpdate $request, HtCrr $htcrr)
     {
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
-            $jobcard->progresses()->save(new Progress([
+            $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard-hardtime-engineer.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
-            $jobcard->progresses()->save(new Progress([
+            $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','pending')->first()->id,
                 'reason_id' =>  Type::ofJobCardPauseReason()->where('uuid',$request->pause)->first()->id,
                 'reason_text' =>  $request->reason,
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
+            return redirect()->route('frontend.job-card-hard-time.engineer.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
-            $jobcard->progresses()->save(new Progress([
+            $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','closed')->first()->id,
                 'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
                 'reason_text' =>  $request->note,
                 'progressed_by' => Auth::id()
             ]));
 
-            $jobcard->approvals()->save(new Approval([
+            $htcrr->approvals()->save(new Approval([
                 'approvable_id' => $jobcard->id,
                 'approved_by' => Auth::id(),
             ]));
-
-            if($request->discrepancy == 1){
-                return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
-            }
-            else{
-                return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
-            }
         }
     }
 
