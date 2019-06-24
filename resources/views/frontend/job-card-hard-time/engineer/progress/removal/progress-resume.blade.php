@@ -58,13 +58,13 @@
                                                         <a class="nav-link active" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Removal</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Instalation</a>
+                                                        <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Installation</a>
                                                     </li>
                                                 </ul>
-    
+
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="m_tabs_1_1" role="tabpanel">
-                        
+
                                                         <div class="form-group m-form__group row mt-5">
                                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                                 <table border="1px" width="100%">
@@ -73,7 +73,7 @@
                                                                                 Job Card No
                                                                             </td>
                                                                             <td width="70%" style="text-align:center">
-                                                                              
+
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -109,14 +109,6 @@
                                                                                 Project No
                                                                             </td>
                                                                             <td width="70%" style="text-align:center">
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                                                Inspection Type
-                                                                            </td>
-                                                                            <td width="70%" style="text-align:center">
-                                                                                Generated
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -193,20 +185,20 @@
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                                 <div class="action-buttons d-flex flex-row-reverse">
-                                                                    @include('frontend.job-card-hard-time.modal.modal-close')
+                                                                    @include('frontend.job-card-hard-time.engineer.progress.removal.modal.modal-close')
                                                                     @component('frontend.common.buttons.close')
                                                                         @slot('data_target', '#modal_close')
                                                                         @slot('class', 'ml-2')
                                                                     @endcomponent
-                            
-                                                                    @include('frontend.job-card-hard-time.modal.modal-pause')
+
+                                                                    @include('frontend.job-card-hard-time.engineer.progress.removal.modal.modal-pause')
                                                                     @component('frontend.common.buttons.pause')
                                                                         @slot('data_target', '#modal_pause')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group m-form__group row mt-5">                                                                               
+                                                        <div class="form-group m-form__group row mt-5">
                                                             <div class="col-lg-6">
                                                                 <div class="m-portlet  m-portlet--full-height ">
                                                                     <div class="m-portlet__head">
@@ -410,7 +402,7 @@
                                                                                 Job Card No
                                                                             </td>
                                                                             <td width="70%" style="text-align:center">
-                                                                                
+
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -446,14 +438,6 @@
                                                                                 Project No
                                                                             </td>
                                                                             <td width="70%" style="text-align:center">
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                                                Inspection Type
-                                                                            </td>
-                                                                            <td width="70%" style="text-align:center">
-                                                                                Generated
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -542,7 +526,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group m-form__group row mt-5">                                                                               
+                                                        <div class="form-group m-form__group row mt-5">
                                                             <div class="col-lg-6">
                                                                 <div class="m-portlet  m-portlet--full-height ">
                                                                     <div class="m-portlet__head">
@@ -738,7 +722,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>    
+                                    </div>
                                 </div>
                             </form>
                         </div>

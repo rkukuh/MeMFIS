@@ -270,6 +270,7 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
         $taskcard->items()->attach($item, [
             'quantity' => rand(1, 10),
             'unit_id' => $unit->id,
+            'note' => $faker->randomElement([null, $faker->text]),
         ]);
     }
 
@@ -334,6 +335,7 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
             $eo_instruction->items()->attach($item, [
                 'quantity' => rand(1, 10),
                 'unit_id' => $unit->id,
+                'note' => $faker->randomElement([null, $faker->text]),
             ]);
         }
 
@@ -373,6 +375,7 @@ $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker)
         $taskcard->items()->attach($item, [
             'quantity' => rand(1, 10),
             'unit_id' => $unit->id,
+            'note' => $faker->randomElement([null, $faker->text]),
         ]);
     }
 

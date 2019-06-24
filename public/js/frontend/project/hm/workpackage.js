@@ -54,13 +54,13 @@ let Workpackage = {
                 filterable: !1,
             },
             {
-                field: '',
+                field: 'description',
                 title: 'Title',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: '',
+                field: 'position',
                 title: 'Position',
                 sortable: 'asc',
                 filterable: !1,
@@ -132,6 +132,9 @@ let Workpackage = {
 
             let cri = $('input[name=cri]').val();
             let pn = $('input[name=pn]').val();
+            let position = $('input[name=position]').val();
+            let removal = $('input[name=removal]').val();
+            let installation = $('input[name=installation]').val();
             let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
             let mhrs = $('input[name=mhrs]').val();
@@ -156,6 +159,9 @@ let Workpackage = {
                     skill_id: otr_certification,
                     estimation_manhour: mhrs,
                     is_rii: is_rii,
+                    position: is_rii,
+                    removal_manhour_estimation: removal,
+                    installation_manhour_estimation: installation,
                     project_id: project_uuid,
                 },
                 success: function (data) {

@@ -5,6 +5,7 @@ use App\Models\JobCard;
 use App\Models\TaskCard;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Employee;
 use App\Models\Quotation;
 use App\Models\Inspection;
 use Faker\Generator as Faker;
@@ -39,6 +40,12 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
 
     if ($faker->boolean) {
         $jobcard->approvals()->save(factory(Approval::class)->make());
+    }
+
+    // Helper (Employee)
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $jobcard->helpers()->save(factory(Employee::class)->make());
     }
 
     // Progress

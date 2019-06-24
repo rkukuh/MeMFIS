@@ -6,6 +6,7 @@ use Auth;
 use Validator;
 use App\Models\Type;
 use App\Models\Status;
+use App\Models\HtCrr;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Progress;
@@ -26,13 +27,13 @@ class JobCardHardTimeEngineerController extends Controller
 
     public function __construct()
     {
-        $this->statuses = Status::ofJobCard()->get();
-        $this->break = Type::ofJobCardPauseReason()->where('code','break-time')->first()->uuid;
-        $this->waiting = Type::ofJobCardPauseReason()->where('code','waiting-material')->first()->uuid;
-        $this->other = Type::ofJobCardPauseReason()->where('code','other')->first()->uuid;
-        $this->accomplished = Type::ofJobCardCloseReason()->where('code','accomplished')->first()->uuid;
+        $this->statuses = Status::ofHtCrr()->get();
+        $this->break = Type::ofHtCrrPauseReason()->where('code','break-time')->first()->uuid;
+        $this->waiting = Type::ofHtCrrPauseReason()->where('code','waiting-material')->first()->uuid;
+        $this->other = Type::ofHtCrrPauseReason()->where('code','other')->first()->uuid;
+        $this->accomplished = Type::ofHtCrrCloseReason()->where('code','accomplished')->first()->uuid;
         $this->notification = $notification = array(
-                            'message' => "JobCard's status has been updated",
+                            'message' => "HtCrr's status has been updated",
                             'title' => "Success",
                             'alert-type' => "success"
                         );
@@ -86,40 +87,40 @@ class JobCardHardTimeEngineerController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobcard)
+    public function edit(HtCrr $htcrr)
     {
-        if ($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open") {
-            return view('frontend.job-card-hard-time.engineer.progress-open', [
-                'jobcard' => $jobcard,
+        if ($this->statuses->where('id',$htcrr->progresses->last()->status_id)->first()->code == "open") {
+            return view('frontend.job-card-hard-time.engineer.progress.removal.progress-open', [
+                'htcrr' => $htcrr,
                 'status' => $this->statuses->where('code','open')->first(),
             ]);
         }
-        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "progress"){
-            return view('frontend.job-card-hard-time.engineer.progress-resume', [
+        else if($this->statuses->where('id',$htcrr->progresses->last()->status_id)->first()->code == "progress"){
+            return view('frontend.job-card-hard-time.engineer.progress.removal.progress-resume', [
                 'break' => $this->break,
                 'waiting' => $this->waiting,
                 'other' => $this->other,
                 'accomplished' => $this->accomplished,
-                'jobcard' => $jobcard,
+                'htcrr' => $htcrr,
                 'pending' => $this->statuses->where('code','pending')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
-        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "pending"){
-            return view('frontend.job-card-hard-time.engineer.progress-pause', [
-                'jobcard' => $jobcard,
+        else if($this->statuses->where('id',$htcrr->progresses->last()->status_id)->first()->code == "pending"){
+            return view('frontend.job-card-hard-time.engineer.progress.removal.progress-pause', [
+                'htcrr' => $htcrr,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
-        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "closed"){
-            return view('frontend.job-card-hard-time.engineer.progress-close', [
-                'jobcard' => $jobcard,
+        else if($this->statuses->where('id',$htcrr->progresses->last()->status_id)->first()->code == "closed"){
+            return view('frontend.job-card-hard-time.engineer.progress.removal.progress-close', [
+                'htcrr' => $htcrr,
             ]);
         }
         else{
-            return view('frontend.job-card-hard-time.engineer.progress-close', [
-                'jobcard' => $jobcard,
+            return view('frontend.job-card-hard-time.engineer.progress.removal.progress-close', [
+                'htcrr' => $htcrr,
             ]);
         }
     }
@@ -131,44 +132,37 @@ class JobCardHardTimeEngineerController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $jobcard)
+    public function update(JobCardUpdate $request, HtCrr $htcrr)
     {
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
-            $jobcard->progresses()->save(new Progress([
+            $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard-hardtime-engineer.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
-            $jobcard->progresses()->save(new Progress([
+            $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','pending')->first()->id,
                 'reason_id' =>  Type::ofJobCardPauseReason()->where('uuid',$request->pause)->first()->id,
                 'reason_text' =>  $request->reason,
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
+            return redirect()->route('frontend.job-card-hard-time.engineer.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
-            $jobcard->progresses()->save(new Progress([
+            $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','closed')->first()->id,
                 'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
                 'reason_text' =>  $request->note,
                 'progressed_by' => Auth::id()
             ]));
 
-            $jobcard->approvals()->save(new Approval([
+            $htcrr->approvals()->save(new Approval([
                 'approvable_id' => $jobcard->id,
                 'approved_by' => Auth::id(),
             ]));
-
-            if($request->discrepancy == 1){
-                return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
-            }
-            else{
-                return redirect()->route('frontend.jobcard-engineer.index')->with($this->notification);
-            }
         }
     }
 
@@ -192,16 +186,16 @@ class JobCardHardTimeEngineerController extends Controller
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'number' => 'required|exists:jobcards,number'
+            'code' => 'required|exists:htcrr,code'
           ]);
 
           if ($validator->fails()) {
             return
-            redirect()->route('frontend.jobcard-engineer.index')->withErrors($validator)->withInput();
+            redirect()->route('frontend.jobcard-hardtime-engineer.index')->withErrors($validator)->withInput();
           }
 
-        $search = JobCard::where('number',$request->number)->first();
+        $search = HtCrr::where('code',$request->code)->first();
 
-        return redirect()->route('frontend.jobcard-engineer.edit',$search->uuid);
+        return redirect()->route('frontend.jobcard-hardtime-engineer.edit',$search->uuid);
     }
 }

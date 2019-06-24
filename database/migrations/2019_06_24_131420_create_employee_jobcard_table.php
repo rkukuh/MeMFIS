@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDefectcardsTable extends Migration
+class CreateEmployeeJobcardTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,10 @@ class CreateDefectcardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('defectcards', function (Blueprint $table) {
+        Schema::create('employee_jobcard', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('uuid', 36)->unique();
-            $table->string('code')->nullable();
             $table->unsignedInteger('jobcard_id');
-            $table->integer('engineer_quantity');
-            $table->integer('helper_quantity');
-            $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
-            $table->boolean('is_rii');
-            $table->text('complaint')->nullable();
-            $table->text('description')->nullable();
+            $table->unsignedInteger('employee_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -32,7 +25,10 @@ class CreateDefectcardsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->index('code');
+            $table->foreign('employee_id')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
@@ -43,6 +39,6 @@ class CreateDefectcardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('defectcards');
+        Schema::dropIfExists('employee_jobcard');
     }
 }

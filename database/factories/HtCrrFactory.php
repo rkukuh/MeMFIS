@@ -17,7 +17,6 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'code' => 'HTCRR-DUM-' . $number,
         'part_number' => 'P/N-' . $faker->randomNumber,
         'project_id' => Project::get()->random()->id,
-        'skill_id' => Type::ofTaskCardSkill()->get()->random()->id,
         'is_rii' => $faker->boolean,
         'estimation_manhour' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
         'removed_at' => Carbon::now()->subWeeks(rand(1, 3)),
@@ -43,5 +42,18 @@ $factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
             'status_id' => Status::ofHtCrr()->where('code', 'open')->first()
         ])
     );
+
+    // SKill
+
+    for ($i = 1; $i <= rand(1, 3); $i++) {
+        if (Type::ofTaskCardSkill()->count()) {
+            $skill = Type::ofTaskCardSkill()->get()->random();
+        }
+        else {
+            $skill = factory(Type::class)->states('taskcard-skill')->create();
+        }
+    
+        $htcrr->skills()->attach($skill);
+    }
     
 });

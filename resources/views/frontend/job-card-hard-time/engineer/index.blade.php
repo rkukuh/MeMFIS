@@ -5,7 +5,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                Job Cards
+                Job Cards HTCRR
             </h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                 <li class="m-nav__item">
                     <a href="{{ route('frontend.item.index') }}" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            Job Cards
+                            Job Cards HTCRR
                         </span>
                     </a>
                 </li>
@@ -41,7 +41,7 @@
                             @include('frontend.common.label.datalist')
 
                             <h3 class="m-portlet__head-text">
-                                Job Cards
+                                Job Cards HTCRR
                             </h3>
                         </div>
                     </div>
@@ -50,19 +50,19 @@
                     <div class="m-portlet__body">
                         <div class="row align-items-center" style="margin-top:50px;">
                             <div class="col-xl-12 order-2 order-xl-1">
-                                <form method="POST" action="{{route('frontend.engineer.jobcard.search')}}">
+                                <form method="POST" action="{{route('frontend.engineer.jobcard.hardtime.search')}}">
                                     {!! csrf_field() !!}
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
                                             <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
+                                                <input type="text" class="form-control m-input" id="code" name="code" placeholder="Search...">
 
                                                 <span class="m-input-icon__icon m-input-icon__icon--left">
                                                     <span><i class="la la-search"></i></span>
                                                 </span>
                                             </div>
                                             <?php
-                                            echo $errors->first('number','<div class="form-control-feedback text-danger" ">:message</div>');
+                                            echo $errors->first('code','<div class="form-control-feedback text-danger" ">:message</div>');
                                             ?>
                                         </div>
                                         <div class="col-md-3 search">
@@ -104,10 +104,7 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('js/frontend/job-card-hard-time/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card-hard-time/item/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card-hard-time/tool/index.js') }}"></script>
 <script>
     $("#number").focus();
 </script>

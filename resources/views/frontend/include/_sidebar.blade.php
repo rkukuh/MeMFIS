@@ -178,7 +178,7 @@
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.job-card.hardtime.mechanic') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.jobcard-hardtime-mechanic.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -188,7 +188,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.job-card-hard-time.engineer') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.jobcard-hardtime-engineer.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -198,7 +198,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.job-card-hard-time.ppc') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.jobcard-hardtime-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>

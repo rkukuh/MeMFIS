@@ -12,7 +12,6 @@ class HtCrr extends MemfisModel
         'code',
         'part_number',
         'project_id',
-        'skill_id',
         'is_rii',
         'estimation_manhour',
         'removed_at',
@@ -84,12 +83,16 @@ class HtCrr extends MemfisModel
     }
 
     /**
-     * One-Way: An HT/CRR must have a skill assigned to.
+     * Many-to-Many: An HTCRR may have zero or many skill.
+     *
+     * This function will retrieve all the skills of an HTCRR.
+     * See: Type's skill_htcrr() method for the inverse
      *
      * @return mixed
      */
-    public function skill()
+    public function skills()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsToMany(Type::class, 'htcrr_skill', 'htcrr_id', 'skill_id')
+                    ->withTimestamps();;
     }
 }

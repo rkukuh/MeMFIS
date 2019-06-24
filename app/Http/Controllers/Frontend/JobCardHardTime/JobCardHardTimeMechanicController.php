@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\JobCardHardTime;
 use Auth;
 use Validator;
 use App\Models\Type;
+use App\Models\HtCrr;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
@@ -189,17 +190,17 @@ class JobCardHardTimeMechanicController extends Controller
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'number' => 'required|exists:jobcards,number'
+            'code' => 'required|exists:htcrr,code'
           ]);
 
           if ($validator->fails()) {
             return
-            redirect()->route('frontend.jobcard-mechanic.index')->withErrors($validator)->withInput();
+            redirect()->route('frontend.jobcard-hardtime-mechanic.index')->withErrors($validator)->withInput();
           }
 
-        $search = JobCard::where('number',$request->number)->first();
+        $search = HtCrr::where('code',$request->code)->first();
 
-        return redirect()->route('frontend.jobcard-mechanic.edit',$search->uuid);
+        return redirect()->route('frontend.jobcard-hardtime-mechanic.edit',$search->uuid);
     }
 
 }

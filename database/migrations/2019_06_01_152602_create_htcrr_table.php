@@ -18,8 +18,8 @@ class CreateHtcrrTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('part_number');
+            $table->string('position')->nullable();
             $table->unsignedInteger('project_id');
-            $table->unsignedInteger('skill_id');
             $table->boolean('is_rii');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->timestamp('removed_at')->nullable();
@@ -34,11 +34,6 @@ class CreateHtcrrTable extends Migration
 
             $table->foreign('project_id')
                     ->references('id')->on('projects')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('skill_id')
-                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
