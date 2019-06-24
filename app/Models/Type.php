@@ -149,6 +149,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of HTCRR's skill.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfHtCrrSkill(Builder $query)
+    {
+        return $query->where('of', 'taskcard-skill');
+    }
+
+    /**
      * Scope a query to only include type of JobCard close reason.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -553,7 +564,21 @@ class Type extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have zero or many skill.
+     * Many-to-Many: A HTCRR may have zero or many skill.
+     *
+     * This function will retrieve all HTCRR skills of a type.
+     * See: HtCrr's skills() method for the inverse
+     *
+     * @return mixed
+     */
+    public function skill_htcrr()
+    {
+        return $this->belongsToMany(HtCrr::class, 'htcrr_skill', 'skill_id', 'htcrr_id')
+                    ->withTimestamps();;
+    }
+
+    /**
+     * Many-to-Many: A task card may have zero or many skill.
      *
      * This function will retrieve all task card skills of a type.
      * See: TaskCard's skills() method for the inverse
