@@ -69,14 +69,14 @@
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                     @component('frontend.common.buttons.create')
                                         @slot('text', 'Release To Service')
-                                        @slot('href', route('frontend.release-to-service.create') )
+                                        @slot('href', route('frontend.rts.create') )
                                     @endcomponent
 
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
                         </div>
-                        @include('frontend.release-to-service.filter')
+                        @include('frontend.rts.filter')
                         <div class="rts_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
@@ -88,5 +88,5 @@
 
 @push('footer-scripts')
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-<script src="{{ asset('js/frontend/release-to-service/index.js')}}"></script>
+<script src="{{ asset('js/frontend/rts/index.js')}}"></script>
 @endpush

@@ -73,7 +73,7 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
 
 
-<script src="{{ asset('js/frontend/release-to-service/filter.js') }}"></script>
+<script src="{{ asset('js/frontend/rts/filter.js') }}"></script>
 
 
 @endpush
