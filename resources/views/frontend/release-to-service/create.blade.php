@@ -49,11 +49,11 @@
                                             Project No @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'project_no')
+                                        @component('frontend.common.input.select2')
+                                        @slot('id', 'project')
                                         @slot('text', 'Project Number')
-                                        @slot('name', 'project_no')
-                                        @slot('id_error', 'project_no')
+                                        @slot('name', 'project')
+                                        @slot('id_error', 'project')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -215,7 +215,7 @@
                                                 @include('frontend.common.buttons.reset')
 
                                                 @component('frontend.common.buttons.back')
-                                                @slot('href', route('frontend.release-to-service.index'))
+                                                    @slot('href', route('frontend.release-to-service.index'))
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -247,12 +247,44 @@
 <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+
+<script>
+  
+    $('#project').on('change', function(){
+        let project_id = this.options[this.selectedIndex].value;
+        $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'GET',
+        dataType: "json",
+        url: '/label/get-project/'+project_id,
+        success: function (response) {
+            if (response) {
+                // Note: change select2 selected option by jquery
+                $('#applicability_airplane  option[value='+response.aircraft_id+']').attr('selected','selected');
+                $('#applicability_airplane').select2().trigger('change');
+                $('#aircraft_register').empty();
+                $('#aircraft_register').val(response.aircraft_register);
+                $("#date").datetimepicker().datetimepicker("setDate", new Date());
+                if(response.quotations[0]){
+                    $('#work_performed').empty();
+                    $('#work_performed').val(response.quotations[0].title);
+                }
+            } else {
+                console.log("empty");
+            }
+
+        }
+    });
+    });
+</script>
 
 @endpush
