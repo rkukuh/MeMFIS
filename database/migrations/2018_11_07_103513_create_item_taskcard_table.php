@@ -19,6 +19,7 @@ class CreateItemTaskcardTable extends Migration
             $table->unsignedInteger('item_id');
             $table->double('quantity');
             $table->unsignedInteger('unit_id');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
