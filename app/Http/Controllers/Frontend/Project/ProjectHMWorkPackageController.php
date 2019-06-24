@@ -68,14 +68,14 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, WorkPackage $workPackage)
     {
-        $engineer_skills = $skills = $subset = [];
-        
+        $mhrs_pfrm_factor = $skills = $subset = [];
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         foreach($workPackage->taskcards as $taskcard){
+            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
             $result = $taskcard->skills->map(function ($skills) {
                 return collect($skills->toArray())
                     ->only(['name'])
@@ -91,7 +91,7 @@ class ProjectHMWorkPackageController extends Controller
         }
         sort($skills);
         $skills = array_unique($skills);
-
+        $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = false;
@@ -101,21 +101,21 @@ class ProjectHMWorkPackageController extends Controller
         $facilities = Facility::all();
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
-        // dd($count);
 
         return view('frontend.project.hm.workpackage.index',[
             'edit' => $edit,
             'project' => $project,
             'employees' => $employees,
+            'toolCount' => $toolCount,
             'total_mhrs' => $total_mhrs,
             'facilities' => $facilities,
             'engineer_skills' => $skills,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
+            'materialCount' => $materialCount,
+            'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project_workpackage' => $project_workpackage,
-            'materialCount' => $materialCount,
-            'toolCount' => $toolCount,
         ]);
     }
 

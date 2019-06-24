@@ -22,6 +22,7 @@
                         @slot('id', 'airframe_qty')
                         @slot('text', 'Airframe Quantity')
                         @slot('name', 'airframe_qty')
+                        @slot('class', 'engineer_qty')
                         @slot('id_error', 'airframe_qty')
                         @slot('input_append', 'person')
                         @slot('value', $engineer->quantity)
@@ -44,6 +45,7 @@
                     @slot('text', 'Airframe Quantity')
                     @slot('name', 'airframe_qty')
                     @slot('id_error', 'airframe_qty')
+                    @slot('class', 'engineer_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
                 @endcomponent
@@ -77,6 +79,7 @@
                         @slot('id', 'powerplant_qty')
                         @slot('text', 'Powerplant Quantity')
                         @slot('name', 'powerplant_qty')
+                        @slot('class', 'engineer_qty')
                         @slot('id_error', 'powerplant_qty')
                         @slot('input_append', 'person')
                         @slot('value', $engineer->quantity)
@@ -98,6 +101,7 @@
                     @slot('id', 'powerplant_qty')
                     @slot('text', 'Powerplant Quantity')
                     @slot('name', 'powerplant_qty')
+                    @slot('class', 'engineer_qty')
                     @slot('id_error', 'powerplant_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
@@ -132,6 +136,7 @@
                             @slot('id', 'electrical_qty')
                             @slot('text', 'Electrical Quantity')
                             @slot('name', 'electrical_qty')
+                            @slot('class', 'engineer_qty')
                             @slot('id_error', 'electrical_qty')
                             @slot('input_append', 'person')
                             @slot('value', $engineer->quantity)
@@ -152,6 +157,7 @@
                 @component('frontend.common.input.number')
                     @slot('id', 'electrical_qty')
                     @slot('text', 'Electrical Quantity')
+                    @slot('class', 'engineer_qty')
                     @slot('name', 'electrical_qty')
                     @slot('id_error', 'electrical_qty')
                     @slot('input_append', 'person')
@@ -187,6 +193,7 @@
                             @slot('id', 'radio_qty')
                             @slot('text', 'Radio Quantity')
                             @slot('name', 'radio_qty')
+                            @slot('class', 'engineer_qty')
                             @slot('id_error', 'radio_qty')
                             @slot('input_append', 'person')
                             @slot('value', $engineer->quantity)
@@ -208,6 +215,7 @@
                         @slot('id', 'radio_qty')
                         @slot('text', 'Radio Quantity')
                         @slot('name', 'radio_qty')
+                        @slot('class', 'engineer_qty')
                         @slot('id_error', 'radio_qty')
                         @slot('input_append', 'person')
                         @slot('value', $engineer->quantity)
@@ -243,6 +251,7 @@
                             @slot('id', 'instrument_qty')
                             @slot('text', 'Instrument Quantity')
                             @slot('name', 'instrument_qty')
+                            @slot('class', 'engineer_qty')
                             @slot('id_error', 'instrument_qty')
                             @slot('input_append', 'person')
                             @slot('value', $engineer->quantity)
@@ -264,6 +273,7 @@
                         @slot('id', 'instrument_qty')
                         @slot('text', 'Instrument Quantity')
                         @slot('name', 'instrument_qty')
+                        @slot('class', 'engineer_qty')
                         @slot('id_error', 'instrument_qty')
                         @slot('input_append', 'person')
                         @slot('min',0)
@@ -298,6 +308,7 @@
                             @slot('id', 'cabin_qty')
                             @slot('text', 'Cabin Quantity')
                             @slot('name', 'cabin_qty')
+                            @slot('class', 'engineer_qty')
                             @slot('id_error', 'cabin_qty')
                             @slot('input_append', 'person')
                             @slot('value', $engineer->quantity)
@@ -353,6 +364,7 @@
                             @slot('id', 'runup_qty')
                             @slot('text', 'Run Up Quantity')
                             @slot('name', 'runup_qty')
+                            @slot('class', 'engineer_qty')
                             @slot('id_error', 'runup_qty')
                             @slot('input_append', 'person')
                             @slot('value', $engineer->quantity)
@@ -373,6 +385,7 @@
                 @component('frontend.common.input.number')
                     @slot('id', 'runup_qty')
                     @slot('text', 'Run Up Quantity')
+                    @slot('class', 'engineer_qty')
                     @slot('name', 'runup_qty')
                     @slot('id_error', 'runup_qty')
                     @slot('input_append', 'person')
@@ -407,6 +420,7 @@
                         @component('frontend.common.input.number')
                             @slot('id', 'repair_qty')
                             @slot('text', 'Repair Quantity')
+                            @slot('class', 'engineer_qty')
                             @slot('name', 'repair_qty')
                             @slot('id_error', 'repair_qty')
                             @slot('input_append', 'person')
@@ -429,6 +443,7 @@
                     @slot('id', 'repair_qty')
                     @slot('text', 'Repair Quantity')
                     @slot('name', 'repair_qty')
+                    @slot('class', 'engineer_qty')
                     @slot('id_error', 'repair_qty')
                     @slot('input_append', 'person')
                     @slot('value', $engineer->quantity)
@@ -464,6 +479,7 @@
                             @slot('id', 'repainting_qty')
                             @slot('text', 'Repainting Quantity')
                             @slot('name', 'repainting_qty')
+                            @slot('class', 'engineer_qty')
                             @slot('id_error', 'repainting_qty')
                             @slot('input_append', 'person')
                             @slot('value', $engineer->quantity)
@@ -485,6 +501,7 @@
                     @slot('id', 'repainting_qty')
                     @slot('text', 'Repainting Quantity')
                     @slot('name', 'repainting_qty')
+                    @slot('class', 'engineer_qty')
                     @slot('id_error', 'repainting_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
@@ -519,6 +536,7 @@
                             @slot('id', 'ndi_ndt_qty')
                             @slot('text', 'NDI / NDT Quantity')
                             @slot('name', 'ndi_ndt_qty')
+                            @slot('class', 'engineer_qty')
                             @slot('id_error', 'ndi_ndt_qty')
                             @slot('input_append', 'person')
                             @slot('value', $engineer->quantity)
@@ -540,6 +558,7 @@
                     @slot('id', 'ndi_ndt_qty')
                     @slot('text', 'NDI / NDT Quantity')
                     @slot('name', 'ndi_ndt_qty')
+                    @slot('class', 'engineer_qty')
                     @slot('id_error', 'ndi_ndt_qty')
                     @slot('input_append', 'person')
                     @slot('value', $engineer->quantity)
@@ -570,6 +589,12 @@
                     @slot('value', $project_workpackage->tat)
                     @endif
                 @endcomponent
+            </div>
+            <div class="btn btn-default calculate" id="calculate">
+                <span>
+                    <i class="fa fa-calculator"></i>
+                    Calculate
+                </span>
             </div>
         </div>
     </div>
@@ -606,46 +631,71 @@
 <script>
     let project_uuid = '{{ $project->uuid }}';
     let workpackage_uuid = '{{ $workPackage->uuid }}';
+    let mhrs_pfrm_factor = '{{ $mhrs_pfrm_factor }}';
+
     if($('#employee_airframe ').length > 1){
         $('#employee_airframe ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#airframe_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_powerplant ').length > 1){
         $('#employee_powerplant ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#powerplant_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_electrical ').length > 1){
         $('#employee_electrical ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#electrical_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_radio ').length > 1){
         $('#employee_radio ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#radio_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_instrument ').length > 1){
         $('#employee_instrument ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#instrument_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_cabinMaintenance ').length > 1){
         $('#employee_cabinMaintenance ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#cabin_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_runup ').length > 1){
         $('#employee_runup ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#runup_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_repair ').length > 1){
         $('#employee_repair ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#repair_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_repainting ').length > 1){
         $('#employee_repainting ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#repainting_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
     if($('#employee_ndi_ndt ').length > 1){
         $('#employee_ndi_ndt ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
         $('#ndi_ndt_qty ')[1].closest("div.col-sm-3.col-md-3.col-lg-3").remove();
     }
+
+    $('#calculate').on('click',function(){
+        let engineer_qty = tat = 0;
+        $('.engineer_qty').each(function(){
+            engineer_qty = engineer_qty + parseInt($(this).val());
+        });
+        if($('#default').prop("checked")){
+            tat = parseInt(mhrs_pfrm_factor) / engineer_qty * 6,5;
+        }else{
+            tat = total_mhrs * 1.6 / engineer_qty * 6,5;
+        }
+        $('#tat').val(tat);
+    });
+
     </script>
 <script src="{{ asset('js/frontend/functions/select2/employee.js')}}"></script>
 @endpush

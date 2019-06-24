@@ -13,7 +13,6 @@ let TaskCard = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-                            console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -741,25 +740,25 @@ let TaskCard = {
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
-                if($(this).val() == 'Select'){
-                    $(this).siblings(".select2-container").css('border', '5px solid red');
-                    status = false;
-                }else{
-                    $(this).siblings(".select2-container").css('border', '2px grey');
+                // if($(this).val() == 'Select'){
+                    // $(this).siblings(".select2-container").css('border', '5px solid red');
+                    // status = false;
+                // }else{
+                    // $(this).siblings(".select2-container").css('border', '2px grey');
                     threshold_type[i] = $(this).val();
-                }
+                // }
             });
             threshold_type = threshold_type.filter(Boolean);
 
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
-                if($(this).val() == 'Select'){
-                    $(this).siblings(".select2-container").css('border', '5px solid red');
-                    status = false;
-                }else{
-                    $(this).siblings(".select2-container").css('border', '2px grey');
+                // if($(this).val() == 'Select'){
+                    // $(this).siblings(".select2-container").css('border', '5px solid red');
+                    // status = false;
+                // }else{
+                    // $(this).siblings(".select2-container").css('border', '2px grey');
                     repeat_type[i] = $(this).val();
-                }
+                // }
             });
             repeat_type = repeat_type.filter(Boolean);
 
