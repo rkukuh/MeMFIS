@@ -74,12 +74,38 @@
                             @slot('id_error', 'mhrs')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Installation Mhrs @include('frontend.common.label.required')
+                            Position @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.select2')
+                        @component('frontend.common.input.text')
+                            @slot('text', 'position')
+                            @slot('id', 'position')
+                            @slot('name', 'position')
+                            @slot('id_error', 'position')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row ">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Est. Removal Mhrs @include('frontend.common.label.required')
+                        </label>
+
+                        @component('frontend.common.input.number')
+                            @slot('text', 'removal')
+                            @slot('id', 'removal')
+                            @slot('name', 'removal')
+                            @slot('id_error', 'removal')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Est. Installation Mhrs @include('frontend.common.label.required')
+                        </label>
+
+                        @component('frontend.common.input.number')
                             @slot('text', 'Installaton')
                             @slot('id', 'installaton')
                             @slot('name', 'installaton')
