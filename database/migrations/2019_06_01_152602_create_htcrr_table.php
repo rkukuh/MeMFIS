@@ -20,8 +20,8 @@ class CreateHtcrrTable extends Migration
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('project_id');
             $table->string('position')->nullable();
-            $table->string('sn_off');
             $table->string('sn_on');
+            $table->string('sn_off');
             $table->string('pn_on');
             $table->string('pn_off');
             $table->boolean('is_rii');
