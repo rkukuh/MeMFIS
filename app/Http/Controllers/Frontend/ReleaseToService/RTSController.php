@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\ReleaseToService;
 
+use Auth;
 use App\Models\RTS;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\RTSStore;
@@ -38,7 +39,7 @@ class RTSController extends Controller
     public function store(RTSStore $request)
     {
         $request->merge(['work_performed' => join("|", $request->work_performed)]);
-        
+
         $project = RTS::create($request->all());
 
         return response()->json($project);
@@ -87,5 +88,23 @@ class RTSController extends Controller
     public function destroy(RTS $rts)
     {
         //
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function print(RTS $rts)
+    {
+        $username = Auth::user()->name;
+
+        $pdf = \PDF::loadView('frontend/form/rts_certificate',[
+                'username' => $username,
+                'rts' => $rts,
+
+                ]);
+        return $pdf->stream();
     }
 }
