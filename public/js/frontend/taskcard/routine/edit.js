@@ -67,7 +67,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.remark',
+                    field: 'pivot.note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -330,7 +330,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.remark',
+                    field: 'pivot.note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -512,7 +512,7 @@ let TaskCard = {
                     item_id: material,
                     quantity: quantity,
                     unit_id: unit_material,
-                    remark_material: remark_material,
+                    note: remark_material,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -559,7 +559,7 @@ let TaskCard = {
                     item_id: tool,
                     quantity: quantity,
                     unit_id: unit_tool,
-                    remark_tool: remark_tool,
+                    note: remark_tool,
                 },
                 success: function (data) {
                     if (data.errors) {
