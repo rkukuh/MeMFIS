@@ -224,10 +224,10 @@ class QuotationDatatables extends Controller
         $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
+            
         $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
         ->with('facility')
         ->get();
-        // dd($ProjectWorkPackageFacility);
 
         $data = $alldata = json_decode($ProjectWorkPackageFacility);
 

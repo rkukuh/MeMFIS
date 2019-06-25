@@ -59,7 +59,8 @@ class ProjectWorkPackageFacilityController extends Controller
      */
     public function edit(ProjectWorkPackageFacility $projectWorkPackageFacility)
     {
-        //
+        dd($projectWorkPackageFacility);
+        return response()->json($projectWorkPackageFacility);
     }
 
     /**

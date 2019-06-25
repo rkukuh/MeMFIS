@@ -140,42 +140,22 @@
         $('#m_form_status, #m_form_type').selectpicker();
 
         let edit = $('.facility_datatable').on('click', '.facility_price', function edit () {
-            save_changes_button();
+            // save_changes_button();
 
             let triggerid = $(this).data('uuid');
-
+            console.log(triggerid);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/aircraft/' + triggerid + '/edit',
+                url: '/project-workpackage-facility/' + triggerid + '/edit',
                 success: function (data) {
-                    document.getElementById('uuid').value = data.uuid;
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('code').value = data.code;
-                    $.ajax({
-                        url: '/get-manufacturers/',
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (manufacturer) {
-                            $('select[name="manufacturer_id"]').empty();
-
-                            $.each(manufacturer, function (key, value) {
-                                if(key == data.manufacturer_id){
-                                    $('select[name="manufacturer_id"]').append(
-                                        '<option value="' + key + '" selected>' + value + '</option>'
-                                    );
-                                }
-                                else{
-                                    $('select[name="manufacturer_id"]').append(
-                                        '<option value="' + key + '">' + value + '</option>'
-                                    );
-                                }
-                            });
-                        }
-                    });
-
+                    console.log(data);
+                    // document.getElementById('uuid').value = data.uuid;
+                    // document.getElementById('name').value = data.name;
+                    // document.getElementById('code').value = data.code;
+                    
                     $('.btn-success').addClass('update');
                     $('.btn-success').removeClass('add');
                 },
