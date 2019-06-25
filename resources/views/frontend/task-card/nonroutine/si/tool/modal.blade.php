@@ -63,7 +63,7 @@
                             <div class="form-group m-form__group row ">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <label class="form-control-label">
-                                        Remark @include('frontend.common.label.required')
+                                        Remark @include('frontend.common.label.optional')
                                     </label>
 
                                     @component('frontend.common.input.textarea')
