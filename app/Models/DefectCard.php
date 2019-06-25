@@ -50,7 +50,8 @@ class DefectCard extends MemfisModel
                         'unit_id',
                         'ipc_ref',
                         'sn_on',
-                        'sn_off'
+                        'sn_off',
+                        'note'
                     )
                     ->withTimestamps();
     }
