@@ -29,15 +29,9 @@
 
 @push('footer-scripts')
 <script>
-    var DatatableDataLocalDemo = function () {
-    //== Private functions
-
-    // demo initializer
-    var demo = function () {
-        var dataJSONArray = JSON.parse('[{"facilityName":"Hangar Space","price":"US$ 1,000.00","note":"Eiusmod nisi enim esse elit deserunt sint ex ut est cillum in."},{"facilityName":"Office Space","price":"US$ 1,000.00","note":"Eiusmod nisi enim esse elit deserunt sint ex ut est cillum in."},{"facilityName":"Workshop A","price":"US$ 1,000.00","note":"Eiusmod nisi enim esse elit deserunt sint ex ut est cillum in."},{"facilityName":"Hangar Space 2","price":"US$ 1,000.00","note":"Eiusmod nisi enim esse elit deserunt sint ex ut est cillum in."},{"facilityName":"Hangar Office room","price":"US$ 1,000.00","note":"Eiusmod nisi enim esse elit deserunt sint ex ut est cillum in."}]');
-
-        var datatable = $('.facility_datatable').mDatatable({
-            // datasource definition
+    let facilityDatatable = {
+        init:function () {
+        let datatable = $('.facility_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -51,7 +45,6 @@
                     if (typeof raw.data !== 'undefined') {
                         dataSet = raw.data;
                     }
-                    console.log(dataSet);
                     return dataSet;
                     }
                 }
@@ -118,7 +111,7 @@
                 sortable: false,
                 overflow: 'visible',
                 template: function (row, index, datatable) {
-                    var dropup = (datatable.getPageSize() - index) <= 4 ? 'dropup' : '';
+                    let dropup = (datatable.getPageSize() - index) <= 4 ? 'dropup' : '';
 
                     return (
                     '<button data-toggle="modal" data-target="#facility_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill facility_price" title="Tool" data-uuid=' +
@@ -140,10 +133,8 @@
         $('#m_form_status, #m_form_type').selectpicker();
 
         let edit = $('.facility_datatable').on('click', '.facility_price', function edit () {
-            // save_changes_button();
 
             let triggerid = $(this).data('uuid');
-            console.log(triggerid);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -151,10 +142,12 @@
                 type: 'get',
                 url: '/project-workpackage-facility/' + triggerid + '/edit',
                 success: function (data) {
-                    console.log(data);
-                    // document.getElementById('uuid').value = data.uuid;
-                    // document.getElementById('name').value = data.name;
-                    // document.getElementById('code').value = data.code;
+                    $('#uuid').val(data.uuid);
+                    if(data.facility){
+                    $('#facility_name').val(data.facility.name);
+                    }
+                    $('#price_amount').val(data.price_amount);
+                    $('#marketing_note').val(data.note);
                     
                     $('.btn-success').addClass('update');
                     $('.btn-success').removeClass('add');
@@ -171,19 +164,62 @@
             });
         });
 
-    };
+        let update = $('.modal-footer').on('click', '.update', function () {
+            let name = $('#facility_name').val();
+            let triggeruuid = $('#uuid').val();
+            let price_amount =$('#price_amount').val();
+            let marketing_note = $('#marketing_note').val();
 
-    return {
-        //== Public functions
-        init: function () {
-            // init dmeo
-            demo();
+            console.log($('#facility_name'));
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-workpackage-facility/' + triggeruuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    name: name,
+                    price_amount: price_amount,
+                    note: marketing_note
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.name) {
+                            $('#facility_name-error').html(data.errors.name[0]);
+
+                        }
+                        if (data.errors.price_amount) {
+                            $('#price_amount-error').html(data.errors.price_amount[0]);
+
+                        }
+                        if (data.errors.marketing_note) {
+                            $('#marketing_note-error').html(data.errors.marketing_note[0]);
+
+                        }
+
+                    } else {
+                        $('#facility_price').modal('hide');
+
+                        toastr.success('Aircraft has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.facility_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
         }
     };
-}();
+
 
 jQuery(document).ready(function () {
-    DatatableDataLocalDemo.init();
+    facilityDatatable.init();
 });
 </script>]
 @endpush

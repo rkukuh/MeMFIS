@@ -25,11 +25,12 @@
                                 Facility Name 
                                 </label>
 
-                                @component('frontend.common.label.data-info')
+                                @component('frontend.common.input.text')
                                     @slot('text', 'Facility Name')
                                     @slot('name', 'facility_name')
                                     @slot('id', 'facility_name')
                                     @slot('id_error', 'facility_name')
+                                    @slot('disabled', 'disabled')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -38,10 +39,10 @@
                                 </label>
 
                                 @component('frontend.common.input.number')
-                                    @slot('text', 'Discount')
-                                    @slot('name', 'discount')
-                                    @slot('id', 'discount')
-                                    @slot('id_error', 'discount')
+                                    @slot('text', 'Price')
+                                    @slot('name', 'price_amount')
+                                    @slot('id', 'price_amount')
+                                    @slot('id_error', 'price_amount')
                                 @endcomponent
                             </div>
                         </div>
@@ -64,11 +65,11 @@
                         <div class="flex">
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.update')
-                                        @slot('class', 'discount')
+                                        @slot('class', 'price_amount')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')
-                                        @slot('class', 'reset-sequance')
+                                        @slot('class', 'reset-sequence')
                                     @endcomponent
                                 @include('frontend.common.buttons.close')
                             </div>

@@ -57,9 +57,9 @@ class ProjectWorkPackageFacilityController extends Controller
      * @param  \App\Models\ProjectWorkPackageFacility  $projectWorkPackageFacility
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProjectWorkPackageFacility $projectWorkPackageFacility)
+    public function edit($projectWorkPackageFacility)
     {
-        dd($projectWorkPackageFacility);
+        $projectWorkPackageFacility = ProjectWorkPackageFacility::where('uuid',$projectWorkPackageFacility)->with('facility')->first();
         return response()->json($projectWorkPackageFacility);
     }
 
@@ -70,9 +70,11 @@ class ProjectWorkPackageFacilityController extends Controller
      * @param  \App\Models\ProjectWorkPackageFacility  $projectWorkPackageFacility
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectWorkPackageFacilityUpdate $request, ProjectWorkPackageFacility $projectWorkPackageFacility)
+    public function update(ProjectWorkPackageFacilityUpdate $request,  $projectWorkPackageFacility)
     {
-        //
+        $projectWorkPackageFacility = ProjectWorkPackageFacility::where('uuid',$projectWorkPackageFacility)->first();
+        $projectWorkPackageFacility->update( $request->all() );
+        return response()->json($projectWorkPackageFacility);
     }
 
     /**
