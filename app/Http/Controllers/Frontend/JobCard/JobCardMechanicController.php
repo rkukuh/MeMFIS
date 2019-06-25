@@ -22,7 +22,8 @@ class JobCardMechanicController extends Controller
     protected $waiting;
     protected $other;
     protected $accomplished;
-    protected $notification;
+    protected $sucess_notification;
+    protected $error_notification;
 
 
     public function __construct()
@@ -32,10 +33,15 @@ class JobCardMechanicController extends Controller
         $this->waiting = Type::ofJobCardPauseReason()->where('code','waiting-material')->first()->uuid;
         $this->other = Type::ofJobCardPauseReason()->where('code','other')->first()->uuid;
         $this->accomplished = Type::ofJobCardCloseReason()->where('code','accomplished')->first()->uuid;
-        $this->notification = $notification = array(
+        $this->sucess_notification = array(
             'message' => "JobCard's status has been updated",
             'title' => "Success",
             'alert-type' => "success"
+        );
+        $this->error_notification = array(
+            'message' => "JobCard's status can't updated",
+            'title' => "Danger",
+            'alert-type' => "error"
         );
     }
 
@@ -89,37 +95,49 @@ class JobCardMechanicController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
-        if ($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open") {
+
+        $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
+
+        foreach($progresses as $progress){
+            $progress->status .= Status::where('id',$progress->status_id)->first()->name;
+        }
+
+        if ($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "open") {
             return view('frontend.job-card.mechanic.progress-open', [
                 'jobcard' => $jobcard,
+                'progresses' => $progresses,
                 'status' => $this->statuses->where('code','open')->first(),
             ]);
         }
-        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "progress"){
+        else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "progress"){
             return view('frontend.job-card.mechanic.progress-resume', [
                 'break' => $this->break,
                 'waiting' => $this->waiting,
                 'other' => $this->other,
                 'accomplished' => $this->accomplished,
                 'jobcard' => $jobcard,
+                'progresses' => $progresses,
                 'pending' => $this->statuses->where('code','pending')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
-        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "pending"){
+        else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "pending"){
             return view('frontend.job-card.mechanic.progress-pause', [
                 'jobcard' => $jobcard,
+                'progresses' => $progresses,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
-        else if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "closed"){
+        else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "closed"){
             return view('frontend.job-card.mechanic.progress-close', [
+                'progresses' => $progresses,
                 'jobcard' => $jobcard,
             ]);
         }
         else{
             return view('frontend.job-card.mechanic.progress-close', [
+                'progresses' => $progresses,
                 'jobcard' => $jobcard,
             ]);
         }
@@ -136,11 +154,15 @@ class JobCardMechanicController extends Controller
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
-            $jobcard->progresses()->save(new Progress([
-                'status_id' =>  $this->statuses->where('code','progress')->first()->id,
-                'progressed_by' => Auth::id()
-            ]));
-            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->notification);
+            if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open"){
+                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
+            }else{
+                $jobcard->progresses()->save(new Progress([
+                    'status_id' =>  $this->statuses->where('code','progress')->first()->id,
+                    'progressed_by' => Auth::id()
+                ]));
+                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->sucess_notification);
+            }
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
             $jobcard->progresses()->save(new Progress([
@@ -149,7 +171,7 @@ class JobCardMechanicController extends Controller
                 'reason_text' =>  $request->reason,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
             $jobcard->progresses()->save(new Progress([
@@ -163,7 +185,7 @@ class JobCardMechanicController extends Controller
                 return redirect()->route('frontend.discrepancy.jobcard.mechanic.discrepancy',$jobcard->uuid);
             }
             else{
-                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->notification);
+                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->sucess_notification);
             }
 
         }

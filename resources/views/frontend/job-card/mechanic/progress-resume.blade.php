@@ -240,7 +240,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="m-portlet  m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -255,7 +255,24 @@
                         <div class="m-scrollable" data-scrollable="true" data-height="380" data-mobile-height="300">
                             <div class="m-timeline-2">
                                 <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
-                                    <div class="m-timeline-2__item">
+                                    @foreach($progresses as $progress)
+                                        <div class="m-timeline-2__item m--margin-top-30">
+                                            <span class="m-timeline-2__item-time">{{ date("m-d-y", strtotime($progress->created_at))}}</span>
+                                            <div class="m-timeline-2__item-cricle">
+                                                <i class="fa fa-genderless m--font-success"></i>
+                                            </div>
+                                            <div class="m-timeline-2__item-text m-timeline-2__item-text--bold">
+                                                {{$progress->status}}
+                                            </div>
+                                            <div class="m-list-pics m-list-pics--sm m--padding-left-20">
+                                                <a href="#"><img src="assets/app/media/img/users/100_4.jpg" title=""></a>
+                                                <a href="#"><img src="assets/app/media/img/users/100_13.jpg" title=""></a>
+                                                <a href="#"><img src="assets/app/media/img/users/100_11.jpg" title=""></a>
+                                                <a href="#"><img src="assets/app/media/img/users/100_14.jpg" title=""></a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    {{-- <div class="m-timeline-2__item">
                                         <span class="m-timeline-2__item-time">10:00</span>
                                         <div class="m-timeline-2__item-cricle">
                                             <i class="fa fa-genderless m--font-danger"></i>
@@ -328,7 +345,7 @@
                                         <div class="m-timeline-2__item-text m--padding-top-5">
                                             Received a new feedback on <a href="#" class="m-link m-link--brand m--font-bolder">FinancePro App</a> product.
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
