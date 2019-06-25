@@ -17,7 +17,22 @@ class HtCrrDatatables extends Controller
      */
     public function index(Project $project)
     {
-        $data = $alldata = json_decode(HtCrr::with('skill')->where('project_id',$project->id)->get());
+        $HtCrr =HtCrr::where('project_id',$project->id)->get();
+        foreach($HtCrr as $data){
+            if(isset($data->skills) ){
+                if(sizeof($data->skills) == 3){
+                    $data->skill_name .= "ERI";
+                }
+                else if(sizeof($data->skills) == 1){
+                    $data->skill_name .= $data->skills[0]->name;
+                }
+                else{
+                    $data->skill_name .= '';
+                }
+            }
+        }
+
+        $data = $alldata = json_decode($HtCrr);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

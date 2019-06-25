@@ -20,6 +20,9 @@
                   data: "pivot.unit"
               },
               {
+                  data: "pivot.note"
+              },
+              {
                   data: "Actions"
               }
           ],

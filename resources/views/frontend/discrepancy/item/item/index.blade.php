@@ -66,8 +66,8 @@
 
                                     @component('frontend.common.input.textarea')
                                         @slot('rows', '5')
-                                        @slot('id', 'item_remark')
-                                        @slot('name', 'item_remark')
+                                        @slot('id', 'remark_material')
+                                        @slot('name', 'remark_material')
                                         @slot('text', 'Remark')
                                     @endcomponent
                                 </div>

@@ -59,6 +59,19 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-Many: An HTCRR may have one remover / installer.
+     *
+     * This function will retrieve all the HTCRRs of a given remover / installer.
+     * See: HtCrr's conductedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function conducted_htcrr()
+    {
+        return $this->hasMany(HtCrr::class, 'conducted_by');
+    }
+
+    /**
      * Polymorphic: An employee can have zero or many documents.
      *
      * This function will get all of the employee's documents.
@@ -146,19 +159,6 @@ class Employee extends MemfisModel
     {
         return $this->belongsToMany(JobCard::class, 'employee_jobcard', 'employee_id', 'jobcard_id')
                     ->withTimestamps();;
-    }
-
-    /**
-     * One-to-Many: An HT/CRR may have one installer.
-     *
-     * This function will retrieve all the HT/CRRs of a given installer.
-     * See: HtCrr's installedBy() method for the inverse
-     *
-     * @return mixed
-     */
-    public function htcrr_installed()
-    {
-        return $this->hasMany(HtCrr::class, 'installed_by');
     }
 
     /**

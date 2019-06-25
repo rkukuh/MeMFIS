@@ -20,21 +20,20 @@
                         <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
                         <div class="m-portlet__body">
                             <div class="form-group m-form__group row ">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Item @include('frontend.common.label.required')
-                                            </label>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Item @include('frontend.common.label.required')
+                                    </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'material')
-                                                @slot('text', 'Material')
-                                                @slot('name', 'material')
-                                                @slot('id_error', 'material')
-                                            @endcomponent
-                                    </div>
+                                    @component('frontend.common.input.select2')
+                                        @slot('id', 'material')
+                                        @slot('text', 'Material')
+                                        @slot('name', 'material')
+                                        @slot('id_error', 'material')
+                                    @endcomponent
+                                </div>
                             </div>
                             <div class="form-group m-form__group row ">
-
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
                                         Quantity @include('frontend.common.label.required')
@@ -49,17 +48,32 @@
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Unit @include('frontend.common.label.required')
-                                        </label>
+                                    <label class="form-control-label">
+                                        Unit @include('frontend.common.label.required')
+                                    </label>
 
-                                        @component('frontend.common.input.select2')
-                                            @slot('id', 'unit_material')
-                                            @slot('text', 'Unit')
-                                            @slot('name', 'unit_material')
-                                            @slot('id_error', 'unit_material')
-                                        @endcomponent
-                                    </div>
+                                    @component('frontend.common.input.select2')
+                                        @slot('id', 'unit_material')
+                                        @slot('text', 'Unit')
+                                        @slot('name', 'unit_material')
+                                        @slot('id_error', 'unit_material')
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row ">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-control-label">
+                                        Remark @include('frontend.common.label.optional')
+                                    </label>
+
+                                    @component('frontend.common.input.textarea')
+                                        @slot('text', 'Remark')
+                                        @slot('rows', '3')
+                                        @slot('name', 'remark_material')
+                                        @slot('id', 'remark_material')
+                                        @slot('id_error', 'remark_material')
+                                    @endcomponent
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">

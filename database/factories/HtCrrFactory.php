@@ -15,16 +15,27 @@ $factory->define(HtCrr::class, function (Faker $faker) {
 
     return [
         'code' => 'HTCRR-DUM-' . $number,
+        'type_id' => function () use ($faker) {
+            if (Type::ofHtCrrType()->count()) {
+                return Type::ofHtCrrType()->get()->random()->id;
+            }
+            
+            return factory(Type::class)->states('htcrr-type')->create()->id;
+        },
+        'project_id' => function () use ($faker) {
+            if (Project::count()) {
+                return Project::get()->random()->id;
+            }
+            
+            return factory(Project::class)->create()->id;
+        },
+        'position' => 'Pos-' . ucfirst($faker->word),
+        'serial_number' => 'S/N-' . $faker->randomNumber,
         'part_number' => 'P/N-' . $faker->randomNumber,
-        'project_id' => Project::get()->random()->id,
-        'is_rii' => $faker->boolean,
+        'conducted_at' => Carbon::now()->subWeeks(rand(1, 3)),
+        'conducted_by' => Employee::get()->random()->id,
         'estimation_manhour' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
-        'removed_at' => Carbon::now()->subWeeks(rand(1, 3)),
-        'removed_by' => Employee::get()->random()->id,
-        'removal_manhour_estimation' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
-        'installed_at' => Carbon::now()->addWeeks(rand(1, 3)),
-        'installed_by' => Employee::get()->random()->id,
-        'installation_manhour_estimation' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
+        'is_rii' => $faker->boolean,
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 

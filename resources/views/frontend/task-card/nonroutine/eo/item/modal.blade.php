@@ -34,7 +34,6 @@
                                     </div>
                             </div>
                             <div class="form-group m-form__group row ">
-
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
                                         Quantity @include('frontend.common.label.required')
@@ -59,6 +58,21 @@
                                             @slot('id_error', 'unit_material')
                                         @endcomponent
                                     </div>
+                            </div>
+                            <div class="form-group m-form__group row ">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-control-label">
+                                        Remark @include('frontend.common.label.optional')
+                                    </label>
+
+                                    @component('frontend.common.input.textarea')
+                                        @slot('text', 'Remark')
+                                        @slot('rows', '3')
+                                        @slot('name', 'remark_item')
+                                        @slot('id', 'remark_item')
+                                        @slot('id_error', 'remark_item')
+                                    @endcomponent
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">

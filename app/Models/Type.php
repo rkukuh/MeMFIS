@@ -149,6 +149,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of HTCRR.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfHtCrrType(Builder $query)
+    {
+        return $query->where('of', 'htcrr-type');
+    }
+
+    /**
      * Scope a query to only include type of HTCRR's close reason.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -624,6 +635,19 @@ class Type extends MemfisModel
     public function task_taskcards()
     {
         return $this->hasMany(TaskCard::class, 'task_id', 'id');
+    }
+
+    /**
+     * One-to-Many: An HTCRR may have zero or many type.
+     *
+     * This function will retrieve all HTCRRs of a type.
+     * See: HtCrr's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type_htcrrs()
+    {
+        return $this->hasMany(HtCrr::class, 'type_id', 'id');
     }
 
     /**

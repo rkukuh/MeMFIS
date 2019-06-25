@@ -10,37 +10,33 @@ class HtCrr extends MemfisModel
 
     protected $fillable = [
         'code',
-        'part_number',
+        'type_id',
         'project_id',
-        'is_rii',
+        'position',
+        'serial_number',
+        'part_number',
+        'conducted_at',
+        'conducted_by',
         'estimation_manhour',
-        'removed_at',
-        'removed_by',
-        'removal_manhour_estimation',
-        'installed_at',
-        'installed_by',
-        'installation_manhour_estimation',
+        'is_rii',
         'description',
     ];
 
-    protected $dates = [
-        'removed_at',
-        'installed_at',
-    ];
+    protected $dates = ['conducted_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: An HT/CRR may have one installer.
+     * One-to-Many: An HTCRR may have one remover / installer.
      *
-     * This function will retrieve the installer of an HT/CRR.
-     * See: Employee's htcrr_installed() method for the inverse
+     * This function will retrieve the removed / installer of an HTCRR.
+     * See: Employee's conducted_htcrr() method for the inverse
      *
      * @return mixed
      */
-    public function installedBy()
+    public function conductedBy()
     {
-        return $this->belongsTo(Employee::class, 'installed_by');
+        return $this->belongsTo(Employee::class, 'conducted_by');
     }
 
     /**
@@ -94,5 +90,18 @@ class HtCrr extends MemfisModel
     {
         return $this->belongsToMany(Type::class, 'htcrr_skill', 'htcrr_id', 'skill_id')
                     ->withTimestamps();;
+    }
+
+    /**
+     * One-to-Many: An HTCRR may have zero or many type.
+     *
+     * This function will retrieve the type of an HTCRR.
+     * See: Type's type_htcrrs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
     }
 }

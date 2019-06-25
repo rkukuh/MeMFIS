@@ -88,7 +88,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: "",
+                    field: "pivot.note",
                     title: "Remark",
                     sortable: "asc",
                     filterable: !1,
@@ -181,7 +181,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: "",
+                    field: "pivot.note",
                     title: "Remark",
                     sortable: "asc",
                     filterable: !1,

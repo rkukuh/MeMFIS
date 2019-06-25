@@ -167,7 +167,7 @@ let Item = {
                     filterable: !1,
                 },
                 {
-                    field: "",
+                    field: "pivot.note",
                     title: "Remark",
                     sortable: "asc",
                     filterable: !1,
@@ -197,6 +197,7 @@ let Item = {
             let ipc = $('input[name=ipc]').val();
             let sn_on = $('input[name=sn_on]').val();
             let sn_off = $('input[name=sn_off]').val();
+            let remark_tool = $('#remark_tool').val();
 
             $.ajax({
                 headers: {
@@ -212,6 +213,7 @@ let Item = {
                     ipc_ref: ipc,
                     sn_on: sn_on,
                     sn_off: sn_off,
+                    note: remark_tool,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -257,6 +259,7 @@ let Item = {
                     document.getElementById('ipc').value = data.pivot.ipc_ref;
                     document.getElementById('sn_on').value = data.pivot.sn_on;
                     document.getElementById('sn_off').value = data.pivot.sn_off;
+                    document.getElementById('remark_tool').value = data.pivot.note;
                     $.ajax({
                         url: '/get-tools/',
                         type: 'GET',
@@ -323,6 +326,7 @@ let Item = {
             let ipc = $('input[name=ipc]').val();
             let sn_on = $('input[name=sn_on]').val();
             let sn_off = $('input[name=sn_off]').val();
+            let remark_tool = $('#remark_tool').val();
             let triggeruuid = $('input[name=uuid]').val();
 
             $.ajax({
@@ -339,6 +343,7 @@ let Item = {
                     ipc_ref: ipc,
                     sn_on: sn_on,
                     sn_off: sn_off,
+                    note: remark_tool,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -507,7 +512,7 @@ let Item = {
                     filterable: !1,
                 },
                 {
-                    field: "",
+                    field: "pivot.note",
                     title: "Remark",
                     sortable: "asc",
                     filterable: !1,
@@ -536,6 +541,7 @@ let Item = {
             let ipc = $('input[name=ipc_material]').val();
             let sn_on = $('input[name=sn_on_material]').val();
             let sn_off = $('input[name=sn_off_material]').val();
+            let remark_material = $('#remark_material').val();
 
             $.ajax({
                 headers: {
@@ -551,6 +557,7 @@ let Item = {
                     ipc_ref: ipc,
                     sn_on: sn_on,
                     sn_off: sn_off,
+                    note: remark_material,
 
                 },
                 success: function (data) {
@@ -597,6 +604,7 @@ let Item = {
                     document.getElementById('ipc_material').value = data.pivot.ipc_ref;
                     document.getElementById('sn_on_material').value = data.pivot.sn_on;
                     document.getElementById('sn_off_material').value = data.pivot.sn_off;
+                    document.getElementById('remark_material').value = data.pivot.note;
                     $.ajax({
                         url: '/get-materials/',
                         type: 'GET',
@@ -662,6 +670,7 @@ let Item = {
             let ipc = $('input[name=ipc_material]').val();
             let sn_on = $('input[name=sn_on_material]').val();
             let sn_off = $('input[name=sn_off_material]').val();
+            let remark_material = $('#remark_material').val();
             let triggeruuid = $('input[name=material_uuid]').val();
 
             $.ajax({
@@ -678,6 +687,7 @@ let Item = {
                     ipc_ref: ipc,
                     sn_on: sn_on,
                     sn_off: sn_off,
+                    note: remark_material,
                 },
                 success: function (data) {
                     if (data.errors) {

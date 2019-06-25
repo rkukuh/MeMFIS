@@ -25,6 +25,7 @@
       <div class="facility_datatable" id="scrolling_both"></div>
   </div>
 </div>
+@include('frontend.quotation.facility.modal')
 
 @push('footer-scripts')
 <script>
@@ -38,9 +39,27 @@
         var datatable = $('.facility_datatable').mDatatable({
             // datasource definition
             data: {
-                type: 'local',
-                source: dataJSONArray,
-                pageSize: 10
+                type: 'remote',
+                source: {
+                read: {
+                    method: 'GET',
+                    url: '/datatables/quotation/' + quotation_uuid + '/workpackage/'+ workPackage_uuid +'/facilities',
+                    map: function (raw) {
+                    let dataSet = raw;
+                    let total = subtotal = 0;
+                    
+                    if (typeof raw.data !== 'undefined') {
+                        dataSet = raw.data;
+                    }
+                    console.log(dataSet);
+                    return dataSet;
+                    }
+                }
+                },
+                pageSize: 10,
+                serverPaging: !1,
+                serverSorting: !1
+
             },
 
             // layout definition
@@ -52,13 +71,31 @@
                 footer: false // display/hide footer
             },
 
+            responsive: true,
+
             // column sorting
             sortable: true,
 
             pagination: true,
 
+            toolbar: {
+
+            items: {
+
+                    pagination: {
+
+                    pageSizeSelect: [10, 20, 30, 50, 100],
+                    },
+                },
+            },
+
             search: {
                 input: $('#generalSearch')
+            },
+
+            rows: {
+
+
             },
 
             // inline and bactch editing(cooming soon)
@@ -66,10 +103,10 @@
 
             // columns definition
             columns: [{
-                field: "facilityName",
+                field: "facility.name",
                 title: "Facility Name"
             }, {
-                field: "price",
+                field: "price_amount",
                 title: "Price",
             }, {
                 field: "note",
@@ -83,21 +120,11 @@
                 template: function (row, index, datatable) {
                     var dropup = (datatable.getPageSize() - index) <= 4 ? 'dropup' : '';
 
-                    return '\
-                        <div class="dropdown ' + dropup + '">\
-                            <a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">\
-                                <i class="la la-ellipsis-h"></i>\
-                            </a>\
-                              <div class="dropdown-menu dropdown-menu-right">\
-                                <a class="dropdown-item" href="#"><i class="la la-edit"></i> Edit Details</a>\
-                                <a class="dropdown-item" href="#"><i class="la la-leaf"></i> Update Status</a>\
-                                <a class="dropdown-item" href="#"><i class="la la-print"></i> Generate Report</a>\
-                              </div>\
-                        </div>\
-                        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="View ">\
-                            <i class="la la-edit"></i>\
-                        </a>\
-                    ';
+                    return (
+                    '<button data-toggle="modal" data-target="#facility_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill facility_price" title="Tool" data-uuid=' +
+                    row.uuid +
+                    '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                  );
                 }
             }]
         });
@@ -111,6 +138,38 @@
         });
 
         $('#m_form_status, #m_form_type').selectpicker();
+
+        let edit = $('.facility_datatable').on('click', '.facility_price', function edit () {
+            // save_changes_button();
+
+            let triggerid = $(this).data('uuid');
+            console.log(triggerid);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/project-workpackage-facility/' + triggerid + '/edit',
+                success: function (data) {
+                    console.log(data);
+                    // document.getElementById('uuid').value = data.uuid;
+                    // document.getElementById('name').value = data.name;
+                    // document.getElementById('code').value = data.code;
+                    
+                    $('.btn-success').addClass('update');
+                    $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#aircraft-error').html(value);
+                    });
+                }
+            });
+        });
 
     };
 
