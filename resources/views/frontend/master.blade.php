@@ -45,6 +45,11 @@
                             timeOut: 5000
                         });
                     break;
+                    case 'error':
+                        toastr.error('{{ Session::get('message') }}', '{{ Session::get('title') }}', {
+                            timeOut: 5000
+                        });
+                    break;
                 }
             @endif
         </script>
