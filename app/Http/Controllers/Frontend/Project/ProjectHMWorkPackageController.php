@@ -127,7 +127,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function edit(Project $project, WorkPackage $workPackage)
     {
-        $engineer_skills = $skills = $subset = [];
+        $mhrs_pfrm_factor = $engineer_skills = $skills = $subset = [];
             
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
@@ -135,6 +135,7 @@ class ProjectHMWorkPackageController extends Controller
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         foreach($workPackage->taskcards as $taskcard){
+            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
             $result = $taskcard->skills->map(function ($skills) {
                 return collect($skills->toArray())
                     ->only(['name'])
@@ -151,11 +152,12 @@ class ProjectHMWorkPackageController extends Controller
         sort($skills);
         $skills = array_unique($skills);
 
+        $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
 
-        $employees = Employee::all();
+        // $employees = Employee::all();
         $facilities = Facility::all();
         
         $materialCount = $workPackage->items->count();
@@ -169,6 +171,7 @@ class ProjectHMWorkPackageController extends Controller
             'project' => $project,
             'engineer_skills' => $engineer_skills,
             'project_workpackage' => $project_workpackage,
+            'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'materialCount' => $materialCount,
             'toolCount' => $toolCount,
         ]);
