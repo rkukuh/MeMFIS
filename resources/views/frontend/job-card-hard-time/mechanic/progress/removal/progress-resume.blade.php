@@ -80,6 +80,7 @@
                                                                             CRI No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -87,6 +88,7 @@
                                                                             A/C Type
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft->name}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -94,6 +96,7 @@
                                                                             A/C Reg
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft_register}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -101,6 +104,7 @@
                                                                             A/C Serial Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft_sn}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -108,6 +112,7 @@
                                                                             Project No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -115,7 +120,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            Generated
+                                                                            {{$htcrr->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -123,7 +128,7 @@
                                                                             Item Part Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            Generated
+                                                                            {{$htcrr->part_number}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -131,6 +136,7 @@
                                                                             Position
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->position}}
                                                                         </td>
                                                                     </tr>
                                                             </table>
@@ -409,6 +415,7 @@
                                                                             CRI No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -416,6 +423,7 @@
                                                                             A/C Type
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft->name}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -423,6 +431,7 @@
                                                                             A/C Reg
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft_register}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -430,6 +439,7 @@
                                                                             A/C Serial Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft_sn}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -437,6 +447,7 @@
                                                                             Project No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -444,7 +455,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            Generated
+                                                                            {{$htcrr->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -452,6 +463,7 @@
                                                                             Position
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->position}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -463,7 +475,9 @@
                                                                                 @slot('id', 'is_rii')
                                                                                 @slot('name', 'is_rii')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @slot('checked', 'checked')
+                                                                                @if($htcrr->position == 1)
+                                                                                    @slot('checked', 'checked')
+                                                                                @endif
                                                                                 @slot('size', '2')
                                                                                 @slot('style_div', 'margin-top:20px; padding:0;')
                                                                                 @slot('padding_left', '0')
