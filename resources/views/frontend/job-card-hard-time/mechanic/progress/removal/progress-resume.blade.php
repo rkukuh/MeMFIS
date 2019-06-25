@@ -190,13 +190,13 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons d-flex flex-row-reverse">
-                                                                @include('frontend.job-card-hard-time.modal.modal-close')
+                                                                @include('frontend.job-card-hard-time.mechanic.progress.removal.modal.modal-close')
                                                                 @component('frontend.common.buttons.close')
                                                                     @slot('data_target', '#modal_close')
                                                                     @slot('class', 'ml-2')
                                                                 @endcomponent
 
-                                                                @include('frontend.job-card-hard-time.modal.modal-pause')
+                                                                @include('frontend.job-card-hard-time.mechanic.progress.removal.modal.modal-pause')
                                                                 @component('frontend.common.buttons.pause')
                                                                     @slot('data_target', '#modal_pause')
                                                                 @endcomponent
