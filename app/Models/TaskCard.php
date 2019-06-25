@@ -99,7 +99,8 @@ class TaskCard extends MemfisModel
         return $this->belongsToMany(Item::class, 'item_taskcard', 'taskcard_id', 'item_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id'
+                        'unit_id',
+                        'note'
                     )
                     ->withTimestamps();
     }
