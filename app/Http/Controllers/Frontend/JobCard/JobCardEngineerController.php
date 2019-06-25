@@ -88,6 +88,8 @@ class JobCardEngineerController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
+        // $decoded = json_decode($jobcard->data_taskcard);
+        
         if ($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open") {
             return view('frontend.job-card.engineer.progress-open', [
                 'jobcard' => $jobcard,
