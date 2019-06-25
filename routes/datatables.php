@@ -251,6 +251,7 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/', 'QuotationDatatables@index')->name('all');
                 Route::get('/{quotation}/job-request', 'QuotationDatatables@jobRequest')->name('job-request');
+                Route::get('/{quotation}/workpackage/{workPackage}/facilities', 'QuotationDatatables@facilities')->name('all-facilities');
 
             });
 
