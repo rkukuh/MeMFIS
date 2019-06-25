@@ -42,7 +42,8 @@ class EOInstructionItemController extends Controller
         $taskcard->items()->attach($taskcard->id, [
             'item_id' => $request->item_id,
             'unit_id' => $request->unit_id,
-            'quantity' => $request->quantity
+            'quantity' => $request->quantity,
+            'note' => $request->note
         ]);
 
         return response()->json($taskcard);
