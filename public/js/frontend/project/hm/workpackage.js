@@ -78,7 +78,7 @@ let Workpackage = {
                 filterable: !1,
             },
             {
-                field: 'skill.name',
+                field: 'skill_name',
                 title: 'Skill',
                 sortable: 'asc',
                 filterable: !1,
