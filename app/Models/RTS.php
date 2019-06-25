@@ -41,6 +41,6 @@ class RTS extends MemfisModel
      */
     public function project()
     {
-        return $this->hasOne(Project::class);
+        return $this->belongsTo(Project::class);
     }
 }
