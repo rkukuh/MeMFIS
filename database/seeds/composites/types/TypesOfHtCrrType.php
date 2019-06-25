@@ -13,6 +13,12 @@ class TypesOfHtCrrType extends Seeder
     public function run()
     {
         Type::create([
+            'code' => 'parent',
+            'name' => 'Parent',
+            'of'   => 'htcrr-type',
+        ]);
+
+        Type::create([
             'code' => 'removal',
             'name' => 'Removal',
             'of'   => 'htcrr-type',

@@ -17,11 +17,12 @@ class CreateHtcrrTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
+            $table->unsignedInteger('parent_id')->nullable();
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('project_id');
             $table->string('position')->nullable();
-            $table->string('serial_number');
-            $table->string('part_number');
+            $table->string('serial_number')->nullable();
+            $table->string('part_number')->nullable();
             $table->timestamp('conducted_at')->nullable();
             $table->unsignedInteger('conducted_by')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
@@ -29,6 +30,11 @@ class CreateHtcrrTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('parent_id')
+                    ->references('id')->on('htcrr')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('type_id')
                     ->references('id')->on('types')
