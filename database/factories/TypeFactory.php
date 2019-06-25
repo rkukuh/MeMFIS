@@ -24,6 +24,7 @@ $factory->define(Type::class, function (Faker $faker) {
             'regulator',
             'work-area',
             'capability',
+            'htcrr-type',
             'eligibility',
             'school-degree',
             'taskcard-task',
@@ -60,6 +61,7 @@ $factory->state(Type::class, 'document', ['of' => 'document']);
 $factory->state(Type::class, 'regulator', ['of' => 'regulator']);
 $factory->state(Type::class, 'work-area', ['of' => 'work-area']);
 $factory->state(Type::class, 'capability', ['of' => 'capability']);
+$factory->state(Type::class, 'htcrr-type', ['of' => 'htcrr-type']);
 $factory->state(Type::class, 'eligibility', ['of' => 'eligibility']);
 $factory->state(Type::class, 'school-degree', ['of' => 'school-degree']);
 $factory->state(Type::class, 'taskcard-task', ['of' => 'taskcard-task']);

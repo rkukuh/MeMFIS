@@ -95,9 +95,9 @@
                               </label>
                               @component('frontend.common.input.textarea')
                                 @slot('text', 'Remark')
-                                @slot('name', 'remark')
+                                @slot('name', 'remark_material')
                                 @slot('rows', '3')
-                                @slot('id', 'remark')
+                                @slot('id', 'remark_material')
                                 @endcomponent
                             </div>
                         </div>

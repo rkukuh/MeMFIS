@@ -300,7 +300,7 @@ Route::name('frontend.')->group(function () {
 
             Route::name('rts.')->group(function () {
                 Route::prefix('rts')->group(function () {
-                    //
+                    Route::get('/{rts}/print', 'RTSController@print');
                 });
             });
         });

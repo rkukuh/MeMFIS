@@ -46,6 +46,7 @@ class DiscrepancyItemController extends Controller
             'ipc_ref'=> $request->ipc_ref,
             'sn_on'=> $request->sn_on,
             'sn_off'=> $request->sn_off,
+            'note'=> $request->note,
         ]);
 
         return response()->json($discrepancy);
@@ -92,6 +93,7 @@ class DiscrepancyItemController extends Controller
             'ipc_ref'=> $request->ipc_ref,
             'sn_on'=> $request->sn_on,
             'sn_off'=> $request->sn_off,
+            'note'=> $request->note,
         ]);
 
         return response()->json($discrepancy);

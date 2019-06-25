@@ -54,7 +54,7 @@
   <div id="content">
     <div class="image">
         <img src="./img/RTS-Certificate.jpg" alt="">
-    </div>  
+    </div>
     <div class="kotak">
       <h2>CERTIFICATE OF RELEASE TO SERVICE</h2>
       <table width="100%">
@@ -90,7 +90,7 @@
             <div style="margin-top:-15px;">
               <ul style="margin-left:-40px;">
                 <li>-</li>
-                <li>free text</li>
+                <li>{{ $rts->work_performed[0] }}</li>
               </ul>
               <ul style="margin-top:-12px;margin-left:-40px;">
                 <li>-</li>

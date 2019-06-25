@@ -14,6 +14,7 @@
                             <th>Material</th>
                             <th>Quantity</th>
                             <th>Unit</th>
+                            <th>Remark</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
