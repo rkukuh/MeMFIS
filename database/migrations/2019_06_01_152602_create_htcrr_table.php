@@ -62,6 +62,6 @@ class CreateHtcrrTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('htcrrs');
+        Schema::dropIfExists('htcrr');
     }
 }

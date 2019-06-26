@@ -20,11 +20,6 @@ class OldDataController extends Controller
         Excel::import(new EnginesImport, $this->import_directory . 'engines.xlsx');
     }
 
-    public function personnels()
-    {
-        Excel::import(new PersonnelsImport, $this->import_directory . 'personnels.xlsx');
-    }
-
     public function workAreas()
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');
