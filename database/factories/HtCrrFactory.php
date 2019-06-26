@@ -15,13 +15,8 @@ $factory->define(HtCrr::class, function (Faker $faker) {
 
     return [
         'code' => 'HTCRR-DUM-' . $number,
-        'type_id' => function () use ($faker) {
-            if (Type::ofHtCrrType()->count()) {
-                return Type::ofHtCrrType()->get()->random()->id;
-            }
-            
-            return factory(Type::class)->states('htcrr-type')->create()->id;
-        },
+        'parent_id' => null,
+        'type_id' => Type::ofHtCrrType()->where('name', 'parent')->first()->id,
         'project_id' => function () use ($faker) {
             if (Project::count()) {
                 return Project::get()->random()->id;
@@ -30,13 +25,43 @@ $factory->define(HtCrr::class, function (Faker $faker) {
             return factory(Project::class)->create()->id;
         },
         'position' => 'Pos-' . ucfirst($faker->word),
+        'serial_number' => null,
+        'part_number' => null,
+        'conducted_at' => null,
+        'conducted_by' => null,
+        'estimation_manhour' => 0,
+        'is_rii' => false,
+        'description' => $faker->randomElement([null, $faker->text]),
+    ];
+
+});
+
+/** STATES */
+
+$factory->state(HtCrr::class, 'removal', function ($faker) {
+
+    return [
+        'type_id' => Type::ofHtCrrType()->where('name', 'removal')->first()->id,
         'serial_number' => 'S/N-' . $faker->randomNumber,
         'part_number' => 'P/N-' . $faker->randomNumber,
         'conducted_at' => Carbon::now()->subWeeks(rand(1, 3)),
         'conducted_by' => Employee::get()->random()->id,
-        'estimation_manhour' => $faker->randomElement([null, $faker->randomFloat(2, 0, 9999)]),
+        'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
         'is_rii' => $faker->boolean,
-        'description' => $faker->randomElement([null, $faker->text]),
+    ];
+
+});
+
+$factory->state(HtCrr::class, 'installation', function ($faker) {
+
+    return [
+        'type_id' => Type::ofHtCrrType()->where('name', 'installation')->first()->id,
+        'serial_number' => 'S/N-' . $faker->randomNumber,
+        'part_number' => 'P/N-' . $faker->randomNumber,
+        'conducted_at' => Carbon::now()->subWeeks(rand(1, 3)),
+        'conducted_by' => Employee::get()->random()->id,
+        'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
+        'is_rii' => $faker->boolean,
     ];
 
 });
