@@ -17,7 +17,7 @@ return [
         'defectcards' => 15,
         'facilities' => 15,
         'goods-received' => 15,
-        'htcrrs' => 15,
+        'htcrr' => 15,
         'items' => 15,
         'jobcards' => 15,
         'journals' => 15,

@@ -12,7 +12,7 @@ class HtCrrs extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= config('memfis.dummies.htcrrs'); $i++) {
+        for ($i = 1; $i <= config('memfis.dummies.htcrr'); $i++) {
             $htcrr_parent = factory(HtCrr::class)->create();
 
             factory(HtCrr::class)->states('removal')->create([
