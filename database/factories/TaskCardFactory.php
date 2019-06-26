@@ -178,7 +178,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
             }
         },
 
-        // These attributes are filled on 'taskcard_eo' table
+        // These attributes are filled on 'eo_instructions' table
         'work_area' => null,
         'estimation_manhour' => null,
         'engineer_quantity' => null,
