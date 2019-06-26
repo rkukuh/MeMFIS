@@ -41,10 +41,16 @@ class StatusesOfProject extends Seeder
             'name' => 'RELEASED',
             'of'   => 'project',
         ]);
-        
+
         Status::create([
             'code' => 'rii-released',
             'name' => 'RII RELEASED',
+            'of'   => 'project',
+        ]);
+
+        Status::create([
+            'code' => 'rts',
+            'name' => 'RELEASE TO SERVICE',
             'of'   => 'project',
         ]);
     }

@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Datatables\ReleaseToService;
 use App\Models\Status;
 use App\Models\Project;
 use App\Models\JobCard;
-use App\Models\Quotation;
 use App\Models\ListUtil;
+use App\Models\Quotation;
+use App\Models\Progresses;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,7 +20,9 @@ class ReleaseToServiceDatatables extends Controller
      */
     public function index()
     {
-        $alldata = Project::with('rts')->get();
+        $alldata = Project::with('rts','progresses')->whereHas('progresses', function ($query) {
+                    $query->where('status_id','<>', Status::where('code','rts')->where('of','project')->first()->id);
+                    })->get();
 
         foreach($alldata as $rts){
             $rts->customer_name .= $rts->customer->name;
@@ -36,7 +39,21 @@ class ReleaseToServiceDatatables extends Controller
                     }
                 }
             }
-            $project->status .= $status;
+            if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'open'){
+                $project->status .= 'OPEN';
+            }
+            elseif(sizeof($project->approvals->toArray()) == 1){
+                $project->status .= 'Project Approved';
+            }
+            elseif(sizeof($project->approvals->toArray()) == 2){
+                $project->status .= 'Quotation Approved';
+            }
+            elseif($status == "-"){
+                $project->status .= 'Closed';
+            }
+            else{
+                $project->status .= $status;
+            }
         }
 
         $data = $alldata = json_decode($alldata);
