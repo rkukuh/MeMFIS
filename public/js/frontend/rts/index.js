@@ -55,7 +55,7 @@ let TaskCard = {
 
                 },
                 {
-                    field: 'project.title',
+                    field: 'title',
                     title: 'Project Title',
                     sortable: 'asc',
                     filterable: !1,
@@ -68,7 +68,7 @@ let TaskCard = {
 
                 },
                 {
-                    field: '',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,

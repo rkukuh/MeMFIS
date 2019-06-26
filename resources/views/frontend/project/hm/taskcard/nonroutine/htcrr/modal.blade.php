@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group m-form__group row ">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             CRI No @include('frontend.common.label.required')
                         </label>
@@ -21,7 +21,7 @@
                             @slot('id_error', 'cri')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <label class="form-control-label">
                             P/N @include('frontend.common.label.required')
                         </label>
@@ -153,7 +153,7 @@
                             @slot('id_error', 'engineer_by')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             RII Required? @include('frontend.common.label.optional')
                         </label>

@@ -16,7 +16,7 @@ class CreateHtcrrTable extends Migration
         Schema::create('htcrr', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->unsignedInteger('parent_id')->nullable();
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('project_id');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
@@ -39,8 +40,32 @@ class HtCrrController extends Controller
     public function store(HtCrrStore $request)
     {
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
-
+        $request->merge(['type_id' => Type::ofHtCrrType()->where('code','parent')->first()->id]);
         $htcrr = HtCrr::create($request->all());
+
+        if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+            $htcrr->skills()->attach(Type::where('code','electrical')->first()->id);
+            $htcrr->skills()->attach(Type::where('code','radio')->first()->id);
+            $htcrr->skills()->attach(Type::where('code','instrument')->first()->id);
+        }
+        else{
+            $htcrr->skills()->attach($request->skill_id);
+        }
+
+        $htcrr = HtCrr::create([
+            'parent_id' => $htcrr->id,
+            'type_id' => Type::ofHtCrrType()->where('code','removal')->first()->id,
+            'project_id' => $request->project_id,
+            'position' => $request->position,
+            'part_number' => $request->part_number,
+        ]);
+
+        $htcrr = HtCrr::create([
+            'parent_id' => $htcrr->id,
+            'type_id' => Type::ofHtCrrType()->where('code','installation')->first()->id,
+            'project_id' => $request->project_id,
+            'position' => $request->position,
+        ]);
 
         return response()->json($htcrr);
     }
