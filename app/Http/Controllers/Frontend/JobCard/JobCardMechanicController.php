@@ -102,7 +102,7 @@ class JobCardMechanicController extends Controller
             $progress->status .= Status::where('id',$progress->status_id)->first()->name;
         }
 
-        if ($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "open") {
+        if ($progresses->count() == 0 and $this->statuses->where('id',$jobcard->progresses->get(1)->status_id)->first()->code == "progress") {
             return view('frontend.job-card.mechanic.progress-open', [
                 'jobcard' => $jobcard,
                 'progresses' => $progresses,
