@@ -39,10 +39,14 @@ Route::name('frontend.')->group(function () {
         Route::resource('approval', 'ApprovalController');
         Route::resource('progress', 'ProgressController');
         Route::resource('inspection', 'InspectionController');
+        Route::resource('predecessor', 'PredecessorController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
         ]);
+
+        Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
+        Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
 
         /** MASTER */
 
@@ -58,88 +62,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
-        /** LICENSE */
-
-        Route::resource('general-license', 'GeneralLicenseController');
-        Route::resource('employee-license', 'EmployeeLicenseController');
-
-        /** CERTIFICATION */
-
-        Route::resource('otr-certification', 'OTRCertificationController');
-        Route::resource('certification-employee', 'CertificationEmployeeController');
-
-        /** PROJECT */
-
-        Route::namespace('Project')->group(function () {
-
-            Route::resource('project', 'ProjectController');
-            Route::post('/project/{project}/approve', 'ProjectController@approve')->name('project.approve');
-
-
-            Route::resource('project-hm', 'ProjectHMController', [
-                'parameters' => ['project-hm' => 'project']
-            ]);
-
-            Route::resource('project-workshop', 'ProjectWorkshopController', [
-                'parameters' => ['project-workshop' => 'project']
-            ]);
-
-            Route::post('project-workpackage/{project}', 'BlankWorkPackageController@store')->name('project-workpackage.store');
-            Route::get('project/{project}/blank-workpackage','BlankWorkPackageController@create')->name('project-blank-workpackage.create');
-            Route::get('project/{project}/blank-workpackage/{workPackage}/edit','BlankWorkPackageController@edit')->name('project-blank-workpackage.edit');
-
-            Route::prefix('project-hm')->group(function () {
-                Route::name('project-hm.')->group(function () {
-                    Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
-                        'parameters' => ['workpackage' => 'workPackage']
-                    ]);
-                });
-                Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
-                Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
-                Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
-                Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
-            });
-
-            Route::prefix('project-workshop')->group(function () {
-                Route::name('project-workshop.')->group(function () {
-                    Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
-                        'parameters' => ['workpackage' => 'workPackage']
-                    ]);
-                });
-            });
-
-        });
-
-        /** PROJECT'S WORKPACKAGE */
-
-        Route::resource('project-workpackage', 'ProjectWorkPackageController');
-        Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
-        Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
-        Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
-
-        /** QUOTATION */
-
-        Route::namespace('Quotation')->group(function () {
-            Route::resource('quotation', 'QuotationController');
-            Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
-
-            Route::prefix('quotation')->group(function () {
-                Route::get('/{quotation}/print', 'QuotationController@print');
-                Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
-                Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
-                Route::name('quotation.')->group(function () {
-                    Route::resource('/{quotation}/workpackage', 'QuotationWorkPackageController', [
-                        'parameters' => ['workpackage' => 'workPackage']
-                    ]);
-                });
-                Route::get('/{quotation}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('quotation.summary.basic');
-                Route::get('/{quotation}/workpackage/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('quotation.summary.sip');
-                Route::get('/{quotation}/workpackage/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('quotation.summary.cpcp');
-                Route::get('/{quotation}/workpackage/{workPackage}/summary/adsb', 'SummaryNonRoutineTaskcardController@adsb')->name('quotation.summary.adsb');
-                Route::get('/{quotation}/workpackage/{workPackage}/summary/cmrawl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('quotation.summary.cmrawl');
-                Route::get('/{quotation}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('quotation.summary.si');
-            });
-        });
+        /** ============================================================================================================================== **/
 
         /** AIRCRAFT */
 
@@ -160,70 +83,10 @@ Route::name('frontend.')->group(function () {
 
         });
 
-        /** WORKPACKAGE */
+        /** CERTIFICATION */
 
-        Route::namespace('WorkPackage')->group(function () {
-            Route::resource('workpackage', 'WorkPackageController', [
-                'parameters' => ['workpackage' => 'workPackage']
-            ]);
-
-            Route::prefix('workpackage')->group(function () {
-
-                Route::post('/{workPackage}/taskcard', 'WorkPackageController@addTaskCard')->name('taskcard.workpackage');
-                Route::delete('/{workPackage}/taskcard/{taskcard}', 'WorkPackageController@deleteTaskCard')->name('delete_taskcard.workpackage');
-                Route::put('/{workPackage}/sequence/{taskcard}', 'WorkPackageController@sequence')->name('sequence.workpackage');
-                Route::put('/{workPackage}/mandatory/{taskcard}', 'WorkPackageController@mandatory')->name('mandatory.workpackage');
-
-                /** Summary */
-
-                Route::get('/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('summary.basic');
-                Route::get('/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('summary.sip');
-                Route::get('/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('summary.cpcp');
-                Route::get('/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
-                Route::get('/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
-                Route::get('/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
-                Route::get('/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
-                Route::get('/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
-                Route::get('/{workPackage}/summary/', 'WorkPackageController@summary')->name('summary.workpackage');
-
-                /** Transaction: Item */
-                Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
-                Route::delete('/{workPackage}/{item}/item/', 'WorkPackageItemsController@destroy')->name('item.workpackage.delete');
-
-            });
-        });
-
-        /** ITEM */
-
-        Route::namespace('Item')->group(function () {
-
-            Route::resource('item', 'ItemController');
-
-            Route::name('item.')->group(function () {
-                Route::prefix('item')->group(function () {
-
-                    /** Price List */
-                    Route::resource('/{item}/prices', 'ItemPriceController');
-
-                    /** Transaction: Unit */
-                    Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
-                    Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
-
-                    /** Transaction: Storage */
-                    Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
-                    Route::put('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
-                    Route::delete('/{item}/{storage}/storage', 'ItemStorageController@destroy')->name('storage.destroy');
-
-                });
-            });
-
-        });
-
-        Route::namespace('Item')->group(function () {
-
-            Route::resource('tool', 'ToolController');
-
-        });
+        Route::resource('otr-certification', 'OTRCertificationController');
+        Route::resource('certification-employee', 'CertificationEmployeeController');
 
         /** CUSTOMER */
 
@@ -247,6 +110,78 @@ Route::name('frontend.')->group(function () {
 
         });
 
+        /** DEFECT CARD */
+
+        Route::namespace('DefectCard')->group(function () {
+
+            Route::resource('defectcard', 'DefectCardController');
+
+            Route::resource('defectcard-engineer', 'DefectCardEngineerController', [
+                'parameters' => ['defectcard-engineer' => 'defectcard']
+            ]);
+
+            Route::post('defectcard-engineer', 'DefectCardEngineerController@search')->name('engineer.defectcard.search');
+
+            Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
+                'parameters' => ['defectcard-mechanic' => 'defectcard']
+            ]);
+
+            Route::post('defectcard-mechanic', 'DefectCardMechanicController@search')->name('mechanic.defectcard.search');
+
+            Route::resource('defectcard-project', 'DefectCardProjectController', [
+                'parameters' => ['defectcard-project' => 'defectcard']
+            ]);
+
+            Route::name('defectcard.')->group(function () {
+                Route::prefix('defectcard')->group(function () {
+
+                    // 
+
+                });
+            });
+
+        });
+
+        /** DISCREPANCY */
+
+        Route::namespace('Discrepancy')->group(function () {
+
+            Route::resource('discrepancy', 'DiscrepancyController');
+
+            Route::resource('discrepancy-ppc', 'DiscrepancyPPCController', [
+                'parameters' => ['discrepancy-ppc' => 'discrepancy']
+            ]);
+
+            Route::post('discrepancy-engineer/search', 'DiscrepancyEngineerController@search')->name('engineer.discrepancy.search');
+
+
+            Route::resource('discrepancy-engineer', 'DiscrepancyEngineerController', [
+                'parameters' => ['discrepancy-engineer' => 'discrepancy']
+            ]);
+
+            Route::resource('discrepancy-mechanic', 'DiscrepancyMechanicController', [
+                'parameters' => ['discrepancy-mechanic' => 'discrepancy']
+            ]);
+
+            Route::name('discrepancy.')->group(function () {
+                Route::prefix('discrepancy')->group(function () {
+
+                    /** Transaction */
+                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy.create');
+                    Route::GET('{jobcard}/engineer/', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy');
+                    Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
+                    Route::GET('{jobcard}/mechanic/', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy');
+                    Route::PUT('{discrepancy}/engineer/approve', 'DiscrepancyEngineerController@approve')->name('jobcard.engineer.discrepancy.approve');
+                    Route::PUT('{discrepancy}/ppc/approve', 'DiscrepancyPPCController@approve')->name('jobcard.ppc.discrepancy.approve');
+
+                    /** Transaction: Item */
+                    Route::resource('/{discrepancy}/item', 'DiscrepancyItemController');
+
+                });
+            });
+
+        });
+
         /** EMPLOYEE */
 
         Route::namespace('Employee')->group(function () {
@@ -254,6 +189,7 @@ Route::name('frontend.')->group(function () {
             Route::resource('employee', 'EmployeeController');
 
             Route::name('employee.')->group(function () {
+
                 Route::prefix('employee')->group(function () {
 
                     /** Polymorph */
@@ -275,6 +211,20 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
 
                 });
+
+            });
+
+        });
+
+        /** GRN (Goods Received Note) */
+
+        Route::namespace('GoodsReceived')->group(function () {
+
+            Route::resource('goods-received', 'GoodsReceivedController');
+            Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
+
+            Route::name('goods-received.')->group(function () {
+                //
             });
 
         });
@@ -282,18 +232,264 @@ Route::name('frontend.')->group(function () {
         /** HT/CRR */
 
         Route::namespace('Project')->group(function () {
+
             Route::resource('htcrr', 'HtCrrController');
 
             Route::name('htcrr.')->group(function () {
+
                 Route::prefix('htcrr')->group(function () {
                     //
+                });
+
+            });
+
+        });
+
+        /** INTERCHANGE */
+
+        Route::namespace('Interchange')->group(function () {
+            Route::resource('interchange', 'InterchangeController');
+        });
+
+        /** ITEM */
+
+        Route::namespace('Item')->group(function () {
+
+            Route::resource('item', 'ItemController');
+            Route::resource('tool', 'ToolController');
+
+            Route::name('item.')->group(function () {
+
+                Route::prefix('item')->group(function () {
+
+                    /** Price List */
+                    Route::resource('/{item}/prices', 'ItemPriceController');
+
+                    /** Transaction: Unit */
+                    Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
+                    Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
+
+                    /** Transaction: Storage */
+                    Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
+                    Route::put('/{item}/storage', 'ItemStorageController@update')->name('storage.update');
+                    Route::delete('/{item}/{storage}/storage', 'ItemStorageController@destroy')->name('storage.destroy');
+
+                });
+
+            });
+
+        });
+
+        /** JOB CARD */
+
+        Route::namespace('JobCard')->group(function () {
+
+            Route::resource('jobcard-ppc', 'JobCardPPCController', [
+                'parameters' => ['jobcard-ppc' => 'jobcard']
+            ]);
+
+            Route::resource('jobcard-engineer', 'JobCardEngineerController', [
+                'parameters' => ['jobcard-engineer' => 'jobcard']
+            ]);
+
+            Route::post('jobcard-engineer', 'JobCardEngineerController@search')->name('engineer.jobcard.search');
+
+            Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
+                'parameters' => ['jobcard-mechanic' => 'jobcard']
+            ]);
+
+            Route::post('jobcard-mechanic/', 'JobCardMechanicController@search')->name('mechanic.jobcard.search');
+
+            Route::name('jobcard.')->group(function () {
+
+                Route::prefix('jobcard')->group(function () {
+
+                    /** Transaction */
+                    Route::get('/{jobCard}/print', 'JobCardController@print');
+                });
+
+            });
+
+        });
+
+        /** JOB CARD: HT/CRR */
+
+        Route::namespace('JobCardHardTime')->group(function () {
+
+            Route::resource('jobcard-hardtime-ppc', 'JobCardHardTimePPCController', [
+                'parameters' => ['jobcard-hardtime-ppc' => 'htcrr']
+            ]);
+
+            Route::resource('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController', [
+                'parameters' => ['jobcard-hardtime-engineer' => 'htcrr']
+            ]);
+
+            Route::post('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController@search')->name('engineer.jobcard.hardtime.search');
+
+            Route::resource('jobcard-hardtime-mechanic', 'JobCardHardTimeMechanicController', [
+                'parameters' => ['jobcard-hardtime-mechanic' => 'htcrr']
+            ]);
+
+            Route::post('jobcard-hardtime-mechanic/', 'JobCardHardTimeMechanicController@search')->name('mechanic.jobcard.hardtime.search');
+
+            Route::name('jobcard.hardtime.')->group(function () {
+                Route::prefix('jobcard-hardtime')->group(function () {
+
+                    /** Transaction */
+                    Route::get('/{jobCard}/print', 'JobCardHardTimeController@print')->name('print');
+                });
+            });
+
+        });
+
+        /** LICENSE */
+
+        Route::resource('general-license', 'GeneralLicenseController');
+        Route::resource('employee-license', 'EmployeeLicenseController');
+
+        /** PROJECT */
+
+        Route::namespace('Project')->group(function () {
+
+            Route::resource('project', 'ProjectController');
+            Route::post('/project/{project}/approve', 'ProjectController@approve')->name('project.approve');
+
+
+            Route::resource('project-hm', 'ProjectHMController', [
+                'parameters' => ['project-hm' => 'project']
+            ]);
+
+            Route::resource('project-workshop', 'ProjectWorkshopController', [
+                'parameters' => ['project-workshop' => 'project']
+            ]);
+
+            Route::post('project-workpackage/{project}', 'BlankWorkPackageController@store')->name('project-workpackage.store');
+            Route::get('project/{project}/blank-workpackage','BlankWorkPackageController@create')->name('project-blank-workpackage.create');
+            Route::get('project/{project}/blank-workpackage/{workPackage}/edit','BlankWorkPackageController@edit')->name('project-blank-workpackage.edit');
+
+            Route::prefix('project-hm')->group(function () {
+
+                Route::name('project-hm.')->group(function () {
+                    Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+                });
+
+                Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
+                Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
+                Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
+                Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
+
+            });
+
+            Route::prefix('project-workshop')->group(function () {
+
+                Route::name('project-workshop.')->group(function () {
+
+                    Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+
+                });
+
+            });
+
+        });
+
+        /** PROJECT'S WORKPACKAGE */
+
+        Route::resource('project-workpackage', 'ProjectWorkPackageController');
+        Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
+        Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
+        Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
+
+        /** PURCHASE ORDER */
+
+        Route::namespace('PurchaseOrder')->group(function () {
+
+            Route::resource('purchase-order', 'PurchaseOrderController');
+            Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
+
+            Route::name('purchase-order.')->group(function () {
+                //
+            });
+
+        });
+
+        /** PURCHASE REQUEST */
+
+        Route::namespace('PurchaseRequest')->group(function () {
+
+            Route::resource('purchase-request', 'PurchaseRequestController');
+
+            Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
+            Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
+
+            Route::name('purchase-request.')->group(function () {
+                //
+            });
+
+        });
+
+        /** QUOTATION */
+
+        Route::namespace('Quotation')->group(function () {
+
+            Route::resource('quotation', 'QuotationController');
+            Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
+
+            Route::prefix('quotation')->group(function () {
+                Route::get('/{quotation}/print', 'QuotationController@print');
+                Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
+                Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
+                Route::name('quotation.')->group(function () {
+                    Route::resource('/{quotation}/workpackage', 'QuotationWorkPackageController', [
+                        'parameters' => ['workpackage' => 'workPackage']
+                    ]);
+                });
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('quotation.summary.basic');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('quotation.summary.sip');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('quotation.summary.cpcp');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/adsb', 'SummaryNonRoutineTaskcardController@adsb')->name('quotation.summary.adsb');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/cmrawl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('quotation.summary.cmrawl');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('quotation.summary.si');
+
+            });
+
+        });
+
+        /** RII (Receiving Inspection Report) */
+
+        Route::namespace('ReceivingInspectionReport')->group(function () {
+            Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
+        });
+
+        /** RII RELEASE */
+
+        Route::namespace('RIIRelease')->group(function () {
+
+            Route::name('riirelease-jobcard.')->group(function () {
+                Route::prefix('riirelease-jobcard')->group(function () {
+                    Route::resource('rii-release', 'RIIReleaseJobCardController', [
+                        'parameters' => ['rii-release' => 'riirelease']
+                    ]);
+                });
+            });
+
+            Route::name('riirelease-defectcard.')->group(function () {
+                Route::prefix('riirelease-defectcard')->group(function () {
+                    Route::resource('rii-release', 'RIIReleaseDefectCardController', [
+                        'parameters' => ['rii-release' => 'riirelease']
+                    ]);
                 });
             });
 
         });
 
         /** RTS */
+        
         Route::namespace('ReleaseToService')->group(function () {
+
             Route::resource('rts', 'RTSController', [
                 'parameters' => ['rts' => 'rts']
             ]);
@@ -303,7 +499,9 @@ Route::name('frontend.')->group(function () {
                     Route::get('/{rts}/print', 'RTSController@print');
                 });
             });
+
         });
+
         /** TASK CARD */
 
         Route::namespace('TaskCard')->group(function () {
@@ -344,9 +542,11 @@ Route::name('frontend.')->group(function () {
                     Route::delete('/{taskcard}/{repeat}/repeat', 'TaskCardRoutineRepeatController@destroy')->name('repeat.destroy');
 
                 });
+
             });
 
             Route::name('taskcard-eo.')->group(function () {
+
                 Route::prefix('taskcard-eo')->group(function () {
 
                     Route::resource('/{taskcard}/eo-instruction', 'EOInstructionController');
@@ -356,9 +556,11 @@ Route::name('frontend.')->group(function () {
                     Route::delete('/eo-instruction/{taskcard}/{item}/item', 'EOInstructionItemController@destroy')->name('item.destroy');
 
                 });
+
             });
 
             Route::name('taskcard-si.')->group(function () {
+
                 Route::prefix('taskcard-si')->group(function () {
 
                     /** Transaction: Item */
@@ -366,9 +568,11 @@ Route::name('frontend.')->group(function () {
                     Route::delete('/{taskcard}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
 
                 });
+
             });
 
             Route::name('preliminary.')->group(function () {
+
                 Route::prefix('preliminary')->group(function () {
 
                     /** Transaction: Item */
@@ -376,66 +580,64 @@ Route::name('frontend.')->group(function () {
                     // Route::delete('/{preliminary}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
 
                 });
+
             });
 
         });
 
-        /** JOB CARD */
+        /** TASK RELEASE */
 
-        Route::namespace('JobCard')->group(function () {
+        Route::namespace('TaskRelease')->group(function () {
 
-            Route::resource('jobcard-ppc', 'JobCardPPCController', [
-                'parameters' => ['jobcard-ppc' => 'jobcard']
-            ]);
+            Route::name('taskrelease-jobcard.')->group(function () {
+                Route::prefix('taskrelease-jobcard')->group(function () {
+                    Route::resource('task-release', 'TaskReleaseJobCardController', [
+                        'parameters' => ['task-release' => 'taskrelease']
+                    ]);
 
-            Route::resource('jobcard-engineer', 'JobCardEngineerController', [
-                'parameters' => ['jobcard-engineer' => 'jobcard']
-            ]);
+                });
+            });
 
-            Route::post('jobcard-engineer', 'JobCardEngineerController@search')->name('engineer.jobcard.search');
-
-            Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
-                'parameters' => ['jobcard-mechanic' => 'jobcard']
-            ]);
-
-            Route::post('jobcard-mechanic/', 'JobCardMechanicController@search')->name('mechanic.jobcard.search');
-
-            Route::name('jobcard.')->group(function () {
-                Route::prefix('jobcard')->group(function () {
-
-                    /** Transaction */
-                    Route::get('/{jobCard}/print', 'JobCardController@print');
+            Route::name('taskrelease-defectcard.')->group(function () {
+                Route::prefix('taskrelease-defectcard')->group(function () {
+                    Route::resource('task-release', 'TaskReleaseDefectCardController', [
+                        'parameters' => ['task-release' => 'taskrelease']
+                    ]);
                 });
             });
 
         });
 
-        /** JOB CARD HARD TIME*/
+        /** WORKPACKAGE */
 
-        Route::namespace('JobCardHardTime')->group(function () {
+        Route::namespace('WorkPackage')->group(function () {
 
-            Route::resource('jobcard-hardtime-ppc', 'JobCardHardTimePPCController', [
-                'parameters' => ['jobcard-hardtime-ppc' => 'htcrr']
+            Route::resource('workpackage', 'WorkPackageController', [
+                'parameters' => ['workpackage' => 'workPackage']
             ]);
 
-            Route::resource('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController', [
-                'parameters' => ['jobcard-hardtime-engineer' => 'htcrr']
-            ]);
+            Route::prefix('workpackage')->group(function () {
 
-            Route::post('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController@search')->name('engineer.jobcard.hardtime.search');
+                Route::post('/{workPackage}/taskcard', 'WorkPackageController@addTaskCard')->name('taskcard.workpackage');
+                Route::delete('/{workPackage}/taskcard/{taskcard}', 'WorkPackageController@deleteTaskCard')->name('delete_taskcard.workpackage');
+                Route::put('/{workPackage}/sequence/{taskcard}', 'WorkPackageController@sequence')->name('sequence.workpackage');
+                Route::put('/{workPackage}/mandatory/{taskcard}', 'WorkPackageController@mandatory')->name('mandatory.workpackage');
 
-            Route::resource('jobcard-hardtime-mechanic', 'JobCardHardTimeMechanicController', [
-                'parameters' => ['jobcard-hardtime-mechanic' => 'htcrr']
-            ]);
+                /** Summary */
+                Route::get('/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('summary.basic');
+                Route::get('/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('summary.sip');
+                Route::get('/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('summary.cpcp');
+                Route::get('/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
+                Route::get('/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
+                Route::get('/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
+                Route::get('/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
+                Route::get('/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
+                Route::get('/{workPackage}/summary/', 'WorkPackageController@summary')->name('summary.workpackage');
 
-            Route::post('jobcard-hardtime-mechanic/', 'JobCardHardTimeMechanicController@search')->name('mechanic.jobcard.hardtime.search');
+                /** Transaction: Item */
+                Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
+                Route::delete('/{workPackage}/{item}/item/', 'WorkPackageItemsController@destroy')->name('item.workpackage.delete');
 
-            Route::name('jobcard.hardtime.')->group(function () {
-                Route::prefix('jobcard-hardtime')->group(function () {
-
-                    /** Transaction */
-                    Route::get('/{jobCard}/print', 'JobCardHardTimeController@print')->name('print');
-                });
             });
 
         });
@@ -458,178 +660,6 @@ Route::name('frontend.')->group(function () {
 
         // Route::view('/jobcard-hardtime-ppc', 'frontend.job-card-hard-time.ppc.index')->name('job-card-hard-time.ppc');
         // Route::view('/jobcard-hardtime-ppc-show', 'frontend.job-card-hard-time.ppc.show')->name('job-card-hard-time.ppc.show');
-
-
-        /** TASK RELEASE */
-
-        Route::namespace('TaskRelease')->group(function () {
-            Route::name('taskrelease-jobcard.')->group(function () {
-                Route::prefix('taskrelease-jobcard')->group(function () {
-                    Route::resource('task-release', 'TaskReleaseJobCardController', [
-                        'parameters' => ['task-release' => 'taskrelease']
-                    ]);
-
-                });
-            });
-            Route::name('taskrelease-defectcard.')->group(function () {
-                Route::prefix('taskrelease-defectcard')->group(function () {
-                    Route::resource('task-release', 'TaskReleaseDefectCardController', [
-                        'parameters' => ['task-release' => 'taskrelease']
-                    ]);
-                });
-            });
-        });
-
-         /** RII RELEASE */
-
-         Route::namespace('RIIRelease')->group(function () {
-            Route::name('riirelease-jobcard.')->group(function () {
-                Route::prefix('riirelease-jobcard')->group(function () {
-                    Route::resource('rii-release', 'RIIReleaseJobCardController', [
-                        'parameters' => ['rii-release' => 'riirelease']
-                    ]);
-                });
-            });
-            Route::name('riirelease-defectcard.')->group(function () {
-                Route::prefix('riirelease-defectcard')->group(function () {
-                    Route::resource('rii-release', 'RIIReleaseDefectCardController', [
-                        'parameters' => ['rii-release' => 'riirelease']
-                    ]);
-                });
-            });
-        });
-
-        /** Discrepancy */
-
-        Route::namespace('Discrepancy')->group(function () {
-
-            Route::resource('discrepancy', 'DiscrepancyController');
-
-            Route::resource('discrepancy-ppc', 'DiscrepancyPPCController', [
-                'parameters' => ['discrepancy-ppc' => 'discrepancy']
-            ]);
-
-            Route::post('discrepancy-engineer/search', 'DiscrepancyEngineerController@search')->name('engineer.discrepancy.search');
-
-
-            Route::resource('discrepancy-engineer', 'DiscrepancyEngineerController', [
-                'parameters' => ['discrepancy-engineer' => 'discrepancy']
-            ]);
-
-            Route::resource('discrepancy-mechanic', 'DiscrepancyMechanicController', [
-                'parameters' => ['discrepancy-mechanic' => 'discrepancy']
-            ]);
-
-            Route::name('discrepancy.')->group(function () {
-                Route::prefix('discrepancy')->group(function () {
-
-                    /** Transaction */
-                    Route::POST('{jobcard}/engineer/create', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy.create');
-                    Route::GET('{jobcard}/engineer/', 'DiscrepancyEngineerController@create')->name('jobcard.engineer.discrepancy');
-                    Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
-                    Route::GET('{jobcard}/mechanic/', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy');
-                    Route::PUT('{discrepancy}/engineer/approve', 'DiscrepancyEngineerController@approve')->name('jobcard.engineer.discrepancy.approve');
-                    Route::PUT('{discrepancy}/ppc/approve', 'DiscrepancyPPCController@approve')->name('jobcard.ppc.discrepancy.approve');
-
-                    /** Transaction: Item */
-                    Route::resource('/{discrepancy}/item', 'DiscrepancyItemController');
-
-                });
-            });
-
-        });
-
-        /** DEFECT CARD */
-
-        Route::namespace('DefectCard')->group(function () {
-
-            Route::resource('defectcard', 'DefectCardController');
-
-            Route::resource('defectcard-engineer', 'DefectCardEngineerController', [
-                'parameters' => ['defectcard-engineer' => 'defectcard']
-            ]);
-
-            Route::post('defectcard-engineer', 'DefectCardEngineerController@search')->name('engineer.defectcard.search');
-
-            Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
-                'parameters' => ['defectcard-mechanic' => 'defectcard']
-            ]);
-
-            Route::post('defectcard-mechanic', 'DefectCardMechanicController@search')->name('mechanic.defectcard.search');
-
-            Route::resource('defectcard-project', 'DefectCardProjectController', [
-                'parameters' => ['defectcard-project' => 'defectcard']
-            ]);
-
-            Route::name('defectcard.')->group(function () {
-                Route::prefix('defectcard')->group(function () {
-
-                    /** Transaction */
-
-
-                });
-            });
-
-        });
-
-
-        /** INTERCHANGE */
-
-        Route::namespace('Interchange')->group(function () {
-            Route::resource('interchange', 'InterchangeController');
-        });
-
-        /** Receiving Inspection Report */
-
-        Route::namespace('ReceivingInspectionReport')->group(function () {
-            Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
-        });
-
-        /** PURCHASE REQUEST */
-
-        Route::namespace('PurchaseRequest')->group(function () {
-            Route::resource('purchase-request', 'PurchaseRequestController');
-
-            Route::put('purchase-request/{purchaseRequest}/approve', 'PurchaseRequestController@approve')->name('purchase-request.approve');
-            Route::post('purchase-request/{purchaseRequest}/item/{item}', 'PurchaseRequestController@add_item')->name('purchase-request.add-item');
-
-            Route::name('purchase-request.')->group(function () {
-                //
-            });
-        });
-
-        /** PURCHASE ORDER */
-
-        Route::namespace('PurchaseOrder')->group(function () {
-
-            Route::resource('purchase-order', 'PurchaseOrderController');
-            Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
-
-            Route::name('purchase-order.')->group(function () {
-                //
-            });
-        });
-
-
-        /** GOODS RECEIVED NOTE */
-        Route::namespace('GoodsReceived')->group(function () {
-
-            Route::resource('goods-received', 'GoodsReceivedController');
-            Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
-
-            Route::name('goods-received.')->group(function () {
-                //
-            });
-        });
-
-        /** PRICE LIST */
-
-        Route::view('/price-list', 'frontend.price-list.index')->name('price-list.index');
-
-
-        /** DOCUMENTS */
-
-        Route::view('/support-documents', 'frontend.support-documents.index')->name('support-documents.index');
 
     });
 

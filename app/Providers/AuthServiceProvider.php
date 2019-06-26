@@ -57,6 +57,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\DefectCard::class => Policies\DefectCardPolicy::class,
         Models\Inspection::class => Policies\InspectionPolicy::class,
         Models\WorkPackage::class => Policies\WorkPackagePolicy::class,
+        Models\Predecessor::class => Policies\PredecessorPolicy::class,
         Models\Manufacturer::class => Policies\ManufacturerPolicy::class,
         Models\Certification::class => Policies\CertificationPolicy::class,
         Models\EOInstruction::class => Policies\EOInstructionPolicy::class,
