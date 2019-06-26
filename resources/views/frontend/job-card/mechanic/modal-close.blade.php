@@ -26,7 +26,6 @@
                                     @slot('id', 'note')
                                     @slot('name', 'note')
                                     @slot('text', 'Note')
-                                    @slot('required', 'required')
                                 @endcomponent
                             </div>
                         </div>
