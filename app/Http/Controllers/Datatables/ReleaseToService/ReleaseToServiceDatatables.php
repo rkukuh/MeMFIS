@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Datatables\ReleaseToService;
 
-use App\Models\RTS;
+use App\Models\Status;
+use App\Models\Project;
+use App\Models\JobCard;
+use App\Models\Quotation;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,11 +19,25 @@ class ReleaseToServiceDatatables extends Controller
      */
     public function index()
     {
-        $alldata = RTS::with('project')->get();
+        $alldata = Project::with('rts')->get();
 
         foreach($alldata as $rts){
-                    $rts->customer_name .= $rts->project->customer->name;
+            $rts->customer_name .= $rts->customer->name;
+        }
+
+        foreach($alldata as $project){
+            $quotations = Quotation::where('project_id',$project->id)->get();
+            $status = "-";
+            foreach($quotations as $quotation){
+                $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
+                foreach($jobcards as $jobcard){
+                    if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
+                        $status = "IN-PROGRESS";
+                    }
+                }
             }
+            $project->status .= $status;
+        }
 
         $data = $alldata = json_decode($alldata);
 
