@@ -9,6 +9,7 @@ class Employee extends MemfisModel
 {
     protected $fillable = [
         'code',
+        'user_id',
         'first_name',
         'middle_name',
         'last_name',
@@ -297,5 +298,18 @@ class Employee extends MemfisModel
     {
         return $this->belongsToMany(School::class)
                     ->withTimestamps();
+    }
+
+    /**
+     * One-to-One: An Employee have one User account.
+     *
+     * This function will retrieve User account of a given Employee.
+     * See: User's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

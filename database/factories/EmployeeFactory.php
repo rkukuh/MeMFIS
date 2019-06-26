@@ -21,6 +21,7 @@ $factory->define(Employee::class, function (Faker $faker) {
 
     return [
         'code' => 'EMP-DUM-' . $faker->unixTime(),
+        'user_id' => null,
         'first_name' => $faker->randomElement([$firstNameMale, $firstNameFemale]),
         'middle_name' => $faker->randomElement([null, $faker->lastName()]),
         'last_name' => $lastname,
@@ -31,7 +32,7 @@ $factory->define(Employee::class, function (Faker $faker) {
 
 });
 
-/** Callbacks */
+/** CALLBACKS */
 
 $factory->afterCreating(Employee::class, function ($employee, $faker) {
     if ($faker->boolean) {

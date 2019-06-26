@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\License;
@@ -18,11 +19,7 @@ class CertifiedStaff_GeneralLicense extends Seeder
     {
         /** Create EMPLOYEE */
 
-        $aldrin = Employee::create([
-            'code' => 'MMF-00001',
-            'first_name' => 'Aldrin',
-            'last_name' => 'Collins',
-        ]);
+        $aldrin = Employee::where('user_id', User::where('email', 'aldrin@ptmmf.co.id')->first()->id)->first();
 
 
         /** Assign EMPLOYEE to GENERAL LICENSE */
