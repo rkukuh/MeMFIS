@@ -136,7 +136,7 @@ class Project extends MemfisModel
      */
     public function rts()
     {
-        return $this->belongsTo(RTS::class);
+        return $this->hasOne(RTS::class);
     }
 
     /**

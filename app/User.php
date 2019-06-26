@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /** Relationship **/
-use Modules\Blog\Entities\Post;
 use Spatie\MediaLibrary\Models\Media;
 
 /** Scopes, Interfaces, Facades, Helpers  **/

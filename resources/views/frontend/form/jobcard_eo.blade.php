@@ -159,7 +159,7 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>JC No : 123456</legend>
+                <legend>JC No : {{$jobCard->number}}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>

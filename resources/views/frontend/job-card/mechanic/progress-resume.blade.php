@@ -240,7 +240,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="m-portlet  m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -257,7 +257,7 @@
                                 <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
                                     @foreach($progresses as $progress)
                                         <div class="m-timeline-2__item m--margin-top-30">
-                                            <span class="m-timeline-2__item-time">{{ date("m-d-y", strtotime($progress->created_at))}}</span>
+                                            <span class="m-timeline-2__item-time">{{ $progress->created_at}}</span>
                                             <div class="m-timeline-2__item-cricle">
                                                 <i class="fa fa-genderless m--font-success"></i>
                                             </div>

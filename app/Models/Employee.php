@@ -148,6 +148,19 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-Many: An HT/CRR may have one remover.
+     *
+     * This function will retrieve all the HT/CRRs of a given remover.
+     * See: HtCrr's removedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr_removed()
+    {
+        return $this->hasMany(HtCrr::class, 'removed_by');
+    }
+
+    /**
      * Many-to-Many: A JobCard may have zero or many helper.
      *
      * This function will retrieve all the JobCards of a helper.
@@ -159,19 +172,6 @@ class Employee extends MemfisModel
     {
         return $this->belongsToMany(JobCard::class, 'employee_jobcard', 'employee_id', 'jobcard_id')
                     ->withTimestamps();;
-    }
-
-    /**
-     * One-to-Many: An HT/CRR may have one remover.
-     *
-     * This function will retrieve all the HT/CRRs of a given remover.
-     * See: HtCrr's removedBy() method for the inverse
-     *
-     * @return mixed
-     */
-    public function htcrr_removed()
-    {
-        return $this->hasMany(HtCrr::class, 'removed_by');
     }
 
     /**
