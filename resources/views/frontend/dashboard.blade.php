@@ -1,9 +1,9 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-content">
+    <div class="m-content hidden">
         <!--Begin::Section-->
-        <div class="m-portlet">
+        <div class="m-portlet ">
             <div class="m-portlet__body  m-portlet__body--no-padding">
                 <div class="row m-row--no-padding m-row--col-separator-xl">
                     <div class="col-xl-4">
