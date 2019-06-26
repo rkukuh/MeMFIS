@@ -38,11 +38,11 @@ class ReleaseToServiceDatatables extends Controller
                         $status = "IN-PROGRESS";
                     }
                 }
+                if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'open' and $quotation->jobcards->count() == 0){
+                    $status = 'OPEN';
+                }
             }
-            if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'open'){
-                $project->status .= 'OPEN';
-            }
-            elseif(sizeof($project->approvals->toArray()) == 1){
+            if(sizeof($project->approvals->toArray()) == 1){
                 $project->status .= 'Project Approved';
             }
             elseif(sizeof($project->approvals->toArray()) == 2){
