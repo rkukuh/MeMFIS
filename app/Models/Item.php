@@ -197,7 +197,11 @@ class Item extends MemfisModel implements HasMedia
     public function projects()
     {
         return $this->belongsToMany(Project::class)
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'note'
+                    )
                     ->withTimestamps();
     }
 
@@ -293,7 +297,9 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(TaskCard::class, 'item_taskcard', 'item_id', 'taskcard_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id')
+                        'unit_id',
+                        'note'
+                    )
                     ->withTimestamps();
     }
 
