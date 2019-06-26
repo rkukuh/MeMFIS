@@ -96,6 +96,10 @@ class JobCardMechanicController extends Controller
     public function edit(JobCard $jobcard)
     {
 
+        if($jobcard->helpers->where('id',Auth::id())->first() == null){
+            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
+        }
+
         $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
 
         foreach($progresses as $progress){
