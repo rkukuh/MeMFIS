@@ -9,6 +9,7 @@ use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -95,7 +96,7 @@ class JobCardEngineerController extends Controller
     public function edit(JobCard $jobcard)
     {
         $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
-
+        $employees = Employee::all();
         foreach($progresses as $progress){
             $progress->status .= Status::where('id',$progress->status_id)->first()->name;
         }
@@ -105,6 +106,7 @@ class JobCardEngineerController extends Controller
                 'jobcard' => $jobcard,
                 'progresses' => $progresses,
                 'status' => $this->statuses->where('code','open')->first(),
+                'employees' => $employees,
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "progress"){
