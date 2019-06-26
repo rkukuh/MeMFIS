@@ -17,17 +17,8 @@ class UsersImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        // Register them as an employee first...,
-
-        $employee = new Employee([
-            'code' => $row['nrp'],
-            'first_name' => ucfirst(strtolower($row['nama'])),
-        ]);
-
-        // ...then give them access (as User account)
-
-        $user = $employee->user()->create([
-            'name' => null,
+        $user = new User([
+            'name' => ucfirst(strtolower($row['nama'])),
             'email' => !empty($row['email']) ? strtolower($row['email']) : str_slug(strtolower($row['nama'])) . '@example.org',
             'password' => Hash::make('aaa'),
         ]);

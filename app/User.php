@@ -18,7 +18,7 @@ use App\Scopes\OrderByColumn;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Employee;
+
 
 class User extends Authenticatable implements Auditable, HasMedia
 {
@@ -80,18 +80,7 @@ class User extends Authenticatable implements Auditable, HasMedia
 
     /*************************************** RELATIONSHIP ****************************************/
 
-    /**
-     * One-to-One: An Employee have one User account.
-     *
-     * This function will retrieve an associated Employee of a given User account.
-     * See: Employee's user() method for the inverse
-     *
-     * @return mixed
-     */
-    public function employee()
-    {
-        return $this->belongsTo(Employee::class);
-    }
+    // ...
 
     /**************************************** ACCESSOR *******************************************/
 
