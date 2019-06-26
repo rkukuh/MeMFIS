@@ -63,6 +63,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('certification', 'CertificationController');
 
         /** ============================================================================================================================== **/
+        /** ============================================================================================================================== **/
 
         /** AIRCRAFT */
 
@@ -133,11 +134,11 @@ Route::name('frontend.')->group(function () {
             ]);
 
             Route::name('defectcard.')->group(function () {
+
                 Route::prefix('defectcard')->group(function () {
-
                     // 
-
                 });
+
             });
 
         });
@@ -333,11 +334,14 @@ Route::name('frontend.')->group(function () {
             Route::post('jobcard-hardtime-mechanic/', 'JobCardHardTimeMechanicController@search')->name('mechanic.jobcard.hardtime.search');
 
             Route::name('jobcard.hardtime.')->group(function () {
+
                 Route::prefix('jobcard-hardtime')->group(function () {
 
                     /** Transaction */
                     Route::get('/{jobCard}/print', 'JobCardHardTimeController@print')->name('print');
+
                 });
+
             });
 
         });
@@ -439,14 +443,19 @@ Route::name('frontend.')->group(function () {
             Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
             Route::prefix('quotation')->group(function () {
+                
                 Route::get('/{quotation}/print', 'QuotationController@print');
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
                 Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
+                
                 Route::name('quotation.')->group(function () {
+
                     Route::resource('/{quotation}/workpackage', 'QuotationWorkPackageController', [
                         'parameters' => ['workpackage' => 'workPackage']
                     ]);
+
                 });
+
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('quotation.summary.basic');
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('quotation.summary.sip');
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('quotation.summary.cpcp');
