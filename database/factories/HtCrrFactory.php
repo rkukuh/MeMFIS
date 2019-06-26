@@ -2,6 +2,8 @@
 
 use Carbon\Carbon;
 use App\Models\Type;
+use App\Models\Item;
+use App\Models\Unit;
 use App\Models\HtCrr;
 use App\Models\Status;
 use App\Models\Project;
@@ -70,6 +72,32 @@ $factory->state(HtCrr::class, 'installation', function ($faker) {
 
 $factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
 
+    // Item
+
+    if ($faker->boolean) {
+        $item = null;
+
+        for ($i = 1; $i <= rand(5, 10); $i++) {
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
+            $htcrr->items()->save($item, [
+                'quantity' => rand(1, 10),
+                'unit_id' => $unit->id,
+                'note' => $faker->randomElement([null, $faker->sentence]),
+            ]);
+        }
+    }
+
     // Progress
 
     $htcrr->progresses()->save(
@@ -79,7 +107,7 @@ $factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
         ])
     );
 
-    // SKill
+    // Skill
 
     for ($i = 1; $i <= rand(1, 3); $i++) {
         if (Type::ofTaskCardSkill()->count()) {

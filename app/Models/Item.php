@@ -130,6 +130,25 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: An HTCRR may have one or many item.
+     *
+     * This function will retrieve all the HTCRR of an item.
+     * See: HtCrr's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr()
+    {
+        return $this->belongsToMany(HtCrr::class)
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: An item may have zero or one account code (journal).
      *
      * This function will retrieve the account code (journal) of an item.
