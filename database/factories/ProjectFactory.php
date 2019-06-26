@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\RTS;
 use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Status;
@@ -83,6 +84,12 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
             'status_id' => Status::ofProject()->where('code', 'open')->first()
         ])
     );
+
+    // RTS
+
+    if ($faker->boolean) {
+        $project->rts()->save(factory(RTS::class)->make());
+    }
 
     // Work Package
 

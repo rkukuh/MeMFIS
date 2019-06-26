@@ -130,7 +130,6 @@ let Workpackage = {
 
         $('.modal-footer').on('click', '.add-htcrr', function () {
 
-            let cri = $('input[name=cri]').val();
             let pn = $('input[name=pn]').val();
             let position = $('input[name=position]').val();
             let removal = $('input[name=removal]').val();
@@ -138,12 +137,6 @@ let Workpackage = {
             let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
             let mhrs = $('input[name=mhrs]').val();
-            let is_rii;
-            if (document.getElementById("is_rii").checked) {
-                is_rii = 1;
-            } else {
-                is_rii = 0;
-            }
 
             $.ajax({
                 headers: {
@@ -153,13 +146,11 @@ let Workpackage = {
                 url: '/project-hm/htcrr',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    code: cri,
                     part_number: pn,
                     description: description,
                     skill_id: otr_certification,
                     estimation_manhour: mhrs,
-                    is_rii: is_rii,
-                    position: is_rii,
+                    position: position,
                     removal_manhour_estimation: removal,
                     installation_manhour_estimation: installation,
                     project_id: project_uuid,

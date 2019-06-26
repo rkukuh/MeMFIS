@@ -23,6 +23,7 @@ class JobCardEngineerController extends Controller
     protected $other;
     protected $accomplished;
     protected $sucess_notification;
+    protected $error_notification;
 
     public function __construct()
     {
@@ -36,6 +37,11 @@ class JobCardEngineerController extends Controller
                             'title' => "Success",
                             'alert-type' => "success"
                         );
+        $this->error_notification = array(
+                            'message' => "JobCard's status can't updated",
+                            'title' => "Danger",
+                            'alert-type' => "error"
+        );
     }
 
     /**
@@ -94,7 +100,7 @@ class JobCardEngineerController extends Controller
             $progress->status .= Status::where('id',$progress->status_id)->first()->name;
         }
 
-        if ($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "open") {
+        if ($progresses->count() == 0 and $this->statuses->where('id',$jobcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.job-card.engineer.progress-open', [
                 'jobcard' => $jobcard,
                 'progresses' => $progresses,
@@ -162,6 +168,12 @@ class JobCardEngineerController extends Controller
             return redirect()->route('frontend.jobcard-engineer.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
+
+            foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
+                if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
+                    return redirect()->route('frontend.jobcard-engineer.index')->with($this->error_notification);
+                }
+            }
 
             foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                 if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed"){

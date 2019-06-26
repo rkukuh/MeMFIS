@@ -211,36 +211,25 @@
 
                                     </table>
                                     <table border="1px" width="100%" style="margin-top:10px">
-                                            <tr>
-                                                <td width="30%" style="background-color:beige;padding:10px;">
-                                                    Helper
-                                                </td>
-                                                <td width="70%" style="text-align:center">
-                                                    <div class='repeater'>
-                                                        <div data-repeater-list="group-email">
-                                                            <div data-repeater-item>
-                                                                <div class=" row">
-                                                                    <div class="col-sm-5 col-md-5 col-lg-5">
-                                                                        {{-- TO DO ganti select--}}
-                                                                        @component('frontend.common.input.text')
-                                                                            @slot('text', 'helper')
-                                                                            @slot('id', 'helper')
-                                                                            @slot('name', 'helper')
-                                                                            @slot('id_error', 'helper')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                        @include('frontend.common.buttons.create_repeater')
-                                                                    </div>
-                                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                        @include('frontend.common.buttons.delete_repeater')
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Helper
+                                            </td>
+                                            <td width="70%" style="text-align:center">
+                                                @foreach($jobcard->helpers as $helper)    
+                                                <div class=" row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('text', 'helper')
+                                                            @slot('name', 'helper')
+                                                            @slot('value', $helper->first_name)
+                                                            @slot('id_error', 'helper')
+                                                        @endcomponent
                                                     </div>
-                                                </td>
-                                            </tr>
+                                                </div>
+                                                @endforeach
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -269,9 +258,22 @@
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/type.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/type.js')}}"></script>
 
+    <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/helper.js')}}"></script>
+
+    <script>
+        let helpers = {!! $jobcard->helpers !!}
+        $('select[name^=helper]').each( function(key) 
+        {
+            console.log(helpers[key].code);
+            console.log( $(this).find('option[value='+helpers[key].code+']').val() );
+        });
+        $('select[name^=helper]').select2().trigger('change');
+        // $('select[name=helper] option[value='+value.first_name+']').attr('selected','selected');
+    </script>
 
     <script src="{{ asset('js/frontend/journal.js')}}"></script>
 @endpush

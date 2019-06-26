@@ -29,7 +29,6 @@ return [
         'purchase-orders' => 15,
         'purchase-requests' => 15,
         'quotations' => 15,
-        'rts' => 15,
         'schools' => 15,
         'statuses' => 15,
         'storages' => 15,

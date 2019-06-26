@@ -10,6 +10,7 @@ class HtCrr extends MemfisModel
 
     protected $fillable = [
         'code',
+        'parent_id',
         'type_id',
         'project_id',
         'position',
@@ -27,6 +28,19 @@ class HtCrr extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many (self-join): An HTCRR may have none or many sub-HTCRR.
+     *
+     * This function will retrieve the sub-HTCRR of an HTCRR, if any.
+     * See: HtCrr's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function childs()
+    {
+        return $this->hasMany(HtCrr::class, 'parent_id');
+    }
+
+    /**
      * One-to-Many: An HTCRR may have one remover / installer.
      *
      * This function will retrieve the removed / installer of an HTCRR.
@@ -37,6 +51,19 @@ class HtCrr extends MemfisModel
     public function conductedBy()
     {
         return $this->belongsTo(Employee::class, 'conducted_by');
+    }
+
+    /**
+     * One-to-Many (self-join): An HTCRR may have none or many sub-HTCRR.
+     *
+     * This function will retrieve the parent of a sub-HTCRR.
+     * See: HtCrr's childs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsTo(HtCrr::class, 'parent_id');
     }
 
     /**
