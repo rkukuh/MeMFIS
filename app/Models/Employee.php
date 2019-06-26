@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use App\MemfisModel;
 use App\Models\Pivots\EmployeeLicense;
 
