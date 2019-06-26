@@ -16,14 +16,14 @@ class ReleaseToServiceDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(RTS::all());
-        // $data = $alldata = json_decode(TaskCard::with('type','aircrafts')->get());
+        $alldata = RTS::with('project')->get();
 
-        // foreach($alldata as $rts){
-        //             $rts->customer_name .= $rts->customer->name;
-        //     }
+        foreach($alldata as $rts){
+                    $rts->customer_name .= $rts->project->customer->name;
+            }
 
-        // $data = $alldata = json_decode($alldata);
+        $data = $alldata = json_decode($alldata);
+
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
