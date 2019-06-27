@@ -18,7 +18,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Accomplishment Notes: @include('frontend.common.label.required')
+                                    Accomplishment Notes: @include('frontend.common.label.optional')
                                 </label>
                                 <input type="hidden" id="accomplishment" name="accomplishment" value="{{$accomplished}}">
                                 @component('frontend.common.input.textarea')
@@ -38,6 +38,7 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                         @component('frontend.common.input.radio')
                                             @slot('id', 'yes')
+                                            @slot('value', '1')
                                             @slot('name', 'discrepancy')
                                             @slot('text', 'Yes')
                                         @endcomponent
@@ -45,6 +46,7 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                         @component('frontend.common.input.radio')
                                             @slot('id', 'no')
+                                            @slot('value', '0')
                                             @slot('name', 'discrepancy')
                                             @slot('text', 'No')
                                         @endcomponent
