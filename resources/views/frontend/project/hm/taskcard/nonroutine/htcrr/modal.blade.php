@@ -107,9 +107,9 @@
 
                         @component('frontend.common.input.number')
                             @slot('text', 'Installaton')
-                            @slot('id', 'installaton')
-                            @slot('name', 'installaton')
-                            @slot('id_error', 'installaton')
+                            @slot('id', 'installation')
+                            @slot('name', 'installation')
+                            @slot('id_error', 'installation')
                         @endcomponent
                     </div>
                 </div>
