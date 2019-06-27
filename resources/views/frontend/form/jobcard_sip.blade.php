@@ -324,11 +324,13 @@
         <table width="100%" cellpadding="10">
           <tr>
             <td width="25%" valign="top">
-              @if($jobCard->taskcard->skill->name)
-              {{$jobCard->taskcard->skill->name}}
-              @else
-                -
-              @endif
+                @if(sizeof($jobCard->taskcard->skills) == 3)
+                  ERI
+                @elseif(sizeof($jobCard->taskcard->skills) == 1)
+                  {{$jobCard->taskcard->skills[0]->name}}
+                @else
+                  -
+                @endif
             </td>
             <td width="25%" align="center" valign="top">
               @if($jobCard->taskcard->work_area)
