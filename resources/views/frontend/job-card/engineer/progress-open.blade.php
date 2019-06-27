@@ -216,18 +216,31 @@
                                                 Helper
                                             </td>
                                             <td width="70%" style="text-align:center">
+                                            @if(isset($jobcard->helpers))
                                                 @foreach($jobcard->helpers as $helper)    
-                                                <div class=" row">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <select name="helper" style="width:100%" class="form-control m-select2">
+                                                            <option value=""></option>
+                                                            @foreach($employees as $employee)
+                                                            <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            @else
+                                                <div class="row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         @component('frontend.common.input.select2')
                                                             @slot('text', 'helper')
                                                             @slot('name', 'helper')
-                                                            @slot('value', $helper->first_name)
                                                             @slot('id_error', 'helper')
                                                         @endcomponent
                                                     </div>
                                                 </div>
-                                                @endforeach
+                                            @endif
                                             </td>
                                         </tr>
                                     </table>
@@ -261,19 +274,32 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/type.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/helper.js')}}"></script>
-
+@if(sizeof($jobcard->helpers) == 0)
+<script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
+@endif
+<script src="{{ asset('js/frontend/functions/select2/helper.js')}}"></script>
+<!-- 
     <script>
+        $( document ).ready(function() {
         let helpers = {!! $jobcard->helpers !!}
-        $('select[name^=helper]').each( function(key) 
-        {
-            console.log(helpers[key].code);
-            console.log( $(this).find('option[value='+helpers[key].code+']').val() );
-        });
+        console.log($('select[name^=helper]').length);
+        $('select[name^=helper]').each()
         $('select[name^=helper]').select2().trigger('change');
-        // $('select[name=helper] option[value='+value.first_name+']').attr('selected','selected');
+        // $('select[name^=helper] option[value='+helpers[key].code+']').attr('selected','selected');
+        });
+        
+    </script> -->
+    <script>
+        $( document ).ready(function() {
+            $('.helper').each( function() {
+                console.log( $(this).select2() );
+            });
+        console.log($('.helper').length);
+        });
+        
     </script>
+
+
 
     <script src="{{ asset('js/frontend/journal.js')}}"></script>
 @endpush
