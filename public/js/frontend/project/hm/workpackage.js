@@ -229,6 +229,8 @@ let Workpackage = {
             $('.btn-success').removeClass('add-htcrr');
             $('.btn-success').removeClass('add');
             $('.btn-success').addClass('edit-htcrr');
+            $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save Changes</span></span>");
+
 
             let uuid_htcrr = $(this).data('uuid_htcrr');
 
@@ -335,7 +337,7 @@ let Workpackage = {
                         $('#modal_ht_crr').modal('hide');
                         $('.btn-success').removeClass('edit-htcrr');
                         $('.btn-success').addClass('add-htcrr');
-
+                        $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save New</span></span>");
                     }
                 }
             });
