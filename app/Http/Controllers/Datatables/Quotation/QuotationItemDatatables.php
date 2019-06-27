@@ -2,34 +2,34 @@
 
 namespace App\Http\Controllers\Datatables\Quotation;
 
-use App\Models\Pivots\ProjectWorkPackage;
-use App\Models\ProjectWorkPackageFacility;
+use App\Models\Item;
 use App\Models\ListUtil;
-use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class QuotationDatatables extends Controller
+class QuotationItemDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function routine(WorkPackage $workPackage)
     {
-        $quotations = Quotation::with('customer','project')->get();
+        $workPackages = $workPackage->taskcards()->with('type')
+        ->whereHas('type', function ($query) {
+            $query->where('of', 'taskcard-type-routine');
+        })->get();
 
-        foreach($quotations as $quotation){
-            if(!empty($quotation->approvals->toArray())){
-                $quotation->status .= 'Approved';
-            }else{
-                $quotation->status .= '';
+        dd($workPackages);
 
-            }
-        }
-        $data = $alldata = json_decode($quotations);
+        $items = Item::with('unit', 'journal','categories')
+        ->whereHas('categories', function ($query) {
+            $query->where('code','<>','tool');
+        })->get();
+
+        $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -123,113 +123,21 @@ class QuotationDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function jobRequest(Quotation $quotation)
+    public function non_routine(WorkPackage $workPackage)
     {
-        $data = $alldata = json_decode($quotation->workpackages);
+        $workPackages = $workPackage->taskcards()->with('type')
+        ->whereHas('type', function ($query) {
+            $query->where('of', 'taskcard-type-non-routine');
+        })->get();
 
-        $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
+        dd($workPackages);
 
-        $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
-                    ? $datatable['query']['generalSearch'] : '';
+        $items = Item::with('unit', 'journal','categories')
+        ->whereHas('categories', function ($query) {
+            $query->where('code','<>','tool');
+        })->get();
 
-        if (! empty($filter)) {
-            $data = array_filter($data, function ($a) use ($filter) {
-                return (boolean)preg_grep("/$filter/i", (array)$a);
-            });
-
-            unset($datatable['query']['generalSearch']);
-        }
-
-        $query = isset($datatable['query']) && is_array($datatable['query']) ? $datatable['query'] : null;
-
-        if (is_array($query)) {
-            $query = array_filter($query);
-
-            foreach ($query as $key => $val) {
-                $data = $this->list_filter($data, [$key => $val]);
-            }
-        }
-
-        $sort  = ! empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
-        $field = ! empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'RecordID';
-
-        $meta    = [];
-        $page    = ! empty($datatable['pagination']['page']) ? (int)$datatable['pagination']['page'] : 1;
-        $perpage = ! empty($datatable['pagination']['perpage']) ? (int)$datatable['pagination']['perpage'] : -1;
-
-        $pages = 1;
-        $total = count($data);
-
-        usort($data, function ($a, $b) use ($sort, $field) {
-            if (! isset($a->$field) || ! isset($b->$field)) {
-                return false;
-            }
-
-            if ($sort === 'asc') {
-                return $a->$field > $b->$field ? true : false;
-            }
-
-            return $a->$field < $b->$field ? true : false;
-        });
-
-        if ($perpage > 0) {
-            $pages  = ceil($total / $perpage);
-            $page   = max($page, 1);
-            $page   = min($page, $pages);
-            $offset = ($page - 1) * $perpage;
-
-            if ($offset < 0) {
-                $offset = 0;
-            }
-
-            $data = array_slice($data, $offset, $perpage, true);
-        }
-
-        $meta = [
-            'page'    => $page,
-            'pages'   => $pages,
-            'perpage' => $perpage,
-            'total'   => $total,
-        ];
-
-        if (isset($datatable['requestIds']) && filter_var($datatable['requestIds'], FILTER_VALIDATE_BOOLEAN)) {
-            $meta['rowIds'] = array_map(function ($row) {
-                return $row->RecordID;
-            }, $alldata);
-        }
-
-        header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
-
-        $result = [
-            'meta' => $meta + [
-                    'sort'  => $sort,
-                    'field' => $field,
-                ],
-            'data' => $data,
-        ];
-
-        echo json_encode($result, JSON_PRETTY_PRINT);
-    }
-
- /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function facilities(Quotation $quotation,WorkPackage $workPackage)
-    {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
-            ->where('workpackage_id',$workPackage->id)
-            ->first();
-            
-        $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
-        ->with('facility')
-        ->get();
-
-        $data = $alldata = json_decode($ProjectWorkPackageFacility);
+        $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

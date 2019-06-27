@@ -159,7 +159,6 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{item}/storages', 'ItemStorageDatatables@index')->name('storages.index');
                 Route::get('/{purchase_request}/purchase-request', 'ItemDatatables@purchaseRequest')->name('purchase-request');
 
-
             });
 
         });
@@ -252,6 +251,14 @@ Route::name('datatables.')->group(function () {
                 Route::get('/', 'QuotationDatatables@index')->name('all');
                 Route::get('/{quotation}/job-request', 'QuotationDatatables@jobRequest')->name('job-request');
                 Route::get('/{quotation}/workpackage/{workPackage}/facilities', 'QuotationDatatables@facilities')->name('all-facilities');
+
+                /** Item */
+                Route::get('/{workPackage}/item/routine', 'QuotationItemDatatables@routine')->name('item.routine');
+                Route::get('/{workPackage}/item/non-routine', 'QuotationItemDatatables@non_routine')->name('item.non_routine');
+
+                /** Tool */
+                Route::get('/{workPackage}/tool/routine', 'QuotationToolDatatables@routine')->name('tool.routine');
+                Route::get('/{workPackage}/tool/non-routine', 'QuotationToolDatatables@non_routine')->name('tool.non_routine');
 
             });
 
