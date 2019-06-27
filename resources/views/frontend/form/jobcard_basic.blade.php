@@ -219,8 +219,8 @@
                         <td width="20%">Company Task</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                            @if(isset(json_decode($jobcard->taskcard->additionals)->internal_number))
-                                {{json_decode($jobcard->taskcard->additionals)->internal_number}}
+                            @if(isset(json_decode($jobCard->taskcard->additionals)->internal_number))
+                                {{json_decode($jobCard->taskcard->additionals)->internal_number}}
                             @else
                                 -
                             @endif  
