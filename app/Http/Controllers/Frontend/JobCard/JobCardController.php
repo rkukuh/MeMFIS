@@ -107,14 +107,31 @@ class JobCardController extends Controller
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
                 $dateClosed = $jobCard->progresses->last()->created_at;
+                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_at = $jobCard->approvals->get(1)->created_at;
             }else{
                 $dateClosed = "-";
+                $rii_by = "-";
             }
+
+            $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+            $inspected_at = $jobCard->approvals->first()->created_at;
+            $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
+            $accomplished_at =  $jobCard->progresses->last()->created_at;
+            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+
             $pdf = \PDF::loadView('frontend/form/jobcard_basic',[
                     'jobCard' => $jobCard,
                     'username' => $username,
                     'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
+                    'dateClosed' => $dateClosed,
+                    'accomplished_by' => $accomplished_by,
+                    'accomplished_at' => $accomplished_at,
+                    'inspected_by' => $inspected_by,
+                    'inspected_at' => $inspected_at,
+                    'rii_by' => $rii_by,
+                    'rii_at' => $rii_at,
+                    'prepared_by' => $prepared_by
                     ]);
             return $pdf->stream();
         }
@@ -123,14 +140,31 @@ class JobCardController extends Controller
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
                 $dateClosed = $jobCard->progresses->last()->created_at;
+                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_at = $jobCard->approvals->get(1)->created_at;
             }else{
                 $dateClosed = "-";
+                $rii_by = "-";
             }
+            
+            $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+            $inspected_at = $jobCard->approvals->first()->created_at;
+            $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
+            $accomplished_at =  $jobCard->progresses->last()->created_at;
+            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+
             $pdf = \PDF::loadView('frontend/form/jobcard_sip',[
                     'jobCard' => $jobCard,
                     'username' => $username,
                     'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
+                    'dateClosed' => $dateClosed,
+                    'accomplished_by' => $accomplished_by,
+                    'accomplished_at' => $accomplished_at,
+                    'inspected_by' => $inspected_by,
+                    'inspected_at' => $inspected_at,
+                    'rii_by' => $rii_by,
+                    'rii_at' => $rii_at,
+                    'prepared_by' => $prepared_by
                     ]);
             return $pdf->stream();
         }
@@ -139,14 +173,31 @@ class JobCardController extends Controller
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
                 $dateClosed = $jobCard->progresses->last()->created_at;
+                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_at = $jobCard->approvals->get(1)->created_at;
             }else{
                 $dateClosed = "-";
+                $rii_by = "-";
             }
+
+            $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+            $inspected_at = $jobCard->approvals->first()->created_at;
+            $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
+            $accomplished_at =  $jobCard->progresses->last()->created_at;
+            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+
             $pdf = \PDF::loadView('frontend/form/jobcard_cpcp',[
                     'jobCard' => $jobCard,
                     'username' => $username,
                     'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
+                    'dateClosed' => $dateClosed,
+                    'accomplished_by' => $accomplished_by,
+                    'accomplished_at' => $accomplished_at,
+                    'inspected_by' => $inspected_by,
+                    'inspected_at' => $inspected_at,
+                    'rii_by' => $rii_by,
+                    'rii_at' => $rii_at,
+                    'prepared_by' => $prepared_by
                     ]);
             return $pdf->stream();
         }
@@ -155,14 +206,31 @@ class JobCardController extends Controller
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
                 $dateClosed = $jobCard->progresses->last()->created_at;
+                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_at = $jobCard->approvals->get(1)->created_at;
             }else{
                 $dateClosed = "-";
+                $rii_by = "-";
             }
+
+            $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+            $inspected_at = $jobCard->approvals->first()->created_at;
+            $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
+            $accomplished_at =  $jobCard->progresses->last()->created_at;
+            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+
             $pdf = \PDF::loadView('frontend/form/jobcard_adsb',[
                     'jobCard' => $jobCard,
                     'username' => $username,
                     'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
+                    'dateClosed' => $dateClosed,
+                    'accomplished_by' => $accomplished_by,
+                    'accomplished_at' => $accomplished_at,
+                    'inspected_by' => $inspected_by,
+                    'inspected_at' => $inspected_at,
+                    'rii_by' => $rii_by,
+                    'rii_at' => $rii_at,
+                    'prepared_by' => $prepared_by
                     ]);
             return $pdf->stream();        }
         elseif(($jobCard->taskcard->type->code == "eo") or ($jobCard->taskcard->type->code == "ea")){
@@ -182,7 +250,7 @@ class JobCardController extends Controller
             $inspected_at = $jobCard->approvals->first()->created_at;
             $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
             $accomplished_at =  $jobCard->progresses->last()->created_at;
-            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;;
+            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
 
             $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
                     'jobCard' => $jobCard,
@@ -204,14 +272,31 @@ class JobCardController extends Controller
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
                 $dateClosed = $jobCard->progresses->last()->created_at;
+                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_at = $jobCard->approvals->get(1)->created_at;
             }else{
                 $dateClosed = "-";
+                $rii_by = "-";
             }
+
+            $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+            $inspected_at = $jobCard->approvals->first()->created_at;
+            $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
+            $accomplished_at =  $jobCard->progresses->last()->created_at;
+            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+
             $pdf = \PDF::loadView('frontend/form/jobcard_cmrawl',[
                     'jobCard' => $jobCard,
                     'username' => $username,
                     'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
+                    'dateClosed' => $dateClosed,
+                    'accomplished_by' => $accomplished_by,
+                    'accomplished_at' => $accomplished_at,
+                    'inspected_by' => $inspected_by,
+                    'inspected_at' => $inspected_at,
+                    'rii_by' => $rii_by,
+                    'rii_at' => $rii_at,
+                    'prepared_by' => $prepared_by
                     ]);
             return $pdf->stream();
         }
@@ -220,14 +305,31 @@ class JobCardController extends Controller
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
                 $dateClosed = $jobCard->progresses->last()->created_at;
+                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_at = $jobCard->approvals->get(1)->created_at;
             }else{
                 $dateClosed = "-";
+                $rii_by = "-";
             }
+
+            $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+            $inspected_at = $jobCard->approvals->first()->created_at;
+            $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
+            $accomplished_at =  $jobCard->progresses->last()->created_at;
+            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            
             $pdf = \PDF::loadView('frontend/form/jobcard_si',[
                     'jobCard' => $jobCard,
                     'username' => $username,
                     'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
+                    'dateClosed' => $dateClosed,
+                    'accomplished_by' => $accomplished_by,
+                    'accomplished_at' => $accomplished_at,
+                    'inspected_by' => $inspected_by,
+                    'inspected_at' => $inspected_at,
+                    'rii_by' => $rii_by,
+                    'rii_at' => $rii_at,
+                    'prepared_by' => $prepared_by
                     ]);
             return $pdf->stream();
         }
@@ -236,14 +338,31 @@ class JobCardController extends Controller
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
                 $dateClosed = $jobCard->progresses->last()->created_at;
+                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_at = $jobCard->approvals->get(1)->created_at;
             }else{
                 $dateClosed = "-";
+                $rii_by = "-";
             }
+
+            $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+            $inspected_at = $jobCard->approvals->first()->created_at;
+            $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
+            $accomplished_at =  $jobCard->progresses->last()->created_at;
+            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+
             $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one',[
                     'jobCard' => $jobCard,
                     'username' => $username,
                     'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
+                    'dateClosed' => $dateClosed,
+                    'accomplished_by' => $accomplished_by,
+                    'accomplished_at' => $accomplished_at,
+                    'inspected_by' => $inspected_by,
+                    'inspected_at' => $inspected_at,
+                    'rii_by' => $rii_by,
+                    'rii_at' => $rii_at,
+                    'prepared_by' => $prepared_by
                     ]);
             return $pdf->stream();
         // } else {
