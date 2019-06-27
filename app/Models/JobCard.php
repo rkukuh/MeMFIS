@@ -141,6 +141,36 @@ class JobCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many (self-join): A job card may have none or many successor.
+     *
+     * This function will retrieve successor's parent.
+     * See: JobCard's successors() method for the inverse
+     *
+     * @return mixed
+     */
+    public function successor_parent()
+    {
+        return $this->belongsToMany(JobCard::class, 'jobcard_successor', 'next', 'jobcard_id')
+                    ->withPivot('order')
+                    ->withTrashed();
+    }
+
+    /**
+     * Many-to-Many (self-join): A job card may have none or many successor.
+     *
+     * This function will retrieve all the job card's successors.
+     * See: JobCard's successor_parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function successors()
+    {
+        return $this->belongsToMany(JobCard::class, 'jobcard_successor', 'jobcard_id', 'next')
+                    ->withPivot('order')
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many (with JSON data): A jobcard must have a taskcard
      *
      * This function will retrieve the taskcard of a jobcard.

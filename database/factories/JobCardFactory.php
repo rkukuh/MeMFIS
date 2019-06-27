@@ -72,5 +72,15 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
             'status_id' => Status::ofJobCard()->where('code', 'open')->first()
         ])
     );
+
+    // Successor
+
+    if (JobCard::count()) {
+        for ($i = 1; $i <= rand(1, JobCard::count()); $i++) {
+            $jobcard->successors()->save(JobCard::get()->random(), [
+                'order' => $i
+            ]);
+        }
+    }
     
 });
