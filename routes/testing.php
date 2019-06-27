@@ -4,12 +4,6 @@ Route::name('testing.')->group(function () {
 
     Route::group(['prefix' => '_test'], function () {
 
-        Route::get('/docnum', function () {
-
-            return App\Helpers\DocNumberGenerator::generateTaskCardNumber();
-
-        });
-
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
         Route::view('/taskcard-wip', 'frontend/testing/taskcard-wip')->name('taskcard');
