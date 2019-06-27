@@ -46,7 +46,7 @@
     #content{
       margin-top:168px;
     }
-    
+
     #content .jobcard-info fieldset legend{
       font-size: 20px;
       font-weight: bold;
@@ -101,7 +101,7 @@
       font-weight: bold;
       font-size: 14px;
     }
-    
+
     #content5 .body{
       width: 100%;
       border-left:  4px solid  #d4d7db;
@@ -145,7 +145,7 @@
   </header>
   <footer>
     <div class="container">
-      <span style="margin-left:6px">Prepared By : Name PPC;{{$jobCard->created_at}}&nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By :{{$prepared_by}};{{$jobCard->created_at}}&nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardsip/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
@@ -217,8 +217,8 @@
                         <td width="20%">Company Task</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                            @if(isset(json_decode($jobcard->taskcard->additionals)->internal_number))
-                                {{json_decode($jobcard->taskcard->additionals)->internal_number}}
+                            @if(isset(json_decode($jobCard->taskcard->additionals)->internal_number))
+                                {{json_decode($jobCard->taskcard->additionals)->internal_number}}
                             @else
                                 -
                             @endif
@@ -324,11 +324,13 @@
         <table width="100%" cellpadding="10">
           <tr>
             <td width="25%" valign="top">
-              @if($jobCard->taskcard->skill->name)
-              {{$jobCard->taskcard->skill->name}}
-              @else
-                -
-              @endif
+                @if(sizeof($jobCard->taskcard->skills) == 3)
+                  ERI
+                @elseif(sizeof($jobCard->taskcard->skills) == 1)
+                  {{$jobCard->taskcard->skills[0]->name}}
+                @else
+                  -
+                @endif
             </td>
             <td width="25%" align="center" valign="top">
               @if($jobCard->taskcard->work_area)
@@ -357,7 +359,7 @@
     </div>
   </div>
 
-  <div id="content4"> 
+  <div id="content4">
     <div class="container">
       <table width="100%" cellpadding="8" class="table-mt">
         <tr>
@@ -383,7 +385,7 @@
                 <ul>
                     <li>
                       <img
-                          @if(isset($jobCard->defectcards))
+                          @if(sizeof($jobCard->defectcards) <> 0)
                           src="./img/check.png"
                           @else
                           src="./img/check-box-empty.png"
@@ -392,7 +394,7 @@
                     </li>
                     <li style="margin-left:12px;">
                       <img
-                          @if(isset($jobCard->defectcards))
+                          @if(sizeof($jobCard->defectcards) == 0)
                           src="./img/check-box-empty.png"
                           @else
                           src="./img/check.png"
@@ -406,7 +408,7 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                @if(isset($jobCard->defectcards))
+                @if(sizeof($jobCard->defectcards) <> 0)
                 {{$jobCard->defectcards->first()->code}}
                 @endif
               </span>
@@ -418,7 +420,7 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">Yemimul</td>
-          <td width="33%" valign="top" align="center">Status : 
+          <td width="33%" valign="top" align="center">Status :
               <span>
                 {{$lastStatus}}
               </span>
@@ -448,16 +450,16 @@
         <table width="100%">
           <tr>
             <td width="33%" height="46%" align="center" valign="bottom">
-              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+              <div style="width:100%;height:20px;text-align:center">{{$accomplished_by}}</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$accomplished_at}}</span></div>
             </td>
             <td width="33%" height="46%" align="center" valign="bottom">
-              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+              <div style="width:100%;height:20px;text-align:center">{{$inspected_by}}</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
             </td>
             <td width="34%" height="46%" align="center" valign="bottom">
-              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+              <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
             </td>
           </tr>
         </table>
