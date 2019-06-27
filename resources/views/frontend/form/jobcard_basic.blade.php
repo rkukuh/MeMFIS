@@ -218,7 +218,13 @@
                       <tr>
                         <td width="20%">Company Task</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{json_decode($jobCard->taskcard->additionals)->internal_number)}}</td>
+                        <td width="29%">
+                            @if(isset(json_decode($jobcard->taskcard->additionals)->internal_number))
+                                {{json_decode($jobcard->taskcard->additionals)->internal_number}}
+                            @else
+                                -
+                            @endif  
+                        </td>
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
                         <td width="29%">
