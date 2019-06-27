@@ -244,29 +244,19 @@ $('select[name="date_issued"]').append('<option value="desc">Descending</option>
 $('select[name="task_card_no"]').append('<option value="desc">Descending</option>');
 $('select[name="project_no"]').append('<option value="desc">Descending</option>');
 
-$('select[name="status_jobcard"]').append('<option value="Open">Open</option>');
-$('select[name="status_jobcard"]').append('<option value="On Progress">On Progress</option>');
-$('select[name="status_jobcard"]').append('<option value="Pending/Pause">Pending/Pause</option>');
-$('select[name="status_jobcard"]').append('<option value="Closed">Closed</option>');
-
 $(document).ready(function () {
-    TaskcardRoutineNonType = function () {
-        $.ajax({
-            url: '/get-takcard-non-routine-types/',
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-
-                $.each(data, function (key, value) {
-                    $('#taskcard_routine_type').append(
-                        '<option value="' + key + '">' + value + '</option>'
-                    ).trigger('change');
-                });
-            }
-        });
-    };
-
-    TaskcardRoutineNonType();
+    $.ajax({
+        url: '/get-takcard-non-routine-types/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function (key, value) {
+                $('#taskcard_routine_type').append(
+                    '<option value="' + key + '">' + value + '</option>'
+                ).trigger('change');
+            });
+        }
+    });
 });
 
 

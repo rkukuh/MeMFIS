@@ -151,7 +151,6 @@ class TaskCardDatatables extends Controller
             });
         }
         if (!empty($request->aircrafts)) {
-            // dd($request->aircrafts);
             $TaskCard->whereHas('aircrafts', function ($query) use ($request) {
                 $query->whereIn('aircraft_id', $request->aircrafts);
             });
