@@ -148,7 +148,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Prepared By : Name PPC;{{$jobCard->created_at}} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{$jobCard->created_at}} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardbasic/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
@@ -387,7 +387,7 @@
                 <ul>
                   <li>
                     <img
-                      @if(isset($jobCard->defectcards))
+                      @if(sizeof($jobCard->defectcards) <> 0)
                       src="./img/check.png"
                       @else
                       src="./img/check-box-empty.png"
@@ -396,7 +396,7 @@
                   </li>
                   <li style="margin-left:12px;">
                       <img
-                      @if(isset($jobCard->defectcards))
+                      @if(sizeof($jobCard->defectcards) == 0)
                       src="./img/check-box-empty.png"
                       @else
                       src="./img/check.png"
@@ -410,9 +410,9 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                  @if(isset($jobCard->defectcards))
-                  {{$jobCard->defectcards->first()->code}}
-                  @endif
+                @if(sizeof($jobCard->defectcards) <> 0)
+                {{$jobCard->defectcards->first()->code}}
+                @endif
               </span>
           </td>
         </tr>
@@ -452,16 +452,16 @@
         <table width="100%">
           <tr>
             <td width="33%" height="46%" align="center" valign="bottom">
-              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+              <div style="width:100%;height:20px;text-align:center">{{$accomplished_by}}</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$accomplished_at}}</span></div>
             </td>
             <td width="33%" height="46%" align="center" valign="bottom">
-              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+              <div style="width:100%;height:20px;text-align:center">{{$inspected_by}}</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
             </td>
             <td width="34%" height="46%" align="center" valign="bottom">
-              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+              <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
             </td>
           </tr>
         </table>
