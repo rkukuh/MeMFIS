@@ -315,10 +315,10 @@ class FillComboxController extends Controller
      */
     public function item()
     {
-        $items = Item::pluck('name', 'id');
+        $items = Item::with('categories')
+                 ->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
 
-        return json_encode($items);
-
+        return $items;
     }
 
     /**

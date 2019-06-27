@@ -8,6 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="hidden" name="htcrr_uuid" id="htcrr_uuid">
                 <div class="form-group m-form__group row ">
                     <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
@@ -26,11 +27,11 @@
                             P/N @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.number')
+                        @component('frontend.common.input.select2')
                             @slot('text', 'Part Number')
-                            @slot('id', 'pn')
-                            @slot('name', 'pn')
-                            @slot('id_error', 'pn')
+                            @slot('id', 'item')
+                            @slot('name', 'item')
+                            @slot('id_error', 'item')
                         @endcomponent
                     </div>
                 </div>
@@ -107,9 +108,9 @@
 
                         @component('frontend.common.input.number')
                             @slot('text', 'Installaton')
-                            @slot('id', 'installaton')
-                            @slot('name', 'installaton')
-                            @slot('id_error', 'installaton')
+                            @slot('id', 'installation')
+                            @slot('name', 'installation')
+                            @slot('id_error', 'installation')
                         @endcomponent
                     </div>
                 </div>
@@ -190,4 +191,6 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
 @endpush

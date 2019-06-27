@@ -116,10 +116,13 @@ let Workpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " title="Create Workshop Task" data-uuid=' +
+                        '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Create Workshop Task" data-uuid=' +
+                        t.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-file"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                        '<button data-toggle="modal" data-target="#modal_ht_crr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid_htcrr=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid_htcrr="' + t.uuid + '">' +
                         '<i class="la la-trash"></i>' +
                         '</a>'
                     );
@@ -130,7 +133,7 @@ let Workpackage = {
 
         $('.modal-footer').on('click', '.add-htcrr', function () {
 
-            let pn = $('input[name=pn]').val();
+            let pn = $('#item').val();
             let position = $('input[name=position]').val();
             let removal = $('input[name=removal]').val();
             let installation = $('input[name=installation]').val();
@@ -174,6 +177,171 @@ let Workpackage = {
                     }
                 }
             });
+        });
+
+        let remove = $('.ht_crr_datatable').on('click', '.delete', function () {
+            let uuid_htcrr = $(this).data('uuid_htcrr');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+                .then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content'
+                                )
+                            },
+                            type: 'DELETE',
+                            url: '/htcrr/' + uuid_htcrr + '/',
+                            success: function (data) {
+                                toastr.success('Instruction has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                                );
+
+                                let table = $('.ht_crr_datatable').mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+                            },
+                            error: function (jqXhr, json, errorThrown) {
+                                let errorsHtml = '';
+                                let errors = jqXhr.responseJSON;
+
+                                $.each(errors.errors, function (index, value) {
+                                    $('#delete-error').html(value);
+                                });
+                            }
+                        });
+                    }
+                });
+        });
+
+
+        $('.ht_crr_datatable').on('click', '.edit', function () {
+            $('.btn-success').removeClass('add-htcrr');
+            $('.btn-success').removeClass('add');
+            $('.btn-success').addClass('edit-htcrr');
+            $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save Changes</span></span>");
+
+
+            let uuid_htcrr = $(this).data('uuid_htcrr');
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/htcrr/' + uuid_htcrr + '/edit/',
+                success: function (data) {
+                    document.getElementById('description').value = data.description;
+                    document.getElementById('mhrs').value = data.estimation_manhour;
+                    document.getElementById('position').value = data.position;
+                    document.getElementById('installation').value = data.installation_mhrs;
+                    document.getElementById('removal').value = data.removal_mhrs;
+                    document.getElementById('htcrr_uuid').value = data.uuid;
+
+
+                    $.ajax({
+                        url: '/get-items/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data2) {
+                            $('select[name="item"]').empty();
+                            $.each(data2, function (key, value) {
+                                if (key == data.pn) {
+                                    $('select[name="item"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else {
+                                    $('select[name="item"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                    $.ajax({
+                        url: '/get-otr-certifications/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data3) {
+                            $('select[name="otr_certification"]').empty();
+                            $.each(data3, function (key2, value2) {
+                                if (key2 == data.skill_id) {
+                                    $('select[name="otr_certification"]').append(
+                                        '<option value="' + key2 + '" selected>' + value2 + '</option>'
+                                    );
+                                }
+                                else {
+                                    $('select[name="otr_certification"]').append(
+                                        '<option value="' + key2 + '">' + value2 + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+        });
+        $('.modal-footer').on('click', '.edit-htcrr', function () {
+            let htcrr_uuid = $('#htcrr_uuid').val();
+            let pn = $('#item').val();
+            let position = $('input[name=position]').val();
+            let removal = $('input[name=removal]').val();
+            let installation = $('input[name=installation]').val();
+            let description = $('#description').val();
+            let otr_certification = $('#otr_certification').val();
+            let mhrs = $('input[name=mhrs]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/htcrr/' + htcrr_uuid + '/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    part_number: pn,
+                    description: description,
+                    skill_id: otr_certification,
+                    estimation_manhour: mhrs,
+                    position: position,
+                    removal_manhour_estimation: removal,
+                    installation_manhour_estimation: installation,
+                    project_id: project_uuid,
+                },
+                success: function (data) {
+                    if (data.errors) {
+
+
+                    } else {
+
+                        toastr.success('HTCRR has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.ht_crr_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                        $('#modal_ht_crr').modal('hide');
+                        $('.btn-success').removeClass('edit-htcrr');
+                        $('.btn-success').addClass('add-htcrr');
+                        $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save New</span></span>");
+                    }
+                }
+            });
+
         });
         $('.footer').on('click', '.add-manhour', function () {
             let manhour = total_mhrs;

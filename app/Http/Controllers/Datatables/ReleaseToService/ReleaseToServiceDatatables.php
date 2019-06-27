@@ -34,8 +34,10 @@ class ReleaseToServiceDatatables extends Controller
             foreach($quotations as $quotation){
                 $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
                 foreach($jobcards as $jobcard){
-                    if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
-                        $status = "IN-PROGRESS";
+                    if(sizeof($jobcard->progresses) <> 0){
+                        if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
+                            $status = "IN-PROGRESS";
+                        }
                     }
                 }
                 if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'open' and $quotation->jobcards->count() == 0){
