@@ -105,7 +105,7 @@
                                                     Company Task No
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    Generated
+                                                    {{json_decode($jobcard->taskcard->additionals)->internal_number)}}
                                                 </td>
                                             </tr>
                                             <tr>
