@@ -12,9 +12,8 @@ function strtrunc(str, max, add) {
 $('.filter').on('change', function () {
     let taskcard_routine_type = $('#taskcard_routine_type').val();
     let task_type_id = $('#task_type_id').val();
-    let applicability_airplane = $('#applicability_airplane').val();
-    let otr_certification = $('#otr_certification').val();
-    let task_card_no = $('#task_card_no').val();
+    let aircrafts = $('#applicability_airplane').val();
+    let skills = $('#otr_certification').val();
 
     $.ajax({
         headers: {
@@ -26,14 +25,14 @@ $('.filter').on('change', function () {
             _token: $('input[name=_token]').val(),
             taskcard_routine_type: taskcard_routine_type,
             task_type_id: task_type_id,
-            applicability_airplane: applicability_airplane,
-            otr_certification: otr_certification,
-            task_card_no: task_card_no,
+            aircrafts: aircrafts,
+            skills: skills,
+            // task_card_no: task_card_no,
         },
         success: function(response) {
-            let table = $('.job_card_datatable').mDatatable();
+            let table = $('.taskcard_datatable').mDatatable();
             table.destroy();
-            table = $('.job_card_datatable').mDatatable({
+            table = $('.taskcard_datatable').mDatatable({
                 data: {
                     type: "local",
                     source: response,
@@ -199,7 +198,7 @@ $('.filter').on('change', function () {
                 ]
             });
 
-            table.reload();
+            // table.reload();
 
         }
     });
@@ -249,6 +248,27 @@ $('select[name="status_jobcard"]').append('<option value="Open">Open</option>');
 $('select[name="status_jobcard"]').append('<option value="On Progress">On Progress</option>');
 $('select[name="status_jobcard"]').append('<option value="Pending/Pause">Pending/Pause</option>');
 $('select[name="status_jobcard"]').append('<option value="Closed">Closed</option>');
+
+$(document).ready(function () {
+    TaskcardRoutineNonType = function () {
+        $.ajax({
+            url: '/get-takcard-non-routine-types/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                $.each(data, function (key, value) {
+                    $('#taskcard_routine_type').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    ).trigger('change');
+                });
+            }
+        });
+    };
+
+    TaskcardRoutineNonType();
+});
+
 
 $(document).ready(function () {
     dateIssued.init();

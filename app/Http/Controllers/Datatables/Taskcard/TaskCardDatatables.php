@@ -141,29 +141,66 @@ class TaskCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $TaskCard = TaskCard::with('taskcard');
+        // dd($request->taskcard_routine_type);
+
+        $TaskCard = TaskCard::with('task','aircrafts','skills','type');
 
         if (!empty($request->task_type_id)) {
             $TaskCard->whereHas('task', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }
-        // if (!empty($request->applicability_airplane)) {
-        //     $TaskCard->whereHas('applicability_airplane', function ($query) use ($request) {
-        //         $query->whereIn('id', $request->applicability_airplane);
-        //     });
+        if (!empty($request->aircrafts)) {
+            // dd($request->aircrafts);
+            $TaskCard->whereHas('aircrafts', function ($query) use ($request) {
+                $query->whereIn('aircraft_id', $request->aircrafts);
+            });
+        }
+        if (!empty($request->skills)) {
+            $TaskCard->whereHas('skills', function ($query) use ($request) {
+                $query->where('skill_id', $request->skills);
+            });
+        }
+        if (!empty($request->taskcard_routine_type)) {
+            $TaskCard->whereHas('type', function ($query) use ($request) {
+                $query->whereIn('type_id', $request->taskcard_routine_type);
+            });
+        }
+        // if (!empty($request->task_card_no)) {
+        //     $TaskCard->orderBy('number', $request->task_card_no);
         // }
-        // if (!empty($request->otr_certification)) {
-        //     $TaskCard->whereHas('otr_certification', function ($query) use ($request) {
-        //         $query->where('id', $request->otr_certification);
-        //     });
-        // }
-        // if (!empty($request->taskcard_routine_type)) {
-        //     $TaskCard->whereHas('type', function ($query) use ($request) {
-        //     $query->where('task_id', $request->task_type_id);
-        // });
-        // }
-        $data = $alldata = $TaskCard->get();
+        $TaskCard = $TaskCard->get();
+
+        foreach($TaskCard as $item){
+            if(isset($item->aircrafts) ){
+                for($index = 0; sizeof($item->aircrafts) > $index; $index++){
+                    if(sizeof($item->aircrafts)-1 == $index){
+                    $item->pesawat .= $item->aircrafts[$index]->name;
+                    }
+                    else{
+                    $item->pesawat .= $item->aircrafts[$index]->name.", ";
+                    }
+                }
+            }
+        }
+
+        foreach($TaskCard as $item){
+            if(isset($item->skills) ){
+                if(sizeof($item->skills) == 3){
+                    $item->skill .= "ERI";
+                }
+                else if(sizeof($item->skills) == 1){
+                    $item->skill .= $item->skills[0]->name;
+                }
+                else{
+                    $item->skill .= '';
+                }
+            }
+        }
+
+        // dd($TaskCard->get());
+
+        $data = $alldata = json_decode($TaskCard);
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
