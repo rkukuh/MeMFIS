@@ -46,7 +46,7 @@
     #content{
       margin-top:168px;
     }
-    
+
     #content .jobcard-info fieldset legend{
       font-size: 20px;
       font-weight: bold;
@@ -101,7 +101,7 @@
       font-weight: bold;
       font-size: 14px;
     }
-    
+
     #content5 .body{
       width: 100%;
       border-left:  4px solid  #d4d7db;
@@ -359,7 +359,7 @@
     </div>
   </div>
 
-  <div id="content4"> 
+  <div id="content4">
     <div class="container">
       <table width="100%" cellpadding="8" class="table-mt">
         <tr>
@@ -385,7 +385,7 @@
                 <ul>
                     <li>
                       <img
-                          @if(isset($jobCard->defectcards))
+                          @if(sizeof($jobCard->defectcards) <> 0)
                           src="./img/check.png"
                           @else
                           src="./img/check-box-empty.png"
@@ -394,7 +394,7 @@
                     </li>
                     <li style="margin-left:12px;">
                       <img
-                          @if(isset($jobCard->defectcards))
+                          @if(sizeof($jobCard->defectcards) == 0)
                           src="./img/check-box-empty.png"
                           @else
                           src="./img/check.png"
@@ -408,7 +408,7 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                @if(isset($jobCard->defectcards))
+                @if(sizeof($jobCard->defectcards) <> 0)
                 {{$jobCard->defectcards->first()->code}}
                 @endif
               </span>
@@ -420,7 +420,7 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">Yemimul</td>
-          <td width="33%" valign="top" align="center">Status : 
+          <td width="33%" valign="top" align="center">Status :
               <span>
                 {{$lastStatus}}
               </span>
