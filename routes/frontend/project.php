@@ -37,10 +37,17 @@ Route::name('frontend.')->group(function () {
                     ]);
                 });
 
-                Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
                 Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
                 Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
                 Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
+
+                /** Transaction: HTCRR */
+
+                Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
+
+                /** Transaction: Item */
+                Route::post('/htcrr/{htcrr}/item', 'HtCrrItemsController@store')->name('htcrr.item.store');
+                Route::delete('/htcrr/{htcrr}/{item}/item', 'HtCrrItemsController@destroy')->name('htcrr.item.destroy');
 
             });
 
