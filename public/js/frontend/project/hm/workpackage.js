@@ -130,7 +130,7 @@ let Workpackage = {
 
         $('.modal-footer').on('click', '.add-htcrr', function () {
 
-            let pn = $('input[name=pn]').val();
+            let pn = $('#item').val();
             let position = $('input[name=position]').val();
             let removal = $('input[name=removal]').val();
             let installation = $('input[name=installation]').val();

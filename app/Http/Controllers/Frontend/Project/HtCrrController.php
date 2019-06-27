@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use App\Models\Item;
 use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Project;
@@ -39,6 +40,7 @@ class HtCrrController extends Controller
      */
     public function store(HtCrrStore $request)
     {
+        $request->merge(['part_number' => Item::where('id',$request->part_number)->first()->code]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['type_id' => Type::ofHtCrrType()->where('code','parent')->first()->id]);
         $htcrr = HtCrr::create($request->all());

@@ -26,7 +26,7 @@ class CreateHtcrrTable extends Migration
             $table->timestamp('conducted_at')->nullable();
             $table->unsignedInteger('conducted_by')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
-            $table->boolean('is_rii');
+            $table->boolean('is_rii')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
