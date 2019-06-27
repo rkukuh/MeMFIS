@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Datatables\JobCard;
 use App\Models\Unit;
 use App\Models\JobCard;
 use App\Models\TaskCard;
+use App\Models\Status;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -170,18 +171,17 @@ class JobCardDatatables extends Controller
             $JobCard->orderBy('number', $request->jc_no);
         }
         if (!empty($request->customer)) {
-            $request->whereHas('customer', function ($query) use ($request) {
+            $JobCard->whereHas('customer', function ($query) use ($request) {
                 $query->where('id', $request->customer);
             });
         }
         if (!empty($request->status_jobcard)) {
-            $request->whereHas('progresses', function ($query) use ($request) {
-                $query->where('status_id', 23);
+            $JobCard->whereHas('progresses', function ($query) use ($request) {
+                $query->where('status_id', $request->status_jobcard);
             });
         }
         $JobCard = $JobCard->get();
 
-        dd($JobCard);
         foreach($JobCard as $taskcard){
             if(isset($taskcard->taskcard->skills) ){
                 if(sizeof($taskcard->taskcard->skills) == 3){
@@ -214,7 +214,7 @@ class JobCardDatatables extends Controller
         }
 
         foreach($JobCard as $taskcard){
-            $taskcard->task_name .= $taskcard->taskcard->task;
+            $taskcard->status .= Status::find($taskcard->progresses->last()->status_id);
         }
 
         foreach($JobCard as $taskcard){

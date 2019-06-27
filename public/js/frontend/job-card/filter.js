@@ -158,13 +158,13 @@ $('.filter').on('change', function () {
                         filterable: !1,
                     },
                     {
-                        field: 'unit',
+                        field: 'taskcard.estimation_manhour',
                         title: 'Actual. Mhrs',
                         sortable: 'asc',
                         filterable: !1,
                     },
                     {
-                        field: 'unit',
+                        field: 'status.name',
                         title: 'Status',
                         sortable: 'asc',
                         filterable: !1,
@@ -230,12 +230,12 @@ $('select[name="date_issued"]').append('<option value="desc">Descending</option>
 $('select[name="jc_no"]').append('<option value="desc">Descending</option>');
 $('select[name="project_no"]').append('<option value="desc">Descending</option>');
 
-$('select[name="status_jobcard"]').append('<option value="open">Open</option>');
-$('select[name="status_jobcard"]').append('<option value="progress">On Progress</option>');
-$('select[name="status_jobcard"]').append('<option value="pending/Pause">Pending/Pause</option>');
-$('select[name="status_jobcard"]').append('<option value="closed">Closed</option>');
-$('select[name="status_jobcard"]').append('<option value="released">RELEASED</option>');
-$('select[name="status_jobcard"]').append('<option value="rii-released">RII RELEASED</option>');
+$('select[name="status_jobcard"]').append('<option value="23">Open</option>');
+$('select[name="status_jobcard"]').append('<option value="24">On Progress</option>');
+$('select[name="status_jobcard"]').append('<option value="25">Pending/Pause</option>');
+$('select[name="status_jobcard"]').append('<option value="26">Closed</option>');
+$('select[name="status_jobcard"]').append('<option value="27">RELEASED</option>');
+$('select[name="status_jobcard"]').append('<option value="28">RII RELEASED</option>');
 
 $(document).ready(function () {
     $.ajax({
