@@ -105,7 +105,11 @@
                                                     Company Task No
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    Generated
+                                                    @if(isset(json_decode($jobcard->taskcard->additionals)->internal_number))
+                                                        {{json_decode($jobcard->taskcard->additionals)->internal_number}}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>

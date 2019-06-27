@@ -146,7 +146,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Issued By : Name PPC;{{$jobCard->created_at}} &nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By : Name PPC;{{$jobCard->created_at}} &nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardsi/FooterJobCardSI.png" width="100%" alt="" >
   </footer>
@@ -156,7 +156,7 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>JC No : 123456</legend>
+                <legend>JC No : {{$jobCard->number}}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
