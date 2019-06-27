@@ -145,7 +145,7 @@
   </header>
   <footer>
     <div class="container">
-      <span style="margin-left:6px">Issued By : Name PPC;{{$jobCard->created_at}}&nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By : Name PPC;{{$jobCard->created_at}}&nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardsip/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
@@ -155,7 +155,7 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>JC No : 123456</legend>
+                <legend>JC No : {{$jobCard->number}}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
@@ -176,7 +176,13 @@
                       <tr>
                         <td width="20%">Taskcard No</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">
+                          @if($jobCard->taskcard->number)
+                          {{$jobCard->taskcard->number}}
+                          @else
+                            -
+                          @endif
+                        </td>
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
                         <td width="29%">
@@ -210,7 +216,7 @@
                       <tr>
                         <td width="20%">Company Task</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{json_decode($jobCard->taskcard->additionals)->internal_number)}}</td>
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
                         <td width="29%">

@@ -148,7 +148,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Issued By : Name PPC; {{$jobCard->created_at}} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span> <span style="position:absolute; right:20px;" class="num">PAGE </span>
+      <span style="margin-left:6px">Prepared By : Name PPC; {{$jobCard->created_at}} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span> <span style="position:absolute; right:20px;" class="num">PAGE </span>
     </div>
     <img src="./img/form/printoutjobcardeo/FooterJobCardEO.jpg" width="100%" alt="" >
   </footer>
