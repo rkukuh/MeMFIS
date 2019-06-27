@@ -39,6 +39,7 @@ Route::name('admin.')->group(function () {
         Route::resource('progress', 'ProgressController');
         Route::resource('inspection', 'InspectionController');
         Route::resource('predecessor', 'PredecessorController');
+        Route::resource('successor', 'SuccessorController');
 
         /** MASTER */
 
