@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Datatables\JobCard;
 use App\Models\Unit;
 use App\Models\JobCard;
 use App\Models\TaskCard;
+use App\Models\Status;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -138,31 +139,31 @@ class JobCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $JobCard=JobCard::with('taskcard');
+        $JobCard = JobCard::with('taskcard');
 
         if (!empty($request->task_type_id)) {
-            $JobCard->whereHas('taskcard', function ($query) use ($request) {
+            $JobCard->whereHas('taskcard.task', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }
-        if (!empty($request->applicability_airplane)) {
-            $JobCard->whereHas('applicability_airplane', function ($query) use ($request) {
-                $query->whereIn('id', $request->applicability_airplane);
+        if (!empty($request->aircrafts)) {
+            $JobCard->whereHas('taskcard.aircrafts', function ($query) use ($request) {
+                $query->whereIn('aircraft_id', $request->aircrafts);
             });
         }
-        // if (!empty($request->otr_certification)) {
-        //     $JobCard->whereHas('otr_certification', function ($query) use ($request) {
-        //         $query->where('id', $request->otr_certification);
-        //     });
-        // }
+        if (!empty($request->skills)) {
+            $JobCard->whereHas('taskcard.skills', function ($query) use ($request) {
+                $query->where('skill_id', $request->skills);
+            });
+        }
         if (!empty($request->project_no)) {
             $JobCard->orderBy('project_no', $request->project_no);
         }
-        // if (!empty($request->taskcard_routine_type)) {
-        //     $JobCard->whereHas('taskcard_routine_type', function ($query) use ($request) {
-        //     $query->where('task_id', $request->task_type_id);
-        // });
-        // }
+        if (!empty($request->taskcard_routine_type)) {
+            $JobCard->whereHas('taskcard.type', function ($query) use ($request) {
+                $query->where('type_id', $request->taskcard_routine_type);
+            });
+        }
         if (!empty($request->date_issued)) {
             $JobCard->orderBy('created_at', $request->date_issued);
         }
@@ -170,17 +171,57 @@ class JobCardDatatables extends Controller
             $JobCard->orderBy('number', $request->jc_no);
         }
         if (!empty($request->customer)) {
-            $request->whereHas('otr_certification', function ($query) use ($request) {
-                $query->where('id', $request->otr_certification);
+            $JobCard->whereHas('customer', function ($query) use ($request) {
+                $query->where('id', $request->customer);
             });
         }
-        // if (!empty($request->status_jobcard)) {
-        //      $request->whereHas('statuses', function ($query) use ($request) {
-        //     $query->where('id', $request->status_jobcard);
-        // });
-        // }
+        if (!empty($request->status_jobcard)) {
+            $JobCard->whereHas('progresses', function ($query) use ($request) {
+                $query->where('status_id', $request->status_jobcard);
+            });
+        }
+        $JobCard = $JobCard->get();
 
-        $data = $alldata = json_decode($JobCard->get());
+        foreach($JobCard as $taskcard){
+            if(isset($taskcard->taskcard->skills) ){
+                if(sizeof($taskcard->taskcard->skills) == 3){
+                    $taskcard->skill_name .= "ERI";
+                }
+                else if(sizeof($taskcard->taskcard->skills) == 1){
+                    $taskcard->skill_name .= $taskcard->taskcard->skills[0]->name;
+                }
+                else{
+                    $taskcard->skill_name .= '';
+                }
+            }
+        }
+
+        foreach($JobCard as $taskcard){
+            if(isset($taskcard->taskcard->aircrafts) ){
+                for($index = 0; sizeof($taskcard->taskcard->aircrafts) > $index; $index++){
+                    if(sizeof($taskcard->taskcard->aircrafts)-1 == $index){
+                    $taskcard->pesawat .= $taskcard->taskcard->aircrafts[$index]->name;
+                    }
+                    else{
+                    $taskcard->pesawat .= $taskcard->taskcard->aircrafts[$index]->name.", ";
+                    }
+                }
+            }
+        }
+
+        foreach($JobCard as $taskcard){
+            $taskcard->task_name .= $taskcard->taskcard->task;
+        }
+
+        foreach($JobCard as $taskcard){
+            $taskcard->status .= Status::find($taskcard->progresses->last()->status_id);
+        }
+
+        foreach($JobCard as $taskcard){
+            $taskcard->task_name .= $taskcard->taskcard->type;
+        }
+
+        $data = $alldata = json_decode($JobCard);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
