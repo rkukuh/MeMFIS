@@ -95,6 +95,13 @@ class JobCardMechanicController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
+        foreach($jobcard->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
+
+        if($jobcard->helpers->where('userID',Auth::id())->first() == null){
+            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
+        }
 
         $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
 
@@ -102,12 +109,16 @@ class JobCardMechanicController extends Controller
             $progress->status .= Status::where('id',$progress->status_id)->first()->name;
         }
 
-        if ($progresses->count() == 0 and $this->statuses->where('id',$jobcard->progresses->get(1)->status_id)->first()->code == "progress") {
-            return view('frontend.job-card.mechanic.progress-open', [
-                'jobcard' => $jobcard,
-                'progresses' => $progresses,
-                'status' => $this->statuses->where('code','open')->first(),
-            ]);
+        if ($progresses->count() == 0) {
+            if(isset($jobcard->progresses[1]) and $this->statuses->where('id',$jobcard->progresses->get(1)->status_id)->first()->code == "progress"){
+                return view('frontend.job-card.mechanic.progress-open', [
+                    'jobcard' => $jobcard,
+                    'progresses' => $progresses,
+                    'status' => $this->statuses->where('code','open')->first(),
+                ]);
+            }else{
+                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
+            }
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "progress"){
             return view('frontend.job-card.mechanic.progress-resume', [

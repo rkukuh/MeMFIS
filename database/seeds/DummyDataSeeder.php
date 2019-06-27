@@ -13,6 +13,10 @@ class DummyDataSeeder extends Seeder
     {
         ini_set('memory_limit', '-1');
 
+        /** USER and ACL/RBAC */
+
+        $this->call(Users::class);
+
         /** INITIAL DATA */
 
         $this->call(Types::class);
@@ -57,6 +61,8 @@ class DummyDataSeeder extends Seeder
         $this->call(Approvals::class);
         $this->call(Progresses::class);
         $this->call(Inspections::class);
+        $this->call(Predecessors::class);
+        $this->call(Successors::class);
 
         /** LICENSE */
 

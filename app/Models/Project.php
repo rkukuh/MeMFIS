@@ -82,7 +82,11 @@ class Project extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class)
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'note'
+                    )
                     ->withTimestamps();
     }
 

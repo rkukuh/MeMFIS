@@ -17,7 +17,7 @@ class HtCrrDatatables extends Controller
      */
     public function index(Project $project)
     {
-        $HtCrr =HtCrr::where('project_id',$project->id)->get();
+        $HtCrr =HtCrr::where('project_id',$project->id)->where('parent_id',null)->get();
         foreach($HtCrr as $data){
             if(isset($data->skills) ){
                 if(sizeof($data->skills) == 3){

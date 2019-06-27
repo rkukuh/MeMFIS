@@ -18,9 +18,9 @@ class UsersImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $user = new User([
-            'name' => ucfirst(strtolower($row['nama'])),
+            'name' => ucwords(strtolower($row['nama'])),
             'email' => !empty($row['email']) ? strtolower($row['email']) : str_slug(strtolower($row['nama'])) . '@example.org',
-            'password' => Hash::make('aaa'),
+            'password' => Hash::make('employee'),
         ]);
 
         $user->save();
@@ -28,5 +28,10 @@ class UsersImport implements ToModel, WithHeadingRow
         $user->assignRole(
             Role::where('name', 'employee')->first()
         );
+
+        $user->employee()->create([
+            'code' => $row['nrp'],
+            'first_name' => ucwords(strtolower($row['nama'])),
+        ]);
     }
 }

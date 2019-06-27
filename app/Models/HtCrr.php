@@ -54,6 +54,25 @@ class HtCrr extends MemfisModel
     }
 
     /**
+     * Many-to-Many: An HTCRR may have one or many item.
+     *
+     * This function will retrieve all the items of an HTCRR.
+     * See: Item's htcrr() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'htcrr_item', 'htcrr_id', 'item_id')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many (self-join): An HTCRR may have none or many sub-HTCRR.
      *
      * This function will retrieve the parent of a sub-HTCRR.

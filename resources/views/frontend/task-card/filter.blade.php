@@ -1,7 +1,7 @@
 <div class="advanceFilter">
     <div class="hidden" id="advanceFilter">
         <div class="form-group m-form__group row">
-            <div class="col-sm-2 col-md-2 col-lg-2">
+            {{-- <div class="col-sm-2 col-md-2 col-lg-2">
                 <label class="form-control-label">
                     Task Card Number
                 </label>
@@ -12,7 +12,7 @@
                     @slot('id_error', 'task_card_no')
                     @slot('class','filter')
                 @endcomponent
-            </div>
+            </div> --}}
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Taskcard Type
@@ -39,7 +39,7 @@
                     @slot('class','filter')
                 @endcomponent
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Skill
                 </label>
@@ -51,7 +51,7 @@
                     @slot('class','filter')
                 @endcomponent
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Task Type
                 </label>
@@ -84,7 +84,6 @@
 
 <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
-
 
 <script src="{{ asset('js/frontend/task-card/filter.js') }}"></script>
 

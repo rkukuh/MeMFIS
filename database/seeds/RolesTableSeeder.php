@@ -18,5 +18,9 @@ class RolesTableSeeder extends Seeder
 
         Role::create(['name' => 'marketing']);
         Role::create(['name' => 'ppic']);
+        Role::create(['name' => 'engineer']);
+        Role::create(['name' => 'helper']);
+
+        Role::create(['name' => 'dummy']);
     }
 }

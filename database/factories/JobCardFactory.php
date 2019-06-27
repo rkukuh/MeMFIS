@@ -45,7 +45,7 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
     // Helper (Employee)
 
     for ($i = 0; $i < rand(1, 3); $i++) {
-        $jobcard->helpers()->save(factory(Employee::class)->make());
+        $jobcard->helpers()->save(Employee::get()->random());
     }
 
     // Progress
