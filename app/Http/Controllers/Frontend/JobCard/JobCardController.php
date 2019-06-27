@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend\JobCard;
 
 use Auth;
-use App\Models\User;
+use App\User;
 use App\Models\Status;
 use App\Models\JobCard;
 use Illuminate\Http\Request;
@@ -176,13 +176,29 @@ class JobCardController extends Controller
             }else{
                 $dateClosed = "-";
                 $rii_by = "-";
+                $rii_at = "-";
+            }
+            if(sizeof($jobCard->approvals)==0){
+                $inspected_by = "-";
+                $inspected_at = "-";
+            }
+            else{
+                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
-            $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
-            $inspected_at = $jobCard->approvals->first()->created_at;
-            $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-            $accomplished_at =  $jobCard->progresses->last()->created_at;
-            $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;;
+            if(sizeof($jobCard->progresses)==0){
+                $accomplished_by = "-";
+                $accomplished_at = "-";
+            }else{
+                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->last()->created_at;
+            }
+            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            }else{
+                $prepared_by ="-";
+            }
 
             $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
                     'jobCard' => $jobCard,
