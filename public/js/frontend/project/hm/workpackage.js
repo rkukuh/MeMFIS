@@ -116,10 +116,13 @@ let Workpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " title="Create Workshop Task" data-uuid=' +
+                        '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Create Workshop Task" data-uuid=' +
+                        t.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-file"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                        '<button data-toggle="modal" data-target="#modal_ht_crr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid_htcrr=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid_htcrr="' + t.uuid + '">' +
                         '<i class="la la-trash"></i>' +
                         '</a>'
                     );
@@ -174,6 +177,221 @@ let Workpackage = {
                     }
                 }
             });
+        });
+
+        let remove = $('.ht_crr_datatable').on('click', '.delete', function () {
+            let uuid_htcrr = $(this).data('uuid_htcrr');
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+                .then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content'
+                                )
+                            },
+                            type: 'DELETE',
+                            url: '/htcrr/' + uuid_htcrr + '/',
+                            success: function (data) {
+                                toastr.success('Instruction has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                                );
+
+                                let table = $('.ht_crr_datatable').mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+                            },
+                            error: function (jqXhr, json, errorThrown) {
+                                let errorsHtml = '';
+                                let errors = jqXhr.responseJSON;
+
+                                $.each(errors.errors, function (index, value) {
+                                    $('#delete-error').html(value);
+                                });
+                            }
+                        });
+                    }
+                });
+        });
+
+
+        $('.ht_crr_datatable').on('click', '.edit', function () {
+            // instruction_reset();
+            // save_changes_button();
+            // let uuid_htcrr = $('#uuid_htcrr').val();
+
+            let uuid_htcrr = $(this).data('uuid_htcrr');
+            // alert(triggeruuid3);
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/htcrr/' + uuid_htcrr + '/edit/',
+                success: function (data) {
+                    document.getElementById('description').value = data.description;
+                    document.getElementById('mhrs').value = data.estimation_manhour;
+                    document.getElementById('position').value = data.position;
+                    document.getElementById('installation').value = data.installation_mhrs;
+                    document.getElementById('removal').value = data.removal_mhrs;
+                    // document.getElementById('uuid').value = data.uuid;
+                    // if (data.is_rii == 1) {
+                    //     $("#is_rii").prop("checked", true);
+                    // }
+                    // else if (data.is_rii == 0) {
+                    //     $("#is_rii").prop("checked", false);
+                    // }
+
+                    $.ajax({
+                        url: '/get-items/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data2) {
+                            $('select[name="item"]').empty();
+                            $.each(data2, function (key, value) {
+                                if (key == data.pn) {
+                                    $('select[name="item"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else {
+                                    $('select[name="item"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                    $.ajax({
+                        url: '/get-otr-certifications/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data3) {
+                            $('select[name="otr_certification"]').empty();
+                            $.each(data3, function (key2, value2) {
+                                if (key2 == data.skill_id) {
+                                    $('select[name="otr_certification"]').append(
+                                        '<option value="' + key2 + '" selected>' + value2 + '</option>'
+                                    );
+                                }
+                                else {
+                                    $('select[name="otr_certification"]').append(
+                                        '<option value="' + key2 + '">' + value2 + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+        });
+        $('.modal-footer').on('click', '.edit-instruction', function () {
+            let taskcard_uuid = $('#uuid_taskcard').val();
+            let eo_uuid = $('input[name=uuid]').val();
+            let work_area = $('#work_area').val();
+            let manhour = $('input[name=manhour]').val();
+            let performa = $('input[name=performa]').val();
+            let helper_quantity = $('input[name=helper_quantity]').val();
+            let engineer_quantity = $('input[name=engineer_quantity]').val();
+            let sequence = $('input[name=sequence]').val();
+            let otr_certification = $('#otr_certification').val();
+            if (document.getElementById("is_rii").checked) {
+                is_rii = 1;
+            } else {
+                is_rii = 0;
+            }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/taskcard-eo/' + taskcard_uuid + '/eo-instruction/' + eo_uuid + '/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    work_area: work_area,
+                    estimation_manhour: manhour,
+                    performance_factor: performa,
+                    helper_quantity: helper_quantity,
+                    engineer_quantity: engineer_quantity,
+                    sequence: sequence,
+                    skill_id: otr_certification,
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.item_id) {
+                        //     $('#material-error').html(data.errors.item_id[0]);
+                        // }
+
+                        // if (data.errors.quantity) {
+                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
+                        // }
+
+                        if (data.errors.work_area) {
+                            $('#work_area-error').html(data.errors.work_area[0]);
+                        }
+
+                        if (data.errors.performance_factor) {
+                            $('#performa-error').html(data.errors.performance_factor[0]);
+                        }
+
+                        if (data.errors.estimation_manhour) {
+                            $('#manhour-error').html(data.errors.estimation_manhour[0]);
+                        }
+
+                        if (data.errors.helper_quantity) {
+                            $('#helper_quantity-error').html(data.errors.helper_quantity[0]);
+                        }
+
+                        if (data.errors.engineer_quantity) {
+                            $('#engineer_quantity-error').html(data.errors.engineer_quantity[0]);
+                        }
+
+                        if (data.errors.sequence) {
+                            $('#sequence-error').html(data.errors.sequence[0]);
+                        }
+
+                        if (data.errors.skill_id) {
+                            $('#otr_certification-error').html(data.errors.skill_id[0]);
+                        }
+
+                        document.getElementById('work_area').value = work_area;
+                        document.getElementById('engineer_quantity').value = engineer_quantity;
+                        document.getElementById('manhour').value = manhour;
+                        document.getElementById('performa').value = performa;
+                        document.getElementById('helper_quantity').value = helper_quantity;
+                        document.getElementById('skill_id').value = otr_certification;
+                        document.getElementById('sequence').value = sequence;
+                        // document.getElementById('material').value = material;
+                        // document.getElementById('quantity').value = quantity;
+
+                    } else {
+
+                        toastr.success('Instruction has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.instruction_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                        $('#modal_instruction').modal('hide');
+                    }
+                }
+            });
+
         });
         $('.footer').on('click', '.add-manhour', function () {
             let manhour = total_mhrs;

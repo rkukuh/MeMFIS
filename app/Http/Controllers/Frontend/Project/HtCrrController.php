@@ -54,18 +54,22 @@ class HtCrrController extends Controller
             $htcrr->skills()->attach($request->skill_id);
         }
 
+        $parent_id = $htcrr->id;
+
         $htcrr = HtCrr::create([
-            'parent_id' => $htcrr->id,
+            'parent_id' => $parent_id,
             'type_id' => Type::ofHtCrrType()->where('code','removal')->first()->id,
             'project_id' => $request->project_id,
             'position' => $request->position,
+            'estimation_manhour' => $request->removal_manhour_estimation,
             'part_number' => $request->part_number,
         ]);
 
         $htcrr = HtCrr::create([
-            'parent_id' => $htcrr->id,
+            'parent_id' => $parent_id,
             'type_id' => Type::ofHtCrrType()->where('code','installation')->first()->id,
             'project_id' => $request->project_id,
+            'estimation_manhour' => $request->installation_manhour_estimation,
             'position' => $request->position,
         ]);
 
@@ -89,9 +93,20 @@ class HtCrrController extends Controller
      * @param  \App\Models\HtCrr  $htCrr
      * @return \Illuminate\Http\Response
      */
-    public function edit(HtCrr $htCrr)
+    public function edit(HtCrr $htcrr)
     {
-        //
+            $htcrr->installation_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->first()->estimation_manhour;
+            $htcrr->removal_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->last()->estimation_manhour;
+            $htcrr->pn .= Item::where('code',$htcrr->part_number)->first()->id;
+
+            if(sizeof($htcrr->skills) == 3){
+                $htcrr->skill_id .= Type::ofTaskCardSkill()->where('code','eri')->first()->id;
+            }
+            else if(sizeof($htcrr->skills) == 1){
+                $htcrr->skill_id .= $htcrr->skills->first()->skill_id;
+            }
+
+        return response()->json($htcrr);
     }
 
     /**
@@ -112,8 +127,17 @@ class HtCrrController extends Controller
      * @param  \App\Models\HtCrr  $htCrr
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HtCrr $htCrr)
+    public function destroy(HtCrr $htcrr)
     {
-        //
+        $htcrr->delete();
+
+        $hard_time = HtCrr::where('parent_id',$htcrr->id)->get();
+
+        foreach($hard_time as $htcrr){
+            $htcrr->delete();
+        }
+
+        return response()->json($hard_time);
+
     }
 }
